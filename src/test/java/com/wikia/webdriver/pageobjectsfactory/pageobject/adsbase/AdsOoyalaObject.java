@@ -28,7 +28,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
 
-  @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
+  @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper iframe[src*=ima-sdk-frame]")
   private WebElement lightboxVideo;
 
   @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
@@ -85,6 +85,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyLightboxVideo() {
+    wait.forElementNotVisible(lightboxVideo);
     verifyColorAd(lightboxVideo, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
