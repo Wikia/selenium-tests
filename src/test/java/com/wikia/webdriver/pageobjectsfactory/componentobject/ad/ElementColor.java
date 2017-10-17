@@ -10,20 +10,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-public class OoyalaPrerollAd {
+public class ElementColor {
   private WikiaWebDriver driver;
 
-  public OoyalaPrerollAd(WikiaWebDriver driver) {
+  public ElementColor(WikiaWebDriver driver) {
     this.driver = driver;
   }
 
-  public void verifyColorAd(WebElement element, Color color, int durationSec) {
+  public void verifyColor(WebElement element, Color color, int durationSec) {
     AdsComparison adsComparison = new AdsComparison();
-    waitForColorAds(element, color);
+    waitForColor(element, color);
     adsComparison.verifyColorAd(element, color, durationSec, driver);
   }
 
-  private void waitForColorAds(WebElement element, Color color) {
+  private void waitForColor(WebElement element, Color color) {
     WebDriverWait waitFor = new WebDriverWait(driver, 15);
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MICROSECONDS);
 
