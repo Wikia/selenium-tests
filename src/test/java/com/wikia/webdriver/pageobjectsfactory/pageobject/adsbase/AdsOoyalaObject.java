@@ -20,7 +20,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final Color GREEN_OOYALA_3 = new Color(20, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
   private static final int AD_DURATION_SEC = 30;
-  private static final int VIDEO_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 5;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
   private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
@@ -88,12 +88,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxAd() {
     wait.forElementVisible(lightboxVideo);
+    System.out.println("lalalalal");
     verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
+    System.out.println("lalalalal");
     logMessage(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyLightboxVideo() {
+    System.out.println("lalalalal");
     verifyColorAd(lightboxVideo, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
+    System.out.println("lalalalal");
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 

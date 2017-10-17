@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 )
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
 
-  private static final String MERCURY_SKIN = "useskin=mercury";
   private static final String NO_ADS = "noads=1";
 
   private static final Page TEST_PAGE = new Page("project43", "SyntheticTests/Premium/FeaturedVideo");
@@ -24,7 +23,6 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollMercury() {
     String url = urlBuilder.getUrlForPage(TEST_PAGE);
-    url = urlBuilder.appendQueryStringToURL(url, MERCURY_SKIN);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
     wikiPage.playFeaturedVideo();
     wikiPage.verifyArticleAd();
@@ -36,7 +34,7 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollMercuryNoAds() {
     String url = urlBuilder.getUrlForPage(TEST_PAGE);
-    url = urlBuilder.appendQueryStringToURL(url, NO_ADS + "&" + MERCURY_SKIN);
+    url = urlBuilder.appendQueryStringToURL(url, NO_ADS);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
     wikiPage.playFeaturedVideo();
     wikiPage.verifyMobileArticleVideo();
