@@ -1,9 +1,9 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Editor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.Editor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.GuidelinesEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.GuidelinesEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 

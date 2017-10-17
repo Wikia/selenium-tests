@@ -1,7 +1,8 @@
-package com.wikia.webdriver.elements.mercury.components.discussions.common;
+package com.wikia.webdriver.elements.mercury.components.discussions.common.contribution;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;

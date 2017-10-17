@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.discussions.common;
+package com.wikia.webdriver.elements.mercury.components.discussions.common.contribution;
 
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;

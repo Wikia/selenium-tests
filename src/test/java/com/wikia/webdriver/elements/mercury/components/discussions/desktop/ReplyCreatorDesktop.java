@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.BaseReplyCreator;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

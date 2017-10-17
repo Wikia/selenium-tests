@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import org.testng.annotations.Test;

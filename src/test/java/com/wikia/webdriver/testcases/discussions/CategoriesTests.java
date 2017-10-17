@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ContributionEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
