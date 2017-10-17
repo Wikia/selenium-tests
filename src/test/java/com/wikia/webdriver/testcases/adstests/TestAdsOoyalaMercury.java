@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 
 import org.testng.annotations.Test;
 
-@InBrowser(browser = Browser.FIREFOX, browserSize = "414x736")
+@InBrowser(browser = Browser.CHROME_MOBILE, browserSize = "414x736")
 public class TestAdsOoyalaMercury extends TemplateNoFirstLoad {
 
   @Test(
@@ -25,3 +25,5 @@ public class TestAdsOoyalaMercury extends TemplateNoFirstLoad {
     wikiPage.verifyLightboxVideo();
   }
 }
+
+//browser = Browser.FIREFOX, browserSize = "414x736"
