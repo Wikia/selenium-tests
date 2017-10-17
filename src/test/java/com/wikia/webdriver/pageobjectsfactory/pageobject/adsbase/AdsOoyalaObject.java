@@ -18,8 +18,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final Color GREEN_OOYALA_4 = new Color(0, 255, 13);
   private static final Color GREEN_OOYALA_3 = new Color(20, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
-  private static final int AD_DURATION_SEC = 35;
-  private static final int VIDEO_DURATION_SEC = 35;
+  private static final int AD_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 30;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
   private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
