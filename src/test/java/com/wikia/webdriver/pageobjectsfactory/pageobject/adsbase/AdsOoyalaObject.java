@@ -26,8 +26,10 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
   private static final String ARTICLE_VIDEO_MOBILE_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
+  private static final String ARTICLE_VIDEO_PLAY_BUTTON_SELECTOR = ".article-featured-video__play-circle";
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
+  private static final By VIDEO_PLAY_BUTTON = By.cssSelector(ARTICLE_VIDEO_PLAY_BUTTON_SELECTOR);
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
@@ -45,6 +47,10 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void playLightboxVideo() {
     wait.forElementVisible(lightboxVideo);
     lightboxVideo.click();
+  }
+
+  public void playFeaturedVideo() {
+    wait.forElementVisible(VIDEO_PLAY_BUTTON).click();
   }
 
   public void clickVolumeButton() {
