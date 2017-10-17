@@ -21,10 +21,7 @@ public class TestAdsOoyalaMercury extends TemplateNoFirstLoad {
     String url = urlBuilder.getUrlForPage(TEST_PAGE);
     url = urlBuilder.appendQueryStringToURL(url, OOYALA_VIDEO_MODAL + "&useskin=mercury");
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
-    wikiPage.playLightboxVideo();
     wikiPage.verifyLightboxAd();
     wikiPage.verifyLightboxVideo();
   }
 }
-
-//browser = Browser.FIREFOX, browserSize = "414x736"
