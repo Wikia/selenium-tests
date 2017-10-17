@@ -96,8 +96,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   private void verifyFeaturedVideoElement(Color color, int duration) {
-//    verifyColorAd(articleVideoWrapper, color, 5);
-    System.out.println("lalalalalal");
+    verifyColorAd(articleVideoWrapper, color, 5);
     logMessage(color, duration);
   }
 

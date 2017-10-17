@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 
 import org.testng.annotations.Test;
 
-@InBrowser(browser = Browser.CHROME_MOBILE, browserSize = "414x736")
+@InBrowser(browser = Browser.FIREFOX, browserSize = "414x736")
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
 
   private static final String MERCURY_SKIN = "useskin=mercury";
