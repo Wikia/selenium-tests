@@ -98,10 +98,10 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
-        PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
+        PageObjectLogging.log("verifyColor", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColorAd", e, false, driver);
+      PageObjectLogging.log("verifyColor", e, false, driver);
     }
   }
 
@@ -109,7 +109,7 @@ public class AdsComparison {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
       PageObjectLogging.log(
-          "verifyColorAd",
+          "verifyColor",
           "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
           true,
           driver
