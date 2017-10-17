@@ -5,7 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
-import org.apache.xpath.SourceTree;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -88,16 +87,12 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxAd() {
     wait.forElementVisible(lightboxVideo);
-    System.out.println("lalalalal");
     verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
-    System.out.println("lalalalal");
     logMessage(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyLightboxVideo() {
-    System.out.println("lalalalal");
     verifyColorAd(lightboxVideo, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
-    System.out.println("lalalalal");
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
