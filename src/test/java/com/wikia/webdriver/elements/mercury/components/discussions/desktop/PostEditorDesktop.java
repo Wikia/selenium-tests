@@ -14,58 +14,30 @@ public class PostEditorDesktop extends ContributionEditor implements StandaloneE
   @FindBy(css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
   private WebElement postsCreator;
 
-  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
-  private WebElement okButtonInSignInDialog;
-
-  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
-  private WebElement signInButtonInSignInDialog;
-
   @Getter
   @FindBy(css = ".discussion-inline-editor")
   private WebElement editor;
+
+  @Getter
+  @FindBy(css = ".discussion-inline-editor-submit")
+  private WebElement submitButton;
 
   @Getter
   @FindBy(css = ".editor-close")
   private WebElement cancelButton;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .discussion-inline-editor-submit")
-  private WebElement submitButton;
-
-  @Getter
-  @FindBy(css = ".editor-overlay-message .message-close")
-  private WebElement guidelinesMessageCloseButton;
-
-  @Getter
   @FindBy(css = "#categoryPickerButtonDesktop")
   private WebElement addCategoryButton;
 
-  @Getter
-  @FindBy(css = ".discussion-inline-editor textarea[required]")
-  private WebElement descriptionTextarea;
-
-  @Getter
-  private By openGraphContainer = By.className("og-container");
-
-  @Getter
-  private By openGraphText = By.className("og-texts");
-
+  @Override
   public boolean isExpanded() {
     return editor.getAttribute("class").contains("is-active");
   }
 
+  @Override
   public boolean isSticky() {
     return editor.getAttribute("class").contains("is-sticky");
-  }
-
-  public PostEditorDesktop clickOkButtonInSignInDialog() {
-    okButtonInSignInDialog.click();
-    return this;
-  }
-
-  public PostEditorDesktop clickSignInButtonInSignInDialog() {
-    signInButtonInSignInDialog.click();
-    return this;
   }
 
   @Override
