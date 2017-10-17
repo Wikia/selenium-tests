@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.wampagetests;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
@@ -47,13 +46,5 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyWamIndexPageFirstColumn(1, 20);
     wam.clickNextPaginator();
     wam.verifyWamIndexPageFirstColumn(21, 40);
-  }
-
-  @Test(groups = {"wamPage_005", "WamPageTests"})
-  public void wam_005_testDatePicker() {
-    wam.verifyLatestDateInDatePicker();
-    String date = "July 12, 2014";
-    wam.typeDateInDatePicker(date);
-    wam.verifyDateInDatePicker(date);
   }
 }

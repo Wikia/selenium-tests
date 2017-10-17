@@ -4,29 +4,17 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.Period;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class WamPageObject extends BasePageObject {
 
   public static final int DEFAULT_WAM_INDEX_ROWS = 21;
-  private static final int FIRST_WAM_TAB_INDEX = 0;
   private static final By WAM_INDEX_TABLE = By.cssSelector("#wam-index table");
   private static final String WAM_TAB_CSS_SELECTOR_FORMAT = "a[data-vertical-id='%s']";
   @FindBy(css = ".wam-filtering-tab a")
@@ -185,26 +173,5 @@ public class WamPageObject extends BasePageObject {
             .findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
             .getAttribute("class").contains("icon-vertical-selected"));
     wait.forElementVisible(tabSelected);
-  }
-
-  public void verifyLatestDateInDatePicker() {
-    String currentDate = datePickerInput.getAttribute("value");
-    String latestDate =
-            DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-                    .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
-    Assertion.assertEquals(currentDate, latestDate, "Current date and the latest possible date are not the same");
-  }
-
-  public void verifyDateInDatePicker(String date) {
-    isLoaded();
-    String currentDate = datePickerInput.getAttribute("value");
-    Assertion.assertEquals(date, currentDate, "Current date and expected date are not the same");
-  }
-
-  public void typeDateInDatePicker(String date) {
-    wait.forElementClickable(datePickerInput);
-    jsActions.execute("$(arguments[0])[0].value=''", datePickerInput);
-    scrollAndClick(datePickerInput);
-    new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
   }
 }
