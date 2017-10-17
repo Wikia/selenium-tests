@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.FIREFOX, browserSize = "414x736")
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
 
-  private static final String MERCURY_STRING = "useskin=mercury";
+  private static final String MERCURY_STRING = "&useskin=mercury";
+  private static final String NO_ADS = "noads=1";
+
   private static final Page TEST_PAGE = new Page("project43", "SyntheticTests/Premium/FeaturedVideo");
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = {"AdsPremiumPrerollMercury"},
-      dataProvider = "adsPremiumPreroll"
+      groups = {"AdsPremiumPrerollMercury"}
   )
   public void adsPremiumPrerollMercury() {
     String url = urlBuilder.getUrlForPage(TEST_PAGE);
@@ -30,13 +30,11 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
   }
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = {"AdsPremiumPrerollMercury"},
-      dataProvider = "adsPremiumPreroll"
+      groups = {"AdsPremiumPrerollMercury"}
   )
   public void adsPremiumPrerollMercuryNoAds() {
     String url = urlBuilder.getUrlForPage(TEST_PAGE);
-    url = urlBuilder.appendQueryStringToURL(url, "noads=1" + "&" + MERCURY_STRING);
+    url = urlBuilder.appendQueryStringToURL(url, NO_ADS + MERCURY_STRING);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
     wikiPage.verifyMobileArticleVideo();
   }

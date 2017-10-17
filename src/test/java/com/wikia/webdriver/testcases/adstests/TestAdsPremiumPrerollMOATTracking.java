@@ -35,8 +35,6 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5, browser = Browser.CHROME)
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsPremiumPreroll",
       groups = {"AdsOoyalaPrerollMercury", "AdsPremiumPrerollMOATTrackingMobile"}
   )
   public void adsPremiumPrerollMOATTrackingMobile() {
