@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -25,7 +26,7 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adFreeWikis",
-      groups = {"AdsNoAdsOnAdsFreeWikisOasis"}
+      groups = "AdsNoAdsOnAdsFreeWikisOasis"
   )
   public void testNoAdsOasis(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
@@ -36,11 +37,12 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adFreeWikis",
-      groups = {"AdsNoAdsOnAdsFreeWikisMercury"}
+      groups = "AdsNoAdsOnAdsFreeWikisMercury"
   )
   public void testNoAdsMercury(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnMobilePage();
+    wikiPage.setEnvironment(AdsContent.ENV_MOBILE);
+    wikiPage.verifyNoAdsOnPage();
   }
 }

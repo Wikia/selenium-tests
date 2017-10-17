@@ -23,6 +23,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomOoyala"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
@@ -30,7 +31,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecialOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoVelesOasis"/>

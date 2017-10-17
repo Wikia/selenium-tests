@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
@@ -98,9 +98,9 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   private void verifyColorAd(WebElement element, Color color, int duration) {
-    OoyalaPrerollAd ooyala = new OoyalaPrerollAd(driver);
+    ElementColor ooyala = new ElementColor(driver);
 
-    ooyala.verifyColorAd(element, color, duration);
+    ooyala.verifyColor(element, color, duration);
   }
 
 //  private void verifyFeaturedVideoElement(Color color, int duration) {
