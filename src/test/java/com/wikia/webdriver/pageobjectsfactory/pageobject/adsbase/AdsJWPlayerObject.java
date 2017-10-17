@@ -37,22 +37,22 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   }
 
   public void verifyPreroll() {
-    verifyFeaturedVideoElement(PLAYER_SELECTOR, COLOR_PREROLL, 20);
+    verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_PREROLL, 20);
   }
 
   public void verifyMidroll() {
-    verifyFeaturedVideoElement(PLAYER_SELECTOR, COLOR_MIDROLL, 10);
+    verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_MIDROLL, 10);
   }
 
   public void verifyPostroll() {
-    verifyFeaturedVideoElement(PLAYER_SELECTOR, COLOR_POSTROLL, 10);
+    verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_POSTROLL, 10);
   }
 
   public void verifyFeaturedVideo() {
-    verifyFeaturedVideoElement(PLAYER_SELECTOR, COLOR_VIDEO, 10);
+    verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_VIDEO, 10);
   }
 
-  private void verifyFeaturedVideoElement(By selector, Color color, int assertTime) {
+  private void verifyFeaturedVideoElementColor(By selector, Color color, int assertTime) {
     jsActions.scrollToElement(selector);
     verifyColor(articleVideoWrapper, color, assertTime);
     logMessage(color);

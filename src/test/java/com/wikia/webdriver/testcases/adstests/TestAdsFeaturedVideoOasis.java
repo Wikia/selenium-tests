@@ -15,7 +15,7 @@ public class TestAdsFeaturedVideoOasis extends TemplateNoFirstLoad {
   private static final String INSTANT_GLOBAL_POSTROLL = "wgAdDriverFVPostrollCountries";
 
   @Test(
-      groups = {"AdsFeaturedVideoOasis", "AdsPremiumPrerollOasis"}
+      groups = {"AdsFeaturedVideoOasis"}
   )
   public void adsFeaturedVideoAdsOasis() {
     String testedPage = PAGE_WITH_FV.getUrl();
