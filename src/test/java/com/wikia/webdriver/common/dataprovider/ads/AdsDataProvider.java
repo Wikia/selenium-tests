@@ -40,7 +40,7 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/OoyalaVideo/" +
-            "Simple?file=Synthetic_video_ad_test_(all_green_video)_320x240_(ooyala-stored_video)&useskin=mercury",
+            "Simple?file=Synthetic_video_ad_test_(all_green_video)_320x240_(ooyala-stored_video)",
         }
     };
   }
@@ -729,7 +729,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "project43",
-            "SyntheticTests/Premium/FeaturedVideo"
+            "SyntheticTests/Premium/FeaturedVideo?useskin=mercury"
         }
     };
   }
