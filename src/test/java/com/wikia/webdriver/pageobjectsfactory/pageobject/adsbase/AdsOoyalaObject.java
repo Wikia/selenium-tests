@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
+import org.apache.xpath.SourceTree;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,6 +67,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyArticleAd() {
     wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30, 1000);
+    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
+    fixScrollPositionByNavbar();
     verifyFeaturedVideoElement(BLUE, AD_DURATION_SEC);
   }
 
@@ -75,6 +78,9 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyMobileArticleVideo() {
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_MOBILE_SELECTOR), 30, 1000);
+    scrollToPosition(ARTICLE_VIDEO_MOBILE_SELECTOR);
+    fixScrollPositionByNavbar();
     verifyFeaturedVideoElement(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
@@ -90,9 +96,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   private void verifyFeaturedVideoElement(Color color, int duration) {
-    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
-    fixScrollPositionByNavbar();
-    verifyColorAd(articleVideoWrapper, color, 5);
+//    verifyColorAd(articleVideoWrapper, color, 5);
+    System.out.println("lalalalalal");
     logMessage(color, duration);
   }
 
