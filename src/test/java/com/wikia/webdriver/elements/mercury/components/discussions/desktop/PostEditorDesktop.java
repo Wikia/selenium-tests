@@ -36,10 +36,6 @@ public class PostEditorDesktop extends ContributionEditor {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .discussion-textarea-with-counter")
-  private WebElement titleTextarea;
-
-  @Getter
   @FindBy(css = ".discussion-inline-editor textarea[required]")
   private WebElement descriptionTextarea;
 

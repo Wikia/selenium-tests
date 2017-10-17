@@ -30,10 +30,6 @@ public class PostEditorMobile extends ContributionEditor {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor .discussion-textarea-with-counter")
-  private WebElement titleTextarea;
-
-  @Getter
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
   private WebElement descriptionTextarea;
 

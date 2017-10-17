@@ -75,16 +75,15 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
 
   protected abstract WebElement getPostsCreator();
   protected abstract WebElement getEditor();
-  protected abstract WebElement getTitleTextarea();
+
+  private By titleInput = By.className("discussion-textarea-with-counter");
+
+  protected WebElement getTitleTextarea() {
+    return getEditor().findElement(titleInput);
+  }
 
   public ContributionEditor click() {
     waitAndClick(getPostsCreator());
-    return this;
-  }
-
-  @Override
-  public ContributionEditor clickCancelButton() {
-    waitAndClick(getCancelButton());
     return this;
   }
 

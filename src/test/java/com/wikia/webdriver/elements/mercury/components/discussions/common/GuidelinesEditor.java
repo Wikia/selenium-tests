@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class GuidelinesEditor extends BasePageObject implements Editor {
+public class GuidelinesEditor extends BasePageObject implements Editor, StandaloneEditor {
 
   @Getter
   @FindBy(css = ".discussion-standalone-editor-save-button")
@@ -26,13 +26,13 @@ public class GuidelinesEditor extends BasePageObject implements Editor {
   }
 
   @Override
-  public Editor clickSubmitButton() {
+  public GuidelinesEditor clickSubmitButton() {
     waitAndClick(getSubmitButton());
     return this;
   }
 
   @Override
-  public Editor clickCancelButton() {
+  public GuidelinesEditor clickCancelButton() {
     waitAndClick(getCancelButton());
     return this;
   }

@@ -7,10 +7,8 @@ public interface Editor {
 
   boolean isSubmitButtonActive();
   Editor clickSubmitButton();
-  Editor clickCancelButton();
   Editor addTextWith(final String text);
   Editor clearText();
   WebElement getTextArea();
-  WebElement getCancelButton();
   WebElement getSubmitButton();
 }
