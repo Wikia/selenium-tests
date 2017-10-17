@@ -20,6 +20,10 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "arecovery";
   private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
+
+  private static final String RECOVERED_BOTTOM_LEADERBOARD_SELECTOR =
+      "div[id*=BOTTOM_LEADERBOARD][adonis-marker]";
+
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountrie";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
   private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT = "wgAdDriverPremiumAdLayoutCountries";
@@ -36,7 +40,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
-        .forElementPresent(By.cssSelector("div[id*=BOTTOM_LEADERBOARD][adonis-marker]"));
+        .forElementPresent(By.cssSelector(RECOVERED_BOTTOM_LEADERBOARD_SELECTOR));
 
     List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
     Assert.assertEquals(recoveredAds.size(), 3);
