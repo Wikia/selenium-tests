@@ -1,13 +1,14 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.StandaloneEditor;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class PostEditorDesktop extends ContributionEditor {
+public class PostEditorDesktop extends ContributionEditor implements StandaloneEditor {
 
   @Getter
   @FindBy(css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
@@ -22,6 +23,10 @@ public class PostEditorDesktop extends ContributionEditor {
   @Getter
   @FindBy(css = ".discussion-inline-editor")
   private WebElement editor;
+
+  @Getter
+  @FindBy(css = ".editor-close")
+  private WebElement cancelButton;
 
   @Getter
   @FindBy(css = ".discussion-inline-editor .discussion-inline-editor-submit")
@@ -64,7 +69,8 @@ public class PostEditorDesktop extends ContributionEditor {
   }
 
   @Override
-  public WebElement getCancelButton() {
-    throw new UnsupportedOperationException("Desktop editors don't have cancel buttons");
+  public PostEditorDesktop clickCancelButton() {
+    waitAndClick(getCancelButton());
+    return this;
   }
 }

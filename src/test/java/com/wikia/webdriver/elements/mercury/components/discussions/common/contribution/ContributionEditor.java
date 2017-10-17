@@ -28,9 +28,25 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   @FindBy(css = ".discussion-image-upload__button input[type=file]")
   private WebElement uploadButton;
 
-  private By confirmButton = By.className("confirm-button");
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
 
+  @Getter
+  @FindBy(css = ".editor-overlay-message .message-close")
+  private WebElement guidelinesMessageCloseButton;
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
+
+  private By confirmButton = By.className("confirm-button");
   private By signInButton = By.className("signin-button");
+
+  protected abstract WebElement getPostsCreator();
+  protected abstract WebElement getEditor();
 
   protected WebElement getOkButtonInSignInDialog() {
     return getSignInDialog().findElement(confirmButton);
@@ -61,21 +77,12 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return getEditor().findElement(imagePreview);
   }
 
-  @Getter
-  @FindBy(css = ".delete-image")
-  private WebElement imageDeleteButton;
 
-  @Getter
-  @FindBy(css = ".editor-overlay-message .message-close")
-  private WebElement guidelinesMessageCloseButton;
 
   public ContributionEditor() {
     this.categoryPills = new CategoryPills();
     categoryPills.setEmpty(false);
   }
-
-  protected abstract WebElement getPostsCreator();
-  protected abstract WebElement getEditor();
 
   private By titleInput = By.className("discussion-textarea-with-counter");
 
@@ -108,11 +115,7 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return getEditor().findElement(By.className("//TODO: fixme"));
   }
 
-  @Getter
-  private By openGraphContainer = By.className("og-container");
 
-  @Getter
-  private By openGraphText = By.className("og-texts");
 
   public boolean hasOpenGraph() {
     boolean result = false;
@@ -162,8 +165,6 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     getTitleTextarea().clear();
     return this;
   }
-
-
 
   public ContributionEditor addDescriptionWithLink(final URL url) {
     getTextArea().sendKeys(String.format(" %s ", url.toString()));
