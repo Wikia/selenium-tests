@@ -65,15 +65,17 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleAd() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_PREROLL_SELECTOR, BLUE, AD_DURATION_SEC);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30, 1000);
+    verifyFeaturedVideoElement(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyArticleVideo() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN_OOYALA_4, VIDEO_DURATION_SEC);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR), 30, 1000);
+    verifyFeaturedVideoElement(GREEN_OOYALA_4, VIDEO_DURATION_SEC);
   }
 
   public void verifyMobileArticleVideo() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_MOBILE_SELECTOR, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
+    verifyFeaturedVideoElement(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
   public void verifyLightboxAd() {
@@ -87,8 +89,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
-  private void verifyFeaturedVideoElement(By selector, Color color, int duration) {
-    wait.forElementVisible(selector, 30, 1000);
+  private void verifyFeaturedVideoElement(Color color, int duration) {
     scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
     fixScrollPositionByNavbar();
     verifyColorAd(articleVideoWrapper, color, 5);
@@ -100,10 +101,10 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
     ooyala.verifyColorAd(element, color, duration);
   }
-  
-  private void verifyFeaturedVideoElement(String selector, Color color, int duration) {
-    verifyFeaturedVideoElement(By.cssSelector(selector), color, duration);
-  }
+
+//  private void verifyFeaturedVideoElement(Color color, int duration) {
+//    verifyFeaturedVideoElement(color, duration);
+//  }
 
   private void logMessage(Color color, int duration) {
     PageObjectLogging.log("Video", "Video content had " + color + " during " + duration + " seconds", true);
