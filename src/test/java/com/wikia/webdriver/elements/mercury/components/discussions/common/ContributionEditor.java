@@ -27,6 +27,28 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   @FindBy(css = ".discussion-image-upload__button input[type=file]")
   private WebElement uploadButton;
 
+  private By confirmButton = By.className("confirm-button");
+
+  private By signInButton = By.className("signin-button");
+
+  protected WebElement getOkButtonInSignInDialog() {
+    return getSignInDialog().findElement(confirmButton);
+  }
+
+  protected WebElement getSignInButtonInSignInDialog() {
+    return getSignInDialog().findElement(signInButton);
+  }
+
+  public ContributionEditor clickOkButtonInSignInDialog() {
+    waitAndClick(getOkButtonInSignInDialog());
+    return this;
+  }
+
+  public ContributionEditor clickSignInButtonInSignInDialog() {
+    waitAndClick(getSignInButtonInSignInDialog());
+    return this;
+  }
+
   private By imagePreview = By.className("post-image-inner-image");
 
   /**
@@ -42,6 +64,10 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   @FindBy(css = ".delete-image")
   private WebElement imageDeleteButton;
 
+  @Getter
+  @FindBy(css = ".editor-overlay-message .message-close")
+  private WebElement guidelinesMessageCloseButton;
+
   public ContributionEditor() {
     this.categoryPills = new CategoryPills();
     categoryPills.setEmpty(false);
@@ -49,10 +75,7 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
 
   protected abstract WebElement getPostsCreator();
   protected abstract WebElement getEditor();
-  protected abstract WebElement getGuidelinesMessageCloseButton();
   protected abstract WebElement getTitleTextarea();
-  protected abstract By getOpenGraphContainer();
-  protected abstract By getOpenGraphText();
 
   public ContributionEditor click() {
     waitAndClick(getPostsCreator());
@@ -84,6 +107,12 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   public WebElement getTextArea() {
     return getEditor().findElement(By.className("//TODO: fixme"));
   }
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
 
   public boolean hasOpenGraph() {
     boolean result = false;
