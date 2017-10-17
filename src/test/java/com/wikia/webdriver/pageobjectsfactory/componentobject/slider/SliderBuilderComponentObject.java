@@ -49,7 +49,7 @@ public class SliderBuilderComponentObject extends BasePageObject {
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     addPhotoButton.click();
-    PageObjectLogging.log("addPhoto", "add photo button clicked", true);
+    PageObjectLogging.log("addPhoto", "addTextWith photo button clicked", true);
     return new AddPhotoComponentObject(driver);
   }
 

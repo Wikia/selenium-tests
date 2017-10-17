@@ -23,7 +23,7 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-community-header__sitename a")
   private WebElement wikiName;
 
-  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"add-new-page\"]")
+  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"addTextWith-new-page\"]")
   private WebElement addNewPageButton;
 
   @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"wiki-activity\"]")

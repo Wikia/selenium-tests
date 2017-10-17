@@ -155,9 +155,9 @@ public class ForumBoardPage extends BasePageObject {
     discussionTitleArea.sendKeys(title);
     wait.forElementVisible(wikiaEditorTextArea);
     jsActions.focus(wikiaEditorTextArea);
-    // add internal wikia link
+    // addTextWith internal wikia link
     miniEditor.addInternalLink(internalLink);
-    // add external link
+    // addTextWith external link
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(Keys.END);
     miniEditor.writeMiniEditor(Keys.ENTER);

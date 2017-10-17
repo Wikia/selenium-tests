@@ -26,7 +26,7 @@ public class LockingPostTests extends NewTestTemplate {
   private static final String SHOULD_NOT_ADD_REPLY_MESSAGE =
     "%s should not be able to create reply under post locked by %s.";
   private static final String SHOULD_ADD_REPLY_MESSAGE =
-    "%s should be able to add reply to post unlocked by %s.";
+    "%s should be able to addTextWith reply to post unlocked by %s.";
 
   private static final String MOBILE = "discussions-locking-posts-mobile";
   private static final String DESKTOP = "discussions-locking-posts-desktop";
@@ -376,7 +376,7 @@ public class LockingPostTests extends NewTestTemplate {
 
     page.getReplyCreatorMobile().click()
         .clickGuidelinesReadButton()
-        .add(text)
+        .addTextWith(text)
         .clickSubmitButton();
 
     return text;
@@ -387,7 +387,7 @@ public class LockingPostTests extends NewTestTemplate {
 
     page.getReplyCreatorDesktop().click()
         .clickGuidelinesReadButton()
-        .add(text)
+        .addTextWith(text)
         .clickSubmitButton();
 
     return text;

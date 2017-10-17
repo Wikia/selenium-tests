@@ -203,26 +203,26 @@ public class CreatingPostTests extends NewTestTemplate {
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
-        "User should not be able to add post with only title filled.");
+        "User should not be able to addTextWith post with only title filled.");
 
     postsCreator.addTextWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
-        "User should not be able to add post with title and description filled.");
+        "User should not be able to addTextWith post with title and description filled.");
 
     postsCreator.clearTitle();
     Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
-        "User should not be able to add post with only description filled.");
+        "User should not be able to addTextWith post with only description filled.");
     postsCreator.clearText();
 
     postsCreator.clickAddCategoryButton()
         .findCategoryOn(0)
         .click();
     Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
-        "User should not be able to add post with only category selected.");
+        "User should not be able to addTextWith post with only category selected.");
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
-        "User should not be able to add post with category selected and title filled.");
+        "User should not be able to addTextWith post with category selected and title filled.");
   }
 
   private CategoryPill fillPostCategoryWith(final ContributionEditor postsCreator, final String description) {

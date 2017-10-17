@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionP
 import org.testng.annotations.Test;
 
 /**
- * Test uploadAvatar 1. Open user profile page User:Username and add avatar 2. Verify that avatar
+ * Test uploadAvatar 1. Open user profile page User:Username and addTextWith avatar 2. Verify that avatar
  * appeared on user page, and on global navigation
  *
  * Test clickAvatar 1. Open wikia page and click user avatar on global navigation 2. Make sure you

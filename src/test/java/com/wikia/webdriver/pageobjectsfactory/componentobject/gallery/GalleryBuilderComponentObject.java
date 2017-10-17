@@ -99,7 +99,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
-    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+    PageObjectLogging.log("clickAddPhoto", "addTextWith photo button clicked", true);
     return new AddPhotoComponentObject(driver);
   }
 

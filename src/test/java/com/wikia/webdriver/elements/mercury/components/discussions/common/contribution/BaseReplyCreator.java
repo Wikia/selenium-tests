@@ -9,12 +9,12 @@ import org.openqa.selenium.WebElement;
 
 import java.net.URL;
 
-public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
+public abstract class BaseReplyCreator extends BasePageObject implements Editor {
 
   @Getter
   private By errorNotification = By.className("error");
 
-  protected abstract WebElement getReplyCreatorTextArea();
+  protected abstract WebElement getBaseReplyCreatorTextArea();
   protected abstract WebElement getEditor();
   protected abstract WebElement getDialogSignIn();
   protected abstract WebElement getOkButtonInSignInDialog();
@@ -30,8 +30,8 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   protected abstract By getOpenGraphText();
 
   @Override
-  public ReplyCreator click() {
-    wait.forElementVisible(getReplyCreatorTextArea()).click();
+  public BaseReplyCreator click() {
+    wait.forElementVisible(getBaseReplyCreatorTextArea()).click();
     return this;
   }
 
@@ -41,32 +41,32 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   }
 
   @Override
-  public ReplyCreator clickOkButtonInSignInDialog() {
+  public BaseReplyCreator clickOkButtonInSignInDialog() {
     getOkButtonInSignInDialog().click();
     return this;
   }
 
 
   @Override
-  public ReplyCreator clickSignInButtonInSignInDialog() {
+  public BaseReplyCreator clickSignInButtonInSignInDialog() {
     getSignInButtonInSignInDialog().click();
     return this;
   }
 
   @Override
-  public ReplyCreator clickGuidelinesReadButton() {
+  public BaseReplyCreator clickGuidelinesReadButton() {
     getGuidelinesReadButton().click();
     return this;
   }
 
   @Override
-  public ReplyCreator clearText() {
+  public BaseReplyCreator clearText() {
     wait.forElementVisible(getTextarea()).clear();
     return this;
   }
 
   @Override
-  public ReplyCreator add(final String text) {
+  public BaseReplyCreator addTextWith(final String text) {
     wait.forElementVisible(getTextarea()).sendKeys(text);
     return this;
   }
@@ -77,12 +77,12 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   }
 
   @Override
-  public ReplyCreator clickSubmitButton() {
+  public BaseReplyCreator clickSubmitButton() {
     getSubmitButton().click();
     return this.waitForConfirmation();
   }
 
-  private ReplyCreator waitForConfirmation() {
+  private BaseReplyCreator waitForConfirmation() {
     waitSafely(() -> wait.forElementVisible(getLoadingSuccess()));
     waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
@@ -122,7 +122,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   @Override
   public BaseReplyCreator startReplyCreationWith(String description) {
-    click().clickGuidelinesReadButton().add(description);
+    click().clickGuidelinesReadButton().addTextWith(description);
     return this;
   }
 

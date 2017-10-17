@@ -18,11 +18,11 @@ public class EditorHomePageObject extends BasePageObject {
 
   @FindBy(css = ".sub-head--done")
   private WebElement publishButton;
-  @FindBy(css = "section:nth-of-type(2) .curated-content-editor-add-item-btn")
+  @FindBy(css = "section:nth-of-type(2) .curated-content-editor-addTextWith-item-btn")
   private WebElement addFeaturedContentButton;
-  @FindBy(css = "section:nth-of-type(3) .curated-content-editor-add-item-btn")
+  @FindBy(css = "section:nth-of-type(3) .curated-content-editor-addTextWith-item-btn")
   private WebElement addNewSectionButton;
-  @FindBy(css = "section:nth-of-type(4) .curated-content-editor-add-item-btn")
+  @FindBy(css = "section:nth-of-type(4) .curated-content-editor-addTextWith-item-btn")
   private WebElement addCategoryButton;
 
   @Getter(lazy = true)

@@ -270,7 +270,7 @@ public class UploadingImageTests extends NewTestTemplate {
   private BaseReplyCreator startReplyCreation(BaseReplyCreator replyCreator) {
     replyCreator.click()
       .clickGuidelinesReadButton()
-      .add(TextGenerator.defaultText());
+      .addTextWith(TextGenerator.defaultText());
     return replyCreator;
   }
 

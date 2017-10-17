@@ -42,7 +42,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   @FindBy(className = "discussion-category-all")
   private WebElement editableCategoryAll;
 
-  @FindBy(className = "discussion-categories-edit-add-link")
+  @FindBy(className = "discussion-categories-edit-addTextWith-link")
   private WebElement addCategoryLink;
 
   @FindBy(css = ".discussion-categories-edit button.submit")

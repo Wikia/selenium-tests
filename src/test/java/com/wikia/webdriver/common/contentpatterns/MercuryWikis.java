@@ -27,7 +27,7 @@ public class MercuryWikis {
   // for discussions mobile view tests
   public static final String DISCUSSIONS_MOBILE = "dauto-mobile";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";
-  // for testing zero state messages - please don't add any posts!
+  // for testing zero state messages - please don't addTextWith any posts!
   public static final String DISCUSSIONS_EMPTY = "discussions-empty";
   // read-only tests for Promoting
   public static final String FALLOUT = "fallout";
