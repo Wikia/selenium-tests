@@ -25,7 +25,6 @@ public class TestAdsFeaturedVideoOasis extends TemplateNoFirstLoad {
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, testedPage);
 
     jwPlayerObject.verifyPlayerOnPage();
-    jwPlayerObject.waitForAdStartsPlaying();
     jwPlayerObject.verifyPreroll();
     jwPlayerObject.verifyFeaturedVideo();
     jwPlayerObject.verifyMidroll();
