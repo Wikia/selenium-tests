@@ -9,10 +9,10 @@ import java.awt.*;
 
 public class AdsJWPlayerObject extends AdsBaseObject {
 
-  private static final Color COLOR_PREROLL = new Color(0, 0, 255);
-  private static final Color COLOR_MIDROLL = new Color(138, 137, 138);
-  private static final Color COLOR_POSTROLL = new Color(240, 71, 168);
-  private static final Color COLOR_VIDEO = new Color(21, 255, 12);
+  private static final Color COLOR_PREROLL = new Color(0, 1, 253);
+  private static final Color COLOR_MIDROLL = new Color(137, 137, 137);
+  private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
+  private static final Color COLOR_VIDEO = new Color(0, 255, 13);
 
   private static final String FEATURED_VIDEO_AD_SELECTOR = "#featured-video__player_ad";
   private static final String FEATURED_VIDEO_MOVIE_SELECTOR = "#featured-video__player .jw-media video[src]";
