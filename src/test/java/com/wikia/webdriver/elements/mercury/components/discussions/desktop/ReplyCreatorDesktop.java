@@ -41,9 +41,7 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement textarea;
 
-  @FindBy(css = ".wds-spinner__overlay .success")
-  @Getter
-  private WebElement loadingSuccess;
+
 
   @FindBy(css = ".discussion-inline-reply-editor")
   @Getter
@@ -67,7 +65,6 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private By openGraphText = By.className("og-texts");
 
-  @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
   }

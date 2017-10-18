@@ -375,7 +375,7 @@ public class LockingPostTests extends NewTestTemplate {
     final String text = TextGenerator.createUniqueText();
 
     page.getReplyCreatorMobile().click()
-        .clickGuidelinesReadButton()
+        .closeGuidelinesMessage()
         .addTextWith(text)
         .clickSubmitButton();
 
@@ -386,7 +386,7 @@ public class LockingPostTests extends NewTestTemplate {
     final String text = TextGenerator.createUniqueText();
 
     page.getReplyCreatorDesktop().click()
-        .clickGuidelinesReadButton()
+        .closeGuidelinesMessage()
         .addTextWith(text)
         .clickSubmitButton();
 

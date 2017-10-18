@@ -18,6 +18,10 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   private final CategoryPills categoryPills;
 
   @Getter
+  @FindBy(css = ".wds-spinner__overlay .success")
+  private WebElement loadingSuccess;
+
+  @Getter
   private By errorNotification = By.className("error");
 
   @Getter

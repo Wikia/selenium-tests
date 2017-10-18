@@ -269,7 +269,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private BaseReplyCreator startReplyCreation(BaseReplyCreator replyCreator) {
     replyCreator.click()
-      .clickGuidelinesReadButton()
+      .closeGuidelinesMessage()
       .addTextWith(TextGenerator.defaultText());
     return replyCreator;
   }

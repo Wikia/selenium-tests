@@ -2,42 +2,25 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common.contr
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.net.URL;
 
-public abstract class BaseReplyCreator extends BasePageObject implements Editor {
+public abstract class BaseReplyCreator extends ContributionEditor implements Editor {
 
-  @Getter
-  private By errorNotification = By.className("error");
 
-  protected abstract WebElement getBaseReplyCreatorTextArea();
-  protected abstract WebElement getEditor();
-  protected abstract WebElement getDialogSignIn();
-  protected abstract WebElement getOkButtonInSignInDialog();
-  protected abstract WebElement getSignInButtonInSignInDialog();
-  protected abstract WebElement getGuidelinesReadButton();
-  protected abstract WebElement getTextarea();
-  protected abstract WebElement getSubmitButton();
-  protected abstract WebElement getLoadingSuccess();
-  protected abstract WebElement getImagePreview();
-  protected abstract WebElement getUploadButton();
-  protected abstract WebElement getImageDeleteButton();
-  protected abstract By getOpenGraphContainer();
-  protected abstract By getOpenGraphText();
 
   @Override
   public BaseReplyCreator click() {
-    wait.forElementVisible(getBaseReplyCreatorTextArea()).click();
+    wait.forElementVisible(getTextArea()).click();
     return this;
   }
 
-  @Override
   public boolean isModalDialogVisible() {
-    return wait.forElementVisible(getDialogSignIn()).isDisplayed();
+    return wait.forElementVisible(getSignInDialog()).isDisplayed();
   }
 
   @Override
@@ -54,32 +37,20 @@ public abstract class BaseReplyCreator extends BasePageObject implements Editor 
   }
 
   @Override
-  public BaseReplyCreator clickGuidelinesReadButton() {
-    getGuidelinesReadButton().click();
-    return this;
-  }
-
-  @Override
   public BaseReplyCreator clearText() {
-    wait.forElementVisible(getTextarea()).clear();
+    wait.forElementVisible(getTextArea()).clear();
     return this;
   }
 
   @Override
   public BaseReplyCreator addTextWith(final String text) {
-    wait.forElementVisible(getTextarea()).sendKeys(text);
+    wait.forElementVisible(getTextArea()).sendKeys(text);
     return this;
   }
 
   @Override
   public boolean isSubmitButtonActive() {
     return getSubmitButton().isEnabled();
-  }
-
-  @Override
-  public BaseReplyCreator clickSubmitButton() {
-    getSubmitButton().click();
-    return this.waitForConfirmation();
   }
 
   private BaseReplyCreator waitForConfirmation() {
@@ -120,9 +91,8 @@ public abstract class BaseReplyCreator extends BasePageObject implements Editor 
     return startReplyCreationWith(TextGenerator.defaultText());
   }
 
-  @Override
   public BaseReplyCreator startReplyCreationWith(String description) {
-    click().clickGuidelinesReadButton().addTextWith(description);
+    click().closeGuidelinesMessage().addTextWith(description);
     return this;
   }
 
