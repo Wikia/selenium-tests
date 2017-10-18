@@ -1,15 +1,14 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsVelesObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
@@ -27,13 +26,14 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
     String testedPage = PAGE_WITH_VELES.getUrl();
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, CONFIG);
 
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsVelesObject velesAds = new AdsVelesObject(driver, testedPage);
 
-    triggerIncontentPlayer();
-    Assertion.assertTrue(isIncontentPlayerDispalyed(ads), "Video Player is not displayed");
+    Assertion.assertTrue(velesAds.isIncontentWrapperOnPage(), "Incontent player not inserted");
+    velesAds.triggerIncontentPlayer();
+    Assertion.assertTrue(isIncontentPlayerDispalyed(velesAds), "Video Player is not displayed");
 
-    ads.refreshPage();
-    Assertion.assertFalse(isIncontentPlayerDispalyed(ads), "Video Player is displayed");
+    velesAds.refreshPage();
+    Assertion.assertFalse(velesAds.isIncontentWrapperOnPage(), "Incontent player inserted");
   }
 
   private boolean isIncontentPlayerDispalyed(AdsBaseObject ads) {
@@ -45,13 +45,4 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
       return false;
     }
   }
-
-  private void triggerIncontentPlayer() {
-    JavascriptActions jsActions = new JavascriptActions(driver);
-    WebElement slotWrapper = driver.findElement(By.cssSelector("#INCONTENT_WRAPPER"));
-
-    jsActions.scrollToElement(slotWrapper);
-    jsActions.scrollBy(0, -10);
-  }
-
 }
