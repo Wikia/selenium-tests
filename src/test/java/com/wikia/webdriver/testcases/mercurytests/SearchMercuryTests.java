@@ -12,6 +12,8 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.testcases.mobilewikitests.SearchTests;
+
 import org.testng.annotations.Test;
 
 @InBrowser(browser = Browser.CHROME)
