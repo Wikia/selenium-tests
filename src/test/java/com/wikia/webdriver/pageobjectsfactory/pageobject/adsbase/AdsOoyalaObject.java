@@ -19,14 +19,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final Color GREEN_OOYALA_3 = new Color(20, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
   private static final int AD_DURATION_SEC = 30;
-  private static final int VIDEO_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 5;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
   private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
   private static final String ARTICLE_VIDEO_MOBILE_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
+  private static final String ARTICLE_VIDEO_PLAY_BUTTON_SELECTOR = ".article-featured-video__play-circle";
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
+  private static final By VIDEO_PLAY_BUTTON = By.cssSelector(ARTICLE_VIDEO_PLAY_BUTTON_SELECTOR);
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
@@ -44,6 +46,10 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void playLightboxVideo() {
     wait.forElementVisible(lightboxVideo);
     lightboxVideo.click();
+  }
+
+  public void playFeaturedVideo() {
+    wait.forElementVisible(VIDEO_PLAY_BUTTON).click();
   }
 
   public void clickVolumeButton() {
@@ -65,18 +71,22 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleAd() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_PREROLL_SELECTOR, BLUE, AD_DURATION_SEC);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30, 1000);
+    verifyFeaturedVideoElement(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyArticleVideo() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN_OOYALA_4, VIDEO_DURATION_SEC);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR), 30, 1000);
+    verifyFeaturedVideoElement(GREEN_OOYALA_4, VIDEO_DURATION_SEC);
   }
 
   public void verifyMobileArticleVideo() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_MOBILE_SELECTOR, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_MOBILE_SELECTOR), 30, 1000);
+    verifyFeaturedVideoElement(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
   public void verifyLightboxAd() {
+    wait.forElementVisible(lightboxVideo);
     verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
     logMessage(BLUE, AD_DURATION_SEC);
   }
@@ -86,10 +96,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
-  private void verifyFeaturedVideoElement(By selector, Color color, int duration) {
-    wait.forElementVisible(selector, 30, 1000);
-    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
-    fixScrollPositionByNavbar();
+  private void verifyFeaturedVideoElement(Color color, int duration) {
     verifyColorAd(articleVideoWrapper, color, 5);
     logMessage(color, duration);
   }
@@ -98,10 +105,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
     ElementColor ooyala = new ElementColor(driver);
 
     ooyala.verifyColor(element, color, duration);
-  }
-  
-  private void verifyFeaturedVideoElement(String selector, Color color, int duration) {
-    verifyFeaturedVideoElement(By.cssSelector(selector), color, duration);
   }
 
   private void logMessage(Color color, int duration) {

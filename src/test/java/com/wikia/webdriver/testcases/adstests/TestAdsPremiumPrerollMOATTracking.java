@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 import org.testng.annotations.Test;
@@ -14,18 +14,19 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   private static final String IGNORE_SAMPLING = "ignored_samplers=moatTrackingForFeaturedVideo";
   private static final String QUERY_PARAM_CONTROL_GROUP = "AbTest.MOBILE_FEATURED_VIDEO_AUTOPLAY=CONTROL";
   private static final String MOAT_VIDEO_TRACKING_URL = "https://z.moatads.com/wikiaimajsint377461931603/moatvideo.js";
-  private static final String FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT = "%s?" + TURN_ON_MOAT + "&" + IGNORE_SAMPLING + "&" + QUERY_PARAM_CONTROL_GROUP;
+  private static final String FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT = TURN_ON_MOAT + "&" + IGNORE_SAMPLING + "&" + QUERY_PARAM_CONTROL_GROUP;
+  private static final Page TEST_PAGE = new Page("project43", "SyntheticTests/Premium/FeaturedVideo");
+
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsPremiumPreroll",
       groups = {"AdsOoyalaPrerollOasis", "AdsPremiumPrerollMOATTrackingOasis"}
   )
-  public void adsPremiumPrerollMOATTrackingOasis(String wikiName, String article) {
+  public void adsPremiumPrerollMOATTrackingOasis() {
     networkTrafficInterceptor.startIntercepting();
-    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver,
-        urlBuilder.getUrlForPath(wikiName, String.format(FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT, article)));
+    String url = urlBuilder.getUrlForPage(TEST_PAGE);
+    url = urlBuilder.appendQueryStringToURL(url, FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT);
+    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
 
     adsPremiumPrerollMOATTracking(wikiPage);
   }
@@ -33,14 +34,13 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5, browser = Browser.CHROME)
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsPremiumPreroll",
       groups = {"AdsOoyalaPrerollMercury", "AdsPremiumPrerollMOATTrackingMobile"}
   )
-  public void adsPremiumPrerollMOATTrackingMobile(String wikiName, String article) {
+  public void adsPremiumPrerollMOATTrackingMobile() {
     networkTrafficInterceptor.startIntercepting();
-    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver,
-        urlBuilder.getUrlForPath(wikiName, String.format(FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT, article)));
+    String url = urlBuilder.getUrlForPage(TEST_PAGE);
+    url = urlBuilder.appendQueryStringToURL(url, FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT);
+    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
 
     adsPremiumPrerollMOATTracking(wikiPage);
   }
