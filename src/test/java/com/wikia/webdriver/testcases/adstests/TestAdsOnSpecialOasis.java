@@ -49,12 +49,12 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   }
 
   private void testSpecialPage(AdsBaseObject ads) {
-    ads.setPageType("special");
+    ads.setPageType(AdsBaseObject.PAGE_TYPE_SPECIAL);
     ads.verifyAds(getSpecialPageExpectedLineItems(), getSpecialPageExpectedAdUnits());
   }
 
   private void testFilePage(AdsBaseObject ads) {
-    ads.setPageType("file");
+    ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
     ads.verifyAds(getFilePageExpectedLineItems(), getFilePageExpectedAdUnits());
   }
 

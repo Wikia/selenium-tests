@@ -39,7 +39,6 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import java.util.ArrayList;
@@ -121,11 +120,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement veToolMenu;
   @FindBy(css = "h3[id='headerWikis']")
   protected WebElement headerWhereIsMyExtensionPage;
-  @FindAll({
-          @FindBy(css = "#globalNavigation"),
-          @FindBy(css = ".site-head.no-shadow"),
-          @FindBy(css = ".wds-global-navigation")
-  })
+  @FindBy(css = "#globalNavigation,.site-head.no-shadow,.wds-global-navigation")
   protected WebElement navigationBar;
   @FindBy(css = "#globalNavigation")
   protected WebElement newGlobalNavigation;

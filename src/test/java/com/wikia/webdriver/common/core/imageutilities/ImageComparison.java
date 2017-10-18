@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Class containing methods responsible for comparing images using different algorithms.
@@ -35,6 +36,33 @@ public class ImageComparison {
       throw new WebDriverException(e);
     }
     return Arrays.equals(fileInBytes1, fileInBytes2);
+  }
+
+  public Color getMostFrequentColor(BufferedImage image) {
+    final HashMap<Integer, Integer> colorFreq = new HashMap<>();
+
+    for (int x = 0; x < image.getWidth(); x++) {
+      for (int y = 0; y < image.getHeight(); y++) {
+        int pixelColor = image.getRGB(x,y);
+        if (colorFreq.get(pixelColor) == null) {
+          colorFreq.put(pixelColor, 0);
+        }
+        colorFreq.put(pixelColor, colorFreq.get(pixelColor) + 1);
+      }
+    }
+
+    HashMap.Entry<Integer, Integer> mostFrequentEntry = null;
+    for (HashMap.Entry<Integer, Integer> entry : colorFreq.entrySet()) {
+      if (mostFrequentEntry == null || entry.getValue().compareTo(mostFrequentEntry.getValue()) > 0) {
+        mostFrequentEntry = entry;
+      }
+    }
+
+    final Color color = new Color(mostFrequentEntry.getKey());
+
+    PageObjectLogging.log("Most frequent color", "Image most frequent color is " + color, true);
+
+    return color;
   }
 
   /**
@@ -110,7 +138,7 @@ public class ImageComparison {
     return true;
   }
 
-  private boolean areColorsSimilar(Color c1, Color c2) {
+  public boolean areColorsSimilar(Color c1, Color c2) {
     double distance = Math.pow(c1.getRed() - c2.getRed(), 2) +
                       Math.pow(c1.getGreen() - c2.getGreen(), 2) +
                       Math.pow(c1.getBlue() - c2.getBlue(), 2);
