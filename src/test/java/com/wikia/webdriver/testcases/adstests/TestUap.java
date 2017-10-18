@@ -36,8 +36,6 @@ public class TestUap extends TemplateNoFirstLoad {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
-    ads.triggerComments();
-    ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
   }
 
@@ -81,23 +79,18 @@ public class TestUap extends TemplateNoFirstLoad {
   private void verifySlotsBlocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
-
-      ads.verifyNoAd(slotName);
+      ads.verifyNoAdWithoutTrigger(AdsContent.getSlotSelector(slotName));
     }
   }
 
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
-      String slotSelector = AdsContent.getSlotSelector(slotName);
-
-      ads.wait.forElementPresent(By.cssSelector(slotSelector));
-      ads.scrollToPosition(slotSelector);
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
+      ads.checkSlotOnPageLoaded(slotName);
       ads.verifyLineItemId(slotName, slotData.get("lineItemId").toString());
-      ads.verifyIframeSize(slotName, slotData.get("src").toString(),
-                           slotSize.getWidth(), slotSize.getHeight());
+      ads.verifyIframeSize(slotName, slotData.get("src").toString(), slotSize.getWidth(), slotSize.getHeight());
     }
   }
 }

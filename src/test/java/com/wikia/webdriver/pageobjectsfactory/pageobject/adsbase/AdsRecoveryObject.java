@@ -28,11 +28,9 @@ public class AdsRecoveryObject extends AdsBaseObject {
   public void assertIfAllRecoveredSlotHasCorrectSizeAndBackground(List<WebElement> recoveredAds) {
     String expectedRecoveredLB;
     String expectedRecoveredMR;
-    String expectedRecoveredSKY;
     try {
       expectedRecoveredLB = readFileToString(new File(EXPECTED_LEADERBOARD_PATH));
       expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
-      expectedRecoveredSKY = readFileToString(new File(EXPECTED_SKY_PATH));
     } catch (IOException e) {
       PageObjectLogging.log("Can't open expected PageFair recovery file.", e, false);
       throw new WebDriverException("Can't open expected PageFair recovery file.");
@@ -45,8 +43,6 @@ public class AdsRecoveryObject extends AdsBaseObject {
         Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredLB), "TOP_LEADERBOARD is not correctly recovered!");
       } else if (adSize.equals(MEDREC_SIZE)) {
         Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredMR), "MEDREC is not correctly recovered!");
-      } else if (adSize.equals(SKY_SIZE)) {
-        Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredSKY), "SKY is not correctly recovered!");
       } else {
         Assertion.fail("Not supported PageFair recovery ad size encountered: " + adSize);
       }

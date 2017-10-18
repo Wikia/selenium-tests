@@ -32,6 +32,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnCategoryPageOasis() {
     AdsBaseObject ads = buildAdsObject(CATEGORY_PAGE_PATH);
+    ads.setPageType(AdsBaseObject.PAGE_TYPE_CATEGORY);
     ads.verifyNoAdsOnPage();
   }
 
@@ -39,6 +40,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnSpecialPageOasis() {
     AdsBaseObject ads = buildAdsObject(SPECIAL_PAGE_PATH);
+    ads.setPageType(AdsBaseObject.PAGE_TYPE_SPECIAL);
     ads.verifyNoAdsOnPage();
   }
 
@@ -46,6 +48,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnFilePageOasis() {
     AdsBaseObject ads = buildAdsObject(FILE_PAGE_PATH);
+    ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
     ads.verifyNoAdsOnPage();
   }
 

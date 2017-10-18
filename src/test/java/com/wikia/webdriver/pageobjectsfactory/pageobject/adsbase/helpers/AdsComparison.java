@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -15,7 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class AdsComparison {
 
@@ -27,12 +25,10 @@ public class AdsComparison {
   private static final int AD_TIMEOUT_SEC = 15;
   protected ImageComparison imageComparison;
   private Shooter shooter;
-  private ImageEditor imageEditor;
 
   public AdsComparison() {
     imageComparison = new ImageComparison();
     shooter = new Shooter();
-    imageEditor = new ImageEditor();
   }
 
   public void hideSlot(String selector, WebDriver driver) {
@@ -47,15 +43,6 @@ public class AdsComparison {
     PageObjectLogging.log("CSS selector", selector, true, driver);
     JavascriptActions javascriptActions = new JavascriptActions(driver);
     javascriptActions.changeElementOpacity(selector, value);
-  }
-
-  public boolean compareImageWithScreenshot(final String pathToImage,
-                                            final WebElement element,
-                                            final WebDriver driver) {
-    BufferedImage expectedImage = imageEditor.fileToImage(new File(pathToImage));
-    BufferedImage actualImage = imageEditor.fileToImage(
-        shooter.captureWebElement(element, driver));
-    return imageComparison.areImagesTheSame(actualImage, expectedImage);
   }
 
   public boolean isAdVisible(final WebElement element, final String selector,
@@ -98,18 +85,27 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
-        PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
+        PageObjectLogging.log("verifyColor", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColorAd", e, false, driver);
+      PageObjectLogging.log("verifyColor", e, false, driver);
     }
+  }
+
+  public boolean isMostFrequentColorValid(WebDriver driver, WebElement element, Color color) {
+    BufferedImage image = shooter.takeScreenshot(element, driver);
+    Color mostFrequentColor = imageComparison.getMostFrequentColor(image);
+
+    PageObjectLogging.logWarning("Comparing two colors", "Actual: " + mostFrequentColor + "; expected: " + color);
+
+    return imageComparison.areColorsSimilar(mostFrequentColor, color);
   }
 
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
       PageObjectLogging.log(
-          "verifyColorAd",
+          "verifyColor",
           "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
           true,
           driver
