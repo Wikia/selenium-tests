@@ -49,7 +49,7 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
 
   private void triggerIncontentPlayer() {
     JavascriptActions jsActions = new JavascriptActions(driver);
-    WebElement slotWrapper = driver.findElement(By.cssSelector("#Section_2.mw-headline"));
+    WebElement slotWrapper = driver.findElement(By.cssSelector("#Player_above.mw-headline"));
 
     jsActions.scrollToElement(slotWrapper);
   }
