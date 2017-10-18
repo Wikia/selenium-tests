@@ -33,7 +33,13 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
-  private String pageType = "article";
+  public static final String PAGE_TYPE_ARTICLE = "article";
+  public static final String PAGE_TYPE_SPECIAL = "special";
+  public static final String PAGE_TYPE_FILE = "file";
+  public static final String PAGE_TYPE_CATEGORY = "category";
+
+  private String pageType = PAGE_TYPE_ARTICLE;
+  private String environment = AdsContent.ENV_DESKTOP;
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
@@ -112,6 +118,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     pageType = type;
   }
 
+  public void setEnvironment(String env) {
+    environment = env;
+  }
+
   public void timerStart() {
     tStart = System.currentTimeMillis();
   }
@@ -151,10 +161,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot("div[id*='TOP_RIGHT_BOXAD']", presentMedrec);
   }
 
-  public void verifyFloatingMedrec() {
-    verifyAdVisibleInSlot(FLOATING_MEDREC_SELECTOR, presentMedrec);
-  }
-
   public void verifyTopLeaderboard() {
     if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
         By.cssSelector("#jpsuperheader"))) {
@@ -168,18 +174,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyNoAds();
     PageObjectLogging.log(
         "verifyNoAdsOnPage",
-        "No ads detected",
-        true,
-        driver
-    );
-  }
-
-  public void verifyNoAdsOnMobilePage() {
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_AD_IN_CONTENT));
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_PREFOOTER));
-    verifyNoAds();
-    PageObjectLogging.log(
-        "verifyNoAdsOnMobilePage",
         "No ads detected",
         true,
         driver
@@ -448,13 +442,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
-      String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
-
-      if (StringUtils.isNotEmpty(javaScriptTrigger)) {
-        triggerAdSlot(slotName)
-            .wait
-            .forElementPresent(By.cssSelector(slotSelector));
-      }
+      triggerAdSlot(slotName);
 
       try {
         slot = driver.findElement(By.cssSelector(slotSelector));
@@ -572,14 +560,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public Boolean verifyNoAd(final String slotName) {
     final String slotSelector = AdsContent.getSlotSelector(slotName);
-    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+    PageObjectLogging.log(
+        "verifyNoAd",
+        "Triggering " + slotName,
+        true,
+        driver
+    );
+    triggerAdSlot(slotName);
+    return verifyNoAdWithoutTrigger(slotSelector);
+  }
 
-    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
-      triggerAdSlot(slotName)
-          .wait
-          .forElementNotPresent(By.cssSelector(slotSelector));
-    }
-
+  public Boolean verifyNoAdWithoutTrigger(final String slotSelector) {
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
 
@@ -694,13 +685,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private Map<String, String> getSlotsSelectorMap() {
     switch(pageType) {
-      case "special":
+      case PAGE_TYPE_SPECIAL:
         return AdsContent.getSpecialPageSlotsSelectorsMap();
-      case "file":
+      case PAGE_TYPE_FILE:
         return AdsContent.getFilePageSlotsSelectors();
-      case "article":
+      case PAGE_TYPE_CATEGORY:
+        return AdsContent.getCategoryPageSlotsSelectors();
+      case PAGE_TYPE_ARTICLE:
       default:
-        return AdsContent.getSlotsSelectorsMap();
+        return AdsContent.getSlotsSelectorsMap(environment);
     }
   }
 
