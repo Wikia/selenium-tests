@@ -522,7 +522,7 @@ public class AdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             AdsContent.INVISIBLE_SKIN,
-            "DirectGpt; RemnantGpt"
+            "DirectGpt"
         }
     };
   }
