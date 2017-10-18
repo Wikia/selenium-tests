@@ -33,7 +33,6 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
     Assertion.assertTrue(isIncontentPlayerDispalyed(ads), "Video Player is not displayed");
 
     ads.refreshPage();
-    triggerIncontentPlayer();
     Assertion.assertFalse(isIncontentPlayerDispalyed(ads), "Video Player is displayed");
   }
 
@@ -49,7 +48,7 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
 
   private void triggerIncontentPlayer() {
     JavascriptActions jsActions = new JavascriptActions(driver);
-    WebElement slotWrapper = driver.findElement(By.cssSelector("#Player_above.mw-headline"));
+    WebElement slotWrapper = driver.findElement(By.cssSelector("#INCONTENT_WRAPPER"));
 
     jsActions.scrollToElement(slotWrapper);
   }
