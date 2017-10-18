@@ -51,6 +51,7 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
     WebElement slotWrapper = driver.findElement(By.cssSelector("#INCONTENT_WRAPPER"));
 
     jsActions.scrollToElement(slotWrapper);
+    jsActions.scrollBy(0, -10);
   }
 
 }
