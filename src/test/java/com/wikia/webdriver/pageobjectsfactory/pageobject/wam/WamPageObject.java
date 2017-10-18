@@ -189,10 +189,14 @@ public class WamPageObject extends BasePageObject {
 
   public void verifyLatestDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
-    String latestDate =
-            DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-                    .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
-    Assertion.assertEquals(currentDate, latestDate, "Current date and the latest possible date are not the same");
+    String yesterday =
+        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
+            .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
+    String dayBeforeYesterday =
+        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
+            .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
+    Assertion.assertTrue(yesterday.equals(currentDate) || dayBeforeYesterday.equals(currentDate),
+        "Current date does not match yesterday or the day before");
   }
 
   public void verifyDateInDatePicker(String date) {
