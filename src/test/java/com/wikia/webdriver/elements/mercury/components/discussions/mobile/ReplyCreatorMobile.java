@@ -61,4 +61,10 @@ public class ReplyCreatorMobile extends ContributionEditor {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();
   }
 
+  @Override
+  protected WebElement getPostsCreator() {
+    // TODO: remove this implementation when abstract method is moved
+    return null;
+  }
+
 }

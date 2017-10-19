@@ -69,4 +69,10 @@ public class ReplyCreatorDesktop extends ContributionEditor {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
   }
 
+  @Override
+  protected WebElement getPostsCreator() {
+    // TODO: remove this implementation when abstract method is moved
+    return null;
+  }
+
 }
