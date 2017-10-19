@@ -30,12 +30,10 @@ public class PostEditorDesktop extends ContributionEditor implements StandaloneE
   @FindBy(css = "#categoryPickerButtonDesktop")
   private WebElement addCategoryButton;
 
-  @Override
   public boolean isExpanded() {
     return editor.getAttribute("class").contains("is-active");
   }
 
-  @Override
   public boolean isSticky() {
     return editor.getAttribute("class").contains("is-sticky");
   }

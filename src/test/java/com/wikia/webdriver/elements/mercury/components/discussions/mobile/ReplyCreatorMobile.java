@@ -56,7 +56,6 @@ public class ReplyCreatorMobile extends ContributionEditor {
   @Getter
   private By openGraphText = By.className("og-texts");
 
-  @Override
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();
   }

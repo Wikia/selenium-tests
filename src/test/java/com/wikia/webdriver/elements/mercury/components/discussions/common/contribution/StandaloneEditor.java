@@ -5,6 +5,4 @@ import org.openqa.selenium.WebElement;
 public interface StandaloneEditor {
   WebElement getCancelButton();
   StandaloneEditor clickCancelButton();
-  boolean isExpanded();
-  boolean isSticky();
 }

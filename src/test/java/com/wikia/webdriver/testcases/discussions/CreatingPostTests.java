@@ -228,7 +228,7 @@ public class CreatingPostTests extends NewTestTemplate {
   private CategoryPill fillPostCategoryWith(final ContributionEditor postsCreator, final String description) {
     CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()
-        .addDescriptionWith(description)
+        .addTextWith(description)
         .clickAddCategoryButton()
         .findCategoryOn(0);
 

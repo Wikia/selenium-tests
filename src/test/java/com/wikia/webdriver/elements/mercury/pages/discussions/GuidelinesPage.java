@@ -85,7 +85,6 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
     return editor.clickSubmitButton();
   }
 
-  @Override
   public Editor clickCancelButton() {
     return editor.clickCancelButton();
   }
@@ -100,11 +99,12 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
     return editor.clearText();
   }
 
-  @Override public WebElement getTextArea() {
+  @Override
+  public WebElement getTextArea() {
     return editor.getTextArea();
   }
 
-  @Override public WebElement getCancelButton() {
+  public WebElement getCancelButton() {
     return editor.getCancelButton();
   }
 
