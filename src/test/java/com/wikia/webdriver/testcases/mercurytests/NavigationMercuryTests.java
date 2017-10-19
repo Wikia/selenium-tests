@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
+import com.wikia.webdriver.testcases.mobilewikitests.NavigationTests;
 
 import org.testng.annotations.Test;
 

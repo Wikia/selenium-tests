@@ -2,37 +2,41 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 
 import org.testng.annotations.Test;
 
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(
+    browser = Browser.CHROME_MOBILE,
+    browserSize = "414x736"
+)
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
 
+  private static final String NO_ADS = "noads=1";
+
+  private static final Page TEST_PAGE = new Page("project43", "SyntheticTests/Premium/FeaturedVideo");
+
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = {"AdsPremiumPrerollMercury"},
-      dataProvider = "adsPremiumPreroll"
+      groups = {"AdsPremiumPrerollMercury"}
   )
-  public void adsPremiumPrerollMercury(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
+  public void adsPremiumPrerollMercury() {
+    String url = urlBuilder.getUrlForPage(TEST_PAGE);
+    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
+    wikiPage.playFeaturedVideo();
     wikiPage.verifyArticleAd();
     wikiPage.verifyMobileArticleVideo();
   }
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = {"AdsPremiumPrerollMercury"},
-      dataProvider = "adsPremiumPreroll"
+      groups = {"AdsPremiumPrerollMercury"}
   )
-  public void adsPremiumPrerollMercuryNoAds(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?noads=1");
-    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
+  public void adsPremiumPrerollMercuryNoAds() {
+    String url = urlBuilder.getUrlForPage(TEST_PAGE);
+    url = urlBuilder.appendQueryStringToURL(url, NO_ADS);
+    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
+    wikiPage.playFeaturedVideo();
     wikiPage.verifyMobileArticleVideo();
   }
-
 }
