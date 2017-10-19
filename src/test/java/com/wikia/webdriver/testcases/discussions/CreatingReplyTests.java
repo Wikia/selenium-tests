@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.BaseReplyCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import org.testng.annotations.Test;
@@ -53,7 +53,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    final BaseReplyCreator replyCreator = page.getReplyCreatorMobile();
+    final ContributionEditor replyCreator = page.getReplyCreatorMobile();
 
     assertThatUserCanCreateReply(page, replyCreator);
   }
@@ -65,7 +65,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    final BaseReplyCreator replyCreator = page.getReplyCreatorDesktop();
+    final ContributionEditor replyCreator = page.getReplyCreatorDesktop();
 
     assertThatUserCanCreateReply(page, replyCreator);
 
@@ -73,18 +73,18 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   // Testing methods
 
-  private void userOnDesktopMustBeLoggedInToUseReplyCreator(final BaseReplyCreator replyCreator) {
+  private void userOnDesktopMustBeLoggedInToUseReplyCreator(final ContributionEditor replyCreator) {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.REGISTER_PAGE);
   }
 
-  private void userOnMobileMustBeLoggedInToUseReplyCreator(final BaseReplyCreator replyCreator) {
+  private void userOnMobileMustBeLoggedInToUseReplyCreator(final ContributionEditor replyCreator) {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.JOIN_PAGE);
   }
 
-  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final BaseReplyCreator replyCreator, final String urlFragment) {
-    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
+  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final ContributionEditor replyCreator, final String urlFragment) {
+    Assertion.assertTrue(replyCreator.click().isSignInDialogVisible());
     replyCreator.clickOkButtonInSignInDialog();
-    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
+    Assertion.assertTrue(replyCreator.click().isSignInDialogVisible());
     replyCreator.clickSignInButtonInSignInDialog();
     Assertion.assertTrue(driver.getCurrentUrl().contains(urlFragment));
   }
@@ -93,7 +93,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
-  private void assertThatUserCanCreateReply(PostDetailsPage page, BaseReplyCreator replyCreator) {
+  private void assertThatUserCanCreateReply(PostDetailsPage page, ContributionEditor replyCreator) {
     String text = TextGenerator.createUniqueText();
     replyCreator.startReplyCreationWith(text).clickSubmitButton();
     page.getReplies().waitForReplyToAppearWith(text).refreshPage();

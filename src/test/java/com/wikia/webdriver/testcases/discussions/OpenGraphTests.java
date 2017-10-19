@@ -12,7 +12,7 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.BaseReplyCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostEditorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
@@ -92,7 +92,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
 
-  private void verifyOpenGraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
+  private void verifyOpenGraphInNewReply(PostDetailsPage page, ContributionEditor replyCreator)
     throws MalformedURLException {
     replyCreator.startReplyCreationWithLink(new URL(URL));
 

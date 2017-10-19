@@ -204,6 +204,12 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return this;
   }
 
+  private ContributionEditor waitForConfirmation() {
+    waitSafely(() -> wait.forElementVisible(getLoadingSuccess()));
+    waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
+    return this;
+  }
+
   public ContributionEditor startPostCreation() {
     return startPostCreationWith(TextGenerator.defaultText());
   }
@@ -221,5 +227,15 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   public ContributionEditor startPostCreationWithLink(URL link) {
     return startPostCreationWith(String.format(" %s ", link.toString()));
   }
+
+  public ContributionEditor startReplyCreationWith(String description) {
+    click().closeGuidelinesMessage().addTextWith(description);
+    return this;
+  }
+
+  public ContributionEditor startReplyCreationWithLink(URL link) {
+    return startReplyCreationWith(String.format(" %s ", link.toString()));
+  }
+
 
 }

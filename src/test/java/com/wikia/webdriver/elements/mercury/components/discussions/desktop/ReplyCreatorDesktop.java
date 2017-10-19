@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.BaseReplyCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class ReplyCreatorDesktop extends BaseReplyCreator {
+public class ReplyCreatorDesktop extends ContributionEditor {
 
   @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
   @Getter

@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.BaseReplyCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
@@ -253,12 +253,12 @@ public class UploadingImageTests extends NewTestTemplate {
     return page.getPostsCreatorDesktop().startPostCreationWithLink(new URL(URL));
   }
 
-  private BaseReplyCreator startReplyCreationDesktopWithLink(PostDetailsPage page)
+  private ContributionEditor startReplyCreationDesktopWithLink(PostDetailsPage page)
     throws MalformedURLException {
     return page.getReplyCreatorDesktop().startReplyCreationWithLink(new URL(URL));
   }
 
-  private BaseReplyCreator startReplyCreationMobileWithLink(PostDetailsPage page)
+  private ContributionEditor startReplyCreationMobileWithLink(PostDetailsPage page)
     throws MalformedURLException {
     return page.getReplyCreatorMobile().startReplyCreationWithLink(new URL(URL));
   }
@@ -267,18 +267,18 @@ public class UploadingImageTests extends NewTestTemplate {
     return page.getPostsCreatorMobile().startPostCreation();
   }
 
-  private BaseReplyCreator startReplyCreation(BaseReplyCreator replyCreator) {
+  private ContributionEditor startReplyCreation(ContributionEditor replyCreator) {
     replyCreator.click()
       .closeGuidelinesMessage()
       .addTextWith(TextGenerator.defaultText());
     return replyCreator;
   }
 
-  private BaseReplyCreator startReplyCreationDesktop(PostDetailsPage page) {
+  private ContributionEditor startReplyCreationDesktop(PostDetailsPage page) {
     return startReplyCreation(page.getReplyCreatorDesktop());
   }
 
-  private BaseReplyCreator startReplyCreationMobile(PostDetailsPage page) {
+  private ContributionEditor startReplyCreationMobile(PostDetailsPage page) {
     return startReplyCreation(page.getReplyCreatorMobile());
   }
 
@@ -288,7 +288,7 @@ public class UploadingImageTests extends NewTestTemplate {
     postCreator.clickSubmitButton();
   }
 
-  private void addReplyWithUnsupportedImage(BaseReplyCreator replyCreator) {
+  private void addReplyWithUnsupportedImage(ContributionEditor replyCreator) {
     String errorMsg = replyCreator.uploadUnsupportedImage();
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     replyCreator.clickSubmitButton();
