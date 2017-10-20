@@ -3,30 +3,24 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import static org.apache.commons.io.FileUtils.readFileToString;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class AdsRecoveryObject extends AdsBaseObject {
   private static final Dimension MEDREC_SIZE = new Dimension(300, 250);
-  private static final Dimension SKY_SIZE = new Dimension(300, 600);
   private static final Dimension LEADERBOARD_SIZE = new Dimension(728, 90);
   private static final String EXPECTED_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
   private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
-  private static final String EXPECTED_SKY_PATH = "src/test/resources/adsResources/recovered_sky";
   private static final By RECOVERABLE_SLOT_SELECTOR = By.cssSelector("[adonis-marker]");
   public static final By PF_RECOVERED_ADS_SELECTOR = By.cssSelector("body>span");
 
