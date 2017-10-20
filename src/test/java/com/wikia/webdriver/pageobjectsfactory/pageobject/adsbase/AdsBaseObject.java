@@ -603,6 +603,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerAdSlot(String slotName) {
+    if (slotName.equals(AdsContent.BOTTOM_LB)) {
+      triggerBLB();
+      return this;
+    }
+
     String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
     if (StringUtils.isNotEmpty(javaScriptTrigger)) {
@@ -610,6 +615,25 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     return this;
+  }
+
+  private void triggerBLB() {
+    scrollToFooter();
+    jsActions.scrollBy(0, 100);
+    jsActions.scrollBy(0, -100);
+    wait.forX(Duration.ofMillis(500));
+
+    jsActions.scrollBy(0, 100);
+    jsActions.scrollBy(0, -100);
+    wait.forX(Duration.ofMillis(500));
+
+    jsActions.scrollBy(0, 100);
+    jsActions.scrollBy(0, -100);
+    wait.forX(Duration.ofMillis(500));
+
+    jsActions.scrollBy(0, 100);
+    jsActions.scrollBy(0, -100);
+    wait.forX(Duration.ofMillis(500));
   }
 
   public void verifyExpandedAdVisibleInSlot(String slotSelector, WebElement slot) {
