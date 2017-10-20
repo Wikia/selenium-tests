@@ -22,9 +22,6 @@ public abstract class PageWithPosts extends WikiBasePageObject {
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
 
   @Getter(lazy = true)
-  private final Promoting promoting = new Promoting();
-
-  @Getter(lazy = true)
   private final CommunityBadge communityBadge = new CommunityBadge();
 
   @Getter(lazy = true)

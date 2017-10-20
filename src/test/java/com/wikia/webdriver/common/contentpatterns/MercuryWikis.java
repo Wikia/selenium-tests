@@ -29,8 +29,6 @@ public class MercuryWikis {
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";
   // for testing zero state messages - please don't add any posts!
   public static final String DISCUSSIONS_EMPTY = "discussions-empty";
-  // read-only tests for Promoting
-  public static final String FALLOUT = "fallout";
 
   private MercuryWikis() {
   }
