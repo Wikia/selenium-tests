@@ -42,6 +42,9 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
         .wait
         .forElementPresent(By.cssSelector(RECOVERED_BOTTOM_LEADERBOARD_SELECTOR));
 
+    // let's wait for recovered images to render
+    adsRecoveryObject.wait.forXMilliseconds(1000);
+
     List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
     Assert.assertEquals(recoveredAds.size(), 3);
 
