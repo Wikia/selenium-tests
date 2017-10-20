@@ -619,21 +619,21 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private void triggerBLB() {
     scrollToFooter();
-    jsActions.scrollBy(0, 100);
-    jsActions.scrollBy(0, -100);
-    wait.forX(Duration.ofMillis(500));
 
-    jsActions.scrollBy(0, 100);
-    jsActions.scrollBy(0, -100);
-    wait.forX(Duration.ofMillis(500));
+    simulateUserActivity(Duration.ofSeconds(3));
+  }
 
-    jsActions.scrollBy(0, 100);
-    jsActions.scrollBy(0, -100);
-    wait.forX(Duration.ofMillis(500));
+  private void simulateUserActivity(Duration duration) {
+    simulateUserActivity(duration, Duration.ofMillis(500), 100);
+  }
 
-    jsActions.scrollBy(0, 100);
-    jsActions.scrollBy(0, -100);
-    wait.forX(Duration.ofMillis(500));
+  private void simulateUserActivity(Duration duration, Duration waitDuration, int scrollDistance) {
+    while (!duration.isNegative()) {
+      jsActions.scrollBy(0, scrollDistance);
+      wait.forX(waitDuration);
+      jsActions.scrollBy(0, -scrollDistance);
+      duration = duration.minus(waitDuration);
+    }
   }
 
   public void verifyExpandedAdVisibleInSlot(String slotSelector, WebElement slot) {
