@@ -8,11 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObje
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
@@ -20,9 +16,6 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "arecovery";
   private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
-
-  private static final String RECOVERED_BOTTOM_LEADERBOARD_SELECTOR =
-      "div[id*=BOTTOM_LEADERBOARD][adonis-marker] iframe[id*=BOTTOM_LEADERBOARD]";
 
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountrie";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
@@ -40,15 +33,11 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
-        .forElementPresent(By.cssSelector(RECOVERED_BOTTOM_LEADERBOARD_SELECTOR));
+        .forRecoveredAds(adsRecoveryObject, AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR, 3);
 
-    // let's wait for recovered images to render
-    adsRecoveryObject.wait.forXMilliseconds(1000);
-
-    List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
-    Assert.assertEquals(recoveredAds.size(), 3);
-
-    adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(recoveredAds);
+    adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(
+        adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR)
+    );
   }
 
   @Test(

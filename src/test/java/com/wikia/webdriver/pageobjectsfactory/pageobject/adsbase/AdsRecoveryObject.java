@@ -1,15 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import static org.apache.commons.io.FileUtils.readFileToString;
+
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import static org.apache.commons.io.FileUtils.readFileToString;
 
 public class AdsRecoveryObject extends AdsBaseObject {
   private static final Dimension MEDREC_SIZE = new Dimension(300, 250);
