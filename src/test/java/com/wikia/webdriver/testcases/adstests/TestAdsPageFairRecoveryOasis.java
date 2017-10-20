@@ -22,7 +22,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
 
   private static final String RECOVERED_BOTTOM_LEADERBOARD_SELECTOR =
-      "div[id*=BOTTOM_LEADERBOARD][adonis-marker]";
+      "div[id*=BOTTOM_LEADERBOARD][adonis-marker] iframe[id*=BOTTOM_LEADERBOARD]";
 
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountrie";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
