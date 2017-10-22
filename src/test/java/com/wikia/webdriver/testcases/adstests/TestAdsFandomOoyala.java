@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
 import org.openqa.selenium.By;
@@ -113,8 +113,8 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   }
 
   private void verifyColorAd(WebElement element, Color color, int duration) {
-    OoyalaPrerollAd ooyala = new OoyalaPrerollAd(driver);
+    ElementColor ooyala = new ElementColor(driver);
 
-    ooyala.verifyColorAd(element, color, duration);
+    ooyala.verifyColor(element, color, duration);
   }
 }
