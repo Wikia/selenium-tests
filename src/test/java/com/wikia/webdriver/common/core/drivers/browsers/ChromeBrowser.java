@@ -62,8 +62,7 @@ public class ChromeBrowser extends BrowserAbstract {
     chromedriver.setExecutable(true);
 
     System.setProperty("webdriver.chrome.driver", chromedriver.getPath());
-    PageObjectLogging.log("Using chromedriver from: ", chromedriver.getPath(), true);
-    PageObjectLogging.logInfo("Using chromedriver version: ", getChromeDriverVersion());
+    PageObjectLogging.logInfo("Using chromedriver from: ", chromedriver.getPath());
     PageObjectLogging.logInfo("Using chromedriver version: ", getChromeDriverVersion());
 
     chromeOptions.addArguments("start-maximized");
