@@ -11,9 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,18 +19,19 @@ public class ChromeBrowser extends BrowserAbstract {
 
   private static final String CHROMEDRIVER_PATH_FORMAT = "ChromeDriver/chromedriver_%s";
   private static final String CHROMEDRIVER_PATH_MAC =
-      String.format(CHROMEDRIVER_PATH_FORMAT, "mac64/chromedriver");
+          String.format(CHROMEDRIVER_PATH_FORMAT, "mac64/chromedriver");
   private static final String CHROMEDRIVER_PATH_LINUX =
-      String.format(CHROMEDRIVER_PATH_FORMAT, "linux64/chromedriver");
+          String.format(CHROMEDRIVER_PATH_FORMAT, "linux64/chromedriver");
   private static final String CHROMEDRIVER_PATH_WINDOWS =
-      String.format(CHROMEDRIVER_PATH_FORMAT, "win32/chromedriver.exe");
+          String.format(CHROMEDRIVER_PATH_FORMAT, "win32/chromedriver.exe");
   private ChromeOptions chromeOptions = new ChromeOptions();
   private boolean useMobile = "CHROMEMOBILEMERCURY".equals(Configuration.getBrowser());
-  private static File chromedriver = getChromedriverFile();
 
-  private static File getChromedriverFile(){
+  @Override
+  public void setOptions() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
+    Emulator emulator = Configuration.getEmulator();
 
     if (osName.contains("WINDOWS")) {
       chromeBinaryPath = CHROMEDRIVER_PATH_WINDOWS;
@@ -41,29 +40,14 @@ public class ChromeBrowser extends BrowserAbstract {
     } else if (osName.contains("LINUX")) {
       chromeBinaryPath = CHROMEDRIVER_PATH_LINUX;
     }
-    return new File(ClassLoader.getSystemResource(chromeBinaryPath).getPath());
-  }
 
-  public String getChromeDriverVersion(){
-    String command = chromedriver.getAbsolutePath() + " -v";
-    try{
-      return this.executeCommand(command).split(" ")[1];
-    } catch (ArrayIndexOutOfBoundsException e){
-      PageObjectLogging.logInfo("Warning", "Couldn't parse chromedriver version");
-      return this.executeCommand(command);
-    }
-  }
-
-  @Override
-  public void setOptions() {
-    Emulator emulator = Configuration.getEmulator();
+    File chromedriver = new File(ClassLoader.getSystemResource(chromeBinaryPath).getPath());
 
     // set application user permissions to 455
     chromedriver.setExecutable(true);
 
     System.setProperty("webdriver.chrome.driver", chromedriver.getPath());
-    PageObjectLogging.logInfo("Using chromedriver from: ", chromedriver.getPath());
-    PageObjectLogging.logInfo("Using chromedriver version: ", getChromeDriverVersion());
+    PageObjectLogging.logInfo("Using chromedriver: ", chromedriver.getPath());
 
     chromeOptions.addArguments("start-maximized");
     chromeOptions.addArguments("disable-notifications");
@@ -103,27 +87,5 @@ public class ChromeBrowser extends BrowserAbstract {
   @Override
   public void addExtension(String extensionName) {
     chromeOptions.addExtensions(ExtHelper.findExtension(extensionName, "crx"));
-  }
-
-  //TODO: Move it to some better place
-  private String executeCommand(String command) {
-
-    StringBuffer output = new StringBuffer();
-
-    Process p;
-    try {
-      p = Runtime.getRuntime().exec(command);
-      p.waitFor();
-      BufferedReader reader =
-              new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-      String line;
-      while ((line = reader.readLine()) != null) {
-        output.append(line + "\n");
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return output.toString();
   }
 }
