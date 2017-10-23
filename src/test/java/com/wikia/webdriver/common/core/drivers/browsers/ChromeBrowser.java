@@ -19,11 +19,11 @@ public class ChromeBrowser extends BrowserAbstract {
 
   private static final String CHROMEDRIVER_PATH_FORMAT = "ChromeDriver/chromedriver_%s";
   private static final String CHROMEDRIVER_PATH_MAC =
-          String.format(CHROMEDRIVER_PATH_FORMAT, "mac64/chromedriver");
+      String.format(CHROMEDRIVER_PATH_FORMAT, "mac64/chromedriver");
   private static final String CHROMEDRIVER_PATH_LINUX =
-          String.format(CHROMEDRIVER_PATH_FORMAT, "linux64/chromedriver");
+      String.format(CHROMEDRIVER_PATH_FORMAT, "linux64/chromedriver");
   private static final String CHROMEDRIVER_PATH_WINDOWS =
-          String.format(CHROMEDRIVER_PATH_FORMAT, "win32/chromedriver.exe");
+      String.format(CHROMEDRIVER_PATH_FORMAT, "win32/chromedriver.exe");
   private ChromeOptions chromeOptions = new ChromeOptions();
   private boolean useMobile = "CHROMEMOBILEMERCURY".equals(Configuration.getBrowser());
 
