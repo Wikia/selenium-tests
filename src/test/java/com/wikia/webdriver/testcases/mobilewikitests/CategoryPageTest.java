@@ -64,7 +64,7 @@ public class CategoryPageTest extends NewTestTemplate {
     Assert.assertEquals(404, category.getURLStatus(category.getCurrentUrl()));
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink")
+  @Test(groups = "mercury_category_navigateToCategoryPageFromLinkInArticle")
   @RelatedIssue(issueID = "QAART-1044")
   public void mercury_category_navigateToCategoryPageFromLinkInArticle() {
     final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
