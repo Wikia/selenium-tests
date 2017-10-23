@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -33,6 +36,7 @@ public class TestAdsProvidersChain extends TemplateNoFirstLoad {
       dataProvider = "providersChainMercury",
       groups = {"AdsProvidersChainMercury", "Ads"}
   )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void adsProvidersChainMercury(String wikiName,
                                        String article,
                                        String slotName,
