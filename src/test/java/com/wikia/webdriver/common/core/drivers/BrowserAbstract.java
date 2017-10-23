@@ -83,9 +83,9 @@ public abstract class BrowserAbstract {
    * Set Proxy instance for a Browser instance
    */
   protected void setProxy() {
-    if (Configuration.useProxy()) {
+    if (true) {
       Proxy proxyServer = new Proxy();
-      if ("true".equals(Configuration.useZap())) {
+      if (false) {
         String zapProxyAddress = String.format("%s:%s", XMLReader.getValue("zap_proxy.address"),
             Integer.parseInt(XMLReader.getValue("zap_proxy.port")));
         proxyServer.setHttpProxy(zapProxyAddress);
@@ -93,7 +93,7 @@ public abstract class BrowserAbstract {
       } else {
         server = new NetworkTrafficInterceptor();
         server.setTrustAllServers(true);
-        server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
+        server.setMitmDisabled(false);
         server.addHeader("X-Backend", "k8s");
         server.setRequestTimeout(90, TimeUnit.SECONDS);
         server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
