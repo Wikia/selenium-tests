@@ -8,11 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObje
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
@@ -21,12 +17,12 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   private static final String WIKIA = "arecovery";
   private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
 
-  private static final String RECOVERED_BOTTOM_LEADERBOARD_SELECTOR =
-      "div[id*=BOTTOM_LEADERBOARD][adonis-marker]";
-
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountrie";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
   private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT = "wgAdDriverPremiumAdLayoutCountries";
+
+  private static final String ADONIS_MARKER_BOTTOM_LEADERBOARD_SELECTOR =
+      "div[id*=BOTTOM_LEADERBOARD][adonis-marker] iframe[id*=BOTTOM_LEADERBOARD]";
 
   @Test(
       groups = "AdsRecoveryPageFairOasis"
@@ -40,12 +36,11 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
-        .forElementPresent(By.cssSelector(RECOVERED_BOTTOM_LEADERBOARD_SELECTOR));
+        .forRecoveredAds(adsRecoveryObject, AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR, 3);
 
-    List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
-    Assert.assertEquals(recoveredAds.size(), 3);
-
-    adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(recoveredAds);
+    adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(
+        adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR)
+    );
   }
 
   @Test(
@@ -58,7 +53,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(2);
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
-        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
+        .forElementPresent(By.cssSelector(ADONIS_MARKER_BOTTOM_LEADERBOARD_SELECTOR));
 
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(3);
   }
