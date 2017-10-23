@@ -34,6 +34,10 @@ public class AdsVelesObject extends AdsBaseObject {
     }
   }
 
+  public boolean isIncontentWrapperOnPage() {
+    return isElementOnPage(By.cssSelector(INCONTENT_WRAPPER));
+  }
+
   public void triggerIncontentPlayer() {
     final WebElement wrapper = driver.findElement(By.cssSelector(INCONTENT_WRAPPER));
 
