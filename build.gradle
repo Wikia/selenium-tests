@@ -389,6 +389,7 @@ dependencies {
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-ie-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-safari-driver:${webdriverVersion}"
+    testCompile "org.seleniumhq.selenium:selenium-edge-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-support:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:htmlunit-driver:2.20"
     testCompile 'org.apache.httpcomponents:httpcore:4.4.1'
