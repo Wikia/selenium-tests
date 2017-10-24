@@ -65,17 +65,17 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleAd() {
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30, 1000);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30);
     verifyFeaturedVideoElement(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyArticleVideo() {
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR), 30, 1000);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR), 30);
     verifyFeaturedVideoElement(GREEN_OOYALA_4, VIDEO_DURATION_SEC);
   }
 
   public void verifyMobileArticleVideo() {
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_MOBILE_SELECTOR), 30, 1000);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_MOBILE_SELECTOR), 30);
     verifyFeaturedVideoElement(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
