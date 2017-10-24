@@ -11,7 +11,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObj
 
 public class SectionItemListPageObject extends CuratedEditorFormPageObject {
 
-  @FindBy(css = ".curated-content-editor-addTextWith-item-btn")
+  @FindBy(css = ".curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
   @FindBy(css = ".curated-content-editor-row")
   private List<WebElement> item;

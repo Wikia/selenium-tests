@@ -114,7 +114,7 @@ public class EditMode extends WikiBasePageObject {
 
   public TableBuilderComponentObject clickAddTableButton() {
     addTableButton.click();
-    PageObjectLogging.log("addTable", "addTextWith table button clicked", true);
+    PageObjectLogging.log("addTable", "add table button clicked", true);
     return new TableBuilderComponentObject(driver);
   }
 

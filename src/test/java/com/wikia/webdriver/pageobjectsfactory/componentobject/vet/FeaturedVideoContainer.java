@@ -16,7 +16,7 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
   private By videoTitleTextBoxBy = By.cssSelector(".video-title");
   private By imageTitleTextBoxBy = By.cssSelector(".alt-thumb-name");
   private By addImageButtonBy = By.cssSelector(".media-uploader-btn");
-  private By addVideoButtonBy = By.cssSelector(".addTextWith-video-button");
+  private By addVideoButtonBy = By.cssSelector(".add-video-button");
   private By addImageModalBy = By.cssSelector("#WMU_divWrapper");
   private By addVideoModalBy = By.cssSelector("#VideoEmbedBackWrapper");
   private By displayedTitleTextBoxBy = By.cssSelector(".display-title");

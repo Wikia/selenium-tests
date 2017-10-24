@@ -152,7 +152,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   /**
    * DAR-985 bug prevention test case details fogbugz: https://wikia.fogbugz.com/default.asp?31293,
-   * details jira: https://wikia-inc.atlassian.net/browse/DAR-985 1. Go to a messageWall and addTextWith
+   * details jira: https://wikia-inc.atlassian.net/browse/DAR-985 1. Go to a messageWall and add
    * unClosedDivComment 2. refresh the page 3. make sure that reply area avatar doesn't appear by
    * default
    */

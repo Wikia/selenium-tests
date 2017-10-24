@@ -78,7 +78,7 @@ public class FilePageTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-4294")
   @Test(groups = {"FilePage", "filePage004_delete", "Media"})
   public void filePage004_delete() {
-    // Go to Special:Videos to addTextWith a video
+    // Go to Special:Videos to add a video
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
@@ -111,7 +111,7 @@ public class FilePageTests extends NewTestTemplate {
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("pokemon");
 
-    // Go to Special:Videos to addTextWith a video
+    // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
@@ -123,7 +123,7 @@ public class FilePageTests extends NewTestTemplate {
     // Verify the video is actually there
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    // Go to the history tab and addTextWith a second video to test deleting a version
+    // Go to the history tab and add a second video to test deleting a version
     FilePage filePage = new FilePage().open(video.getFileName());
     filePage.selectHistoryTab();
 

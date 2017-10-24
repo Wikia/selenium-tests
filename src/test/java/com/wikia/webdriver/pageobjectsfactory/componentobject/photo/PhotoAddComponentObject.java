@@ -60,7 +60,7 @@ public class PhotoAddComponentObject extends BasePageObject {
         addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
             .getAttribute("data-image-name");
     scrollAndClick(photo);
-    PageObjectLogging.log("clickAddPhoto", "addTextWith photo button clicked", true);
+    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
     return new PhotoOptionsComponentObject(driver);
   }
 
@@ -68,7 +68,7 @@ public class PhotoAddComponentObject extends BasePageObject {
     WebElement photo = Elements.getElementByValue(addThisPhotoList, "title", fileName);
     photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
     scrollAndClick(photo);
-    PageObjectLogging.log("clickAddPhoto", "addTextWith photo button clicked", true);
+    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
     return new PhotoOptionsComponentObject(driver);
   }
 

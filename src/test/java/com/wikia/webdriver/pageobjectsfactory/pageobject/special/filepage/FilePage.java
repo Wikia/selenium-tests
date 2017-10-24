@@ -152,7 +152,7 @@ public class FilePage extends WikiBasePageObject {
 
     wait.forElementVisible(addButton);
     scrollAndClick(addButton);
-    PageObjectLogging.log("replaceVideo", "addTextWith url button clicked", true, driver);
+    PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
   }
 
   public DeletePageObject deleteVersion(int num) {

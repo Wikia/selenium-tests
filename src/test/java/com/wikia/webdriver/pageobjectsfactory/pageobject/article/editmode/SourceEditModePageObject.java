@@ -174,20 +174,20 @@ public class SourceEditModePageObject extends EditMode {
   public PhotoAddComponentObject clickAddPhoto() {
     focusTextArea();
     photo.click();
-    PageObjectLogging.log("clickAddPhot", "addTextWith photo button was clicked", true, driver);
+    PageObjectLogging.log("clickAddPhot", "add photo button was clicked", true, driver);
     return new PhotoAddComponentObject(driver);
   }
 
   public void clickAddGallery() {
     focusTextArea();
     gallery.click();
-    PageObjectLogging.log("clickAddGallery", "addTextWith gallery button was clicked", true, driver);
+    PageObjectLogging.log("clickAddGallery", "add gallery button was clicked", true, driver);
   }
 
   public VetAddVideoComponentObject clickAddVideo() {
     focusTextArea();
     video.click();
-    PageObjectLogging.log("clickAddVideo", "addTextWith video button was clicked", true, driver);
+    PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
     return new VetAddVideoComponentObject(driver);
   }
 

@@ -38,7 +38,7 @@ public class PhotoOptionsComponentObject extends BasePageObject {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
     waitForElementNotVisibleByElement(addPhotoButton);
-    PageObjectLogging.log("clickAddPhoto", "addTextWith photo button clicked", true);
+    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
   }
 
   public void adjustAlignment(int i) {
