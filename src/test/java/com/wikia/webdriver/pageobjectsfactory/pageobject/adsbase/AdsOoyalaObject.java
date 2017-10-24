@@ -6,6 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -87,24 +88,25 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxAd() {
     wait.forElementVisible(lightboxVideo);
-    verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
+    verifyColorAd(lightboxVideo, BLUE);
     logMessage(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyLightboxVideo() {
-    verifyColorAd(lightboxVideo, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
+    verifyColorAd(lightboxVideo, GREEN_OOYALA_3);
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
   private void verifyFeaturedVideoElement(Color color, int duration) {
-    verifyColorAd(articleVideoWrapper, color, 5);
+    jsActions.scrollToElement(articleVideoWrapper);
+    verifyColorAd(articleVideoWrapper, color);
     logMessage(color, duration);
   }
 
-  private void verifyColorAd(WebElement element, Color color, int duration) {
+  private void verifyColorAd(WebElement element, Color color) {
     ElementColor ooyala = new ElementColor(driver);
 
-    ooyala.verifyColor(element, color, duration);
+    ooyala.verifyMostFrequentColor(element, color);
   }
 
   private void logMessage(Color color, int duration) {
