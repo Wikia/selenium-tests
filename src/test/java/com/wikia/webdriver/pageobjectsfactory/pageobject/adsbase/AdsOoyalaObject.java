@@ -6,7 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +22,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final int VIDEO_DURATION_SEC = 5;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
-  private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
   private static final String ARTICLE_VIDEO_MOBILE_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_PLAY_BUTTON_SELECTOR = ".article-featured-video__play-circle";
@@ -42,11 +40,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
-  }
-
-  public void playLightboxVideo() {
-    wait.forElementVisible(lightboxVideo);
-    lightboxVideo.click();
   }
 
   public void playFeaturedVideo() {
