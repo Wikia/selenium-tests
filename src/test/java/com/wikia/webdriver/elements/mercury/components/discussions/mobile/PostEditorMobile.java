@@ -1,12 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.StandaloneEditor;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class PostEditorMobile extends ContributionEditor {
+public class PostEditorMobile extends ContributionEditor implements StandaloneEditor {
 
   @Getter
   @FindBy(className = "new-post")
@@ -32,4 +33,8 @@ public class PostEditorMobile extends ContributionEditor {
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
+  @Override
+  public StandaloneEditor clickCancelButton() {
+    return null;
+  }
 }

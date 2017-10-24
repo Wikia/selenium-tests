@@ -1,13 +1,14 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.StandaloneEditor;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Getter
-public class ReplyCreatorMobile extends ContributionEditor {
+public class ReplyCreatorMobile extends ContributionEditor implements StandaloneEditor {
 
   @FindBy(css = ".discussion-editor-entry-point-container .discussion-editor-entry-point-content")
   private WebElement replyCreatorTextArea;
@@ -66,4 +67,13 @@ public class ReplyCreatorMobile extends ContributionEditor {
     return null;
   }
 
+  @Override
+  public WebElement getCancelButton() {
+    return null;
+  }
+
+  @Override
+  public StandaloneEditor clickCancelButton() {
+    return null;
+  }
 }
