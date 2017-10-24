@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
+
 import org.testng.annotations.Test;
 
 public class TestAdsFeaturedVideoOasis extends TemplateNoFirstLoad {
@@ -36,6 +37,18 @@ public class TestAdsFeaturedVideoOasis extends TemplateNoFirstLoad {
     jwPlayerObject.verifyMidroll();
     jwPlayerObject.verifyFeaturedVideo();
     jwPlayerObject.verifyPostroll();
+  }
+
+  @Test(
+      groups = {"AdsFeaturedVideoOasis"}
+  )
+  public void adsFeaturedVideoNoAdsOasis() {
+    String testedPage = urlBuilder.appendQueryStringToURL(PAGE_WITH_FV.getUrl(), "noads=1");
+
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, testedPage);
+
+    jwPlayerObject.verifyPlayerOnPage();
+    jwPlayerObject.verifyFeaturedVideo();
   }
 
   @NetworkTrafficDump(useMITM = true)
