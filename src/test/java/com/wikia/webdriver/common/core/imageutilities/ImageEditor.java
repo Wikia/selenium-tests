@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
@@ -55,6 +56,9 @@ public class ImageEditor {
     if (start.getY() < 0) {
       start.move(start.getX(), 0);
     }
+
+    PageObjectLogging.log("Cropping screenshot", String.format("Cropping image %sx%s. Start position %sx%s, subimage %sx%s",
+            image.getWidth(), image.getHeight(), start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR), true);
     BufferedImage dest = image.getSubimage(
         start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR
     );
