@@ -16,7 +16,11 @@ import java.util.regex.Pattern;
 
 public class ImageEditor {
 
-  private static final int DPR = getDevicePixelRatio();
+  private int dpr;
+
+  public ImageEditor() {
+    this.dpr = getDevicePixelRatio();
+  }
 
   public void saveImageFile(File imageFile, String path) {
     Pattern pattern = Pattern.compile("/*.jpg|/*.png|/*.jpeg");
@@ -57,10 +61,10 @@ public class ImageEditor {
       start.move(start.getX(), 0);
     }
 
-    PageObjectLogging.log("Cropping screenshot for " + Configuration.getEmulator().getDeviceNameTest() + ", dpr = " + DPR , String.format("Cropping image %sx%s. Start position %sx%s, subimage %sx%s",
-            image.getWidth(), image.getHeight(), start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR), true);
+    PageObjectLogging.log("Cropping screenshot, dpr = " + dpr, String.format("Cropping image %sx%s. Start position %sx%s, subimage %sx%s",
+            image.getWidth(), image.getHeight(), start.getX() * dpr, start.getY() * dpr, width * dpr, height * dpr), true);
     BufferedImage dest = image.getSubimage(
-        start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR
+        start.getX() * dpr, start.getY() * dpr, width * dpr, height * dpr
     );
     try {
       ImageIO.write(dest, "png", subImg);

@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.Map;
 
 public enum Emulator {
-  GOOGLE_NEXUS_5("GOOGLE_NEXUS_5",
+  GOOGLE_NEXUS_5(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 360)
           .put("height", 640)
@@ -15,7 +15,7 @@ public enum Emulator {
           .put("mobile", true)
           .build(),
       "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"),
-  APPLE_IPHONE_6("APPLE_IPHONE_6",
+  APPLE_IPHONE_6(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 375)
           .put("height", 667)
@@ -24,7 +24,7 @@ public enum Emulator {
           .put("mobile", true)
           .build(),
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25"),
-  NEXUS_5X("NEXUS_5X",
+  NEXUS_5X(
     new ImmutableMap.Builder<String, Object>()
       .put("width", 412)
       .put("height", 732)
@@ -34,7 +34,7 @@ public enum Emulator {
       .build(),
     "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"
   ),
-  DESKTOP_BREAKPOINT_BIG("DESKTOP_BREAKPOINT_BIG",
+  DESKTOP_BREAKPOINT_BIG(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 1296)
           .put("height", 900)
@@ -42,7 +42,7 @@ public enum Emulator {
           .put("touch", false)
           .put("mobile", false)
           .build()),
-  DESKTOP_BREAKPOINT_SMALL("DESKTOP_BREAKPOINT_SMALL",
+  DESKTOP_BREAKPOINT_SMALL(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 1024)
           .put("height", 720)
@@ -50,7 +50,7 @@ public enum Emulator {
           .put("touch", false)
           .put("mobile", false)
           .build()),
-  DESKTOP_BREAKPOINT_LARGE("DESKTOP_BREAKPOINT_LARGE",
+  DESKTOP_BREAKPOINT_LARGE(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 1920)
           .put("height", 1080)
@@ -58,12 +58,10 @@ public enum Emulator {
           .put("touch", false)
           .put("mobile", false)
           .build()),
-  DEFAULT("Defaultbrowser");
+  DEFAULT("");
 
   @Getter
   private String deviceName;
-  @Getter
-  private String deviceNameTest;
   @Getter
   private Map<String, Object> deviceMetrics;
   @Getter
@@ -82,17 +80,5 @@ public enum Emulator {
   Emulator(Map<String, Object> deviceMetrics, String userAgent) {
     this.deviceMetrics = deviceMetrics;
     this.userAgent = userAgent;
-  }
-
-  Emulator(String deviceName, Map<String, Object> deviceMetrics, String userAgent) {
-    this.deviceNameTest = deviceName;
-    this.deviceMetrics = deviceMetrics;
-    this.userAgent = userAgent;
-  }
-
-  Emulator(String deviceName, Map<String, Object> deviceMetrics) {
-    this.deviceNameTest = deviceName;
-    this.deviceMetrics = deviceMetrics;
-    this.userAgent = "";
   }
 }
