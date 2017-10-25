@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class PortableInfoboxObject {
+public class PortableInfoboxObject extends WikiBasePageObject{
 
   @FindBy(css = "body")
   private WebElement bodyElement;
@@ -107,6 +108,7 @@ public class PortableInfoboxObject {
 
   public PortableInfoboxObject tapInfoboxContent() {
     Assertion.assertFalse(dataLabels.isEmpty());
+    jsActions.scrollToElement(dataLabels.get(0));
     dataLabels.get(0).click();
 
     return this;

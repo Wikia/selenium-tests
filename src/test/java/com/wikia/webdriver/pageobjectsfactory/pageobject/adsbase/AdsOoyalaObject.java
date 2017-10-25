@@ -22,7 +22,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final int VIDEO_DURATION_SEC = 5;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
-  private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
   private static final String ARTICLE_VIDEO_MOBILE_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_PLAY_BUTTON_SELECTOR = ".article-featured-video__play-circle";
@@ -41,11 +40,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
-  }
-
-  public void playLightboxVideo() {
-    wait.forElementVisible(lightboxVideo);
-    lightboxVideo.click();
   }
 
   public void playFeaturedVideo() {
@@ -71,40 +65,41 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleAd() {
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30, 1000);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR), 30);
     verifyFeaturedVideoElement(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyArticleVideo() {
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR), 30, 1000);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR), 30);
     verifyFeaturedVideoElement(GREEN_OOYALA_4, VIDEO_DURATION_SEC);
   }
 
   public void verifyMobileArticleVideo() {
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_MOBILE_SELECTOR), 30, 1000);
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_MOBILE_SELECTOR), 30);
     verifyFeaturedVideoElement(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
   public void verifyLightboxAd() {
     wait.forElementVisible(lightboxVideo);
-    verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
+    verifyColorAd(lightboxVideo, BLUE);
     logMessage(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyLightboxVideo() {
-    verifyColorAd(lightboxVideo, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
+    verifyColorAd(lightboxVideo, GREEN_OOYALA_3);
     logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
   private void verifyFeaturedVideoElement(Color color, int duration) {
-    verifyColorAd(articleVideoWrapper, color, 5);
+    jsActions.scrollToElement(articleVideoWrapper);
+    verifyColorAd(articleVideoWrapper, color);
     logMessage(color, duration);
   }
 
-  private void verifyColorAd(WebElement element, Color color, int duration) {
+  private void verifyColorAd(WebElement element, Color color) {
     ElementColor ooyala = new ElementColor(driver);
 
-    ooyala.verifyColor(element, color, duration);
+    ooyala.verifyMostFrequentColor(element, color);
   }
 
   private void logMessage(Color color, int duration) {
