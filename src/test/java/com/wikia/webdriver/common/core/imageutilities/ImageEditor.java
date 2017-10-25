@@ -57,7 +57,7 @@ public class ImageEditor {
       start.move(start.getX(), 0);
     }
 
-    PageObjectLogging.log("Cropping screenshot for " + Configuration.getEmulator().getDeviceName() , String.format("Cropping image %sx%s. Start position %sx%s, subimage %sx%s",
+    PageObjectLogging.log("Cropping screenshot for " + Configuration.getEmulator().getDeviceName() + ", dpr = " + DPR , String.format("Cropping image %sx%s. Start position %sx%s, subimage %sx%s",
             image.getWidth(), image.getHeight(), start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR), true);
     BufferedImage dest = image.getSubimage(
         start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR
