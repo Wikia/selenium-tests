@@ -1,18 +1,21 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
-
 public class ImageEditor {
+
+  private static final int dpr = getDevicePixelRatio();
 
   public void saveImageFile(File imageFile, String path) {
     Pattern pattern = Pattern.compile("/*.jpg|/*.png|/*.jpeg");
@@ -53,7 +56,7 @@ public class ImageEditor {
       start.move(start.getX(), 0);
     }
     BufferedImage dest = image.getSubimage(
-        start.getX(), start.getY(), width, height
+        start.getX() * dpr, start.getY() * dpr, width * dpr, height * dpr
     );
     try {
       ImageIO.write(dest, "png", subImg);
@@ -76,5 +79,10 @@ public class ImageEditor {
       throw new WebDriverException(e);
     }
     return img;
+  }
+
+  private static int getDevicePixelRatio() {
+    Map<String, Object> metrics = Configuration.getEmulator().getDeviceMetrics();
+    return (metrics != null && metrics.containsKey("pixelRatio")) ? ((Double) metrics.get("pixelRatio")).intValue() : 1;
   }
 }
