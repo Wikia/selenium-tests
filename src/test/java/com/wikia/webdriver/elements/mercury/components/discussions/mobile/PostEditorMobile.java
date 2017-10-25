@@ -10,10 +10,6 @@ import org.openqa.selenium.support.FindBy;
 public class PostEditorMobile extends ContributionEditor implements StandaloneEditor {
 
   @Getter
-  @FindBy(className = "new-post")
-  private WebElement postsCreator;
-
-  @Getter
   @FindBy(css = ".editor-close")
   private WebElement cancelButton;
 
@@ -22,19 +18,17 @@ public class PostEditorMobile extends ContributionEditor implements StandaloneEd
   private WebElement editor;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-save-button")
+  @FindBy(css = ".discussion-standalone-editor-save-button")
   private WebElement submitButton;
 
-  @Getter
-  @FindBy(css = "#categoryPickerButtonMobile")
-  private WebElement addCategoryButton;
-
-  @Getter
-  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
-  private WebElement descriptionTextarea;
+  @Override
+  public PostEditorMobile clickCancelButton() {
+    waitAndClick(getCancelButton());
+    return this;
+  }
 
   @Override
-  public StandaloneEditor clickCancelButton() {
+  protected WebElement getPostsCreator() {
     return null;
   }
 }

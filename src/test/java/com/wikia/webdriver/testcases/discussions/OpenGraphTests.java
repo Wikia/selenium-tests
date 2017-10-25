@@ -14,8 +14,10 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostEditorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostCreatorMobile;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostEditorMobile;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
@@ -48,7 +50,7 @@ public class OpenGraphTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void validLinkGeneratesOpenGraphItemInNewPostOnDesktop() throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
-    PostEditorDesktop postsCreator = page.getPostsCreatorDesktop();
+    PostCreatorDesktop postsCreator = page.getPostsCreatorDesktop();
     verifyOpenGraphInNewPost(page, postsCreator);
   }
 
@@ -64,7 +66,7 @@ public class OpenGraphTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void validLinkGeneratesOpenGraphItemInNewPostOnMobile() throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
-    PostEditorMobile postsCreator = page.getPostsCreatorMobile();
+    PostCreatorMobile postsCreator = page.getPostsCreatorMobile();
     verifyOpenGraphInNewPost(page, postsCreator);
   }
 

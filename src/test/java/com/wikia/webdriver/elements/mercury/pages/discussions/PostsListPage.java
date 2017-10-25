@@ -3,8 +3,8 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostEditorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostEditorMobile;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostCreatorMobile;
 import lombok.Getter;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -15,10 +15,10 @@ public class PostsListPage extends PageWithPosts {
   public static final String PATH = "/d/f";
 
   @Getter(lazy = true)
-  private final PostEditorDesktop postsCreatorDesktop = new PostEditorDesktop();
+  private final PostCreatorDesktop postsCreatorDesktop = new PostCreatorDesktop();
 
   @Getter(lazy = true)
-  private final PostEditorMobile postsCreatorMobile = new PostEditorMobile();
+  private final PostCreatorMobile postsCreatorMobile = new PostCreatorMobile();
 
   @Getter(lazy = true)
   private final SignInToFollowModalDialog signInDialog = new SignInToFollowModalDialog();

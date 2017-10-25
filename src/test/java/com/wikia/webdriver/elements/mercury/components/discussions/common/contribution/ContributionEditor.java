@@ -237,5 +237,12 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return startReplyCreationWith(String.format(" %s ", link.toString()));
   }
 
+  public boolean isExpanded() {
+    return getEditor().getAttribute("class").contains("is-active");
+  }
+
+  public boolean isSticky() {
+    return getEditor().getAttribute("class").contains("is-sticky");
+  }
 
 }

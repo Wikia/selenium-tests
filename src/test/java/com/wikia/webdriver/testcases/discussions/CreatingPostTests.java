@@ -15,8 +15,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostEditorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostEditorMobile;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
@@ -66,7 +66,7 @@ public class CreatingPostTests extends NewTestTemplate {
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
-    PostEditorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
+    PostCreatorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
 
     Assertion.assertFalse(postsCreator.isExpanded());
     Assertion.assertTrue(postsCreator.isSticky());
@@ -119,7 +119,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanExpandPostEditor() {
-    PostEditorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    PostCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
     postsCreator.click();
 
@@ -167,7 +167,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
-    PostEditorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+    PostCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
@@ -176,7 +176,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
-    PostEditorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    PostCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
