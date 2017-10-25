@@ -1,78 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
-import lombok.Getter;
+
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.InlineContributionEditor;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-
-public class ReplyCreatorDesktop extends ContributionEditor {
-
-  @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
-  @Getter
-  private WebElement replyCreatorTextArea;
-
-  @FindBy(css = ".discussion-inline-editor-content-wrapper")
-  @Getter
-  private WebElement replyCreatorWrapper;
-
-  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
-  @Getter
-  private WebElement dialogSignIn;
-
-  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
-  @Getter
-  private WebElement okButtonInSignInDialog;
-
-  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
-  @Getter
-  private WebElement signInButtonInSignInDialog;
-
-  @FindBy(css = ".editor-overlay-message .message-button")
-  @Getter
-  private WebElement guidelinesReadButton;
-
-  @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-submit")
-  @Getter
-  private WebElement submitButton;
-
-  @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-textarea")
-  @Getter
-  private WebElement textarea;
-
-
-
-  @FindBy(css = ".discussion-inline-reply-editor")
-  @Getter
-  private WebElement editor;
-
-  @Getter
-  @FindBy(css = ".discussion-image-upload__button input[type=file]")
-  private WebElement uploadButton;
-
-  @Getter
-  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
-  private WebElement imagePreview;
-
-  @Getter
-  @FindBy(css = ".delete-image")
-  private WebElement imageDeleteButton;
-
-  @Getter
-  private By openGraphContainer = By.className("og-container");
-
-  @Getter
-  private By openGraphText = By.className("og-texts");
+public class ReplyCreatorDesktop extends InlineContributionEditor {
 
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
-  }
-
-  @Override
-  protected WebElement getPostsCreator() {
-    // TODO: remove this implementation when abstract method is moved
-    return null;
   }
 
 }
