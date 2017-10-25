@@ -14,9 +14,4 @@ public class InlineContributionEditor extends ContributionEditor {
   @FindBy(className = "discussion-inline-editor")
   private WebElement editor;
 
-  @Override
-  protected WebElement getPostsCreator() {
-    // TODO: remove this method
-    return null;
-  }
 }

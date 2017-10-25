@@ -3,9 +3,13 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostCreatorMobile;
+import java.net.URL;
 import lombok.Getter;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
@@ -14,11 +18,12 @@ public class PostsListPage extends PageWithPosts {
 
   public static final String PATH = "/d/f";
 
-  @Getter(lazy = true)
-  private final PostCreatorDesktop postsCreatorDesktop = new PostCreatorDesktop();
+  @Getter
+  @FindBy(css = ".discussion-inline-editor-textarea-wrapper")
+  private WebElement newPostArea;
 
   @Getter(lazy = true)
-  private final PostCreatorMobile postsCreatorMobile = new PostCreatorMobile();
+  private final PostCreatorDesktop postsCreatorDesktop = new PostCreatorDesktop();
 
   @Getter(lazy = true)
   private final SignInToFollowModalDialog signInDialog = new SignInToFollowModalDialog();
@@ -36,6 +41,10 @@ public class PostsListPage extends PageWithPosts {
     return this;
   }
 
+  public PostCreatorMobile getPostsCreatorMobile() {
+    return getDiscussionsHeader().getPostsCreatorMobile();
+  }
+
   public void waitForPageReloadWith(final String categoryName) {
     waitForPageReload();
 
@@ -48,6 +57,37 @@ public class PostsListPage extends PageWithPosts {
     } finally {
       restoreDefaultImplicitWait();
     }
+  }
+
+  public ContributionEditor startPostCreation() {
+    return startPostCreationWith(TextGenerator.defaultText());
+  }
+
+  public ContributionEditor startPostCreationWith(String description) {
+    expandPostCreator()
+        .addTitleWith(TextGenerator.defaultText())
+        .addTextWith(description)
+        .clickAddCategoryButton()
+        .selectFirstCategory();
+    return getPostsCreatorDesktop();
+  }
+
+  public ContributionEditor expandPostCreator() {
+    waitAndClick(newPostArea);
+    return getPostsCreatorDesktop().closeGuidelinesMessage();
+  }
+
+  public ContributionEditor startPostCreationWithLink(URL link) {
+    return startPostCreationWith(String.format(" %s ", link.toString()));
+  }
+
+  public ContributionEditor startReplyCreationWith(String description) {
+    expandPostCreator().addTextWith(description);
+    return getPostsCreatorDesktop();
+  }
+
+  public ContributionEditor startReplyCreationWithLink(URL link) {
+    return startReplyCreationWith(String.format(" %s ", link.toString()));
   }
 
 }

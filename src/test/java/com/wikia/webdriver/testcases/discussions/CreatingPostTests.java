@@ -167,7 +167,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
-    PostCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+    PostCreatorMobile postsCreator = new PostsListPage().open().getDiscussionsHeader().getPostsCreatorMobile();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());

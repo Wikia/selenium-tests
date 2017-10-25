@@ -49,7 +49,6 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   private By confirmButton = By.className("confirm-button");
   private By signInButton = By.className("signin-button");
 
-  protected abstract WebElement getPostsCreator();
   protected abstract WebElement getEditor();
 
   protected WebElement getOkButtonInSignInDialog() {
@@ -92,11 +91,6 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
 
   protected WebElement getTitleTextarea() {
     return getEditor().findElement(titleInput);
-  }
-
-  public ContributionEditor click() {
-    waitAndClick(getPostsCreator());
-    return this;
   }
 
   @Override
@@ -208,33 +202,6 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     waitSafely(() -> wait.forElementVisible(getLoadingSuccess()));
     waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
-  }
-
-  public ContributionEditor startPostCreation() {
-    return startPostCreationWith(TextGenerator.defaultText());
-  }
-
-  public ContributionEditor startPostCreationWith(String description) {
-    click()
-      .closeGuidelinesMessage()
-      .addTitleWith(TextGenerator.defaultText())
-      .addTextWith(description)
-      .clickAddCategoryButton()
-      .selectFirstCategory();
-    return this;
-  }
-
-  public ContributionEditor startPostCreationWithLink(URL link) {
-    return startPostCreationWith(String.format(" %s ", link.toString()));
-  }
-
-  public ContributionEditor startReplyCreationWith(String description) {
-    click().closeGuidelinesMessage().addTextWith(description);
-    return this;
-  }
-
-  public ContributionEditor startReplyCreationWithLink(URL link) {
-    return startReplyCreationWith(String.format(" %s ", link.toString()));
   }
 
   public boolean isExpanded() {

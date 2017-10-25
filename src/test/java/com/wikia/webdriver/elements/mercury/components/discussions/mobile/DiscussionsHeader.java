@@ -15,6 +15,10 @@ public class DiscussionsHeader extends BasePageObject {
   @Getter(lazy = true)
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
 
+  @Getter(lazy = true)
+  private final PostCreatorMobile postsCreatorMobile = new PostCreatorMobile();
+
+
   public FiltersPopOver openFilterMenu() {
     waitAndClick(filterMenuButton);
     return getFiltersPopOver();

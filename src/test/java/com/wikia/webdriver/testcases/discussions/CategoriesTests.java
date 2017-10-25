@@ -14,7 +14,6 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.contribution.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
@@ -262,7 +261,7 @@ public class CategoriesTests extends NewTestTemplate {
     try {
       assertTrue(categoriesFieldset.hasCategory(editedName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, editedName));
-      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), editedName),
+      assertTrue(isCategoryIn(page, editedName),
         String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, editedName));
     } finally {
       cleanUp(editedCategory);
@@ -330,7 +329,7 @@ public class CategoriesTests extends NewTestTemplate {
     try {
       assertTrue(categoriesFieldset.hasCategory(categoryName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName),
+      assertTrue(isCategoryIn(page, categoryName),
         String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       removeCategoryRemotely(siteId, data);
@@ -353,7 +352,7 @@ public class CategoriesTests extends NewTestTemplate {
     try {
       assertTrue(categoriesFieldset.hasCategory(newCategoryName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, newCategoryName));
-      assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), newCategoryName),
+      assertTrue(isCategoryIn(page, newCategoryName),
         String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, newCategoryName));
     } finally {
       cleanUp(editedCategory);
@@ -482,9 +481,9 @@ public class CategoriesTests extends NewTestTemplate {
         .clickApproveButton();
   }
 
-  private boolean isCategoryIn(ContributionEditor postsCreator, String categoryName) {
-    return postsCreator.click()
-        .closeGuidelinesMessage()
+  private boolean isCategoryIn(PostsListPage page, String categoryName) {
+    return page
+        .expandPostCreator()
         .clickAddCategoryButton()
         .hasCategory(categoryName);
   }
