@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class ImageEditor {
 
-  private static final int dpr = getDevicePixelRatio();
+  private static final int DPR = getDevicePixelRatio();
 
   public void saveImageFile(File imageFile, String path) {
     Pattern pattern = Pattern.compile("/*.jpg|/*.png|/*.jpeg");
@@ -56,7 +56,7 @@ public class ImageEditor {
       start.move(start.getX(), 0);
     }
     BufferedImage dest = image.getSubimage(
-        start.getX() * dpr, start.getY() * dpr, width * dpr, height * dpr
+        start.getX() * DPR, start.getY() * DPR, width * DPR, height * DPR
     );
     try {
       ImageIO.write(dest, "png", subImg);
