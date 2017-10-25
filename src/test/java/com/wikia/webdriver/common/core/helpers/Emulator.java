@@ -63,6 +63,8 @@ public enum Emulator {
   @Getter
   private String deviceName;
   @Getter
+  private String deviceNameTest;
+  @Getter
   private Map<String, Object> deviceMetrics;
   @Getter
   private String userAgent;
@@ -83,13 +85,13 @@ public enum Emulator {
   }
 
   Emulator(String deviceName, Map<String, Object> deviceMetrics, String userAgent) {
-    this.deviceName = deviceName;
+    this.deviceNameTest = deviceName;
     this.deviceMetrics = deviceMetrics;
     this.userAgent = userAgent;
   }
 
   Emulator(String deviceName, Map<String, Object> deviceMetrics) {
-    this.deviceName = deviceName;
+    this.deviceNameTest = deviceName;
     this.deviceMetrics = deviceMetrics;
     this.userAgent = "";
   }
