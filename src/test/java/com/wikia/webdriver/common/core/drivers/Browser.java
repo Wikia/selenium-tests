@@ -10,10 +10,13 @@ import com.wikia.webdriver.common.core.drivers.browsers.HtmlUnitBrowser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public enum Browser {
-  CHROME(ChromeBrowser.class, "CHROME"), FIREFOX(FirefoxBrowser.class, "FF"), CHROME_MOBILE(
-      ChromeBrowser.class, "CHROMEMOBILEMERCURY"), HTMLUNIT(HtmlUnitBrowser.class,
-          "HTMLUNIT"), GHOST(GhostBrowser.class, "GHOST"), CHROME_ANDROID(AndroidBrowser.class,
-              "ANDROID"), DEFAULT(DefaultBrowser.class, "");
+  CHROME(ChromeBrowser.class, "CHROME"),
+  FIREFOX(FirefoxBrowser.class, "FF"),
+  CHROME_MOBILE(ChromeBrowser.class, "CHROMEMOBILEMERCURY"),
+  HTMLUNIT(HtmlUnitBrowser.class, "HTMLUNIT"),
+  GHOST(GhostBrowser.class, "GHOST"),
+  CHROME_ANDROID(AndroidBrowser.class, "ANDROID"),
+  DEFAULT(DefaultBrowser.class, "");
 
   private Class<? extends BrowserAbstract> browserClass;
   private String name;
