@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
@@ -97,6 +98,8 @@ public class ImageEditor {
    */
   private static int getDevicePixelRatio() {
     if (Configuration.getEmulator() == Emulator.DEFAULT){
+      if (Configuration.getDpr() == null)
+        throw new ConfigurationRuntimeException("No dpr variable found in config.yaml");
       return Integer.parseInt(Configuration.getDpr());
     } else{
       Map<String, Object> metrics = Configuration.getEmulator().getDeviceMetrics();
