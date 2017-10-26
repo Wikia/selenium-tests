@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
@@ -89,8 +90,17 @@ public class ImageEditor {
     return img;
   }
 
+  /**
+   * Gets device pixel ratio from emulator, 1 if not present. If no emulator is used dpr is taken from config.yaml
+   * and should reflect your monitor dpr e.g. 2 for Macbook Pro
+   * @return dpr
+   */
   private static int getDevicePixelRatio() {
-    Map<String, Object> metrics = Configuration.getEmulator().getDeviceMetrics();
-    return (metrics != null && metrics.containsKey("pixelRatio")) ? ((Double) metrics.get("pixelRatio")).intValue() : 1;
+    if (Configuration.getEmulator() == Emulator.DEFAULT){
+      return Integer.parseInt(Configuration.getDpr());
+    } else{
+      Map<String, Object> metrics = Configuration.getEmulator().getDeviceMetrics();
+      return (metrics != null && metrics.containsKey("pixelRatio")) ? ((Double) metrics.get("pixelRatio")).intValue() : 1;
+    }
   }
 }
