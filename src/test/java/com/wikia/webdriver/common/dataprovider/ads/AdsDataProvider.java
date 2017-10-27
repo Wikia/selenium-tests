@@ -219,7 +219,7 @@ public class AdsDataProvider {
             Arrays.asList(
                 "\"loc\":\"top\"",
                 "\"pos\":\"TOP_LEADERBOARD\"",
-                "\"src\":\"gpt\""
+                "\"src\":\"test\""
             )
         }
     };

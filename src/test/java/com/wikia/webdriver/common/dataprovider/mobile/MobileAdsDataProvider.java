@@ -98,7 +98,7 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"test\""
             )
         }
     };

@@ -60,14 +60,6 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
     AdsBaseObject ads = new AdsBaseObject(driver, url, pageSize);
 
-    if (pageSize.equals(WindowSize.DESKTOP)) {
-      // on desktop comments lazy loads - on mobile you need to tap to load them
-      ads.triggerComments();
-
-      // only desktop pages have this headline
-      ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
-    }
-
     ads.triggerAdSlot(slotName)
         .wait
         .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
