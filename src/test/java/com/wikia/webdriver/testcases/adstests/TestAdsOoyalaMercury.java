@@ -21,7 +21,6 @@ public class TestAdsOoyalaMercury extends TemplateNoFirstLoad {
     String url = urlBuilder.getUrlForPage(TEST_PAGE);
     url = urlBuilder.appendQueryStringToURL(url, OOYALA_VIDEO_MODAL);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
-    wikiPage.;
     wikiPage.verifyLightboxAd();
     wikiPage.verifyLightboxVideo();
   }
