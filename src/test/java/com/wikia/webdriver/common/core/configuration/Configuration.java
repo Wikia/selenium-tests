@@ -90,6 +90,9 @@ public class Configuration {
   public static String getBrowser() {
     return getProp("browser");
   }
+  public static String getDpr() {
+    return getProp("dpr");
+  }
   public static String getDefaultWikiName() {
     return getPropertyFromFile("wikiName");
   }
