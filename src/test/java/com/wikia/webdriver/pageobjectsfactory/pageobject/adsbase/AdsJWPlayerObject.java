@@ -1,11 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.awt.*;
+import java.time.Duration;
 
 public class AdsJWPlayerObject extends AdsBaseObject {
 
@@ -21,6 +24,7 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   private static final By AD_SELECTOR = By.cssSelector(FEATURED_VIDEO_AD_SELECTOR);
   private static final By MOVIE_SELECTOR = By.cssSelector(FEATURED_VIDEO_MOVIE_SELECTOR);
   private static final By PLAYER_SELECTOR = By.cssSelector(FEATURED_VIDEO_PLAYER_SELECTOR);
+  private static final By VOLUME_BUTTON_SELECTOR = By.cssSelector("#featured-video__player div.jw-icon.jw-icon-volume");
 
   public AdsJWPlayerObject(WebDriver driver, String page) {
     super(driver, page);
@@ -69,5 +73,39 @@ public class AdsJWPlayerObject extends AdsBaseObject {
     ElementColor elementColor = new ElementColor(driver);
 
     elementColor.verifyMostFrequentColor(element, color);
+  }
+
+  public Boolean wasSoundHeard() {
+    return SoundMonitor.wasSoundHeardOnPage(jsActions);
+  }
+
+  public void clickVolumeButton() {
+    hoverPlayerToActivateUI();
+    driver.findElement(VOLUME_BUTTON_SELECTOR).click();
+  }
+
+  public void allowToPlayVideoForSomeTime(Duration duration) {
+    try {
+      Thread.sleep(duration.toMillis());
+    } catch (InterruptedException e) {
+      PageObjectLogging.log("Error", e.getMessage(), false);
+    }
+  }
+
+  public void waitForAdStartsPlaying() {
+    wait.forElementVisible(AD_SELECTOR);
+  }
+
+  public void scrollToPlayer() {
+    scrollTo(driver.findElement(PLAYER_SELECTOR));
+  }
+
+  private void hoverPlayerToActivateUI() {
+    builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(500).perform();
+  }
+
+  public void waitForAdFinish(Duration videoDuration) {
+    wait.forElementNotVisible(AD_SELECTOR, videoDuration);
+    wait.forElementVisible(MOVIE_SELECTOR);
   }
 }
