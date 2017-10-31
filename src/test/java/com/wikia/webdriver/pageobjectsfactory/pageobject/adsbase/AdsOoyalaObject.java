@@ -62,7 +62,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   private void verifyFeaturedVideoElement(Color color, int duration) {
-    jsActions.scrollToElement(articleVideoWrapper);
     verifyColorAd(articleVideoWrapper, color);
     logMessage(color, duration);
   }

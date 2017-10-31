@@ -3,12 +3,14 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 import org.testng.annotations.Test;
 
 @InBrowser(
-    browser = Browser.CHROME_MOBILE,
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5,
     browserSize = "414x736"
 )
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
@@ -21,7 +23,6 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
   public void adsPremiumPrerollMercury() {
     String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_WITH_FV);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
-    wikiPage.playFeaturedVideo();
     wikiPage.verifyArticleAd();
     wikiPage.verifyMobileArticleVideo();
   }
@@ -33,7 +34,6 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
     String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_WITH_FV);
     url = urlBuilder.appendQueryStringToURL(url, NO_ADS);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
-    wikiPage.playFeaturedVideo();
     wikiPage.verifyMobileArticleVideo();
   }
 }
