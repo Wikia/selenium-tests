@@ -592,6 +592,11 @@ public class AdsBaseObject extends WikiBasePageObject {
       return this;
     }
 
+    if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+      triggerFMR();
+      return this;
+    }
+
     String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
     if (StringUtils.isNotEmpty(javaScriptTrigger)) {
@@ -599,6 +604,31 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     return this;
+  }
+
+  private void triggerFMR() {
+    final By FMRSelector = By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC));
+    scrollToPosition(By.cssSelector("#wikia-recent-activity"));
+
+    doUntilElementVisible(FMRSelector, () -> {
+      jsActions.scrollBy(0, 100);
+      wait.forX(Duration.ofSeconds(1));
+    });
+  }
+
+  private void doUntilElementVisible(By by, Runnable f) {
+    Boolean isElementDisplayed = false;
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+
+    do {
+      try {
+        isElementDisplayed = driver.findElement(by).isDisplayed();
+      } catch (NoSuchElementException ignored) {
+        f.run();
+      }
+    } while(!isElementDisplayed);
+
+    restoreDefaultImplicitWait();
   }
 
   private void triggerBLB() {
@@ -761,12 +791,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     link.click();
 
     waitTitleChangesTo(linkName);
-  }
-
-  public void triggerComments() {
-    scrollToFooter();
-    jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
-    scrollToFooter();
   }
 
   public void scrollToPosition(By element) {
