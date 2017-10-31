@@ -18,19 +18,6 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   private static final Page TEST_PAGE = new Page("project43", "SyntheticTests/Premium/FeaturedVideo");
 
 
-  @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsOoyalaPrerollOasis", "AdsPremiumPrerollMOATTrackingOasis"}
-  )
-  public void adsPremiumPrerollMOATTrackingOasis() {
-    networkTrafficInterceptor.startIntercepting();
-    String url = urlBuilder.getUrlForPage(TEST_PAGE);
-    url = urlBuilder.appendQueryStringToURL(url, FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT);
-    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
-
-    adsPremiumPrerollMOATTracking(wikiPage);
-  }
-
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5, browser = Browser.CHROME)
   @NetworkTrafficDump(useMITM = true)
   @Test(

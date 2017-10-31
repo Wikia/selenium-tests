@@ -36,7 +36,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoVelesOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestVideoVelesMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMercury"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMOATTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPageFairRecoveryOasis"/>
@@ -53,7 +52,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaMercury"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
