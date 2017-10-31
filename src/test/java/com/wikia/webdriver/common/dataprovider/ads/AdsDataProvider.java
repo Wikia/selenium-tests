@@ -31,6 +31,12 @@ public class AdsDataProvider {
 
   public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
 
+  private static final String FV_JWPLAYER_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
+  private static final String FV_JWPLAYER_WITH_SOUND_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer/WithSound";
+
+  public static final Page PAGE_WITH_FV = new Page(WIKI_SPECIAL, FV_JWPLAYER_PAGE_URI);
+  public static final Page PAGE_WITH_FV_AND_SOUND = new Page(WIKI_SPECIAL, FV_JWPLAYER_WITH_SOUND_PAGE_URI);
+
   private AdsDataProvider() {
   }
 
