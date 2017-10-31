@@ -607,10 +607,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void triggerFMR() {
-    final By FMRSelector = By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC));
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
 
-    doUntilElementVisible(FMRSelector, () -> {
+    doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)), () -> {
       jsActions.scrollBy(0, 100);
       wait.forX(Duration.ofSeconds(1));
     });
