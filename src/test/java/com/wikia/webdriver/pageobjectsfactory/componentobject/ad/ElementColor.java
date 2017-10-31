@@ -26,8 +26,12 @@ public class ElementColor {
   }
 
   public void verifyMostFrequentColor(WebElement element, Color color) {
+    verifyMostFrequentColor(element,color, 30);
+  }
+
+  public void verifyMostFrequentColor(WebElement element, Color color, int timeOutInSeconds) {
     AdsComparison adsComparison = new AdsComparison();
-    WebDriverWait waitFor = new WebDriverWait(driver, 30);
+    WebDriverWait waitFor = new WebDriverWait(driver, timeOutInSeconds);
 
     waitFor.until(new ExpectedCondition<Object>() {
       @Override

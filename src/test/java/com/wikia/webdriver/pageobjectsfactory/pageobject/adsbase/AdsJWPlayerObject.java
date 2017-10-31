@@ -17,7 +17,7 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
   private static final Color COLOR_VIDEO = new Color(0, 255, 13);
 
-  private static final String FEATURED_VIDEO_AD_SELECTOR = "#featured-video__player_ad";
+  private static final String FEATURED_VIDEO_AD_SELECTOR = "#featured-video__player iframe[src*=imasdk]";
   private static final String FEATURED_VIDEO_MOVIE_SELECTOR = "#featured-video__player .jw-media video[src]";
   private static final String FEATURED_VIDEO_PLAYER_SELECTOR = "#featured-video__player";
 
@@ -34,11 +34,11 @@ public class AdsJWPlayerObject extends AdsBaseObject {
     wait.forElementPresent(PLAYER_SELECTOR);
   }
 
-  public void waitForAdPlaying() {
+  private void waitForAdPlaying() {
     wait.forElementVisible(AD_SELECTOR, 30);
   }
 
-  public void waitForMoviePlaying() {
+  private void waitForMoviePlaying() {
     wait.forElementVisible(MOVIE_SELECTOR, 30);
   }
 
@@ -72,7 +72,7 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   private void verifyColor(WebElement element, Color color) {
     ElementColor elementColor = new ElementColor(driver);
 
-    elementColor.verifyMostFrequentColor(element, color);
+    elementColor.verifyMostFrequentColor(element, color, 15);
   }
 
   public Boolean wasSoundHeard() {
