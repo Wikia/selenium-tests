@@ -21,6 +21,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
   public void adsPremiumPrerollOasis() {
     AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, PAGE_WITH_FV.getUrl());
     wikiPage.waitForAdStartsPlaying();
+    wikiPage.scrollToPlayer();
     wikiPage.verifyPlayerOnPage();
     wikiPage.verifyPreroll();
     wikiPage.verifyFeaturedVideo();
