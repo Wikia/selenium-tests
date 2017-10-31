@@ -26,7 +26,7 @@ public class ElementColor {
   }
 
   public void verifyMostFrequentColor(WebElement element, Color color) {
-    verifyMostFrequentColor(element,color, 30);
+    verifyMostFrequentColor(element, color, 30);
   }
 
   public void verifyMostFrequentColor(WebElement element, Color color, int timeOutInSeconds) {
