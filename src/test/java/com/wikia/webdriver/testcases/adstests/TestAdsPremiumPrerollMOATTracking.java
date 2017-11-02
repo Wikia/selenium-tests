@@ -16,6 +16,19 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   private static final String MOAT_VIDEO_TRACKING_URL = "https://z.moatads.com/wikiaimajsint377461931603/moatvideo.js";
   private static final String FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT = TURN_ON_MOAT + "&" + IGNORE_SAMPLING + "&" + QUERY_PARAM_CONTROL_GROUP;
 
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsOoyalaPrerollOasis", "AdsPremiumPrerollMOATTrackingOasis"}
+  )
+  public void adsPremiumPrerollMOATTrackingOasis() {
+    networkTrafficInterceptor.startIntercepting();
+    String url = urlBuilder.getUrlForPage(TEST_PAGE);
+    url = urlBuilder.appendQueryStringToURL(url, FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT);
+    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
+
+    adsPremiumPrerollMOATTracking(wikiPage);
+  }
+
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5, browser = Browser.CHROME)
   @NetworkTrafficDump(useMITM = true)
   @Test(
