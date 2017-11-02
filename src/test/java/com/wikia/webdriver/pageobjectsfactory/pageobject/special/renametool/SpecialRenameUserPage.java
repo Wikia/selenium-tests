@@ -20,7 +20,10 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   private WebElement staffLogLink;
   @FindBy(css = ".errorbox")
   private WebElement errorMessageTextBox;
-
+  @FindBy(css = "#mw-content-text")
+  private WebElement contentTextBox;
+  @FindBy(css = ".extiw")
+  private WebElement helpLink;
 
   public SpecialRenameUserPage(WebDriver driver) {
     super();
@@ -39,6 +42,11 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   }
 
   public SpecialRenameUserPage fillFormData(String newUsername, String reason) {
+    return fillFormData(newUsername,newUsername,reason);
+  }
+
+  public SpecialRenameUserPage fillFormData(String newUsername, String confirmUsername, String
+                                            reason) {
     wait.forElementClickable(confirmNewUsernameTextBox);
     newUsernameTextBox.sendKeys(newUsername);
     confirmNewUsernameTextBox.sendKeys(newUsername);
@@ -53,5 +61,14 @@ public class SpecialRenameUserPage extends SpecialPageObject {
 
   public String getErrorMessage() {
     return errorMessageTextBox.getText();
+  }
+
+  public String getContentText() {
+    return contentTextBox.getText();
+  }
+
+  public HelpPage goToHelpPage() {
+    helpLink.click();
+    return new HelpPage(driver);
   }
 }
