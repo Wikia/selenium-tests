@@ -18,7 +18,7 @@ import java.awt.*;
 @Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final By PLAY_BUTTON_SELECTOR =
-      By.cssSelector(".fandom-video[data-jwplayer-id] .jw-icon");
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG'] .jw-icon-display");
   private static final By PLAYER_CONTAINER_SELECTOR =
       By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG']");
   private static final By PLAYER_AD_SELECTOR =
