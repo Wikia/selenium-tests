@@ -14,27 +14,27 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump
   @Test(groups = "AmazonAdsDesktop")
-  public void amazonAdsDesktop() {
+  public void testAmazonDisplayAdsDesktop() {
     checkAmazonSlots(AdsAmazonObject.DESKTOP_SLOTS);
   }
 
   @Test(groups = "AmazonAdsMobile")
   @NetworkTrafficDump
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void amazonAdsMobile() {
+  public void testAmazonDisplayAdsMobile() {
     checkAmazonSlots(AdsAmazonObject.MOBILE_SLOTS);
   }
 
   @Test(groups = "AmazonAdsDesktop")
   @NetworkTrafficDump(useMITM = true)
-  public void testAmazonVideoOasis() {
+  public void testAmazonVideoAdsDesktop() {
     testAmazonVideo();
   }
 
   @Test(groups = "AmazonAdsMobile")
   @NetworkTrafficDump(useMITM = true)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void testAmazonVideoMobile() {
+  public void testAmazonVideoAdsMobile() {
     testAmazonVideo();
   }
 
