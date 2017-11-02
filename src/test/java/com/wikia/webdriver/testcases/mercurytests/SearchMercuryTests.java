@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.skin.Skin;
@@ -25,6 +26,9 @@ public class SearchMercuryTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
                   "Mercury_Search_001"})
+  @RelatedIssue(issueID = "IRIS-5132", comment = "Infobox suggestions not showing both on "
+                                                 + "desktop and "
+                                                 + "mobile")
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
     String clickedSuggestion = new GuidelinesPage()
         .open()
@@ -44,6 +48,9 @@ public class SearchMercuryTests extends SearchTests {
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnDesktop",
                   "Mercury_Search_001"})
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
+  @RelatedIssue(issueID = "IRIS-5132", comment = "Infobox suggestions not showing both on "
+                                                  + "desktop and "
+                                                 + "mobile")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String clickedSuggestion = new GuidelinesPage()
         .open()
