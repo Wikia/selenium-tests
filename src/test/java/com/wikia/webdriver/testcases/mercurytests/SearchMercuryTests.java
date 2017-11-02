@@ -26,9 +26,8 @@ public class SearchMercuryTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
                   "Mercury_Search_001"})
-  @RelatedIssue(issueID = "IRIS-5132", comment = "Infobox suggestions not showing both on "
-                                                 + "desktop and "
-                                                 + "mobile")
+  @RelatedIssue(issueID = "IRIS-5132", comment = "Infobox suggestions not showing both on desktop"
+                                                 + " and mobile")
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
     String clickedSuggestion = new GuidelinesPage()
         .open()
@@ -39,8 +38,7 @@ public class SearchMercuryTests extends SearchTests {
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(),
-        new ArticlePage().getHeader().getPageTitle().toLowerCase()
+        clickedSuggestion.toLowerCase(), new ArticlePage().getHeader().getPageTitle().toLowerCase()
     );
   }
 
@@ -48,9 +46,8 @@ public class SearchMercuryTests extends SearchTests {
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnDesktop",
                   "Mercury_Search_001"})
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
-  @RelatedIssue(issueID = "IRIS-5132", comment = "Infobox suggestions not showing both on "
-                                                  + "desktop and "
-                                                 + "mobile")
+  @RelatedIssue(issueID = "IRIS-5132", comment = "Infobox suggestions not showing both on desktop"
+                                                 + " and mobile")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String clickedSuggestion = new GuidelinesPage()
         .open()
