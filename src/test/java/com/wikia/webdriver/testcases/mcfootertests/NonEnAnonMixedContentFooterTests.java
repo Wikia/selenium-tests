@@ -34,7 +34,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "es.serowiec")
+  @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
   public void discussionsCardIsPresentOnNonENwikiWithEmptyDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
@@ -42,7 +42,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "es.gta")
+  @Execute(onWikia = "es.nonenwikiwithoutdiscussions")
   public void discussionsCardIsNotPresentOnNonENwikiWithoutDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
@@ -72,11 +72,25 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "es.serowiec")
+  @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
   public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
     Assertion.assertEquals(mcFooter.countArticleCards(), 12);
+  }
+
+  @Test
+  public void countNoOfArticlesInExploreCard() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertEquals(mcFooter.countArticlesInExploreCard(), 3);
+  }
+
+  @Test void isUserTakenToDiscussionsAfterClickOnViewAll() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    mcFooter.clickOnViewAllLinkInDiscussions();
+    Assertion.assertTrue(mcFooter.isDiscussions());
   }
 
 }

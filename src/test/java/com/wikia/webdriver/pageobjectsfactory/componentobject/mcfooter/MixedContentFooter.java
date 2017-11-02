@@ -23,8 +23,24 @@ public class MixedContentFooter extends WikiBasePageObject{
   @FindBy(css = ".mcf-card-related-wikis")
   private WebElement exploreWikisCard;
 
+  @FindBy (css = ".mcf-card-related-wikis__item")
+  private List<WebElement> exploreWikisList;
+
   @FindBy(css = ".mcf-card-article__link")
   private List<WebElement> articleLinks;
+
+  @FindBy(css = ".mcf-card-discussions__link")
+  private WebElement viewAllLink;
+
+  @FindBy(css = ".site-body-discussion")
+  private WebElement discussionsBody;
+
+  @FindBy(css = ".mcf-card-discussions__user-subtitle")
+  private WebElement avatarUsername;
+
+  @FindBy(css = ".wds-avatar")
+  private WebElement avatarImage;
+
 
   public MixedContentFooter openWikiMainPage() {
     getUrl(getWikiUrl() + URLsContent.WIKI_DIR);
@@ -68,6 +84,28 @@ public class MixedContentFooter extends WikiBasePageObject{
   public int countArticleCards (){
     wait.forElementVisible(mcFooter);
     return articleLinks.size();
+  }
+
+  public int countArticlesInExploreCard() {
+    wait.forElementVisible(exploreWikisCard);
+    return exploreWikisList.size();
+  }
+
+  public void clickOnViewAllLinkInDiscussions() {
+    wait.forElementVisible(viewAllLink).click();
+  }
+
+  public boolean isDiscussions() {
+    return discussionsBody.isDisplayed();
+  }
+
+  public String getUsername() {
+    return avatarUsername.getText();
+  }
+
+  public MixedContentFooter clickUserAvatar() {
+    avatarImage.click();
+    return this;
   }
 
 }

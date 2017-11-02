@@ -42,7 +42,7 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "glee", asUser = User.USER)
+  @Execute(onWikia = "enwikiwithoutdiscussions", asUser = User.USER)
   public void discussionsCardIsNotPresentOnENwikiWithoutDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
@@ -77,6 +77,20 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
     Assertion.assertEquals(mcFooter.countArticleCards(), 18);
+  }
+
+  @Test
+  public void countNoOfArticlesInExploreCard() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertEquals(mcFooter.countArticlesInExploreCard(), 3);
+  }
+
+  @Test void isUserTakenToDiscussionsAfterClickOnViewAll() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    mcFooter.clickOnViewAllLinkInDiscussions();
+    Assertion.assertTrue(mcFooter.isDiscussions());
   }
 
 }

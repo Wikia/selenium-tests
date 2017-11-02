@@ -79,4 +79,18 @@ public class NonEnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     Assertion.assertEquals(mcFooter.countArticleCards(), 12);
   }
 
+  @Test
+  public void countNoOfArticlesInExploreCard() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertEquals(mcFooter.countArticlesInExploreCard(), 3);
+  }
+
+  @Test void isUserTakenToDiscussionsAfterClickOnViewAll() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    mcFooter.clickOnViewAllLinkInDiscussions();
+    Assertion.assertTrue(mcFooter.isDiscussions());
+  }
+
 }
