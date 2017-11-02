@@ -10,7 +10,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   private static final String QS_TURN_ON_A9_VIDEO_DEBUG = "amzn_debug_mode=1";
 
   public static final String[] A9_VIDEO_DEBUG_MODE = {QS_TURN_ON_A9, QS_TURN_ON_A9_VIDEO, QS_TURN_ON_A9_VIDEO_DEBUG};
-  public static final String A9_VIDEO_DEBUG_BID_PATTERN = ".*ads\\?output=xml_vast3.*amznbid%3Dv_2975ds.*";
+  public static final String A9_VIDEO_DEBUG_BID_PATTERN = ".*aax.amazon-adsystem\\.com.*vast.*v_2975ds";
 
   public static final String A9_TEST_LINE_ITEM = "4397742201";
 
