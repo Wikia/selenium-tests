@@ -615,19 +615,30 @@ public class AdsBaseObject extends WikiBasePageObject {
     });
   }
 
-  private void doUntilElementVisible(By by, Runnable f) {
+  private void doUntilElementVisible(By by, Runnable f, final int maxNumberOfRepetitions) {
     Boolean isElementDisplayed = false;
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    int i = 0;
 
     do {
+      if (maxNumberOfRepetitions < i) {
+        throw new NoSuchElementException("No visible element:" + by.toString());
+      }
+
       try {
         isElementDisplayed = driver.findElement(by).isDisplayed();
       } catch (NoSuchElementException ignored) {
         f.run();
       }
+
+      i++;
     } while(!isElementDisplayed);
 
     restoreDefaultImplicitWait();
+  }
+
+  private void doUntilElementVisible(By by, Runnable f) {
+    doUntilElementVisible(by, f, 20);
   }
 
   private void triggerBLB() {
