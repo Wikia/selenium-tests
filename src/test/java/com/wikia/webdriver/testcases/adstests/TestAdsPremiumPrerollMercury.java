@@ -21,7 +21,7 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
       groups = {"AdsPremiumPrerollMercury"}
   )
   public void adsPremiumPrerollMercury() {
-    String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_WITH_FV);
+    String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_FV_JWPLAYER);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
     wikiPage.verifyArticleAd();
     wikiPage.verifyMobileArticleVideo();
@@ -31,7 +31,7 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
       groups = {"AdsPremiumPrerollMercury"}
   )
   public void adsPremiumPrerollMercuryNoAds() {
-    String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_WITH_FV);
+    String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_FV_JWPLAYER);
     url = urlBuilder.appendQueryStringToURL(url, NO_ADS);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
     wikiPage.verifyMobileArticleVideo();
