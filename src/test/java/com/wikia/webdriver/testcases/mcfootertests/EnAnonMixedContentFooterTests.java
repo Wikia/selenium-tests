@@ -99,8 +99,10 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   @Test
   public void userIsTakenToUserprofileAfterClickOnAvatar() {
     MixedContentFooter mcFooter = new MixedContentFooter();
-    mcFooter.openWikiMainPage().scrollToMCFooter();
-    String username = mcFooter.getUsername();
+    mcFooter.openWikiMainPage()
+        .scrollToMCFooter();
+    String username = mcFooter.getUsername()
+        .replaceAll(" •.*$", "");
     mcFooter.clickUserAvatar();
     Assertion.assertEquals(new UserProfilePage().getUserName(), username);
   }
