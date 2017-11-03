@@ -4,7 +4,10 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.testng.annotations.Test;
 
@@ -91,6 +94,57 @@ public class NonEnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     mcFooter.openWikiMainPage().scrollToMCFooter();
     mcFooter.clickOnViewAllLinkInDiscussions();
     Assertion.assertTrue(mcFooter.isDiscussions());
+  }
+
+  @Test
+  public void userIsTakenToUserProfileAfterClickOnAvatar() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage()
+        .scrollToMCFooter();
+    String username = mcFooter.getUsername()
+        .replaceAll(" •.*$", "");
+    mcFooter.clickUserAvatar();
+    Assertion.assertEquals(new UserProfilePage().getUserName(), username);
+  }
+
+  @Test
+  public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage()
+        .scrollToMCFooter();
+    mcFooter.clickDiscussionsPost();
+    Assertion.assertEquals(new DiscussionsPage().getUrl(), mcFooter.getCurrentUrl() );
+  }
+
+  @Test
+  @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
+  public void zeroStateAppearsInDiscussionsWithoutPosts() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage()
+        .scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isZeroState());
+  }
+
+  @Test
+  public void userIsTakenToWikiArticleAfterClickOnWikiArticleCard() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    mcFooter.clickWikiArticlecard();
+    mcFooter.waitForPageLoad();
+    String url = driver.getCurrentUrl();
+    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
+  }
+
+  @Test
+  public void userIsTakenToWikiArticleWithVideoAfterClickOnWikiVideoCard() {
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    mcFooter.clickWikiVideoCard();
+    mcFooter.waitForPageLoad();
+    String url = driver.getCurrentUrl();
+    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
+    ArticlePageObject video = new ArticlePageObject();
+    Assertion.assertTrue(video.isFeaturedVideo());
   }
 
 }

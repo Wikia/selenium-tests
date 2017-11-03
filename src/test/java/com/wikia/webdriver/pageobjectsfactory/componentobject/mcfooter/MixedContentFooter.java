@@ -41,6 +41,23 @@ public class MixedContentFooter extends WikiBasePageObject{
   @FindBy(css = ".wds-avatar")
   private WebElement avatarImage;
 
+  @FindBy(css = ".mcf-card-discussions__content")
+  private WebElement discussionsPost;
+
+  @FindBy(css = ".mcf-card-discussions__zero-state-text")
+  private WebElement discussionsZeroState;
+
+  @FindBy(css = ".mcf-card-article[data-li-type='ns']")
+  private WebElement fandomArticleCard;
+
+  @FindBy(css = ".mcf-card-article[data-li-type='wiki']")
+  private WebElement wikiArticleCard;
+
+  @FindBy(css = ".mcf-card-article[data-li-type='ns'] .mcf-card-article__video-container")
+  private WebElement fandomVideoCard;
+
+  @FindBy(css = ".mcf-card-article[data-li-type='wiki'] .mcf-card-article__video-container")
+  private WebElement wikiVideoCard;
 
   public MixedContentFooter openWikiMainPage() {
     getUrl(getWikiUrl() + URLsContent.WIKI_DIR);
@@ -108,4 +125,26 @@ public class MixedContentFooter extends WikiBasePageObject{
     return this;
   }
 
+  public MixedContentFooter clickDiscussionsPost() {
+    discussionsPost.click();
+    return this;
+  }
+
+  public boolean isZeroState() {
+    return discussionsZeroState.isDisplayed();
+  }
+
+  public void clickFanomArticleCard() {
+    fandomArticleCard.click();
+  }
+
+  public void clickWikiArticlecard() {
+    wikiArticleCard.click();
+  }
+
+  public void clickFanomVideoCard() {
+    fandomVideoCard.click();
+  }
+
+  public void clickWikiVideoCard() { wikiVideoCard.click(); }
 }
