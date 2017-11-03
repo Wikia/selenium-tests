@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
-  UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
+  UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getForceHttps(), Configuration.getNewStagingUrlFormat());
   private String testedWiki = urlBuilder.getUrlForWiki("community");
   private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
 
