@@ -141,6 +141,14 @@ public class Configuration {
     return getProp("mockAds");
   }
 
+  public static Boolean getForceHttps() {
+    return getProp("forceHttps").equals("true");
+  }
+
+  public static Boolean getNewStagingUrlFormat() {
+    return getProp("newStagingUrlFormat").equals("true");
+  }
+
   public static Emulator getEmulator() {
     Emulator emulatorToUse = Emulator.DEFAULT;
     if (TestContext.getCurrentTestMethod().getDeclaringClass()
