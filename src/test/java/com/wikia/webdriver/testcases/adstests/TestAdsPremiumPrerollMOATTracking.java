@@ -23,7 +23,7 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollMOATTrackingMobile() {
     networkTrafficInterceptor.startIntercepting();
-    String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_WITH_FV);
+    String url = urlBuilder.getUrlForPage(AdsDataProvider.PAGE_FV_JWPLAYER);
     url = urlBuilder.appendQueryStringToURL(url, FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, url);
 
