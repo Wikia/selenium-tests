@@ -18,13 +18,13 @@ import java.awt.*;
 @Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final By PLAY_BUTTON_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id] .oo-action-icon");
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG'] .jw-icon-display");
   private static final By PLAYER_CONTAINER_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id='J1dGgwYTE6IWVacg3U0JEcVCDQUmKnX6']");
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG']");
   private static final By PLAYER_AD_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id] iframe[src*=imasdk]");
+      By.cssSelector(".fandom-video iframe[src*=imasdk]");
   private static final By AUTOPLAY_PLAYERER_AD_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id][data-autoplay] iframe[src*=imasdk]");
+      By.cssSelector(".fandom-video[data-jwplayer-id][data-autoplay] iframe[src*=imasdk]");
 
   private static final String CLICK_TO_PLAY_PAGE = "the-best-movies-of-2017-so-far";
   private static final String AUTOPLAY_PAGE = "orphan-black-clones-names";
