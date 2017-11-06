@@ -16,7 +16,7 @@ public class TestAdsFeaturedVideoSoundOasis extends TemplateNoFirstLoad {
       groups = {"AdsFeaturedVideoSoundOasis", "AdsJWPlayerPrerollOasisWithSound"}
   )
   public void adsJWPlayerOasisWithSound() {
-    AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, AdsDataProvider.PAGE_WITH_FV_AND_SOUND.getUrl());
+    AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
     wikiPage.waitForAdStartsPlaying();
     wikiPage.scrollToPlayer();
     wikiPage.clickVolumeButton();
@@ -28,7 +28,7 @@ public class TestAdsFeaturedVideoSoundOasis extends TemplateNoFirstLoad {
       groups = {"AdsFeaturedVideoSoundOasis", "AdsJWPlayerOasisWithoutSound"}
   )
   public void adsJWPlayerOasisWithoutSound() {
-    AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, AdsDataProvider.PAGE_WITH_FV_AND_SOUND.getUrl());
+    AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
     wikiPage.waitForAdStartsPlaying();
     wikiPage.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));
     wikiPage.waitForAdFinish(AD_LENGTH);
