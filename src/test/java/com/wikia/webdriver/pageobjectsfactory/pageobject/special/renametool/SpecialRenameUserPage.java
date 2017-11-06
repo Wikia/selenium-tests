@@ -8,13 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class SpecialRenameUserPage extends SpecialPageObject {
-  @FindBy(css = "input[name=\"newusername\"]")
+  @FindBy(css = "input[name=\"newUsername\"]")
   private WebElement newUsernameTextBox;
-  @FindBy(css = "input[name=\"newusernamerepeat\"]")
+  @FindBy(css = "input[name=\"newUsernameRepeat\"]")
   private WebElement confirmNewUsernameTextBox;
-  @FindBy(css = "input[name=\"reason\"]")
-  private WebElement reasonForRenameTextBox;
-  @FindBy(css = "input[name=\"submit\"]")
+  @FindBy(css = "input[name=\"submitbutton\"]")
   private WebElement submitButton;
   @FindBy(xpath = "//a[text()=\"Staff log\"")
   private WebElement staffLogLink;
@@ -24,6 +22,11 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   private WebElement contentTextBox;
   @FindBy(css = ".extiw")
   private WebElement helpLink;
+  @FindBy(css = "#password")
+  private WebElement currentPasswordTextBox;
+  @FindBy(css = "#understand-consequences")
+  private WebElement termsAndConditionsCheckBox;
+
 
   public SpecialRenameUserPage(WebDriver driver) {
     super();
@@ -46,11 +49,11 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   }
 
   public SpecialRenameUserPage fillFormData(String newUsername, String confirmUsername, String
-                                            reason) {
+                                            password) {
     wait.forElementClickable(confirmNewUsernameTextBox);
     newUsernameTextBox.sendKeys(newUsername);
     confirmNewUsernameTextBox.sendKeys(newUsername);
-    reasonForRenameTextBox.sendKeys(reason);
+    currentPasswordTextBox.sendKeys(password);
     return this;
   }
 
@@ -70,5 +73,10 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   public HelpPage goToHelpPage() {
     helpLink.click();
     return new HelpPage(driver);
+  }
+
+  public SpecialRenameUserPage agreeToTermsAndConditions() {
+    termsAndConditionsCheckBox.click();
+    return this;
   }
 }

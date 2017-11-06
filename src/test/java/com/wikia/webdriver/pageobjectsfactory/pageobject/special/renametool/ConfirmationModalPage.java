@@ -12,9 +12,9 @@ public class ConfirmationModalPage extends SpecialPageObject {
   //TODO: Move it to components
   @FindBy(css = "")
   private WebElement messageTextBox;
-  @FindBy(css = "input[value=\"Yes\"]")
+  @FindBy(css = "#WikiaConfirmOk")
   private WebElement yesButton;
-  @FindBy(css = "input[value=\"No\"]")
+  @FindBy(css = "#WikiaConfirmCancel")
   private WebElement noButton;
   By confirmationmodalContainerBy = By.cssSelector("");
 
@@ -37,5 +37,9 @@ public class ConfirmationModalPage extends SpecialPageObject {
 
   public void reject() {
     noButton.click();
+  }
+
+  public void accept() {
+    yesButton.click();
   }
 }

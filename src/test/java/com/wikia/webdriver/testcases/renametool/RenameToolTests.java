@@ -13,6 +13,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.Spec
 
 import org.testng.annotations.Test;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @InBrowser(browser = Browser.CHROME)
 @Execute(onWikia = "community")
 @Test(groups = "renameTool")
@@ -48,5 +52,32 @@ public class RenameToolTests extends NewTestTemplate {
     HelpPage helpPage = renameUserPage.goToHelpPage();
 
     Assertion.assertEquals(helpPage.isHelpPageHeaderPresent(), true);
+  }
+
+  @Test(groups = {"renameTool_01"})
+  @Execute(asUser = User.LUKAS)
+  public void ConfirmationModalDecline_RedirectionToRenameTool() {
+    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
+        .open()
+        .fillFormData("NewUserName", "NewUserName", User.LUKAS.getPassword())
+        .agreeToTermsAndConditions()
+        .submitChange();
+    new ConfirmationModalPage(driver).reject();
+    Assertion.assertEquals(renameUserPage.getHeaderText(), "Change a user's name");
+  }
+
+  @Test(groups = {"renameTool_01"})
+  @Execute(asUser = User.LUKAS)
+  public void ConfirmationModalConfirm_CheckForConfirmationBox() {
+    String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
+        .open()
+        .fillFormData("NewUserName_" + timestamp, "NewUserName_" + timestamp, User.LUKAS
+            .getPassword())
+        .agreeToTermsAndConditions();
+//        .submitChange();
+    new ConfirmationModalPage(driver).accept();
+    Assertion.assertEquals(renameUserPage.getHeaderText(), "Rename process is in progress. The "
+                                                           + "rest will be done in background. You will be notified via e-mail when it is completed.");
   }
 }

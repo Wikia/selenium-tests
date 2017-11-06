@@ -112,4 +112,5 @@ public class ArticlePage extends WikiBasePageObject {
 
     return articleTitle.getText();
   }
+
 }

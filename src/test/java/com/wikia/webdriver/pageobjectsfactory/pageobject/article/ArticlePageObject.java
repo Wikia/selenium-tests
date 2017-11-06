@@ -9,6 +9,9 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
+import com.wikia.webdriver.elements.oasis.components.navigation.LocalNavigation;
+import com.wikia.webdriver.elements.oasis.components.navigation.NestedNavigation;
+import com.wikia.webdriver.elements.oasis.components.navigation.UploadVideo;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
@@ -137,6 +140,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
+
+  @Getter(lazy = true)
+  private  final LocalNavigation localNavigation = new LocalNavigation();
+
+  @Getter(lazy = true)
+  private final NestedNavigation nestedNavigation = new NestedNavigation();
+
+  @Getter(lazy = true)
+  private final UploadVideo uploadVideo = new UploadVideo();
+
+
 
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
   private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";

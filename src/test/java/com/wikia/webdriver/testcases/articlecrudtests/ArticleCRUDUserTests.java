@@ -45,14 +45,21 @@ ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
   @Execute(asUser = User.USER)
   public void ArticleCRUDUser_003_addEditButton() {
-    new ArticleContent().push();
+    new ArticleContent().clear();
     ArticlePageObject article = new ArticlePageObject().open();
     String articleTitle = article.getArticleTitle();
 
     VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButton();
+    visualEditMode.clearContent();
+    visualEditMode.clickBoldButton();
     visualEditMode.addContent(PageContent.ARTICLE_TEXT);
     visualEditMode.submitArticle();
-    article.verifyContent(PageContent.ARTICLE_TEXT);
+
+    article.openCKModeWithMainEditButton();
+    visualEditMode.clickBoldButton();
+    visualEditMode.addContentWithoutClear(PageContent.ARTICLE_TEXT_DROZDY);
+    visualEditMode.submitArticle();
+    article.verifyContent(PageContent.ARTICLE_TEXT_DROZDY+PageContent.ARTICLE_TEXT);
     article.verifyArticleTitle(articleTitle);
   }
 
