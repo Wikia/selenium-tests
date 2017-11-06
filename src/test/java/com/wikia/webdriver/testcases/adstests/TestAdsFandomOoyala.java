@@ -25,6 +25,9 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       By.cssSelector(".fandom-video iframe[src*=imasdk]");
   private static final By AUTOPLAY_PLAYERER_AD_SELECTOR =
       By.cssSelector(".fandom-video[data-jwplayer-id][data-autoplay] iframe[src*=imasdk]");
+      
+  private static final By SMART_BANNER_CLOSE_BUTTON_SELECTOR = 
+      By.cssSelector(".smart-banner__close");
 
   private static final String CLICK_TO_PLAY_PAGE = "the-best-movies-of-2017-so-far";
   private static final String AUTOPLAY_PAGE = "orphan-black-clones-names";
@@ -69,6 +72,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
         WindowSize.PHONE
     );
+    removeSmartBanner();
     testOoyalaClickToPlayPreroll(adsFandom);
   }
 
@@ -84,7 +88,15 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
              AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
              WindowSize.PHONE
     );
+    removeSmartBanner();
     testOoyalaAutoplayPreroll(adsFandom);
+  }
+
+  public void removeSmartBanner() {
+    Wait wait = new Wait(driver);
+
+    wait.forElementVisible(SMART_BANNER_CLOSE_BUTTON_SELECTOR);
+    driver.findElement(SMART_BANNER_CLOSE_BUTTON_SELECTOR).click();
   }
 
   public void testOoyalaClickToPlayPreroll(AdsFandomObject adsFandom) {
