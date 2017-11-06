@@ -8,6 +8,8 @@ public class FandomPageObject extends WikiBasePageObject {
   @FindBy(css = ".article-header__video")
   private WebElement featuredVideo;
 
-  public boolean isFeaturedVideo() { return featuredVideo.isDisplayed(); }
+  public boolean isFeaturedVideo() {
+    wait.forElementVisible(featuredVideo);
+    return featuredVideo.isDisplayed(); }
 
 }

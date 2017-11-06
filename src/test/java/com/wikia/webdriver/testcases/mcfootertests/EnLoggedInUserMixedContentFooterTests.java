@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.DiscussionsCardInMcFooter;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FandomPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
@@ -17,14 +18,14 @@ import org.testng.annotations.Test;
 public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
 
   @Test
-   public void mcFooterIsPresentOnENwiki() {
+  public void mcFooterIsPresentOnENwiki() {
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
     Assertion.assertTrue(mcFooter.isMCFooterPresent());
   }
 
   @Test
-   public void exploreWikisCardIsPresentOnENwiki(){
+  public void exploreWikisCardIsPresentOnENwiki(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
     Assertion.assertTrue(mcFooter.isExploreWikisCardPresent());
@@ -34,23 +35,23 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
   public void discussionsCardIsPresentOnENwikiWithDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isDiscussionsCardPresent());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isDiscussionsCardPresent());
   }
 
   @Test
-  @Execute(onWikia = "mcfwithoutmoreofwikiarticles", asUser = User.USER)
+  @Execute(onWikia = "mcfwithoutmoreofwikiarticles")
   public void discussionsCardIsPresentOnENwikiWithEmptyDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isDiscussionsCardPresent());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isDiscussionsCardPresent());
   }
 
   @Test
-  @Execute(onWikia = "enwikiwithoutdiscussions", asUser = User.USER)
+  @Execute(onWikia = "enwikiwithoutdiscussions")
   public void discussionsCardIsNotPresentOnENwikiWithoutDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isDiscussionsCardNotPresent());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isDiscussionsCardNotPresent());
   }
 
   @Test
@@ -68,7 +69,8 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "glee", asUser = User.USER)
+  @Execute(onWikia = "disney")
+  //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE 'More of..' will appear on this wiki
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
@@ -76,7 +78,7 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "mcfwithoutmoreofwikiarticles", asUser = User.USER)
+  @Execute(onWikia = "mcfwithoutmoreofwikiarticles")
   public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
@@ -90,11 +92,13 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     Assertion.assertEquals(mcFooter.countArticlesInExploreCard(), 3);
   }
 
-  @Test void isUserTakenToDiscussionsAfterClickOnViewAll() {
+  @Test
+  public void userIsTakenToDiscussionsAfterClickOnViewAll() {
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    mcFooter.clickOnViewAllLinkInDiscussions();
-    Assertion.assertTrue(mcFooter.isDiscussions());
+    DiscussionsCardInMcFooter discussions =new DiscussionsCardInMcFooter();
+    discussions.clickOnViewAllLinkInDiscussions();
+    Assertion.assertTrue(discussions.isDiscussions());
   }
 
   @Test
@@ -102,9 +106,10 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage()
         .scrollToMCFooter();
-    String username = mcFooter.getUsername()
+    DiscussionsCardInMcFooter discussions =new DiscussionsCardInMcFooter();
+    String username = discussions.getUsername()
         .replaceAll(" •.*$", "");
-    mcFooter.clickUserAvatar();
+    discussions.clickUserAvatar();
     Assertion.assertEquals(new UserProfilePage().getUserName(), username);
   }
 
@@ -113,7 +118,8 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage()
         .scrollToMCFooter();
-    mcFooter.clickDiscussionsPost();
+    DiscussionsCardInMcFooter discussions =new DiscussionsCardInMcFooter();
+    discussions.clickDiscussionsPost();
     Assertion.assertEquals(new DiscussionsPage().getUrl(), mcFooter.getCurrentUrl() );
   }
 
@@ -123,7 +129,7 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage()
         .scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isZeroState());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isZeroState());
   }
 
   @Test
@@ -169,4 +175,5 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
     ArticlePageObject video = new ArticlePageObject();
     Assertion.assertTrue(video.isFeaturedVideo());
   }
+
 }

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.DiscussionsCardInMcFooter;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FandomPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
@@ -34,7 +35,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   public void discussionsCardIsPresentOnENwikiWithDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isDiscussionsCardPresent());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isDiscussionsCardPresent());
   }
 
   @Test
@@ -42,15 +43,15 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   public void discussionsCardIsPresentOnENwikiWithEmptyDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isDiscussionsCardPresent());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isDiscussionsCardPresent());
   }
 
   @Test
-  @Execute(onWikia = "serowiec")
+  @Execute(onWikia = "enwikiwithoutdiscussions")
   public void discussionsCardIsNotPresentOnENwikiWithoutDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isDiscussionsCardNotPresent());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isDiscussionsCardNotPresent());
   }
 
   @Test
@@ -95,8 +96,9 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   public void userIsTakenToDiscussionsAfterClickOnViewAll() {
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
-    mcFooter.clickOnViewAllLinkInDiscussions();
-    Assertion.assertTrue(mcFooter.isDiscussions());
+    DiscussionsCardInMcFooter discussions =new DiscussionsCardInMcFooter();
+    discussions.clickOnViewAllLinkInDiscussions();
+    Assertion.assertTrue(discussions.isDiscussions());
   }
 
   @Test
@@ -104,9 +106,10 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage()
         .scrollToMCFooter();
-    String username = mcFooter.getUsername()
+    DiscussionsCardInMcFooter discussions =new DiscussionsCardInMcFooter();
+    String username = discussions.getUsername()
         .replaceAll(" •.*$", "");
-    mcFooter.clickUserAvatar();
+    discussions.clickUserAvatar();
     Assertion.assertEquals(new UserProfilePage().getUserName(), username);
   }
 
@@ -115,7 +118,8 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage()
         .scrollToMCFooter();
-    mcFooter.clickDiscussionsPost();
+    DiscussionsCardInMcFooter discussions =new DiscussionsCardInMcFooter();
+    discussions.clickDiscussionsPost();
     Assertion.assertEquals(new DiscussionsPage().getUrl(), mcFooter.getCurrentUrl() );
   }
 
@@ -125,7 +129,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage()
         .scrollToMCFooter();
-    Assertion.assertTrue(mcFooter.isZeroState());
+    Assertion.assertTrue(new DiscussionsCardInMcFooter().isZeroState());
   }
 
   @Test

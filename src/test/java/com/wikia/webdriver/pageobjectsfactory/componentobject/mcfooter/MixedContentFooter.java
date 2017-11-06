@@ -20,9 +20,6 @@ public class MixedContentFooter extends WikiBasePageObject{
   @FindBy(css = ".mcf-card-wiki-articles")
   private WebElement moreOfWikiArticlesCard;
 
-  @FindBy(css = ".mcf-card-discussions")
-  private WebElement discussionsCard;
-
   @FindBy(css = ".mcf-card-related-wikis")
   private WebElement exploreWikisCard;
 
@@ -31,24 +28,6 @@ public class MixedContentFooter extends WikiBasePageObject{
 
   @FindBy(css = ".mcf-card-article__link")
   private List<WebElement> articleLinks;
-
-  @FindBy(css = ".mcf-card-discussions__link")
-  private WebElement viewAllLink;
-
-  @FindBy(css = ".site-body-discussion")
-  private WebElement discussionsBody;
-
-  @FindBy(css = ".mcf-card-discussions__user-subtitle")
-  private WebElement avatarUsername;
-
-  @FindBy(css = ".wds-avatar")
-  private WebElement avatarImage;
-
-  @FindBy(css = ".mcf-card-discussions__content")
-  private WebElement discussionsPost;
-
-  @FindBy(css = ".mcf-card-discussions__zero-state-text")
-  private WebElement discussionsZeroState;
 
   @FindBy(css = ".mcf-card-article[data-li-type='ns']")
   private WebElement fandomArticleCard;
@@ -83,16 +62,6 @@ public class MixedContentFooter extends WikiBasePageObject{
     return mcFooter.isDisplayed();
   }
 
-  public boolean isDiscussionsCardPresent() {
-    wait.forElementVisible(discussionsCard);
-    return discussionsCard.isDisplayed();
-  }
-
-  public boolean isDiscussionsCardNotPresent() {
-    wait.forElementNotVisible(discussionsCard);
-    return true;
-  }
-
   public boolean isExploreWikisCardPresent() {
     wait.forElementVisible(exploreWikisCard);
     return exploreWikisCard.isDisplayed();
@@ -114,43 +83,22 @@ public class MixedContentFooter extends WikiBasePageObject{
     return exploreWikisList.size();
   }
 
-  public void clickOnViewAllLinkInDiscussions() {
-    wait.forElementVisible(viewAllLink).click();
-  }
-
-  public boolean isDiscussions() {
-    return discussionsBody.isDisplayed();
-  }
-
-  public String getUsername() {
-    return avatarUsername.getText();
-  }
-
-  public MixedContentFooter clickUserAvatar() {
-    avatarImage.click();
-    return this;
-  }
-
-  public MixedContentFooter clickDiscussionsPost() {
-    discussionsPost.click();
-    return this;
-  }
-
-  public boolean isZeroState() {
-    return discussionsZeroState.isDisplayed();
-  }
-
   public void clickFanomArticleCard() {
+    wait.forElementClickable(fandomArticleCard);
     fandomArticleCard.click();
   }
 
   public void clickWikiArticlecard() {
+    wait.forElementClickable(wikiArticleCard);
     wikiArticleCard.click();
   }
 
   public void clickFanomVideoCard() {
+    wait.forElementClickable(fandomVideoCard);
     fandomVideoCard.click();
   }
 
-  public void clickWikiVideoCard() { wikiVideoCard.click(); }
+  public void clickWikiVideoCard() {
+    wait.forElementClickable(wikiVideoCard);
+    wikiVideoCard.click(); }
 }

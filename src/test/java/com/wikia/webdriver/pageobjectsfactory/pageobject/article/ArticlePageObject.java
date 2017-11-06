@@ -803,6 +803,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public boolean isFeaturedVideo() {
+    wait.forElementVisible(featuredVideo);
     return featuredVideo.isDisplayed();
   }
 }
