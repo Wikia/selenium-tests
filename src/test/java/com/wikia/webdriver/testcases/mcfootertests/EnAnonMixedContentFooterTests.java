@@ -68,7 +68,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "glee")
+  @Execute(onWikia = "disney")
   //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE 'More of..' will appear on this wiki
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles(){
     MixedContentFooter mcFooter = new MixedContentFooter();
@@ -171,6 +171,5 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
     ArticlePageObject video = new ArticlePageObject();
     Assertion.assertTrue(video.isFeaturedVideo());
   }
-
 
 }
