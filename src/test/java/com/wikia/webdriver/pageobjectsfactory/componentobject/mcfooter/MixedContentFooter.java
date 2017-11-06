@@ -14,6 +14,9 @@ public class MixedContentFooter extends WikiBasePageObject{
   @FindBy(css = "#mixed-content-footer")
   private WebElement mcFooter;
 
+  @FindBy(css = ".mcf-header")
+  private WebElement mcFooterHeader;
+
   @FindBy(css = ".mcf-card-wiki-articles")
   private WebElement moreOfWikiArticlesCard;
 
@@ -35,12 +38,14 @@ public class MixedContentFooter extends WikiBasePageObject{
   public void scrollToMCFooter() {
     wait.forElementVisible(mcFooter);
     jsActions.scrollToElement(mcFooter);
+    wait.forElementVisible(mcFooterHeader);
 
     PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
   public boolean isMCFooterPresent() {
-    wait.forElementVisible(mcFooter);
+    //  MCF is lazy loaded when user scrolls to it, so to check if MCF is present we can check if its header is visible
+    wait.forElementVisible(mcFooterHeader);
     PageObjectLogging.log("verifyMcfooterPresent", "MCFooter appeared", true);
     return mcFooter.isDisplayed();
   }
@@ -65,8 +70,9 @@ public class MixedContentFooter extends WikiBasePageObject{
     return moreOfWikiArticlesCard.isDisplayed();
   }
 
-  public int countArticleCards (){
-    wait.forElementVisible(mcFooter);
+  public int countArticleCards () {
+    //  MCF is lazy loaded when user scrolls to it, so to check if MCF is present we can check if its header is visible
+    wait.forElementVisible(mcFooterHeader);
     return articleLinks.size();
   }
 
