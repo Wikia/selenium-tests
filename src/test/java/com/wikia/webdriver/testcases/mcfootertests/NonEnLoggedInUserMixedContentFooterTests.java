@@ -142,16 +142,13 @@ public class NonEnLoggedInUserMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
-    MixedContentFooter mcFooter = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter();
-
-    DiscussionsPage discussionsPage = mcFooter
+    new MixedContentFooter().openWikiMainPage()
+        .scrollToMCFooter()
         .getDiscussionsCard()
         .clickDiscussionsPost();
 
-    // TODO: IMO this test will always pass
-    Assertion.assertEquals(discussionsPage.getUrl(), mcFooter.getCurrentUrl());
+    String url = driver.getCurrentUrl();
+    Assertion.assertTrue(url.contains(".wikia.com/d/"));
   }
 
   @Test
@@ -167,16 +164,19 @@ public class NonEnLoggedInUserMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToWikiArticleAfterClickOnWikiArticleCard() {
-    ArticlePageObject article = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter()
+    MixedContentFooter mcf = new MixedContentFooter()
+        .openWikiMainPage();
+
+    String urlMainPage = driver.getCurrentUrl();
+
+    ArticlePageObject article = mcf.scrollToMCFooter()
         .clickWikiArticlecard();
 
     article.waitForPageLoad();
 
-    String url = driver.getCurrentUrl();
-    // TODO: this assertion will pass even if link does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
+    String urlArticlePage = mcf.getCurrentUrl();
+
+    Assertion.assertNotEquals(urlMainPage, urlArticlePage);
   }
 
   @Test
@@ -188,12 +188,7 @@ public class NonEnLoggedInUserMixedContentFooterTests extends NewTestTemplate {
 
     article.waitForPageLoad();
 
-    String url = driver.getCurrentUrl();
-    // TODO: this assertion will pass even if link does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
-
-    ArticlePageObject video = new ArticlePageObject();
-    Assertion.assertTrue(video.isFeaturedVideo());
+    Assertion.assertTrue(article.isFeaturedVideo());
   }
 
 }

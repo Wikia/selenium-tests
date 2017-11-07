@@ -143,15 +143,13 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
-    MixedContentFooter mcFooter = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter();
+    new MixedContentFooter().openWikiMainPage()
+        .scrollToMCFooter()
+        .getDiscussionsCard()
+        .clickDiscussionsPost();
 
-    DiscussionCard discussions = new DiscussionCard();
-    discussions.clickDiscussionsPost();
-
-    // TODO: IMO this test always will pass
-    Assertion.assertEquals(new DiscussionsPage().getUrl(), mcFooter.getCurrentUrl());
+    String url = driver.getCurrentUrl();
+    Assertion.assertTrue(url.contains(".wikia.com/d/"));
   }
 
   @Test
@@ -179,16 +177,18 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToWikiArticleAfterClickOnWikiArticleCard() {
-    new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter()
+    MixedContentFooter mcf = new MixedContentFooter()
+        .openWikiMainPage();
+
+    String urlMainPage = driver.getCurrentUrl();
+
+    mcf.scrollToMCFooter()
         .clickWikiArticlecard()
         .waitForPageLoad();
 
-    String url = driver.getCurrentUrl();
+    String urlArticle = driver.getCurrentUrl();
 
-    // TODO: this test will pass even if the link in the card does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
+    Assertion.assertNotEquals(urlMainPage, urlArticle);
   }
 
   @Test
@@ -208,17 +208,18 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToWikiArticleWithVideoAfterClickOnWikiVideoCard() {
-    ArticlePageObject article = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter()
+    MixedContentFooter mcf = new MixedContentFooter()
+        .openWikiMainPage();
+
+    String urlMainPage = driver.getCurrentUrl();
+
+    ArticlePageObject article = mcf.scrollToMCFooter()
         .clickWikiVideoCard();
 
-    String url = driver.getCurrentUrl();
-    // TODO: This assertion is pointless as it will pass even if the link does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
-
     article.waitForPageLoad();
-    Assertion.assertTrue(article.isFeaturedVideo());
+
+    String urlArticlePage = driver.getCurrentUrl();
+    Assertion.assertNotEquals(urlMainPage, urlArticlePage);
   }
 
 }

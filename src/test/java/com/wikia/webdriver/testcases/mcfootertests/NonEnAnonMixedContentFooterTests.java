@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"NonEnAnonMixedContentFooter"})
 @Execute(onWikia = "de.gta", asUser = User.ANONYMOUS)
-public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
+public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void isMCFooterPresentOnNonENwiki() {
@@ -26,7 +26,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  public void exploreWikisCardIsPresentOnNonENwiki(){
+  public void exploreWikisCardIsPresentOnNonENwiki() {
     MixedContentFooter mcFooter = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter();
@@ -35,7 +35,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  public void discussionsCardIsPresentOnNonENwiki(){
+  public void discussionsCardIsPresentOnNonENwiki() {
     DiscussionCard discussionCard = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter()
@@ -46,7 +46,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
-  public void discussionsCardIsPresentOnNonENwikiWithEmptyDiscussions(){
+  public void discussionsCardIsPresentOnNonENwikiWithEmptyDiscussions() {
     DiscussionCard discussionsCard = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter()
@@ -57,7 +57,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   @Execute(onWikia = "es.nonenwikiwithoutdiscussions")
-  public void discussionsCardIsNotPresentOnNonENwikiWithoutDiscussions(){
+  public void discussionsCardIsNotPresentOnNonENwikiWithoutDiscussions() {
     DiscussionCard discussionCard = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter()
@@ -76,7 +76,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  public void countNoOfArticlesInMCFooterWithDiscussionsAndWithMoreOfWikiArticles(){
+  public void countNoOfArticlesInMCFooterWithDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter();
@@ -86,7 +86,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   @Execute(onWikia = "es.gta")
-  public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles(){
+  public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter();
@@ -96,7 +96,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
-  public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
+  public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter();
@@ -113,7 +113,8 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
     Assertion.assertEquals(mcFooter.countArticlesInExploreCard(), 3);
   }
 
-  @Test void isUserTakenToDiscussionsAfterClickOnViewAll() {
+  @Test
+  void isUserTakenToDiscussionsAfterClickOnViewAll() {
     DiscussionsPage discussions = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter()
@@ -140,16 +141,13 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
-    MixedContentFooter mcFooter = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter();
-
-    DiscussionsPage discussionsPage = mcFooter
+    new MixedContentFooter().openWikiMainPage()
+        .scrollToMCFooter()
         .getDiscussionsCard()
         .clickDiscussionsPost();
 
-    // TODO: IMO this test will always pass
-    Assertion.assertEquals(discussionsPage.getUrl(), mcFooter.getCurrentUrl() );
+    String url = driver.getCurrentUrl();
+    Assertion.assertTrue(url.contains(".wikia.com/d/"));
   }
 
   @Test
@@ -165,16 +163,19 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   public void userIsTakenToWikiArticleAfterClickOnWikiArticleCard() {
-    ArticlePageObject article = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter()
+    MixedContentFooter mcf = new MixedContentFooter()
+        .openWikiMainPage();
+
+    String urlMainPage = driver.getCurrentUrl();
+
+    ArticlePageObject article = mcf.scrollToMCFooter()
         .clickWikiArticlecard();
 
     article.waitForPageLoad();
 
-    String url = driver.getCurrentUrl();
-    // TODO: IMO this test will pass even if link does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
+    String urlArticlePage = mcf.getCurrentUrl();
+
+    Assertion.assertNotEquals(urlMainPage, urlArticlePage);
   }
 
   @Test
@@ -186,12 +187,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
 
     article.waitForPageLoad();
 
-    String url = driver.getCurrentUrl();
-    // TODO: IMO this assertion will pass even if link does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
-
-    ArticlePageObject video = new ArticlePageObject();
-    Assertion.assertTrue(video.isFeaturedVideo());
+    Assertion.assertTrue(article.isFeaturedVideo());
   }
 
 }

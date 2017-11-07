@@ -142,16 +142,13 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
-    MixedContentFooter mcFooter = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter();
-
-    DiscussionsPage discussionsPage = mcFooter
+    new MixedContentFooter().openWikiMainPage()
+        .scrollToMCFooter()
         .getDiscussionsCard()
         .clickDiscussionsPost();
 
-    // TODO: IMO this test will always pass
-    Assertion.assertEquals(discussionsPage.getUrl(), mcFooter.getCurrentUrl());
+    String url = driver.getCurrentUrl();
+    Assertion.assertTrue(url.contains(".wikia.com/d/"));
   }
 
   @Test
@@ -179,16 +176,18 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToWikiArticleAfterClickOnWikiArticleCard() {
-    new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter()
+    MixedContentFooter mcFooter = new MixedContentFooter()
+        .openWikiMainPage();
+
+    String urlMainPage = driver.getCurrentUrl();
+
+    mcFooter.scrollToMCFooter()
         .clickWikiArticlecard()
         .waitForPageLoad();
 
-    String url = driver.getCurrentUrl();
+    String urlWikiArticle = driver.getCurrentUrl();
 
-    // TODO: this test will pass even if the link in the card does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
+    Assertion.assertNotEquals(urlMainPage, urlWikiArticle);
   }
 
   @Test
@@ -214,10 +213,6 @@ public class EnLoggedInUserMixedContentFooterTests extends NewTestTemplate {
         .clickWikiVideoCard();
 
     article.waitForPageLoad();
-
-    String url = driver.getCurrentUrl();
-    // TODO: This assertion is pointless as it will pass even if the link does not work
-    Assertion.assertTrue(url.contains(".wikia.com/wiki/"));
 
     Assertion.assertTrue(article.isFeaturedVideo());
   }
