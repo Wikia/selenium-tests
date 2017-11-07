@@ -1,20 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter;
 
+import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class DiscussionsCardInMcFooter extends WikiBasePageObject{
+public class DiscussionCard extends WikiBasePageObject {
 
   @FindBy(css = ".mcf-card-discussions")
   private WebElement discussionsCard;
 
   @FindBy(css = ".mcf-card-discussions__link")
   private WebElement viewAllLink;
-
-  @FindBy(css = ".site-body-discussion")
-  private WebElement discussionsBody;
 
   @FindBy(css = ".mcf-card-discussions__user-subtitle")
   private WebElement avatarUsername;
@@ -31,40 +30,44 @@ public class DiscussionsCardInMcFooter extends WikiBasePageObject{
 
   public boolean isDiscussionsCardPresent() {
     wait.forElementVisible(discussionsCard);
+
     return discussionsCard.isDisplayed();
   }
 
   public boolean isDiscussionsCardNotPresent() {
     wait.forElementNotVisible(discussionsCard);
+
     return true;
   }
 
-  public void clickOnViewAllLinkInDiscussions() {
-    wait.forElementClickable(viewAllLink).click();
-  }
+  public DiscussionsPage clickOnViewAllLinkInDiscussions() {
+    wait.forElementClickable(viewAllLink)
+        .click();
 
-  public boolean isDiscussions() {
-    return discussionsBody.isDisplayed();
+    return new DiscussionsPage();
   }
 
   public String getUsername() {
     return avatarUsername.getText();
   }
 
-  public DiscussionsCardInMcFooter clickUserAvatar() {
+  public UserProfilePage clickUserAvatar() {
     wait.forElementClickable(avatarImage);
     avatarImage.click();
-    return this;
+
+    return new UserProfilePage();
   }
 
-  public DiscussionsCardInMcFooter clickDiscussionsPost() {
+  public DiscussionsPage clickDiscussionsPost() {
     wait.forElementClickable(discussionsPost);
     discussionsPost.click();
-    return this;
+
+    return new DiscussionsPage();
   }
 
   public boolean isZeroState() {
     wait.forElementVisible(discussionsZeroState);
+
     return discussionsZeroState.isDisplayed();
   }
 
