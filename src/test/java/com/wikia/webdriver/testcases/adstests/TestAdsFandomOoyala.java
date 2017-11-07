@@ -72,7 +72,6 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
         WindowSize.PHONE
     );
-    removeSmartBanner();
     testOoyalaClickToPlayPreroll(adsFandom);
   }
 
@@ -88,15 +87,13 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
              AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
              WindowSize.PHONE
     );
-    removeSmartBanner();
     testOoyalaAutoplayPreroll(adsFandom);
   }
 
-  public void removeSmartBanner() {
-    Wait wait = new Wait(driver);
-
-    wait.forElementVisible(SMART_BANNER_CLOSE_BUTTON_SELECTOR);
-    driver.findElement(SMART_BANNER_CLOSE_BUTTON_SELECTOR).click();
+  private void removeSmartBannerIfPresent() {
+    if (driver.findElements(SMART_BANNER_CLOSE_BUTTON_SELECTOR).size() > 0) {
+      driver.findElement(SMART_BANNER_CLOSE_BUTTON_SELECTOR).click();
+    }
   }
 
   public void testOoyalaClickToPlayPreroll(AdsFandomObject adsFandom) {
@@ -104,6 +101,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     WebElement playButton = driver.findElement(PLAY_BUTTON_SELECTOR);
 
     wait.forElementVisible(playButton);
+    removeSmartBannerIfPresent();
     adsFandom.scrollToPosition(PLAYER_CONTAINER_SELECTOR);
     playButton.click();
 
@@ -117,6 +115,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     Wait wait = new Wait(driver);
 
     wait.forElementVisible(AUTOPLAY_PLAYERER_AD_SELECTOR);
+    removeSmartBannerIfPresent();
     adsFandom.scrollToPosition(AUTOPLAY_PLAYERER_AD_SELECTOR);
     verifyColorAd(
         driver.findElement(AUTOPLAY_PLAYERER_AD_SELECTOR),
