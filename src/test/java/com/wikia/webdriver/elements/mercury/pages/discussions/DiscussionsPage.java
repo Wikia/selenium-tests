@@ -31,6 +31,9 @@ public class DiscussionsPage extends WikiBasePageObject {
   @FindBy(css = ".discussion-filter-header")
   private WebElement discussionsFilter;
 
+  @FindBy(css = ".site-body-discussion")
+  private WebElement discussionsBody;
+
   public DiscussionsPage() {
     super();
     getNavigate().toPageByPath(PageContent.DISCUSSIONS_LINK);
@@ -48,4 +51,7 @@ public class DiscussionsPage extends WikiBasePageObject {
     }
   }
 
+  public boolean isDiscussions() {
+    return discussionsBody.isDisplayed();
+  }
 }
