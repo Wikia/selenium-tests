@@ -63,7 +63,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @InBrowser(browser = Browser.CHROME_MOBILE, browserSize = "414x736")
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();

@@ -17,8 +17,6 @@ import java.util.Map;
 
 public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
-  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
-
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsSlotSizeOasis",
