@@ -616,23 +616,23 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void doUntilElementVisible(By by, Runnable f, final int maxNumberOfRepetitions) {
-    Boolean isElementDisplayed = false;
+    Boolean isElementTriggered = false;
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     int i = 0;
 
     do {
       if (maxNumberOfRepetitions < i) {
-        throw new NoSuchElementException("No visible element:" + by.toString());
+        isElementTriggered = true;
       }
 
       try {
-        isElementDisplayed = driver.findElement(by).isDisplayed();
+        isElementTriggered = driver.findElement(by).isDisplayed();
       } catch (NoSuchElementException ignored) {
         f.run();
       }
 
       i++;
-    } while(!isElementDisplayed);
+    } while(!isElementTriggered);
 
     restoreDefaultImplicitWait();
   }
