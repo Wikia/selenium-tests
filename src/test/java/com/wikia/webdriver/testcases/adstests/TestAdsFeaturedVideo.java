@@ -20,9 +20,9 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   private static final String MOAT_VIDEO_TRACKING_URL = "https://z.moatads.com/wikiajwint101173217941/moatvideo.js";
 
   @Test(
-      groups = {"AdsFeaturedVideoOasis", "d1"}
+      groups = {"AdsFeaturedVideoOasis"}
   )
-  public void adsFeaturedVideoAdsOasis() {
+  public void adsFeaturedVideoAdsDesktop() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
@@ -35,7 +35,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoOasis"}
   )
-  public void adsFeaturedVideoNoAdsOasis() {
+  public void adsFeaturedVideoNoAdsDesktop() {
     String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
 
     new AdsBaseObject(driver, testedPage);
@@ -47,7 +47,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoOasis"}
   )
-  public void adsFeaturedVideoPrerollWithMOATTrackingOasis() {
+  public void adsFeaturedVideoMoatTrackingDesktop() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
@@ -64,8 +64,8 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoAdsMercury() {
-    adsFeaturedVideoAdsOasis();
+  public void adsFeaturedVideoAdsMobile() {
+    adsFeaturedVideoAdsDesktop();
   }
 
   @InBrowser(
@@ -75,8 +75,8 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoNoAdsMercury() {
-    adsFeaturedVideoNoAdsOasis();
+  public void adsFeaturedVideoNoAdsMobile() {
+    adsFeaturedVideoNoAdsDesktop();
   }
 
   @InBrowser(
@@ -87,19 +87,14 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoPrerollWithMOATTrackingMercury() {
-    adsFeaturedVideoPrerollWithMOATTrackingOasis();
+  public void adsFeaturedVideoMoatTrackingMobile() {
+    adsFeaturedVideoMoatTrackingDesktop();
   }
 
   private void verifyAdPositions() {
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
-    jwPlayerObject.verifyPlayerOnPage();
-    jwPlayerObject.verifyPreroll();
-    jwPlayerObject.verifyFeaturedVideo();
-    jwPlayerObject.verifyMidroll();
-    jwPlayerObject.verifyFeaturedVideo();
-    jwPlayerObject.verifyPostroll();
+    jwPlayerObject.verifyAllAdPositions();
   }
 
   private void verifyNoAds() {

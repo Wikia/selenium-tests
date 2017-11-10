@@ -48,6 +48,15 @@ public class AdsJWPlayerObject {
     wait.forElementVisible(AD_SELECTOR, 30);
   }
 
+  public void verifyAllAdPositions() {
+    verifyPlayerOnPage();
+    verifyPreroll();
+    verifyFeaturedVideo();
+    verifyMidroll();
+    verifyFeaturedVideo();
+    verifyPostroll();
+  }
+
   public void verifyPreroll() {
     waitForAdPlaying();
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_PREROLL);
