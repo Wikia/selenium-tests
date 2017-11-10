@@ -17,7 +17,7 @@ public class TestAdsFeaturedVideoSoundOasis extends TemplateNoFirstLoad {
   )
   public void adsJWPlayerOasisWithSound() {
     AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
-    wikiPage.waitForAdStartsPlaying();
+    wikiPage.waitForAdPlaying();
     wikiPage.scrollToPlayer();
     wikiPage.clickVolumeButton();
     wikiPage.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));
@@ -29,7 +29,7 @@ public class TestAdsFeaturedVideoSoundOasis extends TemplateNoFirstLoad {
   )
   public void adsJWPlayerOasisWithoutSound() {
     AdsJWPlayerObject wikiPage = new AdsJWPlayerObject(driver, AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
-    wikiPage.waitForAdStartsPlaying();
+    wikiPage.waitForAdPlaying();
     wikiPage.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));
     wikiPage.waitForAdFinish(AD_LENGTH);
     Assertion.assertFalse(wikiPage.wasSoundHeard());

@@ -34,12 +34,8 @@ public class AdsJWPlayerObject extends AdsBaseObject {
     wait.forElementPresent(PLAYER_SELECTOR);
   }
 
-  private void waitForAdPlaying() {
+  public void waitForAdPlaying() {
     wait.forElementVisible(AD_SELECTOR, 30);
-  }
-
-  private void waitForMoviePlaying() {
-    wait.forElementVisible(MOVIE_SELECTOR, 30);
   }
 
   public void verifyPreroll() {
@@ -92,8 +88,9 @@ public class AdsJWPlayerObject extends AdsBaseObject {
     }
   }
 
-  public void waitForAdStartsPlaying() {
-    wait.forElementVisible(AD_SELECTOR);
+  public void waitForAdFinish(Duration videoDuration) {
+    wait.forElementNotVisible(AD_SELECTOR, videoDuration);
+    wait.forElementVisible(MOVIE_SELECTOR);
   }
 
   public void scrollToPlayer() {
@@ -104,8 +101,7 @@ public class AdsJWPlayerObject extends AdsBaseObject {
     builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(500).perform();
   }
 
-  public void waitForAdFinish(Duration videoDuration) {
-    wait.forElementNotVisible(AD_SELECTOR, videoDuration);
-    wait.forElementVisible(MOVIE_SELECTOR);
+  private void waitForMoviePlaying() {
+    wait.forElementVisible(MOVIE_SELECTOR, 30);
   }
 }
