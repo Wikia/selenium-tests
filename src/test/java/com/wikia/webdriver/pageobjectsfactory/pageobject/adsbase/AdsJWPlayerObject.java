@@ -24,14 +24,14 @@ public class AdsJWPlayerObject {
   private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
   private static final Color COLOR_VIDEO = new Color(0, 255, 13);
 
-  private static final String FEATURED_VIDEO_AD_SELECTOR = ".jwplayer .jw-plugin-googima";
-  private static final String FEATURED_VIDEO_MOVIE_SELECTOR = ".jwplayer .jw-media video[src]";
-  private static final String FEATURED_VIDEO_PLAYER_SELECTOR = ".jwplayer";
+  public static final String VIDEO_AD_SELECTOR = ".jwplayer .jw-plugin-googima";
+  public static final String VIDEO_MOVIE_SELECTOR = ".jwplayer .jw-media video[src]";
+  public static final String VIDEO_PLAYER_SELECTOR = ".jwplayer";
 
-  private static final By AD_SELECTOR = By.cssSelector(FEATURED_VIDEO_AD_SELECTOR);
-  private static final By MOVIE_SELECTOR = By.cssSelector(FEATURED_VIDEO_MOVIE_SELECTOR);
-  public static final By PLAYER_SELECTOR = By.cssSelector(FEATURED_VIDEO_PLAYER_SELECTOR);
-  private static final By VOLUME_BUTTON_SELECTOR = By.cssSelector(".jwplayer div.jw-icon.jw-icon-volume");
+  public static final By AD_SELECTOR = By.cssSelector(VIDEO_AD_SELECTOR);
+  public static final By MOVIE_SELECTOR = By.cssSelector(VIDEO_MOVIE_SELECTOR);
+  public static final By PLAYER_SELECTOR = By.cssSelector(VIDEO_PLAYER_SELECTOR);
+  public static final By VOLUME_BUTTON_SELECTOR = By.cssSelector(".jwplayer div.jw-icon.jw-icon-volume");
 
   public AdsJWPlayerObject(WikiaWebDriver driver) {
     this.builder = new Actions(driver);
@@ -110,6 +110,11 @@ public class AdsJWPlayerObject {
   public void waitForAdFinish(Duration videoDuration) {
     wait.forElementNotVisible(AD_SELECTOR, videoDuration);
     wait.forElementVisible(MOVIE_SELECTOR);
+  }
+
+  public void clickOnPlayer() {
+    WebElement playButton = driver.findElement(PLAYER_SELECTOR);
+    playButton.click();
   }
 
   private void hoverPlayerToActivateUI() {

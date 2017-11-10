@@ -10,27 +10,31 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
 import org.testng.annotations.Test;
 
-public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
+public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
   @Test(
-      groups = {"AdsFeaturedVideoF2"}
+      groups = {"AdsArticleVideoF2"}
   )
-  public void adsFeaturedVideoAdsDesktop() {
-    String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
+  public void adsArticleVideoAdsDesktop() {
+    String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.ARTICLE_VIDEO_PAGE_SLUG,
         FandomAdsDataProvider.INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
         FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL);
 
-    loadPage(testedPage);
+    AdsFandomObject pageObject = loadPage(testedPage);
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
-    jwPlayerObject.verifyAllAdPositions();
+    jwPlayerObject.verifyPlayerOnPage();
+    pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
+    jwPlayerObject.clickOnPlayer();
+    jwPlayerObject.verifyPreroll();
+    jwPlayerObject.verifyFeaturedVideo();
   }
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoF2"}
+      groups = {"AdsArticledVideoF2"}
   )
-  public void adsFeaturedVideoMOATTrackingDesktop() {
+  public void adsArticleVideoMOATTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
         FandomAdsDataProvider.INSTANT_GLOBAL_MOAT_TRACKING);
@@ -40,6 +44,8 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
+    pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
+    jwPlayerObject.clickOnPlayer();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL);
   }
 
@@ -50,8 +56,8 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   @Test(
       groups = {"AdsFeaturedVideoF2"}
   )
-  public void adsFeaturedVideoAdsMobile() {
-    adsFeaturedVideoAdsDesktop();
+  public void adsArticleVideoAdsMobile() {
+    adsArticleVideoAdsDesktop();
   }
 
   @InBrowser(
@@ -62,7 +68,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   @Test(
       groups = {"AdsFeaturedVideoF2"}
   )
-  public void adsFeaturedVideoMOATTrackingMobile() {
-    adsFeaturedVideoMOATTrackingDesktop();
+  public void adsArticleVideoMOATTrackingMobile() {
+    adsArticleVideoMOATTrackingDesktop();
   }
 }
