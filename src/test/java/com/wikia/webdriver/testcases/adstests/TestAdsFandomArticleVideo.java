@@ -27,7 +27,6 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
     jwPlayerObject.clickOnPlayer();
     jwPlayerObject.verifyPreroll();
-    jwPlayerObject.verifyFeaturedVideo();
   }
 
   @NetworkTrafficDump(useMITM = true)
