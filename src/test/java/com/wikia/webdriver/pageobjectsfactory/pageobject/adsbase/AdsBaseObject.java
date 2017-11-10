@@ -615,7 +615,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         wait.forX(Duration.ofSeconds(1));
       });
     } catch (NoSuchElementException ex) {
-      PageObjectLogging.log("INCONTENT_BOXAD_1 is not displayed", ex, true);
+      PageObjectLogging.log(AdsContent.FLOATING_MEDREC + " is not displayed", ex, true);
     }
   }
 
