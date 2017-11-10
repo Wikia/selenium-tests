@@ -609,30 +609,34 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void triggerFMR() {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
 
-    doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)), () -> {
-      jsActions.scrollBy(0, 100);
-      wait.forX(Duration.ofSeconds(1));
-    });
+    try {
+      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)), () -> {
+        jsActions.scrollBy(0, 100);
+        wait.forX(Duration.ofSeconds(1));
+      });
+    }catch (NoSuchElementException ex) {
+      PageObjectLogging.log("INCONTENT_BOXAD_1 is not displayed", ex, true);
+    }
   }
 
   private void doUntilElementVisible(By by, Runnable f, final int maxNumberOfRepetitions) {
-    Boolean isElementTriggered = false;
+    Boolean isElementDisplayed = false;
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     int i = 0;
 
     do {
       if (maxNumberOfRepetitions < i) {
-        isElementTriggered = true;
+        throw new NoSuchElementException("No visible element:" + by.toString());
       }
 
       try {
-        isElementTriggered = driver.findElement(by).isDisplayed();
+        isElementDisplayed = driver.findElement(by).isDisplayed();
       } catch (NoSuchElementException ignored) {
         f.run();
       }
 
       i++;
-    } while(!isElementTriggered);
+    } while(!isElementDisplayed);
 
     restoreDefaultImplicitWait();
   }
