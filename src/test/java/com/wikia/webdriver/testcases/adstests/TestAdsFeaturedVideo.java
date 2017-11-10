@@ -57,7 +57,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoAdsMobile() {
+  public void adsFeaturedVideoAdsMercury() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
@@ -72,7 +72,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoNoAdsMobile() {
+  public void adsFeaturedVideoNoAdsMercury() {
     String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
 
     verifyNoAds(testedPage);
@@ -86,7 +86,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoPrerollWithMOATTrackingMobile() {
+  public void adsFeaturedVideoPrerollWithMOATTrackingMercury() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
