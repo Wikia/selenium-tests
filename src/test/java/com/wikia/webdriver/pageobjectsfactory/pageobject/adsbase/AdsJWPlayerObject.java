@@ -17,14 +17,14 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
   private static final Color COLOR_VIDEO = new Color(0, 255, 13);
 
-  private static final String FEATURED_VIDEO_AD_SELECTOR = "#featured-video__player_ad";
-  private static final String FEATURED_VIDEO_MOVIE_SELECTOR = "#featured-video__player .jw-media video[src]";
-  private static final String FEATURED_VIDEO_PLAYER_SELECTOR = "#featured-video__player";
+  private static final String FEATURED_VIDEO_AD_SELECTOR = ".jwplayer .jw-plugin-googima";
+  private static final String FEATURED_VIDEO_MOVIE_SELECTOR = ".jwplayer .jw-media video[src]";
+  private static final String FEATURED_VIDEO_PLAYER_SELECTOR = ".jwplayer";
 
   private static final By AD_SELECTOR = By.cssSelector(FEATURED_VIDEO_AD_SELECTOR);
   private static final By MOVIE_SELECTOR = By.cssSelector(FEATURED_VIDEO_MOVIE_SELECTOR);
   private static final By PLAYER_SELECTOR = By.cssSelector(FEATURED_VIDEO_PLAYER_SELECTOR);
-  private static final By VOLUME_BUTTON_SELECTOR = By.cssSelector("#featured-video__player div.jw-icon.jw-icon-volume");
+  private static final By VOLUME_BUTTON_SELECTOR = By.cssSelector(".jwplayer div.jw-icon.jw-icon-volume");
 
   public AdsJWPlayerObject(WebDriver driver, String page) {
     super(driver, page);
