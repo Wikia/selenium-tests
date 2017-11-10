@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
 import org.testng.annotations.Test;
 
@@ -50,17 +51,19 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
   }
 
   private void verifyFeaturedVideoWithSound(String pageUrl) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+    AdsBaseObject pageObject = new AdsBaseObject(driver, pageUrl);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.waitForAdPlaying();
-    jwPlayerObject.scrollToPlayer();
+    pageObject.scrollTo(driver.findElement(AdsJWPlayerObject.PLAYER_SELECTOR));
     jwPlayerObject.clickVolumeButton();
     jwPlayerObject.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));
     Assertion.assertTrue(jwPlayerObject.wasSoundHeard());
   }
 
   private void verifyFeaturedVideoWithoutSound(String pageUrl) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+    new AdsBaseObject(driver, pageUrl);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.waitForAdPlaying();
     jwPlayerObject.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));

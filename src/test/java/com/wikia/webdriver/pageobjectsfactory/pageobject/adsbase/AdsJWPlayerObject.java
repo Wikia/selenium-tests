@@ -1,16 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.awt.*;
 import java.time.Duration;
 
-public class AdsJWPlayerObject extends AdsBaseObject {
+public class AdsJWPlayerObject {
+  protected final Actions builder;
+  protected final WikiaWebDriver driver;
+  protected final JavascriptActions jsActions;
+  protected final Wait wait;
 
   private static final Color COLOR_PREROLL = new Color(0, 1, 253);
   private static final Color COLOR_MIDROLL = new Color(137, 137, 137);
@@ -23,11 +30,14 @@ public class AdsJWPlayerObject extends AdsBaseObject {
 
   private static final By AD_SELECTOR = By.cssSelector(FEATURED_VIDEO_AD_SELECTOR);
   private static final By MOVIE_SELECTOR = By.cssSelector(FEATURED_VIDEO_MOVIE_SELECTOR);
-  private static final By PLAYER_SELECTOR = By.cssSelector(FEATURED_VIDEO_PLAYER_SELECTOR);
+  public static final By PLAYER_SELECTOR = By.cssSelector(FEATURED_VIDEO_PLAYER_SELECTOR);
   private static final By VOLUME_BUTTON_SELECTOR = By.cssSelector(".jwplayer div.jw-icon.jw-icon-volume");
 
-  public AdsJWPlayerObject(WebDriver driver, String page) {
-    super(driver, page);
+  public AdsJWPlayerObject(WikiaWebDriver driver) {
+    this.builder = new Actions(driver);
+    this.driver = driver;
+    this.jsActions = new JavascriptActions(driver);
+    this.wait = new Wait(driver);
   }
 
   public void verifyPlayerOnPage() {
@@ -91,10 +101,6 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   public void waitForAdFinish(Duration videoDuration) {
     wait.forElementNotVisible(AD_SELECTOR, videoDuration);
     wait.forElementVisible(MOVIE_SELECTOR);
-  }
-
-  public void scrollToPlayer() {
-    scrollTo(driver.findElement(PLAYER_SELECTOR));
   }
 
   private void hoverPlayerToActivateUI() {

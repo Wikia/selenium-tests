@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
 import org.testng.annotations.Test;
 
@@ -19,14 +20,16 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   private static final String MOAT_VIDEO_TRACKING_URL = "https://z.moatads.com/wikiajwint101173217941/moatvideo.js";
 
   @Test(
-      groups = {"AdsFeaturedVideoOasis"}
+      groups = {"AdsFeaturedVideoOasis", "d1"}
   )
   public void adsFeaturedVideoAdsOasis() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
 
-    verifyAdPositions(testedPage);
+    new AdsBaseObject(driver, testedPage);
+
+    verifyAdPositions();
   }
 
   @Test(
@@ -35,7 +38,9 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   public void adsFeaturedVideoNoAdsOasis() {
     String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
 
-    verifyNoAds(testedPage);
+    new AdsBaseObject(driver, testedPage);
+
+    verifyNoAds();
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -47,7 +52,9 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
 
-    verifyVideoMoatTracking(testedPage);
+    AdsBaseObject pageObject = new AdsBaseObject(driver, testedPage);
+
+    verifyVideoMoatTracking(pageObject);
   }
 
   @InBrowser(
@@ -58,11 +65,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       groups = {"AdsFeaturedVideoMercury"}
   )
   public void adsFeaturedVideoAdsMercury() {
-    String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
-
-    verifyAdPositions(testedPage);
+    adsFeaturedVideoAdsOasis();
   }
 
   @InBrowser(
@@ -73,9 +76,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       groups = {"AdsFeaturedVideoMercury"}
   )
   public void adsFeaturedVideoNoAdsMercury() {
-    String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
-
-    verifyNoAds(testedPage);
+    adsFeaturedVideoNoAdsOasis();
   }
 
   @InBrowser(
@@ -87,15 +88,11 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       groups = {"AdsFeaturedVideoMercury"}
   )
   public void adsFeaturedVideoPrerollWithMOATTrackingMercury() {
-    String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
-
-    verifyVideoMoatTracking(testedPage);
+    adsFeaturedVideoPrerollWithMOATTrackingOasis();
   }
 
-  private void verifyAdPositions(String pageUrl) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+  private void verifyAdPositions() {
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
     jwPlayerObject.verifyPreroll();
@@ -105,19 +102,19 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     jwPlayerObject.verifyPostroll();
   }
 
-  private void verifyNoAds(String pageUrl) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+  private void verifyNoAds() {
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
     jwPlayerObject.verifyFeaturedVideo();
   }
 
-  private void verifyVideoMoatTracking(String pageUrl) {
+  private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
     networkTrafficInterceptor.startIntercepting();
 
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
-    jwPlayerObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
+    pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
   }
 }
