@@ -21,6 +21,9 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
   public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
+  private static final String NETZATHLETEN_PIXEL_URL_PATERN = ".*naMediaAd.js.*";
+  private static final String NETZATHLETEN_INSTANT_GLOBALS = "InstantGlobals.wgAdDriverNetzAthletenCountries=[XX]";
+  private static final Page NETZATHLETEN_TEST_PAGE = new Page("project43", "/Provider/NetzAthleten");
 
   @NetworkTrafficDump
   @Test(
@@ -46,6 +49,18 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
       assertTrackingPixelsSent(adsBaseObject, urls);
     }
+  }
+
+  @NetworkTrafficDump
+  @Test(
+      groups = "AdsTrackingPixels"
+  )
+  @Execute(mockAds = "true")
+  public void adsTackingPixelNetzathleten() {
+    networkTrafficInterceptor.startIntercepting();
+    String url = urlBuilder.getUrlForPage(NETZATHLETEN_TEST_PAGE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.appendQueryStringToURL(url, NETZATHLETEN_INSTANT_GLOBALS));
+    ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, NETZATHLETEN_PIXEL_URL_PATERN);
   }
 
   @UseUnstablePageLoadStrategy
