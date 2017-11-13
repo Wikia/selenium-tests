@@ -609,10 +609,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void triggerFMR() {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
 
-    doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)), () -> {
-      jsActions.scrollBy(0, 100);
-      wait.forX(Duration.ofSeconds(1));
-    });
+    try {
+      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)), () -> {
+        jsActions.scrollBy(0, 100);
+        wait.forX(Duration.ofSeconds(1));
+      });
+    } catch (NoSuchElementException ex) {
+      PageObjectLogging.log(AdsContent.FLOATING_MEDREC + " is not displayed", ex, true);
+    }
   }
 
   private void doUntilElementVisible(By by, Runnable f, final int maxNumberOfRepetitions) {

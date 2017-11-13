@@ -178,16 +178,4 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
     Assertion.assertNotEquals(urlMainPage, urlArticlePage);
   }
 
-  @Test
-  public void userIsTakenToWikiArticleWithVideoAfterClickOnWikiVideoCard() {
-    ArticlePageObject article = new MixedContentFooter()
-        .openWikiMainPage()
-        .scrollToMCFooter()
-        .clickWikiVideoCard();
-
-    article.waitForPageLoad();
-
-    Assertion.assertTrue(article.isFeaturedVideo());
-  }
-
 }
