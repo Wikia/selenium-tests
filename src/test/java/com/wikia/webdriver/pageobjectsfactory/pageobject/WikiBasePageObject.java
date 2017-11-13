@@ -154,9 +154,15 @@ public class WikiBasePageObject extends BasePageObject {
   /**
    * Checks if container containing all banner notification is present, it may be present, but may have 0px height
    * when no notification is displayed
+   *
+   * TODO: Move this logic to better place (WebElement?)
    */
   public boolean isBannerNotificationContainerPresent(){
-    return driver.findElements(BANNER_NOTIFICATION_CONTAINER).size() != 0;
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    boolean result = driver.findElements(BANNER_NOTIFICATION_CONTAINER).size() != 0;
+    restoreDefaultImplicitWait();
+
+    return result;
   }
 
   public int getBannerNotificationsHeight(){
