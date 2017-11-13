@@ -23,7 +23,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     loadPage(testedPage);
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
-    jwPlayerObject.verifyAllAdPositions();
+    jwPlayerObject.verifyPreroll();
   }
 
   @NetworkTrafficDump(useMITM = true)
