@@ -98,7 +98,7 @@ public class AdsComparison {
 
     PageObjectLogging.logWarning("Comparing two colors", "Actual: " + mostFrequentColor + "; expected: " + color);
 
-    return imageComparison.areColorsSimilar(mostFrequentColor, color);
+    return imageComparison.areColorsSimilar(mostFrequentColor, color, 30);
   }
 
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
