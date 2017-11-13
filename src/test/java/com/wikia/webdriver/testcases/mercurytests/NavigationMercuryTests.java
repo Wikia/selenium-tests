@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
+import com.wikia.webdriver.testcases.mobilewikitests.NavigationTests;
 
 import org.testng.annotations.Test;
 
@@ -57,7 +58,7 @@ public class NavigationMercuryTests extends NavigationTests {
   }
 
   @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
-  @Execute(asUser = User.USER_3)
+  @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-1042")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(

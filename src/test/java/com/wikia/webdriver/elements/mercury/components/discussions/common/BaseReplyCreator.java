@@ -1,29 +1,36 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.net.URL;
 
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
 
-  protected abstract WebElement getReplyCreator();
+  @Getter
+  private By errorNotification = By.className("error");
 
+  protected abstract WebElement getReplyCreatorTextArea();
+  protected abstract WebElement getEditor();
   protected abstract WebElement getDialogSignIn();
-
   protected abstract WebElement getOkButtonInSignInDialog();
-
   protected abstract WebElement getSignInButtonInSignInDialog();
-
   protected abstract WebElement getGuidelinesReadButton();
-
   protected abstract WebElement getTextarea();
-
   protected abstract WebElement getSubmitButton();
-
   protected abstract WebElement getLoadingSuccess();
+  protected abstract WebElement getImagePreview();
+  protected abstract WebElement getUploadButton();
+  protected abstract WebElement getImageDeleteButton();
+  protected abstract By getOpenGraphContainer();
+  protected abstract By getOpenGraphText();
 
   @Override
   public ReplyCreator click() {
-    wait.forElementVisible(getReplyCreator()).click();
+    wait.forElementVisible(getReplyCreatorTextArea()).click();
     return this;
   }
 
@@ -79,4 +86,47 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
   }
+
+  public BaseReplyCreator uploadImage() {
+    getUploadButton().sendKeys(ContentLoader.getImage());
+    wait.forElementVisible(getImagePreview());
+    return this;
+  }
+
+  public String uploadUnsupportedImage() {
+    getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
+    wait.forElementVisible(getErrorNotification()).getText();
+    return wait.forElementVisible(getErrorNotification()).getText();
+  }
+
+  public BaseReplyCreator removeImage() {
+    waitAndClick(getImageDeleteButton());
+    wait.forElementNotVisible(getImagePreview());
+    return this;
+  }
+
+  public boolean hasOpenGraph() {
+    boolean result = false;
+    final WebElement openGraphContainer = getEditor()
+      .findElement(getOpenGraphContainer());
+    if (null != openGraphContainer) {
+      result = null != openGraphContainer.findElement(getOpenGraphText());
+    }
+    return result;
+  }
+
+  public BaseReplyCreator startReplyCreation() {
+    return startReplyCreationWith(TextGenerator.defaultText());
+  }
+
+  @Override
+  public BaseReplyCreator startReplyCreationWith(String description) {
+    click().clickGuidelinesReadButton().add(description);
+    return this;
+  }
+
+  public BaseReplyCreator startReplyCreationWithLink(URL link) {
+    return startReplyCreationWith(String.format(" %s ", link.toString()));
+  }
+
 }

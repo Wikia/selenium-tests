@@ -39,6 +39,6 @@ public class ErrorPage extends WikiBasePageObject {
     wait.forElementVisible(navMenu);
     PageObjectLogging.logInfo("Navigation is opened");
 
-    return new Navigation(driver);
+    return new Navigation();
   }
 }

@@ -2,10 +2,10 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -49,12 +49,15 @@ public class TopBar extends BasePageObject {
   public Navigation openNavigation() {
     PageObjectLogging.logInfo("Open navigation");
     wait.forElementClickable(hamburgerIcon);
-    hamburgerIcon.click();
+    int offsetToBottom = (int) Math.floor(hamburgerIcon.getSize().height / 2);
+
+    Actions action = new Actions(driver);
+    action.moveToElement(hamburgerIcon).moveByOffset(0, offsetToBottom).click().perform();
 
     PageObjectLogging.logInfo("Navigation is opened");
     wait.forElementVisible(navMenu);
 
-    return new Navigation(driver);
+    return new Navigation();
   }
 
   public String typeInDesktopSearchAndSelectSuggestion(String query, int suggestionIndex) {
@@ -89,7 +92,7 @@ public class TopBar extends BasePageObject {
     wait.forElementClickable(closeButton);
     closeButton.click();
 
-    return new Navigation(driver);
+    return new Navigation();
   }
 
   public void clickWikiaLogo() {

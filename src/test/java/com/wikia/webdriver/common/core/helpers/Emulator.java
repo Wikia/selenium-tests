@@ -1,10 +1,9 @@
 package com.wikia.webdriver.common.core.helpers;
 
-import java.util.Map;
-
+import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 public enum Emulator {
   GOOGLE_NEXUS_5(

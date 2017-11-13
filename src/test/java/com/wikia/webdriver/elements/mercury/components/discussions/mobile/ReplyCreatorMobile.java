@@ -10,7 +10,11 @@ import org.openqa.selenium.support.FindBy;
 public class ReplyCreatorMobile extends BaseReplyCreator {
 
   @FindBy(css = ".discussion-editor-entry-point-container .discussion-editor-entry-point-content")
-  private WebElement replyCreator;
+  private WebElement replyCreatorTextArea;
+
+  @FindBy(css = ".discussion-standalone-content-wrapper")
+  @Getter
+  private WebElement editor;
 
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement dialogSignIn;
@@ -33,6 +37,24 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @FindBy(css = ".wds-spinner__stroke")
   @Getter
   private WebElement loadingSuccess;
+
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
+  private WebElement imagePreview;
+
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
 
   @Override
   public boolean isPresent() {

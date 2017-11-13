@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -42,8 +41,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -123,6 +120,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement veToolMenu;
   @FindBy(css = "h3[id='headerWikis']")
   protected WebElement headerWhereIsMyExtensionPage;
+  @FindBy(css = "#globalNavigation,.site-head.no-shadow,.wds-global-navigation")
+  protected WebElement navigationBar;
   @FindBy(css = "#globalNavigation")
   protected WebElement newGlobalNavigation;
   @FindBy(css = "#facebook-connect-button")
@@ -164,6 +163,10 @@ public class WikiBasePageObject extends BasePageObject {
     return bannerNotificationContainer.getSize().getHeight();
   }
 
+  public int getNavigationBarOffsetFromTop() {
+    return Integer.parseInt(navigationBar.getAttribute("offsetTop")) + navigationBar.getSize().height;
+  }
+
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + articlePage,
@@ -182,12 +185,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
     return new PreferencesPageObject();
-  }
-
-  public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
-    return new SpecialPromotePageObject(driver);
   }
 
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
@@ -270,7 +267,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
-    return new CreateNewWikiPageObjectStep1(driver);
+    return new CreateNewWikiPageObjectStep1();
   }
 
   public void openSpecialWatchListPage(String wikiURL) {
@@ -389,13 +386,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
                                              URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject();
-  }
-
-  public WikiBasePageObject waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
-    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
-      "Loading overlay still visible, page not loaded in expected time");
-    return this;
   }
 
   public void verifyUserLoggedIn(final String userName) {

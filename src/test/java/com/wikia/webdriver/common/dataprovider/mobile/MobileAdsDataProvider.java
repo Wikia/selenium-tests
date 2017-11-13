@@ -10,6 +10,8 @@ import org.testng.annotations.DataProvider;
 import java.util.Arrays;
 
 public class MobileAdsDataProvider {
+  private static final String WIKI_SPECIAL = "project43";
+  private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private MobileAdsDataProvider() {
   }
@@ -96,22 +98,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"test\""
             )
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] dfpRubiconParamsSynthetic() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/RubiconFastlane",
-            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_project43//article",
-            "MOBILE_TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":\\[\"43_tier(NONE|PREBID|\\d{4})\",\"44_tier(NONE|PREBID|\\d{4})\",\"67_tier(NONE|PREBID|\\d{4})\"\\].*"
         }
     };
   }
@@ -257,11 +245,11 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"35-44\",\"kids\",\"teen\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"34-44\",\"kids\",\"teen\"]",
                 "\"media\":[\"movies\"]",
                 "\"sex\":[\"m\"]",
-                "\"pform\":[\"xboxone\",\"ps4\",\"ps3\",\"xbox360\",\"pc\"]",
-                "\"gnre\":[\"adventure\",\"3rdpersonshooter\",\"comedy\",\"casual\",\"platformer\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"switch\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"adventure\",\"casual\",\"comedy\",\"platformer\"]",
                 "\"theme\":[\"lego\"]",
                 "\"esrb\":\"everyone\""
             ),
@@ -420,16 +408,8 @@ public class MobileAdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             AdsContent.MOBILE_TOP_LB,
-            "DirectGptMobile; RemnantGptMobile"
-        },
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            AdsContent.MOBILE_TOP_LB,
-            "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
+            "DirectGptMobile"
         }
     };
   }
@@ -440,16 +420,16 @@ public class MobileAdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.MOBILE_TOP_LB,
             ""
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.MOBILE_TOP_LB,
-            "RubiconFastlane"
+            "Evolve2"
         },
     };
   }
@@ -547,6 +527,34 @@ public class MobileAdsDataProvider {
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")
                 .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVuapClickToPlayMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVuapMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
         }
     };
   }

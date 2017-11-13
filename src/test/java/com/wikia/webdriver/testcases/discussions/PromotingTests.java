@@ -21,34 +21,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
 public class PromotingTests extends NewTestTemplate {
 
   private static final String MOBILE_PROMOTION_TEXT = "Wikia: Fallout 4 Fan App";
-  private static final String DESKTOP_PROMOTION_TEXT =
-    "Take your fandom with you, download the app today!";
-  private static final String IOS_APP_TITLE = "Fandom Community for: Fallout";
-  private static final String ANDROID_APP_TITLE = "FANDOM: Fallout 4";
-
-  /**
-   * ANON ON DESKTOP SECTION
-   */
-
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void anonUserOnDesktopCanSeeAppPromotion() {
-    Promoting promoting = findPromoting();
-    assertTrue(promoting.isAppleLinkDisplayed());
-    assertTrue(promoting.isGooglePlayLinkDisplayed());
-    assertEquals(promoting.getPromotionAppText(), DESKTOP_PROMOTION_TEXT);
-  }
-
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void anonUserOnDesktopCanClickAppleLink() {
-    findPromoting().clickAppleLinkInAppPromotion();
-    assertAppPageOpened(IOS_APP_TITLE);
-  }
-  
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void anonUserOnDesktopCanClickGooglePlayLink() {
-    findPromoting().clickGooglePlayLinkInAppPromotion();
-    assertAppPageOpened(ANDROID_APP_TITLE);
-  }
+  private static final String ANDROID_APP_TITLE = "FANDOM for: Fallout 4";
 
   /**
    * ANON ON MOBILE SECTION

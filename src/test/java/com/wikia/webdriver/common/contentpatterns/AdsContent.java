@@ -1,14 +1,19 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AdsContent {
-
   //HashMap with slots selector
   private static final Map<String, String> SLOTS_SELECTORS;
+  private static final Map<String, String> PAL_SLOTS_SELECTORS;
+  private static final Map<String, String> SPECIAL_PAGE_SLOTS_SELECTORS;
+  private static final Map<String, String> FILE_PAGE_SLOTS_SELECTORS;
+  private static final Map<String, String> MOBILE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
+
+  public static final String ENV_DESKTOP = "desktop";
+  public static final String ENV_MOBILE = "mobile";
 
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
@@ -46,8 +51,24 @@ public class AdsContent {
 
   }
 
-  public static Collection<String> getAllSlotsSelectors() {
-    return SLOTS_SELECTORS.values();
+  public static Map<String, String> getSlotsSelectorsMap(String env) {
+    if(env.equals(ENV_MOBILE)) {
+      return MOBILE_SLOTS_SELECTORS;
+    }
+
+    return PAL_SLOTS_SELECTORS;
+  }
+
+  public static Map<String, String> getSpecialPageSlotsSelectorsMap() {
+    return SPECIAL_PAGE_SLOTS_SELECTORS;
+  }
+
+  public static Map<String, String> getFilePageSlotsSelectors() {
+    return FILE_PAGE_SLOTS_SELECTORS;
+  }
+
+  public static Map<String, String> getCategoryPageSlotsSelectors() {
+    return FILE_PAGE_SLOTS_SELECTORS;
   }
 
   public static String getSlotSelector(String slotName) {
@@ -82,10 +103,34 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
 
+    SPECIAL_PAGE_SLOTS_SELECTORS = new HashMap<>();
+    SPECIAL_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+
+    FILE_PAGE_SLOTS_SELECTORS = new HashMap<>();
+    FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+    FILE_PAGE_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
+
+    PAL_SLOTS_SELECTORS = new HashMap<>();
+    PAL_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
+    PAL_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+    PAL_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    PAL_SLOTS_SELECTORS.put(FLOATING_MEDREC, "#INCONTENT_BOXAD_1");
+    PAL_SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
+    PAL_SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
+    PAL_SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
+    PAL_SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
+
+    MOBILE_SLOTS_SELECTORS = new HashMap<>();
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#MOBILE_IN_CONTENT");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
+
     SLOTS_TRIGGERS = new HashMap<>();
-    SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })();");
+    SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10500); })();");
     SLOTS_TRIGGERS.put(INCONTENT_LEADERBOARD, "$('#mw-content-text h2')[1].scrollIntoView(true);");
     SLOTS_TRIGGERS.put(LEFT_SKYSCRAPPER_3, "window.scrollTo(0,document.body.scrollHeight);");
+    SLOTS_TRIGGERS.put(BOTTOM_LB,"(function(){function getHookElement(){var mixContentFooterSelector=\"#mixed-content-footer\",articleCategoriesSelector=\".article-categories\",isMixContentFooterOnPage=!!document.querySelectorAll(mixContentFooterSelector)[0],areArticleCategoriesOnPage=!!document.querySelectorAll(articleCategoriesSelector)[0];if(isMixContentFooterOnPage){return mixContentFooterSelector;}return articleCategoriesSelector;}var hookElement=getHookElement();document.querySelectorAll(hookElement)[0].scrollIntoView();setTimeout(function(){window.scrollBy(0, -10);},5000);})();");
+    SLOTS_TRIGGERS.put(MOBILE_BOTTOM_LB, "(function(){ document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 5000); })();");
   }
 }
-

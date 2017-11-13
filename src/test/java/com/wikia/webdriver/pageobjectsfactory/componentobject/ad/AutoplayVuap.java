@@ -1,9 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -88,7 +89,9 @@ public class AutoplayVuap {
   }
 
   public void togglePause() {
-    wait.forElementClickable(pauseOverlaySelector).click();
+    wait.forElementClickable(pauseOverlaySelector);
+    // hack to click pause overlay on mobile
+    clickByJS(pauseOverlaySelector);
   }
 
   public void play() {
@@ -167,7 +170,9 @@ public class AutoplayVuap {
   }
 
   public boolean isVisible() {
-    return usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
+    return isDesktop() ?
+           usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed()) :
+           driver.findElement(getVideoSelector()).isDisplayed();
   }
 
   public boolean isMuted() {
@@ -178,8 +183,16 @@ public class AutoplayVuap {
     return !isMuted();
   }
 
-  public String findTitle() {
+  private String getTitleDesktop() {
     return usingVideoContext(video -> video.getAttribute("title"));
+  }
+
+  private String getTitleMobile() {
+    return driver.findElement(getVideoSelector()).getAttribute("title");
+  }
+
+  public String findTitle() {
+    return isDesktop() ? getTitleDesktop() : getTitleMobile();
   }
 
   public void waitForVideoToStart(final long timeout) {

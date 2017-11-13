@@ -45,8 +45,7 @@ public class Search extends BasePageObject {
 
     // Mobile wiki opens the suggested page using AJAX, Mercury reloads the page and opens Mobile Wiki
     if (fromSkin == Skin.MOBILE_WIKI) {
-      Loading loading = new Loading(driver);
-      loading.handleAsyncPageReload();
+      waitForPageReload();
     } else {
       Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     }
@@ -91,8 +90,7 @@ public class Search extends BasePageObject {
 
     // Mobile wiki opens the SRP using AJAX, Mercury reloads the page and opens Mobile Wiki
     if (fromSkin == Skin.MOBILE_WIKI) {
-      Loading loading = new Loading(driver);
-      loading.handleAsyncPageReload();
+      waitForPageReload();
     } else {
       Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     }

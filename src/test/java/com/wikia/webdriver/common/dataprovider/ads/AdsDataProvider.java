@@ -13,16 +13,6 @@ import org.testng.annotations.DataProvider;
 import java.util.Arrays;
 
 public class AdsDataProvider {
-
-  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
-      AdsContent.TOP_LB,
-      AdsContent.MEDREC,
-      AdsContent.LEFT_SKYSCRAPPER_2,
-      AdsContent.LEFT_SKYSCRAPPER_3,
-      AdsContent.PREFOOTER_LEFT,
-      AdsContent.PREFOOTER_RIGHT
-  };
-
   private static final String WIKI_REGULAR = "adtest-pluto";
   private static final String WIKI_SPECIAL = "project43";
 
@@ -40,6 +30,14 @@ public class AdsDataProvider {
   private static final String VIDEO_PLAYER_IFRAME = " .video-player iframe";
 
   public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
+
+  private static final String FV_JWPLAYER_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
+  private static final String FV_JWPLAYER_WITH_SOUND_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer/WithSound";
+
+  public static final Page PAGE_A9_DISPLAY = new Page(WIKI_SPECIAL, "SyntheticTests/Amazon");
+  public static final Page PAGE_FV = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo");
+  public static final Page PAGE_FV_JWPLAYER = new Page(WIKI_SPECIAL, FV_JWPLAYER_PAGE_URI);
+  public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(WIKI_SPECIAL, FV_JWPLAYER_WITH_SOUND_PAGE_URI);
 
   private AdsDataProvider() {
   }
@@ -73,17 +71,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] noAdsForUsers() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/LongPage"},
-        {"project43", "Category:Browse"},
-        {"project43", "Special:Videos"},
-        {"project43", "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)"},
-        {"project43", "Koperek:SyntheticTests/NoAds"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
@@ -112,28 +99,6 @@ public class AdsDataProvider {
         {"es.filmhub", "Wiki_Pel%C3%ADculas_Hub"},
         {"ja.entertainmenthub",
          "%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%83%8F%E3%83%96_Wiki"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] specialPages() {
-    return new Object[][]{
-        {"project43", "Special:Videos", "271491732", "wka.life/_project43//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"project43", "Special:Images", "271491732", "wka.life/_project43//special",
-         "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-    };
-  }
-
-  @DataProvider
-  public static Object[][] filePages() {
-    return new Object[][]{
-        {"project43", "File:Example.jpg", "271491732", "wka.life/_project43//file",
-         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
-        {"project43", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "271491732",
-         "wka.life/_project43//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
-         new Dimension(1292, 1000)},
     };
   }
 
@@ -221,7 +186,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adFreeWikis() {
     return new Object[][]{
-        {"api", "Wikia_API_Wiki"},
+        {"api", "Quick_Start"},
         {"sfhomeless", "Glide_Memorial_Church"},
         {"geekfeminism", "Dickwolves"},
         {"suicideprevention", "USA"}
@@ -262,22 +227,8 @@ public class AdsDataProvider {
             Arrays.asList(
                 "\"loc\":\"top\"",
                 "\"pos\":\"TOP_LEADERBOARD\"",
-                "\"src\":\"gpt\""
+                "\"src\":\"test\""
             )
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] dfpRubiconParamsSynthetic() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/RubiconFastlane",
-            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_project43//article",
-            "TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":\\[\"2_tier(NONE|PREBID|\\d{4})\",\"57_tier(NONE|PREBID|\\d{4})\"\\].*"
         }
     };
   }
@@ -516,36 +467,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpEvolveParamsOasis() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/DfpParams",
-            4403,
-            "ev/wikia_intl/ros",
-            "TOP_LEADERBOARD",
-            Arrays.asList(
-                "\"s0\":\"life\"",
-                "\"s1\":\"_adtest\"",
-                "\"s2\":\"article\"",
-                "\"dmn\":\"wikiacom\"",
-                "\"hostpre\":\"",
-                "\"wpage\":\"synthetictests/dfpparams\"",
-                "\"ref\":\"direct\"",
-                "\"lang\":\"en\"",
-                "\"esrb\":\"teen\""
-            ),
-            Arrays.asList(
-                "\"pos\":\"a\"",
-                "\"wloc\":\"top\"",
-                "\"wpos\":\"TOP_LEADERBOARD\"",
-                "\"wsrc\":\"evolve\""
-            )
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsGptPageParam() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
@@ -566,13 +487,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] amazonSites() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Amazon"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] prebidCustomAdapter() {
     return new Object[][]{
         {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
@@ -587,14 +501,20 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] evolveTestPage() {
-    return new Object[][]{{"project43", "SyntheticTests/Evolve"}};
-  }
-
-  @DataProvider
-  public static Object[][] evolveHopTestPage() {
+  public static Object[][] prebidRubiconSlotsList() {
     return new Object[][]{
-        {"project43", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD", "RemnantGpt"}};
+        {
+            Arrays.asList(
+                ".*fastlane.json.*TOP_LEADERBOARD.*",
+                ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
+                ".*fastlane.json.*LEFT_SKYSCRAPER_2.*",
+                ".*fastlane.json.*LEFT_SKYSCRAPER_3.*",
+                ".*fastlane.json.*INCONTENT_BOXAD_1.*",
+                ".*fastlane.json.*PREFOOTER_LEFT_BOXAD.*",
+                ".*fastlane.json.*PREFOOTER_RIGHT_BOXAD.*"
+            )
+        }
+    };
   }
 
   @DataProvider
@@ -603,23 +523,14 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; RubiconFastlane"
-        },
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
-            "",
             AdsContent.INVISIBLE_SKIN,
-            "DirectGpt; RemnantGpt"
+            "DirectGpt"
         }
     };
   }
@@ -630,9 +541,9 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.TOP_LB,
-            "RubiconFastlane"
+            "Evolve2"
         },
     };
   }
@@ -641,27 +552,6 @@ public class AdsDataProvider {
   public static Object[][] kruxIntegration() {
     return new Object[][]{
         {"project43", "SyntheticTests/Krux"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] delayBtf() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Delay_BTF", true}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] disableBtf() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Disable_BTF", true}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] disableBtfExceptHighlyViewableSlots() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Disable_BTF/Unblock_HIVI", true}
     };
   }
 
@@ -810,26 +700,6 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", "260204412")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", "260206692")
-                .put("src", "gpt")
-                .build()
-        },
-        {
             new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
@@ -843,27 +713,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", "257673852")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", "257673852")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
                 .put("slotSize", new Dimension(120, 600))
                 .put("lineItemId", "257673852")
                 .put("src", "gpt")
@@ -878,17 +728,7 @@ public class AdsDataProvider {
                 .put("lineItemId", "255534972")
                 .put("src", "gpt")
                 .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(300, 1050))
-                .put("lineItemId", "255534972")
-                .put("src", "gpt")
-                .build()
-        },
+        }
     };
   }
 
@@ -1049,20 +889,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsVuapClickToPlayMobile() {
-    return new Object[][]{
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
-            AdsContent.MOBILE_TOP_LB
-        },
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
-            AdsContent.MOBILE_BOTTOM_LB
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsVuapAutoplayDesktop() {
     return new Object[][]{
                 {
@@ -1109,18 +935,6 @@ public class AdsDataProvider {
                     new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
                     AdsContent.BOTTOM_LB
             }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsVideoFrequencyCapping() {
-    return new Object[][]{
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2pv]")
-        },
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2min]")
-        }
     };
   }
 

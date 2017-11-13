@@ -7,18 +7,25 @@ import org.apache.commons.lang.StringUtils;
 
 public class UrlBuilder {
 
-  private static final String PROD_URL_FORMAT = "http://%s%s.%s";
-  private static final String SANDBOX_URL_FORMAT = "http://%s.%s%s.%s";
-  private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
+  private static final String PROD_URL_FORMAT = "%s%s.%s";
+  private static final String SANDBOX_URL_FORMAT = "%s.%s%s.%s";
+  private static final String SANDBOX_NEW_URL_FORMAT = "%s%s.%s.%s";
+  private static final String DEV_URL_FORMAT = "%s%s.%s.%s";
 
   private String env;
+  private Boolean forceHttps;
+  private Boolean newStagingUrlFormat;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
+    this.forceHttps = Configuration.getForceHttps();
+    this.newStagingUrlFormat = Configuration.getNewStagingUrlFormat();
   }
 
-  public UrlBuilder(String env) {
+  public UrlBuilder(String env, Boolean forceHttps, Boolean newStagingUrlFormat) {
     this.env = env;
+    this.forceHttps = forceHttps;
+    this.newStagingUrlFormat = newStagingUrlFormat;
   }
 
   public String normalizePageName(String pageName) {
@@ -80,9 +87,10 @@ public class UrlBuilder {
     return getUrlForWiki(Configuration.getWikiName(), addWWW);
   }
 
+
   public String getUrlForWiki(String wikiName, boolean addWWW) {
-    EnvType envType = Configuration.getEnvType(this.env);
     final String wikiaName = getWikiaGlobalName(wikiName);
+    EnvType envType = Configuration.getEnvType(this.env);
 
     String www = "";
     if (addWWW) {
@@ -92,20 +100,31 @@ public class UrlBuilder {
     switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.format(DEV_URL_FORMAT, www, wikiaName, devBoxOwner, envType.getWikiaDomain());
+        return String.format(getUrlProtocol() + DEV_URL_FORMAT, www, wikiaName, devBoxOwner, envType.getWikiaDomain());
       }
       case PROD: {
-        return String.format(PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
+        return String.format(getUrlProtocol() + PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
       }
       case STAGING: {
-        return String.format(PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
+        return String.format(getUrlProtocol() + PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
       }
       case SANDBOX: {
-        return String.format(SANDBOX_URL_FORMAT, this.env, www, wikiaName, envType.getWikiaDomain());
+        if (newStagingUrlFormat) {
+          return String.format(getUrlProtocol() + SANDBOX_NEW_URL_FORMAT, www, wikiaName, this.env, envType.getWikiaDomain());
+        } else {
+          return String.format(getUrlProtocol() + SANDBOX_URL_FORMAT, this.env, www, wikiaName, envType.getWikiaDomain());
+        }
       }
       default:
         return "";
     }
+  }
+
+  private String getUrlProtocol() {
+    if (this.forceHttps) {
+      return "https://";
+    }
+    return "http://";
   }
 
   public String getWikiGlobalURL(){
@@ -114,13 +133,13 @@ public class UrlBuilder {
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.format("http://%s.www.%s", devBoxOwner, env.getWikiaDomain());
+        return String.format(getUrlProtocol() + "%s.www.%s", devBoxOwner, env.getWikiaDomain());
       }
       case SANDBOX: {
-        return String.format("http://%s.www.%s", this.env, env.getWikiaDomain());
+        return String.format(getUrlProtocol() + "%s.www.%s", this.env, env.getWikiaDomain());
       }
       default:
-        return String.format("http://www.%s", env.getWikiaDomain());
+        return String.format(getUrlProtocol() + "www.%s", env.getWikiaDomain());
     }
   }
 
@@ -145,5 +164,13 @@ public class UrlBuilder {
     } else {
       return url + separator + qs;
     }
+  }
+
+  public String globallyEnableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
+    return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[XX]", instantGlobal));
+  }
+
+  public String globallyDisableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
+    return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[ZZ]", instantGlobal));
   }
 }

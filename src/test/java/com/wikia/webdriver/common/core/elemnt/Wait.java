@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
 
 import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.By;
@@ -541,6 +542,33 @@ public class Wait {
       Thread.sleep(duration.toMillis());
     } catch (InterruptedException e) {
       PageObjectLogging.log("Wait.forXMilliseconds", e, false);
+    }
+  }
+
+  public Boolean forRecoveredAds(AdsRecoveryObject recoveryObject,
+                              By spansBodyChildrenSelector,
+                              int recoveredAdsNo) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+
+    try {
+      List<WebElement> recoveredAds = recoveryObject.getRecoveredAds(spansBodyChildrenSelector);
+
+      return recoveredAds.size() == recoveredAdsNo;
+    } catch (TimeoutException e) {
+      PageObjectLogging.log(
+          "wait.forRecoveredAds",
+          new String().format("Couldn't find %d recovered ads", recoveredAdsNo),
+          false
+      );
+
+      throw e;
+    } finally {
+      changeImplicitWait(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+      PageObjectLogging.log(
+          "wait.forRecoveredAds",
+          new String().format("Found %d recovered ads", recoveredAdsNo),
+          true
+      );
     }
   }
 }

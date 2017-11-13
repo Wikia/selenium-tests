@@ -90,6 +90,9 @@ public class Configuration {
   public static String getBrowser() {
     return getProp("browser");
   }
+  public static String getDpr() {
+    return getProp("dpr");
+  }
   public static String getDefaultWikiName() {
     return getPropertyFromFile("wikiName");
   }
@@ -136,6 +139,14 @@ public class Configuration {
 
   public static String getMockAds() {
     return getProp("mockAds");
+  }
+
+  public static Boolean getForceHttps() {
+    return getProp("forceHttps").equals("true");
+  }
+
+  public static Boolean getNewStagingUrlFormat() {
+    return getProp("newStagingUrlFormat").equals("true");
   }
 
   public static Emulator getEmulator() {

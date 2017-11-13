@@ -17,8 +17,6 @@ import java.util.Map;
 
 public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
-  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
-
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsSlotSizeOasis",
@@ -60,15 +58,10 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
     AdsBaseObject ads = new AdsBaseObject(driver, url, pageSize);
 
-    if (pageSize.equals(WindowSize.DESKTOP)) {
-      // on desktop comments lazy loads - on mobile you need to tap to load them
-      ads.triggerComments();
+    ads.triggerAdSlot(slotName)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
 
-      // only desktop pages have this headline
-      ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
-    }
-    ads.wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-    ads.triggerAdSlot(slotName);
     ads.verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()));
     ads.verifyIframeSize(slotName, slotInfo.get("src").toString(),
                           slotSize.getWidth(), slotSize.getHeight());

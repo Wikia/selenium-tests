@@ -1,6 +1,10 @@
 package com.wikia.webdriver.common.logging;
 
-import com.wikia.webdriver.common.core.*;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -18,7 +22,12 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -355,7 +364,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
-
     logJSError();
   }
 

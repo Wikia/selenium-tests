@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -46,9 +47,23 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
-  public PostsCreatorMobile() {
-    super();
-  }
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
+  private WebElement imagePreview;
+
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
 
   @Override
   protected String getBaseCssClassName() {
@@ -56,14 +71,12 @@ public class PostsCreatorMobile extends BasePostsCreator {
   }
 
   public PostsCreatorMobile clickOkButtonInSignInDialog() {
-    wait.forElementClickable(okButtonInSignInDialog);
-    okButtonInSignInDialog.click();
+    waitAndClick(okButtonInSignInDialog);
     return this;
   }
 
   public PostsCreatorMobile clickSignInButtonInSignInDialog() {
-    wait.forElementClickable(signInButtonInSignInDialog);
-    signInButtonInSignInDialog.click();
+    waitAndClick(signInButtonInSignInDialog);
     return this;
   }
 }

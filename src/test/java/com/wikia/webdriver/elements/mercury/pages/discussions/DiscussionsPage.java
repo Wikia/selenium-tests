@@ -23,13 +23,16 @@ public class DiscussionsPage extends WikiBasePageObject {
   private final Navigate navigate = new Navigate();
 
   @Getter(lazy = true)
-  private final Navigation navigation = new Navigation(driver);
+  private final Navigation navigation = new Navigation();
 
   @Getter(lazy = true)
   private final TopBar topbar = new TopBar();
 
   @FindBy(css = ".discussion-filter-header")
   private WebElement discussionsFilter;
+
+  @FindBy(css = ".site-body-discussion")
+  private WebElement discussionsBody;
 
   public DiscussionsPage() {
     super();
@@ -48,4 +51,7 @@ public class DiscussionsPage extends WikiBasePageObject {
     }
   }
 
+  public boolean isDiscussions() {
+    return discussionsBody.isDisplayed();
+  }
 }

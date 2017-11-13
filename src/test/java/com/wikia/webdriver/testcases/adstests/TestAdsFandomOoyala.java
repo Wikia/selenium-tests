@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
 import org.openqa.selenium.By;
@@ -17,12 +17,17 @@ import java.awt.*;
 
 @Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
-  private static final By PLAY_BUTTON_SELECTOR = By.cssSelector(".ooyala-video .oo-action-icon");
-  private static final By PLAYER_CONTAINER_SELECTOR
-      = By.cssSelector(".video[data-video-id='J1dGgwYTE6IWVacg3U0JEcVCDQUmKnX6']");
-  private static final By PLAYER_AD_SELECTOR = By.cssSelector(".ooyala-video iframe[src*=imasdk]");
+  private static final By PLAY_BUTTON_SELECTOR =
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG'] .jw-icon-display");
+  private static final By PLAYER_CONTAINER_SELECTOR =
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG']");
+  private static final By PLAYER_AD_SELECTOR =
+      By.cssSelector(".fandom-video iframe[src*=imasdk]");
   private static final By AUTOPLAY_PLAYERER_AD_SELECTOR =
-      By.cssSelector(".ooyala-video[data-autoplay] iframe[src*=imasdk]");
+      By.cssSelector(".fandom-video[data-jwplayer-id][data-autoplay] iframe[src*=imasdk]");
+      
+  private static final By SMART_BANNER_CLOSE_BUTTON_SELECTOR = 
+      By.cssSelector(".smart-banner__close");
 
   private static final String CLICK_TO_PLAY_PAGE = "the-best-movies-of-2017-so-far";
   private static final String AUTOPLAY_PAGE = "orphan-black-clones-names";
@@ -85,11 +90,18 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     testOoyalaAutoplayPreroll(adsFandom);
   }
 
+  private void removeSmartBannerIfPresent() {
+    if (driver.findElements(SMART_BANNER_CLOSE_BUTTON_SELECTOR).size() > 0) {
+      driver.findElement(SMART_BANNER_CLOSE_BUTTON_SELECTOR).click();
+    }
+  }
+
   public void testOoyalaClickToPlayPreroll(AdsFandomObject adsFandom) {
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(PLAY_BUTTON_SELECTOR);
 
     wait.forElementVisible(playButton);
+    removeSmartBannerIfPresent();
     adsFandom.scrollToPosition(PLAYER_CONTAINER_SELECTOR);
     playButton.click();
 
@@ -103,6 +115,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     Wait wait = new Wait(driver);
 
     wait.forElementVisible(AUTOPLAY_PLAYERER_AD_SELECTOR);
+    removeSmartBannerIfPresent();
     adsFandom.scrollToPosition(AUTOPLAY_PLAYERER_AD_SELECTOR);
     verifyColorAd(
         driver.findElement(AUTOPLAY_PLAYERER_AD_SELECTOR),
@@ -113,8 +126,8 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   }
 
   private void verifyColorAd(WebElement element, Color color, int duration) {
-    OoyalaPrerollAd ooyala = new OoyalaPrerollAd(driver);
+    ElementColor ooyala = new ElementColor(driver);
 
-    ooyala.verifyColorAd(element, color, duration);
+    ooyala.verifyColor(element, color, duration);
   }
 }

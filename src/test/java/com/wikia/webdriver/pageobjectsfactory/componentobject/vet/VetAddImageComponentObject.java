@@ -40,23 +40,10 @@ public class VetAddImageComponentObject extends WikiBasePageObject {
     PageObjectLogging.log(PAGE_NAME, "Upload button clicked", true, driver);
   }
 
-  private void typeInSearchQuery(String query) {
-    wait.forElementVisible(findTextBox);
-    findTextBox.sendKeys(query);
-    PageObjectLogging.log(PAGE_NAME,
-                          query + " query typed into search image field", true);
-  }
-
   public void uploadImage(String imagePath){
     typeInPath(imagePath);
     clickUploadButton();
     wait.forElementNotVisible(uploadButton);
     wait.forElementNotVisible(addImageModalBy);
-  }
-
-  public void clickFind(String image){
-    wait.forElementClickable(findButton);
-    findButton.click();
-    PageObjectLogging.log(PAGE_NAME, "find button clicked", true, driver);
   }
 }

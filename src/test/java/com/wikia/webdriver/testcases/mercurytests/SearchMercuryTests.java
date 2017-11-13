@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.skin.Skin;
@@ -12,8 +13,11 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.testcases.mobilewikitests.SearchTests;
+
 import org.testng.annotations.Test;
 
+@Test(groups = "SearchMercuryTests")
 @InBrowser(browser = Browser.CHROME)
 public class SearchMercuryTests extends SearchTests {
 
@@ -21,9 +25,12 @@ public class SearchMercuryTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
-                  "Mercury_Search_001"})
-  public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
+  @RelatedIssue(issueID = "IRIS-5167")
+  @Test(groups =
+      {"mercury_search_navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage",
+                  "Discussions_Search_001"})
+  public void mercury_search_navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage() {
+
     String clickedSuggestion = new GuidelinesPage()
         .open()
         .getTopBar()
@@ -33,16 +40,17 @@ public class SearchMercuryTests extends SearchTests {
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(),
-        new ArticlePage().getHeader().getPageTitle().toLowerCase()
+        clickedSuggestion.toLowerCase(), new ArticlePage().getHeader().getPageTitle().toLowerCase()
     );
   }
 
   @Execute(onWikia = "dauto")
-  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnDesktop",
-                  "Mercury_Search_001"})
+  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage",
+                  "Discussions_Search_001"})
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
-  public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
+
+  public void mercury_search_navigateUsingSearchSuggestionsOnDesktopFromDiscussionsGuidelinesPage() {
+
     String clickedSuggestion = new GuidelinesPage()
         .open()
         .getTopBar()
@@ -57,8 +65,8 @@ public class SearchMercuryTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_cancelSearchPhrase", "Mercury_Search_001"})
-  public void mercury_search_clearSearchPhrase() {
+  @Test(groups = {"mercury_search_cancelSearchPhraseFromDiscussionsGuidelinesPage", "Discussions_Search_001"})
+  public void mercury_search_clearSearchPhraseFromDiscussionsGuidelinesPage() {
     super.mercury_search_clearSearchPhrase(
         new GuidelinesPage().open()
     );
@@ -66,8 +74,8 @@ public class SearchMercuryTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_verifySearchLayout", "Mercury_Search_001"})
-  public void mercury_search_verifySearchLayout() {
+  @Test(groups = {"mercury_search_verifySearchLayoutFromDiscussionsGuidelinesPage", "Discussions_Search_001"})
+  public void mercury_search_verifySearchLayoutFromDiscussionsGuidelinesPage() {
     super.mercury_search_verifySearchLayout(
         new GuidelinesPage().open()
     );
@@ -75,8 +83,8 @@ public class SearchMercuryTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_userIsRedirectedToSearchResultsPage", "Mercury_Search_001"})
-  public void mercury_search_userIsRedirectedToSearchResultsPage() {
+  @Test(groups = {"mercury_search_userIsRedirectedToSearchResultsPageFromDiscussionsGuidelinesPage", "Discussions_Search_001"})
+  public void mercury_search_userIsRedirectedToSearchResultsPageFromDiscussionsGuidelinesPage() {
     SearchResultsPage searchResults =
         new GuidelinesPage()
             .open()

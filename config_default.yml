@@ -3,6 +3,7 @@
 # You can also override these values by specyfing a system property
 
 browser: CHROME # acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMERCURY, HTMLUNIT
+dpr: 1 # Your device's pixel ratio, do not commit your changes
 wikiName: mediawiki119 # default testing wiki
 env: preview # acceptable values: prod, preview, sandbox-number dev-name
 credentialsPath: /selenium-config/config.xml # Path to your config.xml file
@@ -13,6 +14,8 @@ jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
 mockAds: false
+forceHttps: false
+newStagingUrlFormat: false
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
 useZapProxy: false

@@ -5,63 +5,52 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
 import org.testng.annotations.Test;
 
-public class TestAmazonAds extends NewTestTemplate {
-
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "amazonSites",
-      groups = {"AmazonAds", "AmazonAds", "Ads"}
-  )
-  public void adsAmazonOasis(String wikiName, String path) {
-    testAmazonAd(wikiName, path, false);
-  }
+@Test(groups = "AmazonAds")
+public class TestAmazonAds extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "amazonSites",
-      groups = {"AmazonAds", "AmazonAds_debugMode", "Ads"}
-  )
-  public void adsAmazonDebugModeOasis(String wikiName, String path) {
-    testAmazonAd(wikiName, path, true);
+  @Test(groups = "AmazonAdsDesktop")
+  public void testAmazonDisplayAdsDesktop() {
+    checkAmazonSlots(AdsAmazonObject.DESKTOP_SLOTS);
   }
 
-  private void testAmazonAd(String wikiName, String path, boolean debugMode) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    if (debugMode) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
-      networkTrafficInterceptor.startIntercepting();
-    }
-    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
-
-    amazonAds.verifyAmazonScriptIncluded();
-
-    if (debugMode) {
-      amazonAds.verifyGPTParams();
-      amazonAds.verifyAdsFromAmazonPresent();
-      amazonAds.verifyResponseIsValid(networkTrafficInterceptor);
-    }
-  }
-
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "amazonSites",
-      groups = "AmazonAdsMercury"
-  )
+  @Test(groups = "AmazonAdsMobile")
+  @NetworkTrafficDump
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void adsAmazonDebugModeOnConsecutivePagesMercury(String wikiName, String path) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
-    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
-    amazonAds
-        .verifyAdsFromAmazonPresent()
-        .verifyGPTParams();
+  public void testAmazonDisplayAdsMobile() {
+    checkAmazonSlots(AdsAmazonObject.MOBILE_SLOTS);
+  }
 
-    amazonAds.clickAmazonArticleLink("AmazonSecondPageView")
-        .verifyNoAdsFromAmazonPresent();
+  @Test(groups = "AmazonAdsDesktop")
+  @NetworkTrafficDump(useMITM = true)
+  public void testAmazonVideoAdsDesktop() {
+    testAmazonVideo();
+  }
+
+  @Test(groups = "AmazonAdsMobile")
+  @NetworkTrafficDump(useMITM = true)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void testAmazonVideoAdsMobile() {
+    testAmazonVideo();
+  }
+
+  private void checkAmazonSlots(String[] slots) {
+    networkTrafficInterceptor.startIntercepting();
+    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, AdsDataProvider.PAGE_A9_DISPLAY.getUrl());
+    amazonAds.runA9DebugMode();
+
+    for (String slotName : slots) {
+      amazonAds.verifyTestBidAdInSlot(slotName, AdsAmazonObject.A9_TEST_LINE_ITEM);
+    }
+  }
+
+  private void testAmazonVideo() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, AdsDataProvider.PAGE_FV.getUrl(AdsAmazonObject.A9_VIDEO_DEBUG_MODE));
+    amazonAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsAmazonObject.A9_VIDEO_DEBUG_BID_PATTERN);
   }
 }
