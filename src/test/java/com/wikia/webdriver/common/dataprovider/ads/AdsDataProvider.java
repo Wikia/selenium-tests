@@ -576,24 +576,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsMiddlePrefooter() {
-    return new Object[][]{
-        {
-            "project43",
-            "",
-            WindowSize.DESKTOP,
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Prefooters",
-            WindowSize.DESKTOP,
-            false
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsTrackingPixelsOnConsecutivePages() {
     return new Object[][]{
         {
