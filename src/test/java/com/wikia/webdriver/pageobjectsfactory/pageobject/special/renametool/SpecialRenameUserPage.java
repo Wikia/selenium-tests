@@ -52,12 +52,14 @@ public class SpecialRenameUserPage extends SpecialPageObject {
                                             password) {
     wait.forElementClickable(confirmNewUsernameTextBox);
     newUsernameTextBox.sendKeys(newUsername);
-    confirmNewUsernameTextBox.sendKeys(newUsername);
+    confirmNewUsernameTextBox.sendKeys(confirmUsername);
     currentPasswordTextBox.sendKeys(password);
     return this;
   }
 
+
   public SpecialRenameUserPage submitChange() {
+    jsActions.scrollToElement(submitButton);
     submitButton.click();
     return this;
   }

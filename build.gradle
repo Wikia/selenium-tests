@@ -404,7 +404,7 @@ dependencies {
     testCompile 'com.google.guava:guava:18.0'
     testCompile 'org.yaml:snakeyaml:1.8'
     testCompile 'org.apache.httpcomponents:httpclient:4.5'
-    testCompile 'javax.mail:mail:1.4.4'
+    testCompile 'javax.mail:mail:1.4.7'
     testCompile 'commons-configuration:commons-configuration:1.6'
     testCompile 'javax.json:javax.json-api:1.0'
     testCompile 'org.json:json:20080701'
