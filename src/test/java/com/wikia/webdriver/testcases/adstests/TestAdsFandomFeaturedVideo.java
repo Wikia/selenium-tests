@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   @Test(
-      groups = {"AdsFeaturedVideoF2"}
+      groups = {"AdsFeaturedVideoF2Desktop"}
   )
   public void adsFeaturedVideoAdsDesktop() {
     String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
@@ -28,7 +28,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoF2"}
+      groups = {"AdsFeaturedVideoF2Desktop"}
   )
   public void adsFeaturedVideoMOATTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
@@ -48,7 +48,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
       emulator = Emulator.GOOGLE_NEXUS_5
   )
   @Test(
-      groups = {"AdsFeaturedVideoF2"}
+      groups = {"AdsFeaturedVideoF2Mobile"}
   )
   public void adsFeaturedVideoAdsMobile() {
     adsFeaturedVideoAdsDesktop();
@@ -60,7 +60,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   )
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoF2"}
+      groups = {"AdsFeaturedVideoF2Mobile"}
   )
   public void adsFeaturedVideoMOATTrackingMobile() {
     adsFeaturedVideoMOATTrackingDesktop();
