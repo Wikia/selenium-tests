@@ -139,9 +139,13 @@ public class ImageComparison {
   }
 
   public boolean areColorsSimilar(Color c1, Color c2) {
+    return areColorsSimilar(c1, c2, ACCEPTABLE_COLOR_DISTANCE);
+  }
+
+  public boolean areColorsSimilar(Color c1, Color c2, int acceptableColorDistance) {
     double distance = Math.pow(c1.getRed() - c2.getRed(), 2) +
                       Math.pow(c1.getGreen() - c2.getGreen(), 2) +
                       Math.pow(c1.getBlue() - c2.getBlue(), 2);
-    return Math.sqrt(distance) < ACCEPTABLE_COLOR_DISTANCE;
+    return Math.sqrt(distance) < acceptableColorDistance;
   }
 }

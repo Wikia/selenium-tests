@@ -27,7 +27,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-import java.util.List;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -38,6 +38,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 public class ArticlePageObject extends WikiBasePageObject {
 
@@ -137,6 +139,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement articleEditButton;
   @FindBy(css = "[href='#WikiaArticleComments']")
   private WebElement commentButton;
+  @FindBy(css = ".featured-video")
+  private WebElement featuredVideo;
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
@@ -810,5 +814,10 @@ public class ArticlePageObject extends WikiBasePageObject {
         throw new NoSuchElementException(
             "Invalid expected editor chosen: " + expectedEditor.name());
     }
+  }
+
+  public boolean isFeaturedVideo() {
+    wait.forElementVisible(featuredVideo);
+    return featuredVideo.isDisplayed();
   }
 }

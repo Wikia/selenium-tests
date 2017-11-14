@@ -25,4 +25,14 @@ public class Page {
   public String getUrl() {
     return urlBuilder.getUrlForPath(this.wikiName, this.wikiPath);
   }
+
+  public String getUrl(String[] queryParams) {
+    String url = getUrl();
+
+    for (String param : queryParams) {
+      url = urlBuilder.appendQueryStringToURL(url, param);
+    }
+
+    return url;
+  }
 }

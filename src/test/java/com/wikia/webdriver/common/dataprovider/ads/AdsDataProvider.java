@@ -31,6 +31,14 @@ public class AdsDataProvider {
 
   public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
 
+  private static final String FV_JWPLAYER_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
+  private static final String FV_JWPLAYER_WITH_SOUND_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer/WithSound";
+
+  public static final Page PAGE_A9_DISPLAY = new Page(WIKI_SPECIAL, "SyntheticTests/Amazon");
+  public static final Page PAGE_FV = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo");
+  public static final Page PAGE_FV_JWPLAYER = new Page(WIKI_SPECIAL, FV_JWPLAYER_PAGE_URI);
+  public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(WIKI_SPECIAL, FV_JWPLAYER_WITH_SOUND_PAGE_URI);
+
   private AdsDataProvider() {
   }
 
@@ -178,7 +186,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adFreeWikis() {
     return new Object[][]{
-        {"api", "Wikia_API_Wiki"},
+        {"api", "Quick_Start"},
         {"sfhomeless", "Glide_Memorial_Church"},
         {"geekfeminism", "Dickwolves"},
         {"suicideprevention", "USA"}

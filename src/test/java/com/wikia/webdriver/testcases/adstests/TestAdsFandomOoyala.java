@@ -18,13 +18,16 @@ import java.awt.*;
 @Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final By PLAY_BUTTON_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id] .oo-action-icon");
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG'] .jw-icon-display");
   private static final By PLAYER_CONTAINER_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id='J1dGgwYTE6IWVacg3U0JEcVCDQUmKnX6']");
+      By.cssSelector(".fandom-video[data-jwplayer-id='5n3XYpUG']");
   private static final By PLAYER_AD_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id] iframe[src*=imasdk]");
+      By.cssSelector(".fandom-video iframe[src*=imasdk]");
   private static final By AUTOPLAY_PLAYERER_AD_SELECTOR =
-      By.cssSelector(".fandom-video[data-ooyala-id][data-autoplay] iframe[src*=imasdk]");
+      By.cssSelector(".fandom-video[data-jwplayer-id][data-autoplay] iframe[src*=imasdk]");
+      
+  private static final By SMART_BANNER_CLOSE_BUTTON_SELECTOR = 
+      By.cssSelector(".smart-banner__close");
 
   private static final String CLICK_TO_PLAY_PAGE = "the-best-movies-of-2017-so-far";
   private static final String AUTOPLAY_PAGE = "orphan-black-clones-names";
@@ -87,11 +90,18 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     testOoyalaAutoplayPreroll(adsFandom);
   }
 
+  private void removeSmartBannerIfPresent() {
+    if (driver.findElements(SMART_BANNER_CLOSE_BUTTON_SELECTOR).size() > 0) {
+      driver.findElement(SMART_BANNER_CLOSE_BUTTON_SELECTOR).click();
+    }
+  }
+
   public void testOoyalaClickToPlayPreroll(AdsFandomObject adsFandom) {
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(PLAY_BUTTON_SELECTOR);
 
     wait.forElementVisible(playButton);
+    removeSmartBannerIfPresent();
     adsFandom.scrollToPosition(PLAYER_CONTAINER_SELECTOR);
     playButton.click();
 
@@ -105,6 +115,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     Wait wait = new Wait(driver);
 
     wait.forElementVisible(AUTOPLAY_PLAYERER_AD_SELECTOR);
+    removeSmartBannerIfPresent();
     adsFandom.scrollToPosition(AUTOPLAY_PLAYERER_AD_SELECTOR);
     verifyColorAd(
         driver.findElement(AUTOPLAY_PLAYERER_AD_SELECTOR),
