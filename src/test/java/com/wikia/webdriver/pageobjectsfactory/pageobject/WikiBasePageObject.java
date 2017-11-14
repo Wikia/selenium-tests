@@ -151,15 +151,18 @@ public class WikiBasePageObject extends BasePageObject {
     return driver.getCurrentUrl();
   }
 
+  public boolean isBannerNotificationContainerPresent(){
+    return isElementPresent(BANNER_NOTIFICATION_CONTAINER);
+  }
+
   /**
-   * Checks if container containing all banner notification is present, it may be present, but may have 0px height
-   * when no notification is displayed
+   * Checks if present NOW
    *
    * TODO: Move this logic to better place (WebElement?)
    */
-  public boolean isBannerNotificationContainerPresent(){
+  public boolean isElementPresent(By selector){
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
-    boolean result = driver.findElements(BANNER_NOTIFICATION_CONTAINER).size() != 0;
+    boolean result = driver.findElements(selector).size() != 0;
     restoreDefaultImplicitWait();
 
     return result;
