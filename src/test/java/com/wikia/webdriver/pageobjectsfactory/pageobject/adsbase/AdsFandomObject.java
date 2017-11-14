@@ -37,10 +37,6 @@ public class AdsFandomObject extends AdsBaseObject {
     jsActions.scrollToElement(driver.findElement(By.cssSelector(cssSelector)));
   }
 
-  public void scrollToFeed() {
-    scrollTo(FANDOM_FEED_SELECTOR);
-  }
-
   public void scrollToSlot(String slotId) {
     jsActions.scrollToElement(driver.findElement(By.id(slotId)));
   }
