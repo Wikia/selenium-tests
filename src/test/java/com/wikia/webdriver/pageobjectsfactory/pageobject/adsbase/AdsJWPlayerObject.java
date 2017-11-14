@@ -35,32 +35,49 @@ public class AdsJWPlayerObject extends AdsBaseObject {
   }
 
   public void waitForAdPlaying() {
-    wait.forElementVisible(AD_SELECTOR, 30);
+    PageObjectLogging.log("Info", "Waiting for video ad playing", true);
+    wait.forElementVisible(AD_SELECTOR, 15);
+  }
+
+  public void waitForMoviePlaying() {
+    PageObjectLogging.log("Info", "Waiting for video movie playing", true);
+    wait.forElementVisible(MOVIE_SELECTOR, 15);
+  }
+
+  public void waitForAdFinish(Duration videoDuration) {
+    PageObjectLogging.log("Info", "Waiting for ad finish", true);
+    wait.forElementNotVisible(AD_SELECTOR, videoDuration);
   }
 
   public void verifyPreroll() {
     waitForAdPlaying();
+    PageObjectLogging.log("Info", "Waiting for blue preroll", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_PREROLL);
+    waitForAdFinish(Duration.ofSeconds(30));
   }
 
   public void verifyMidroll() {
     waitForAdPlaying();
+    PageObjectLogging.log("Info", "Waiting for grey midroll", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_MIDROLL);
+    waitForAdFinish(Duration.ofSeconds(15));
   }
 
   public void verifyPostroll() {
     waitForAdPlaying();
+    PageObjectLogging.log("Info", "Waiting for pink postroll", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_POSTROLL);
+    waitForAdFinish(Duration.ofSeconds(15));
   }
 
   public void verifyFeaturedVideo() {
     waitForMoviePlaying();
+    PageObjectLogging.log("Info", "Waiting for green movie", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_VIDEO);
   }
 
   private void verifyFeaturedVideoElementColor(By selector, Color color) {
     WebElement articleVideoWrapper = driver.findElement(selector);
-
     jsActions.scrollToElement(articleVideoWrapper);
     verifyColor(articleVideoWrapper, color);
   }
@@ -88,20 +105,11 @@ public class AdsJWPlayerObject extends AdsBaseObject {
     }
   }
 
-  public void waitForAdFinish(Duration videoDuration) {
-    wait.forElementNotVisible(AD_SELECTOR, videoDuration);
-    wait.forElementVisible(MOVIE_SELECTOR);
-  }
-
   public void scrollToPlayer() {
     scrollTo(driver.findElement(PLAYER_SELECTOR));
   }
 
   private void hoverPlayerToActivateUI() {
     builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(500).perform();
-  }
-
-  private void waitForMoviePlaying() {
-    wait.forElementVisible(MOVIE_SELECTOR, 30);
   }
 }

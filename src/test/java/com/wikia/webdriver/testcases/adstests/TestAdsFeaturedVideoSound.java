@@ -65,6 +65,7 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
     jwPlayerObject.waitForAdPlaying();
     jwPlayerObject.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));
     jwPlayerObject.waitForAdFinish(AD_LENGTH);
+    jwPlayerObject.waitForMoviePlaying();
     Assertion.assertFalse(jwPlayerObject.wasSoundHeard());
   }
 }
