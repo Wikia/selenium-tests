@@ -186,7 +186,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adFreeWikis() {
     return new Object[][]{
-        {"api", "Wikia_API_Wiki"},
+        {"api", "Quick_Start"},
         {"sfhomeless", "Glide_Memorial_Church"},
         {"geekfeminism", "Dickwolves"},
         {"suicideprevention", "USA"}
