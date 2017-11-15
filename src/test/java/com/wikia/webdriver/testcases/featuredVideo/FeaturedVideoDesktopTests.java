@@ -14,7 +14,10 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoIsPresentOnArticle() {
-   FeaturedVideoComponentObject video = new FeaturedVideoComponentObject().openWikiArticle("FeaturedVideo");
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(false)
+        .openWikiArticle("FeaturedVideo");
+
     Assertion.assertTrue(video.isFeaturedVideo());
 
   }
