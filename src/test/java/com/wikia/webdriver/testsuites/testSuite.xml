@@ -61,7 +61,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoFrequencyCapping"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPremiumAdLayout"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
