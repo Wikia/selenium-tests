@@ -28,7 +28,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     driver.manage().addCookie(new Cookie(
         AUTOPLAY_COOKIE,
         autoplay ? "1" : "0",
-        Configuration.getEnvType().getWikiaDomain(),
+        String.format(".%s", Configuration.getEnvType().getWikiaDomain()),
         null,
         null
     ));
