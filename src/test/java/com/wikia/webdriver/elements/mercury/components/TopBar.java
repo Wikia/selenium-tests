@@ -34,7 +34,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButtonInnerElement;
 
-  @FindBy(css = ".site-head-icon-nav")
+  @FindBy(css = ".nav-menu")
   private WebElement navMenu;
 
   @FindBy(css = ".wds-global-navigation__search-input")
@@ -53,7 +53,7 @@ public class TopBar extends BasePageObject {
 
     Actions action = new Actions(driver);
     action.moveToElement(hamburgerIcon).moveByOffset(0, offsetToBottom).click().perform();
-
+    waitAndClick(hamburgerIcon);
     PageObjectLogging.logInfo("Navigation is opened");
     wait.forElementVisible(navMenu);
 
