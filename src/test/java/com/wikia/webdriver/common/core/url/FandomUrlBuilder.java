@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
-public class FandomUrlBuilder {
+public class FandomUrlBuilder extends UrlBuilder {
 
   private static final String FANDOM_URL = "fandom.wikia.com";
   private static final String ARTICLE_PATH = "articles";
@@ -12,6 +12,7 @@ public class FandomUrlBuilder {
   private String env;
 
   public FandomUrlBuilder() {
+    super();
     this.env = Configuration.getEnv();
     this.browser = Configuration.getBrowser();
   }

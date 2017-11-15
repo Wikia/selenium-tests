@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
 import org.testng.annotations.Test;
 
@@ -21,33 +22,39 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoOasis"}
   )
-  public void adsFeaturedVideoAdsOasis() {
+  public void adsFeaturedVideoAdsDesktop() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
 
-    verifyAdPositions(testedPage);
+    new AdsBaseObject(driver, testedPage);
+
+    verifyAdPositions();
   }
 
   @Test(
       groups = {"AdsFeaturedVideoOasis"}
   )
-  public void adsFeaturedVideoNoAdsOasis() {
+  public void adsFeaturedVideoNoAdsDesktop() {
     String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
 
-    verifyNoAds(testedPage);
+    new AdsBaseObject(driver, testedPage);
+
+    verifyNoAds();
   }
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
       groups = {"AdsFeaturedVideoOasis"}
   )
-  public void adsFeaturedVideoPrerollWithMOATTrackingOasis() {
+  public void adsFeaturedVideoMoatTrackingDesktop() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
 
-    verifyVideoMoatTracking(testedPage);
+    AdsBaseObject pageObject = new AdsBaseObject(driver, testedPage);
+
+    verifyVideoMoatTracking(pageObject);
   }
 
   @InBrowser(
@@ -57,12 +64,8 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoAdsMercury() {
-    String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
-
-    verifyAdPositions(testedPage);
+  public void adsFeaturedVideoAdsMobile() {
+    adsFeaturedVideoAdsDesktop();
   }
 
   @InBrowser(
@@ -72,10 +75,8 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoNoAdsMercury() {
-    String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
-
-    verifyNoAds(testedPage);
+  public void adsFeaturedVideoNoAdsMobile() {
+    adsFeaturedVideoNoAdsDesktop();
   }
 
   @InBrowser(
@@ -86,38 +87,29 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
-  public void adsFeaturedVideoPrerollWithMOATTrackingMercury() {
-    String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
-
-    verifyVideoMoatTracking(testedPage);
+  public void adsFeaturedVideoMoatTrackingMobile() {
+    adsFeaturedVideoMoatTrackingDesktop();
   }
 
-  private void verifyAdPositions(String pageUrl) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+  private void verifyAdPositions() {
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
-    jwPlayerObject.verifyPlayerOnPage();
-    jwPlayerObject.verifyPreroll();
-    jwPlayerObject.verifyFeaturedVideo();
-    jwPlayerObject.verifyMidroll();
-    jwPlayerObject.verifyFeaturedVideo();
-    jwPlayerObject.verifyPostroll();
+    jwPlayerObject.verifyAllAdPositions();
   }
 
-  private void verifyNoAds(String pageUrl) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+  private void verifyNoAds() {
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
     jwPlayerObject.verifyFeaturedVideo();
   }
 
-  private void verifyVideoMoatTracking(String pageUrl) {
+  private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
     networkTrafficInterceptor.startIntercepting();
 
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver, pageUrl);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
-    jwPlayerObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
+    pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
   }
 }
