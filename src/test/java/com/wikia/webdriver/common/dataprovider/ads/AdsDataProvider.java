@@ -19,7 +19,6 @@ public class AdsDataProvider {
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
 
-  private static final String INSTANT_GLOBAL_ADMIX_SWITCHED_OFF = "?InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[ZZ]";
   private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
@@ -628,7 +627,7 @@ public class AdsDataProvider {
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -638,7 +637,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -648,17 +647,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 600))
-                .put("lineItemId", "270230292")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -668,7 +657,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -678,7 +667,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -688,7 +677,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -698,7 +687,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MEDREC)
