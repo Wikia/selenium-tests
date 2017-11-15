@@ -34,7 +34,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButtonInnerElement;
 
-  @FindBy(css = ".nav-menu")
+  @FindBy(css = ".site-head-icon-nav")
   private WebElement navMenu;
 
   @FindBy(css = ".wds-global-navigation__search-input")
