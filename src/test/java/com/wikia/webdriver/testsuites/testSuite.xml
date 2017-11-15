@@ -7,7 +7,7 @@
         <classes>
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPremiumAdLayoutFeaturedVideo"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsMedrecReloading"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsAbcdProductsPriority"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDfpParamsPresentMercury"/>
