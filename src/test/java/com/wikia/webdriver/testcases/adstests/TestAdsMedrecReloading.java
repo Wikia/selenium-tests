@@ -19,7 +19,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   private static final By FMR_SELECTOR = By.id(AdsContent.FLOATING_MEDREC);
 
   @Test(
-          groups = {"PremiumAdLayoutRefreshFMR"}
+          groups = {"AdsRefreshFMR"}
   )
   public void regularFloatingMedrecIsReloadingWithRecirculationModule() {
     Page page = new Page("project43", "SyntheticTests/LongPage");
@@ -36,7 +36,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = {"PremiumAdLayout", "PremiumAdLayoutRefreshFMRWithUAP"}
+          groups = {"AdsRefreshFMRWithUAP"}
   )
   public void uapFloatingMedrecIsReloadingOnceWithRecirculationModule() {
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_PAGE.getUrl());
