@@ -19,7 +19,14 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isFeaturedVideo());
+  }
 
+  @Test
+  public void videoTitleIsVisible() {
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(false)
+        .openWikiArticle("FeaturedVideo");
+    Assertion.assertEquals(video.getTitle(), "Why Jon Snow Should Rule Westeros");
   }
 
 
