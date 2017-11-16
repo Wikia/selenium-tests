@@ -29,7 +29,7 @@ public class UserRegistration {
     String env = Configuration.getEnvType().getKey();
     String baseURL = XMLReader.getValue("services_internal." + env + ".base_url");
     try {
-      url = new URL(baseURL + "/user-registration/users/emailconfirmed");
+      url = new URL(baseURL + "user-registration/users/emailconfirmed");
     } catch (MalformedURLException e) {
       PageObjectLogging.logError("Wrong internal services URL", e);
     }
