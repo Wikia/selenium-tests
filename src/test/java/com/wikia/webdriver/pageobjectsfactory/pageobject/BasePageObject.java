@@ -220,7 +220,7 @@ public class BasePageObject {
     return isElementInElement;
   }
 
-  protected void scrollTo(WebElement element) {
+  public void scrollTo(WebElement element) {
     jsActions.scrollElementIntoViewPort(element);
     wait.forElementClickable(element, 5);
   }
