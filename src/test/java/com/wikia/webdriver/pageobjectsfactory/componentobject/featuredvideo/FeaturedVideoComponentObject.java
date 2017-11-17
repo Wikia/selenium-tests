@@ -15,6 +15,9 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = ".featured-video")
   private WebElement featuredVideo;
 
+  @FindBy(css = ".wikia-jw-settings-button")
+  private WebElement settingsMenu;
+
   @FindBy(css = ".jw-title-primary")
   private WebElement primaryTitle;
 
@@ -22,7 +25,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   private WebElement secondaryTitle;
 
   @FindBy(css = "#featured-video__player")
-  private WebElement playAndStopArea;
+  private WebElement player;
 
   @FindBy(css = ".jw-controlbar")
   private WebElement controlbar;
@@ -36,7 +39,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = ".video-feedback")
   private WebElement videoFeedback;
 
-  @FindBy(css = ".wikia-jw-settings__toggle")
+  @FindBy(css = "#featured-video__player-videoAutoplayToggle")
   private WebElement autoplayToggle;
 
   public FeaturedVideoComponentObject() {
@@ -62,43 +65,65 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
   public boolean isFeaturedVideo() {
     wait.forElementVisible(featuredVideo);
+
     return featuredVideo.isDisplayed();
   }
 
   public String getTitle() {
     wait.forElementVisible(primaryTitle);
+
     return primaryTitle.getText();
   }
 
   public String getSubtitle() {
     wait.forElementVisible(secondaryTitle);
+
     return secondaryTitle.getText();
   }
 
-  public void clickPlay() {
-    wait.forElementVisible(playAndStopArea);
-    playAndStopArea.click();
+  public FeaturedVideoComponentObject clickPlay() {
+    wait.forElementClickable(player);
+    player.click();
+
+    return this;
   }
 
-  public void clickPause() {
-    wait.forElementVisible(videoFeedback);
-    playAndStopArea.click();
+  public FeaturedVideoComponentObject clickPause() {
+    wait.forElementClickable(player);
+    player.click();
+
+    return this;
   }
 
   public boolean isVideoPlaying() {
-   wait.forElementVisible(videoFeedback);
-   return videoFeedback.isDisplayed();
+    wait.forElementVisible(videoFeedback);
+
+    return videoFeedback.isDisplayed();
   }
 
   public boolean isVideoPaused() {
     wait.forElementNotVisible(videoFeedback);
+
     return videoFeedback.isDisplayed();
   }
 
-  public String autoplayIsOn() {
-    return autoplayToggle.getAttribute("checked");
+  public boolean isAutoplayOn() {
+    return "true".equals(autoplayToggle.getAttribute("checked"));
   }
 
+  public FeaturedVideoComponentObject showControlBar() {
+    jsActions.mouseOver(player);
+    wait.forElementClickable(controlbar);
 
+    return this;
+  }
+
+  public FeaturedVideoComponentObject openSettingsMenu() {
+    showControlBar();
+    wait.forElementClickable(settingsMenu)
+        .click();
+
+    return this;
+  }
 }
 
