@@ -22,7 +22,25 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   private WebElement secondaryTitle;
 
   @FindBy(css = "#featured-video__player")
-  private WebElement playArea;
+  private WebElement playAndStopArea;
+
+  @FindBy(css = ".jw-controlbar")
+  private WebElement controlbar;
+
+  @FindBy(css = ".jw-svg-icon-play")
+  private WebElement controlbarPlayIcon;
+
+  @FindBy(css = ".jw-svg-icon-pause")
+  private WebElement controlbarPauseIcon;
+
+  @FindBy(css = ".video-feedback")
+  private WebElement videoFeedback;
+
+  @FindBy(css = ".wikia-jw-settings__toggle")
+  private WebElement autoplayToggle;
+
+  public FeaturedVideoComponentObject() {
+  }
 
   public FeaturedVideoComponentObject setAutoplayCookie(boolean autoplay) {
     driver.manage().addCookie(new Cookie(
@@ -37,7 +55,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openWikiArticle(String articleName) {
-    this.openWikiPage(getWikiUrl() + URLsContent.WIKI_DIR + articleName);
+    this.openWikiPage(getWikiUrl() + URLsContent.WIKI_DIR + articleName + "?noads=1");
 
     return this;
   }
@@ -54,12 +72,33 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
   public String getSubtitle() {
     wait.forElementVisible(secondaryTitle);
-    return secondaryTitle.getTagName();
+    return secondaryTitle.getText();
   }
 
   public void clickPlay() {
-    wait.forElementVisible(playArea);
-    playArea.click();
+    wait.forElementVisible(playAndStopArea);
+    playAndStopArea.click();
   }
 
+  public void clickPause() {
+    wait.forElementVisible(videoFeedback);
+    playAndStopArea.click();
+  }
+
+  public boolean isVideoPlaying() {
+   wait.forElementVisible(videoFeedback);
+   return videoFeedback.isDisplayed();
+  }
+
+  public boolean isVideoPaused() {
+    wait.forElementNotVisible(videoFeedback);
+    return videoFeedback.isDisplayed();
+  }
+
+  public String autoplayIsOn() {
+    return autoplayToggle.getAttribute("checked");
+  }
+
+
 }
+
