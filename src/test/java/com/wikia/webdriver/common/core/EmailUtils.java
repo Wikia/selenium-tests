@@ -22,12 +22,14 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class EmailUtils {
 
-  private static final String PASSWORD_RESET_LINK =
-    ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
+  private static final String EMAIL_LINK_PATTERN = ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>%s</a>.*";
+  private static final String PASSWORD_RESET_LINK = String.format(EMAIL_LINK_PATTERN, "SET NEW PASSWORD");
+  private static final String CONFIRM_EMAIL_LINK = String.format(EMAIL_LINK_PATTERN, "<span class=\"il\">Confirm</span> Now");
 
   // Pattern.DOTALL flag forces dot in regex to also match line terminators
-  private static Pattern PASSWORD_RESET_PATTERN =
-    Pattern.compile(PASSWORD_RESET_LINK, Pattern.DOTALL);
+  private static Pattern getPatternForString(String value) {
+    return Pattern.compile(value, Pattern.DOTALL);
+  }
 
   private EmailUtils() {
   }
@@ -138,14 +140,22 @@ public class EmailUtils {
   }
 
   public static String getPasswordResetLinkFromEmailContent(String mailContent) {
-    /*
+    return getLinkWith(mailContent, PASSWORD_RESET_LINK);
+  }
+
+  public static String getConfirmationLinkFromEmailContent(String mailContent) {
+    return getLinkWith(mailContent, EMAIL_LINK_PATTERN);
+  }
+
+  private static String getLinkWith(String mailContent, String linkValue) {
+        /*
       remove "=" character except when followed by "3D" hex sequence
       and replace "=3D" sequence with a single "=" character
       because of RFC-2045 line breaks and encoding in IMAP
       see: https://tools.ietf.org/html/rfc2045#section-6.7
     */
     String formattedContent = mailContent.replaceAll("=(?!3D)", "").replaceAll("=3D", "=");
-    Matcher m = PASSWORD_RESET_PATTERN.matcher(formattedContent);
+    Matcher m = getPatternForString(linkValue).matcher(formattedContent);
     if (m.find()) {
       return m.group("url");
     } else {
@@ -166,4 +176,5 @@ public class EmailUtils {
     return emailAddress.replace("+", "").replace("@",
         new String(new char[specialsToAdd]).replace("\0", "+") + "@");
   }
+
 }

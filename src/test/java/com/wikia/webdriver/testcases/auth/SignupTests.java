@@ -34,12 +34,12 @@ public class SignupTests extends NewTestTemplate {
 
   private static final String DESKTOP = "auth-signup-desktop";
   private static final String MOBILE = "auth-signup-mobile";
-  private static final String PASS_PATTERN = "pass_%s";
-  private static final String USERNAME_PATTERN = "QA%s";
+  static final String PASS_PATTERN = "pass_%s";
+  static final String USERNAME_PATTERN = "QA%s";
 
   private UserWithEmail userWithEmail = UserWithEmailFactory.getEmailOnlyUser1();
   private User existingUser = User.LOGIN_USER;
-  private static final LocalDate BIRTH_DATE = LocalDate.of(1993, 3, 19);
+  static final LocalDate BIRTH_DATE = LocalDate.of(1993, 3, 19);
 
   @Test(groups = DESKTOP)
   public void newUserCanSignUpDesktop() {
@@ -203,7 +203,7 @@ public class SignupTests extends NewTestTemplate {
     );
   }
 
-  private String getEmailAlias(String email) {
+  static String getEmailAlias(String email) {
     return email.replace("@", String.format("+%s@", Instant.now().getEpochSecond()));
   }
 
