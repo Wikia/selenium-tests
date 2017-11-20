@@ -13,7 +13,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ResetPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import java.time.Instant;
 import org.testng.annotations.AfterMethod;
@@ -43,7 +42,7 @@ public class ConfirmEmailTests extends NewTestTemplate {
   }
 
   private ArticlePage confirmEmailForUser(UserWithEmail user) {
-    String confirmationLink = BasePageObject.getPasswordResetLink(user.getEmail(), user.getEmailPassword());
+    String confirmationLink = BasePageObject.getEmailConfirmationLink(user.getEmail(), user.getEmailPassword());
     ArticlePage page = new ArticlePage();
     page.openWikiPage(confirmationLink);
     return page;

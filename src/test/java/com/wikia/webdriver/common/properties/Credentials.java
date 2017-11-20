@@ -231,7 +231,7 @@ public class Credentials {
     forgottenPasswordEmail2Password = XMLReader.getValue(file, "ci.email.forgotPass2.password");
 
     confirmEmailAddress = XMLReader.getValue("ci.email.confirmEmail.username");
-    confirmEmailPassword = XMLReader.getValue("ci.email.confirmEmail.username");
+    confirmEmailPassword = XMLReader.getValue("ci.email.confirmEmail.password");
 
     userNameBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.username");
     passwordBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.password");
