@@ -448,7 +448,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public List<Notification> getNotifications(){
-    wait.forElementPresent(BANNER_NOTIFICATION);
+    wait.forElementVisible(BANNER_NOTIFICATION);
     List<Notification> notificationList = new ArrayList<>();
     for (WebElement notificationElement : notificationElements){
       Notification notification = new Notification(driver, notificationElement);

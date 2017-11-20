@@ -43,13 +43,13 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void newUserCanSignUpDesktop() {
-    performSignUpOnDesktopAs(createNewUser());
+    performSignUpOnDesktopAs(createNewUser(userWithEmail));
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void newUserCanSignUpMobile() {
-    performSignUpOnMobileAs(createNewUser());
+    performSignUpOnMobileAs(createNewUser(userWithEmail));
   }
 
   @Test(groups = DESKTOP)
@@ -117,7 +117,7 @@ public class SignupTests extends NewTestTemplate {
   @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
-    signUpOnDesktopFromDiscussionPageAs(createNewUser());
+    signUpOnDesktopFromDiscussionPageAs(createNewUser(userWithEmail));
     assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon sign up");
   }
@@ -127,7 +127,7 @@ public class SignupTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
-    signUpOnDiscussionMobilePageAs(discussionPage, createNewUser());
+    signUpOnDiscussionMobilePageAs(discussionPage, createNewUser(userWithEmail));
     assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon sign up");
   }
@@ -147,11 +147,11 @@ public class SignupTests extends NewTestTemplate {
    * HELPER METHODS
    */
 
-  private SignUpUser createNewUser() {
+  static SignUpUser createNewUser(UserWithEmail user) {
 
     return new SignUpUser(
       String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-      getEmailAlias(userWithEmail.getEmail()),
+      getEmailAlias(user.getEmail()),
       String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
       BIRTH_DATE
     );

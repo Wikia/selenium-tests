@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.testcases.auth.SignupTests.BIRTH_DATE;
-import static com.wikia.webdriver.testcases.auth.SignupTests.PASS_PATTERN;
-import static com.wikia.webdriver.testcases.auth.SignupTests.USERNAME_PATTERN;
-import static com.wikia.webdriver.testcases.auth.SignupTests.getEmailAlias;
+import static com.wikia.webdriver.testcases.auth.SignupTests.createNewUser;
+import static org.testng.Assert.assertTrue;
 
 import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
@@ -16,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
-import java.time.Instant;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,17 +30,16 @@ public class ConfirmEmailTests extends NewTestTemplate {
 
   @Test
   public void testEmailConfirmationFlow() {
-    SignUpUser newUser =  new SignUpUser(
-        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-        getEmailAlias(user.getEmail()),
-        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-        BIRTH_DATE
-    );
+    SignUpUser newUser =  createNewUser(user);
     new DetachedRegisterPage(new NavigationBar().clickOnRegister()).signUp(newUser);
-    new ArticlePage().isNotificationPresent(NotificationType.WARN,
-        "Your email address hasn't been confirmed.");
+    ArticlePage articlePage = new ArticlePage();
+    articlePage.verifyUserLoggedIn(newUser.getUsername());
+
+    assertTrue(articlePage.isNotificationPresent(NotificationType.WARN,
+        "Your email address hasn't been confirmed."));
     UserProfilePage page = confirmEmailForUser(user);
-    page.isNotificationPresent(NotificationType.CONFIRM, "Your email has been confirmed.");
+    assertTrue(page.isNotificationPresent(NotificationType.CONFIRM,
+        "Your email has been confirmed."));
   }
 
   private UserProfilePage confirmEmailForUser(UserWithEmail user) {
