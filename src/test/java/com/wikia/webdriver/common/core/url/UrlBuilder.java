@@ -133,10 +133,14 @@ public class UrlBuilder {
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.format(getUrlProtocol() + "%s.www.%s", devBoxOwner, env.getWikiaDomain());
+        return String.format(getUrlProtocol() + "www.%s.%s", devBoxOwner, env.getWikiaDomain());
       }
       case SANDBOX: {
-        return String.format(getUrlProtocol() + "%s.www.%s", this.env, env.getWikiaDomain());
+        if (newStagingUrlFormat) {
+          return String.format(getUrlProtocol() + "www.%s.%s", this.env, env.getWikiaDomain());
+        } else {
+          return String.format(getUrlProtocol() + "%s.www.%s", this.env, env.getWikiaDomain());
+        }
       }
       default:
         return String.format(getUrlProtocol() + "www.%s", env.getWikiaDomain());
