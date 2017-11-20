@@ -107,7 +107,6 @@
             <class name="com.wikia.webdriver.testcases.discussions.UploadingImageTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
-            <class name="com.wikia.webdriver.testcases.auth.FacebookTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowArticleTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowBlogTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowPhotosTests"/>
@@ -126,9 +125,12 @@
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>
             <class name="com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.ConfirmEmailTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.FacebookTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ForcedLoginTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ForgottenPasswordTests"/>
             <class name="com.wikia.webdriver.testcases.auth.LoginTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mcfootertests.EnAnonMixedContentFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mcfootertests.EnLoggedInUserMixedContentFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mcfootertests.NonEnAnonMixedContentFooterTests"/>
@@ -199,7 +201,6 @@
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.GoSearchFeature"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.Suggestions"/>
-            <class name="com.wikia.webdriver.testcases.auth.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.social.MercuryAssetCheck"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditAccountTests"/>
