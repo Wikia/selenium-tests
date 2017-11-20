@@ -463,6 +463,10 @@ public class WikiBasePageObject extends BasePageObject {
             .collect(Collectors.toList());
   }
 
+  public boolean isNotificationPresent(NotificationType type, String message) {
+    return getNotifications(type).stream().anyMatch(n -> n.getMessage().contains(message));
+  }
+
   public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {
     getUrl(wikiURL + URLsContent.BLOG_NAMESPACE.replace("%userName%", userName) + blogTitle);
     return new BlogPage();

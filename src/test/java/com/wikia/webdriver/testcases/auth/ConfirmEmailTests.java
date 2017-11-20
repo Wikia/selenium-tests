@@ -11,8 +11,10 @@ import com.wikia.webdriver.common.core.helpers.UserWithEmail;
 import com.wikia.webdriver.common.core.helpers.UserWithEmailFactory;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import java.time.Instant;
 import org.testng.annotations.AfterMethod;
@@ -38,12 +40,15 @@ public class ConfirmEmailTests extends NewTestTemplate {
         BIRTH_DATE
     );
     new DetachedRegisterPage(new NavigationBar().clickOnRegister()).signUp(newUser);
-    confirmEmailForUser(user).verifyUserLoggedIn(newUser.getUsername());
+    new ArticlePage().isNotificationPresent(NotificationType.WARN,
+        "Your email address hasn't been confirmed.");
+    UserProfilePage page = confirmEmailForUser(user);
+    page.isNotificationPresent(NotificationType.CONFIRM, "Your email has been confirmed.");
   }
 
-  private ArticlePage confirmEmailForUser(UserWithEmail user) {
+  private UserProfilePage confirmEmailForUser(UserWithEmail user) {
     String confirmationLink = BasePageObject.getEmailConfirmationLink(user.getEmail(), user.getEmailPassword());
-    ArticlePage page = new ArticlePage();
+    UserProfilePage page = new UserProfilePage();
     page.openWikiPage(confirmationLink);
     return page;
   }

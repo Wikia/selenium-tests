@@ -24,7 +24,7 @@ public class EmailUtils {
 
   private static final String EMAIL_LINK_PATTERN = ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>%s</a>.*";
   private static final String PASSWORD_RESET_LINK = String.format(EMAIL_LINK_PATTERN, "SET NEW PASSWORD");
-  private static final String CONFIRM_EMAIL_LINK = String.format(EMAIL_LINK_PATTERN, "<span class=\"il\">Confirm</span> Now");
+  private static final String CONFIRM_EMAIL_LINK = String.format(EMAIL_LINK_PATTERN, "Confirm Now");
 
   // Pattern.DOTALL flag forces dot in regex to also match line terminators
   private static Pattern getPatternForString(String value) {
@@ -145,7 +145,7 @@ public class EmailUtils {
   }
 
   public static String getConfirmationLinkFromEmailContent(String mailContent) {
-    return getLinkWith(mailContent, EMAIL_LINK_PATTERN);
+    return getLinkWith(mailContent, CONFIRM_EMAIL_LINK);
   }
 
   private static String getLinkWith(String mailContent, String linkValue) {
