@@ -8,6 +8,8 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
   private static final String AUTOPLAY_COOKIE = "featuredVideoAutoplay";
@@ -41,6 +43,18 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "#featured-video__player-videoAutoplayToggle")
   private WebElement autoplayToggle;
+
+  @FindBy(css = ".jw-icon-tooltip.jw-icon-volume.jw-off")
+  private WebElement volumeMuted;
+
+  @FindBy(css = ".wikia-jw-settings__quality-button")
+  private WebElement videoQualityButton;
+
+  @FindBy(css = ".wikia-jw-settings__captions-button")
+  private WebElement videoCaptionsButton;
+
+  @FindBy(css = ".wikia-jw-settings__submenu")
+  private List<WebElement> videoSettingsSubmenu;
 
   public FeaturedVideoComponentObject() {
   }
@@ -125,5 +139,26 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
     return this;
   }
+
+  public boolean isVolumeMuted() {
+    wait.forElementClickable(volumeMuted);
+    return volumeMuted.isEnabled();
+  }
+
+  public boolean isQuality() {
+    wait.forElementClickable(videoQualityButton);
+    videoQualityButton.click();
+    return wait.forTextInElement(videoSettingsSubmenu, 0, "Auto");
+
+  }
+
+  public boolean areCaptions() {
+    wait.forElementClickable(videoCaptionsButton);
+    videoCaptionsButton.click();
+    WebElement last = videoSettingsSubmenu.get(videoSettingsSubmenu.size()-1);
+    return wait.forTextInElement(last, "No captions");
+
+  }
+
 }
 

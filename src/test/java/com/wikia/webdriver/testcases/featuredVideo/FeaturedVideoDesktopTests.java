@@ -63,7 +63,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
   }
 
   @Test
-  public void videoIsAutoplayed() {
+  public void autoplaytoggleIsOn() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
@@ -73,7 +73,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
   }
 
   @Test
-  public void videoIsNotAutoplayed() {
+  public void autoplayToggleIsOff() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
@@ -82,5 +82,49 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
     Assertion.assertFalse(video.isAutoplayOn());
   }
+
+  @Test
+  public void videoMutedWhenAutoplayed() {
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo")
+        .clickPause()
+        .showControlBar();
+
+    Assertion.assertTrue(video.isVolumeMuted());
+  }
+
+  @Test
+  public void videoQualityCanChanged() {
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo")
+        .clickPause()
+        .showControlBar()
+        .openSettingsMenu();
+
+    Assertion.assertTrue(video.isQuality());
+
+  }
+
+  @Test
+  @Execute(onWikia = "rybatest", asUser = User.ANONYMOUS)
+
+  public void videoCaptionsCanChanged() {
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideoTest")
+        .clickPause()
+        .showControlBar()
+        .openSettingsMenu();
+
+    Assertion.assertTrue(video.areCaptions());
+
+  }
+
+
+
+
+
 
 }
