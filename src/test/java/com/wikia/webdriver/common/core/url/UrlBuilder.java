@@ -58,7 +58,7 @@ public class UrlBuilder {
     return addPathToUrl(getUrlForWiki(wikiName), wikiPath);
   }
 
-  public String addPathToUrl(String url, String path) {
+  private String addPathToUrl(String url, String path) {
 
     String outputUrl = (!path.startsWith("/")) ? String.format("%s/%s", url, path): String.format("%s%s", url, path);
 
@@ -146,8 +146,8 @@ public class UrlBuilder {
   }
 
   public String getFandomUrl() {
-    EnvType env = Configuration.getEnvType(EnvType.PROD.getKey());
-    return String.format(getUrlProtocol() + "%s.%s", "fandom", env.getWikiaDomain());
+    return String.format(getUrlProtocol() + "%s.%s", "fandom",
+            Configuration.getEnvType(EnvType.PROD.getKey()).getWikiaDomain());
   }
 
   public String getFandomPageUrl(String path) {
