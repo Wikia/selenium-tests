@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.featuredVideo;
+package com.wikia.webdriver.testcases.featuredvideo;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -12,13 +12,14 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "featuredvideo", asUser = User.ANONYMOUS)
 public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
+
   @Test
   public void videoIsPresentOnArticle() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
-    Assertion.assertTrue(video.isFeaturedVideo());
+    Assertion.assertTrue(video.isFeaturedVideoDisplayed());
   }
 
   @Test
@@ -27,7 +28,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
-    Assertion.assertEquals(video.getTitle(), "Why Jon Snow Should Rule Westeros");
+    Assertion.assertEquals(video.getTitle(), "Papuga atakuje!");
   }
 
   @Test
@@ -38,7 +39,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
     Assertion.assertEquals(
         video.getSubtitle(),
-        "Jon Snow is the leader Westeros needs. This is why he should rule the Seven Kingdoms."
+        "Czyli jak wyprowadzic papuge z rownowagi"
     );
   }
 
@@ -103,13 +104,11 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .showControlBar()
         .openSettingsMenu();
 
-    Assertion.assertTrue(video.isQuality());
+    Assertion.assertTrue(video.isQualityAvailable());
 
   }
 
   @Test
-  @Execute(onWikia = "rybatest", asUser = User.ANONYMOUS)
-
   public void videoCaptionsCanChanged() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(true)
@@ -118,13 +117,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .showControlBar()
         .openSettingsMenu();
 
-    Assertion.assertTrue(video.areCaptions());
+    Assertion.assertTrue(video.areCaptionsAvailable());
 
   }
-
-
-
-
 
 
 }

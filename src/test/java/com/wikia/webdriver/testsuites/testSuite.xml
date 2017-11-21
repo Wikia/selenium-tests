@@ -114,7 +114,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
             <class name="com.wikia.webdriver.testcases.fandom.HeroUnitTest"/>
             <class name="com.wikia.webdriver.testcases.fandom.WPAdminPageTest"/>
-            <class name="com.wikia.webdriver.testcases.featuredVideo.FeaturedVideoDesktopTests"/>
+            <class name="com.wikia.webdriver.testcases.featuredvideo.FeaturedVideoDesktopTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowArticleTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowBlogTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowPhotosTests"/>

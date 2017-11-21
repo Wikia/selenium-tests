@@ -56,9 +56,6 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = ".wikia-jw-settings__submenu")
   private List<WebElement> videoSettingsSubmenu;
 
-  public FeaturedVideoComponentObject() {
-  }
-
   public FeaturedVideoComponentObject setAutoplayCookie(boolean autoplay) {
     driver.manage().addCookie(new Cookie(
         AUTOPLAY_COOKIE,
@@ -77,7 +74,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return this;
   }
 
-  public boolean isFeaturedVideo() {
+  public boolean isFeaturedVideoDisplayed() {
     wait.forElementVisible(featuredVideo);
 
     return featuredVideo.isDisplayed();
@@ -145,14 +142,14 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return volumeMuted.isEnabled();
   }
 
-  public boolean isQuality() {
+  public boolean isQualityAvailable() {
     wait.forElementClickable(videoQualityButton);
     videoQualityButton.click();
     return wait.forTextInElement(videoSettingsSubmenu, 0, "Auto");
 
   }
 
-  public boolean areCaptions() {
+  public boolean areCaptionsAvailable() {
     wait.forElementClickable(videoCaptionsButton);
     videoCaptionsButton.click();
     WebElement last = videoSettingsSubmenu.get(videoSettingsSubmenu.size()-1);
