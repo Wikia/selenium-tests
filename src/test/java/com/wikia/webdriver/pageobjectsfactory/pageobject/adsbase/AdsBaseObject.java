@@ -1,8 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -10,8 +7,19 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkinHelper;
+
+import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,7 +62,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       "RemnantGptMobile"
   };
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-  private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
   private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation,.site-head-container";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
@@ -72,8 +79,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement presentMedrec;
   @FindBy(css = FLOATING_MEDREC_SELECTOR)
   private WebElement presentFloatingMedrec;
-  @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
-  private WebElement middlePrefooter;
   @FindBy(css = "#WikiaFooter")
   private WebElement wikiaFooter;
   @FindBy(css = ".mobile-in-content")
