@@ -7,7 +7,7 @@
         <classes>
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPremiumAdLayoutFeaturedVideo"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsMedrecReloading"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsAbcdProductsPriority"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDfpParamsPresentMercury"/>
@@ -61,7 +61,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoFrequencyCapping"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPremiumAdLayout"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
