@@ -88,7 +88,6 @@ public class EmailUtils {
       throw new WebDriverException();
     } catch (MessagingException | IOException | InterruptedException e) {
       PageObjectLogging.log("getFirstEmailContent", e, false);
-      PageObjectLogging.log("Cannot log in", String.format("cannot log in using credentials: %s/%s", userName, password), false);
       throw new WebDriverException();
     }
   }
