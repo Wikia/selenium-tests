@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
 import static com.wikia.webdriver.testcases.auth.SignupTests.createNewUser;
-import static org.testng.Assert.assertTrue;
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
