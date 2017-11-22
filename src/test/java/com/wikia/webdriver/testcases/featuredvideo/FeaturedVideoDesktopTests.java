@@ -121,7 +121,8 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .openWikiArticle("FeaturedVideo")
         .clickPause()
         .showControlBar()
-        .openSettingsMenu();
+        .openSettingsMenu()
+        .openQualityMenu();
 
     Assertion.assertTrue(video.isQualityAvailable());
 

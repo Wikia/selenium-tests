@@ -1,9 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,7 +56,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = ".wikia-jw-settings__quality-button")
   private WebElement videoQualityButton;
 
-  @FindBy(css = ".wikia-jw-settings__captions-button")
+  @FindBy(css = ".wikia-jw-settings__list .wikia-jw-settings__captions-button")
   private WebElement videoCaptionsButton;
 
   @FindBy(css = ".wikia-jw-settings__submenu")
@@ -75,7 +75,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openWikiArticle(String articleName) {
-    this.openWikiPage(getWikiUrl() + URLsContent.WIKI_DIR + articleName + "?noads=1");
+    this.openWikiPage(getWikiUrl() + articleName + "?noads=1");
 
     return this;
   }
@@ -156,7 +156,13 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return this;
   }
 
-  public FeaturedVideoComponentObject openCaptionsMenu(){
+  public FeaturedVideoComponentObject openQualityMenu() {
+    wait.forElementClickable(videoQualityButton);
+    videoQualityButton.click();
+    return this;
+  }
+
+  public FeaturedVideoComponentObject openCaptionsMenu() {
     wait.forElementClickable(videoCaptionsButton);
     videoCaptionsButton.click();
     return this;
@@ -168,16 +174,13 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public boolean isQualityAvailable() {
-    wait.forElementClickable(videoQualityButton);
-    videoQualityButton.click();
+
     return wait.forTextInElement(videoSettingsSubmenu, 0, "Auto");
 
   }
 
   public boolean areCaptionsAvailable() {
-    wait.forElementClickable(videoCaptionsButton);
-    videoCaptionsButton.click();
-    WebElement last = videoSettingsSubmenu.get(videoSettingsSubmenu.size()-1);
+    By last = By.xpath("//*[@data-track='0']");
     return wait.forTextInElement(last, "No captions");
 
   }
