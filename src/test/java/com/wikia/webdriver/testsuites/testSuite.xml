@@ -106,6 +106,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.UploadingImageTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
+            <class name="com.wikia.webdriver.testcases.dpl.DplQueryTest"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowArticleTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowBlogTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowPhotosTests"/>
