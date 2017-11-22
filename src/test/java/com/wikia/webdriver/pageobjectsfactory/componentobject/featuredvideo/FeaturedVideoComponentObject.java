@@ -38,6 +38,12 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = ".jw-svg-icon-pause")
   private WebElement controlbarPauseIcon;
 
+  @FindBy(css = ".jw-state-playing")
+  private WebElement playerStatePlaying;
+
+  @FindBy(css = ".jw-state-paused")
+  private WebElement playerStatePaused;
+
   @FindBy(css = ".video-feedback")
   private WebElement videoFeedback;
 
@@ -107,12 +113,25 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public boolean isVideoPlaying() {
+    wait.forElementVisible(playerStatePlaying);
+
+    return playerStatePlaying.isDisplayed();
+  }
+
+  public boolean isVideoPaused() {
+    wait.forElementVisible(playerStatePaused);
+
+    return playerStatePaused.isDisplayed();
+  }
+
+
+  public boolean isVideoFeedbackDisplayed() {
     wait.forElementVisible(videoFeedback);
 
     return videoFeedback.isDisplayed();
   }
 
-  public boolean isVideoPaused() {
+  public boolean isVideoFeedbackNotDisplayed() {
     wait.forElementNotVisible(videoFeedback);
 
     return videoFeedback.isDisplayed();
@@ -134,6 +153,12 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     wait.forElementClickable(settingsMenu)
         .click();
 
+    return this;
+  }
+
+  public FeaturedVideoComponentObject openCaptionsMenu(){
+    wait.forElementClickable(videoCaptionsButton);
+    videoCaptionsButton.click();
     return this;
   }
 

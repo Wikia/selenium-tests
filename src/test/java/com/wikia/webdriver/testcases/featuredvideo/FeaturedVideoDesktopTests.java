@@ -44,11 +44,20 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
   }
 
   @Test
-  public void videoIsPlaying() {
+  public void feedbackIsVisibleWhenVideoPlayed() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
         .clickPlay();
+
+    Assertion.assertTrue(video.isVideoFeedbackDisplayed());
+  }
+
+  @Test
+  public void videoIsPlaying() {
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isVideoPlaying());
   }
@@ -60,11 +69,21 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .openWikiArticle("FeaturedVideo")
         .clickPause();
 
-    Assertion.assertFalse(video.isVideoPaused());
+    Assertion.assertTrue(video.isVideoPaused());
   }
 
   @Test
-  public void autoplaytoggleIsOn() {
+  public void feedbackIsNotVisibleWhenVideoPaused() {
+    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo")
+        .clickPause();
+
+    Assertion.assertFalse(video.isVideoFeedbackNotDisplayed());
+  }
+
+  @Test
+  public void autoplayToggleIsOn() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
@@ -96,7 +115,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
   }
 
   @Test
-  public void videoQualityCanChanged() {
+  public void videoQualityCanBeChanged() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
@@ -109,13 +128,14 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
   }
 
   @Test
-  public void videoCaptionsCanChanged() {
+  public void videoCaptionsCanBeChanged() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(true)
-        .openWikiArticle("FeaturedVideoTest")
+        .openWikiArticle("FeaturedVideo")
         .clickPause()
         .showControlBar()
-        .openSettingsMenu();
+        .openSettingsMenu()
+        .openCaptionsMenu();
 
     Assertion.assertTrue(video.areCaptionsAvailable());
 
