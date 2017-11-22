@@ -19,7 +19,6 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountrie";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
-  private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT = "wgAdDriverPremiumAdLayoutCountries";
 
   private static final String ADONIS_MARKER_BOTTOM_LEADERBOARD_SELECTOR =
       "div[id*=BOTTOM_LEADERBOARD][adonis-marker] iframe[id*=BOTTOM_LEADERBOARD]";
@@ -71,8 +70,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private String getUrlArticlePageFairRecovery() {
     String url = urlBuilder.globallyDisableGeoInstantGlobalOnPage(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC);
-    url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, INSTANT_GLOBAL_PAGE_FAIR);
 
-    return urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT);
+    return urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, INSTANT_GLOBAL_PAGE_FAIR);
   }
 }

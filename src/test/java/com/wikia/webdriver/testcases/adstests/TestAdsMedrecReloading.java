@@ -8,24 +8,22 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.PremiumAdLayout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TestPremiumAdLayoutFeaturedVideo extends TemplateNoFirstLoad {
+public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   private static final By RECIRCULATION_SELECTOR = By.id("recirculation-rail");
   private static final By FMR_SELECTOR = By.id(AdsContent.FLOATING_MEDREC);
 
   @Test(
-          groups = {"AdMixFeaturedVideoOasis", "PremiumAdLayoutRefreshFMR"},
-          dataProviderClass = AdsDataProvider.class,
-          dataProvider = "premiumLayoutPages"
+          groups = {"AdsRefreshFMR"}
   )
-  public void regularFloatingMedrecIsReloadingWithRecirculationModule(Page page) {
-    AdsBaseObject ads = new AdsBaseObject(driver, PremiumAdLayout.addTurnOnParams(urlBuilder, page));
+  public void regularFloatingMedrecIsReloadingWithRecirculationModule() {
+    Page page = new Page("project43", "SyntheticTests/LongPage");
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
 
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
     ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
@@ -38,10 +36,10 @@ public class TestPremiumAdLayoutFeaturedVideo extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = {"PremiumAdLayout", "PremiumAdLayoutRefreshFMRWithUAP"}
+          groups = {"AdsRefreshFMRWithUAP"}
   )
   public void uapFloatingMedrecIsReloadingOnceWithRecirculationModule() {
-    AdsBaseObject ads = new AdsBaseObject(driver, PremiumAdLayout.addTurnOnParams(urlBuilder, AdsDataProvider.UAP_PAGE));
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_PAGE.getUrl());
 
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
     ads.wait.forElementVisible(RECIRCULATION_SELECTOR);

@@ -80,6 +80,16 @@ public class BasePageObject {
     return resetLink;
   }
 
+  public static String getEmailConfirmationLink(String email, String password) {
+    String emailConfirmationMessage = EmailUtils.getFirstEmailContent(email, password,
+        "Confirm your email and get started on FANDOM!");
+    String confirmationLink = EmailUtils.getConfirmationLinkFromEmailContent(emailConfirmationMessage);
+    PageObjectLogging.log("Email confirmation link", "Email confirmation link received: " + confirmationLink,
+        true);
+
+    return confirmationLink;
+  }
+
   // wait for comscore to load
   public void waitForPageLoad() {
     wait.forElementPresent(

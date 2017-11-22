@@ -68,6 +68,9 @@ public class Credentials {
   public final String forgottenPasswordEmail2Address;
   public final String forgottenPasswordEmail2Password;
 
+  public final String confirmEmailAddress;
+  public final String confirmEmailPassword;
+
   public final String userNameStaff;
   public final String userNameStaffId;
   public final String passwordStaff;
@@ -226,6 +229,9 @@ public class Credentials {
 
     forgottenPasswordEmail2Address = XMLReader.getValue(file, "ci.email.forgotPass2.username");
     forgottenPasswordEmail2Password = XMLReader.getValue(file, "ci.email.forgotPass2.password");
+
+    confirmEmailAddress = XMLReader.getValue("ci.email.confirmEmail.username");
+    confirmEmailPassword = XMLReader.getValue("ci.email.confirmEmail.password");
 
     userNameBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.username");
     passwordBlocked = XMLReader.getValue(file, "ci.user.tooManyLoginAttempts.password");
