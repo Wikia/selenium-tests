@@ -62,7 +62,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static String screenDirPath = reportPath + "screenshots" + File.separator;
   private static String screenPath = screenDirPath + "screenshot";
   private static String logFileName = "log.html";
+  private static String browserHistoryFileName = "history.yaml";
   private static String logPath = reportPath + logFileName;
+  private static String browserHistoryPath = reportPath + browserHistoryFileName;
   private static String jiraPath = "https://wikia-inc.atlassian.net/browse/";
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
   private static boolean testStarted = false;
@@ -282,6 +284,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String description = VelocityWrapper.fillLink(url, url);
     String html = VelocityWrapper.fillLogRow(classList, command, description);
     CommonUtils.appendTextToFile(logPath, html);
+    CommonUtils.appendTextToFile(browserHistoryPath, "- src_url: " + url);
     logJSError();
   }
 
@@ -295,14 +298,17 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         String description = VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
         String html = VelocityWrapper.fillLogRow(classList, command, description);
         CommonUtils.appendTextToFile(logPath, html);
+        CommonUtils.appendTextToFile(browserHistoryPath, "  dst_url: " + url);
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
         }
         logWarning("Url after navigation", driver.getCurrentUrl());
+        CommonUtils.appendTextToFile(browserHistoryPath, "  dst_url: " + driver.getCurrentUrl());
       }
     } else {
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
+      CommonUtils.appendTextToFile(browserHistoryPath, "  dst_url: \"\"");
     }
 
     if (driver.getCurrentUrl().contains(Configuration.getWikiaDomain())) {
