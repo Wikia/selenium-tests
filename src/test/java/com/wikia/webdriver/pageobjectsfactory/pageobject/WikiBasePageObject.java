@@ -448,7 +448,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public List<Notification> getNotifications(){
-    wait.forElementPresent(BANNER_NOTIFICATION);
+    wait.forElementVisible(BANNER_NOTIFICATION);
     List<Notification> notificationList = new ArrayList<>();
     for (WebElement notificationElement : notificationElements){
       Notification notification = new Notification(driver, notificationElement);
@@ -461,6 +461,10 @@ public class WikiBasePageObject extends BasePageObject {
     List<Notification> notificationList = getNotifications();
     return notificationList.stream().filter(n -> n.getType().toLowerCase().contains(notificationType.getClassName()))
             .collect(Collectors.toList());
+  }
+
+  public boolean isNotificationPresent(NotificationType type, String message) {
+    return getNotifications(type).stream().anyMatch(n -> n.getMessage().contains(message));
   }
 
   public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {

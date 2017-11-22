@@ -220,7 +220,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   private Notifications getNotificationsOnArticlePageMobile() {
-    return getNotificationsMobile(new ArticlePage().open(MercurySubpages.MAIN_PAGE));
+    return getNotificationsMobile(new ArticlePage().openDefault());
   }
 
   private Notifications getNotificationsMobile(WikiBasePageObject page) {
