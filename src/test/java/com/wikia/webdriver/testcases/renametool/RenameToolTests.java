@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -30,7 +31,7 @@ import java.util.Date;
 public class RenameToolTests extends NewTestTemplate {
 
   @Test(groups = {"renameTool_01"})
-  @Execute(asUser = User.LUKAS)
+  @Execute(asUser = User.QARENAME)
   public void UserProvidesCorrectNewNameDoesntClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
         .open()
@@ -41,7 +42,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test(groups = {"renameTool_01"})
-  @Execute(asUser = User.LUKAS)
+  @Execute(asUser = User.QARENAME)
   public void UserProvidesInCorrectNewNameDoesClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
         .open()
@@ -53,7 +54,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test(groups = {"renameTool_01"})
-  @Execute(asUser = User.LUKAS)
+  @Execute(asUser = User.QARENAME)
   public void UserProvidesNoNewUserName_ErrorIsShown() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
         .open()
@@ -64,7 +65,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test(groups = {"renameTool_01"})
-  @Execute(asUser = User.LUKAS)
+  @Execute(asUser = User.QARENAME)
   @RelatedIssue(issueID = "SUS-123", comment = "Ten test nie działą")
   public void UserAlreadyRenamedMessageShowed() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
@@ -75,7 +76,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test(groups = {"renameTool_01"})
-  @Execute(asUser = User.LUKAS)
+  @Execute(asUser = User.QARENAME)
   @RelatedIssue(issueID = "SUS-123", comment = "Ten test nie działą")
   public void GoToHelpPage() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
@@ -86,7 +87,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test(groups = {"renameTool_01"})
-  @Execute(asUser = User.LUKAS)
+  @Execute(asUser = User.QARENAME)
   public void ConfirmationModalDecline_RedirectionToRenameTool() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
         .open()
@@ -102,7 +103,7 @@ public class RenameToolTests extends NewTestTemplate {
     String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
         .open()
-        .fillFormData("NewUserName_" + timestamp, "NewUserName_" + timestamp, User.LUKAS
+        .fillFormData("NewUserName_" + timestamp, "NewUserName_" + timestamp, User.QARENAME
             .getPassword())
         .agreeToTermsAndConditions();
 //        .submitChange();
@@ -115,27 +116,21 @@ public class RenameToolTests extends NewTestTemplate {
   public void NewUserCreateAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
-    EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
     SignUpUser
         user =
         new SignUpUser("QARenameUser" + timestamp, credentials.email, "aaaa",
                        LocalDate.of(1993, 3, 19));
-    new DetachedRegisterPage(new NavigationBar().clickOnRegister()).signUp(user);
-    new WikiBasePageObject().verifyUserLoggedIn(user.getUsername());
-    String emailContent = EmailUtils.getFirstEmailContent(credentials.email, credentials
-                                                           .emailPassword,
-                                           "Confirm your email and get "
-                                                                                  + "started on "
-                                                                                  + "FANDOM!");
-    String url = EmailUtils.getPasswordResetLinkFromEmailContent(emailContent);
+    UserRegistration.registerUserEmailConfirmed(user);
+    new WikiBasePageObject().loginAs(user.getUsername(),user.getPassword(),wikiURL);
+
 
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
         .open()
         .fillFormData("NewUserName" + timestamp, "NewUserName" + timestamp, user.getPassword())
-        .agreeToTermsAndConditions();
-//        .submitChange();
+        .agreeToTermsAndConditions()
+        .submitChange();
     new ConfirmationModalPage(driver).accept();
-    Assertion.assertEquals(renameUserPage.getHeaderText(), "Rename process is in progress. The "
+    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(), "Rename process is in progress. The "
                                                            + "rest will be done in background. You will be notified via e-mail when it is completed.");
   }
 

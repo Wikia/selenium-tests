@@ -26,7 +26,8 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   private WebElement currentPasswordTextBox;
   @FindBy(css = "#understand-consequences")
   private WebElement termsAndConditionsCheckBox;
-
+  @FindBy(css = ".successbox")
+  private WebElement successBox;
 
   public SpecialRenameUserPage(WebDriver driver) {
     super();
@@ -63,6 +64,8 @@ public class SpecialRenameUserPage extends SpecialPageObject {
     submitButton.click();
     return this;
   }
+
+  public String getSuccessBoxMessage() { return successBox.getText(); }
 
   public String getErrorMessage() {
     return errorMessageTextBox.getText();
