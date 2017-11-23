@@ -58,6 +58,10 @@ public class AdsContent {
   }
 
   public static String getSlotSelector(String slotName) {
+    if(slotName.startsWith("MOBILE")) {
+      return MOBILE_SLOTS_SELECTORS.get(slotName);
+    }
+
     return SLOTS_SELECTORS.get(slotName);
   }
 
