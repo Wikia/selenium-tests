@@ -138,6 +138,8 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public boolean isAutoplayOn() {
+    wait.forElementVisible(autoplayToggle);
+    scrollTo(autoplayToggle);
     return "true".equals(autoplayToggle.getAttribute("checked"));
   }
 
