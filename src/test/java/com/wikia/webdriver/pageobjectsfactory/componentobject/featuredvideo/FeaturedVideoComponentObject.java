@@ -150,6 +150,8 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
   public FeaturedVideoComponentObject openSettingsMenu() {
     showControlBar();
+    wait.forElementVisible(settingsMenu);
+    scrollTo(settingsMenu);
     wait.forElementClickable(settingsMenu)
         .click();
 
@@ -157,14 +159,16 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openQualityMenu() {
-    wait.forElementClickable(videoQualityButton);
-    videoQualityButton.click();
+    wait.forElementClickable(videoQualityButton)
+        .click();
+
     return this;
   }
 
   public FeaturedVideoComponentObject openCaptionsMenu() {
-    wait.forElementClickable(videoCaptionsButton);
-    videoCaptionsButton.click();
+    wait.forElementClickable(videoCaptionsButton)
+        .click();
+
     return this;
   }
 
