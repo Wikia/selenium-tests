@@ -26,11 +26,22 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__search-icon > svg")
   private WebElement inputFieldSearchIcon;
 
+  @FindBy(css = ".wikia-search__container")
+  private WebElement searchContainer;
+
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
   private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content";
   private static final String focusedSearchInput = ".wikia-search--focused input";
+
+  public boolean isPresent(){
+    return isElementOnPage(searchInput);
+  }
+
+  public int getHeight() {
+    return searchContainer.getSize().getHeight();
+  }
 
   public String clickSearchSuggestion(int index, Skin fromSkin) {
     String clickedSuggestion;
