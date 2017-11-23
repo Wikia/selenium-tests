@@ -3,8 +3,9 @@ package com.wikia.webdriver.common.core.elemnt;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.components.Search;
+import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -132,9 +133,14 @@ public class JavascriptActions {
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     int offset = wikiPage.getNavigationBarOffsetFromTop();
     if (wikiPage.isBannerNotificationContainerPresent()) {
-      int notificationsHeight = wikiPage.getBannerNotificationsHeight();
-      offset += notificationsHeight;
+      offset += wikiPage.getBannerNotificationsHeight();
     }
+
+    Search searchComponent = new SearchResultsPage().getSearch();
+    if (searchComponent.isPresent()) {
+      offset += searchComponent.getHeight();
+    }
+
     return offset;
   }
 
