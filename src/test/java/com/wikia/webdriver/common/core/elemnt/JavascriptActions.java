@@ -132,12 +132,14 @@ public class JavascriptActions {
   private int getOffset() {
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     int offset = wikiPage.getNavigationBarOffsetFromTop();
-    if (wikiPage.isBannerNotificationContainerPresent())
+    if (wikiPage.isBannerNotificationContainerPresent()) {
       offset += wikiPage.getBannerNotificationsHeight();
+    }
 
     Search searchComponent = new SearchResultsPage().getSearch();
-    if (searchComponent.isPresent())
+    if (searchComponent.isPresent()) {
       offset += searchComponent.getHeight();
+    }
 
     return offset;
   }
