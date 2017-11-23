@@ -3,10 +3,13 @@ package com.wikia.webdriver.common.templates.core;
 import java.io.File;
 import java.lang.reflect.Method;
 
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.Dimension;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
@@ -32,7 +35,7 @@ public abstract class CoreTestTemplate {
   protected WikiaWebDriver driver;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
-  protected void refreshDriver() {
+  private void refreshDriver() {
     driver = DriverProvider.getActiveDriver();
   }
 
@@ -67,6 +70,9 @@ public abstract class CoreTestTemplate {
 
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
+    if (networkTrafficInterceptor != null && Configuration.getForceHttps()) {
+      networkTrafficInterceptor.startIntercepting();
+    }
     setWindowSize();
 
     loadFirstPage();
@@ -123,7 +129,7 @@ public abstract class CoreTestTemplate {
   /**
    * Return false if test is excluded from running on current test environment
    */
-  protected boolean isTestExcludedFromEnv(Method method) {
+  private boolean isTestExcludedFromEnv(Method method) {
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
 
@@ -136,7 +142,7 @@ public abstract class CoreTestTemplate {
     return false;
   }
 
-  protected void prepareDirectories() {
+  private void prepareDirectories() {
     CommonUtils.deleteDirectory("." + File.separator + "logs");
     CommonUtils.createDirectory("." + File.separator + "logs");
   }
@@ -157,6 +163,15 @@ public abstract class CoreTestTemplate {
   @AfterClass(alwaysRun = true)
   public void stop() {
     DriverProvider.close();
+    if ( networkTrafficInterceptor != null ) {
+      Har har = networkTrafficInterceptor.getHar();
+      for (HarEntry entry : har.getLog().getEntries()) {
+        if (entry.getRequest().getUrl().matches("^https?://.*\\.wikia\\..*/")) {
+          Boolean isHttps = entry.getRequest().getUrl().startsWith("https");
+          PageObjectLogging.log("VISITED URL", "Url: " + entry.getRequest().getUrl(), !Configuration.getForceHttps() || isHttps);
+        }
+      }
+    }
   }
 
   protected void switchToWindow(int index) {

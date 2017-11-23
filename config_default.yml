@@ -14,7 +14,7 @@ jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
 mockAds: false
-forceHttps: false
+forceHttps: true
 newStagingUrlFormat: true
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
