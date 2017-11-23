@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"FeaturedVideoDesktop"})
 @Execute(onWikia = "featuredvideo", asUser = User.ANONYMOUS)
-@InBrowser(browserSize = "1024x768")
+@InBrowser(browserSize = "1024x1024")
 public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
 
