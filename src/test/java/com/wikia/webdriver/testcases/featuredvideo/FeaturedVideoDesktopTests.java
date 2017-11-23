@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.featuredvideo;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo.FeaturedVideoComponentObject;
@@ -11,7 +12,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"FeaturedVideoDesktop"})
 @Execute(onWikia = "featuredvideo", asUser = User.ANONYMOUS)
-@InBrowser(browserSize = "1024x1024")
+@InBrowser(browser = Browser.FIREFOX, browserSize = "1024x1024")
 public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
 
