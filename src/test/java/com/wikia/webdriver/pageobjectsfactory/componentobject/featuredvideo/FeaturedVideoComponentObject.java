@@ -159,6 +159,8 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openQualityMenu() {
+    wait.forElementVisible(videoQualityButton);
+    scrollTo(videoQualityButton);
     wait.forElementClickable(videoQualityButton)
         .click();
 
@@ -166,6 +168,8 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openCaptionsMenu() {
+    wait.forElementVisible(videoCaptionsButton);
+    scrollTo(videoCaptionsButton);
     wait.forElementClickable(videoCaptionsButton)
         .click();
 
