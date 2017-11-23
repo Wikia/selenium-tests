@@ -138,8 +138,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public boolean isAutoplayOn() {
-    wait.forElementVisible(autoplayToggle);
-    scrollTo(autoplayToggle);
+
     return "true".equals(autoplayToggle.getAttribute("checked"));
   }
 
@@ -152,8 +151,6 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
 
   public FeaturedVideoComponentObject openSettingsMenu() {
     showControlBar();
-    wait.forElementVisible(settingsMenu);
-    scrollTo(settingsMenu);
     wait.forElementClickable(settingsMenu)
         .click();
 
@@ -161,8 +158,6 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openQualityMenu() {
-    wait.forElementVisible(videoQualityButton);
-    scrollTo(videoQualityButton);
     wait.forElementClickable(videoQualityButton)
         .click();
 
@@ -170,9 +165,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openCaptionsMenu() {
-    wait.forElementVisible(videoCaptionsButton);
-    scrollTo(videoCaptionsButton);
-    wait.forElementClickable(videoCaptionsButton)
+   wait.forElementClickable(videoCaptionsButton)
         .click();
 
     return this;
