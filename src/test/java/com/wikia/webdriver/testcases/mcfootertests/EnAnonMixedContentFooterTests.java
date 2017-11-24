@@ -191,7 +191,12 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
     Assertion.assertNotEquals(urlMainPage, urlArticle);
   }
 
-  @Test
+  /**
+   * Those 2 tests below are commented because Liftigniter not always throws card with a video
+   * from Fandom or Wiki article and they are randomly failing
+   */
+
+  @Test(enabled = false)
   public void userIsTakenToFandomArticleWithVideoAfterClickOnFandomVideoCard() {
     FandomPageObject fandomPage = new MixedContentFooter()
         .openWikiMainPage()
@@ -206,7 +211,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
     Assertion.assertTrue(fandomPage.isFeaturedVideo());
   }
 
-  @Test
+  @Test(enabled = false)
   public void userIsTakenToWikiArticleWithVideoAfterClickOnWikiVideoCard() {
     MixedContentFooter mcf = new MixedContentFooter()
         .openWikiMainPage();
