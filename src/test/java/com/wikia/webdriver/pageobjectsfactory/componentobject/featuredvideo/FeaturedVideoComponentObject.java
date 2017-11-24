@@ -138,6 +138,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public boolean isAutoplayOn() {
+
     return "true".equals(autoplayToggle.getAttribute("checked"));
   }
 
@@ -157,14 +158,16 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoComponentObject openQualityMenu() {
-    wait.forElementClickable(videoQualityButton);
-    videoQualityButton.click();
+    wait.forElementClickable(videoQualityButton)
+        .click();
+
     return this;
   }
 
   public FeaturedVideoComponentObject openCaptionsMenu() {
-    wait.forElementClickable(videoCaptionsButton);
-    videoCaptionsButton.click();
+   wait.forElementClickable(videoCaptionsButton)
+        .click();
+
     return this;
   }
 
