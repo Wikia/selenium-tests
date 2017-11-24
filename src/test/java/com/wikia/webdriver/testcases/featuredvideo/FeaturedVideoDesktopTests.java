@@ -102,6 +102,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
         .clickPlay()
+        .clickPause()
         .openSettingsMenu();
 
     Assertion.assertFalse(video.isAutoplayOn());
