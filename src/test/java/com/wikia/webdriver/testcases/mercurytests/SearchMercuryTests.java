@@ -36,7 +36,7 @@ public class SearchMercuryTests extends SearchTests {
         .getTopBar()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
-        .clickSearchSuggestion(0, Skin.MERCURY);
+        .clickSearchSuggestion(0);
 
     ArticlePage page = new ArticlePage();
     page.getHeader().waitForLoaded();

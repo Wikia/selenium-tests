@@ -44,7 +44,7 @@ public class Search extends BasePageObject {
     return searchContainer.getSize().getHeight();
   }
 
-  public String clickSearchSuggestion(int index, Skin fromSkin) {
+  public String clickSearchSuggestion(int index) {
     wait.forElementNotVisible(suggestionsLoading);
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
@@ -76,7 +76,7 @@ public class Search extends BasePageObject {
     PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
     PageObjectLogging.logInfo("Select first search suggestion");
-    clickSearchSuggestion(0, Skin.MOBILE_WIKI);
+    clickSearchSuggestion(0);
 
     return this;
   }

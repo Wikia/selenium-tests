@@ -37,7 +37,7 @@ public class SearchMobileWikiTests extends SearchTests {
     String clickedSuggestion = article.getTopBar()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
-        .clickSearchSuggestion(0, Skin.MOBILE_WIKI);
+        .clickSearchSuggestion(0);
 
     Assertion.assertEquals(
         clickedSuggestion.toLowerCase(),
