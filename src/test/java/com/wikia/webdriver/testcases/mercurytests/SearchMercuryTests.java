@@ -38,8 +38,10 @@ public class SearchMercuryTests extends SearchTests {
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0, Skin.MERCURY);
 
+    ArticlePage page = new ArticlePage();
+    page.getHeader().waitForLoaded();
     Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(), new ArticlePage().getHeader().getPageTitle().toLowerCase()
+        clickedSuggestion.toLowerCase(), page.getHeader().getPageTitle().toLowerCase()
     );
   }
 
