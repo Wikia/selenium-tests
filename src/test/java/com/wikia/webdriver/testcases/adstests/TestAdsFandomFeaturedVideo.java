@@ -26,7 +26,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     jwPlayerObject.verifyPreroll();
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Test(
       groups = {"AdsFeaturedVideoF2Desktop"}
   )

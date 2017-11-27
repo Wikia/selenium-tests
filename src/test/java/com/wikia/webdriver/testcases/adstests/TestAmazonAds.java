@@ -26,7 +26,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
   }
 
   @Test(groups = "AmazonAdsDesktop")
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   public void testAmazonVideoAdsDesktop() {
     testAmazonVideo();
   }
