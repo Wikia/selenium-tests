@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -12,9 +13,13 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -38,6 +43,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +76,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
   private static boolean testStarted = false;
   private By lastFindBy;
-  private WebDriver driver;
+  private WikiaWebDriver driver;
 
   private static String getPageSource(WebDriver driver) {
     return driver.getPageSource().replaceAll("<script", "<textarea style=\"display: none\"><script")
@@ -268,6 +277,22 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private void stopLogging() {
+    NetworkTrafficInterceptor networkTrafficInterceptor = driver.getProxy();
+    if ( networkTrafficInterceptor != null ) {
+      Har har = networkTrafficInterceptor.getHar();
+      for (HarEntry entry : har.getLog().getEntries()) {
+        URL url = null;
+        try {
+          url = new URL(entry.getRequest().getUrl());
+          if (url.getHost().contains("wikia")) {
+            Boolean isHttps = entry.getRequest().getUrl().startsWith("https");
+            PageObjectLogging.log("VISITED URL", "Url: " + entry.getRequest().getUrl(), !Configuration.getForceHttps() || isHttps);
+          }
+        } catch (MalformedURLException e) {
+          PageObjectLogging.log("MALFORMED URL", "Url: " + entry.getRequest().getUrl(), false);
+        }
+      }
+    }
     String html = VelocityWrapper.fillLastLogRow();
     CommonUtils.appendTextToFile(logPath, html);
     testStarted = false;

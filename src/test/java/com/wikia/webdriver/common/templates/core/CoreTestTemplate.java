@@ -163,15 +163,6 @@ public abstract class CoreTestTemplate {
   @AfterClass(alwaysRun = true)
   public void stop() {
     DriverProvider.close();
-    if ( networkTrafficInterceptor != null ) {
-      Har har = networkTrafficInterceptor.getHar();
-      for (HarEntry entry : har.getLog().getEntries()) {
-        if (entry.getRequest().getUrl().matches("^https?://.*\\.wikia\\..*/")) {
-          Boolean isHttps = entry.getRequest().getUrl().startsWith("https");
-          PageObjectLogging.log("VISITED URL", "Url: " + entry.getRequest().getUrl(), !Configuration.getForceHttps() || isHttps);
-        }
-      }
-    }
   }
 
   protected void switchToWindow(int index) {
