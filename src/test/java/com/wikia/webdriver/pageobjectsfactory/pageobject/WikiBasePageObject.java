@@ -152,20 +152,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public boolean isBannerNotificationContainerPresent(){
-    return isElementPresent(BANNER_NOTIFICATION_CONTAINER);
-  }
-
-  /**
-   * Checks if present NOW
-   *
-   * TODO: Move this logic to better place (WebElement?)
-   */
-  public boolean isElementPresent(By selector){
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
-    boolean result = driver.findElements(selector).size() != 0;
-    restoreDefaultImplicitWait();
-
-    return result;
+    return isElementOnPage(BANNER_NOTIFICATION_CONTAINER);
   }
 
   public int getBannerNotificationsHeight(){

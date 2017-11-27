@@ -2,7 +2,6 @@ package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
-
 import org.apache.commons.lang.StringUtils;
 
 public class UrlBuilder {
@@ -56,19 +55,18 @@ public class UrlBuilder {
   }
 
   public String getUrlForPath(String wikiName, String wikiPath) {
-    String url = "";
-    if (!wikiPath.startsWith("/")) {
-      url = String.format("%s/%s", getUrlForWiki(wikiName), wikiPath);
-    } else {
-      url = String.format("%s%s", getUrlForWiki(wikiName), wikiPath);
-    }
+    return addPathToUrl(getUrlForWiki(wikiName), wikiPath);
+  }
+
+  private String addPathToUrl(String url, String path) {
+
+    String outputUrl = (!path.startsWith("/")) ? String.format("%s/%s", url, path): String.format("%s%s", url, path);
 
     String qs = Configuration.getQS();
     if (StringUtils.isNotBlank(qs)) {
-      url = appendQueryStringToURL(url, qs);
+      outputUrl = appendQueryStringToURL(outputUrl, qs);
     }
-
-    return url;
+    return outputUrl;
   }
 
   public String getUrlForPath(String wikiPath) {
@@ -127,7 +125,7 @@ public class UrlBuilder {
     return "http://";
   }
 
-  public String getWikiGlobalURL(){
+  public String getWikiGlobalURL() {
     EnvType env = Configuration.getEnvType(this.env);
 
     switch (env) {
@@ -145,6 +143,15 @@ public class UrlBuilder {
       default:
         return String.format(getUrlProtocol() + "www.%s", env.getWikiaDomain());
     }
+  }
+
+  public String getFandomUrl() {
+    return String.format(getUrlProtocol() + "%s.%s", "fandom",
+            Configuration.getEnvType(EnvType.PROD.getKey()).getWikiaDomain());
+  }
+
+  public String getFandomPageUrl(String path) {
+    return addPathToUrl(getFandomUrl(), path);
   }
 
   private String getWikiaGlobalName(String wikiName) {
