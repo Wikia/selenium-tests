@@ -32,7 +32,7 @@ public class Search extends BasePageObject {
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
-  private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content";
+  private static final String searchSuggestionClass = ".wikia-search__suggestions li";
   private static final String focusedSearchInput = ".wikia-search--focused input";
 
   public boolean isPresent(){
