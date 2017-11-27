@@ -17,7 +17,7 @@ mockAds: false
 forceHttps: true
 newStagingUrlFormat: true
 disableCommunityPageSalesPitchDialog: true
-useMITM: false
+useMITM: true
 useZapProxy: false
 
 # Specify browser window size in format <width>x<height>, example: 800x600
