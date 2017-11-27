@@ -32,8 +32,9 @@ public class Search extends BasePageObject {
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
-  private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content";
+  private static final String searchSuggestionClass = ".wikia-search__suggestions li";
   private static final String focusedSearchInput = ".wikia-search--focused input";
+  private static final By suggestionsLoading = By.className("wikia-search__loading");
 
   public boolean isPresent(){
     return isElementOnPage(searchInput);
@@ -43,23 +44,15 @@ public class Search extends BasePageObject {
     return searchContainer.getSize().getHeight();
   }
 
-  public String clickSearchSuggestion(int index, Skin fromSkin) {
-    String clickedSuggestion;
+  public String clickSearchSuggestion(int index) {
+    wait.forElementNotVisible(suggestionsLoading);
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
-
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
-    clickedSuggestion = searchResult.getText();
-
+    String clickedSuggestion = searchResult.getText();
     searchResult.click();
-
-    // Mobile wiki opens the suggested page using AJAX, Mercury reloads the page and opens Mobile Wiki
-    if (fromSkin == Skin.MOBILE_WIKI) {
-      waitForPageReload();
-    } else {
-      Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
-    }
+    waitForPageReload();
 
     return clickedSuggestion;
   }
@@ -83,7 +76,7 @@ public class Search extends BasePageObject {
     PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
     PageObjectLogging.logInfo("Select first search suggestion");
-    clickSearchSuggestion(0, Skin.MOBILE_WIKI);
+    clickSearchSuggestion(0);
 
     return this;
   }
