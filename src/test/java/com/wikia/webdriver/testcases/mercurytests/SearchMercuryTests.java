@@ -38,7 +38,6 @@ public class SearchMercuryTests extends SearchTests {
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0, Skin.MERCURY);
 
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     Assertion.assertEquals(
         clickedSuggestion.toLowerCase(), new ArticlePage().getHeader().getPageTitle().toLowerCase()
     );
