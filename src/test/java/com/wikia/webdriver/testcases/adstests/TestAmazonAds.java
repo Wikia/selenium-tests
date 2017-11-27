@@ -26,13 +26,13 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
   }
 
   @Test(groups = "AmazonAdsDesktop")
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   public void testAmazonVideoAdsDesktop() {
     testAmazonVideo();
   }
 
   @Test(groups = "AmazonAdsMobile")
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void testAmazonVideoAdsMobile() {
     testAmazonVideo();
