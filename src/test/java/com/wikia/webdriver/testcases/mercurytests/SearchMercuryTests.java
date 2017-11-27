@@ -25,7 +25,6 @@ public class SearchMercuryTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "IRIS-5167")
   @Test(groups =
       {"mercury_search_navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage",
                   "Discussions_Search_001"})
