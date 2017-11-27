@@ -51,15 +51,8 @@ public class Search extends BasePageObject {
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
     clickedSuggestion = searchResult.getText();
-
     searchResult.click();
-
-    // Mobile wiki opens the suggested page using AJAX, Mercury reloads the page and opens Mobile Wiki
-    if (fromSkin == Skin.MOBILE_WIKI) {
-      waitForPageReload();
-    } else {
-      Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
-    }
+    waitForPageReload();
 
     return clickedSuggestion;
   }
