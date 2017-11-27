@@ -34,6 +34,7 @@ public class Search extends BasePageObject {
 
   private static final String searchSuggestionClass = ".wikia-search__suggestions li";
   private static final String focusedSearchInput = ".wikia-search--focused input";
+  private static final By suggestionsLoading = By.className("wikia-search__loading");
 
   public boolean isPresent(){
     return isElementOnPage(searchInput);
@@ -44,13 +45,12 @@ public class Search extends BasePageObject {
   }
 
   public String clickSearchSuggestion(int index, Skin fromSkin) {
-    String clickedSuggestion;
+    wait.forElementNotVisible(suggestionsLoading);
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
-
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
-    clickedSuggestion = searchResult.getText();
+    String clickedSuggestion = searchResult.getText();
     searchResult.click();
     waitForPageReload();
 
