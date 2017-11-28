@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"EnAnonMixedContentFooter"})
-@Execute(onWikia = "serowiec", asUser = User.ANONYMOUS)
+@Execute(onWikia = "mediawiki119", asUser = User.ANONYMOUS)
 public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
