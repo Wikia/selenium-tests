@@ -275,6 +275,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private void stopLogging() {
+    driver = DriverProvider.getActiveDriver();
     if ( driver.getProxy() != null ) {
       Har har = driver.getProxy().getHar();
       for (HarEntry entry : har.getLog().getEntries()) {
