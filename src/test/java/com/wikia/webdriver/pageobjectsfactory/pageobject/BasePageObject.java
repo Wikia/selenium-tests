@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;

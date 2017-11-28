@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import org.openqa.selenium.WebDriver;
 
 public class HomePage extends WikiBasePageObject {

@@ -3,13 +3,10 @@ package com.wikia.webdriver.common.templates.core;
 import java.io.File;
 import java.lang.reflect.Method;
 
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.Dimension;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;

@@ -1,8 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

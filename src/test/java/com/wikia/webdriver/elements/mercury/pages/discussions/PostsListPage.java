@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
