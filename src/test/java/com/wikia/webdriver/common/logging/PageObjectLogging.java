@@ -275,9 +275,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private void stopLogging() {
-    NetworkTrafficInterceptor networkTrafficInterceptor = driver.getProxy();
-    if ( networkTrafficInterceptor != null ) {
-      Har har = networkTrafficInterceptor.getHar();
+    if ( driver.getProxy() != null ) {
+      Har har = driver.getProxy().getHar();
       for (HarEntry entry : har.getLog().getEntries()) {
         URL url = null;
         try {
