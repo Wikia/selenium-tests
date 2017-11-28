@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
@@ -648,7 +649,7 @@ public class BasePageObject {
     int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
     new WebDriverWait(driver, TIMEOUT_PAGE_REGISTRATION)
-        .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
+        .until((Function<WebDriver, Boolean>) input -> getTabsCount() > initialTabsNumber);
   }
 
   protected void openLinkInNewTab(WebElement link) {

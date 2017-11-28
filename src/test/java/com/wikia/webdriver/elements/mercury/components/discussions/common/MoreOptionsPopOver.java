@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
@@ -50,7 +51,7 @@ public class MoreOptionsPopOver {
     }
   }
 
-  private void waitFor(final Predicate<PostEntity> predicate) {
+  private void waitFor(final Function<PostEntity, Boolean> predicate) {
     new FluentWait<>(postEntity)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
         .until(predicate);
@@ -69,7 +70,7 @@ public class MoreOptionsPopOver {
   public MoreOptionsPopOver clickUnlockPostOption() {
     // should be changed to post.findElement(By.className("<class name>")).click(); after SOC-3791
     clickReportLinkOption("Unlock Post");
-    waitFor(Predicates.not(PostEntity::isLocked));
+    waitFor(PostEntity::isLocked);
     return this;
   }
 

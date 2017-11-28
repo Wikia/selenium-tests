@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
@@ -34,7 +35,7 @@ public class Replies extends BasePageObject {
   public Replies waitForReplyToAppearWith(final String text) {
     new FluentWait<>(driver)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-        .until((Predicate<WikiaWebDriver>) input -> wait.forElementVisible(replyContent)
+        .until((Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(replyContent)
           .getText()
           .contains(text));
     return this;

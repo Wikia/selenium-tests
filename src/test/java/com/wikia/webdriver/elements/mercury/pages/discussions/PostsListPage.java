@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
@@ -46,7 +47,7 @@ public class PostsListPage extends PageWithPosts {
     try {
       new FluentWait<>(getPost())
           .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-          .until((Predicate<Post>) p -> p.getPosts().stream()
+          .until((Function<Post, Boolean>) p -> p.getPosts().stream()
               .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName)));
     } finally {
       restoreDefaultImplicitWait();

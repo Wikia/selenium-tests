@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ public class TopNoteModalDialog extends ConfirmationDialog {
   public void clickApprove() {
     super.clickConfirm();
     new WebDriverWait(driver, DiscussionsConstants.TIMEOUT).until(
-      (Predicate<WebDriver>) input -> !post.getAttribute("class").contains("is-reported")
+      (Function<WebDriver, Boolean>) input -> !post.getAttribute("class").contains("is-reported")
     );
   }
 }

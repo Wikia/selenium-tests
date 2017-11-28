@@ -207,7 +207,7 @@ public class AutoplayVuap {
     usingAdFrame(() -> wait.forElementPresent(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR)));
   }
 
-  private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
+  private void waitFor(final Function<AutoplayVuap, Boolean> predicate, final long timeout) {
     new FluentWait<>(this)
         .withTimeout(timeout, TimeUnit.SECONDS)
         .pollingEvery(1, TimeUnit.SECONDS)
