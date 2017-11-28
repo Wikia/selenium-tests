@@ -22,7 +22,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
   private static final Page TEST_PAGE_BIDDER = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Bidder");
   private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Direct");
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithDirectOfferEventMobile"})
   public void adsVelesWithDirectOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -32,7 +32,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithBidderOfferEventMobile"})
   public void adsVelesWithBidderOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -43,7 +43,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferEventMobile"})
   public void adsVelesWithoutOfferEvent() {
     networkTrafficInterceptor.startIntercepting();

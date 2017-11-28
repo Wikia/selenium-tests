@@ -20,7 +20,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
   private static final Page TEST_PAGE_BIDDER = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Bidder");
   private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Direct");
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithDirectOfferEventOasis"})
   public void adsVelesWithDirectOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -30,7 +30,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithBidderOfferEventOasis"})
   public void adsVelesWithBidderOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -41,7 +41,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithoutOfferEventOasis"})
   public void adsVelesWithoutOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -51,7 +51,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesDirectVisibleAllTheTimeOasis"})
   public void adsVelesDirectVisibleAllTheTime() {
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());

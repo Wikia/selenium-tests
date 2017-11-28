@@ -43,7 +43,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     verifyNoAds();
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(
       groups = {"AdsFeaturedVideoOasis"}
   )
@@ -83,7 +83,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )

@@ -49,7 +49,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   }
 
   @UseUnstablePageLoadStrategy
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixels",
@@ -65,7 +65,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Test(
           groups = "AdsTrackingPixelsAuthPage",
           dataProviderClass = AdsDataProvider.class,
