@@ -25,7 +25,6 @@ public class SearchMercuryTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "IRIS-5167")
   @Test(groups =
       {"mercury_search_navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage",
                   "Discussions_Search_001"})
@@ -36,18 +35,19 @@ public class SearchMercuryTests extends SearchTests {
         .getTopBar()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
-        .clickSearchSuggestion(0, Skin.MERCURY);
+        .clickSearchSuggestion(0);
 
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
+    ArticlePage page = new ArticlePage();
+    page.getHeader().waitForLoaded();
     Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(), new ArticlePage().getHeader().getPageTitle().toLowerCase()
+        clickedSuggestion.toLowerCase(), page.getHeader().getPageTitle().toLowerCase()
     );
   }
 
   @Execute(onWikia = "dauto")
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage",
                   "Discussions_Search_001"})
-  @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktopFromDiscussionsGuidelinesPage() {
 

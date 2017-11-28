@@ -27,6 +27,10 @@ public class Header extends BasePageObject {
     }
   }
 
+  public void waitForLoaded() {
+    wait.forElementVisible(header);
+  }
+
   public boolean isPageTitleVisible() {
     try {
       return pageTitle.isDisplayed();
