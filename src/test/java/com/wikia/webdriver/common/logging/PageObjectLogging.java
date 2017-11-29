@@ -13,11 +13,9 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.commons.codec.binary.Base64;
@@ -281,8 +279,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       for (HarEntry entry : har.getLog().getEntries()) {
         URL url = null;
         try {
-          url = new URL(entry.getRequest().getUrl());
-          if (url.getHost().contains("wikia")) {
+          if (url.getHost().contains("wikia") && !url.getHost().contains("vignette")) {
             Boolean isHttps = entry.getRequest().getUrl().startsWith("https");
             PageObjectLogging.log("VISITED URL", "Url: " + entry.getRequest().getUrl(), !Configuration.getForceHttps() || isHttps);
           }
