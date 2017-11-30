@@ -76,7 +76,7 @@ public class VideoComponentObject extends WikiBasePageObject {
   }
 
   public void verifyVideoIgnEmbed() {
-    String iframeSrc = "http://widgets.ign.com/video/embed/content.html?url=";
+    String iframeSrc = "https://widgets.ign.com/video/embed/content.html?url=";
     Assertion.assertStringContains(getVideoPlayerIframe().getAttribute("src"), iframeSrc);
     PageObjectLogging.log("verifyVideoIgnEmbed", "IGN video is embedded", true);
   }
