@@ -92,7 +92,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(emulator = Emulator.OLIWIA)
   public void anonUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
