@@ -1,9 +1,7 @@
-package com.webdriver;
+package com.webdriver.pageobject;
 
 import com.webdriver.common.core.Assertion;
 import com.webdriver.common.core.PageWebDriver;
-import com.webdriver.common.core.elemnt.JavascriptActions;
-import com.webdriver.common.core.elemnt.Wait;
 import com.webdriver.common.core.url.UrlBuilder;
 import com.webdriver.common.driverprovider.DriverProvider;
 import com.webdriver.common.logging.PageObjectLogging;
@@ -22,19 +20,15 @@ import java.util.concurrent.TimeUnit;
 public class BasePageObject {
 
   private static final int TIMEOUT_PAGE_REGISTRATION = 3000;
-  public final Wait wait;
   public WebDriverWait waitFor;
   public Actions builder;
   protected PageWebDriver driver = DriverProvider.getActiveDriver();
   protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
-  protected JavascriptActions jsActions;
 
   public BasePageObject() {
     this.waitFor = new WebDriverWait(driver, timeOut);
     this.builder = new Actions(driver);
-    this.wait = new Wait(driver);
-    this.jsActions = new JavascriptActions(driver);
 
     PageFactory.initElements(driver, this);
   }
@@ -48,25 +42,6 @@ public class BasePageObject {
     }
   }
 
-  protected boolean isElementDisplayed(WebElement element, int timeout) {
-    try {
-      wait.forElementVisible(element, timeout);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    }
-  }
-
-  public void scrollTo(WebElement element) {
-    jsActions.scrollElementIntoViewPort(element);
-    wait.forElementClickable(element, 5);
-  }
-
-  protected void scrollAndClick(WebElement element) {
-    jsActions.scrollElementIntoViewPort(element);
-    wait.forElementClickable(element, 5);
-    element.click();
-  }
   public void verifyURL(String givenURL) {
     Assertion.assertEquals(driver.getCurrentUrl(), givenURL);
   }

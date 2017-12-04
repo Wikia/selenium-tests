@@ -7,14 +7,12 @@ import com.webdriver.common.core.annotations.DontRun;
 import com.webdriver.common.core.annotations.Execute;
 import com.webdriver.common.core.annotations.RelatedIssue;
 import com.webdriver.common.core.configuration.Configuration;
-import com.webdriver.common.core.elemnt.JavascriptActions;
 import com.webdriver.common.core.helpers.User;
 import com.webdriver.common.core.imageutilities.Shooter;
 import com.webdriver.common.core.url.UrlBuilder;
 import com.webdriver.common.core.SelectorStack;
 import com.webdriver.common.core.XMLReader;
 import com.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -275,7 +273,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
-    new JavascriptActions(driver).execute("window.stop()");
     List<String> classList = new ArrayList<>();
     classList.add(SUCCESS_CLASS);
     String command = "Navigate to";
@@ -308,7 +305,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (driver.getCurrentUrl().contains(Configuration.getWikiaDomain())) {
       // HACK FOR DISABLING NOTIFICATIONS
       try {
-        new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
+        //noop
       } catch (WebDriverException e) {
         PageObjectLogging.logInfo("Hack for disabling notifications", "Failed to execute js action");
 
@@ -344,10 +341,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         user = method.getAnnotation(Execute.class).asUser();
       }
 
-      if (user != null && user != User.ANONYMOUS) {
-        // log in, make sure user is logged in and flow is on the requested url
-        new WikiBasePageObject().loginAs(user);
-      }
     }
 
     logJSError();

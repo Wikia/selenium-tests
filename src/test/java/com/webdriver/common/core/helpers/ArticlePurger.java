@@ -1,6 +1,6 @@
 package com.webdriver.common.core.helpers;
 
-import com.webdriver.BasePageObject;
+import com.webdriver.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,7 +19,6 @@ public class ArticlePurger extends BasePageObject {
 
   public void purgeArticleAsAnon() {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "action=purge"));
-    wait.forElementVisible(confirmationButton);
     confirmationButton.click();
   }
 }

@@ -1,4 +1,4 @@
-package com.webdriver;
+package com.webdriver.pageobject;
 
 import com.webdriver.common.core.PageWebDriver;
 import com.webdriver.common.driverprovider.DriverProvider;
