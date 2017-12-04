@@ -15,7 +15,7 @@ public class SkinHelper extends WikiBasePageObject {
   @FindBy(css = "body.ember-application")
   private WebElement mercuryClassInBody;
 
-  @FindBy(css = "body.ember-application.mobile-wiki")
+  @FindBy(css = "body.mobile-wiki .ember-application")
   private WebElement mobileWikiClassInBody;
 
   public SkinHelper(WebDriver driver) {
