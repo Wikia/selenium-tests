@@ -1,0 +1,36 @@
+package com.webdriver.common.remote.operations.http;
+
+import com.webdriver.common.core.helpers.User;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpPost;
+import org.json.JSONObject;
+
+
+public class DeleteRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
+
+  public DeleteRemoteOperation(User user) {
+    super(user);
+  }
+
+  @Override
+  public String execute(final String url) {
+    return super.execute(new HttpDelete(url));
+  }
+
+  public String execute(final String url, final JSONObject jsonObject) {
+    return super.execute(new HttpDeleteWithEntity(url), jsonObject);
+  }
+
+  public static class HttpDeleteWithEntity extends HttpPost {
+
+    public HttpDeleteWithEntity(String url) {
+      super(url);
+    }
+
+    @Override
+    public String getMethod() {
+      return HttpDelete.METHOD_NAME;
+    }
+  }
+
+}
