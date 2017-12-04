@@ -15,13 +15,8 @@ public class SkinHelper extends WikiBasePageObject {
   @FindBy(css = "body.discussions")
   private WebElement discussionsSkin;
 
-<<<<<<< Updated upstream
-  @FindBy(css = "body.mobile-wiki .ember-application")
-  private WebElement mobileWikiClassInBody;
-=======
   @FindBy(css = "body.mobile-wiki")
   private WebElement mobileWikiSkin;
->>>>>>> Stashed changes
 
   public SkinHelper(WebDriver driver) {
     super();
