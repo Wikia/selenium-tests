@@ -1,5 +1,11 @@
 package com.wikia.webdriver.elements.common;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
@@ -8,12 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 public class CommunityHeader extends BasePageObject {
 
@@ -32,28 +32,35 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"admin-dashboard\"]")
   private WebElement adminDashboardButton;
 
-  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-explore-tiny\"]")
+  @FindBy(
+      css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-explore-tiny\"]")
   private WebElement exploreTab;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-activity\"], .wds-dropdown a[data-tracking-label=\"explore-activity\"]")
+  @FindBy(
+      css = ".wds-dropdown a[data-tracking=\"explore-activity\"], .wds-dropdown a[data-tracking-label=\"explore-activity\"]")
   private WebElement exploreWikiActivityLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-random\"], .wds-dropdown a[data-tracking-label=\"explore-random\"]")
+  @FindBy(
+      css = ".wds-dropdown a[data-tracking=\"explore-random\"], .wds-dropdown a[data-tracking-label=\"explore-random\"]")
   private WebElement exploreRandomLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-community\"], .wds-dropdown a[data-tracking-label=\"explore-community\"]")
+  @FindBy(
+      css = ".wds-dropdown a[data-tracking=\"explore-community\"], .wds-dropdown a[data-tracking-label=\"explore-community\"]")
   private WebElement exploreCommunityLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-videos\"], .wds-dropdown a[data-tracking-label=\"explore-videos\"]")
+  @FindBy(
+      css = ".wds-dropdown a[data-tracking=\"explore-videos\"], .wds-dropdown a[data-tracking-label=\"explore-videos\"]")
   private WebElement exploreVideosLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-images\"], .wds-dropdown a[data-tracking-label=\"explore-images\"]")
+  @FindBy(
+      css = ".wds-dropdown a[data-tracking=\"explore-images\"], .wds-dropdown a[data-tracking-label=\"explore-images\"]")
   private WebElement exploreImagesLink;
 
   @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-forum\"]")
   private WebElement exploreForumLink;
 
-  @FindBy(css = ".wds-community-header a[data-tracking=\"discuss\"], .wds-community-header a[data-tracking=\"forum\"]")
+  @FindBy(
+      css = ".wds-community-header a[data-tracking=\"discuss\"], .wds-community-header a[data-tracking=\"forum\"]")
   private WebElement discussLink;
 
   @FindBy(css = ".wds-community-header .wds-avatar-stack__avatar a")
@@ -61,6 +68,15 @@ public class CommunityHeader extends BasePageObject {
 
   @FindBy(css = ".wds-community-header")
   private WebElement communityHeader;
+
+  @FindBy(css = "#ShareEntryPoint")
+  private WebElement shareButton;
+
+  @FindBy(css = "#PageShareModalDialog")
+  private WebElement shareDialog;
+
+  @FindBy(css = "#ShareEntryPoint")
+  private WebElement shareButton;
 
   public boolean isVisible() {
     return this.isElementDisplayed(communityHeader);
@@ -170,6 +186,20 @@ public class CommunityHeader extends BasePageObject {
     wait.forElementClickable(exploreForumLink).click();
 
     PageObjectLogging.logInfo("explore->forum link clicked");
+  }
+
+  public CommunityHeader clickShareButton() {
+    shareButton.click();
+    wait.forElementVisible(shareDialog);
+
+    return this;
+  }
+
+  public CommunityHeader clickShareOnFacebook() {
+    shareButton.click();
+    wait.forElementVisible(shareDialog);
+
+    return this;
   }
 
   public boolean isDiscussLinkDisplayed() {

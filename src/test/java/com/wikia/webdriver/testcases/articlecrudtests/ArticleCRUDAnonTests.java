@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -28,8 +31,17 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_002"})
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   public void articleCRUDAnon_addByURL() {
-    String articleContent = PageContent.ARTICLE_TEXT;
+
+    String articleContent = "An article for category pagination [[Category:PaginationTests]]";
+
+    for(int  i = 0; i<300; i++){
+      new ArticleContent().push(articleContent, String.format("PaginationTestArticle_%d", i));
+    }
+
+
+ //   String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
         new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
