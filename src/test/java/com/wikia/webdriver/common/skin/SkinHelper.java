@@ -10,13 +10,13 @@ import org.openqa.selenium.support.FindBy;
 public class SkinHelper extends WikiBasePageObject {
 
   @FindBy(css = "body.skin-oasis")
-  private WebElement oasisClassInBody;
+  private WebElement oasisSkin;
 
-  @FindBy(css = "body.ember-application")
-  private WebElement mercuryClassInBody;
+  @FindBy(css = "body.discussions")
+  private WebElement discussionsSkin;
 
-  @FindBy(css = "body.mobile-wiki .ember-application")
-  private WebElement mobileWikiClassInBody;
+  @FindBy(css = "body.mobile-wiki")
+  private WebElement mobileWikiSkin;
 
   public SkinHelper(WebDriver driver) {
     super();
@@ -27,13 +27,13 @@ public class SkinHelper extends WikiBasePageObject {
 
     switch (skin) {
       case OASIS:
-        isExpectedSkin = wait.forElementInViewPort(oasisClassInBody);
+        isExpectedSkin = wait.forElementInViewPort(oasisSkin);
         break;
-      case MERCURY:
-        isExpectedSkin = wait.forElementInViewPort(mercuryClassInBody);
+      case DISCUSSIONS:
+        isExpectedSkin = wait.forElementInViewPort(discussionsSkin);
         break;
       case MOBILE_WIKI:
-        isExpectedSkin = wait.forElementInViewPort(mobileWikiClassInBody);
+        isExpectedSkin = wait.forElementInViewPort(mobileWikiSkin);
         break;
       default:
         isExpectedSkin = false;
