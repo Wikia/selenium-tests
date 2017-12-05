@@ -55,6 +55,23 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "adsVuapClickToPlayMobile",
+      groups = {"AdsVuapClickToPlayTopAreasMercury"}
+  )
+  public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(Page page, String slot) {
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+
+    ads.scrollToSlot(slot);
+
+    vuap.clickOnArea(3);
+    vuap.waitForVideoStart();
+
+    VuapAssertions.verifyVideoPlay(vuap);
+  }
+
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapMobile",
       groups = "AdsVuapDefaultStateMercury"
   )
