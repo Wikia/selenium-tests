@@ -9,8 +9,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class AdsKruxObject extends AdsBaseObject {
 
-  private String KRUX_CDN = urlBuilder.getUrlProtocol() + "cdn.krxd.net/";
-  private final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
+  private final String kruxCdn = urlBuilder.getUrlProtocol() + "cdn.krxd.net/";
+  private final String kruxControlTagUrlPrefix = kruxCdn + "controltag?confid=";
 
   @FindBy(css = "script[src*='cdn.krxd.net/controltag?confid=']")
   private WebElement kruxControlTag;
@@ -25,7 +25,7 @@ public class AdsKruxObject extends AdsBaseObject {
    * @param kruxSiteId the expected Krux site ID
    */
   public void verifyKruxControlTag(String kruxSiteId) {
-    String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
+    String expectedUrl = kruxControlTagUrlPrefix + kruxSiteId;
     Assertion.assertEquals(kruxControlTag.getAttribute("src"), expectedUrl);
   }
 
