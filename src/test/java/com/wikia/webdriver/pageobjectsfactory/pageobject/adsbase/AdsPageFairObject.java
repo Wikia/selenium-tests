@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class AdsPageFairObject extends AdsBaseObject {
 
   private static final String PATTERN_PAGEFAIR =
-      "http://stats.pagefair.com/stats/page_view_event/[0-9A-Z]{16}/a\\.js.*";
+      "https?://stats.pagefair.com/stats/page_view_event/[0-9A-Z]{16}/a\\.js.*";
   private static final String PAGEFAIR_URL_PARAM = "pagefairdetection=1";
   private static final String PATTERN_PAGEFAIR_ADBLOCK_DETECTED =
       PATTERN_PAGEFAIR + "is_ab=1.*";

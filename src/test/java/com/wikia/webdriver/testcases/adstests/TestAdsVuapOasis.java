@@ -60,7 +60,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.clickOnArea(2);
 
     final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(actual.equals(AD_REDIRECT_URL), "Image should point to page on project43.");
+    Assert.assertEquals(actual, AD_REDIRECT_URL, "Image should point to page on project43.");
   }
 
   @Test(groups = {"AdsVuapDefaultState"},
@@ -169,10 +169,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_DURATION);
     vuap.clickOnArea(2);
 
-    Assert.assertTrue(
-        ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),
-        "Image should point to page on project43."
-    );
+    Assert.assertEquals(ads.switchToNewBrowserTab(), AD_REDIRECT_URL, "Image should point to page on project43.");
   }
 
   @Test(
