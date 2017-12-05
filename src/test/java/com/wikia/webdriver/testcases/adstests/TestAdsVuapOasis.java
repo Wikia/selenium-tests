@@ -245,7 +245,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
-      groups = {"AdsVuapClickToPlaySizes"}
+      groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
@@ -263,7 +263,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
-      groups = {"AdsVuapClickToPlaySizes"}
+      groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);

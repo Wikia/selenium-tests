@@ -25,7 +25,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayMobile",
-      groups = {"AdsVuapClickToPlayTopAreasMercury"}
+      groups = {"AdsVuapClickToPlayMobile"}
   )
   public void vuapCheckTopAreasMercury(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
@@ -56,7 +56,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayMobile",
-      groups = {"AdsVuapClickToPlayTopAreasMercury"}
+      groups = {"AdsVuapClickToPlayMobile"}
   )
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
