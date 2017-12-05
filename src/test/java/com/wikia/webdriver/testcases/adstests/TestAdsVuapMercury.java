@@ -59,7 +59,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       groups = "AdsVuapDefaultStateMercury"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);

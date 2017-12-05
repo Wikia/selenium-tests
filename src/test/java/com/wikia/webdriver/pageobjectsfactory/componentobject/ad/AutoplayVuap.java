@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -24,6 +25,8 @@ public class AutoplayVuap {
   private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
+
+  private static final Color COLOR_VUAP_VIDEO_AD = new Color(247, 35, 0);
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
@@ -97,7 +100,7 @@ public class AutoplayVuap {
   public void play() {
     if (isPausedWithOverlay()) {
       togglePause();
-    } else if( !this.mobile ) {
+    } else if (!this.mobile) {
       clickOnArea(2);
     } else {
       clickOnArea(4);
@@ -171,8 +174,8 @@ public class AutoplayVuap {
 
   public boolean isVisible() {
     return isDesktop() ?
-           usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed()) :
-           driver.findElement(getVideoSelector()).isDisplayed();
+        usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed()) :
+        driver.findElement(getVideoSelector()).isDisplayed();
   }
 
   public boolean isMuted() {
@@ -219,7 +222,7 @@ public class AutoplayVuap {
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
-    int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
+    int percentResult = (int) Math.round(100 - (100 / (videoHeight / imageHeight)));
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
   }
 
@@ -248,6 +251,12 @@ public class AutoplayVuap {
 
   public boolean isPauseLayerNotVisible() {
     wait.forElementNotVisible(pauseOverlaySelector);
+    return true;
+  }
+
+  public boolean isColourVuapVideoAdVisible() {
+    ElementColor elementColor = new ElementColor(driver);
+    elementColor.verifyMostFrequentColor(driver.findElement(pauseOverlaySelector), COLOR_VUAP_VIDEO_AD, 10);
     return true;
   }
 
