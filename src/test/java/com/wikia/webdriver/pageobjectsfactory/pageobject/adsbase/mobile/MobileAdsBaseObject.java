@@ -19,7 +19,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     super(driver, page);
 
     if (driver.isChromeMobile()) {
-      verifyMercury();
+      verifyMobileWiki();
     }
 
     PageObjectLogging.log("", "Page screenshot", true, driver);
@@ -102,11 +102,11 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     );
   }
 
-  private void verifyMercury() {
+  private void verifyMobileWiki() {
     try {
       wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
-      PageObjectLogging.logWarning("", "MERCURY FAILED TO LOAD");
+      PageObjectLogging.logWarning("", "MOBILE WIKI FAILED TO LOAD");
       throw e;
     }
   }

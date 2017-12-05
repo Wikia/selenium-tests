@@ -98,7 +98,7 @@ public class CategoryPageTest extends NewTestTemplate {
     // This test assumes that there are more than 200 articles created and with category like one below.
     // Staging env should have fixture of this articles to create them everytime it is rebuilded
 
-    final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
+    final String categoryName = "Category:PaginationTests";
     ArticleContent articleContent = new ArticleContent();
 
     articleContent.push("some irrelevant content of category article", categoryName);
