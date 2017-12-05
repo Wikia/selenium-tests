@@ -26,7 +26,7 @@ public class AutoplayVuap {
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
-  private static final Color COLOR_VUAP_VIDEO_AD = new Color(247, 35, 0);
+  private static final Color COLOR_VUAP_VIDEO_AD = new Color(255, 0, 0);
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
