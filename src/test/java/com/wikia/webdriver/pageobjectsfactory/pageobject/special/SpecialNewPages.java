@@ -21,9 +21,11 @@ public class SpecialNewPages extends WikiBasePageObject {
   @FindBy(className = "mw-newpages-pagename")
   private List<WebElement> newArticleLinks;
 
-  public void openSpecialNewPages() {
+  public SpecialNewPages open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
            + "Special:NewPages");
+    
+    return this;
   }
 
   /**
