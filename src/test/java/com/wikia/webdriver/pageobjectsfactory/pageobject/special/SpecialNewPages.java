@@ -1,28 +1,37 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.testng.Assert;
 
+import java.util.List;
+
+/**
+ * Implements <a href="https://www.mediawiki.org/wiki/Help:New_pages">Special:NewPages</a>
+ *
+ * This is a special page that lists recently created pages in reverse order of creation,
+ * with creation date and time, current size, user who created the page, and first edit summary.
+ * It also provides links to patrol these new pages when that feature is enabled.
+ */
 public class SpecialNewPages extends WikiBasePageObject {
-  @FindBys(@FindBy(className = "mw-newpages-pagename"))
+
+  @FindBy(className = "mw-newpages-pagename")
   private List<WebElement> newArticleLinks;
 
-  public SpecialNewPages openSpecialNewPages(String wikiUrl) {
-    getUrl(wikiUrl + "/wiki/Special:NewPages");
-    PageObjectLogging.log("openSpecialNewPages", "Special:NewPages was opened", true);
-
-    return this;
+  public void openSpecialNewPages() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+           + "Special:NewPages");
   }
 
-  public void verifyContainsLinkToArticle(String articleTitle) {
-    Assert.assertTrue(
-        newArticleLinks.stream().map(WebElement::getText).anyMatch(articleTitle::equals),
-        "Special:NewPages does not have link to article named " + articleTitle
-    );
+  /**
+   * Checks if the list of new pages contains a link to a specific named article
+   * @param articleTitle the title to search for
+   * @return whether there is a link to this article in the list
+   */
+  public boolean containsLinkToArticle(String articleTitle) {
+    return newArticleLinks.stream().map(WebElement::getText).anyMatch(articleTitle::equals);
   }
 }

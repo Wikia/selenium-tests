@@ -4,6 +4,8 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewPages;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "sustainingtest")
@@ -16,7 +18,10 @@ public class NewPagesTests extends NewTestTemplate {
 
     SpecialNewPages specialNewPages = new SpecialNewPages();
 
-    specialNewPages.openSpecialNewPages(wikiURL);
-    specialNewPages.verifyContainsLinkToArticle(articleTitle);
+    specialNewPages.openSpecialNewPages();
+    Assert.assertTrue(
+        specialNewPages.containsLinkToArticle(articleTitle),
+        "Special:NewPages does not contain link to article named " + articleTitle
+    );
   }
 }
