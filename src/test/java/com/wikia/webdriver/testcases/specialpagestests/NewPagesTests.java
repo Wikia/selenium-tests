@@ -16,9 +16,8 @@ public class NewPagesTests extends NewTestTemplate {
     ArticleContent articleContent = new ArticleContent();
     String articleTitle = articleContent.createUniqueArticle();
 
-    SpecialNewPages specialNewPages = new SpecialNewPages();
+    SpecialNewPages specialNewPages = new SpecialNewPages().open();
 
-    specialNewPages.openSpecialNewPages();
     Assert.assertTrue(
         specialNewPages.containsLinkToArticle(articleTitle),
         "Special:NewPages does not contain link to article named " + articleTitle
