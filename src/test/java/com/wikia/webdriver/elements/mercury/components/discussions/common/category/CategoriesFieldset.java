@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common.categ
 import com.google.common.collect.Iterables;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
   private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
   private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
   private static final String DELETE_COMMAND = "action-delete";
+  private static final String MOVE_COMMAND = "action-move";
+  private static final int CATEGORY_INPUT_HEIGHT_PX = 29;
 
   private static final String CATEGORY_NOT_FOUND = "Could not find category!";
 
@@ -103,7 +106,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return categoryList.indexOf(category);
   }
 
-  private int getCategoryPosition(final String categoryName) {
+  public int getCategoryPosition(final String categoryName) {
     return getCategoryPosition(this.categories, categoryName);
   }
 
@@ -240,4 +243,15 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return this;
   }
 
+  public void reorderCategory(String categoryName, int offset) {
+    final WebElement element = findEditableCategoryWith(categoryName);
+
+    if (null != element) {
+      builder.moveToElement(element)
+          .clickAndHold(element.findElement(By.className(MOVE_COMMAND)))
+          .perform();
+      builder.moveByOffset(0, offset * CATEGORY_INPUT_HEIGHT_PX).perform();
+      builder.release().perform();
+    }
+  }
 }
