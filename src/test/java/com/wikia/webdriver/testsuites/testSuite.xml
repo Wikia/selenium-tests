@@ -207,6 +207,7 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditAccountTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditingPreferencesTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.FilePageTests"/>
+            <class name="com.wikia.webdriver.testcases.specialpagestests.NewPagesTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.SpecialPagesForAnons"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.ThemeDesigner"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.UserAndRights"/>
