@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class FeaturedVideoComponentObject extends WikiBasePageObject {
+public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
 
   private static final String AUTOPLAY_COOKIE = "featuredVideoAutoplay";
 
@@ -62,7 +62,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = ".wikia-jw-settings__submenu")
   private List<WebElement> videoSettingsSubmenu;
 
-  public FeaturedVideoComponentObject setAutoplayCookie(boolean autoplay) {
+  public FeaturedVideoDesktopComponentObject setAutoplayCookie(boolean autoplay) {
     driver.manage().addCookie(new Cookie(
         AUTOPLAY_COOKIE,
         autoplay ? "1" : "0",
@@ -74,7 +74,7 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return this;
   }
 
-  public FeaturedVideoComponentObject openWikiArticle(String articleName) {
+  public FeaturedVideoDesktopComponentObject openWikiArticle(String articleName) {
     this.openWikiPage(getWikiUrl() + articleName + "?noads=1");
 
     return this;
@@ -98,14 +98,14 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return secondaryTitle.getText();
   }
 
-  public FeaturedVideoComponentObject clickPlay() {
+  public FeaturedVideoDesktopComponentObject clickPlay() {
     wait.forElementClickable(player);
     player.click();
 
     return this;
   }
 
-  public FeaturedVideoComponentObject clickPause() {
+  public FeaturedVideoDesktopComponentObject clickPause() {
     wait.forElementClickable(player);
     player.click();
 
@@ -142,14 +142,14 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return "true".equals(autoplayToggle.getAttribute("checked"));
   }
 
-  public FeaturedVideoComponentObject showControlBar() {
+  public FeaturedVideoDesktopComponentObject showControlBar() {
     jsActions.mouseOver(player);
     wait.forElementClickable(controlbar);
 
     return this;
   }
 
-  public FeaturedVideoComponentObject openSettingsMenu() {
+  public FeaturedVideoDesktopComponentObject openSettingsMenu() {
     showControlBar();
     wait.forElementClickable(settingsMenu)
         .click();
@@ -157,14 +157,14 @@ public class FeaturedVideoComponentObject extends WikiBasePageObject {
     return this;
   }
 
-  public FeaturedVideoComponentObject openQualityMenu() {
+  public FeaturedVideoDesktopComponentObject openQualityMenu() {
     wait.forElementClickable(videoQualityButton)
         .click();
 
     return this;
   }
 
-  public FeaturedVideoComponentObject openCaptionsMenu() {
+  public FeaturedVideoDesktopComponentObject openCaptionsMenu() {
    wait.forElementClickable(videoCaptionsButton)
         .click();
 
