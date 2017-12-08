@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +22,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
   private static final String DELETE_COMMAND = "action-delete";
   private static final String MOVE_COMMAND = "action-move";
-  private static final int CATEGORY_INPUT_HEIGHT_PX = 29;
+  private static final int CATEGORY_INPUT_HEIGHT_PX = 31;
 
   private static final String CATEGORY_NOT_FOUND = "Could not find category!";
 
@@ -247,10 +249,20 @@ public class CategoriesFieldset extends WikiBasePageObject {
     final WebElement element = findEditableCategoryWith(categoryName);
 
     if (null != element) {
+      WebElement dragElement = element.findElement(By.className(MOVE_COMMAND));
+
       builder.moveToElement(element)
-          .clickAndHold(element.findElement(By.className(MOVE_COMMAND)))
+          .clickAndHold(dragElement)
           .perform();
-      builder.moveByOffset(0, offset * CATEGORY_INPUT_HEIGHT_PX).perform();
+
+      // The first move doesn't work properly so do a no-op
+      builder
+          .moveByOffset(0, 0)
+          .moveByOffset(0, offset * CATEGORY_INPUT_HEIGHT_PX)
+          .perform();
+
+      wait.forX(Duration.ofMillis(100));
+
       builder.release().perform();
     }
   }
