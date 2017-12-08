@@ -24,9 +24,11 @@ public interface PostsCreator {
 
   PostsCreator addDescriptionWith(final String text);
 
-  PostsCreator addDescriptionWithLink(final URL url);
+  PostsCreator addDescriptionWithLink(final String url);
 
   PostsCreator clearDescription();
 
   PostsCreator clickSubmitButton();
+
+  PostsCreator clearOpenGraph();
 }

@@ -80,8 +80,8 @@ public class CreatingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
     PostsListPage page = new PostsListPage().open();
-    PostsCreator postsCreator = page.getPostsCreatorMobile();
-    assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
+    BasePostsCreator postsCreator = page.getPostsCreatorMobile();
+    assertThatPostWithoutCategoryOrAnyContentCannotBeAdded(postsCreator);
   }
 
   @Test(groups = MOBILE)
@@ -101,7 +101,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCannotAddPostWithoutTitle() throws MalformedURLException {
+  public void userOnMobileCannotAddPostWithoutTitle() {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorMobile();
@@ -130,8 +130,8 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
-    PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
-    assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
+    BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    assertThatPostWithoutCategoryOrAnyContentCannotBeAdded(postsCreator);
   }
 
   @Test(groups = DESKTOP)
@@ -186,42 +186,113 @@ public class CreatingPostTests extends NewTestTemplate {
   /**
    * This test covers all situations when post cannot be added (submit button is disabled).
    * <p>
-   * | Category | Title | Description |
-   * |          |     x |             |
-   * |          |     x |           x |
-   * |          |       |           x |
-   * |        x |       |             |
-   * |        x |     x |             |
+   * | Category | Title | Description | Open Graph | Content Image |
+   * |          |       |             |            |               |
+   * |          |     x |             |            |               |
+   * |          |       |           x |            |               |
+   * |          |       |             |          x |               |
+   * |          |       |             |            |             x |
+   * |          |     x |           x |            |               |
+   * |          |     x |             |          x |               |
+   * |          |     x |             |            |             x |
+   * |        x |       |             |            |               |
+   * |        x |     x |             |            |               |
+   * |        x |       |           x |            |               |
+   * |        x |       |             |          x |               |
+   * |        x |       |             |            |             x |
+   *
+   *
    * <p>
    * * x - means category was selected or text was added
    */
-  private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(PostsCreator postsCreator) {
-    postsCreator.click()
-        .closeGuidelinesMessage();
+  private void assertThatPostWithoutCategoryOrAnyContentCannotBeAdded(BasePostsCreator postsCreator) {
+    postsCreator.click().closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with only title filled.");
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only title."
+    );
+    postsCreator.clearTitle();
 
     postsCreator.addDescriptionWith(TextGenerator.defaultText());
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with title and description filled.");
-
-    postsCreator.clearTitle();
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with only description filled.");
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only description."
+    );
     postsCreator.clearDescription();
 
+    postsCreator.addDescriptionWithLink("http://fandom.wikia.com");
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only open graph."
+    );
+    postsCreator.clearDescription();
+    postsCreator.clearOpenGraph();
+
+    postsCreator.uploadImage();
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only content image uploaded."
+    );
+    postsCreator.removeImage();
+
+    postsCreator.addTitleWith(TextGenerator.defaultText());
+    postsCreator.addDescriptionWith(TextGenerator.defaultText());
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only title and description."
+    );
+    postsCreator.clearDescription();
+
+    postsCreator.addDescriptionWithLink("http://fandom.wikia.com");
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only title and open graph."
+    );
+    postsCreator.clearDescription();
+    postsCreator.clearOpenGraph();
+
+    postsCreator.uploadImage();
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only title and content image."
+    );
+    postsCreator.removeImage();
+
+    // Add category at the end because there is no way to clear it
     postsCreator.clickAddCategoryButton()
         .findCategoryOn(0)
         .click();
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with only category selected.");
+        "User should not be able to add post with only category.");
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with category selected and title filled.");
+        "User should not be able to add post with only category and title.");
+    postsCreator.clearTitle();
+
+    postsCreator.addDescriptionWith(TextGenerator.defaultText());
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only category and description."
+    );
+    postsCreator.clearDescription();
+
+    postsCreator.addDescriptionWithLink("http://fandom.wikia.com");
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only category and open graph."
+    );
+    postsCreator.clearDescription();
+    postsCreator.clearOpenGraph();
+
+    postsCreator.uploadImage();
+    Assertion.assertFalse(
+        postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only category and content image."
+    );
   }
 
   private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
