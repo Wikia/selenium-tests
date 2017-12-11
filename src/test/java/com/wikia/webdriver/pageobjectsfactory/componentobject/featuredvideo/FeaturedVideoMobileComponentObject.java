@@ -23,16 +23,16 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
   @FindBy(css = ".jw-title-primary")
   private WebElement primaryTitle;
 
-  @FindBy(css = "#featured-video__player")
+  @FindBy(css = ".jw-flag-touch")
   private WebElement player;
 
   @FindBy(css = ".jw-controlbar")
   private WebElement controlbar;
 
-  @FindBy(xpath = "//*[@aria-label='Start playback']")
+  @FindBy(css = ".jw-display-icon-display")
   private WebElement playButton;
 
-  @FindBy(xpath = "//*[@aria-label='Pause']")
+  @FindBy(css = ".jw-display-icon-display")
   private WebElement pauseButton;
 
   @FindBy(css = ".jw-state-playing")
@@ -40,6 +40,9 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
 
   @FindBy(css = ".jw-state-paused")
   private WebElement playerStatePaused;
+
+  @FindBy(css = ".wikia-jw-settings-button")
+  private WebElement videoQualityButton;
 
   @FindBy(css = "#featured-video__player-videoAutoplayToggle")
   private WebElement autoplayToggle;
@@ -83,17 +86,22 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
     return primaryTitle.getText();
   }
 
-  public FeaturedVideoMobileComponentObject clickPlay() {
+  public FeaturedVideoMobileComponentObject activatePlayerOptions() {
     wait.forElementClickable(player);
     player.click();
+
+    return this;
+  }
+
+  public FeaturedVideoMobileComponentObject clickPlay() {
+    wait.forElementClickable(playButton);
     playButton.click();
 
     return this;
   }
 
   public FeaturedVideoMobileComponentObject clickPause() {
-    wait.forElementClickable(player);
-    player.click();
+    wait.forElementClickable(pauseButton);
     pauseButton.click();
 
     return this;

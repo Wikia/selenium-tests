@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo.FeaturedVideoDesktopComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo.FeaturedVideoMobileComponentObject;
 
 import org.testng.annotations.Test;
@@ -45,10 +46,49 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
   public void videoIsPaused() {
     FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
         .setAutoplayCookie(false)
-        .clickPlay()
         .openWikiArticle("FeaturedVideo")
+        .clickPlay()
+        .activatePlayerOptions()
         .clickPause();
 
     Assertion.assertTrue(video.isVideoPaused());
   }
+
+  @Test
+  public void autoplayToggleIsOn() {
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo")
+        .clickPause()
+        .openSettingsMenu();
+
+    Assertion.assertTrue(video.isAutoplayOn());
+  }
+
+  @Test
+  public void autoplayToggleIsOff() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .setAutoplayCookie(false)
+        .openWikiArticle("FeaturedVideo")
+        .activatePlayerOptions()
+        .clickPlay()
+        .activatePlayerOptions()
+        .clickPause()
+        .openSettingsMenu();
+
+    Assertion.assertFalse(video.isAutoplayOn());
+  }
+
+  @Test
+  public void videoMutedWhenAutoplayed() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo")
+        .activatePlayerOptions()
+        .clickPause()
+        .showControlBar();
+
+    Assertion.assertTrue(video.isVolumeMuted());
+  }
+
 }
