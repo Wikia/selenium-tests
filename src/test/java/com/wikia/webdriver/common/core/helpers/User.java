@@ -65,6 +65,7 @@ public enum User {
   SUS_REGULAR_USER("ci.user.sus_user.username", "ci.user.sus_user.password"),
   SUS_REGULAR_USER2("ci.user.sus_user2.username", "ci.user.sus_user2.password"),
   SUS_REGULAR_USER3("ci.user.sus_user3.username", "ci.user.sus_user3.password"),
+  USER_CTEST("ci.user.ctest3.username", "ci.user.ctest3.password"),
   ;
 
   private final String userName;
