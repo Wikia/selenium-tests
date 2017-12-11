@@ -78,7 +78,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
+  public void userOnMobileCannotSavePostWithoutCategoryOrAnyContent() {
     PostsListPage page = new PostsListPage().open();
     BasePostsCreator postsCreator = page.getPostsCreatorMobile();
     assertThatPostWithoutCategoryOrAnyContentCannotBeAdded(postsCreator);
@@ -129,7 +129,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
+  public void userOnDesktopCannotSavePostWithoutCategoryOrAnyContent() {
     BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutCategoryOrAnyContentCannotBeAdded(postsCreator);
   }
@@ -151,7 +151,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userOnDesktopCannotAddPostWithoutTitle() throws MalformedURLException {
+  public void userOnDesktopCannotAddPostWithoutTitle() {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorDesktop();
