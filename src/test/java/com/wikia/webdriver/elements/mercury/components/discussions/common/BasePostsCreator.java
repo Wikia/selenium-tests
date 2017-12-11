@@ -106,14 +106,20 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator addDescriptionWithLink(final URL url) {
-    getDescriptionTextarea().sendKeys(String.format(" %s ", url.toString()));
+  public PostsCreator addDescriptionWithLink(final String url) {
+    getDescriptionTextarea().sendKeys(String.format(" %s ", url));
     return this;
   }
 
   @Override
   public PostsCreator clearDescription() {
     getDescriptionTextarea().clear();
+    return this;
+  }
+
+  @Override
+  public PostsCreator clearOpenGraph() {
+    getEditor().findElement(getOpenGraphContainer()).findElement(By.className("og-close")).click();
     return this;
   }
 
