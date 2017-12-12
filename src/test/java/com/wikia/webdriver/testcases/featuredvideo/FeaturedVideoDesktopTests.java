@@ -33,8 +33,8 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
     Assertion.assertEquals(video.getTitle(), "Papuga atakuje!");
   }
-
-  @Test
+// Test is disabled until Derek decides if we want to show subtitle to a user
+  @Test(enabled = false)
   public void videoSubtitleIsVisible() {
     FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
         .setAutoplayCookie(false)
