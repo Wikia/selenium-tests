@@ -156,7 +156,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanUploadImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
-    startPostCreationMobile(page).uploadImage().clickSubmitButton();
+    startEmptyPostCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.getPost().firstPostHasImage(), POST_IMAGE_VISIBLE);
   }
@@ -166,7 +166,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanUploadImageTotheirReplyOnMobile() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
-    startReplyCreationMobile(page).uploadImage().clickSubmitButton();
+    startEmptyReplyCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
@@ -271,6 +271,10 @@ public class UploadingImageTests extends NewTestTemplate {
     return page.getPostsCreatorMobile().startPostCreation();
   }
 
+  private BasePostsCreator startEmptyPostCreationMobile(PostsListPage page) {
+    return page.getPostsCreatorMobile().startPostCreationWithoutText();
+  }
+
   private BaseReplyCreator startReplyCreation(BaseReplyCreator replyCreator) {
     replyCreator.click()
       .clickGuidelinesReadButton()
@@ -294,6 +298,10 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private BaseReplyCreator startReplyCreationMobile(PostDetailsPage page) {
     return startReplyCreation(page.getReplyCreatorMobile());
+  }
+
+  private BaseReplyCreator startEmptyReplyCreationMobile(PostDetailsPage page) {
+    return startEmptyReplyCreation(page.getReplyCreatorMobile());
   }
 
   private void addPostWithUnsupportedImage(BasePostsCreator postCreator) {
