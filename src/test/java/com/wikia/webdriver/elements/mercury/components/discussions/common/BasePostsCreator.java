@@ -66,15 +66,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return result;
   }
 
-  public boolean hasOpenGraphContainer() {
-    boolean result = false;
-    final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
-    if (null != openGraphContainer) {
-      result = true;
-    }
-    return result;
-  }
-
   @Override
   public PostsCreator closeGuidelinesMessage() {
     if (getGuidelinesMessageCloseButton().isDisplayed()) {
@@ -160,7 +151,12 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   public BasePostsCreator startPostCreationWithoutText() {
-    return startEmpyDescritpionPostCreation();
+    click()
+        .closeGuidelinesMessage()
+        .addTitleWith(TextGenerator.defaultText())
+        .clickAddCategoryButton()
+        .selectFirstCategory();
+    return this;
   }
 
   public BasePostsCreator startPostCreationWith(String description) {
@@ -170,15 +166,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
       .addDescriptionWith(description)
       .clickAddCategoryButton()
       .selectFirstCategory();
-    return this;
-  }
-
-  public BasePostsCreator startEmpyDescritpionPostCreation() {
-    click()
-        .closeGuidelinesMessage()
-        .addTitleWith(TextGenerator.defaultText())
-        .clickAddCategoryButton()
-        .selectFirstCategory();
     return this;
   }
 

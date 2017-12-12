@@ -129,7 +129,7 @@ public class OpenGraphTests extends NewTestTemplate {
       throws MalformedURLException {
     postsCreator.startPostCreationWithLink(new URL(URL));
     postsCreator.clearDescription();
-    Assertion.assertTrue(postsCreator.hasOpenGraphContainer());
+    Assertion.assertTrue(postsCreator.hasOpenGraph());
 
     postsCreator.clickSubmitButton();
     page.waitForPageReload();
@@ -144,7 +144,7 @@ public class OpenGraphTests extends NewTestTemplate {
     replyCreator.startReplyCreationWithLink(new URL(URL));
     replyCreator.clearText();
 
-    Assertion.assertTrue(replyCreator.hasOpenGraphContainer());
+    Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
     page.getReplies().waitForReplyToAppearWith(URL);
