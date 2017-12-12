@@ -86,7 +86,23 @@ public class OpenGraphTests extends NewTestTemplate {
 
   @Test
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void validOpenGraphItemCanBeSubmittedInNewPostOnMobile() throws MalformedURLException {
+    PostsListPage page = new PostsListPage().open();
+    PostsCreatorMobile postsCreator = page.getPostsCreatorMobile();
+    verifyOpenGraphWithLinkRemovedInNewPost(page, postsCreator);
+  }
+
+  @Test
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void validLinkGeneratesOpenGraphItemInNewReplyOnMobile() throws MalformedURLException {
+    PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
+    ReplyCreatorMobile replyCreator = page.getReplyCreatorMobile();
+    verifyOpenGraphInNewReply(page, replyCreator);
+  }
+
+  @Test
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void validOpenGraphItemCanBeSubmittedInNewReplyOnMobile() throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
     ReplyCreatorMobile replyCreator = page.getReplyCreatorMobile();
     verifyOpenGraphInNewReply(page, replyCreator);
