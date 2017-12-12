@@ -45,7 +45,12 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewPost() {
-    userOnMobileMustBeLoggedInToUsePostCreator();
+    PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+    postsCreator.clickOkButtonInSignInDialog();
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+    postsCreator.clickSignInButtonInSignInDialog();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
   }
 
   /*
@@ -56,7 +61,12 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotWriteNewPost() {
-    userOnDesktopMustBeLoggedInToUsePostCreator();
+    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+    postsCreator.clickOkButtonInSignInDialog();
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+    postsCreator.clickSignInButtonInSignInDialog();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
 
   @Test(groups = DESKTOP)
@@ -102,10 +112,8 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotAddPostWithoutTitle() {
-    String description = TextGenerator.createUniqueText();
-    PostsListPage page = new PostsListPage().open();
-    PostsCreator postsCreator = page.getPostsCreatorMobile();
-    fillPostCategoryWith(postsCreator, description);
+    PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+    fillPostCategoryWith(postsCreator, TextGenerator.createUniqueText());
 
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
@@ -152,10 +160,8 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotAddPostWithoutTitle() {
-    String description = TextGenerator.createUniqueText();
-    PostsListPage page = new PostsListPage().open();
-    PostsCreator postsCreator = page.getPostsCreatorDesktop();
-    fillPostCategoryWith(postsCreator, description);
+    PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    fillPostCategoryWith(postsCreator, TextGenerator.createUniqueText());
 
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
@@ -163,27 +169,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   /**
    * TESTING METHODS SECTION
-   */
-
-  private void userOnMobileMustBeLoggedInToUsePostCreator() {
-    PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-    postsCreator.clickOkButtonInSignInDialog();
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-    postsCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
-  }
-
-  private void userOnDesktopMustBeLoggedInToUsePostCreator() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-    postsCreator.clickOkButtonInSignInDialog();
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-    postsCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
-  }
-
-  /**
+   *
    * This test covers all situations when post cannot be added (submit button is disabled).
    * <p>
    * | Category | Title | Description | Open Graph | Content Image |
@@ -245,7 +231,9 @@ public class CreatingPostTests extends NewTestTemplate {
         "User should not be able to add post with only title and description."
     );
     postsCreator.clearDescription();
+    postsCreator.clearTitle();
 
+    postsCreator.addTitleWith(TextGenerator.defaultText());
     postsCreator.addDescriptionWithLink("http://fandom.wikia.com");
     Assertion.assertFalse(
         postsCreator.isPostButtonActive(),
@@ -253,13 +241,16 @@ public class CreatingPostTests extends NewTestTemplate {
     );
     postsCreator.clearDescription();
     postsCreator.clearOpenGraph();
+    postsCreator.clearTitle();
 
+    postsCreator.addTitleWith(TextGenerator.defaultText());
     postsCreator.uploadImage();
     Assertion.assertFalse(
         postsCreator.isPostButtonActive(),
         "User should not be able to add post with only title and content image."
     );
     postsCreator.removeImage();
+    postsCreator.clearTitle();
 
     // Add category at the end because there is no way to clear it
     postsCreator.clickAddCategoryButton()
