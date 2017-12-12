@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"NonEnAnonMixedContentFooter"})
-@Execute(onWikia = "de.gta", asUser = User.ANONYMOUS)
+@Execute(onWikia = "de.gameofthrones", asUser = User.ANONYMOUS)
 public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
