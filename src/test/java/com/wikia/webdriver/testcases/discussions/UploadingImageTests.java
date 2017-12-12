@@ -240,7 +240,7 @@ public class UploadingImageTests extends NewTestTemplate {
    */
 
   private BasePostsCreator startEmptyPostCreationDesktop(PostsListPage page) {
-    return page.getPostsCreatorDesktop().startPostCreationWithoutText();
+    return page.getPostsCreatorDesktop().startPostCreationWithoutDescription();
   }
 
   private BasePostsCreator startPostCreationDesktop(PostsListPage page) {
@@ -272,7 +272,7 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   private BasePostsCreator startEmptyPostCreationMobile(PostsListPage page) {
-    return page.getPostsCreatorMobile().startPostCreationWithoutText();
+    return page.getPostsCreatorMobile().startPostCreationWithoutDescription();
   }
 
   private BaseReplyCreator startReplyCreation(BaseReplyCreator replyCreator) {

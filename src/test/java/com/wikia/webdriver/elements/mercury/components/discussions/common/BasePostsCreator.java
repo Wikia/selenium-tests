@@ -150,7 +150,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return startPostCreationWith(TextGenerator.defaultText());
   }
 
-  public BasePostsCreator startPostCreationWithoutText() {
+  public BasePostsCreator startPostCreationWithoutDescription() {
     click()
         .closeGuidelinesMessage()
         .addTitleWith(TextGenerator.defaultText())
