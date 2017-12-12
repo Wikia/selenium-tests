@@ -66,6 +66,15 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return result;
   }
 
+  public boolean hasOpenGraphContainer() {
+    boolean result = false;
+    final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
+    if (null != openGraphContainer) {
+      result = true;
+    }
+    return result;
+  }
+
   @Override
   public PostsCreator closeGuidelinesMessage() {
     if (getGuidelinesMessageCloseButton().isDisplayed()) {

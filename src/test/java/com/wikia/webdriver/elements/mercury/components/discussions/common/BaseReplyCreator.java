@@ -115,6 +115,15 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return result;
   }
 
+  public boolean hasOpenGraphContainer() {
+    boolean result = false;
+    final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
+    if (null != openGraphContainer) {
+      result = true;
+    }
+    return result;
+  }
+
   public BaseReplyCreator startReplyCreation() {
     return startReplyCreationWith(TextGenerator.defaultText());
   }
