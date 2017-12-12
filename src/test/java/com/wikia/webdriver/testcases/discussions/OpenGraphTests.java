@@ -105,7 +105,7 @@ public class OpenGraphTests extends NewTestTemplate {
   public void validOpenGraphItemCanBeSubmittedInNewReplyOnMobile() throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
     ReplyCreatorMobile replyCreator = page.getReplyCreatorMobile();
-    verifyOpenGraphInNewReply(page, replyCreator);
+    verifyOpenGraphWithLinkRemovedInNewReply(page, replyCreator);
   }
 
   /**
