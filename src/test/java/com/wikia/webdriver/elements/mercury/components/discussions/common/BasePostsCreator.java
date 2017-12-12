@@ -159,6 +159,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return startPostCreationWith(TextGenerator.defaultText());
   }
 
+  public BasePostsCreator startPostCreationWithoutText() {
+    return startEmpyDescritpionPostCreation();
+  }
+
   public BasePostsCreator startPostCreationWith(String description) {
     click()
       .closeGuidelinesMessage()
@@ -166,6 +170,15 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
       .addDescriptionWith(description)
       .clickAddCategoryButton()
       .selectFirstCategory();
+    return this;
+  }
+
+  public BasePostsCreator startEmpyDescritpionPostCreation() {
+    click()
+        .closeGuidelinesMessage()
+        .addTitleWith(TextGenerator.defaultText())
+        .clickAddCategoryButton()
+        .selectFirstCategory();
     return this;
   }
 

@@ -68,7 +68,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanUploadImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
-    startPostCreationDesktop(page).uploadImage().clickSubmitButton();
+    startEmptyPostCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.getPost().firstPostHasImage(), POST_IMAGE_VISIBLE);
   }
@@ -78,7 +78,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanUploadImageToTheirReplyOnDesktop() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
-    startReplyCreationDesktop(page).uploadImage().clickSubmitButton();
+    startEmptyReplyCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
@@ -239,6 +239,10 @@ public class UploadingImageTests extends NewTestTemplate {
    * helper methods
    */
 
+  private BasePostsCreator startEmptyPostCreationDesktop(PostsListPage page) {
+    return page.getPostsCreatorDesktop().startPostCreationWithoutText();
+  }
+
   private BasePostsCreator startPostCreationDesktop(PostsListPage page) {
     return page.getPostsCreatorDesktop().startPostCreation();
   }
@@ -274,8 +278,18 @@ public class UploadingImageTests extends NewTestTemplate {
     return replyCreator;
   }
 
+  private BaseReplyCreator startEmptyReplyCreation(BaseReplyCreator replyCreator) {
+    replyCreator.click()
+        .clickGuidelinesReadButton();
+    return replyCreator;
+  }
+
   private BaseReplyCreator startReplyCreationDesktop(PostDetailsPage page) {
     return startReplyCreation(page.getReplyCreatorDesktop());
+  }
+
+  private BaseReplyCreator startEmptyReplyCreationDesktop(PostDetailsPage page) {
+    return startEmptyReplyCreation(page.getReplyCreatorDesktop());
   }
 
   private BaseReplyCreator startReplyCreationMobile(PostDetailsPage page) {
