@@ -59,7 +59,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       groups = {"AdsVuapClickToPlayMobile"}
   )
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
@@ -76,7 +76,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       groups = "AdsVuapDefaultStateMercury"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);

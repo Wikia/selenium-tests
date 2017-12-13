@@ -25,7 +25,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
@@ -266,7 +266,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
       groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
