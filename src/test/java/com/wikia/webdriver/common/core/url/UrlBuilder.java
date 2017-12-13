@@ -40,7 +40,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForPage(String wikiName, String pageName) {
-    return getUrlForWiki(wikiName) + pageName;
+    return getUrlForWiki(wikiName) + "/wiki/" + pageName;
   }
 
   public String getUrlForPage(Page page) {
