@@ -248,7 +248,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
       groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
