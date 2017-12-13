@@ -25,7 +25,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
@@ -245,10 +245,10 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
-      groups = {"AdsVuapClickToPlaySizes"}
+      groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
@@ -258,5 +258,20 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     double videoAdHeight = vuap.getVideoHeightWhilePaused();
 
     VuapAssertions.verifyVideoAdSize(vuap, videoAdHeight, adSlotHeight, MAX_AUTOPLAY_MOVIE_DURATION);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapClickToPlayDesktop",
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(Page page, String slot) {
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    ads.scrollToSlot(slot);
+
+    vuap.clickOnArea(2);
+
+    VuapAssertions.verifyVideoPlay(vuap);
   }
 }

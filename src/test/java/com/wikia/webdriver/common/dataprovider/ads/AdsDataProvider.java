@@ -835,11 +835,11 @@ public class AdsDataProvider {
   public static Object[][] adsVuapClickToPlayDesktop() {
     return new Object[][]{
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                     AdsContent.TOP_LB
             },
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                     AdsContent.BOTTOM_LB
             }
     };
@@ -871,11 +871,11 @@ public class AdsDataProvider {
   public static Object[][] adsVuapDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB
         }
     };
@@ -885,11 +885,11 @@ public class AdsDataProvider {
   public static Object[][] adsVuapResolvedState() {
     return new Object[][]{
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
                     AdsContent.TOP_LB
             },
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
                     AdsContent.BOTTOM_LB
             }
     };

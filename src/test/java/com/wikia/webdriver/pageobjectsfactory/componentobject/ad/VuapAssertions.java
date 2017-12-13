@@ -50,6 +50,7 @@ public class VuapAssertions {
 
   public static void verifyVideoPlay(final AutoplayVuap vuap) {
     Assert.assertTrue(vuap.isPauseLayerVisible(), "VUAP did not automatically played when page was opened.");
+    Assert.assertTrue(vuap.isColourVuapVideoAdVisible(), "VUAP video ad has wrong colour");
     Assert.assertEquals(vuap.findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
   }
 
