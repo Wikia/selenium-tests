@@ -160,12 +160,8 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   public BasePostsCreator startPostCreationWith(String description) {
-    click()
-      .closeGuidelinesMessage()
-      .addTitleWith(TextGenerator.defaultText())
-      .addDescriptionWith(description)
-      .clickAddCategoryButton()
-      .selectFirstCategory();
+    startPostCreationWithoutDescription()
+        .addDescriptionWith(description);
     return this;
   }
 
