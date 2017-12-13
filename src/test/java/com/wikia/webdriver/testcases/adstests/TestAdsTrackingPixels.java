@@ -9,9 +9,9 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.testng.annotations.Test;
 
 public class TestAdsTrackingPixels extends NewTestTemplate {
@@ -57,6 +57,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
       dataProvider = "adsTrackingPixelsSent"
   )
   public void adsTrackingPixelSent(String wiki, String urlParam, String[] pixelUrls) {
+    PageObjectLogging.log("Test data", "wiki: " + wiki + " urlParam: " + urlParam + "pixelUrls: " + String.join(",", pixelUrls), true);
     networkTrafficInterceptor.startIntercepting();
 
     String testedPage = urlBuilder.getUrlForPath(wiki, urlParam);
@@ -85,6 +86,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
   private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
+      PageObjectLogging.log("MEthod: assertTrackingPixelsSent", "Waiting for pixel: " + pixelUrl, true);
       adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
     }
   }

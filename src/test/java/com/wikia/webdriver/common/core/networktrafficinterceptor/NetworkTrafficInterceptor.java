@@ -1,19 +1,17 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import java.net.InetSocketAddress;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
-
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.net.InetSocketAddress;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
@@ -30,7 +28,9 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
   }
 
   public void startIntercepting() {
+    PageObjectLogging.log("Start intercepting", "Starting intercepting", true);
     this.har = newHar(RandomStringUtils.random(5));
+    PageObjectLogging.log("Start intercepting", "Started intercepting", true);
   }
 
   public HarEntry getEntryByUrlPart(String needle) {
