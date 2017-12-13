@@ -57,10 +57,10 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
       dataProvider = "adsTrackingPixelsSent"
   )
   public void adsTrackingPixelSent(String wiki, String urlParam, String[] pixelUrls) {
-    PageObjectLogging.log("Test data", "wiki: " + wiki + " urlParam: " + urlParam + "pixelUrls: " + String.join(",", pixelUrls), true);
+    PageObjectLogging.log("Test data", "wiki: " + wiki + ", urlParam: " + urlParam + ", pixelUrls: " + String.join(",", pixelUrls), true);
     networkTrafficInterceptor.startIntercepting();
 
-    String testedPage = urlBuilder.getUrlForPath(wiki, urlParam);
+    String testedPage = urlBuilder.getUrlForPage(wiki, urlParam);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
 
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);

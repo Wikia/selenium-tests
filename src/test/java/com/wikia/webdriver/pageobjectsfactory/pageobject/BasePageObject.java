@@ -290,11 +290,13 @@ public class BasePageObject {
   }
 
   public void getUrl(String url, boolean makeScreenshot) {
+    PageObjectLogging.log("Method: getUrl", "Getting url: " + url, true);
     driver.get(url);
     if (makeScreenshot) {
       PageObjectLogging.log("Take screenshot",
           String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
+    PageObjectLogging.log("Method: getUrl", "Got url: " + url, true);
   }
 
   public void getUrl(Page page) {
