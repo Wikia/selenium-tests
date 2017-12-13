@@ -35,6 +35,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getImageDeleteButton();
+  protected abstract WebElement getOpenGraphDeleteButton();
   protected abstract By getOpenGraphContainer();
   protected abstract By getOpenGraphText();
 
@@ -119,7 +120,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public PostsCreator clearOpenGraph() {
-    getEditor().findElement(getOpenGraphContainer()).findElement(By.className("og-close")).click();
+    getOpenGraphDeleteButton().click();
     return this;
   }
 
