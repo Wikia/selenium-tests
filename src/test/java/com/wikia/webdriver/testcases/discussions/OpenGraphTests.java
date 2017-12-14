@@ -119,7 +119,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(postsCreator.hasOpenGraph());
     postsCreator.clickSubmitButton();
     page.waitForPageReload();
-    page.getPost().waitForPostToAppearWith(URL);
+    page.getPost().waitForPostToAppearWithText(URL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
@@ -133,9 +133,21 @@ public class OpenGraphTests extends NewTestTemplate {
 
     postsCreator.clickSubmitButton();
     page.waitForPageReload();
-    page.getPost().waitForPostToAppearWith(URL);
+    page.getPost().waitForPostToAppearWithOpenGraph(URL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
+  }
+
+  private void verifyOpenGraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
+    throws MalformedURLException {
+    replyCreator.startReplyCreationWithLink(new URL(URL));
+
+    Assertion.assertTrue(replyCreator.hasOpenGraph());
+    replyCreator.clickSubmitButton();
+    page.waitForPageReload();
+    page.getReplies().waitForReplyToAppearWithText(URL);
+
+    Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }
 
   private void verifyOpenGraphWithLinkRemovedInNewReply(PostDetailsPage page, BaseReplyCreator
@@ -147,19 +159,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
-    page.getReplies().waitForReplyToAppearWith(URL);
-
-    Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
-  }
-
-  private void verifyOpenGraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
-    throws MalformedURLException {
-    replyCreator.startReplyCreationWithLink(new URL(URL));
-
-    Assertion.assertTrue(replyCreator.hasOpenGraph());
-    replyCreator.clickSubmitButton();
-    page.waitForPageReload();
-    page.getReplies().waitForReplyToAppearWith(URL);
+    page.getReplies().waitForReplyToAppearWithOpenGraph(URL);
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }
