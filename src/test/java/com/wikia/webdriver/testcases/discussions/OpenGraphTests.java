@@ -54,10 +54,26 @@ public class OpenGraphTests extends NewTestTemplate {
 
   @Test
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void validOpenGraphItemCanBeSubmittedInNewPostOnDesktop() throws MalformedURLException {
+    PostsListPage page = new PostsListPage().open();
+    PostsCreatorDesktop postsCreator = page.getPostsCreatorDesktop();
+    verifyOpenGraphWithLinkRemovedInNewPost(page, postsCreator);
+  }
+
+  @Test
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void validLinkGeneratesOpenGraphItemInNewReplyOnDesktop() throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
     ReplyCreatorDesktop replyCreator = page.getReplyCreatorDesktop();
     verifyOpenGraphInNewReply(page, replyCreator);
+  }
+
+  @Test
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void validOpenGraphItemCanBeSubmittedInNewReplyOnDesktop() throws MalformedURLException {
+    PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
+    ReplyCreatorDesktop replyCreator = page.getReplyCreatorDesktop();
+    verifyOpenGraphWithLinkRemovedInNewReply(page, replyCreator);
   }
 
   @Test
@@ -70,10 +86,26 @@ public class OpenGraphTests extends NewTestTemplate {
 
   @Test
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void validOpenGraphItemCanBeSubmittedInNewPostOnMobile() throws MalformedURLException {
+    PostsListPage page = new PostsListPage().open();
+    PostsCreatorMobile postsCreator = page.getPostsCreatorMobile();
+    verifyOpenGraphWithLinkRemovedInNewPost(page, postsCreator);
+  }
+
+  @Test
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void validLinkGeneratesOpenGraphItemInNewReplyOnMobile() throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
     ReplyCreatorMobile replyCreator = page.getReplyCreatorMobile();
     verifyOpenGraphInNewReply(page, replyCreator);
+  }
+
+  @Test
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void validOpenGraphItemCanBeSubmittedInNewReplyOnMobile() throws MalformedURLException {
+    PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
+    ReplyCreatorMobile replyCreator = page.getReplyCreatorMobile();
+    verifyOpenGraphWithLinkRemovedInNewReply(page, replyCreator);
   }
 
   /**
@@ -87,7 +119,21 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(postsCreator.hasOpenGraph());
     postsCreator.clickSubmitButton();
     page.waitForPageReload();
-    page.getPost().waitForPostToAppearWith(URL);
+    page.getPost().waitForPostToAppearWithText(URL);
+
+    Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
+  }
+
+  private void verifyOpenGraphWithLinkRemovedInNewPost(PostsListPage page, BasePostsCreator
+      postsCreator)
+      throws MalformedURLException {
+    postsCreator.startPostCreationWithLink(new URL(URL));
+    postsCreator.clearDescription();
+    Assertion.assertTrue(postsCreator.hasOpenGraph());
+
+    postsCreator.clickSubmitButton();
+    page.waitForPageReload();
+    page.getPost().waitForPostToAppearWithOpenGraph(URL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
@@ -99,7 +145,21 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
-    page.getReplies().waitForReplyToAppearWith(URL);
+    page.getReplies().waitForReplyToAppearWithText(URL);
+
+    Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
+  }
+
+  private void verifyOpenGraphWithLinkRemovedInNewReply(PostDetailsPage page, BaseReplyCreator
+      replyCreator)
+      throws MalformedURLException {
+    replyCreator.startReplyCreationWithLink(new URL(URL));
+    replyCreator.clearText();
+
+    Assertion.assertTrue(replyCreator.hasOpenGraph());
+    replyCreator.clickSubmitButton();
+    page.waitForPageReload();
+    page.getReplies().waitForReplyToAppearWithOpenGraph(URL);
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }

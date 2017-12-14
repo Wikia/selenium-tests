@@ -416,7 +416,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   private boolean isReplyNotPresent(PostDetailsPage page, String text) {
     return page.getReplies()
-        .waitForReplyToAppearWith(text)
+        .waitForReplyToAppearWithText(text)
         .isEmpty();
   }
 }
