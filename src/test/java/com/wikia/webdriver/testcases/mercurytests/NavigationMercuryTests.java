@@ -75,7 +75,6 @@ public class NavigationMercuryTests extends NavigationTests {
   }
 
   @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
-  @RelatedIssue(issueID = "IRIS-5351")
   public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
     new GuidelinesPage()
         .open()
