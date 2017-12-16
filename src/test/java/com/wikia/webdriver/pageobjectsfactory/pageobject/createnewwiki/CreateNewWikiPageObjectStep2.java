@@ -40,7 +40,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
       throw new WebDriverException("Cannot find a categpory with this index");
     }
     scrollTo(wikiCategoryDropdown);
-    wait.forElementClickable(wikiCategoryDropdown);
+    wait.forElementClickable(wikiCategoryDropdown, 30);
     WebElement selectedCategory;
     try {
       selectedCategory = wikiCategoryList.get(categoryId);
