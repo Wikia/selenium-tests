@@ -163,7 +163,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @param toolName {Follow, Edit, History, (...)}
    */
   public void verifyToolOnList(String toolName) {
-    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
+    wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)), 30);
     PageObjectLogging.log("verifyToolOnList", toolName + " visible on the list", true);
   }
 
