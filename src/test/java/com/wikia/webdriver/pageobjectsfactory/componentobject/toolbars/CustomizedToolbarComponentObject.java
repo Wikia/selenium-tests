@@ -258,6 +258,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void waitForTenSecondsAndThinkPositivelyAboutLudwik() {
+    PageObjectLogging.log("Oh, Ludwik!", "Thought positively about Ludwik: checked.", true);
     wait.forXMilliseconds(10000);
   }
 }
