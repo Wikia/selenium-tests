@@ -253,6 +253,17 @@ public class Wait {
     }
   }
 
+  public boolean forElementNotVisible(WebElement element, int timeoutSec) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(driver, timeoutSec).until(
+          CommonExpectedConditions.invisibilityOfElementLocated(element));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+
   /**
    * Wait for element to be either invisible or not present on the DOM.
    */
