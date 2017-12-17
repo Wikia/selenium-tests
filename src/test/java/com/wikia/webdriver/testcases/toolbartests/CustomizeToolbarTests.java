@@ -123,6 +123,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
     toolbar.verifyFollowMessage();
     toolbar.verifyFollowedToolbar();
     toolbar.verifyToolOnToolbar(toolFollowing);
+    Thread.sleep(10000);
     toolbar.clickOnTool("follow");
     toolbar.verifyFollowMessage();
     toolbar.verifyUnfollowed();
