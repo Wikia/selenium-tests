@@ -256,4 +256,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void waitForCustomizeToolbarModalToDisappear() {
     wait.forElementNotVisible(customizeToolbar);
   }
+
+  public void waitForTenSecondsAndThinkPositivelyAboutLudwik() {
+    wait.forXMilliseconds(10000);
+  }
 }
