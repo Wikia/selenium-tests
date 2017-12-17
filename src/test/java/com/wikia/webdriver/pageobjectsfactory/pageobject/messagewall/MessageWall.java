@@ -115,7 +115,7 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(postButton);
     builder.moveByOffset(0, 0).perform();
 
-    wait.forElementNotVisible(postButton);
+    wait.forElementNotVisible(postButton, 30);
     PageObjectLogging.log("submit", "message submitted", true);
   }
 
