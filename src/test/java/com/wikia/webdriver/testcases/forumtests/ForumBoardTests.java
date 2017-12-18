@@ -10,7 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumTh
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
-i
 @Test(groups = {"ForumBoardTests", "Forum"})
 @Execute(onWikia = "sustainingtest")
 public class ForumBoardTests extends NewTestTemplate {
