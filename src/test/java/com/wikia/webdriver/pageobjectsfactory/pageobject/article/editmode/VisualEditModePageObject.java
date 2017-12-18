@@ -41,7 +41,7 @@ public class VisualEditModePageObject extends EditMode {
   protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
   private WebElement contentInput;
-  @FindBy(css = "div.cke_wrapper.cke_ltr div.cke_contents iframe")
+  @FindBy(className = "cke_wysiwyg_frame")
   private WebElement iframe;
   @FindBy(css = "img.image-gallery")
   private WebElement gallery;
@@ -69,6 +69,10 @@ public class VisualEditModePageObject extends EditMode {
   private List<WebElement> categoryList;
   @FindBy(css = ".RTEMediaCaption")
   private WebElement caption;
+  @FindBy(css = ".placeholder-double-brackets .portable-infobox")
+  private WebElement portableInfoboxTransclusion;
+  @FindBy(css = "[style*=\"block\"] .RTEPlaceholderPreviewToolsDelete")
+  private WebElement removeInfoboxButton;
   @FindBy(
       xpath = "//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
   private WebElement blockedUserMessage1;
@@ -99,6 +103,7 @@ public class VisualEditModePageObject extends EditMode {
   private By sliderBy = By.cssSelector("img.image-gallery-slider");
   private By videoBy = By.cssSelector("img.video");
   private By categorySuggestionsList = By.cssSelector("li > a");
+  private final By portableInfoboxBy = By.cssSelector(".placeholder-double-brackets .portable-infobox");
 
   private String categoryEditSelector = "li.category[data-name='%categoryName%'] li.editCategory";
   private String categoryRemoveSelector =
@@ -146,6 +151,18 @@ public class VisualEditModePageObject extends EditMode {
     contentInput.sendKeys(content);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
+  }
+
+  public boolean checkPortableInfoboxVisible() {
+    try {
+      wait.forElementVisible(iframe);
+      verifyComponent(portableInfoboxTransclusion);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    } finally {
+      driver.switchTo().defaultContent();
+    }
   }
 
   private void verifyComponent(WebElement component) {
@@ -231,31 +248,30 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   private void mouseOverComponent(Components component) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
     switch (component) {
       case GALLERY:
         verifyComponent(gallery);
-        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
+        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image-gallery').mouseenter()");
         break;
       case SLIDESHOW:
         verifyComponent(slideshow);
-        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
+        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image-slideshow').mouseenter()");
         break;
       case SLIDER:
         verifyComponent(slider);
-        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
+        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image-gallery-slider').mouseenter()");
         break;
       case VIDEO:
         verifyComponent(video);
-        js.executeScript("$('div.cke_contents>iframe').contents().find('img.video').mouseenter()");
+        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.video').mouseenter()");
         break;
       case PHOTO:
         verifyComponent(image);
-        js.executeScript("$('div.cke_contents>iframe').contents().find('img.image').mouseenter()");
+        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image').mouseenter()");
         break;
       case VIDEO_PLACEHOLDER:
         verifyComponent(videoPlaceholder);
-        js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
+        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.video-placeholder').mouseenter()");
         break;
       default:
         break;
@@ -289,7 +305,7 @@ public class VisualEditModePageObject extends EditMode {
     mouseOverComponent(component);
     removeComponentButton.click();
     removeConfirmationButton.click();
-    PageObjectLogging.log("removeGallery", "Click on 'remove button' on gallery", true);
+    PageObjectLogging.log("removeComponent", "Click on 'remove button' on component", true);
   }
 
   public void verifyComponentRemoved(Components component) {
@@ -319,6 +335,26 @@ public class VisualEditModePageObject extends EditMode {
     PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
   }
 
+  public void removePortableInfobox() {
+    verifyComponent(portableInfoboxTransclusion);
+    driver.executeScript("$('.cke_wysiwyg_frame').contents().find('.placeholder-double-brackets .portable-infobox').mouseenter()");
+
+    removeInfoboxButton.click();
+    removeConfirmationButton.click();
+  }
+
+  public boolean checkPortableInfoboxIsNotPresent() {
+    driver.switchTo().frame(iframe);
+    try {
+      wait.forElementNotPresent(portableInfoboxBy);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    } finally {
+      driver.switchTo().defaultContent();
+    }
+  }
+
   public void typeCategoryName(String categoryName) {
     jsActions.scrollToElementInModal(categoryInput,modalElement);
     wait.forElementVisible(categoryInput);
@@ -329,8 +365,7 @@ public class VisualEditModePageObject extends EditMode {
   public void triggerCategorySuggestions() {
     int timeout = 0;
     pressDownArrow(categoryInput);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");
+    String returned = (String) driver.executeScript("return $('ul.ui-autocomplete li').text()");
     while (returned.isEmpty() && timeout <= 5000) {
       try {
         Thread.sleep(500);
@@ -340,7 +375,7 @@ public class VisualEditModePageObject extends EditMode {
             .log("triggerCategorySuggestions", "Interrupted Exception occurred", false);
       }
       pressDownArrow(categoryInput);
-      returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");
+      returned = (String) driver.executeScript("return $('ul.ui-autocomplete li').text()");
     }
   }
 
@@ -355,24 +390,14 @@ public class VisualEditModePageObject extends EditMode {
 
   private void waitForNewCategoryToAppear(final int categoryListSizeBeforeSubmission) {
     WebDriverWait wait = new WebDriverWait(driver, ELEMENT_SHOW_UP_TIMEOUT);
-    wait.until(new ExpectedCondition<Boolean>() {
-      public Boolean apply(WebDriver driver) {
-        return categoryList.size() > categoryListSizeBeforeSubmission ? true : false;
-      }
-    });
+    wait.until((ExpectedCondition<Boolean>) driver -> categoryList.size() > categoryListSizeBeforeSubmission);
   }
 
   public void verifyCategoryPresent(String category){
-    boolean categoryVisible = false;
+    boolean categoryVisible = categoryList.stream().map(WebElement::getText).anyMatch(category::equals);
 
-    Assertion.assertFalse(categoryList.isEmpty(),"Category list is empty");
-    for (WebElement elem : categoryList) {
-      if (elem.getText().equals(category)) {
-        categoryVisible = true;
-        break;
-      }
-    }
-    String listedCategories = categoryList.stream().map(d->d.getText()).collect(Collectors.joining(", "));
+    String listedCategories = categoryList.stream()
+        .map(WebElement::getText).collect(Collectors.joining(", "));
     Assertion.assertTrue(categoryVisible, "Category " + category + " not present. Listed ones: " + listedCategories + ".");
   }
 

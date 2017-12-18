@@ -2,11 +2,13 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,14 +30,17 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
+
 import org.testng.annotations.Test;
 
 @Test(groups = {"ArticleFeaturesCRUDUser"})
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
-  private int additionalPropertyValue = 10;
+  private static final String PI_TEMPLATE_NAME = "Template:RTEPortableInfobox_";
+  private static final int ADDITIONAL_PROPERTY_VALUE = 10;
 
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   @Execute(asUser = User.USER)
@@ -329,14 +334,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
     visualEditMode.clickPropertiesTableButton();
     TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
-    addTable.typeBorderSize(border + additionalPropertyValue);
-    addTable.typeCellSpacing(cellspacing + additionalPropertyValue);
-    addTable.typeCellPadding(cellpadding + additionalPropertyValue);
+    addTable.typeBorderSize(border + ADDITIONAL_PROPERTY_VALUE);
+    addTable.typeCellSpacing(cellspacing + ADDITIONAL_PROPERTY_VALUE);
+    addTable.typeCellPadding(cellpadding + ADDITIONAL_PROPERTY_VALUE);
     addTable.submitTable();
     ArticlePageObject article = visualEditMode.submitArticle();
-    article.verifyTableBorder(border + additionalPropertyValue);
-    article.verifyTableCellspacing(cellspacing + additionalPropertyValue);
-    article.verifyTableCellpadding(cellpadding + additionalPropertyValue);
+    article.verifyTableBorder(border + ADDITIONAL_PROPERTY_VALUE);
+    article.verifyTableCellspacing(cellspacing + ADDITIONAL_PROPERTY_VALUE);
+    article.verifyTableCellpadding(cellpadding + ADDITIONAL_PROPERTY_VALUE);
   }
 
   @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
@@ -374,5 +379,40 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     article.verifyPhoto();
+  }
+
+  @Test(groups = {"ArticleFeaturesCRUDUser_015"})
+  @Execute(asUser = User.USER)
+  public void editPageWithPortableInfobox() {
+    String piTemplate = ContentLoader.loadWikiTextContent("Infobox2_Template");
+    String piTemplateCall = ContentLoader.loadWikiTextContent("Infobox2_Invocation");
+    ArticleContent articleContent = new ArticleContent();
+
+    articleContent.push(piTemplate, PI_TEMPLATE_NAME);
+    articleContent.push(piTemplateCall);
+
+    VisualEditModePageObject visualEditModePageObject = new VisualEditModePageObject().open();
+    Assertion.assertTrue(
+        visualEditModePageObject.checkPortableInfoboxVisible(),
+        "Portable infobox is not visible"
+    );
+
+    SourceEditModePageObject sourceEditModePageObject = visualEditModePageObject.clickSourceButton();
+    Assertion.assertTrue(
+        Assertion.assertStringContains(sourceEditModePageObject.getContent(), piTemplateCall.trim()),
+        "Portable infobox transclusion is incorrect"
+    );
+
+    visualEditModePageObject = sourceEditModePageObject.clickVisualButton();
+    Assertion.assertTrue(
+        visualEditModePageObject.checkPortableInfoboxVisible(),
+        "Portable infobox is not visible after mode switch"
+    );
+
+    visualEditModePageObject.removePortableInfobox();
+    Assertion.assertTrue(
+        visualEditModePageObject.checkPortableInfoboxIsNotPresent(),
+        "Portable infobox could not be removed"
+    );
   }
 }
