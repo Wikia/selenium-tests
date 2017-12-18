@@ -87,7 +87,7 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.open(boardTitle);
 
     PageObjectLogging.log("Oh, Ludwik!", "Thought positively about Ludwik: checked.", true);
-    wait.forXMilliseconds(10000);
+    new WebDriverWait(driver, 10);    
 
 
     forumBoard.unfollowIfDiscussionIsFollowed(1);
