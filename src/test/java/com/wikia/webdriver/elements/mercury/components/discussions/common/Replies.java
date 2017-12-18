@@ -18,6 +18,9 @@ public class Replies extends BasePageObject {
   @FindBy(css = ".discussion-reply .discussion-content")
   private WebElement replyContent;
 
+  @FindBy(css = ".discussion-reply .og-container")
+  private WebElement replyOpenGraph;
+
   public boolean hasNoRepliesIcon() {
     return null != webElement.findElement(By.cssSelector(".icon.no-replies"));
   }
@@ -31,12 +34,21 @@ public class Replies extends BasePageObject {
     return webElement.findElement(By.className("discussion-no-replies")).getText();
   }
 
-  public Replies waitForReplyToAppearWith(final String text) {
+  public Replies waitForReplyToAppearWithText(final String text) {
     new FluentWait<>(driver)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
         .until((Predicate<WikiaWebDriver>) input -> wait.forElementVisible(replyContent)
           .getText()
           .contains(text));
+    return this;
+  }
+
+  public Replies waitForReplyToAppearWithOpenGraph(final String url) {
+    new FluentWait<>(driver)
+        .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+        .until((Predicate<WikiaWebDriver>) input -> wait.forElementVisible(replyOpenGraph)
+            .getAttribute("href")
+            .contains(url));
     return this;
   }
 
