@@ -2,13 +2,15 @@ package com.wikia.webdriver.testcases.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
+import org.openqa.selenium.WebElement;
+i
 @Test(groups = {"ForumBoardTests", "Forum"})
 @Execute(onWikia = "sustainingtest")
 public class ForumBoardTests extends NewTestTemplate {
@@ -84,6 +86,10 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.startDiscussion("A nice discussion", "A nice Message", false);
 
     forumBoard.open(boardTitle);
+
+    PageObjectLogging.log("Oh, Ludwik!", "Thought positively about Ludwik: checked.", true);
+    wait.forXMilliseconds(10000);
+
 
     forumBoard.unfollowIfDiscussionIsFollowed(1);
     forumBoard.verifyTextOnFollowButton(1, "Follow");
