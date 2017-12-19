@@ -30,7 +30,7 @@ public class FandomAdsDataProvider {
         },
         {
             AdsFandomTestTemplate.PAGE_TYPE_TOPIC,
-            "games"
+            "movies"
         }
     };
   }
