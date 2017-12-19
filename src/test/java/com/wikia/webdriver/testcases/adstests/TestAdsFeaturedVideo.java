@@ -48,6 +48,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       groups = {"AdsFeaturedVideoOasis"}
   )
   public void adsFeaturedVideoMoatTrackingDesktop() {
+    networkTrafficInterceptor.startIntercepting();
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
@@ -105,7 +106,6 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   }
 
   private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
-    networkTrafficInterceptor.startIntercepting();
 
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
