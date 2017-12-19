@@ -87,7 +87,7 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.startDiscussion("A nice discussion", "A nice Message", false);
 
     PageObjectLogging.log("Oh, Ludwik!", "Thought positively about Ludwik: checked.", true);
-    new WebDriverWait(driver, 20);    
+    new WebDriverWait(driver, 60);    
 
     forumBoard.open(boardTitle);
 
