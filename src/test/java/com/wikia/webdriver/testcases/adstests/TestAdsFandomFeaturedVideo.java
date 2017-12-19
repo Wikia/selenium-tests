@@ -40,7 +40,6 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
-    jwPlayerObject.waitForAdPlaying();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL);
   }
 
