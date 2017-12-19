@@ -18,9 +18,10 @@ public class CuratedContentPageObject extends BasePageObject {
   private WebElement sectionTitle;
   @FindBy(css = ".curated-content-section__back")
   private WebElement linkToMainPage;
-  @FindBy(css = ".curated-content-section:not(.hidden) .curated-content-items")
+  @FindBy(css = ".curated-content-section:not(.wds-is-hidden) .curated-content-items")
   private WebElement sectionContainer;
-  @FindBy(css = ".curated-content .curated-content-section:not(.hidden) .curated-content-item")
+  @FindBy(css = ".curated-content .curated-content-section:not(.wds-is-hidden) "
+                + ".curated-content-item .item-figure")
   private List<WebElement> curatedContentItems;
 
   public int getCuratedContentItemsNumber() {

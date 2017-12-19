@@ -26,7 +26,7 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     return new AdsFandomObject(driver, pageUrl, resolution);
   }
 
-  private String getFandomUrl(String pageName, String pageType) {
+  public String getFandomUrl(String pageName, String pageType) {
     String pageUrl;
 
     switch (pageType) {

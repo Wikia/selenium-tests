@@ -60,6 +60,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement imageDeleteButton;
 
   @Getter
+  @FindBy(css = ".og-close")
+  private WebElement openGraphDeleteButton;
+
+  @Getter
   private By openGraphContainer = By.className("og-container");
 
   @Getter

@@ -32,8 +32,8 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   private By mainPagePadSlot = By.cssSelector(".main-page-pad-slot");
 
-  public int getElementOffsetTop(String element) {
-    return Integer.parseInt(driver
+  public float getElementOffsetTop(String element) {
+    return Float.parseFloat(driver
         .executeScript("return $(arguments[0]).offset() && $(arguments[0]).offset().top", element)
         .toString());
   }

@@ -1,12 +1,11 @@
 package com.wikia.webdriver.common.templates;
 
-import java.lang.reflect.Method;
-
-import org.testng.annotations.BeforeMethod;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
+import org.testng.annotations.BeforeMethod;
+
+import java.lang.reflect.Method;
 
 public class NewTestTemplate extends CoreTestTemplate {
 
@@ -26,7 +25,7 @@ public class NewTestTemplate extends CoreTestTemplate {
   protected void prepareURLs() {
     urlBuilder = new UrlBuilder();
     wikiURL = urlBuilder.getUrlForWiki();
-    wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
+    wikiCorporateURL = urlBuilder.getWikiGlobalURL();
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
   }
 }

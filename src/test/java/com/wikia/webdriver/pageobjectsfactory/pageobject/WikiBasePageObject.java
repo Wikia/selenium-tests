@@ -68,9 +68,9 @@ public class WikiBasePageObject extends BasePageObject {
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
       ".wikia-nav__avatar img[alt*=%userName%]";
-  private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder");
+  private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
   private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
-  @FindBy(css = ".banner-notifications-placeholder")
+  @FindBy(css = ".banner-notifications-placeholder,.smart-banner")
   private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
   private final GlobalNavigation globalNavigation = new GlobalNavigation();
@@ -151,12 +151,8 @@ public class WikiBasePageObject extends BasePageObject {
     return driver.getCurrentUrl();
   }
 
-  /**
-   * Checks if container containing all banner notification is present, it may be present, but may have 0px height
-   * when no notification is displayed
-   */
   public boolean isBannerNotificationContainerPresent(){
-    return driver.findElements(BANNER_NOTIFICATION_CONTAINER).size() != 0;
+    return isElementOnPage(BANNER_NOTIFICATION_CONTAINER);
   }
 
   public int getBannerNotificationsHeight(){
@@ -439,7 +435,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public List<Notification> getNotifications(){
-    wait.forElementPresent(BANNER_NOTIFICATION);
+    wait.forElementVisible(BANNER_NOTIFICATION);
     List<Notification> notificationList = new ArrayList<>();
     for (WebElement notificationElement : notificationElements){
       Notification notification = new Notification(driver, notificationElement);
@@ -452,6 +448,10 @@ public class WikiBasePageObject extends BasePageObject {
     List<Notification> notificationList = getNotifications();
     return notificationList.stream().filter(n -> n.getType().toLowerCase().contains(notificationType.getClassName()))
             .collect(Collectors.toList());
+  }
+
+  public boolean isNotificationPresent(NotificationType type, String message) {
+    return getNotifications(type).stream().anyMatch(n -> n.getMessage().contains(message));
   }
 
   public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {
