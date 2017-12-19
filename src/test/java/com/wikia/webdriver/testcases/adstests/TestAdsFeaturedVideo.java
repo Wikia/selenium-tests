@@ -106,7 +106,6 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   }
 
   private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
-
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPlayerOnPage();
