@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -260,6 +261,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     VuapAssertions.verifyVideoAdSize(vuap, videoAdHeight, adSlotHeight, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
+  @InBrowser(browserSize = "800x700")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
