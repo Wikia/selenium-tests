@@ -266,7 +266,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
       groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
