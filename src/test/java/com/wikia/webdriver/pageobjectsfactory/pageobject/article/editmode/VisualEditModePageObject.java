@@ -6,9 +6,11 @@ import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.CategoryModule;
+import com.wikia.webdriver.elements.Frame;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.FeaturesModule;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -18,11 +20,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class VisualEditModePageObject extends EditMode {
 
@@ -53,14 +50,6 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement removeComponentButton;
   @FindBy(css = "#RTEConfirmOk > span")
   private WebElement removeConfirmationButton;
-  @FindBy(css = "#wpTextbox1")
-  private WebElement messageSourceModeTextArea;
-  @FindBy(css = "input#CategorySelectInput")
-  private WebElement categoryInput;
-  @FindBy(css = "#CategorySelect .ui-autocomplete")
-  private WebElement categorySuggestionsContainer;
-  @FindBy(css = "li.category>span")
-  private List<WebElement> categoryList;
   @FindBy(css = ".RTEMediaCaption")
   private WebElement caption;
   @FindBy(css = ".placeholder-double-brackets .portable-infobox")
@@ -86,24 +75,21 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement image;
   @FindBy(css = "#wpApprove")
   private WebElement autoApproveCheckbox;
-  @FindBy(css = ".module_categories")
-  private WebElement categoriesModuleBar;
   @FindBy(css = ".rail-auto-height")
   private WebElement modalElement;
-
 
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
   private By sliderBy = By.cssSelector("img.image-gallery-slider");
   private By videoBy = By.cssSelector("img.video");
-  private By categorySuggestionsList = By.cssSelector("li > a");
   private final By portableInfoboxBy = By.cssSelector(".placeholder-double-brackets .portable-infobox");
 
-  private String categoryEditSelector = "li.category[data-name='%categoryName%'] li.editCategory";
-  private String categoryRemoveSelector =
-      "li.category[data-name='%categoryName%'] li.removeCategory";
-  private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
   private AceEditor aceEditor;
+
+  private FeaturesModule featuresModule;
+  private CategoryModule categoryModule;
+  private final Frame editorFrame = new Frame(driver, iframe);
+  private final Frame contextFrameWrapper = new Frame(driver, contextFrame);
 
   public VisualEditModePageObject() {
     super();
@@ -130,45 +116,27 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void clearContent() {
-    driver.switchTo().frame(iframe);
-    contentInput.clear();
-    driver.switchTo().defaultContent();
+    editorFrame.frameScope(contentInput::clear);
   }
 
   /**
    * clears article content and adds new content to the article
    */
   public void addContent(String content) {
-    wait.forElementVisible(iframe);
-    driver.switchTo().frame(iframe);
-    contentInput.clear();
-    contentInput.sendKeys(content);
-    driver.switchTo().defaultContent();
+    editorFrame.frameScope(() -> contentInput.sendKeys(content));
     PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
   }
 
   public boolean checkPortableInfoboxVisible() {
-    try {
-      wait.forElementVisible(iframe);
-      verifyComponent(portableInfoboxTransclusion);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    } finally {
-      driver.switchTo().defaultContent();
-    }
+    return editorFrame.frameScope(portableInfoboxTransclusion::isDisplayed);
   }
 
   private void verifyComponent(WebElement component) {
-    driver.switchTo().frame(iframe);
-    wait.forElementVisible(component);
-    driver.switchTo().defaultContent();
+    editorFrame.frameScope(() -> wait.forElementVisible(component));
   }
 
   private void verifyComponent(By componentBy) {
-    driver.switchTo().frame(iframe);
-    wait.forElementVisible(componentBy);
-    driver.switchTo().defaultContent();
+    editorFrame.frameScope(() -> wait.forElementVisible(componentBy));
   }
 
   public void verifyPhoto() {
@@ -192,24 +160,19 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public boolean isContentLoaded() {
-    wait.forElementVisible(iframe);
-    driver.switchTo().frame(iframe);
-    try {
-      wait.forElementVisible(contentInput);
-      return true;
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("isContentLoaded", "RTE editor loaded", false, driver);
-      return false;
-    } finally {
-      driver.switchTo().defaultContent();
-    }
+    return editorFrame.frameScope(() -> {
+      try {
+        wait.forElementVisible(contentInput);
+        return true;
+      } catch (TimeoutException e) {
+        PageObjectLogging.log("isContentLoaded", "RTE editor loaded", false, driver);
+        return false;
+      }
+    });
   }
 
   public void verifyVideoPosition(PositionsVideo position) {
-    verifyComponent(video);
-    driver.switchTo().frame(iframe);
-    String positionClass = video.getAttribute("class");
-    driver.switchTo().defaultContent();
+    String positionClass = editorFrame.frameScope(() -> video.getAttribute("class"));
     switch (position) {
       case LEFT:
         Assertion.assertStringContains(positionClass, "alignLeft");
@@ -226,12 +189,8 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public int getVideoWidth() {
-    verifyComponent(video);
-    driver.switchTo().frame(iframe);
-    int widthCurrent = Integer.parseInt(video.getAttribute("width"));
-    driver.switchTo().defaultContent();
-
-    return widthCurrent;
+    return editorFrame
+        .frameScope(() -> Integer.parseInt(video.getAttribute("width")));
   }
 
   public String getVideoCaption() {
@@ -303,29 +262,29 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void verifyComponentRemoved(Components component) {
-    driver.switchTo().frame(iframe);
-    switch (component) {
-      case PHOTO:
-        wait.forElementNotPresent(IMAGE_BY);
-        break;
-      case GALLERY:
-        wait.forElementNotPresent(galleryBy);
-        break;
-      case SLIDESHOW:
-        wait.forElementNotPresent(slideshowBy);
-        break;
-      case SLIDER:
-        wait.forElementNotPresent(sliderBy);
-        break;
-      case VIDEO:
-        wait.forElementNotPresent(videoBy);
-        break;
-      default:
-        PageObjectLogging.log("verifyComponentRemoved", "Invalid component: " + component.name()
-            + " selected", false);
-        break;
-    }
-    driver.switchTo().defaultContent();
+    editorFrame.frameScope(() -> {
+      switch (component) {
+        case PHOTO:
+          wait.forElementNotPresent(IMAGE_BY);
+          break;
+        case GALLERY:
+          wait.forElementNotPresent(galleryBy);
+          break;
+        case SLIDESHOW:
+          wait.forElementNotPresent(slideshowBy);
+          break;
+        case SLIDER:
+          wait.forElementNotPresent(sliderBy);
+          break;
+        case VIDEO:
+          wait.forElementNotPresent(videoBy);
+          break;
+        default:
+          PageObjectLogging.log("verifyComponentRemoved", "Invalid component: " + component.name() + " selected", false);
+          break;
+      }
+    });
+
     PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
   }
 
@@ -338,112 +297,14 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public boolean checkPortableInfoboxIsNotPresent() {
-    driver.switchTo().frame(iframe);
-    try {
-      wait.forElementNotPresent(portableInfoboxBy);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    } finally {
-      driver.switchTo().defaultContent();
-    }
-  }
-
-  public void typeCategoryName(String categoryName) {
-    jsActions.scrollToElementInModal(categoryInput,modalElement);
-    wait.forElementVisible(categoryInput);
-    categoryInput.sendKeys(categoryName);
-    PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
-  }
-
-  public void triggerCategorySuggestions() {
-    int timeout = 0;
-    pressDownArrow(categoryInput);
-    String returned = (String) driver.executeScript("return $('ul.ui-autocomplete li').text()");
-    while (returned.isEmpty() && timeout <= 5000) {
+    return editorFrame.frameScope(() -> {
       try {
-        Thread.sleep(500);
-        timeout += 500;
-      } catch (InterruptedException e) {
-        PageObjectLogging
-            .log("triggerCategorySuggestions", "Interrupted Exception occurred", false);
+        wait.forElementNotPresent(portableInfoboxBy);
+        return true;
+      } catch (TimeoutException e) {
+        return false;
       }
-      pressDownArrow(categoryInput);
-      returned = (String) driver.executeScript("return $('ul.ui-autocomplete li').text()");
-    }
-  }
-
-  public void submitCategory(){
-    int categoryListSizeBeforeSubmission = categoryList.size();
-    new Actions(driver).sendKeys(categoryInput, Keys.ARROW_DOWN)
-        .sendKeys(categoryInput, Keys.ARROW_DOWN).sendKeys(categoryInput, Keys.ENTER).perform();
-    PageObjectLogging.log("submitCategory", "category submitted", true);
-
-    waitForNewCategoryToAppear(categoryListSizeBeforeSubmission);
-  }
-
-  private void waitForNewCategoryToAppear(final int categoryListSizeBeforeSubmission) {
-    WebDriverWait wait = new WebDriverWait(driver, ELEMENT_SHOW_UP_TIMEOUT);
-    wait.until((ExpectedCondition<Boolean>) driver -> categoryList.size() > categoryListSizeBeforeSubmission);
-  }
-
-  public void verifyCategoryPresent(String category){
-    boolean categoryVisible = categoryList.stream().map(WebElement::getText).anyMatch(category::equals);
-
-    String listedCategories = categoryList.stream()
-        .map(WebElement::getText).collect(Collectors.joining(", "));
-    Assertion.assertTrue(categoryVisible, "Category " + category + " not present. Listed ones: " + listedCategories + ".");
-  }
-
-  public void verifyCategoryNotPresent(String category) {
-    this.scrollTo(categoriesModuleBar);
-    wait.forElementNotPresent(By.cssSelector(categoryRemovedSelector.replace("%categoryName%",
-            category)));
-    boolean categoryVisible = true;
-    for (WebElement elem : categoryList) {
-      if (elem.getText().equals(category)) {
-        categoryVisible = false;
-      }
-    }
-    Assertion.assertTrue(categoryVisible, "category " + category + " present");
-  }
-
-  public String selectCategorySuggestions(int categoryNumber) {
-    wait.forElementVisible(categorySuggestionsContainer);
-    WebElement categoryItem =
-        categorySuggestionsContainer.findElements(categorySuggestionsList).get(categoryNumber);
-    String categoryName = categoryItem.getText();
-    categoryItem.click();
-    waitForElementNotVisibleByElement(categorySuggestionsContainer);
-    PageObjectLogging.log("selectCategorySuggestions", categoryNumber
-        + " category selected from suggestions", true);
-    return categoryName;
-  }
-
-  public EditCategoryComponentObject editCategory(String categoryName) {
-    WebElement editCategory =
-        driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
-            categoryName)));
-    WebElement category =
-        driver.findElement(By.cssSelector(".category[data-name='" + categoryName + "']"));
-    new Actions(driver).moveToElement(category).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
-        .perform();
-    scrollAndClick(editCategory);
-    PageObjectLogging.log("editCategory", "edit category button clicked on category "
-        + categoryName, true);
-    return new EditCategoryComponentObject(driver);
-  }
-
-  public void removeCategory(String categoryName) {
-    WebElement removeCategory =
-        driver.findElement(By.cssSelector(categoryRemoveSelector.replace("%categoryName%",
-            categoryName)));
-    WebElement category =
-        driver.findElement(By.cssSelector(".category[data-name='" + categoryName + "']"));
-    new Actions(driver).moveToElement(category).perform();
-    scrollAndClick(removeCategory);
-    PageObjectLogging.log("removeCategory", "remove category button clicked on category "
-        + categoryName, true);
+    });
   }
 
   public void verifyBlockedUserMessage() {
@@ -454,14 +315,13 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   private void selectFromContextMenu(WebElement option) {
-    wait.forElementVisible(iframe);
-    driver.switchTo().frame(iframe);
-    Actions actions = new Actions(driver);
-    actions.contextClick(visualModeTable).build().perform();
-    driver.switchTo().defaultContent();
-    driver.switchTo().frame(contextFrame);
-    option.click();
-    driver.switchTo().defaultContent();
+    editorFrame.frameScope(() -> {
+      Actions actions = new Actions(driver);
+      actions.contextClick(visualModeTable).build().perform();
+    });
+
+    contextFrameWrapper.frameScope(option::click);
+
     isElementOnPage(visualModeTable);
   }
 
@@ -484,6 +344,21 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(autoApproveCheckbox);
     autoApproveCheckbox.click();
     return this;
+  }
+
+  public FeaturesModule getFeaturesModule() {
+    if (featuresModule == null) {
+      featuresModule = new FeaturesModule(driver);
+    }
+
+    return featuresModule;
+  }
+
+  public CategoryModule getCategoryModule() {
+    if (categoryModule == null) {
+      categoryModule = new CategoryModule(driver);
+    }
+    return categoryModule;
   }
 
   public enum Components {

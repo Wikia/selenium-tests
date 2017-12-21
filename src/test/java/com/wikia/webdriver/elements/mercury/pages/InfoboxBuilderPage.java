@@ -13,6 +13,8 @@ import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.Frame;
+import com.wikia.webdriver.elements.FrameScope;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
@@ -87,6 +89,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
+  private final Frame builderFrame = new Frame(driver, builderIFrame);
+
   public InfoboxBuilderPage openNew(String templateName) {
     getUrl(urlBuilder.appendQueryStringToURL(
         String.format("%s/wiki/%s:%s", urlBuilder.getUrlForWiki(), "Template", templateName),
@@ -116,6 +120,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forElementVisible(previewArea);
 
     return this;
+  }
+
+  public void inBuilderFrame(FrameScope frameScope) {
+    wait.forElementVisible(builderIFrame);
+    builderFrame.frameScope(frameScope);
   }
 
   public boolean isGoToSourceModalPresent() {
