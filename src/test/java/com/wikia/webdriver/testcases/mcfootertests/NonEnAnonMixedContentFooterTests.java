@@ -130,7 +130,8 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
     DiscussionCard discussionCard = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter()
-        .getDiscussionsCard();
+        .getDiscussionsCard()
+        .scrollToDiscussions();
 
     String username = discussionCard.getUsername()
         .replaceAll(" •.*$", "");
@@ -145,6 +146,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
     new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
+        .scrollToDiscussions()
         .clickDiscussionsPost();
 
     String url = driver.getCurrentUrl();
