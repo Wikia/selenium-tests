@@ -119,6 +119,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
+        .scrollToDiscussions()
         .clickOnViewAllLinkInDiscussions();
 
     Assertion.assertTrue(discussions.isDiscussions());
