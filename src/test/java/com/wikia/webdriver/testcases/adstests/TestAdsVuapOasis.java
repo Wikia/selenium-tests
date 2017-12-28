@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -12,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.TimeUnit;
 
 @Test(groups = "AdsVuapOasis")
@@ -275,5 +278,41 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.clickOnArea(2);
 
     VuapAssertions.verifyVideoPlay(vuap);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void ABCDShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+    final String adUnit = "/5441/wka1a.VIDEO/abcd/desktop/oasis-article/_project43-life";
+    checkRequestForAdUnit(AdsDataProvider.UAP_ABCD_PAGE, adUnit);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void HiViBTFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+    final String adUnit = "/5441/wka1a.VIDEO/uap_bfaa/desktop/oasis-article/_project43-life";
+    checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE, adUnit);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void HiViATFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+    final String adUnit = "/5441/wka1a.VIDEO/uap_bfab/desktop/oasis-article/_project43-life";
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
+    ads.triggerAdSlot(AdsContent.BOTTOM_LB);
+    ads.waitForVASTRequestWithAdUnit(networkTrafficInterceptor, adUnit);
+  }
+
+  private void checkRequestForAdUnit(Page page, String adUnit) throws UnsupportedEncodingException {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    ads.waitForVASTRequestWithAdUnit(networkTrafficInterceptor, adUnit);
   }
 }
