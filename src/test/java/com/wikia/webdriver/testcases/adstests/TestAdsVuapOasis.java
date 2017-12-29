@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -260,13 +261,14 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     VuapAssertions.verifyVideoAdSize(vuap, videoAdHeight, adSlotHeight, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
+  @InBrowser(browserSize = "1024x768")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
       groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 

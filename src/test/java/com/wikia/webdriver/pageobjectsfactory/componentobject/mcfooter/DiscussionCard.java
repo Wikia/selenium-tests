@@ -71,4 +71,11 @@ public class DiscussionCard extends WikiBasePageObject {
     return discussionsZeroState.isDisplayed();
   }
 
+  public DiscussionCard scrollToDiscussions() {
+    wait.forElementClickable(discussionsCard);
+    jsActions.scrollToElement(discussionsCard);
+
+    return this;
+  }
+  
 }
