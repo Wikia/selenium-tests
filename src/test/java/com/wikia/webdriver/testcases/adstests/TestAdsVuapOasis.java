@@ -293,7 +293,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
-  public void HiViBTFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+  public void HiViATFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
     final String adUnit = "/5441/wka1a.VIDEO/uap_bfaa/desktop/oasis-article/_project43-life";
     checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE, adUnit);
   }
@@ -302,7 +302,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
-  public void HiViATFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+  public void HiViBTFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
     final String adUnit = "/5441/wka1a.VIDEO/uap_bfab/desktop/oasis-article/_project43-life";
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
