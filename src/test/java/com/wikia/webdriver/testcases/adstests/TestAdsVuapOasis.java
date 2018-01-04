@@ -264,7 +264,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     VuapAssertions.verifyVideoAdSize(vuap, videoAdHeight, adSlotHeight, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
-  @InBrowser(browserSize = "800x700")
+  @InBrowser(browserSize = "1024x768")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
