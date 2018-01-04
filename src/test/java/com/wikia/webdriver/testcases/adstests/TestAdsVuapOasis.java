@@ -304,15 +304,21 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void HiViBTFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
     final String adUnit = "/5441/wka1a.VIDEO/uap_bfab/desktop/oasis-article/_project43-life";
+    checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE, adUnit, new String[]{AdsContent.BOTTOM_LB});
+  }
+
+  private void checkRequestForAdUnit(Page page, String adUnit, String[] slotsToTrigger) throws UnsupportedEncodingException {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
-    ads.triggerAdSlot(AdsContent.BOTTOM_LB);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+
+    for (String slotName : slotsToTrigger) {
+      ads.triggerAdSlot(slotName);
+    }
+
     ads.waitForVASTRequestWithAdUnit(networkTrafficInterceptor, adUnit);
   }
 
   private void checkRequestForAdUnit(Page page, String adUnit) throws UnsupportedEncodingException {
-    networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    ads.waitForVASTRequestWithAdUnit(networkTrafficInterceptor, adUnit);
+    checkRequestForAdUnit(page, adUnit, new String[]{});
   }
 }
