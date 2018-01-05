@@ -29,7 +29,7 @@ public class MainPageTests extends NewTestTemplate {
   private static final String ROOT_PATH = "/wiki/Mercury_CC_Wikia";
 
   /**
-   * Page elements in f order
+   * Page elements in correct order
    */
   private enum PageElements {
     TOP_LEADERBOARD("Top Leaderboard AD", ".mobile-top-leaderboard"),
