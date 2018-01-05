@@ -77,6 +77,13 @@ public class ArticlePage extends WikiBasePageObject {
     return this;
   }
 
+  public ArticlePage openDefault() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
+
+    return this;
+  }
+
   public String getArticleContent() {
 
     return driver.findElement(articleContent).getText();

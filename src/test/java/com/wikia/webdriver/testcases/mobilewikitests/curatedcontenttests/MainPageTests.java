@@ -153,11 +153,11 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    int lastPosition = 0;
+    float lastPosition = 0;
     String lastElement = "top";
 
     for (PageElements element : PageElements.values()) {
-      int newPosition = curatedMainPage.getElementOffsetTop(element.className);
+      float newPosition = curatedMainPage.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
       PageObjectLogging.log(

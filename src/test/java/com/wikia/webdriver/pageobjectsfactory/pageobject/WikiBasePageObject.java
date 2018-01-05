@@ -152,20 +152,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public boolean isBannerNotificationContainerPresent(){
-    return isElementPresent(BANNER_NOTIFICATION_CONTAINER);
-  }
-
-  /**
-   * Checks if present NOW
-   *
-   * TODO: Move this logic to better place (WebElement?)
-   */
-  public boolean isElementPresent(By selector){
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
-    boolean result = driver.findElements(selector).size() != 0;
-    restoreDefaultImplicitWait();
-
-    return result;
+    return isElementOnPage(BANNER_NOTIFICATION_CONTAINER);
   }
 
   public int getBannerNotificationsHeight(){
@@ -448,7 +435,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public List<Notification> getNotifications(){
-    wait.forElementPresent(BANNER_NOTIFICATION);
+    wait.forElementVisible(BANNER_NOTIFICATION);
     List<Notification> notificationList = new ArrayList<>();
     for (WebElement notificationElement : notificationElements){
       Notification notification = new Notification(driver, notificationElement);
@@ -461,6 +448,10 @@ public class WikiBasePageObject extends BasePageObject {
     List<Notification> notificationList = getNotifications();
     return notificationList.stream().filter(n -> n.getType().toLowerCase().contains(notificationType.getClassName()))
             .collect(Collectors.toList());
+  }
+
+  public boolean isNotificationPresent(NotificationType type, String message) {
+    return getNotifications(type).stream().anyMatch(n -> n.getMessage().contains(message));
   }
 
   public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {

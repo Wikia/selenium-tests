@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"EnAnonMixedContentFooter"})
-@Execute(onWikia = "serowiec", asUser = User.ANONYMOUS)
+@Execute(onWikia = "gameofthrones", asUser = User.ANONYMOUS)
 public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
@@ -86,7 +86,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "disney")
+  @Execute(onWikia = "villains")
   //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE 'More of..' will appear on this wiki
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
@@ -191,7 +191,12 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
     Assertion.assertNotEquals(urlMainPage, urlArticle);
   }
 
-  @Test
+  /**
+   * Those 2 tests below are commented because Liftigniter not always throws card with a video
+   * from Fandom or Wiki article and they are randomly failing
+   */
+
+  @Test(enabled = false)
   public void userIsTakenToFandomArticleWithVideoAfterClickOnFandomVideoCard() {
     FandomPageObject fandomPage = new MixedContentFooter()
         .openWikiMainPage()
@@ -206,7 +211,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
     Assertion.assertTrue(fandomPage.isFeaturedVideo());
   }
 
-  @Test
+  @Test(enabled = false)
   public void userIsTakenToWikiArticleWithVideoAfterClickOnWikiVideoCard() {
     MixedContentFooter mcf = new MixedContentFooter()
         .openWikiMainPage();

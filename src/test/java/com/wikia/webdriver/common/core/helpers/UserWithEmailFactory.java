@@ -30,4 +30,10 @@ public class UserWithEmailFactory {
       CREDENTIALS.emailPasswordQaart1);
   }
 
+  public static UserWithEmail getEmailOnlyUserForConfirmation() {
+    return new UserWithEmail(null,
+        CREDENTIALS.confirmEmailAddress,
+        CREDENTIALS.confirmEmailPassword);
+  }
+
 }

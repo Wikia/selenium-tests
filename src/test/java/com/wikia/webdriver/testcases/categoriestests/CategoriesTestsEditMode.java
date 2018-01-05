@@ -51,7 +51,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
     visual.typeCategoryName(PageContent.CATEGORY_NAME_PREFIX);
     visual.triggerCategorySuggestions();
-    String categoryName = visual.selectCategorySuggestions(1);
+    String categoryName = visual.selectCategorySuggestions(0);
     visual.verifyCategoryPresent(categoryName);
   }
 
@@ -75,7 +75,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     VisualEditModePageObject visual = new VisualEditModePageObject().open();
     visual.typeCategoryName(PageContent.CATEGORY_NAME_PREFIX);
     visual.triggerCategorySuggestions();
-    String categoryName = visual.selectCategorySuggestions(1);
+    String categoryName = visual.selectCategorySuggestions(0);
     visual.verifyCategoryPresent(categoryName);
   }
 }

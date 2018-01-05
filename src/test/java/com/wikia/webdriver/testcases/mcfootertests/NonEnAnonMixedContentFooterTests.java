@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"NonEnAnonMixedContentFooter"})
-@Execute(onWikia = "de.gta", asUser = User.ANONYMOUS)
+@Execute(onWikia = "de.gameofthrones", asUser = User.ANONYMOUS)
 public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
@@ -119,6 +119,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
+        .scrollToDiscussions()
         .clickOnViewAllLinkInDiscussions();
 
     Assertion.assertTrue(discussions.isDiscussions());
@@ -129,7 +130,8 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
     DiscussionCard discussionCard = new MixedContentFooter()
         .openWikiMainPage()
         .scrollToMCFooter()
-        .getDiscussionsCard();
+        .getDiscussionsCard()
+        .scrollToDiscussions();
 
     String username = discussionCard.getUsername()
         .replaceAll(" •.*$", "");
@@ -144,6 +146,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
     new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
+        .scrollToDiscussions()
         .clickDiscussionsPost();
 
     String url = driver.getCurrentUrl();

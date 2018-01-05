@@ -15,7 +15,7 @@ logEnabled: true
 takeScreenshots: true
 mockAds: false
 forceHttps: false
-newStagingUrlFormat: false
+newStagingUrlFormat: true
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
 useZapProxy: false
