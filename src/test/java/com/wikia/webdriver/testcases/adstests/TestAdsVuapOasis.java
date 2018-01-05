@@ -22,6 +22,10 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
   private static final String FANDOM_ARTICLE_WESTWORLD_LINK = "http://adeng.fandom.wikia.com/articles/whats-coming-westworld-finale";
   private static final String AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
+  private static final String[] TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS = {
+    "InstantGlobals.wgAdDriverAdProductsBridgeMobileCountries=[XX]",
+    "InstantGlobals.wgAdDriverAdProductsBridgeCountries=[XX]"
+  };
 
   @Test(
     groups = {"AdsVuapDefaultState"},
@@ -309,7 +313,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
   private void checkRequestForAdUnit(Page page, String adUnit, String[] slotsToTrigger) throws UnsupportedEncodingException {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS));
 
     for (String slotName : slotsToTrigger) {
       ads.triggerAdSlot(slotName);
