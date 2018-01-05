@@ -7,6 +7,7 @@ import java.io.File;
 
 public enum User {
   QARENAME("ci.user.qarename.username", "ci.user.qarename.password"),
+  QARENAMEDALREADY("ci.user.qarenamedalready.username", "ci.user.qarenamedalready.password"),
   USER("ci.user.regular.username", "ci.user.regular.password", "ci.user.regular.user_id", "ci.user.regular.access_token"),
   USER_2("ci.user.regular2.username", "ci.user.regular2.password"),
   USER_3("ci.user.regular3.username", "ci.user.regular3.password"),

@@ -519,7 +519,7 @@ public class WikiBasePageObject extends BasePageObject {
         "user was logged in by by helios using access token: " + token);
     logMercuryUserId();
 
-    return token;
+     return token;
   }
 
   public String loginAs(User user) {

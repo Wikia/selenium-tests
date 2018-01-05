@@ -62,4 +62,7 @@ public class WikiaWebDriver extends EventFiringWebDriver {
     }
     super.quit();
   }
+
+  public void navigate(String s) {
+  }
 }

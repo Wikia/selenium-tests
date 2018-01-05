@@ -1,11 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.net.URLEncoder;
 
 public class SpecialRenameUserPage extends SpecialPageObject {
   @FindBy(css = "input[name=\"newUsername\"]")
@@ -28,6 +31,9 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   private WebElement termsAndConditionsCheckBox;
   @FindBy(css = ".successbox")
   private WebElement successBox;
+  @FindBy(css = "#mw-content-text")
+  private WebElement renamedMessage;
+
 
   public SpecialRenameUserPage(WebDriver driver) {
     super();
@@ -45,8 +51,20 @@ public class SpecialRenameUserPage extends SpecialPageObject {
     return new SpecialStaffLogPage(driver);
   }
 
-  public SpecialRenameUserPage fillFormData(String newUsername, String reason) {
-    return fillFormData(newUsername,newUsername,reason);
+//  public SpecialRenameUserPage fillFormData(String s, String s1) {
+//    return fillFormData(newUsername,newUsername,reason);
+//  }
+
+  public String encodeToURL(String toEncode) {
+    String encodedString = "";
+
+    try {
+      encodedString = URLEncoder.encode(toEncode, "UTF-8").replace("+", "_");
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Could not encode URLs");
+    }
+
+    return encodedString;
   }
 
   public SpecialRenameUserPage fillFormData(String newUsername, String confirmUsername, String
@@ -73,6 +91,10 @@ public class SpecialRenameUserPage extends SpecialPageObject {
 
   public String getContentText() {
     return contentTextBox.getText();
+  }
+
+  public String getPageText() {
+    return renamedMessage.getText();
   }
 
   public HelpPage goToHelpPage() {

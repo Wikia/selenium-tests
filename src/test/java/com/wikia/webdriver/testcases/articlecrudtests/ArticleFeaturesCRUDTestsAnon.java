@@ -75,7 +75,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
   @Test(groups = {"ArticleFeatureCRUDAnonymous_001", "ArticleFeaturesCRUDAnon"})
   public void TestVarious() {
 
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 100; i++) {
       new ArticleContent(User.USER_CTEST).push("Article_d",
                                                String.format("Article_title_%d", i));
       for (int j=0; j< 3; j++) {
