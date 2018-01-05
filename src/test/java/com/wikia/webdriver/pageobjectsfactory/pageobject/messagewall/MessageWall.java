@@ -70,10 +70,13 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement replyAreaAvatars;
   @FindBy(css = "[data-is-reply]:nth-child(1)")
   private WebElement editMessageWrapper;
+  @FindBy(css = "[data-is-reply]:nth-child(2)")
+  private WebElement editMessageWrapper2;
   @FindBy(css = ".speech-bubble-message-removed")
   private WebElement removedThreadMessage;
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
+
 
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
@@ -314,6 +317,14 @@ public class MessageWall extends WikiBasePageObject {
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(msgBodyTextBox.getText(), message);
     Assertion.assertEquals(editMessageWrapper.findElement(messageUserNameBy).getText(), userName);
+  }
+
+  public void verifyMessageEditTextRenameDone(String title, String message, String userName) {
+    wait.forElementVisible(editMessageWrapper2);
+    WebElement msgBodyTextBox = editMessageWrapper2.findElement(messageBodyBy);
+    wait.forElementVisible(msgBodyTextBox);
+
+    Assertion.assertEquals(editMessageWrapper2.findElement(messageUserNameBy).getText(), userName);
   }
 
   public void verifyInternalLink(String title, String target, String text, String wikiURL) {

@@ -52,7 +52,7 @@ ArticleCRUDUserTests extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButton();
     visualEditMode.addContent(PageContent.ARTICLE_TEXT);
     visualEditMode.submitArticle();
-    article.verifyContent(PageContent.ARTICLE_TEXT);
+    article.verifyContent(PageContent.ARTICLE_TEXT)
     article.verifyArticleTitle(articleTitle);
   }
 
