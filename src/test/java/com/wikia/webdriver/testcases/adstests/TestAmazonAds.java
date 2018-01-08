@@ -52,8 +52,6 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, AdsDataProvider.PAGE_FV.getUrl(AdsAmazonObject.A9_VIDEO_DEBUG_MODE));
     amazonAds.refreshPage(); // Added to make test more stable
-    amazonAds.waitForPageLoad();
-
     amazonAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsAmazonObject.A9_VIDEO_DEBUG_BID_PATTERN);
   }
 }
