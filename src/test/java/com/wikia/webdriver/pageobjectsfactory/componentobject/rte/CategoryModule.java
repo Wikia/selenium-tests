@@ -67,6 +67,7 @@ public class CategoryModule {
     WebElement suggestion = categorySelectModule.findElement(autoCompleteSuggestion);
     String categoryName = suggestion.getText().trim();
 
+    webDriverWait.until(ExpectedConditions.elementToBeClickable(suggestion));
     suggestion.click();
 
     PageObjectLogging.log("selectCategorySuggestions", "category selected from suggestions", true);

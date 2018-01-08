@@ -58,6 +58,8 @@ public class TemplateConfigurationModal {
    * This method blocks until the inserted template becomes visible, with a timeout of 10 seconds.
    */
   public void clickOkButton() {
+    webDriverWait.until(ExpectedConditions.elementToBeClickable(okButton));
+
     final int numberOfTemplatesOnPage = webDriver.findElements(templatePlaceholderBy).size();
     okButton.click();
 
