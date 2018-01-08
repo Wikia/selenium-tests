@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class FeaturesModule {
-  @FindBy(css = ".RTEInfoboxButton span.cke_label")
+  @FindBy(css = ".cke_button__addinfobox span.cke_button_label")
   private WebElement infoboxButton;
 
   private final WebDriver webDriver;

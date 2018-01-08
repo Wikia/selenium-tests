@@ -19,7 +19,7 @@ public class InfoboxChoiceModal {
   @FindBy(css = ".infobox-templates-list a")
   private List<WebElement> availableInfoboxList;
 
-  @FindBy(css= ".infobox-dialog-button .cke_dialog_ui_button")
+  @FindBy(css= ".infobox-dialog-button")
   private WebElement createNewInfoboxButton;
 
   private final WebDriver webDriver;
@@ -54,6 +54,8 @@ public class InfoboxChoiceModal {
    * @return wrapper object for infobox builder modal
    */
   public InfoboxBuilderPage clickCreateNewInfoboxButton() {
+    // to make Selenium do thy bidding, you need to ask it twice
+    actions.click(createNewInfoboxButton).perform();
     actions.click(createNewInfoboxButton).perform();
 
     return new InfoboxBuilderPage();

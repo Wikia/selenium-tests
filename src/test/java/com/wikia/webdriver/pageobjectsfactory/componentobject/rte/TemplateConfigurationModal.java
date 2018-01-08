@@ -22,7 +22,7 @@ public class TemplateConfigurationModal {
   private WebElement editorFrameElement;
   @FindBy(css = "#templateParameters textarea")
   private List<WebElement> templateParameters;
-  @FindBy(id = "cke_82_label")
+  @FindBy(css = "a[title=\"OK\"] .cke_dialog_ui_button")
   private WebElement okButton;
 
   private final By templatePlaceholderBy = By.className("placeholder-double-brackets");
