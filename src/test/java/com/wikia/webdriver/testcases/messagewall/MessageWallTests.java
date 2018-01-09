@@ -16,6 +16,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallCloseRemoveThreadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
@@ -181,9 +182,12 @@ public class MessageWallTests extends NewTestTemplate {
    */
   @Test(groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
   public void blockedUserCanCreatePostOnHerMessageWall() {
+    String blockedUserName = User.CONSTANTLY_BLOCKED_USER.getUserName();
+
     SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
-    boolean isUserBlocked = blockListPage.isUserBlocked(User.CONSTANTLY_BLOCKED_USER.getUserName());
-    if (!isUserBlocked) {
+    blockListPage.searchForUser(blockedUserName);
+
+    if (!blockListPage.verifyUserBlocked(blockedUserName)) {
       blockListPage.loginAs(User.SUS_CHAT_STAFF2);
       SpecialBlockPage blockPage = new SpecialBlockPage(driver).open();
       blockPage.typeInUserName(User.CONSTANTLY_BLOCKED_USER.getUserName());
@@ -192,17 +196,22 @@ public class MessageWallTests extends NewTestTemplate {
       blockPage.deselectAllSelections();
       blockPage.clickBlockButton();
     }
+
     blockListPage.loginAs(User.CONSTANTLY_BLOCKED_USER);
+
     MessageWall wall = new MessageWall().open(User.CONSTANTLY_BLOCKED_USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
-    String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-    String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
+    String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + BasePageObject.getTimeStamp();
+    String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + BasePageObject.getTimeStamp();
+
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, User.CONSTANTLY_BLOCKED_USER.getUserName());
+
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
-    String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
+    String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + BasePageObject.getTimeStamp();
+
     miniReply.switchAndQuoteMessageWall(reply);
     wall.submitQuote();
     wall.verifyQuote(reply);
