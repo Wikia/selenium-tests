@@ -98,8 +98,8 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   public SearchResultsPage clickLoadMoreButton() {
     PageObjectLogging.logInfo("Click Load More button ");
-    wait.forElementClickable(loadMoreButton);
     jsActions.scrollToElement(loadMoreButton);
+    wait.forElementClickable(loadMoreButton);
     loadMoreButton.click();
     wait.forElementVisible(loadMoreButton);
     return this;
