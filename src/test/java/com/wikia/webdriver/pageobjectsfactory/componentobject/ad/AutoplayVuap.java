@@ -25,7 +25,7 @@ public class AutoplayVuap {
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
-  private static final Color COLOR_VUAP_VIDEO_AD = new Color(0, 1, 253);
+  public static final Color COLOR_VUAP_VIDEO_AD = new Color(0, 1, 253);
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT =
@@ -256,10 +256,16 @@ public class AutoplayVuap {
     return true;
   }
 
-  public boolean isColourVuapVideoAdVisible() {
+  public boolean hasVideoExpectedColor(Color expectedColor) {
+    final WebElement pauseOverlayElement = driver.findElement(this.pauseOverlaySelector);
+    return hasElementExpectedColor(pauseOverlayElement, expectedColor);
+  }
+
+  private boolean hasElementExpectedColor(WebElement element, Color expectedColor) {
     ElementColor elementColor = new ElementColor(driver);
-    elementColor.verifyMostFrequentColor(driver.findElement(pauseOverlaySelector),
-        COLOR_VUAP_VIDEO_AD, 10);
+
+    elementColor.verifyMostFrequentColor(element, expectedColor, 10);
+
     return true;
   }
 

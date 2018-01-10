@@ -1,15 +1,21 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.FluentWait;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -43,6 +49,9 @@ public class Post extends BasePageObject {
 
   @FindBy(css = ".discussion.post .discussion-content")
   private WebElement postDetails;
+
+  @FindBy(css = ".post-detail .og-container")
+  private WebElement postOpenGraph;
 
   public boolean isPostListEmpty() {
     return postList.isEmpty();
@@ -138,8 +147,19 @@ public class Post extends BasePageObject {
     return this;
   }
 
-  public Post waitForPostToAppearWith(final String description) {
-    wait.forTextInElement(By.cssSelector(".discussion.forum.forum-wrapper"), description);
+  public Post waitForPostToAppearWithText(final String text) {
+    wait.forTextInElement(By.cssSelector(".discussion.forum.forum-wrapper"), text);
+    return this;
+  }
+
+  public Post waitForPostToAppearWithOpenGraph(final String url) {
+    new FluentWait<>(driver)
+        .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+        .until(
+            (Predicate<WikiaWebDriver>) input -> wait.forElementVisible(postOpenGraph)
+                .getAttribute("href")
+                .contains(url)
+        );
     return this;
   }
 

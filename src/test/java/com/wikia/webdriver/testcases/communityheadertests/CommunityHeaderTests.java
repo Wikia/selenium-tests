@@ -5,6 +5,8 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.CommunityHeader;
+import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
@@ -51,8 +53,28 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.clickWikiActivity();
     Assert.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
 
-    CreateArticleModalComponentObject modal = communityHeader.clickAddNewPage();
-    Assert.assertTrue(modal.isCreateNewArticleModalVisible());
+    CreateArticleModalComponentObject addNewPageModal = communityHeader.clickAddNewPage();
+    Assert.assertTrue(addNewPageModal.isCreateNewArticleModalVisible());
+    addNewPageModal.close();
+
+    communityHeader.openMoreToolsDropdown()
+        .clickMoreAddImageLink();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Upload"));
+
+    AddMediaModalComponentObject addVideoModal = communityHeader.openMoreToolsDropdown()
+        .clickMoreAddVideoLink();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
+    Assert.assertTrue(addVideoModal.isVideoModalVisible());
+
+    addVideoModal.closeAddVideoModal();
+
+    communityHeader.openMoreToolsDropdown()
+        .clickMoreRecentChanges();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:RecentChanges"));
+
+    ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
+        .clickMoreAllShortcuts();
+    Assert.assertTrue(actionExplorerModal.isVisible());
   }
 
   @Test(groups = {"CommunityHeaderTests"})
@@ -66,8 +88,28 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.clickAdminDashboard();
     Assert.assertTrue(driver.getCurrentUrl().contains("Special:AdminDashboard"));
 
-    CreateArticleModalComponentObject modal = communityHeader.clickAddNewPage();
-    Assert.assertTrue(modal.isCreateNewArticleModalVisible());
+    CreateArticleModalComponentObject addNewPageModal = communityHeader.clickAddNewPage();
+    Assert.assertTrue(addNewPageModal.isCreateNewArticleModalVisible());
+    addNewPageModal.close();
+
+    communityHeader.openMoreToolsDropdown()
+        .clickMoreAddImageLink();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Upload"));
+
+    AddMediaModalComponentObject addVideoModal = communityHeader.openMoreToolsDropdown()
+        .clickMoreAddVideoLink();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
+    Assert.assertTrue(addVideoModal.isVideoModalVisible());
+
+    addVideoModal.closeAddVideoModal();
+
+    communityHeader.openMoreToolsDropdown()
+        .clickMoreRecentChanges();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:RecentChanges"));
+
+    ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
+        .clickMoreAllShortcuts();
+    Assert.assertTrue(actionExplorerModal.isVisible());
   }
 
   @Test(groups = {"CommunityHeaderTests"})
