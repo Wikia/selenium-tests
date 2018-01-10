@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.google.common.base.Predicate;
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -156,7 +156,7 @@ public class Post extends BasePageObject {
     new FluentWait<>(driver)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
         .until(
-            (Predicate<WikiaWebDriver>) input -> wait.forElementVisible(postOpenGraph)
+            (Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(postOpenGraph)
                 .getAttribute("href")
                 .contains(url)
         );
