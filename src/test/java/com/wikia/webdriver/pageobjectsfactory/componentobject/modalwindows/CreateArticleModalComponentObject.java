@@ -26,6 +26,8 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   private WebElement phalanxBlockMessageContainer;
   @FindBy(css = "button[data-event=create]")
   private WebElement addAPageButton;
+  @FindBy(css = "#CreatePageModalDialog .close")
+  private WebElement closeButton;
 
   public CreateArticleModalComponentObject(WebDriver driver) {
     super();
@@ -66,8 +68,6 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
    * Checks layout's radiobutton accroding to layout type given as param Layout can have values:
    * standard - layout with video and image placeholders top - layout for top10List page blank -
    * blank page's layout
-   *
-   * @param layout
    */
   private void chooseLayout(String layout) {
     if ("standard".equals(layout)) {
@@ -96,4 +96,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     }
   }
 
+  public void close() {
+    wait.forElementClickable(closeButton).click();
+  }
 }

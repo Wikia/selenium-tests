@@ -1,6 +1,8 @@
 package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
@@ -61,6 +63,21 @@ public class CommunityHeader extends BasePageObject {
 
   @FindBy(css = ".wds-community-header")
   private WebElement communityHeader;
+
+  @FindBy(css = ".wds-community-header__wiki-buttons .wds-dropdown")
+  private WebElement moreToolsDropdown;
+
+  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"more-add-new-image\"]")
+  private WebElement moreToolsAddImageLink;
+
+  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"more-add-new-video\"]")
+  private WebElement moreToolsAddVideoLink;
+
+  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"more-recent-changes\"]")
+  private WebElement moreToolsRecentChanges;
+
+  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"more-all-shortcuts\"]")
+  private WebElement moreToolsAllShortcuts;
 
   public boolean isVisible() {
     return this.isElementDisplayed(communityHeader);
@@ -170,6 +187,42 @@ public class CommunityHeader extends BasePageObject {
     wait.forElementClickable(exploreForumLink).click();
 
     PageObjectLogging.logInfo("explore->forum link clicked");
+  }
+
+  public CommunityHeader openMoreToolsDropdown() {
+    new Actions(driver).moveToElement(moreToolsDropdown).perform();
+
+    PageObjectLogging.logInfo("more tools dropdown opened");
+
+    return this;
+  }
+
+  public void clickMoreAddImageLink() {
+    wait.forElementClickable(moreToolsAddImageLink).click();
+
+    PageObjectLogging.logInfo("more -> Add image link clicked");
+  }
+
+  public AddMediaModalComponentObject clickMoreAddVideoLink() {
+    wait.forElementClickable(moreToolsAddVideoLink).click();
+
+    PageObjectLogging.logInfo("more -> Add video link clicked");
+
+    return new AddMediaModalComponentObject();
+  }
+
+  public void clickMoreRecentChanges() {
+    wait.forElementClickable(moreToolsRecentChanges).click();
+
+    PageObjectLogging.logInfo("more -> Recent Changes link clicked");
+  }
+
+  public ActionExplorerModal clickMoreAllShortcuts() {
+    wait.forElementClickable(moreToolsAllShortcuts).click();
+
+    PageObjectLogging.logInfo("more -> All shortcuts link clicked");
+
+    return new ActionExplorerModal();
   }
 
   public boolean isDiscussLinkDisplayed() {
