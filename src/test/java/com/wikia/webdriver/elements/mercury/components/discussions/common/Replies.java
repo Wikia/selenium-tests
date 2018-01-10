@@ -2,6 +2,9 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Function;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

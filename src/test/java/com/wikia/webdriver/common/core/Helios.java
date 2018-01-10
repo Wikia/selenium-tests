@@ -15,6 +15,7 @@ import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -207,6 +208,7 @@ public class Helios {
 
   private static CloseableHttpClient getDefaultClient() {
     return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-        .disableAutomaticRetries().setDefaultRequestConfig(REQUEST_CONFIG).build();
+        .disableAutomaticRetries().setDefaultRequestConfig(REQUEST_CONFIG).setSSLHostnameVerifier(
+            NoopHostnameVerifier.INSTANCE).build();
   }
 }
