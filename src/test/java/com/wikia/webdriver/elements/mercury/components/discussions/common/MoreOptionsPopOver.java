@@ -1,16 +1,16 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import com.google.common.base.Function;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MoreOptionsPopOver {
@@ -18,6 +18,10 @@ public class MoreOptionsPopOver {
   private final PostEntity postEntity;
 
   private final WebElement post;
+
+  static MoreOptionsPopOver fromPostEntity(final PostEntity postEntity) {
+    return new MoreOptionsPopOver(postEntity, postEntity.getPost());
+  }
 
   public boolean hasLockPostOption() {
     return hasOption("#wds-icons-lock-small");
@@ -50,7 +54,7 @@ public class MoreOptionsPopOver {
     }
   }
 
-  private void waitFor(final Predicate<PostEntity> predicate) {
+  private void waitFor(final Function<PostEntity, Boolean> predicate) {
     new FluentWait<>(postEntity)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
         .until(predicate);
@@ -63,22 +67,19 @@ public class MoreOptionsPopOver {
 
   public ShareDialog clickSharePostOption() {
     post.findElement(By.className("share-link")).click();
-    return new ShareDialog(post.findElement(By.cssSelector(".discussion-share-dialog .modal-dialog")));
+    return new ShareDialog(
+        post.findElement(By.cssSelector(".discussion-share-dialog .modal-dialog")));
   }
 
   public MoreOptionsPopOver clickUnlockPostOption() {
     // should be changed to post.findElement(By.className("<class name>")).click(); after SOC-3791
     clickReportLinkOption("Unlock Post");
-    waitFor(Predicates.not(PostEntity::isLocked));
+    waitFor(PostEntity::isNotLocked);
     return this;
   }
 
   public UserPostsPage clickViewAllPostsByOption() {
     post.findElement(By.cssSelector("a[href^='/d/u/']")).click();
     return new UserPostsPage();
-  }
-
-  static MoreOptionsPopOver fromPostEntity(final PostEntity postEntity) {
-    return new MoreOptionsPopOver(postEntity, postEntity.getPost());
   }
 }
