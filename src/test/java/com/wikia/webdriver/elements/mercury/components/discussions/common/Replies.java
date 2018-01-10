@@ -49,7 +49,7 @@ public class Replies extends BasePageObject {
   public Replies waitForReplyToAppearWithOpenGraph(final String url) {
     new FluentWait<>(driver)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-        .until((Predicate<WikiaWebDriver>) input -> wait.forElementVisible(replyOpenGraph)
+        .until((Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(replyOpenGraph)
             .getAttribute("href")
             .contains(url));
     return this;
