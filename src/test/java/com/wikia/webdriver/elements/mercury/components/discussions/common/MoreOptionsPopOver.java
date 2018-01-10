@@ -1,18 +1,16 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Function;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
-
-import com.google.common.base.Function;
-
-import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MoreOptionsPopOver {
@@ -56,9 +54,10 @@ public class MoreOptionsPopOver {
     }
   }
 
-  private void waitFor(final Function<PostEntity, Boolean> function) {
-    new FluentWait<>(postEntity).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-        .until(function);
+  private void waitFor(final Function<PostEntity, Boolean> predicate) {
+    new FluentWait<>(postEntity)
+        .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+        .until(predicate);
   }
 
   public ReportDialog clickReportPostOption() {

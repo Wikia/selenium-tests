@@ -164,6 +164,10 @@ public class Configuration {
   }
 
   public static String useMITM() {
+    if (getForceHttps()) {
+      return "true";
+    }
+
     return getProp("useMITM");
   }
 
@@ -211,7 +215,7 @@ public class Configuration {
 
   public static boolean useProxy() {
     return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode())
-        || Boolean.valueOf(getProp("useZapProxy"));
+        || Boolean.valueOf(getProp("useZapProxy")) || getForceHttps();
   }
 
   /**
