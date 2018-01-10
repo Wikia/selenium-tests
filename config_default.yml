@@ -14,10 +14,10 @@ jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
 mockAds: false
-forceHttps: true
+forceHttps: false
 newStagingUrlFormat: true
 disableCommunityPageSalesPitchDialog: true
-useMITM: true
+useMITM: false
 useZapProxy: false
 
 # Specify browser window size in format <width>x<height>, example: 800x600
