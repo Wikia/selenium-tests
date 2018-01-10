@@ -380,7 +380,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   @Override
-  public void afterChangeValueOf(WebElement element, WebDriver driver) {
+  public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
     List<String> classList = new ArrayList<>();
     classList.add(SUCCESS_CLASS);
     classList.add(LOW_LEVEL_ACTION_CLASS);

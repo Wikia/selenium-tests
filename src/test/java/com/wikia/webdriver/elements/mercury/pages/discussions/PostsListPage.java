@@ -1,14 +1,21 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.google.common.base.Predicate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import java.util.concurrent.TimeUnit;
+
+import lombok.Getter;
+
+import org.openqa.selenium.support.ui.FluentWait;
+
+import com.google.common.base.Function;
+
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
-import lombok.Getter;
-import org.openqa.selenium.support.ui.FluentWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class PostsListPage extends PageWithPosts {
 
@@ -44,9 +51,8 @@ public class PostsListPage extends PageWithPosts {
 
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
-      new FluentWait<>(getPost())
-          .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-          .until((Predicate<Post>) p -> p.getPosts().stream()
+      new FluentWait<>(getPost()).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+          .until((Function<Post, Boolean>) p -> p.getPosts().stream()
               .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName)));
     } finally {
       restoreDefaultImplicitWait();
