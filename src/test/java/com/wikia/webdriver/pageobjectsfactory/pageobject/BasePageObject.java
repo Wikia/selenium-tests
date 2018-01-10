@@ -1,6 +1,36 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.google.common.base.Predicate;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,25 +45,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
 
@@ -71,8 +82,8 @@ public class BasePageObject {
   }
 
   public static String getPasswordResetLink(String email, String password) {
-    String passwordResetEmail = EmailUtils
-      .getFirstEmailContent(email, password, "Reset your FANDOM password");
+    String passwordResetEmail =
+        EmailUtils.getFirstEmailContent(email, password, "Reset your FANDOM password");
     String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
     PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
         true);
@@ -83,9 +94,10 @@ public class BasePageObject {
   public static String getEmailConfirmationLink(String email, String password) {
     String emailConfirmationMessage = EmailUtils.getFirstEmailContent(email, password,
         "Confirm your email and get started on FANDOM!");
-    String confirmationLink = EmailUtils.getConfirmationLinkFromEmailContent(emailConfirmationMessage);
-    PageObjectLogging.log("Email confirmation link", "Email confirmation link received: " + confirmationLink,
-        true);
+    String confirmationLink =
+        EmailUtils.getConfirmationLinkFromEmailContent(emailConfirmationMessage);
+    PageObjectLogging.log("Email confirmation link",
+        "Email confirmation link received: " + confirmationLink, true);
 
     return confirmationLink;
   }
@@ -97,9 +109,10 @@ public class BasePageObject {
   }
 
   public BasePageObject waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
+    waitSafely(
+        () -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
     waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
-      "Loading overlay still visible, page not loaded in expected time");
+        "Loading overlay still visible, page not loaded in expected time");
     return this;
   }
 
@@ -138,6 +151,7 @@ public class BasePageObject {
    * WebElement.isEnabled() method signature says that it returns true for anything except disabled
    * input fields. In order to check if non-input elements are disabled, "disabled" attribute value
    * must be checked and compared to "true" value
+   * 
    * @param element WebElement on the page
    * @return true if value of "disabled" attribute is different than "true"
    */
@@ -256,13 +270,12 @@ public class BasePageObject {
     String currentURL = driver.getCurrentUrl();
     if (currentURL.toLowerCase().contains(givenString.toLowerCase())) {
       PageObjectLogging.log("isStringInURL",
-        String.format("Current url: %s contains given string: %s", currentURL, givenString),
-        true);
+          String.format("Current url: %s contains given string: %s", currentURL, givenString),
+          true);
       return true;
     } else {
-      PageObjectLogging.log("isStringInURL",
-        String.format("Current url: %s does not contain given string: %s", currentURL, givenString),
-        false);
+      PageObjectLogging.log("isStringInURL", String.format(
+          "Current url: %s does not contain given string: %s", currentURL, givenString), false);
       return false;
     }
   }
@@ -617,15 +630,13 @@ public class BasePageObject {
 
   private String getTabWithCondition(
       java.util.function.Predicate<? super Pair<String, String>> condition) {
-    Optional<String> newTab = driver.getWindowHandles()
-      .stream()
-      .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
-      .peek(handleTitle -> PageObjectLogging.log("Found window", String.format("Window with title %s", handleTitle), true))
-      .filter(condition)
-      .map(Pair::getKey)
-      .findFirst();
-    return newTab.orElseThrow(
-        () -> new NotFoundException("Tab that satisfies the condition doesn't exist"));
+    Optional<String> newTab = driver.getWindowHandles().stream()
+        .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
+        .peek(handleTitle -> PageObjectLogging.log("Found window",
+            String.format("Window with title %s", handleTitle), true))
+        .filter(condition).map(Pair::getKey).findFirst();
+    return newTab
+        .orElseThrow(() -> new NotFoundException("Tab that satisfies the condition doesn't exist"));
   }
 
   public WebDriver switchToWindowWithTitle(String title) {
@@ -648,7 +659,7 @@ public class BasePageObject {
     int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
     new WebDriverWait(driver, TIMEOUT_PAGE_REGISTRATION)
-        .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
+        .until((Function<WebDriver, Boolean>) input -> getTabsCount() > initialTabsNumber);
   }
 
   protected void openLinkInNewTab(WebElement link) {

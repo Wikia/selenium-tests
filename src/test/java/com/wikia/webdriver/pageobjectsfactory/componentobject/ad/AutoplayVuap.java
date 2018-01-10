@@ -1,17 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
-import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 
 public class AutoplayVuap {
 
@@ -29,19 +28,23 @@ public class AutoplayVuap {
   public static final Color COLOR_VUAP_VIDEO_AD = new Color(0, 1, 253);
 
   // #TOP_LEADERBOARD .pause-overlay
-  private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
+  private static final String PAUSE_BUTTON_SELECTOR_FORMAT =
+      SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
 
   // #TOP_LEADERBOARD .replay-overlay
-  private static final String REPLAY_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + REPLAY_CLASS_NAME;
+  private static final String REPLAY_BUTTON_SELECTOR_FORMAT =
+      SLOT_SELECTOR_PREFIX + REPLAY_CLASS_NAME;
 
   // #TOP_LEADERBOARD .current-time
-  private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
+  private static final String CURRENT_TIME_SELECTOR_FORMAT =
+      SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
 
   // #TOP_LEADERBOARD .speaker
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
 
   // #TOP_LEADERBOARD .close-ad
-  private static final String CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
+  private static final String CLOSE_BUTTON_SELECTOR_FORMAT =
+      SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
   private final WikiaWebDriver driver;
 
@@ -127,7 +130,8 @@ public class AutoplayVuap {
     return Boolean.valueOf(usingImaBridge(webDriver -> {
       final JavascriptActions js = new JavascriptActions();
 
-      return js.execute("document.querySelector('video') && document.querySelector('video').paused").toString();
+      return js.execute("document.querySelector('video') && document.querySelector('video').paused")
+          .toString();
     }));
   }
 
@@ -173,9 +177,9 @@ public class AutoplayVuap {
   }
 
   public boolean isVisible() {
-    return isDesktop() ?
-        usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed()) :
-        driver.findElement(getVideoSelector()).isDisplayed();
+    return isDesktop()
+        ? usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed())
+        : driver.findElement(getVideoSelector()).isDisplayed();
   }
 
   public boolean isMuted() {
@@ -210,10 +214,8 @@ public class AutoplayVuap {
     usingAdFrame(() -> wait.forElementPresent(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR)));
   }
 
-  private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
-    new FluentWait<>(this)
-        .withTimeout(timeout, TimeUnit.SECONDS)
-        .pollingEvery(1, TimeUnit.SECONDS)
+  private void waitFor(final Function<AutoplayVuap, Boolean> predicate, final long timeout) {
+    new FluentWait<>(this).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS)
         .until(predicate);
   }
 
@@ -261,7 +263,9 @@ public class AutoplayVuap {
 
   private boolean hasElementExpectedColor(WebElement element, Color expectedColor) {
     ElementColor elementColor = new ElementColor(driver);
+
     elementColor.verifyMostFrequentColor(element, expectedColor, 10);
+
     return true;
   }
 

@@ -66,17 +66,13 @@ public class FirefoxBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
-    caps.setCapability("marionette", true);
+    caps.setCapability("marionette", false);
 
     return new WikiaWebDriver(new FirefoxDriver(caps), server, false);
   }
 
   @Override
   public void addExtension(String extensionName) {
-    try {
-      firefoxProfile.addExtension(ExtHelper.findExtension(extensionName, "xpi"));
-    } catch (IOException e) {
-      PageObjectLogging.logError("Can't initialize extensions", e);
-    }
+    firefoxProfile.addExtension(ExtHelper.findExtension(extensionName, "xpi"));
   }
 }
