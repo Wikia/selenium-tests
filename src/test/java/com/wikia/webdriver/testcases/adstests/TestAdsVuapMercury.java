@@ -25,7 +25,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayMobile",
-      groups = {"AdsVuapClickToPlayTopAreasMercury"}
+      groups = {"AdsVuapClickToPlayMobile"}
   )
   public void vuapCheckTopAreasMercury(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
@@ -51,6 +51,23 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
         AD_REDIRECT_URL,
         "Top part of creative should point to FANDOM page but it points to " + actual
     );
+  }
+
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "adsVuapClickToPlayMobile",
+      groups = {"AdsVuapClickToPlayMobile"}
+  )
+  public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(Page page, String slot) {
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+
+    ads.scrollToSlot(slot);
+
+    vuap.clickOnArea(3);
+    vuap.waitForVideoStart();
+
+    VuapAssertions.verifyVideoPlay(vuap);
   }
 
   @Test(

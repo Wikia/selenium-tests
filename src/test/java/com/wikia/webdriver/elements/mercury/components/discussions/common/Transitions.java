@@ -1,13 +1,15 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.google.common.base.Function;
+import javax.annotation.Nullable;
+
 import lombok.AllArgsConstructor;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.annotation.Nullable;
+import com.google.common.base.Function;
 
 @AllArgsConstructor
 public class Transitions {
@@ -24,8 +26,7 @@ public class Transitions {
     new WebDriverWait(webDriver, TIMEOUT_IN_SECONDS).until(new Function<WebDriver, Boolean>() {
       @Override
       public Boolean apply(@Nullable WebDriver input) {
-        return ExpectedConditions.presenceOfElementLocated(By.className(cssClassName))
-            .apply(input)
+        return ExpectedConditions.presenceOfElementLocated(By.className(cssClassName)).apply(input)
             .isDisplayed();
       }
     });

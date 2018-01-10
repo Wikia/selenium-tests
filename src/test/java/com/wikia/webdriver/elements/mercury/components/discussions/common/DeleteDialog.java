@@ -2,13 +2,12 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 
 import com.google.common.base.Function;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 public class DeleteDialog extends ConfirmationDialog {
 

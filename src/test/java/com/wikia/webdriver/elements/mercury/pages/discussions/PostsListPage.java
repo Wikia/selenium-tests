@@ -1,14 +1,21 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import java.util.concurrent.TimeUnit;
+
+import lombok.Getter;
+
+import org.openqa.selenium.support.ui.FluentWait;
+
 import com.google.common.base.Function;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
-import lombok.Getter;
-import org.openqa.selenium.support.ui.FluentWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class PostsListPage extends PageWithPosts {
 
