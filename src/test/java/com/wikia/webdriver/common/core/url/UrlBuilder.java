@@ -10,8 +10,10 @@ public class UrlBuilder {
   private static final String SANDBOX_URL_FORMAT = "%s.%s%s.%s";
   private static final String SANDBOX_NEW_URL_FORMAT = "%s%s.%s.%s";
   private static final String DEV_URL_FORMAT = "%s%s.%s.%s";
+  public static final String HTTPS_PREFIX = "https://";
+  public static final String HTTP_PREFIX = "http://";
 
-  private String env;
+  protected String env;
   private Boolean forceHttps;
   private Boolean newStagingUrlFormat;
 
@@ -58,7 +60,11 @@ public class UrlBuilder {
     return addPathToUrl(getUrlForWiki(wikiName), wikiPath);
   }
 
-  private String addPathToUrl(String url, String path) {
+  public String getUrlForPath(String wikiName, String wikiPath, EnvType envType) {
+    return addPathToUrl(getUrlForWiki(wikiName, envType), wikiPath);
+  }
+
+  protected String addPathToUrl(String url, String path) {
 
     String outputUrl = (!path.startsWith("/")) ? String.format("%s/%s", url, path): String.format("%s%s", url, path);
 
@@ -81,14 +87,22 @@ public class UrlBuilder {
     return getUrlForWiki(wikiName, false);
   }
 
+  public String getUrlForWiki(String wikiName, EnvType envType) {
+    return getUrlForWiki(wikiName, false, envType);
+  }
+
   public String getUrlForWiki(boolean addWWW) {
     return getUrlForWiki(Configuration.getWikiName(), addWWW);
   }
 
-
   public String getUrlForWiki(String wikiName, boolean addWWW) {
-    final String wikiaName = getWikiaGlobalName(wikiName);
     EnvType envType = Configuration.getEnvType(this.env);
+    return getUrlForWiki(wikiName, addWWW, envType);
+  }
+
+
+  public String getUrlForWiki(String wikiName, boolean addWWW, EnvType envType) {
+    final String wikiaName = getWikiaGlobalName(wikiName);
 
     String www = "";
     if (addWWW) {
@@ -118,11 +132,11 @@ public class UrlBuilder {
     }
   }
 
-  private String getUrlProtocol() {
+  public String getUrlProtocol() {
     if (this.forceHttps) {
-      return "https://";
+      return HTTPS_PREFIX;
     }
-    return "http://";
+    return HTTP_PREFIX;
   }
 
   public String getWikiGlobalURL() {
@@ -143,15 +157,6 @@ public class UrlBuilder {
       default:
         return String.format(getUrlProtocol() + "www.%s", env.getWikiaDomain());
     }
-  }
-
-  public String getFandomUrl() {
-    return String.format(getUrlProtocol() + "%s.%s", "fandom",
-            Configuration.getEnvType(EnvType.PROD.getKey()).getWikiaDomain());
-  }
-
-  public String getFandomPageUrl(String path) {
-    return addPathToUrl(getFandomUrl(), path);
   }
 
   private String getWikiaGlobalName(String wikiName) {

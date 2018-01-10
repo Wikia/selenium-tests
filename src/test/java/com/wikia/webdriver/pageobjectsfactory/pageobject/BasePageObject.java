@@ -41,6 +41,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
+import com.wikia.webdriver.common.core.url.FandomUrlBuilder;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
@@ -49,12 +50,14 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 public class BasePageObject {
 
   private static final int TIMEOUT_PAGE_REGISTRATION = 3000;
+  private static final String COMSCORE_PIXEL_URL = "script[src*='b.scorecardresearch.com/beacon.js']";
   public final Wait wait;
   public WebDriverWait waitFor;
   public Actions builder;
   protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
+  protected UrlBuilder fandomUrlBuilder = new FandomUrlBuilder();
   protected JavascriptActions jsActions;
 
   public BasePageObject() {
@@ -105,7 +108,7 @@ public class BasePageObject {
   // wait for comscore to load
   public void waitForPageLoad() {
     wait.forElementPresent(
-        By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
+        By.cssSelector(COMSCORE_PIXEL_URL));
   }
 
   public BasePageObject waitForPageReload() {

@@ -13,7 +13,7 @@ public class VideoAd {
   private String title = "Test Video";
   private int duration = 3;
   private String type = "video/mp4";
-  private String url = "http://public.adeng.wikia-dev.pl/porvata/red_10s.mp4";
+  private String url = "https://public.adeng.wikia-dev.pl/porvata/red_10s.mp4";
   private int width = 640;
   private int height = 480;
 
