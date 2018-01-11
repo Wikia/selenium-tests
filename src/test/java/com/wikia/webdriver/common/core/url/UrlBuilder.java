@@ -98,7 +98,6 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki(String wikiName, boolean addWWW) {
-    EnvType envType = Configuration.getEnvType(this.env);
     return getUrlForWiki(wikiName, addWWW, envType);
   }
 
