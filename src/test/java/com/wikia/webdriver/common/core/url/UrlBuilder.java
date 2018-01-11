@@ -14,11 +14,13 @@ public class UrlBuilder {
   public static final String HTTP_PREFIX = "http://";
 
   protected String env;
+  protected EnvType envType;
   private Boolean forceHttps;
   private Boolean newStagingUrlFormat;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
+    envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
     this.newStagingUrlFormat = Configuration.getNewStagingUrlFormat();
   }
