@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PlaybuzzWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = ".playbuzz iframe")
+  @FindBy(css = ".playbuzz iframe, .widget-playbuzz iframe")
   private List<WebElement> widgetIFrameList;
 
   @FindBy(css = "#pb-body-container")
