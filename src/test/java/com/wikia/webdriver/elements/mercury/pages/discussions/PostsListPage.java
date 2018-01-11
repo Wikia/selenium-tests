@@ -51,7 +51,8 @@ public class PostsListPage extends PageWithPosts {
 
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
-      new FluentWait<>(getPost()).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+      new FluentWait<>(getPost())
+          .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
           .until((Function<Post, Boolean>) p -> p.getPosts().stream()
               .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName)));
     } finally {

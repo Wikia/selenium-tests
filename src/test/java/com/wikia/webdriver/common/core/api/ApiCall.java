@@ -1,35 +1,31 @@
 package com.wikia.webdriver.common.core.api;
 
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.WebDriverException;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public abstract class ApiCall {
 
+  protected static String URL_STRING = null;
   private static String ERROR_MESSAGE = "Problem with API call";
 
-  protected static String URL_STRING = null;
-
-  protected ApiCall() {
-  }
+  protected ApiCall() {}
 
   abstract protected String getURL();
 
@@ -49,7 +45,8 @@ public abstract class ApiCall {
 
   public void call() {
     try {
-      CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
+      CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries()
+          .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
       HttpPost httpPost = new HttpPost(getURL());
       // set header
       if (getUser() != null) {
@@ -63,7 +60,8 @@ public abstract class ApiCall {
       CloseableHttpResponse resp = httpClient.execute(httpPost);
 
       PageObjectLogging.logInfo("CONTENT PUSH: ", "Content posted to: " + httpPost.toString());
-      PageObjectLogging.logInfo("CONTENT PUSH: ", "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
+      PageObjectLogging.logInfo("CONTENT PUSH: ",
+          "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);

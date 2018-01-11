@@ -215,7 +215,9 @@ public class AutoplayVuap {
   }
 
   private void waitFor(final Function<AutoplayVuap, Boolean> predicate, final long timeout) {
-    new FluentWait<>(this).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS)
+    new FluentWait<>(this)
+        .withTimeout(timeout, TimeUnit.SECONDS)
+        .pollingEvery(1, TimeUnit.SECONDS)
         .until(predicate);
   }
 

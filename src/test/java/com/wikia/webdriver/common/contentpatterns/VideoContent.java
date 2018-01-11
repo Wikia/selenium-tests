@@ -9,12 +9,12 @@ public class VideoContent {
 
   public static final String YOUTUBE_VIDEO_URL2_FILENAME = "How_to_make_the_Monstre_Verte_cocktail";
 
-  public static final String YOUTUBE_VIDEO_URL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
+  public static final String YOUTUBE_VIDEO_URL3 = "https://www.youtube.com/watch?v=LQjkDW3UPVk";
 
   public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=yvBXsd4P550";
 
   public static final String WIKIA_VIDEO_QUERY = "mouse";
-  public static final String NON_PREMIUM_VIDEO_URL = "http://www.youtube.com/watch?v=d9r5_DDMMjY";
+  public static final String NON_PREMIUM_VIDEO_URL = "https://www.youtube.com/watch?v=d9r5_DDMMjY";
 
   public static final String
       PREMIUM_VIDEO_URL =
