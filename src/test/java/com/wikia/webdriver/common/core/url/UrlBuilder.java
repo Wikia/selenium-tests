@@ -14,17 +14,20 @@ public class UrlBuilder {
   public static final String HTTP_PREFIX = "http://";
 
   protected String env;
+  protected EnvType envType;
   private Boolean forceHttps;
   private Boolean newStagingUrlFormat;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
+    this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
     this.newStagingUrlFormat = Configuration.getNewStagingUrlFormat();
   }
 
   public UrlBuilder(String env, Boolean forceHttps, Boolean newStagingUrlFormat) {
     this.env = env;
+    this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
     this.newStagingUrlFormat = newStagingUrlFormat;
   }
@@ -96,7 +99,6 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki(String wikiName, boolean addWWW) {
-    EnvType envType = Configuration.getEnvType(this.env);
     return getUrlForWiki(wikiName, addWWW, envType);
   }
 
