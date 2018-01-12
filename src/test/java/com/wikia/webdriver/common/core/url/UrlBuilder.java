@@ -20,13 +20,14 @@ public class UrlBuilder {
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
-    envType = Configuration.getEnvType(this.env);
+    this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
     this.newStagingUrlFormat = Configuration.getNewStagingUrlFormat();
   }
 
   public UrlBuilder(String env, Boolean forceHttps, Boolean newStagingUrlFormat) {
     this.env = env;
+    this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
     this.newStagingUrlFormat = newStagingUrlFormat;
   }
