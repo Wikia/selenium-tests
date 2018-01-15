@@ -17,7 +17,6 @@ public class MobilePreviewTests extends NewTestTemplate {
         .clickOnMobilePreviewButton()
         .heroImageIsPresent()
         .infoboxIsPresent()
-        .tableOfContentsIsPresent()
         .articleTableIsPresent()
         .mediaGalleryIsPresent()
         .linkedMediaGalleryIsPresent()
