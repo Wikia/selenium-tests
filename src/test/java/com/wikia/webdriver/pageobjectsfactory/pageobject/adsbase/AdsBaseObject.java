@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -25,6 +26,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -883,5 +886,11 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public By findFirstIframeWithAd(String slotName) {
     return By.cssSelector("#" + slotName + " iframe[title='3rd party ad content']");
+  }
+
+  public void waitForVASTRequestWithAdUnit(NetworkTrafficInterceptor networkTrafficInterceptor, String adUnit) throws UnsupportedEncodingException {
+    final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
+    final String PATTERN = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
+    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN);
   }
 }

@@ -102,10 +102,10 @@ public class URLsContent {
   public static final String STUMPLEUPON_DOMAIN = "stumbleupon.com";
 
   // Facebook
-  public static final String FACEBOOK_MAINPAGE = "http://www.facebook.com/";
-  public static final String FACEBOOK_SETTINGSPAGE = "http://www.facebook.com/settings";
+  public static final String FACEBOOK_MAINPAGE = "https://www.facebook.com/";
+  public static final String FACEBOOK_SETTINGSPAGE = "https://www.facebook.com/settings";
   public static final String FACEBOOK_SETTINGS_APP_TAB =
-      "http://www.facebook.com/settings?tab=applications";
+      "https://www.facebook.com/settings?tab=applications";
 
   // avatars
   public static final String AVATAR_GENERIC = "Avatar.jpg";
