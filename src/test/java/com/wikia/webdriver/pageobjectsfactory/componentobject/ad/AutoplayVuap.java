@@ -18,7 +18,7 @@ public class AutoplayVuap {
   private static final String PAUSE_CLASS_NAME = "pause-overlay";
   private static final String REPLAY_CLASS_NAME = "replay-overlay";
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
-  private static final String SPEAKER_CLASS_NAME = "speaker";
+  private static final String SPEAKER_CLASS_NAME = "volume-button,porvata-switchable-icon";
   private static final String CLOSE_BUTTON_CLASS_NAME = "close-ad";
   private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
   private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
@@ -183,7 +183,7 @@ public class AutoplayVuap {
   }
 
   public boolean isMuted() {
-    return wait.forElementVisible(speakerSelector).getAttribute("class").contains("mute");
+    return wait.forElementVisible(speakerSelector).getAttribute("class").contains("is-on");
   }
 
   public boolean isUnmuted() {
