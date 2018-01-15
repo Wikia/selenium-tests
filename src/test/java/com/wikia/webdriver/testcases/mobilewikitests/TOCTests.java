@@ -14,7 +14,8 @@ import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 import org.testng.annotations.Test;
 
-@Test(groups = "Mercury_TOC")
+//class was disabled because now we have collapsed sections on mobile and there is no TOC any longer
+@Test(groups = "Mercury_TOC", enabled = false)
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
