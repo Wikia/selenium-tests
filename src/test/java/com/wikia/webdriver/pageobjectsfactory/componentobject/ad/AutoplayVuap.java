@@ -14,12 +14,12 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 
 public class AutoplayVuap {
 
-  private static final String SLOT_SELECTOR_PREFIX = "#%s .";
-  private static final String PAUSE_CLASS_NAME = "pause-overlay";
-  private static final String REPLAY_CLASS_NAME = "replay-overlay";
-  private static final String CURRENT_TIME_CLASS_NAME = "current-time";
-  private static final String SPEAKER_CLASS_NAME = "volume-button.porvata-switchable-icon";
-  private static final String CLOSE_BUTTON_CLASS_NAME = "close-ad";
+  private static final String SLOT_SELECTOR_PREFIX = "#%s ";
+  private static final String PAUSE_SELECTOR = ".pause-overlay";
+  private static final String REPLAY_SELECTOR = ".replay-overlay";
+  private static final String CURRENT_TIME_SELECTOR = ".current-time";
+  private static final String SPEAKER_SELECTOR = ".volume-button.porvata-switchable-icon";
+  private static final String CLOSE_BUTTON_SELECTOR = ".close-ad";
   private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
   private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
@@ -29,22 +29,22 @@ public class AutoplayVuap {
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
+      SLOT_SELECTOR_PREFIX + PAUSE_SELECTOR;
 
   // #TOP_LEADERBOARD .replay-overlay
   private static final String REPLAY_BUTTON_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + REPLAY_CLASS_NAME;
+      SLOT_SELECTOR_PREFIX + REPLAY_SELECTOR;
 
   // #TOP_LEADERBOARD .current-time
   private static final String CURRENT_TIME_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
+      SLOT_SELECTOR_PREFIX + CURRENT_TIME_SELECTOR;
 
   // #TOP_LEADERBOARD .speaker
-  private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
+  private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_SELECTOR;
 
   // #TOP_LEADERBOARD .close-ad
   private static final String CLOSE_BUTTON_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
+      SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_SELECTOR;
 
   private final WikiaWebDriver driver;
 
