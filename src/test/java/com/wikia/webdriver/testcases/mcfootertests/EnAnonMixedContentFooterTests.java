@@ -86,7 +86,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "villains")
+  @Execute(onWikia = "sydneybuses")
   //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE 'More of..' will appear on this wiki
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
