@@ -21,19 +21,9 @@ public class FandomAdsDataProvider {
 
   private FandomAdsDataProvider() { }
 
-  @DataProvider
-  public static Object[][] fandomAds() {
-    return new Object[][]{
-        {
-            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-            "young-fans-guide-cinema-part-3"
-        },
-        {
-            AdsFandomTestTemplate.PAGE_TYPE_TOPIC,
-            "movies"
-        }
-    };
-  }
+  public static final String PAGE_NON_UAP_TOPIC = "movies";
+  public static final String PAGE_NON_UAP_ARTICLE = "young-fans-guide-cinema-part-3";
+  public static final String PAGE_HIVI_UAP_ARTICLE = "walking-dead-major-death-differs-from-comics";
 
   @DataProvider
   public static Object[][] fandomBtfBlockPage() {
