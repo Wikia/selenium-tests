@@ -200,43 +200,4 @@ public class RenameToolTests extends NewTestTemplate {
     wall.verifyMessageEditTextRenameDone(title, message, newName);
 
   }
-
-  @Test(groups = {"renameTool_01"})
-  public void NewUserCreateBlogPostAndRenameDone() {
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    SignUpUser
-        user =
-        new SignUpUser("QARename Usęr" + timestamp, credentials.email, "aaaa",
-                       LocalDate.of(1993, 3, 19));
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
-
-    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
-    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-
-    UserProfilePage userProfile = new UserProfilePage().open(user.getUsername());
-    userProfile.clickOnBlogTab();
-    SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
-    VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
-    visualEditMode.addContent(blogContent);
-    BlogPage blogPage = visualEditMode.submitBlog();
-    blogPage.getBlogTitle();
-    blogPage.verifyContent(blogContent);
-
-    UserProfilePage userProfilePage = new UserProfilePage()
-        .open(user.getUsername());
-
-    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage(driver)
-        .open()
-        .fillFormData("NewUser Nąmę" + timestamp, "NewUser Nąmę" + timestamp, user.getPassword())
-        .agreeToTermsAndConditions()
-        .submitChange();
-    new ConfirmationModalPage(driver).accept();
-    Assertion
-        .assertEquals(renameUserPage.getSuccessBoxMessage(), "Rename process is in progress. The "
-                                                             + "rest will be done in background. You will be notified via e-mail when it is completed.");
-  }
-
 }
