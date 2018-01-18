@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +9,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class AdsKruxObject extends AdsBaseObject {
 
-  private static final String KRUX_CDN = "http://cdn.krxd.net/";
-  private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
+  private final String kruxCdn = urlBuilder.getUrlProtocol() + "cdn.krxd.net/";
+  private final String kruxControlTagUrlPrefix = kruxCdn + "controltag?confid=";
 
-  @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
+  @FindBy(css = "script[src*='cdn.krxd.net/controltag?confid=']")
   private WebElement kruxControlTag;
 
   public AdsKruxObject(WebDriver driver, String testedPage) {
@@ -26,7 +25,7 @@ public class AdsKruxObject extends AdsBaseObject {
    * @param kruxSiteId the expected Krux site ID
    */
   public void verifyKruxControlTag(String kruxSiteId) {
-    String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
+    String expectedUrl = kruxControlTagUrlPrefix + kruxSiteId;
     Assertion.assertEquals(kruxControlTag.getAttribute("src"), expectedUrl);
   }
 

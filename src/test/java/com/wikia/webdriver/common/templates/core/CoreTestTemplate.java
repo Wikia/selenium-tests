@@ -32,7 +32,7 @@ public abstract class CoreTestTemplate {
   protected WikiaWebDriver driver;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
-  protected void refreshDriver() {
+  private void refreshDriver() {
     driver = DriverProvider.getActiveDriver();
   }
 
@@ -67,6 +67,9 @@ public abstract class CoreTestTemplate {
 
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
+    if (networkTrafficInterceptor != null && Configuration.getForceHttps()) {
+      networkTrafficInterceptor.startIntercepting();
+    }
     setWindowSize();
 
     loadFirstPage();
@@ -123,7 +126,7 @@ public abstract class CoreTestTemplate {
   /**
    * Return false if test is excluded from running on current test environment
    */
-  protected boolean isTestExcludedFromEnv(Method method) {
+  private boolean isTestExcludedFromEnv(Method method) {
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
 
@@ -136,7 +139,7 @@ public abstract class CoreTestTemplate {
     return false;
   }
 
-  protected void prepareDirectories() {
+  private void prepareDirectories() {
     CommonUtils.deleteDirectory("." + File.separator + "logs");
     CommonUtils.createDirectory("." + File.separator + "logs");
   }
