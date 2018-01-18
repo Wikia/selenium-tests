@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiviUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -70,6 +71,20 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
 
     fandomPage.scrollBy(0, 500);
+    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+  }
+
+  @Test(
+      groups = {"AdsFandomUapHiViDesktop"}
+  )
+  public void TLBShouldDisplayResolvedStateAfterVideoEnds() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+    WebElement slot = driver.findElement(TLB_SELECTOR);
+
+    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    hiviUap.waitForVideoEnd();
+
     Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
   }
 
