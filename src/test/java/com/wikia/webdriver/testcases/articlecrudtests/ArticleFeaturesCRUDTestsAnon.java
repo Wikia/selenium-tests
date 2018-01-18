@@ -1,12 +1,13 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
-import org.testng.annotations.Test;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import org.testng.annotations.Test;
 
 public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 

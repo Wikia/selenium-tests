@@ -19,6 +19,7 @@ public class URLsContent {
   public static final String SPECIAL_MULTIPLE_UPLOAD = "/wiki/Special:MultipleUpload";
   public static final String SPECIAL_WATCHLIST = "/wiki/Special:Watchlist";
   public static final String SPECIAL_PREFERENCES = "/wiki/Special:Preferences";
+  public static final String SPECIAL_RENAME_TOOL = "/wiki/Special:UserRenameTool";
   public static final String SPECIAL_EDITING_PREFERENCES =
       "/wiki/Special:Preferences#mw-prefsection-editing";
   public static final String SPECIAL_EDITING_PREFERENCES_EMAIL =
