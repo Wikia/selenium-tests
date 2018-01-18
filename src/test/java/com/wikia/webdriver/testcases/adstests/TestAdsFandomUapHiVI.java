@@ -8,9 +8,11 @@ import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiviUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
@@ -22,6 +24,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
   private static final double MOBILE_VIDEO_ASPECT_RATIO = 272.0 / 153.0;
   private static final By TLB_SELECTOR = By.id("gpt-top-leaderboard");
+  private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   @Test(
     groups = {"AdsFandomUapHiVi"}
@@ -106,6 +109,18 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     hiviUap.waitForVideoEnd();
 
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+  }
+
+  @Test(
+      groups = {"AdsFandomUapHiVi"}
+  )
+  public void adsImageClickedOpensNewPageFandom() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    hiviUap.clickVideo();
+
+    Assert.assertTrue(fandomPage.tabContainsUrl(AD_REDIRECT));
   }
 
   private void assertAspectRatio(Dimension size, double expected) {

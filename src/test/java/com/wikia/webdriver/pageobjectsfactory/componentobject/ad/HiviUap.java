@@ -13,6 +13,8 @@ public class HiviUap {
 
   private static final String SLOT_SELECTOR = "#%s ";
   private static final String REPLAY_SELECTOR = ".replay-overlay";
+  private static final String VIDEO_CLICK_AREA_SELECTOR = ".toggle-ui-overlay";
+  private static final String VIDEO_THUMBNAIL_SELECTOR = ".videoThumbnail";
 
   private final WikiaWebDriver driver;
 
@@ -20,6 +22,12 @@ public class HiviUap {
     this.wait = new Wait(driver);
     this.driver = driver;
     this.slot = slot;
+  }
+
+  public void waitForVideoStart() {
+    usingAdFrame(() -> {
+      wait.forElementNotVisible(By.cssSelector(VIDEO_THUMBNAIL_SELECTOR));
+    });
   }
 
   public void waitForVideoEnd() {
@@ -37,4 +45,8 @@ public class HiviUap {
     driver.switchTo().defaultContent();
   }
 
+  public void clickVideo() {
+    waitForVideoStart();
+    wait.forElementClickable(By.cssSelector(VIDEO_CLICK_AREA_SELECTOR)).click();
+  }
 }
