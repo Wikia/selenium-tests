@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiviUap;
@@ -10,25 +13,42 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
 
-  private static final float DEFAULT_STATE_ASPECT_RATIO = 4L;
-  private static final float RESOLVED_STATE_ASPECT_RATIO = 10L;
-  private static final float MOBILE_ASPECT_RATIO = 412 / 232;
+  private static final double DEFAULT_STATE_ASPECT_RATIO = 4.0;
+  private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
+  private static final double MOBILE_VIDEO_ASPECT_RATIO = 272.0 / 153.0;
   private static final By TLB_SELECTOR = By.id("gpt-top-leaderboard");
 
   @Test(
-    groups = {"AdsFandomUapHiViDesktop"}
+    groups = {"AdsFandomUapHiVi"}
   )
   public void TLBShouldHaveDefaultStateAspectRatio() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
 
-    Assertion.assertEquals(getAspectRatio(driver.findElement(TLB_SELECTOR)), DEFAULT_STATE_ASPECT_RATIO);
+    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), DEFAULT_STATE_ASPECT_RATIO);
+  }
+
+  @InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+    groups = {"AdsFandomUapHiVi"}
+  )
+  public void TLBShouldHaveVideoAspectRatioOnMobile() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+
+    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), MOBILE_VIDEO_ASPECT_RATIO);
   }
 
   @Test(
-    groups = {"AdsFandomUapHiViDesktop"}
+    groups = {"AdsFandomUapHiVi"}
   )
   public void TLBShouldHaveResolvedStateAspectRatioOnSecondPageView() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
@@ -36,11 +56,11 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     fandomPage.refreshPage();
     fandomPage.waitForPageLoad();
 
-    Assertion.assertEquals(getAspectRatio(driver.findElement(TLB_SELECTOR)), RESOLVED_STATE_ASPECT_RATIO);
+    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
   @Test(
-      groups = {"AdsFandomUapHiViDesktop"}
+      groups = {"AdsFandomUapHiVi"}
   )
   public void TLBShouldHaveResolvedStateAspectRatioAfterScroll() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
@@ -49,33 +69,33 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     int defaultStateHeight = slot.getSize().getHeight();
     int scrollBy = 50;
 
-    Assertion.assertEquals(getAspectRatio(slot), DEFAULT_STATE_ASPECT_RATIO);
+    assertAspectRatio(slot.getSize(), DEFAULT_STATE_ASPECT_RATIO);
 
     fandomPage.scrollBy(0, scrollBy);
     Assertion.assertEquals(slot.getSize().getHeight(), defaultStateHeight - scrollBy);
 
     fandomPage.scrollBy(0, 500);
-    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
   @Test(
-      groups = {"AdsFandomUapHiViDesktop"}
+      groups = {"AdsFandomUapHiVi"}
   )
-  public void TLBResolvedStateShouldKeepAspectRatioAfterScroll() {
+  public void TLBShouldKeepResolvedStateAspectRatioAfterScroll() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
     fandomPage.refreshPage();
     fandomPage.waitForPageLoad();
     WebElement slot = driver.findElement(TLB_SELECTOR);
 
-    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
 
     fandomPage.scrollBy(0, 500);
-    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
   @Test(
-      groups = {"AdsFandomUapHiViDesktop"}
+      groups = {"AdsFandomUapHiVi"}
   )
   public void TLBShouldDisplayResolvedStateAfterVideoEnds() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
@@ -85,11 +105,15 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
     hiviUap.waitForVideoEnd();
 
-    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  private float getAspectRatio(WebElement slot) {
-    final Dimension size = slot.getSize();
-    return Math.round((float) size.getWidth() / (float) slot.getSize().getHeight());
+  private void assertAspectRatio(Dimension size, double expected) {
+    final double actual = (double) size.getWidth() / (double) size.getHeight();
+    Assertion.assertEquals(roundAspectRatio(actual), roundAspectRatio(expected), 0.02, "Aspect ratios are divergent");
+  }
+
+  private double roundAspectRatio(double aspectRatio) {
+    return new BigDecimal(aspectRatio).setScale(2, RoundingMode.HALF_UP).doubleValue();
   }
 }
