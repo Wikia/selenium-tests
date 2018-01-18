@@ -12,8 +12,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
 
   private static final int DEFAULT_STATE_ASPECT_RATIO = 3;
   private static final int RESOLVED_STATE_ASPECT_RATIO = 10;
-
-  private By TLB_SELECTOR = By.id("gpt-top-leaderboard");
+  private static final By TLB_SELECTOR = By.id("gpt-top-leaderboard");
 
   @Test(
     groups = {"AdsFandomUapHiViDesktop"}
@@ -37,7 +36,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     Assertion.assertEquals(getAspectRatio(driver.findElement(TLB_SELECTOR)), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  private int getAspectRatio(WebElement TLB) {
-    return TLB.getSize().getWidth() / TLB.getSize().getHeight();
+  private int getAspectRatio(WebElement slot) {
+    return slot.getSize().getWidth() / slot.getSize().getHeight();
   }
 }
