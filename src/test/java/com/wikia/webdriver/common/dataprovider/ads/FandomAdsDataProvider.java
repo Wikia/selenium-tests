@@ -19,11 +19,11 @@ public class FandomAdsDataProvider {
   public static final String INSTANT_GLOBAL_MOAT_TRACKING = "wgAdDriverVideoMoatTrackingCountries";
   public static final String INSTANT_GLOBAL_POSTROLL = "wgAdDriverVideoPostrollCountries";
 
-  private FandomAdsDataProvider() { }
-
   public static final String PAGE_NON_UAP_TOPIC = "movies";
   public static final String PAGE_NON_UAP_ARTICLE = "young-fans-guide-cinema-part-3";
   public static final String PAGE_HIVI_UAP_ARTICLE = "walking-dead-major-death-differs-from-comics";
+
+  private FandomAdsDataProvider() { }
 
   @DataProvider
   public static Object[][] fandomBtfBlockPage() {
