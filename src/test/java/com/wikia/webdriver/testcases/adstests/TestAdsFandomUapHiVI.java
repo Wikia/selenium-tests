@@ -5,13 +5,15 @@ import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
 
-  private static final int DEFAULT_STATE_ASPECT_RATIO = 3;
-  private static final int RESOLVED_STATE_ASPECT_RATIO = 10;
+  private static final float DEFAULT_STATE_ASPECT_RATIO = 4L;
+  private static final float RESOLVED_STATE_ASPECT_RATIO = 10L;
+  private static final float MOBILE_ASPECT_RATIO = 412 / 232;
   private static final By TLB_SELECTOR = By.id("gpt-top-leaderboard");
 
   @Test(
@@ -36,7 +38,8 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     Assertion.assertEquals(getAspectRatio(driver.findElement(TLB_SELECTOR)), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  private int getAspectRatio(WebElement slot) {
-    return slot.getSize().getWidth() / slot.getSize().getHeight();
+  private float getAspectRatio(WebElement slot) {
+    final Dimension size = slot.getSize();
+    return Math.round((float) size.getWidth() / (float) slot.getSize().getHeight());
   }
 }
