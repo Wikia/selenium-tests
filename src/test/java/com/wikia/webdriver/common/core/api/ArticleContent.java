@@ -1,23 +1,23 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.net.URISyntaxException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.message.BasicNameValuePair;
-import org.openqa.selenium.WebDriverException;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.WebDriverException;
+
+import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
+  public static final String ARTICLE_NAME_PATTERN = "%s-%s";
   private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
       + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
@@ -50,13 +50,13 @@ public class ArticleContent extends ApiCall {
     String editToken = new EditToken(user).getEditToken();
     try {
       URL_STRING = new URIBuilder(baseURL)
-          .setParameter("text", text)
-          .setParameter("summary", "SUMMARY_QM")
-          .setParameter("title", articleTitle)
-          .setParameter("action", "edit")
-          .setParameter("format", "json")
-          .setParameter("token", editToken)
-          .build().toASCIIString();
+              .setParameter("text", text)
+              .setParameter("summary", "SUMMARY_QM")
+              .setParameter("title", articleTitle)
+              .setParameter("action", "edit")
+              .setParameter("format", "json")
+              .setParameter("token", editToken)
+              .build().toASCIIString();
     } catch (URISyntaxException e) {
       PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException("Failed to build edit API URL");
@@ -68,11 +68,11 @@ public class ArticleContent extends ApiCall {
     push(content, TestContext.getCurrentMethodName());
   }
 
-  public String createUniqueArticle() {
-    String uniqueText = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, LocalDateTime.now());
-    push(uniqueText, uniqueText);
+  public String pushUnique() {
+    String articleTitle = createUniqueArticleTitle();
+    push(PageContent.ARTICLE_TEXT, articleTitle);
 
-    return uniqueText;
+    return articleTitle;
   }
 
   public void push() {
@@ -87,5 +87,9 @@ public class ArticleContent extends ApiCall {
 
   public void clear() {
     push("", TestContext.getCurrentMethodName());
+  }
+
+  private String createUniqueArticleTitle() {
+    return String.format(ARTICLE_NAME_PATTERN, PageContent.ARTICLE_NAME_PREFIX, LocalDateTime.now());
   }
 }
