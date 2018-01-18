@@ -62,5 +62,4 @@ public class WikiaWebDriver extends EventFiringWebDriver {
     }
     super.quit();
   }
-
 }

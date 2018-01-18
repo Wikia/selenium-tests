@@ -77,7 +77,6 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
 
-
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
         + userName);

@@ -144,17 +144,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
-
   @Getter(lazy = true)
   private  final LocalNavigation localNavigation = new LocalNavigation();
-
   @Getter(lazy = true)
   private final NestedNavigation nestedNavigation = new NestedNavigation();
-
   @Getter(lazy = true)
   private final UploadVideo uploadVideo = new UploadVideo();
-
-
 
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
   private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";

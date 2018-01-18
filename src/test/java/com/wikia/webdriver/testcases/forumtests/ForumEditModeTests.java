@@ -124,8 +124,6 @@ public class ForumEditModeTests extends NewTestTemplate {
     article.getNestedNavigation().openScrollTest3();
     article.getNestedNavigation().clickCat_3();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Category:Videos"));
-
-
   }
 
   @Test
@@ -139,11 +137,6 @@ public class ForumEditModeTests extends NewTestTemplate {
     article.getUploadVideo().clickAddVideo();
     article.getUploadVideo().addVideo("https://www.youtube"
                                       + ".com/watch?time_continue=3&v=KsVWdGOnHZU");
-
-
-
-
-
   }
 }
 

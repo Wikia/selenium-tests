@@ -10,35 +10,29 @@ public class UploadVideo extends BasePageObject {
 
   @FindBy(xpath = "//span[text()='Explore']/../../..")
   private WebElement exploreButton;
-
   @FindBy(css = ".wds-button.addVideo")
   private WebElement addVideo;
-
   @FindBy(css = "#VideoEmbedUrl")
   private WebElement videoTextBox;
-
   @FindBy(css = "#VideoEmbedUrlSubmit")
   private WebElement submitVideo;
 
   public UploadVideo exploreButton() {
     new Actions(driver).moveToElement(exploreButton).perform();
+
     return this;
   }
 
-
   public UploadVideo clickAddVideo() {
     new Actions(driver).click(addVideo).perform();
-    return this;
 
+    return this;
   }
 
   public UploadVideo addVideo(String videoUrl) {
     videoTextBox.sendKeys(videoUrl);
     submitVideo.click();
+
     return this;
   }
 }
-
-
-
-
