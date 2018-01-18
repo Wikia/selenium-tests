@@ -38,6 +38,41 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     Assertion.assertEquals(getAspectRatio(driver.findElement(TLB_SELECTOR)), RESOLVED_STATE_ASPECT_RATIO);
   }
 
+  @Test(
+      groups = {"AdsFandomUapHiViDesktop"}
+  )
+  public void TLBShouldHaveResolvedStateAspectRatioAfterScroll() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+    WebElement slot = driver.findElement(TLB_SELECTOR);
+    int defaultStateHeight = slot.getSize().getHeight();
+    int scrollBy = 50;
+
+    Assertion.assertEquals(getAspectRatio(slot), DEFAULT_STATE_ASPECT_RATIO);
+
+    fandomPage.scrollBy(0, scrollBy);
+    Assertion.assertEquals(slot.getSize().getHeight(), defaultStateHeight - scrollBy);
+
+    fandomPage.scrollBy(0, 500);
+    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+  }
+
+  @Test(
+      groups = {"AdsFandomUapHiViDesktop"}
+  )
+  public void TLBResolvedStateShouldKeepAspectRatioAfterScroll() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+    fandomPage.refreshPage();
+    fandomPage.waitForPageLoad();
+    WebElement slot = driver.findElement(TLB_SELECTOR);
+
+    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+
+    fandomPage.scrollBy(0, 500);
+    Assertion.assertEquals(getAspectRatio(slot), RESOLVED_STATE_ASPECT_RATIO);
+  }
+
   private float getAspectRatio(WebElement slot) {
     final Dimension size = slot.getSize();
     return Math.round((float) size.getWidth() / (float) slot.getSize().getHeight());

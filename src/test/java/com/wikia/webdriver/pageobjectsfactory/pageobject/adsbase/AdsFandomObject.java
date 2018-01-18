@@ -41,6 +41,10 @@ public class AdsFandomObject extends AdsBaseObject {
     jsActions.scrollToElement(driver.findElement(By.id(slotId)));
   }
 
+  public void scrollBy(int x, int y) {
+    jsActions.scrollBy(x, y);
+  }
+
   public WebElement getSlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
 
