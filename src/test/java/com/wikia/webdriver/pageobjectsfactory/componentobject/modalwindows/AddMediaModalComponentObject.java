@@ -48,4 +48,10 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
         true, driver
     );
   }
+
+  public boolean isVideoModalVisible() {
+    wait.forElementVisible(addVideoModal);
+
+    return true;
+  }
 }

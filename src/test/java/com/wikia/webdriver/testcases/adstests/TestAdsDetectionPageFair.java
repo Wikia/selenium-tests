@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Test(
       groups = "AdsDetectAdBlockPageFair",
       dataProviderClass = AdsDataProvider.class,
@@ -21,7 +21,7 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
     adsBaseObject.assertPageFairResponse(true, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Test(
       groups = "AdsDetectNoAdBlockPageFair",
       dataProviderClass = AdsDataProvider.class,

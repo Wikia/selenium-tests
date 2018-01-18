@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.globalnavigationbar;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
@@ -16,7 +17,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickFandomLogo();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getFandomPageUrl("/"));
+    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD));
   }
 
   @Test(groups = {"gamesHubLinkClickOnEnCommunityOpensGamesHub"})
@@ -25,7 +26,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickGamesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getFandomPageUrl("/topics/games"));
+    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/games");
   }
 
   @Test(groups = {"moviesHubLinkClickOnEnCommunityOpensMoviesHub"})
@@ -34,7 +35,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickMoviesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getFandomPageUrl("/topics/movies"));
+    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/movies");
   }
 
   @Test(groups = {"tvHubLinkClickOnEnCommunityOpensTvHub"})
@@ -43,7 +44,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickTVHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getFandomPageUrl("/topics/tv"));
+    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/tv");
   }
 
   @Test(groups = {"communityCentralLinkClickOnDeCommunityOpensDeCommunityCentral"})
@@ -64,7 +65,7 @@ public class Navigating extends NewTestTemplate {
         .openWikisMenu()
         .clickExploreWikisLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getFandomPageUrl("/explore"));
+    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore");
   }
 
   @Test(groups = {"fandomUniversityLinkClickOnEnCommunityOpensFandomUniversity"})

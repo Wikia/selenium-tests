@@ -23,12 +23,6 @@ public class MobilePreviewModal extends WikiBasePageObject {
     return this;
   }
 
-  public MobilePreviewModal tableOfContentsIsPresent() {
-    waitForElementToBePresent(".table-of-contents", "Table of contents");
-
-    return this;
-  }
-
   public MobilePreviewModal articleTableIsPresent() {
     waitForElementToBePresent(".article-table", "Article table");
 
