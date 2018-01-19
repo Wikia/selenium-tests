@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
-public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
+public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
 
   private static final double DEFAULT_STATE_ASPECT_RATIO = 4.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
@@ -159,7 +159,21 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     TimeUnit.SECONDS.sleep(3);
 
     Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+  }
 
+  @Test(
+      groups = {"AdsFandomUapHiVi"}
+  )
+  public void videoShouldBeFullscreenAfterClickOnIcon() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+
+    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    hiviUap.waitForVideoStart();
+    hiviUap.clickFullscreenIcon();
+    Dimension windowSize = driver.manage().window().getSize();
+
+    Assertion.assertEquals(hiviUap.getVideoWidth(), windowSize.width);
   }
 
   private void assertAspectRatio(Dimension size, double expected) {

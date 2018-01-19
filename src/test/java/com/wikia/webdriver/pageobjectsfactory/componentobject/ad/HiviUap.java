@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,6 +14,7 @@ public class HiviUap {
   private final String slot;
 
   private static final String SLOT_SELECTOR = "#%s ";
+  private static final String FULL_SCREEN_BUTTON_SELECTOR = ".toggle-fullscreen-button";
   private static final String REPLAY_SELECTOR = ".replay-overlay";
   private static final String VIDEO_CLICK_AREA_SELECTOR = ".toggle-ui-overlay";
   private static final String VIDEO_THUMBNAIL_SELECTOR = ".videoThumbnail";
@@ -83,4 +83,19 @@ public class HiviUap {
         () -> wait.forElementPresent(By.cssSelector("video")).getAttribute("currentTime")
     ));
   }
+
+  public void clickFullscreenIcon() {
+    enableVideoToolbar();
+    wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + FULL_SCREEN_BUTTON_SELECTOR)).click();
+  }
+
+  public int getVideoWidth() {
+    try {
+      return usingImaFrame(() -> driver.findElement(By.cssSelector("video")).getSize().width);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return 0;
+    }
+  }
+
 }
