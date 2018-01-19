@@ -26,7 +26,8 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   private static final double DEFAULT_STATE_ASPECT_RATIO = 4.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
   private static final double MOBILE_VIDEO_ASPECT_RATIO = 272.0 / 153.0;
-  private static final By TLB_SELECTOR = By.id("gpt-top-leaderboard");
+  private static final String TLB_SLOT_ID = "gpt-top-leaderboard";
+  private static final By TLB_SELECTOR = By.id(TLB_SLOT_ID);
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   @Test(
@@ -108,7 +109,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
     fandomPage.waitForPageLoad();
     WebElement slot = driver.findElement(TLB_SELECTOR);
 
-    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
     hiviUap.waitForVideoEnd();
 
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
@@ -120,7 +121,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   public void TLBVideoClickedOpensNewPageFandom() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
-    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
     hiviUap.clickVideo();
 
     Assert.assertTrue(fandomPage.tabContainsUrl(AD_REDIRECT));
@@ -132,7 +133,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   public void TLBVideoPausesFandom() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
-    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
 
     hiviUap.waitForVideoStart();
     TimeUnit.SECONDS.sleep(2);
@@ -151,7 +152,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   public void TLBVideoPlaysSoundFandom() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
-    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
 
     hiviUap.waitForVideoStart();
     hiviUap.toggleSound();

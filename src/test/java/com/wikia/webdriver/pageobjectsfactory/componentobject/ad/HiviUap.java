@@ -31,15 +31,11 @@ public class HiviUap {
   }
 
   public void waitForVideoStart() {
-    usingAdFrame(() -> {
-      wait.forElementNotVisible(By.cssSelector(VIDEO_THUMBNAIL_SELECTOR));
-    });
+    usingAdFrame(() -> wait.forElementNotVisible(By.cssSelector(VIDEO_THUMBNAIL_SELECTOR)));
   }
 
   public void waitForVideoEnd() {
-    usingAdFrame(() -> {
-      wait.forElementVisible(By.cssSelector(String.format(REPLAY_SELECTOR, slot)), 60);
-    });
+    usingAdFrame(() -> wait.forElementVisible(By.cssSelector(String.format(REPLAY_SELECTOR, slot)), 60));
   }
 
   private void usingAdFrame(Runnable f) {
