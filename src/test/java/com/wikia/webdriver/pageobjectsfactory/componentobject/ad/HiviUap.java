@@ -19,6 +19,7 @@ public class HiviUap {
   private static final String VIDEO_CLICK_AREA_SELECTOR = ".toggle-ui-overlay";
   private static final String VIDEO_THUMBNAIL_SELECTOR = ".videoThumbnail";
   private static final String PAUSE_SELECTOR = ".play-pause-button";
+  private static final String SOUND_SELECTOR = ".volume-button";
   private static final String VIDEO_PLAYER = ".video-player";
 
   private final WikiaWebDriver driver;
@@ -60,18 +61,25 @@ public class HiviUap {
     return result;
   }
 
+  private void enableVideoToolbar() {
+    WebElement videoPlayer = wait.forElementVisible(By.cssSelector(String.format(SLOT_SELECTOR, slot) + VIDEO_PLAYER));
+    Actions builder = new Actions(driver);
+    builder.moveToElement(videoPlayer).perform();
+  }
+
   public void clickVideo() {
     waitForVideoStart();
     wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + VIDEO_CLICK_AREA_SELECTOR)).click();
   }
 
   public void togglePause() {
-    waitForVideoStart();
-
-    Actions builder = new Actions(driver);
-    builder.moveToElement(driver.findElement(By.cssSelector(String.format(SLOT_SELECTOR, slot) + VIDEO_PLAYER))).perform();
-
+    enableVideoToolbar();
     wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + PAUSE_SELECTOR)).click();
+  }
+
+  public void toggleSound() {
+    enableVideoToolbar();
+    wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + SOUND_SELECTOR)).click();
   }
 
   public double getCurrentTime() throws Exception {

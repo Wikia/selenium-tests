@@ -3,11 +3,13 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiviUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -141,6 +143,22 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
 
     Assert.assertNotEquals(0, hiviUap.getCurrentTime(), "Video did not start");
     Assert.assertEquals(time, hiviUap.getCurrentTime(), "Video did not togglePause");
+  }
+
+  @Test(
+      groups = {"AdsFandomUapHiVi"}
+  )
+  public void TLBVideoPlaysSoundFandom() throws Exception {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+
+    hiviUap.waitForVideoStart();
+    hiviUap.toggleSound();
+    TimeUnit.SECONDS.sleep(3);
+
+    Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+
   }
 
   private void assertAspectRatio(Dimension size, double expected) {
