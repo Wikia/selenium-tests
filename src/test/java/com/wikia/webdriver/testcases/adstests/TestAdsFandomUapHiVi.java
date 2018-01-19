@@ -178,7 +178,8 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
 
   private void assertAspectRatio(Dimension size, double expected) {
     final double actual = (double) size.getWidth() / (double) size.getHeight();
-    Assertion.assertEquals(roundAspectRatio(actual), roundAspectRatio(expected), 0.02, "Aspect ratios are divergent");
+    // Some divergent is possible because of browser size rounding
+    Assertion.assertEquals(roundAspectRatio(actual), roundAspectRatio(expected), 0.03, "Aspect ratios are divergent");
   }
 
   private double roundAspectRatio(double aspectRatio) {
