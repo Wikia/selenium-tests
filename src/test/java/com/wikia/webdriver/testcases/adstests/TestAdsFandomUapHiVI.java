@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.concurrent.TimeUnit;
 
 public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
 
@@ -114,13 +115,32 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   @Test(
       groups = {"AdsFandomUapHiVi"}
   )
-  public void adsImageClickedOpensNewPageFandom() {
+  public void TLBVideoClickedOpensNewPageFandom() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
     HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
     hiviUap.clickVideo();
 
     Assert.assertTrue(fandomPage.tabContainsUrl(AD_REDIRECT));
+  }
+
+  @Test(
+      groups = {"AdsFandomUapHiVi"}
+  )
+  public void TLBVideoPausesFandom() throws Exception {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    fandomPage.waitForPageLoad();
+    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
+
+    hiviUap.waitForVideoStart();
+    TimeUnit.SECONDS.sleep(2);
+    hiviUap.togglePause();
+    double time = hiviUap.getCurrentTime();
+
+    TimeUnit.SECONDS.sleep(3);
+
+    Assert.assertNotEquals(0, hiviUap.getCurrentTime(), "Video did not start");
+    Assert.assertEquals(time, hiviUap.getCurrentTime(), "Video did not togglePause");
   }
 
   private void assertAspectRatio(Dimension size, double expected) {

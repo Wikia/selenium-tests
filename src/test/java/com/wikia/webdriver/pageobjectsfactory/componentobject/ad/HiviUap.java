@@ -5,6 +5,9 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.concurrent.Callable;
 
 public class HiviUap {
 
@@ -15,6 +18,8 @@ public class HiviUap {
   private static final String REPLAY_SELECTOR = ".replay-overlay";
   private static final String VIDEO_CLICK_AREA_SELECTOR = ".toggle-ui-overlay";
   private static final String VIDEO_THUMBNAIL_SELECTOR = ".videoThumbnail";
+  private static final String PAUSE_SELECTOR = ".play-pause-button";
+  private static final String VIDEO_PLAYER = ".video-player";
 
   private final WikiaWebDriver driver;
 
@@ -45,8 +50,33 @@ public class HiviUap {
     driver.switchTo().defaultContent();
   }
 
+  private <T> T usingImaFrame(final Callable<T> f) throws Exception {
+    WebElement adIframe = wait.forElementPresent(By.cssSelector(
+        String.format(SLOT_SELECTOR, slot) + VIDEO_PLAYER + " iframe"
+    ));
+    driver.switchTo().frame(adIframe);
+    T result = f.call();
+    driver.switchTo().defaultContent();
+    return result;
+  }
+
   public void clickVideo() {
     waitForVideoStart();
-    wait.forElementClickable(By.cssSelector(VIDEO_CLICK_AREA_SELECTOR)).click();
+    wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + VIDEO_CLICK_AREA_SELECTOR)).click();
+  }
+
+  public void togglePause() {
+    waitForVideoStart();
+
+    Actions builder = new Actions(driver);
+    builder.moveToElement(driver.findElement(By.cssSelector(String.format(SLOT_SELECTOR, slot) + VIDEO_PLAYER))).perform();
+
+    wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + PAUSE_SELECTOR)).click();
+  }
+
+  public double getCurrentTime() throws Exception {
+    return Double.parseDouble(usingImaFrame(
+        () -> wait.forElementPresent(By.cssSelector("video")).getAttribute("currentTime")
+    ));
   }
 }
