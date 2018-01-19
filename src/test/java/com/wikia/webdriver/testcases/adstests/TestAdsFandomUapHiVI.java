@@ -118,7 +118,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   @Test(
       groups = {"AdsFandomUapHiVi"}
   )
-  public void TLBVideoClickedOpensNewPageFandom() {
+  public void TLBVideoClickedOpensNewPage() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
     HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
@@ -130,7 +130,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   @Test(
       groups = {"AdsFandomUapHiVi"}
   )
-  public void TLBVideoPausesFandom() throws Exception {
+  public void TLBVideoPauses() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
     HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
@@ -149,7 +149,7 @@ public class TestAdsFandomUapHiVI extends AdsFandomTestTemplate {
   @Test(
       groups = {"AdsFandomUapHiVi"}
   )
-  public void TLBVideoPlaysSoundFandom() throws Exception {
+  public void TLBVideoPlaysSound() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
     HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
