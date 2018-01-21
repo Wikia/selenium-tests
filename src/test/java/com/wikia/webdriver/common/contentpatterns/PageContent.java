@@ -16,6 +16,8 @@ public class PageContent {
   public static final String ARTICLE_NAME_PREFIX = "QAarticle";
   public static final String ARTICLE_TEXT =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  public static final String ARTICLE_TEXT_DROZDY =
+      "Drozdy latają kluczem.";
   public static final String ARTICLE_TEXT_EDIT = "Brand new content";
   public static final String ARTICLE_TEXT_SECOND_EDIT =
       "Ut enim ad minim veniam, quis nostrud exercitation "
