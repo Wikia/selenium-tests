@@ -240,6 +240,7 @@
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
+            <class name="com.wikia.webdriver.testcases.renametool.RenameToolTests"/>
         </classes>
     </test>
 </suite>
