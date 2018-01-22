@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.oasis.components.globalshortcuts;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class ActionExplorerModal extends WikiBasePageObject {
 
@@ -32,6 +32,12 @@ public class ActionExplorerModal extends WikiBasePageObject {
     super();
 
     this.actions = new Actions(driver);
+  }
+
+  public boolean isVisible() {
+    wait.forElementVisible(actionExplorerModalSelector);
+
+    return true;
   }
 
   public ActionExplorerModal useShortcut(String shortcut) {

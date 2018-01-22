@@ -10,13 +10,15 @@ import org.testng.annotations.Test;
 public class TestAdsDetection extends NewTestTemplate {
 
   public static final String PIXEL_PATTERN_WITH_ADBLOCK =
-      "http://www\\..*\\.com/bcn.*deo=1.*";
+      "https?://www\\..*\\.com/bcn.*deo=1.*";
   public static final String PIXEL_PATTERN_WITHOUT_ADBLOCK =
-      "http://www\\..*\\.com/bcn.*deo=0.*";
+      "https?://www\\..*\\.com/bcn.*deo=0.*";
+//  public static final String PIXEL_PATTERN_WITHOUT_ADBLOCK =
+//          ".*acdn.*";
   public static final String TEST_WIKI = "project43";
   public static final String TEST_PAGE = "Project43_Wikia";
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Test(
       groups = "AdsDetectNoAdBlock"
   )

@@ -14,6 +14,14 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     // we want to avoid going to qa.fandom.com as logged in user
   }
 
+  protected AdsFandomObject loadArticle(String pageName) {
+    return loadPage(pageName, AdsFandomTestTemplate.PAGE_TYPE_ARTICLE);
+  }
+
+  protected AdsFandomObject loadTopic(String pageName) {
+    return loadPage(pageName, AdsFandomTestTemplate.PAGE_TYPE_TOPIC);
+  }
+
   protected AdsFandomObject loadPage(String pageName, String pageType) {
     String pageUrl = getFandomUrl(pageName, pageType);
 

@@ -28,6 +28,8 @@ public class VisualEditModePageObject extends EditMode {
   public static final int ELEMENT_SHOW_UP_TIMEOUT = 3;
   @FindBy(css = "#wpSave")
   private WebElement submitButton;
+  @FindBy(css = "a.cke_button_bold")
+  private WebElement boldButton;
   @FindBy(css = ".video-thumbnail")
   protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
@@ -95,6 +97,11 @@ public class VisualEditModePageObject extends EditMode {
     super();
   }
 
+  public VisualEditModePageObject clickBoldButton() {
+    boldButton.click();
+    return this;
+  }
+
   public VisualEditModePageObject open() {
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
         + URLsContent.WIKI_DIR + TestContext.getCurrentMethodName(), URLsContent.ACTION_EDIT));
@@ -129,6 +136,14 @@ public class VisualEditModePageObject extends EditMode {
 
   public boolean checkPortableInfoboxVisible() {
     return editorFrame.frameScope(portableInfoboxTransclusion::isDisplayed);
+  }
+  
+  public void addContentWithoutClear(String content) {
+    wait.forElementVisible(iframe);
+    driver.switchTo().frame(iframe);
+    contentInput.sendKeys(content);
+    driver.switchTo().defaultContent();
+    PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
   }
 
   private void verifyComponent(WebElement component) {

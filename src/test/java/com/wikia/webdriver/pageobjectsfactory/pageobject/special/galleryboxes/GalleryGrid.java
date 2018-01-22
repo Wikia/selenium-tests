@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class GalleryGrid extends BasePageObject {
 
-  @FindBy(css = ".gallerybox a.image img:not([data-video-name=''])")
+  @FindBy(css = "a.video.video-thumbnail.image.lightbox.xsmall")
   private List<WebElement> galleryVideoBox;
   @FindBy(css = ".gallerybox a.image img:not([data-image-name=''])")
   private List<WebElement> galleryImageBox;

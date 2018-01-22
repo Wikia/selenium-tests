@@ -8,19 +8,23 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
-
 import org.testng.annotations.Test;
 
 public class TestAdsFandom extends AdsFandomTestTemplate {
-
   @Test(
-      dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomAds",
       groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
   )
-  public void adsFandomAdsDesktop(String pageType, String pageName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    verifySlotsOnDesktop(fandomPage, pageType);
+  public void adsFandomAdsArticleDesktop() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_NON_UAP_ARTICLE);
+    verifySlots(fandomPage);
+  }
+
+  @Test(
+      groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
+  )
+  public void adsFandomAdsTopicDesktop() {
+    AdsFandomObject fandomPage = loadTopic(FandomAdsDataProvider.PAGE_NON_UAP_TOPIC);
+    verifySlots(fandomPage);
   }
 
   @InBrowser(
@@ -28,55 +32,62 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       emulator = Emulator.GOOGLE_NEXUS_5
   )
   @Test(
-      dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomAds",
       groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
-  public void adsFandomAdsMobile(String pageType, String pageName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    verifySlotsOnMobile(fandomPage, pageType);
+  public void adsFandomAdsArticleMobile() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_NON_UAP_ARTICLE);
+    verifySlots(fandomPage);
   }
 
-  private void verifySlotsOnDesktop(AdsFandomObject fandomPage, String pageType) {
-    if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_ARTICLE)) {
-      verifyArticleSlotsOnDesktop(fandomPage);
-    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_TOPIC)) {
-      verifyTopicSlots(fandomPage);
-    }
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
+  )
+  public void adsFandomAdsTopicMobile() {
+    AdsFandomObject fandomPage = loadTopic(FandomAdsDataProvider.PAGE_NON_UAP_TOPIC);
+    verifySlots(fandomPage);
   }
 
-  private void verifySlotsOnMobile(AdsFandomObject fandomPage, String pageType) {
-    if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_ARTICLE)) {
-      verifyArticleSlotsOnMobile(fandomPage);
-    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_TOPIC)) {
-      verifyTopicSlots(fandomPage);
-    }
+  @Test(
+      groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
+  )
+  public void adsFandomAdsArticleUAPDesktop() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    verifyUAPSlots(fandomPage);
   }
 
-  private void verifyArticleSlotsOnDesktop(AdsFandomObject fandomPage) {
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
+  )
+  public void adsFandomAdsArticleUAPMobile() {
+    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    verifyUAPSlots(fandomPage);
+  }
+
+  private void verifySlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.FEED_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
-  }
-
-  private void verifyArticleSlotsOnMobile(AdsFandomObject fandomPage) {
-    fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 
-  private void verifyTopicSlots(AdsFandomObject fandomPage) {
+  private void verifyUAPSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.FEED_BOXAD));
+    fandomPage.verifySlot(AdsFandomContent.FEED_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 }

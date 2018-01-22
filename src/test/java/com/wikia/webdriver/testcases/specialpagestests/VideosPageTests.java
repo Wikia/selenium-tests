@@ -40,7 +40,7 @@ public class VideosPageTests extends NewTestTemplate {
      * presented by Global Notifications. (Note: This test also adds a video beforehand to make sure
      * running this test is sustainable).
      */
-    @Execute(asUser = User.STAFF)
+    @Execute(asUser = User.SUS_STAFF)
     @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
     @RelatedIssue(issueID = "SUS-755")
     public void VideosPageTest_002_deleteVideo_notificationContainsTitle() {
