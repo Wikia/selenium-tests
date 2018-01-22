@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiviUap;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiViUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 
@@ -109,8 +109,8 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     fandomPage.waitForPageLoad();
     WebElement slot = driver.findElement(TLB_SELECTOR);
 
-    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
-    hiviUap.waitForVideoEnd();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForVideoEnd();
 
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
@@ -121,8 +121,8 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
   public void TLBVideoClickedOpensNewPage() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
-    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
-    hiviUap.clickVideo();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.clickVideo();
 
     Assert.assertTrue(fandomPage.tabContainsUrl(AD_REDIRECT));
   }
@@ -133,17 +133,17 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
   public void TLBVideoPauses() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
-    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
 
-    hiviUap.waitForVideoStart();
+    hiViUap.waitForVideoStart();
     TimeUnit.SECONDS.sleep(2);
-    hiviUap.togglePause();
-    double time = hiviUap.getCurrentTime();
+    hiViUap.togglePause();
+    double time = hiViUap.getCurrentTime();
 
     TimeUnit.SECONDS.sleep(3);
 
-    Assert.assertNotEquals(0, hiviUap.getCurrentTime(), "Video did not start");
-    Assert.assertEquals(time, hiviUap.getCurrentTime(), "Video did not togglePause");
+    Assert.assertNotEquals(0, hiViUap.getCurrentTime(), "Video did not start");
+    Assert.assertEquals(time, hiViUap.getCurrentTime(), "Video did not togglePause");
   }
 
   @Test(
@@ -152,10 +152,10 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
   public void TLBVideoPlaysSound() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
-    HiviUap hiviUap = new HiviUap(driver, TLB_SLOT_ID);
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
 
-    hiviUap.waitForVideoStart();
-    hiviUap.toggleSound();
+    hiViUap.waitForVideoStart();
+    hiViUap.toggleSound();
     TimeUnit.SECONDS.sleep(3);
 
     Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
@@ -168,12 +168,12 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
 
-    HiviUap hiviUap = new HiviUap(driver, "gpt-top-leaderboard");
-    hiviUap.waitForVideoStart();
-    hiviUap.clickFullscreenIcon();
+    HiViUap hiViUap = new HiViUap(driver, "gpt-top-leaderboard");
+    hiViUap.waitForVideoStart();
+    hiViUap.clickFullscreenIcon();
     Dimension windowSize = driver.manage().window().getSize();
 
-    Assertion.assertEquals(hiviUap.getVideoWidth(), windowSize.width);
+    Assertion.assertEquals(hiViUap.getVideoWidth(), windowSize.width);
   }
 
   private void assertAspectRatio(Dimension size, double expected) {
