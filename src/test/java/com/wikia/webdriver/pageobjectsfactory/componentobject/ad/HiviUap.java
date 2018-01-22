@@ -43,16 +43,25 @@ public class HiviUap {
         String.format(SLOT_SELECTOR, slot) + " iframe[id^=\"google_ads\"]"
     ));
     driver.switchTo().frame(adIframe);
-    f.run();
+    try {
+      f.run();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
     driver.switchTo().defaultContent();
   }
 
-  private <T> T usingImaFrame(final Callable<T> f) throws Exception {
+  private <T> T usingImaFrame(final Callable<T> f) {
     WebElement adIframe = wait.forElementPresent(By.cssSelector(
         String.format(SLOT_SELECTOR, slot) + VIDEO_PLAYER + " iframe"
     ));
     driver.switchTo().frame(adIframe);
-    T result = f.call();
+    T result;
+    try {
+      result = f.call();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
     driver.switchTo().defaultContent();
     return result;
   }
@@ -78,7 +87,7 @@ public class HiviUap {
     wait.forElementClickable(By.cssSelector(String.format(SLOT_SELECTOR, slot) + SOUND_SELECTOR)).click();
   }
 
-  public double getCurrentTime() throws Exception {
+  public double getCurrentTime() {
     return Double.parseDouble(usingImaFrame(
         () -> wait.forElementPresent(By.cssSelector("video")).getAttribute("currentTime")
     ));
@@ -90,12 +99,7 @@ public class HiviUap {
   }
 
   public int getVideoWidth() {
-    try {
-      return usingImaFrame(() -> driver.findElement(By.cssSelector("video")).getSize().width);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return 0;
-    }
+    return usingImaFrame(() -> driver.findElement(By.cssSelector("video")).getSize().width);
   }
 
 }
