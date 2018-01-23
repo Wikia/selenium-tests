@@ -28,7 +28,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-9808", comment = "problems with banner notifications")
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
-    String articleTitle = "DeleteUndeleArticle";
+    String articleTitle = "DeleteUndeleArticle1";
     new ArticleContent().push(PageContent.ARTICLE_TEXT, articleTitle);
 
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
