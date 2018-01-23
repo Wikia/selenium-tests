@@ -10,7 +10,10 @@ public class HiViUap {
   private By adIframe;
   private By fullScreenButton;
   private By imaIframe;
+  private By learnMore;
+  private By mobileVideoElement;
   private By pauseButton;
+  private By progressBar;
   private By replayButton;
   private By soundButton;
   private By videoClickArea;
@@ -38,6 +41,9 @@ public class HiViUap {
     this.videoElement = By.cssSelector("video");
     this.videoPlayer = By.cssSelector(slotSelector + ".video-player");
     this.videoThumbnail = By.cssSelector(slotSelector + ".videoThumbnail");
+    this.progressBar = By.cssSelector(slotSelector + ".current-time");
+    this.learnMore = By.cssSelector(slotSelector + ".learn-more");
+    this.mobileVideoElement = By.cssSelector(slotSelector + "video");
   }
 
   public void waitForVideoStart() {
@@ -75,6 +81,10 @@ public class HiViUap {
     ));
   }
 
+  public double getCurrentTimeMobile() {
+    return Double.parseDouble(wait.forElementPresent(mobileVideoElement).getAttribute("currentTime"));
+  }
+
   public void clickFullscreenIcon() {
     enableVideoToolbar();
     wait.forElementClickable(fullScreenButton).click();
@@ -82,5 +92,25 @@ public class HiViUap {
 
   public int getVideoWidth() {
     return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).getSize().width);
+  }
+
+  public int getVideoWidthMobile() {
+    return driver.findElement(mobileVideoElement).getSize().width;
+  }
+
+  public double getProgressBarWidth() {
+    return driver.findElement(progressBar).getSize().getWidth();
+  }
+
+  public void clickReplayButton() {
+    iframeRunner.usingIframe(adIframe, () -> wait.forElementClickable(replayButton).click());
+  }
+
+  public void clickAd() {
+    iframeRunner.usingIframe(adIframe, () -> wait.forElementClickable(By.id("adContainer")).click());
+  }
+
+  public void clickLearnMore() {
+    wait.forElementClickable(learnMore).click();
   }
 }
