@@ -24,7 +24,7 @@ public class ImageStorageTests extends NewTestTemplate {
   String imageURL;
   String imageThumbnailURL;
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_001"})
+  @Test(groups = {"ImageStorageTests", "ImageStorage_001"}, invocationCount = 10)
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.USER_2)
   @RelatedIssue(issueID = "QAART-1028")
@@ -37,7 +37,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.setFileName(fileName);
     filesPage.checkIgnoreAnyWarnings();
     filesPage.clickUploadButton();
-    Assertion.assertTrue(filesPage.isImageOnPage(fileName));
+    Assertion.assertTrue(filesPage.isImageOnPage(fileName), "File " + fileName + " was not found on the page");
     filesPage.verifyFileUploaded(fileName);
 
     FilePage file = new FilePage().open(fileName, true);
