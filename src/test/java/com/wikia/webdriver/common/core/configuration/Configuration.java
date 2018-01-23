@@ -188,12 +188,13 @@ public class Configuration {
   }
 
   public static EnvType getEnvType(String env) {
+    String[] sandboxEnvs = new String[]{"verify", "preview", "sandbox", "stable", "adeng"};
+
     if (env.contains("prod")) {
       return EnvType.PROD;
     } else if (env.contains("staging")) {
       return EnvType.STAGING;
-    } else if (env.contains("verify") || env.contains("preview") || env.contains("sandbox")
-        || env.contains("stable") || env.contains("adeng")) {
+    } else if (StringUtils.indexOfAny(env, sandboxEnvs) != -1) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {
       return EnvType.DEV;
