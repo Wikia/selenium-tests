@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.imageservingtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,6 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -24,10 +24,9 @@ public class ImageStorageTests extends NewTestTemplate {
   String imageURL;
   String imageThumbnailURL;
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_001"}, invocationCount = 10)
+  @Test(groups = {"ImageStorageTests", "ImageStorage_001"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.USER_2)
-  @RelatedIssue(issueID = "QAART-1028")
   public void ImageStorage_001_deleteImage() {
     SpecialNewFilesPage filesPage = new SpecialNewFilesPage().openSpecialNewFiles(wikiURL);
     filesPage.addPhoto();
@@ -82,7 +81,6 @@ public class ImageStorageTests extends NewTestTemplate {
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "QAART-921")
   public void ImageStorage_002_moveImage() {
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
 
