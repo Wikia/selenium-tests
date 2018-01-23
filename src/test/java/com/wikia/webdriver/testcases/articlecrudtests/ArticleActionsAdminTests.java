@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -15,7 +14,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
+
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 
@@ -25,7 +26,6 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "MAIN-9808", comment = "problems with banner notifications")
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
     String articleTitle = "DeleteUndeleArticle1";
