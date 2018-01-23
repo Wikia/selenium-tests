@@ -557,7 +557,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public DeletePageObject deleteUsingDropdown() {
     this.openArticleEditDropdown();
-    wait.forElementVisible(deleteDropdown);
+    wait.forElementClickable(deleteDropdown);
     scrollAndClick(deleteDropdown);
     return new DeletePageObject(driver);
   }
