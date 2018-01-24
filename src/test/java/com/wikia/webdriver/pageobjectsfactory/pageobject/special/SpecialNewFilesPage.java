@@ -21,7 +21,7 @@ import java.util.Random;
 public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
-  public static final By mwContentTextImgBy = By.cssSelector("#mw-content-text img");
+  private static final By mwContentTextImgBy = By.cssSelector("#mw-content-text img");
 
   @FindBy(css = "#page-header-add-new-photo")
   private WebElement addPhotoButton;
