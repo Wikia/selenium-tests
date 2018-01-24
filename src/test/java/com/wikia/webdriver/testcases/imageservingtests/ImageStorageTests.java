@@ -36,7 +36,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.setFileName(fileName);
     filesPage.checkIgnoreAnyWarnings();
     filesPage.clickUploadButton();
-    Assertion.assertTrue(filesPage.isImageOnPage(fileName), "File " + fileName + " was not found on the page");
+    Assertion.assertTrue(filesPage.isImageOnPage(fileName), String.format("File %s was not found on the page", fileName));
     filesPage.verifyFileUploaded(fileName);
 
     FilePage file = new FilePage().open(fileName, true);
