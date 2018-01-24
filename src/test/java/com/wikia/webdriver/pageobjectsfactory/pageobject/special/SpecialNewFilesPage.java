@@ -21,7 +21,7 @@ import java.util.Random;
 public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
-  public static final By MW_CONTENT_TEXT_IMG = By.cssSelector("#mw-content-text img");
+  public static final By mwContentTextImgBy = By.cssSelector("#mw-content-text img");
 
   @FindBy(css = "#page-header-add-new-photo")
   private WebElement addPhotoButton;
@@ -111,7 +111,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   }
 
   public Boolean isImageOnPage(String fileName) {
-    wait.forElementVisible(MW_CONTENT_TEXT_IMG);
+    wait.forElementVisible(mwContentTextImgBy);
     for (int i = 0; i < 2; i++) {
       for (WebElement image : imagesNewFiles) {
         if (image.getAttribute("src").contains(fileName)) {
