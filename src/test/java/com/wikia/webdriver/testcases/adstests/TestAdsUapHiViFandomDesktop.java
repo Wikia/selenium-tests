@@ -21,7 +21,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
-public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
+@Test(
+  groups = {"AdsUapHiViFandomDesktop"}
+)
+public class TestAdsUapHiViFandomDesktop extends AdsFandomTestTemplate {
 
   private static final double DEFAULT_STATE_ASPECT_RATIO = 4.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
@@ -30,10 +33,8 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
   private static final By TLB_SELECTOR = By.id(TLB_SLOT_ID);
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
-  @Test(
-    groups = {"AdsFandomUapHiVi"}
-  )
-  public void TLBShouldHaveDefaultStateAspectRatio() {
+  @Test
+  public void shouldHaveCorrectAspectRatioForImpactState() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
 
@@ -44,9 +45,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
   )
-  @Test(
-    groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBShouldHaveVideoAspectRatioOnMobile() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -54,9 +53,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), MOBILE_VIDEO_ASPECT_RATIO);
   }
 
-  @Test(
-    groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBShouldHaveResolvedStateAspectRatioOnSecondPageView() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -66,9 +63,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBShouldHaveResolvedStateAspectRatioAfterScroll() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -85,9 +80,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBShouldKeepResolvedStateAspectRatioAfterScroll() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -101,9 +94,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBShouldDisplayResolvedStateAfterVideoEnds() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -115,9 +106,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBVideoClickedOpensNewPage() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -127,9 +116,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     Assert.assertTrue(fandomPage.tabContainsUrl(AD_REDIRECT));
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBVideoPauses() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -146,9 +133,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     Assert.assertEquals(time, hiViUap.getCurrentTime(), "Video did not togglePause");
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void TLBVideoPlaysSound() throws Exception {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
@@ -161,9 +146,7 @@ public class TestAdsFandomUapHiVi extends AdsFandomTestTemplate {
     Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
   }
 
-  @Test(
-      groups = {"AdsFandomUapHiVi"}
-  )
+  @Test
   public void videoShouldBeFullscreenAfterClickOnIcon() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     fandomPage.waitForPageLoad();
