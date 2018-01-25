@@ -78,7 +78,7 @@ public class Configuration {
         : String.valueOf(readConfiguration().get(propertyName));
   }
 
-  private static String getProp(String propertyName) {
+  public static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
           : getPropertyFromFile(propertyName);
@@ -137,7 +137,8 @@ public class Configuration {
     return getProp("logEnabled");
   }
 
-  public static String getMockAds() {
+  public static String
+  getMockAds() {
     return getProp("mockAds");
   }
 
