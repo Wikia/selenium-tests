@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"EnAnonMixedContentFooter"})
-@Execute(onWikia = "mediawiki119", asUser = User.ANONYMOUS)
+@Execute(onWikia = "gameofthrones", asUser = User.ANONYMOUS)
 public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
@@ -86,7 +86,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "disney")
+  @Execute(onWikia = "sydneybuses")
   //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE 'More of..' will appear on this wiki
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()

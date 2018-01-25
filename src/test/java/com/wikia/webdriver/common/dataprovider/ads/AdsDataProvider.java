@@ -29,6 +29,8 @@ public class AdsDataProvider {
   private static final String VIDEO_PLAYER_IFRAME = " .video-player iframe";
 
   public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
+  public static final Page UAP_ABCD_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP/ABCD");
+  public static final Page UAP_HIVI_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP/HiVi");
 
   private static final String FV_JWPLAYER_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
   private static final String FV_JWPLAYER_WITH_SOUND_PAGE_URI = "SyntheticTests/Premium/FeaturedVideo/JWPlayer/WithSound";
@@ -835,11 +837,11 @@ public class AdsDataProvider {
   public static Object[][] adsVuapClickToPlayDesktop() {
     return new Object[][]{
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                     AdsContent.TOP_LB
             },
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                     AdsContent.BOTTOM_LB
             }
     };
@@ -871,11 +873,11 @@ public class AdsDataProvider {
   public static Object[][] adsVuapDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB
         }
     };
@@ -885,11 +887,11 @@ public class AdsDataProvider {
   public static Object[][] adsVuapResolvedState() {
     return new Object[][]{
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
                     AdsContent.TOP_LB
             },
             {
-                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
                     AdsContent.BOTTOM_LB
             }
     };

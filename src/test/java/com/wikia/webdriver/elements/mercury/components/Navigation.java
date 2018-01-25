@@ -86,7 +86,7 @@ public class Navigation extends WikiBasePageObject {
     if (fromSkin == Skin.MOBILE_WIKI) {
       waitForPageReload();
     } else {
-      new SkinHelper(driver).isSkin(Skin.MERCURY);
+      new SkinHelper(driver).isSkin(Skin.DISCUSSIONS);
     }
 
     return this;

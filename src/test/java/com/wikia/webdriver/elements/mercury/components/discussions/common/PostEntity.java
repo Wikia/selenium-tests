@@ -49,6 +49,10 @@ public class PostEntity {
     return hasClass("is-locked");
   }
 
+  public boolean isNotLocked() {
+    return !isLocked();
+  }
+
   public boolean isReported() {
     return hasClass("is-reported");
   }

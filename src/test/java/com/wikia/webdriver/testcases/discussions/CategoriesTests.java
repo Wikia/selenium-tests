@@ -388,6 +388,28 @@ public class CategoriesTests extends NewTestTemplate {
     canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
   }
 
+  @Test(groups = {DESKTOP})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void discussionsAdministratorOnDesktopCanReorderCategories() {
+    deleteCategoriesDesktop();
+    ArrayList<CategoryPill.Data> categories = setUp(1);
+    String categoryName = categories.get(0).getName();
+
+    final PostsListPage page = new PostsListPage().open();
+    final CategoriesFieldset categoriesFieldset = page.getCategories();
+
+    categoriesFieldset.clickEdit();
+    categoriesFieldset.reorderCategory(categoryName, -1);
+    categoriesFieldset.clickApproveButton();
+    assertEquals(
+        categoriesFieldset.getCategoryPosition(categoryName),
+        // 1 not 0 because of "All" category
+        1,
+        "Category should be moved one position up"
+    );
+  }
+
   // test methods body
 
   private void canChangeCategoryDesktop() {

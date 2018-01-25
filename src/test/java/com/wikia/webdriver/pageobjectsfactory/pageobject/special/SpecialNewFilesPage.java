@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +20,7 @@ import java.util.Random;
 public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
+  private static final By mwContentTextImgBy = By.cssSelector("#mw-content-text img");
 
   @FindBy(css = "#page-header-add-new-photo")
   private WebElement addPhotoButton;
@@ -62,7 +63,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   }
 
   public SpecialNewFilesPage clickOnMoreOptions() {
-    moreOrFewerOptions.click();
+    jsActions.click(moreOrFewerOptions);
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
     PageObjectLogging.log("ClickOnMoreOptions", "Click on More options", true);
 
@@ -70,7 +71,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   }
 
   public SpecialNewFilesPage clickOnFewerOptions() {
-    moreOrFewerOptions.click();
+    jsActions.click(moreOrFewerOptions);
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "none");
     PageObjectLogging.log("ClickOnFewerOptions", "Click on Fewer options", true);
 
@@ -109,6 +110,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   }
 
   public Boolean isImageOnPage(String fileName) {
+    wait.forElementVisible(mwContentTextImgBy);
     for (int i = 0; i < 2; i++) {
       for (WebElement image : imagesNewFiles) {
         if (image.getAttribute("src").contains(fileName)) {

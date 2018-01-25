@@ -24,6 +24,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomDesktop"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
@@ -163,7 +165,6 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.LightboxTests"/>
-            <class name="com.wikia.webdriver.testcases.mobilewikitests.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.ApesterTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.PlaybuzzTests"/>
@@ -207,6 +208,7 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditAccountTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditingPreferencesTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.FilePageTests"/>
+            <class name="com.wikia.webdriver.testcases.specialpagestests.NewPagesTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.SpecialPagesForAnons"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.ThemeDesigner"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.UserAndRights"/>
@@ -240,6 +242,7 @@
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
+            <class name="com.wikia.webdriver.testcases.renametool.RenameToolTests"/>
         </classes>
     </test>
 </suite>
