@@ -16,17 +16,17 @@ import org.apache.http.message.BasicNameValuePair;
 
 public class FlakyReporter {
 
-  private static final String SERVICE_URL = "http://services.wikia.com/dupa";
+  private static final String SERVICE_URL = "http://services.wikia.com/my-awesome-service";
   private HttpClient httpclient = HttpClients.createDefault();
   private HttpPost httppost = new HttpPost(SERVICE_URL);
 
   // Request parameters and other properties.
   private List<NameValuePair> params = new ArrayList<>();
 
-  void sendFlaky(String name, String status, boolean flaky) throws IOException {
+  public void sendFlaky(String name, Integer status, Boolean flaky) throws IOException {
     params.add(new BasicNameValuePair("name", name));
-    params.add(new BasicNameValuePair("status", status));
-    params.add(new BasicNameValuePair("flaky", Boolean.toString(flaky));
+    params.add(new BasicNameValuePair("status", mapStatus(status)));
+    params.add(new BasicNameValuePair("flaky", Boolean.toString(flaky)));
     httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
     //Execute and get the response.
@@ -38,6 +38,14 @@ public class FlakyReporter {
         System.out.print(instream.toString());
       }
     }
+  }
+
+  private String mapStatus(Integer status) {
+    if (status == 1) {
+      return "success";
+    } else if (status == 2) {
+      return "failure";
+    } else return "unknown";
   }
 
 }

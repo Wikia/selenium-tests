@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.logging;
 
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.FlakyReporter;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
@@ -422,7 +423,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestSuccess(ITestResult result) {
+    sendFlaky(result);
     stopLogging();
+  }
+
+  private void sendFlaky(ITestResult result) {
+    try {
+      new FlakyReporter().sendFlaky(result.getTestName(), result.getStatus(), !result.isSuccess());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -447,7 +457,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         CommonUtils.appendTextToFile(logPath, html);
       }
       logJSError();
-
+      sendFlaky(result);
       stopLogging();
     }
   }
