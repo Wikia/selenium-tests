@@ -1,14 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
@@ -16,6 +7,15 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class SpecialNewFilesPage extends SpecialPageObject {
 
