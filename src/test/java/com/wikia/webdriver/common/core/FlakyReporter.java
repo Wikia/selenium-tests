@@ -56,13 +56,13 @@ public class FlakyReporter {
   }
 
   private String getMetadata() {
-    String env = Configuration.getProp("env");
-    String app = Configuration.getProp("app");
-    String version = Configuration.getProp("version");
+    String env = Configuration.getEnv();
+    String app = Configuration.getApp();
+    String version = Configuration.getVersion();
 
     String metadata = "";
     try {
-      metadata = new JSONObject().put("env", env).put("app", app).put(version, version).toString();
+      metadata = new JSONObject().put("env", env).put("app", app).put("version", version).toString();
     } catch (JSONException e) {
       PageObjectLogging.logError("Error building metadata for CornFlaky", e);
     }

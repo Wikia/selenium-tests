@@ -101,6 +101,14 @@ public class Configuration {
     return getProp("env");
   }
 
+  public static String getApp() {
+    return getProp("app");
+  }
+
+  public static String getVersion() {
+    return getProp("release");
+  }
+
   public static String getWikiName() {
     return getProp("wikiName");
   }
