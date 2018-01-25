@@ -9,8 +9,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -23,18 +23,14 @@ public class FlakyReporter {
 
   private static final String SERVICE_URL = XMLReader.getValue("cornflaky.address");
   private HttpClient httpclient = HttpClients.createDefault();
-  private HttpPost httppost = new HttpPost(String.format("%s/%s", SERVICE_URL, "statusFromBody"));
+  private HttpPost httppost = new HttpPost(String.format("%s/%s", SERVICE_URL, "status"));
 
   // Request parameters and other properties.
   private List<NameValuePair> params = new ArrayList<>();
 
   public void sendFlaky(String name, Integer status, Boolean flaky) throws IOException {
-    params.add(new BasicNameValuePair("name", name));
-    params.add(new BasicNameValuePair("status", mapStatus(status)));
-    params.add(new BasicNameValuePair("flaky", Boolean.toString(flaky)));
-    params.add(new BasicNameValuePair("meta", getMetadata()));
-    httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-
+    httppost.setEntity(new StringEntity(getData(name, status, flaky)));
+    httppost.setHeader("Content-Type", "application/json");
     // Execute and get the response.
     HttpResponse response = httpclient.execute(httppost);
     HttpEntity entity = response.getEntity();
@@ -55,19 +51,26 @@ public class FlakyReporter {
       return "unknown";
   }
 
-  private String getMetadata() {
+  private String getData(String name, Integer status, boolean flaky) {
     String env = Configuration.getEnv();
     String app = Configuration.getApp();
     String version = Configuration.getVersion();
 
-    String metadata = "";
+    params.add(new BasicNameValuePair("name", name));
+    params.add(new BasicNameValuePair("status", mapStatus(status)));
+    params.add(new BasicNameValuePair("flaky", Boolean.toString(flaky)));
+
+    String data = "";
     try {
-      metadata = new JSONObject().put("env", env).put("app", app).put("version", version).toString();
+      JSONObject metadata =
+          new JSONObject().put("env", env).put("app", app).put("version", version);
+      data = new JSONObject().put("name", name).put("status", mapStatus(status))
+          .put("flaky", Boolean.toString(flaky)).put("meta", metadata).toString();
     } catch (JSONException e) {
       PageObjectLogging.logError("Error building metadata for CornFlaky", e);
     }
 
-    return metadata;
+    return data;
   }
 
 }

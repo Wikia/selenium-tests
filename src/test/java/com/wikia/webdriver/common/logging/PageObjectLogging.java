@@ -1,26 +1,22 @@
 package com.wikia.webdriver.common.logging;
 
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.FlakyReporter;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.Flaky;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.TimeZone;
 
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -40,19 +36,24 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TimeZone;
-
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.FlakyReporter;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -88,7 +89,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
     CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
     String className = success ? SUCCESS_CLASS : ERROR_CLASS;
-    String html = VelocityWrapper.fillLogRowWithScreenshot(Arrays.asList(className), command, description, imageCounter);
+    String html = VelocityWrapper.fillLogRowWithScreenshot(Arrays.asList(className), command,
+        description, imageCounter);
     CommonUtils.appendTextToFile(logPath, html);
     logJSError();
   }
@@ -104,7 +106,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     logJSError();
   }
 
-  //Log assertion result
+  // Log assertion result
   public static void log(String command, String description, boolean success) {
     log(command, description, success, false);
   }
@@ -140,7 +142,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private static void log(String command, String description, boolean isSuccess,
-                          boolean ifLowLevel) {
+      boolean ifLowLevel) {
     logsResults.add(isSuccess);
     String escapedDescription = escapeHtml(description);
 
@@ -154,30 +156,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String html = VelocityWrapper.fillLogRow(classList, command, escapedDescription);
     CommonUtils.appendTextToFile(logPath, html);
     logJSError();
-  }
-
-  public void logAssertionStacktrace(AssertionError exception) {
-    driver = DriverProvider.getActiveDriver();
-
-    imageCounter += 1;
-    if ("true".equals(Configuration.getLogEnabled())) {
-      String exceptionMessage = ExceptionUtils.getStackTrace(exception);
-      List<String> classList = new ArrayList<>();
-      classList.add(ERROR_CLASS);
-      classList.add(STACKTRACE_CLASS);
-      String html = VelocityWrapper.fillErrorLogRow(classList, exceptionMessage, imageCounter);
-      try {
-        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
-        CommonUtils.appendTextToFile(logPath, html);
-      } catch (Exception e) {
-        html = VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(classList, exceptionMessage);
-        CommonUtils.appendTextToFile(logPath, html);
-        log("onException",
-            "driver has no ability to catch screenshot or html source - driver may died<br/>", false);
-      }
-      logJSError();
-    }
   }
 
   public static void logError(String command, Exception exception) {
@@ -212,7 +190,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     CommonUtils.appendTextToFile(logPath, html);
   }
 
-
   /**
    * This method will log info to log file (line in blue color)
    */
@@ -245,7 +222,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       List<String> error =
           (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
       if (!error.isEmpty()) {
-        String html = VelocityWrapper.fillLogRow(Arrays.asList(ERROR_CLASS), "click", error.toString());
+        String html =
+            VelocityWrapper.fillLogRow(Arrays.asList(ERROR_CLASS), "click", error.toString());
         CommonUtils.appendTextToFile(logPath, html);
       }
     }
@@ -265,7 +243,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       String jiraUrl = jiraPath + issueID;
       String jiraLink = VelocityWrapper.fillLink(jiraUrl, issueID);
       command = "Known failure";
-      description = testName + " - " + jiraLink + " " + testMethod.getAnnotation(RelatedIssue.class).comment();
+      description = testName + " - " + jiraLink + " "
+          + testMethod.getAnnotation(RelatedIssue.class).comment();
     } else {
       command = "";
       description = testName;
@@ -275,9 +254,34 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     testStarted = true;
   }
 
+  public void logAssertionStacktrace(AssertionError exception) {
+    driver = DriverProvider.getActiveDriver();
+
+    imageCounter += 1;
+    if ("true".equals(Configuration.getLogEnabled())) {
+      String exceptionMessage = ExceptionUtils.getStackTrace(exception);
+      List<String> classList = new ArrayList<>();
+      classList.add(ERROR_CLASS);
+      classList.add(STACKTRACE_CLASS);
+      String html = VelocityWrapper.fillErrorLogRow(classList, exceptionMessage, imageCounter);
+      try {
+        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
+        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
+        CommonUtils.appendTextToFile(logPath, html);
+      } catch (Exception e) {
+        html = VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(classList, exceptionMessage);
+        CommonUtils.appendTextToFile(logPath, html);
+        log("onException",
+            "driver has no ability to catch screenshot or html source - driver may died<br/>",
+            false);
+      }
+      logJSError();
+    }
+  }
+
   private void stopLogging() {
     driver = DriverProvider.getActiveDriver();
-    if ( driver.getProxy() != null && Configuration.getForceHttps()) {
+    if (driver.getProxy() != null && Configuration.getForceHttps()) {
       Har har = driver.getProxy().getHar();
       for (HarEntry entry : har.getLog().getEntries()) {
         URL url = null;
@@ -285,7 +289,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           url = new URL(entry.getRequest().getUrl());
           if (url.getHost().contains("wikia")) {
             Boolean isHttps = entry.getRequest().getUrl().startsWith("https");
-            PageObjectLogging.log("VISITED URL", "Url: " + entry.getRequest().getUrl(), !Configuration.getForceHttps() || isHttps);
+            PageObjectLogging.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
+                !Configuration.getForceHttps() || isHttps);
           }
         } catch (MalformedURLException e) {
           PageObjectLogging.log("MALFORMED URL", "Url: " + entry.getRequest().getUrl(), false);
@@ -316,7 +321,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         List<String> classList = new ArrayList<>();
         classList.add(SUCCESS_CLASS);
         String command = "Url after navigation";
-        String description = VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
+        String description =
+            VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
         String html = VelocityWrapper.fillLogRow(classList, command, description);
         CommonUtils.appendTextToFile(logPath, html);
       } else {
@@ -334,7 +340,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       try {
         new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
       } catch (WebDriverException e) {
-        PageObjectLogging.logInfo("Hack for disabling notifications", "Failed to execute js action");
+        PageObjectLogging.logInfo("Hack for disabling notifications",
+            "Failed to execute js action");
 
       }
 
@@ -349,7 +356,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-           String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
+            String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
       }
     }
 
@@ -429,9 +436,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private void sendFlaky(ITestResult result) {
-    boolean isFlaky = result.getMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(Flaky.class);
+    boolean isFlaky =
+        result.getMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(Flaky.class);
+    String testName =
+        String.format("%s.%s", TestContext.getCurrentTestMethod().getDeclaringClass().getName(),
+            TestContext.getCurrentTestMethod().getName());
     try {
-      new FlakyReporter().sendFlaky(result.getTestName(), result.getStatus(), isFlaky);
+      new FlakyReporter().sendFlaky(testName, result.getStatus(), isFlaky);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -492,22 +503,17 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     CommonUtils.createDirectory(screenDirPath);
     imageCounter = 0;
 
-    String date = DateTimeFormat.forPattern(DATE_FORMAT)
-                  .print(DateTime.now(DateTimeZone.UTC));
-    String polishDate = DateTimeFormat.forPattern(POLISH_DATE_FORMAT)
-                        .print(DateTime.now()
-                        .withZone(DateTimeZone
-                        .forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
+    String date = DateTimeFormat.forPattern(DATE_FORMAT).print(DateTime.now(DateTimeZone.UTC));
+    String polishDate = DateTimeFormat.forPattern(POLISH_DATE_FORMAT).print(
+        DateTime.now().withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
     String testingEnvironmentUrl = new UrlBuilder().getUrlForWiki(Configuration.getWikiName());
     String testingEnvironment = Configuration.getEnv();
     String testedVersion = "TO DO: GET WIKI VERSION HERE";
 
-    String
-        headerHtml = VelocityWrapper
-                     .fillHeader(date, polishDate, browser, os, testingEnvironmentUrl,
-                                   testingEnvironment, testedVersion);
+    String headerHtml = VelocityWrapper.fillHeader(date, polishDate, browser, os,
+        testingEnvironmentUrl, testingEnvironment, testedVersion);
     CommonUtils.appendTextToFile(logPath, headerHtml);
     appendShowHideButtons();
     try {

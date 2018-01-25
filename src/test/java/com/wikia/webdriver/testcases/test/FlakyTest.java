@@ -24,6 +24,6 @@ public class FlakyTest extends NewTestTemplate {
 
   @Flaky
   public void flakyPassingTest() {
-    Assertion.assertTrue(false);
+    Assertion.assertTrue(true);
   }
 }
