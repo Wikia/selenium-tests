@@ -2,7 +2,6 @@ package com.wikia.webdriver.common.core;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.HttpEntity;
@@ -16,7 +15,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 public class FlakyReporter {
 
-  private static final String SERVICE_URL = "http://services.wikia.com/my-awesome-service";
+  private static final String SERVICE_URL = "http://services.-dev.pl/flaky-tests-detector/";
   private HttpClient httpclient = HttpClients.createDefault();
   private HttpPost httppost = new HttpPost(SERVICE_URL);
 
