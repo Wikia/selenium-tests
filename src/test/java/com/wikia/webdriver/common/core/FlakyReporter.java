@@ -23,7 +23,7 @@ public class FlakyReporter {
 
   private static final String SERVICE_URL = XMLReader.getValue("cornflaky.address");
   private HttpClient httpclient = HttpClients.createDefault();
-  private HttpPost httppost = new HttpPost(String.format("%s/%s", SERVICE_URL, "status"));
+  private HttpPost httppost = new HttpPost(String.format("%s/%s", SERVICE_URL, "statusFromBody"));
 
   // Request parameters and other properties.
   private List<NameValuePair> params = new ArrayList<>();
