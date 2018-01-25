@@ -447,6 +447,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         CommonUtils.appendTextToFile(logPath, html);
       }
       logJSError();
+
       stopLogging();
     }
   }
