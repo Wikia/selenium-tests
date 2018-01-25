@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
@@ -428,8 +429,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private void sendFlaky(ITestResult result) {
+    boolean isFlaky = result.getMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(Flaky.class);
     try {
-      new FlakyReporter().sendFlaky(result.getTestName(), result.getStatus(), !result.isSuccess());
+      new FlakyReporter().sendFlaky(result.getTestName(), result.getStatus(), isFlaky);
     } catch (IOException e) {
       e.printStackTrace();
     }

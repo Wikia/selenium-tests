@@ -1,8 +1,10 @@
 package com.wikia.webdriver.testcases.test;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
 import org.testng.annotations.Test;
+
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Flaky;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 @Test(groups = "flaky-test")
 public class FlakyTest extends NewTestTemplate {
@@ -15,4 +17,13 @@ public class FlakyTest extends NewTestTemplate {
     Assertion.assertTrue(false);
   }
 
+  @Flaky
+  public void flakyFailingTest() {
+    Assertion.assertTrue(false);
+  }
+
+  @Flaky
+  public void flakyPassingTest() {
+    Assertion.assertTrue(false);
+  }
 }
