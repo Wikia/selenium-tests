@@ -12,7 +12,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,6 +28,8 @@ public class FlakyReporter {
   private List<NameValuePair> params = new ArrayList<>();
 
   public void sendFlaky(String name, Integer status, Boolean flaky) throws IOException {
+    PageObjectLogging.logInfo("Sending flaky report with data: ", getData(name, status, flaky).toString());
+
     httppost.setEntity(new StringEntity(getData(name, status, flaky)));
     httppost.setHeader("Content-Type", "application/json");
     // Execute and get the response.
@@ -55,10 +56,6 @@ public class FlakyReporter {
     String env = Configuration.getEnv();
     String app = Configuration.getApp();
     String version = Configuration.getVersion();
-
-    params.add(new BasicNameValuePair("name", name));
-    params.add(new BasicNameValuePair("status", mapStatus(status)));
-    params.add(new BasicNameValuePair("flaky", Boolean.toString(flaky)));
 
     String data = "";
     try {
