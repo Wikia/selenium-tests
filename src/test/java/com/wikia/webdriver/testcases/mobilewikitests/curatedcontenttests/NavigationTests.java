@@ -50,7 +50,6 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_002")
-  @Flaky
   public void mercuryCuratedNavigationTest_002_navigateThroughSection() {
     init();
 

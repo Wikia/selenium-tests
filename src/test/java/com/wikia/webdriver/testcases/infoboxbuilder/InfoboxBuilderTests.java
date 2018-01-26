@@ -88,7 +88,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Flaky
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingDefaultComponents() {
     Sidebar builderSidebar = new Sidebar();

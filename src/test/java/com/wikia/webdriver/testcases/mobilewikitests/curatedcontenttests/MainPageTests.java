@@ -384,7 +384,6 @@ public class MainPageTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedMainPageTest_005")
   @Execute(onWikia = MercuryWikis.MERCURY_NTAV_CC)
-  @Flaky
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
     init();
 
