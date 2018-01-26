@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -36,6 +37,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
+  @Flaky
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();
@@ -63,6 +65,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
+  @Flaky
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
@@ -104,9 +107,11 @@ public class EditorTests extends NewTestTemplate {
 
     Assertion.assertNumber(new CuratedContentPageObject().getCuratedContentItemsNumber(), 1,
         "If error says that 3 elements were found - it means getList API returned cached response - ticket created: XW-1281");
+    Assertion.assertTrue(false);
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
+  @Flaky
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();
@@ -128,5 +133,6 @@ public class EditorTests extends NewTestTemplate {
 
     PageObjectLogging.log("Curated Content", MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedContentVisible());
+    Assertion.assertTrue(false);
   }
 }

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -63,6 +64,7 @@ public class MainPageTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
+  @Flaky
   @RelatedIssue(issueID = "XW-1739", comment = "if this tests fails just edit any article on mercurycc.wikia.com and wait 24h")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
@@ -173,6 +175,7 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_002")
+  @Flaky
   @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC)
   public void MercuryCuratedMainPageTest_002_CheckElementsInvisibility() {
     init();
@@ -231,6 +234,7 @@ public class MainPageTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedMainPageTest_003")
   @Execute(onWikia = MercuryWikis.MERCURY_NTA_CC)
+  @Flaky
   public void MercuryCuratedMainPageTest_003_CheckElementsForNoTrendingArticles() {
     init();
 
@@ -311,6 +315,7 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_004")
+  @Flaky
   @Execute(onWikia = MercuryWikis.MERCURY_NTV_CC)
   public void MercuryCuratedMainPageTest_004_CheckElementsVisibilityExceptTrendingVideos() {
     init();
@@ -373,10 +378,13 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.VISIBLE_MSG,
         result
     );
+
+    Assertion.assertTrue(false);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_005")
   @Execute(onWikia = MercuryWikis.MERCURY_NTAV_CC)
+  @Flaky
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
     init();
 
@@ -454,5 +462,7 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.VISIBLE_MSG,
         result
     );
+
+    Assertion.assertTrue(false);
   }
 }

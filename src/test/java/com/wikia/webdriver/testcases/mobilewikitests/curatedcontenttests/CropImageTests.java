@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -51,6 +52,7 @@ public class CropImageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCropImageTest_001")
+  @Flaky
   public void MercuryCropImageTest_001_cropOptionInModal() {
     init();
 

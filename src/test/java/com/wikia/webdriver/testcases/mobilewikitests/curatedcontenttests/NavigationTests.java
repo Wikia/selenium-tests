@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -36,6 +37,7 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_001")
+  @Flaky
   public void mercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 
@@ -48,6 +50,7 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_002")
+  @Flaky
   public void mercuryCuratedNavigationTest_002_navigateThroughSection() {
     init();
 
@@ -63,9 +66,12 @@ public class NavigationTests extends NewTestTemplate {
 
     UrlChecker.isPathContainedInCurrentUrl(
         driver, MercurySubpages.CC_MAIN_PAGE);
+
+    Assertion.assertTrue(false);
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")
+  @Flaky
   public void mercuryCuratedNavigationTest_003_redirectToExistingArticle() {
     init();
 

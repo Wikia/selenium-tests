@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.Flaky;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -48,6 +49,7 @@ public class ImageUploadTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryImageUploadTest_001")
+  @Flaky
   public void MercuryImageUploadTest_001_saveNewPhoto() {
     init();
 
