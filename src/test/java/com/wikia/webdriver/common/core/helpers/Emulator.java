@@ -34,6 +34,7 @@ public enum Emulator {
       .build(),
     "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Mobile Safari/537.36"
   ),
+  // NEXUS_5X_WITHOUT_TOUCH is a hack due to touch event issues, more: https://wikia-inc.atlassian.net/browse/ADEN-6264
   NEXUS_5X_WITHOUT_TOUCH(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 412)
