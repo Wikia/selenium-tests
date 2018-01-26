@@ -61,7 +61,7 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH
   )
   @NetworkTrafficDump(useMITM = true)
   @Test(
