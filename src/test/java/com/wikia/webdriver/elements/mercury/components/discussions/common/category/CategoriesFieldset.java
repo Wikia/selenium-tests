@@ -149,7 +149,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
    */
   public boolean canEditAllCategory() {
     return !isMobile() && !editableCategoryAll
-      .findElement(By.className("fancy-checkbox-span"))
+      .findElement(By.className("fancy-check-box-span"))
       .getAttribute("class")
       .contains("disabled");
   }
