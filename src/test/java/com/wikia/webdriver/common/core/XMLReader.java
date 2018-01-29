@@ -1,9 +1,8 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.configuration.XMLConfiguration;
 
 import java.io.File;
@@ -21,13 +20,17 @@ public class XMLReader {
    */
   public static String getValue(File file, String key) {
 
-    try {
-      XMLConfiguration xml = new XMLConfiguration(file);
-      return xml.getString(key);
-    } catch (ConfigurationException e) {
-      PageObjectLogging.log("Error while reading XML config", e, false);
+    if (!file.exists() || file.isDirectory()) {
+      RuntimeException e = new ConfigurationRuntimeException("Cannot find a file with credentials");
+      throw e;
+    }
 
-      return e.getMessage();
+    try {
+      XMLConfiguration xml = new XMLConfiguration(file + "sad");
+      String test = xml.getString(key);
+      return test;
+    } catch (ConfigurationException e) {
+      throw new ConfigurationRuntimeException("Error while reading XML config");
     }
   }
 
