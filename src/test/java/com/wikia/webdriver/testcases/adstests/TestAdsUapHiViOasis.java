@@ -38,11 +38,14 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   }
 
   @Test
-  public void shouldHaveCorrectAspectRatioForResolvedState() {
+  public void shouldHaveCorrectAspectRatioForResolvedState() throws InterruptedException {
     AdsBaseObject page = new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
     HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
     page.refreshPage();
+
+    page.waitForPageLoaded();
+    hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
 
     assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), RESOLVED_STATE_ASPECT_RATIO);
@@ -203,19 +206,19 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
     assertAspectRatio(slot.getSize(), IMPACT_STATE_ASPECT_RATIO);
 
     page.refreshPage();
+    hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
     slot = driver.findElement(TLB_SELECTOR);
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
 
     page.refreshPage();
+    hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
     slot = driver.findElement(TLB_SELECTOR);
     assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
-  @Test(
-      groups = {"fixme"}
-  )
+  @Test
   public void shouldBeFullscreenAfterClickOnIcon() {
     new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
     HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
@@ -236,18 +239,21 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
     hiViUap.waitForAdLoaded();
 
     page.refreshPage();
+    hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
 
     hiViUap.waitForVideoStart();
   }
 
+  @Test
   public void shouldMuteAutoplayedVideoOnResolvedState() throws InterruptedException {
     AdsBaseObject page = new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
     HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
 
     page.refreshPage();
-    page.waitForPageLoad();
+    hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
+    hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
 
     TimeUnit.SECONDS.sleep(3);
