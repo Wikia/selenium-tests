@@ -97,8 +97,9 @@ public class CreatingReplyTests extends NewTestTemplate {
     String text = TextGenerator.createUniqueText();
     replyCreator.startReplyCreationWith(text).clickSubmitButton();
     page.getReplies().waitForReplyToAppearWith(text).refreshPage();
-    Assertion.assertFalse(page.getReplies().isEmpty(), REPLY_ADDED_MESSAGE);
-    Assertion.assertTrue(page.isPostFollowed(), POST_FOLLOWED_BY_DEFAULT);
+    PostDetailsPage pageAfterRefresh = new PostDetailsPage();
+    Assertion.assertFalse(pageAfterRefresh.getReplies().isEmpty(), REPLY_ADDED_MESSAGE);
+    Assertion.assertTrue(pageAfterRefresh.isPostFollowed(), POST_FOLLOWED_BY_DEFAULT);
   }
 
 }
