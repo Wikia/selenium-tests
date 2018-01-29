@@ -24,6 +24,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomDesktop"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
@@ -51,8 +53,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestFloorAdhesion"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaMercury"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
