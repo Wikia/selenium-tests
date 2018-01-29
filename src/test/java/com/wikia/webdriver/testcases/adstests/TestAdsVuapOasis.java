@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -11,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.TimeUnit;
 
 @Test(groups = "AdsVuapOasis")
@@ -18,6 +22,10 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
   private static final String FANDOM_ARTICLE_WESTWORLD_LINK = "http://adeng.fandom.wikia.com/articles/whats-coming-westworld-finale";
   private static final String AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
+  private static final String[] TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS = {
+    "InstantGlobals.wgAdDriverAdProductsBridgeMobileCountries=[XX]",
+    "InstantGlobals.wgAdDriverAdProductsBridgeCountries=[XX]"
+  };
 
   @Test(
     groups = {"AdsVuapDefaultState"},
@@ -25,7 +33,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
@@ -60,7 +68,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.clickOnArea(2);
 
     final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(actual.equals(AD_REDIRECT_URL), "Image should point to page on project43.");
+    Assert.assertEquals(actual, AD_REDIRECT_URL, "Image should point to page on project43.");
   }
 
   @Test(groups = {"AdsVuapDefaultState"},
@@ -169,10 +177,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_DURATION);
     vuap.clickOnArea(2);
 
-    Assert.assertTrue(
-        ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),
-        "Image should point to page on project43."
-    );
+    Assert.assertEquals(ads.switchToNewBrowserTab(), AD_REDIRECT_URL, "Image should point to page on project43.");
   }
 
   @Test(
@@ -245,10 +250,10 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
-      groups = {"AdsVuapClickToPlaySizes"}
+      groups = {"AdsVuapClickToPlayDesktop"}
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
@@ -258,5 +263,63 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     double videoAdHeight = vuap.getVideoHeightWhilePaused();
 
     VuapAssertions.verifyVideoAdSize(vuap, videoAdHeight, adSlotHeight, MAX_AUTOPLAY_MOVIE_DURATION);
+  }
+
+  @InBrowser(browserSize = "1024x768")
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapClickToPlayDesktop",
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(Page page, String slot) {
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    ads.scrollToSlot(slot);
+
+    vuap.clickOnArea(2);
+
+    VuapAssertions.verifyVideoPlay(vuap);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void ABCDShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+    final String adUnit = "/5441/wka1a.VIDEO/abcd/desktop/oasis-article/_project43-life";
+    checkRequestForAdUnit(AdsDataProvider.UAP_ABCD_PAGE, adUnit);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void HiViATFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+    final String adUnit = "/5441/wka1a.VIDEO/uap_bfaa/desktop/oasis-article/_project43-life";
+    checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE, adUnit);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = {"AdsVuapClickToPlayDesktop"}
+  )
+  public void HiViBTFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
+    final String adUnit = "/5441/wka1a.VIDEO/uap_bfab/desktop/oasis-article/_project43-life";
+    checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE, adUnit, new String[]{AdsContent.BOTTOM_LB});
+  }
+
+  private void checkRequestForAdUnit(Page page, String adUnit, String[] slotsToTrigger) throws UnsupportedEncodingException {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS));
+
+    for (String slotName : slotsToTrigger) {
+      ads.triggerAdSlot(slotName);
+    }
+
+    ads.waitForVASTRequestWithAdUnit(networkTrafficInterceptor, adUnit);
+  }
+
+  private void checkRequestForAdUnit(Page page, String adUnit) throws UnsupportedEncodingException {
+    checkRequestForAdUnit(page, adUnit, new String[]{});
   }
 }

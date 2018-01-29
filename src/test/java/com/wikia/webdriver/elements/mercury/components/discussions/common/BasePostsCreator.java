@@ -35,6 +35,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getImageDeleteButton();
+  protected abstract WebElement getOpenGraphDeleteButton();
   protected abstract By getOpenGraphContainer();
   protected abstract By getOpenGraphText();
 
@@ -106,14 +107,20 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator addDescriptionWithLink(final URL url) {
-    getDescriptionTextarea().sendKeys(String.format(" %s ", url.toString()));
+  public PostsCreator addDescriptionWithLink(final String url) {
+    getDescriptionTextarea().sendKeys(String.format(" %s ", url));
     return this;
   }
 
   @Override
   public PostsCreator clearDescription() {
     getDescriptionTextarea().clear();
+    return this;
+  }
+
+  @Override
+  public PostsCreator clearOpenGraph() {
+    getOpenGraphDeleteButton().click();
     return this;
   }
 
@@ -144,13 +151,18 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return startPostCreationWith(TextGenerator.defaultText());
   }
 
-  public BasePostsCreator startPostCreationWith(String description) {
+  public BasePostsCreator startPostCreationWithoutDescription() {
     click()
-      .closeGuidelinesMessage()
-      .addTitleWith(TextGenerator.defaultText())
-      .addDescriptionWith(description)
-      .clickAddCategoryButton()
-      .selectFirstCategory();
+        .closeGuidelinesMessage()
+        .addTitleWith(TextGenerator.defaultText())
+        .clickAddCategoryButton()
+        .selectFirstCategory();
+    return this;
+  }
+
+  public BasePostsCreator startPostCreationWith(String description) {
+    startPostCreationWithoutDescription()
+        .addDescriptionWith(description);
     return this;
   }
 

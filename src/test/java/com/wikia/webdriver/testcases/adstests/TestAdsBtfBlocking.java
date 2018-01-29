@@ -5,8 +5,8 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
@@ -17,15 +17,15 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
   private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
+  private static final Page PAGE_DISABLE_BTF = new Page("project43", "SyntheticTests/Disable_BTF");
+  private static final Page PAGE_DISABLE_BTF_HIVI = new Page("project43", "SyntheticTests/Disable_BTF/Unblock_HIVI");
+  private static final Page PAGE_DELAY_BTF = new Page("project43", "SyntheticTests/Delay_BTF");
 
   @Test(
       groups = "AdsBtfBlockingOasis"
   )
   public void adsAtfDelayBtfOasis() {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
-
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Delay_BTF");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DELAY_BTF.getUrl(), DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
@@ -38,10 +38,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       groups = "AdsBtfBlockingOasis"
   )
   public void adsAtfDisableBtfOasis() {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
-
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DISABLE_BTF.getUrl(), DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), "Slot" + AdsContent.MEDREC);
@@ -59,10 +56,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class
   )
   public void adsAtfOnTabletOasis() {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
-
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DISABLE_BTF.getUrl(), TABLET_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
@@ -73,10 +67,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       groups = "AdsBtfBlockingOasis"
   )
   public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis() {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
-
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF/Unblock_HIVI");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DISABLE_BTF_HIVI.getUrl(), DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
     adsBaseObject.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
 
@@ -95,16 +86,11 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       groups = "AdsBtfBlockingMercury"
   )
   public void adsAtfDelayBtfMercury() {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
-
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Delay_BTF");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DELAY_BTF.getUrl(), MOBILE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
-                         AdsContent.MOBILE_AD_IN_CONTENT);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER),
-                         AdsContent.MOBILE_PREFOOTER);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT), AdsContent.MOBILE_AD_IN_CONTENT);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER), AdsContent.MOBILE_PREFOOTER);
   }
 
   @InBrowser(
@@ -115,20 +101,11 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       groups = "AdsBtfBlockingMercury"
   )
   public void adsAtfDisableBtfMercury() {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
-
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DISABLE_BTF.getUrl(), MOBILE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
-    Assertion.assertTrue(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
-        AdsContent.MOBILE_TOP_LB);
-    Assertion.assertTrue(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
-        AdsContent.MOBILE_AD_IN_CONTENT);
-    Assertion.assertTrue(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER),
-        AdsContent.MOBILE_PREFOOTER);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER));
   }
 }

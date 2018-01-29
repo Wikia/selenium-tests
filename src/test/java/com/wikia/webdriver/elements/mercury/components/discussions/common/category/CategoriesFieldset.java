@@ -2,12 +2,15 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common.categ
 import com.google.common.collect.Iterables;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +21,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
   private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
   private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
   private static final String DELETE_COMMAND = "action-delete";
+  private static final String MOVE_COMMAND = "action-move";
+  private static final int CATEGORY_INPUT_HEIGHT_PX = 31;
 
   private static final String CATEGORY_NOT_FOUND = "Could not find category!";
 
@@ -103,7 +108,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return categoryList.indexOf(category);
   }
 
-  private int getCategoryPosition(final String categoryName) {
+  public int getCategoryPosition(final String categoryName) {
     return getCategoryPosition(this.categories, categoryName);
   }
 
@@ -240,4 +245,25 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return this;
   }
 
+  public void reorderCategory(String categoryName, int offset) {
+    final WebElement element = findEditableCategoryWith(categoryName);
+
+    if (null != element) {
+      WebElement dragElement = element.findElement(By.className(MOVE_COMMAND));
+
+      builder.moveToElement(element)
+          .clickAndHold(dragElement)
+          .perform();
+
+      // The first move doesn't work properly so do a no-op
+      builder
+          .moveByOffset(0, 0)
+          .moveByOffset(0, offset * CATEGORY_INPUT_HEIGHT_PX)
+          .perform();
+
+      wait.forX(Duration.ofMillis(100));
+
+      builder.release().perform();
+    }
+  }
 }

@@ -80,7 +80,7 @@ public class NavigationMercuryTests extends NavigationTests {
         .open()
         .getTopBar()
         .openNavigation()
-        .clickExploreWikiHeader(Skin.DISCUSSIONS);
+        .clickExploreWikiHeader(Skin.MOBILE_WIKI);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }

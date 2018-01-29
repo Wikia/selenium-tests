@@ -164,6 +164,10 @@ public class Configuration {
   }
 
   public static String useMITM() {
+    if (getForceHttps()) {
+      return "true";
+    }
+
     return getProp("useMITM");
   }
 
@@ -184,12 +188,13 @@ public class Configuration {
   }
 
   public static EnvType getEnvType(String env) {
+    String[] sandboxEnvs = new String[]{"verify", "preview", "sandbox", "stable", "adeng"};
+
     if (env.contains("prod")) {
       return EnvType.PROD;
     } else if (env.contains("staging")) {
       return EnvType.STAGING;
-    } else if (env.contains("verify") || env.contains("preview") || env.contains("sandbox")
-        || env.contains("stable")) {
+    } else if (StringUtils.indexOfAny(env, sandboxEnvs) != -1) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {
       return EnvType.DEV;
@@ -211,7 +216,7 @@ public class Configuration {
 
   public static boolean useProxy() {
     return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode())
-        || Boolean.valueOf(getProp("useZapProxy"));
+        || Boolean.valueOf(getProp("useZapProxy")) || getForceHttps();
   }
 
   /**

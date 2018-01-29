@@ -21,6 +21,7 @@ public class RenamePageObject extends ArticlePageObject {
   }
 
   public ArticlePageObject rename(String newName, boolean leaveRedirect) {
+    wait.forElementClickable(newNameInput);
     newNameInput.clear();
     newNameInput.sendKeys(newName);
     if (leaveRedirect) {

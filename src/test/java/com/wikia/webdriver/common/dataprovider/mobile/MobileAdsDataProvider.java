@@ -535,11 +535,11 @@ public class MobileAdsDataProvider {
   public static Object[][] adsVuapClickToPlayMobile() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.MOBILE_TOP_LB
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.MOBILE_BOTTOM_LB
         }
     };
@@ -549,11 +549,11 @@ public class MobileAdsDataProvider {
   public static Object[][] adsVuapMobile() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.MOBILE_TOP_LB
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.MOBILE_BOTTOM_LB
         }
     };
