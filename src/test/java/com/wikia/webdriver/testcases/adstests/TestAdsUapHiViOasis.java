@@ -262,6 +262,27 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
     Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
   }
 
+  @Test
+  public void shouldNotAutoplayVideoForClickToPlay() throws InterruptedException {
+    new AdsBaseObject(driver, AdsDataProvider.UAP_CTP_HIVI_PAGE.getUrl());
+    HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
+    hiViUap.waitForAdLoaded();
+
+    Assertion.assertFalse(hiViUap.isVideoElementVisible(), "Video started automatically");
+  }
+
+  @Test
+  public void shouldPlayVideoWithSoundForClickToPlay() throws InterruptedException {
+    new AdsBaseObject(driver, AdsDataProvider.UAP_CTP_HIVI_PAGE.getUrl());
+    HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
+    hiViUap.waitForAdLoaded();
+
+    hiViUap.clickReplayButton();
+    hiViUap.waitForVideoStart();
+    TimeUnit.SECONDS.sleep(3);
+    Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+  }
+
   private void assertAspectRatio(Dimension size, double expected) {
     final double actual = (double) size.getWidth() / (double) size.getHeight();
     // Some divergent is possible because of browser size rounding

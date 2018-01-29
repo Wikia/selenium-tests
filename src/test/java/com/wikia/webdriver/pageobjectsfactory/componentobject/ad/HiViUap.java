@@ -99,6 +99,10 @@ public class HiViUap {
     return driver.findElement(mobileVideoElement).getSize().width;
   }
 
+  public boolean isVideoElementVisible() {
+    return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).isDisplayed());
+  }
+
   public double getProgressBarWidth() {
     return driver.findElement(progressBar).getSize().getWidth();
   }
