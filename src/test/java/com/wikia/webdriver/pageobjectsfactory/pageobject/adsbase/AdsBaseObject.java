@@ -893,4 +893,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     final String PATTERN = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
     wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN);
   }
+
+  public void scrollBy(int x, int y) {
+    jsActions.scrollBy(x, y);
+  }
 }
