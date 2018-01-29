@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -54,7 +55,7 @@ public class HiViUap {
     iframeRunner.usingIframe(adIframe, () -> wait.forElementVisible(replayButton, 60));
   }
 
-  private void enableVideoToolbar() {
+  public void enableVideoToolbar() {
     WebElement videoPlayerElement = wait.forElementVisible(this.videoPlayer);
     Actions builder = new Actions(driver);
     builder.moveToElement(videoPlayerElement).perform();
@@ -108,6 +109,13 @@ public class HiViUap {
 
   public void clickAd() {
     iframeRunner.usingIframe(adIframe, () -> wait.forElementClickable(By.id("adContainer")).click());
+  }
+
+  public void waitForAdLoaded() {
+    iframeRunner.usingIframe(adIframe, () -> {
+      JavascriptActions jsActions = new JavascriptActions(driver);
+      jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
+    });
   }
 
   public void clickLearnMore() {
