@@ -98,6 +98,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     replyCreator.startReplyCreationWith(text).clickSubmitButton();
     page.getReplies().waitForReplyToAppearWith(text).refreshPage();
     PostDetailsPage pageAfterRefresh = new PostDetailsPage();
+    pageAfterRefresh.waitForPageReload();
     Assertion.assertFalse(pageAfterRefresh.getReplies().isEmpty(), REPLY_ADDED_MESSAGE);
     Assertion.assertTrue(pageAfterRefresh.isPostFollowed(), POST_FOLLOWED_BY_DEFAULT);
   }
