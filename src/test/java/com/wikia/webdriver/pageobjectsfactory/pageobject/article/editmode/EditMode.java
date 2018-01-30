@@ -38,10 +38,10 @@ public class EditMode extends WikiBasePageObject {
   @FindBy(css = "a.RTESliderButton")
   private WebElement sliderButton;
 
-  @FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
+  @FindBy(css = "a.cke_button_ModeWysiwyg > span.cke_button_label")
   private WebElement visualButton;
 
-  @FindBy(css = "a.cke_button_ModeSource > span.cke_label")
+  @FindBy(css = "a.cke_button_ModeSource > span.cke_button_label")
   private WebElement sourceButton;
 
   @FindBy(css = "a.cke_off.cke_button_table")
@@ -137,6 +137,12 @@ public class EditMode extends WikiBasePageObject {
     scrollAndClick(galleryButton);
     PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);
     return new GalleryBuilderComponentObject(driver);
+  }
+
+  public VisualEditModePageObject clickVisualButton() {
+    visualButton.click();
+    PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject clickSourceButton() {
