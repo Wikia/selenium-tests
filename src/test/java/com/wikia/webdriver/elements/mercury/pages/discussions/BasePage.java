@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
