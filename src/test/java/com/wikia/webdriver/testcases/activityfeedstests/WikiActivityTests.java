@@ -76,6 +76,7 @@ public class WikiActivityTests extends NewTestTemplate {
       String.format("Activity for new category for article with title %s was not found", articleName));
   }
 
+  @RelatedIssue(issueID = "IRIS-5502")
   public void articleEditWithoutVisualChangeIsNotRecordedInWikiActivity() {
     ArticlePageObject article = createArticle();
     String articleName = editArticleWithContentAndGetTitle(article, article.getContent());
