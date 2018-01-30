@@ -38,7 +38,7 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   }
 
   @Test
-  public void shouldHaveCorrectAspectRatioForResolvedState() throws InterruptedException {
+  public void shouldHaveCorrectAspectRatioForResolvedState() {
     AdsBaseObject page = new AdsBaseObject(driver, AdsDataProvider.UAP_HIVI_PAGE.getUrl());
     HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();
@@ -263,7 +263,7 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   }
 
   @Test
-  public void shouldNotAutoplayVideoForClickToPlay() throws InterruptedException {
+  public void shouldNotAutoplayVideoForClickToPlay() {
     new AdsBaseObject(driver, AdsDataProvider.UAP_CTP_HIVI_PAGE.getUrl());
     HiViUap hiViUap = new HiViUap(driver, AdsContent.TOP_LB);
     hiViUap.waitForAdLoaded();

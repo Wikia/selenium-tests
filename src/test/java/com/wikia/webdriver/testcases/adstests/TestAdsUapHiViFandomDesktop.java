@@ -1,143 +1,140 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AssertionAds;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiViUap;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
 @Test(
   groups = {"AdsUapHiViFandomDesktop"}
 )
 public class TestAdsUapHiViFandomDesktop extends AdsFandomTestTemplate {
-
-  private static final double DEFAULT_STATE_ASPECT_RATIO = 4.0;
+  private static final double IMPACT_STATE_ASPECT_RATIO = 4.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
-  private static final double MOBILE_VIDEO_ASPECT_RATIO = 272.0 / 153.0;
   private static final String TLB_SLOT_ID = "gpt-top-leaderboard";
   private static final By TLB_SELECTOR = By.id(TLB_SLOT_ID);
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
+  private AdsBaseObject openPage() {
+    return loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+  }
+
   @Test
   public void shouldHaveCorrectAspectRatioForImpactState() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
 
-    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), DEFAULT_STATE_ASPECT_RATIO);
-  }
-
-  @InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test
-  public void TLBShouldHaveVideoAspectRatioOnMobile() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-
-    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), MOBILE_VIDEO_ASPECT_RATIO);
+    AssertionAds.assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), IMPACT_STATE_ASPECT_RATIO);
   }
 
   @Test
-  public void TLBShouldHaveResolvedStateAspectRatioOnSecondPageView() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-    fandomPage.refreshPage();
-    fandomPage.waitForPageLoad();
+  public void shouldHaveCorrectAspectRatioForResolvedState() {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    page.refreshPage();
 
-    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), RESOLVED_STATE_ASPECT_RATIO);
+    page.waitForPageLoaded();
+    hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
+    AssertionAds.assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
   @Test
-  public void TLBShouldHaveResolvedStateAspectRatioAfterScroll() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
+  public void shouldHaveResolvedStateAfterScroll() throws InterruptedException {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(TLB_SELECTOR);
+
     int defaultStateHeight = slot.getSize().getHeight();
     int scrollBy = 50;
 
-    assertAspectRatio(slot.getSize(), DEFAULT_STATE_ASPECT_RATIO);
+    AssertionAds.assertAspectRatio(slot.getSize(), IMPACT_STATE_ASPECT_RATIO);
 
-    fandomPage.scrollBy(0, scrollBy);
+    page.scrollBy(0, scrollBy);
+    TimeUnit.SECONDS.sleep(1);
     Assertion.assertEquals(slot.getSize().getHeight(), defaultStateHeight - scrollBy);
 
-    fandomPage.scrollBy(0, 500);
-    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+    page.scrollBy(0, defaultStateHeight);
+    TimeUnit.SECONDS.sleep(1);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
   @Test
-  public void TLBShouldKeepResolvedStateAspectRatioAfterScroll() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-    fandomPage.refreshPage();
-    fandomPage.waitForPageLoad();
+  public void shouldKeepResolvedStateAspectRatioAfterScroll() throws InterruptedException {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    page.refreshPage();
+    hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(TLB_SELECTOR);
 
-    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+    int defaultStateHeight = slot.getSize().getHeight();
 
-    fandomPage.scrollBy(0, 500);
-    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+
+    page.scrollBy(0, defaultStateHeight);
+    TimeUnit.SECONDS.sleep(1);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+
+    page.scrollBy(0, -defaultStateHeight);
+    TimeUnit.SECONDS.sleep(1);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
   }
 
   @Test
-  public void TLBShouldDisplayResolvedStateAfterVideoEnds() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-    WebElement slot = driver.findElement(TLB_SELECTOR);
-
+  public void shouldAutoplayVideoForImpactState() {
+    openPage();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
-    hiViUap.waitForVideoEnd();
-
-    assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
-  }
-
-  @Test
-  public void TLBVideoClickedOpensNewPage() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
-    hiViUap.clickVideo();
-
-    Assert.assertTrue(fandomPage.tabContainsUrl(AD_REDIRECT));
-  }
-
-  @Test
-  public void TLBVideoPauses() throws Exception {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
-
+    hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
-    TimeUnit.SECONDS.sleep(2);
-    hiViUap.togglePause();
-    double time = hiViUap.getCurrentTime();
+  }
 
+  @Test
+  public void shouldProgressTimeWhilePlaying() throws InterruptedException {
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    hiViUap.waitForVideoStart();
+
+    final double startProgressBarWidth = hiViUap.getProgressBarWidth();
     TimeUnit.SECONDS.sleep(3);
 
-    Assert.assertNotEquals(0, hiViUap.getCurrentTime(), "Video did not start");
-    Assert.assertEquals(time, hiViUap.getCurrentTime(), "Video did not togglePause");
+    Assert.assertTrue(startProgressBarWidth < hiViUap.getProgressBarWidth(), "Video time indicator should move.");
   }
 
   @Test
-  public void TLBVideoPlaysSound() throws Exception {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
+  public void shouldMuteVideoForAutoplayedImpactState() throws InterruptedException {
+    openPage();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    hiViUap.waitForVideoStart();
+
+    TimeUnit.SECONDS.sleep(3);
+    Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+    TimeUnit.SECONDS.sleep(3);
+    Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+  }
+
+  @Test
+  public void shouldUnmuteVideoAfterClickOnIcon() throws InterruptedException {
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
 
     hiViUap.waitForVideoStart();
     hiViUap.toggleSound();
@@ -147,25 +144,144 @@ public class TestAdsUapHiViFandomDesktop extends AdsFandomTestTemplate {
   }
 
   @Test
-  public void videoShouldBeFullscreenAfterClickOnIcon() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
+  public void shouldPlayUnmutedVideoForReplayedAd() throws InterruptedException {
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
 
-    HiViUap hiViUap = new HiViUap(driver, "gpt-top-leaderboard");
+    hiViUap.waitForVideoEnd();
+    hiViUap.clickReplayButton();
+    TimeUnit.SECONDS.sleep(3);
+
+    Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+  }
+
+  @Test
+  public void shouldRedirectToPageAfterClickOnAd() {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    page.refreshPage();
+    hiViUap.waitForAdLoaded();
+    hiViUap.clickAd();
+    page.waitForPageLoaded();
+
+    Assert.assertTrue(page.tabContainsUrl(AD_REDIRECT));
+  }
+
+  @Test
+  public void shouldPauseOnVideoAfterClickOnPauseIcon() throws InterruptedException {
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
     hiViUap.waitForVideoStart();
-    hiViUap.clickFullscreenIcon();
-    Dimension windowSize = driver.manage().window().getSize();
+    TimeUnit.SECONDS.sleep(2);
+    hiViUap.enableVideoToolbar();
+    hiViUap.togglePause();
 
+    final double startProgressBarWidth = hiViUap.getProgressBarWidth();
+    TimeUnit.SECONDS.sleep(3);
+
+    Assert.assertTrue(hiViUap.getProgressBarWidth() > 0, "Video did not start");
+    Assert.assertEquals(startProgressBarWidth, hiViUap.getProgressBarWidth(), "Video did not togglePause");
+  }
+
+  @Test
+  public void shouldBeResolvedStateAfterVideoEnds() {
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    hiViUap.waitForVideoEnd();
+
+    WebElement slot = driver.findElement(TLB_SELECTOR);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+  }
+
+  @Test
+  public void shouldDisplayResolvedStateOnNextPageView() {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+
+    hiViUap.waitForAdLoaded();
+    WebElement slot = driver.findElement(TLB_SELECTOR);
+    AssertionAds.assertAspectRatio(slot.getSize(), IMPACT_STATE_ASPECT_RATIO);
+
+    page.refreshPage();
+    hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    slot = driver.findElement(TLB_SELECTOR);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+
+    page.refreshPage();
+    hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    slot = driver.findElement(TLB_SELECTOR);
+    AssertionAds.assertAspectRatio(slot.getSize(), RESOLVED_STATE_ASPECT_RATIO);
+  }
+
+  @Test
+  public void shouldBeFullscreenAfterClickOnIcon() {
+    openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    hiViUap.waitForVideoStart();
+
+    hiViUap.enableVideoToolbar();
+    hiViUap.clickFullscreenIcon();
+
+    Dimension windowSize = driver.findElement(By.cssSelector("body")).getSize();
     Assertion.assertEquals(hiViUap.getVideoWidth(), windowSize.width);
   }
 
-  private void assertAspectRatio(Dimension size, double expected) {
-    final double actual = (double) size.getWidth() / (double) size.getHeight();
-    // Some divergent is possible because of browser size rounding
-    Assertion.assertEquals(roundAspectRatio(actual), roundAspectRatio(expected), 0.03, "Aspect ratios are divergent");
+  @Test
+  public void shouldAutoplayVideoForResolvedState() {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
+    page.refreshPage();
+    hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
+    hiViUap.waitForVideoStart();
   }
 
-  private double roundAspectRatio(double aspectRatio) {
-    return new BigDecimal(aspectRatio).setScale(2, RoundingMode.HALF_UP).doubleValue();
+  @Test
+  public void shouldMuteAutoplayedVideoOnResolvedState() throws InterruptedException {
+    AdsBaseObject page = openPage();
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
+    page.refreshPage();
+    hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+    hiViUap.waitForVideoStart();
+
+    TimeUnit.SECONDS.sleep(3);
+    Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+    TimeUnit.SECONDS.sleep(3);
+    Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+  }
+
+  @Test
+  public void shouldNotAutoplayVideoForClickToPlay() {
+    loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_CTP);
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
+    Assertion.assertFalse(hiViUap.isVideoElementVisible(), "Video started automatically");
+  }
+
+  @Test
+  public void shouldPlayVideoWithSoundForClickToPlay() throws InterruptedException {
+    loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_CTP);
+    HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
+    hiViUap.waitForAdLoaded();
+
+    hiViUap.clickReplayButton();
+    hiViUap.waitForVideoStart();
+    TimeUnit.SECONDS.sleep(3);
+    Assertion.assertTrue(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
   }
 }
