@@ -829,6 +829,22 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToElement(By.id(slotName));
   }
 
+  public void scrollBy(int x, int y) {
+    jsActions.scrollBy(x, y);
+  }
+
+  public void scrollTo(By selector) {
+    jsActions.scrollToElement(selector);
+  }
+
+  public void scrollTo(WebElement element) {
+    jsActions.scrollToElement(element);
+  }
+
+  public void scrollTo(String cssSelector) {
+    scrollTo(By.cssSelector(cssSelector));
+  }
+
   public void fixScrollPositionByNavbar() {
     int navbarHeight = -1 * driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight();
 
@@ -892,9 +908,5 @@ public class AdsBaseObject extends WikiBasePageObject {
     final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
     final String PATTERN = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
     wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN);
-  }
-
-  public void scrollBy(int x, int y) {
-    jsActions.scrollBy(x, y);
   }
 }
