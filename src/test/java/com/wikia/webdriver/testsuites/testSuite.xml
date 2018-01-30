@@ -27,6 +27,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomDesktop"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViMobileWiki"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>

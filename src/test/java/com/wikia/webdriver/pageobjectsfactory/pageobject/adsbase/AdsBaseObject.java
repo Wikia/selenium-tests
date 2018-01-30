@@ -815,6 +815,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     waitTitleChangesTo(linkName);
   }
 
+  public void scrollBy(int x, int y) {
+    jsActions.scrollBy(x, y);
+  }
+
   public void scrollToPosition(By element) {
     jsActions.scrollToSpecificElement(driver.findElement(element));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);

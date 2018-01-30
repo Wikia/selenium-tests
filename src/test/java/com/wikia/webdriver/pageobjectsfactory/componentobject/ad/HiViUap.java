@@ -57,7 +57,7 @@ public class HiViUap {
     iframeRunner.usingIframe(adIframe, () -> wait.forElementVisible(replayButton, 60));
   }
 
-  private void enableVideoToolbar() {
+  public void enableVideoToolbar() {
     WebElement videoPlayerElement = wait.forElementVisible(this.videoPlayer);
     Actions builder = new Actions(driver);
     builder.moveToElement(videoPlayerElement).perform();
@@ -105,6 +105,10 @@ public class HiViUap {
     return driver.findElement(mobileVideoElement).isDisplayed();
   }
 
+  public boolean isVideoElementVisible() {
+    return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).isDisplayed());
+  }
+
   public double getProgressBarWidth() {
     return driver.findElement(progressBar).getSize().getWidth();
   }
@@ -118,13 +122,15 @@ public class HiViUap {
   }
 
   public WebElement waitForAdLoaded() {
+    return driver.findElement(slotSelector);
+  }
+
+  public void waitForAdLoaded() {
     iframeRunner.usingIframe(adIframe, () -> {
       JavascriptActions jsActions = new JavascriptActions(driver);
       jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
       wait.forElementVisible(By.id("adContainer"));
     });
-
-    return driver.findElement(slotSelector);
   }
 
   public void clickLearnMore() {
