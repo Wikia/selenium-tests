@@ -815,10 +815,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     waitTitleChangesTo(linkName);
   }
 
-  public void scrollBy(int x, int y) {
-    jsActions.scrollBy(x, y);
-  }
-
   public void scrollToPosition(By element) {
     jsActions.scrollToSpecificElement(driver.findElement(element));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);
@@ -831,6 +827,22 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToSlot(String slotName) {
     checkSlotOnPageLoaded(slotName);
     jsActions.scrollToElement(By.id(slotName));
+  }
+
+  public void scrollBy(int x, int y) {
+    jsActions.scrollBy(x, y);
+  }
+
+  public void scrollTo(By selector) {
+    jsActions.scrollToElement(selector);
+  }
+
+  public void scrollTo(WebElement element) {
+    jsActions.scrollToElement(element);
+  }
+
+  public void scrollTo(String cssSelector) {
+    scrollTo(By.cssSelector(cssSelector));
   }
 
   public void fixScrollPositionByNavbar() {
