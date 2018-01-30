@@ -16,6 +16,7 @@ public class HiViUap {
   private By pauseButton;
   private By progressBar;
   private By replayButton;
+  private By slotSelector;
   private By soundButton;
   private By videoClickArea;
   private By videoElement;
@@ -37,6 +38,7 @@ public class HiViUap {
     this.imaIframe = By.cssSelector(slotSelector + ".video-player iframe");
     this.pauseButton = By.cssSelector(slotSelector + ".play-pause-button");
     this.replayButton = By.cssSelector(".replay-overlay");
+    this.slotSelector = By.id(slot);
     this.soundButton = By.cssSelector(slotSelector + ".volume-button");
     this.videoClickArea = By.cssSelector(slotSelector + ".toggle-ui-overlay");
     this.videoElement = By.cssSelector("video");
@@ -99,6 +101,10 @@ public class HiViUap {
     return driver.findElement(mobileVideoElement).getSize().width;
   }
 
+  public boolean isMobileVideoElementVisible() {
+    return driver.findElement(mobileVideoElement).isDisplayed();
+  }
+
   public boolean isVideoElementVisible() {
     return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).isDisplayed());
   }
@@ -115,12 +121,14 @@ public class HiViUap {
     iframeRunner.usingIframe(adIframe, () -> wait.forElementClickable(By.id("adContainer")).click());
   }
 
-  public void waitForAdLoaded() {
+  public WebElement waitForAdLoaded() {
     iframeRunner.usingIframe(adIframe, () -> {
       JavascriptActions jsActions = new JavascriptActions(driver);
       jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
       wait.forElementVisible(By.id("adContainer"));
     });
+
+    return driver.findElement(slotSelector);
   }
 
   public void clickLearnMore() {
