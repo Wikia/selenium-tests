@@ -21,14 +21,14 @@ public class XMLReader {
   public static String getValue(File file, String key) {
 
     if (!file.exists() || file.isDirectory()) {
-      throw new ConfigurationRuntimeException("Cannot find a file with credentials");;
+      throw new ConfigurationRuntimeException("Cannot find a file with credentials");
     }
 
     try {
       XMLConfiguration xml = new XMLConfiguration(file);
       return xml.getString(key);
     } catch (ConfigurationException e) {
-      throw new ConfigurationRuntimeException("Error while reading XML config");
+      throw new ConfigurationRuntimeException(e);
     }
   }
 
