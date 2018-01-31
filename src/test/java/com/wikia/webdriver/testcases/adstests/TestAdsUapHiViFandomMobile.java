@@ -35,17 +35,18 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
   private static final By TLB_SELECTOR = By.id(TLB_SLOT_ID);
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
+  private AdsFandomObject openPage() {
+    return loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+  }
+
   @Test
   public void shouldHaveCorrectAspectRatioForImpactState() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    fandomPage.waitForPageLoad();
-
-    assertAspectRatio(driver.findElement(TLB_SELECTOR).getSize(), IMPACT_STATE_ASPECT_RATIO);
+    (new TestAdsUapHiVi(driver, openPage(), TLB_SLOT_ID)).shouldHaveCorrectAspectRatioForImpactState(IMPACT_STATE_ASPECT_RATIO);
   }
 
   @Test
   public void shouldHaveCorrectAspectRatioForResolvedState() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     fandomPage.refreshPage();
     fandomPage.waitForPageLoad();
@@ -55,7 +56,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldHaveResolvedStateAfterScroll() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     WebElement slot = driver.findElement(TLB_SELECTOR);
     int defaultStateHeight = slot.getSize().getHeight();
@@ -72,7 +73,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldKeepResolvedStateAspectRatioAfterScroll() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     fandomPage.refreshPage();
     fandomPage.waitForPageLoad();
@@ -89,7 +90,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldAutoplayVideoForImpactState() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
     hiViUap.waitForVideoStart();
@@ -97,7 +98,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldProgressTimeWhilePlaying() throws InterruptedException {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
     hiViUap.waitForVideoStart();
@@ -112,7 +113,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldMuteVideoForAutoplayedImpactState() throws InterruptedException {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
     hiViUap.waitForVideoStart();
@@ -125,7 +126,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldUnmuteVideoAfterClickOnIcon() throws InterruptedException {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
 
@@ -139,7 +140,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldPlayUnmutedVideoForReplayedAd() throws InterruptedException {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
 
@@ -152,7 +153,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldRedirectToPageAfterClickOnAd() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     fandomPage.refreshPage();
     fandomPage.waitForPageLoad();
@@ -166,7 +167,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldRedirectAfterClickOnLearnMore() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
     hiViUap.clickLearnMore();
@@ -178,7 +179,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldPauseOnVideoAfterClickOnPauseIcon() throws InterruptedException {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     HiViUap hiViUap = new HiViUap(driver, TLB_SLOT_ID);
 
@@ -196,7 +197,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldBeResolvedStateAfterVideoEnds() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     WebElement slot = driver.findElement(TLB_SELECTOR);
 
@@ -208,7 +209,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldDisplayResolvedStateOnNextPageView() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
     WebElement slot = driver.findElement(TLB_SELECTOR);
 
@@ -227,7 +228,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldBeFullscreenAfterClickOnIcon() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
 
     HiViUap hiViUap = new HiViUap(driver, "gpt-top-leaderboard");
@@ -241,7 +242,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldAutoplayVideoForResolvedState() {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
 
     WebElement slot = driver.findElement(TLB_SELECTOR);
@@ -258,7 +259,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
 
   @Test
   public void shouldMuteAutoplayedVideoOnResolvedState() throws InterruptedException {
-    AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject fandomPage = openPage();
     fandomPage.waitForPageLoad();
 
     fandomPage.refreshPage();
