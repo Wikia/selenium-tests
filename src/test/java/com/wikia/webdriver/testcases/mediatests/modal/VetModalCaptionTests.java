@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -34,6 +35,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 
   @Test(groups = {"VetModalCaption_001"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "XW-4586", comment = "broke after update of CKE")
   public void VetModalCaption_001_modalCaption() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
