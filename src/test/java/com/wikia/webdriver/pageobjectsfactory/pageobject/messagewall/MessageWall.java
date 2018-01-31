@@ -86,6 +86,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
+    wait.forElementClickable(messageMainBody).click();
     new Actions(driver).moveToElement(newWallMessageContainer).perform();
 
     while (!postButton.isDisplayed()) {
