@@ -44,7 +44,7 @@ public class MessageWall extends WikiBasePageObject {
   private static final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
   private static final By replyBodyBy = By.cssSelector(".replyBody");
   private static final By closeButtonBy = By.cssSelector(FIRST_MESSAGE_MENU + CLOSE_BUTTON_STRING);
-  @FindBy(css = ".cke_button_ModeSource > .cke_icon")
+  @FindBy(css = ".cke_button__modesource")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
   private WebElement boldButton;
@@ -52,9 +52,9 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement italicButton;
   @FindBy(css = ".cke_toolbar_insert .RTEImageButton > .cke_icon")
   private WebElement imageButton;
-  @FindBy(css = ".cke_toolbar_formatmini .cke_button_link > .cke_icon")
+  @FindBy(css = ".cke_button__link")
   private WebElement linkButton;
-  @FindBy(css = "#cke_contents_WallMessageBody > textarea")
+  @FindBy(css = "#cke_WallMessageBody textarea")
   private WebElement sourceModeInputField;
   @FindBy(css = "#wall-new-message")
   private WebElement newWallMessageContainer;
@@ -198,7 +198,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickSourceModeButton() {
-    wait.forElementVisible(sourceModeButton);
+    wait.forElementClickable(sourceModeButton);
     scrollAndClick(sourceModeButton);
     wait.forElementVisible(By.cssSelector(".editor-open.mode-source"));
     PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
@@ -209,10 +209,10 @@ public class MessageWall extends WikiBasePageObject {
     wait.forElementClickable(boldButton);
     scrollAndClick(boldButton);
     if (state) {
-      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_bold.cke_off"));
+      wait.forElementPresent(By.cssSelector(".cke_button__bold.cke__button_off"));
       PageObjectLogging.log("clickBoldButton", "italic button is now OFF", true);
     } else {
-      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_bold.cke_on"));
+      wait.forElementPresent(By.cssSelector(".cke_button__bold.cke_button_on"));
       PageObjectLogging.log("clickBoldButton", "italic button is now ON", true);
     }
   }
@@ -222,10 +222,10 @@ public class MessageWall extends WikiBasePageObject {
     wait.forElementClickable(boldButton);
     scrollAndClick(italicButton);
     if (state) {
-      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_italic.cke_off"));
+      wait.forElementPresent(By.cssSelector(".cke_button__italic.cke_button_off"));
       PageObjectLogging.log("clickItalicButton", "italic button is now OFF", true);
     } else {
-      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_italic.cke_on"));
+      wait.forElementPresent(By.cssSelector(".cke_button__italic.cke_button_on"));
       PageObjectLogging.log("clickItalicButton", "italic button is now ON", true);
     }
   }
