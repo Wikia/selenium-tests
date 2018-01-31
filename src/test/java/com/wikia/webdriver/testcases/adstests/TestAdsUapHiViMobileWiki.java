@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AssertionAds;
@@ -34,9 +33,11 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   private AdsBaseObject openPage() {
-    final Page mainPage = new Page("project43", "Project43_Wikia");
-    final AdsBaseObject adsBaseObject = new AdsBaseObject(driver, mainPage.getUrl());
-    adsBaseObject.getUrl(AdsDataProvider.UAP_HIVI_PAGE.getUrl());
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(
+        driver,
+        AdsDataProvider.UAP_HIVI_PAGE.getUrl()
+    );
+
     return adsBaseObject.waitForPageLoaded();
   }
 
