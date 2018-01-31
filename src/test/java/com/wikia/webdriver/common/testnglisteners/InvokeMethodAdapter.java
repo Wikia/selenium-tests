@@ -37,11 +37,8 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
 
   @Override
   public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-    if (method.isTestMethod()) {
-      if (isTestExcludedFromEnv(method.getTestMethod().getConstructorOrMethod().getMethod())) {
+    if (method.isTestMethod() && isTestExcludedFromEnv(method.getTestMethod().getConstructorOrMethod().getMethod())) {
         throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
-
-      }
     }
   }
 
