@@ -26,6 +26,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomDesktop"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViMobileWiki"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
@@ -72,6 +74,7 @@
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleSourceModeTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleTOCTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ModalTests"/>
+            <class name="com.wikia.webdriver.testcases.articlecrudtests.RTETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ConfirmEmailTests"/>
             <class name="com.wikia.webdriver.testcases.auth.FacebookTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ForcedLoginTests"/>
