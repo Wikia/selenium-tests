@@ -58,7 +58,7 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement sourceModeInputField;
   @FindBy(css = "#wall-new-message")
   private WebElement newWallMessageContainer;
-  @FindBy(css = "#WallMessageBody")
+  @FindBy(css = "#cke_WallMessageBody")
   private WebElement messageMainBody;
   @FindBy(css = "#WallMessageTitle")
   private WebElement messageTitleField;
