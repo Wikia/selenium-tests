@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.contentpatterns;
 
+import org.openqa.selenium.By;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +57,12 @@ public class AdsFandomContent {
   private AdsFandomContent() {
   }
 
-  public static String getSlotSelector(String slotName) {
-    return SLOT_SELECTORS.get(slotName);
+  public static String getSlotSelectorString(String slotName) {
+    return "#" + getGptSlotSelector(slotName);
+  }
+
+  public static By getSlotSelector(String slotName) {
+    return By.id(GPT_SLOT_SELECTORS.get(slotName));
   }
 
   public static String getGptSlotSelector(String slotName) {

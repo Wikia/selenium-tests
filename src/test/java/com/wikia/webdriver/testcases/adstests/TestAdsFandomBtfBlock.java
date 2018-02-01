@@ -9,40 +9,28 @@ import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
-
 import org.testng.annotations.Test;
 
 public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
   private static final String ASSERT_MESSAGE = "Expected BTF slot to be blocked.";
 
-  @Test(
-      dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomBtfBlockPage",
-      groups = {"AdsFandomBtfBlockDesktop"}
-  )
-  public void adsFandomBtfBlockDesktop(String article) {
-    AdsFandomObject fandomPage = loadPage(article);
-
-    fandomPage.triggerOnScrollSlots();
-
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-
-    Assertion.assertTrue(areBtfSlotsHidden(fandomPage), "BTF ads are displayed");
+  @Test(groups = "AdsFandomBtfBlockDesktop")
+  public void adsFandomBtfBlockDesktop() {
+    itShouldHideBTFSlotsWhenBTFBlockerIsOnPage();
   }
 
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
-  @Test(
-      dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomBtfBlockPage",
-      groups = {"AdsFandomBtfBlockMobile"}
-  )
-  public void adsFandomBtfBlockMobile(String article) {
-    AdsFandomObject fandomPage = loadPage(article);
+  @Test(groups = "AdsFandomBtfBlockMobile")
+  public void adsFandomBtfBlockMobile() {
+    itShouldHideBTFSlotsWhenBTFBlockerIsOnPage();
+  }
+
+  private void itShouldHideBTFSlotsWhenBTFBlockerIsOnPage() {
+    AdsFandomObject fandomPage = loadPage(FandomAdsDataProvider.PAGE_BTF_BLOCKER);
 
     fandomPage.triggerOnScrollSlots();
 

@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AdsFandomObject extends AdsBaseObject {
-  private static final String FANDOM_FEED_SELECTOR = ".feed-container";
-
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
   }
@@ -18,8 +16,8 @@ public class AdsFandomObject extends AdsBaseObject {
     super(driver, testedPage, resolution);
   }
 
-  private WebElement slots(String slotSelector) {
-    return driver.findElement(By.cssSelector(AdsFandomContent.getSlotSelector(slotSelector)));
+  private WebElement findSlotElement(String slotSelector) {
+    return driver.findElement(By.cssSelector(AdsFandomContent.getSlotSelectorString(slotSelector)));
   }
 
   public void triggerOnScrollSlots() {
@@ -27,14 +25,14 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public void verifySlot(String slotName) {
-    String selector = AdsFandomContent.getSlotSelector(slotName);
+    String selector = AdsFandomContent.getSlotSelectorString(slotName);
 
-    scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
-    verifyAdVisibleInSlot(selector, slots(slotName));
+    scrollTo(AdsFandomContent.getSlotSelector(slotName));
+    verifyAdVisibleInSlot(selector, findSlotElement(slotName));
   }
 
   public WebElement getSlot(String slotName) {
-    String selector = AdsFandomContent.getSlotSelector(slotName);
+    String selector = AdsFandomContent.getSlotSelectorString(slotName);
 
     if (isElementOnPage(By.cssSelector(selector))) {
       return driver.findElement(By.cssSelector(selector));
