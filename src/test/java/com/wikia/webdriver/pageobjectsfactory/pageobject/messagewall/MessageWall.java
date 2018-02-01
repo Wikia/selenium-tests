@@ -60,6 +60,8 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement newWallMessageContainer;
   @FindBy(css = "#cke_WallMessageBody")
   private WebElement messageMainBody;
+  @FindBy(css = "#WallMessageBody")
+  private WebElement messageMainBody2;
   @FindBy(css = "#WallMessageTitle")
   private WebElement messageTitleField;
   @FindBy(id = "WallMessageSubmit")
@@ -86,7 +88,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    wait.forElementClickable(messageMainBody).click();
+    wait.forElementClickable(messageMainBody2).click();
     new Actions(driver).moveToElement(newWallMessageContainer).perform();
 
     while (!postButton.isDisplayed()) {
