@@ -52,10 +52,8 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   @Test
   public void shouldHaveCorrectAspectRatioForImpactState() {
-    AdsBaseObject page = openPage();
-    final WebElement slot = page.wait.forElementPresent(TLB_SELECTOR);
-    page.waitForSlotExpanded(slot);
-    AssertionAds.assertAspectRatio(slot.getSize(), IMPACT_STATE_ASPECT_RATIO);
+    openPage();
+    (new TestAdsUapHiVi(driver, openPage(), TLB_SLOT_ID)).shouldHaveCorrectAspectRatioForImpactState(IMPACT_STATE_ASPECT_RATIO);
   }
 
   @Test
