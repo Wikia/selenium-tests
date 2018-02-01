@@ -61,7 +61,7 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = "#cke_WallMessageBody")
   private WebElement messageMainBody;
   @FindBy(css = "#WallMessageBody")
-  private WebElement messageMainBody2;
+  private WebElement messageMainBodySourceMode;
   @FindBy(css = "#WallMessageTitle")
   private WebElement messageTitleField;
   @FindBy(id = "WallMessageSubmit")
@@ -88,14 +88,24 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    wait.forElementClickable(messageMainBody2).click();
+    return triggerMessageArea(false);
+  }
+
+  public MiniEditorComponentObject triggerMessageArea(Boolean sourceMode) {
+    WebElement messageBody = messageMainBody;
+    //Override messageBody if triggering in source mode
+    if(sourceMode){
+      messageBody = messageMainBodySourceMode;
+    }
+    wait.forElementClickable(messageBody).click();
     new Actions(driver).moveToElement(newWallMessageContainer).perform();
 
     while (!postButton.isDisplayed()) {
-      jsActions.focus(messageMainBody);
+      jsActions.focus(messageBody);
     }
     wait.forAttributeToContain(newWallMessageContainer, HTML.Attribute.CLASS.toString(), "focused");
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
+
     return new MiniEditorComponentObject(driver);
   }
 
