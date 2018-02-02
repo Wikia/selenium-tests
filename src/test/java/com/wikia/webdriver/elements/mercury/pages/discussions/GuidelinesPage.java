@@ -1,11 +1,8 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.skin.Skin;
-import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -13,7 +10,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class GuidelinesPage extends WikiBasePageObject {
+public class GuidelinesPage extends BasePage {
 
   private static final String DEFAULT_GUIDELINES_TEXT = "Discussion Guidelines";
 
@@ -91,7 +88,7 @@ public class GuidelinesPage extends WikiBasePageObject {
     this.guidelinesText.clear();
     this.guidelinesText.sendKeys(text);
     clickSaveButton();
-    waitForPageReload();
+    waitForLoadingSpinner();
   }
 
   private String addNewTextToGuidelines() {
