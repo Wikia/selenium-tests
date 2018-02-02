@@ -69,7 +69,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanUploadImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     startEmptyPostCreationDesktop(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertTrue(page.getPost().firstPostHasImage(), POST_IMAGE_VISIBLE);
   }
 
@@ -79,7 +79,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanUploadImageToTheirReplyOnDesktop() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startEmptyReplyCreationDesktop(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
@@ -89,7 +89,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCannotUploadUnsupportedImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     addPostWithUnsupportedImage(startPostCreationDesktop(page));
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
@@ -99,7 +99,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     addReplyWithUnsupportedImage(startReplyCreationDesktop(page));
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
@@ -109,7 +109,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanRemoveImagePreviewFromPostDraftOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_DELETED_IMAGE_NOT_VISIBLE);
   }
 
@@ -119,7 +119,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startReplyCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
@@ -130,7 +130,7 @@ public class UploadingImageTests extends NewTestTemplate {
     throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasOpenGraph(), POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
@@ -141,7 +141,7 @@ public class UploadingImageTests extends NewTestTemplate {
     throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startReplyCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
@@ -157,7 +157,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanUploadImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
     startEmptyPostCreationMobile(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertTrue(page.getPost().firstPostHasImage(), POST_IMAGE_VISIBLE);
   }
 
@@ -167,7 +167,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanUploadImageTotheirReplyOnMobile() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     startEmptyReplyCreationMobile(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
@@ -177,7 +177,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCannotUploadUnsupportedImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
     addPostWithUnsupportedImage(startPostCreationMobile(page));
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
@@ -187,7 +187,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCannotUploadUnsupportedImageToTheirReplyOnMobile() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     addReplyWithUnsupportedImage(startReplyCreationMobile(page));
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
@@ -197,7 +197,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanRemoveImagePreviewFromPostDraftOnMobile() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_DELETED_IMAGE_NOT_VISIBLE);
   }
 
@@ -207,7 +207,7 @@ public class UploadingImageTests extends NewTestTemplate {
   public void userCanRemoveImagePreviewFromReplyDraftOnMobile() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     startReplyCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
@@ -218,7 +218,7 @@ public class UploadingImageTests extends NewTestTemplate {
     throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobileWithLink(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasOpenGraph());
   }
 
@@ -231,7 +231,7 @@ public class UploadingImageTests extends NewTestTemplate {
     throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
