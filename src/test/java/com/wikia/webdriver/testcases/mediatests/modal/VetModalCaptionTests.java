@@ -35,7 +35,6 @@ public class VetModalCaptionTests extends NewTestTemplate {
 
   @Test(groups = {"VetModalCaption_001"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "XW-4586", comment = "broke after update of CKE")
   public void VetModalCaption_001_modalCaption() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
