@@ -2,18 +2,18 @@ package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class FiltersPopOver extends WikiBasePageObject {
+public class FiltersPopOver extends BasePage {
 
   @Getter(lazy = true)
   private final CategoriesFieldset categoriesFieldset = new CategoriesFieldset();
 
-  @FindBy(css = ".discussion-header .icon.filter-default")
+  @FindBy(css = ".discussion-header .wds-icon.filter-default")
   private WebElement filterButton;
 
   @Getter

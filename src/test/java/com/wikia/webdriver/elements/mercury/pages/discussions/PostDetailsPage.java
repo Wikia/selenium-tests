@@ -36,12 +36,12 @@ public class PostDetailsPage extends PageWithPosts {
 
   public PostDetailsPage open(String postId) {
     getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, postId));
-    waitForPageReload();
+    waitForEmberLoad();
     return this;
   }
 
   public boolean isPostFollowed() {
-    waitForPageLoad();
+    waitForEmberLoad();
     return getPost().findNewestPost().isFollowed();
   }
 

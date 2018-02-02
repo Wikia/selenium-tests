@@ -234,7 +234,7 @@ public class CategoriesTests extends NewTestTemplate {
     final CategoriesFieldset categoriesFieldset = addCategory(
         page.getFiltersPopOver().click().getCategoriesFieldset(),
         categoryName);
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     CategoryPill.Data newCategory = categoriesFieldset.findCategoryOrElseThrow(categoryName);
     try {
       assertTrue(categoriesFieldset.hasCategory(categoryName), 
@@ -257,7 +257,7 @@ public class CategoriesTests extends NewTestTemplate {
         .getCategoriesFieldset().clickEdit()
         .renameMobile(editableCategory.getName(), editedName)
         .clickApproveButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     CategoryPill.Data editedCategory = categoriesFieldset.findCategoryOrElseThrow(editedName);
     try {
       assertTrue(categoriesFieldset.hasCategory(editedName),
@@ -325,7 +325,7 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = createUniqueCategoryName();
     final CategoriesFieldset categoriesFieldset = addCategory(page.getCategories(), categoryName);
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     final CategoryPill.Data data = categoriesFieldset.findCategoryOrElseThrow(categoryName);
     try {
       assertTrue(categoriesFieldset.hasCategory(categoryName),
@@ -348,7 +348,7 @@ public class CategoriesTests extends NewTestTemplate {
       .getCategories()
       .renameDesktop(editableCategory.getName(), newCategoryName)
       .clickApproveButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
     CategoryPill.Data editedCategory = categoriesFieldset.findCategoryOrElseThrow(newCategoryName);
     try {
       assertTrue(categoriesFieldset.hasCategory(newCategoryName),
@@ -473,12 +473,12 @@ public class CategoriesTests extends NewTestTemplate {
     final FiltersPopOver filtersPopOver = page.getFiltersPopOver().click();
     filtersPopOver.getCategoriesFieldset().clickCategoryWith(categoryName);
     filtersPopOver.clickApplyButton();
-    page.waitForPageReloadWith(categoryName);
+    page.waitForLoadingSpinnerWith(categoryName);
   }
 
   private void openPageAndSelectCategoryOnDesktop(PostsListPage page, String categoryName) {
     page.getCategories().clickCategoryWith(categoryName);
-    page.waitForPageReloadWith(categoryName);
+    page.waitForLoadingSpinnerWith(categoryName);
   }
 
   private boolean postsOnPageAreOnlyFromOneCategory(PostsListPage page, String categoryName) {
@@ -533,7 +533,7 @@ public class CategoriesTests extends NewTestTemplate {
         .clickPill(GENERAL_CATEGORY_NAME)
         .clickConfirmButton()
         .clickApproveButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
   }
 
   private void addAndRemoveTemporaryCategory(PostsListPage page, String temporaryCategoryName, CategoriesFieldset categoriesFieldset) {
@@ -541,6 +541,6 @@ public class CategoriesTests extends NewTestTemplate {
         .addCategory(temporaryCategoryName)
         .removeTemporaryCategory(temporaryCategoryName)
         .clickApproveButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
   }
 }
