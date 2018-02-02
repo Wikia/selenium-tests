@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import org.openqa.selenium.Cookie;
+
 import org.testng.annotations.Test;
 
 @InBrowser(
@@ -20,13 +20,13 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
   private static final double RESOLVED_STATE_ASPECT_RATIO = 640.0 / 213;
   private static final String TLB_SLOT_ID = "MOBILE_TOP_LEADERBOARD";
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
-  private static final Cookie NO_SMART_BANNER_COOKIE = new Cookie("fandom-sb-closed", "1");
 
   private AdsBaseObject openPage(Page page) {
-    final Page mainPage = new Page("project43", "Project43_Wikia");
-    final AdsBaseObject adsBaseObject = new AdsBaseObject(driver, mainPage.getUrl());
-    driver.manage().addCookie(NO_SMART_BANNER_COOKIE); // it must be run until ADEN-6608 will be released
-    adsBaseObject.getUrl(page.getUrl());
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(
+        driver,
+        page.getUrl()
+    );
+
     return adsBaseObject.waitForPageLoaded();
   }
 
