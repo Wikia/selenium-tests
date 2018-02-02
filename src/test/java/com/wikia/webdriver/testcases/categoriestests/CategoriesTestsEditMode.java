@@ -35,8 +35,8 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
     assertThat(categoryModule.getCategoryList()).contains(categoryName);
 
     EditCategoryComponentObject editCategory = categoryModule.editExistingCategory(categoryName);
-    categoryName = PageContent.CATEGORY_NAME_PREFIX + BasePageObject.getTimeStamp();
-    editCategory.editCategoryName(categoryName);
+    String categoryName2 = PageContent.CATEGORY_NAME_PREFIX + BasePageObject.getTimeStamp();
+    editCategory.editCategoryName(categoryName2);
 
     assertThat(categoryModule.getCategoryList()).doesNotContain(categoryName);
   }

@@ -26,7 +26,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     MessageWall wall = new MessageWall().open(User.SUS_REGULAR_USER2.getUserName());
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
-    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     wall.clickBoldButton();
     mini.switchAndWrite(message);
     wall.setTitle(title);
@@ -46,7 +46,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     MessageWall wall = new MessageWall().open(User.SUS_REGULAR_USER2.getUserName());
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
-    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     wall.clickBoldButton();
     mini.switchAndWrite(message);
     wall.setTitle(title);
