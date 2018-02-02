@@ -5,15 +5,14 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AssertionAds;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiViUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -32,13 +31,13 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
   private static final String TLB_SLOT_ID = "MOBILE_TOP_LEADERBOARD";
   private static final By TLB_SELECTOR = By.id(TLB_SLOT_ID);
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
-  private static final Cookie NO_SMART_BANNER_COOKIE = new Cookie("fandom-sb-closed", "1");
 
   private AdsBaseObject openPage() {
-    final Page mainPage = new Page("project43", "Project43_Wikia");
-    final AdsBaseObject adsBaseObject = new AdsBaseObject(driver, mainPage.getUrl());
-    driver.manage().addCookie(NO_SMART_BANNER_COOKIE); // it must be run until ADEN-6608 will be released
-    adsBaseObject.getUrl(AdsDataProvider.UAP_HIVI_PAGE.getUrl());
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(
+        driver,
+        AdsDataProvider.UAP_HIVI_PAGE.getUrl()
+    );
+
     return adsBaseObject.waitForPageLoaded();
   }
 
