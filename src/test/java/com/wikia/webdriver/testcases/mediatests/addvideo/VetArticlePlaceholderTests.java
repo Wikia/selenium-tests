@@ -46,7 +46,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_003"})
   @Execute(asUser = User.SUS_STAFF, onWikia = "mobileregressiontesting")
-  @RelatedIssue(issueID = "XW-4584")
   public void userCanAddVideoByUrlUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
@@ -67,7 +66,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_004"})
   @Execute(asUser = User.SUS_STAFF, onWikia = "mobileregressiontesting")
-  @RelatedIssue(issueID = "XW-4584")
   public void userCanAddVideoFromWikiaUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
