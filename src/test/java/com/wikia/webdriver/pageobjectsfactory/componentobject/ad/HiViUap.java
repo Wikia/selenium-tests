@@ -77,7 +77,7 @@ public class HiViUap {
 
   private Boolean isMobile() {
     final String aClass = driver.findElement(slotSelector).getAttribute("class");
-    return aClass.contains("is-mobile-device") || aClass.contains("theme-mobile-layout");
+    return aClass.contains("is-mobile-device");
   }
 
   public void clickVideo() {
