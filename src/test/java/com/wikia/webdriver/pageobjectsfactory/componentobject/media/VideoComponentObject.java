@@ -50,7 +50,7 @@ public class VideoComponentObject extends WikiBasePageObject {
     wait.forElementVisible(videoEmbed.findElement(By.cssSelector("object")));
     PageObjectLogging.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
   }
-  
+
   public void verifyVideoIframeVisible() {
     wait.forElementVisible(videoEmbed.findElement(By.tagName("iframe")));
     PageObjectLogging.log("verifyVideoIframeVisible", "Video iframe is visible", true);
