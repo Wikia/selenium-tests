@@ -57,8 +57,14 @@ public class AdsFandomContent {
   private AdsFandomContent() {
   }
 
+  /**
+   * Returns a querySelector() string to the element created by GPT
+   *
+   * @param slotName
+   * @return String DOM id of element injected by GPT on a page
+   */
   public static String getSlotSelectorString(String slotName) {
-    return "#" + getGptSlotSelector(slotName);
+    return SLOT_SELECTORS.get(slotName);
   }
 
   public static By getSlotSelector(String slotName) {
