@@ -3,28 +3,39 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
-import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
+import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.testng.annotations.Test;
 
 @InBrowser(
-  browser = Browser.CHROME,
+  browser = Browser.CHROME_MOBILE,
   emulator = Emulator.GOOGLE_NEXUS_5
 )
-@Test(groups = "AdsUapHiViFandomMobile")
-public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
-
+@Test(groups = "AdsUapHiViMobileWiki")
+public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
   private static final double IMPACT_STATE_ASPECT_RATIO = 272.0 / 153.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 640.0 / 213;
-  private static final String TLB_SLOT_ID = "gpt-top-leaderboard";
+  private static final String TLB_SLOT_ID = "MOBILE_TOP_LEADERBOARD";
   private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
-  private TestAdsUapHiVi test() {
-    return test(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+  private AdsBaseObject openPage(Page page) {
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(
+        driver,
+        page.getUrl()
+    );
+
+    return adsBaseObject.waitForPageLoaded();
   }
 
-  private TestAdsUapHiVi test(String page) {
-    return new TestAdsUapHiVi(driver, loadArticle(page), TLB_SLOT_ID);
+  private TestAdsUapHiVi test() {
+    return test(AdsDataProvider.UAP_HIVI_PAGE);
+  }
+
+  private TestAdsUapHiVi test(Page page) {
+    return new TestAdsUapHiVi(driver, openPage(page), TLB_SLOT_ID);
   }
 
   @Test
@@ -98,11 +109,6 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
   }
 
   @Test
-  public void shouldBeFullscreenAfterClickOnIcon() {
-    test().shouldBeFullscreenAfterClickOnIcon();
-  }
-
-  @Test
   public void shouldAutoplayVideoForResolvedState() {
     test().shouldAutoplayVideoForResolvedState();
   }
@@ -110,5 +116,15 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
   @Test
   public void shouldMuteAutoplayedVideoOnResolvedState() throws InterruptedException {
     test().shouldMuteAutoplayedVideoOnResolvedState();
+  }
+
+  @Test
+  public void shouldNotAutoplayVideoForClickToPlay() {
+    test(AdsDataProvider.UAP_CTP_HIVI_PAGE).shouldNotAutoplayVideoForClickToPlay();
+  }
+
+  @Test
+  public void shouldPlayVideoWithSoundForClickToPlay() throws InterruptedException {
+    test(AdsDataProvider.UAP_CTP_HIVI_PAGE).shouldPlayVideoWithSoundForClickToPlay();
   }
 }

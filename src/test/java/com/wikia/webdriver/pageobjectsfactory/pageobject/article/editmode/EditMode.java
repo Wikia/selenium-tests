@@ -38,13 +38,13 @@ public class EditMode extends WikiBasePageObject {
   @FindBy(css = "a.RTESliderButton")
   private WebElement sliderButton;
 
-  @FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
+  @FindBy(css = "a.cke_button_ModeWysiwyg > span.cke_button_label")
   private WebElement visualButton;
 
-  @FindBy(css = "a.cke_button_ModeSource > span.cke_label")
+  @FindBy(css = "a.cke_button_ModeSource > span.cke_button_label")
   private WebElement sourceButton;
 
-  @FindBy(css = "a.cke_off.cke_button_table")
+  @FindBy(css = "a.cke_button_off.cke_button_table")
   private WebElement addTableButton;
 
   @FindBy(css = ".editpage-notices")
@@ -113,7 +113,7 @@ public class EditMode extends WikiBasePageObject {
   }
 
   public TableBuilderComponentObject clickAddTableButton() {
-    addTableButton.click();
+    wait.forElementClickable(addTableButton).click();
     PageObjectLogging.log("addTable", "add table button clicked", true);
     return new TableBuilderComponentObject(driver);
   }
@@ -137,6 +137,12 @@ public class EditMode extends WikiBasePageObject {
     scrollAndClick(galleryButton);
     PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);
     return new GalleryBuilderComponentObject(driver);
+  }
+
+  public VisualEditModePageObject clickVisualButton() {
+    visualButton.click();
+    PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject clickSourceButton() {

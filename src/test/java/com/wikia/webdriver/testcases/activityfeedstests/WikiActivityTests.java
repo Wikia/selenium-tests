@@ -134,6 +134,7 @@ public class WikiActivityTests extends NewTestTemplate {
   private String editArticleWithContentAndGetTitle(ArticlePageObject article, String content) {
     String articleName = article.getArticleName();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
+    visualEditMode.clearContent();
     visualEditMode.addContent(content);
     visualEditMode.submitArticle();
     return articleName;

@@ -3,7 +3,6 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import lombok.Getter;
 import org.openqa.selenium.NoSuchElementException;
@@ -37,7 +36,7 @@ public class UserPostsPage extends PageWithPosts {
 
   public UserPostsPage open(String userId) {
     driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, userId));
-    waitForPageReload();
+    waitForEmberLoad();
     return this;
   }
 

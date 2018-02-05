@@ -12,7 +12,7 @@ public class ArticleComment extends BasePageObject {
 
   @FindBy(css = "#article-comm-submit")
   private WebElement commentSubmitButton;
-  @FindBy(css = "#cke_contents_article-comm>iframe")
+  @FindBy(css = ".cke_wysiwyg_frame")
   private WebElement commentIFrame;
   @FindBy(css = "#article-comments-ul li:nth-child(1) .caption")
   private WebElement latestCommentCaption;

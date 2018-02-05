@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ public class HiViUap {
   private By pauseButton;
   private By progressBar;
   private By replayButton;
+  private By slotSelector;
   private By soundButton;
   private By videoClickArea;
   private By videoElement;
@@ -36,6 +38,7 @@ public class HiViUap {
     this.imaIframe = By.cssSelector(slotSelector + ".video-player iframe");
     this.pauseButton = By.cssSelector(slotSelector + ".play-pause-button");
     this.replayButton = By.cssSelector(".replay-overlay");
+    this.slotSelector = By.id(slot);
     this.soundButton = By.cssSelector(slotSelector + ".volume-button");
     this.videoClickArea = By.cssSelector(slotSelector + ".toggle-ui-overlay");
     this.videoElement = By.cssSelector("video");
@@ -54,10 +57,27 @@ public class HiViUap {
     iframeRunner.usingIframe(adIframe, () -> wait.forElementVisible(replayButton, 60));
   }
 
-  private void enableVideoToolbar() {
+  public void enableVideoToolbar() {
+    if (isMobile()) {
+      enableVideoToolbarMobile();
+    } else {
+      enableVideoToolbarDesktop();
+    }
+  }
+
+  private void enableVideoToolbarDesktop() {
     WebElement videoPlayerElement = wait.forElementVisible(this.videoPlayer);
     Actions builder = new Actions(driver);
     builder.moveToElement(videoPlayerElement).perform();
+  }
+
+  private void enableVideoToolbarMobile() {
+    clickVideo();
+  }
+
+  private Boolean isMobile() {
+    final String aClass = driver.findElement(slotSelector).getAttribute("class");
+    return aClass.contains("is-mobile-layout");
   }
 
   public void clickVideo() {
@@ -91,11 +111,19 @@ public class HiViUap {
   }
 
   public int getVideoWidth() {
+    if (isMobile()) {
+      return driver.findElement(mobileVideoElement).getSize().width;
+    }
+
     return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).getSize().width);
   }
 
-  public int getVideoWidthMobile() {
-    return driver.findElement(mobileVideoElement).getSize().width;
+  public boolean isVideoElementVisible() {
+    if (isMobile()) {
+      return driver.findElement(mobileVideoElement).isDisplayed();
+    }
+
+    return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).isDisplayed());
   }
 
   public double getProgressBarWidth() {
@@ -108,6 +136,16 @@ public class HiViUap {
 
   public void clickAd() {
     iframeRunner.usingIframe(adIframe, () -> wait.forElementClickable(By.id("adContainer")).click());
+  }
+
+  public WebElement waitForAdLoaded() {
+    iframeRunner.usingIframe(adIframe, () -> {
+      JavascriptActions jsActions = new JavascriptActions(driver);
+      jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
+      wait.forElementVisible(By.id("adContainer"));
+    });
+
+    return driver.findElement(slotSelector);
   }
 
   public void clickLearnMore() {
