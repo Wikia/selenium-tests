@@ -63,7 +63,7 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement blockedUserMessage1;
   @FindBy(xpath = "//b[contains(text(), 'Your user name or IP address has been blocked.')]")
   private WebElement blockedUserMessage2;
-  @FindBy(css = ".cke_button_tabledelete > span.cke_label")
+  @FindBy(css = ".cke_menubutton__tabledelete")
   private WebElement deleteItem;
   @FindBy(css = ".cke_button_table")
   private WebElement propertiesItem;

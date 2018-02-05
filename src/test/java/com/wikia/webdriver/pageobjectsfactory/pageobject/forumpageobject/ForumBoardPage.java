@@ -36,7 +36,7 @@ public class ForumBoardPage extends BasePageObject {
   private List<WebElement> threadTitlesList;
   @FindBy(css = ".notify-everyone")
   private WebElement highlight;
-  @FindBy(css = "#WikiaEditor-0")
+  @FindBy(css = "#cke_WikiaEditor-0")
   private WebElement wikiaEditorTextArea;
 
   /**
