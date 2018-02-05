@@ -45,17 +45,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] ooyalaAds() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/OoyalaVideo/" +
-            "Simple?file=Synthetic_video_ad_test_(all_green_video)_320x240_(ooyala-stored_video)",
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
         {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
