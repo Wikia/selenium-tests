@@ -42,7 +42,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
   private boolean areBtfSlotsHidden(AdsFandomObject fandomPage) {
     try {
-      Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD), ASSERT_MESSAGE);
+      Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.FEED_BOXAD), ASSERT_MESSAGE);
       Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD), ASSERT_MESSAGE);
       Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), ASSERT_MESSAGE);
     } catch (AssertionError ae) {
