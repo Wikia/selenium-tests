@@ -44,7 +44,7 @@ public class EditMode extends WikiBasePageObject {
   @FindBy(css = "a.cke_button_ModeSource > span.cke_button_label")
   private WebElement sourceButton;
 
-  @FindBy(css = "a.cke_off.cke_button_table")
+  @FindBy(css = "a.cke_button_off.cke_button_table")
   private WebElement addTableButton;
 
   @FindBy(css = ".editpage-notices")
@@ -113,7 +113,7 @@ public class EditMode extends WikiBasePageObject {
   }
 
   public TableBuilderComponentObject clickAddTableButton() {
-    addTableButton.click();
+    wait.forElementClickable(addTableButton).click();
     PageObjectLogging.log("addTable", "add table button clicked", true);
     return new TableBuilderComponentObject(driver);
   }

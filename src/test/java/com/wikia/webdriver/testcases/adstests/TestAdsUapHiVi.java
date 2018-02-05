@@ -114,7 +114,6 @@ public class TestAdsUapHiVi {
   public void shouldUnmuteVideoAfterClickOnIcon() throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
-
     hiViUap.waitForVideoStart();
     hiViUap.toggleSound();
     TimeUnit.SECONDS.sleep(3);
@@ -150,7 +149,6 @@ public class TestAdsUapHiVi {
 
     hiViUap.waitForVideoStart();
     TimeUnit.SECONDS.sleep(2);
-    hiViUap.enableVideoToolbar();
     hiViUap.togglePause();
 
     final double startProgressBarWidth = hiViUap.getProgressBarWidth();
@@ -193,10 +191,7 @@ public class TestAdsUapHiVi {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
-
-    hiViUap.enableVideoToolbar();
     hiViUap.clickFullscreenIcon();
-
     Dimension windowSize = driver.findElement(By.cssSelector("body")).getSize();
     Assertion.assertEquals(hiViUap.getVideoWidth(), windowSize.width);
   }
@@ -225,6 +220,14 @@ public class TestAdsUapHiVi {
     Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
     TimeUnit.SECONDS.sleep(3);
     Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
+  }
+
+  // mobile only
+  public void shouldRedirectAfterClickOnLearnMore(String url) {
+    HiViUap hiViUap = new HiViUap(driver, slotName);
+    hiViUap.clickLearnMore();
+
+    Assert.assertTrue(page.tabContainsUrl(url));
   }
 
   public void shouldNotAutoplayVideoForClickToPlay() {

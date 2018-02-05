@@ -19,7 +19,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInSourceMode() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
-    wall.triggerMessageArea();
+    wall.triggerMessageArea(true);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.clickSourceModeButton();
