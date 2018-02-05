@@ -50,7 +50,6 @@ public class CategoryModule {
    * @param categoryName the category name to input
    */
   public void typeCategoryName(String categoryName) {
-    actions.click(categoryModuleHeader).perform();
     actions.moveToElement(categorySelectInput).perform();
 
     categorySelectInput.sendKeys(categoryName);
@@ -69,6 +68,7 @@ public class CategoryModule {
 
     webDriverWait.until(ExpectedConditions.elementToBeClickable(suggestion));
     suggestion.click();
+    webDriverWait.until(ExpectedConditions.invisibilityOf(suggestion));
 
     PageObjectLogging.log("selectCategorySuggestions", "category selected from suggestions", true);
 

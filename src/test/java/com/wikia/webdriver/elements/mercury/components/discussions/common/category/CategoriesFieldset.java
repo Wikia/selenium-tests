@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 import com.google.common.collect.Iterables;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CategoriesFieldset extends WikiBasePageObject {
+public class CategoriesFieldset extends BasePage {
 
   private static final String GENERAL_CATEGORY_NAME = "General";
   private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
@@ -154,7 +154,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
    */
   public boolean canEditAllCategory() {
     return !isMobile() && !editableCategoryAll
-      .findElement(By.className("fancy-checkbox-span"))
+      .findElement(By.className("fancy-check-box-span"))
       .getAttribute("class")
       .contains("disabled");
   }

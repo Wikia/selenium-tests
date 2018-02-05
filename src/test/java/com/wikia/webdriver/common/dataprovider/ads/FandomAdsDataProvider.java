@@ -22,6 +22,7 @@ public class FandomAdsDataProvider {
   public static final String PAGE_NON_UAP_TOPIC = "movies";
   public static final String PAGE_NON_UAP_ARTICLE = "young-fans-guide-cinema-part-3";
   public static final String PAGE_HIVI_UAP_ARTICLE = "walking-dead-major-death-differs-from-comics";
+  public static final String PAGE_HIVI_UAP_CTP = "lady-bird-director-greta-gerwig-shut-out-at-baftas";
 
   private FandomAdsDataProvider() { }
 
