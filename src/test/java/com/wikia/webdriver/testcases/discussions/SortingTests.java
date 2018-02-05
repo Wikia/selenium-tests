@@ -81,7 +81,7 @@ public class SortingTests extends NewTestTemplate {
       .openFilterMenu()
       .chooseSortingOption(sortOption)
       .clickApplyButton()
-      .waitForPageReload();
+      .waitForLoadingSpinner();
     Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));
   }
 
@@ -89,7 +89,7 @@ public class SortingTests extends NewTestTemplate {
     page
       .getSortingFilterDesktop()
       .chooseSortingOption(sortOption)
-      .waitForPageReload();
+      .waitForLoadingSpinner();
     Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));
   }
 

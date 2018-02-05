@@ -58,9 +58,26 @@ public class HiViUap {
   }
 
   public void enableVideoToolbar() {
+    if (isMobile()) {
+      enableVideoToolbarMobile();
+    } else {
+      enableVideoToolbarDesktop();
+    }
+  }
+
+  private void enableVideoToolbarDesktop() {
     WebElement videoPlayerElement = wait.forElementVisible(this.videoPlayer);
     Actions builder = new Actions(driver);
     builder.moveToElement(videoPlayerElement).perform();
+  }
+
+  private void enableVideoToolbarMobile() {
+    clickVideo();
+  }
+
+  private Boolean isMobile() {
+    final String aClass = driver.findElement(slotSelector).getAttribute("class");
+    return aClass.contains("is-mobile-layout");
   }
 
   public void clickVideo() {
@@ -94,18 +111,18 @@ public class HiViUap {
   }
 
   public int getVideoWidth() {
+    if (isMobile()) {
+      return driver.findElement(mobileVideoElement).getSize().width;
+    }
+
     return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).getSize().width);
   }
 
-  public int getVideoWidthMobile() {
-    return driver.findElement(mobileVideoElement).getSize().width;
-  }
-
-  public boolean isMobileVideoElementVisible() {
-    return driver.findElement(mobileVideoElement).isDisplayed();
-  }
-
   public boolean isVideoElementVisible() {
+    if (isMobile()) {
+      return driver.findElement(mobileVideoElement).isDisplayed();
+    }
+
     return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).isDisplayed());
   }
 
