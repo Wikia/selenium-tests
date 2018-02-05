@@ -118,7 +118,7 @@ public class OpenGraphTests extends NewTestTemplate {
 
     Assertion.assertTrue(postsCreator.hasOpenGraph());
     postsCreator.clickSubmitButton();
-    page.waitForLoadingSpinner();
+    page.waitForPageReload();
     page.getPost().waitForPostToAppearWithText(URL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
@@ -132,7 +132,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(postsCreator.hasOpenGraph());
 
     postsCreator.clickSubmitButton();
-    page.waitForLoadingSpinner();
+    page.waitForPageReload();
     page.getPost().waitForPostToAppearWithOpenGraph(URL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
@@ -144,7 +144,7 @@ public class OpenGraphTests extends NewTestTemplate {
 
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
-    page.waitForLoadingSpinner();
+    page.waitForPageReload();
     page.getReplies().waitForReplyToAppearWithText(URL);
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
@@ -158,7 +158,7 @@ public class OpenGraphTests extends NewTestTemplate {
 
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
-    page.waitForLoadingSpinner();
+    page.waitForPageReload();
     page.getReplies().waitForReplyToAppearWithOpenGraph(URL);
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());

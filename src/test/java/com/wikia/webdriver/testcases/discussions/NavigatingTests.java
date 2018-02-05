@@ -85,7 +85,7 @@ public class NavigatingTests extends NewTestTemplate {
   private void clickingPostContentRedirectsToPostDetailsPage() {
     new PostsListPage().open().getPost().findNewestPost().click();
     PostDetailsPage postDetailsPage = new PostDetailsPage();
-    postDetailsPage.waitForEmberLoad();
+    postDetailsPage.waitForPageReload();
     Assertion.assertTrue(postDetailsPage.isDisplayed());
   }
 

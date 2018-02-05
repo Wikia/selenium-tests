@@ -1,12 +1,12 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
-import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class SortingFilterDesktop extends BasePage {
+public class SortingFilterDesktop extends BasePageObject {
 
   @FindBy(css = ".discussion-fieldset.sortby-fieldset")
   private WebElement fieldset;

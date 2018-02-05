@@ -42,12 +42,12 @@ public class PostsListPage extends PageWithPosts {
   @Override
   public PostsListPage open() {
     driver.get(urlBuilder.getUrlForWiki() + PATH);
-    waitForEmberLoad();
+    waitForPageReload();
     return this;
   }
 
-  public void waitForLoadingSpinnerWith(final String categoryName) {
-    waitForLoadingSpinner();
+  public void waitForPageReloadWith(final String categoryName) {
+    waitForPageReload();
 
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
