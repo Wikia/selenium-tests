@@ -15,7 +15,7 @@ import com.wikia.webdriver.testcases.mobilewikitests.SearchTests;
 
 import org.testng.annotations.Test;
 
-@Test(groups = "iris-discussions-search")
+@Test(groups = "discussions-search")
 @InBrowser(browser = Browser.CHROME)
 @Execute(onWikia = "dauto")
 public class DiscussionsSearchTests extends SearchTests {
