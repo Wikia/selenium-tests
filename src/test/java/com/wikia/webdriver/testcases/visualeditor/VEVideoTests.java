@@ -34,21 +34,22 @@ public class VEVideoTests extends NewTestTemplate {
     veNew.verifyVEToolBarPresent();
     veNew.publish();
   }
-
-  @Test(groups = {"VEVideo", "VEAddExternalVideo"})
-  @Execute(asUser = User.USER)
-  public void addPremiumVideo() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-                                                                    + DateTime.now().getMillis());
-    VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.PREMIUM_VIDEO_URL);
-    veNew.verifyVideos(1);
-    veNew.verifyVEToolBarPresent();
-    veNew.publish();
-  }
+//  // I think this test should be removed, because Premium Video was something from video.wikia.com
+//  @Test(groups = {"VEVideo", "VEAddExternalVideo"})
+//  @Execute(asUser = User.USER)
+//  public void addPremiumVideo() {
+//    VisualEditorPageObject ve =
+//        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+//                                                                    + DateTime.now().getMillis());
+//    VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.PREMIUM_VIDEO_URL);
+//    veNew.verifyVideos(1);
+//    veNew.verifyVEToolBarPresent();
+//    veNew.publish();
+//  }
 
   @Test(groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(comment = "This test will run smoothly when Video removing scripts are done.")
   public void addExistingVideo() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
