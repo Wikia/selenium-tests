@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests;
+package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
