@@ -14,6 +14,7 @@ public class VideoContent {
   public static final String YOUTUBE_VIDEO_URL5 = "https://www.youtube.com/watch?v=yvBXsd4P550";
 
   public static final String WIKIA_VIDEO_QUERY = "wikia";
+  public static final String TEST_VIDEO_QUERY = "test";
   public static final String NON_PREMIUM_VIDEO_URL = "https://www.youtube.com/watch?v=d9r5_DDMMjY";
 
   public static final String
