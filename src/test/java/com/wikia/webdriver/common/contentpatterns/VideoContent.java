@@ -19,13 +19,13 @@ public class VideoContent {
 
   public static final String
       PREMIUM_VIDEO_URL =
-      "http://video.wikia.com/wiki/File:Batman_-_Following";
-  public static final String PREMIUM_VIDEO_NAME = "Batman - Following";
+      "http://muppet.wikia.com/wiki/File:VH1_-_Vogue_Fashion_Awards_Miss_Piggy_(2002,_USA)";
+  public static final String PREMIUM_VIDEO_NAME = "VH1 Miss Piggy";
 
   public static final String
       PREMIUM_VIDEO_URL2 =
-      "http://video.wikia.com/wiki/File:Frozen_-_Olaf%27s_Summer_Song";
-  public static final String PREMIUM_VIDEO_NAME2 = "Frozen - Olaf's Summer Song";
+      "http://muppet.wikia.com/wiki/File:Cookie_Monster_iPhone_6_S_Commercial";
+  public static final String PREMIUM_VIDEO_NAME2 = "Cookie Monster Commercial";
 
   private VideoContent() {
 
