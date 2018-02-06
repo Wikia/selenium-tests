@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
-  private static final long MAX_MOVIE_DURATION = 40L;
   private static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
   private static final int MOBILE_VIDEO_TRIGGER_AREA = 3;
   private static final int REDIRECT_AREA_TRIGGER = 1; // DESKTOP & MOBILE
@@ -207,7 +206,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
     fandomPage.triggerOnScrollSlots();
     AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
-    fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
+    fandomPage.scrollTo(AdsFandomContent.getSlotSelector(slotName));
     return videoFanTakeover;
   }
 }

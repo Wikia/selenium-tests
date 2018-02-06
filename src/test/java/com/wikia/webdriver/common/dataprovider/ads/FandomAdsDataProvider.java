@@ -23,17 +23,9 @@ public class FandomAdsDataProvider {
   public static final String PAGE_NON_UAP_ARTICLE = "young-fans-guide-cinema-part-3";
   public static final String PAGE_HIVI_UAP_ARTICLE = "walking-dead-major-death-differs-from-comics";
   public static final String PAGE_HIVI_UAP_CTP = "lady-bird-director-greta-gerwig-shut-out-at-baftas";
+  public static final String PAGE_BTF_BLOCKER = "game-of-thrones-the-ghost-of-high-heart";
 
   private FandomAdsDataProvider() { }
-
-  @DataProvider
-  public static Object[][] fandomBtfBlockPage() {
-    return new Object[][]{
-        {
-            "game-of-thrones-the-ghost-of-high-heart"
-        }
-    };
-  }
 
   @DataProvider
   public static Object[][] fandomArticleUapPage() {
