@@ -23,16 +23,16 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
   @FindBy(css = ".jw-title-primary")
   private WebElement primaryTitle;
 
-  @FindBy(css = ".jw-flag-touch")
+  @FindBy(css = ".article-featured-video__on-scroll-video-wrapper")
   private WebElement player;
 
   @FindBy(css = ".jw-controlbar")
   private WebElement controlbar;
 
-  @FindBy(css = ".jw-display-icon-display")
+  @FindBy(css = ".jw-svg-icon .jw-svg-icon-play")
   private WebElement playButton;
 
-  @FindBy(css = ".jw-display-icon-display")
+  @FindBy(css = ".jw-svg-icon .jw-svg-icon-pause")
   private WebElement pauseButton;
 
   @FindBy(css = ".jw-state-playing")
