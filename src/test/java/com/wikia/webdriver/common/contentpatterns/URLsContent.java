@@ -46,7 +46,6 @@ public class URLsContent {
   public static final String SPECIAL_BLOCK = "/wiki/Special:Block";
   public static final String SPECIAL_CHAT = "/wiki/Special:Chat";
   public static final String SPECIAL_EDIT_HUB = "/wiki/Special:EditHub";
-  public static final String SPECIAL_VIDEO_PAGE_ADMIN = "/wiki/Special:VideoPageAdmin/edit";
   public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "/wiki/Special:Version";
   public static final String SPECIAL_INFOBOX_BUILDER = "/wiki/Special:InfoboxBuilder/";
