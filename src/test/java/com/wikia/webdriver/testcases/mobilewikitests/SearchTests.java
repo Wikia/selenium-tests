@@ -9,7 +9,7 @@ public class SearchTests extends NewTestTemplate {
 
   private static final String SEARCH_PHRASE = "Infobox";
 
-  public void mercury_search_clearSearchPhrase(WikiBasePageObject page) {
+  public void clearSearchPhrase(WikiBasePageObject page) {
     String currentPhrase = page
         .getTopBar()
         .openSearch()
@@ -20,7 +20,7 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(currentPhrase.isEmpty());
   }
 
-  public void mercury_search_verifySearchLayout(WikiBasePageObject page) {
+  public void verifySearchLayout(WikiBasePageObject page) {
     Search search = page
         .getTopBar()
         .openSearch();
