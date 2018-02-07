@@ -101,6 +101,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.CreatingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.DeleteAllPostsByUserTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.DiscussionsCreation"/>
+            <class name="com.wikia.webdriver.testcases.discussions.DiscussionsSearchTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.EditingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.FollowingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.GuidelinesTests"/>
@@ -155,7 +156,6 @@
             <class name="com.wikia.webdriver.testcases.mediatests.videosmodule.VideosModuleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMercuryTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.SearchMercuryTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.ArticlePageTests"/>
