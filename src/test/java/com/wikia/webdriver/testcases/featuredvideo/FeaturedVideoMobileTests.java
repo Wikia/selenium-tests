@@ -1,9 +1,10 @@
 package com.wikia.webdriver.testcases.featuredvideo;
 
+import static com.wikia.webdriver.common.core.drivers.Browser.CHROME_MOBILE;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo.FeaturedVideoMobileComponentObject;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"FeaturedVideoMobile"})
 @Execute(onWikia = "featuredvideo", asUser = User.ANONYMOUS)
-@InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = CHROME_MOBILE, browserSize = "400x681")
 public class FeaturedVideoMobileTests extends NewTestTemplate {
 
   @Test
@@ -58,7 +59,7 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
     FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
-        .activatePlayerOptions()
+//        .activatePlayerOptions()
         .clickPause()
         .openSettingsMenu();
 
