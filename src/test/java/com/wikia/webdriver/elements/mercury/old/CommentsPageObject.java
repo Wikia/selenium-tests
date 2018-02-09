@@ -180,7 +180,7 @@ public class CommentsPageObject extends WikiBasePageObject {
     WebElement mediaInComment;
     allComments.stream().forEach(e -> wait.forElementClickable(e));
     if ("Video".equals(mediaType)) {
-      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
+      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .video"));
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
     }
@@ -191,7 +191,7 @@ public class CommentsPageObject extends WikiBasePageObject {
     WebElement mediaInComment;
     allComments.stream().forEach(e -> wait.forElementClickable(e));
     if ("Video".equals(mediaType)) {
-      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
+      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .video"));
     } else {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure"));
     }
