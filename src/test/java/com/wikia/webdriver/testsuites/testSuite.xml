@@ -148,7 +148,6 @@
             <class name="com.wikia.webdriver.testcases.mediatests.modal.VetModalCaptionTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.modal.VetModalWidthTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.providers.VetProvidersTests"/>
-            <class name="com.wikia.webdriver.testcases.mediatests.suggestions.VideoSuggestionsTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.VetAddingVideoTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.videosmodule.VideosModuleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.PortableInfoboxTests"/>
