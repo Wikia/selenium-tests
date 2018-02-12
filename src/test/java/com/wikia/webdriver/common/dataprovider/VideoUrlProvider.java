@@ -10,12 +10,7 @@ public class VideoUrlProvider {
   @DataProvider
   private static final Object[][] videoUrl() {
     return new Object[][]{
-        // Premium Provider Links
-        {
-            //ign
-            "http://video.wikia.com/wiki/File:Call_of_Duty_Black_Ops_2_Walkthrough_-_All_Cordis_Die_Intel_Locations",
-            "Call of Duty Black Ops 2 Walkthrough - All Cordis Die Intel Locations"
-        },
+
         // Non-Premium Provider Links
         {
             "http://www.dailymotion.com/video/x101vdw_robert-pattison-y-kristen-stewart-se-dan-un-tiempo_people#.UZovsrWnqXw",
