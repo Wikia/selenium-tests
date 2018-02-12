@@ -3,8 +3,15 @@ package com.wikia.webdriver.common.core;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.cert.CertificateException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -206,9 +213,40 @@ public class Helios {
       new UrlBuilder().getUrlForWiki("community"), encodedUsername, DateTime.now().getMillis());
   }
 
+  private static X509TrustManager getPassiveTrustManager() {
+    return new X509TrustManager() {
+
+      public X509Certificate[] getAcceptedIssuers() {
+        return null;
+      }
+
+      public void checkServerTrusted(X509Certificate[] arg0, String arg1)
+          throws CertificateException {
+      }
+
+      public void checkClientTrusted(X509Certificate[] arg0, String arg1)
+          throws CertificateException {
+      }
+    };
+  }
+
+  private static SSLContext createUnsecureSSLContext() {
+    SSLContext sc = null;
+    try {
+      TrustManager[] trustAllCerts = new TrustManager[]{Helios.getPassiveTrustManager()};
+      sc = SSLContext.getInstance("TLS");
+      sc.init(null, trustAllCerts, new SecureRandom());
+    } catch (Exception e) {
+      String msg = "error while creating unsecure SSLContext";
+      PageObjectLogging.log(msg, e, false);
+      throw new RuntimeException(msg, e);
+    }
+    return sc;
+  }
+
   private static CloseableHttpClient getDefaultClient() {
     return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-        .disableAutomaticRetries().setDefaultRequestConfig(REQUEST_CONFIG).setSSLHostnameVerifier(
-            NoopHostnameVerifier.INSTANCE).build();
+        .disableAutomaticRetries().setDefaultRequestConfig(REQUEST_CONFIG).setSSLContext(
+        Helios.createUnsecureSSLContext()).setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
   }
 }
