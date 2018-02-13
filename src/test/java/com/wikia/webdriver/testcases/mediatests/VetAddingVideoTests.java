@@ -52,7 +52,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.setTitle(title);
     VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
     VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     mini.verifyVideoMiniEditor();
