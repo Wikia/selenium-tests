@@ -54,7 +54,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
     VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     String desiredVideoName = vetOptions.getVideoName();
     vetOptions.submit();
