@@ -104,7 +104,7 @@ public class AdsDataProvider {
 //            null
 //        }, {
             WIKI_REGULAR, "Skin",
-            new Dimension(1800, 900),
+            new Dimension(2000, 900),
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
