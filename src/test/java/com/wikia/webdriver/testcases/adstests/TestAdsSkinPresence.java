@@ -51,7 +51,6 @@ public class TestAdsSkinPresence extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     PageObjectLogging.log("Window resolution: ", String.valueOf(resolution.width), true);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, resolution);
-    adsBaseObject.waitForSlotExpanded(driver.findElement(By.id("TOP_LEADERBOARD")));
     adsBaseObject.verifySkin(expectedLeftSide,
                              expectedRightSide,
                              backgroundColor,

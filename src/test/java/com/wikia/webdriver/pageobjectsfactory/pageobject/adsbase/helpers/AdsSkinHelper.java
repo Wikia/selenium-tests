@@ -64,6 +64,11 @@ public class AdsSkinHelper {
   }
 
   private boolean skinPartPresent(boolean isLeft) {
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     hideCoveredSkinElements();
     String pathToFile = isLeft ? pathToLeftPart : pathToRightPart;
     File patternFile = new File(pathToFile);
