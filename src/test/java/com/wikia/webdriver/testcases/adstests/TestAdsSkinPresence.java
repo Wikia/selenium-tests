@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -50,6 +51,7 @@ public class TestAdsSkinPresence extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     PageObjectLogging.log("Window resolution: ", String.valueOf(resolution.width), true);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, resolution);
+    adsBaseObject.waitForSlotExpanded(driver.findElement(By.id("TOP_LEADERBOARD")));
     adsBaseObject.verifySkin(expectedLeftSide,
                              expectedRightSide,
                              backgroundColor,
