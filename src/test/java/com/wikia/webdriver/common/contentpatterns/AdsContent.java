@@ -98,6 +98,6 @@ public class AdsContent {
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10500); })();");
     SLOTS_TRIGGERS.put(BOTTOM_LB,"(function(){function getHookElement(){var mixContentFooterSelector=\"#mixed-content-footer\",articleCategoriesSelector=\".article-categories\",isMixContentFooterOnPage=!!document.querySelectorAll(mixContentFooterSelector)[0],areArticleCategoriesOnPage=!!document.querySelectorAll(articleCategoriesSelector)[0];if(isMixContentFooterOnPage){return mixContentFooterSelector;}return articleCategoriesSelector;}var hookElement=getHookElement();document.querySelectorAll(hookElement)[0].scrollIntoView();setTimeout(function(){window.scrollBy(0, -10);},5000);})();");
-    SLOTS_TRIGGERS.put(MOBILE_BOTTOM_LB, "(function(){ document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 5000); })();");
+    SLOTS_TRIGGERS.put(MOBILE_BOTTOM_LB, "(function(){ document.querySelector('.recirculation-prefooter').scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 5000); })();");
   }
 }
