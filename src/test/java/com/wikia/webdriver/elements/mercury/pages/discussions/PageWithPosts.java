@@ -7,9 +7,10 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.SignIn
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
-public abstract class PageWithPosts extends BasePage {
+public abstract class PageWithPosts extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final SortingFilterDesktop sortingFilterDesktop = new SortingFilterDesktop();

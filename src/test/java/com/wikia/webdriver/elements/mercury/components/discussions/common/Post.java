@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 
-public class Post extends BasePage {
+public class Post extends BasePageObject {
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
