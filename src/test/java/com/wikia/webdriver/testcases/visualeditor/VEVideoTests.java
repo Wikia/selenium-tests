@@ -35,18 +35,6 @@ public class VEVideoTests extends NewTestTemplate {
     veNew.publish();
   }
 
-  @Test(groups = {"VEVideo", "VEAddExternalVideo"})
-  @Execute(asUser = User.USER)
-  public void addPremiumVideo() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-                                                                    + DateTime.now().getMillis());
-    VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.PREMIUM_VIDEO_URL);
-    veNew.verifyVideos(1);
-    veNew.verifyVEToolBarPresent();
-    veNew.publish();
-  }
-
   @Test(groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
   public void addExistingVideo() {
