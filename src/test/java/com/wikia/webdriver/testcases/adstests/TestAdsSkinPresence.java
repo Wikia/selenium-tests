@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
