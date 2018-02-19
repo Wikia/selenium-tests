@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -125,9 +126,13 @@ public class PostEntity {
   }
 
   public boolean hasEditedBySection() {
-    return post.findElement(By.cssSelector(".discussion-content + div"))
-        .getAttribute(CLASS_ATTRIBUTE)
-        .contains(POST_EDITED_BY_CLASS_NAME);
+    try {
+      return post.findElement(By.cssSelector(".post-edited-by-row"))
+          .getAttribute(CLASS_ATTRIBUTE)
+          .contains(POST_EDITED_BY_CLASS_NAME);
+    } catch (NoSuchElementException e) {
+      return false;
+    }
   }
 
   public String getEditedBySectionText() {
