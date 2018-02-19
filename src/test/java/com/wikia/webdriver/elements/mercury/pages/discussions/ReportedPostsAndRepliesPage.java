@@ -13,7 +13,7 @@ public class ReportedPostsAndRepliesPage extends PageWithPosts {
 
   @Override
   public ReportedPostsAndRepliesPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + PATH);
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + PATH));
     waitForEmberLoad();
     return this;
   }
