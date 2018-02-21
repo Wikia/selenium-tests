@@ -34,7 +34,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public float getElementOffsetTop(String element) {
     return Float.parseFloat(driver
-        .executeScript("return $(arguments[0]).offset() && $(arguments[0]).offset().top", element)
+        .executeScript("var el = document.querySelector(arguments[0]), boundingClientRect = el.getBoundingClientRect(); return boundingClientRect && boundingClientRect.top + document.body.scrollTop;", element)
         .toString());
   }
 
