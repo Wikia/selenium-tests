@@ -10,11 +10,11 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
   private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-floor";
-  private static final String FLOOR_ADHESION_AD_FRAME_CSS =
-      "#ext-wikia-adEngine-template-floor .ad iframe";
+  private static final String FLOOR_ADHESION_AD_FRAME_CSS = "#ext-wikia-adEngine-template-floor .ad iframe";
   private static final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
   private static final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-floor .close";
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
+  private static final By FLOOR_ADHESION_CLOSE_SELECTOR = By.cssSelector(FLOOR_ADHESION_CLOSE_CSS);
 
   public AdsFloorAdhesionOldObject(WebDriver driver, String testedPage, Dimension resolution) {
     super(driver, testedPage, resolution);
@@ -48,15 +48,13 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
     return this;
   }
 
-  public AdsFloorAdhesionOldObject clickFloorAdhesionModalClose(
-      String floorAdhesionModalCloseSelector
-  ) {
-    driver.findElement(By.cssSelector(floorAdhesionModalCloseSelector)).click();
+  public AdsFloorAdhesionOldObject clickFloorAdhesionModalClose(String floorAdhesionModalCloseSelector) {
+    wait.forElementClickable(By.cssSelector(floorAdhesionModalCloseSelector)).click();
     return this;
   }
 
   public AdsFloorAdhesionOldObject clickFloorAdhesionClose() {
-    driver.findElement(By.cssSelector(FLOOR_ADHESION_CLOSE_CSS)).click();
+    wait.forElementPresent(FLOOR_ADHESION_CLOSE_SELECTOR).click();
     return this;
   }
 
