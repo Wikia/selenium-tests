@@ -33,7 +33,6 @@ public class AdsContent {
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
   public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
   public static final String INVISIBLE_HIGH_IMPACT_2 = "INVISIBLE_HIGH_IMPACT_2";
-  public static final String TOP_BUTTON_WIDE = "TOP_BUTTON_WIDE";
 
   private AdsContent() {}
 
@@ -87,7 +86,6 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
-    SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
     MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
@@ -98,6 +96,6 @@ public class AdsContent {
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10500); })();");
     SLOTS_TRIGGERS.put(BOTTOM_LB,"(function(){function getHookElement(){var mixContentFooterSelector=\"#mixed-content-footer\",articleCategoriesSelector=\".article-categories\",isMixContentFooterOnPage=!!document.querySelectorAll(mixContentFooterSelector)[0],areArticleCategoriesOnPage=!!document.querySelectorAll(articleCategoriesSelector)[0];if(isMixContentFooterOnPage){return mixContentFooterSelector;}return articleCategoriesSelector;}var hookElement=getHookElement();document.querySelectorAll(hookElement)[0].scrollIntoView();setTimeout(function(){window.scrollBy(0, -10);},5000);})();");
-    SLOTS_TRIGGERS.put(MOBILE_BOTTOM_LB, "(function(){ document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 5000); })();");
+    SLOTS_TRIGGERS.put(MOBILE_BOTTOM_LB, "(function(){ document.querySelector('.recirculation-prefooter').scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 5000); })();");
   }
 }

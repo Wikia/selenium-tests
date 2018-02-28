@@ -673,8 +673,11 @@ public class WikiBasePageObject extends BasePageObject {
    * Refresh Wiki page, busting the cache( by adding cb=currentTimestamp )
    */
   public void refreshPageAddingCacheBuster() {
-    driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
-        "cb=" + DateTime.now().getMillis()));
+    driver.get(getUrlWithCacheBuster(driver.getCurrentUrl()));
+  }
+
+  public String getUrlWithCacheBuster(String url) {
+    return urlBuilder.appendQueryStringToURL(url, "cb=" + DateTime.now().getMillis());
   }
 
   public enum PositionsVideo {
