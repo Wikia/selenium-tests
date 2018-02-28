@@ -22,7 +22,7 @@ public class AdsContent {
 
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
-  public static final String MOBILE_BOTTOM_LB = "MOBILE_BOTTOM_LEADERBOARD";
+  public static final String MOBILE_BOTTOM_LB = "BOTTOM_LEADERBOARD";
   public static final String TOP_LB = "TOP_LEADERBOARD";
   public static final String MEDREC = "TOP_RIGHT_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
