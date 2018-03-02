@@ -1,119 +1,96 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.dataprovider.ads.AdTypeDataProvider;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
-
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 /**
  * https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
  */
+@InBrowser(
+  browser = Browser.CHROME,
+  emulator = Emulator.GOOGLE_NEXUS_5
+)
+@Test(groups = "AdTypeMercury")
 public class TestAdTypeMobile extends MobileTestTemplate {
 
-  private static final String SRC = "mobile";
-
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncSuccessWithAd"
-  )
-  public void adsAdTypeAsyncSuccessWithAd(String wikiName, String article, String adUnit,
-                                          String slotName, String imgUrl) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.waitForSlot(slotName);
-    ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
+  @Test
+  public void adsAdTypeAsyncSuccessWithAd() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
+    String imgUrl = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
+    Page page = new Page("project43", "SyntheticTests/AdType/Async/Success");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.waitForSlot(AdsContent.MOBILE_BOTTOM_LB);
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, imgUrl);
   }
 
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncHopNoAd"
-  )
-  public void adsAdTypeAsyncHopWithoutAd(String wikiName, String article, String adUnit,
-                                       String slotName) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifyNoAdInSlot(slotName);
+  @Test
+  public void adsAdTypeAsyncHopWithoutAd() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
+    Page page = new Page("project43", "SyntheticTests/AdType/Async/Hop");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.wait.forElementPresent(By.id(AdsContent.MOBILE_AD_IN_CONTENT));
+    ads.verifyNoAdInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
   }
 
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncSuccessNoAd"
-  )
-  public void adsAdTypeAsyncSuccessNoAd(String wikiName, String article, String adUnit,
-                                              String slotName) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifySlotExpanded(slotName);
+  @Test
+  public void adsAdTypeAsyncSuccessNoAd() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261075132&orderId=245575332
+    Page page = new Page("project43", "SyntheticTests/AdType/Async/Success/NoAd");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.wait.forElementPresent(By.id(AdsContent.MOBILE_BOTTOM_LB));
+    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }
 
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncHopWithAd"
-  )
-  public void adsAdTypeAsyncHopWithAd(String wikiName, String article, String adUnit,
-                                           String slotName) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifyNoAdInSlot(slotName);
+  @Test
+  public void adsAdTypeAsyncHopWithAd() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261089652&orderId=245575332
+    Page page = new Page("project43", "SyntheticTests/AdType/Async/Hop/WithAd");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.wait.forElementPresent(By.id(AdsContent.MOBILE_AD_IN_CONTENT));
+    ads.verifyNoAdInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
   }
 
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "asyncSuccessAndHop"
-  )
-  public void adsAdTypeAsyncSuccessAndHop(
-      String wikiName, String article, String adUnit, String slotNameWithAd, String imgUrl,
-      String slotNameWithoutAd
-  ) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+  @Test
+  public void adsAdTypeAsyncSuccessAndHop() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
+    Page page = new Page("project43", "SyntheticTests/AdType/Async/Success,Hop");
+    String imgUrl = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
+    String slotNameWithAd = AdsContent.MOBILE_BOTTOM_LB;
+    String slotNameWithoutAd = AdsContent.MOBILE_AD_IN_CONTENT;
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
     ads.wait.forElementPresent(By.id(slotNameWithAd));
     ads.wait.forElementPresent(By.id(slotNameWithoutAd));
-    ads.verifyGptIframe(adUnit, slotNameWithAd, SRC);
-    ads.verifyGptIframe(adUnit, slotNameWithoutAd, SRC);
     ads.verifyImgAdLoadedInSlot(slotNameWithAd, imgUrl);
     ads.verifyNoAdInSlot(slotNameWithoutAd);
   }
 
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "forcedSuccessNoAd"
-  )
-  public void adsAdTypeAsyncForcedSuccess(String wikiName, String article, String adUnit,
-                                               String slotName) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.waitForSlot(slotName);
-    ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifySlotExpanded(slotName);
+  @Test
+  public void adsAdTypeAsyncForcedSuccess() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261157332&orderId=245575332
+    Page page = new Page("project43", "SyntheticTests/AdType/ForcedSuccess");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.waitForSlot(AdsContent.MOBILE_BOTTOM_LB);
+    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }
 
-  @Test(
-      groups = "AdTypeMercury",
-      dataProviderClass = AdTypeDataProvider.class,
-      dataProvider = "inspectIframeImg"
-  )
-  public void adsAdTypeInspectIframe(String wikiName, String article, String adUnit,
-                                                 String slotName, String imgUrl) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.wait.forElementPresent(By.id(slotName));
-    ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
+  @Test
+  public void adsAdTypeInspectIframe() {
+    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261158532&orderId=245575332
+    Page page = new Page("project43", "SyntheticTests/AdType/InspectIframe");
+    String imgUrl = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
+
+    final By slotSelector = By.id(AdsContent.MOBILE_BOTTOM_LB);
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.waitForSlotExpanded(slotSelector);
+    ads.scrollToPosition(slotSelector);
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, imgUrl);
   }
 }

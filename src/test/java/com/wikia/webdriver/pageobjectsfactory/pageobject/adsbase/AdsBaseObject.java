@@ -341,6 +341,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     waitForElementToHaveSize(0, 0, slot);
   }
 
+  public void waitForSlotExpanded(final By slotSelector) {
+    WebElement slot = wait.forElementPresent(slotSelector);
+    waitForSlotExpanded(slot);
+  }
+
   public void waitForSlotExpanded(final WebElement slot) {
     waitFor.until(new ExpectedCondition<Object>() {
       @Override
