@@ -22,10 +22,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
       dataProvider = "adsSlotSizeOasis",
       groups = "AdsSlotSizesOasis"
   )
-  public void adsSlotSizesOasis(Page page,
-                                String urlParamToEnable,
-                                Map<String, Object> slotInfo) {
-
+  public void adsSlotSizesOasis(Page page, String urlParamToEnable, Map<String, Object> slotInfo) {
     adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo);
   }
 
@@ -34,18 +31,11 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
       dataProvider = "adsSlotSizeMercury",
       groups = "AdsSlotSizesMercury"
   )
-  public void adsSlotSizesMercury(Page page,
-                                  String urlParamToEnable,
-                                  Map<String, Object> slotInfo) {
-
+  public void adsSlotSizesMercury(Page page, String urlParamToEnable, Map<String, Object> slotInfo) {
     adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo);
   }
 
-  private void adsSlotSizes(Page page,
-                            String urlParamToEnable,
-                            Dimension pageSize,
-                            Map<String, Object> slotInfo) {
-
+  private void adsSlotSizes(Page page, String urlParamToEnable, Dimension pageSize, Map<String, Object> slotInfo) {
     String slotName = slotInfo.get("slotName").toString();
     Dimension slotSize = (Dimension) slotInfo.get("slotSize");
 
@@ -63,8 +53,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
         .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
 
     ads.verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()));
-    ads.verifyIframeSize(slotName, slotInfo.get("src").toString(),
-                          slotSize.getWidth(), slotSize.getHeight());
+    ads.verifyIframeSize(slotName, slotInfo.get("src").toString(), slotSize.getWidth(), slotSize.getHeight());
   }
 
   private void log(String slotName, Dimension slotSize) {

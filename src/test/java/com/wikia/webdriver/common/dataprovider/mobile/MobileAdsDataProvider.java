@@ -440,7 +440,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
                 .put("src", "mobile")
@@ -470,7 +470,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")
