@@ -78,13 +78,12 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  @RelatedIssue(issueID = "SUS-123", comment = "Ten test nie działą")
   public void GoToHelpPage() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open();
     HelpPage helpPage = renameUserPage.goToHelpPage();
 
-    Assertion.assertEquals(helpPage.isHelpPageHeaderPresent(), true);
+    Assertion.assertEquals(renameUserPage.getHeaderText(), "Help:Rename my account");
   }
 
   @Test

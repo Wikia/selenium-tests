@@ -12,7 +12,7 @@ public class HelpPage extends WikiBasePageObject {
 
 
   private static final By HELP_PAGE_HEADER_BY = By.cssSelector(".page-header__title");
-  @FindBy(css = "")
+  @FindBy(css = "Help:Rename my account")
   private WebElement messageTextBox;
 
 
