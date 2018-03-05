@@ -35,7 +35,6 @@ public class AllTagsTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
     widgets = new ArrayList<>();
-    widgets.add(new PollsnackWidgetPageObject());
     widgets.add(new SoundCloudWidgetPageObject());
     widgets.add(new SpotifyWidgetPageObject());
     widgets.add(new TwitterWidgetPageObject());
