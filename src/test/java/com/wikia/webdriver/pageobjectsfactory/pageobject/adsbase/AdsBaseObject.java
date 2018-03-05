@@ -255,7 +255,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyLineItemId(String slotName, String lineItemId) {
     String lineItemParam = getSlotAttribute(slotName, GPT_DATA_ATTRIBUTES[0]);
-    Assertion.assertStringContains(lineItemParam, lineItemId);
+      Assertion.assertStringContains(lineItemParam, lineItemId);
     PageObjectLogging
         .log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
     return this;
@@ -597,6 +597,20 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerAdSlot(String slotName) {
+    if (slotName.equals(AdsContent.BOTTOM_LB) && driver.isChromeMobile()) {
+      waitForSlotExpanded(By.id(AdsContent.MOBILE_AD_IN_CONTENT));
+
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+
+      triggerBLB();
+
+      return this;
+    }
+
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerBLB();
       return this;
