@@ -90,7 +90,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT), AdsContent.MOBILE_AD_IN_CONTENT);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER), AdsContent.MOBILE_PREFOOTER);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB), AdsContent.MOBILE_PREFOOTER);
   }
 
   @InBrowser(
