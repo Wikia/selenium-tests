@@ -17,7 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
@@ -34,7 +33,6 @@ public class AllTagsTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void prepareTest() {
     widgets = new ArrayList<>();
-    widgets.add(new PollsnackWidgetPageObject());
     widgets.add(new SoundCloudWidgetPageObject());
     widgets.add(new SpotifyWidgetPageObject());
     widgets.add(new TwitterWidgetPageObject());
