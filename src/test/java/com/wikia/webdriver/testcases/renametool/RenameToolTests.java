@@ -162,7 +162,7 @@ public class RenameToolTests extends NewTestTemplate {
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
     MessageWall wall = new MessageWall().open(user.getUsername());
-    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = String.format("%s%s", PageContent.MESSAGE_WALL_MESSAGE_PREFIX, timestamp);
     String title = String.format("%s%s", PageContent.MESSAGE_WALL_TITLE_PREFIX, timestamp);
     mini.switchAndWrite(message);
