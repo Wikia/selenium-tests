@@ -66,9 +66,7 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToPosition(MOBILE_PREFOOTER);
-    Assertion.assertTrue(ads.isMobilePrefooterAdDisplayed(), "Mobile prefooter ad is not displayed");
-    ads.scrollToPosition(MOBILE_BOTTOM_LEADERBOARD);
+    ads.scrollToPosition(By.id(AdsContent.MOBILE_BOTTOM_LB));
     Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(), "Mobile bottom leaderboard ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
