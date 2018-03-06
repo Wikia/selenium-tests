@@ -96,37 +96,39 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] skinWithTheme() {
     return new Object[][]{
-        {
-            WIKI_REGULAR, "Skin",
-            new Dimension(1200, 1000),
-            NO_SKIN_LEFT, NO_SKIN_RIGHT,
-            null,
-            null
-        }, {
+//        {
+//            WIKI_REGULAR, "Skin",
+//            new Dimension(1200, 1000),
+//            NO_SKIN_LEFT, NO_SKIN_RIGHT,
+//            null,
+//            null
+//        },
+            {
             WIKI_REGULAR, "Skin",
             new Dimension(1600, 900),
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
-        }, {
-            WIKI_REGULAR, "Skin",
-            WindowSize.DESKTOP,
-            SKIN_LEFT, SKIN_RIGHT,
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            WIKI_REGULAR, "Skin",
-            new Dimension(2400, 1080),
-            SKIN_LEFT, SKIN_RIGHT,
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            WIKI_REGULAR, "Skin/NoMiddleColor",
-            WindowSize.DESKTOP,
-            SKIN_LEFT, SKIN_RIGHT,
-            "AAAAAA",
-            ""
         }
+//            {
+//            WIKI_REGULAR, "Skin",
+//            WindowSize.DESKTOP,
+//            SKIN_LEFT, SKIN_RIGHT,
+//            "AAAAAA",
+//            "FFFFFF"
+//        }, {
+//            WIKI_REGULAR, "Skin",
+//            new Dimension(2400, 1080),
+//            SKIN_LEFT, SKIN_RIGHT,
+//            "AAAAAA",
+//            "FFFFFF"
+//        }, {
+//            WIKI_REGULAR, "Skin/NoMiddleColor",
+//            WindowSize.DESKTOP,
+//            SKIN_LEFT, SKIN_RIGHT,
+//            "AAAAAA",
+//            ""
+//        }
     };
   }
 
