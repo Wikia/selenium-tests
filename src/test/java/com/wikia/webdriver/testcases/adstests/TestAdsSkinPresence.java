@@ -11,20 +11,20 @@ import org.testng.annotations.Test;
 
 public class TestAdsSkinPresence extends NewTestTemplate {
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "skinWithoutTheme",
-      groups = "AdsSkinPresence"
-  )
-  public void adsSkinPresenceOnWikiWithoutTheme(String wikiName, String article,
-                                                Dimension resolution,
-                                                String expectedLeftSide,
-                                                String expectedRightSide,
-                                                String backgroundColor,
-                                                String middleColor) {
-    verifySkin(wikiName, article, resolution, expectedLeftSide, expectedRightSide, backgroundColor,
-               middleColor);
-  }
+//  @Test(
+//      dataProviderClass = AdsDataProvider.class,
+//      dataProvider = "skinWithoutTheme",
+//      groups = "AdsSkinPresence"
+//  )
+//  public void adsSkinPresenceOnWikiWithoutTheme(String wikiName, String article,
+//                                                Dimension resolution,
+//                                                String expectedLeftSide,
+//                                                String expectedRightSide,
+//                                                String backgroundColor,
+//                                                String middleColor) {
+//    verifySkin(wikiName, article, resolution, expectedLeftSide, expectedRightSide, backgroundColor,
+//               middleColor);
+//  }
 
   @Execute(mockAds = "true")
   @Test(
