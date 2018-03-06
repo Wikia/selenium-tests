@@ -34,7 +34,7 @@ public class FandomAdsDataProvider {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
             "box-office-audiences-download-angry-birds",
             365404452,
-            365416332
+            271491732
         }
     };
   }
@@ -47,7 +47,7 @@ public class FandomAdsDataProvider {
             AdsFandomTestTemplate.PAGE_TYPE_TOPIC,
             "tv",
             365404452,
-            365416332
+            271491732
         }
     };
   }
