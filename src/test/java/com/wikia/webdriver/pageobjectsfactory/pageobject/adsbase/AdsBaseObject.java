@@ -882,19 +882,9 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public boolean isMobilePrefooterAdDisplayed() {
-    try{
-      wait.forElementVisible(mobilePrefooter);
-      return true;
-    } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Mobile prefooter ad is not displayed", ex, true);
-      return false;
-    }
-  }
-
   public boolean isMobileBottomLeaderboardAdDisplayed() {
     try{
-      wait.forElementVisible(mobileBottomLeaderboard);
+      wait.forElementVisible(By.id(AdsContent.MOBILE_BOTTOM_LB));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);

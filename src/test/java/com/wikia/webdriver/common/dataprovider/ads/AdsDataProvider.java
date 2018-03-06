@@ -761,14 +761,6 @@ public class AdsDataProvider {
             ),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILE_PREFOOTER)
-                    .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", "365416332")
-                    .put("src", "mobile")
-                    .build()
-            ),
-            Arrays.asList(
-                ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", "365416332")
@@ -789,14 +781,6 @@ public class AdsDataProvider {
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
-                    .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", "365416332")
-                    .put("src", "mobile")
-                    .build()
-            ),
-            Arrays.asList(
-                ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILE_PREFOOTER)
                     .put("slotSize", new Dimension(300, 250))
                     .put("lineItemId", "365416332")
                     .put("src", "mobile")
