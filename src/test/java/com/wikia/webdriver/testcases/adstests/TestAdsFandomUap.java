@@ -35,7 +35,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomArticleUapPage",
       groups = {"AdsFandomUapMobile"}
   )
-  @RelatedIssue(issueID = "ADEN-4339")
+
   public void adsFandomArticleUapMobile(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
@@ -66,7 +66,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomTopicPage",
       groups = {"AdsFandomUapMobile"}
   )
-  @RelatedIssue(issueID = "ADEN-4339")
+
   public void adsFandomUapOnTopicMobile(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
