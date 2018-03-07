@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
@@ -35,7 +34,6 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomArticleUapPage",
       groups = {"AdsFandomUapMobile"}
   )
-  @RelatedIssue(issueID = "ADEN-4339")
   public void adsFandomArticleUapMobile(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
@@ -66,7 +64,6 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomTopicPage",
       groups = {"AdsFandomUapMobile"}
   )
-  @RelatedIssue(issueID = "ADEN-4339")
   public void adsFandomUapOnTopicMobile(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
@@ -76,17 +73,17 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
 
   private void verifyUapAtf(long atfId, String slotName, AdsFandomObject fandomPage) {
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    Assertion.assertEquals(atfId, fandomPage.getLineItemId(AdsFandomContent.TOP_LEADERBOARD));
+    Assertion.assertEquals(fandomPage.getLineItemId(AdsFandomContent.TOP_LEADERBOARD), atfId);
 
     fandomPage.verifySlot(slotName);
-    Assertion.assertEquals(atfId, fandomPage.getLineItemId(AdsFandomContent.TOP_BOXAD));
+    Assertion.assertEquals(fandomPage.getLineItemId(AdsFandomContent.TOP_BOXAD), atfId);
   }
 
   private void verifyUapBtf(long btfId, String slotName, String bottomSlotName, AdsFandomObject fandomPage) {
     fandomPage.verifySlot(slotName);
-    Assertion.assertEquals(btfId, fandomPage.getLineItemId(slotName));
+    Assertion.assertEquals(fandomPage.getLineItemId(slotName), btfId);
 
     fandomPage.verifySlot(bottomSlotName);
-    Assertion.assertEquals(btfId, fandomPage.getLineItemId(bottomSlotName));
+    Assertion.assertEquals(fandomPage.getLineItemId(bottomSlotName), btfId);
   }
 }

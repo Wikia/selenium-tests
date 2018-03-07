@@ -1,11 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -26,7 +24,6 @@ public class TestAdsSkinPresence extends NewTestTemplate {
                middleColor);
   }
 
-  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "skinWithTheme",
@@ -37,8 +34,7 @@ public class TestAdsSkinPresence extends NewTestTemplate {
                                              String expectedRightSide,
                                              String backgroundColor,
                                              String middleColor) {
-    verifySkin(wikiName, article, resolution, expectedLeftSide, expectedRightSide, backgroundColor,
-               middleColor);
+    verifySkin(wikiName, article, resolution, expectedLeftSide, expectedRightSide, backgroundColor, middleColor);
   }
 
   private void verifySkin(String wikiName, String article,
@@ -50,10 +46,7 @@ public class TestAdsSkinPresence extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     PageObjectLogging.log("Window resolution: ", String.valueOf(resolution.width), true);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, resolution);
-    adsBaseObject.verifySkin(expectedLeftSide,
-                             expectedRightSide,
-                             backgroundColor,
-                             middleColor);
+    adsBaseObject.verifySkin(expectedLeftSide, expectedRightSide, backgroundColor, middleColor);
   }
 
 }
