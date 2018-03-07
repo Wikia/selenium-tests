@@ -33,4 +33,61 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
     Assertion.assertEquals(video.getTitle(), "Papuga atakuje!");
   }
 
+  @Test
+  public void videoIsPlaying() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo");
+
+    Assertion.assertTrue(video.isVideoPlaying());
+  }
+
+  @Test
+  public void videoIsPaused() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .setAutoplayCookie(false)
+        .openWikiArticle("FeaturedVideo")
+        .clickPlay()
+        .activatePlayerOptions()
+        .clickPause();
+
+    Assertion.assertTrue(video.isVideoPaused());
+  }
+
+  @Test
+  public void autoplayToggleIsOn() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .openWikiArticle("FeaturedVideo")
+        .setAutoplayCookie(true)
+        .clickPause()
+        .openSettingsMenu();
+
+    Assertion.assertTrue(video.isAutoplayOn());
+  }
+
+  @Test
+  public void autoplayToggleIsOff() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .setAutoplayCookie(false)
+        .openWikiArticle("FeaturedVideo")
+        .clickPlay()
+        .activatePlayerOptions()
+        .clickPause()
+        .openSettingsMenu();
+
+    Assertion.assertFalse(video.isAutoplayOn());
+  }
+
+  @Test
+  public void videoMutedWhenAutoplayed() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .setAutoplayCookie(true)
+        .openWikiArticle("FeaturedVideo")
+        .activatePlayerOptions()
+        .clickPause()
+        .showControlBar();
+
+    Assertion.assertTrue(video.isVolumeMuted());
+  }
+
 }
