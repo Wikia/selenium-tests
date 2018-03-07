@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,10 +28,10 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
   @FindBy(css = ".jw-controlbar")
   private WebElement controlbar;
 
-  @FindBy(css = ".jw-svg-icon .jw-svg-icon-play")
+  @FindBy(css = "*[aria-label='Start playback']")
   private WebElement playButton;
 
-  @FindBy(css = ".jw-svg-icon .jw-svg-icon-pause")
+  @FindBy(css = "*[aria-label='Pause']")
   private WebElement pauseButton;
 
   @FindBy(css = ".jw-state-playing")
@@ -44,7 +43,7 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
   @FindBy(css = ".wikia-jw-settings-button")
   private WebElement videoQualityButton;
 
-  @FindBy(css = "#featured-video__player-videoAutoplayToggle")
+  @FindBy(css = ".wds-toggle__label")
   private WebElement autoplayToggle;
 
   @FindBy(css = ".jw-icon-tooltip.jw-icon-volume.jw-off")
@@ -65,6 +64,8 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
         null
     ));
 
+    driver.navigate().refresh();
+
     return this;
   }
 
@@ -84,90 +85,6 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
     wait.forElementVisible(primaryTitle);
 
     return primaryTitle.getText();
-  }
-
-  public FeaturedVideoMobileComponentObject activatePlayerOptions() {
-    wait.forElementClickable(player);
-    player.click();
-
-    return this;
-  }
-
-  public FeaturedVideoMobileComponentObject clickPlay() {
-    wait.forElementClickable(playButton);
-    playButton.click();
-
-    return this;
-  }
-
-  public FeaturedVideoMobileComponentObject clickPause() {
-    wait.forElementClickable(pauseButton);
-    pauseButton.click();
-
-    return this;
-  }
-
-  public boolean isVideoPlaying() {
-    wait.forElementVisible(playerStatePlaying);
-
-    return playerStatePlaying.isDisplayed();
-  }
-
-  public boolean isVideoPaused() {
-    wait.forElementVisible(playerStatePaused);
-
-    return playerStatePaused.isDisplayed();
-  }
-
-
-  public boolean isAutoplayOn() {
-
-    return "true".equals(autoplayToggle.getAttribute("checked"));
-  }
-
-  public FeaturedVideoMobileComponentObject showControlBar() {
-    wait.forElementClickable(player);
-
-    return this;
-  }
-
-  public FeaturedVideoMobileComponentObject openSettingsMenu() {
-    showControlBar();
-    wait.forElementClickable(settingsMenu)
-        .click();
-
-    return this;
-  }
-
-  public FeaturedVideoMobileComponentObject openQualityMenu() {
-    wait.forElementClickable(videoQualityButton)
-        .click();
-
-    return this;
-  }
-
-  public FeaturedVideoMobileComponentObject openCaptionsMenu() {
-    wait.forElementClickable(videoCaptionsButton)
-        .click();
-
-    return this;
-  }
-
-  public boolean isVolumeMuted() {
-    wait.forElementClickable(volumeMuted);
-    return volumeMuted.isEnabled();
-  }
-
-  public boolean isQualityAvailable() {
-
-    return wait.forTextInElement(videoSettingsSubmenu, 0, "Auto");
-
-  }
-
-  public boolean areCaptionsAvailable() {
-    By last = By.xpath("//*[@data-track='0']");
-    return wait.forTextInElement(last, "No captions");
-
   }
 
 }
