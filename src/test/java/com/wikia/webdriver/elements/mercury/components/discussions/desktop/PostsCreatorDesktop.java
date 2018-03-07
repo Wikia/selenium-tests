@@ -52,6 +52,14 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement uploadButton;
 
   @Getter
+  @FindBy(css = ".poll-add-button")
+  private WebElement addPollButton;
+
+  @Getter
+  @FindBy(css = ".poll-wrapper")
+  private WebElement pollPreview;
+
+  @Getter
   @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
   private WebElement imagePreview;
 
