@@ -14,6 +14,7 @@ public class AdTypeDataProvider {
     return new Object[][]{
         {
             "project43", "SyntheticTests/AdType/Collapse",
+            "wka.life/_project43//article",
             new String[] {
                 AdsContent.TOP_LB,
                 AdsContent.MEDREC

@@ -12,7 +12,7 @@ public class TestAdType extends TemplateNoFirstLoad {
       dataProvider = "collapse",
       groups = "TestAdTypeCollapse"
   )
-  public void adsAdTypeCollapse(String wikiName, String article, String[] slots) {
+  public void adsAdTypeCollapse(String wikiName, String article, String adUnit, String[] slots) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
