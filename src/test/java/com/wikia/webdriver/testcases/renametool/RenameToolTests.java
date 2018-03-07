@@ -177,6 +177,12 @@ public class RenameToolTests extends NewTestTemplate {
     wall.submitEdition();
     wall.verifyMessageEditText(title, messageEdit, user.getUsername());
 
+    try {
+      Thread.sleep(15000);
+    } catch (InterruptedException e) {
+      e.printStackTrace( );
+    }
+
     String newName = "NewUser Nąmę" + timestamp;
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()

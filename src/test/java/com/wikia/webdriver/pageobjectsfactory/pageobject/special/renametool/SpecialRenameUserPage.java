@@ -75,6 +75,7 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   }
 
   public HelpPage goToHelpPage() {
+    jsActions.scrollToElement(helpLink);
     helpLink.click();
 
     return new HelpPage(driver);
