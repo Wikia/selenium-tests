@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"FeaturedVideoMobile"})
 @Execute(onWikia = "featuredvideo", asUser = User.ANONYMOUS)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 public class FeaturedVideoMobileTests extends NewTestTemplate {
 
   @Test
