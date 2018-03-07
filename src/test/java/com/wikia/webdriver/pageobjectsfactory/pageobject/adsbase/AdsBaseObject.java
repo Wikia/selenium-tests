@@ -249,8 +249,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyIframeSize(String slotName, String src, int slotWidth, int slotHeight) {
-    waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
+  public void verifyIframeSize(String slotName, int slotWidth, int slotHeight) {
+    waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName));
   }
 
   public AdsBaseObject verifyLineItemId(String slotName, String lineItemId) {
@@ -550,7 +550,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return providersChain;
   }
 
-  private WebElement getIframe(String slotName, String src) {
+  private WebElement getIframe(String slotName) {
     return driver.findElement(By.cssSelector("#" + slotName + " iframe"));
   }
 

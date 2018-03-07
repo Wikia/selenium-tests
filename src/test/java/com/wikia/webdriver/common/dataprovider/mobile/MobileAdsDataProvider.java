@@ -413,7 +413,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 100))
                 .put("lineItemId", 272132532)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -423,7 +422,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -433,7 +431,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -443,7 +440,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -453,7 +449,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -463,7 +458,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -473,7 +467,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
-                .put("src", "mobile")
                 .build()
         }
     };

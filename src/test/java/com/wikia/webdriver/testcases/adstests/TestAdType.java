@@ -18,7 +18,7 @@ public class TestAdType extends TemplateNoFirstLoad {
 
     for (String slotName : slots) {
       ads.verifyGptIframe(adUnit, slotName, "gpt");
-      ads.verifyIframeSize(slotName, "gpt", 0, 0);
+      ads.verifyIframeSize(slotName, 0, 0);
     }
   }
 }
