@@ -19,15 +19,16 @@ import org.testng.annotations.Test;
 )
 @Test(groups = "AdTypeMercury")
 public class TestAdTypeMobile extends MobileTestTemplate {
-
+  private static final String DFP_IMAGE_URL =
+      "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
+  
   @Test
   public void adsAdTypeAsyncSuccessWithAd() {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
-    String imgUrl = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
     Page page = new Page("project43", "SyntheticTests/AdType/Async/Success");
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
     ads.waitForSlot(AdsContent.MOBILE_BOTTOM_LB);
-    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, imgUrl);
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, DFP_IMAGE_URL);
   }
 
   @Test
@@ -62,13 +63,12 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
     Page page = new Page("project43", "SyntheticTests/AdType/Async/Success,Hop");
-    String imgUrl = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
     String slotNameWithAd = AdsContent.MOBILE_BOTTOM_LB;
     String slotNameWithoutAd = AdsContent.MOBILE_AD_IN_CONTENT;
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
     ads.wait.forElementPresent(By.id(slotNameWithAd));
     ads.wait.forElementPresent(By.id(slotNameWithoutAd));
-    ads.verifyImgAdLoadedInSlot(slotNameWithAd, imgUrl);
+    ads.verifyImgAdLoadedInSlot(slotNameWithAd, DFP_IMAGE_URL);
     ads.verifyNoAdInSlot(slotNameWithoutAd);
   }
 
@@ -85,12 +85,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   public void adsAdTypeInspectIframe() {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261158532&orderId=245575332
     Page page = new Page("project43", "SyntheticTests/AdType/InspectIframe");
-    String imgUrl = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
-
     final By slotSelector = By.id(AdsContent.MOBILE_BOTTOM_LB);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
     ads.waitForSlotExpanded(slotSelector);
     ads.scrollToPosition(slotSelector);
-    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, imgUrl);
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, DFP_IMAGE_URL);
   }
 }
