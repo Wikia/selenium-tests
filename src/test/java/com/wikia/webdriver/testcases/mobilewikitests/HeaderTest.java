@@ -25,7 +25,6 @@ public class HeaderTest extends NewTestTemplate {
   private static final String INVISIBLE_MESSAGE = "invisible";
 
   private static final String ELEMENT_EXPECTATION_MESSAGE_TEMPLATE = "%s was expected to be %s.";
-  private static final String INVALID_ATTRIBUTE_MESSAGE_TEMPLATE = "%s has invalid %s attribute.";
 
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
