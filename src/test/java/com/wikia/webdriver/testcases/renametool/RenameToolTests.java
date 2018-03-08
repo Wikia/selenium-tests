@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -83,7 +82,7 @@ public class RenameToolTests extends NewTestTemplate {
         .open();
     HelpPage helpPage = renameUserPage.goToHelpPage();
 
-    Assertion.assertEquals(renameUserPage.getHeaderText(), "Help:Rename my account");
+    Assertion.assertEquals(helpPage.getHeaderText(), "Help:Rename my account");
   }
 
   @Test
@@ -180,7 +179,7 @@ public class RenameToolTests extends NewTestTemplate {
     try {
       Thread.sleep(15000);
     } catch (InterruptedException e) {
-      e.printStackTrace( );
+      e.printStackTrace();
     }
 
     String newName = "NewUser Nąmę" + timestamp;
