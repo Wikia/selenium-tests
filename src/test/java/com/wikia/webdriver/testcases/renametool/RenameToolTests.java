@@ -180,7 +180,8 @@ public class RenameToolTests extends NewTestTemplate {
     try {
       Thread.sleep(15000);
     } catch (InterruptedException e) {
-      PageObjectLogging.logError("Interruption during waiting for Message Wall background task");
+      PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
+                                 e);
     }
 
 
