@@ -5,7 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -31,10 +30,10 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".site-head-icon-search > a.icon-button")
   private WebElement searchIconClickableLink;
 
-  @FindBy(css = ".icon-button-icon > use[*|href*='close']")
+  @FindBy(css = ".site-head-icon.icon-button")
   private WebElement closeButtonInnerElement;
 
-  @FindBy(css = ".nav-menu")
+  @FindBy(css = ".site-head-icon-nav")
   private WebElement navMenu;
 
   @FindBy(css = ".wds-global-navigation__search-input")
