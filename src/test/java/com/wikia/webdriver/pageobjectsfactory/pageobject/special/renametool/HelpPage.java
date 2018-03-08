@@ -12,16 +12,10 @@ public class HelpPage extends WikiBasePageObject {
 
 
   private static final By HELP_PAGE_HEADER_BY = By.cssSelector(".page-header__title");
-  @FindBy(css = "")
-  private WebElement messageTextBox;
 
 
   public HelpPage(WebDriver driver) {
     super();
     PageFactory.initElements(driver, this);
-  }
-
-  public boolean isHelpPageHeaderPresent() {
-    return !driver.findElements(HELP_PAGE_HEADER_BY).isEmpty();
   }
 }
