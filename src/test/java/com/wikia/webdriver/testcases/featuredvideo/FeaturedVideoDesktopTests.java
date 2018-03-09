@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo.FeaturedVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.featuredvideo.FeaturedVideoDesktopComponentObject;
 
 import org.testng.annotations.Test;
 
@@ -18,7 +18,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoIsPresentOnArticle() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
@@ -27,7 +27,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoTitleIsVisible() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
@@ -36,7 +36,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 // Test is disabled until Derek decides if we want to show subtitle to a user
   @Test(enabled = false)
   public void videoSubtitleIsVisible() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
@@ -48,7 +48,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void feedbackIsVisibleWhenVideoPlayed() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
         .clickPlay();
@@ -58,7 +58,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoIsPlaying() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo");
 
@@ -67,7 +67,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoIsPaused() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause();
@@ -77,7 +77,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void feedbackIsNotVisibleWhenVideoPaused() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause();
@@ -87,7 +87,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void autoplayToggleIsOn() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
@@ -98,7 +98,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void autoplayToggleIsOff() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
         .clickPlay()
@@ -110,7 +110,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoMutedWhenAutoplayed() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
@@ -121,7 +121,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoQualityCanBeChanged() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
@@ -135,7 +135,7 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoCaptionsCanBeChanged() {
-    FeaturedVideoComponentObject video = new FeaturedVideoComponentObject()
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
         .setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()

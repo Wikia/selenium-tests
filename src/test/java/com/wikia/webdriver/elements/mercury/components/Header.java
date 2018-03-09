@@ -47,19 +47,4 @@ public class Header extends BasePageObject {
     }
   }
 
-  public String getHeroImageCssValue(String property) {
-    try {
-      return header.getCssValue(property);
-    } catch (TimeoutException | ElementNotFoundException e) {
-      return "";
-    }
-  }
-
-  public boolean isHeroImageSquare() {
-    try {
-      return header.getSize().getHeight() == header.getSize().getWidth();
-    } catch (TimeoutException | ElementNotFoundException e) {
-      return false;
-    }
-  }
 }

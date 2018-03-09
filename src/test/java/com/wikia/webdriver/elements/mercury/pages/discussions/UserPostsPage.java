@@ -28,14 +28,14 @@ public class UserPostsPage extends PageWithPosts {
   @FindBy(className = "header-dropdown-button")
   private WebElement moderation;
 
-  private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+$");
+  private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+");
 
   private static final String PATH = "/d/u/%s";
 
   private static final String NON_EXISTING_USER_ID = "4809883";
 
   public UserPostsPage open(String userId) {
-    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, userId));
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + String.format(PATH, userId)));
     waitForEmberLoad();
     return this;
   }

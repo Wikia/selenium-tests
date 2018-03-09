@@ -1,19 +1,24 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -24,11 +29,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Helios {
 
@@ -101,6 +107,8 @@ public class Helios {
 
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
     httpPost.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
+
+
 
     try {
       String token = executeAndRetry(httpPost, extractAccessToken());
@@ -183,9 +191,14 @@ public class Helios {
   }
 
   private static String getUserId(String userName) {
+
     try {
       String encodedUsername = URLEncoder.encode(userName, "UTF-8");
-      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername));
+
+      //Downgrade to use http proxy
+      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername).replace("https:","http:"));
+      httpGet.setConfig(RequestConfig.custom().setProxy(getBorderProxy()).build());
+
       PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
       return executeAndRetry(httpGet, extractUserId());
     } catch (UnsupportedEncodingException e) {
@@ -198,6 +211,26 @@ public class Helios {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
+    }
+  }
+
+  private static HttpHost getBorderProxy() {
+
+    EnvType envType = Configuration.getEnvType(Configuration.getEnv());
+    File configFile = new File(Configuration.getCredentialsFilePath());
+
+    switch (envType) {
+      case DEV : {
+        return new HttpHost(
+            XMLReader.getValue(configFile, "border.poz.address"),
+            Integer.parseInt(XMLReader.getValue(configFile, "border.poz.port")),
+            XMLReader.getValue(configFile, "border.poz.protocol"));
+      } default: {
+        return new HttpHost(
+                XMLReader.getValue(configFile, "border.sjc.address"),
+                Integer.parseInt(XMLReader.getValue(configFile, "border.sjc.port")),
+                XMLReader.getValue(configFile, "border.sjc.protocol"));
+      }
     }
   }
 

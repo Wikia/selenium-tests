@@ -4,12 +4,12 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -78,13 +78,12 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  @RelatedIssue(issueID = "SUS-123", comment = "Ten test nie działą")
   public void GoToHelpPage() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open();
     HelpPage helpPage = renameUserPage.goToHelpPage();
 
-    Assertion.assertEquals(helpPage.isHelpPageHeaderPresent(), true);
+    Assertion.assertEquals(helpPage.getHeaderText(), "Help:Rename my account");
   }
 
   @Test
@@ -163,7 +162,7 @@ public class RenameToolTests extends NewTestTemplate {
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
     MessageWall wall = new MessageWall().open(user.getUsername());
-    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = String.format("%s%s", PageContent.MESSAGE_WALL_MESSAGE_PREFIX, timestamp);
     String title = String.format("%s%s", PageContent.MESSAGE_WALL_TITLE_PREFIX, timestamp);
     mini.switchAndWrite(message);
@@ -177,6 +176,14 @@ public class RenameToolTests extends NewTestTemplate {
     mini.switchAndEditMessageWall(messageEdit);
     wall.submitEdition();
     wall.verifyMessageEditText(title, messageEdit, user.getUsername());
+
+    try {
+      Thread.sleep(15000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
+                                 e);
+    }
+
 
     String newName = "NewUser Nąmę" + timestamp;
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
