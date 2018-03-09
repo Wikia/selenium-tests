@@ -43,6 +43,10 @@ public class PostEntity {
     return !post.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
   }
 
+  public boolean hasPoll() {
+    return !post.findElements(By.cssSelector(".poll-bar")).isEmpty();
+  }
+
   private WebElement findTopNoteElement() {
     return post.findElement(By.className("top-note"));
   }

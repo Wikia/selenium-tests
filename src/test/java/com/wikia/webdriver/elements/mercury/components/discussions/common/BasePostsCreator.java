@@ -35,7 +35,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getPollPreview();
   protected abstract WebElement getUploadButton();
-  protected  abstract WebElement getAddPollButton();
+  protected abstract WebElement getAddPollButton();
   protected abstract WebElement getImageDeleteButton();
   protected abstract WebElement getOpenGraphDeleteButton();
   protected abstract By getOpenGraphContainer();
@@ -138,10 +138,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return this;
   }
 
-  public void addPoll() {
+  public Poll addPoll() {
     getAddPollButton().click();
     wait.forElementVisible(getPollPreview());
-    //return new PollCreator;
+    return new Poll();
   }
 
   public String uploadUnsupportedImage() {

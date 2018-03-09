@@ -195,6 +195,13 @@ public class Post extends BasePage {
     return hasImage;
   }
 
+  public boolean firstPostHasPoll() {
+    setShortImplicitWait();
+    boolean hasPoll = findNewestPost().hasPoll();
+    restoreDefaultImplicitWait();
+    return hasPoll;
+  }
+
   public boolean firstPostHasOpenGraph() {
     setShortImplicitWait();
     boolean hasOpenGraph = findNewestPost().hasOpenGraph();
