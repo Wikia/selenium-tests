@@ -22,7 +22,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   public static final String[] MOBILE_SLOTS = {
           AdsContent.MOBILE_TOP_LB,
           AdsContent.MOBILE_AD_IN_CONTENT,
-          AdsContent.MOBILE_PREFOOTER
+          AdsContent.MOBILE_BOTTOM_LB
   };
 
 
