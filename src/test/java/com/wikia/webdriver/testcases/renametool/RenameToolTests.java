@@ -104,7 +104,7 @@ public class RenameToolTests extends NewTestTemplate {
   public void newUserCreateAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
-    String hashstamp = UUID.randomUUID().toString().replace("-","0");;
+    String hashstamp = UUID.randomUUID().toString().replace("-","0");
     SignUpUser
         user =
         new SignUpUser("Q" + timestamp, credentials.email, "aaaa",
