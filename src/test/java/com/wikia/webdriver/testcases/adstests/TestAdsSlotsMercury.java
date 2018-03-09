@@ -5,102 +5,45 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
 import org.testng.annotations.Test;
 
+@InBrowser(
+  browser = Browser.CHROME,
+  emulator = Emulator.GOOGLE_NEXUS_5
+)
+@Test(groups = "AdsSlotsMercury")
 public class TestAdsSlotsMercury extends MobileTestTemplate {
   private static final String CREATIVE_IMAGE_URL = "googlesyndication.com/simgad/8216620376696319112";
-  private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
-  private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
-  private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
-  private static final String SRC = "mobile";
   private static final String PORTABLE_INFOBOX = ".portable-infobox";
   private static final String ARTICLE_HEADER = ".wiki-page-header";
   private static final String ARTICLE_BODY = ".article-body";
   private static final String ARTICLE_FOOTER = ".article-footer";
 
-  @Test(
-      groups = "AdsSlotsMercury",
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "allSlots"
-  )
-  public void adsAllSlotsOnPage(String wikiName,
-                                String article,
-                                String adUnit) {
-
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, SRC);
+  @Test
+  public void adsAllSlotsOnPage() {
+    Page page = new Page("project43", "SyntheticTests/Mercury/Slots/AllSlots");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.verifySlotExpanded(AdsContent.MOBILE_AD_IN_CONTENT);
     ads.scrollToPosition(ARTICLE_FOOTER);
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
-    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
-    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, CREATIVE_IMAGE_URL);
-
-    Assertion.assertFalse(ads.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB));
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_TOP_LB, CREATIVE_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_AD_IN_CONTENT, CREATIVE_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, CREATIVE_IMAGE_URL);
   }
 
-  @Test(
-      groups = "AdsSlotsMercury",
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "leaderboardAndPrefooterSlots"
-  )
-  public void adsLeaderboardAndPrefooterOnPage(String wikiName,
-                                                String article,
-                                                String adUnit) {
-
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
-    ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, CREATIVE_IMAGE_URL);
-    ads.verifyNoSlotPresent(MOBILE_IN_CONTENT);
-  }
-
-  @Test(
-      groups = "AdsSlotsMercury",
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "leaderboardAndInContentSlots"
-  )
-  public void adsLeaderboardAndInContentOnPage(String wikiName,
-                                                String article,
-                                                String adUnit) {
-
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
-    ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
-    ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
-  }
-
-
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = "AdsSlotsMercury",
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "leaderboardSlotOnPageWithInfobox"
-  )
-  public void adsLeaderboardOnPageWithInfobox(String wikiName,
-                                              String article,
-                                              String adUnit) {
-
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+  @Test
+  public void adsLeaderboardOnPageWithInfobox() {
+    Page page = new Page("project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
     PortableInfobox infobox = new PortableInfobox();
 
     ads.waitForPageLoadedWithGpt();
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
+    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
 
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX);
@@ -114,24 +57,13 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     );
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = "AdsSlotsMercury",
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "leaderboardSlotOnPageWithoutInfobox"
-  )
-  public void adsLeaderboardOnPageWithoutInfobox(String wikiName,
-                                                 String article,
-                                                 String adUnit) {
-
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+  @Test
+  public void adsLeaderboardOnPageWithoutInfobox() {
+    Page page = new Page("project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header");
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
 
     ads.waitForPageLoadedWithGpt();
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
+    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
 
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER);
@@ -145,31 +77,29 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     );
   }
 
-  @Test(
-      groups = "AdsSlotsMercury",
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "mercuryConsecutivePageViews"
-  )
-  public void adsLeaderboardAndPrefooterOnConsecutivePageViews(String wikiName,
-                                                                String firstArticle,
-                                                                String secondArticle,
-                                                                String thirdArticle,
-                                                                String adUnit) {
+  @Test
+  public void leaderboardsOnConsecutivePageViews() {
+    Page page = new Page("project43", "SyntheticTests/Mercury/Slots/ConsecutivePageViews/1");
+    String secondArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2";
+    String thirdArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3";
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, firstArticle);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.scrollToFooter();
+    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
 
     ads.scrollToPosition(ARTICLE_BODY);
     ads.mercuryNavigateToAnArticle(secondArticle);
     ads.waitTitleChangesTo(secondArticle);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
+    ads.scrollToFooter();
+    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
 
     ads.scrollToPosition(ARTICLE_BODY);
     ads.mercuryNavigateToAnArticle(thirdArticle);
     ads.waitTitleChangesTo(thirdArticle);
-    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
+    ads.scrollToFooter();
+    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }
 }

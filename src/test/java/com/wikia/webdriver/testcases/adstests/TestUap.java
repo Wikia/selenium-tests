@@ -21,9 +21,6 @@ import java.util.Map;
 public class TestUap extends TemplateNoFirstLoad {
 
   private static final String MOBILE_IN_CONTENT = ".mobile-in-content";
-  private static final String MOBILE_PREFOOTER = ".mobile-prefooter";
-  private static final String MOBILE_BOTTOM_LEADERBOARD = ".mobile-bottom-leaderboard";
-  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -51,28 +48,22 @@ public class TestUap extends TemplateNoFirstLoad {
   public void adsUapMercury(Page page,
                             List<Map<String, Object>> mobileTopLeaderboard,
                             List<Map<String, Object>> mobileInContent,
-                            List<Map<String, Object>> mobilePrefooter,
                             List<Map<String, Object>> mobileBottomLeaderboard) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsBlocked(ads, mobileInContent);
-    verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
     ads.scrollToPosition(MOBILE_IN_CONTENT);
     Assertion.assertTrue(ads.isMobileInContentAdDisplayed(), "Mobile in content ad is not displayed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
-    verifySlotsUnblocked(ads, mobilePrefooter);
-    verifySlotsBlocked(ads, mobileBottomLeaderboard);
+    verifySlotsUnblocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToPosition(MOBILE_PREFOOTER);
-    Assertion.assertTrue(ads.isMobilePrefooterAdDisplayed(), "Mobile prefooter ad is not displayed");
-    ads.scrollToPosition(MOBILE_BOTTOM_LEADERBOARD);
+    ads.scrollToPosition(By.id(AdsContent.MOBILE_BOTTOM_LB));
     Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(), "Mobile bottom leaderboard ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
-    verifySlotsUnblocked(ads, mobilePrefooter);
     verifySlotsUnblocked(ads, mobileBottomLeaderboard);
   }
 
@@ -90,7 +81,7 @@ public class TestUap extends TemplateNoFirstLoad {
 
       ads.checkSlotOnPageLoaded(slotName);
       ads.verifyLineItemId(slotName, slotData.get("lineItemId").toString());
-      ads.verifyIframeSize(slotName, slotData.get("src").toString(), slotSize.getWidth(), slotSize.getHeight());
+      ads.verifyIframeSize(slotName, slotSize.getWidth(), slotSize.getHeight());
     }
   }
 }
