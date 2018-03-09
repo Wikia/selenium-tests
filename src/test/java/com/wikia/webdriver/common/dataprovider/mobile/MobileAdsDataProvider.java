@@ -17,46 +17,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] leaderboardAndPrefooterSlots() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Mercury/Slots/Leaderboard,Prefooter",
-            "wka.life/_project43//article"
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] leaderboardAndInContentSlots() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Mercury/Slots/Leaderboard,Incontent",
-            "wka.life/_project43//article"
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] leaderboardSlotOnPageWithInfobox() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox",
-            "wka.life/_project43//article"
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] leaderboardSlotOnPageWithoutInfobox() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header",
-            "wka.life/_project43//article"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] allSlots() {
     return new Object[][]{
         {
@@ -435,18 +395,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] mercuryConsecutivePageViews() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Mercury/Slots/ConsecutivePageViews/1",
-            "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2",
-            "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3",
-            "wka.life/_project43//article",
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
         {"project43", "SyntheticTests/AdType/1xHop", "DirectGptMobile", "\"source\":\"mobile/LB\""},
@@ -465,7 +413,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 100))
                 .put("lineItemId", 272132532)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -475,7 +422,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -485,17 +431,15 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
-                .put("src", "mobile")
                 .build()
         },
         {
             new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -505,7 +449,6 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
-                .put("src", "mobile")
                 .build()
         },
         {
@@ -515,17 +458,15 @@ public class MobileAdsDataProvider {
                 .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
-                .put("src", "mobile")
                 .build()
         },
         {
             new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
-                .put("src", "mobile")
                 .build()
         }
     };
