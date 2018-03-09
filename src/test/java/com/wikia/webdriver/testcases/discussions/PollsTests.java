@@ -29,15 +29,27 @@ public class PollsTests extends NewTestTemplate {
     @Test
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
     public void userCanCreatePostWithSimplePollOnDesktop() {
+        BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+        postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
+        postsCreator.addTitleWith(TextGenerator.createUniqueText());
+        Poll poll = postsCreator.addPoll();
+        Assert.assertFalse(postsCreator.isPostButtonActive());
 
+        poll.addTitle(TextGenerator.createUniqueText());
+        Assert.assertFalse(postsCreator.isPostButtonActive());
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
+        Assert.assertFalse(postsCreator.isPostButtonActive()); //poll needs to have at least 2 answers options
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
+        postsCreator.clickSubmitButton();
+
+        Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
     @Test
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     public void userCanCreatePostWithSimplePollOnMobile() {
         BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorMobile();
-        postsCreator.click().closeGuidelinesMessage();
-        postsCreator.clickAddCategoryButton().selectFirstCategory();
+        postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
         postsCreator.addTitleWith(TextGenerator.createUniqueText());
         Poll poll = postsCreator.addPoll();
         Assertion.assertFalse(postsCreator.isPostButtonActive());
