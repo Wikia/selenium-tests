@@ -89,7 +89,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  public void confirmationModalDecline_RedirectionToRenameTool() {
+  public void confirmationModalDeclineRedirectionToRenameTool() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
         .fillFormData("ChesskyTest", "ChesskyTest", "q")
@@ -192,7 +192,9 @@ public class RenameToolTests extends NewTestTemplate {
         .agreeToTermsAndConditions()
         .submitChange();
     new ConfirmationModalPage().accept();
-    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(), "Rename process is in progress. The rest will be done in background. You will be notified via e-mail when it is completed.");
+    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(),
+                           "Rename process is in progress. The rest will be done in background. "
+                           + "You will be notified via e-mail when it is completed.");
     wall.open(newName);
     String encodedUrl = renameUserPage.encodeToURL(newName);
 
@@ -205,38 +207,36 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   public void phalanxBlocksForbiddenPhrase() {
-    String username = "QArename";
     String newName = "With all due respect Fuck You sir";
     String expectedError = String.format(
         "Phrase \"%s\" is globally blocked by Phalanx. See the list of blocks here.", newName);
-    checkInvalidUserRenameFlow(username, newName, expectedError);
+    checkInvalidUserRenameFlow(newName, expectedError);
   }
 
   @Test
   public void antiSpoofBlocksForbiddenPhrase() {
-    String username = "QArename";
+
     String newName = "MACbre";
     String antiSpoofError = String.format(
         "AntiSpoof warning - there is already a username similar to \"%s\".", newName);
-    checkInvalidUserRenameFlow(username, newName, antiSpoofError);
+    checkInvalidUserRenameFlow(newName, antiSpoofError);
 
   }
 
   @Test
   public void antiSpoofBlocksEmoticonPhrase() {
-    String username = "QArename";
     String newName = "Chessky☠☠☠";
     String antiSpoofError = String.format(
         "AntiSpoof warning - there is already a username similar to \"%s\".", newName);
-    checkInvalidUserRenameFlow(username, newName, antiSpoofError);
+    checkInvalidUserRenameFlow(newName, antiSpoofError);
 
   }
 
-  private void checkInvalidUserRenameFlow(String username, String newName, String errorMessage) {
+  private void checkInvalidUserRenameFlow(String newName, String errorMessage) {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     SignUpUser
-        user = new SignUpUser(username + timestamp, credentials.email, "aaaa",
+        user = new SignUpUser("QArenamuser" + timestamp, credentials.email, "aaaa",
                               LocalDate.of(1993, 3, 19));
     UserRegistration.registerUserEmailConfirmed(user);
 
