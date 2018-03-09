@@ -147,5 +147,21 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   }
 
+  @Test
+  public void videoAttributionIsPresent() {
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
+        .openWikiArticle("FeaturedVideo");
+
+    Assertion.assertTrue(video.isAttributionLinkVisible());
+    Assertion.assertTrue(video.isAttributionAvatarVisible());
+  }
+
+  @Test
+  public void videoAttributionIsNotPresent() {
+    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
+        .openWikiArticle("FeaturedVideo3");
+
+    Assertion.assertTrue(video.isAttributionLinkNotVisible());
+  }
 
 }
