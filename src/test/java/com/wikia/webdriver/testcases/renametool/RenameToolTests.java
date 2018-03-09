@@ -184,7 +184,6 @@ public class RenameToolTests extends NewTestTemplate {
                                  e);
     }
 
-
     String newName = "NewUser Nąmę" + timestamp;
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
@@ -203,5 +202,83 @@ public class RenameToolTests extends NewTestTemplate {
 
     Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);
     wall.verifyMessageEditTextRenameDone(title, message, newName);
+  }
+
+  @Test
+  public void PhalanxBlocksForbiddenPhrase() {
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    SignUpUser
+        user =
+        new SignUpUser("QAPhalanx" + timestamp, credentials.email, "aaaa",
+                       LocalDate.of(1993, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+
+    String newName = "With all due respect Fuck You " + timestamp;
+    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
+        .open()
+        .fillFormData(newName, newName, user.getPassword())
+        .agreeToTermsAndConditions()
+        .submitChange();
+    new ConfirmationModalPage().accept();
+
+    Assertion
+        .assertEquals(renameUserPage.getErrorMessage(), "Phrase " + "\"" + newName + "\"" + " is "
+                                                        + "globally "
+                                                        + "blocked by "
+                                                        + "Phalanx. See the list of blocks "
+                                                        + "here.");
+  }
+
+  @Test
+  public void AntiSpoofBlocksForbiddenPhrase() {
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    SignUpUser
+        user =
+        new SignUpUser("QAntiSpoof" + timestamp, credentials.email, "aaaa",
+                       LocalDate.of(1993, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+
+    String newName = "MACbre";
+    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
+        .open()
+        .fillFormData(newName, newName, user.getPassword())
+        .agreeToTermsAndConditions()
+        .submitChange();
+    new ConfirmationModalPage().accept();
+
+    Assertion.assertEquals(renameUserPage.getErrorMessage(), "AntiSpoof warning - there is "
+                                                             + "already a username similar to "
+                                                             + "\"" + newName + "\".");
+  }
+
+  @Test
+  public void AntiSpoofBlocksEmoticonPhrase() {
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    SignUpUser
+        user =
+        new SignUpUser("QAntiSpoof" + timestamp, credentials.email, "aaaa",
+                       LocalDate.of(1993, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+
+    String newName = "Chessky☠☠☠";
+    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
+        .open()
+        .fillFormData(newName, newName, user.getPassword())
+        .agreeToTermsAndConditions()
+        .submitChange();
+    new ConfirmationModalPage().accept();
+
+    Assertion.assertEquals(renameUserPage.getErrorMessage(), "AntiSpoof warning - there is "
+                                                             + "already a username similar to "
+                                                             + "\"" + newName + "\".");
   }
 }
