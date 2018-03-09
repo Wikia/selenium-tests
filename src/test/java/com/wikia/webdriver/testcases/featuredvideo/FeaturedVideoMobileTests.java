@@ -33,4 +33,21 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
     Assertion.assertEquals(video.getTitle(), "Papuga atakuje!");
   }
 
+  @Test
+  public void videoAttributionIsPresent() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .openWikiArticle("FeaturedVideo");
+
+    Assertion.assertTrue(video.isAttributionLinkVisible());
+    Assertion.assertTrue(video.isAttributionAvatarVisible());
+  }
+
+  @Test
+  public void videoAttributionIsNotPresent() {
+    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
+        .openWikiArticle("FeaturedVideo3");
+
+    Assertion.assertTrue(video.isAttributionLinkNotVisible());
+  }
+
 }

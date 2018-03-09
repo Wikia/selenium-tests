@@ -62,6 +62,12 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
   @FindBy(css = ".wikia-jw-settings__submenu")
   private List<WebElement> videoSettingsSubmenu;
 
+  @FindBy (css = ".featured-video__attribution-username")
+  private WebElement attributionLink;
+
+  @FindBy (css = ".featured-video__attribution-avatar")
+  private WebElement attributionAvatar;
+
   public FeaturedVideoDesktopComponentObject setAutoplayCookie(boolean autoplay) {
     driver.manage().addCookie(new Cookie(
         AUTOPLAY_COOKIE,
@@ -186,6 +192,25 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
     By last = By.xpath("//*[@data-track='0']");
     return wait.forTextInElement(last, "No captions");
 
+  }
+
+  public boolean isAttributionLinkVisible () {
+    wait.forElementVisible(attributionLink);
+
+    return attributionLink.isDisplayed();
+  }
+
+  public boolean isAttributionLinkNotVisible () {
+    wait.forElementNotVisible(attributionLink);
+
+    return true;
+  }
+
+
+  public boolean isAttributionAvatarVisible () {
+    wait.forElementVisible(attributionAvatar);
+
+    return attributionAvatar.isDisplayed();
   }
 
 }
