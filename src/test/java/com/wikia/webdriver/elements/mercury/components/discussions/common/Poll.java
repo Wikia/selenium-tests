@@ -16,6 +16,12 @@ public class Poll extends BasePageObject {
     @FindBy(css = ".poll-answer__input")
     private List<WebElement> pollAnswersInputsList;
 
+    @FindBy(css = ".poll-title")
+    private WebElement pollTitle;
+
+    @FindBy(css = ".poll-answer")
+    private List<WebElement> pollAnswersList;
+
     public Poll addTitle(String title) {
         wait.forElementClickable(pollTitleInput);
         pollTitleInput.sendKeys(title);
@@ -26,6 +32,20 @@ public class Poll extends BasePageObject {
     public Poll addNthAnswer(String answer, int number) {
         wait.forElementClickable(pollAnswersInputsList.get(number));
         pollAnswersInputsList.get(number).sendKeys(answer);
+
+        return this;
+    }
+
+    public Poll clickPollTitle() {
+        wait.forElementClickable(pollTitle);
+        pollTitle.click();
+
+        return this;
+    }
+
+    public Poll clickNthAnswer(int number) {
+        wait.forElementClickable(pollAnswersList.get(number));
+        pollAnswersList.get(number).click();
 
         return this;
     }

@@ -53,6 +53,9 @@ public class Post extends BasePage {
   @FindBy(css = ".post-detail .og-container")
   private WebElement postOpenGraph;
 
+  @FindBy(css = ".post-detail .poll-bar")
+  private List<WebElement> postsWithPollList;
+
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -79,6 +82,16 @@ public class Post extends BasePage {
   public Post clickLoadMore() {
     scrollAndClick(loadMoreButton);
     return this;
+  }
+
+  public Post clickNthPostWithPoll(int number) {
+    wait.forElementClickable(postsWithPollList.get(number));
+    postsWithPollList.get(number).click();
+    return this;
+  }
+
+  public Poll getPoll() {
+    return new Poll();
   }
 
   public int getPostsListLength() {
