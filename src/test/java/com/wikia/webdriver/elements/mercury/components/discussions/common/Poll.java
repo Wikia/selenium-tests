@@ -11,43 +11,82 @@ public class Poll extends BasePageObject {
 
     @Getter
     @FindBy(css = ".poll-title__input")
-    private WebElement pollTitleInput;
+    private WebElement titleInput;
+
+    @Getter
+    @FindBy(css = ".poll-title")
+    private WebElement title;
+
+    @Getter
+    @FindBy(css = ".poll-footer__vote")
+    private WebElement voteButton;
+
+    @FindBy(css = ".poll-footer__voted")
+    private WebElement votedMessage;
 
     @FindBy(css = ".poll-answer__input")
-    private List<WebElement> pollAnswersInputsList;
-
-    @FindBy(css = ".poll-title")
-    private WebElement pollTitle;
+    private List<WebElement> answersInputsList;
 
     @FindBy(css = ".poll-answer")
-    private List<WebElement> pollAnswersList;
+    private List<WebElement> answersList;
+
+    @Getter
+    @FindBy(css = ".poll-answer__radio")
+    private List<WebElement> answersRadioButtonsList;
+
+    @Getter
+    @FindBy(css = ".poll-answer__result-bar.is-active")
+    private WebElement activeBarResult;
+
+    @Getter
+    @FindBy(css = ".poll-answer__result-bar")
+    private List<WebElement> BarResultsList;
 
     public Poll addTitle(String title) {
-        wait.forElementClickable(pollTitleInput);
-        pollTitleInput.sendKeys(title);
+        wait.forElementClickable(titleInput);
+        titleInput.sendKeys(title);
 
         return this;
     }
 
     public Poll addNthAnswer(String answer, int number) {
-        wait.forElementClickable(pollAnswersInputsList.get(number));
-        pollAnswersInputsList.get(number).sendKeys(answer);
+        wait.forElementClickable(answersInputsList.get(number));
+        answersInputsList.get(number).sendKeys(answer);
 
         return this;
     }
 
     public Poll clickPollTitle() {
-        wait.forElementClickable(pollTitle);
-        pollTitle.click();
+        wait.forElementClickable(title);
+        title.click();
+
+        return this;
+    }
+
+    public Poll clickVoteButton() {
+        wait.forElementClickable(voteButton);
+        voteButton.click();
 
         return this;
     }
 
     public Poll clickNthAnswer(int number) {
-        wait.forElementClickable(pollAnswersList.get(number));
-        pollAnswersList.get(number).click();
+        wait.forElementClickable(answersList.get(number));
+        answersList.get(number).click();
 
         return this;
+    }
+
+    public boolean isChosenResultBarDisplayed() {
+        wait.forElementVisible(activeBarResult);
+
+        return activeBarResult.isDisplayed();
+    }
+
+    public boolean isAlreadyVotedMessageVisible() {
+        wait.forElementVisible(votedMessage);
+
+        return votedMessage.isDisplayed();
     }
 
 }

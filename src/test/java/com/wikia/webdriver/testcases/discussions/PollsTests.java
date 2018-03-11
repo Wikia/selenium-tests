@@ -9,7 +9,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Poll;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -28,7 +31,8 @@ public class PollsTests extends NewTestTemplate {
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
     @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void userCanCreatePostWithSimplePollOnDesktop() {
-        BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+        PostsListPage page = new PostsListPage().open();
+        BasePostsCreator postsCreator = page.getPostsCreatorDesktop();
         postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
         postsCreator.addTitleWith(TextGenerator.createUniqueText());
         Poll poll = postsCreator.addPoll();
@@ -40,6 +44,7 @@ public class PollsTests extends NewTestTemplate {
         Assert.assertFalse(postsCreator.isPostButtonActive()); //poll needs to have at least 2 answers options
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
+        page.waitForLoadingSpinner();
 
         Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
@@ -52,10 +57,25 @@ public class PollsTests extends NewTestTemplate {
         poll.clickPollTitle();
         SignInToFollowModalDialog signInModal = new SignInToFollowModalDialog();
         Assert.assertTrue(signInModal.isVisible());
-        
+
         signInModal.clickOkButton();
         poll.clickNthAnswer(0);
         Assert.assertTrue(signInModal.isVisible());
+    }
+
+    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"})
+    @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+    @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
+    public void loggedInUserCanVoteOnceInPollOnDesktop() {
+        Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
+        Assert.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
+        poll.clickNthAnswer(0);
+        poll.clickNthAnswer(1); //change answer before submitting a vote
+        poll.clickVoteButton();
+
+        Assert.assertTrue(poll.isChosenResultBarDisplayed());
+        Assert.assertTrue(poll.getBarResultsList().size() > 0);
+        Assert.assertTrue(poll.isAlreadyVotedMessageVisible());
     }
 
     @Test
