@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Poll;
@@ -20,12 +19,7 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-polls")
 public class PollsTests extends NewTestTemplate {
 
-    private String siteId;
-    private String postId;
-
-    private void setUp(String wikiName) {
-        siteId = Utils.excractSiteIdFromWikiName(wikiName);
-    }
+    public static int DEFAULT_ANSWERS_NUMBER = 2;
 
     @Test
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -79,6 +73,40 @@ public class PollsTests extends NewTestTemplate {
     }
 
     @Test
+    @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+    @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
+    public void userCanCreateComplexPollOnDesktop() {
+        PostsListPage page = new PostsListPage().open();
+        BasePostsCreator postsCreator = page.getPostsCreatorDesktop();
+        postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
+        postsCreator.addTitleWith(TextGenerator.createUniqueText());
+        Poll poll = postsCreator.addPoll();
+        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
+
+        poll.addTitle(TextGenerator.createUniqueText());
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
+        poll.deletePoll(); //delete poll being created
+        postsCreator.addPoll(); //create new poll
+        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
+
+        poll.addTitle(TextGenerator.createUniqueText());
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
+        poll.clickAddAnswerButton();
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 2);
+        poll.clickAddAnswerButton();
+        poll.addNthAnswer(TextGenerator.createUniqueText(), 3);
+        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER + 2);
+
+        poll.deleteNthAnswer(0);
+        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER + 1);
+
+        postsCreator.clickSubmitButton();
+        page.waitForLoadingSpinner();
+        Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
+    }
+
+    @Test
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void userCanCreatePostWithSimplePollOnMobile() {
@@ -91,7 +119,7 @@ public class PollsTests extends NewTestTemplate {
         poll.addTitle(TextGenerator.createUniqueText());
         Assertion.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        Assert.assertFalse(postsCreator.isPostButtonActive()); //poll needs to have at least 2 answers options
+        Assert.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
 
@@ -110,6 +138,21 @@ public class PollsTests extends NewTestTemplate {
         signInModal.clickOkButton();
         poll.clickNthAnswer(0);
         Assert.assertTrue(signInModal.isVisible());
+    }
+
+    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"})
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
+    public void loggedInUserCanVoteOnceInPollOnMobile() {
+        Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
+        Assert.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
+        poll.clickNthAnswer(0);
+        poll.clickNthAnswer(1);
+        poll.clickVoteButton();
+
+        Assert.assertTrue(poll.isChosenResultBarDisplayed());
+        Assert.assertTrue(poll.getBarResultsList().size() > 0);
+        Assert.assertTrue(poll.isAlreadyVotedMessageVisible());
     }
 
 }

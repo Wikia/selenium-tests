@@ -24,9 +24,11 @@ public class Poll extends BasePageObject {
     @FindBy(css = ".poll-footer__voted")
     private WebElement votedMessage;
 
+    @Getter
     @FindBy(css = ".poll-answer__input")
     private List<WebElement> answersInputsList;
 
+    @Getter
     @FindBy(css = ".poll-answer")
     private List<WebElement> answersList;
 
@@ -41,6 +43,15 @@ public class Poll extends BasePageObject {
     @Getter
     @FindBy(css = ".poll-answer__result-bar")
     private List<WebElement> BarResultsList;
+
+    @FindBy(css = ".poll-title__remove-icon")
+    private WebElement deletePollIcon;
+
+    @FindBy(css = ".poll-answer__remove")
+    private WebElement deleteAnswerIcon;
+
+    @FindBy(css = ".poll-answers__add-answer-button > .wds-button")
+    private WebElement addAnswerButton;
 
     public Poll addTitle(String title) {
         wait.forElementClickable(titleInput);
@@ -73,6 +84,30 @@ public class Poll extends BasePageObject {
     public Poll clickNthAnswer(int number) {
         wait.forElementClickable(answersList.get(number));
         answersList.get(number).click();
+
+        return this;
+    }
+
+    public Poll clickAddAnswerButton() {
+        wait.forElementClickable(addAnswerButton);
+        scrollAndClick(addAnswerButton);
+//        addAnswerButton.click();
+
+        return this;
+    }
+
+    public Poll deletePoll() {
+        wait.forElementClickable(deletePollIcon);
+        deletePollIcon.click();
+
+        return this;
+    }
+
+    public Poll deleteNthAnswer(int number) {
+        wait.forElementClickable(answersInputsList.get(number));
+        answersInputsList.get(number).click();
+        wait.forElementClickable(deleteAnswerIcon);
+        deleteAnswerIcon.click();
 
         return this;
     }
