@@ -222,8 +222,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void deleteVideo() {
     new ArticleContent()
-        .push(
-            "[[File:Wikia University - How to Contact Wikia|thumb|right|335 px]]QAWebdriverCaption");
+        .push("[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
 
