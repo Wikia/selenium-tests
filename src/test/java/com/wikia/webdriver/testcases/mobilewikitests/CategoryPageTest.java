@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -65,7 +64,6 @@ public class CategoryPageTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageFromLinkInArticle")
-  @RelatedIssue(issueID = "QAART-1044")
   public void mercury_category_navigateToCategoryPageFromLinkInArticle() {
     final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
 
@@ -79,7 +77,6 @@ public class CategoryPageTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_category_navigateToCategoryMemberPage")
-  @RelatedIssue(issueID = "QAART-1044")
   public void mercury_category_navigateToCategoryMemberPage() {
     final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
     final String articleContent = "Test article content";
