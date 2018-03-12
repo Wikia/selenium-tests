@@ -5,12 +5,12 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "MobileWiki_Navigation")
@@ -64,7 +64,6 @@ public class NavigationMobileWikiTests extends NavigationTests {
 
   @Test(groups = "mobileWiki_navigation_navigationElementsUserLoggedIn")
   @Execute(asUser = User.USER_3)
-  @RelatedIssue(issueID = "QAART-1042")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(
         new ArticlePage().open(MercurySubpages.MAIN_PAGE)
