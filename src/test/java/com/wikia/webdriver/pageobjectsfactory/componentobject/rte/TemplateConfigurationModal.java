@@ -36,7 +36,7 @@ public class TemplateConfigurationModal {
     PageFactory.initElements(webDriver, this);
     this.webDriver = webDriver;
     webDriverWait = new WebDriverWait(webDriver, 10);
-    editorFrame = new Frame(webDriver, editorFrameElement);
+    editorFrame = new Frame(editorFrameElement);
   }
 
   /**
