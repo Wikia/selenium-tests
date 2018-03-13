@@ -127,15 +127,11 @@ public class Poll extends BasePageObject {
     }
 
     public boolean isChosenResultBarDisplayed() {
-        wait.forElementVisible(activeBarResult);
-
-        return activeBarResult.isDisplayed();
+        return isElementDisplayed(activeBarResult);
     }
 
     public boolean isAlreadyVotedMessageVisible() {
-        wait.forElementVisible(votedMessage);
-
-        return votedMessage.isDisplayed();
+        return isElementDisplayed(votedMessage);
     }
 
 }
