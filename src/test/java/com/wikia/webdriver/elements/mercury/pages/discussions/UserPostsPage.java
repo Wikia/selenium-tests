@@ -3,7 +3,6 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import lombok.Getter;
 import org.openqa.selenium.NoSuchElementException;
@@ -29,15 +28,15 @@ public class UserPostsPage extends PageWithPosts {
   @FindBy(className = "header-dropdown-button")
   private WebElement moderation;
 
-  private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+$");
+  private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+");
 
   private static final String PATH = "/d/u/%s";
 
   private static final String NON_EXISTING_USER_ID = "4809883";
 
   public UserPostsPage open(String userId) {
-    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, userId));
-    waitForPageReload();
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + String.format(PATH, userId)));
+    waitForEmberLoad();
     return this;
   }
 

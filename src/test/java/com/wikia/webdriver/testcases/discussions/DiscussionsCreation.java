@@ -25,13 +25,13 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
 
   private void createNewPost(PostsListPage page) {
     page.getPostsCreatorDesktop().startPostCreation().clickSubmitButton();
-    page.waitForPageReload();
+    page.waitForLoadingSpinner();
   }
 
   private PostsListPage navigateToDiscussions() {
     new CommunityHeader().clickDiscussLink();
     PostsListPage page = new PostsListPage();
-    page.waitForPageReload();
+    page.waitForEmberLoad();
     return page;
   }
 }

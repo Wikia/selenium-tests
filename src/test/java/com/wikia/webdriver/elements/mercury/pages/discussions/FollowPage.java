@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import lombok.Getter;
 
@@ -15,8 +14,8 @@ public class FollowPage extends PageWithPosts {
   @Override
   public FollowPage open() {
     final FollowPage page = new FollowPage();
-    page.getUrl(page.urlBuilder.getUrlForWiki() + PATH);
-    page.waitForPageReload();
+    page.getUrl(getUrlWithCacheBuster(page.urlBuilder.getUrlForWiki() + PATH));
+    page.waitForEmberLoad();
     return page;
   }
 

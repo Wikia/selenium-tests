@@ -34,7 +34,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   private WebElement addVideoButton;
   @FindBy(css = "img.video.thumb")
   private WebElement videoInMessageEditMode;
-  @FindBy(css = ".cke_toolbar_formatmini span.cke_button.cke_button_link a .cke_icon")
+  @FindBy(css = "a.cke_button__link")
   private WebElement addLinkButton;
   @FindBy(css = "input[value='ext']")
   private WebElement externalLinkOption;
@@ -98,7 +98,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void addExternalLink(String externalLink) {
-    wait.forElementVisible(addLinkButton);
+    wait.forElementClickable(addLinkButton);
     scrollAndClick(addLinkButton);
     wait.forElementVisible(externalLinkOption);
     scrollAndClick(externalLinkOption);
@@ -108,7 +108,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void addInternalLink(String internalLink) {
-    wait.forElementVisible(addLinkButton);
+    wait.forElementClickable(addLinkButton);
     scrollAndClick(addLinkButton);
     wait.forElementVisible(targetPageOrURL);
     targetPageOrURL.sendKeys(internalLink);

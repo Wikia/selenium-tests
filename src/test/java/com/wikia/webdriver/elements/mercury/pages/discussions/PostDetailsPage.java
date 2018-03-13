@@ -35,13 +35,13 @@ public class PostDetailsPage extends PageWithPosts {
   private static final String EMPTY_POST_ID = "404";
 
   public PostDetailsPage open(String postId) {
-    getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, postId));
-    waitForPageReload();
+    getUrl(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + String.format(PATH, postId)));
+    waitForEmberLoad();
     return this;
   }
 
   public boolean isPostFollowed() {
-    waitForPageLoad();
+    waitForEmberLoad();
     return getPost().findNewestPost().isFollowed();
   }
 

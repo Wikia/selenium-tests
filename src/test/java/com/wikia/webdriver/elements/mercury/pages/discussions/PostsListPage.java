@@ -19,7 +19,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsC
 
 public class PostsListPage extends PageWithPosts {
 
-  public static final String PATH = "/d/f";
+  public static final String PATH = "/d/f?sort=latest";
 
   @Getter(lazy = true)
   private final PostEditor postEditor = new PostEditor();
@@ -41,13 +41,13 @@ public class PostsListPage extends PageWithPosts {
 
   @Override
   public PostsListPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + PATH);
-    waitForPageReload();
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + PATH));
+    waitForEmberLoad();
     return this;
   }
 
-  public void waitForPageReloadWith(final String categoryName) {
-    waitForPageReload();
+  public void waitForLoadingSpinnerWith(final String categoryName) {
+    waitForLoadingSpinner();
 
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {

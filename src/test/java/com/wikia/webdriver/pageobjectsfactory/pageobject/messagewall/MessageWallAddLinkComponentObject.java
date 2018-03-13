@@ -10,15 +10,15 @@ import org.openqa.selenium.support.FindBy;
 
 public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
 
-  @FindBy(css = ".linkEditorDialog > div")
+  @FindBy(css = ".linkEditorDialog")
   private WebElement addLinkModal;
 
-  private By targetBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(2) input");
-  private By textBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(3) input");
-  private By okButtonBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(1) a");
+  private By targetBy = By.cssSelector(".linkEditorDialog tr:nth-child(2) input");
+  private By textBy = By.cssSelector(".linkEditorDialog tr:nth-child(3) input");
+  private By okButtonBy = By.cssSelector(".linkEditorDialog a[title=\"OK\"]");
   private By
       externalRadioButtonBy =
-      By.cssSelector(".linkEditorDialog > div tr:nth-child(1) input[value = ext]");
+      By.cssSelector(".linkEditorDialog tr:nth-child(1) input[value = ext]");
 
   public MessageWallAddLinkComponentObject(WebDriver driver) {
     super();

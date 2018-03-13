@@ -22,7 +22,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
   private static final String EXPECTED_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
   private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
   private static final By RECOVERABLE_SLOT_SELECTOR = By.cssSelector("[adonis-marker]");
-  public static final By PF_RECOVERED_ADS_SELECTOR = By.cssSelector("body>span");
+  public static final By PF_RECOVERED_ADS_SELECTOR = By.cssSelector("body>div");
 
   public AdsRecoveryObject(WebDriver driver, String page, Dimension resolution) {
     super(driver, page, resolution);
@@ -52,10 +52,10 @@ public class AdsRecoveryObject extends AdsBaseObject {
     }
   }
 
-  public List<WebElement> getRecoveredAds(By spansBodyChildrenSelector) {
-    String firstSpanClass = driver.findElement(spansBodyChildrenSelector).getAttribute("class");
+  public List<WebElement> getRecoveredAds(By elementsBodyChildrenSelector) {
+    String firstElmentClass = driver.findElement(elementsBodyChildrenSelector).getAttribute("class");
     return driver
-        .findElements(By.cssSelector("body>span." + firstSpanClass))
+        .findElements(By.cssSelector("body>div." + firstElmentClass))
         .stream()
         .filter(WebElement::isDisplayed)
         .filter(e -> e.getCssValue("background").contains("data:image/jpeg"))

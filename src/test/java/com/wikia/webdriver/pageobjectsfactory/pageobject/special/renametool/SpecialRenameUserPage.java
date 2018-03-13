@@ -19,7 +19,7 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   private WebElement submitButton;
   @FindBy(css = ".errorbox")
   private WebElement errorMessageTextBox;
-  @FindBy(css = ".extiw")
+  @FindBy(css = "#renameuser fieldset a")
   private WebElement helpLink;
   @FindBy(css = "#password")
   private WebElement currentPasswordTextBox;
@@ -75,6 +75,7 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   }
 
   public HelpPage goToHelpPage() {
+    jsActions.scrollToElement(helpLink);
     helpLink.click();
 
     return new HelpPage(driver);

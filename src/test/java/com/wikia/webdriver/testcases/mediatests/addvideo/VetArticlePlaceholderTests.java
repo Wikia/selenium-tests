@@ -39,7 +39,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open();
     VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
     VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.submit();
     article.verifyVideo();
   }
@@ -76,7 +76,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     VetAddVideoComponentObject vetAddingVideo =
         (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
     VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     visualEditMode.verifyVideo();

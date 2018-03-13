@@ -20,7 +20,7 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__container input.side-search__input")
   private WebElement searchInput;
 
-  @FindBy(css = ".wikia-search__clear")
+  @FindBy(css = ".wikia-search__clear.icon-button")
   private WebElement clearSearchButton;
 
   @FindBy(css = ".wikia-search__search-icon > svg")

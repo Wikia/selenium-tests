@@ -50,11 +50,9 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH
   )
-  @Test(
-      groups = {"AdsArticleVideoF2Mobile"}
-  )
+  @Test(groups = "AdsArticleVideoF2Mobile")
   public void adsArticleVideoAdsMobile() {
     adsArticleVideoAdsDesktop();
   }

@@ -27,6 +27,7 @@ public class EditCategoryComponentObject extends BasePageObject {
     categoryNameField.clear();
     categoryNameField.sendKeys(newCategoryName);
     saveButton.click();
+    wait.forElementNotVisible(categoryNameField);
     PageObjectLogging.log("editCategoryName", "category name changed to " + newCategoryName, true);
     return new ArticlePageObject();
   }

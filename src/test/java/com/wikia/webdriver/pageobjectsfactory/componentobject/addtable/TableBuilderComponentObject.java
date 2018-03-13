@@ -20,7 +20,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   private WebElement addTableLightbox;
   @FindBy(css = "input.cke_dialog_ui_input_text")
   private List<WebElement> tablePropertiesInputs;
-  @FindBy(css = ".cke_dialog_ui_input_select")
+  @FindBy(css = "select.cke_dialog_ui_input_select")
   private List<WebElement> tablePropertiesDropdownOptions;
 
   public TableBuilderComponentObject(WebDriver driver) {

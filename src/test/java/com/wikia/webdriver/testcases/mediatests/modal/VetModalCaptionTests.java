@@ -83,7 +83,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
         base.navigateToArticleEditPage(wikiURL, articleTitleNotEditable);
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 1);
+        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 1);
     vetOptions.verifyNameNotEditable();
   }
 }

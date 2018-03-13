@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DeleteCategoryModal extends WikiBasePageObject {
+public class DeleteCategoryModal extends BasePage {
 
   private final CategoriesFieldset categoriesFieldset;
 

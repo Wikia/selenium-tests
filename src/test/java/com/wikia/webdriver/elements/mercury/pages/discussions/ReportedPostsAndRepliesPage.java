@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import lombok.Getter;
 
@@ -14,7 +13,8 @@ public class ReportedPostsAndRepliesPage extends PageWithPosts {
 
   @Override
   public ReportedPostsAndRepliesPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + PATH);
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + PATH));
+    waitForEmberLoad();
     return this;
   }
 

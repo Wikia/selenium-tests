@@ -46,28 +46,9 @@ public class VideoComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyVideoIframeWidth", "Width: " + videoWidth, true);
   }
 
-  public void verifyVideoOoyalaAgeGate() {
-    String ageGateClass = "ageGate";
-    Assertion.assertTrue(videoEmbed.findElement(By.className(ageGateClass)) != null);
-    PageObjectLogging.log("verifyVideoOoyalaAgeGate", "Age gate module is enabled", true);
-  }
-
-  public void verifyVideoOoyalaEmbed() {
-    WebElement container = videoEmbed.findElement(By.tagName("div"));
-    String containerId = "ooyalaplayer-";
-    Assertion.assertStringContains(container.getAttribute("id"), containerId);
-    wait.forElementVisible(container.findElement(By.cssSelector("[id^='ooyalaplayer-']>.innerWrapper")));
-    PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
-  }
-
   public void verifyFlashVideoObjectVisible() {
     wait.forElementVisible(videoEmbed.findElement(By.cssSelector("object")));
     PageObjectLogging.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
-  }
-
-  public void verifyVideoObjectVisible() {
-    wait.forElementVisible(videoEmbed.findElement(By.cssSelector("[id^='ooyalaplayer-']>.innerWrapper")));
-    PageObjectLogging.log("verifyVideoObjectVisible", "Video object is visible", true);
   }
 
   public void verifyVideoIframeVisible() {

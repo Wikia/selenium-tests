@@ -1,21 +1,9 @@
 package com.wikia.webdriver.common.templates.core;
 
-import java.io.File;
-import java.lang.reflect.Method;
-
-import org.openqa.selenium.Dimension;
-import org.testng.SkipException;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
@@ -24,6 +12,15 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
+import java.io.File;
+import java.lang.reflect.Method;
 
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
     com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
@@ -60,10 +57,6 @@ public abstract class CoreTestTemplate {
     }
 
     prepareURLs();
-
-    if (isTestExcludedFromEnv(method)) {
-      throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
-    }
 
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
@@ -121,22 +114,6 @@ public abstract class CoreTestTemplate {
       setTestProperty("useMITM",
           String.valueOf(method.getAnnotation(NetworkTrafficDump.class).useMITM()));
     }
-  }
-
-  /**
-   * Return false if test is excluded from running on current test environment
-   */
-  private boolean isTestExcludedFromEnv(Method method) {
-    if (method.isAnnotationPresent(DontRun.class)) {
-      String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
-
-      for (String excludedEnv : excludedEnvs) {
-        if (Configuration.getEnv().contains(excludedEnv)) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   private void prepareDirectories() {

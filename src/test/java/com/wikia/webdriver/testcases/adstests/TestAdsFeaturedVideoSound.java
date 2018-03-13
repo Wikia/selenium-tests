@@ -21,6 +21,7 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
   public void adsFeaturedVideoWithSoundOasis() {
     verifyFeaturedVideoWithSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
   }
+
   @Test(
       groups = {"AdsFeaturedVideoSoundOasis"}
   )
@@ -30,7 +31,7 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH
   )
   @Test(
       groups = {"AdsFeaturedVideoSoundMercury"}

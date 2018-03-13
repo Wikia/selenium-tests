@@ -39,7 +39,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName6, credentials.password6, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName6);
-    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);

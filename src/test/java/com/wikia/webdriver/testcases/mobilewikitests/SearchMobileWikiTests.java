@@ -61,7 +61,7 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_cancelSearchPhrase", "MobileWiki_Search_001"})
   public void mercury_search_clearSearchPhrase() {
-    super.mercury_search_clearSearchPhrase(
+    super.clearSearchPhrase(
         new ArticlePage().open(MercurySubpages.MAIN_PAGE)
     );
   }
@@ -70,7 +70,7 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_verifySearchLayout", "MobileWiki_Search_001"})
   public void mercury_search_verifySearchLayout() {
-    super.mercury_search_verifySearchLayout(
+    super.verifySearchLayout(
         new ArticlePage().open(MercurySubpages.MAIN_PAGE)
     );
   }

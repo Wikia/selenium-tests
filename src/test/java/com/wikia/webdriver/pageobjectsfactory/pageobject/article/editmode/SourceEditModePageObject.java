@@ -299,7 +299,7 @@ public class SourceEditModePageObject extends EditMode {
   public String getContent() {
     wait.forElementVisible(sourceModeTextArea);
 
-    return sourceModeTextArea.getAttribute("value");
+    return sourceModeTextArea.getAttribute("value").trim();
   }
 
   public void verifyVideoAlignment(PositionsVideo position) {

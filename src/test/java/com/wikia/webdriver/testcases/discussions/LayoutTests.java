@@ -132,7 +132,7 @@ public class LayoutTests extends NewTestTemplate {
     if(startingListLength < 20) {
       throw new SkipException("Skipping test because the condition of minimum 20 posts not met");
     }
-    post.clickLoadMore().waitForPageReload();
+    post.clickLoadMore().waitForLoadingSpinner();
 
     Assertion.assertTrue(startingListLength < post.getPostsListLength());
   }

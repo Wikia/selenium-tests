@@ -37,6 +37,7 @@ import groovy.json.JsonSlurper
 import groovy.xml.XmlUtil
 import org.ajoberstar.grgit.Credentials
 import org.ajoberstar.grgit.Grgit
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 task initConfig << {
     def configPath = "./../config";
@@ -372,8 +373,11 @@ test {
                 collect({ path -> new File(path) })
         includeGroups = groups.split(',')
         useDefaultListeners = true
+        scanForTestClasses = false
+
         testLogging.showStandardStreams = true
-        scanForTestClasses = false;
+        testLogging.showStackTraces = true
+        testLogging.exceptionFormat = TestExceptionFormat.FULL
     }
 
     outputs.upToDateWhen { false }
@@ -415,6 +419,7 @@ dependencies {
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.18'
     testCompile 'org.slf4j:slf4j-log4j12:1.6.4'
     testCompile 'org.projectlombok:lombok:1.16.6'
+    testCompile 'org.assertj:assertj-core:3.8.0'
 }
 
 

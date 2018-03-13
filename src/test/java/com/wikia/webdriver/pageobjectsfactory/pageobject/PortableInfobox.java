@@ -268,6 +268,10 @@ public class PortableInfobox extends BasePageObject {
     return isElementVisible(title);
   }
 
+  public String getInfoboxTitle() {
+    return title.getText();
+  }
+
   public boolean isLightboxVisible() {
     return isElementVisible(lightbox);
   }
