@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -42,7 +43,7 @@ public class Poll extends BasePageObject {
 
     @Getter
     @FindBy(css = ".poll-answer__result-bar")
-    private List<WebElement> BarResultsList;
+    private List<WebElement> barResultsList;
 
     @FindBy(css = ".poll-title__remove-icon")
     private WebElement deletePollIcon;
@@ -61,8 +62,12 @@ public class Poll extends BasePageObject {
     }
 
     public Poll addNthAnswer(String answer, int number) {
-        wait.forElementClickable(answersInputsList.get(number));
-        answersInputsList.get(number).sendKeys(answer);
+        try {
+            wait.forElementClickable(answersInputsList.get(number));
+            answersInputsList.get(number).sendKeys(answer);
+        } catch (Exception e) {
+            PageObjectLogging.log("Could not add nth answer", e, false);
+        }
 
         return this;
     }
@@ -82,8 +87,13 @@ public class Poll extends BasePageObject {
     }
 
     public Poll clickNthAnswer(int number) {
-        wait.forElementClickable(answersList.get(number));
-        answersList.get(number).click();
+        try {
+            wait.forElementClickable(answersList.get(number));
+            answersList.get(number).click();
+        } catch (Exception e) {
+            PageObjectLogging.log("Could not click nth answer", e, false);
+        }
+
 
         return this;
     }
@@ -91,7 +101,6 @@ public class Poll extends BasePageObject {
     public Poll clickAddAnswerButton() {
         wait.forElementClickable(addAnswerButton);
         scrollAndClick(addAnswerButton);
-//        addAnswerButton.click();
 
         return this;
     }
@@ -104,8 +113,13 @@ public class Poll extends BasePageObject {
     }
 
     public Poll deleteNthAnswer(int number) {
-        wait.forElementClickable(answersInputsList.get(number));
-        answersInputsList.get(number).click();
+        try {
+            wait.forElementClickable(answersInputsList.get(number));
+            answersInputsList.get(number).click();
+        } catch (Exception e) {
+            PageObjectLogging.log("Could not click nth answer", e, false);
+        }
+
         wait.forElementClickable(deleteAnswerIcon);
         deleteAnswerIcon.click();
 

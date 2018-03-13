@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-polls")
 public class PollsTests extends NewTestTemplate {
 
-    public static int DEFAULT_ANSWERS_NUMBER = 2;
+    public static final int DEFAULT_ANSWERS_NUMBER = 2;
 
     @Test
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
