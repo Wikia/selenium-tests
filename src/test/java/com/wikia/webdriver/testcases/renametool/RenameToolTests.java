@@ -23,6 +23,7 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @SuppressWarnings("SpellCheckingInspection")
 @InBrowser(browser = Browser.CHROME)
@@ -32,7 +33,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  public void UserProvidesCorrectNewNameDoesntClickUnderstandCheckbox() {
+  public void userProvidesCorrectNewNameDoesntClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
         .fillFormData("ChesskyTest", "ChesskyTest", "q")
@@ -44,7 +45,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  public void UserProvidesInCorrectNewNameDoesClickUnderstandCheckbox() {
+  public void userProvidesInCorrectNewNameDoesClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
         .fillFormData("Chessky>Test", "Chessky>Test", "q")
@@ -57,7 +58,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  public void UserProvidesNoNewUserName_ErrorIsShown() {
+  public void userProvidesNoNewUserNameErrorIsShown() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
         .fillFormData("", "", "q")
@@ -68,7 +69,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAMEDALREADY)
-  public void UserAlreadyRenamedMessageShowed() {
+  public void userAlreadyRenamedMessageShowed() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open();
 
@@ -78,7 +79,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  public void GoToHelpPage() {
+  public void goToHelpPage() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open();
     HelpPage helpPage = renameUserPage.goToHelpPage();
@@ -88,7 +89,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.QARENAME)
-  public void ConfirmationModalDecline_RedirectionToRenameTool() {
+  public void confirmationModalDeclineRedirectionToRenameTool() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
         .fillFormData("ChesskyTest", "ChesskyTest", "q")
@@ -100,19 +101,20 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  public void NewUserCreateAndRenameDone() {
+  public void newUserCreateAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
+    String hashstamp = UUID.randomUUID().toString().replace("-","0");
     SignUpUser
         user =
-        new SignUpUser("QARenameUser" + timestamp, credentials.email, "aaaa",
+        new SignUpUser("Q" + timestamp, credentials.email, "aaaa",
                        LocalDate.of(1993, 3, 19));
     UserRegistration.registerUserEmailConfirmed(user);
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
-        .fillFormData("NewUserName" + timestamp, "NewUserName" + timestamp, user.getPassword())
+        .fillFormData("N" + hashstamp, "N" + hashstamp, user.getPassword())
         .agreeToTermsAndConditions()
         .submitChange();
     new ConfirmationModalPage().accept();
@@ -124,7 +126,7 @@ public class RenameToolTests extends NewTestTemplate {
 
   @Test
   @Execute(onWikia = "communitytest")
-  public void NewUserCreateEditProfileAndRenameDone() {
+  public void newUserCreateEditProfileAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     SignUpUser
@@ -150,13 +152,12 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  public void NewUserCreateEditMessageWallAndRenameDone() {
+  public void newUserCreateEditMessageWallAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     SignUpUser
-        user =
-        new SignUpUser("QARename Usęr" + timestamp, credentials.email, "aaaa",
-                       LocalDate.of(1993, 3, 19));
+        user = new SignUpUser("QARename Usęr" + timestamp, credentials.email, "aaaa",
+                              LocalDate.of(1993, 3, 19));
     UserRegistration.registerUserEmailConfirmed(user);
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
@@ -184,7 +185,6 @@ public class RenameToolTests extends NewTestTemplate {
                                  e);
     }
 
-
     String newName = "NewUser Nąmę" + timestamp;
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
         .open()
@@ -192,9 +192,9 @@ public class RenameToolTests extends NewTestTemplate {
         .agreeToTermsAndConditions()
         .submitChange();
     new ConfirmationModalPage().accept();
-    Assertion
-        .assertEquals(renameUserPage.getSuccessBoxMessage(), "Rename process is in progress. The "
-                                                             + "rest will be done in background. You will be notified via e-mail when it is completed.");
+    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(),
+                           "Rename process is in progress. The rest will be done in background. "
+                           + "You will be notified via e-mail when it is completed.");
     wall.open(newName);
     String encodedUrl = renameUserPage.encodeToURL(newName);
 
@@ -203,5 +203,52 @@ public class RenameToolTests extends NewTestTemplate {
 
     Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);
     wall.verifyMessageEditTextRenameDone(title, message, newName);
+  }
+
+  @Test
+  public void phalanxBlocksForbiddenPhrase() {
+    String newName = "With all due respect Fuck You sir";
+    String expectedError = String.format(
+        "Phrase \"%s\" is globally blocked by Phalanx. See the list of blocks here.", newName);
+    checkInvalidUserRenameFlow(newName, expectedError);
+  }
+
+  @Test
+  public void antiSpoofBlocksForbiddenPhrase() {
+
+    String newName = "MACbre";
+    String antiSpoofError = String.format(
+        "AntiSpoof warning - there is already a username similar to \"%s\".", newName);
+    checkInvalidUserRenameFlow(newName, antiSpoofError);
+
+  }
+
+  @Test
+  public void antiSpoofBlocksEmoticonPhrase() {
+    String newName = "Chessky☠☠☠";
+    String antiSpoofError = String.format(
+        "AntiSpoof warning - there is already a username similar to \"%s\".", newName);
+    checkInvalidUserRenameFlow(newName, antiSpoofError);
+
+  }
+
+  private void checkInvalidUserRenameFlow(String newName, String errorMessage) {
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    SignUpUser
+        user = new SignUpUser("QArenamuser" + timestamp, credentials.email, "aaaa",
+                              LocalDate.of(1993, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+
+    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
+        .open()
+        .fillFormData(newName, newName, user.getPassword())
+        .agreeToTermsAndConditions()
+        .submitChange();
+    new ConfirmationModalPage().accept();
+
+    Assertion.assertEquals(renameUserPage.getErrorMessage(), errorMessage);
   }
 }

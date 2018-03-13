@@ -34,7 +34,7 @@ public class VisualEditModePageObject extends EditMode {
   protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
   private WebElement contentInput;
-  @FindBy(className = "cke_wysiwyg_frame")
+  @FindBy(css = ".cke_wysiwyg_frame")
   private WebElement iframe;
   @FindBy(css = "img.image-gallery")
   private WebElement gallery;
@@ -63,13 +63,13 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement blockedUserMessage1;
   @FindBy(xpath = "//b[contains(text(), 'Your user name or IP address has been blocked.')]")
   private WebElement blockedUserMessage2;
-  @FindBy(css = ".cke_menubutton__tabledelete")
+  @FindBy(css = ".cke_menubutton.cke_menubutton__tabledelete")
   private WebElement deleteItem;
   @FindBy(css = ".cke_button_table")
   private WebElement propertiesItem;
-  @FindBy(css = ".article-table")
+  @FindBy(css = ".article-table.article-table-selected")
   private WebElement visualModeTable;
-  @FindBy(css = ".cke_contextmenu iframe")
+  @FindBy(css = ".cke_menu_panel iframe")
   private WebElement contextFrame;
   @FindBy(css = ".cke_dialog_body")
   private WebElement addTableLightbox;
@@ -90,8 +90,8 @@ public class VisualEditModePageObject extends EditMode {
 
   private FeaturesModule featuresModule;
   private CategoryModule categoryModule;
-  private final Frame editorFrame = new Frame(driver, iframe);
-  private final Frame contextFrameWrapper = new Frame(driver, contextFrame);
+  private final Frame editorFrame = new Frame(iframe);
+  private final Frame contextFrameWrapper = new Frame(contextFrame);
 
   public VisualEditModePageObject() {
     super();

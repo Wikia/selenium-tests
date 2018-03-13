@@ -249,16 +249,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyIframeSize(String slotName,
-                               String src,
-                               int slotWidth,
-                               int slotHeight) {
-    waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
+  public void verifyIframeSize(String slotName, int slotWidth, int slotHeight) {
+    waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName));
   }
 
   public AdsBaseObject verifyLineItemId(String slotName, String lineItemId) {
     String lineItemParam = getSlotAttribute(slotName, GPT_DATA_ATTRIBUTES[0]);
-    Assertion.assertStringContains(lineItemParam, lineItemId);
+      Assertion.assertStringContains(lineItemParam, lineItemId);
     PageObjectLogging
         .log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
     return this;
@@ -339,6 +336,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void waitForSlotCollapsed(WebElement slot) {
     waitForElementToHaveSize(0, 0, slot);
+  }
+
+  public void waitForSlotExpanded(final By slotSelector) {
+    WebElement slot = wait.forElementPresent(slotSelector);
+    waitForSlotExpanded(slot);
   }
 
   public void waitForSlotExpanded(final WebElement slot) {
@@ -548,8 +550,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     return providersChain;
   }
 
-  private WebElement getIframe(String slotName, String src) {
-    return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
+  private WebElement getIframe(String slotName) {
+    return driver.findElement(By.cssSelector("#" + slotName + " iframe"));
   }
 
   public void verifyNoAd(final String slotName) {
@@ -595,6 +597,20 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerAdSlot(String slotName) {
+    if (slotName.equals(AdsContent.BOTTOM_LB) && driver.isChromeMobile()) {
+      waitForSlotExpanded(By.id(AdsContent.MOBILE_AD_IN_CONTENT));
+
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        PageObjectLogging.log("InterruptedException occurred", e, false);
+      }
+
+      triggerBLB();
+
+      return this;
+    }
+
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerBLB();
       return this;
@@ -866,19 +882,9 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public boolean isMobilePrefooterAdDisplayed() {
-    try{
-      wait.forElementVisible(mobilePrefooter);
-      return true;
-    } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Mobile prefooter ad is not displayed", ex, true);
-      return false;
-    }
-  }
-
   public boolean isMobileBottomLeaderboardAdDisplayed() {
     try{
-      wait.forElementVisible(mobileBottomLeaderboard);
+      wait.forElementVisible(By.id(AdsContent.MOBILE_BOTTOM_LB));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
@@ -906,7 +912,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void waitForVASTRequestWithAdUnit(NetworkTrafficInterceptor networkTrafficInterceptor, String adUnit) throws UnsupportedEncodingException {
     final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
-    final String PATTERN = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
-    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN);
+    final String pattern = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
+    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
   }
 }
