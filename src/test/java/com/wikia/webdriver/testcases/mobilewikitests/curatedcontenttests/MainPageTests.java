@@ -103,16 +103,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    Assertion.assertTrue(curatedMainPage.isMainPagePadSlotInDOM());
-
-    result = curatedMainPage.isFeaturedContentVisible();
-    PageObjectLogging.log(
-        PageElements.FEATURED_CONTENT.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
     result = curatedMainPage.isCuratedContentVisible();
     PageObjectLogging.log(
         PageElements.CURATED_CONTENT.name,

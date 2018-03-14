@@ -54,15 +54,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
     return isCuratedElementVisible(wikiaStatsContainer);
   }
 
-  public boolean isMainPagePadSlotInDOM() {
-    try {
-      wait.forElementPresent(mainPagePadSlot, false);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    }
-  }
-
   public boolean isFeaturedContentVisible() {
     return isCuratedElementVisible(featuredContent);
   }
