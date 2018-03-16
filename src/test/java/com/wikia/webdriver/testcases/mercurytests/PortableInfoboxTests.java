@@ -134,9 +134,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     infobox
         .isImageInCollectionVisible()
-        .clickNextImageArrow()
+        .clickNextImageArrow(1)
         .isImageInCollectionVisible()
-        .clickSecondNextImageArrow()
+        .clickNextImageArrow(2)
         .isImageInCollectionVisible();
   }
 
