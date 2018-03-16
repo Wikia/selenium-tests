@@ -21,7 +21,7 @@ public class ArticlePageObject extends BasePageObject {
   private WebElement topContributorsSection;
   @FindBy(css = ".contributors img")
   private List<WebElement> topContributorsThumbs;
-  @FindBy(css = "figure.article-image a")
+  @FindBy(css = "figure.article-media-thumbnail a")
   private List<WebElement> singleImgLink;
   @FindBy(css = "footer.wds-global-footer")
   private WebElement footer;
