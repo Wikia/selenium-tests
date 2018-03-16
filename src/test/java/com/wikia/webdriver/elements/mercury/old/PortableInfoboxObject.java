@@ -52,12 +52,6 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
   private List<WebElement> galleryButtonList;
 
-  @FindBy(css = ".image-collection-actions .action-next")
-  private WebElement nextImageArrow;
-
-  @FindBy(css = ".pi-image:nth-child(2) .action-next")
-  private WebElement secondNextImageArrow;
-
   @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
 
@@ -160,14 +154,8 @@ public class PortableInfoboxObject extends WikiBasePageObject{
     return this;
   }
 
-  public PortableInfoboxObject clickNextImageArrow() {
-    wait.forElementClickable(nextImageArrow).click();
-
-    return this;
-  }
-
-  public PortableInfoboxObject clickSecondNextImageArrow() {
-    wait.forElementClickable(secondNextImageArrow).click();
+  public PortableInfoboxObject clickNextImageArrow(int childIndex) {
+    wait.forElementClickable(By.cssSelector(".pi-image:nth-child(" + childIndex + ") .action-next")).click();
 
     return this;
   }
