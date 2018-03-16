@@ -55,6 +55,9 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   @FindBy(css = ".image-collection-actions .action-next")
   private WebElement nextImageArrow;
 
+  @FindBy(css = ".pi-image:nth-child(2) .action-next")
+  private WebElement secondNextImageArrow;
+
   @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
 
@@ -159,6 +162,12 @@ public class PortableInfoboxObject extends WikiBasePageObject{
 
   public PortableInfoboxObject clickNextImageArrow() {
     wait.forElementClickable(nextImageArrow).click();
+
+    return this;
+  }
+
+  public PortableInfoboxObject clickSecondNextImageArrow() {
+    wait.forElementClickable(secondNextImageArrow).click();
 
     return this;
   }
