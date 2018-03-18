@@ -89,7 +89,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
-  private final Frame builderFrame = new Frame(driver, builderIFrame);
+  private final Frame builderFrame = new Frame(builderIFrame);
 
   public InfoboxBuilderPage openNew(String templateName) {
     getUrl(urlBuilder.appendQueryStringToURL(

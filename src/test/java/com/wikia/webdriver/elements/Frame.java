@@ -1,5 +1,7 @@
 package com.wikia.webdriver.elements;
 
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -9,8 +11,8 @@ public class Frame {
   private final WebDriver webDriver;
   private final WebElement frameElement;
 
-  public Frame(WebDriver webDriver, WebElement frameElement) {
-    this.webDriver = webDriver;
+  public Frame(WebElement frameElement) {
+    this.webDriver = DriverProvider.getActiveDriver();
     this.frameElement = frameElement;
   }
 

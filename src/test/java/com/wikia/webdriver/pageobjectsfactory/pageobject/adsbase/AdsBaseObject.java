@@ -845,6 +845,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToElement(By.id(slotName));
   }
 
+  public void scrollTwitch() {
+    simulateUserActivity(Duration.ofMillis(500));
+  }
+
   public void scrollBy(int x, int y) {
     jsActions.scrollBy(x, y);
   }
