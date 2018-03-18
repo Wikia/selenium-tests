@@ -22,7 +22,7 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  @FindBy(css = ".portable-infobox .pi-data .article-media-thumbnail-image-wrapper img")
+  @FindBy(css = ".portable-infobox .pi-data .article-media-thumbnail img")
   private WebElement imageInInfobox;
 
   @FindBy(css = ".portable-infobox .pi-expand-button")
@@ -31,16 +31,16 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   @FindBy(css = ".article-content .collapsed")
   private WebElement infoboxIsCollapsed;
 
-  @FindBy(css = ".tabber .article-image")
+  @FindBy(css = ".tabber .article-media-thumbnail")
   private WebElement imageInTabber;
 
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
 
-  @FindBy(css = ".portable-infobox .article-video")
+  @FindBy(css = ".portable-infobox .wds-player-icon-play-medium")
   private WebElement video;
 
-  @FindBy(css = ".portable-infobox .article-video figcaption")
+  @FindBy(css = ".portable-infobox .article-media-thumbnail figcaption")
   private WebElement videoCaption;
 
   @FindBy(css = ".pi-image-collection")
