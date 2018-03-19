@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -17,6 +18,8 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
+
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedMainPage")
@@ -67,7 +70,9 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
 
+    String timestamp = Long.toString(DateTime.now().getMillis());
     navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
+    new ArticleContent().push(timestamp, "TrendArt");
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     new ArticlePageObject(driver).isFooterVisible();
 
