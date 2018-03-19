@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -60,7 +61,7 @@ public class MainPageTests extends NewTestTemplate {
     this.curatedMainPage = new CuratedMainPagePageObject();
     this.curatedContent = new CuratedContentPageObject();
   }
-
+  
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   @RelatedIssue(issueID = "XW-1739", comment = "if this tests fails just edit any article on mercurycc.wikia.com and wait 24h")
@@ -102,8 +103,6 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
-
-    Assertion.assertTrue(curatedMainPage.isMainPagePadSlotInDOM());
 
     result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
