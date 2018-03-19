@@ -22,7 +22,7 @@ public class ArticlePageObject extends BasePageObject {
   @FindBy(css = ".contributors img")
   private List<WebElement> topContributorsThumbs;
   @FindBy(css = "figure.article-media-thumbnail a")
-  private List<WebElement> singleImgLink;
+  private List<WebElement> imgLinks;
   @FindBy(css = "footer.wds-global-footer")
   private WebElement footer;
   @FindBy(css = ".wds-global-footer__header-logo")
@@ -55,7 +55,7 @@ public class ArticlePageObject extends BasePageObject {
   }
 
   public void clickOnImage(int index) {
-    singleImgLink.get(index).click();
+    imgLinks.get(index).click();
   }
 
   public void clickOnAnchorInContent(int index) {
