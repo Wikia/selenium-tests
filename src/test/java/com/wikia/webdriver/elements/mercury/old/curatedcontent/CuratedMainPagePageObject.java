@@ -5,10 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 public class CuratedMainPagePageObject extends BasePageObject {
 
@@ -97,9 +94,5 @@ public class CuratedMainPagePageObject extends BasePageObject {
     Settings(int value) {
       this.value = value;
     }
-  }
-
-  private void editArticle() {
-
   }
 }

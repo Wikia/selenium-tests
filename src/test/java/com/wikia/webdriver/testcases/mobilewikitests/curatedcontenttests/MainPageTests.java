@@ -61,7 +61,7 @@ public class MainPageTests extends NewTestTemplate {
     this.curatedMainPage = new CuratedMainPagePageObject();
     this.curatedContent = new CuratedContentPageObject();
   }
-  
+
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
   @RelatedIssue(issueID = "XW-1739", comment = "if this tests fails just edit any article on mercurycc.wikia.com and wait 24h")
