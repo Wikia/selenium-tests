@@ -66,7 +66,6 @@ public class MainPageTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
-  @RelatedIssue(issueID = "XW-1739", comment = "if this tests fails just edit any article on mercurycc.wikia.com and wait 24h")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
 
