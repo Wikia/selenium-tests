@@ -155,7 +155,9 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   }
 
   public PortableInfoboxObject clickNextImageArrow(int childIndex) {
-    wait.forElementClickable(By.cssSelector(".pi-image:nth-child(" + childIndex + ") .action-next")).click();
+    By nextImageArrow = By.cssSelector(".pi-image:nth-child(" + childIndex + ") .action-next");
+    wait.forElementClickable(nextImageArrow)
+        .click();
 
     return this;
   }
