@@ -39,6 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public static final String PAGE_TYPE_SPECIAL = "special";
   public static final String PAGE_TYPE_FILE = "file";
   public static final String PAGE_TYPE_CATEGORY = "category";
+  public static final String ADS_IFRAME = "google_ads_iframe_";
 
   private String pageType = PAGE_TYPE_ARTICLE;
   private String environment = AdsContent.ENV_DESKTOP;
@@ -303,13 +304,13 @@ public class AdsBaseObject extends WikiBasePageObject {
   public String buildGptIframeId(int dfpClientId, String adUnit, String slotName, String... src) {
     if (slotName == "BOTTOM_LEADERBOARD"){
       return Joiner.on("/").skipNulls().join(
-              "google_ads_iframe_",
+              ADS_IFRAME,
               String.valueOf(dfpClientId),
               adUnit + "_0"
       );
     } else {
       return Joiner.on("/").skipNulls().join(
-              "google_ads_iframe_",
+              ADS_IFRAME,
               String.valueOf(dfpClientId),
               adUnit,
               src.length > 0 ? src[0] : null,
@@ -737,7 +738,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private boolean checkIfGptSlotHasCreativeContent(WebElement element, String hopAdType) {
-    String slotName = element.getAttribute("id").replace("wikia_gpt", "google_ads_iframe_");
+    String slotName = element.getAttribute("id").replace("wikia_gpt", ADS_IFRAME);
     String iframeSelector = "iframe[id*='" + slotName + "_0']";
     String adTypeScriptXpath = String.format("//script[contains(text(), \"%s\")]", hopAdType);
     WebElement iframe = element.findElement(By.cssSelector(iframeSelector));
