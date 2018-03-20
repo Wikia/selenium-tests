@@ -301,13 +301,21 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
   public String buildGptIframeId(int dfpClientId, String adUnit, String slotName, String... src) {
-    return Joiner.on("/").skipNulls().join(
-        "google_ads_iframe_",
-        String.valueOf(dfpClientId),
-        adUnit,
-        src.length > 0 ? src[0] : null,
-        slotName + "_0"
-    );
+    if (slotName == "BOTTOM_LEADERBOARD"){
+      return Joiner.on("/").skipNulls().join(
+              "google_ads_iframe_",
+              String.valueOf(dfpClientId),
+              adUnit + "_0"
+      );
+    } else {
+      return Joiner.on("/").skipNulls().join(
+              "google_ads_iframe_",
+              String.valueOf(dfpClientId),
+              adUnit,
+              src.length > 0 ? src[0] : null,
+              slotName + "_0"
+      );
+    }
   }
 
   /**

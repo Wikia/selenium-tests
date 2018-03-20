@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   static final String PROJECT43_TEST_LINE_ITEM_ID = "271491732";
   static final String FILE_PAGE_AD_UNIT = "wka.life/_project43//file";
+  static final String FILE_PAGE_BOTTOM_LB_AD_UNIT = "wka1a.PF/bottom_leaderboard/desktop/oasis-file/_project43-life";
 
   private AdsBaseObject buildAdsObjectForPage(String pageName) {
     String testedPage = urlBuilder.getUrlForPath("project43", pageName);
@@ -43,7 +44,7 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     HashMap<String, String> expectedAdUnits = new HashMap<>();
     expectedAdUnits.put(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
     expectedAdUnits.put(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
-    expectedAdUnits.put(AdsContent.BOTTOM_LB, FILE_PAGE_AD_UNIT);
+    expectedAdUnits.put(AdsContent.BOTTOM_LB, FILE_PAGE_BOTTOM_LB_AD_UNIT);
 
     return expectedAdUnits;
   }
