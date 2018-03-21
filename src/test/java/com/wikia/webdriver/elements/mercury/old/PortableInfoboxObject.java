@@ -37,7 +37,7 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
 
-  @FindBy(css = ".portable-infobox .wds-player-icon-play-medium")
+  @FindBy(css = ".portable-infobox .article-video")
   private WebElement video;
 
   @FindBy(css = ".portable-infobox .article-media-thumbnail figcaption")
