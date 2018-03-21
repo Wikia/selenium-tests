@@ -302,6 +302,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
   public String buildGptIframeId(int dfpClientId, String adUnit, String slotName, String... src) {
+    //TODO remove the if-statement after ADEN-6901 is done
     if (slotName == "BOTTOM_LEADERBOARD"){
       return Joiner.on("/").skipNulls().join(
               ADS_IFRAME,
