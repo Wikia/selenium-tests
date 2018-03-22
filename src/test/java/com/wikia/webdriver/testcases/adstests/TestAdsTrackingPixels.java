@@ -18,7 +18,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
   public static final String GA_PIXEL_URL = "https://www.google-analytics.com/collect";
-  public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
+  public static final String KRUX_PIXEL_URL = "https://beacon.krxd.net/pixel.gif";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
   public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
 
