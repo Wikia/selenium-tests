@@ -1,16 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class AutoplayVuap {
 
@@ -177,9 +176,7 @@ public class AutoplayVuap {
   }
 
   public boolean isVisible() {
-    return isDesktop()
-        ? usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed())
-        : driver.findElement(getVideoSelector()).isDisplayed();
+    return driver.findElement(getVideoSelector()).isDisplayed();
   }
 
   public boolean isMuted() {
