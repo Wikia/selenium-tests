@@ -1,16 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class AutoplayVuap {
 
@@ -21,8 +20,6 @@ public class AutoplayVuap {
   private static final String SPEAKER_SELECTOR = ".volume-button.porvata-switchable-icon";
   private static final String CLOSE_BUTTON_SELECTOR = ".close-ad";
   private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
-  private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
-  private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
   public static final Color COLOR_VUAP_VIDEO_AD = new Color(0, 1, 253);
@@ -61,10 +58,6 @@ public class AutoplayVuap {
   private final By replayOverlaySelector;
 
   private boolean mobile;
-
-  public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId) {
-    this(driver, slot, By.id(adIframeId), false);
-  }
 
   public AutoplayVuap(WikiaWebDriver driver, String slot, By adIframeSelector, Boolean mobile) {
     this.driver = driver;
@@ -172,14 +165,8 @@ public class AutoplayVuap {
     return driver.findElement(progressBarSelector).getSize().getWidth();
   }
 
-  public boolean hasStarted() {
-    return getCurrentTime() > 0;
-  }
-
   public boolean isVisible() {
-    return isDesktop()
-        ? usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed())
-        : driver.findElement(getVideoSelector()).isDisplayed();
+    return driver.findElement(getVideoSelector()).isDisplayed();
   }
 
   public boolean isMuted() {
