@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class TestVideoVelesMobile extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "project43";
-  private static final String OUTSTREAM_DEBUG_MODE = "appnexusast_debug_mode=1";
+  private static final String OUTSTREAM_DEBUG_MODE = "wikia_video_adapter=2000";
 
   private static final String ASSERTION_VELES_PLAYER_RENDERED = "Veles player rendered";
   private static final String ASSERTION_VELES_PLAYER_NOT_RENDERED = "Veles player not rendered";
