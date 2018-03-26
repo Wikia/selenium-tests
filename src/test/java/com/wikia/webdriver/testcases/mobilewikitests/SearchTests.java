@@ -23,7 +23,8 @@ public class SearchTests extends NewTestTemplate {
   public void verifySearchLayout(WikiBasePageObject page) {
     Search search = page
         .getTopBar()
-        .openSearch();
+        .openSearch()
+        .typeInSearch("qAga");
 
     Assertion.assertTrue(search.isSearchInputFieldVisible());
     Assertion.assertTrue(search.isClearSearchButtonVisible());

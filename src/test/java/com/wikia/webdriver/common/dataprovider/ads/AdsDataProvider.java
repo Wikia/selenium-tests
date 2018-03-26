@@ -177,7 +177,6 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adFreeWikis() {
     return new Object[][]{
-        {"api", "Quick_Start"},
         {"sfhomeless", "Glide_Memorial_Church"},
         {"geekfeminism", "Dickwolves"},
         {"suicideprevention", "USA"}
@@ -625,7 +624,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", "269679732")
-                .put("src", "gpt")
                 .build()
         },
         {
@@ -635,7 +633,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(300, 600))
                 .put("lineItemId", "270230292")
-                .put("src", "gpt")
                 .build()
         },
         {
@@ -645,7 +642,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", "269679732")
-                .put("src", "gpt")
                 .build()
         },
         {
@@ -655,7 +651,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", "269679732")
-                .put("src", "gpt")
                 .build()
         },
         {
@@ -665,7 +660,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(160, 600))
                 .put("lineItemId", "270616092")
-                .put("src", "gpt")
                 .build()
         },
         {
@@ -675,7 +669,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(120, 600))
                 .put("lineItemId", "257673852")
-                .put("src", "gpt")
                 .build()
         },
         {
@@ -685,7 +678,6 @@ public class AdsDataProvider {
                 .put("slotName", AdsContent.MEDREC)
                 .put("slotSize", new Dimension(300, 1050))
                 .put("lineItemId", "255534972")
-                .put("src", "gpt")
                 .build()
         }
     };
@@ -711,13 +703,11 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.TOP_LB)
                     .put("slotSize", new Dimension(1889, 767))
                     .put("lineItemId", "365404452")
-                    .put("src", "gpt")
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MEDREC)
                     .put("slotSize", new Dimension(300, 250))
                     .put("lineItemId", "365404452")
-                    .put("src", "gpt")
                     .build()
             ),
             Arrays.asList(
@@ -725,13 +715,11 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.FLOATING_MEDREC)
                     .put("slotSize", new Dimension(300, 250))
                     .put("lineItemId", "365416332")
-                    .put("src", "gpt")
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.BOTTOM_LB)
                     .put("slotSize", new Dimension(1178, 479))
                     .put("lineItemId", "365416332")
-                    .put("src", "gpt")
                     .build()
             )
         }
@@ -748,7 +736,6 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", "365404452")
-                    .put("src", "mobile")
                     .build()
             ),
             Arrays.asList(
@@ -756,15 +743,6 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                     .put("slotSize", new Dimension(300, 250))
                     .put("lineItemId", "365416332")
-                    .put("src", "mobile")
-                    .build()
-            ),
-            Arrays.asList(
-                ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILE_PREFOOTER)
-                    .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", "365416332")
-                    .put("src", "mobile")
                     .build()
             ),
             Arrays.asList(
@@ -772,7 +750,6 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", "365416332")
-                    .put("src", "mobile")
                     .build()
             )
         },
@@ -783,7 +760,6 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", "365404452")
-                    .put("src", "mobile")
                     .build()
             ),
             Arrays.asList(
@@ -791,15 +767,6 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                     .put("slotSize", new Dimension(300, 250))
                     .put("lineItemId", "365416332")
-                    .put("src", "mobile")
-                    .build()
-            ),
-            Arrays.asList(
-                ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILE_PREFOOTER)
-                    .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", "365416332")
-                    .put("src", "mobile")
                     .build()
             ),
             Arrays.asList(
@@ -807,7 +774,6 @@ public class AdsDataProvider {
                     .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", "365416332")
-                    .put("src", "mobile")
                     .build()
             )
         }
