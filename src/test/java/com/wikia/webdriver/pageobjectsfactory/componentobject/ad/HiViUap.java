@@ -10,16 +10,14 @@ import org.openqa.selenium.interactions.Actions;
 public class HiViUap {
   private By adIframe;
   private By fullScreenButton;
-  private By imaIframe;
   private By learnMore;
-  private By mobileVideoElement;
+  private By videoElement;
   private By pauseButton;
   private By progressBar;
   private By replayButton;
   private By slotSelector;
   private By soundButton;
   private By videoClickArea;
-  private By videoElement;
   private By videoPlayer;
   private By videoThumbnail;
 
@@ -35,18 +33,16 @@ public class HiViUap {
     final String slotSelector = String.format("#%s ", slot);
     this.adIframe = By.cssSelector(slotSelector + " iframe[id^=\"google_ads\"]");
     this.fullScreenButton = By.cssSelector(slotSelector + ".toggle-fullscreen-button");
-    this.imaIframe = By.cssSelector(slotSelector + ".video-player iframe");
     this.pauseButton = By.cssSelector(slotSelector + ".play-pause-button");
     this.replayButton = By.cssSelector(".replay-overlay");
     this.slotSelector = By.id(slot);
     this.soundButton = By.cssSelector(slotSelector + ".volume-button");
     this.videoClickArea = By.cssSelector(slotSelector + ".toggle-ui-overlay");
-    this.videoElement = By.cssSelector("video");
     this.videoPlayer = By.cssSelector(slotSelector + ".video-player");
     this.videoThumbnail = By.cssSelector(slotSelector + ".videoThumbnail");
     this.progressBar = By.cssSelector(slotSelector + ".current-time");
     this.learnMore = By.cssSelector(slotSelector + ".learn-more");
-    this.mobileVideoElement = By.cssSelector(slotSelector + "video");
+    this.videoElement = By.cssSelector(slotSelector + "video");
   }
 
   public void waitForVideoStart() {
@@ -95,27 +91,17 @@ public class HiViUap {
     wait.forElementClickable(soundButton).click();
   }
 
-  public double getCurrentTime() {
-    return Double.parseDouble(iframeRunner.usingIframeGet(imaIframe,
-        () -> wait.forElementPresent(videoElement).getAttribute("currentTime")
-    ));
-  }
-
-  public double getCurrentTimeMobile() {
-    return Double.parseDouble(wait.forElementPresent(mobileVideoElement).getAttribute("currentTime"));
-  }
-
   public void clickFullscreenIcon() {
     enableVideoToolbar();
     wait.forElementClickable(fullScreenButton).click();
   }
 
   public int getVideoWidth() {
-    return driver.findElement(mobileVideoElement).getSize().width;
+    return driver.findElement(videoElement).getSize().width;
   }
 
   public boolean isVideoElementVisible() {
-    return driver.findElement(mobileVideoElement).isDisplayed();
+    return driver.findElement(videoElement).isDisplayed();
   }
 
   public double getProgressBarWidth() {
