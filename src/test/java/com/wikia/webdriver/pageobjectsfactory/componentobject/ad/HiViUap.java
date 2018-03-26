@@ -111,19 +111,11 @@ public class HiViUap {
   }
 
   public int getVideoWidth() {
-    if (isMobile()) {
-      return driver.findElement(mobileVideoElement).getSize().width;
-    }
-
-    return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).getSize().width);
+    return driver.findElement(mobileVideoElement).getSize().width;
   }
 
   public boolean isVideoElementVisible() {
-    if (isMobile()) {
-      return driver.findElement(mobileVideoElement).isDisplayed();
-    }
-
-    return iframeRunner.usingIframeGet(imaIframe, () -> driver.findElement(videoElement).isDisplayed());
+    return driver.findElement(mobileVideoElement).isDisplayed();
   }
 
   public double getProgressBarWidth() {
