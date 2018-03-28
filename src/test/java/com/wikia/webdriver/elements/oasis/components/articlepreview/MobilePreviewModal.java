@@ -42,7 +42,7 @@ public class MobilePreviewModal extends WikiBasePageObject {
   }
 
   public MobilePreviewModal singleImageIsPresent() {
-    waitForElementToBePresent(".article-image", "Single image");
+    waitForElementToBePresent("#Single_Image", "Single image");
 
     return this;
   }
