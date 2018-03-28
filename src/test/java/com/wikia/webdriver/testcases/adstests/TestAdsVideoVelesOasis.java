@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "project43";
-  private static final String APPNEXUS_DEEBUG_MODE = "appnexusast_debug_mode=1";
+  private static final String OUTSTREAM_DEBUG_MODE = "wikia_video_adapter=2000";
 
   private static final String ASSERTION_VELES_PLAYER_RENDERED = "Veles player rendered";
   private static final String ASSERTION_VELES_PLAYER_NOT_RENDERED = "Veles player not rendered";
@@ -35,7 +35,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
   public void adsVelesWithBidderOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
     String url = TEST_PAGE_BIDDER.getUrl();
-    AdsVelesObject velesAds = new AdsVelesObject(driver, urlBuilder.appendQueryStringToURL(url, APPNEXUS_DEEBUG_MODE));
+    AdsVelesObject velesAds = new AdsVelesObject(driver, urlBuilder.appendQueryStringToURL(url, OUTSTREAM_DEBUG_MODE));
 
     Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(), ASSERTION_VELES_PLAYER_NOT_RENDERED);
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
