@@ -239,6 +239,25 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
+  public void verifyGptAdInSlot(String slotName, String lineItemId) {
+    Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-line-item-id"), lineItemId);
+
+    PageObjectLogging.log(
+            "verifyGptAdInSlot",
+            "Line item id loaded: " + lineItemId,
+            true,
+            driver
+    );
+  }
+
+  public void verifyAdUnit(String slotName, String adUnit) {
+    verifyGptIframe(adUnit, slotName, "gpt");
+  }
+
+  public void verifyMEGAAdUnit(String slotName, String adUnit) {
+    verifyIframe(slotName, buildMEGAGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit));
+  }
+
   public void verifySpotlights() {
     AdsComparison adsComparison = new AdsComparison();
 
@@ -302,22 +321,21 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
   public String buildGptIframeId(int dfpClientId, String adUnit, String slotName, String... src) {
-    //TODO remove the if-statement after ADEN-6901 is done
-    if (slotName == "BOTTOM_LEADERBOARD"){
-      return Joiner.on("/").skipNulls().join(
-              ADS_IFRAME,
-              String.valueOf(dfpClientId),
-              adUnit + "_0"
-      );
-    } else {
-      return Joiner.on("/").skipNulls().join(
-              ADS_IFRAME,
-              String.valueOf(dfpClientId),
-              adUnit,
-              src.length > 0 ? src[0] : null,
-              slotName + "_0"
-      );
-    }
+    return Joiner.on("/").skipNulls().join(
+            ADS_IFRAME,
+            String.valueOf(dfpClientId),
+            adUnit,
+            src.length > 0 ? src[0] : null,
+            slotName + "_0"
+    );
+  }
+
+  public String buildMEGAGptIframeId(int dfpClientId, String adUnit) {
+    return Joiner.on("/").skipNulls().join(
+            ADS_IFRAME,
+            String.valueOf(dfpClientId),
+            adUnit + "_0"
+    );
   }
 
   /**
@@ -330,7 +348,10 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
   public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
-    String iframeId = buildGptIframeId(dfpClientId, adUnit, slotName, src);
+    verifyIframe(slotName, buildGptIframeId(dfpClientId, adUnit, slotName, src));
+  }
+
+  private void verifyIframe(String slotName, String iframeId) {
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
