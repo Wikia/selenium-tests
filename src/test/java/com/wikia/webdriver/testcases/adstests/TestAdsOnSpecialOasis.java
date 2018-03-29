@@ -13,7 +13,6 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   private static final String SPECIAL_PAGE_AD_UNIT = "wka.life/_project43//special";
   private static final String FILE_PAGE_BLB_MEGA_AD_UNIT = "wka1a.PF/bottom_leaderboard/desktop/oasis-file/_project43-life";
   private static final Dimension RESOLUTION = new Dimension(1292, 1000);
-  private static final String TURN_ON_MEGA = "InstantGlobals.wgAdDriverBottomLeaderBoardMegaCountries=[XX]";
 
   private void testSpecialPage(AdsBaseObject ads) {
     ads.setPageType(AdsBaseObject.PAGE_TYPE_SPECIAL);
@@ -36,7 +35,7 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "TestAdsOnFilePagesOasis")
   public void testAdsOnFilePageOasis() {
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_SPECIAL_FILE.getUrl(TURN_ON_MEGA), RESOLUTION);
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_SPECIAL_FILE.getUrl(), RESOLUTION);
     ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
 
     ads.verifyGptAdInSlot(AdsContent.TOP_LB, TEST_LINE_ITEM_ID);
