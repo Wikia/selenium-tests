@@ -10,6 +10,7 @@ public class AdsContent {
   private static final Map<String, String> FILE_PAGE_SLOTS_SELECTORS;
   private static final Map<String, String> MOBILE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
+  public static final Map<String, String> IFRAME_SLOT_SELECTORS;
 
   public static final String ENV_DESKTOP = "desktop";
   public static final String ENV_MOBILE = "mobile";
@@ -86,6 +87,9 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
+
+    IFRAME_SLOT_SELECTORS = new HashMap<>();
+    IFRAME_SLOT_SELECTORS.put(BOTTOM_LB, "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe");
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
     MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
