@@ -20,8 +20,9 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountries";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
 
+  private static final String BLB_IFRAME_SELECTOR = "iframe[id*=wka1a.PF/bottom_leaderboard][id*='_0__container__']";
   private static final String ADONIS_MARKER_BOTTOM_LEADERBOARD_SELECTOR =
-      "div[id*=BOTTOM_LEADERBOARD][adonis-marker] iframe[id*=BOTTOM_LEADERBOARD]";
+          "div[id*='BOTTOM_LEADERBOARD'][adonis-marker] " + BLB_IFRAME_SELECTOR;
 
   @Test(
       groups = "AdsRecoveryPageFairOasis"
