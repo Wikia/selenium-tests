@@ -26,9 +26,9 @@ public class AdsFandomContent {
   static {
     SLOT_SELECTORS = new HashMap<>();
     SLOT_SELECTORS.put(TOP_LEADERBOARD, "div[id$='TOP_LEADERBOARD_0__container__']");
-    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD, "div[id$='BOTTOM_LEADERBOARD_0__container__']");
-    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_DESKTOP, "div[id$='BOTTOM_LEADERBOARD_0__container__']");
-    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_MOBILE, "div[id$='BOTTOM_LEADERBOARD_0__container__']");
+    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD, "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__']");
+    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_DESKTOP, "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__']");
+    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_MOBILE, "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__']");
     SLOT_SELECTORS.put(TOP_BOXAD, "div[id$='TOP_BOXAD_0__container__']");
     SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "div[id$='TOP_BOXAD_0__container__']");
     SLOT_SELECTORS.put(TOP_BOXAD_DESKTOP, "div[id$='TOP_BOXAD_0__container__']");
