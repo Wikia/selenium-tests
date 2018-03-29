@@ -15,9 +15,6 @@ public class AdsContent {
   public static final String ENV_DESKTOP = "desktop";
   public static final String ENV_MOBILE = "mobile";
 
-  //SCRIPTS
-  public static final String ADS_PUSHSLOT_SCRIPT =
-      "window.adslots2.push([\"%slot%\"]);";
   public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
       "top.window.adDriver2ForcedStatus['%s']='success';";
 
