@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
 
 import javax.imageio.ImageIO;
@@ -38,8 +37,7 @@ public class ImageEditor {
     }
   }
 
-  public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size,
-                        BufferedImage image) {
+  public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size, BufferedImage image) {
     int width = size.width;
     int height = size.height;
     File subImg;
@@ -76,7 +74,27 @@ public class ImageEditor {
     return subImg;
   }
 
-  public File cropImage(Point start, org.openqa.selenium.Dimension size, File image) {
+//  public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size,
+//                        BufferedImage image) {
+//    CustomImageCropper cropper = new CustomImageCropper();
+//    BufferedImage croppedImage = cropper.customCropScreenshot(image, start, size).getImage();
+//    File subImg;
+//    try {
+//      subImg = File.createTempFile("screenshot", ".png");
+//    } catch (IOException e) {
+//      throw new WebDriverException(e);
+//    }
+//
+//    try {
+//      ImageIO.write(croppedImage, "png", subImg);
+//    } catch (IOException e) {
+//      throw new WebDriverException(e);
+//    }
+//
+//    return subImg;
+//  }
+
+  public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size, File image) {
     BufferedImage img = fileToImage(image);
     return cropImage(start, size, img);
   }
@@ -96,7 +114,7 @@ public class ImageEditor {
    * and should reflect your monitor dpr e.g. 2 for Macbook Pro
    * @return dpr
    */
-  private static int getDevicePixelRatio() {
+  public static int getDevicePixelRatio() {
     if (Configuration.getEmulator() == Emulator.DEFAULT){
       if (Configuration.getDpr() == null)
         throw new ConfigurationRuntimeException("No dpr variable found in config.yaml");

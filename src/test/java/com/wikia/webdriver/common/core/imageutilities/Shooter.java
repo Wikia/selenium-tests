@@ -2,18 +2,15 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.*;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.coordinates.CoordsProvider;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
 
 /**
  * Class responsible for taking and saving screenshots
@@ -21,9 +18,11 @@ import java.util.ArrayList;
 public class Shooter {
 
   private ImageEditor imageEditor;
+  private int dpr;
 
   public Shooter() {
     imageEditor = new ImageEditor();
+    this.dpr = imageEditor.getDevicePixelRatio();
   }
 
   public void savePageScreenshot(String path, WebDriver driver) {
@@ -31,6 +30,8 @@ public class Shooter {
   }
 
   public File capturePage(WebDriver driver) {
+    BufferedImage image = new AShot().takeScreenshot(driver).getImage();
+
     return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
   }
 
@@ -42,38 +43,61 @@ public class Shooter {
    * @param driver  - instance of WebDriver
    * @return File path  - file's handler which was saved in given path
    */
-  public File captureWebElement(WebElement element, WebDriver driver) {
-    Point start = element.getLocation();
-    Dimension size = element.getSize();
-    if (!"FF".equals(Configuration.getBrowser())) {
-      Object[] rect = getBoundingClientRect(element, driver);
-      start = (Point) rect[0];
-      size = (Dimension) rect[1];
-    }
-
-    File image = imageEditor.cropImage(start, size, capturePage(driver));
-    PageObjectLogging.logImage("Shooter", image, true);
-    return image;
-  }
-
-  private Object[] getBoundingClientRect(WebElement element, WebDriver driver) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    ArrayList<String> list = (ArrayList<String>) js.executeScript(
-        "var rect =  arguments[0].getBoundingClientRect();" +
-        "return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
-        element
-    );
-    Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
-    Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
-    return new Object[]{start, size};
-  }
 
   public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
-    return imageEditor.fileToImage(captureWebElement(element, driver));
+
+    CoordsProvider coordsProvider;
+    if (!"FF".equals(Configuration.getBrowser())) {
+      coordsProvider = new SzogiCoordsProvider();
+    } else {
+      coordsProvider = new WebDriverCoordsProvider();
+    }
+
+    BufferedImage image = new AShot()
+            .coordsProvider(coordsProvider)
+//              .shootingStrategy(ShootingStrategies.scaling(dpr))
+            .takeScreenshot(driver, element).getImage();
+    File file;
+    try {
+      file = File.createTempFile("screenshot", ".png");
+    } catch (IOException e) {
+      throw new WebDriverException(e);
+    }
+
+    try {
+      ImageIO.write(image, "png", file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    PageObjectLogging.logImage("Shooter", file, true);
+    return image;
   }
 
   public File capturePageAndCrop(Point start, Dimension size, WebDriver driver) {
     File screen = capturePage(driver);
     return imageEditor.cropImage(start, size, screen);
+
+//    WebElement dummyElement = driver.findElement(By.tagName("body"));
+//
+//    BufferedImage image = new AShot()
+//            .imageCropper(new CustomImageCropper().setCoordinates(start, size))
+////              .shootingStrategy(ShootingStrategies.scaling(dpr))
+//            .takeScreenshot(driver, dummyElement).getImage();
+//
+//    File file;
+//    try {
+//      file = File.createTempFile("screenshot", ".png");
+//    } catch (IOException e) {
+//      throw new WebDriverException(e);
+//    }
+//
+//    try {
+//      ImageIO.write(image, "png", file);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
+//
+//    return file;
   }
 }
