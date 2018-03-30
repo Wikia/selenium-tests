@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 
-    @Test(groups = "szogi_dcreenshot_tests")
+    @Test(groups = "SzogiScreenshotTests")
     @Execute(onWikia = "wikiActivities", asUser = User.WIKIACTIVITY_USER)
     public class SzogiScreenshotTests extends NewTestTemplate {
 
