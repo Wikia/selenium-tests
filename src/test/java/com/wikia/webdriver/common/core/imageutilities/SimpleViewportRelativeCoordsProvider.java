@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,8 +13,6 @@ import java.util.ArrayList;
 
 public class SimpleViewportRelativeCoordsProvider extends CoordsProvider {
 
-    private WebDriver driver = DriverProvider.getActiveDriver();
-    private JavascriptExecutor js = (JavascriptExecutor) driver;
 
     @Override
     public Coords ofElement(WebDriver driver, WebElement element) {
