@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
@@ -334,6 +335,24 @@ public class ArticlePageObject extends WikiBasePageObject {
     String articleName = articleTitle.getText();
     PageObjectLogging.log("getArticleName", "the name of the article is: " + articleName, true);
     return articleName;
+  }
+
+  public void getScreenshotOfArticleName() {
+    Shooter shooter = new Shooter();
+    shooter.takeScreenshot(articleTitle, driver);
+  }
+
+  public void getScreenshotOfSubmitCommentButton() {
+    Shooter shooter = new Shooter();
+    scrollToFooter();
+    scrollTo(articleTitle);
+    shooter.takeScreenshot(commentSubmitButton, driver);
+  }
+
+  public void getScreenshotOfArticleNameAfterScroll() {
+    Shooter shooter = new Shooter();
+    scrollToFooter();
+    shooter.takeScreenshot(articleTitle, driver);
   }
 
   public void verifyDropdownForAdmin() {

@@ -1,11 +1,13 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.*;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.CoordsProvider;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -30,8 +32,6 @@ public class Shooter {
   }
 
   public File capturePage(WebDriver driver) {
-    BufferedImage image = new AShot().takeScreenshot(driver).getImage();
-
     return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
   }
 
@@ -46,17 +46,27 @@ public class Shooter {
 
   public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
 
+
+    JavascriptActions jsActions = new JavascriptActions();
     CoordsProvider coordsProvider;
     if (!"FF".equals(Configuration.getBrowser())) {
-      coordsProvider = new SzogiCoordsProvider();
+      jsActions.scrollElementIntoViewPort(element);
+      coordsProvider = new SimpleViewportRelativeCoordsProvider();
     } else {
       coordsProvider = new WebDriverCoordsProvider();
     }
 
     BufferedImage image = new AShot()
             .coordsProvider(coordsProvider)
-//              .shootingStrategy(ShootingStrategies.scaling(dpr))
+            .shootingStrategy(ShootingStrategies.scaling(dpr))
             .takeScreenshot(driver, element).getImage();
+
+    PageObjectLogging.log("Image size",image.getWidth() + "x" + image.getHeight(),true);
+    PageObjectLogging.logImage("Shooter", createTempFileFromImage(image), true);
+    return image;
+  }
+
+  private File createTempFileFromImage(BufferedImage image) {
     File file;
     try {
       file = File.createTempFile("screenshot", ".png");
@@ -69,35 +79,18 @@ public class Shooter {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    PageObjectLogging.logImage("Shooter", file, true);
-    return image;
+    return file;
   }
 
   public File capturePageAndCrop(Point start, Dimension size, WebDriver driver) {
-    File screen = capturePage(driver);
-    return imageEditor.cropImage(start, size, screen);
 
-//    WebElement dummyElement = driver.findElement(By.tagName("body"));
-//
-//    BufferedImage image = new AShot()
-//            .imageCropper(new CustomImageCropper().setCoordinates(start, size))
-////              .shootingStrategy(ShootingStrategies.scaling(dpr))
-//            .takeScreenshot(driver, dummyElement).getImage();
-//
-//    File file;
-//    try {
-//      file = File.createTempFile("screenshot", ".png");
-//    } catch (IOException e) {
-//      throw new WebDriverException(e);
-//    }
-//
-//    try {
-//      ImageIO.write(image, "png", file);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//
-//    return file;
+    WebElement dummyElement = driver.findElement(By.tagName("body"));
+
+    BufferedImage image = new AShot()
+            .imageCropper(new CustomImageCropper().setCoordinates(start, size))
+              .shootingStrategy(ShootingStrategies.scaling(dpr))
+            .takeScreenshot(driver, dummyElement).getImage();
+
+    return createTempFileFromImage(image);
   }
 }
