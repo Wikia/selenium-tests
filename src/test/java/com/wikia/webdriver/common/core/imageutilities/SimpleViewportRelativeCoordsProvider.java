@@ -9,7 +9,8 @@ import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.ashot.coordinates.Coords;
 import ru.yandex.qatools.ashot.coordinates.CoordsProvider;
 
-import static java.lang.Math.toIntExact;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class SimpleViewportRelativeCoordsProvider extends CoordsProvider {
 
@@ -20,20 +21,28 @@ public class SimpleViewportRelativeCoordsProvider extends CoordsProvider {
     public Coords ofElement(WebDriver driver, WebElement element) {
 
         Dimension dimension = element.getSize();
-        int offsetTop = toIntExact((Long) js.executeScript("return parseInt(arguments[0].getBoundingClientRect().top)", element));
-        int offsetLeft = toIntExact((Long) js.executeScript("return parseInt(arguments[0].getBoundingClientRect().left)", element));
+        Point start = (Point) getBoundingClientRect(element, driver)[0];
 
-        Coords coords = new Coords(
-                offsetLeft,
-                offsetTop,
+        Coords coords =  new Coords(
+                start.x,
+                start.y,
                 dimension.getWidth(),
-                dimension.getHeight()
-        );
+                dimension.getHeight());
 
-        PageObjectLogging.log("SzogiJqueryCoordsProvider",
-                "Start: " + coords.x + "x" + coords.y + " , size: " + coords.width + "x" + coords.height,
-                true);
-
+        PageObjectLogging.log("SimpleViewportRelativeCoordsProvider",
+                "Start: " + coords.x + "x" + coords.y + " , size: " + coords.width + "x" + coords.height, true);
         return coords;
+    }
+
+    private Object[] getBoundingClientRect(WebElement element, WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        ArrayList<String> list = (ArrayList<String>) js.executeScript(
+                "var rect =  arguments[0].getBoundingClientRect();" +
+                        "return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
+                element
+        );
+        Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
+        Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
+        return new Object[]{start, size};
     }
 }

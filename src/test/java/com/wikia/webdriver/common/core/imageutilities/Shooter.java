@@ -77,7 +77,7 @@ public class Shooter {
     try {
       ImageIO.write(image, "png", file);
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new WebDriverException(e);
     }
     return file;
   }

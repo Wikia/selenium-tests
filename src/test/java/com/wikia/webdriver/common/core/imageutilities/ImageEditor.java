@@ -72,11 +72,12 @@ public class ImageEditor {
    * @return dpr
    */
   public static int getDevicePixelRatio() {
-    if (Configuration.getEmulator() == Emulator.DEFAULT){
-      if (Configuration.getDpr() == null)
+    if (Configuration.getEmulator() == Emulator.DEFAULT) {
+      if (Configuration.getDpr() == null) {
         throw new ConfigurationRuntimeException("No dpr variable found in config.yaml");
+      }
       return Integer.parseInt(Configuration.getDpr());
-    } else{
+    } else {
       Map<String, Object> metrics = Configuration.getEmulator().getDeviceMetrics();
       return (metrics != null && metrics.containsKey("pixelRatio")) ? ((Double) metrics.get("pixelRatio")).intValue() : 1;
     }
