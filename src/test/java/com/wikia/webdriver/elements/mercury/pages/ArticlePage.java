@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -47,6 +48,8 @@ public class ArticlePage extends WikiBasePageObject {
   private final By articleContent = By.cssSelector(".article-content");
   private final By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");
   private final By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
+  private final By commentsButton = By.cssSelector(".show-comments-btn");
+
 
   public CategoryPage openCategoryPageFromCategoriesDropdown() {
     wait.forElementClickable(categoriesDropdown);
@@ -66,6 +69,25 @@ public class ArticlePage extends WikiBasePageObject {
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     return this;
+  }
+
+  public void getScreenshotOfArticleName() {
+    Shooter shooter = new Shooter();
+    shooter.takeScreenshot(articleTitle, driver);
+  }
+
+  public void getScreenshotOfArticleNameAfterScroll() {
+    Shooter shooter = new Shooter();
+    scrollToFooter();
+    shooter.takeScreenshot(articleTitle, driver);
+  }
+
+  public void getScreenshotOfCategoriesDropdown() {
+    scrollToFooter();
+    scrollTo(articleTitle);
+    wait.forElementClickable(commentsButton);
+    WebElement dropdown = driver.findElement(commentsButton);
+    new Shooter().takeScreenshot(dropdown, driver);
   }
 
   public ArticlePage open() {

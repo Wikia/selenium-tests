@@ -54,6 +54,7 @@ public class Shooter {
       coordsProvider = new SimpleViewportRelativeCoordsProvider();
     } else {
       coordsProvider = new WebDriverCoordsProvider();
+      dpr = 1;
     }
 
     BufferedImage image = new AShot()
@@ -61,7 +62,7 @@ public class Shooter {
             .shootingStrategy(ShootingStrategies.scaling(dpr))
             .takeScreenshot(driver, element).getImage();
 
-    PageObjectLogging.log("Image size",image.getWidth() + "x" + image.getHeight(),true);
+    PageObjectLogging.log("Image size",image.getWidth() + "x" + image.getHeight() + "with dpr: " + dpr,true);
     PageObjectLogging.logImage("Shooter", createTempFileFromImage(image), true);
     return image;
   }
