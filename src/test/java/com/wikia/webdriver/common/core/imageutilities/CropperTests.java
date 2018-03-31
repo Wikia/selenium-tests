@@ -13,44 +13,44 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 
-    public class SzogiScreenshotTests extends NewTestTemplate {
+    public class CropperTests extends NewTestTemplate {
 
         private User testUser = User.WIKIACTIVITY_USER;
 
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "ChromeCropper"})
         public void webElementInViewport() {
             ArticlePageObject article = createArticle();
             article.getScreenshotOfArticleName();
         }
 
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "ChromeCropper"})
         public void webElementBelowViewport() {
             ArticlePageObject article = createArticle();
             article.getScreenshotOfSubmitCommentButton();
         }
 
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "ChromeCropper"})
         public void webElementOverViewport() {
             ArticlePageObject article = createArticle();
             article.getScreenshotOfArticleNameAfterScroll();
         }
 
         @InBrowser(browser = Browser.FIREFOX)
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "FirefoxCropper"})
         public void webElementInViewportInFirefox() {
             ArticlePageObject article = createArticle();
             article.getScreenshotOfArticleName();
         }
 
         @InBrowser(browser = Browser.FIREFOX)
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "FirefoxCropper"})
         public void webElementBelowViewportInFirefox() {
             ArticlePageObject article = createArticle();
             article.getScreenshotOfSubmitCommentButton();
         }
 
         @InBrowser(browser = Browser.FIREFOX)
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "FirefoxCropper"})
         public void webElementOverViewportInFirefox() {
             ArticlePageObject article = createArticle();
             article.getScreenshotOfArticleNameAfterScroll();
@@ -63,7 +63,7 @@ import org.testng.annotations.Test;
 
         @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
         @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "MobileCropper"})
         public void webElementInViewportInMercury() {
             ArticlePage article = new ArticlePage().open("/ScrollPreserveTest");
             article.getScreenshotOfArticleName();
@@ -71,7 +71,7 @@ import org.testng.annotations.Test;
 
         @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
         @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "MobileCropper"})
         public void webElementBelowViewportInMercury() {
             ArticlePage article = new ArticlePage().open("/ScrollPreserveTest");
             article.getScreenshotOfCategoriesDropdown();
@@ -79,12 +79,9 @@ import org.testng.annotations.Test;
 
         @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
         @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-        @Test(groups = "SzogiScreenshotTests")
+        @Test(groups = {"CropperTests", "MobileCropper"})
         public void webElementOverViewportInMercury() {
             ArticlePage article = new ArticlePage().open("/ScrollPreserveTest");
             article.getScreenshotOfArticleNameAfterScroll();
         }
     }
-
-
-
