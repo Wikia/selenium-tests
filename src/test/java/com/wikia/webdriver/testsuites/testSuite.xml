@@ -239,6 +239,7 @@
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.renametool.RenameToolTests"/>
+            <class name="com.wikia.webdriver.testcases.cropper.CropperTests"/>
         </classes>
     </test>
 </suite>
