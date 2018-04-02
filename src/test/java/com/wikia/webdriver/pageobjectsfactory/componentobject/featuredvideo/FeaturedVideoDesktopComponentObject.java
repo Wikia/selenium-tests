@@ -17,7 +17,7 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
   @FindBy(css = ".featured-video")
   private WebElement featuredVideo;
 
-  @FindBy(css = ".wikia-jw-settings-button")
+  @FindBy(css = "div[button=\"wikiaSettings\"]")
   private WebElement settingsMenu;
 
   @FindBy(css = ".jw-title-primary")
@@ -56,7 +56,7 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
   @FindBy(css = ".wikia-jw-settings__quality-button")
   private WebElement videoQualityButton;
 
-  @FindBy(css = ".wikia-jw-settings__list .wikia-jw-settings__captions-button")
+  @FindBy(css = "li.wikia-jw-settings__captions-button")
   private WebElement videoCaptionsButton;
 
   @FindBy(css = ".wikia-jw-settings__submenu")
