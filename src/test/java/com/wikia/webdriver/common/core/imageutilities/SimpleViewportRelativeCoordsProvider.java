@@ -3,12 +3,12 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.ashot.coordinates.Coords;
 import ru.yandex.qatools.ashot.coordinates.CoordsProvider;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class SimpleViewportRelativeCoordsProvider extends CoordsProvider {
