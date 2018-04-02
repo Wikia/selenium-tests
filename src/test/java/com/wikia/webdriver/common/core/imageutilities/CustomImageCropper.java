@@ -7,7 +7,7 @@ import ru.yandex.qatools.ashot.coordinates.Coords;
 import ru.yandex.qatools.ashot.cropper.DefaultCropper;
 import ru.yandex.qatools.ashot.cropper.ImageCropper;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.Set;
