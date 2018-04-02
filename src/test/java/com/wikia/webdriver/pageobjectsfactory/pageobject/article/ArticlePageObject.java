@@ -27,6 +27,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;

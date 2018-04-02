@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -46,8 +47,6 @@ public class ArticlePage extends WikiBasePageObject {
   private final By articleContent = By.cssSelector(".article-content");
   private final By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");
   private final By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
-  private final By commentsButton = By.cssSelector(".show-comments-btn");
-
 
   public CategoryPage openCategoryPageFromCategoriesDropdown() {
     wait.forElementClickable(categoriesDropdown);
