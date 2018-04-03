@@ -144,11 +144,11 @@ public class Configuration {
   }
 
   public static Boolean getForceHttps() {
-    return getProp("forceHttps").equals("true");
+    return "true".equals(getProp("forceHttps"));
   }
 
   public static Boolean getNewStagingUrlFormat() {
-    return getProp("newStagingUrlFormat").equals("true");
+    return "true".equals(getProp("newStagingUrlFormat"));
   }
 
   public static Emulator getEmulator() {
