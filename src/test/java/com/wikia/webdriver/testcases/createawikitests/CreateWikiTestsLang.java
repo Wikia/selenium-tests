@@ -19,16 +19,16 @@ import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 @Test(groups = {"CNW_lang"})
 public class CreateWikiTestsLang extends NewTestTemplate {
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs",
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getWikis",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_first"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWikiLangTC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    cnw1.selectLanguage(lang);
-    String expectedDomainPrefix = "en".equals(lang) ? "" : String.format("%s.", lang);
+    cnw1.selectLanguage("szl");
+    String expectedDomainPrefix = "szl";
     assertEquals(cnw1.getDomainPrefix().getText(), expectedDomainPrefix);
-    String wikiName = cnw1.getWikiName();
+    String wikiName = lang;
     cnw1.typeInWikiName(wikiName);
     cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
