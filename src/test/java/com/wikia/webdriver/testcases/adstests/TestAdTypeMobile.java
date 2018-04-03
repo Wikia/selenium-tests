@@ -80,15 +80,4 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.waitForSlot(AdsContent.MOBILE_BOTTOM_LB);
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }
-
-  @Test
-  public void adsAdTypeInspectIframe() {
-    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261158532&orderId=245575332
-    Page page = new Page("project43", "SyntheticTests/AdType/InspectIframe");
-    final By slotSelector = By.id(AdsContent.MOBILE_BOTTOM_LB);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
-    ads.waitForSlotExpanded(slotSelector);
-    ads.scrollToPosition(slotSelector);
-    ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, DFP_IMAGE_URL);
-  }
 }
