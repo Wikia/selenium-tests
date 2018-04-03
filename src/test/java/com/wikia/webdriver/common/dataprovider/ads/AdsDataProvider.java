@@ -48,23 +48,6 @@ public class AdsDataProvider {
   private AdsDataProvider() {}
 
   @DataProvider
-  public static Object[][] popularSites() {
-    return new Object[][]{
-        {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
-        {"gameofthrones", "Game_of_Thrones_Wiki"},
-        {"2007.runescape", "2007scape_Wiki"},
-        {"ru.warframe",
-         "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
-        {"gameofthrones", "Aegon_I_Targaryen"},
-        {"elderscrolls", "Nightblade_(Online)"},
-        {"starwars", "Turtle_Tanker/Legends"},
-        {"harrypotter", "Fizzing_Whizzbees"},
-        {"leagueoflegends", "Ekko"},
-        {"lego", "LEGO"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
