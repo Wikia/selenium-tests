@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 
 import org.openqa.selenium.By;
@@ -42,7 +43,11 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public By getIframeSelector(String slotName) {
-    return By.cssSelector(String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']", slotName));
+    return By.cssSelector(AdsContent.IFRAME_SLOT_SELECTORS.getOrDefault(slotName, getDefaultIframeSelector(slotName)));
+  }
+
+  private String getDefaultIframeSelector(String slotName) {
+    return String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']", slotName);
   }
 
 }

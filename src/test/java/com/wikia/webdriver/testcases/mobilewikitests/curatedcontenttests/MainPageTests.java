@@ -138,14 +138,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = curatedMainPage.isMobilePrefooterVisible();
-    PageObjectLogging.log(
-        PageElements.PREFOOTER.name,
-        MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG,
-        result
-    );
-
     result = curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_VIDEOS.name,

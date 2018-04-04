@@ -2,10 +2,8 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
 
 import javax.imageio.ImageIO;
@@ -40,45 +38,22 @@ public class ImageEditor {
 
   public File cropImage(org.openqa.selenium.Point start, org.openqa.selenium.Dimension size,
                         BufferedImage image) {
-    int width = size.width;
-    int height = size.height;
+    CustomImageCropper cropper = new CustomImageCropper();
+    BufferedImage croppedImage = cropper.customCropScreenshot(image, start, size).getImage();
     File subImg;
     try {
       subImg = File.createTempFile("screenshot", ".png");
     } catch (IOException e) {
       throw new WebDriverException(e);
     }
-    if (width < 1) {
-      width = 1;
-    }
-    if (height < 1) {
-      height = 1;
-    }
-    // workaround for whenever WebElement.getLocation() return negatives
-    // https://github.com/Wikia/selenium-tests/blob/9d00f02ba24391534a80520908c2973d9e6bed86/src/test/java/com/wikia/webdriver/common/core/imageutilities/Shooter.java#L46
-    if (start.getX() < 0) {
-      start.move(0, start.getY());
-    }
-    if (start.getY() < 0) {
-      start.move(start.getX(), 0);
-    }
 
-    PageObjectLogging.log("Cropping screenshot, dpr = " + dpr, String.format("Cropping image %sx%s. Start position %sx%s, subimage %sx%s",
-            image.getWidth(), image.getHeight(), start.getX() * dpr, start.getY() * dpr, width * dpr, height * dpr), true);
-    BufferedImage dest = image.getSubimage(
-        start.getX() * dpr, start.getY() * dpr, width * dpr, height * dpr
-    );
     try {
-      ImageIO.write(dest, "png", subImg);
+      ImageIO.write(croppedImage, "png", subImg);
     } catch (IOException e) {
       throw new WebDriverException(e);
     }
-    return subImg;
-  }
 
-  public File cropImage(Point start, org.openqa.selenium.Dimension size, File image) {
-    BufferedImage img = fileToImage(image);
-    return cropImage(start, size, img);
+    return subImg;
   }
 
   public BufferedImage fileToImage(File file) {
@@ -96,12 +71,13 @@ public class ImageEditor {
    * and should reflect your monitor dpr e.g. 2 for Macbook Pro
    * @return dpr
    */
-  private static int getDevicePixelRatio() {
-    if (Configuration.getEmulator() == Emulator.DEFAULT){
-      if (Configuration.getDpr() == null)
+  public static int getDevicePixelRatio() {
+    if (Configuration.getEmulator() == Emulator.DEFAULT) {
+      if (Configuration.getDpr() == null) {
         throw new ConfigurationRuntimeException("No dpr variable found in config.yaml");
+      }
       return Integer.parseInt(Configuration.getDpr());
-    } else{
+    } else {
       Map<String, Object> metrics = Configuration.getEmulator().getDeviceMetrics();
       return (metrics != null && metrics.containsKey("pixelRatio")) ? ((Double) metrics.get("pixelRatio")).intValue() : 1;
     }

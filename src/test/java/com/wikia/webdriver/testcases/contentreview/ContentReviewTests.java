@@ -1,10 +1,8 @@
 package com.wikia.webdriver.testcases.contentreview;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
@@ -34,7 +32,7 @@ public class ContentReviewTests extends NewTestTemplate {
     }
 
     @Test
-    @Execute(asUser = User.CONTENT_REVIEWER)
+    @Execute(asUser = User.STAFF)
     public void editJS() {
         final String expectedContent = "console.log(\"content review test\");";
 
