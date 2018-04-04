@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ReplyCreatorDesktop extends BaseReplyCreator {
 
-  @FindBy(css = ".inline-editor-floating-container .inline-editor-textarea")
+  @FindBy(css = ".inline-editor__floating-container textarea")
   @Getter
   private WebElement replyCreatorTextArea;
 
@@ -33,11 +33,11 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement guidelinesReadButton;
 
-  @FindBy(css = ".discussion-inline-reply-editor .inline-editor-submit")
+  @FindBy(css = ".inline-reply-editor button[type='submit']")
   @Getter
   private WebElement submitButton;
 
-  @FindBy(css = ".discussion-inline-reply-editor .inline-editor-textarea")
+  @FindBy(css = ".inline-reply-editor .editor-textarea")
   @Getter
   private WebElement textarea;
 
@@ -45,7 +45,7 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement loadingSuccess;
 
-  @FindBy(css = ".discussion-inline-reply-editor")
+  @FindBy(css = ".inline-reply-editor")
   @Getter
   private WebElement editor;
 
