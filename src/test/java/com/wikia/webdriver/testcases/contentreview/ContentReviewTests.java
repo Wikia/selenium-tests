@@ -26,7 +26,6 @@ public class ContentReviewTests extends NewTestTemplate {
 
     @Test
     @Execute(asUser = User.STAFF)
-    @RelatedIssue(issueID = "XW-4839")
     public void staffUserShouldSeeReviewModule() {
         SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
@@ -34,8 +33,7 @@ public class ContentReviewTests extends NewTestTemplate {
     }
 
     @Test
-    @Execute(asUser = User.STAFF)
-    @RelatedIssue(issueID = "XW-4839")
+    @Execute(asUser = User.CONTENT_REVIEWER)
     public void editJS() {
         final String expectedContent = "console.log(\"content review test\");";
 
