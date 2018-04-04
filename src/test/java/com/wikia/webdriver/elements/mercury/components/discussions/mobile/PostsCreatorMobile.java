@@ -28,7 +28,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement editor;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-save-button")
+  @FindBy(css = ".discussion-standalone-editor button[type='submit']")
   private WebElement submitButton;
 
   @Getter
@@ -40,11 +40,11 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor .discussion-textarea-with-counter")
+  @FindBy (css = ".discussion-standalone-editor .discussion-standalone-editor-title .editor-textarea")
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
+  @FindBy(css = ".discussion-standalone-editor .editor-input-label-wrapper:nth-child(1) .editor-textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
   @Getter

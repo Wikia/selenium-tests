@@ -28,7 +28,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement editor;
 
   @Getter
-  @FindBy(css = ".inline-editor .inline-editor-submit")
+  @FindBy(css = ".inline-editor button[type='submit']")
   private WebElement submitButton;
 
   @Getter
