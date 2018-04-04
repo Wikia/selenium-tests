@@ -444,11 +444,11 @@ public class AdsBaseObject extends WikiBasePageObject {
                          String backgroundColor,
                          String middleColor) {
     AdsSkinHelper skinHelper = new AdsSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
-    Assertion.assertTrue(skinHelper.skinPresent());
+    Assertion.assertTrue(skinHelper.skinPresent(), "Skin was not present");
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
 
     if (!Strings.isNullOrEmpty(backgroundColor)) {
-      Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor);
+      Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor, "Background colors differ");
       PageObjectLogging.log("SKIN", "SKIN has correct background color", true);
     }
 
