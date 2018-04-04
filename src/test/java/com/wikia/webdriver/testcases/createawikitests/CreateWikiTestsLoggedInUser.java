@@ -92,7 +92,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
-  @Execute(asUser = User.USER_CNW)
+  @Execute(asUser = User.USER)
   public void createNewWiki005CreateWikiPolicyViolation() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
