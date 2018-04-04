@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorDesktop extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".inline-editor-textarea-wrapper .discussion-textarea")
+  @FindBy(css = ".inline-editor .editor-textarea")
   private WebElement postsCreator;
 
   @Getter
