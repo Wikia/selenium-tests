@@ -60,7 +60,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   )
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoF2Mobile"}
+      groups = {"AdsFeaturedVideoMoatTrackingF2Mobile"}
   )
   public void adsFeaturedVideoMOATTrackingMobile() {
     adsFeaturedVideoMOATTrackingDesktop();
