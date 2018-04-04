@@ -10,7 +10,12 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
 
+/** To run these tests the wiki has to have
+ * variable wgUserSIteJs value set to true
+ * and user has to be admin of the wiki */
+
 @Test(groups = "ContentReview")
+@Execute(onWikia = "ContentReviewTest")
 public class ContentReviewTests extends NewTestTemplate {
 
     @Test
