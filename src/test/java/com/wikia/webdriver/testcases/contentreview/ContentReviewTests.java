@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.contentreview;
 
-import org.testng.annotations.Test;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
