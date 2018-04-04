@@ -44,7 +44,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .editor-input-label-wrapper:nth-child(1) .editor-textarea:not([disabled])")
+  @FindBy(css = ".discussion-standalone-editor .editor-input-label-wrapper .editor-textarea.js--textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
   @Getter
