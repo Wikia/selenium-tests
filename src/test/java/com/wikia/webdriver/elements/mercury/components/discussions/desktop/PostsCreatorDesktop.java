@@ -71,7 +71,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
 
   @Override
   protected String getBaseCssClassName() {
-    return "discussion-inline-editor";
+    return "inline-editor";
   }
 
   public boolean isExpanded() {
