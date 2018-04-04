@@ -1,9 +1,9 @@
 package com.wikia.webdriver.testcases.contentreview;
 
 import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
@@ -26,6 +26,7 @@ public class ContentReviewTests extends NewTestTemplate {
 
     @Test
     @Execute(asUser = User.STAFF)
+    @RelatedIssue(issueID = "XW-4839")
     public void staffUserShouldSeeReviewModule() {
         SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
@@ -33,7 +34,8 @@ public class ContentReviewTests extends NewTestTemplate {
     }
 
     @Test
-    @Execute(asUser = User.CONTENT_REVIEWER)
+    @Execute(asUser = User.STAFF)
+    @RelatedIssue(issueID = "XW-4839")
     public void editJS() {
         final String expectedContent = "console.log(\"content review test\");";
 

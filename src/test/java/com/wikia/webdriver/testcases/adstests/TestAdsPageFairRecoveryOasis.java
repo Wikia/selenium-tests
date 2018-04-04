@@ -20,8 +20,9 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountries";
   private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
 
-  private static final String ADONIS_MARKER_BOTTOM_LEADERBOARD_SELECTOR =
-      "div[id*=BOTTOM_LEADERBOARD][adonis-marker] iframe[id*=BOTTOM_LEADERBOARD]";
+  private static final By RECOVERABLE_BLB_SELECTOR = By.cssSelector(
+          "div[id*='BOTTOM_LEADERBOARD'] div[id*='wka1a.PF/bottom_leaderboard'][adonis-marker][adonis-marker] iframe"
+  );
 
   @Test(
       groups = "AdsRecoveryPageFairOasis"
@@ -52,7 +53,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(2);
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
-        .forElementPresent(By.cssSelector(ADONIS_MARKER_BOTTOM_LEADERBOARD_SELECTOR));
+        .forElementPresent(RECOVERABLE_BLB_SELECTOR);
 
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(3);
   }
