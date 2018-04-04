@@ -420,6 +420,7 @@ dependencies {
     testCompile 'org.slf4j:slf4j-log4j12:1.6.4'
     testCompile 'org.projectlombok:lombok:1.16.6'
     testCompile 'org.assertj:assertj-core:3.8.0'
+    testCompile 'ru.yandex.qatools.ashot:ashot:1.5.2'
 }
 
 
