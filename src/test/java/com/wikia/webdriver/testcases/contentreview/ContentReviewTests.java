@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.contentreview;
 
-import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
