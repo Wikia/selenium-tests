@@ -40,7 +40,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy(css = ".inline-editor .discussion-textarea-with-counter")
+  @FindBy(css = ".inline-editor .inline-editor__title textarea")
   private WebElement titleTextarea;
 
   @Getter
