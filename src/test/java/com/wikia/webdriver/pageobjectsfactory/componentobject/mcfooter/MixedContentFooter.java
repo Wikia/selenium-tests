@@ -52,7 +52,8 @@ public class MixedContentFooter extends WikiBasePageObject {
 
   public MixedContentFooter scrollToMCFooter() {
     wait.forElementVisible(mcFooter);
-    jsActions.scrollToElement(mcFooter);
+//    jsActions.scrollToElement(mcFooter);
+    jsActions.scrollToElement(mcFooter,30);
     wait.forElementVisible(mcFooterHeader);
 
     PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
