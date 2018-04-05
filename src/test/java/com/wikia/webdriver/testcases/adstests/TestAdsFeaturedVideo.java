@@ -45,7 +45,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoOasis"}
+      groups = {"AdsFeaturedVideoMoatTrackingOasis"}
   )
   public void adsFeaturedVideoMoatTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
@@ -86,7 +86,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   )
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoMercury"}
+      groups = {"AdsFeaturedVideoMoatTrackingMercury"}
   )
   public void adsFeaturedVideoMoatTrackingMobile() {
     adsFeaturedVideoMoatTrackingDesktop();
