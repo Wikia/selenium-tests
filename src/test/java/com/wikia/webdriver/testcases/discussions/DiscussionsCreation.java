@@ -30,6 +30,7 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
     createNewWikiLangTC001("en");
     PostsListPage page = navigateToDiscussions();
     GuidelinesPage guidelinesPage = page.getGuidelines();
+    guidelinesPage.open();
     Assertion.assertFalse(guidelinesPage.getGuidelinesText().isEmpty());
   }
 
