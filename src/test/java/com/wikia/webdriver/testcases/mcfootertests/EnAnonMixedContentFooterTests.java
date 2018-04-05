@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.DiscussionCard;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FandomPageObject;
@@ -120,9 +119,10 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test(groups = {"test_aga"})
   public void userIsTakenToDiscussionsAfterClickOnViewAll() {
-    DiscussionsPage discussions = new MixedContentFooter()
+//    DiscussionsPage discussions =
+        new MixedContentFooter()
         .openWikiMainPage()
-        .scrollToMCFooter()
+        .scrollToMCFooter();
 //        .getDiscussionsCard()
 //        .clickOnViewAllLinkInDiscussions();
 //
