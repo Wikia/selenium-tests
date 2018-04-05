@@ -28,7 +28,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoF2Desktop"}
+      groups = {"AdsFeaturedVideoMoatTrackingF2Desktop"}
   )
   public void adsFeaturedVideoMOATTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
@@ -48,7 +48,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
       emulator = Emulator.GOOGLE_NEXUS_5
   )
   @Test(
-      groups = {"AdsFeaturedVideoF2Mobile"}
+      groups = {"AdsFeaturedVideoMoatTrackingF2Mobile"}
   )
   public void adsFeaturedVideoAdsMobile() {
     adsFeaturedVideoAdsDesktop();
@@ -60,7 +60,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   )
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = {"AdsFeaturedVideoF2Mobile"}
+      groups = {"AdsFeaturedVideoMoatTrackingF2Mobile"}
   )
   public void adsFeaturedVideoMOATTrackingMobile() {
     adsFeaturedVideoMOATTrackingDesktop();

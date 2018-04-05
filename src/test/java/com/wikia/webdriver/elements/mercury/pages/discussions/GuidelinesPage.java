@@ -37,10 +37,10 @@ public class GuidelinesPage extends BasePage {
   @FindBy(css = ".editor-close")
   private WebElement editorClose;
 
-  @FindBy(css = ".discussion-standalone-editor-save-button")
+  @FindBy(css = ".discussion-standalone-editor button[type='submit']")
   private WebElement saveButton;
 
-  @FindBy(css = ".discussion-standalone-editor-textarea")
+  @FindBy(css = ".discussion-standalone-content-wrapper textarea")
   private WebElement guidelinesText;
 
   public GuidelinesPage open() {

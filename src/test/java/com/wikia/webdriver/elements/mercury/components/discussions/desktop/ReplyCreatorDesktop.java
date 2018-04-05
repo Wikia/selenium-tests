@@ -9,11 +9,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class ReplyCreatorDesktop extends BaseReplyCreator {
 
-  @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
+  @FindBy(css = ".inline-editor__floating-container textarea")
   @Getter
   private WebElement replyCreatorTextArea;
 
-  @FindBy(css = ".discussion-inline-editor-content-wrapper")
+  @FindBy(css = ".inline-editor-content-wrapper")
   @Getter
   private WebElement replyCreatorWrapper;
 
@@ -33,11 +33,11 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement guidelinesReadButton;
 
-  @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-submit")
+  @FindBy(css = ".inline-reply-editor button[type='submit']")
   @Getter
   private WebElement submitButton;
 
-  @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-textarea")
+  @FindBy(css = ".inline-reply-editor .editor-textarea")
   @Getter
   private WebElement textarea;
 
@@ -45,7 +45,7 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement loadingSuccess;
 
-  @FindBy(css = ".discussion-inline-reply-editor")
+  @FindBy(css = ".inline-reply-editor")
   @Getter
   private WebElement editor;
 
@@ -54,7 +54,7 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   private WebElement uploadButton;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  @FindBy(css = ".inline-editor .post-image-inner-image")
   private WebElement imagePreview;
 
   @Getter

@@ -30,8 +30,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
 
-  private By mainPagePadSlot = By.cssSelector(".main-page-pad-slot");
-
   public float getElementOffsetTop(String element) {
     return Float.parseFloat(driver
         .executeScript("var el = document.querySelector(arguments[0]), boundingClientRect = el.getBoundingClientRect(); return boundingClientRect && boundingClientRect.top + document.body.scrollTop;", element)
@@ -52,15 +50,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
 
   public boolean isWikiaStatsContainerVisible() {
     return isCuratedElementVisible(wikiaStatsContainer);
-  }
-
-  public boolean isMainPagePadSlotInDOM() {
-    try {
-      wait.forElementPresent(mainPagePadSlot, false);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    }
   }
 
   public boolean isFeaturedContentVisible() {
