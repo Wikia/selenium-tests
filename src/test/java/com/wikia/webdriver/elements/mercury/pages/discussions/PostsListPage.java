@@ -6,6 +6,8 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.catego
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import lombok.Getter;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
@@ -13,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class PostsListPage extends PageWithPosts {
 
   public static final String PATH = "/d/f?sort=latest";
+
+  @FindBy(css = ".wikia-guidelines")
+  private WebElement guidelinesLink;
 
   @Getter(lazy = true)
   private final PostEditor postEditor = new PostEditor();
@@ -31,9 +36,6 @@ public class PostsListPage extends PageWithPosts {
 
   @Getter(lazy = true)
   private final CategoriesFieldset categories = new CategoriesFieldset();
-
-  @Getter(lazy = true)
-  private final GuidelinesPage guidelines = new GuidelinesPage();
 
   @Override
   public PostsListPage open() {
@@ -54,6 +56,13 @@ public class PostsListPage extends PageWithPosts {
     } finally {
       restoreDefaultImplicitWait();
     }
+  }
+
+  public GuidelinesPage openGuidelinesPage() {
+    wait.forElementClickable(guidelinesLink);
+    guidelinesLink.click();
+
+    return new GuidelinesPage();
   }
 
 }

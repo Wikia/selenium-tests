@@ -29,9 +29,8 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
   public void guidelinesHaveDefaultContentOnNewCommunityDiscussionsPage() {
     createNewWikiLangTC001("en");
     PostsListPage page = navigateToDiscussions();
-    GuidelinesPage guidelinesPage = page.getGuidelines();
-    guidelinesPage.open();
-    Assertion.assertFalse(guidelinesPage.getGuidelinesText().isEmpty());
+    GuidelinesPage guidelines = page.openGuidelinesPage();
+    Assertion.assertFalse(guidelines.getGuidelinesText().isEmpty());
   }
 
   private void createNewPost(PostsListPage page) {
