@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.elements.common.CommunityHeader;
+import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.testcases.createawikitests.CreateWikiTestsLang;
 import org.testng.annotations.Test;
@@ -21,6 +22,15 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
     Assertion.assertTrue(page.getErrorMessages().isEmptyPostsListMessageDisplayed());
     createNewPost(page);
     Assertion.assertFalse(page.getPost().isPostListEmpty());
+  }
+
+  @Execute(asUser = User.USER_CNW)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void guidelinesHaveDefaultContentOnNewCommunityDiscussionsPage() {
+    createNewWikiLangTC001("en");
+    PostsListPage page = navigateToDiscussions();
+    GuidelinesPage guidelinesPage = page.getGuidelines();
+    Assertion.assertFalse(guidelinesPage.getGuidelinesText().isEmpty());
   }
 
   private void createNewPost(PostsListPage page) {

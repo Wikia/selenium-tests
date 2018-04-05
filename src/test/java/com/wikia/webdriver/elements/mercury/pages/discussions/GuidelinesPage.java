@@ -71,6 +71,12 @@ public class GuidelinesPage extends BasePage {
     return result;
   }
 
+  public String getGuidelinesText() {
+    wait.forElementVisible(guidelinesText);
+
+    return guidelinesText.getText();
+  }
+
   public boolean isGuidelinesImageAreaDisplayed() {
     return isElementVisible(leftRailHeader, "Guidelines image");
   }
