@@ -118,7 +118,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
     Assertion.assertEquals(mcFooter.countArticlesInExploreCard(), 3);
   }
 
-  @Test
+  @Test(groups = {"test_aga"})
   public void userIsTakenToDiscussionsAfterClickOnViewAll() {
     DiscussionsPage discussions = new MixedContentFooter()
         .openWikiMainPage()
