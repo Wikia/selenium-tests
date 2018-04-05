@@ -7,11 +7,9 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Poll;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,6 +18,11 @@ import org.testng.annotations.Test;
 public class PollsTests extends NewTestTemplate {
 
     public static final int DEFAULT_ANSWERS_NUMBER = 2;
+
+    private void createInitialPostWithPoll() {
+        final PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+
+    }
 
     @Test
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -62,7 +65,6 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        Assert.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
         poll.clickNthAnswer(0);
         poll.clickNthAnswer(1); //change answer before submitting a vote
         poll.clickVoteButton();
