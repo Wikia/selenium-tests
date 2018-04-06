@@ -26,7 +26,7 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
 
   @Execute(asUser = User.USER_CNW)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void guidelinesHaveDefaultContentOnNewCommunityDiscussionsPage() {
+  public void guidelinesIsNotEmptyOnNewCommunityDiscussionsPage() {
     createNewWikiLangTC001("en");
     PostsListPage page = navigateToDiscussions();
     GuidelinesPage guidelines = page.openGuidelinesPage();
