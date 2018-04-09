@@ -59,6 +59,10 @@ public class DiscussionsClient {
     return createPost(CreatePostContext.postContext(siteId, title, description));
   }
 
+  public PostEntity.Data createCustomPostWithPoll(String siteId, String title, String description) {
+    return createPost(CreatePostContext.postContext(siteId, title, description));
+  }
+
   private String extractSiteId() {
     return Utils.extractSiteIdFromMediaWikiUsing(driver);
   }
