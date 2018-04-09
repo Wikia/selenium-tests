@@ -7,9 +7,11 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Poll;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,10 +21,9 @@ public class PollsTests extends NewTestTemplate {
 
     public static final int DEFAULT_ANSWERS_NUMBER = 2;
 
-    private void createInitialPostWithPoll() {
-        final PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-
-    }
+    /**
+     * DESKTOP TESTS SECTION
+     */
 
     @Test
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -38,7 +39,7 @@ public class PollsTests extends NewTestTemplate {
         poll.addTitle(TextGenerator.createUniqueText());
         Assert.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        Assert.assertFalse(postsCreator.isPostButtonActive()); //poll needs to have at least 2 answers options
+        Assert.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
         page.waitForLoadingSpinner();
@@ -52,12 +53,7 @@ public class PollsTests extends NewTestTemplate {
     public void anonUserCanNotVoteInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         poll.clickPollTitle();
-        SignInToFollowModalDialog signInModal = new SignInToFollowModalDialog();
-        Assert.assertTrue(signInModal.isVisible());
-
-        signInModal.clickOkButton();
-        poll.clickNthAnswer(0);
-        Assert.assertTrue(signInModal.isVisible());
+        manageSignInModal(poll);
     }
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"})
@@ -66,7 +62,7 @@ public class PollsTests extends NewTestTemplate {
     public void loggedInUserCanVoteOnceInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         poll.clickNthAnswer(0);
-        poll.clickNthAnswer(1); //change answer before submitting a vote
+        poll.clickNthAnswer(1);
         poll.clickVoteButton();
 
         Assert.assertTrue(poll.isChosenResultBarDisplayed());
@@ -87,8 +83,8 @@ public class PollsTests extends NewTestTemplate {
 
         poll.addTitle(TextGenerator.createUniqueText());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        poll.deletePoll(); //delete poll being created
-        postsCreator.addPoll(); //create new poll
+        poll.deletePoll();
+        postsCreator.addPoll();
         Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
 
         poll.addTitle(TextGenerator.createUniqueText());
@@ -107,6 +103,10 @@ public class PollsTests extends NewTestTemplate {
         page.waitForLoadingSpinner();
         Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
+
+    /**
+     * MOBILE TESTS SECTION
+     */
 
     @Test
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -134,12 +134,7 @@ public class PollsTests extends NewTestTemplate {
     public void anonUserCanNotVoteInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         poll.clickPollTitle();
-        SignInToFollowModalDialog signInModal = new SignInToFollowModalDialog();
-        Assert.assertTrue(signInModal.isVisible());
-
-        signInModal.clickOkButton();
-        poll.clickNthAnswer(0);
-        Assert.assertTrue(signInModal.isVisible());
+        manageSignInModal(poll);
     }
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"})
@@ -155,6 +150,18 @@ public class PollsTests extends NewTestTemplate {
         Assert.assertTrue(poll.isChosenResultBarDisplayed());
         Assert.assertTrue(poll.getBarResultsList().size() > 0);
         Assert.assertTrue(poll.isAlreadyVotedMessageVisible());
+    }
+
+    /**
+     * TESTING METHODS SECTION
+     */
+
+    public void manageSignInModal(Poll p) {
+        SignInToFollowModalDialog signInModal = new SignInToFollowModalDialog();
+        Assert.assertTrue(signInModal.isVisible());
+        signInModal.clickOkButton();
+        p.clickNthAnswer(0);
+        Assert.assertTrue(signInModal.isVisible());
     }
 
 }
