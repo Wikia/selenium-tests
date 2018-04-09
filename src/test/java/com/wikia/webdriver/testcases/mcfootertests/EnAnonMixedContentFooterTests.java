@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mcfootertests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
@@ -116,6 +117,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
+  @RelatedIssue(issueID = "PLATFORM-3439")
   public void userIsTakenToDiscussionsAfterClickOnViewAll() {
     DiscussionsPage discussions = new MixedContentFooter()
         .openWikiMainPage()
@@ -127,6 +129,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
+  @RelatedIssue(issueID = "PLATFORM-3439")
   public void userIsTakenToUserProfileAfterClickOnAvatar() {
     DiscussionCard discussions = new MixedContentFooter()
         .openWikiMainPage()
@@ -142,6 +145,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
+  @RelatedIssue(issueID = "PLATFORM-3439")
   public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
     new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
