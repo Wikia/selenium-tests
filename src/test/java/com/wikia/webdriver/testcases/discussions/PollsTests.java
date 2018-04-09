@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-polls")
 public class PollsTests extends NewTestTemplate {
 
+    /* TODO: Use fixtures to create Poll post */
+
     public static final int DEFAULT_ANSWERS_NUMBER = 2;
 
     /**
