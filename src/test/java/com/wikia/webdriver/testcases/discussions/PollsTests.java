@@ -62,7 +62,6 @@ public class PollsTests extends NewTestTemplate {
     public void loggedInUserCanVoteOnceInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         poll.clickNthAnswer(0);
-        poll.clickNthAnswer(1);
         poll.clickVoteButton();
 
         Assert.assertTrue(poll.isChosenResultBarDisplayed());
@@ -144,7 +143,6 @@ public class PollsTests extends NewTestTemplate {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         Assert.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
         poll.clickNthAnswer(0);
-        poll.clickNthAnswer(1);
         poll.clickVoteButton();
 
         Assert.assertTrue(poll.isChosenResultBarDisplayed());
