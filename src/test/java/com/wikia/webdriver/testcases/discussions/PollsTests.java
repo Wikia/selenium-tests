@@ -16,7 +16,6 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = "discussions-polls")
 public class PollsTests extends NewTestTemplate {
 
     /* TODO: Use fixtures to create Poll post */
@@ -27,7 +26,7 @@ public class PollsTests extends NewTestTemplate {
      * DESKTOP TESTS SECTION
      */
 
-    @Test
+    @Test(groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
     @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void userCanCreatePostWithSimplePollOnDesktop() {
@@ -49,7 +48,7 @@ public class PollsTests extends NewTestTemplate {
         Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
-    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"})
+    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"}, groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
     @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void anonUserCanNotVoteInPollOnDesktop() {
@@ -58,7 +57,7 @@ public class PollsTests extends NewTestTemplate {
         manageSignInModal(poll);
     }
 
-    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"})
+    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"}, groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnDesktop() {
@@ -71,7 +70,7 @@ public class PollsTests extends NewTestTemplate {
         Assert.assertTrue(poll.isAlreadyVotedMessageVisible());
     }
 
-    @Test
+    @Test(groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
     @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void userCanCreateComplexPollOnDesktop() {
@@ -109,7 +108,7 @@ public class PollsTests extends NewTestTemplate {
      * MOBILE TESTS SECTION
      */
 
-    @Test
+    @Test(groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void userCanCreatePostWithSimplePollOnMobile() {
@@ -129,7 +128,7 @@ public class PollsTests extends NewTestTemplate {
         Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
-    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"})
+    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void anonUserCanNotVoteInPollOnMobile() {
@@ -138,7 +137,7 @@ public class PollsTests extends NewTestTemplate {
         manageSignInModal(poll);
     }
 
-    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"})
+    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnMobile() {
