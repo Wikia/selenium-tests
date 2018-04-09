@@ -85,8 +85,13 @@ public class Post extends BasePage {
   }
 
   public Post clickNthPostWithPoll(int number) {
-    wait.forElementClickable(postsWithPollList.get(number));
-    postsWithPollList.get(number).click();
+    try {
+      wait.forElementClickable(postsWithPollList.get(number));
+      postsWithPollList.get(number).click();
+    } catch (IndexOutOfBoundsException e) {
+      PageObjectLogging.log("Could not find and click nth post with a poll", e, false);
+    }
+
     return this;
   }
 
