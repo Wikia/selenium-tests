@@ -16,7 +16,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PollsTests extends NewTestTemplate {
+public class PollzsTests extends NewTestTemplate {
 
     /* TODO: Use fixtures to create Poll post */
 
