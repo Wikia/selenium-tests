@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Navigation extends WikiBasePageObject {
 
-  @FindBy(css = ".wikia-nav__avatar .wds-icon")
+  @FindBy(css = ".wikia-nav__avatar .wikia-nav--login")
   private WebElement signInRegisterButton;
 
   @FindBy(css = ".wikia-nav__back")

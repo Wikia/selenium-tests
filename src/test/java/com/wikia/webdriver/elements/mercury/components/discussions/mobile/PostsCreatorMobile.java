@@ -52,6 +52,14 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement uploadButton;
 
   @Getter
+  @FindBy(css = ".poll-add-button")
+  private WebElement addPollButton;
+
+  @Getter
+  @FindBy(css = ".poll-wrapper")
+  private WebElement pollPreview;
+
+  @Getter
   @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
   private WebElement imagePreview;
 

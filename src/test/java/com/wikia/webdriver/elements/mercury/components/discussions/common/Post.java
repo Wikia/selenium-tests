@@ -53,6 +53,9 @@ public class Post extends BasePage {
   @FindBy(css = ".post-detail .og-container")
   private WebElement postOpenGraph;
 
+  @FindBy(css = ".post-detail .poll-bar")
+  private List<WebElement> postsWithPollList;
+
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -79,6 +82,21 @@ public class Post extends BasePage {
   public Post clickLoadMore() {
     scrollAndClick(loadMoreButton);
     return this;
+  }
+
+  public Post clickNthPostWithPoll(int number) {
+    try {
+      wait.forElementClickable(postsWithPollList.get(number));
+      postsWithPollList.get(number).click();
+    } catch (IndexOutOfBoundsException e) {
+      PageObjectLogging.log("Could not find and click nth post with a poll", e, false);
+    }
+
+    return this;
+  }
+
+  public Poll getPoll() {
+    return new Poll();
   }
 
   public int getPostsListLength() {
@@ -193,6 +211,13 @@ public class Post extends BasePage {
     boolean hasImage = findNewestPost().hasImage();
     restoreDefaultImplicitWait();
     return hasImage;
+  }
+
+  public boolean firstPostHasPoll() {
+    setShortImplicitWait();
+    boolean hasPoll = findNewestPost().hasPoll();
+    restoreDefaultImplicitWait();
+    return hasPoll;
   }
 
   public boolean firstPostHasOpenGraph() {
