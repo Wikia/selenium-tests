@@ -129,4 +129,10 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return startReplyCreationWith(String.format(" %s ", link.toString()));
   }
 
+  public BaseReplyCreator waitForErrorMessageNotVisible() {
+    wait.forElementNotVisible(By.className("error"));
+
+    return this;
+  }
+
 }
