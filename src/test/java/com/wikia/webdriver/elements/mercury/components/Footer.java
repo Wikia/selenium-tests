@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -23,18 +22,10 @@ public class Footer extends WikiBasePageObject{
     viewFullSiteLink.click();
   }
 
-  public boolean isOasis() {
-    return isElementOnPage(By.className("skin-oasis"));
-  }
-
   public void clickViewMobileSite() {
     wait.forElementVisible(footer);
     wait.forElementClickable(viewMobileSiteLink);
     scrollAndClick(viewMobileSiteLink);
-  }
-
-  public boolean isMobile() {
-    return isElementOnPage(By.className("mobile-wiki"));
   }
 
 }

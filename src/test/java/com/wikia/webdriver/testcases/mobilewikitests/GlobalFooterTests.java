@@ -6,6 +6,8 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Footer;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -23,14 +25,10 @@ public class GlobalFooterTests extends NewTestTemplate{
     Footer footer = new Footer();
     footer.clickViewFullSiteLink();
 
-    Assertion.assertTrue(footer.isOasis());
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
 
     footer.clickViewMobileSite();
 
-    Assertion.assertTrue(footer.isMobile());
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
   }
-
-
-
-
 }
