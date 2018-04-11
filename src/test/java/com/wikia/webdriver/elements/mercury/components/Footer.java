@@ -27,5 +27,4 @@ public class Footer extends WikiBasePageObject{
     wait.forElementClickable(viewMobileSiteLink);
     scrollAndClick(viewMobileSiteLink);
   }
-
 }
