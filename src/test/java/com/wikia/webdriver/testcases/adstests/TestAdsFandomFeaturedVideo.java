@@ -11,9 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObje
 import org.testng.annotations.Test;
 
 public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
-  @Test(
-      groups = {"AdsFeaturedVideoF2Desktop"}
-  )
+  @Test(groups = "AdsFeaturedVideoF2Desktop")
   public void adsFeaturedVideoAdsDesktop() {
     String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
         FandomAdsDataProvider.INSTANT_GLOBAL_MIDROLL);
@@ -27,9 +25,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsFeaturedVideoF2Desktop"}
-  )
+  @Test(groups = "AdsFeaturedVideoMoatTrackingF2Desktop")
   public void adsFeaturedVideoMOATTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
@@ -47,9 +43,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
-  @Test(
-      groups = {"AdsFeaturedVideoF2Mobile"}
-  )
+  @Test(groups = "AdsFeaturedVideoF2Mobile")
   public void adsFeaturedVideoAdsMobile() {
     adsFeaturedVideoAdsDesktop();
   }
@@ -59,9 +53,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
       emulator = Emulator.GOOGLE_NEXUS_5
   )
   @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsFeaturedVideoF2Mobile"}
-  )
+  @Test(groups = "AdsFeaturedVideoMoatTrackingF2Mobile")
   public void adsFeaturedVideoMOATTrackingMobile() {
     adsFeaturedVideoMOATTrackingDesktop();
   }

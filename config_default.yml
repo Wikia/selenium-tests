@@ -6,8 +6,7 @@ browser: CHROME # acceptable values: FF, CHROME, GHOST, ANDROID, CHROMEMOBILEMER
 dpr: 1 # Your device's pixel ratio, do not commit your changes
 wikiName: mediawiki119 # default testing wiki
 env: preview # acceptable values: prod, preview, sandbox-number dev-name, adeng (for adeng.fandom.wikia.com)
-credentialsPath: /selenium-config/config.xml # Path to your config.xml file
-captchaPath: /selenium-config/captcha.txt # Path to your captcha.txt file
+seleniumConfigPath: /selenium-config
 qs: null
 disableFlash: true
 jsErrorsEnabled: false

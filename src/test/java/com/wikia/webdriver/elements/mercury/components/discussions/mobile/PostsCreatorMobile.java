@@ -28,7 +28,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement editor;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-save-button")
+  @FindBy(css = ".discussion-standalone-editor button[type='submit']")
   private WebElement submitButton;
 
   @Getter
@@ -40,16 +40,24 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor .discussion-textarea-with-counter")
+  @FindBy (css = ".discussion-standalone-editor .discussion-standalone-editor-title .editor-textarea")
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
+  @FindBy(css = ".discussion-standalone-editor .editor-input-label-wrapper .editor-textarea.js--textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
   @Getter
   @FindBy(css = ".discussion-image-upload__button input[type=file]")
   private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".poll-add-button")
+  private WebElement addPollButton;
+
+  @Getter
+  @FindBy(css = ".poll-wrapper")
+  private WebElement pollPreview;
 
   @Getter
   @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")

@@ -41,25 +41,11 @@ public class AdsDataProvider {
   public static final Page PAGE_FV_JWPLAYER = new Page(WIKI_SPECIAL, FV_JWPLAYER_PAGE_URI);
   public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(WIKI_SPECIAL, FV_JWPLAYER_WITH_SOUND_PAGE_URI);
 
-  private AdsDataProvider() {
-  }
+  public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
+  public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
+  public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
 
-  @DataProvider
-  public static Object[][] popularSites() {
-    return new Object[][]{
-        {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
-        {"gameofthrones", "Game_of_Thrones_Wiki"},
-        {"2007.runescape", "2007scape_Wiki"},
-        {"ru.warframe",
-         "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
-        {"gameofthrones", "Aegon_I_Targaryen"},
-        {"elderscrolls", "Nightblade_(Online)"},
-        {"starwars", "Turtle_Tanker/Legends"},
-        {"harrypotter", "Fizzing_Whizzbees"},
-        {"leagueoflegends", "Ekko"},
-        {"lego", "LEGO"}
-    };
-  }
+  private AdsDataProvider() {}
 
   @DataProvider
   public static Object[][] noAdsForSony() {
@@ -187,7 +173,7 @@ public class AdsDataProvider {
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{
         {
-            "project43",
+            WIKI_SPECIAL,
             "SyntheticTests/AdDriver2ForceStatus/Success",
             Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")
         }
@@ -198,7 +184,7 @@ public class AdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {
-            "project43",
+            WIKI_SPECIAL,
             "SyntheticTests/DfpParams",
             null,
             "wka.life/_project43//article",
@@ -464,29 +450,29 @@ public class AdsDataProvider {
         {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
-        {"project43", "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
-        {"project43", "SyntheticTests/LB", "\"s0c\":[\"tech\"]", true}
+        {WIKI_SPECIAL, "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
+        {WIKI_SPECIAL, "SyntheticTests/LB", "\"s0c\":[\"tech\"]", true}
     };
   }
 
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"project43", "SyntheticTests/Spotlights"}
+        {WIKI_SPECIAL, "SyntheticTests/Spotlights"}
     };
   }
 
   @DataProvider
   public static Object[][] prebidCustomAdapter() {
     return new Object[][]{
-        {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
+        {WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Wikia"},
     };
   }
 
   @DataProvider
   public static Object[][] prebidVelesAdapter() {
     return new Object[][]{
-        {"project43","SyntheticTests/Cap", 333201132},
+        {WIKI_SPECIAL,"SyntheticTests/Cap", 333201132},
     };
   }
 
@@ -507,13 +493,13 @@ public class AdsDataProvider {
   public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
-            "project43",
+            WIKI_SPECIAL,
             "SyntheticTests/ProvidersChain",
             AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt"
         },
         {
-            "project43",
+            WIKI_SPECIAL,
             "SyntheticTests/ProvidersChain",
             AdsContent.INVISIBLE_SKIN,
             "DirectGpt"
@@ -525,7 +511,7 @@ public class AdsDataProvider {
   public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
-            "project43",
+            WIKI_SPECIAL,
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.TOP_LB,
@@ -537,7 +523,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{
-        {"project43", "SyntheticTests/Krux"}
+        {WIKI_SPECIAL, "SyntheticTests/Krux"}
     };
   }
 
@@ -545,7 +531,7 @@ public class AdsDataProvider {
   public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
             new Dimension(300, 250)
         },
     };
@@ -555,7 +541,7 @@ public class AdsDataProvider {
   public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
             new Dimension(728, 90)
         },
     };
@@ -565,7 +551,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsOnConsecutivePages() {
     return new Object[][]{
         {
-            new Page("project43", "TrackingPixels/Article1"),
+            new Page(WIKI_SPECIAL, "TrackingPixels/Article1"),
             new String[]{
                 "TrackingPixels/Article2",
                 "TrackingPixels/Article3",
@@ -585,7 +571,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "project43", "Project43_Wikia",
+            WIKI_SPECIAL, "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -618,7 +604,7 @@ public class AdsDataProvider {
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -627,7 +613,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -636,7 +622,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -645,7 +631,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -654,7 +640,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -663,7 +649,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Slots/Size/120x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -672,7 +658,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/Slots/Size/300x1050"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MEDREC)
@@ -687,7 +673,7 @@ public class AdsDataProvider {
   public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
-            "project43",
+            WIKI_SPECIAL,
             "SyntheticTests/Premium/FeaturedVideo"
         }
     };
@@ -754,7 +740,7 @@ public class AdsDataProvider {
             )
         },
         {
-            new Page("project43", "SyntheticTests/UAP/Infobox"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/UAP/Infobox"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
@@ -784,7 +770,7 @@ public class AdsDataProvider {
     public static Object[][] adsDetectionPageFair() {
         return new Object[][]{
                 {
-                        new Page("project43")
+                        new Page(WIKI_SPECIAL)
                 }
         };
     }

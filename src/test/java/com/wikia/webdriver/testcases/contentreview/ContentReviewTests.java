@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.contentreview;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -10,7 +7,14 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
 
+import org.testng.annotations.Test;
+
+/** To run these tests the wiki has to have
+ * variable wgUserSIteJs value set to true
+ * and user has to be admin of the wiki */
+
 @Test(groups = "ContentReview")
+@Execute(onWikia = "ContentReviewTest")
 public class ContentReviewTests extends NewTestTemplate {
 
     @Test

@@ -14,6 +14,7 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class Configuration {
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
+  private static final String SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME = "config.xml";
 
   @Getter(lazy = true)
   private static final String wikiaDomain = getEnvType().getWikiaDomain();
@@ -110,7 +112,7 @@ public class Configuration {
   }
 
   public static String getCredentialsFilePath() {
-    return getProp("credentialsPath");
+    return Paths.get(getProp("seleniumConfigPath"), SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME).toString();
   }
 
   public static String getQS() {
@@ -142,11 +144,11 @@ public class Configuration {
   }
 
   public static Boolean getForceHttps() {
-    return getProp("forceHttps").equals("true");
+    return "true".equals(getProp("forceHttps"));
   }
 
   public static Boolean getNewStagingUrlFormat() {
-    return getProp("newStagingUrlFormat").equals("true");
+    return "true".equals(getProp("newStagingUrlFormat"));
   }
 
   public static Emulator getEmulator() {

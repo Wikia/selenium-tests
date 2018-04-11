@@ -36,7 +36,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecialOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoVelesOasis"/>
@@ -109,6 +108,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.LockingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.NavigatingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.OpenGraphTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.PollsTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.PromotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ReportingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SharingTests"/>

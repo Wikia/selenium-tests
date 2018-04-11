@@ -39,6 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public static final String PAGE_TYPE_SPECIAL = "special";
   public static final String PAGE_TYPE_FILE = "file";
   public static final String PAGE_TYPE_CATEGORY = "category";
+  public static final String ADS_IFRAME = "google_ads_iframe_";
 
   private String pageType = PAGE_TYPE_ARTICLE;
   private String environment = AdsContent.ENV_DESKTOP;
@@ -238,6 +239,25 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
+  public void verifyGptAdInSlot(String slotName, String lineItemId) {
+    Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-line-item-id"), lineItemId);
+
+    PageObjectLogging.log(
+            "verifyGptAdInSlot",
+            "Line item id loaded: " + lineItemId,
+            true,
+            driver
+    );
+  }
+
+  public void verifyAdUnit(String slotName, String adUnit) {
+    verifyGptIframe(adUnit, slotName, "gpt");
+  }
+
+  public void verifyMEGAAdUnit(String slotName, String adUnit) {
+    verifyIframe(slotName, buildMEGAGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit));
+  }
+
   public void verifySpotlights() {
     AdsComparison adsComparison = new AdsComparison();
 
@@ -302,11 +322,19 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public String buildGptIframeId(int dfpClientId, String adUnit, String slotName, String... src) {
     return Joiner.on("/").skipNulls().join(
-        "google_ads_iframe_",
-        String.valueOf(dfpClientId),
-        adUnit,
-        src.length > 0 ? src[0] : null,
-        slotName + "_0"
+            ADS_IFRAME,
+            String.valueOf(dfpClientId),
+            adUnit,
+            src.length > 0 ? src[0] : null,
+            slotName + "_0"
+    );
+  }
+
+  public String buildMEGAGptIframeId(int dfpClientId, String adUnit) {
+    return Joiner.on("/").skipNulls().join(
+            ADS_IFRAME,
+            String.valueOf(dfpClientId),
+            adUnit + "_0"
     );
   }
 
@@ -320,7 +348,10 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
   public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
-    String iframeId = buildGptIframeId(dfpClientId, adUnit, slotName, src);
+    verifyIframe(slotName, buildGptIframeId(dfpClientId, adUnit, slotName, src));
+  }
+
+  private void verifyIframe(String slotName, String iframeId) {
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
@@ -413,11 +444,11 @@ public class AdsBaseObject extends WikiBasePageObject {
                          String backgroundColor,
                          String middleColor) {
     AdsSkinHelper skinHelper = new AdsSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
-    Assertion.assertTrue(skinHelper.skinPresent());
+    Assertion.assertTrue(skinHelper.skinPresent(), "Skin was not present");
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
 
     if (!Strings.isNullOrEmpty(backgroundColor)) {
-      Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor);
+      Assertion.assertEquals(skinHelper.getBackgroundColor(), backgroundColor, "Background colors differ");
       PageObjectLogging.log("SKIN", "SKIN has correct background color", true);
     }
 
@@ -729,7 +760,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private boolean checkIfGptSlotHasCreativeContent(WebElement element, String hopAdType) {
-    String slotName = element.getAttribute("id").replace("wikia_gpt", "google_ads_iframe_");
+    String slotName = element.getAttribute("id").replace("wikia_gpt", ADS_IFRAME);
     String iframeSelector = "iframe[id*='" + slotName + "_0']";
     String adTypeScriptXpath = String.format("//script[contains(text(), \"%s\")]", hopAdType);
     WebElement iframe = element.findElement(By.cssSelector(iframeSelector));

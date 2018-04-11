@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorDesktop extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
+  @FindBy(css = ".inline-editor .editor-textarea")
   private WebElement postsCreator;
 
   @Getter
@@ -24,11 +24,11 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement signInButtonInSignInDialog;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor")
+  @FindBy(css = ".inline-editor")
   private WebElement editor;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .discussion-inline-editor-submit")
+  @FindBy(css = ".inline-editor button[type='submit']")
   private WebElement submitButton;
 
   @Getter
@@ -40,11 +40,11 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .discussion-textarea-with-counter")
+  @FindBy(css = ".inline-editor .inline-editor__title textarea")
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor textarea[required]")
+  @FindBy(css = ".inline-editor textarea[required]")
   private WebElement descriptionTextarea;
 
   @Getter
@@ -52,7 +52,15 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement uploadButton;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  @FindBy(css = ".poll-add-button")
+  private WebElement addPollButton;
+
+  @Getter
+  @FindBy(css = ".poll-wrapper")
+  private WebElement pollPreview;
+
+  @Getter
+  @FindBy(css = ".inline-editor .post-image-inner-image")
   private WebElement imagePreview;
 
   @Getter
@@ -71,7 +79,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
 
   @Override
   protected String getBaseCssClassName() {
-    return "discussion-inline-editor";
+    return "inline-editor";
   }
 
   public boolean isExpanded() {

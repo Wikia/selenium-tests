@@ -37,10 +37,10 @@ public class GuidelinesPage extends BasePage {
   @FindBy(css = ".editor-close")
   private WebElement editorClose;
 
-  @FindBy(css = ".discussion-standalone-editor-save-button")
+  @FindBy(css = ".discussion-standalone-editor button[type='submit']")
   private WebElement saveButton;
 
-  @FindBy(css = ".discussion-standalone-editor-textarea")
+  @FindBy(css = ".editor-input-label-wrapper textarea")
   private WebElement guidelinesText;
 
   public GuidelinesPage open() {
@@ -55,6 +55,7 @@ public class GuidelinesPage extends BasePage {
 
   private void clickEditGuidelines() {
     wait.forElementNotVisible(By.className("discussion-standalone-editor"));
+    wait.forElementClickable(editButton);
     editButton.click();
   }
 
@@ -69,6 +70,12 @@ public class GuidelinesPage extends BasePage {
     }
 
     return result;
+  }
+
+  public String getGuidelinesText() {
+    wait.forElementVisible(guidelinesText);
+
+    return guidelinesText.getText();
   }
 
   public boolean isGuidelinesImageAreaDisplayed() {
