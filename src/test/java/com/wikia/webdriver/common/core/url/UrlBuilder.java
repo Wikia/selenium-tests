@@ -2,34 +2,27 @@ package com.wikia.webdriver.common.core.url;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
+import okhttp3.HttpUrl;
 import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.WebDriverException;
 
 public class UrlBuilder {
 
-  private static final String PROD_URL_FORMAT = "%s%s.%s";
-  private static final String SANDBOX_URL_FORMAT = "%s.%s%s.%s";
-  private static final String SANDBOX_NEW_URL_FORMAT = "%s%s.%s.%s";
-  private static final String DEV_URL_FORMAT = "%s%s.%s.%s";
-  public static final String HTTPS_PREFIX = "https://";
-  public static final String HTTP_PREFIX = "http://";
 
   protected String env;
   protected EnvType envType;
   private Boolean forceHttps;
-  private Boolean newStagingUrlFormat;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
-    this.newStagingUrlFormat = Configuration.getNewStagingUrlFormat();
   }
 
   public UrlBuilder(String env, Boolean forceHttps, Boolean newStagingUrlFormat) {
     this.env = env;
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
-    this.newStagingUrlFormat = newStagingUrlFormat;
   }
 
   public String normalizePageName(String pageName) {
@@ -68,14 +61,14 @@ public class UrlBuilder {
   }
 
   protected String addPathToUrl(String url, String path) {
-
-    String outputUrl = (!path.startsWith("/")) ? String.format("%s/%s", url, path): String.format("%s%s", url, path);
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+    urlBuilder.addPathSegment(path).build();
 
     String qs = Configuration.getQS();
     if (StringUtils.isNotBlank(qs)) {
-      outputUrl = appendQueryStringToURL(outputUrl, qs);
+      urlBuilder.encodedQuery(qs);
     }
-    return outputUrl;
+    return urlBuilder.build().toString();
   }
 
   public String getUrlForPath(String wikiPath) {
@@ -83,7 +76,11 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki() {
-    return getUrlForWiki(Configuration.getWikiName(), false);
+    return getUrlForWiki(Configuration.getWikiName(), Configuration.getLanguage(), false);
+  }
+
+  private String getUrlForWiki(String wikiName, String language, boolean addWWW) {
+    return getUrlForWiki(wikiName, language, addWWW, envType);
   }
 
   public String getUrlForWiki(String wikiName) {
@@ -104,6 +101,10 @@ public class UrlBuilder {
 
 
   public String getUrlForWiki(String wikiName, boolean addWWW, EnvType envType) {
+    return getUrlForWiki(wikiName, null, addWWW, envType);
+  }
+
+  public String getUrlForWiki(String wikiName, String language, boolean addWWW, EnvType envType) {
     final String wikiaName = getWikiaGlobalName(wikiName);
 
     String www = "";
@@ -111,54 +112,66 @@ public class UrlBuilder {
       www = "www.";
     }
 
+    String host;
+    HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
     switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.format(getUrlProtocol() + DEV_URL_FORMAT, www, wikiaName, devBoxOwner, envType.getWikiaDomain());
+        host = String.join(".", www + wikiaName, devBoxOwner, envType.getWikiaDomain());
+        break;
       }
       case PROD: {
-        return String.format(getUrlProtocol() + PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
+        host = String.join(".", www + wikiaName, envType.getWikiaDomain());
+        break;
       }
       case STAGING: {
-        return String.format(getUrlProtocol() + PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
+        host = String.join(".", www + wikiaName, envType.getWikiaDomain());
+        break;
       }
       case SANDBOX: {
-        if (newStagingUrlFormat) {
-          return String.format(getUrlProtocol() + SANDBOX_NEW_URL_FORMAT, www, wikiaName, this.env, envType.getWikiaDomain());
-        } else {
-          return String.format(getUrlProtocol() + SANDBOX_URL_FORMAT, this.env, www, wikiaName, envType.getWikiaDomain());
-        }
+        host = String.join(".", www + wikiaName, this.env, envType.getWikiaDomain());
+        break;
       }
       default:
-        return "";
+        throw new WebDriverException("Unknown environment type");
     }
+    urlBuilder.scheme(getUrlProtocol()).host(host);
+
+    if (language != null && !language.equals("en")) {
+      urlBuilder.addPathSegments(language);
+    }
+
+    return urlBuilder.build().toString();
   }
 
   public String getUrlProtocol() {
-    if (this.forceHttps) {
-      return HTTPS_PREFIX;
-    }
-    return HTTP_PREFIX;
+    return this.forceHttps ? "https" : "http";
   }
 
   public String getWikiGlobalURL() {
+    String host;
+    HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
     EnvType env = Configuration.getEnvType(this.env);
 
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.format(getUrlProtocol() + "www.%s.%s", devBoxOwner, env.getWikiaDomain());
+        host = String.join(".", "www", devBoxOwner, envType.getWikiaDomain());
+        break;
       }
       case SANDBOX: {
-        if (newStagingUrlFormat) {
-          return String.format(getUrlProtocol() + "www.%s.%s", this.env, env.getWikiaDomain());
-        } else {
-          return String.format(getUrlProtocol() + "%s.www.%s", this.env, env.getWikiaDomain());
-        }
+        host = String.join(".", "www", this.env, envType.getWikiaDomain());
+        break;
       }
       default:
-        return String.format(getUrlProtocol() + "www.%s", env.getWikiaDomain());
+        host = String.join(".", "www" , envType.getWikiaDomain());
     }
+
+    return urlBuilder
+            .scheme(getUrlProtocol())
+            .host(host)
+            .build()
+            .toString();
   }
 
   private String getWikiaGlobalName(String wikiName) {
@@ -174,14 +187,8 @@ public class UrlBuilder {
   }
 
   public String appendQueryStringToURL(String url, String qs) {
-    String separator = url.contains("?") ? "&" : "?";
-
-    String[] filteredUrl = url.split("#");
-    if (filteredUrl.length > 1) {
-      return filteredUrl[0] + separator + qs + "#" + filteredUrl[1];
-    } else {
-      return url + separator + qs;
-    }
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+    return urlBuilder.encodedQuery(qs).build().toString();
   }
 
   public String globallyEnableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
