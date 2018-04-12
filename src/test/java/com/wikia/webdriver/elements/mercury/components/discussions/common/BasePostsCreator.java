@@ -178,4 +178,9 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return startPostCreationWith(String.format(" %s ", link.toString()));
   }
 
+  public BasePostsCreator waitForErrorMessageNotVisible() {
+    wait.forElementNotVisible(By.className("error"));
+
+    return this;
+  }
 }
