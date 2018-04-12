@@ -307,7 +307,7 @@ public class UploadingImageTests extends NewTestTemplate {
   private void addPostWithUnsupportedImage(BasePostsCreator postCreator) {
     String errorMsg = postCreator.uploadUnsupportedImage();
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
-    postCreator.clickSubmitButton();
+    postCreator.waitForErrorMessageNotVisible().clickSubmitButton();
   }
 
   private void addReplyWithUnsupportedImage(BaseReplyCreator replyCreator) {
