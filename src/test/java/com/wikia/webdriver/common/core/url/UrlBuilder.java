@@ -134,7 +134,7 @@ public class UrlBuilder {
     }
     urlBuilder.scheme(getUrlProtocol()).host(host);
 
-    if (language != null && !language.equals("en")) {
+    if (language != null && !("en").equals(language) {
       urlBuilder.addPathSegments(language);
     }
     return urlBuilder.build().toString();

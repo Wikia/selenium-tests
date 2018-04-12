@@ -216,7 +216,6 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
         Configuration.setTestValue("qs", "");
 
         for (Object[] data : TEST_DATA) {
-            System.out.println("Nazwa wikii: " + data[0]);
             Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2])
                             .getUrlForPath((String) data[0], (String) data[1]),
                     (String) data[3]);
@@ -243,7 +242,6 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
         Configuration.setTestValue("qs", "");
 
         for (Object[] data : TEST_DATA_LANGUAGE) {
-            System.out.println("Nazwa wikii: " + data[0]);
             Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2])
                             .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
                     (String) data[3]);
