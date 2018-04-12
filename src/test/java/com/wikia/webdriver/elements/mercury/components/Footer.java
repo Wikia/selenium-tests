@@ -19,7 +19,7 @@ public class Footer extends WikiBasePageObject{
   public void clickViewFullSiteLink() {
     wait.forElementVisible(footer);
     wait.forElementClickable(viewFullSiteLink);
-    viewFullSiteLink.click();
+    scrollAndClick(viewFullSiteLink);
   }
 
   public void clickViewMobileSite() {
