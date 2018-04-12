@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -48,10 +47,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
     return isCuratedElementVisible(revisedArticleTitle);
   }
 
-//  public boolean isWikiaStatsContainerVisible() {
-//    return isCuratedElementVisible(wikiaStatsContainer);
-//  }
-
   public boolean isFeaturedContentVisible() {
     return isCuratedElementVisible(featuredContent);
   }
@@ -59,10 +54,6 @@ public class CuratedMainPagePageObject extends BasePageObject {
   public boolean isCuratedContentVisible() {
     return isCuratedElementVisible(curatedContent);
   }
-
-//  public boolean isMobileInContentVisible() {
-//    return isCuratedElementVisible(mobileInContent);
-//  }
 
   public boolean isTrendingArticlesVisible() {
     return isCuratedElementVisible(trendingArticles);

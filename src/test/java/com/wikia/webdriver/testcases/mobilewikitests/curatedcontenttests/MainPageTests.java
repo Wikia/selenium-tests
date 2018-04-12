@@ -98,14 +98,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-//    result = curatedMainPage.isWikiaStatsContainerVisible();
-//    PageObjectLogging.log(
-//        PageElements.WIKIA_STATS.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
-
     result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
@@ -121,14 +113,6 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
-
-//    result = curatedMainPage.isMobileInContentVisible();
-//    PageObjectLogging.log(
-//        PageElements.IN_CONTENT.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
 
     result = curatedMainPage.isTrendingArticlesVisible();
     PageObjectLogging.log(
@@ -180,14 +164,6 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
-
-//    result = !curatedMainPage.isWikiaStatsContainerVisible();
-//    PageObjectLogging.log(
-//        PageElements.WIKIA_STATS.name,
-//        MercuryMessages.INVISIBLE_MSG,
-//        MercuryMessages.VISIBLE_MSG,
-//        result
-//    );
 
     result = !curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
@@ -254,14 +230,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-//    result = curatedMainPage.isWikiaStatsContainerVisible();
-//    PageObjectLogging.log(
-//        PageElements.WIKIA_STATS.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
-
     result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
@@ -277,14 +245,6 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
-
-//    result = curatedMainPage.isMobileInContentVisible();
-//    PageObjectLogging.log(
-//        PageElements.IN_CONTENT.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
 
     result = !curatedMainPage.isMobilePrefooterVisible();
     PageObjectLogging.log(
@@ -327,14 +287,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-//    result = curatedMainPage.isWikiaStatsContainerVisible();
-//    PageObjectLogging.log(
-//        PageElements.WIKIA_STATS.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
-
     result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
@@ -350,14 +302,6 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
-
-//    result = curatedMainPage.isMobileInContentVisible();
-//    PageObjectLogging.log(
-//        PageElements.IN_CONTENT.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
 
     result = !curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
@@ -392,14 +336,6 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-//    result = curatedMainPage.isWikiaStatsContainerVisible();
-//    PageObjectLogging.log(
-//        PageElements.WIKIA_STATS.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
-
     result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
@@ -415,14 +351,6 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.INVISIBLE_MSG,
         result
     );
-
-//    result = curatedMainPage.isMobileInContentVisible();
-//    PageObjectLogging.log(
-//        PageElements.IN_CONTENT.name,
-//        MercuryMessages.VISIBLE_MSG,
-//        MercuryMessages.INVISIBLE_MSG,
-//        result
-//    );
 
     result = !curatedMainPage.isTrendingArticlesVisible();
     PageObjectLogging.log(
