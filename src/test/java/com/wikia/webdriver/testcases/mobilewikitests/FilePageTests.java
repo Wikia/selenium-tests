@@ -25,8 +25,6 @@ public void snippetIsNotAffectedByXSS() {
 
   Assertion.assertTrue(filePage.doesSnippetContainXSS());
 
-  AlertHandler xssAlert = new AlertHandler();
-
-  Assertion.assertFalse(xssAlert.isAlertPresent(driver));
+  Assertion.assertFalse(AlertHandler.isAlertPresent(driver));
   }
 }

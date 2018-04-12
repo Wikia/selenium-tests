@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AlertHandler {
 
-  public AlertHandler() {
+  private AlertHandler() {
   }
 
   public static boolean isAlertPresent(WebDriver driver) {
