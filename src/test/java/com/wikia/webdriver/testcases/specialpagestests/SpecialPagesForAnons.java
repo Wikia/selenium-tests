@@ -1,10 +1,8 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.SpecialPagesDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
 import org.testng.annotations.Test;
 
 public class SpecialPagesForAnons extends NewTestTemplate {
@@ -14,7 +12,7 @@ public class SpecialPagesForAnons extends NewTestTemplate {
           "SpecialPages"})
   public void SpecialPagesForAnons_001_verifyHeaders(String specialPageName,
       String specialPageHeader) {
-    String testedPage = urlBuilder.getUrlForPath(Configuration.getWikiName(), specialPageName);
+    String testedPage = urlBuilder.getUrlForPath(specialPageName);
     SpecialPageObject specialPage = new SpecialPageObject();
     specialPage.getUrl(testedPage);
     specialPage.verifyPageHeader(specialPageHeader);

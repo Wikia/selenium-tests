@@ -29,7 +29,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeader().clickWikiName();
 
