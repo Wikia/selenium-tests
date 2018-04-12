@@ -151,10 +151,6 @@ public class Configuration {
     return "true".equals(getProp("forceHttps"));
   }
 
-  public static Boolean getNewStagingUrlFormat() {
-    return "true".equals(getProp("newStagingUrlFormat"));
-  }
-
   public static Emulator getEmulator() {
     Emulator emulatorToUse = Emulator.DEFAULT;
     if (TestContext.getCurrentTestMethod().getDeclaringClass()
