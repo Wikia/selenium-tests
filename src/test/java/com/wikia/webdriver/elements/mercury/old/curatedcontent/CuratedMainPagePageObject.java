@@ -48,9 +48,9 @@ public class CuratedMainPagePageObject extends BasePageObject {
     return isCuratedElementVisible(revisedArticleTitle);
   }
 
-  public boolean isWikiaStatsContainerVisible() {
-    return isCuratedElementVisible(wikiaStatsContainer);
-  }
+//  public boolean isWikiaStatsContainerVisible() {
+//    return isCuratedElementVisible(wikiaStatsContainer);
+//  }
 
   public boolean isFeaturedContentVisible() {
     return isCuratedElementVisible(featuredContent);
@@ -60,9 +60,9 @@ public class CuratedMainPagePageObject extends BasePageObject {
     return isCuratedElementVisible(curatedContent);
   }
 
-  public boolean isMobileInContentVisible() {
-    return isCuratedElementVisible(mobileInContent);
-  }
+//  public boolean isMobileInContentVisible() {
+//    return isCuratedElementVisible(mobileInContent);
+//  }
 
   public boolean isTrendingArticlesVisible() {
     return isCuratedElementVisible(trendingArticles);
@@ -87,7 +87,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
   }
 
   private enum Settings {
-    TIME_OUT_IN_SEC(5), CHECK_OUT_IN_MILLI_SEC(1000);
+    TIME_OUT_IN_SEC(10), CHECK_OUT_IN_MILLI_SEC(5000);
 
     private int value;
 
