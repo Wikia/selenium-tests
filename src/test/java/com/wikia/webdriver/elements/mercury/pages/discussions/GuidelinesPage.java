@@ -28,8 +28,8 @@ public class GuidelinesPage extends BasePage {
   @FindBy(css = ".discussion-left-rail__header")
   private WebElement leftRailHeader;
 
-  @FindBy(css = ".guidelines-text")
-  private WebElement contentText;
+  @FindBy(css = ".editor-input-label-wrapper textarea")
+  private WebElement guidelinesEditorTextarea;
 
   @FindBy(css = ".guidelines-edit-button")
   private WebElement editButton;
@@ -40,7 +40,7 @@ public class GuidelinesPage extends BasePage {
   @FindBy(css = ".discussion-standalone-editor button[type='submit']")
   private WebElement saveButton;
 
-  @FindBy(css = ".editor-input-label-wrapper textarea")
+  @FindBy(css = ".guidelines-text")
   private WebElement guidelinesText;
 
   public GuidelinesPage open() {
@@ -92,8 +92,8 @@ public class GuidelinesPage extends BasePage {
   }
 
   private void addText(String text) {
-    this.guidelinesText.clear();
-    this.guidelinesText.sendKeys(text);
+    this.guidelinesEditorTextarea.clear();
+    this.guidelinesEditorTextarea.sendKeys(text);
     clickSaveButton();
     waitForLoadingSpinner();
   }
@@ -106,14 +106,14 @@ public class GuidelinesPage extends BasePage {
   }
 
   private void hasTextInGuidelines(String text) {
-    wait.forTextInElement(contentText, text);
-    contentText.isDisplayed();
+    wait.forTextInElement(guidelinesText, text);
+    guidelinesText.isDisplayed();
   }
 
   private void deleteTextFromGuidelines(String text) {
     clickEditGuidelines();
     addText(DEFAULT_GUIDELINES_TEXT);
-    wait.forTextNotInElement(contentText, text);
+    wait.forTextNotInElement(guidelinesText, text);
   }
 
   public boolean canUpdateGuidelinesContent() {
@@ -121,6 +121,6 @@ public class GuidelinesPage extends BasePage {
       hasTextInGuidelines(text);
       deleteTextFromGuidelines(text);
 
-      return DEFAULT_GUIDELINES_TEXT.equals(contentText.getText());
+      return DEFAULT_GUIDELINES_TEXT.equals(guidelinesText.getText());
   }
 }
