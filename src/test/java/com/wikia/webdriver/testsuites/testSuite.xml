@@ -177,6 +177,8 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.CategoryPageTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.CategoryTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.ErrorPageTests"/>
+            <class name="com.wikia.webdriver.testcases.mobilewikitests.FilePageTests"/>
+            <class name="com.wikia.webdriver.testcases.mobilewikitests.GlobalFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.ImageReviewTests"/>
