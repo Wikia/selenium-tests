@@ -77,26 +77,36 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
     };
 
     private static Object[][] TEST_DATA_LANGUAGE = new Object[][]{
-//            {
-//                    "drama", "wiki/Portada", false, false,
-//                    "http://drama.wikia.com/es/wiki/Portada",
-//                    "http://drama.preview.wikia.com/es/wiki/Portada",
-//                    "http://drama.sandbox.wikia.com/es/wiki/Portada",
-//                    "http://drama.sandbox-mercurydev.wikia.com/es/wiki/Portada",
-//                    "http://drama.dmytror.wikia-dev.pl/es/wiki/Portada",
-//                    "http://drama.wikia-staging.com/es/wiki/Portada",
-//                    "es"
-//            },
-//            {
-//                    "marvel-filme", "wiki/Marvel-Filme", false, false,
-//                    "http://marvel-filme.wikia.com/de/wiki/Marvel-Filme",
-//                    "http://marvel-filme.preview.wikia.com/de/wiki/Marvel-Filme",
-//                    "http://marvel-filme.sandbox.wikia.com/de/wiki/Marvel-Filme",
-//                    "http://marvel-filme.sandbox-mercurydev.wikia.com/de/wiki/Marvel-Filme",
-//                    "http://marvel-filme.dmytror.wikia-dev.pl/de/wiki/Marvel-Filme",
-//                    "http://marvel-filme.wikia-staging.com/de/wiki/Marvel-Filme",
-//                    "de"
-//            },
+            {
+                    "drama", "wiki/Portada", false, false,
+                    "http://es.drama.wikia.com/wiki/Portada",
+                    "http://es.drama.preview.wikia.com/wiki/Portada",
+                    "http://es.drama.sandbox.wikia.com/wiki/Portada",
+                    "http://es.drama.sandbox-mercurydev.wikia.com/wiki/Portada",
+                    "http://es.drama.dmytror.wikia-dev.pl/wiki/Portada",
+                    "http://es.drama.wikia-staging.com/wiki/Portada",
+                    "es"
+            },
+            {
+                    "marvel-filme", "wiki/Marvel-Filme", false, false,
+                    "http://de.marvel-filme.wikia.com/wiki/Marvel-Filme",
+                    "http://de.marvel-filme.preview.wikia.com/wiki/Marvel-Filme",
+                    "http://de.marvel-filme.sandbox.wikia.com/wiki/Marvel-Filme",
+                    "http://de.marvel-filme.sandbox-mercurydev.wikia.com/wiki/Marvel-Filme",
+                    "http://de.marvel-filme.dmytror.wikia-dev.pl/wiki/Marvel-Filme",
+                    "http://de.marvel-filme.wikia-staging.com/wiki/Marvel-Filme",
+                    "de"
+            },
+            {
+                    "pad", "wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA", false, false,
+                    "http://zh.pad.wikia.com/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
+                    "http://zh.pad.preview.wikia.com/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
+                    "http://zh.pad.sandbox.wikia.com/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
+                    "http://zh.pad.sandbox-mercurydev.wikia.com/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
+                    "http://zh.pad.dmytror.wikia-dev.pl/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
+                    "http://zh.pad.wikia-staging.com/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
+                    "zh"
+            },
             {
                     "drama", "wiki/Portada", false, true,
                     "http://drama.wikia.com/es/wiki/Portada",
