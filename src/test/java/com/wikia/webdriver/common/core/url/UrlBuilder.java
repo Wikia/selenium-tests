@@ -14,6 +14,7 @@ public class UrlBuilder {
   protected EnvType envType;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
+  protected static final String HTTP_PREFIX = "http://";
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
@@ -126,8 +127,9 @@ public class UrlBuilder {
   }
 
   private String getFormattedWikiHost(String www, String wikiaName, EnvType envType, String language) {
-    if (!forceLanguageInPath)
-      wikiaName = String.join(".", language, wikiaName);
+    if (!forceLanguageInPath) {
+      return getFormattedWikiHost(www, String.join(".", language, wikiaName), envType);
+    }
     return getFormattedWikiHost(www, wikiaName, envType);
   }
 

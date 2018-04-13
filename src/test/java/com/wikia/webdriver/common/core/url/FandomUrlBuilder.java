@@ -28,7 +28,7 @@ public class FandomUrlBuilder extends UrlBuilder {
       hostname = env + "." + hostname;
     }
 
-    return "http://" + hostname + "/";
+    return HTTP_PREFIX + hostname + "/";
   }
 
   public String getFandomPageUrl(String path) {
