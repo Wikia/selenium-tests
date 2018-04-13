@@ -88,7 +88,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki() {
-    return getUrlForWiki(Configuration.getWikiName(), Configuration.getLanguage(), false);
+    return getUrlForWiki(Configuration.getWikiName(), DEFAULT_LANGUAGE, false);
   }
 
   public String getUrlForWiki(String wikiName, String language, boolean addWWW) {
@@ -115,6 +115,9 @@ public class UrlBuilder {
   public String getUrlForWiki(String wikiName, String language, boolean addWWW, EnvType envType) {
     final String wikiaName = getWikiaGlobalName(wikiName);
 
+    if (language == null || wikiName == null)
+      throw new NullPointerException("Wikia name and language are required");
+
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
 
     String www = addWWW ? "www." : "";
@@ -123,10 +126,12 @@ public class UrlBuilder {
     if (!("en").equals(language) && forceLanguageInPath) {
         urlBuilder.addEncodedPathSegments(language);
     }
-    return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString();
+    return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString().replaceFirst("/$","");
   }
 
   private String getFormattedWikiHost(String www, String wikiaName, EnvType envType, String language) {
+
+
     if (!forceLanguageInPath && !("en").equals(language)) {
       return getFormattedWikiHost(www, String.join(".", language, wikiaName), envType);
     }
@@ -179,7 +184,7 @@ public class UrlBuilder {
             .scheme(getUrlProtocol())
             .host(getFormattedHostForGlobalUrl(env))
             .build()
-            .toString();
+            .toString().replaceFirst("/$","");
   }
 
   private String getWikiaGlobalName(String wikiName) {

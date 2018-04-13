@@ -324,11 +324,11 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
     public void getWikiaUrl() {
 
         Assertion.assertEquals(new UrlBuilder("preview", false).getWikiGlobalURL(),
-                "http://www.preview.wikia.com/");
+                "http://www.preview.wikia.com");
         Assertion.assertEquals(new UrlBuilder("sandbox-s1", false).getWikiGlobalURL(),
-                "http://www.sandbox-s1.wikia.com/");
+                "http://www.sandbox-s1.wikia.com");
         Assertion.assertEquals(new UrlBuilder("prod", false).getWikiGlobalURL(),
-                "http://www.wikia.com/");
+                "http://www.wikia.com");
     }
 
 
