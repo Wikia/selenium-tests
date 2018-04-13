@@ -127,7 +127,7 @@ public class UrlBuilder {
   }
 
   private String getFormattedWikiHost(String www, String wikiaName, EnvType envType, String language) {
-    if (!forceLanguageInPath) {
+    if (!forceLanguageInPath && !("en").equals(language)) {
       return getFormattedWikiHost(www, String.join(".", language, wikiaName), envType);
     }
     return getFormattedWikiHost(www, wikiaName, envType);

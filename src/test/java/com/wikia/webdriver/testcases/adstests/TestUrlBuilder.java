@@ -12,7 +12,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
 
     private static Object[][] TEST_DATA = new Object[][]{
             {
-                    "runescape", "wiki/RuneScape_Wiki", false,
+                    "runescape", "wiki/RuneScape_Wiki", false, false,
                     "http://runescape.wikia.com/wiki/RuneScape_Wiki",
                     "http://runescape.preview.wikia.com/wiki/RuneScape_Wiki",
                     "http://runescape.sandbox.wikia.com/wiki/RuneScape_Wiki",
@@ -21,7 +21,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "http://runescape.wikia-staging.com/wiki/RuneScape_Wiki"
             },
             {
-                    "yugioh", "wiki/Main_Page", false,
+                    "yugioh", "wiki/Main_Page", false, false,
                     "http://yugioh.wikia.com/wiki/Main_Page",
                     "http://yugioh.preview.wikia.com/wiki/Main_Page",
                     "http://yugioh.sandbox.wikia.com/wiki/Main_Page",
@@ -30,7 +30,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "http://yugioh.wikia-staging.com/wiki/Main_Page"
             },
             {
-                    "naruto", "wiki/Narutopedia", false,
+                    "naruto", "wiki/Narutopedia", false, false,
                     "http://naruto.wikia.com/wiki/Narutopedia",
                     "http://naruto.preview.wikia.com/wiki/Narutopedia",
                     "http://naruto.sandbox.wikia.com/wiki/Narutopedia",
@@ -39,7 +39,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "http://naruto.wikia-staging.com/wiki/Narutopedia"
             },
             {
-                    "leagueoflegends", "wiki/League_of_Legends_Wiki", false,
+                    "leagueoflegends", "wiki/League_of_Legends_Wiki", false, false,
                     "http://leagueoflegends.wikia.com/wiki/League_of_Legends_Wiki",
                     "http://leagueoflegends.preview.wikia.com/wiki/League_of_Legends_Wiki",
                     "http://leagueoflegends.sandbox.wikia.com/wiki/League_of_Legends_Wiki",
@@ -48,7 +48,25 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "http://leagueoflegends.wikia-staging.com/wiki/League_of_Legends_Wiki"
             },
             {
-                    "wowwiki", "wiki/Portal:Main", true,
+                    "wowwiki", "wiki/Portal:Main", true, false,
+                    "https://wowwiki.wikia.com/wiki/Portal:Main",
+                    "https://wowwiki.preview.wikia.com/wiki/Portal:Main",
+                    "https://wowwiki.sandbox.wikia.com/wiki/Portal:Main",
+                    "https://wowwiki.sandbox-mercurydev.wikia.com/wiki/Portal:Main",
+                    "https://wowwiki.dmytror.wikia-dev.pl/wiki/Portal:Main",
+                    "https://wowwiki.wikia-staging.com/wiki/Portal:Main"
+            },
+            {
+                    "leagueoflegends", "wiki/League_of_Legends_Wiki", false, true,
+                    "http://leagueoflegends.wikia.com/wiki/League_of_Legends_Wiki",
+                    "http://leagueoflegends.preview.wikia.com/wiki/League_of_Legends_Wiki",
+                    "http://leagueoflegends.sandbox.wikia.com/wiki/League_of_Legends_Wiki",
+                    "http://leagueoflegends.sandbox-mercurydev.wikia.com/wiki/League_of_Legends_Wiki",
+                    "http://leagueoflegends.dmytror.wikia-dev.pl/wiki/League_of_Legends_Wiki",
+                    "http://leagueoflegends.wikia-staging.com/wiki/League_of_Legends_Wiki"
+            },
+            {
+                    "wowwiki", "wiki/Portal:Main", true, true,
                     "https://wowwiki.wikia.com/wiki/Portal:Main",
                     "https://wowwiki.preview.wikia.com/wiki/Portal:Main",
                     "https://wowwiki.sandbox.wikia.com/wiki/Portal:Main",
@@ -59,8 +77,28 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
     };
 
     private static Object[][] TEST_DATA_LANGUAGE = new Object[][]{
+//            {
+//                    "drama", "wiki/Portada", false, false,
+//                    "http://drama.wikia.com/es/wiki/Portada",
+//                    "http://drama.preview.wikia.com/es/wiki/Portada",
+//                    "http://drama.sandbox.wikia.com/es/wiki/Portada",
+//                    "http://drama.sandbox-mercurydev.wikia.com/es/wiki/Portada",
+//                    "http://drama.dmytror.wikia-dev.pl/es/wiki/Portada",
+//                    "http://drama.wikia-staging.com/es/wiki/Portada",
+//                    "es"
+//            },
+//            {
+//                    "marvel-filme", "wiki/Marvel-Filme", false, false,
+//                    "http://marvel-filme.wikia.com/de/wiki/Marvel-Filme",
+//                    "http://marvel-filme.preview.wikia.com/de/wiki/Marvel-Filme",
+//                    "http://marvel-filme.sandbox.wikia.com/de/wiki/Marvel-Filme",
+//                    "http://marvel-filme.sandbox-mercurydev.wikia.com/de/wiki/Marvel-Filme",
+//                    "http://marvel-filme.dmytror.wikia-dev.pl/de/wiki/Marvel-Filme",
+//                    "http://marvel-filme.wikia-staging.com/de/wiki/Marvel-Filme",
+//                    "de"
+//            },
             {
-                    "drama", "wiki/Portada", false,
+                    "drama", "wiki/Portada", false, true,
                     "http://drama.wikia.com/es/wiki/Portada",
                     "http://drama.preview.wikia.com/es/wiki/Portada",
                     "http://drama.sandbox.wikia.com/es/wiki/Portada",
@@ -70,7 +108,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "es"
             },
             {
-                    "marvel-filme", "wiki/Marvel-Filme", false,
+                    "marvel-filme", "wiki/Marvel-Filme", false, true,
                     "http://marvel-filme.wikia.com/de/wiki/Marvel-Filme",
                     "http://marvel-filme.preview.wikia.com/de/wiki/Marvel-Filme",
                     "http://marvel-filme.sandbox.wikia.com/de/wiki/Marvel-Filme",
@@ -80,7 +118,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "squadraspecialecobra11", "wiki/Squadra_speciale_Cobra_11", false,
+                    "squadraspecialecobra11", "wiki/Squadra_speciale_Cobra_11", false, true,
                     "http://squadraspecialecobra11.wikia.com/it/wiki/Squadra_speciale_Cobra_11",
                     "http://squadraspecialecobra11.preview.wikia.com/it/wiki/Squadra_speciale_Cobra_11",
                     "http://squadraspecialecobra11.sandbox.wikia.com/it/wiki/Squadra_speciale_Cobra_11",
@@ -90,7 +128,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "it"
             },
             {
-                    "onepiece", "wiki/One_Piece_Wiki_Italia", false,
+                    "onepiece", "wiki/One_Piece_Wiki_Italia", false, true,
                     "http://onepiece.wikia.com/it/wiki/One_Piece_Wiki_Italia",
                     "http://onepiece.preview.wikia.com/it/wiki/One_Piece_Wiki_Italia",
                     "http://onepiece.sandbox.wikia.com/it/wiki/One_Piece_Wiki_Italia",
@@ -100,7 +138,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "it"
             },
             {
-                    "pad", "wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA", false,
+                    "pad", "wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA", false, true,
                     "http://pad.wikia.com/zh/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
                     "http://pad.preview.wikia.com/zh/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
                     "http://pad.sandbox.wikia.com/zh/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA",
@@ -110,7 +148,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "zh"
             },
             {
-                    "gundam", "wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2", false,
+                    "gundam", "wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2", false, true,
                     "http://gundam.wikia.com/ja/wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2",
                     "http://gundam.preview.wikia.com/ja/wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2",
                     "http://gundam.sandbox.wikia.com/ja/wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2",
@@ -120,7 +158,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "ja"
             },
             {
-                    "naruto", "wiki/Narutopedia", false,
+                    "naruto", "wiki/Narutopedia", false, true,
                     "http://naruto.wikia.com/de/wiki/Narutopedia",
                     "http://naruto.preview.wikia.com/de/wiki/Narutopedia",
                     "http://naruto.sandbox.wikia.com/de/wiki/Narutopedia",
@@ -130,7 +168,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "gameofthrones", "wiki/Staffel_4", false,
+                    "gameofthrones", "wiki/Staffel_4", false, true,
                     "http://gameofthrones.wikia.com/de/wiki/Staffel_4",
                     "http://gameofthrones.preview.wikia.com/de/wiki/Staffel_4",
                     "http://gameofthrones.sandbox.wikia.com/de/wiki/Staffel_4",
@@ -140,7 +178,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "gta", "wiki/Fahrzeuge_(V)", false,
+                    "gta", "wiki/Fahrzeuge_(V)", false, true,
                     "http://gta.wikia.com/de/wiki/Fahrzeuge_(V)",
                     "http://gta.preview.wikia.com/de/wiki/Fahrzeuge_(V)",
                     "http://gta.sandbox.wikia.com/de/wiki/Fahrzeuge_(V)",
@@ -150,7 +188,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "fahrrad", "wiki/Reifenumfang_%28Tabelle%29", false,
+                    "fahrrad", "wiki/Reifenumfang_%28Tabelle%29", false, true,
                     "http://fahrrad.wikia.com/de/wiki/Reifenumfang_%28Tabelle%29",
                     "http://fahrrad.preview.wikia.com/de/wiki/Reifenumfang_%28Tabelle%29",
                     "http://fahrrad.sandbox.wikia.com/de/wiki/Reifenumfang_%28Tabelle%29",
@@ -160,7 +198,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "bindingofisaac", "wiki/Items", false,
+                    "bindingofisaac", "wiki/Items", false, true,
                     "http://bindingofisaac.wikia.com/de/wiki/Items",
                     "http://bindingofisaac.preview.wikia.com/de/wiki/Items",
                     "http://bindingofisaac.sandbox.wikia.com/de/wiki/Items",
@@ -170,7 +208,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "videospielehub", "wiki/Videospiele_Hub", false,
+                    "videospielehub", "wiki/Videospiele_Hub", false, true,
                     "http://videospielehub.wikia.com/de/wiki/Videospiele_Hub",
                     "http://videospielehub.preview.wikia.com/de/wiki/Videospiele_Hub",
                     "http://videospielehub.sandbox.wikia.com/de/wiki/Videospiele_Hub",
@@ -180,7 +218,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "jedipedia", "wiki/Jedipedia:Hauptseite", false,
+                    "jedipedia", "wiki/Jedipedia:Hauptseite", false, true,
                     "http://jedipedia.wikia.com/de/wiki/Jedipedia:Hauptseite",
                     "http://jedipedia.preview.wikia.com/de/wiki/Jedipedia:Hauptseite",
                     "http://jedipedia.sandbox.wikia.com/de/wiki/Jedipedia:Hauptseite",
@@ -190,7 +228,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "de"
             },
             {
-                    "memory-alpha", "wiki/Portal:Main", false,
+                    "memory-alpha", "wiki/Portal:Main", false, true,
                     "http://memory-alpha.wikia.com/wiki/Portal:Main",
                     "http://memory-alpha.preview.wikia.com/wiki/Portal:Main",
                     "http://memory-alpha.sandbox.wikia.com/wiki/Portal:Main",
@@ -200,7 +238,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                     "en"
             },
             {
-                    "memory-alpha", "wiki/Hauptseite", false,
+                    "memory-alpha", "wiki/Hauptseite", false, true,
                     "http://memory-alpha.wikia.com/de/wiki/Hauptseite",
                     "http://memory-alpha.preview.wikia.com/de/wiki/Hauptseite",
                     "http://memory-alpha.sandbox.wikia.com/de/wiki/Hauptseite",
@@ -216,24 +254,24 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
         Configuration.setTestValue("qs", "");
 
         for (Object[] data : TEST_DATA) {
-            Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[1]),
-                    (String) data[3]);
-            Assertion.assertEquals(new UrlBuilder("preview", (Boolean) data[2])
+            Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2], (Boolean) data[3])
                             .getUrlForPath((String) data[0], (String) data[1]),
                     (String) data[4]);
-            Assertion.assertEquals(new UrlBuilder("sandbox", (Boolean) data[2])
+            Assertion.assertEquals(new UrlBuilder("preview", (Boolean) data[2], (Boolean) data[3])
                             .getUrlForPath((String) data[0], (String) data[1]),
                     (String) data[5]);
-            Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev", (Boolean) data[2])
+            Assertion.assertEquals(new UrlBuilder("sandbox", (Boolean) data[2], (Boolean) data[3])
                             .getUrlForPath((String) data[0], (String) data[1]),
                     (String) data[6]);
-            Assertion.assertEquals(new UrlBuilder("dev-dmytror", (Boolean) data[2])
+            Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev", (Boolean) data[2], (Boolean) data[3])
                             .getUrlForPath((String) data[0], (String) data[1]),
                     (String) data[7]);
-            Assertion.assertEquals(new UrlBuilder("staging", (Boolean) data[2])
+            Assertion.assertEquals(new UrlBuilder("dev-dmytror", (Boolean) data[2], (Boolean) data[3])
                             .getUrlForPath((String) data[0], (String) data[1]),
                     (String) data[8]);
+            Assertion.assertEquals(new UrlBuilder("staging", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[1]),
+                    (String) data[9]);
         }
     }
 
@@ -242,24 +280,24 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
         Configuration.setTestValue("qs", "");
 
         for (Object[] data : TEST_DATA_LANGUAGE) {
-            Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
-                    (String) data[3]);
-            Assertion.assertEquals(new UrlBuilder("preview", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
+            Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
                     (String) data[4]);
-            Assertion.assertEquals(new UrlBuilder("sandbox", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
+            Assertion.assertEquals(new UrlBuilder("preview", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
                     (String) data[5]);
-            Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
+            Assertion.assertEquals(new UrlBuilder("sandbox", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
                     (String) data[6]);
-            Assertion.assertEquals(new UrlBuilder("dev-dmytror", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
+            Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
                     (String) data[7]);
-            Assertion.assertEquals(new UrlBuilder("staging", (Boolean) data[2])
-                            .getUrlForPath((String) data[0], (String) data[9], (String) data[1]),
+            Assertion.assertEquals(new UrlBuilder("dev-dmytror", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
                     (String) data[8]);
+            Assertion.assertEquals(new UrlBuilder("staging", (Boolean) data[2], (Boolean) data[3])
+                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
+                    (String) data[9]);
         }
     }
 
