@@ -13,17 +13,27 @@ public class UrlBuilder {
   protected String env;
   protected EnvType envType;
   private Boolean forceHttps;
+  private Boolean forceLanguageInPath;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
+    this.forceLanguageInPath = Configuration.getForceLanguageInPath();
   }
 
   public UrlBuilder(String env, Boolean forceHttps) {
     this.env = env;
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
+    this.forceLanguageInPath = Configuration.getForceLanguageInPath();
+  }
+
+  public UrlBuilder(String env, Boolean forceHttps, Boolean forceLanguageInPath) {
+    this.env = env;
+    this.envType = Configuration.getEnvType(this.env);
+    this.forceHttps = forceHttps;
+    this.forceLanguageInPath = forceLanguageInPath;
   }
 
   public String normalizePageName(String pageName) {
@@ -104,40 +114,55 @@ public class UrlBuilder {
   public String getUrlForWiki(String wikiName, String language, boolean addWWW, EnvType envType) {
     final String wikiaName = getWikiaGlobalName(wikiName);
 
-    String www = "";
-    if (addWWW) {
-      www = "www.";
-    }
-
-    String host;
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
+
+    String www = addWWW ? "www." : "";
+    String host = getFormattedWikiHost(www, wikiaName, envType, language);
+
+    if (!("en").equals(language) && forceLanguageInPath) {
+        urlBuilder.addEncodedPathSegments(language);
+    }
+    return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString();
+  }
+
+  private String getFormattedWikiHost(String www, String wikiaName, EnvType envType, String language) {
+    if (!forceLanguageInPath)
+      wikiaName = String.join(".", language, wikiaName);
+    return getFormattedWikiHost(www, wikiaName, envType);
+  }
+
+  private String getFormattedWikiHost(String www, String wikiaName, EnvType envType) {
     switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        host = String.join(".", www + wikiaName, devBoxOwner, envType.getWikiaDomain());
-        break;
+        return String.join(".", www + wikiaName, devBoxOwner, envType.getWikiaDomain());
       }
       case PROD: {
-        host = String.join(".", www + wikiaName, envType.getWikiaDomain());
-        break;
+        return String.join(".", www + wikiaName, envType.getWikiaDomain());
       }
       case STAGING: {
-        host = String.join(".", www + wikiaName, envType.getWikiaDomain());
-        break;
+        return String.join(".", www + wikiaName, envType.getWikiaDomain());
       }
       case SANDBOX: {
-        host = String.join(".", www + wikiaName, this.env, envType.getWikiaDomain());
-        break;
+        return String.join(".", www + wikiaName, this.env, envType.getWikiaDomain());
       }
       default:
         throw new WebDriverException("Unknown environment type");
     }
-    urlBuilder.scheme(getUrlProtocol()).host(host);
+  }
 
-    if (language != null && !("en").equals(language)) {
-      urlBuilder.addPathSegments(language);
+  private String getFormattedHostForGlobalUrl(EnvType env) {
+    switch (env) {
+      case DEV: {
+        String devBoxOwner = this.env.split("-")[1];
+        return String.join(".", "www", devBoxOwner, envType.getWikiaDomain());
+      }
+      case SANDBOX: {
+        return String.join(".", "www", this.env, envType.getWikiaDomain());
+      }
+      default:
+        return String.join(".", "www" , envType.getWikiaDomain());
     }
-    return urlBuilder.build().toString();
   }
 
   public String getUrlProtocol() {
@@ -145,27 +170,12 @@ public class UrlBuilder {
   }
 
   public String getWikiGlobalURL() {
-    String host;
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
     EnvType env = Configuration.getEnvType(this.env);
 
-    switch (env) {
-      case DEV: {
-        String devBoxOwner = this.env.split("-")[1];
-        host = String.join(".", "www", devBoxOwner, envType.getWikiaDomain());
-        break;
-      }
-      case SANDBOX: {
-        host = String.join(".", "www", this.env, envType.getWikiaDomain());
-        break;
-      }
-      default:
-        host = String.join(".", "www" , envType.getWikiaDomain());
-    }
-
     return urlBuilder
             .scheme(getUrlProtocol())
-            .host(host)
+            .host(getFormattedHostForGlobalUrl(env))
             .build()
             .toString();
   }
