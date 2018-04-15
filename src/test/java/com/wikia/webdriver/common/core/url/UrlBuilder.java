@@ -73,12 +73,12 @@ public class UrlBuilder {
   }
 
   public String getUrlForPath(String wikiPath) {
-    return getUrlForPath(Configuration.getWikiName(), Configuration.getLanguage(), wikiPath);
+    return getUrlForPath(Configuration.getWikiName(), DEFAULT_LANGUAGE, wikiPath);
   }
 
   protected String addPathToUrl(String url, String path) {
     HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-    urlBuilder.addEncodedPathSegments(path).build();
+    urlBuilder.addEncodedPathSegments(path.startsWith("/") ? path.replaceAll("^/", "") : path).build();
 
     String qs = Configuration.getQS();
     if (StringUtils.isNotBlank(qs)) {
@@ -200,8 +200,14 @@ public class UrlBuilder {
   }
 
   public String appendQueryStringToURL(String url, String qs) {
-    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-    return urlBuilder.encodedQuery(qs).build().toString();
+    String separator = url.contains("?") ? "&" : "?";
+
+    String[] filteredUrl = url.split("#");
+    if (filteredUrl.length > 1) {
+      return filteredUrl[0] + separator + qs + "#" + filteredUrl[1];
+    } else {
+      return url + separator + qs;
+    }
   }
 
   public String globallyEnableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
