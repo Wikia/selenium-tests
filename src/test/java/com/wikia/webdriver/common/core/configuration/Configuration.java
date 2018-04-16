@@ -107,6 +107,10 @@ public class Configuration {
     return getProp("wikiName");
   }
 
+  public static String getWikiLanguage() {
+    return getProp("language");
+  }
+
   public static String getPlatform() {
     return getProp("platform");
   }

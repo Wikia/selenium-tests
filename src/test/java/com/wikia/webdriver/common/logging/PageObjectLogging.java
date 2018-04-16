@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.logging;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
@@ -320,6 +321,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
+        } else if (driver.getCurrentUrl().contains(URLsContent.NOT_A_VALID_COMMUNITY)) {
+          throw new WebDriverException("Invalid url, redirected to Not_a_valid_community page");
         }
         logWarning("Url after navigation", driver.getCurrentUrl());
       }

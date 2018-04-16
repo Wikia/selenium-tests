@@ -37,6 +37,10 @@ public class UrlBuilder {
     this.forceLanguageInPath = forceLanguageInPath;
   }
 
+  public String getLanguageForWiki() {
+    return Configuration.getWikiLanguage() == null ? DEFAULT_LANGUAGE : Configuration.getWikiLanguage();
+  }
+
   public String normalizePageName(String pageName) {
     return pageName.replace(" ", "_");
   }
@@ -73,7 +77,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForPath(String wikiPath) {
-    return getUrlForPath(Configuration.getWikiName(), DEFAULT_LANGUAGE, wikiPath);
+    return getUrlForPath(Configuration.getWikiName(), getLanguageForWiki(), wikiPath);
   }
 
   protected String addPathToUrl(String url, String path) {
@@ -88,7 +92,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki() {
-    return getUrlForWiki(Configuration.getWikiName(), DEFAULT_LANGUAGE, false);
+    return getUrlForWiki(Configuration.getWikiName(), getLanguageForWiki(), false);
   }
 
   public String getUrlForWiki(String wikiName, String language, boolean addWWW) {
@@ -105,7 +109,7 @@ public class UrlBuilder {
 
 
   public String getUrlForWiki(String wikiName, boolean addWWW, EnvType envType) {
-    return getUrlForWiki(wikiName, DEFAULT_LANGUAGE, addWWW, envType);
+    return getUrlForWiki(wikiName, getLanguageForWiki(), addWWW, envType);
   }
 
   public String getUrlForWiki(String wikiName, String language) {

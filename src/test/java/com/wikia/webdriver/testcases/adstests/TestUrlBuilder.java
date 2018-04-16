@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -312,16 +311,7 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
     }
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void appendQueryString() {
-        String cb = "cb=1111";
-        Configuration.setTestValue("qs", cb);
-
-        Assertion.assertEquals(new UrlBuilder("prod", false).getUrlForPath("wowwiki", "Portal:Main"),
-                "http://wowwiki.wikia.com/Portal:Main?" + cb);
-    }
-
-    @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void getWikiaUrl() {
+    public void getWikiaUrlTests() {
 
         Assertion.assertEquals(new UrlBuilder("preview", false).getWikiGlobalURL(),
                 "http://www.preview.wikia.com");
@@ -331,6 +321,63 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
                 "http://www.wikia.com");
     }
 
+    @Test(groups = {"TestUrlBuilder", "unitTests"})
+    public void loadFirstPageBeforeLangFromAnnotationIsAvailTests() {
+
+        Assertion.assertEquals(new UrlBuilder("preview", false).getUrlForWiki(),
+                String.format("http://%s.preview.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("sandbox-s1", false).getUrlForWiki(),
+                String.format("http://%s.sandbox-s1.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("prod", false).getUrlForWiki(),
+                String.format("http://%s.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("preview", true).getUrlForWiki(),
+                String.format("https://%s.preview.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("sandbox-s1", true).getUrlForWiki(),
+                String.format("https://%s.sandbox-s1.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("prod", true).getUrlForWiki(),
+                String.format("https://%s.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("preview", true, true).getUrlForWiki(),
+                String.format("https://%s.preview.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("sandbox-s1", true, true).getUrlForWiki(),
+                String.format("https://%s.sandbox-s1.wikia.com", Configuration.getWikiName()));
+        Assertion.assertEquals(new UrlBuilder("prod", true, true).getUrlForWiki(),
+                String.format("https://%s.wikia.com", Configuration.getWikiName()));
+    }
+
+    @Test(groups = {"TestUrlBuilder", "unitTests"})
+    public void getUrlForPathTests() {
+
+        Assertion.assertEquals(new UrlBuilder("preview", false).getUrlForPath("/wiki/Special:Version"),
+                String.format("http://%s.preview.wikia.com/wiki/Special:Version", Configuration.getWikiName()));
+
+        String cb = "cb=1111";
+        Configuration.setTestValue("qs", cb);
+
+        Assertion.assertEquals(new UrlBuilder("prod", false).getUrlForPath("wowwiki", "Portal:Main"),
+                "http://wowwiki.wikia.com/Portal:Main?" + cb);
+    }
+
+    @Test(groups = {"TestUrlBuilder", "unitTests"})
+    public void getUrlForPathWithLanguageTests() {
+
+        Configuration.setTestValue("language", "szl");
+
+        Assertion.assertEquals(new UrlBuilder("preview", false, true).getUrlForPath("/wiki/Special:Version"),
+                String.format("http://%s.preview.wikia.com/szl/wiki/Special:Version", Configuration.getWikiName()));
+
+        Assertion.assertEquals(new UrlBuilder("preview", false, false).getUrlForPath("/wiki/Special:Version"),
+                String.format("http://szl.%s.preview.wikia.com/wiki/Special:Version", Configuration.getWikiName()));
+
+    }
+
+    @Test(groups = {"TestUrlBuilder", "unitTests"})
+    public void appendQueryStringTests() {
+
+        Assertion.assertEquals(new UrlBuilder("preview", false).appendQueryStringToURL(
+                "http://mediawiki119.preview.wikia.com/wiki/ArticleFeaturesCRUDTestsUserAddingImagePlaceholder?action=edit",
+                "useFormat=1"),
+                "http://mediawiki119.preview.wikia.com/wiki/ArticleFeaturesCRUDTestsUserAddingImagePlaceholder?action=edit&useFormat=1");
+    }
 
     @AfterMethod(alwaysRun = true)
     public void clearCustomTestProperties() {
