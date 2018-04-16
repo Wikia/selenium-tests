@@ -670,16 +670,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsPremiumPreroll() {
-    return new Object[][]{
-        {
-            WIKI_SPECIAL,
-            "SyntheticTests/Premium/FeaturedVideo"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
