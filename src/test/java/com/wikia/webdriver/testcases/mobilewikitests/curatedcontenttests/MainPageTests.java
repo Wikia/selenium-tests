@@ -140,7 +140,7 @@ public class MainPageTests extends NewTestTemplate {
             ARTICLE_TITLE_SELECTOR,
             WIKIA_STATS_SELECTOR,
             FEATURED_CONTENT_SELECTOR,
-            CURATED_CONTENT_SELECTOR
+            CURATED_CONTENT_SELECTOR,
             AD_MOBILE_IN_CONTENT_SELECTOR
     );
 
@@ -165,7 +165,7 @@ public class MainPageTests extends NewTestTemplate {
             ARTICLE_TITLE_SELECTOR,
             WIKIA_STATS_SELECTOR,
             FEATURED_CONTENT_SELECTOR,
-            CURATED_CONTENT_SELECTOR
+            CURATED_CONTENT_SELECTOR,
             AD_MOBILE_IN_CONTENT_SELECTOR
     );
 
