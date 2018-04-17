@@ -31,6 +31,9 @@ public class EditorTests extends NewTestTemplate {
   private static final String SECTION_DISPLAY_NAME = "New Section";
   private static final String SEARCH_IMAGE_QUERY = "U";
 
+  private static String FEATURED_CONTENT_SELECTOR = ".featured-content";
+  private static String CURATED_CONTENT_SELECTOR = ".curated-content";
+
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
     new CuratedContent().clear();
@@ -40,7 +43,7 @@ public class EditorTests extends NewTestTemplate {
   @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
-        .isFeaturedContentVisible();
+        .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
 
@@ -58,7 +61,7 @@ public class EditorTests extends NewTestTemplate {
         .waitForAddCategoryButtonToBeVisible()
         .publish();
 
-    result = new ArticlePage().getCuratedMainPage().isFeaturedContentVisible();
+    result = new ArticlePage().getCuratedMainPage().isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     PageObjectLogging.log("Featured Content", MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG, result);
@@ -69,7 +72,7 @@ public class EditorTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
-        .isFeaturedContentVisible();
+        .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
 
@@ -101,7 +104,7 @@ public class EditorTests extends NewTestTemplate {
         .publish();
 
     PageObjectLogging.log("Curated Content", MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedContentVisible());
+        MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR));
 
     new CuratedContentPageObject().clickOnCuratedContentElementByIndex(0);
 
@@ -113,7 +116,7 @@ public class EditorTests extends NewTestTemplate {
   @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
-        .isFeaturedContentVisible();
+        .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
     new EditorHomePageObject()
@@ -131,6 +134,6 @@ public class EditorTests extends NewTestTemplate {
         .publish();
 
     PageObjectLogging.log("Curated Content", MercuryMessages.VISIBLE_MSG,
-        MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedContentVisible());
+        MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR));
   }
 }

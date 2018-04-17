@@ -31,6 +31,7 @@ import org.testng.annotations.Test;
 public class CropImageTests extends NewTestTemplate {
 
   private static final String SEARCH_IMAGE_QUERY = "U";
+  private static String ARTICLE_TITLE_SELECTOR = ".wiki-page-title";
 
   private CuratedMainPagePageObject curatedMainPage;
   private EditorHomePageObject editor;
@@ -55,7 +56,7 @@ public class CropImageTests extends NewTestTemplate {
     init();
 
     navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
-    curatedMainPage.isArticleTitleVisible();
+    curatedMainPage.isCuratedElementVisible(ARTICLE_TITLE_SELECTOR);
 
     navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);
     editor.clickAddFeaturedContent();
