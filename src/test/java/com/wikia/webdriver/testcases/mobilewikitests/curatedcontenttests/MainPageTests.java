@@ -173,13 +173,13 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   private void verifyElementsVisible(List<String> elementsList){
-    elementsList.forEach((element) -> Assertion.assertTrue(curatedMainPage.isCuratedElementVisible(element),
+    elementsList.forEach(element -> Assertion.assertTrue(curatedMainPage.isCuratedElementVisible(element),
             element + " is not visible")
     );
   }
 
   private void verifyElementsNotVisible(List<String> elementsList){
-    elementsList.forEach((element) -> Assertion.assertFalse(curatedMainPage.isCuratedElementVisible(element),
+    elementsList.forEach(element -> Assertion.assertFalse(curatedMainPage.isCuratedElementVisible(element),
             element + " is visible")
     );
   }
