@@ -30,12 +30,15 @@ import org.testng.annotations.Test;
 public class ImageUploadTests extends NewTestTemplate {
 
   private CuratedMainPagePageObject curatedMainPage;
+
   private CroppingToolPageObject crop;
   private EditorHomePageObject editor;
   private ImageGenerator generator;
   private ItemFormPageObject itemForm;
   private UploadImageModalComponentObject upload;
   private Navigate navigate;
+
+  private static String CURATED_CONTENT_SELECTOR = ".curated-content";
 
   private void init() {
     this.curatedMainPage = new CuratedMainPagePageObject();
@@ -52,7 +55,7 @@ public class ImageUploadTests extends NewTestTemplate {
     init();
 
     navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
-    curatedMainPage.isCuratedContentVisible();
+    curatedMainPage.isCuratedElementVisible(CURATED_CONTENT_SELECTOR);
 
     navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);
     generator.generateImageWithRandomText();
