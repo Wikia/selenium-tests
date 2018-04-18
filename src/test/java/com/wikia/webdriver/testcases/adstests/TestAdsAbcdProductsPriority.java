@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.junit.Assert;
@@ -12,7 +13,6 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
   private static final String DEBUG_QUERY_STRING = "wikia_video_adapter=2000";
   private static final String WIKIA = "project43";
-  private static final Page FV_PAGE = new Page(WIKIA, "/SyntheticTests/Premium/FeaturedVideo");
   private static final Page TEST_PAGE = new Page(WIKIA, "/SyntheticTests/ProductsPriority/OutstreamOverABCD");
 
   private static final String ABCD_LINE_ITEM_ID = "4417483196";
@@ -44,7 +44,7 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
       groups = {"AdsUAPFamilyAdIsNotDisplayedOnFeaturedVideoPage", "AbcdProductPriorityOasis"}
   )
   public void adsUAPFamilyAdIsNotDisplayedOnFeaturedVideoPage() {
-    AdsBaseObject ads = new AdsBaseObject(driver, FV_PAGE.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
     verifyAbcdAdIsNotDisplayed(ads);
 
     Assert.assertTrue(ads.slotHasSize(AdsContent.TOP_LB, 728, 90));
