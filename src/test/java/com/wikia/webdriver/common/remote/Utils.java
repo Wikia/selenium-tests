@@ -19,7 +19,7 @@ public final class Utils {
   }
 
   public static String extractSiteIdFromMediaWikiUsing(final WebDriver driver) {
-    String text = driver.findElement(By.cssSelector(".wikitable tr:nth-child(7) td:nth-child(2)")).getText();
+    String text = driver.findElement(By.cssSelector(".wikitable tr:nth-child(5) td:nth-child(2)")).getText();
     // Found text: "city_id: 1362702, cluster: c7, dc: sjc"
     return StringUtils.substringBetween(text, ": ", ",");
   }
