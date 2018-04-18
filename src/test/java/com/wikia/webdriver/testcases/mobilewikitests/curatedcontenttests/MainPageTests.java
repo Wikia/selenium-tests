@@ -77,7 +77,6 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             RIVERSED_ARTICLE_TITLE_SELECTOR
@@ -101,7 +100,6 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPageByPath(MercurySubpages.NTACC_MAIN_PAGE);
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             AD_TOP_LEADERBOARD_SELECTOR,
@@ -127,7 +125,6 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPageByPath(MercurySubpages.NTVCC_MAIN_PAGE);
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             AD_TOP_LEADERBOARD_SELECTOR,
@@ -152,7 +149,6 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
     init();
     navigate.toPageByPath(MercurySubpages.NTAVCC_MAIN_PAGE);
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             AD_TOP_LEADERBOARD_SELECTOR,
