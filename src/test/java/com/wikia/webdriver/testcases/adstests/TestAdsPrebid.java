@@ -7,50 +7,40 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
-
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TestAdsPrebid extends TemplateNoFirstLoad {
-
   private static final String STARTED_EVENT = "event_name=started";
-  private static final String WIKIA = "project43";
-  private static final Page TEST_PAGE = new Page(WIKIA, "/SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600");
+  private static final String DIRECT_PREROLL_LINE_ITEM_ID = "314345172";
+  private static final String BIDDER_PREROLL_LINE_ITEM_ID = "4618393909";
+  private static final int VELES_LINE_ITEM_ID = 333201132;
+  private static final List<String> RUBICON_URL_PATTERNS = Arrays.asList(
+    ".*fastlane.json.*TOP_LEADERBOARD.*", ".*fastlane.json.*TOP_RIGHT_BOXAD.*", ".*fastlane.json.*INCONTENT_BOXAD_1.*"
+  );
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "prebidCustomAdapter",
-      groups = "AdsPrebidOasis"
-  )
-  public void adsPrebidOasis(String wiki, String article) {
-    String url = urlBuilder.getUrlForPath(wiki, article);
-    url = urlBuilder.appendQueryStringToURL(url, "wikia_adapter=1881");
-
+  @Test(groups = "AdsPrebidOasis")
+  public void adsPrebidOasis() {
+    final String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=1881");
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
 
     prebidAds.verifyKeyValues(AdsContent.TOP_LB, "wikia", "728x90", "18.50");
     prebidAds.verifyPrebidCreative(AdsContent.TOP_LB, true);
   }
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "prebidCustomAdapter",
-      groups = "AdsPrebidMercury"
-  )
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
-  public void adsPrebidMercury(String wiki, String article) {
-    String url = urlBuilder.getUrlForPath(wiki, article);
-    url = urlBuilder.appendQueryStringToURL(url, "wikia_adapter=831");
-
+  @Test(groups = "AdsPrebidMercury")
+  public void adsPrebidMercury() {
+    String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=831");
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
 
     prebidAds.verifyKeyValues(AdsContent.MOBILE_TOP_LB, "wikia", "320x50", "8.30");
@@ -58,36 +48,51 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "prebidVelesAdapter",
-      groups = "AdsPrebidVelesOasis"
-  )
-  public void adsPrebidVelesDisplayedInTopLeaderboard(String wiki, String article, Integer lineItemId) {
+  @Test(groups = "AdsPrebidVelesOasis")
+  public void adsPrebidVelesDisplayedInTopLeaderboard() {
     networkTrafficInterceptor.startIntercepting();
-    String url = urlBuilder.getUrlForPath(wiki, article);
-    AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
+    AdsPrebidObject prebidAds = new AdsPrebidObject(driver, AdsDataProvider.PAGE_CAP.getUrl());
 
     prebidAds.verifyKeyValues(AdsContent.TOP_LB, "veles", "640x480", "20.00");
     prebidAds.wait.forSuccessfulResponse(networkTrafficInterceptor, STARTED_EVENT);
-    prebidAds.verifyLineItemId(AdsContent.TOP_LB, lineItemId);
+    prebidAds.verifyLineItemId(AdsContent.TOP_LB, VELES_LINE_ITEM_ID);
   }
 
   @NetworkTrafficDump
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "prebidRubiconSlotsList",
-      groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"}
-  )
-  public void adsPrebidRubiconRequestsInSlots(List<String> urlPaterns) {
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"})
+  public void adsPrebidRubiconRequestsInSlots() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, TEST_PAGE.getUrl());
-    Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, urlPaterns), "Lack of rubicon request in all slots");
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
+    Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, RUBICON_URL_PATTERNS), "Lack of rubicon request in all slots");
   }
 
-  private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPaterns) {
+  @NetworkTrafficDump(useMITM = true)
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  public void fvDirectVideoAd() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
+
+    Assertion.assertEquals(getFVStatus(ads), "success");
+    Assertion.assertEquals(ads.getFVLineItem(), DIRECT_PREROLL_LINE_ITEM_ID);
+  }
+
+  private String getFVStatus(AdsBaseObject ads) {
+    return ads.getValueFromTracking(networkTrafficInterceptor, "FEATURED", "ad_status");
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  public void fvBidderVideoAd() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV_RUBICON.getUrl());
+
+    Assertion.assertEquals(getFVStatus(ads), "error");
+    Assertion.assertEquals(ads.getFVLineItem(), BIDDER_PREROLL_LINE_ITEM_ID);
+  }
+
+  private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPatterns) {
     try {
-      for (String urlPatern : urlPaterns) {
+      for (String urlPatern : urlPatterns) {
         ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, urlPatern);
         return true;
       }
