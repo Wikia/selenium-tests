@@ -39,11 +39,16 @@ public class AdsDataProvider {
   public static final Page PAGE_A9_DISPLAY = new Page(WIKI_SPECIAL, "SyntheticTests/Amazon");
   public static final Page PAGE_FV = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo");
   public static final Page PAGE_FV_JWPLAYER = new Page(WIKI_SPECIAL, FV_JWPLAYER_PAGE_URI);
+  public static final Page PAGE_FV_RUBICON = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000");
   public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(WIKI_SPECIAL, FV_JWPLAYER_WITH_SOUND_PAGE_URI);
 
   public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
   public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
   public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
+  public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600");
+  public static final Page PAGE_PREBID = new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Wikia");
+  public static final Page PAGE_CAP = new Page(WIKI_SPECIAL, "SyntheticTests/Cap");
+
 
   private AdsDataProvider() {}
 
@@ -463,29 +468,9 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] prebidCustomAdapter() {
-    return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Wikia"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] prebidVelesAdapter() {
     return new Object[][]{
         {WIKI_SPECIAL,"SyntheticTests/Cap", 333201132},
-    };
-  }
-
-  @DataProvider
-  public static Object[][] prebidRubiconSlotsList() {
-    return new Object[][]{
-        {
-            Arrays.asList(
-                ".*fastlane.json.*TOP_LEADERBOARD.*",
-                ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
-                ".*fastlane.json.*INCONTENT_BOXAD_1.*"
-            )
-        }
     };
   }
 
