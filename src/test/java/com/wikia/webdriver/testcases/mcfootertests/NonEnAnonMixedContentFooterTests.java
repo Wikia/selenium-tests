@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"NonEnAnonMixedContentFooter"})
-@Execute(onWikia = "de.gameofthrones", asUser = User.ANONYMOUS)
+@Execute(onWikia = "gameofthrones", language = "de", asUser = User.ANONYMOUS)
 public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
@@ -45,7 +45,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
+  @Execute(onWikia = "nonenwikiwithemptydiscussions", language = "es")
   public void discussionsCardIsPresentOnNonENwikiWithEmptyDiscussions() {
     DiscussionCard discussionsCard = new MixedContentFooter()
         .openWikiMainPage()
@@ -56,7 +56,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "es.nonenwikiwithoutdiscussions")
+  @Execute(onWikia = "nonenwikiwithoutdiscussions", language = "es")
   public void discussionsCardIsNotPresentOnNonENwikiWithoutDiscussions() {
     DiscussionCard discussionCard = new MixedContentFooter()
         .openWikiMainPage()
@@ -85,7 +85,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "es.gta")
+  @Execute(onWikia = "gta", language = "es")
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
         .openWikiMainPage()
@@ -95,7 +95,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "es.nonenwikiwithemptydiscussions")
+  @Execute(onWikia = "nonenwikiwithemptydiscussions", language = "es")
   public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter()
         .openWikiMainPage()

@@ -56,30 +56,30 @@ public class AdsDataProvider {
   public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypasta", "Categoria:Creepypasta"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"monsterhunter", "Portal:MH3U"},
+        {"elderscrolls", "ru", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+        {"creepypasta", "it", "Categoria:Creepypasta"},
+        {"monsterhunter", "en", "MH3U:_Monsters"},
+        {"monsterhunter", "en", "Portal:MH3U"},
 
         // Main pages
-        {"runescape", "RuneScape_Wiki"},
-        {"yugioh", "Main_Page"},
-        {"naruto", "Narutopedia"},
-        {"leagueoflegends", "League_of_Legends_Wiki"},
-        {"es.drama", "Portada"},
-        {"de.memory-alpha", "Hauptseite"},
-        {"de.marvel-filme", "Marvel-Filme"},
+        {"runescape", "en", "RuneScape_Wiki"},
+        {"yugioh", "en", "Main_Page"},
+        {"naruto", "en", "Narutopedia"},
+        {"leagueoflegends", "en", "League_of_Legends_Wiki"},
+        {"drama", "es", "Portada"},
+        {"memory-alpha", "de", "Hauptseite"},
+        {"marvel-filme", "de", "Marvel-Filme"},
     };
   }
 
   @DataProvider
   public static Object[][] hubsPages() {
     return new Object[][]{
-        {"portail-modedevie", "Portail_mode_de_vie/2014-12-28"},
-        {"gameshub", "Games_Hub"},
-        {"comicshub", "What%27s_Hot"},
-        {"es.filmhub", "Wiki_Pel%C3%ADculas_Hub"},
-        {"ja.entertainmenthub",
+        {"portail-modedevie", "en", "Portail_mode_de_vie/2014-12-28"},
+        {"gameshub", "en", "Games_Hub"},
+        {"comicshub", "en", "What%27s_Hot"},
+        {"filmhub", "es", "Wiki_Pel%C3%ADculas_Hub"},
+        {"entertainmenthub", "ja",
          "%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%83%8F%E3%83%96_Wiki"}
     };
   }

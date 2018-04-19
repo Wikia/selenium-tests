@@ -17,7 +17,7 @@ public class IntraWiki extends NewTestTemplate {
   protected String searchSuggestionsWiki;
 
   public IntraWiki() {
-    UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getForceHttps(), Configuration.getNewStagingUrlFormat());
+    UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getForceHttps());
     testedWiki = urlBuilder.getUrlForWiki("muppet");
     communityWiki = urlBuilder.getUrlForWiki("community");
     searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");

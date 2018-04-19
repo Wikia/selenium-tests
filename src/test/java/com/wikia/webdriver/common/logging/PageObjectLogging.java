@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.logging;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
@@ -310,18 +311,24 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
     if (!AlertHandler.isAlertPresent(driver)) {
+      String command = "Url after navigation";
       if (url.equals(driver.getCurrentUrl())) {
         List<String> classList = new ArrayList<>();
         classList.add(SUCCESS_CLASS);
-        String command = "Url after navigation";
         String description = VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
         String html = VelocityWrapper.fillLogRow(classList, command, description);
         CommonUtils.appendTextToFile(logPath, html);
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
+          logWarning(command, driver.getCurrentUrl());
+        } else if (driver.getCurrentUrl().contains(URLsContent.NOT_A_VALID_COMMUNITY)) {
+          logWarning(command, driver.getCurrentUrl());
+          driver.get("http://seleniumworkaround");
+          PageObjectLogging.log("Workaround", "Dummy redirect", true);
+        } else {
+          logWarning(command, driver.getCurrentUrl());
         }
-        logWarning("Url after navigation", driver.getCurrentUrl());
       }
     } else {
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
@@ -487,7 +494,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                         .forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
-    String testingEnvironmentUrl = new UrlBuilder().getUrlForWiki(Configuration.getWikiName());
+    String testingEnvironmentUrl = new UrlBuilder().getUrlForWiki();
     String testingEnvironment = Configuration.getEnv();
     String testedVersion = "TO DO: GET WIKI VERSION HERE";
 

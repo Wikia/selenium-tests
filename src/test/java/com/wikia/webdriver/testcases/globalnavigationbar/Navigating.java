@@ -48,14 +48,14 @@ public class Navigating extends NewTestTemplate {
   }
 
   @Test(groups = {"communityCentralLinkClickOnDeCommunityOpensDeCommunityCentral"})
-  @Execute(onWikia = "de.gta")
+  @Execute(onWikia = "gta", language = "de")
   public void testCommunityCentralLinkOnDeCommunity() {
     new HomePage()
         .getGlobalNavigation()
         .clickCommunityCentralLink();
 
     Assertion.assertEquals(driver.getCurrentUrl(),
-                           urlBuilder.getUrlForPage("de.community", "/wiki/Community_Deutschland"));
+            urlBuilder.getUrlForPath("community", "de", "/wiki/Community_Deutschland"));
   }
 
   @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})

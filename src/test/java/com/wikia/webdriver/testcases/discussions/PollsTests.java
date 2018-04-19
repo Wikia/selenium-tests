@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Poll;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class PollsTests extends NewTestTemplate {
@@ -35,17 +34,17 @@ public class PollsTests extends NewTestTemplate {
         postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
         postsCreator.addTitleWith(TextGenerator.createUniqueText());
         Poll poll = postsCreator.addPoll();
-        Assert.assertFalse(postsCreator.isPostButtonActive());
+        Assertion.assertFalse(postsCreator.isPostButtonActive());
 
         poll.addTitle(TextGenerator.createUniqueText());
-        Assert.assertFalse(postsCreator.isPostButtonActive());
+        Assertion.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        Assert.assertFalse(postsCreator.isPostButtonActive());
+        Assertion.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
         page.waitForLoadingSpinner();
 
-        Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
+        Assertion.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"}, groups = "discussions-polls")
@@ -65,9 +64,9 @@ public class PollsTests extends NewTestTemplate {
         poll.clickNthAnswer(0);
         poll.clickVoteButton();
 
-        Assert.assertTrue(poll.isChosenResultBarDisplayed());
-        Assert.assertTrue(poll.getBarResultsList().size() > 0);
-        Assert.assertTrue(poll.isAlreadyVotedMessageVisible());
+        Assertion.assertTrue(poll.isChosenResultBarDisplayed());
+        Assertion.assertTrue(poll.getBarResultsList().size() > 0);
+        Assertion.assertTrue(poll.isAlreadyVotedMessageVisible());
     }
 
     @Test(groups = "discussions-polls")
@@ -79,13 +78,13 @@ public class PollsTests extends NewTestTemplate {
         postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
         postsCreator.addTitleWith(TextGenerator.createUniqueText());
         Poll poll = postsCreator.addPoll();
-        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
+        Assertion.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
 
         poll.addTitle(TextGenerator.createUniqueText());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
         poll.deletePoll();
         postsCreator.addPoll();
-        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
+        Assertion.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER);
 
         poll.addTitle(TextGenerator.createUniqueText());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
@@ -94,14 +93,14 @@ public class PollsTests extends NewTestTemplate {
         poll.addNthAnswer(TextGenerator.createUniqueText(), 2);
         poll.clickAddAnswerButton();
         poll.addNthAnswer(TextGenerator.createUniqueText(), 3);
-        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER + 2);
+        Assertion.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER + 2);
 
         poll.deleteNthAnswer(0);
-        Assert.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER + 1);
+        Assertion.assertEquals(poll.getAnswersInputsList().size(), DEFAULT_ANSWERS_NUMBER + 1);
 
         postsCreator.clickSubmitButton();
         page.waitForLoadingSpinner();
-        Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
+        Assertion.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
     /**
@@ -121,11 +120,11 @@ public class PollsTests extends NewTestTemplate {
         poll.addTitle(TextGenerator.createUniqueText());
         Assertion.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        Assert.assertFalse(postsCreator.isPostButtonActive());
+        Assertion.assertFalse(postsCreator.isPostButtonActive());
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
 
-        Assert.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
+        Assertion.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
@@ -142,13 +141,13 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        Assert.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
+        Assertion.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
         poll.clickNthAnswer(0);
         poll.clickVoteButton();
 
-        Assert.assertTrue(poll.isChosenResultBarDisplayed());
-        Assert.assertTrue(poll.getBarResultsList().size() > 0);
-        Assert.assertTrue(poll.isAlreadyVotedMessageVisible());
+        Assertion.assertTrue(poll.isChosenResultBarDisplayed());
+        Assertion.assertTrue(poll.getBarResultsList().size() > 0);
+        Assertion.assertTrue(poll.isAlreadyVotedMessageVisible());
     }
 
     /**
@@ -157,10 +156,10 @@ public class PollsTests extends NewTestTemplate {
 
     public void manageSignInModal(Poll p) {
         SignInToFollowModalDialog signInModal = new SignInToFollowModalDialog();
-        Assert.assertTrue(signInModal.isVisible());
+        Assertion.assertTrue(signInModal.isVisible());
         signInModal.clickOkButton();
         p.clickNthAnswer(0);
-        Assert.assertTrue(signInModal.isVisible());
+        Assertion.assertTrue(signInModal.isVisible());
     }
 
 }

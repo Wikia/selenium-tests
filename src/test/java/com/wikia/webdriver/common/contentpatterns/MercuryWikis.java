@@ -15,7 +15,7 @@ public class MercuryWikis {
 
   // Other wikis
   public static final String MLP = "mlp";
-  public static final String DE_WIKI = "de.demercurytests";
+  public static final String DE_WIKI = "demercurytests";
   // for discussions desktop view tests
   public static final String DISCUSSIONS_1 = "dauto";
   public static final String DISCUSSIONS_2 = "dauto2";

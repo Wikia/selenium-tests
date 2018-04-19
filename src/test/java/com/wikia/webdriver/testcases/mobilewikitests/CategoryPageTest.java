@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -10,8 +11,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
-
-import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Category")
@@ -30,9 +29,9 @@ public class CategoryPageTest extends NewTestTemplate {
 
     CategoryPage category = new CategoryPage().open(categoryName);
 
-    Assert.assertEquals("", category.getArticleContent());
-    Assert.assertTrue(category.categoryMembersContainerIsVisible());
-    Assert.assertTrue(category.hasCategoryMembers());
+    Assertion.assertEquals("", category.getArticleContent());
+    Assertion.assertTrue(category.categoryMembersContainerIsVisible());
+    Assertion.assertTrue(category.hasCategoryMembers());
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl")
@@ -48,9 +47,9 @@ public class CategoryPageTest extends NewTestTemplate {
 
     CategoryPage category = new CategoryPage().open(categoryName);
 
-    Assert.assertFalse("".equals(category.getArticleContent()));
-    Assert.assertTrue(category.categoryMembersContainerIsVisible());
-    Assert.assertTrue(category.hasCategoryMembers());
+    Assertion.assertFalse("".equals(category.getArticleContent()));
+    Assertion.assertTrue(category.categoryMembersContainerIsVisible());
+    Assertion.assertTrue(category.hasCategoryMembers());
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl")
@@ -60,7 +59,7 @@ public class CategoryPageTest extends NewTestTemplate {
     new ArticleContent().push("some irrelevant content of category article", categoryName);
     CategoryPage category = new CategoryPage().open(categoryName);
 
-    Assert.assertEquals(404, category.getURLStatus(category.getCurrentUrl()));
+    Assertion.assertEquals(404, category.getURLStatus(category.getCurrentUrl()));
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageFromLinkInArticle")
@@ -73,7 +72,7 @@ public class CategoryPageTest extends NewTestTemplate {
         .open()
         .openCategoryPageFromCategoriesDropdown();
 
-    Assert.assertTrue(categoryPage.hasCategoryMembers());
+    Assertion.assertTrue(categoryPage.hasCategoryMembers());
   }
 
   @Test(groups = "mercury_category_navigateToCategoryMemberPage")
@@ -87,7 +86,7 @@ public class CategoryPageTest extends NewTestTemplate {
         .open(categoryName)
         .navigateToCategoryMemberPage();
 
-    Assert.assertEquals(articleContent, article.getArticleContent());
+    Assertion.assertEquals(articleContent, article.getArticleContent());
   }
 
   @Test(groups = "mercury_category_testPagination")
@@ -107,13 +106,13 @@ public class CategoryPageTest extends NewTestTemplate {
 
     CategoryPage categoryPage = new CategoryPage().open(categoryName);
 
-    Assert.assertTrue(categoryPage.hasCategoryMembers());
-    Assert.assertTrue(categoryPage.nextButtonIsVisible());
+    Assertion.assertTrue(categoryPage.hasCategoryMembers());
+    Assertion.assertTrue(categoryPage.nextButtonIsVisible());
 
     categoryPage.clickNextButton();
 
-    Assert.assertTrue(categoryPage.hasCategoryMembers());
-    Assert.assertTrue(categoryPage.previousButtonIsVisible());
+    Assertion.assertTrue(categoryPage.hasCategoryMembers());
+    Assertion.assertTrue(categoryPage.previousButtonIsVisible());
 
     // Wait for scroll animation to be finished.
     // categoryPage.previousButtonIsVisible() scrolls to element but jQuery animation scrolls back to somewhere in the middle of a page.
@@ -121,7 +120,7 @@ public class CategoryPageTest extends NewTestTemplate {
 
     categoryPage.clickPreviousButton();
 
-    Assert.assertTrue(categoryPage.hasCategoryMembers());
-    Assert.assertTrue(categoryPage.nextButtonIsVisible());
+    Assertion.assertTrue(categoryPage.hasCategoryMembers());
+    Assertion.assertTrue(categoryPage.nextButtonIsVisible());
   }
 }
