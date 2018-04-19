@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdsBaseObject extends WikiBasePageObject {
   public static final String PAGE_TYPE_ARTICLE = "article";
@@ -949,5 +951,22 @@ public class AdsBaseObject extends WikiBasePageObject {
     final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
     final String pattern = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
     wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+  }
+
+  public String getValueFromTracking(NetworkTrafficInterceptor networkTrafficInterceptor, String slotName, String paramName) {
+    final String fvTrackingUrl = getTrackingUrl(networkTrafficInterceptor, slotName);
+    Matcher matcher = Pattern.compile(".*" + paramName + "=([^&]+)&.*").matcher(fvTrackingUrl);
+    return matcher.matches() ? matcher.group(1) : "";
+  }
+
+  public String getFVLineItem() {
+    final By FV_SLOT_SELECTOR = By.cssSelector("div.featured-video__player-container");
+    return driver.findElement(FV_SLOT_SELECTOR).getAttribute("data-vast-line-item-id");
+  }
+
+  public String getTrackingUrl(NetworkTrafficInterceptor networkTrafficInterceptor, String pos) {
+    final String pattern = ".*adinfo.*kv_pos=" + pos + ".*";
+    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+    return networkTrafficInterceptor.getEntryByUrlPattern(pattern).getRequest().getUrl();
   }
 }
