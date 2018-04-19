@@ -311,20 +311,24 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
     if (!AlertHandler.isAlertPresent(driver)) {
+      String command = "Url after navigation";
       if (url.equals(driver.getCurrentUrl())) {
         List<String> classList = new ArrayList<>();
         classList.add(SUCCESS_CLASS);
-        String command = "Url after navigation";
         String description = VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
         String html = VelocityWrapper.fillLogRow(classList, command, description);
         CommonUtils.appendTextToFile(logPath, html);
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
+          logWarning(command, driver.getCurrentUrl());
         } else if (driver.getCurrentUrl().contains(URLsContent.NOT_A_VALID_COMMUNITY)) {
-          throw new WebDriverException("Invalid url, redirected to Not_a_valid_community page");
+          logWarning(command, driver.getCurrentUrl());
+          driver.get("http://seleniumworkaround");
+          PageObjectLogging.log("Workaround", "Dummy redirect", true);
+        } else {
+          logWarning(command, driver.getCurrentUrl());
         }
-        logWarning("Url after navigation", driver.getCurrentUrl());
       }
     } else {
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
