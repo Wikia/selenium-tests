@@ -43,6 +43,7 @@ public class DiscussionCard extends WikiBasePageObject {
   }
 
   public DiscussionsPage clickOnViewAllLinkInDiscussions() {
+    scrollTo(viewAllLink);
     wait.forElementClickable(viewAllLink)
         .click();
 
@@ -54,6 +55,7 @@ public class DiscussionCard extends WikiBasePageObject {
   }
 
   public UserProfilePage clickUserAvatar() {
+    scrollTo(avatarImage);
     wait.forElementClickable(avatarImage);
     avatarImage.click();
 
