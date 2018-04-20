@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriverException;
 public class UrlBuilder {
 
 
-  public static final String DEFAULT_LANGUAGE = "en";
   protected String env;
   protected EnvType envType;
   private Boolean forceHttps;
@@ -38,7 +37,7 @@ public class UrlBuilder {
   }
 
   public String getLanguageForWiki() {
-    return Configuration.getWikiLanguage() == null ? DEFAULT_LANGUAGE : Configuration.getWikiLanguage();
+    return Configuration.getWikiLanguage() == null ? Configuration.DEFAULT_LANGUAGE : Configuration.getWikiLanguage();
   }
 
   public String normalizePageName(String pageName) {

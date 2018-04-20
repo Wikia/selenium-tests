@@ -41,6 +41,7 @@ public class Configuration {
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
   private static final String SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME = "config.xml";
+  public static final String DEFAULT_LANGUAGE = "en";
 
   @Getter(lazy = true)
   private static final String wikiaDomain = getEnvType().getWikiaDomain();

@@ -1,7 +1,8 @@
 package com.wikia.webdriver.common.core.url;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+
 public class Page {
-  public static final String DEFAULT_LANGUAGE = "en";
   private String wikiName;
   private String wikiPath;
   private String wikiLanguage;
@@ -15,7 +16,7 @@ public class Page {
 
   public Page(String wikiName, String wikiPath) {
     this.wikiName = wikiName;
-    this.wikiLanguage = DEFAULT_LANGUAGE;
+    this.wikiLanguage = Configuration.DEFAULT_LANGUAGE;
     this.wikiPath = wikiPath;
   }
 

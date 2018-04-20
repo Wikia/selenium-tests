@@ -61,7 +61,7 @@ public class Layout extends NewTestTemplate {
 
 
   @Test(groups = {"globalNavigationBarLayoutForDeAnon1284x900"})
-  @Execute(onWikia = "dauto", language = "szl")
+  @Execute(onWikia = "dauto", language = "de")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void testLayoutForDeAnon1284x900() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
