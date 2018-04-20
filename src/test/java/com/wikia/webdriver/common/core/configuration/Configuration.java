@@ -107,6 +107,10 @@ public class Configuration {
     return getProp("wikiName");
   }
 
+  public static String getWikiLanguage() {
+    return getProp("language");
+  }
+
   public static String getPlatform() {
     return getProp("platform");
   }
@@ -147,8 +151,8 @@ public class Configuration {
     return "true".equals(getProp("forceHttps"));
   }
 
-  public static Boolean getNewStagingUrlFormat() {
-    return "true".equals(getProp("newStagingUrlFormat"));
+  public static Boolean getForceLanguageInPath() {
+    return "true".equals(getProp("forceLanguageInPath"));
   }
 
   public static Emulator getEmulator() {

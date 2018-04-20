@@ -421,6 +421,7 @@ dependencies {
     testCompile 'org.projectlombok:lombok:1.16.6'
     testCompile 'org.assertj:assertj-core:3.8.0'
     testCompile 'ru.yandex.qatools.ashot:ashot:1.5.2'
+    testCompile 'com.squareup.okhttp3:okhttp:3.2.0'
 }
 
 

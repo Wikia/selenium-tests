@@ -11,8 +11,8 @@ public final class GermanAdsDataProvider {
   @DataProvider
   public static Object[][] germanArticles() {
     return new Object[][]{
-        {"de.deathnote", "Mary_Kenwood"},
-        {"de.narnia", "Sandro_Kopp"}
+        {"deathnote", "de", "Mary_Kenwood"},
+        {"narnia", "de", "Sandro_Kopp"}
     };
   }
 }
