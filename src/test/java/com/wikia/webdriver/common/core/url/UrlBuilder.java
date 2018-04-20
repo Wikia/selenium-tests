@@ -79,15 +79,19 @@ public class UrlBuilder {
     return getUrlForPath(Configuration.getWikiName(), getLanguageForWiki(), wikiPath);
   }
 
+  /** It actually adds string to url, so the path might consist a query
+  @param  url wiki's url.
+  @param  path path to be added to the url
+   **/
   protected String addPathToUrl(String url, String path) {
-    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-    urlBuilder.addEncodedPathSegments(path.startsWith("/") ? path.replaceAll("^/", "") : path).build();
+
+    String outputUrl = (!path.startsWith("/")) ? String.format("%s/%s", url, path): String.format("%s%s", url, path);
 
     String qs = Configuration.getQS();
     if (StringUtils.isNotBlank(qs)) {
-      urlBuilder.encodedQuery(qs);
+      outputUrl = appendQueryStringToURL(outputUrl, qs);
     }
-    return urlBuilder.build().toString();
+    return outputUrl;
   }
 
   public String getUrlForWiki() {
