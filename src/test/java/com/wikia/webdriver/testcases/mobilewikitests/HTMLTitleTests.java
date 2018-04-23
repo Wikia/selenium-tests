@@ -90,21 +90,6 @@ public class HTMLTitleTests extends NewTestTemplate {
           "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"
       },
       {
-          "mediawiki119",
-          "/d/f/203236/latest",
-          "Discussions | Mediawiki 1.19 test Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "mediawiki119",
-          "/d/p/2706859396041803285",
-          "Discussions | Mediawiki 1.19 test Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "mediawiki119",
-          "/d/u/27334045",
-          "Discussions | Mediawiki 1.19 test Wiki | FANDOM powered by Wikia"
-      },
-      {
           "dnd4",
           "/wiki/Dungeons_&_Dragons",
           "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"
