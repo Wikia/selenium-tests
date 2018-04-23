@@ -41,6 +41,7 @@ public class Configuration {
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
   private static final String SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME = "config.xml";
+  public static final String DEFAULT_LANGUAGE = "en";
 
   @Getter(lazy = true)
   private static final String wikiaDomain = getEnvType().getWikiaDomain();
@@ -107,6 +108,10 @@ public class Configuration {
     return getProp("wikiName");
   }
 
+  public static String getWikiLanguage() {
+    return getProp("language");
+  }
+
   public static String getPlatform() {
     return getProp("platform");
   }
@@ -147,8 +152,8 @@ public class Configuration {
     return "true".equals(getProp("forceHttps"));
   }
 
-  public static Boolean getNewStagingUrlFormat() {
-    return "true".equals(getProp("newStagingUrlFormat"));
+  public static Boolean getForceLanguageInPath() {
+    return "true".equals(getProp("forceLanguageInPath"));
   }
 
   public static Emulator getEmulator() {

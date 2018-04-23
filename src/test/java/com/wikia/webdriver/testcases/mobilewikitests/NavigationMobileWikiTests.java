@@ -54,7 +54,7 @@ public class NavigationMobileWikiTests extends NavigationTests {
     );
   }
 
-  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
   @Test(groups = "mobileWiki_navigation_navigationOnNonEnglishWiki")
   public void mobileWiki_navigation_navigationOnNonEnglishWiki() {
     super.mercury_navigation_navigationOnNonEnglishWiki(

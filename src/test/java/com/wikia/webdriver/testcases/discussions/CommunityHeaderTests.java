@@ -1,14 +1,13 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.common.CommunityHeader;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
-
-import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -19,7 +18,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     new PostsListPage().open();
     MainPage mainPage = new CommunityHeader().clickWordmark();
 
-    Assert.assertTrue(mainPage.isMainPage());
+    Assertion.assertTrue(mainPage.isMainPage());
   }
 
   @Test(groups = {"discussions-CommunityHeaderTests"})
@@ -27,7 +26,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     new PostsListPage().open();
     MainPage mainPage = new CommunityHeader().clickWikiName();
 
-    Assert.assertTrue(mainPage.isMainPage());
+    Assertion.assertTrue(mainPage.isMainPage());
   }
 
   @Test(groups = {"discussions-CommunityHeaderTests"})
@@ -37,7 +36,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     String username = ch.getUserNameFromAvatar(0);
     UserProfilePage userPage = ch.clickUserAvatar(0);
 
-    Assert.assertEquals(userPage.getUserName(), username);
+    Assertion.assertEquals(userPage.getUserName(), username);
   }
 
   @Test(groups = {"discussions-CommunityHeaderTests"})
@@ -49,7 +48,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
         .openExploreMenu()
         .clickExploreWikiActivityLink();
 
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
+    Assertion.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
 
     new PostsListPage().open();
 
@@ -57,7 +56,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
         .openExploreMenu()
         .clickExploreCommunityLink();
 
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Community"));
+    Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Community"));
 
     new PostsListPage().open();
 
@@ -65,7 +64,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
         .openExploreMenu()
         .clickExploreVideosLink();
 
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
+    Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
 
     new PostsListPage().open();
 
@@ -73,7 +72,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
         .openExploreMenu()
         .clickExploreImagesLink();
 
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Images"));
+    Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Images"));
 
     new PostsListPage().open();
 
@@ -81,6 +80,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
         .openExploreMenu()
         .clickExploreRandomLink();
 
-    Assert.assertTrue(driver.getCurrentUrl().matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
+    Assertion.assertTrue(driver.getCurrentUrl().matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
   }
 }

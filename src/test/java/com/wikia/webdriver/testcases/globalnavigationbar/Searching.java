@@ -16,9 +16,9 @@ public class Searching extends NewTestTemplate {
   @DataProvider
   public Object[][] getDataForGlobalSearch() {
     return new Object[][]{
-        {"muppet", "kermit", "Special:Search"},
-        {"de.gta", "san fierro", "Spezial:Suche"},
-        {"zh.pad", "pad", "Special:%E6%90%9C%E7%B4%A2"}
+        {"muppet", "en", "kermit", "Special:Search"},
+        {"gta", "de", "san fierro", "Spezial:Suche"},
+        {"pad", "zh", "pad", "Special:%E6%90%9C%E7%B4%A2"}
     };
   }
 
@@ -26,10 +26,10 @@ public class Searching extends NewTestTemplate {
       dataProvider = "getDataForGlobalSearch"
   )
   public void serachGlobalNavigationBarAsAnon(
-      String wikiName, String query, String expectedSpecialPage
+      String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
-    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
+    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName, wikiLanguage));
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 
@@ -43,10 +43,10 @@ public class Searching extends NewTestTemplate {
   )
   @Execute(asUser = User.USER)
   public void serachGlobalNavigationBarAsLoggedIn(
-      String wikiName, String query, String expectedSpecialPage
+      String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
-    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
+    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName, wikiLanguage));
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 

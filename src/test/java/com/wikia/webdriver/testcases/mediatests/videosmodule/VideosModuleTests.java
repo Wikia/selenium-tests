@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = "de.vidauto")
+@Execute(onWikia = "vidauto", language = "de")
 public class VideosModuleTests extends NewTestTemplate {
 
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
