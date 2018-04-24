@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class AdsKruxObject extends AdsBaseObject {
 
-  private final String kruxCdn = urlBuilder.getUrlProtocol() + "cdn.krxd.net/";
+  private final String kruxCdn = urlBuilder.getUrlProtocol() + "://cdn.krxd.net/";
   private final String kruxControlTagUrlPrefix = kruxCdn + "controltag?confid=";
 
   @FindBy(css = "script[src*='cdn.krxd.net/controltag?confid=']")
