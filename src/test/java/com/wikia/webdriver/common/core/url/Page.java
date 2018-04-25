@@ -22,6 +22,7 @@ public class Page {
 
   public Page(String wikiName) {
     this.wikiName = wikiName;
+    this.wikiLanguage = Configuration.DEFAULT_LANGUAGE;
   }
 
   public String getWikiName() {
