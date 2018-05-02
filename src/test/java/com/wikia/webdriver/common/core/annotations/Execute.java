@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.annotations;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 
 import java.lang.annotation.ElementType;
@@ -22,5 +21,5 @@ public @interface Execute {
 
   String disableCommunityPageSalesPitchDialog() default "";
 
-  String language() default Configuration.DEFAULT_LANGUAGE;
+  String language() default "";
 }
