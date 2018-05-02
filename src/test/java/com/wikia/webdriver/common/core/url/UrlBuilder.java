@@ -14,12 +14,22 @@ public class UrlBuilder {
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
   protected static final String HTTP_PREFIX = "http://";
+  private String language;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
     this.forceLanguageInPath = Configuration.getForceLanguageInPath();
+    this.language = getLanguageForWiki();
+  }
+
+  public UrlBuilder(String language) {
+    this.env = Configuration.getEnv();
+    this.envType = Configuration.getEnvType(this.env);
+    this.forceHttps = Configuration.getForceHttps();
+    this.forceLanguageInPath = Configuration.getForceLanguageInPath();
+    this.language = language;
   }
 
   public UrlBuilder(String env, Boolean forceHttps) {
@@ -27,6 +37,7 @@ public class UrlBuilder {
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = Configuration.getForceLanguageInPath();
+    this.language = getLanguageForWiki();
   }
 
   public UrlBuilder(String env, Boolean forceHttps, Boolean forceLanguageInPath) {
@@ -34,9 +45,10 @@ public class UrlBuilder {
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
+    this.language = getLanguageForWiki();
   }
 
-  public String getLanguageForWiki() {
+  private String getLanguageForWiki() {
     return Configuration.getWikiLanguage() == null ? Configuration.DEFAULT_LANGUAGE : Configuration.getWikiLanguage();
   }
 
@@ -76,7 +88,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForPath(String wikiPath) {
-    return getUrlForPath(Configuration.getWikiName(), getLanguageForWiki(), wikiPath);
+    return getUrlForPath(Configuration.getWikiName(), this.language, wikiPath);
   }
 
   /** It actually adds string to url, so the path might consist a query
@@ -95,7 +107,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki() {
-    return getUrlForWiki(Configuration.getWikiName(), getLanguageForWiki(), false);
+    return getUrlForWiki(Configuration.getWikiName(), this.language, false);
   }
 
   public String getUrlForWiki(String wikiName, String language, boolean addWWW) {
@@ -112,7 +124,7 @@ public class UrlBuilder {
 
 
   public String getUrlForWiki(String wikiName, boolean addWWW, EnvType envType) {
-    return getUrlForWiki(wikiName, getLanguageForWiki(), addWWW, envType);
+    return getUrlForWiki(wikiName, this.language, addWWW, envType);
   }
 
   public String getUrlForWiki(String wikiName, String language) {

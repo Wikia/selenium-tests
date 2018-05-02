@@ -77,7 +77,8 @@ public abstract class CoreTestTemplate {
   private void setPropertiesFromAnnotationsOnDeclaringClass(Class<?> declaringClass) {
     if (declaringClass.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
-      setTestProperty("language", declaringClass.getAnnotation(Execute.class).language());
+      setTestProperty("language", Configuration.getWikiLanguage() == null ?
+              declaringClass.getAnnotation(Execute.class).language() : Configuration.getWikiLanguage());
       setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
       setTestProperty("mockAds", declaringClass.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
@@ -93,11 +94,12 @@ public abstract class CoreTestTemplate {
   private void setPropertiesFromAnnotationsOnMethod(Method method) {
     if (method.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
-      setTestProperty("language", method.getAnnotation(Execute.class).language());
+      setTestProperty("language", Configuration.getWikiLanguage() == null ?
+              method.getAnnotation(Execute.class).language() : Configuration.getWikiLanguage());
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       setTestProperty("mockAds", method.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
-          method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
+              method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
     }
 
     if (method.isAnnotationPresent(InBrowser.class)) {
