@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -27,6 +29,7 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
     jwPlayerObject.clickOnPlayer();
     jwPlayerObject.verifyPreroll();
+    verifySlots(pageObject, false);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -46,6 +49,7 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
     jwPlayerObject.clickOnPlayer();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL);
+    verifySlots(pageObject, true);
   }
 
   @InBrowser(
@@ -67,5 +71,17 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
   )
   public void adsArticleVideoMOATTrackingMobile() {
     adsArticleVideoMOATTrackingDesktop();
+  }
+
+  private void verifySlots(AdsFandomObject fandomPage, Boolean skipTopLeaderboard) {
+    fandomPage.triggerOnScrollSlots();
+
+    if (!skipTopLeaderboard) {
+      fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    }
+
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 }
