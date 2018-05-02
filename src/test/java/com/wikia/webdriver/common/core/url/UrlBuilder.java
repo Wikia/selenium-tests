@@ -21,7 +21,7 @@ public class UrlBuilder {
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = Configuration.getForceHttps();
     this.forceLanguageInPath = Configuration.getForceLanguageInPath();
-    this.language = getLanguageForWiki();
+    this.language = Configuration.getWikiLanguage();
   }
 
   public UrlBuilder(String language) {
@@ -37,7 +37,7 @@ public class UrlBuilder {
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = Configuration.getForceLanguageInPath();
-    this.language = getLanguageForWiki();
+    this.language = Configuration.getWikiLanguage();
   }
 
   public UrlBuilder(String env, Boolean forceHttps, Boolean forceLanguageInPath) {
@@ -45,11 +45,7 @@ public class UrlBuilder {
     this.envType = Configuration.getEnvType(this.env);
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
-    this.language = getLanguageForWiki();
-  }
-
-  private String getLanguageForWiki() {
-    return Configuration.getWikiLanguage() == null ? Configuration.DEFAULT_LANGUAGE : Configuration.getWikiLanguage();
+    this.language = Configuration.getWikiLanguage();
   }
 
   public String normalizePageName(String pageName) {

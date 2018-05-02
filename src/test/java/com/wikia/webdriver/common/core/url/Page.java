@@ -16,13 +16,13 @@ public class Page {
 
   public Page(String wikiName, String wikiPath) {
     this.wikiName = wikiName;
-    this.wikiLanguage = Configuration.DEFAULT_LANGUAGE;
+    this.wikiLanguage = Configuration.getWikiLanguage();
     this.wikiPath = wikiPath;
   }
 
   public Page(String wikiName) {
     this.wikiName = wikiName;
-    this.wikiLanguage = Configuration.DEFAULT_LANGUAGE;
+    this.wikiLanguage = Configuration.getWikiLanguage();
   }
 
   public String getWikiName() {
