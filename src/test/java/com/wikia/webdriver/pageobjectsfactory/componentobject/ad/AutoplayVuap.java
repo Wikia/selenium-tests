@@ -146,11 +146,10 @@ public class AutoplayVuap {
   }
 
   private void clickOnBottomLeftCornerOfElement(WebElement element) {
-    int middlePointOfWebElement = element.getSize().height / 10;
-    int leftSideOfWebElement = element.getSize().width / 3;
+    int bottomPointOfWebElement = element.getSize().height - element.getSize().height / 10;
+    int leftPointOfWebElement = element.getSize().width / 10;
     Actions builder = new Actions(driver);
-    builder.moveToElement(element, middlePointOfWebElement,leftSideOfWebElement).click().build().perform();
-
+    builder.moveToElement(element, bottomPointOfWebElement,leftPointOfWebElement).click().build().perform();
   }
 
   private void clickElementInsideAd(By selector) {
