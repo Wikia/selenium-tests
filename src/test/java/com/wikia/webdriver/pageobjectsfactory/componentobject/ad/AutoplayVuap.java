@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.awt.*;
@@ -146,7 +147,8 @@ public class AutoplayVuap {
 
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
-      driver.findElement(selector).click();
+      Actions builder = new Actions(driver);
+      builder.moveToElement(driver.findElement(selector), 10, 25).click().build().perform();
     });
   }
 
