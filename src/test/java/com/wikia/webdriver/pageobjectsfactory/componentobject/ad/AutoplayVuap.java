@@ -148,7 +148,7 @@ public class AutoplayVuap {
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
       Actions builder = new Actions(driver);
-      builder.moveToElement(driver.findElement(selector), 10, 25).click().build().perform();
+      builder.moveToElement(driver.findElement(selector), -10, -25).click().build().perform();
     });
   }
 
