@@ -146,9 +146,7 @@ public class AutoplayVuap {
 
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
-      // It need to be clicked by JS, because our templates elements covers each other
-      // and there is no way to click it by just .click()
-      clickByJS(selector);
+      driver.findElement(selector).click();
     });
   }
 
