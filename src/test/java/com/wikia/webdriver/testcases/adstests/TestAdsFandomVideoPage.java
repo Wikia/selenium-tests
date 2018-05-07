@@ -15,6 +15,19 @@ import org.testng.annotations.Test;
 public class TestAdsFandomVideoPage extends AdsFandomTestTemplate {
   @Test(groups = "AdsVideoPageF2Desktop")
   public void adsVideoPageAdsDesktop() {
+    adsVideoPageAds();
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(groups = "AdsVideoPageF2Mobile")
+  public void adsVideoPageAdsMobile() {
+    adsVideoPageAds();
+  }
+
+  private void adsVideoPageAds() {
     String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.VIDEO_PAGE_SLUG,
         FandomAdsDataProvider.INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
@@ -25,15 +38,6 @@ public class TestAdsFandomVideoPage extends AdsFandomTestTemplate {
 
     jwPlayerObject.verifyPreroll();
     verifySlots(pageObject);
-  }
-
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(groups = "AdsVideoPageF2Mobile")
-  public void adsVideoPageAdsMobile() {
-    adsVideoPageAdsDesktop();
   }
 
   private void verifySlots(AdsFandomObject fandomPage) {
