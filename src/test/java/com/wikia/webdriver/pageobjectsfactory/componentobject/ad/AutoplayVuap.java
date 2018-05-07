@@ -145,16 +145,17 @@ public class AutoplayVuap {
     new JavascriptActions(driver).execute("arguments[0].click();", driver.findElement(selector));
   }
 
-  private void clickOnBottomLeftCornerOfElement(WebElement element) {
-    int bottomPointOfWebElement = element.getSize().height - element.getSize().height / 10;
-    int leftPointOfWebElement = element.getSize().width / 10;
-    Actions builder = new Actions(driver);
-    builder.moveToElement(element, bottomPointOfWebElement,leftPointOfWebElement).click().build().perform();
+  private void clickOnTopLeftCornerOfElement(WebElement element) {
+    int y = element.getSize().height/4;
+    int x = element.getSize().width/4;
+
+    new Actions(driver).moveToElement(element, x, y).click().build().perform();
   }
 
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
-      clickOnBottomLeftCornerOfElement(driver.findElement(selector));
+      // It need to be clicked on element top left corner, because our templates elements covers each other
+      clickOnTopLeftCornerOfElement(driver.findElement(selector));
     });
   }
 

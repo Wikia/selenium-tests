@@ -9,6 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AdsFandomObject extends AdsBaseObject {
+  private static final By F2_MOBILE_NAVIGATION_BAR = By.cssSelector(".global-navigation-mobile");
+  private static final By F2_DESKTOP_NAVIGATION_BAR = By.cssSelector(".wds-global-navigation");
+
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
   }
@@ -23,6 +26,16 @@ public class AdsFandomObject extends AdsBaseObject {
 
   public void triggerOnScrollSlots() {
     jsActions.scrollToBottom();
+  }
+
+  public void fixScrollPositionByNavbarOnF2(boolean isMobile) {
+    if(isMobile){
+      int mobileNavbarHeight = -1 * driver.findElement(F2_MOBILE_NAVIGATION_BAR).getSize().getHeight();
+      jsActions.scrollBy(0, mobileNavbarHeight);
+    } else {
+      int desktopNavbarHeight = -1 * driver.findElement(F2_DESKTOP_NAVIGATION_BAR).getSize().getHeight();
+      jsActions.scrollBy(0, desktopNavbarHeight);
+    }
   }
 
   public void verifySlot(String slotName) {
