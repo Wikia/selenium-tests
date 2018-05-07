@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 @Getter
 public class ReplyCreatorMobile extends BaseReplyCreator {
 
-  @FindBy(css = ".discussion-editor-entry-point-container .discussion-editor-entry-point-content")
+  @FindBy(css = ".mobile-reply-entry-point .discussion-editor-entry-point-content")
   private WebElement replyCreatorTextArea;
 
   @FindBy(css = ".discussion-standalone-content-wrapper")
