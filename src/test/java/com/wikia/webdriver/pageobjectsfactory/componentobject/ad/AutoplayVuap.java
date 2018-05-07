@@ -145,10 +145,17 @@ public class AutoplayVuap {
     new JavascriptActions(driver).execute("arguments[0].click();", driver.findElement(selector));
   }
 
+  private void clickOnBottomLeftCornerOfElement(WebElement element) {
+    int middlePointOfWebElement = element.getSize().height / 10;
+    int leftSideOfWebElement = element.getSize().width / 3;
+    Actions builder = new Actions(driver);
+    builder.moveToElement(element, middlePointOfWebElement,leftSideOfWebElement).click().build().perform();
+
+  }
+
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
-      Actions builder = new Actions(driver);
-      builder.moveToElement(driver.findElement(selector), 10, 65).click().build().perform();
+      clickOnBottomLeftCornerOfElement(driver.findElement(selector));
     });
   }
 
