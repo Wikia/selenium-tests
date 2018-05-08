@@ -8,6 +8,7 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
 
   public static final String PAGE_TYPE_ARTICLE = "f2/article";
   public static final String PAGE_TYPE_TOPIC = "topic";
+  public static final String PAGE_TYPE_VIDEO_PAGE = "video";
 
   @Override
   protected void loadFirstPage() {
@@ -20,6 +21,10 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
 
   protected AdsFandomObject loadTopic(String pageName) {
     return loadPage(pageName, AdsFandomTestTemplate.PAGE_TYPE_TOPIC);
+  }
+
+  protected AdsFandomObject loadVideoPage(String pageName) {
+    return loadPage(pageName, AdsFandomTestTemplate.PAGE_TYPE_VIDEO_PAGE);
   }
 
   protected AdsFandomObject loadPage(String pageName, String pageType) {
@@ -38,6 +43,9 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     String pageUrl;
 
     switch (pageType) {
+      case PAGE_TYPE_VIDEO_PAGE:
+        pageUrl = urlBuilder.getUrlForFandomVideoPage(pageName);
+        break;
       case PAGE_TYPE_TOPIC:
         pageUrl = urlBuilder.getUrlForFandomTopic(pageName);
         break;
