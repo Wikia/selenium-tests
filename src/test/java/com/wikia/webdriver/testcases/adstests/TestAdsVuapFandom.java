@@ -20,7 +20,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
   private static final int MOBILE_VIDEO_TRIGGER_AREA = 3;
   private static final int REDIRECT_AREA_TRIGGER = 1; // DESKTOP & MOBILE
-
+q
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
@@ -68,7 +68,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
   )
   public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.waitForAdToLoad();
