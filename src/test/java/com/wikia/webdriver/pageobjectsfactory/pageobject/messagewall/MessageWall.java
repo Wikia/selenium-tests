@@ -84,6 +84,14 @@ public class MessageWall extends WikiBasePageObject {
         + userName);
     waitForPageLoad();
 
+    try {
+      Thread.sleep(10000);
+    }catch (Exception e){
+
+    }
+
+    driver.navigate().refresh();
+
     return new MessageWall();
   }
 

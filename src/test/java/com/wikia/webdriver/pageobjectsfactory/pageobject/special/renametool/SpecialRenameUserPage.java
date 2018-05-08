@@ -32,6 +32,8 @@ public class SpecialRenameUserPage extends SpecialPageObject {
 
   public SpecialRenameUserPage open() {
     getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_RENAME_TOOL);
+
+    driver.navigate().refresh();
     return this;
   }
 
@@ -57,6 +59,12 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   }
 
   public SpecialRenameUserPage submitChange() {
+    try {
+      Thread.sleep(10000);
+    }catch (Exception e){
+
+    }
+
     jsActions.scrollToElement(submitButton);
     submitButton.click();
     return this;

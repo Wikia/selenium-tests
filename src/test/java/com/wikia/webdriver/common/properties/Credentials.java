@@ -62,6 +62,8 @@ public class Credentials {
   public final String emailPasswordQaart2;
   public final String emailQaart4;
   public final String emailPasswordQaart4;
+  public final String emailAnonymousUserTestWikia;
+  public final String emailAnonymousUserTestWikiaPassword;
   public final String forgottenPasswordEmail1Address;
   public final String forgottenPasswordEmail1Password;
 
@@ -223,6 +225,9 @@ public class Credentials {
     emailPasswordQaart2 = XMLReader.getValue(file, "ci.email.qawikia2.password");
     emailQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.username");
     emailPasswordQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.password");
+
+    emailAnonymousUserTestWikia = XMLReader.getValue(file, "ci.email.anonymoususertestwikia.username");
+    emailAnonymousUserTestWikiaPassword = XMLReader.getValue(file, "ci.email.anonymoususertestwikia.password");
 
     forgottenPasswordEmail1Address = XMLReader.getValue(file, "ci.email.forgotPass1.username");
     forgottenPasswordEmail1Password = XMLReader.getValue(file, "ci.email.forgotPass1.password");
