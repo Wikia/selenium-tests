@@ -34,12 +34,12 @@ public class PollsTests extends NewTestTemplate {
         postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
         postsCreator.addTitleWith(TextGenerator.createUniqueText());
         Poll poll = postsCreator.addPoll();
-        Assertion.assertFalse(postsCreator.isPostButtonActive());
+//        Assertion.assertFalse(postsCreator.isPostButtonActive()); - this check commented out because of IRIS-5878
 
         poll.addTitle(TextGenerator.createUniqueText());
-        Assertion.assertFalse(postsCreator.isPostButtonActive());
+//        Assertion.assertFalse(postsCreator.isPostButtonActive()); - this check commented out because of IRIS-5878
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        Assertion.assertFalse(postsCreator.isPostButtonActive());
+//        Assertion.assertFalse(postsCreator.isPostButtonActive()); - this check commented out because of IRIS-5878
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
         page.waitForLoadingSpinner();
@@ -111,18 +111,20 @@ public class PollsTests extends NewTestTemplate {
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void userCanCreatePostWithSimplePollOnMobile() {
-        BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+        PostsListPage page = new PostsListPage().open();
+        BasePostsCreator postsCreator = page.open().getPostsCreatorMobile();
         postsCreator.click().closeGuidelinesMessage().clickAddCategoryButton().selectFirstCategory();
         postsCreator.addTitleWith(TextGenerator.createUniqueText());
         Poll poll = postsCreator.addPoll();
-        Assertion.assertFalse(postsCreator.isPostButtonActive());
+//        Assertion.assertFalse(postsCreator.isPostButtonActive()); - this check commented out because of IRIS-5878
 
         poll.addTitle(TextGenerator.createUniqueText());
-        Assertion.assertFalse(postsCreator.isPostButtonActive());
+//        Assertion.assertFalse(postsCreator.isPostButtonActive()); - this check commented out because of IRIS-5878
         poll.addNthAnswer(TextGenerator.createUniqueText(), 0);
-        Assertion.assertFalse(postsCreator.isPostButtonActive());
+//        Assertion.assertFalse(postsCreator.isPostButtonActive()); - this check commented out because of IRIS-5878
         poll.addNthAnswer(TextGenerator.createUniqueText(), 1);
         postsCreator.clickSubmitButton();
+        page.waitForLoadingSpinner();
 
         Assertion.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
