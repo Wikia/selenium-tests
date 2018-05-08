@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ReplyCreatorDesktop extends BaseReplyCreator {
 
-  @FindBy(css = ".inline-editor__floating-container textarea")
+  @FindBy(css = ".inline-editor__floating-container .discussion-editor-entry-point-content")
   @Getter
   private WebElement replyCreatorTextArea;
 
