@@ -75,10 +75,10 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeTextArea;
 
   public SourceEditModePageObject openArticle(String articleTitle) {
-    String URL = urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + articleTitle;
-    URL = urlBuilder.appendQueryStringToURL(URL, URLsContent.ACTION_EDIT);
-    URL = urlBuilder.appendQueryStringToURL(URL, URLsContent.SOURCE_MODE);
-    getUrl(URL);
+    String url = urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + articleTitle;
+    url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_EDIT);
+    url = urlBuilder.appendQueryStringToURL(url, URLsContent.SOURCE_MODE);
+    getUrl(url);
 
     return this;
   }

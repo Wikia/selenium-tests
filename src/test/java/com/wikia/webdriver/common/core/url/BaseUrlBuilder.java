@@ -14,7 +14,7 @@ public class BaseUrlBuilder {
 
     public BaseUrlBuilder(String env) {
         this.env = env;
-        this.envType = getEnvType(this.env);;
+        this.envType = getEnvType(this.env);
     }
 
     /** It actually adds string to url, so the path might consist a query

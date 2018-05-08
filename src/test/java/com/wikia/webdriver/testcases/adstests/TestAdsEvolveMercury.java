@@ -17,7 +17,6 @@ public class TestAdsEvolveMercury extends TemplateNoFirstLoad {
   @Test
   public void adsEvolveMercury() {
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
-//    String testedPage = UrlBuilder.createUrlBuilderForPage(EVOLVE_PAGE).getUrlForPage();
     String testedPage = EVOLVE_PAGE.getUrl();
     wikiPage.enableEvolve(testedPage);
     wikiPage.verifyEvolveCallMercury();

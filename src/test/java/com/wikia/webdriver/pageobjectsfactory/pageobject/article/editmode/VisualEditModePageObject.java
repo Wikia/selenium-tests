@@ -3,8 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -17,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;

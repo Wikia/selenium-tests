@@ -24,7 +24,7 @@ public class JoinPageObject {
 
   private WebDriver driver;
   private Wait wait;
-  private UrlBuilder urlBuilder;
+  private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();;
 
   public JoinPageObject(WebDriver driver) {
     this.driver = driver;
@@ -35,7 +35,6 @@ public class JoinPageObject {
 
   public JoinPageObject get() {
     String redirectParameter = "";
-    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();
     try {
       redirectParameter =
           URLEncoder.encode(urlBuilder.getUrlForWiki(), "UTF-8");
