@@ -52,11 +52,6 @@ public class UrlBuilder extends BaseUrlBuilder {
     return getUrlForWiki() + pageName;
   }
 
-  //!!!!!!!!!!!!!!!!!!!Check that!!!!!!!!
-//  public String getUrlForPath(String language, String wikiPath) {
-//    return addPathToUrl(getUrlForWiki(language, false, envType), wikiPath);
-//  }
-
   public String getUrlForPath(String wikiPath) {
     return addPathToUrl(getUrlForWiki(), wikiPath);
   }
