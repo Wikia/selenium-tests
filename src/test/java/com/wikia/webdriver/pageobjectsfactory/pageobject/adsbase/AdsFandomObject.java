@@ -29,11 +29,10 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public void fixScrollPositionByNavbarOnF2(boolean isMobile) {
-    if(isMobile){
-      scroll_navigation_bar_height(MOBILE_NAVIGATION_BAR);
-    } else {
-      scroll_navigation_bar_height(DESKTOP_NAVIGATION_BAR);
-    }
+    By element = isMobile ? MOBILE_NAVIGATION_BAR : DESKTOP_NAVIGATION_BAR;
+
+    int navbarHeight = driver.findElement(element).getSize().getHeight();
+    jsActions.scrollBy(0, -navbarHeight);
   }
 
   public void verifySlot(String slotName) {
@@ -55,11 +54,6 @@ public class AdsFandomObject extends AdsBaseObject {
 
   public By getIframeSelector(String slotName) {
     return By.cssSelector(AdsContent.IFRAME_SLOT_SELECTORS.getOrDefault(slotName, getDefaultIframeSelector(slotName)));
-  }
-
-  private void scroll_navigation_bar_height(By element){
-    int navbarHeight = -1 * driver.findElement(element).getSize().getHeight();
-    jsActions.scrollBy(0, navbarHeight);
   }
 
   private String getDefaultIframeSelector(String slotName) {
