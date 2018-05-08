@@ -3,12 +3,13 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class GuidelinesPage extends BasePage {
 
@@ -28,8 +29,8 @@ public class GuidelinesPage extends BasePage {
   @FindBy(css = ".discussion-left-rail__header")
   private WebElement leftRailHeader;
 
-  @FindBy(css = ".editor-input-label-wrapper textarea")
-  private WebElement guidelinesEditorTextarea;
+  @FindBy(css = ".editor-input-label-wrapper textarea.is-description")
+  private List<WebElement> guidelinesEditorTextarea;
 
   @FindBy(css = ".guidelines-edit-button")
   private WebElement editButton;
@@ -93,7 +94,7 @@ public class GuidelinesPage extends BasePage {
 
   private void addText(String text) {
     this.guidelinesEditorTextarea.clear();
-    this.guidelinesEditorTextarea.sendKeys(text);
+    this.guidelinesEditorTextarea.get(0).sendKeys(text);
     clickSaveButton();
     waitForLoadingSpinner();
   }
@@ -105,22 +106,28 @@ public class GuidelinesPage extends BasePage {
     return text;
   }
 
-  private void hasTextInGuidelines(String text) {
-    wait.forTextInElement(guidelinesText, text);
-    guidelinesText.isDisplayed();
+  private boolean hasTextInGuidelines(String text) {
+    boolean hasText = false;
+    try {
+      wait.forTextInElement(guidelinesText, text);
+      hasText = true;
+    } catch(Exception e) {
+      PageObjectLogging.log("Guidelines should contains text: " + text, e, false);
+    }
+
+    return hasText;
   }
 
-  private void deleteTextFromGuidelines(String text) {
+  private void clearGuidelinesText() {
     clickEditGuidelines();
-    addText(DEFAULT_GUIDELINES_TEXT);
-    wait.forTextNotInElement(guidelinesText, text);
+    this.guidelinesEditorTextarea.clear();
+    clickSaveButton();
   }
 
   public boolean canUpdateGuidelinesContent() {
+      clearGuidelinesText();
       final String text = addNewTextToGuidelines();
-      hasTextInGuidelines(text);
-      deleteTextFromGuidelines(text);
 
-      return DEFAULT_GUIDELINES_TEXT.equals(guidelinesText.getText());
+      return hasTextInGuidelines(text);
   }
 }
