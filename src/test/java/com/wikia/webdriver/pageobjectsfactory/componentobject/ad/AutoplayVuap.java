@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.awt.*;
@@ -144,11 +145,17 @@ public class AutoplayVuap {
     new JavascriptActions(driver).execute("arguments[0].click();", driver.findElement(selector));
   }
 
+  private void clickOnTopLeftCornerOfElement(WebElement element) {
+    int y = element.getSize().height/4;
+    int x = element.getSize().width/4;
+
+    new Actions(driver).moveToElement(element, x, y).click().build().perform();
+  }
+
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
-      // It need to be clicked by JS, because our templates elements covers each other
-      // and there is no way to click it by just .click()
-      clickByJS(selector);
+      // It need to be clicked on element top left corner, because our templates elements covers each other
+      clickOnTopLeftCornerOfElement(driver.findElement(selector));
     });
   }
 
