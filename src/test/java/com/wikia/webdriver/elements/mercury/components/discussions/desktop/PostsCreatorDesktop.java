@@ -10,7 +10,15 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorDesktop extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".inline-editor .editor-textarea")
+  @FindBy(css = ".post-entry-point__items > li:nth-child(1)")
+  private WebElement textPostType;
+
+  /*
+    PostCreator as editor header is a nasty hack. It's for pointless click, because Desktop and Mobile post creation
+    are implemented by one interface. It should be split into two, since these flows are now completely different.
+  */
+  @Getter
+  @FindBy(css = ".post-entry-point__header")
   private WebElement postsCreator;
 
   @Getter
