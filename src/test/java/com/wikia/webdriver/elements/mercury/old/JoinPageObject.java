@@ -24,7 +24,7 @@ public class JoinPageObject {
 
   private WebDriver driver;
   private Wait wait;
-  private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();;
+  private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();
 
   public JoinPageObject(WebDriver driver) {
     this.driver = driver;
