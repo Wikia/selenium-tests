@@ -68,7 +68,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
   )
   public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.waitForAdToLoad();
