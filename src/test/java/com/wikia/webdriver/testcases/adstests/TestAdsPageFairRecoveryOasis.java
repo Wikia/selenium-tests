@@ -3,9 +3,9 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
@@ -24,11 +24,13 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
           "div[id*='BOTTOM_LEADERBOARD'] div[id*='wka1a.PF/bottom_leaderboard'][adonis-marker][adonis-marker] iframe"
   );
 
+  private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKIA);
+
   @Test(
       groups = "AdsRecoveryPageFairOasis"
   )
   public void adsRecoveryPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
+    String url = urlBuilder.getUrlForPath(getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     // when PF recovered ad is on page, inserts span elements as a direct children of body
@@ -47,7 +49,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryNoAdblockPageFairOasis"
   )
   public void adsRecoveryNoAdblockPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
+    String url = urlBuilder.getUrlForPath(getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(2);
@@ -63,7 +65,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   )
   @Execute(asUser = User.USER_2)
   public void adsRecoveryLoggedInPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
+    String url = urlBuilder.getUrlForPath(getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(0);

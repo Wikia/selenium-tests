@@ -1,11 +1,14 @@
 package com.wikia.webdriver.testcases.globalnavigationbar;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.EnvType;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
@@ -55,7 +58,7 @@ public class Navigating extends NewTestTemplate {
         .clickCommunityCentralLink();
 
     Assertion.assertEquals(driver.getCurrentUrl(),
-            urlBuilder.getUrlForPath("community", "de", "/wiki/Community_Deutschland"));
+            UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "de").getUrlForPath("/wiki/Community_Deutschland"));
   }
 
   @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})
@@ -76,7 +79,8 @@ public class Navigating extends NewTestTemplate {
         .clickFandomUniversityLink();
 
     Assertion.assertEquals(driver.getCurrentUrl(),
-                           urlBuilder.getUrlForPage("community", "/wiki/Fandom_University"));
+                           UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, DEFAULT_LANGUAGE)
+                                   .getUrlForWikiPage("/wiki/Fandom_University"));
   }
 
   @Test(groups = {"communityCentralLinkClickOnEnCommunityOpensEnCommunityCentral"})
@@ -87,6 +91,6 @@ public class Navigating extends NewTestTemplate {
         .clickCommunityCentralLink();
 
     Assertion.assertEquals(driver.getCurrentUrl(),
-                           urlBuilder.getUrlForPage("community", "/wiki/Community_Central"));
+            UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, DEFAULT_LANGUAGE).getUrlForWikiPage("/wiki/Community_Central"));
   }
 }

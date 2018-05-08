@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 public class URLsContent {
@@ -83,7 +82,7 @@ public class URLsContent {
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
-  public static final String API_URL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
+  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrlForWiki()
       + "/api.php";
 
   // File Pages
@@ -128,6 +127,9 @@ public class URLsContent {
   // Other wikis to test on
   public static final String VIDEO_TEST_WIKI = "sktest123";
   public static final String COMMUNITY_WIKI = "community";
+  public static final String COMMUNITY_COUNCIL_WIKI = "communitycouncil";
+  public static final String MUPPET_WIKI = "muppet";
+
 
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";

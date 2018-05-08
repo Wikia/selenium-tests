@@ -1,9 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,7 +20,7 @@ public class SpecialNewPages extends WikiBasePageObject {
   private List<WebElement> newArticleLinks;
 
   public SpecialNewPages open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
            + "Special:NewPages");
     
     return this;

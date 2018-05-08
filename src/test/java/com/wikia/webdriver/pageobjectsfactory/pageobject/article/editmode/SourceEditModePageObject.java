@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -76,7 +75,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeTextArea;
 
   public SourceEditModePageObject openArticle(String articleTitle) {
-    String URL = urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR + articleTitle;
+    String URL = urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + articleTitle;
     URL = urlBuilder.appendQueryStringToURL(URL, URLsContent.ACTION_EDIT);
     URL = urlBuilder.appendQueryStringToURL(URL, URLsContent.SOURCE_MODE);
     getUrl(URL);

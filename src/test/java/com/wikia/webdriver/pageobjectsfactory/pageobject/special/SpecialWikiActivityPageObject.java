@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityType;
@@ -19,7 +18,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   private List<Activity> activities;
 
   public SpecialWikiActivityPageObject open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+    getUrl(urlBuilder.getUrlForWiki()
            + URLsContent.SPECIAL_WIKI_ACTIVITY);
 
     this.refreshPageAddingCacheBuster();

@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoAd;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapVideos;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -13,7 +14,7 @@ public class TemplateNoFirstLoad extends NewTestTemplate {
   }
 
   protected AdsBaseObject openPageWithVideoInLocalStorage(Page page, VideoAd videoAd) {
-    final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));
+    final AdsBaseObject ads = new AdsBaseObject(driver, UrlBuilder.createUrlBuilderForWiki("project43").getUrlForWiki());
     putVASTToLocalStorage(videoAd.getVastXML());
     ads.getUrl(page);
     return ads;

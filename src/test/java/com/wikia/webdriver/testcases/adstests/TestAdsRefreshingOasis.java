@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -19,13 +20,13 @@ public class TestAdsRefreshingOasis extends TemplateNoFirstLoad {
   };
 
   private static final String WIKI_NAME = "project43";
-
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
+  private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
   public void testRefreshingMedrecOasis() {
     AdsBaseObject page = new AdsBaseObject(
         driver,
-        urlBuilder.getUrlForPath(WIKI_NAME, PATH),
+        urlBuilder.getUrlForPath(PATH),
         WindowSize.DESKTOP
     );
     page.verifyAdChainForSlot(CREATIVE_ID_CHAIN, AdsContent.MEDREC, page);

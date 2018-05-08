@@ -1,9 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -22,7 +20,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   }
 
   public EditPreferencesPage openEditingSection() {
-    return openEditingSection(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    return openEditingSection(urlBuilder.getUrlForWiki());
   }
 
   private EditPreferencesPage openEmailSection(String wikiURL) {
@@ -31,7 +29,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   }
 
   public EditPreferencesPage openEmailSection() {
-    return openEmailSection(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    return openEmailSection(urlBuilder.getUrlForWiki());
   }
 
   public void selectPreferredEditor(String value) {

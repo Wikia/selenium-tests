@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import org.openqa.selenium.WebDriver;
 
 import com.google.common.base.Function;
@@ -13,7 +14,7 @@ public class HomePage extends WikiBasePageObject {
   }
 
   public HomePage open(String wikiName) {
-    getUrl(urlBuilder.getUrlForWiki(wikiName));
+    getUrl(UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForWiki());
     waitForPageLoad();
 
     return this;

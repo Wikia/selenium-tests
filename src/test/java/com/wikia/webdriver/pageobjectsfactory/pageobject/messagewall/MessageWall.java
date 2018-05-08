@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -80,7 +79,7 @@ public class MessageWall extends WikiBasePageObject {
   private List<WebElement> threadList;
 
   public MessageWall open(String userName) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.USER_MESSAGE_WALL
         + userName);
     waitForPageLoad();
 

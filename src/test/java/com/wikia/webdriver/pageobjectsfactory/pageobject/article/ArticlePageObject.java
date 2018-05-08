@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
@@ -27,7 +26,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -167,20 +165,20 @@ public class ArticlePageObject extends WikiBasePageObject {
    * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
    */
   public ArticlePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
 
     return this;
   }
 
   public ArticlePageObject open(String articleTitle) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
            + articleTitle);
     return this;
   }
 
   public ArticlePageObject openArticleByPath(String articlePath) {
-    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(Configuration.getWikiName()), articlePath));
+    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), articlePath));
     return this;
   }
 

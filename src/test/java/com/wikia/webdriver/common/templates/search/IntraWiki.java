@@ -5,6 +5,10 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_COUNCIL_WIKI;
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.MUPPET_WIKI;
+
 public class IntraWiki extends NewTestTemplate {
 
   protected static final String SEARCH_SUGGESTION_PHRASE = "Gon";
@@ -17,9 +21,8 @@ public class IntraWiki extends NewTestTemplate {
   protected String searchSuggestionsWiki;
 
   public IntraWiki() {
-    UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getForceHttps());
-    testedWiki = urlBuilder.getUrlForWiki("muppet");
-    communityWiki = urlBuilder.getUrlForWiki("community");
-    searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
+    testedWiki = UrlBuilder.createUrlBuilderForWiki(MUPPET_WIKI).getUrlForWiki();
+    communityWiki = urlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrlForWiki();
+    searchSuggestionsWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_COUNCIL_WIKI, "en").getUrlForWiki();
   }
 }

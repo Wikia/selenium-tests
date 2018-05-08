@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.testng.annotations.Test;
 
 public class TestAdsDetection extends NewTestTemplate {
@@ -45,7 +44,7 @@ public class TestAdsDetection extends NewTestTemplate {
   private void assertPixelWithDetectionStatus(Page wiki, String urlParam, String pixelPattern) {
     networkTrafficInterceptor.startIntercepting();
 
-    String url = urlBuilder.getUrlForPage(wiki);
+    String url = wiki.getUrl();
     url = urlBuilder.appendQueryStringToURL(url, urlParam);
 
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, url);

@@ -27,7 +27,7 @@ public class Navigate extends BasePageObject {
     String query = getQueryParams(path);
     reference = "#" + reference;
 
-    driver.get(urlBuilder.getUrlForPage(path) + query + reference);
+    driver.get(urlBuilder.getUrlForWikiPage(path) + query + reference);
 
     return this;
   }
@@ -35,7 +35,7 @@ public class Navigate extends BasePageObject {
   public Navigate toPageByPath(String path, String[] queryParams) {
     String query = getQueryParams(path, queryParams);
 
-    driver.get(urlBuilder.getUrlForPage(path) + query);
+    driver.get(urlBuilder.getUrlForWikiPage(path) + query);
 
     return this;
   }
@@ -43,7 +43,7 @@ public class Navigate extends BasePageObject {
   public Navigate toPageByPath(String host, String path, String[] queryParams) {
     String query = getQueryParams(path, queryParams);
 
-    driver.get(urlBuilder.getUrlForPage(path) + query);
+    driver.get(urlBuilder.getUrlForWikiPage(path) + query);
 
     return this;
   }

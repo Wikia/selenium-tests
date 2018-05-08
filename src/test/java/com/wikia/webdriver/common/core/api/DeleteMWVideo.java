@@ -1,12 +1,10 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.util.ArrayList;
-
-import org.apache.http.message.BasicNameValuePair;
-
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
 
 public class DeleteMWVideo extends ApiCall {
 
@@ -18,7 +16,7 @@ public class DeleteMWVideo extends ApiCall {
 
   @Override
   protected String getURL() {
-    return new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
+    return UrlBuilder.createUrlBuilder().getUrlForWiki()
         + "/wikia.php?controller=VideoHandler&method=removeVideo&format=json";
   }
 

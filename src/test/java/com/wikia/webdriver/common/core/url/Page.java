@@ -6,23 +6,26 @@ public class Page {
   private String wikiName;
   private String wikiPath;
   private String wikiLanguage;
-  private UrlBuilder urlBuilder = new UrlBuilder();
+  private UrlBuilder urlBuilder;
 
   public Page(String wikiName, String language, String wikiPath) {
     this.wikiName = wikiName;
     this.wikiLanguage = language;
     this.wikiPath = wikiPath;
+    this.urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(this.wikiName, this.wikiLanguage);
   }
 
   public Page(String wikiName, String wikiPath) {
     this.wikiName = wikiName;
     this.wikiLanguage = Configuration.getWikiLanguage();
     this.wikiPath = wikiPath;
+    this.urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(this.wikiName, this.wikiLanguage);
   }
 
   public Page(String wikiName) {
     this.wikiName = wikiName;
     this.wikiLanguage = Configuration.getWikiLanguage();
+    this.urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(this.wikiName, this.wikiLanguage);
   }
 
   public String getWikiName() {
@@ -39,9 +42,9 @@ public class Page {
 
   public String getUrl() {
     if (this.wikiPath == null){
-      return urlBuilder.getUrlForWiki(this.wikiName, this.wikiLanguage, false);
+      return urlBuilder.getUrlForWiki(false);
     } else {
-      return urlBuilder.getUrlForPath(this.wikiName, this.wikiLanguage, this.wikiPath);
+      return urlBuilder.getUrlForPath(this.wikiPath);
     }
   }
 

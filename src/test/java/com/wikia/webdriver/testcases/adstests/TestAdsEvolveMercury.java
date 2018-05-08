@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "AdsEvolveMercury")
@@ -18,7 +17,8 @@ public class TestAdsEvolveMercury extends TemplateNoFirstLoad {
   @Test
   public void adsEvolveMercury() {
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
-    String testedPage = urlBuilder.getUrlForPage(EVOLVE_PAGE);
+//    String testedPage = UrlBuilder.createUrlBuilderForPage(EVOLVE_PAGE).getUrlForPage();
+    String testedPage = EVOLVE_PAGE.getUrl();
     wikiPage.enableEvolve(testedPage);
     wikiPage.verifyEvolveCallMercury();
   }

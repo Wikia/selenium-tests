@@ -1,13 +1,17 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class TestUrlBuilder extends TemplateNoFirstLoad {
+import java.lang.reflect.Constructor;
+
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
+
+public class TestUrlBuilder {
+
 
     private static Object[][] TEST_DATA = new Object[][]{
             {
@@ -259,121 +263,109 @@ public class TestUrlBuilder extends TemplateNoFirstLoad {
     };
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void urlBuilderTests() {
+    public void urlBuilderTests() throws Exception{
         Configuration.setTestValue("qs", "");
+        Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
         for (Object[] data : TEST_DATA) {
-            Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "prod", (Boolean) data[2], (Boolean) data[3], DEFAULT_LANGUAGE)
+                            .getUrlForPath((String) data[1]),
                     (String) data[4]);
-            Assertion.assertEquals(new UrlBuilder("preview", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "preview", (Boolean) data[2], (Boolean) data[3], DEFAULT_LANGUAGE)
+                            .getUrlForPath((String) data[1]),
                     (String) data[5]);
-            Assertion.assertEquals(new UrlBuilder("sandbox", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "sandbox", (Boolean) data[2], (Boolean) data[3], DEFAULT_LANGUAGE)
+                            .getUrlForPath((String) data[1]),
                     (String) data[6]);
-            Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "sandbox-mercurydev", (Boolean) data[2], (Boolean) data[3], DEFAULT_LANGUAGE)
+                            .getUrlForPath((String) data[1]),
                     (String) data[7]);
-            Assertion.assertEquals(new UrlBuilder("dev-dmytror", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "dev-dmytror", (Boolean) data[2], (Boolean) data[3], DEFAULT_LANGUAGE)
+                            .getUrlForPath((String) data[1]),
                     (String) data[8]);
-            Assertion.assertEquals(new UrlBuilder("staging", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "staging", (Boolean) data[2], (Boolean) data[3], DEFAULT_LANGUAGE)
+                            .getUrlForPath((String) data[1]),
                     (String) data[9]);
         }
     }
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void urlWithLanguageBuilderTests() {
+    public void urlWithLanguageBuilderTests() throws Exception {
         Configuration.setTestValue("qs", "");
+        Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
         for (Object[] data : TEST_DATA_LANGUAGE) {
-            Assertion.assertEquals(new UrlBuilder("prod", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
-                    (String) data[4]);
-            Assertion.assertEquals(new UrlBuilder("preview", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "prod", (Boolean) data[2], (Boolean) data[3], (String) data[10])
+                            .getUrlForPath((String) data[1]), (String) data[4]);
+            Assert.assertEquals(c.newInstance((String) data[0], "preview", (Boolean) data[2], (Boolean) data[3], (String) data[10])
+                            .getUrlForPath((String) data[1]),
                     (String) data[5]);
-            Assertion.assertEquals(new UrlBuilder("sandbox", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "sandbox", (Boolean) data[2], (Boolean) data[3], (String) data[10])
+                            .getUrlForPath((String) data[1]),
                     (String) data[6]);
-            Assertion.assertEquals(new UrlBuilder("sandbox-mercurydev", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "sandbox-mercurydev", (Boolean) data[2], (Boolean) data[3], (String) data[10])
+                            .getUrlForPath((String) data[1]),
                     (String) data[7]);
-            Assertion.assertEquals(new UrlBuilder("dev-dmytror", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "dev-dmytror", (Boolean) data[2], (Boolean) data[3], (String) data[10])
+                            .getUrlForPath((String) data[1]),
                     (String) data[8]);
-            Assertion.assertEquals(new UrlBuilder("staging", (Boolean) data[2], (Boolean) data[3])
-                            .getUrlForPath((String) data[0], (String) data[10], (String) data[1]),
+            Assert.assertEquals(c.newInstance((String) data[0], "staging", (Boolean) data[2], (Boolean) data[3], (String) data[10])
+                            .getUrlForPath((String) data[1]),
                     (String) data[9]);
         }
     }
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void getWikiaUrlTests() {
+    public void getWikiaUrlTests() throws Exception{
+        Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
-        Assertion.assertEquals(new UrlBuilder("preview", false).getWikiGlobalURL(),
+        Assert.assertEquals(c.newInstance("mediawiki119","preview", false, false, DEFAULT_LANGUAGE).getWikiGlobalURL(),
                 "http://www.preview.wikia.com");
-        Assertion.assertEquals(new UrlBuilder("sandbox-s1", false).getWikiGlobalURL(),
+        Assert.assertEquals(c.newInstance("mediawiki119","sandbox-s1", false, false, DEFAULT_LANGUAGE).getWikiGlobalURL(),
                 "http://www.sandbox-s1.wikia.com");
-        Assertion.assertEquals(new UrlBuilder("prod", false).getWikiGlobalURL(),
+        Assert.assertEquals(c.newInstance("mediawiki119","prod", false, false, DEFAULT_LANGUAGE).getWikiGlobalURL(),
                 "http://www.wikia.com");
     }
 
-    @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void loadFirstPageBeforeLangFromAnnotationIsAvailTests() {
-
-        Assertion.assertEquals(new UrlBuilder("preview", false).getUrlForWiki(),
-                String.format("http://%s.preview.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("sandbox-s1", false).getUrlForWiki(),
-                String.format("http://%s.sandbox-s1.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("prod", false).getUrlForWiki(),
-                String.format("http://%s.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("preview", true).getUrlForWiki(),
-                String.format("https://%s.preview.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("sandbox-s1", true).getUrlForWiki(),
-                String.format("https://%s.sandbox-s1.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("prod", true).getUrlForWiki(),
-                String.format("https://%s.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("preview", true, true).getUrlForWiki(),
-                String.format("https://%s.preview.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("sandbox-s1", true, true).getUrlForWiki(),
-                String.format("https://%s.sandbox-s1.wikia.com", Configuration.getWikiName()));
-        Assertion.assertEquals(new UrlBuilder("prod", true, true).getUrlForWiki(),
-                String.format("https://%s.wikia.com", Configuration.getWikiName()));
+    private Constructor<UrlBuilder> getUrlBuilderConstructor() throws NoSuchMethodException {
+        Constructor<UrlBuilder> c = UrlBuilder.class
+                .getDeclaredConstructor(String.class, String.class, Boolean.class, Boolean.class, String.class);
+        c.setAccessible(true);
+        return c;
     }
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void getUrlForPathTests() {
-
-        Assertion.assertEquals(new UrlBuilder("preview", false).getUrlForPath("/wiki/Special:Version"),
-                String.format("http://%s.preview.wikia.com/wiki/Special:Version", Configuration.getWikiName()));
+    public void getUrlForPathTests() throws Exception {
+        Constructor<UrlBuilder> c = getUrlBuilderConstructor();
+        
+        Assert.assertEquals(c.newInstance("mediawiki119","preview", false, false, DEFAULT_LANGUAGE).getUrlForPath("/wiki/Special:Version"),
+               "http://mediawiki119.preview.wikia.com/wiki/Special:Version");
 
         String cb = "cb=1111";
         Configuration.setTestValue("qs", cb);
 
-        Assertion.assertEquals(new UrlBuilder("prod", false).getUrlForPath("wowwiki", "Portal:Main"),
-                "http://wowwiki.wikia.com/Portal:Main?" + cb);
+        Assert.assertEquals(c.newInstance("mediawiki119","prod", false, false, DEFAULT_LANGUAGE).getUrlForPath("Portal:Main"),
+                "http://mediawiki119.wikia.com/Portal:Main?" + cb);
     }
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void getUrlForPathWithLanguageTests() {
+    public void getUrlForPathWithLanguageTests() throws Exception {
+        Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
-        Configuration.setTestValue("language", "szl");
+        Assert.assertEquals(c.newInstance("mediawiki119", "preview", false, true, "szl").getUrlForPath("/wiki/Special:Version"),
+                "http://mediawiki119.preview.wikia.com/szl/wiki/Special:Version");
 
-        Assertion.assertEquals(new UrlBuilder("preview", false, true).getUrlForPath("/wiki/Special:Version"),
-                String.format("http://%s.preview.wikia.com/szl/wiki/Special:Version", Configuration.getWikiName()));
-
-        Assertion.assertEquals(new UrlBuilder("preview", false, false).getUrlForPath("/wiki/Special:Version"),
-                String.format("http://szl.%s.preview.wikia.com/wiki/Special:Version", Configuration.getWikiName()));
+        Assert.assertEquals(c.newInstance("mediawiki119", "preview", false, false, "szl").getUrlForPath("/wiki/Special:Version"),
+                "http://szl.mediawiki119.preview.wikia.com/wiki/Special:Version");
 
     }
 
     @Test(groups = {"TestUrlBuilder", "unitTests"})
-    public void appendQueryStringTests() {
+    public void appendQueryStringTests() throws Exception {
+        Constructor<UrlBuilder> c = getUrlBuilderConstructor();
+        UrlBuilder urlBuilder = c.newInstance("mediawiki119", "preview", false, false, DEFAULT_LANGUAGE);
 
-        Assertion.assertEquals(new UrlBuilder("preview", false).appendQueryStringToURL(
+        Assert.assertEquals(urlBuilder.appendQueryStringToURL(
                 "http://mediawiki119.preview.wikia.com/wiki/ArticleFeaturesCRUDTestsUserAddingImagePlaceholder?action=edit",
                 "useFormat=1"),
                 "http://mediawiki119.preview.wikia.com/wiki/ArticleFeaturesCRUDTestsUserAddingImagePlaceholder?action=edit&useFormat=1");

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.templates;
 
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.url.FandomUrlBuilder;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -25,10 +27,10 @@ public class NewTestTemplate extends CoreTestTemplate {
   }
 
   protected void prepareURLs() {
-    urlBuilder = new UrlBuilder();
+    urlBuilder = UrlBuilder.createUrlBuilder();
     fandomUrlBuilder = new FandomUrlBuilder();
     wikiURL = urlBuilder.getUrlForWiki();
     wikiCorporateURL = urlBuilder.getWikiGlobalURL();
-    wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
+    wikiCorpSetupURL = UrlBuilder.createUrlBuilderForWikiAndLang("corp", DEFAULT_LANGUAGE).getUrlForWiki();
   }
 }

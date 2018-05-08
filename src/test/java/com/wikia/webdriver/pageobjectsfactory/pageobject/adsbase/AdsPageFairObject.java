@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import org.openqa.selenium.WebDriver;
 
 public class AdsPageFairObject extends AdsBaseObject {
@@ -20,10 +19,7 @@ public class AdsPageFairObject extends AdsBaseObject {
   }
 
   private static String addPageFairDetectionParam(Page page) {
-    UrlBuilder urlBuilder = new UrlBuilder();
-
-    String url = urlBuilder.getUrlForPage(page);
-    return urlBuilder.appendQueryStringToURL(url, PAGEFAIR_URL_PARAM);
+    return page.getUrl(PAGEFAIR_URL_PARAM);
   }
 
   public void assertPageFairResponse(

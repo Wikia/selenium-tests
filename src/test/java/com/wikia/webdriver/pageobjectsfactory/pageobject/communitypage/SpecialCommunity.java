@@ -19,7 +19,7 @@ public class SpecialCommunity extends WikiBasePageObject {
   }
 
   public SpecialCommunity open() {
-    getUrl(urlBuilder.getUrlForPage(COMMUNITY_PAGE_URL));
+    getUrl(urlBuilder.getUrlForWikiPage(COMMUNITY_PAGE_URL));
     this.isOpen = isCommunityPageOpen();
 
     return this;

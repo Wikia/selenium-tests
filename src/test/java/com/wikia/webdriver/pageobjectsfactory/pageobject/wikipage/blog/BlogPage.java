@@ -13,7 +13,7 @@ public class BlogPage extends ArticlePageObject {
   private WebElement blogHeader;
 
   public BlogPage open(String userName, String postName) {
-    getUrl(urlBuilder.getUrlForPage(String.format(BLOG_PATH_FORMAT, userName, postName)));
+    getUrl(urlBuilder.getUrlForWikiPage(String.format(BLOG_PATH_FORMAT, userName, postName)));
 
     return this;
   }

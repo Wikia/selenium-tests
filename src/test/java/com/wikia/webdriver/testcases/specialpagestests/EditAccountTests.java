@@ -8,18 +8,18 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount.EditAccount;
-
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
 
 @Test(groups = "EditAccountTest", enabled = false)
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
-  UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv(), Configuration.getForceHttps());
-  private String testedWiki = urlBuilder.getUrlForWiki("community");
+  private String testedWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrlForWiki();
   private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
 
   @Test(groups = {"EditAccountTest_001"})

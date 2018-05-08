@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -33,7 +34,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
     // Check tracking pixels on first page view
     networkTrafficInterceptor.startIntercepting();
 
-    String testedPage = urlBuilder.getUrlForPage(page);
+    String testedPage = page.getUrl();
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
 
     assertTrackingPixelsSent(adsBaseObject, urls);
@@ -59,7 +60,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   public void adsTrackingPixelSent(String wiki, String urlParam, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
 
-    String testedPage = urlBuilder.getUrlForPath(wiki, urlParam);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wiki).getUrlForPath(urlParam);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
 
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
@@ -78,7 +79,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @DontRun(env = {"preview", "sandbox"})
   public void adsTrackingPixelSentAuthPage(String wiki, String page, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
-    String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wiki).getUrlForWiki() + page;
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }

@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -34,7 +35,8 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
                                                String slot,
                                                List<String> pageParams,
                                                List<String> slotParams) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(wikiName);
+    String testedPage = urlBuilder.getUrlForPath(article);
     if (StringUtils.isNotEmpty(queryString)) {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
     }
@@ -60,7 +62,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
                                       String slot,
                                       List<String> pageParams,
                                       List<String> slotParams) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
@@ -84,7 +86,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
                                           List<String> pageParams,
                                           List<String> slotParams) {
     AdsEvolveObject ads = new AdsEvolveObject(driver);
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     ads.enableEvolve(testedPage);
     ads.verifyGptIframe(dfpClientId, adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);

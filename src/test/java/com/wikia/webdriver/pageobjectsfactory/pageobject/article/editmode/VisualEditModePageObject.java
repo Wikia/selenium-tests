@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -103,13 +104,13 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public VisualEditModePageObject open() {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki()
         + URLsContent.WIKI_DIR + TestContext.getCurrentMethodName(), URLsContent.ACTION_EDIT));
     return this;
   }
 
   public VisualEditModePageObject open(String articleName) {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki()
         + URLsContent.WIKI_DIR + articleName, URLsContent.ACTION_EDIT));
     return this;
   }

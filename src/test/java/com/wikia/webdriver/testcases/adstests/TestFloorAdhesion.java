@@ -2,13 +2,13 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionOldObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
-
-import org.testng.annotations.Test;
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.Test;
 
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String WIKI_NAME = "project43";
@@ -24,6 +24,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String SLOT_NAME = "INVISIBLE_HIGH_IMPACT_2";
   private static final String LINE_ITEM_ID = "270609492";
   private static final String CREATIVE_ID = "94178805972";
+  private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
   @Test(
       groups = "AdsFloorAdhesionOasis"
@@ -89,7 +90,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   private String getArticleUrl(String articleTitle, String urlTrigger) {
-    String url = urlBuilder.getUrlForPath(WIKI_NAME, articleTitle);
+    String url = urlBuilder.getUrlForPath(articleTitle);
     return urlBuilder.appendQueryStringToURL(url, urlTrigger);
   }
 

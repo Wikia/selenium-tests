@@ -4,9 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -16,6 +13,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
@@ -69,7 +70,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   private List<WebElement> thumbnailsImages;
   @FindBy(css = ".Results a.image.video.lightbox")
   private List<WebElement> thumbnailsVideos;
-  @FindBy(css = ".autocomplete")
+  @FindBy(xpath = "//ul[contains(@id,'Autocomplete')]/li")
   private List<WebElement> suggestionsList;
   @FindBy(css = ".search-tabs.grid-1.alpha")
   private List<WebElement> filterOptions;
@@ -100,7 +101,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
    * This method is checking whether text is translatable by adding "&uselang=qqx" to URl
    */
   public void addQqxUselang() {
-    appendToUrl(URLsContent.TRANSLATABLE_LANGUAGE);
+    goToCurrentUrlWithSuffix(URLsContent.TRANSLATABLE_LANGUAGE);
   }
 
   public void searchFor(String query) {

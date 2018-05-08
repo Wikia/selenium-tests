@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -43,7 +44,7 @@ public class TestAdsSkinPresence extends NewTestTemplate {
                           String expectedRightSide,
                           String backgroundColor,
                           String middleColor) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     PageObjectLogging.log("Window resolution: ", String.valueOf(resolution.width), true);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, resolution);
     adsBaseObject.verifySkin(expectedLeftSide, expectedRightSide, backgroundColor, middleColor);

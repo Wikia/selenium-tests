@@ -9,6 +9,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SpecialCo
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.USER_LOGIN;
+
 
 @Test(groups = "CommunityPageTests")
 public class SpecialCommunityPageTests extends NewTestTemplate {
@@ -21,7 +23,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
     String url = getEditUrl(link.getText(), "veaction=edit");
     link.click();
     // should be at register page
-    Assertion.assertTrue(page.isStringInURL(urlBuilder.getUrlForPage("www", "/signin")));
+    Assertion.assertTrue(page.isStringInURL(urlBuilder.getWikiGlobalURL() + USER_LOGIN));
     page.loginAs(User.USER);
 
     // we are back to link
@@ -52,7 +54,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
 
   private String getEditUrl(String page, String query) {
     return urlBuilder.appendQueryStringToURL(
-        urlBuilder.getUrlForPage(String.format("/wiki/%s", urlBuilder.normalizePageName(page))),
+        urlBuilder.getUrlForWikiPage(String.format("/wiki/%s", urlBuilder.normalizePageName(page))),
         query);
   }
 

@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
@@ -12,7 +11,6 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -69,7 +67,7 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public ArticlePage open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
 
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
@@ -78,7 +76,7 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public ArticlePage openDefault() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    getUrl(urlBuilder.getUrlForWiki());
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     return this;
