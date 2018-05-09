@@ -102,7 +102,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
     vuap.mute();
     vuap.togglePause();
 
-    Assert.assertFalse(vuap.isMuted(), "After video replay VUAP video is muted on replay");
+    Assert.assertFalse(vuap.isMuted(), "After replay VUAP, video is muted");
   }
 
   @Test(
@@ -117,7 +117,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
     vuap.waitForVideoStart();
     vuap.togglePause();
-    Assert.assertTrue(vuap.isMuted(), "Autoplay VUAP video is unmuted");
+    Assert.assertTrue(vuap.isMuted(), "Autoplay VUAP, video is unmuted");
   }
 
   @Test(
