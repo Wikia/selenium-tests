@@ -19,7 +19,7 @@ import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_W
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
-  private String testedWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrlForWiki();
+  private String testedWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrl();
   private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
 
   @Test(groups = {"EditAccountTest_001"})

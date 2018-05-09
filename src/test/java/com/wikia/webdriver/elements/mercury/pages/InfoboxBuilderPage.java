@@ -93,7 +93,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage openNew(String templateName) {
     getUrl(urlBuilder.appendQueryStringToURL(
-        String.format("%s/wiki/%s:%s", urlBuilder.getUrlForWiki(), "Template", templateName),
+        String.format("%s/wiki/%s:%s", urlBuilder.getUrl(), "Template", templateName),
         URLsContent.ACTION_EDIT));
     new TemplateEditPage().getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
@@ -106,7 +106,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage openExisting(String templateName) {
     getUrl(
-        urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s/%s", urlBuilder.getUrlForWiki(),
+        urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s/%s", urlBuilder.getUrl(),
             "Special:InfoboxBuilder", templateName), URLsContent.ACTION_EDIT));
     driver.switchTo().frame(builderIFrame);
 
@@ -115,7 +115,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage open() {
     new TemplateEditPage().open("temp_template");
-    getUrl(String.format("%s/wiki/%s", urlBuilder.getUrlForWiki(), "Special:InfoboxBuilder"));
+    getUrl(String.format("%s/wiki/%s", urlBuilder.getUrl(), "Special:InfoboxBuilder"));
     driver.switchTo().frame(builderIFrame);
     wait.forElementVisible(previewArea);
 

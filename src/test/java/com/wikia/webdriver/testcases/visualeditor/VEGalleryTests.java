@@ -28,7 +28,7 @@ public class VEGalleryTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(URLsContent.VE_ENABLED_WIKI).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(URLsContent.VE_ENABLED_WIKI).getUrl();
     article = new ArticlePageObject();
     article.loginAs(credentials.userName10, credentials.password10, wikiURL);
   }

@@ -30,7 +30,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
       boolean isRTEext, boolean isVEext, VisualEditorDataProvider.EditorPref editorPref,
       VisualEditorDataProvider.Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -48,7 +48,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_002_CreateAPage(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + BasePageObject.getTimeStamp();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
@@ -67,7 +67,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_003_List(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -85,7 +85,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_004_Article(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -103,7 +103,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_005_redLink(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -121,7 +121,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_006_sectionEdit(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -139,7 +139,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_007_template(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -155,7 +155,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_008_urlActionEdit(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -170,7 +170,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   public void VisualEditorEntryTest_009_urlVEActionEdit(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext)).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);

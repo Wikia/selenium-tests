@@ -494,7 +494,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                         .forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
-    String testingEnvironmentUrl = UrlBuilder.createUrlBuilder().getUrlForWiki();
+    String testingEnvironmentUrl = UrlBuilder.createUrlBuilder().getUrl();
     String testingEnvironment = Configuration.getEnv();
     String testedVersion = "TO DO: GET WIKI VERSION HERE";
 

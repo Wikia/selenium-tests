@@ -101,13 +101,13 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public VisualEditModePageObject open() {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki()
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl()
         + URLsContent.WIKI_DIR + TestContext.getCurrentMethodName(), URLsContent.ACTION_EDIT));
     return this;
   }
 
   public VisualEditModePageObject open(String articleName) {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki()
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl()
         + URLsContent.WIKI_DIR + articleName, URLsContent.ACTION_EDIT));
     return this;
   }

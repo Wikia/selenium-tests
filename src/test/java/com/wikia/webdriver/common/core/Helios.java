@@ -237,7 +237,7 @@ public class Helios {
   }
 
   private static String getUserIdUrl(String encodedUsername) {
-    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, Configuration.DEFAULT_LANGUAGE).getUrlForWiki();
+    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, Configuration.DEFAULT_LANGUAGE).getUrl();
     return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
             communityUrl, encodedUsername, DateTime.now().getMillis());
   }

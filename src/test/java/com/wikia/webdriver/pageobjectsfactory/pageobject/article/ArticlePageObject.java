@@ -165,20 +165,20 @@ public class ArticlePageObject extends WikiBasePageObject {
    * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
    */
   public ArticlePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
 
     return this;
   }
 
   public ArticlePageObject open(String articleTitle) {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
            + articleTitle);
     return this;
   }
 
   public ArticlePageObject openArticleByPath(String articlePath) {
-    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), articlePath));
+    getUrl(String.format("%s%s", urlBuilder.getUrl(), articlePath));
     return this;
   }
 
@@ -550,7 +550,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     String
         url =
         urlBuilder
-            .appendQueryStringToURL(urlBuilder.getUrlForWiki(), "title=" + articleTitle.getText());
+            .appendQueryStringToURL(urlBuilder.getUrl(), "title=" + articleTitle.getText());
     url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
     return new WatchPageObject();

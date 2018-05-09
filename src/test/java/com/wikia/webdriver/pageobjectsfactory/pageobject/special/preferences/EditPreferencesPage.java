@@ -20,7 +20,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   }
 
   public EditPreferencesPage openEditingSection() {
-    return openEditingSection(urlBuilder.getUrlForWiki());
+    return openEditingSection(urlBuilder.getUrl());
   }
 
   private EditPreferencesPage openEmailSection(String wikiURL) {
@@ -29,7 +29,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   }
 
   public EditPreferencesPage openEmailSection() {
-    return openEmailSection(urlBuilder.getUrlForWiki());
+    return openEmailSection(urlBuilder.getUrl());
   }
 
   public void selectPreferredEditor(String value) {

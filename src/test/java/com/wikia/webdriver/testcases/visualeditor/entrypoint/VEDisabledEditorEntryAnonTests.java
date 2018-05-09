@@ -21,7 +21,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    wikiURL = UrlBuilder.createUrlBuilderForWiki(URLsContent.VE_DISABLED_WIKI).getUrlForWiki();
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(URLsContent.VE_DISABLED_WIKI).getUrl();
     base = new WikiBasePageObject();
   }
 

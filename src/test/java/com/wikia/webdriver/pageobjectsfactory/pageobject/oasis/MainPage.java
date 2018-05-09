@@ -14,7 +14,7 @@ public class MainPage extends ArticlePageObject {
   protected WebElement body;
 
   public MainPage open() {
-    getUrl(urlBuilder.getUrlForWiki());
+    getUrl(urlBuilder.getUrl());
     return this;
   }
 

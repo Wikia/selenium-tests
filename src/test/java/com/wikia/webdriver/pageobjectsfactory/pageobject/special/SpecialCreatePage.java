@@ -23,7 +23,7 @@ public class SpecialCreatePage extends SpecialPageObject {
   }
 
   public SpecialCreatePage open() {
-    return open(urlBuilder.getUrlForWiki());
+    return open(urlBuilder.getUrl());
   }
 
   public VisualEditModePageObject populateTitleField(String title) {

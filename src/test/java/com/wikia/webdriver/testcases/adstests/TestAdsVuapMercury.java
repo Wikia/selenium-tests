@@ -118,7 +118,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       groups = "AdsVuapTimeProgressMercury"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
-    AdsBaseObject ads = new AdsBaseObject(driver, UrlBuilder.createUrlBuilderForWiki("project43").getUrlForWiki());
+    AdsBaseObject ads = new AdsBaseObject(driver, UrlBuilder.createUrlBuilderForWiki("project43").getUrl());
     ads.getUrl(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
     ads.scrollToSlot(slot);

@@ -29,8 +29,8 @@ public class NewTestTemplate extends CoreTestTemplate {
   protected void prepareURLs() {
     urlBuilder = UrlBuilder.createUrlBuilder();
     fandomUrlBuilder = new FandomUrlBuilder();
-    wikiURL = urlBuilder.getUrlForWiki();
+    wikiURL = urlBuilder.getUrl();
     wikiCorporateURL = urlBuilder.getWikiGlobalURL();
-    wikiCorpSetupURL = UrlBuilder.createUrlBuilderForWikiAndLang("corp", DEFAULT_LANGUAGE).getUrlForWiki();
+    wikiCorpSetupURL = UrlBuilder.createUrlBuilderForWikiAndLang("corp", DEFAULT_LANGUAGE).getUrl();
   }
 }

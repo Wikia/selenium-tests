@@ -10,7 +10,7 @@ public class SpecialVersionPage extends WikiBasePageObject {
   }
 
   public SpecialVersionPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_VERSION);
+    driver.get(urlBuilder.getUrl() + URLsContent.SPECIAL_VERSION);
 
     return this;
   }

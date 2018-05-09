@@ -514,7 +514,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(User user) {
-    return loginAs(user.getUserName(), user.getPassword(), urlBuilder.getUrlForWiki());
+    return loginAs(user.getUserName(), user.getPassword(), urlBuilder.getUrl());
   }
 
   private void logMercuryUserId() {

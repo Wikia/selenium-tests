@@ -44,7 +44,7 @@ public class ForumBoardPage extends BasePageObject {
    * @return
    */
   public ForumBoardPage open(String forumBoardTitle) {
-    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(),
+    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrl(),
         URLsContent.WIKI_DIR, URLsContent.FORUM_BOARD_NAMESPACE, forumBoardTitle));
 
     return this;

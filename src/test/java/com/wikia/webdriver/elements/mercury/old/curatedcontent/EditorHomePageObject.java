@@ -27,7 +27,7 @@ public class EditorHomePageObject extends BasePageObject {
   private final SectionItemListPageObject sectionItemList = new SectionItemListPageObject();
 
   public EditorHomePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki() + "/main/edit");
+    getUrl(urlBuilder.getUrl() + "/main/edit");
 
     return this;
   }

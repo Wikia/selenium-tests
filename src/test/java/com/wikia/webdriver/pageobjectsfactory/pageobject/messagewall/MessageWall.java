@@ -79,7 +79,7 @@ public class MessageWall extends WikiBasePageObject {
   private List<WebElement> threadList;
 
   public MessageWall open(String userName) {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.USER_MESSAGE_WALL
+    getUrl(urlBuilder.getUrl() + URLsContent.USER_MESSAGE_WALL
         + userName);
     waitForPageLoad();
 

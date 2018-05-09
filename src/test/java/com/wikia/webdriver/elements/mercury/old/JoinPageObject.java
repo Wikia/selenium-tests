@@ -37,12 +37,12 @@ public class JoinPageObject {
     String redirectParameter = "";
     try {
       redirectParameter =
-          URLEncoder.encode(urlBuilder.getUrlForWiki(), "UTF-8");
+          URLEncoder.encode(urlBuilder.getUrl(), "UTF-8");
 
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
     }
-    driver.get(urlBuilder.getUrlForWiki() + "/join" + "?redirect="
+    driver.get(urlBuilder.getUrl() + "/join" + "?redirect="
                + redirectParameter);
     return this;
   }

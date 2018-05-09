@@ -33,7 +33,7 @@ public class SpecialBlockPage extends WikiBasePageObject {
   }
 
   public SpecialBlockPage open(){
-    return open(urlBuilder.getUrlForWiki());
+    return open(urlBuilder.getUrl());
   }
 
   public SpecialBlockPage open(String wikiUrl){

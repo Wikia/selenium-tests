@@ -21,8 +21,8 @@ public class IntraWiki extends NewTestTemplate {
   protected String searchSuggestionsWiki;
 
   public IntraWiki() {
-    testedWiki = UrlBuilder.createUrlBuilderForWiki(MUPPET_WIKI).getUrlForWiki();
-    communityWiki = urlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrlForWiki();
-    searchSuggestionsWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_COUNCIL_WIKI, "en").getUrlForWiki();
+    testedWiki = UrlBuilder.createUrlBuilderForWiki(MUPPET_WIKI).getUrl();
+    communityWiki = urlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrl();
+    searchSuggestionsWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_COUNCIL_WIKI, "en").getUrl();
   }
 }

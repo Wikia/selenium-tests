@@ -14,7 +14,7 @@ public class HomePage extends WikiBasePageObject {
   }
 
   public HomePage open(String wikiName) {
-    getUrl(UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForWiki());
+    getUrl(UrlBuilder.createUrlBuilderForWiki(wikiName).getUrl());
     waitForPageLoad();
 
     return this;

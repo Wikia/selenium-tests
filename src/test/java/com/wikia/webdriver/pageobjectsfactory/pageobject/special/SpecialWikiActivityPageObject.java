@@ -18,7 +18,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   private List<Activity> activities;
 
   public SpecialWikiActivityPageObject open() {
-    getUrl(urlBuilder.getUrlForWiki()
+    getUrl(urlBuilder.getUrl()
            + URLsContent.SPECIAL_WIKI_ACTIVITY);
 
     this.refreshPageAddingCacheBuster();

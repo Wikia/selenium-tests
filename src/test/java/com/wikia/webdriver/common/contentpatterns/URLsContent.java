@@ -82,7 +82,7 @@ public class URLsContent {
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
-  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrlForWiki()
+  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrl()
       + "/api.php";
 
   // File Pages

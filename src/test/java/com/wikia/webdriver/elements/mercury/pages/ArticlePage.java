@@ -67,7 +67,7 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public ArticlePage open() {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
 
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
@@ -76,7 +76,7 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public ArticlePage openDefault() {
-    getUrl(urlBuilder.getUrlForWiki());
+    getUrl(urlBuilder.getUrl());
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     return this;

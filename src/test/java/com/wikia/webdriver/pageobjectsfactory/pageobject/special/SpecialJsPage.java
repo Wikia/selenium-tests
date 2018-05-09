@@ -25,14 +25,14 @@ public class SpecialJsPage extends WikiBasePageObject {
      * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
      */
     public SpecialJsPage open() {
-        getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
+        getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
                 + String.format("mediawiki:%s.js", TestContext.getCurrentMethodName()));
 
         return this;
     }
 
     public SpecialJsPage open(String articleTitle) {
-        getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
+        getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
                 + String.format("mediawiki:%s.js", articleTitle));
         return this;
     }

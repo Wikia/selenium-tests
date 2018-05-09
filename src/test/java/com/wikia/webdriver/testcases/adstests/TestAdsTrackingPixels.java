@@ -79,7 +79,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @DontRun(env = {"preview", "sandbox"})
   public void adsTrackingPixelSentAuthPage(String wiki, String page, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
-    String testedPage = UrlBuilder.createUrlBuilderForWiki(wiki).getUrlForWiki() + page;
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wiki).getUrl() + page;
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }

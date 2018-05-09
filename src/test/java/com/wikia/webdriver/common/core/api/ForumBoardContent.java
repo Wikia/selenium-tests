@@ -25,7 +25,7 @@ public class ForumBoardContent extends ApiCall {
 
   @Override
   protected String getURL() {
-    return UrlBuilder.createUrlBuilder().getUrlForWiki()
+    return UrlBuilder.createUrlBuilder().getUrl()
            + "/wikia.php?controller=ForumExternal&method=createNewBoard&format=json";
   }
 

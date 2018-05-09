@@ -449,7 +449,7 @@ public class BasePageObject {
   }
 
   public String getWikiUrl() {
-    return UrlBuilder.createUrlBuilder().getUrlForWiki();
+    return UrlBuilder.createUrlBuilder().getUrl();
   }
 
   public void fillInput(WebElement input, String value) {

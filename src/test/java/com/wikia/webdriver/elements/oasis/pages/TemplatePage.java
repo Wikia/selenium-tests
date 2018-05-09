@@ -29,7 +29,7 @@ public class TemplatePage extends WikiBasePageObject {
   }
 
   public TemplatePage open(String templateName) {
-    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(), URLsContent.WIKI_DIR,
+    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrl(), URLsContent.WIKI_DIR,
                          URLsContent.TEMPLATE_NAMESPACE, templateName));
 
     return this;
@@ -42,7 +42,7 @@ public class TemplatePage extends WikiBasePageObject {
   }
 
   public String getRawContent(String templateName) {
-    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(),
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrl(),
                                                            URLsContent.WIKI_DIR,
                                                            URLsContent.TEMPLATE_NAMESPACE,
                                                            templateName),

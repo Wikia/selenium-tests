@@ -35,7 +35,7 @@ public class PostDetailsPage extends PageWithPosts {
   private static final String EMPTY_POST_ID = "404";
 
   public PostDetailsPage open(String postId) {
-    getUrl(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + String.format(PATH, postId)));
+    getUrl(getUrlWithCacheBuster(urlBuilder.getUrl() + String.format(PATH, postId)));
     waitForEmberLoad();
     return this;
   }

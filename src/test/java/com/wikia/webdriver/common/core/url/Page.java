@@ -42,7 +42,7 @@ public class Page {
 
   public String getUrl() {
     if (this.wikiPath == null){
-      return urlBuilder.getUrlForWiki(false);
+      return urlBuilder.getUrl(false);
     } else {
       return urlBuilder.getUrlForPath(this.wikiPath);
     }

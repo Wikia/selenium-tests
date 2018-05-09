@@ -45,30 +45,30 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String getUrlForPageWithWWW(String pageName) {
-    return getUrlForWiki(getWikiName(), true) + pageName;
+    return getUrl(getWikiName(), true) + pageName;
   }
 
   public String getUrlForWikiPage(String pageName) {
-    return getUrlForWiki() + pageName;
+    return getUrl() + pageName;
   }
 
   public String getUrlForPath(String wikiPath) {
-    return addPathToUrl(getUrlForWiki(), wikiPath);
+    return addPathToUrl(getUrl(), wikiPath);
   }
 
-  public String getUrlForWiki() {
-    return getUrlForWiki(this.language, false);
+  public String getUrl() {
+    return getUrl(this.language, false);
   }
 
-  public String getUrlForWiki(String language, boolean addWWW) {
-    return getUrlForWiki(language, addWWW, envType);
+  public String getUrl(String language, boolean addWWW) {
+    return getUrl(language, addWWW, envType);
   }
 
-  public String getUrlForWiki(boolean addWWW) {
-    return getUrlForWiki(wikiName, addWWW, envType);
+  public String getUrl(boolean addWWW) {
+    return getUrl(wikiName, addWWW, envType);
   }
 
-  public String getUrlForWiki(String language, boolean addWWW, EnvType envType) {
+  public String getUrl(String language, boolean addWWW, EnvType envType) {
       final String wikiaName = getWikiaGlobalName(wikiName);
 
       if (language == null || wikiName == null)

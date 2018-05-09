@@ -23,7 +23,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   }
 
   public SpecialFollowPageObject open() {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_FOLLOW);
+    getUrl(urlBuilder.getUrl() + URLsContent.SPECIAL_FOLLOW);
 
     return this;
   }

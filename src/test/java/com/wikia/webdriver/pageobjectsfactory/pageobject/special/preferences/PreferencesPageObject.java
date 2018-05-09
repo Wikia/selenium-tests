@@ -1,14 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -40,7 +37,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement useAdvancedRecentChangesCheckbox;
 
   public PreferencesPageObject open(){
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_PREFERENCES);
+    getUrl(urlBuilder.getUrl() + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 
     return this;

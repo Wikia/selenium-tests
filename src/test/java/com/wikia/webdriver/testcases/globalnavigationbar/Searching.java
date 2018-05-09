@@ -30,7 +30,7 @@ public class Searching extends NewTestTemplate {
       String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
-    homePage.getUrl(UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, wikiLanguage).getUrlForWiki());
+    homePage.getUrl(UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, wikiLanguage).getUrl());
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 
@@ -47,7 +47,7 @@ public class Searching extends NewTestTemplate {
       String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
-    homePage.getUrl(UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, wikiLanguage).getUrlForWiki());
+    homePage.getUrl(UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, wikiLanguage).getUrl());
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 

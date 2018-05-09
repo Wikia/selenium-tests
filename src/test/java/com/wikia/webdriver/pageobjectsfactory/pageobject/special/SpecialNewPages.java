@@ -20,7 +20,7 @@ public class SpecialNewPages extends WikiBasePageObject {
   private List<WebElement> newArticleLinks;
 
   public SpecialNewPages open() {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR
+    getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
            + "Special:NewPages");
     
     return this;
