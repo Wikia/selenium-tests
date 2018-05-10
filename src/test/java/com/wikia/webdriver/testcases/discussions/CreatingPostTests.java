@@ -12,15 +12,16 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
-
-import java.net.MalformedURLException;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = "discussions-creating-posts")
@@ -260,8 +261,8 @@ public class CreatingPostTests extends NewTestTemplate {
         "User should not be able to add post with only category.");
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with only category and title.");
+    Assertion.assertTrue(postsCreator.isPostButtonActive(),
+        "User should be able to add post with only category and title.");
     postsCreator.clearTitle();
 
     postsCreator.addDescriptionWith(TextGenerator.defaultText());
