@@ -8,7 +8,6 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.net.URL;
 
@@ -19,15 +18,13 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   @Getter
   private By errorNotification = By.className("error");
 
-  @FindBy(css = ".post-entry-point__items > li:nth-child(1)")
-  private WebElement textPostType;
-
   public BasePostsCreator() {
     this.categoryPills = new CategoryPills();
     categoryPills.setEmpty(false);
   }
 
   protected abstract String getBaseCssClassName();
+  protected abstract WebElement getTextPostType();
   protected abstract WebElement getPostsCreator();
   protected abstract WebElement getEditor();
   protected abstract WebElement getSignInDialog();
@@ -47,15 +44,14 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public PostsCreator click() {
-    wait.forElementClickable(textPostType);
-    textPostType.click();
-
     /*
       This entry point is disabled until the outcome of experiment in IRIS-5829
+    */
 
-      wait.forElementClickable(getPostsCreator());
-      getPostsCreator().click();
-     */
+    wait.forElementClickable(getPostsCreator());
+    getPostsCreator().click();
+    wait.forElementClickable(getTextPostType());
+    getTextPostType().click();
 
     return this;
   }

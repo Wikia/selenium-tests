@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import org.testng.annotations.Test;
 
@@ -43,10 +44,12 @@ public class GuidelinesTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffOnDesktopCanAddTextToGuidelines() {
+    String text = TextGenerator.createUniqueText();
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
+    guidelinesPage.clearAndAddUniqueText(text);
 
-    Assertion.assertTrue(guidelinesPage.canUpdateGuidelinesContent());
+    Assertion.assertTrue(guidelinesPage.doesGuidelinesContainsText(text));
     Assertion.assertTrue(guidelinesPage.clickBackToDiscussions().isDiscussionsFilterDisplayed());
   }
 
@@ -54,10 +57,11 @@ public class GuidelinesTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanAddTextToGuidelines() {
+    String text = TextGenerator.createUniqueText();
     GuidelinesPage guidelinesPage = new GuidelinesPage();
-    guidelinesPage.open();
+    guidelinesPage.open().clearAndAddUniqueText(text);
 
-    Assertion.assertTrue(guidelinesPage.canUpdateGuidelinesContent());
+    Assertion.assertTrue(guidelinesPage.doesGuidelinesContainsText(text));
     Assertion.assertTrue(guidelinesPage.clickBackToDiscussions().isDiscussionsFilterDisplayed());
   }
 }
