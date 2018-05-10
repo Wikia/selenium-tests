@@ -99,7 +99,6 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
 
     vuap.clickOnArea(3);
-    vuap.mute();
     vuap.togglePause();
 
     Assert.assertFalse(vuap.isMuted(), "After replay VUAP, video is muted");
