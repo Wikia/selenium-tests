@@ -115,7 +115,6 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
     ads.scrollToSlot(slot);
 
     vuap.waitForVideoStart();
-    vuap.togglePause();
     Assert.assertTrue(vuap.isMuted(), "Autoplay VUAP, video is not muted");
   }
 
