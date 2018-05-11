@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import static org.testng.Assert.assertTrue;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -41,7 +42,14 @@ public class TestAdsTrackingOptOutMercury extends MobileTestTemplate {
       noKruxRequestFound = true;
     }
 
-    assertTrue(noKikimoraRequestFound);
-    assertTrue(noKruxRequestFound);
+    Assertion.assertTrue(
+        noKikimoraRequestFound,
+        "Kikimora tracking is not disabled, request to Data Warehouse was found"
+    );
+
+    Assertion.assertTrue(
+        noKruxRequestFound,
+        "Krux tracking is not disabled, request to Krux services was found"
+    );
   }
 }
