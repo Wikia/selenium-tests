@@ -47,6 +47,9 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptOutOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptOutMercury"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptOutFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBtfBlocking"/>
