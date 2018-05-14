@@ -21,6 +21,7 @@ import java.util.List;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
+  private static final int MAX_AUTOPLAY_MOVIE_DURATION = 15;
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
@@ -95,20 +96,27 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
-    // 2017-10-12 scrollTo takes so much time that the video for sure has started and ended
-    /*
-    vuap.waitForVideoStart();
-    vuap.togglePause();
-    Assert.assertTrue(vuap.isMuted());
-    vuap.play();
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
-    */
 
     vuap.clickOnArea(3);
-    vuap.mute();
     vuap.togglePause();
 
-    VuapAssertions.verifyVideoUnmuteAndMute(vuap);
+    Assert.assertFalse(vuap.isMuted(), "After replay VUAP, video is muted");
+  }
+
+  @Test(
+          dataProviderClass = MobileAdsDataProvider.class,
+          dataProvider = "adsVuapMobile",
+          groups = {"AdsVuapDefaultStateMercury"}
+  )
+  public void vuapDefaultStateIsMuted(Page page, String slot) {
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    ads.scrollToSlot(slot);
+
+    vuap.waitForVideoStart();
+    vuap.togglePause();
+    Assert.assertTrue(vuap.isMuted(), "Autoplay VUAP, video is not muted");
   }
 
   @Test(
