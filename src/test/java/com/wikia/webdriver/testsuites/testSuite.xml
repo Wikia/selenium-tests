@@ -185,7 +185,6 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.GlobalFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HTMLTitleTests"/>
-            <class name="com.wikia.webdriver.testcases.mobilewikitests.ImageReviewTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.NavigationMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.SearchMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.SmartBannerTest"/>
