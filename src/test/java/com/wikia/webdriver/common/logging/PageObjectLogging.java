@@ -310,6 +310,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
+    Method method = TestContext.getCurrentTestMethod();
+    Class<?> declaringClass = method.getDeclaringClass();
+
     if (!AlertHandler.isAlertPresent(driver)) {
       String command = "Url after navigation";
       if (url.equals(driver.getCurrentUrl())) {
@@ -347,7 +350,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
        * Manually user would need to click 'agree' in the tracking opt in modal.
        */
 
-      if (TestContext.isFirstLoad()) {
+      if (TestContext.isFirstLoad() && "true".equals(method.isAnnotationPresent(Execute.class)
+              && "true".equals(method.getAnnotation(Execute.class).trackingOptIn())) ) {
         driver.manage().addCookie(
                 new Cookie("tracking-opt-in-status", "accepted")
         );
@@ -368,8 +372,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
     }
 
-    Method method = TestContext.getCurrentTestMethod();
-    Class<?> declaringClass = method.getDeclaringClass();
 
     if (TestContext.isFirstLoad()) {
       User user = null;
