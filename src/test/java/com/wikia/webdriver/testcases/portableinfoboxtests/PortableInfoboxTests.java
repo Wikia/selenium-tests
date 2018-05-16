@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
