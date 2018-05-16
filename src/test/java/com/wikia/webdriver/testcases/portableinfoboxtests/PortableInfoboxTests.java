@@ -125,7 +125,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(whatLinksHere.whatLinksHereContainsArticleName(articleName));
   }
 
-  @InBrowser(browser = Browser.FIREFOX, browserSize = "1200x720")
+  @InBrowser(browser = Browser.CHROME, browserSize = "1200x720")
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyLightboxVisibilityAfterClickingImage() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
