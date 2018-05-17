@@ -14,14 +14,21 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "button[name='__CONFIRM__']")
   private WebElement appTermsConfirmButton;
+
   @FindBy(css = "#signupUsername")
   private WebElement usernameField;
+
   @FindBy(css = "#signupPassword")
   private WebElement passwordField;
+
   @FindBy(css = "#signupEmail")
   private WebElement emailField;
+
   @FindBy(css = "#signupSubmit")
   private WebElement registerButton;
+
+  @FindBy(css = ".register-fb-page")
+  private WebElement registerFBPage;
 
   public FacebookSignupModalComponentObject() {
     super();
@@ -63,7 +70,14 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     driver.switchTo().window(handles[0].toString());
   }
 
+  public void typeEmail(String email) {
+    wait.forElementClickable(emailField);
+    emailField.sendKeys(email);
+    PageObjectLogging.log("typeEmail", "email " + email + " typed into the field", true);
+  }
+
   public void typeUserName(String userName) {
+    wait.forElementClickable(usernameField);
     usernameField.sendKeys(userName);
     PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
   }
@@ -82,12 +96,18 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   }
 
   public void createAccountNoEmail(String email, String userName, String password) {
-    acceptWikiaAppPolicyNoEmail();
+    acceptWikiaAppPolicy();
     waitForValueToBePresentInElementsAttributeByElement(emailField, "value", email);
 
+    typeEmail(email);
     typeUserName(userName);
     typePassword(password);
+
     clickRegister();
+  }
+
+  public void waitForFBRegisterPage() {
+    wait.forElementVisible(registerFBPage);
   }
 
 }

@@ -52,7 +52,6 @@ public class FacebookTests extends NewTestTemplate {
     assertTrue(new DetachedRegisterPage().isConnectWithFacebookButtonVisible());
   }
 
-
   @Execute(asUser = User.USER)
   public void facebookButtonIsVisibleOnUserPreferencesPage() {
     PreferencesPageObject prefsPage = new WikiBasePageObject().openSpecialPreferencesPage(wikiURL);
@@ -69,6 +68,7 @@ public class FacebookTests extends NewTestTemplate {
     String userName = String.format("QA%s", Instant.now().getEpochSecond());
     String password = String.format("Pass%s", Instant.now().getEpochSecond());
 
+    fbModal.waitForFBRegisterPage();
     fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
   }
