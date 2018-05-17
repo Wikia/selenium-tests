@@ -18,7 +18,19 @@ public class TrackingOptInModal extends BasePageObject {
             wait.forElementClickable(acceptButton);
             acceptButton.click();
         } catch (Exception e) {
-            PageObjectLogging.log("Could click accept button", e, true);
+            PageObjectLogging.log("Accept button clicked", e, false);
         }
+    }
+
+    public boolean isModalDisplayed() {
+        boolean isVisible = false;
+        try {
+            wait.forElementVisible(modal);
+            isVisible = true;
+        } catch (Exception e) {
+            PageObjectLogging.log("Modal is visible", e, false);
+        }
+
+        return isVisible;
     }
 }
