@@ -37,20 +37,27 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
   }
 
+  @Execute(asUser = User.USER, trackingOptIn = false)
+  @Test(groups = {"mobile-wiki-tracking-opt-in"},
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "GDPRcountries"
+  )
+  public void testModalVisibilityForLoggedInWhoNeverOptedIn(String continent, String country, boolean shouldGetModal) {
+    setGeoCookie(continent, country);
+    new ArticlePage().open();
 
-  @Test(groups = {"mobile-wiki-tracking-opt-in"})
-  public void loggedInUserInEUShouldGetModalIfNeverOptedIn() {
-
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
+  @Execute(asUser = User.USER, trackingOptIn = true)
   public void loggedInUserInEUShouldNotGetModalIfOptedIn() {
+    setGeoCookie("EU", "DE");
+    new ArticlePage().open();
 
-  }
-
-  @Test(groups = {"mobile-wiki-tracking-opt-in"})
-  public void loggedInUserOutsideEUShouldNotGetModal() {
-
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertFalse(new TrackingOptInModal().isVisible());
   }
 
   private void setGeoCookie(String continent, String country) {

@@ -6,11 +6,11 @@ public class TrackingOptInDataProvider {
   @DataProvider
   public static Object[][] GDPRcountries() {
     return new Object[][]{
-        {"NA", "AI", true}, // Anguilla
-        {"NA", "AW", true}, // Aruba
-        {"EU", "AX", true}, // Åland Islands
-        {"EU", "AT", true}, // Austria
-        {"EU", "BE", true}, // Belgium
+        {"NA", "ai", true}, // Anguilla
+        {"NA", "aw", true}, // Aruba
+        {"EU", "ax", true}, // Åland Islands
+        {"EU", "at", true}, // Austria
+        {"EU", "be", true}, // Belgium
         {"EU", "bg", true}, // Bulgaria
         {"NA", "bm", true}, // Bermuda
         {"NA", "vg", true}, // British Virgin Islands
