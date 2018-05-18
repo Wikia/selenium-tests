@@ -352,12 +352,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       if (TestContext.isFirstLoad()) {
         boolean userOptedIn = true;
+        boolean userOptedOut = false;
+
         if (method.isAnnotationPresent(Execute.class) && !method.getAnnotation(Execute.class).trackingOptIn()) {
           userOptedIn = false;
         }
 
+        if (method.isAnnotationPresent(Execute.class)) {
+          userOptedOut = method.getAnnotation(Execute.class).trackingOptOut();
+        }
+
         if (userOptedIn) {
           driver.manage().addCookie(new Cookie("tracking-opt-in-status", "accepted"));
+        } else if (userOptedOut) {
+          driver.manage().addCookie(new Cookie("tracking-opt-in-status", "rejected"));
         }
       }
 

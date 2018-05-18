@@ -24,5 +24,7 @@ public @interface Execute {
 
   String language() default Configuration.DEFAULT_LANGUAGE;
 
-  boolean trackingOptIn() default true ;
+  boolean trackingOptIn() default true;
+
+  boolean trackingOptOut() default false;
 }
