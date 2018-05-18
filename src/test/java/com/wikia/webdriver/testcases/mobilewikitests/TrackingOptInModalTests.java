@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TrackingOptInModal;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -15,7 +16,7 @@ import org.openqa.selenium.Cookie;
 import org.testng.annotations.Test;
 
 
-@Test(groups = "mobile-wiki-tracking-opt-in")
+@Test(groups = {"mobile-wiki-tracking-opt-in"})
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -23,30 +24,33 @@ import org.testng.annotations.Test;
 public class TrackingOptInModalTests extends NewTestTemplate {
 
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
-  @Test(groups = "mobile-wiki-tracking-opt-in")
-  public void anonInEUShouldGetModal() {
-    setGeoCookie("PL", "EU");
+  @Test(groups = {"mobile-wiki-tracking-opt-in"},
+        dataProviderClass = TrackingOptInDataProvider.class,
+        dataProvider = "GDPRcountries"
+  )
+  public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
+    setGeoCookie(continent, country);
     new ArticlePage().open();
-
-    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+System.out.println(driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
   }
 
-  @Test(groups = "mobile-wiki-tracking-opt-in")
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
   public void anonOutsideOfEUSHouldNotGetModal() {
 
   }
 
-  @Test(groups = "mobile-wiki-tracking-opt-in")
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
   public void loggedInUserInEUShouldGetModalIfNeverOptedIn() {
 
   }
 
-  @Test(groups = "mobile-wiki-tracking-opt-in")
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
   public void loggedInUserInEUShouldNotGetModalIfOptedIn() {
 
   }
 
-  @Test(groups = "mobile-wiki-tracking-opt-in")
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
   public void loggedInUserOutsideEUShouldNotGetModal() {
 
   }
