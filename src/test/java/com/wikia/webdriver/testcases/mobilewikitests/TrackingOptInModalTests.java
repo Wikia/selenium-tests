@@ -10,8 +10,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TrackingOptInModal;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
 
 import org.openqa.selenium.Cookie;
 import org.testng.annotations.Test;
@@ -37,10 +37,6 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
   }
 
-  @Test(groups = {"mobile-wiki-tracking-opt-in"})
-  public void anonOutsideOfEUSHouldNotGetModal() {
-
-  }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   public void loggedInUserInEUShouldGetModalIfNeverOptedIn() {
