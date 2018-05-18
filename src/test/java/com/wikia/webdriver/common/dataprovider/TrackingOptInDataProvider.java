@@ -2,7 +2,20 @@ package com.wikia.webdriver.common.dataprovider;
 
 import org.testng.annotations.DataProvider;
 
+import java.util.Arrays;
+
 public class TrackingOptInDataProvider {
+
+  public static final String ADS_KIKIMORA_PATTERN = "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
+  public static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
+
+  public static final String[] ADS_INSTANT_GLOBALS = {
+          "wgAdDriverKikimoraTrackingCountries",
+          "wgAdDriverKikimoraViewabilityTrackingCountries",
+          "wgAdDriverKikimoraPlayerTrackingCountries",
+          "wgAdDriverKruxCountries"
+  };
+
   @DataProvider
   public static Object[][] GDPRcountries() {
     return new Object[][]{
@@ -75,6 +88,20 @@ public class TrackingOptInDataProvider {
         {"AS", "JP", false}, // Japan
         {"OC", "AU", false}, // Australia
         {"AS", "CN", false}, // China
+    };
+  }
+
+
+  @DataProvider
+  public static Object[][] adsDataProvider() {
+    return new Object[][]{
+            {
+                    ADS_INSTANT_GLOBALS,
+                    Arrays.asList(
+                            ADS_KIKIMORA_PATTERN,
+                            ADS_KRUX_PATTERN
+                    )
+            }
     };
   }
 }
