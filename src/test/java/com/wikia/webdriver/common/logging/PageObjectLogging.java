@@ -350,11 +350,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
        * Manually user would need to click 'agree' in the tracking opt in modal.
        */
 
-      if (TestContext.isFirstLoad() && "true".equals(method.isAnnotationPresent(Execute.class)
-              && "true".equals(method.getAnnotation(Execute.class).trackingOptIn())) ) {
-        driver.manage().addCookie(
-                new Cookie("tracking-opt-in-status", "accepted")
-        );
+      if (TestContext.isFirstLoad()) {
+        boolean userOptedIn = true;
+        if (method.isAnnotationPresent(Execute.class) && !method.getAnnotation(Execute.class).trackingOptIn()) {
+          userOptedIn = false;
+        }
+
+        if (userOptedIn) {
+          driver.manage().addCookie(new Cookie("tracking-opt-in-status", "accepted"));
+        }
       }
 
       /**
