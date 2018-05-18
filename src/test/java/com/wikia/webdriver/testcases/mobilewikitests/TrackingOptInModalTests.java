@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TrackingOptInModal;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -31,7 +32,8 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
     setGeoCookie(continent, country);
     new ArticlePage().open();
-System.out.println(driver.manage().getCookieNamed("Geo").getValue());
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
   }
 
