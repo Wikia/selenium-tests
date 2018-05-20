@@ -6,14 +6,53 @@ import java.util.Arrays;
 
 public class TrackingOptInDataProvider {
 
-  public static final String ADS_KIKIMORA_PATTERN = "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
-  public static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
+  private static final String ADS_KIKIMORA_PATTERN = "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
+  private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
+  private static final String ADS_NETZ_ATHLETEN_PATTERN = "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
+  private static final String ADS_MOAT_PATTERN = "https?://.*pixel\\.gif.*";
+  private static final String ADS_PREBID_PATTERN = "http?://.*gads\\.pubmatic\\.com/AdServer/AdCallAggregator.*";
+  private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
+  private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch.*";
+  private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve.*";
+  private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/jpt.*";
+  private static final String ADS_NORDICS_PATTERN = "https?://.*Nordics_RoN.*";
+  private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
+  private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
+  private static final String ADS_RUBBICON_FASTLANE_PATTERN = "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
 
-  public static final String[] ADS_INSTANT_GLOBALS = {
+
+  private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
           "wgAdDriverKikimoraTrackingCountries",
           "wgAdDriverKikimoraViewabilityTrackingCountries",
-          "wgAdDriverKikimoraPlayerTrackingCountries",
+          "wgAdDriverKikimoraPlayerTrackingCountries"
+  };
+
+  private static final String[] ADS_KRUX_INSTANT_GLOBALS = {
           "wgAdDriverKruxCountries"
+  };
+
+  private static final String[] ADS_NETZ_ATHLETEN_INSTANT_GLOBALS = {
+          "wgAdDriverNetzAthletenCountries"
+  };
+
+  private static final String[] ADS_MOAT_INSTANT_GLOBALS = {
+          "wgAdDriverVideoMoatTrackingCountries",
+          "wgAdDriverPorvataMoatTrackingCountries",
+          "wgAdDriverVideoMoatTrackingCountries"
+  };
+
+  private static final String[] ADS_PREBID_INSTANT_GLOBALS = {
+          "wgAdDriverBottomLeaderBoardLazyPrebidCountries",
+          "wgAdDriverOpenXPrebidBidderCountries",
+          "wgAdDriverPrebidBidderCountries",
+          "wgAdDriverRubiconDisplayPrebidCountries",
+          "wgAdDriverRubiconPrebidCountries",
+          "wgAdDriverAppNexusBidderCountries"
+  };
+
+  private static final String[] ADS_A9_INSTANT_GLOBALS = {
+          "wgAdDriverA9BidderCountries",
+          "wgAdDriverA9VideoBidderCountries"
   };
 
   @DataProvider
@@ -93,15 +132,102 @@ public class TrackingOptInDataProvider {
 
 
   @DataProvider
-  public static Object[][] adsDataProvider() {
+  public static Object[][] adsKikimoraDataProvider() {
     return new Object[][]{
             {
-                    ADS_INSTANT_GLOBALS,
+                    ADS_KIKIMORA_INSTANT_GLOBALS,
                     Arrays.asList(
-                            ADS_KIKIMORA_PATTERN,
+                            ADS_KIKIMORA_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsKruxDataProvider() {
+    return new Object[][]{
+            {
+                    ADS_KRUX_INSTANT_GLOBALS,
+                    Arrays.asList(
                             ADS_KRUX_PATTERN
                     )
             }
     };
   }
+
+  @DataProvider
+  public static Object[][] adsNetzAthletenDataProvider() {
+    return new Object[][]{
+            {
+                    ADS_NETZ_ATHLETEN_INSTANT_GLOBALS,
+                    Arrays.asList(
+                            ADS_NETZ_ATHLETEN_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsMoatDataProvider() {
+    return new Object[][]{
+            {
+                    ADS_MOAT_INSTANT_GLOBALS,
+                    Arrays.asList(
+                            ADS_MOAT_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsPrebidDataProvider() {
+    return new Object[][]{
+            {
+                    ADS_PREBID_INSTANT_GLOBALS,
+                    Arrays.asList(
+                            ADS_PREBID_PATTERN,
+                            ADS_APP_NEXUS_PATTERN,
+                            ADS_OPOENX_PATTERN,
+                            ADS_INDEX_EXCHANGE_PATTERN,
+                            ADS_RUBBICON_FASTLANE_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsA9DataProvider() {
+    return new Object[][]{
+            {
+                    ADS_A9_INSTANT_GLOBALS,
+                    Arrays.asList(
+                            ADS_A9_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsNordicsDataProvider() {
+    return new Object[][]{
+            {
+                    Arrays.asList(
+                            ADS_NORDICS_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsComscoreQuantcastDataProvider() {
+    return new Object[][]{
+            {
+                    Arrays.asList(
+                            ADS_COMSCORE_PATTERN,
+                            ADS_QUANTCAST_PATTERN
+                    )
+            }
+    };
+  }
+
 }

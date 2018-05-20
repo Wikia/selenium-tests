@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
@@ -30,6 +31,7 @@ public class TrackingOptInModal extends BasePageObject {
 
     private HarEntry entry;
     private static final Duration WAITNG_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
+    private static final String MODAL_INSTANT_GLOBAL = "InstantGlobals.wgEnableTrackingOptInModal=1";
 
 
     public boolean isVisible() {
@@ -75,7 +77,43 @@ public class TrackingOptInModal extends BasePageObject {
         return isVisible;
     }
 
-    public boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
+    public void verifyTrackingRequestsNotSend(String[] instantGlobals, List<String> urlPatterns,
+                                                     NetworkTrafficInterceptor networkTrafficInterceptor,
+                                                     Page page){
+        getUrl(urlWithInstantGlobals(instantGlobals, page));
+        clickRejectButton();
+        isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    }
+
+    public void verifyTrackingRequestsNotSend(List<String> urlPatterns,
+                                              NetworkTrafficInterceptor networkTrafficInterceptor,
+                                              Page page){
+        getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL));
+        clickRejectButton();
+        isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    }
+
+    public void verifyTrackingRequestsSend(String[] instantGlobals, List<String> urlPatterns,
+                                                  NetworkTrafficInterceptor networkTrafficInterceptor,
+                                                  Page page){
+        getUrl(urlWithInstantGlobals(instantGlobals, page));
+        clickAcceptButton();
+        isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
+    }
+
+    public void verifyTrackingRequestsSend(List<String> urlPatterns,
+                                                 NetworkTrafficInterceptor networkTrafficInterceptor,
+                                                 Page page){
+        getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL));
+        clickAcceptButton();
+        isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
+    }
+
+    public String urlOptInModalDisplayedOasis(Page page){
+        return urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL);
+    }
+
+    private boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
                                                     final String pattern) {
         try {
             entry = trafficInterceptor.getEntryByUrlPattern(pattern);
@@ -85,31 +123,35 @@ public class TrackingOptInModal extends BasePageObject {
         }
     }
 
-    public void verifyTrackingRequestsNotSend(List<String> elementsList, BasePageObject object,
+    private void isTrackingRequestsNotSend(List<String> elementsList,
                                               NetworkTrafficInterceptor networkTrafficInterceptor) {
-        object.wait.forX(WAITNG_TIME_FOR_ALL_REQUESTS);
+        wait.forX(WAITNG_TIME_FOR_ALL_REQUESTS);
         for(int i=0; i<elementsList.size(); i++){
             Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i)),
                     "Request to " + elementsList.get(i) + " services was found");
         }
     }
 
-    public void verifyTrackingRequestSend(List<String> elementsList, BasePageObject object,
+    private void isTrackingRequestSend(List<String> elementsList,
                                           NetworkTrafficInterceptor networkTrafficInterceptor) {
         for(int i=0; i<elementsList.size(); i++){
-            object.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,elementsList.get(i));
+            wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,elementsList.get(i));
         }
     }
 
-    public static String appendTrackingOptOutParameters(String url, String[] instantGlobals) {
+    private static String appendTrackingOptOutParameters(String url, String[] instantGlobals) {
         UrlBuilder urlBuilder = new UrlBuilder();
 
         for (String instantGlobal : instantGlobals) {
             url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, instantGlobal);
         }
-
-        url = urlBuilder.appendQueryStringToURL(url, "trackingoptout=1");
-
         return url;
     }
+
+    private String urlWithInstantGlobals(String[] instantGlobals, Page page){
+        String url = urlOptInModalDisplayedOasis(page);
+        String urlWithInstantGlobals = appendTrackingOptOutParameters(url, instantGlobals);
+        return urlBuilder.appendQueryStringToURL(urlWithInstantGlobals, MODAL_INSTANT_GLOBAL);
+    }
+
 }
