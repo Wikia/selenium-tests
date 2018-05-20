@@ -113,18 +113,8 @@ public class TrackingOptInModal extends BasePageObject {
         return urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL);
     }
 
-    private boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
-                                                    final String pattern) {
-        try {
-            entry = trafficInterceptor.getEntryByUrlPattern(pattern);
-            return entry.getResponse().getStatus() < 400;
-        }catch (NullPointerException ex) {
-            return false;
-        }
-    }
-
-    private void isTrackingRequestsNotSend(List<String> elementsList,
-                                              NetworkTrafficInterceptor networkTrafficInterceptor) {
+    public void isTrackingRequestsNotSend(List<String> elementsList,
+                                          NetworkTrafficInterceptor networkTrafficInterceptor) {
         wait.forX(WAITNG_TIME_FOR_ALL_REQUESTS);
         for(int i=0; i<elementsList.size(); i++){
             Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i)),
@@ -132,10 +122,20 @@ public class TrackingOptInModal extends BasePageObject {
         }
     }
 
-    private void isTrackingRequestSend(List<String> elementsList,
-                                          NetworkTrafficInterceptor networkTrafficInterceptor) {
+    public void isTrackingRequestSend(List<String> elementsList,
+                                      NetworkTrafficInterceptor networkTrafficInterceptor) {
         for(int i=0; i<elementsList.size(); i++){
             wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,elementsList.get(i));
+        }
+    }
+
+    private boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
+                                                    final String pattern) {
+        try {
+            entry = trafficInterceptor.getEntryByUrlPattern(pattern);
+            return entry.getResponse().getStatus() < 400;
+        }catch (NullPointerException ex) {
+            return false;
         }
     }
 

@@ -19,6 +19,19 @@ public class TrackingOptInDataProvider {
   private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
   private static final String ADS_RUBBICON_FASTLANE_PATTERN = "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
+  private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
+          "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
+  private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =
+          "https?://.*\\.doubleclick\\.net.*ads.*TOP_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+  private static final String ADS_BLB_NPA_FIRST_PARAMETER_PATTERN =
+          "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*BOTTOM_LEADERBOARD.*";
+  private static final String ADS_BLB_NPA_SECOND_PARAMETER_PATTERN =
+          "https?://.*\\.doubleclick\\.net.*ads.*BOTTOM_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+  private static final String ADS_VAST_NPA_FIRST_PARAMETER_PATTERN =
+          "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
+  private static final String ADS_VAST_NPA_SECOND_PARAMETER_PATTERN =
+          "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
+
 
 
   private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
@@ -190,6 +203,22 @@ public class TrackingOptInDataProvider {
                             ADS_OPOENX_PATTERN,
                             ADS_INDEX_EXCHANGE_PATTERN,
                             ADS_RUBBICON_FASTLANE_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsNpaHiViDataProviderOasis() {
+    return new Object[][]{
+            {
+                    Arrays.asList(
+                            ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
+                            ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
+                            ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
+                            ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
+                            ADS_VAST_NPA_FIRST_PARAMETER_PATTERN,
+                            ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
                     )
             }
     };
