@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.Anonymization;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.EmailUtils;
@@ -13,8 +14,12 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.ConfirmationModalPage;
@@ -28,6 +33,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -37,56 +43,90 @@ import java.util.UUID;
 @Test(groups = "anonymization")
 public class AnonymizationTests extends NewTestTemplate {
 
+  private SpecialAnonymizationUserPage openAnonymizationPage(User user) {
+    WikiBasePageObject base = new WikiBasePageObject();
+    base.loginAs(user);
+    return new SpecialAnonymizationUserPage().open();
+  }
 
-//  @Test
-//  public void anonyizationMessageWallTest() {
+  private static final String ERROR_MESSAGE =
+      "We don't recognize these credentials. Try again or register a new account.";
+
+  @Test
+  public void anonymizedUserCannotLogin() {
+
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    String qanon = "QAanon" + timestamp;
+    String passw = "makak";
+    SignUpUser
+        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
+                              LocalDate.of(1990, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    SpecialAnonymizationUserPage anonymizationStaff = openAnonymizationPage(User.SUS_STAFF);
+    anonymizationStaff.fillFutureAnon(qanon)
+        .submitAnonymization();
+
+    Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
+
+    anonymizationStaff.logOut();
+
+    SignInPage signIn = openLoginModalOnDesktop();
+    signIn.login(qanon, passw);
+    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
+  }
+
+  private SignInPage openLoginModalOnDesktop() {
+    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
+  }
+
+
+
+
+
+
+
+
+
+    @Test
+  public void anonyizationMessageWallTest() {
+
+      Credentials credentials = new Credentials();
+      String timestamp = Long.toString(DateTime.now().getMillis());
+      String qanon = "QAanon" + timestamp;
+      String passw = "makak";
+      SignUpUser
+          user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
+                                LocalDate.of(1990, 3, 19));
+      UserRegistration.registerUserEmailConfirmed(user);
+
+    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+
+    MessageWall wall = new MessageWall().open(user.getUsername());
+    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
+    String message = String.format("%s%s", PageContent.MESSAGE_WALL_MESSAGE_PREFIX, timestamp);
+    String title = String.format("%s%s", PageContent.MESSAGE_WALL_TITLE_PREFIX, timestamp);
+    mini.switchAndWrite(message);
+    wall.setTitle(title);
+    wall.submit();
+    wall.verifyMessageText(title, message, user.getUsername());
+    wall.triggerEditMessageArea();
+    String
+        messageEdit =
+        PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + Long.toString(DateTime.now().getMillis());
+    mini.switchAndEditMessageWall(messageEdit);
+    wall.submitEdition();
+    wall.verifyMessageEditText(title, messageEdit, user.getUsername());
+
+    try {
+      Thread.sleep(15000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
+                                 e);
+    }
+
 //
-//    Credentials credentials = new Credentials();
-//    EmailUtils.deleteAllEmails(credentials.emailAnonymousUserTestWikia,
-//                               credentials.emailAnonymousUserTestWikiaPassword);
-//
-//    String timestamp = Long.toString(DateTime.now().getMillis());
-//    SignUpUser
-//        user =
-//        new SignUpUser("QARename Usęr" + timestamp, credentials.emailAnonymousUserTestWikia, "aaaa",
-//                       LocalDate.of(1993, 3, 19));
-//    UserRegistration.registerUserEmailConfirmed(user);
-//
-//    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
-//
-//    MessageWall wall = new MessageWall().open(user.getUsername());
-//    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
-//    String message = String.format("%s%s", PageContent.MESSAGE_WALL_MESSAGE_PREFIX, timestamp);
-//    String title = String.format("%s%s", PageContent.MESSAGE_WALL_TITLE_PREFIX, timestamp);
-//    mini.switchAndWrite(message);
-//    wall.setTitle(title);
-//    wall.submit();
-//    wall.verifyMessageText(title, message, user.getUsername());
-//    wall.triggerEditMessageArea();
-//    String
-//        messageEdit =
-//        PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + Long.toString(DateTime.now().getMillis());
-//    mini.switchAndEditMessageWall(messageEdit);
-//    wall.submitEdition();
-//    wall.verifyMessageEditText(title, messageEdit, user.getUsername());
-//
-//    try {
-//      Thread.sleep(15000);
-//    } catch (InterruptedException e) {
-//      PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
-//                                 e);
-//    }
-//
-//    String newName = "NewUser Nąmę" + timestamp;
-//    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
-//        .open()
-//        .fillFormData(newName, newName, user.getPassword())
-//        .agreeToTermsAndConditions()
-//        .submitChange();
-//    new ConfirmationModalPage().accept();
-//    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(),
-//                           "Rename process is in progress. The rest will be done in background. "
-//                           + "You will be notified via e-mail when it is completed.");
 //    wall.open(newName);
 //    String encodedUrl = renameUserPage.encodeToURL(newName);
 //
@@ -110,26 +150,4 @@ public class AnonymizationTests extends NewTestTemplate {
 //                               credentials.emailAnonymousUserTestWikiaPassword);
 //
 //  }
-
-  @Test
-  public void anonymizedUscommerCannotLogin() {
-
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = "QAanon" + timestamp;
-    SignUpUser
-        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, "makak",
-                              LocalDate.of(1993, 3, 19));
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    SpecialAnonymizationUserPage anonymizationUserPage = new SpecialAnonymizationUserPage()
-        .open()
-        .fillFutureAnon(qanon)
-        .submitAnonymization();
-
-    Assertion.assertEquals(anonymizationUserPage.getAnonConfirmation(), "Request to forget CTest8 with id=33945471 sent");
-
-
-
-  }
 }
