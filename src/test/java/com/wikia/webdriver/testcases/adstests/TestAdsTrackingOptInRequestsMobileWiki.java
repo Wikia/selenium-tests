@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
-
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -22,6 +21,7 @@ import java.util.List;
 public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
+  private static final Page ADS_PORVATA_DIRECT = new Page("project43", "SyntheticTests/Video/Porvata/Direct");
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
@@ -37,6 +37,23 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
                                                            networkTrafficInterceptor,
                                                            ADS_HOME_PAGE);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+          dataProviderClass = TrackingOptInDataProvider.class,
+          dataProvider = "adsNpaSlotsDataProviderMobile",
+          groups = "adsOptInRejectedMobileWiki"
+  )
+  public void adsTrackingRejectedForSlotsAdSlots(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal.setGeoCookie(driver,"EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_PORVATA_DIRECT));
+
+    modal.clickRejectButton();
+    modal.isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -333,4 +350,20 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
                 .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
     }
 
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+          dataProviderClass = TrackingOptInDataProvider.class,
+          dataProvider = "adsNpaSlotsDataProviderMobile",
+          groups = "adsOptInAcceptedMobileWiki"
+  )
+  public void adsTrackingAcceptedForAdSlots(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal.setGeoCookie(driver,"EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_PORVATA_DIRECT));
+
+    modal.clickAcceptButton();
+    modal.isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+  }
 }
