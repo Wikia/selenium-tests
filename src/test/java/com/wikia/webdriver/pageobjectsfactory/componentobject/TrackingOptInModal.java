@@ -144,6 +144,12 @@ public class TrackingOptInModal extends BasePageObject {
         }
     }
 
+    public void isOnlyExpectedTrackingRequestSend(List<String> elementsList,
+                                                  NetworkTrafficInterceptor networkTrafficInterceptor) {
+        for(int i=0; i<elementsList.size(); i++) {
+        }
+    }
+
     private boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
                                                     final String pattern) {
         try {

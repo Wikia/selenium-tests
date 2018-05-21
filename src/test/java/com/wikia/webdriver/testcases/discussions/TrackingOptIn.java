@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.discussions;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -117,6 +118,18 @@ public class TrackingOptIn extends NewTestTemplate {
     public void AnonInEUShouldNotGetModalIfOptedOutOnMobile() {
         TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
         Assertion.assertFalse(trackingModal.isVisible());
+    }
+
+    @Test
+    @NetworkTrafficDump(useMITM = true)
+    @Execute(trackingOptIn = false)
+    public void testRequest() {
+        TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
+        Assertion.assertTrue(trackingModal.isVisible());
+        networkTrafficInterceptor.startIntercepting();
+        trackingModal.clickRejectButton();
+
+        networkTrafficInterceptor.stop();
     }
 
     /*
