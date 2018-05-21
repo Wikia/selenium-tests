@@ -1,12 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.TimeoutException;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.WebElement;
@@ -33,6 +36,18 @@ public class TrackingOptInModal extends BasePageObject {
     private static final Duration WAITNG_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
     private static final String MODAL_INSTANT_GLOBAL = "InstantGlobals.wgEnableTrackingOptInModal=1";
 
+
+    public static void setGeoCookie(WikiaWebDriver driver, String continent, String country) {
+        Cookie geoCookie = driver.manage().getCookieNamed("Geo");
+        driver.manage().deleteCookie(geoCookie);
+        driver.manage().addCookie(new Cookie(
+            "Geo",
+            "{%22region%22:%22WP%22%2C%22country%22:%22" + country + "%22%2C%22continent%22:%22" + continent + "%22}",
+            String.format(".%s", Configuration.getEnvType().getWikiaDomain()),
+            null,
+            null
+        ));
+    }
 
     public boolean isVisible() {
         try {
