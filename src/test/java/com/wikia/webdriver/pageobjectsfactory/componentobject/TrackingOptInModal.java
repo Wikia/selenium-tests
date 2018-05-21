@@ -169,4 +169,8 @@ public class TrackingOptInModal extends BasePageObject {
         return urlBuilder.appendQueryStringToURL(urlWithInstantGlobals, MODAL_INSTANT_GLOBAL);
     }
 
+    public void logTrackingCookieValue() {
+        PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    }
+
 }
