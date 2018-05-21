@@ -14,6 +14,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement postsCreator;
 
   @Getter
+  @FindBy(css = ".post-entry-point__items > li:nth-child(1)")
+  private WebElement textPostType;
+
+  @Getter
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement signInDialog;
 
@@ -40,11 +44,11 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor .discussion-standalone-editor-title .editor-textarea")
+  @FindBy (css = ".discussion-standalone-editor .editor-form__title .editor-textarea")
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".discussion-standalone-editor .editor-input-label-wrapper .editor-textarea.js--textarea:not([disabled])")
+  @FindBy(css = ".discussion-standalone-editor .editor-input-label-wrapper .editor-textarea.is-description")
   private WebElement descriptionTextarea;
 
   @Getter

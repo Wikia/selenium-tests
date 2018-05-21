@@ -19,7 +19,7 @@ public class Poll extends BasePageObject {
     private WebElement title;
 
     @Getter
-    @FindBy(css = ".poll-footer__vote")
+    @FindBy(css = ".poll-footer > button")
     private WebElement voteButton;
 
     @FindBy(css = ".poll-footer__voted")

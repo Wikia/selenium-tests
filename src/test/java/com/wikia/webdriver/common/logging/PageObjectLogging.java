@@ -342,6 +342,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         PageObjectLogging.logInfo("Hack for disabling notifications", "Failed to execute js action");
 
       }
+      /**
+       * All of tests should be executed as an user who opted in (agreed) on using ads tracking.
+       * Manually user would need to click 'agree' in the tracking opt in modal.
+       */
+
+      if (TestContext.isFirstLoad()) {
+        driver.manage().addCookie(
+                new Cookie("tracking-opt-in-status", "accepted")
+        );
+      }
 
       /**
        * We want to disable sales pitch dialog for new potential contributors to avoid hiding other

@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
@@ -125,7 +126,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(whatLinksHere.whatLinksHereContainsArticleName(articleName));
   }
 
-  @InBrowser(browser = Browser.FIREFOX, browserSize = "1200x720")
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyLightboxVisibilityAfterClickingImage() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);

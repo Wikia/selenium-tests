@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -18,10 +20,11 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
         FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL);
 
-    loadPage(testedPage);
+    AdsFandomObject pageObject = loadPage(testedPage);
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
     jwPlayerObject.verifyPreroll();
+    verifySlots(pageObject);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -37,6 +40,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
 
     jwPlayerObject.verifyPlayerOnPage();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL);
+    verifySlots(pageObject);
   }
 
   @InBrowser(
@@ -56,5 +60,12 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   @Test(groups = "AdsFeaturedVideoMoatTrackingF2Mobile")
   public void adsFeaturedVideoMOATTrackingMobile() {
     adsFeaturedVideoMOATTrackingDesktop();
+  }
+
+  private void verifySlots(AdsFandomObject fandomPage) {
+    fandomPage.triggerOnScrollSlots();
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 }
