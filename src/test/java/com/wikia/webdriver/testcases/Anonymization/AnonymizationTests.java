@@ -14,6 +14,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -21,10 +22,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.ConfirmationModalPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.HelpPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.SpecialRenameUserPage;
+import com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests;
 
 import jdk.nashorn.internal.runtime.regexp.RegExp;
 import org.assertj.core.util.Compatibility;
@@ -82,24 +85,39 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
 
+  @Test
+  public void anonymizationWikiEdits() {
+
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    String qanon = "QAanon" + timestamp;
+    String passw = "makak";
+    SignUpUser
+        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
+                              LocalDate.of(1990, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+
+    new ArticleContent().push("asdf", "aaaa");
+
+    new SpecialWikiActivityPageObject().open();
+
+    Assertion.assertStringContains(qanon,qanon);
+  }
 
 
-
-
-
-
-
-    @Test
+  @Test
   public void anonyizationMessageWallTest() {
 
-      Credentials credentials = new Credentials();
-      String timestamp = Long.toString(DateTime.now().getMillis());
-      String qanon = "QAanon" + timestamp;
-      String passw = "makak";
-      SignUpUser
-          user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
-                                LocalDate.of(1990, 3, 19));
-      UserRegistration.registerUserEmailConfirmed(user);
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    String qanon = "QAanon" + timestamp;
+    String passw = "makak";
+    SignUpUser
+        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
+                              LocalDate.of(1990, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
@@ -124,6 +142,9 @@ public class AnonymizationTests extends NewTestTemplate {
     } catch (InterruptedException e) {
       PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
                                  e);
+
+
+
     }
 
 //
@@ -150,4 +171,5 @@ public class AnonymizationTests extends NewTestTemplate {
 //                               credentials.emailAnonymousUserTestWikiaPassword);
 //
 //  }
+  }
 }
