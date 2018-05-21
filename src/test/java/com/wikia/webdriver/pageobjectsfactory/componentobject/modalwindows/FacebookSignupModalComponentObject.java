@@ -57,7 +57,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
       }
     });
 
-    //switch to Facebook moda;
+    //switch to Facebook modal;
     Object[] handles = driver.getWindowHandles().toArray();
     driver.switchTo().window(handles[1].toString());
 
