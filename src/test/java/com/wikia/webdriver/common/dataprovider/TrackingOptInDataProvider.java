@@ -19,6 +19,9 @@ public class TrackingOptInDataProvider {
   private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
   private static final String ADS_RUBBICON_FASTLANE_PATTERN = "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
+  private static final String ADS_GOOGLE_ANALYTICS_PATERN = "https?://.*google-analytics\\.com/analytics\\.js.*";
+  private static final String ADS_QUALAROO_ANALITYCS_PATERN = "http?:http://s3\\.amazonaws\\.com/.*\\.js.*";
+
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
           "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =
@@ -254,6 +257,28 @@ public class TrackingOptInDataProvider {
                     Arrays.asList(
                             ADS_COMSCORE_PATTERN,
                             ADS_QUANTCAST_PATTERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsGoogleAnalyticsDataProvider() {
+    return new Object[][]{
+            {
+                    Arrays.asList(
+                            ADS_GOOGLE_ANALYTICS_PATERN
+                    )
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsQualarooDataProvider() {
+    return new Object[][]{
+            {
+                    Arrays.asList(
+                            ADS_QUALAROO_ANALITYCS_PATERN
                     )
             }
     };

@@ -1,13 +1,11 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import org.openqa.selenium.Cookie;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -129,6 +127,34 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
         new TrackingOptInModal().verifyTrackingRequestsNotSend(urlPatterns,
                 networkTrafficInterceptor, ADS_HOME_PAGE);
 
+    }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsGoogleAnalyticsDataProvider",
+            groups = "adsOptInRejectedMobileWiki"
+    )
+    public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsQualarooDataProvider",
+            groups = "adsOptInRejectedMobileWiki"
+    )
+    public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -277,5 +303,33 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
         ads.scrollToFooter();
 
         modal.isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsGoogleAnalyticsDataProvider",
+            groups = "adsOptInAcceptedMobileWiki"
+    )
+    public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsQualarooDataProvider",
+            groups = "adsOptInAcceptedMobileWiki"
+    )
+    public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
     }
 }

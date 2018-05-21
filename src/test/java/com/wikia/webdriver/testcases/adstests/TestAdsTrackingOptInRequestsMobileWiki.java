@@ -151,6 +151,36 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   }
 
+    @NetworkTrafficDump(useMITM = true)
+    @Execute(trackingOptIn = false)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsGoogleAnalyticsDataProvider",
+            groups = "adsOptInRejectedMobileWiki"
+    )
+    public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Execute(trackingOptIn = false)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsQualarooDataProvider",
+            groups = "adsOptInRejectedMobileWiki"
+    )
+    public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    }
+
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @Test(
@@ -272,5 +302,35 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     new TrackingOptInModal()
         .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
   }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Execute(trackingOptIn = false)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsGoogleAnalyticsDataProvider",
+            groups = "adsOptInAcceptedMobileWiki"
+    )
+    public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    }
+
+    @NetworkTrafficDump(useMITM = true)
+    @Execute(trackingOptIn = false)
+    @Test(
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "adsQualarooDataProvider",
+            groups = "adsOptInAcceptedMobileWiki"
+    )
+    public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+
+        new TrackingOptInModal()
+                .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    }
 
 }
