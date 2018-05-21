@@ -115,7 +115,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     typeEmail(email);
     typeUserName(userName);
     typePassword(password);
-    typeBirthday(birthMonth,birthDay,birthMonth);
+    typeBirthday(birthMonth,birthDay,birthYear);
     clickRegister();
   }
 

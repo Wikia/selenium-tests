@@ -67,7 +67,7 @@ public class FacebookTests extends NewTestTemplate {
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
-    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password, 11, 11, 1970);
+    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password, 1, 1, 1970);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
   }
 
