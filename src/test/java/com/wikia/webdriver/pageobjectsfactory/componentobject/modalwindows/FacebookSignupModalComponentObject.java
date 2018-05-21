@@ -8,41 +8,43 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import javax.annotation.Nullable;
 
 public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "button[name='__CONFIRM__']")
   private WebElement appTermsConfirmButton;
+
   @FindBy(css = "#signupUsername")
   private WebElement usernameField;
+
   @FindBy(css = "#signupPassword")
   private WebElement passwordField;
+
   @FindBy(css = "#signupEmail")
   private WebElement emailField;
+
   @FindBy(css = "#signupSubmit")
   private WebElement registerButton;
 
+  @FindBy(css = "#facebookRegistrationForm")
+  private WebElement facebookRegistrationForm;
+
+  @FindBy(css = "#signupBirthDate")
+  private WebElement birthdateContainer;
+
+  @FindBy(css = "input.birth-month")
+  private WebElement birthMonthField;
+
+  @FindBy(css = ".birth-day")
+  private WebElement birthDayField;
+
+  @FindBy(css = ".birth-month")
+  private WebElement birthYearField;
+
   public FacebookSignupModalComponentObject() {
     super();
-  }
-
-  public void acceptWikiaAppPolicy() {
-    new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
-      @Nullable
-      @Override
-      public Boolean apply(WebDriver input) {
-        return input.getWindowHandles().size() > 1;
-      }
-    });
-
-    Object[] handles = driver.getWindowHandles().toArray();
-
-    driver.switchTo().window(handles[1].toString());
-    wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
-    appTermsConfirmButton.click();
-    PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
-    driver.switchTo().window(handles[0].toString());
   }
 
   public void acceptWikiaAppPolicyNoEmail() {
@@ -55,15 +57,25 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
       }
     });
 
+    //switch to Facebook modal;
     Object[] handles = driver.getWindowHandles().toArray();
-
     driver.switchTo().window(handles[1].toString());
+
     wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
+
+    //switch back to Wikia auth modal
     driver.switchTo().window(handles[0].toString());
   }
 
+  public void typeEmail(String email) {
+    wait.forElementClickable(emailField);
+    emailField.sendKeys(email);
+    PageObjectLogging.log("typeEmail", "email " + email + " typed into the field", true);
+  }
+
   public void typeUserName(String userName) {
+    wait.forElementClickable(usernameField);
     usernameField.sendKeys(userName);
     PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
   }
@@ -74,6 +86,20 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("typePassword", "password typed into the field", true);
   }
 
+  public void typeBirthday(int month, int day, int year) {
+    wait.forElementClickable(birthdateContainer);
+    birthdateContainer.click();
+
+    wait.forElementClickable(birthMonthField);
+    birthMonthField.sendKeys(Integer.toString(month));
+
+    waitAndClick(birthDayField);
+    birthDayField.sendKeys(Integer.toString(day));
+
+    waitAndClick(birthYearField);
+    birthYearField.sendKeys(Integer.toString(year));
+    }
+
   public void clickRegister() {
     wait.forElementVisible(registerButton);
     registerButton.click();
@@ -81,12 +107,15 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     waitForElementNotVisibleByElement(registerButton);
   }
 
-  public void createAccountNoEmail(String email, String userName, String password) {
+  public void createAccountNoEmail(String email, String userName, String password,
+                                   Integer birthMonth, Integer birthDay, Integer birthYear) {
     acceptWikiaAppPolicyNoEmail();
-    waitForValueToBePresentInElementsAttributeByElement(emailField, "value", email);
 
+    wait.forElementVisible(facebookRegistrationForm);
+    typeEmail(email);
     typeUserName(userName);
     typePassword(password);
+    typeBirthday(birthMonth,birthDay,birthMonth);
     clickRegister();
   }
 
