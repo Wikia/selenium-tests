@@ -144,10 +144,19 @@ public class TrackingOptInModal extends BasePageObject {
         }
     }
 
-    public void isOnlyExpectedTrackingRequestSend(List<String> elementsList,
-                                                  NetworkTrafficInterceptor networkTrafficInterceptor) {
-        for(int i=0; i<elementsList.size(); i++) {
+    public boolean areResponsesByUrlPatternSuccessful(List<String> elementsList,
+                                      NetworkTrafficInterceptor networkTrafficInterceptor) {
+        boolean result = true;
+        for(int i=0; i<elementsList.size(); i++){
+            try {
+                wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,elementsList.get(i));
+            } catch (Exception e) {
+                PageObjectLogging.log("Did not get successfull response with element: " + elementsList.get(i),
+                        e, false);
+                result = false;
+            }
         }
+        return result;
     }
 
     private boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,

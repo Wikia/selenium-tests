@@ -13,6 +13,8 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 @Test(groups = {"discussions-tracking-opt-in"})
 public class TrackingOptIn extends NewTestTemplate {
 
@@ -120,16 +122,19 @@ public class TrackingOptIn extends NewTestTemplate {
         Assertion.assertFalse(trackingModal.isVisible());
     }
 
-    @Test
     @NetworkTrafficDump(useMITM = true)
-    @Execute(trackingOptIn = false)
-    public void testRequest() {
+    @Test(groups = {"discussions-tracking-opt-in-desktop"},
+            dataProviderClass = TrackingOptInDataProvider.class,
+            dataProvider = "discussionsGoogleAnalyticAnonymized")
+    @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
+    public void anonInEUOnRejectShouldGetAnonymizedGoogleTracking(List<String> urlPatterns) {
+        networkTrafficInterceptor.startIntercepting();
         TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
         Assertion.assertTrue(trackingModal.isVisible());
-        networkTrafficInterceptor.startIntercepting();
         trackingModal.clickRejectButton();
-
         networkTrafficInterceptor.stop();
+
+        Assertion.assertTrue(trackingModal.areResponsesByUrlPatternSuccessful(urlPatterns, networkTrafficInterceptor));
     }
 
     /*
