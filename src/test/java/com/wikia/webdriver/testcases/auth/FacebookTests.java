@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.core.helpers.FacebookUser;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -60,16 +59,15 @@ public class FacebookTests extends NewTestTemplate {
     assertTrue(prefsPage.isFacebookButtonVisible());
   }
 
-  @RelatedIssue(issueID = "IRIS-4714")
   public void userCanSignUpViaFacebook() {
+    String userName = String.format("QA%s", Instant.now().getEpochSecond());
+    String password = String.format("Pass%s", Instant.now().getEpochSecond());
+
     new FacebookMainPageObject().login(facebookUser.getEmail(), facebookUser.getPassword());
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
-    String userName = String.format("QA%s", Instant.now().getEpochSecond());
-    String password = String.format("Pass%s", Instant.now().getEpochSecond());
-
-    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password);
+    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password, 11, 11, 1970);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
   }
 
