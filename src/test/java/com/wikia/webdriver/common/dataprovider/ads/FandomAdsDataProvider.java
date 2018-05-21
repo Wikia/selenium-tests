@@ -9,6 +9,7 @@ public class FandomAdsDataProvider {
 
   public static final String ARTICLE_VIDEO_PAGE_SLUG = "the-best-movies-of-2017-so-far";
   public static final String FEATURED_VIDEO_PAGE_SLUG = "orphan-black-clones-names";
+  public static final String VIDEO_PAGE_SLUG = "video";
   public static final String VUAP_PAGE_SLUG = "everything-we-know-about-the-han-solo-movie";
 
   public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
