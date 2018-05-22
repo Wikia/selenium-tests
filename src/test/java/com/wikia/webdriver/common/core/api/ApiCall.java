@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
@@ -16,16 +16,17 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public abstract class ApiCall {
 
   protected static String URL_STRING = null;
   private static String ERROR_MESSAGE = "Problem with API call";
 
-  protected ApiCall() {}
+  protected ApiCall() {
+  }
 
   abstract protected String getURL();
 
@@ -43,14 +44,23 @@ public abstract class ApiCall {
    */
   abstract protected ArrayList<BasicNameValuePair> getParams();
 
+  /**
+   * This enables passing username as string instead from ENUM.
+   *
+   * @return Username to log in.
+   */
+  abstract protected String getUserName();
+
   public void call() {
     try {
       CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries()
           .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
       HttpPost httpPost = new HttpPost(getURL());
       // set header
-      if (getUser() != null) {
-        httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser()));
+      if (getUserName() != null) {
+        httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUserName()));
+      } else if (getUser() != null) {
+        httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser().getUserName()));
       }
       // set query params
       if (getParams() != null) {
@@ -61,7 +71,7 @@ public abstract class ApiCall {
 
       PageObjectLogging.logInfo("CONTENT PUSH: ", "Content posted to: " + httpPost.toString());
       PageObjectLogging.logInfo("CONTENT PUSH: ",
-          "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
+                                "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);

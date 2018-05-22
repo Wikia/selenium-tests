@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.Anonymization;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -14,31 +12,19 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.ArticleHistoryPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.ConfirmationModalPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.HelpPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.SpecialRenameUserPage;
-import com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests;
 
-import jdk.nashorn.internal.runtime.regexp.RegExp;
-import org.assertj.core.util.Compatibility;
 import org.joda.time.DateTime;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @SuppressWarnings("SpellCheckingInspection")
 @InBrowser(browser = Browser.CHROME)
@@ -46,11 +32,6 @@ import java.util.UUID;
 @Test(groups = "anonymization")
 public class AnonymizationTests extends NewTestTemplate {
 
-  private SpecialAnonymizationUserPage openAnonymizationPage(User user) {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(user);
-    return new SpecialAnonymizationUserPage().open();
-  }
 
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
@@ -67,7 +48,8 @@ public class AnonymizationTests extends NewTestTemplate {
                               LocalDate.of(1990, 3, 19));
     UserRegistration.registerUserEmailConfirmed(user);
 
-    SpecialAnonymizationUserPage anonymizationStaff = openAnonymizationPage(User.SUS_STAFF);
+    SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
+    anonymizationStaff.loginAs(User.STAFF);
     anonymizationStaff.fillFutureAnon(qanon)
         .submitAnonymization();
 
@@ -99,11 +81,25 @@ public class AnonymizationTests extends NewTestTemplate {
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
-    new ArticleContent().push("asdf", "aaaa");
+    new ArticleContent(user.getUsername()).push("Test"+ timestamp, "AnonymizationTest");
 
-    new SpecialWikiActivityPageObject().open();
+    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    String id = articleHistoryPage.getHistoryID(user.getUsername());
+    Assertion.assertTrue(articleHistoryPage.isUserInHistory(user.getUsername()));
 
-    Assertion.assertStringContains(qanon,qanon);
+    articleHistoryPage.logOut();
+
+    SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
+    anonymizationStaff.loginAs(User.SUS_STAFF);
+    anonymizationStaff.fillFutureAnon(qanon)
+        .submitAnonymization();
+
+    Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
+
+    articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
+
+//    Assertion.assertStringContains(qanon,qanon);
   }
 
 
