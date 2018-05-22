@@ -31,6 +31,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
@@ -167,6 +169,7 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.LightboxTests"/>
+            <class name="com.wikia.webdriver.testcases.mobilewikitests.TrackingOptInModalTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.ApesterTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.PlaybuzzTests"/>
