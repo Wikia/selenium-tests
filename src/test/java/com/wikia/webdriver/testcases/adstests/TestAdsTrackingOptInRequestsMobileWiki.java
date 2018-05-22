@@ -177,10 +177,12 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     )
     public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
-        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");  TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+        TrackingOptInModal modal = new TrackingOptInModal();
+        modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
+        modal.clickRejectButton();
 
-        new TrackingOptInModal()
-                .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+        modal.isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -330,9 +332,11 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
         TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+        TrackingOptInModal modal = new TrackingOptInModal();
+        modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
+        modal.clickAcceptButton();
 
-        new TrackingOptInModal()
-                .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+        modal.isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
     }
 
     @NetworkTrafficDump(useMITM = true)

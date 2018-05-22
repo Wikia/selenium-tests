@@ -19,7 +19,8 @@ public class TrackingOptInDataProvider {
   private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
   private static final String ADS_RUBBICON_FASTLANE_PATTERN = "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
-  private static final String ADS_GOOGLE_ANALYTICS_PATERN = "https?://.*google-analytics\\.com/analytics\\.js.*";
+  private static final String ADS_GOOGLE_ANALYTICS_REJECTED_PATERN = "https?://.*google-analytics\\.com/collect.*aip=1.*";
+
   private static final String ADS_QUALAROO_ANALITYCS_PATERN = "http?:http://s3\\.amazonaws\\.com/.*\\.js.*";
 
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
@@ -287,7 +288,7 @@ public class TrackingOptInDataProvider {
     return new Object[][]{
             {
                     Arrays.asList(
-                            ADS_GOOGLE_ANALYTICS_PATERN
+                            ADS_GOOGLE_ANALYTICS_REJECTED_PATERN
                     )
             }
     };

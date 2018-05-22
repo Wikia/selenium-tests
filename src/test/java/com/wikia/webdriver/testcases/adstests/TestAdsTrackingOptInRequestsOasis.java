@@ -133,21 +133,23 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsGoogleAnalyticsDataProvider",
-            groups = "adsOptInRejectedMobileWiki"
+            groups = "adsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
         TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+        TrackingOptInModal modal = new TrackingOptInModal();
+        modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
+        modal.clickRejectButton();
 
-        new TrackingOptInModal()
-                .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+        modal.isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
     }
 
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsQualarooDataProvider",
-            groups = "adsOptInRejectedMobileWiki"
+            groups = "adsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -309,21 +311,24 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsGoogleAnalyticsDataProvider",
-            groups = "adsOptInAcceptedMobileWiki"
+            groups = "adsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
         TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
 
-        new TrackingOptInModal()
-                .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+        TrackingOptInModal modal = new TrackingOptInModal();
+        modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
+        modal.clickAcceptButton();
+
+        modal.isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
     }
 
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsQualarooDataProvider",
-            groups = "adsOptInAcceptedMobileWiki"
+            groups = "adsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
