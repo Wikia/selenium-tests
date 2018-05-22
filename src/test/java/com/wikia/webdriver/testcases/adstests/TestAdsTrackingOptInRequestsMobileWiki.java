@@ -177,7 +177,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     )
     public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
-        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");  TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+        TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
         TrackingOptInModal modal = new TrackingOptInModal();
         modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
         modal.clickRejectButton();
