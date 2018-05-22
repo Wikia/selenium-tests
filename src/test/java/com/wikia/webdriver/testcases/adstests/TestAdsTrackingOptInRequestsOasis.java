@@ -20,7 +20,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsKikimoraDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForKikimora(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -34,7 +34,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsKruxDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -48,7 +48,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsNetzAthletenDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForNetzAthleten(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -62,7 +62,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsMoatDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForMoat(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -76,7 +76,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsNordicsDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForNordics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -90,7 +90,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsPrebidDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -104,7 +104,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsA9DataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForA9(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -118,7 +118,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsComscoreQuantcastDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForComscoreAndQuantcast(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -133,7 +133,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsGoogleAnalyticsDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -149,7 +149,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsQualarooDataProvider",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -163,7 +163,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsNpaHiViDataProviderOasis",
-            groups = "adsOptInRejectedOasis"
+            groups = "AdsOptInRejectedOasis"
     )
     public void adsTrackingRejectedForHiViAdSlots(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -182,7 +182,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsKikimoraDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void verifyAdsTrackingAcceptedForKikimora(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -196,7 +196,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsKruxDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForKrux(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -210,7 +210,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsNetzAthletenDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForNetzAthleten(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -224,7 +224,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsMoatDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -238,7 +238,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsNordicsDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForNordics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -251,7 +251,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsPrebidDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -265,7 +265,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsA9DataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForA9(String[] instantGlobals, List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -279,7 +279,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsComscoreQuantcastDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForComscoreAndQuantcast(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -292,7 +292,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsNpaHiViDataProviderOasis",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForHiViAdSlots(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -311,7 +311,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsGoogleAnalyticsDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
@@ -328,7 +328,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     @Test(
             dataProviderClass = TrackingOptInDataProvider.class,
             dataProvider = "adsQualarooDataProvider",
-            groups = "adsOptInAcceptedOasis"
+            groups = "AdsOptInAcceptedOasis"
     )
     public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
