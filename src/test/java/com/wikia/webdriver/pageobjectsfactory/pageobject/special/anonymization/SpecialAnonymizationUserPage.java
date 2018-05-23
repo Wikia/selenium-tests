@@ -1,14 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool.HelpPage;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.net.URLEncoder;
 
 public class SpecialAnonymizationUserPage extends SpecialPageObject {
 
@@ -28,7 +24,7 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
 
 
   public SpecialAnonymizationUserPage fillFutureAnon(String anonymizedUser) {
-    jsActions.scrollBy(0,400);
+    jsActions.scrollBy(0, 400);
 
     wait.forElementClickable(submitButton);
     AnonymizationTextBox.sendKeys(anonymizedUser);
@@ -38,7 +34,7 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   public SpecialAnonymizationUserPage submitAnonymization() {
     try {
       Thread.sleep(10000);
-    }catch (Exception e){
+    } catch (Exception e) {
 
     }
 
@@ -48,10 +44,9 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   }
 
 
-  public String getAnonConfirmation() { return requestConfirmation.getText(); }
-
-
-
+  public String getAnonConfirmation() {
+    return requestConfirmation.getText();
+  }
 
 
 }

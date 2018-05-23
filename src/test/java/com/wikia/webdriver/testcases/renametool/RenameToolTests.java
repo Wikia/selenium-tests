@@ -203,6 +203,32 @@ public class RenameToolTests extends NewTestTemplate {
 
     Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);
     wall.verifyMessageEditTextRenameDone(title, message, newName);
+
+
+//
+//    wall.open(newName);
+//    String encodedUrl = renameUserPage.encodeToURL(newName);
+//
+//    String expectedWallUrl = String.format("%s/wiki/Message_Wall:%s", urlBuilder.getUrlForWiki(),
+//                                           encodedUrl);
+//
+//    Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);
+//    wall.verifyMessageEditTextRenameDone(title, message, newName);
+//    String
+//        theContent =
+//        EmailUtils.getFirstEmailContent(credentials.emailAnonymousUserTestWikia,
+//                                        credentials.emailAnonymousUserTestWikiaPassword,
+//                                        "Your username change on FANDOM is complete!");
+//  }
+//
+//  @Test
+//  public void anonyizationBlogTest() {
+//
+//    Credentials credentials = new Credentials();
+//    EmailUtils.deleteAllEmails(credentials.emailAnonymousUserTestWikia,
+//                               credentials.emailAnonymousUserTestWikiaPassword);
+//
+//  }
   }
 
   @Test

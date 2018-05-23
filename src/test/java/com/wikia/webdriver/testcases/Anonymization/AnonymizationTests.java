@@ -14,6 +14,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
@@ -35,6 +36,10 @@ public class AnonymizationTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
+
+  private SignInPage openLoginModalOnDesktop() {
+    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
+  }
 
   @Test
   public void anonymizedUserCannotLogin() {
@@ -62,10 +67,6 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
-  private SignInPage openLoginModalOnDesktop() {
-    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
-  }
-
 
   @Test
   public void anonymizationWikiEdits() {
@@ -81,7 +82,7 @@ public class AnonymizationTests extends NewTestTemplate {
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
-    new ArticleContent(user.getUsername()).push("Test"+ timestamp, "AnonymizationTest");
+    new ArticleContent(user.getUsername()).push("Test" + timestamp, "AnonymizationTest");
 
     ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
     String id = articleHistoryPage.getHistoryID(user.getUsername());
@@ -96,10 +97,15 @@ public class AnonymizationTests extends NewTestTemplate {
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
+    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
+
     articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
 
-//    Assertion.assertStringContains(qanon,qanon);
+    ArticleHistoryPage articleHistoryPageID = new ArticleHistoryPage().openArticleId(id);
+    String anonUser = articleHistoryPageID.getAnonByArticleID();
+
+
   }
 
 
@@ -140,32 +146,6 @@ public class AnonymizationTests extends NewTestTemplate {
                                  e);
 
 
-
     }
-
-//
-//    wall.open(newName);
-//    String encodedUrl = renameUserPage.encodeToURL(newName);
-//
-//    String expectedWallUrl = String.format("%s/wiki/Message_Wall:%s", urlBuilder.getUrlForWiki(),
-//                                           encodedUrl);
-//
-//    Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);
-//    wall.verifyMessageEditTextRenameDone(title, message, newName);
-//    String
-//        theContent =
-//        EmailUtils.getFirstEmailContent(credentials.emailAnonymousUserTestWikia,
-//                                        credentials.emailAnonymousUserTestWikiaPassword,
-//                                        "Your username change on FANDOM is complete!");
-//  }
-//
-//  @Test
-//  public void anonyizationBlogTest() {
-//
-//    Credentials credentials = new Credentials();
-//    EmailUtils.deleteAllEmails(credentials.emailAnonymousUserTestWikia,
-//                               credentials.emailAnonymousUserTestWikiaPassword);
-//
-//  }
   }
 }

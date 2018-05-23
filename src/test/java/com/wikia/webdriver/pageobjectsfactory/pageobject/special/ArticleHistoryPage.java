@@ -13,15 +13,27 @@ public class ArticleHistoryPage extends WikiBasePageObject {
 
   @FindBy(css = ".mw-userlink")
   private List<WebElement> activityList;
-
+  @FindBy(css = ".mw-userlink")
+  private WebElement anonName;
   @FindBy(css = "#pagehistory li")
   private List<WebElement> history;
 
   private static String ARTICLE_HISTORY_FORMAT = "/wiki/%s?action=history";
 
+  private static String SPECIFIC_ARTICLE_FORMAT = "/wiki/AnonymizationTest?oldid=%s";
+
   public ArticleHistoryPage open(String articleName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
            + String.format(ARTICLE_HISTORY_FORMAT, articleName));
+
+    this.refreshPageAddingCacheBuster();
+
+    return this;
+  }
+
+  public ArticleHistoryPage openArticleId(String articleId) {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + String
+        .format(SPECIFIC_ARTICLE_FORMAT, articleId));
 
     this.refreshPageAddingCacheBuster();
 
@@ -37,14 +49,18 @@ public class ArticleHistoryPage extends WikiBasePageObject {
     return false;
   }
 
-  public String getHistoryID(String username){
+  public String getHistoryID(String username) {
 
-    for(WebElement element : history){
-      if(element.findElement(By.cssSelector(".mw-userlink")).getText().equals(username)){
+    for (WebElement element : history) {
+      if (element.findElement(By.cssSelector(".mw-userlink")).getText().equals(username)) {
         return element.findElement(By.cssSelector("input")).getAttribute("value");
       }
     }
     return null;
   }
 
+  public String getAnonByArticleID() {
+    wait.forElementVisible(anonName);
+    return anonName.getText();
+  }
 }
