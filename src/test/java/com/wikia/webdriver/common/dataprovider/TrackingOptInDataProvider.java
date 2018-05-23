@@ -82,8 +82,7 @@ public class TrackingOptInDataProvider {
   };
 
   private static final String GOOGLE_ANALYTICS_ANONYMIZED_USER =
-          "https?://.*google-analytics\\.com/analytics\\.r/collect*&aip=1.*";
-
+          "https?://.*google-analytics\\.com/collect\\?.*aip=1.*";
 
   @DataProvider
   public static Object[][] GDPRcountries() {
