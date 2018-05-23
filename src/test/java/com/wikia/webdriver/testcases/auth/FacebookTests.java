@@ -61,13 +61,12 @@ public class FacebookTests extends NewTestTemplate {
 
   public void userCanSignUpViaFacebook() {
     String userName = String.format("QA%s", Instant.now().getEpochSecond());
-    String password = String.format("Pass%s", Instant.now().getEpochSecond());
 
     new FacebookMainPageObject().login(facebookUser.getEmail(), facebookUser.getPassword());
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
-    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password, 1, 1, 1970);
+    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, 1, 1, 1970);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
   }
 
