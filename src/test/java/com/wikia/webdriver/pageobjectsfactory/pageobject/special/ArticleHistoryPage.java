@@ -18,6 +18,7 @@ public class ArticleHistoryPage extends WikiBasePageObject {
   @FindBy(css = "#pagehistory li")
   private List<WebElement> history;
 
+
   private static String ARTICLE_HISTORY_FORMAT = "/wiki/%s?action=history";
 
   private static String SPECIFIC_ARTICLE_FORMAT = "/wiki/AnonymizationTest?oldid=%s";

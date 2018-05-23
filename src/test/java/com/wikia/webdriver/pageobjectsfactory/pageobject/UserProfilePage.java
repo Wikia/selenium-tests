@@ -31,9 +31,12 @@ public class UserProfilePage extends WikiBasePageObject {
   private WebElement avatarRemoveButton;
   @FindBy(css = ".masthead-avatar img.avatar")
   private WebElement avatar;
+  @FindBy(css = ".mw-userpage-userdoesnotexist")
+  private WebElement notExist;
   @FindBy(css = "div.masthead-info h1")
   @Getter
   private WebElement userNameTextBox;
+
 
   private By avatarImage = By.cssSelector("img.avatar");
 
@@ -135,4 +138,6 @@ public class UserProfilePage extends WikiBasePageObject {
   public String getUserName() {
     return userNameTextBox.getText();
   }
+
+  public String getUserNotExists() { return notExist.getText(); }
 }
