@@ -30,7 +30,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsKikimoraDataProvider",
+      dataProvider = "adsKikimoraRejectedDataProvider",
       groups = "AdsOptInRejectedMobileWiki"
   )
   public void adsTrackingRejectedForKikimora(String[] instantGlobals, List<String> urlPatterns) {
@@ -38,8 +38,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -183,7 +182,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsKikimoraDataProvider",
+      dataProvider = "adsKikimoraAcceptedDataProvider",
       groups = "AdsOptInAcceptedMobileWiki"
   )
   public void verifyAdsTrackingAcceptedForKikimora(String[] instantGlobals,

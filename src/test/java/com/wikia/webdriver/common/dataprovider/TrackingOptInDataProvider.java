@@ -6,8 +6,10 @@ import java.util.Arrays;
 
 public class TrackingOptInDataProvider {
 
-  private static final String ADS_KIKIMORA_PATTERN =
-      "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
+  private static final String ADS_KIKIMORA_OPT_IN_ACCEPTED_PATTERN =
+      "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=0.*";
+  private static final String ADS_KIKIMORA_OPT_IN_REJECTED_PATTERN =
+      "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=-1.*";
   private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
   private static final String ADS_NETZ_ATHLETEN_PATTERN =
       "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
@@ -156,12 +158,24 @@ public class TrackingOptInDataProvider {
 
 
   @DataProvider
-  public static Object[][] adsKikimoraDataProvider() {
+  public static Object[][] adsKikimoraAcceptedDataProvider() {
     return new Object[][]{
         {
             ADS_KIKIMORA_INSTANT_GLOBALS,
             Arrays.asList(
-                ADS_KIKIMORA_PATTERN
+                ADS_KIKIMORA_OPT_IN_ACCEPTED_PATTERN
+            )
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsKikimoraRejectedDataProvider() {
+    return new Object[][]{
+        {
+            ADS_KIKIMORA_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_KIKIMORA_OPT_IN_REJECTED_PATTERN
             )
         }
     };
