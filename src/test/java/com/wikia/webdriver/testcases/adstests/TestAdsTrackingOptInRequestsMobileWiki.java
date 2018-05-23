@@ -22,9 +22,9 @@ import java.util.List;
 public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
-  private static final String POLAND = "pl";
-  private static final String DENMARK = "dk";
-  private static final String GERMANY = "de";
+  private static final String POLAND = "PL";
+  private static final String DENMARK = "DK";
+  private static final String GERMANY = "DE";
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
@@ -237,21 +237,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
-
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsNordicsDataProvider",
-      groups = "AdsOptInAcceptedMobileWiki"
-  )
-  public void adsTrackingAcceptedForNordics(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }

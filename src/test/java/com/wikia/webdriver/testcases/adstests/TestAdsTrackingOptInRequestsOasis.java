@@ -15,10 +15,9 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
   private static final Page ADS_HIVI_PAGE = new Page("project43", "SyntheticTests/UAP/HiVi");
-  private static final String POLAND = "pl";
-  private static final String DENMARK = "dk";
-  private static final String GERMANY = "de";
-
+  private static final String POLAND = "PL";
+  private static final String DENMARK = "DK";
+  private static final String GERMANY = "DE";
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
