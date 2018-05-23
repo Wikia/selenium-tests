@@ -144,6 +144,21 @@ public class TrackingOptInModal extends BasePageObject {
         }
     }
 
+    public boolean areResponsesByUrlPatternSuccessful(List<String> elementsList,
+                                      NetworkTrafficInterceptor networkTrafficInterceptor) {
+        boolean result = true;
+        for(int i=0; i<elementsList.size(); i++){
+            try {
+                wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,elementsList.get(i));
+            } catch (Exception e) {
+                PageObjectLogging.log("Did not get successfull response with element: " + elementsList.get(i),
+                        e, false);
+                result = false;
+            }
+        }
+        return result;
+    }
+
     private boolean isSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
                                                     final String pattern) {
         try {
@@ -167,6 +182,10 @@ public class TrackingOptInModal extends BasePageObject {
         String url = urlOptInModalDisplayedOasis(page);
         String urlWithInstantGlobals = appendTrackingOptOutParameters(url, instantGlobals);
         return urlBuilder.appendQueryStringToURL(urlWithInstantGlobals, MODAL_INSTANT_GLOBAL);
+    }
+
+    public void logTrackingCookieValue() {
+        PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     }
 
 }
