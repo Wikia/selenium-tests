@@ -6,11 +6,17 @@ import java.util.Arrays;
 
 public class TrackingOptInDataProvider {
 
-  private static final String ADS_KIKIMORA_PATTERN = "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
+  private static final String
+      ADS_KIKIMORA_PATTERN =
+      "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
   private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
-  private static final String ADS_NETZ_ATHLETEN_PATTERN = "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
+  private static final String
+      ADS_NETZ_ATHLETEN_PATTERN =
+      "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
   private static final String ADS_MOAT_PATTERN = "https?://.*pixel\\.gif.*";
-  private static final String ADS_PREBID_PATTERN = "http?://.*gads\\.pubmatic\\.com/AdServer/AdCallAggregator.*";
+  private static final String
+      ADS_PREBID_PATTERN =
+      "http?://.*gads\\.pubmatic\\.com/AdServer/AdCallAggregator.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch.*";
   private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve.*";
@@ -18,55 +24,61 @@ public class TrackingOptInDataProvider {
   private static final String ADS_NORDICS_PATTERN = "https?://.*Nordics_RoN.*";
   private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
-  private static final String ADS_RUBBICON_FASTLANE_PATTERN = "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
-  private static final String ADS_GOOGLE_ANALYTICS_PATERN = "https?://.*google-analytics\\.com/analytics\\.js.*";
-  private static final String ADS_QUALAROO_ANALITYCS_PATERN = "http?:http://s3\\.amazonaws\\.com/.*\\.js.*";
-
+  private static final String ADS_RUBBICON_FASTLANE_PATTERN =
+      "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
+  private static final String ADS_GOOGLE_ANALYTICS_REJECTED_PATERN =
+      "https?://.*google-analytics\\.com/collect.*aip=1.*";
+  private static final String ADS_QUALAROO_ANALITYCS_PATERN =
+      "http?:http://s3\\.amazonaws\\.com/.*\\.js.*";
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
-          "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
+      "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =
-          "https?://.*\\.doubleclick\\.net.*ads.*TOP_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+      "https?://.*\\.doubleclick\\.net.*ads.*TOP_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
   private static final String ADS_BLB_NPA_FIRST_PARAMETER_PATTERN =
-          "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*BOTTOM_LEADERBOARD.*";
+      "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*BOTTOM_LEADERBOARD.*";
   private static final String ADS_BLB_NPA_SECOND_PARAMETER_PATTERN =
-          "https?://.*\\.doubleclick\\.net.*ads.*BOTTOM_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+      "https?://.*\\.doubleclick\\.net.*ads.*BOTTOM_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+  private static final String ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN =
+      "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*MOBILE_IN_CONTENT.*";
+  private static final String ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN =
+      "https?://.*\\.doubleclick\\.net.*ads.*MOBILE_IN_CONTENT.*cust_params=.*npa%3D1.*cookie.*";
   private static final String ADS_VAST_NPA_FIRST_PARAMETER_PATTERN =
-          "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
+      "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
   private static final String ADS_VAST_NPA_SECOND_PARAMETER_PATTERN =
-          "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
+      "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
 
   private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
-          "wgAdDriverKikimoraTrackingCountries",
-          "wgAdDriverKikimoraViewabilityTrackingCountries",
-          "wgAdDriverKikimoraPlayerTrackingCountries"
+      "wgAdDriverKikimoraTrackingCountries",
+      "wgAdDriverKikimoraViewabilityTrackingCountries",
+      "wgAdDriverKikimoraPlayerTrackingCountries"
   };
 
   private static final String[] ADS_KRUX_INSTANT_GLOBALS = {
-          "wgAdDriverKruxCountries"
+      "wgAdDriverKruxCountries"
   };
 
   private static final String[] ADS_NETZ_ATHLETEN_INSTANT_GLOBALS = {
-          "wgAdDriverNetzAthletenCountries"
+      "wgAdDriverNetzAthletenCountries"
   };
 
   private static final String[] ADS_MOAT_INSTANT_GLOBALS = {
-          "wgAdDriverVideoMoatTrackingCountries",
-          "wgAdDriverPorvataMoatTrackingCountries",
-          "wgAdDriverVideoMoatTrackingCountries"
+      "wgAdDriverVideoMoatTrackingCountries",
+      "wgAdDriverPorvataMoatTrackingCountries",
+      "wgAdDriverVideoMoatTrackingCountries"
   };
 
   private static final String[] ADS_PREBID_INSTANT_GLOBALS = {
-          "wgAdDriverBottomLeaderBoardLazyPrebidCountries",
-          "wgAdDriverOpenXPrebidBidderCountries",
-          "wgAdDriverPrebidBidderCountries",
-          "wgAdDriverRubiconDisplayPrebidCountries",
-          "wgAdDriverRubiconPrebidCountries",
-          "wgAdDriverAppNexusBidderCountries"
+      "wgAdDriverBottomLeaderBoardLazyPrebidCountries",
+      "wgAdDriverOpenXPrebidBidderCountries",
+      "wgAdDriverPrebidBidderCountries",
+      "wgAdDriverRubiconDisplayPrebidCountries",
+      "wgAdDriverRubiconPrebidCountries",
+      "wgAdDriverAppNexusBidderCountries"
   };
 
   private static final String[] ADS_A9_INSTANT_GLOBALS = {
-          "wgAdDriverA9BidderCountries",
-          "wgAdDriverA9VideoBidderCountries"
+      "wgAdDriverA9BidderCountries",
+      "wgAdDriverA9VideoBidderCountries"
   };
 
   private static final String DISCUSSION_GOOGLE_ANONYMIZED =
@@ -152,137 +164,153 @@ public class TrackingOptInDataProvider {
   @DataProvider
   public static Object[][] adsKikimoraDataProvider() {
     return new Object[][]{
-            {
-                    ADS_KIKIMORA_INSTANT_GLOBALS,
-                    Arrays.asList(
-                            ADS_KIKIMORA_PATTERN
-                    )
-            }
+        {
+            ADS_KIKIMORA_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_KIKIMORA_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsKruxDataProvider() {
     return new Object[][]{
-            {
-                    ADS_KRUX_INSTANT_GLOBALS,
-                    Arrays.asList(
-                            ADS_KRUX_PATTERN
-                    )
-            }
+        {
+            ADS_KRUX_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_KRUX_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsNetzAthletenDataProvider() {
     return new Object[][]{
-            {
-                    ADS_NETZ_ATHLETEN_INSTANT_GLOBALS,
-                    Arrays.asList(
-                            ADS_NETZ_ATHLETEN_PATTERN
-                    )
-            }
+        {
+            ADS_NETZ_ATHLETEN_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_NETZ_ATHLETEN_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsMoatDataProvider() {
     return new Object[][]{
-            {
-                    ADS_MOAT_INSTANT_GLOBALS,
-                    Arrays.asList(
-                            ADS_MOAT_PATTERN
-                    )
-            }
+        {
+            ADS_MOAT_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_MOAT_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsPrebidDataProvider() {
     return new Object[][]{
-            {
-                    ADS_PREBID_INSTANT_GLOBALS,
-                    Arrays.asList(
-                            ADS_PREBID_PATTERN,
-                            ADS_APP_NEXUS_PATTERN,
-                            ADS_OPOENX_PATTERN,
-                            ADS_INDEX_EXCHANGE_PATTERN,
-                            ADS_RUBBICON_FASTLANE_PATTERN
-                    )
-            }
+        {
+            ADS_PREBID_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_PREBID_PATTERN,
+                ADS_APP_NEXUS_PATTERN,
+                ADS_OPOENX_PATTERN,
+                ADS_INDEX_EXCHANGE_PATTERN,
+                ADS_RUBBICON_FASTLANE_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsNpaHiViDataProviderOasis() {
     return new Object[][]{
-            {
-                    Arrays.asList(
-                            ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
-                            ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
-                            ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
-                            ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
-                            ADS_VAST_NPA_FIRST_PARAMETER_PATTERN,
-                            ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
-                    )
-            }
+        {
+            Arrays.asList(
+                ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
+                ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
+                ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
+                ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
+                ADS_VAST_NPA_FIRST_PARAMETER_PATTERN,
+                ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
+            )
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsNpaSlotsDataProviderMobile() {
+    return new Object[][]{
+        {
+            Arrays.asList(
+                ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
+                ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
+                ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
+                ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
+                ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN,
+                ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsA9DataProvider() {
     return new Object[][]{
-            {
-                    ADS_A9_INSTANT_GLOBALS,
-                    Arrays.asList(
-                            ADS_A9_PATTERN
-                    )
-            }
+        {
+            ADS_A9_INSTANT_GLOBALS,
+            Arrays.asList(
+                ADS_A9_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsNordicsDataProvider() {
     return new Object[][]{
-            {
-                    Arrays.asList(
-                            ADS_NORDICS_PATTERN
-                    )
-            }
+        {
+            Arrays.asList(
+                ADS_NORDICS_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsComscoreQuantcastDataProvider() {
     return new Object[][]{
-            {
-                    Arrays.asList(
-                            ADS_COMSCORE_PATTERN,
-                            ADS_QUANTCAST_PATTERN
-                    )
-            }
+        {
+            Arrays.asList(
+                ADS_COMSCORE_PATTERN,
+                ADS_QUANTCAST_PATTERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsGoogleAnalyticsDataProvider() {
     return new Object[][]{
-            {
-                    Arrays.asList(
-                            ADS_GOOGLE_ANALYTICS_PATERN
-                    )
-            }
+        {
+            Arrays.asList(
+                ADS_GOOGLE_ANALYTICS_REJECTED_PATERN
+            )
+        }
     };
   }
 
   @DataProvider
   public static Object[][] adsQualarooDataProvider() {
     return new Object[][]{
-            {
-                    Arrays.asList(
-                            ADS_QUALAROO_ANALITYCS_PATERN
-                    )
-            }
+        {
+            Arrays.asList(
+                ADS_QUALAROO_ANALITYCS_PATERN
+            )
+        }
     };
   }
 
@@ -296,5 +324,4 @@ public class TrackingOptInDataProvider {
             }
     };
   }
-
 }

@@ -27,7 +27,7 @@ public class TrackingOptInModal extends BasePageObject {
     WebElement acceptButton;
 
     @FindBy(css = "div._3mGMvAUi8MtSBaB1BUvLtz")
-    WebElement rejecttButton;
+    WebElement rejectButton;
 
     @FindBy(css="div[data-tracking-opt-in-overlay]")
     private WebElement optInModalOverlay;
@@ -73,8 +73,8 @@ public class TrackingOptInModal extends BasePageObject {
 
     public void clickRejectButton() {
         try {
-            wait.forElementClickable(rejecttButton);
-            rejecttButton.click();
+            wait.forElementClickable(rejectButton);
+            rejectButton.click();
         } catch (Exception e) {
             PageObjectLogging.log("Reject button clicked", e, false);
         }
