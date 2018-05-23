@@ -22,9 +22,9 @@ import java.util.List;
 public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
-  private static final Page
-      ADS_PORVATA_DIRECT =
-      new Page("project43", "SyntheticTests/Video/Porvata/Direct");
+  private static final String POLAND = "pl";
+  private static final String DENMARK = "dk";
+  private static final String GERMANY = "de";
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
@@ -35,11 +35,11 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForKikimora(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
-                                                           networkTrafficInterceptor,
-                                                           ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -51,12 +51,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForSlotsAdSlots(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_PORVATA_DIRECT));
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    modal.clickRejectButton();
-    modal.isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -68,11 +66,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
-                                                           networkTrafficInterceptor,
-                                                           ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -85,11 +82,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingRejectedForNetzAthleten(String[] instantGlobals,
                                                  List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
-                                                           networkTrafficInterceptor,
-                                                           ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -101,11 +97,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
-                                                           networkTrafficInterceptor,
-                                                           ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -117,10 +112,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForNordics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    new TrackingOptInModal()
-        .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -132,11 +127,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
-                                                           networkTrafficInterceptor,
-                                                           ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -148,11 +142,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForA9(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsNotSend(instantGlobals, urlPatterns,
-                                                           networkTrafficInterceptor,
-                                                           ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -164,10 +157,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForComscoreAndQuantcast(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    new TrackingOptInModal()
-        .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
 
   }
 
@@ -180,27 +173,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
-    modal.clickRejectButton();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    modal.isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsQualarooDataProvider",
-      groups = "AdsOptInRejectedMobileWiki"
-  )
-  public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
-
-    new TrackingOptInModal()
-        .verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -213,10 +189,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void verifyAdsTrackingAcceptedForKikimora(String[] instantGlobals,
                                                    List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsSend(instantGlobals, urlPatterns,
-                                                        networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -228,10 +204,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsSend(instantGlobals, urlPatterns,
-                                                        networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -244,10 +220,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingAcceptedForNetzAthleten(String[] instantGlobals,
                                                  List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsSend(instantGlobals, urlPatterns,
-                                                        networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -259,10 +235,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsSend(instantGlobals, urlPatterns,
-                                                        networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -274,10 +250,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForNordics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    new TrackingOptInModal()
-        .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -289,10 +265,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsSend(instantGlobals, urlPatterns,
-                                                        networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -304,10 +280,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForA9(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
-    new TrackingOptInModal().verifyTrackingRequestsSend(instantGlobals, urlPatterns,
-                                                        networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -319,10 +295,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForComscoreAndQuantcast(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    new TrackingOptInModal()
-        .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -334,27 +310,10 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_HOME_PAGE));
-    modal.clickAcceptButton();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    modal.isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsQualarooDataProvider",
-      groups = "AdsOptInAcceptedMobileWiki"
-  )
-  public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
-
-    new TrackingOptInModal()
-        .verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor, ADS_HOME_PAGE);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -366,12 +325,9 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   )
   public void adsTrackingAcceptedForAdSlots(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal.setGeoCookie(driver, "EU", "PL");
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.getUrl(modal.urlOptInModalDisplayedOasis(ADS_PORVATA_DIRECT));
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    modal.clickAcceptButton();
-    modal.isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 }
-

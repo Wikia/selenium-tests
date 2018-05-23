@@ -6,16 +6,13 @@ import java.util.Arrays;
 
 public class TrackingOptInDataProvider {
 
-  private static final String
-      ADS_KIKIMORA_PATTERN =
+  private static final String ADS_KIKIMORA_PATTERN =
       "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*";
   private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
-  private static final String
-      ADS_NETZ_ATHLETEN_PATTERN =
+  private static final String ADS_NETZ_ATHLETEN_PATTERN =
       "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
   private static final String ADS_MOAT_PATTERN = "https?://.*pixel\\.gif.*";
-  private static final String
-      ADS_PREBID_PATTERN =
+  private static final String ADS_PREBID_PATTERN =
       "http?://.*gads\\.pubmatic\\.com/AdServer/AdCallAggregator.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch.*";
