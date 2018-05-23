@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import com.thoughtworks.selenium.Wait;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.TimeoutException;
 import net.lightbody.bmp.core.har.HarEntry;
