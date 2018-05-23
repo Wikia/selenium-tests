@@ -19,9 +19,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   @FindBy(css = "#signupUsername")
   private WebElement usernameField;
 
-  @FindBy(css = "#signupPassword")
-  private WebElement passwordField;
-
   @FindBy(css = "#signupEmail")
   private WebElement emailField;
 
@@ -80,12 +77,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
   }
 
-  public void typePassword(String password) {
-    wait.forElementClickable(passwordField);
-    passwordField.sendKeys(password);
-    PageObjectLogging.log("typePassword", "password typed into the field", true);
-  }
-
   public void typeBirthday(int month, int day, int year) {
     wait.forElementClickable(birthdateContainer);
     birthdateContainer.click();
@@ -107,14 +98,13 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     waitForElementNotVisibleByElement(registerButton);
   }
 
-  public void createAccountNoEmail(String email, String userName, String password,
+  public void createAccountNoEmail(String email, String userName,
                                    Integer birthMonth, Integer birthDay, Integer birthYear) {
     acceptWikiaAppPolicyNoEmail();
 
     wait.forElementVisible(facebookRegistrationForm);
     typeEmail(email);
     typeUserName(userName);
-    typePassword(password);
     typeBirthday(birthMonth,birthDay,birthYear);
     clickRegister();
   }
