@@ -81,7 +81,7 @@ public class TrackingOptInDataProvider {
       "wgAdDriverA9VideoBidderCountries"
   };
 
-  private static final String DISCUSSION_GOOGLE_ANONYMIZED =
+  private static final String GOOGLE_ANALYTICS_ANONYMIZED_USER =
           "https?://.*google-analytics\\.com/analytics\\.r/collect*&aip=1.*";
 
 
@@ -315,11 +315,11 @@ public class TrackingOptInDataProvider {
   }
 
   @DataProvider
-  public static Object[][] discussionsGoogleAnalyticAnonymized() {
+  public static Object[][] googleAnalyticAnonymizedUser() {
     return new Object[][]{
             {
               Arrays.asList(
-                      DISCUSSION_GOOGLE_ANONYMIZED
+                      GOOGLE_ANALYTICS_ANONYMIZED_USER
               )
             }
     };

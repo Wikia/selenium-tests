@@ -70,7 +70,7 @@ public class TrackingOptIn extends NewTestTemplate {
     @NetworkTrafficDump(useMITM = true)
     @Test(groups = {"discussions-tracking-opt-in-desktop"},
             dataProviderClass = TrackingOptInDataProvider.class,
-            dataProvider = "discussionsGoogleAnalyticAnonymized")
+            dataProvider = "googleAnalyticAnonymizedUser")
     @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
     public void anonInEUOnRejectShouldGetAnonymizedGoogleTracking(List<String> urlPatterns) {
         networkTrafficInterceptor.startIntercepting();
