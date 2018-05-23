@@ -77,7 +77,6 @@ public class TrackingOptIn extends NewTestTemplate {
         TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
         Assertion.assertTrue(trackingModal.isVisible());
         trackingModal.clickRejectButton();
-        networkTrafficInterceptor.stop();
 
         Assertion.assertTrue(trackingModal.areResponsesByUrlPatternSuccessful(urlPatterns, networkTrafficInterceptor));
     }
