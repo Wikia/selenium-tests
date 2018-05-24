@@ -32,7 +32,7 @@ public class UserProfilePage extends WikiBasePageObject {
   @FindBy(css = ".masthead-avatar img.avatar")
   private WebElement avatar;
   @FindBy(css = ".mw-userpage-userdoesnotexist")
-  private WebElement notExist;
+  private WebElement notExistsMessage;
   @FindBy(css = "div.masthead-info h1")
   @Getter
   private WebElement userNameTextBox;
@@ -42,7 +42,7 @@ public class UserProfilePage extends WikiBasePageObject {
 
   /**
    * Open User Profile Page
-   * 
+   *
    * @param userName
    * @return
    */
@@ -139,5 +139,5 @@ public class UserProfilePage extends WikiBasePageObject {
     return userNameTextBox.getText();
   }
 
-  public String getUserNotExists() { return notExist.getText(); }
+  public String getNotExistsMessage() { return notExistsMessage.getText(); }
 }

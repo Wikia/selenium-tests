@@ -24,20 +24,12 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
 
 
   public SpecialAnonymizationUserPage fillFutureAnon(String anonymizedUser) {
-    jsActions.scrollBy(0, 400);
-
     wait.forElementClickable(submitButton);
     AnonymizationTextBox.sendKeys(anonymizedUser);
     return this;
   }
 
   public SpecialAnonymizationUserPage submitAnonymization() {
-    try {
-      Thread.sleep(10000);
-    } catch (Exception e) {
-
-    }
-
     jsActions.scrollToElement(submitButton);
     submitButton.click();
     return this;
@@ -45,6 +37,7 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
 
 
   public String getAnonConfirmation() {
+    wait.forElementVisible(requestConfirmation);
     return requestConfirmation.getText();
   }
 }

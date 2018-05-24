@@ -10,7 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -80,7 +79,7 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
   @FindBy(css = ".edited-by")
-  private WebElement edition;
+  private WebElement wallEdition;
 
 
   public MessageWall open(String userName) {
@@ -152,7 +151,7 @@ public class MessageWall extends WikiBasePageObject {
         driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
     jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
-    PageObjectLogging.log("submitEdition", "message edition submitted", true);
+    PageObjectLogging.log("submitEdition", "message wallEdition submitted", true);
   }
 
   public void submitQuote() {
@@ -405,6 +404,6 @@ public class MessageWall extends WikiBasePageObject {
     PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
   }
   public boolean isEditionVisible() {
-    return isVisible(edition);
+    return isVisible(wallEdition);
   }
 }

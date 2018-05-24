@@ -23,7 +23,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.ArticleHistoryP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
 
 import org.joda.time.DateTime;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -44,7 +43,6 @@ public class AnonymizationTests extends NewTestTemplate {
 
   @Test
   public void anonymizedUserCannotLogin() {
-
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
@@ -70,7 +68,6 @@ public class AnonymizationTests extends NewTestTemplate {
 
   @Test
   public void anonymizedUserProfilePageRemoved() {
-
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
@@ -88,12 +85,11 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getUserNotExists().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
+    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
   }
 
   @Test
   public void anonymizationWikiEdits() {
-
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
@@ -127,7 +123,6 @@ public class AnonymizationTests extends NewTestTemplate {
 
   @Test
   public void anonyizationMessageWallRemoved() {
-
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
@@ -178,7 +173,7 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getUserNotExists().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
+    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
 
     articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
