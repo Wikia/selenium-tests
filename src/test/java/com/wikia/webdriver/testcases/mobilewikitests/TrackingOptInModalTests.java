@@ -61,7 +61,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
-  public void AnonUserInEUShouldNotGetModalIfOptedIn() {
+  public void anonUserInEUShouldNotGetModalIfOptedIn() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
@@ -81,11 +81,43 @@ public class TrackingOptInModalTests extends NewTestTemplate {
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false, trackingOptOut = true)
-  public void AnonUserInEUShouldNotGetModalIfOptedOut() {
+  public void anonUserInEUShouldNotGetModalIfOptedOut() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInModal().isVisible());
+  }
+
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
+  @Execute(asUser = User.USER, trackingOptIn = true)
+  public void loggedInUserInEUGetsModalBackWhenCookieExpires() {
+    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+
+    driver.manage().deleteAllCookies();
+
+    new ArticlePage().open();
+
+    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+  }
+
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
+  @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
+  public void anonUserInEUGetsModalBackWhenCookieExpires() {
+    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+
+    driver.manage().deleteAllCookies();
+
+    new ArticlePage().open();
+
+    Assertion.assertTrue(new TrackingOptInModal().isVisible());
   }
 }
