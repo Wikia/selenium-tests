@@ -68,7 +68,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
   )
   public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.waitForAdToLoad();
@@ -144,7 +144,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   )
   public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage, true);
     videoFanTakeover.waitForAdToLoad();
     videoFanTakeover.clickOnArea(MOBILE_VIDEO_TRIGGER_AREA);
     videoFanTakeover.waitForVideoPlayerHidden();
@@ -161,7 +161,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   )
   public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage, true);
     videoFanTakeover.waitForAdToLoad();
 
     videoFanTakeover.clickOnArea(REDIRECT_AREA_TRIGGER);
@@ -208,6 +208,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
     fandomPage.scrollTo(AdsFandomContent.getSlotSelector(slotName));
     fandomPage.scrollTwitch();
+    fandomPage.fixScrollPositionByNavbarOnF2(isMobile);
     return videoFanTakeover;
   }
 }

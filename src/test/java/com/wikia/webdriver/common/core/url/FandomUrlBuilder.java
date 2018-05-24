@@ -39,4 +39,8 @@ public class FandomUrlBuilder extends BaseUrlBuilder{
   public String getUrlForFandomTopic(String topic) {
     return getFandomUrl() + TOPICS_PATH + "/" + topic;
   }
+
+  public String getUrlForFandomVideoPage(String videoPage) {
+    return getFandomUrl() + videoPage;
+  }
 }

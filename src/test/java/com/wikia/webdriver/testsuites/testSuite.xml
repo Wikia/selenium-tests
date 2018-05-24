@@ -24,12 +24,15 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomVideoPage"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomDesktop"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViFandomMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
@@ -46,6 +49,9 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptOutOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptOutMercury"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptOutFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBtfBlocking"/>
@@ -113,6 +119,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.ReportingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SharingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SortingTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.TrackingOptIn"/>
             <class name="com.wikia.webdriver.testcases.discussions.UploadingImageTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
@@ -163,6 +170,7 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.LightboxTests"/>
+            <class name="com.wikia.webdriver.testcases.mobilewikitests.TrackingOptInModalTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.ApesterTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.PlaybuzzTests"/>
@@ -181,7 +189,6 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.GlobalFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HTMLTitleTests"/>
-            <class name="com.wikia.webdriver.testcases.mobilewikitests.ImageReviewTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.NavigationMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.SearchMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.SmartBannerTest"/>
@@ -214,6 +221,7 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.VideosPageTests"/>
             <class name="com.wikia.webdriver.testcases.templateclassification.TemplateClassificationTest"/>
             <class name="com.wikia.webdriver.testcases.toolbartests.CustomizeToolbarTests"/>
+            <class name="com.wikia.webdriver.testcases.trackingoptintests.TrackingOptInTestsOasis"/>
             <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VEAndRTEDisabledEditorEntryAnonTests"/>
