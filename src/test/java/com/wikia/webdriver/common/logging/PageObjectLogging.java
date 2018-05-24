@@ -1,7 +1,5 @@
 package com.wikia.webdriver.common.logging;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.*;
 import com.wikia.webdriver.common.core.annotations.DontRun;
@@ -14,7 +12,6 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.commons.codec.binary.Base64;
@@ -26,7 +23,10 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-import org.testng.*;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+import org.testng.SkipException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,6 +36,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -71,10 +73,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
     CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
     String className = success ? SUCCESS_CLASS : ERROR_CLASS;
-    String
-        html =
-        VelocityWrapper
-            .fillLogRowWithScreenshot(Arrays.asList(className), command, description, imageCounter);
+    String html =
+            VelocityWrapper.fillLogRowWithScreenshot(Arrays.asList(className), command, description, imageCounter);
     CommonUtils.appendTextToFile(logPath, html);
     logJSError();
   }
@@ -232,9 +232,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       List<String> error =
           (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
       if (!error.isEmpty()) {
-        String
-            html =
-            VelocityWrapper.fillLogRow(Arrays.asList(ERROR_CLASS), "click", error.toString());
+        String html = VelocityWrapper.fillLogRow(Arrays.asList(ERROR_CLASS), "click", error.toString());
         CommonUtils.appendTextToFile(logPath, html);
       }
     }
@@ -311,9 +309,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       if (url.equals(driver.getCurrentUrl())) {
         List<String> classList = new ArrayList<>();
         classList.add(SUCCESS_CLASS);
-        String
-            description =
-            VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
+        String description = VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
         String html = VelocityWrapper.fillLogRow(classList, command, description);
         CommonUtils.appendTextToFile(logPath, html);
       } else {
@@ -338,7 +334,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
       } catch (WebDriverException e) {
         PageObjectLogging
-            .logInfo("Hack for disabling notifications", "Failed to execute js action");
+                .logInfo("Hack for disabling notifications", "Failed to execute js action");
 
       }
       /**
@@ -512,11 +508,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     CommonUtils.createDirectory(screenDirPath);
     imageCounter = 0;
 
-    String date = DateTimeFormat.forPattern(DATE_FORMAT)
-        .print(DateTime.now(DateTimeZone.UTC));
-    String polishDate = DateTimeFormat.forPattern(POLISH_DATE_FORMAT)
-        .print(DateTime.now()
-                   .withZone(DateTimeZone
+    String date = DateTimeFormat.forPattern(DATE_FORMAT).print(DateTime.now(DateTimeZone.UTC));
+    String polishDate = DateTimeFormat.forPattern(POLISH_DATE_FORMAT).print(DateTime.now().withZone(DateTimeZone
                                  .forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
@@ -524,9 +517,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String testingEnvironment = Configuration.getEnv();
     String testedVersion = "TO DO: GET WIKI VERSION HERE";
 
-    String
-        headerHtml = VelocityWrapper
-        .fillHeader(date, polishDate, browser, os, testingEnvironmentUrl,
+    String headerHtml = VelocityWrapper.fillHeader(date, polishDate, browser, os, testingEnvironmentUrl,
                     testingEnvironment, testedVersion);
     CommonUtils.appendTextToFile(logPath, headerHtml);
     appendShowHideButtons();
