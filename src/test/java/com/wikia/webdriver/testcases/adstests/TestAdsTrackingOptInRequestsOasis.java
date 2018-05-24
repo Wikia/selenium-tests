@@ -76,9 +76,9 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingRejectedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
+    modal.rejectOptInModal(driver, POLAND, ADS_HIVI_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -130,10 +130,26 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsComscoreQuantcastDataProvider",
+      dataProvider = "adsQuantcastDataProvider",
       groups = "AdsOptInRejectedOasis"
   )
-  public void adsTrackingRejectedForComscoreAndQuantcast(List<String> urlPatterns) {
+  public void adsTrackingRejectedForQuantcast(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
+
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "adsComscoreDataProvider",
+      groups = "AdsOptInRejectedOasis"
+  )
+  public void adsTrackingRejectedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
@@ -184,7 +200,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
                                                    List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -199,7 +215,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingAcceptedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -215,7 +231,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
                                                  List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, GERMANY, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -245,7 +261,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, POLAND, ADS_HIVI_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -260,7 +276,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingAcceptedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -275,6 +291,21 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingAcceptedForA9(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "adsQuantcastDataProvider",
+      groups = "AdsOptInAcceptedOasis"
+  )
+  public void adsTrackingAcceptedForQuantcast(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
     modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
@@ -284,10 +315,10 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsComscoreQuantcastDataProvider",
+      dataProvider = "adsComscoreDataProvider",
       groups = "AdsOptInAcceptedOasis"
   )
-  public void adsTrackingAcceptedForComscoreAndQuantcast(List<String> urlPatterns) {
+  public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);

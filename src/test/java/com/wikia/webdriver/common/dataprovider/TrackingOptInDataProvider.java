@@ -13,11 +13,11 @@ public class TrackingOptInDataProvider {
   private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
   private static final String ADS_NETZ_ATHLETEN_PATTERN =
       "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
-  private static final String ADS_MOAT_PATTERN = "https?://.*pixel\\.gif.*";
-  private static final String ADS_PREBID_PATTERN =
+  private static final String ADS_MOAT_PATTERN = "https?://.*moatads\\.com.*";
+  private static final String ADS_PUBMATIC_PATTERN =
       "http?://.*gads\\.pubmatic\\.com/AdServer/AdCallAggregator.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
-  private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch.*";
+  private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch\\.com/beacon\\.js*";
   private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve.*";
   private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/jpt.*";
   private static final String ADS_NORDICS_PATTERN = "https?://.*Nordics_RoN.*";
@@ -225,7 +225,7 @@ public class TrackingOptInDataProvider {
         {
             ADS_PREBID_INSTANT_GLOBALS,
             Arrays.asList(
-                ADS_PREBID_PATTERN,
+                ADS_PUBMATIC_PATTERN,
                 ADS_APP_NEXUS_PATTERN,
                 ADS_OPOENX_PATTERN,
                 ADS_INDEX_EXCHANGE_PATTERN,
@@ -291,12 +291,22 @@ public class TrackingOptInDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsComscoreQuantcastDataProvider() {
+  public static Object[][] adsQuantcastDataProvider() {
     return new Object[][]{
         {
             Arrays.asList(
-                ADS_COMSCORE_PATTERN,
                 ADS_QUANTCAST_PATTERN
+            )
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsComscoreDataProvider() {
+    return new Object[][]{
+        {
+            Arrays.asList(
+                ADS_COMSCORE_PATTERN
             )
         }
     };
