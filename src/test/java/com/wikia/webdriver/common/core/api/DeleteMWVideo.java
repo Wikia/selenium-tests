@@ -33,4 +33,9 @@ public class DeleteMWVideo extends ApiCall {
     params.add(new BasicNameValuePair("title", videoTitle));
     return params;
   }
+
+  @Override
+  protected String getUserName() {
+    return null;
+  }
 }
