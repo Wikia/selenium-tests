@@ -124,7 +124,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
-  public void loggedInUserInEUGetsModalBackWhenResetsCokies() {
+  public void anonUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
