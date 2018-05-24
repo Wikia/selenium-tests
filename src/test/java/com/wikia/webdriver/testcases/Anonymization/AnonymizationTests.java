@@ -23,6 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.ArticleHistoryP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
 
 import org.joda.time.DateTime;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -67,6 +68,28 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
+  @Test
+  public void anonymizedUserProfilePageRemoved() {
+
+    Credentials credentials = new Credentials();
+    String timestamp = Long.toString(DateTime.now().getMillis());
+    String qanon = "QAanon" + timestamp;
+    String passw = "makak";
+    SignUpUser
+        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
+                              LocalDate.of(1990, 3, 19));
+    UserRegistration.registerUserEmailConfirmed(user);
+
+    SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
+    anonymizationStaff.loginAs(User.STAFF);
+    anonymizationStaff.fillFutureAnon(qanon)
+        .submitAnonymization();
+
+    Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
+
+    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
+    Assertion.assertTrue(userProfilePage.getUserNotExists().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
+  }
 
   @Test
   public void anonymizationWikiEdits() {
@@ -97,21 +120,13 @@ public class AnonymizationTests extends NewTestTemplate {
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
-    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getUserNotExists().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
-
     articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
-
-    ArticleHistoryPage articleHistoryPageID = new ArticleHistoryPage().openArticleId(id);
-    String anonUser = articleHistoryPageID.getAnonByArticleID();
-
-
   }
 
 
   @Test
-  public void anonyizationMessageWallTest() {
+  public void anonyizationMessageWallRemoved() {
 
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -145,8 +160,33 @@ public class AnonymizationTests extends NewTestTemplate {
     } catch (InterruptedException e) {
       PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
                                  e);
-
-
     }
+
+    new ArticleContent(user.getUsername()).push("Test" + timestamp, "AnonymizationTest");
+
+    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    String id = articleHistoryPage.getHistoryID(user.getUsername());
+    Assertion.assertTrue(articleHistoryPage.isUserInHistory(user.getUsername()));
+
+    articleHistoryPage.logOut();
+
+    SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
+    anonymizationStaff.loginAs(User.SUS_STAFF);
+    anonymizationStaff.fillFutureAnon(qanon)
+        .submitAnonymization();
+
+    Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
+
+    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
+    Assertion.assertTrue(userProfilePage.getUserNotExists().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
+
+    articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
+
+    ArticleHistoryPage articleHistoryPageID = new ArticleHistoryPage().openArticleId(id);
+    String anonUser = articleHistoryPageID.getAnonByArticleID();
+
+    MessageWall messageWall = new MessageWall().open(anonUser);
+    Assertion.assertFalse(messageWall.isEditionVisible());
   }
 }

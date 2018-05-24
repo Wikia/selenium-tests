@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -78,6 +79,9 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
+  @FindBy(css = ".edited-by")
+  private WebElement edition;
+
 
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
@@ -399,5 +403,8 @@ public class MessageWall extends WikiBasePageObject {
     wait.forElementVisible(By.xpath("//div[@class='msg-title']/a[contains(text(), " + "'" + title
         + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
     PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
+  }
+  public boolean isEditionVisible() {
+    return isVisible(edition);
   }
 }

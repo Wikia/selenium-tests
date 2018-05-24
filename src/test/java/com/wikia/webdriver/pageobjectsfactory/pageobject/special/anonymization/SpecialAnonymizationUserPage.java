@@ -48,5 +48,4 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
     return requestConfirmation.getText();
   }
 
-
 }
