@@ -46,7 +46,6 @@ public class TrackingOptInDataProvider {
   private static final String ADS_VAST_NPA_SECOND_PARAMETER_PATTERN =
       "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
 
-
   private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
       "wgAdDriverKikimoraTrackingCountries",
       "wgAdDriverKikimoraViewabilityTrackingCountries",
@@ -80,6 +79,9 @@ public class TrackingOptInDataProvider {
       "wgAdDriverA9BidderCountries",
       "wgAdDriverA9VideoBidderCountries"
   };
+
+  private static final String GOOGLE_ANALYTICS_ANONYMIZED_USER =
+          "https?://.*google-analytics\\.com/collect\\?.*aip=1.*";
 
   @DataProvider
   public static Object[][] GDPRcountries() {
@@ -319,6 +321,17 @@ public class TrackingOptInDataProvider {
                 ADS_QUALAROO_ANALITYCS_PATERN
             )
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] googleAnalyticAnonymizedUser() {
+    return new Object[][]{
+            {
+              Arrays.asList(
+                      GOOGLE_ANALYTICS_ANONYMIZED_USER
+              )
+            }
     };
   }
 }
