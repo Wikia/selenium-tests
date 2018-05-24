@@ -45,6 +45,8 @@ public class TrackingOptInDataProvider {
       "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
   private static final String ADS_VAST_NPA_SECOND_PARAMETER_PATTERN =
       "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
+  private static final String PETAMETRICS_PATTERN =
+      "http?://.*petametrics\\.com.*";
 
   private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
       "wgAdDriverKikimoraTrackingCountries",
@@ -285,6 +287,17 @@ public class TrackingOptInDataProvider {
         {
             Arrays.asList(
                 ADS_NORDICS_PATTERN
+            )
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsPetametricsDataProvider() {
+    return new Object[][]{
+        {
+            Arrays.asList(
+                PETAMETRICS_PATTERN
             )
         }
     };

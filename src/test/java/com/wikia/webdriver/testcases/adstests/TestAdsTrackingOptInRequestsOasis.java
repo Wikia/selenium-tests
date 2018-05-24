@@ -193,6 +193,21 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "adsPetametricsDataProvider",
+      groups = "AdsOptInRejectedOasis"
+  )
+  public void adsTrackingRejectForPetametrics(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKikimoraAcceptedDataProvider",
       groups = "AdsOptInAcceptedOasis"
   )
@@ -355,5 +370,20 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "adsPetametricsDataProvider",
+      groups = "AdsOptInAcceptedOasis"
+  )
+  public void adsTrackingAcceptedForPetametrics(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 }

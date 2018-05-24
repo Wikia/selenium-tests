@@ -161,7 +161,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -193,6 +192,21 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "adsPetametricsDataProvider",
+      groups = "AdsOptInRejectedMobileWiki"
+  )
+  public void adsTrackingRejectedForPetametrics(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
+
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -345,5 +359,20 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "adsPetametricsDataProvider",
+      groups = "AdsOptInAcceptedMobileWiki"
+  )
+  public void adsTrackingAcceptedForPetametrics(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 }
