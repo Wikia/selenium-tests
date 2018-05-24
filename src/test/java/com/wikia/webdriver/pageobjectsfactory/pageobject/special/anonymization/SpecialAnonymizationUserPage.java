@@ -47,5 +47,4 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   public String getAnonConfirmation() {
     return requestConfirmation.getText();
   }
-
 }
