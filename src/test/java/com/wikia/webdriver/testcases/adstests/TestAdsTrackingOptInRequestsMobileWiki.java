@@ -100,7 +100,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.rejectOptInModal(driver, POLAND, ADS_UAP_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
