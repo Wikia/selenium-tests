@@ -396,6 +396,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
    * Manually user would need to click 'agree' in the tracking opt in modal.
    */
   private void handleGdprModalWithCookie() {
+    driver = DriverProvider.getActiveDriver();
     Method method = TestContext.getCurrentTestMethod();
     if (TestContext.isFirstLoad()) {
       boolean userOptedIn = true;
