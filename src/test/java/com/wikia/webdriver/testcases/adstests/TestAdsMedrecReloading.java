@@ -26,6 +26,11 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
 
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
     checkIfNextModuleWillBe(ads, RECIRCULATION_SELECTOR);
