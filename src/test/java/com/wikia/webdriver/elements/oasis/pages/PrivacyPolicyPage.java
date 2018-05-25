@@ -11,7 +11,7 @@ public class PrivacyPolicyPage extends WikiBasePageObject {
   @FindBy(css = "#privacy-settings-button")
   private WebElement resetTrackingButton;
 
-  private static final String PRIVACY_POLICY_PAGE = "http://www.wikia.com/wiki/Privacy_Policy";
+  private static final String PRIVACY_POLICY_PAGE = "http://www.wikia.com/Privacy_Policy";
 
 
   public void navigateToPrivacyPolicyPage() {
