@@ -1,7 +1,14 @@
 package com.wikia.webdriver.common.logging;
 
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.*;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -12,6 +19,18 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.commons.codec.binary.Base64;
@@ -21,23 +40,17 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -337,34 +350,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                 .logInfo("Hack for disabling notifications", "Failed to execute js action");
 
       }
-      /**
-       * All of tests should be executed as an user who opted in (agreed) on using ads tracking.
-       * Manually user would need to click 'agree' in the tracking opt in modal.
-       */
 
-      if (TestContext.isFirstLoad()) {
-        boolean userOptedIn = true;
-        boolean userOptedOut = false;
-
-        if (method.isAnnotationPresent(Execute.class) && !method.getAnnotation(Execute.class)
-            .trackingOptIn()) {
-          userOptedIn = false;
-        }
-
-        if (method.isAnnotationPresent(Execute.class)) {
-          userOptedOut = method.getAnnotation(Execute.class).trackingOptOut();
-        }
-
-        if (userOptedIn) {
-          driver.manage().addCookie(
-              new Cookie("tracking-opt-in-status", "accepted", ".wikia.com", "/",
-                         new Date(new DateTime().plusYears(10).getMillis())));
-        } else if (userOptedOut) {
-          driver.manage().addCookie(
-              new Cookie("tracking-opt-in-status", "rejectedgit", ".wikia.com", "/",
-                         new Date(new DateTime().plusYears(10).getMillis())));
-        }
-      }
+      handleGdprModalWithCookie();
 
       /**
        * We want to disable sales pitch dialog for new potential contributors to avoid hiding other
@@ -401,6 +388,40 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     }
 
     logJSError();
+  }
+
+  /**
+   * All of tests should be executed as an user who opted in (agreed) on using ads tracking,
+   * unless you change it in @Execute annotation.
+   * Manually user would need to click 'agree' in the tracking opt in modal.
+   */
+  private void handleGdprModalWithCookie() {
+    Method method = TestContext.getCurrentTestMethod();
+    if (TestContext.isFirstLoad()) {
+      boolean userOptedIn = true;
+      boolean userOptedOut = false;
+
+      if (method.isAnnotationPresent(Execute.class) && !method.getAnnotation(Execute.class)
+          .trackingOptIn()) {
+        userOptedIn = false;
+      }
+
+      if (method.isAnnotationPresent(Execute.class)) {
+        userOptedOut = method.getAnnotation(Execute.class).trackingOptOut();
+      }
+
+      if (userOptedIn) {
+        driver.manage().addCookie(
+            new Cookie("tracking-opt-in-status", "accepted", ".wikia.com", "/",
+                       new Date(new DateTime().plusYears(10).getMillis())));
+        driver.manage().addCookie(new Cookie("tracking-opt-in-status", "accepted"));
+      } else if (userOptedOut) {
+        driver.manage().addCookie(
+            new Cookie("tracking-opt-in-status", "rejectedgit", ".wikia.com", "/",
+                       new Date(new DateTime().plusYears(10).getMillis())));
+      }
+      driver.navigate().refresh();
+    }
   }
 
   @Override
