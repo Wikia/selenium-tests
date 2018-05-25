@@ -25,11 +25,9 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
     Page page = new Page("project43", "SyntheticTests/LongPage");
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
 
-    try {
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    driver.manage().getCookies().stream().forEach(c -> System.out.println(c.getName() + " = " + c.getValue() +
+        ", httpOnly: " + c.isHttpOnly() + ", secure: " + c.isSecure()));
+
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
     ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
