@@ -58,7 +58,7 @@ public class TrackingOptInModal extends BasePageObject {
 
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Tracking modal not visible");
+      PageObjectLogging.logInfo("Tracking modal not visible", e);
 
       return false;
     }
@@ -159,7 +159,7 @@ public class TrackingOptInModal extends BasePageObject {
         wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i));
       } catch (Exception e) {
         PageObjectLogging
-            .log("Did not get successfull response with element: " + elementsList.get(i),
+            .log("Did not get successful response with element: " + elementsList.get(i),
                  e, false);
         result = false;
       }
@@ -174,6 +174,10 @@ public class TrackingOptInModal extends BasePageObject {
       entry = trafficInterceptor.getEntryByUrlPattern(pattern);
       return entry.getResponse().getStatus() < 400;
     } catch (NullPointerException ex) {
+      PageObjectLogging
+          .logInfo("Did not get successful response",
+               ex);
+
       return false;
     }
   }
