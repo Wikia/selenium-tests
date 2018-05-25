@@ -184,11 +184,13 @@ public class TrackingOptInModal extends BasePageObject {
 
   private static String appendTrackingOptOutParameters(String url, String[] instantGlobals) {
     UrlBuilder urlBuilder = new UrlBuilder();
+    String newUrl = url;
 
     for (String instantGlobal : instantGlobals) {
-      url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, instantGlobal);
+      newUrl = urlBuilder.globallyEnableGeoInstantGlobalOnPage(newUrl, instantGlobal);
     }
-    return url;
+
+    return newUrl;
   }
 
   private String urlWithInstantGlobals(String[] instantGlobals, Page page) {
