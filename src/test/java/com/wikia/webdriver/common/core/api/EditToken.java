@@ -1,8 +1,10 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Iterator;
+import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
@@ -18,19 +20,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Iterator;
 
 public class EditToken {
+
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
   private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName()) + "/api.php";
   private User user;
+  private String username;
 
   public EditToken(User user) {
     this.user = user;
+  }
+
+  public EditToken(String username) {
+    this.username = username;
   }
 
   private static ResponseHandler<String> extractEditToken() {
@@ -68,8 +74,10 @@ public class EditToken {
           .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
       HttpGet httpGet = new HttpGet(apiURL);
       // set header
-      if (user != null) {
-        httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(user));
+      if (username != null) {
+        httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(username));
+      } else if (user != null) {
+        httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(user.getUserName()));
       }
 
       PageObjectLogging.logInfo("QUERY EDIT TOKEN: ", httpGet.toString());
