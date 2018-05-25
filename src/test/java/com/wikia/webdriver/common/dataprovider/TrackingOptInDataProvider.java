@@ -15,11 +15,11 @@ public class TrackingOptInDataProvider {
       "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
   private static final String ADS_MOAT_PATTERN = "https?://.*moatads\\.com.*";
   private static final String ADS_PUBMATIC_PATTERN =
-      "http?://.*gads\\.pubmatic\\.com/AdServer/AdCallAggregator.*";
+      "http?://.*pubmatic\\.com/AdServer.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch\\.com/beacon\\.js*";
   private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve\\.com.*";
-  private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/jpt.*";
+  private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/.*";
   private static final String ADS_NORDICS_PATTERN = "https?://.*doubleclick\\.net/gampad/ads.*Nordics_RoN.*";
   private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
