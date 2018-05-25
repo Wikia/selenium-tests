@@ -351,7 +351,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       }
 
-      handleGdprModalWithCookie();
+//      handleGdprModalWithCookie();
 
       /**
        * We want to disable sales pitch dialog for new potential contributors to avoid hiding other
