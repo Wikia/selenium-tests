@@ -201,7 +201,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
