@@ -28,7 +28,7 @@ public class TrackingOptInDataProvider {
   private static final String ADS_GOOGLE_ANALYTICS_REJECTED_PATERN =
       "https?://.*google-analytics\\.com/collect.*aip=1.*";
   private static final String ADS_QUALAROO_ANALITYCS_PATERN =
-    "https?://.*s3\\.amazonaws\\.com.*";
+    "https?://.*amazonaws\\.com.*";
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
       "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =
