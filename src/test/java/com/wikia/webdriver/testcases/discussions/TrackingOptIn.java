@@ -23,20 +23,10 @@ public class TrackingOptIn extends NewTestTemplate {
     */
 
     @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
-    @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRcountries",
-            groups = {"discussions-tracking-opt-in-desktop"})
-    public void testModalVisibilityForAnonOnDesktop(String continent, String country, boolean shouldGetModal) {
-        TrackingOptInModal trackingModal = setGeoCookieAndNavigate(continent, country);
-        Assertion.assertEquals(trackingModal.isVisible(), shouldGetModal);
-    }
-
-    @Execute(asUser = User.USER, trackingOptIn = false)
-    @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRcountries",
-            groups = {"discussions-tracking-opt-in-desktop"})
-    public void testModalVisibilityForLoggedInWhoNeverOptedInOnDesktop(String continent, String country,
-                                                              boolean shouldGetModal) {
-        TrackingOptInModal trackingModal = setGeoCookieAndNavigate(continent, country);
-        Assertion.assertEquals(trackingModal.isVisible(), shouldGetModal);
+    @Test(groups = {"discussions-tracking-opt-in-desktop"})
+    public void testModalVisibilityForAnonOnDesktop() {
+        TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
+        Assertion.assertFalse(trackingModal.isVisible());
     }
 
     @Test(groups = {"discussions-tracking-opt-in-desktop"})
@@ -87,21 +77,10 @@ public class TrackingOptIn extends NewTestTemplate {
 
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
-    @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRcountries",
-            groups = {"discussions-tracking-opt-in-mobile"})
-    public void testModalVisibilityForAnonOnMobile(String continent, String country, boolean shouldGetModal) {
-        TrackingOptInModal trackingModal = setGeoCookieAndNavigate(continent, country);
-        Assertion.assertEquals(trackingModal.isVisible(), shouldGetModal);
-    }
-
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-    @Execute(asUser = User.USER, trackingOptIn = false)
-    @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRcountries",
-            groups = {"discussions-tracking-opt-in-mobile"})
-    public void testModalVisibilityForLoggedInWhoNeverOptedInOnMobile(String continent, String country,
-                                                              boolean shouldGetModal) {
-        TrackingOptInModal trackingModal = setGeoCookieAndNavigate(continent, country);
-        Assertion.assertEquals(trackingModal.isVisible(), shouldGetModal);
+    @Test(groups = {"discussions-tracking-opt-in-mobile"})
+    public void testModalVisibilityForAnonOnMobile() {
+        TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
+        Assertion.assertFalse(trackingModal.isVisible());
     }
 
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
