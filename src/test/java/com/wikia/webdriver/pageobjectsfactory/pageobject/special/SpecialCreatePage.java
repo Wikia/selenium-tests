@@ -18,7 +18,7 @@ public class SpecialCreatePage extends SpecialPageObject {
 
 
   public SpecialCreatePage open(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_PAGE);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_CREATE_PAGE);
     return this;
   }
 

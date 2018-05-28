@@ -103,7 +103,7 @@ public class TrackingOptInModal extends BasePageObject {
     public void verifyTrackingRequestsNotSend(List<String> urlPatterns,
                                               NetworkTrafficInterceptor networkTrafficInterceptor,
                                               Page page){
-        getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL));
+        getUrl(urlBuilder.appendQueryStringToURL(page.getUrl(), MODAL_INSTANT_GLOBAL));
         clickRejectButton();
         isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
     }
@@ -119,13 +119,13 @@ public class TrackingOptInModal extends BasePageObject {
     public void verifyTrackingRequestsSend(List<String> urlPatterns,
                                                  NetworkTrafficInterceptor networkTrafficInterceptor,
                                                  Page page){
-        getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL));
+        getUrl(urlBuilder.appendQueryStringToURL(page.getUrl(), MODAL_INSTANT_GLOBAL));
         clickAcceptButton();
         isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
     }
 
     public String urlOptInModalDisplayedOasis(Page page){
-        return urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL);
+        return urlBuilder.appendQueryStringToURL(page.getUrl(), MODAL_INSTANT_GLOBAL);
     }
 
     public void isTrackingRequestsNotSend(List<String> elementsList,
@@ -170,10 +170,8 @@ public class TrackingOptInModal extends BasePageObject {
     }
 
     private static String appendTrackingOptOutParameters(String url, String[] instantGlobals) {
-        UrlBuilder urlBuilder = new UrlBuilder();
-
         for (String instantGlobal : instantGlobals) {
-            url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, instantGlobal);
+            url = UrlBuilder.createUrlBuilder().globallyEnableGeoInstantGlobalOnPage(url, instantGlobal);
         }
         return url;
     }

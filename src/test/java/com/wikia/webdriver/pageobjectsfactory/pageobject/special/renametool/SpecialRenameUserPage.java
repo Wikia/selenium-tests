@@ -31,7 +31,7 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   private WebElement renamedMessage;
 
   public SpecialRenameUserPage open() {
-    getUrl(urlBuilder.getUrl() + URLsContent.SPECIAL_RENAME_TOOL);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_RENAME_TOOL));
     return this;
   }
 

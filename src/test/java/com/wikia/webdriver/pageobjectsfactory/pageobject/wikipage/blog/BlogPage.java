@@ -8,12 +8,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 public class BlogPage extends ArticlePageObject {
 
-  private static final String BLOG_PATH_FORMAT = "/wiki/User_blog:%s/%s";
+  private static final String BLOG_PAGE_FORMAT = "User_blog:%s/%s";
   @FindBy(css = ".page-header__title")
   private WebElement blogHeader;
 
   public BlogPage open(String userName, String postName) {
-    getUrl(urlBuilder.getUrlForWikiPage(String.format(BLOG_PATH_FORMAT, userName, postName)));
+    getUrl(urlBuilder.getUrlForWikiPage(String.format(BLOG_PAGE_FORMAT, userName, postName)));
 
     return this;
   }

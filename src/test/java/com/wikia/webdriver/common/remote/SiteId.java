@@ -22,7 +22,9 @@ public class SiteId {
 
   private void extractSiteIdFromSpecialVersion() {
     NoAuthOperation request = new NoAuthOperation();
-    String response = request.execute(this.wikiUrl + URLsContent.SPECIAL_VERSION, new JSONObject());
+    String response = request
+        .execute(this.wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VERSION,
+            new JSONObject());
     Pattern p = Pattern.compile(".*city_id: (\\d+).*", Pattern.DOTALL);
     Matcher m = p.matcher(response);
     if (m.find()) {

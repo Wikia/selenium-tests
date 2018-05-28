@@ -8,6 +8,7 @@ import static com.wikia.webdriver.common.core.configuration.Configuration.getFor
 import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiLanguage;
 import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiName;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import okhttp3.HttpUrl;
 import org.openqa.selenium.WebDriverException;
@@ -41,15 +42,21 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String normalizePageName(String pageName) {
+    if ("".equals(pageName))
+      throw new WebDriverException("Page name is missing");
     return pageName.replace(" ", "_");
   }
 
-  public String getUrlForPageWithWWW(String pageName) {
-    return getUrl(getWikiName(), true) + pageName;
+  public String getUrlForWikiPageWithWWW(String pageName) {
+    if ("".equals(pageName))
+      throw new WebDriverException("Page name is missing");
+    return getUrl(getWikiName(), true) + URLsContent.WIKI_DIR + pageName;
   }
 
   public String getUrlForWikiPage(String pageName) {
-    return getUrl() + pageName;
+    if ("".equals(pageName))
+      throw new WebDriverException("Page name is missing");
+    return getUrl() + URLsContent.WIKI_DIR + pageName;
   }
 
   public String getUrlForPath(String wikiPath) {

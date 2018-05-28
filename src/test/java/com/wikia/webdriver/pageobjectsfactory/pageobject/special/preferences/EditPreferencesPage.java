@@ -15,7 +15,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   private WebElement emailAddressInput;
 
   private EditPreferencesPage openEditingSection(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_EDITING_PREFERENCES);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_EDITING_PREFERENCES);
     return this;
   }
 
@@ -24,7 +24,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   }
 
   private EditPreferencesPage openEmailSection(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_EDITING_PREFERENCES_EMAIL);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_EDITING_PREFERENCES_EMAIL);
     return this;
   }
 

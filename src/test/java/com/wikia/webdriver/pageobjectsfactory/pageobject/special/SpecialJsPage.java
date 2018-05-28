@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ContentReviewModule;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -25,15 +24,15 @@ public class SpecialJsPage extends WikiBasePageObject {
      * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
      */
     public SpecialJsPage open() {
-        getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
-                + String.format("mediawiki:%s.js", TestContext.getCurrentMethodName()));
+        getUrl(urlBuilder.getUrlForWikiPage(
+            String.format("mediawiki:%s.js", TestContext.getCurrentMethodName())));
 
         return this;
     }
 
     public SpecialJsPage open(String articleTitle) {
-        getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
-                + String.format("mediawiki:%s.js", articleTitle));
+        getUrl(urlBuilder.getUrlForWikiPage(String.format("mediawiki:%s.js", articleTitle)));
+
         return this;
     }
 

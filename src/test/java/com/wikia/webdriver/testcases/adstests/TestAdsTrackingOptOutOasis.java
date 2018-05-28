@@ -1,16 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import static org.testng.Assert.assertTrue;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
-import org.testng.annotations.Test;
 import org.openqa.selenium.TimeoutException;
+import org.testng.annotations.Test;
 
 public class TestAdsTrackingOptOutOasis extends NewTestTemplate {
   public static final String TEST_WIKI = "project43";
@@ -33,7 +30,7 @@ public class TestAdsTrackingOptOutOasis extends NewTestTemplate {
 
     Boolean noKikimoraRequestFound = false;
     Boolean noKruxRequestFound = false;
-    String url = appendTrackingOptOutParameters(urlBuilder.getUrlForPage(new Page(TEST_WIKI, TEST_PAGE)));
+    String url = appendTrackingOptOutParameters((new Page(TEST_WIKI, TEST_PAGE)).getUrl());
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, url);
 
     try {
@@ -60,10 +57,10 @@ public class TestAdsTrackingOptOutOasis extends NewTestTemplate {
   }
 
   public static String appendTrackingOptOutParameters(String url) {
-    UrlBuilder urlBuilder = new UrlBuilder();
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();
 
     for (String instantGlobal : INSTANT_GLOBALS) {
-      url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, instantGlobal);
+      url = UrlBuilder.createUrlBuilder().globallyEnableGeoInstantGlobalOnPage(url, instantGlobal);
     }
 
     url = urlBuilder.appendQueryStringToURL(url, "trackingoptout=1");

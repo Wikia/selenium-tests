@@ -92,7 +92,7 @@ public class LightboxTests extends NewTestTemplate {
 
   @Test
   public void mercury_lightbox_PreserveScrollPositionAfterLightboxOpen() {
-    ArticlePage articlePage = new ArticlePage().open("/LightboxTest");
+    ArticlePage articlePage = new ArticlePage().open("LightboxTest");
     articlePage.getLightbox().openLightboxImage(0);
     Long startingPosition = new JavascriptActions().getCurrentPosition();
     articlePage.getLightbox().clickCloseButton();

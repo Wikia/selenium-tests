@@ -178,7 +178,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
     return new PreferencesPageObject();
   }
@@ -190,12 +190,12 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public UserProfilePage openProfilePage(String userName, String wikiURL) {
-    getUrl(wikiURL + URLsContent.USER_PROFILE.replace("%userName%", userName));
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.USER_PROFILE.replace("%userName%", userName));
     return new UserProfilePage();
   }
 
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VIDEOS);
     return new SpecialVideosPageObject(driver);
   }
 
@@ -205,27 +205,27 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL, String queryString) {
     String url =
-        urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.SPECIAL_VIDEOS, queryString);
+        urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VIDEOS, queryString);
     getUrl(url);
     return new SpecialVideosPageObject(driver);
   }
 
   public SpecialVideosPageObject openSpecialVideoPageMostRecent(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS + URLsContent.MOST_RECENT);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VIDEOS + URLsContent.MOST_RECENT);
     return new SpecialVideosPageObject(driver);
   }
 
   public SpecialNewFilesPage openSpecialNewFiles(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_NEW_FILES);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_NEW_FILES);
     return new SpecialNewFilesPage();
   }
 
   public SpecialNewFilesPage openSpecialNewFiles() {
-    return openSpecialNewFiles(getWikiUrl() + URLsContent.SPECIAL_NEW_FILES);
+    return openSpecialNewFiles(getWikiUrl() + URLsContent.WIKI_DIR + URLsContent.SPECIAL_NEW_FILES);
   }
 
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UPLOAD);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_UPLOAD);
     return new SpecialUploadPageObject(driver);
   }
 
@@ -234,25 +234,25 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public SpecialCreatePage openSpecialCreateBlogPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_BLOGPAGE);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_CREATE_BLOGPAGE);
     return new SpecialCreatePage();
   }
 
   public ForumPage openForumMainPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_FORUM);
     PageObjectLogging.log("openForumPage", "forum page opened", true);
     return new ForumPage();
   }
 
   public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_MULTI_WIKI_FINDER);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_MULTI_WIKI_FINDER);
     PageObjectLogging.log("openSpecialMultiWikiFinderPage",
                           "Special MultiWikiFinder page was opened", true);
     return new SpecialMultiWikiFinderPageObject(driver);
   }
 
   public SpecialMultipleUploadPageObject openSpecialMultipleUpload(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_MULTIPLE_UPLOAD);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_MULTIPLE_UPLOAD);
     return new SpecialMultipleUploadPageObject(driver);
   }
 
@@ -267,7 +267,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void openSpecialWatchListPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_WATCHLIST);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_WATCHLIST);
   }
 
   public SourceEditModePageObject openCurrectArticleSourceMode() {

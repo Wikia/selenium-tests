@@ -37,7 +37,7 @@ public class SpecialBlockPage extends WikiBasePageObject {
   }
 
   public SpecialBlockPage open(String wikiUrl){
-    getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
+    getUrl(wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_BLOCK);
     PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
     wait.forElementVisible(blockButton);
 

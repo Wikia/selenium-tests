@@ -172,8 +172,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public ArticlePageObject open(String articleTitle) {
-    getUrl(urlBuilder.getUrl() + URLsContent.WIKI_DIR
-           + articleTitle);
+    getUrl(urlBuilder.getUrlForWikiPage(articleTitle));
     return this;
   }
 

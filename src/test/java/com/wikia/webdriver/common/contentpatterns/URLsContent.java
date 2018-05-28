@@ -12,52 +12,55 @@ public class URLsContent {
   public static final String USER_LOGIN = "/signin";
   public static final String USER_SIGNUP = "/register";
   public static final String USER_FORGOT_PASSWORD = "/forgot-password";
-  public static final String SPECIAL_NEW_FILES = "/wiki/Special:NewFiles";
-  public static final String SPECIAL_VIDEOS = "/wiki/Special:Videos";
-  public static final String SPECIAL_UPLOAD = "/wiki/Special:Upload";
-  public static final String SPECIAL_MULTIPLE_UPLOAD = "/wiki/Special:MultipleUpload";
-  public static final String SPECIAL_WATCHLIST = "/wiki/Special:Watchlist";
-  public static final String SPECIAL_PREFERENCES = "/wiki/Special:Preferences";
-  public static final String SPECIAL_RENAME_TOOL = "/wiki/Special:UserRenameTool";
+
+  public static final String SPECIAL_NEW_FILES = "Special:NewFiles";
+  public static final String SPECIAL_VIDEOS = "Special:Videos";
+  public static final String SPECIAL_UPLOAD = "Special:Upload";
+  public static final String SPECIAL_MULTIPLE_UPLOAD = "Special:MultipleUpload";
+  public static final String SPECIAL_WATCHLIST = "Special:Watchlist";
+  public static final String SPECIAL_PREFERENCES = "Special:Preferences";
+  public static final String SPECIAL_RENAME_TOOL = "Special:UserRenameTool";
   public static final String SPECIAL_EDITING_PREFERENCES =
-      "/wiki/Special:Preferences#mw-prefsection-editing";
+      "Special:Preferences#mw-prefsection-editing";
   public static final String SPECIAL_EDITING_PREFERENCES_EMAIL =
-      "/wiki/Special:Preferences#mw-prefsection-emailv2";
-  public static final String SPECIAL_PROMOTE = "/wiki/Special:Promote";
-  public static final String SPECIAL_CREATE_PAGE = "/wiki/Special:CreatePage";
-  public static final String SPECIAL_CREATE_BLOGPAGE = "/wiki/Special:CreateBlogPage";
-  public static final String SPECIAL_ADMIN_DASHBOARD = "/wiki/Special:AdminDashboard";
-  public static final String SPECIAL_CSS = "/wiki/Special:CSS";
-  public static final String SPECIAL_CURATED_CONTENT = "/wiki/Special:CuratedContent";
-  public static final String SPECIAL_FOLLOW = "/wiki/Special:Following";
-  public static final String SPECIAL_FORUM = "/wiki/Special:Forum";
-  public static final String SPECIAL_THEME_DESIGNER = "/wiki/Special:ThemeDesigner";
-  public static final String SPECIAL_WIKI_ACTIVITY = "/wiki/Special:WikiActivity";
-  public static final String SPECIAL_EDIT_ACCOUNT = "/wiki/Special:EditAccount";
-  public static final String USER_MESSAGE_WALL = "/wiki/Message_Wall:";
-  public static final String SPECIAL_MULTI_WIKI_FINDER = "/wiki/Special:Multiwikifinder";
-  public static final String LOGOUT = "/wiki/Special:UserLogout?noexternals=1";
-  public static final String USER_PROFILE = "/wiki/User:%userName%";
-  public static final String SPECIAL_CREATE_NEW_WIKI = "/Special:CreateNewWiki";
-  public static final String SPECIAL_WIKI_FACTORY = "/wiki/Special:WikiFactory";
-  public static final String SPECIAL_WHERE_IS_EXTENSION = "/Special:WhereIsExtension";
-  public static final String SPECIAL_CONTRIBUTIONS = "/wiki/Special:Contributions";
-  public static final String SPECIAL_BLOCK = "/wiki/Special:Block";
-  public static final String SPECIAL_CHAT = "/wiki/Special:Chat";
-  public static final String SPECIAL_EDIT_HUB = "/wiki/Special:EditHub";
-  public static final String SPECIAL_VIDEO_PAGE_ADMIN = "/wiki/Special:VideoPageAdmin/edit";
-  public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
-  public static final String SPECIAL_VERSION = "/wiki/Special:Version";
-  public static final String SPECIAL_INFOBOX_BUILDER = "/wiki/Special:InfoboxBuilder/";
-  public static final String SPECIAL_WIKI_FEATURES = "/wiki/Special:WikiFeatures/";
-  public static final String NOT_A_VALID_COMMUNITY = "/wiki/Community_Central:Not_a_valid_community";
+      "Special:Preferences#mw-prefsection-emailv2";
+  public static final String SPECIAL_PROMOTE = "Special:Promote";
+  public static final String SPECIAL_CREATE_PAGE = "Special:CreatePage";
+  public static final String SPECIAL_CREATE_BLOGPAGE = "Special:CreateBlogPage";
+  public static final String SPECIAL_ADMIN_DASHBOARD = "Special:AdminDashboard";
+  public static final String SPECIAL_CSS = "Special:CSS";
+  public static final String SPECIAL_CURATED_CONTENT = "Special:CuratedContent";
+  public static final String SPECIAL_FOLLOW = "Special:Following";
+  public static final String SPECIAL_FORUM = "Special:Forum";
+  public static final String SPECIAL_THEME_DESIGNER = "Special:ThemeDesigner";
+  public static final String SPECIAL_WIKI_ACTIVITY = "Special:WikiActivity";
+  public static final String SPECIAL_EDIT_ACCOUNT = "Special:EditAccount";
+  public static final String USER_MESSAGE_WALL = "Message_Wall:";
+  public static final String SPECIAL_MULTI_WIKI_FINDER = "Special:Multiwikifinder";
+  public static final String LOGOUT = "Special:UserLogout?noexternals=1";
+  public static final String USER_PROFILE = "User:%userName%";
+  public static final String SPECIAL_CREATE_NEW_WIKI = "Special:CreateNewWiki";
+  public static final String SPECIAL_WIKI_FACTORY = "Special:WikiFactory";
+  public static final String SPECIAL_WHERE_IS_EXTENSION = "Special:WhereIsExtension";
+  public static final String SPECIAL_CONTRIBUTIONS = "Special:Contributions";
+  public static final String SPECIAL_BLOCK = "Special:Block";
+  public static final String SPECIAL_CHAT = "Special:Chat";
+  public static final String SPECIAL_EDIT_HUB = "Special:EditHub";
+  public static final String SPECIAL_VIDEO_PAGE_ADMIN = "Special:VideoPageAdmin/edit";
+  public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
+  public static final String SPECIAL_VERSION = "Special:Version";
+  public static final String SPECIAL_INFOBOX_BUILDER = "Special:InfoboxBuilder";
+  public static final String SPECIAL_WIKI_FEATURES = "Special:WikiFeatures/";
+  public static final String COMMUNITY_CENTRAL = "Community_Central";
+  public static final String FANDOM_UNIVERSITY = "Fandom_University";
+  public static final String NOT_A_VALID_COMMUNITY = "Community_Central:Not_a_valid_community";
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
 
   // Blog list page url
-  public static final String BLOG_LIST = "/wiki/Blog:%listName%/";
-  public static final String BLOG_NAMESPACE = "/wiki/User_blog:%userName%/";
+  public static final String BLOG_LIST = "Blog:%listName%/";
+  public static final String BLOG_NAMESPACE = "User_blog:%userName%/";
 
   // Mediawiki template url
   public static final String TEMPLATE_NAMESPACE = "Template";

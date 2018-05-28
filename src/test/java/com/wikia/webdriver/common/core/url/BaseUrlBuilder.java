@@ -5,6 +5,7 @@ import static com.wikia.webdriver.common.core.configuration.Configuration.getEnv
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 
 public class BaseUrlBuilder {
 
@@ -49,5 +50,21 @@ public class BaseUrlBuilder {
 
     public String globallyDisableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
         return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[ZZ]", instantGlobal));
+    }
+
+    public String getCacheBusterQuery(String pageName) {
+        return pageName.equals("") || pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
+    }
+
+    public String getQueryParams(String pageName, String[] queryParams) {
+        String query = this.getCacheBusterQuery(pageName);
+
+        if (!query.equals("")) {
+            for (String queryParam : queryParams) {
+                query = query + "&" + queryParam;
+            }
+        }
+
+        return query;
     }
 }

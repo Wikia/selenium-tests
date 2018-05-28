@@ -84,7 +84,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public VisualEditorPageObject open(){
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWikiPage(
-            "/" + TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
+            TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
 
     return this;
   }

@@ -1,15 +1,14 @@
 package com.wikia.webdriver.testcases.communitypagetests;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.USER_LOGIN;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SpecialCommunity;
-
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.USER_LOGIN;
 
 
 @Test(groups = "CommunityPageTests")
@@ -54,7 +53,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
 
   private String getEditUrl(String page, String query) {
     return urlBuilder.appendQueryStringToURL(
-        urlBuilder.getUrlForWikiPage(String.format("/wiki/%s", urlBuilder.normalizePageName(page))),
+        urlBuilder.getUrlForWikiPage(urlBuilder.normalizePageName(page)),
         query);
   }
 
