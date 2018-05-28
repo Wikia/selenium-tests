@@ -41,8 +41,9 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   public void uapFloatingMedrecIsReloadingOnceWithRecirculationModule() {
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_PAGE.getUrl());
 
+    ads.wait.forElementPresent(RECIRCULATION_SELECTOR);
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
-    ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
+
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
