@@ -326,7 +326,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 //    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
 //  }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
