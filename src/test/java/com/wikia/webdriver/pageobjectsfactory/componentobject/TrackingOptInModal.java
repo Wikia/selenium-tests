@@ -146,6 +146,11 @@ public class TrackingOptInModal extends BasePageObject {
 
   public void isTrackingRequestSend(List<String> elementsList,
                                     NetworkTrafficInterceptor networkTrafficInterceptor) {
+    try {
+      Thread.sleep(25000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     for (int i = 0; i < elementsList.size(); i++) {
       wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i));
     }
