@@ -18,7 +18,7 @@ public class TrackingOptInDataProvider {
       "http?://.*pubmatic\\.com/AdServer.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch\\.com.*";
-  private static final String ADS_QUANTCAST_PATTERN = "https?://secure\\.quantserve\\.com/.*";
+  private static final String ADS_QUANTCAST_PATTERN = "https?://.*secure\\.quantserve\\.com/.*";
   private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/.*";
   private static final String ADS_NORDICS_PATTERN = "https?://.*doubleclick\\.net/gampad/ads.*Nordics_RoN.*";
   private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
