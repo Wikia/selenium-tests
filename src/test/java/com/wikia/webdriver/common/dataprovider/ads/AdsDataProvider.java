@@ -535,20 +535,20 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsTrackingPixelsOnConsecutivePages() {
     return new Object[][]{
-        {
-            new Page(WIKI_SPECIAL, "TrackingPixels/Article1"),
-            new String[]{
-                "TrackingPixels/Article2",
-                "TrackingPixels/Article3",
-                "TrackingPixels/Article2",
-                "TrackingPixels/Article1",
-                "Project43 Wikia"
-            },
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
-            }
-        }
+//        {
+//            new Page(WIKI_SPECIAL, "TrackingPixels/Article1"),
+//            new String[]{
+//                "TrackingPixels/Article2",
+//                "TrackingPixels/Article3",
+//                "TrackingPixels/Article2",
+//                "TrackingPixels/Article1",
+//                "Project43 Wikia"
+//            },
+//            new String[]{
+//                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+//                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+//            }
+//        }
     };
   }
 
@@ -558,30 +558,30 @@ public class AdsDataProvider {
         {
             WIKI_SPECIAL, "Project43_Wikia",
             new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+//                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+//                TestAdsTrackingPixels.KRUX_PIXEL_URL,
                 TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
             }
         },
-        {
-            "angrybirds", " Angry_Birds_Wiki",
-            new String[]{
-                TestAdsTrackingPixels.GA_PIXEL_URL
-            }
-        }
+//        {
+//            "angrybirds", " Angry_Birds_Wiki",
+//            new String[]{
+//                TestAdsTrackingPixels.GA_PIXEL_URL
+//            }
+//        }
     };
   }
 
     @DataProvider
     public static Object[][] adsTrackingPixelsSentAuthPage() {
         return new Object[][]{
-            {
-                MercuryWikis.MERCURY_AUTOMATION_TESTING,
-                "/join",
-                new String[]{
-                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
-                }
-            }
+//            {
+//                MercuryWikis.MERCURY_AUTOMATION_TESTING,
+//                "/join",
+//                new String[]{
+//                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
+//                }
+//            }
         };
     }
 

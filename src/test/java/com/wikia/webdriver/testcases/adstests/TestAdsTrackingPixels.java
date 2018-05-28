@@ -16,11 +16,12 @@ import org.testng.annotations.Test;
 
 public class TestAdsTrackingPixels extends NewTestTemplate {
 
-  public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
-  public static final String GA_PIXEL_URL = "https://www.google-analytics.com/collect";
-  public static final String KRUX_PIXEL_URL = "https://beacon.krxd.net/pixel.gif";
-  public static final String QUANTQAST_PIXEL_URL = "http://edge.quantserve.com/";
-  public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
+//  public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
+//  public static final String GA_PIXEL_URL = "https://www.google-analytics.com/collect";
+//  public static final String KRUX_PIXEL_URL = "https://beacon.krxd.net/pixel.gif";
+private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve\\.com.*";
+  public static final String QUANTQAST_PIXEL_URL = "http?://edge\\.quantserve\\.com.*";
+//  public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
 
   @NetworkTrafficDump
   @Test(
@@ -40,8 +41,6 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
     // Check tracking pixels on consecutive page views
     for (String linkName : articles) {
-      networkTrafficInterceptor.startIntercepting();
-
       adsBaseObject.clickOnArticleLink(linkName);
 
       assertTrackingPixelsSent(adsBaseObject, urls);
@@ -85,7 +84,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
   private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
-      adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
+      adsBaseObject.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pixelUrl);
     }
   }
 }
