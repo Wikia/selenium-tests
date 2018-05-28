@@ -137,4 +137,20 @@ public class TrackingOptInModalTests extends NewTestTemplate {
 
     Assertion.assertTrue(new TrackingOptInModal().isVisible());
   }
+
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
+  @Execute(asUser = User.USER, trackingOptIn = true)
+  public void loggedInUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
+    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+
+    PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
+    privacyPolicy.navigateToPrivacyPolicyPage();
+    privacyPolicy.clickResetTrackingButton();
+
+    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+  }
 }
