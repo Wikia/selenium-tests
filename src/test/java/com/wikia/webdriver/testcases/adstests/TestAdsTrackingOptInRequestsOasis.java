@@ -341,20 +341,20 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsComscoreDataProvider",
-      groups = "AdsOptInAcceptedOasis"
-  )
-  public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
-  }
+//  @NetworkTrafficDump(useMITM = true)
+//  @Execute(trackingOptIn = false)
+//  @Test(
+//      dataProviderClass = TrackingOptInDataProvider.class,
+//      dataProvider = "adsComscoreDataProvider",
+//      groups = "AdsOptInAcceptedOasis"
+//  )
+//  public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
+//    networkTrafficInterceptor.startIntercepting();
+//    TrackingOptInModal modal = new TrackingOptInModal();
+//    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+//
+//    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+//  }
 
 //  @NetworkTrafficDump(useMITM = true)
 //  @Execute(trackingOptIn = false)
