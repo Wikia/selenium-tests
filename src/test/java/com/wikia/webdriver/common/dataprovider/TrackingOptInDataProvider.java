@@ -31,7 +31,7 @@ public class TrackingOptInDataProvider {
 //  private static final String ADS_QUALAROO_ANALITYCS_PATERN =
 //      "http?://s3\\.amazonaws\\.com/.*\\.js.*";
   private static final String ADS_QUALAROO_ANALITYCS_PATERN =
-    "http?://.*s3\\.amazonaws\\.com.*";
+    "http?://.*s3.*amazonaws\\.com.*";
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
       "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =
