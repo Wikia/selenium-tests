@@ -27,7 +27,7 @@ import java.util.Iterator;
 public class EditToken {
 
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
-  private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName()) + "/api.php".replace("https://", "http://");
+  private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName()).replace("https://", "http://") + "/api.php";
   private User user;
   private String username;
 
