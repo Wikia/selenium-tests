@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -19,6 +20,7 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.http.util.EntityUtils;
 
 public class UserRegistration {
   private UserRegistration() {}
@@ -49,7 +51,13 @@ public class UserRegistration {
       params.add(new BasicNameValuePair("registrationWikiaId", "80433"));
 
       httpPost.setEntity(new UrlEncodedFormEntity(params, StandardCharsets.UTF_8));
-      httpClient.execute(httpPost);
+
+      CloseableHttpResponse resp = httpClient.execute(httpPost);
+
+      PageObjectLogging.logInfo("REGISTER USER: ",  httpPost.toString());
+      PageObjectLogging.logInfo("REGISTER USER: ",
+          "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
+
     } catch (URISyntaxException | IOException e) {
       PageObjectLogging.logError("Error during registering user", e);
     }
