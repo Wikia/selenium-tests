@@ -18,7 +18,7 @@ public class DeleteMWVideo extends ApiCall {
 
   @Override
   protected String getURL() {
-    return new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
+    return new UrlBuilder().getUrlForWiki(Configuration.getWikiName()).replace("https","http")
         + "/wikia.php?controller=VideoHandler&method=removeVideo&format=json";
   }
 
