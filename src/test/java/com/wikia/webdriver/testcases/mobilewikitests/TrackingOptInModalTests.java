@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.oasis.pages.PrivacyPolicyPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
 
 import org.testng.annotations.Test;
@@ -117,6 +118,38 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     driver.manage().deleteAllCookies();
 
     new ArticlePage().open();
+
+    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+  }
+
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
+  @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
+  public void anonUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
+    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+
+    PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
+    privacyPolicy.navigateToPrivacyPolicyPage();
+    privacyPolicy.clickResetTrackingButton();
+
+    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+  }
+
+  @Test(groups = {"mobile-wiki-tracking-opt-in"})
+  @Execute(asUser = User.USER, trackingOptIn = true)
+  public void loggedInUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
+    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+
+    PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
+    privacyPolicy.navigateToPrivacyPolicyPage();
+    privacyPolicy.clickResetTrackingButton();
 
     Assertion.assertTrue(new TrackingOptInModal().isVisible());
   }
