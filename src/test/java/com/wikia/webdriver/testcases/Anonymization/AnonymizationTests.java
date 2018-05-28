@@ -53,7 +53,7 @@ public class AnonymizationTests extends NewTestTemplate {
     UserRegistration.registerUserEmailConfirmed(user);
 
     SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
-    anonymizationStaff.loginAs(User.STAFF);
+    anonymizationStaff.loginAs(User.SUS_STAFF);
     anonymizationStaff.fillFutureAnon(qanon)
         .submitAnonymization();
 
@@ -78,7 +78,7 @@ public class AnonymizationTests extends NewTestTemplate {
     UserRegistration.registerUserEmailConfirmed(user);
 
     SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
-    anonymizationStaff.loginAs(User.STAFF);
+    anonymizationStaff.loginAs(User.SUS_STAFF);
     anonymizationStaff.fillFutureAnon(qanon)
         .submitAnonymization();
 
