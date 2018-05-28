@@ -351,8 +351,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           userOptedIn = false;
         }
 
-        if (method.isAnnotationPresent(Execute.class)) {
-          userOptedOut = method.getAnnotation(Execute.class).trackingOptOut();
+        if (method.isAnnotationPresent(Execute.class) && method.getAnnotation(Execute.class).trackingOptOut()) {
+          userOptedOut = true;
         }
 
         if (userOptedIn) {
@@ -361,7 +361,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                          new Date(new DateTime().plusYears(10).getMillis())));
         } else if (userOptedOut) {
           driver.manage().addCookie(
-              new Cookie("tracking-opt-in-status", "rejectedgit", ".wikia.com", "/",
+              new Cookie("tracking-opt-in-status", "rejected", ".wikia.com", "/",
                          new Date(new DateTime().plusYears(10).getMillis())));
         }
       }
