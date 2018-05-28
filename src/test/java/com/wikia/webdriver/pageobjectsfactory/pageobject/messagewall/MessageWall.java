@@ -78,11 +78,22 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
+  @FindBy(css = ".edited-by")
+  private WebElement wallEdition;
+
 
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
         + userName);
     waitForPageLoad();
+
+    try {
+      Thread.sleep(10000);
+    }catch (Exception e){
+
+    }
+
+    driver.navigate().refresh();
 
     return new MessageWall();
   }
@@ -140,7 +151,7 @@ public class MessageWall extends WikiBasePageObject {
         driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
     jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
-    PageObjectLogging.log("submitEdition", "message edition submitted", true);
+    PageObjectLogging.log("submitEdition", "message wallEdition submitted", true);
   }
 
   public void submitQuote() {
@@ -391,5 +402,8 @@ public class MessageWall extends WikiBasePageObject {
     wait.forElementVisible(By.xpath("//div[@class='msg-title']/a[contains(text(), " + "'" + title
         + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
     PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
+  }
+  public boolean isEditionVisible() {
+    return isVisible(wallEdition);
   }
 }

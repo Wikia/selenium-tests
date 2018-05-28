@@ -27,6 +27,12 @@ public class CuratedContent extends ApiCall {
     return null;
   }
 
+  @Override
+  protected String getUserName() {
+    return null;
+  }
+
+
   /**
    * Clear Curated Content of current wiki Sets empty array as value of wgWikiaCuratedContent
    * wikifactory variable.
