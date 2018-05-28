@@ -40,8 +40,6 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
     // Check tracking pixels on consecutive page views
     for (String linkName : articles) {
-      networkTrafficInterceptor.startIntercepting();
-
       adsBaseObject.clickOnArticleLink(linkName);
 
       assertTrackingPixelsSent(adsBaseObject, urls);
