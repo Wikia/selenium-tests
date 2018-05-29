@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
@@ -305,6 +306,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     Method method = TestContext.getCurrentTestMethod();
     Class<?> declaringClass = method.getDeclaringClass();
 
+    String cookieDomain = String.format(".%s", Configuration.getEnvType().getWikiaDomain());
+
+    Date cookieDate =new Date(new DateTime().plusYears(10).getMillis());
+
     if (!AlertHandler.isAlertPresent(driver)) {
       String command = "Url after navigation";
       if (url.equals(driver.getCurrentUrl())) {
@@ -336,7 +341,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       } catch (WebDriverException e) {
         PageObjectLogging
                 .logInfo("Hack for disabling notifications", "Failed to execute js action");
-
       }
       /**
        * All of tests should be executed as an user who opted in (agreed) on using ads tracking.
@@ -358,12 +362,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
         if (userOptedIn) {
           driver.manage().addCookie(
-              new Cookie("tracking-opt-in-status", "accepted", ".wikia.com", "/",
-                         new Date(new DateTime().plusYears(10).getMillis())));
+              new Cookie("tracking-opt-in-status", "accepted", cookieDomain, "/",
+                         cookieDate));
         } else if (userOptedOut) {
           driver.manage().addCookie(
-              new Cookie("tracking-opt-in-status", "rejected", ".wikia.com", "/",
-                         new Date(new DateTime().plusYears(10).getMillis())));
+              new Cookie("tracking-opt-in-status", "rejected", cookieDomain, "/",
+                  cookieDate));
         }
       }
 
@@ -373,13 +377,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
        */
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
         driver.manage().addCookie(
-            new Cookie("cpBenefitsModalShown", "1", Configuration.getWikiaDomain(), null, null));
+            new Cookie("cpBenefitsModalShown", "1", cookieDomain, "/", cookieDate));
       }
 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-                                             String.format(".%s", Configuration.getEnvType()
-                                                 .getWikiaDomain()), null, null));
+                                             cookieDomain, "/", cookieDate));
+        logInfo(String.format("Adding moc-ads cookie with value: %s, and domain: %s", XMLReader.getValue("mock.ads_token"), String.format(".%s", Configuration.getEnvType()
+            .getWikiaDomain())));
       }
     }
 

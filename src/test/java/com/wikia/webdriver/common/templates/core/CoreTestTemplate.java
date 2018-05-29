@@ -59,6 +59,7 @@ public abstract class CoreTestTemplate {
     prepareURLs();
 
     driver = DriverProvider.getActiveDriver();
+    networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
 
     loadFirstPage();
