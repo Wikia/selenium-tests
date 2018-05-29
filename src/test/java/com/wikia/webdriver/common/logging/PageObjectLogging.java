@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -397,6 +398,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       if (user != null && user != User.ANONYMOUS) {
         // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject().loginAs(user);
+      }
+      NetworkTrafficInterceptor networkTrafficInterceptor = DriverProvider.getActiveDriver().getProxy();
+      if (networkTrafficInterceptor != null && Configuration.getForceHttps()) {
+        networkTrafficInterceptor.startIntercepting();
       }
     }
 
