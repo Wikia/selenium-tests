@@ -160,6 +160,14 @@ public class TrackingOptInDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] GDPRCountriesForTest() {
+    return new Object[][]{
+        {"EU", "de", true}, // Germany
+
+        {"NA", "US", false}, // USA
+    };
+  }
 
   @DataProvider
   public static Object[][] adsKikimoraAcceptedDataProvider() {
