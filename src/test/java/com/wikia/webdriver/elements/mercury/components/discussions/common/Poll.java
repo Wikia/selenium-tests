@@ -34,11 +34,11 @@ public class Poll extends BasePageObject {
     private List<WebElement> answersList;
 
     @Getter
-    @FindBy(css = ".poll-answer__radio")
+    @FindBy(css = ".poll-answer__label > .poll-answer__radio")
     private List<WebElement> answersRadioButtonsList;
 
     @Getter
-    @FindBy(css = ".poll-answer__result-bar.is-active")
+    @FindBy(css = "span.poll-answer__result-bar.is-active")
     private WebElement activeBarResult;
 
     @Getter
@@ -53,6 +53,31 @@ public class Poll extends BasePageObject {
 
     @FindBy(css = ".poll-answers__add-answer-button > .wds-button")
     private WebElement addAnswerButton;
+
+    @FindBy(css = ".voter-list")
+    private WebElement votersListModal;
+
+    @FindBy(css = ".voter-list__header-icon > .wds-icon")
+    private WebElement closeVotersListButton;
+
+    @FindBy(css = ".poll-vote-count")
+    private WebElement pollVotesIcon;
+
+    @FindBy(css = ".user-avatar")
+    private List<WebElement> votersList;
+
+    @FindBy(css = ".poll-answer")
+    private List<WebElement> answerResultsList;
+
+    public int getVotersNumber() {
+        return votersList.size();
+    }
+
+    public int getRadioButtonsNumber() {
+        wait.forElementVisible(answersRadioButtonsList.get(0));
+
+        return answersRadioButtonsList.size();
+    }
 
     public Poll addTitle(String title) {
         wait.forElementClickable(titleInput);
@@ -86,6 +111,20 @@ public class Poll extends BasePageObject {
         return this;
     }
 
+    public Poll clickOnNthAnswerResult(int n) {
+        wait.forElementClickable(answerResultsList.get(n));
+        answerResultsList.get(n).click();
+
+        return this;
+    }
+
+    public Poll clickOnPollVotesIcon() {
+        wait.forElementClickable(pollVotesIcon);
+        pollVotesIcon.click();
+
+        return this;
+    }
+
     public Poll clickNthAnswer(int number) {
         try {
             wait.forElementClickable(answersList.get(number));
@@ -101,6 +140,13 @@ public class Poll extends BasePageObject {
     public Poll clickAddAnswerButton() {
         wait.forElementClickable(addAnswerButton);
         scrollAndClick(addAnswerButton);
+
+        return this;
+    }
+
+    public Poll closeVotersListModal() {
+        wait.forElementClickable(closeVotersListButton);
+        closeVotersListButton.click();
 
         return this;
     }
@@ -133,5 +179,7 @@ public class Poll extends BasePageObject {
     public boolean isAlreadyVotedMessageVisible() {
         return isElementDisplayed(votedMessage);
     }
+
+    public boolean isVotersListDisplayed() { return isElementDisplayed(votersListModal); }
 
 }
