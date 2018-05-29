@@ -86,7 +86,7 @@ public class TrackingOptInDataProvider {
       "wgAdDriverA9VideoBidderCountries"
   };
 
-  private static final String[] ADS_ARTICLE_POAGES = {
+  private static final String[] ADS_ARTICLE_PAGES = {
       "TrackingPixels/Article2",
       "TrackingPixels/Article3",
       "TrackingPixels/Article2",
@@ -378,7 +378,7 @@ public class TrackingOptInDataProvider {
                 ADS_COMSCORE_PATTERN,
                 ADS_QUANTCAST_PATTERN
             ),
-            ADS_ARTICLE_POAGES
+            ADS_ARTICLE_PAGES
         }
     };
   }
