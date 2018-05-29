@@ -377,7 +377,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
               new Cookie("tracking-opt-in-status", "rejectedgit", ".wikia.com", "/",
                          new Date(new DateTime().plusYears(10).getMillis())));
         }
-        driver.navigate().refresh();
       }
 
       /**

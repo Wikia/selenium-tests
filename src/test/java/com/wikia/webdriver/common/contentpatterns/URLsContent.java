@@ -12,7 +12,11 @@ public class URLsContent {
   public static final String USER_LOGIN = "/signin";
   public static final String USER_SIGNUP = "/register";
   public static final String USER_FORGOT_PASSWORD = "/forgot-password";
+  public static final String SPECIAL_CREATE_NEW_WIKI = "/Special:CreateNewWiki";
+  public static final String SPECIAL_WHERE_IS_EXTENSION = "/Special:WhereIsExtension";
+  public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
 
+  // Special Urls - used with WIKI_DIR
   public static final String SPECIAL_NEW_FILES = "Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "Special:Videos";
   public static final String SPECIAL_UPLOAD = "Special:Upload";
@@ -39,15 +43,12 @@ public class URLsContent {
   public static final String SPECIAL_MULTI_WIKI_FINDER = "Special:Multiwikifinder";
   public static final String LOGOUT = "Special:UserLogout?noexternals=1";
   public static final String USER_PROFILE = "User:%userName%";
-  public static final String SPECIAL_CREATE_NEW_WIKI = "Special:CreateNewWiki";
   public static final String SPECIAL_WIKI_FACTORY = "Special:WikiFactory";
-  public static final String SPECIAL_WHERE_IS_EXTENSION = "Special:WhereIsExtension";
   public static final String SPECIAL_CONTRIBUTIONS = "Special:Contributions";
   public static final String SPECIAL_BLOCK = "Special:Block";
   public static final String SPECIAL_CHAT = "Special:Chat";
   public static final String SPECIAL_EDIT_HUB = "Special:EditHub";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "Special:VideoPageAdmin/edit";
-  public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "Special:Version";
   public static final String SPECIAL_INFOBOX_BUILDER = "Special:InfoboxBuilder";
   public static final String SPECIAL_WIKI_FEATURES = "Special:WikiFeatures/";
