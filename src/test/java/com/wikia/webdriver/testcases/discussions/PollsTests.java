@@ -8,10 +8,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Poll;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
@@ -20,6 +18,7 @@ public class PollsTests extends NewTestTemplate {
     /* TODO: Use fixtures to create Poll post */
 
     public static final int DEFAULT_ANSWERS_NUMBER = 2;
+    public static final String ALREADY_VOTED_POST_ID = "3100000000000020087";
 
     /**
      * DESKTOP TESTS SECTION
@@ -103,6 +102,20 @@ public class PollsTests extends NewTestTemplate {
         Assertion.assertTrue(new PostsListPage().getPost().firstPostHasPoll());
     }
 
+    @Test(groups = "discussions-polls")
+    @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+    @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
+    public void userWhoVotedCanSeeVotersListOnDesktop() {
+        PostDetailsPage postDetails = new PostDetailsPage();
+        postDetails.open(ALREADY_VOTED_POST_ID);
+        Poll poll = postDetails.getPoll();
+        postDetails.clickFollowingTooltip();
+
+        clickNthAnswersVotersModal(poll, postDetails,0);
+        clickNthAnswersVotersModal(poll, postDetails,1);
+        verifyAllVotersModal(poll, postDetails);
+    }
+
     /**
      * MOBILE TESTS SECTION
      */
@@ -143,13 +156,26 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        Assertion.assertTrue(poll.getAnswersRadioButtonsList().size() > 0);
         poll.clickNthAnswer(0);
         poll.clickVoteButton();
 
         Assertion.assertTrue(poll.isChosenResultBarDisplayed());
         Assertion.assertTrue(poll.getBarResultsList().size() > 0);
         Assertion.assertTrue(poll.isAlreadyVotedMessageVisible());
+    }
+
+    @Test(groups = "discussions-polls")
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
+    public void userWhoVotedCanSeeVotersListOnMobile() {
+        PostDetailsPage postDetails = new PostDetailsPage();
+        postDetails.open(ALREADY_VOTED_POST_ID);
+        Poll poll = postDetails.getPoll();
+        postDetails.clickFollowingTooltip();
+
+        clickNthAnswersVotersModal(poll, postDetails,0);
+        clickNthAnswersVotersModal(poll, postDetails,1);
+        verifyAllVotersModal(poll, postDetails);
     }
 
     /**
@@ -162,6 +188,21 @@ public class PollsTests extends NewTestTemplate {
         signInModal.clickOkButton();
         p.clickNthAnswer(0);
         Assertion.assertTrue(signInModal.isVisible());
+    }
+
+    public void clickNthAnswersVotersModal(Poll poll, PostDetailsPage postDetails, int n) {
+        poll.clickOnNthAnswerResult(n);
+        postDetails.waitForLoadingSpinner();
+        Assertion.assertTrue(poll.isVotersListDisplayed());
+        Assertion.assertTrue(poll.getVotersNumber() > 0);
+        poll.closeVotersListModal();
+    }
+
+    public void verifyAllVotersModal(Poll poll, PostDetailsPage postDetails) {
+        poll.clickOnPollVotesIcon();
+        postDetails.waitForLoadingSpinner();
+        Assertion.assertTrue(poll.isVotersListDisplayed());
+        Assertion.assertTrue(poll.getVotersNumber() > 0);
     }
 
 }
