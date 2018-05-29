@@ -26,7 +26,7 @@ public class TrackingOptIn extends NewTestTemplate {
     @Test(groups = {"discussions-tracking-opt-in-desktop"})
     public void testModalVisibilityForAnonOnDesktop() {
         TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
-        Assertion.assertFalse(trackingModal.isVisible());
+        Assertion.assertTrue(trackingModal.isVisible());
     }
 
     @Test(groups = {"discussions-tracking-opt-in-desktop"})
@@ -80,7 +80,7 @@ public class TrackingOptIn extends NewTestTemplate {
     @Test(groups = {"discussions-tracking-opt-in-mobile"})
     public void testModalVisibilityForAnonOnMobile() {
         TrackingOptInModal trackingModal = setGeoCookieToGermanyAndNavigate();
-        Assertion.assertFalse(trackingModal.isVisible());
+        Assertion.assertTrue(trackingModal.isVisible());
     }
 
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
