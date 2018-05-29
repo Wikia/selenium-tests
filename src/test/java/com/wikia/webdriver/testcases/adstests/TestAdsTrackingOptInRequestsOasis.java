@@ -210,21 +210,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsQualarooDataProvider",
-      groups = "AdsOptInRejectedOasis"
-  )
-  public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal modal = new TrackingOptInModal();
-    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKikimoraAcceptedDataProvider",
       groups = "AdsOptInAcceptedOasis"
   )
@@ -397,21 +382,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
       groups = "AdsOptInAcceptedOasis"
   )
   public void adsTrackingAcceptedForPetametrics(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsQualarooDataProvider",
-      groups = "AdsOptInAcceptedOasis"
-  )
-  public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
     modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);

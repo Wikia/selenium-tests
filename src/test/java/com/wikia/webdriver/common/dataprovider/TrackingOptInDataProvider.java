@@ -18,7 +18,8 @@ public class TrackingOptInDataProvider {
       "http?://.*pubmatic\\.com/AdServer.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch\\.com.*";
-  private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve\\.com/.*";
+  private static final String ADS_QUANTCAST_PATTERN = "http://.*quantserve\\.com/.*";
+  private static final String ADS_QUANTCAST_SECURE_PATTERN = "https://.*quantserve\\.com/.*";
   private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/.*";
   private static final String
       ADS_NORDICS_PATTERN =
@@ -31,8 +32,6 @@ public class TrackingOptInDataProvider {
       "https?://.*google-analytics\\.com/collect.*aip=1.*";
   private static final String ADS_GOOGLE_ANALYTICS_PATERN =
       "https?://.*google-analytics\\.com/collect.*aip=1.*";
-  private static final String ADS_QUALAROO_ANALITYCS_PATERN =
-      "https?://.*amazonaws\\.com.*";
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
       "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =
@@ -328,6 +327,17 @@ public class TrackingOptInDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsQuantcastSecureDataProvider() {
+    return new Object[][]{
+        {
+            Arrays.asList(
+                ADS_QUANTCAST_SECURE_PATTERN
+            )
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsComscoreDataProvider() {
     return new Object[][]{
         {
@@ -344,17 +354,6 @@ public class TrackingOptInDataProvider {
         {
             Arrays.asList(
                 ADS_GOOGLE_ANALYTICS_REJECTED_PATERN
-            )
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsQualarooDataProvider() {
-    return new Object[][]{
-        {
-            Arrays.asList(
-                ADS_QUALAROO_ANALITYCS_PATERN
             )
         }
     };
