@@ -18,8 +18,8 @@ public class TrackingOptInDataProvider {
       "http?://.*pubmatic\\.com/AdServer.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch\\.com.*";
-  private static final String ADS_QUANTCAST_PATTERN = "http://.*quantserve\\.com/.*";
-  private static final String ADS_QUANTCAST_SECURE_PATTERN = "https://.*quantserve\\.com/.*";
+  private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve\\.com/.*";
+  private static final String ADS_QUANTCAST_SECURE_PATTERN = "https?://.*quantserve\\.com/.*";
   private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/.*";
   private static final String
       ADS_NORDICS_PATTERN =
@@ -31,7 +31,7 @@ public class TrackingOptInDataProvider {
   private static final String ADS_GOOGLE_ANALYTICS_REJECTED_PATERN =
       "https?://.*google-analytics\\.com/collect.*aip=1.*";
   private static final String ADS_GOOGLE_ANALYTICS_PATERN =
-      "https?://.*google-analytics\\.com/collect.*aip=1.*";
+      "https?://.*google-analytics\\.com/collect.*";
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
       "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String ADS_TLB_NPA_SECOND_PARAMETER_PATTERN =

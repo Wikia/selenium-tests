@@ -389,13 +389,13 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       groups = "AdsTrackingPixels",
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
-  @Execute(mockAds = "true")
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
@@ -411,13 +411,13 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     }
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       groups = "AdsTrackingPixels",
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
-  @Execute(mockAds = "true")
   public void adsTrackingPixelsOnConsecutivePagesOutsideUE(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver);
@@ -433,13 +433,13 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     }
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       groups = "AdsTrackingPixels",
       dataProvider = "adsTrackingPixelsSent"
   )
-  @Execute(mockAds = "true")
   public void adsTrackingPixelsOutsideUE(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
@@ -448,5 +448,4 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
-
 }

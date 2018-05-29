@@ -96,7 +96,7 @@ public class TrackingOptInModal extends BasePageObject {
 
   public void acceptOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL));
+    getUrl(page);;
     clickAcceptButton();
   }
 
@@ -109,7 +109,7 @@ public class TrackingOptInModal extends BasePageObject {
 
   public void rejectOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL));
+    getUrl(page);
     clickRejectButton();
   }
 
@@ -195,8 +195,7 @@ public class TrackingOptInModal extends BasePageObject {
 
   private String urlWithInstantGlobals(String[] instantGlobals, Page page) {
     String url = urlOptInModalDisplayedOasis(page);
-    String urlWithInstantGlobals = appendTrackingOptOutParameters(url, instantGlobals);
-    return urlBuilder.appendQueryStringToURL(urlWithInstantGlobals, MODAL_INSTANT_GLOBAL);
+    return appendTrackingOptOutParameters(url, instantGlobals);
   }
 
   public void logTrackingCookieValue() {
