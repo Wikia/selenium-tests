@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -16,6 +17,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
   private static final Page ADS_HIVI_PAGE = new Page("project43", "SyntheticTests/UAP/HiVi");
+  private static final Page ADS_ARTICLE1_PAGE = new Page("project43", "TrackingPixels/Article1");
   private static final String POLAND = "PL";
   private static final String DENMARK = "DK";
   private static final String GERMANY = "DE";
@@ -208,21 +210,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsQualarooDataProvider",
-      groups = "AdsOptInRejectedOasis"
-  )
-  public void adsTrackingRejectedForQualaroo(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInModal modal = new TrackingOptInModal();
-    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(
-      dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKikimoraAcceptedDataProvider",
       groups = "AdsOptInAcceptedOasis"
   )
@@ -326,7 +313,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
@@ -406,13 +393,58 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "adsQualarooDataProvider",
-      groups = "AdsOptInAcceptedOasis"
+      groups = "AdsTrackingPixels",
+      dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
-  public void adsTrackingAcceptedForQualaroo(List<String> urlPatterns) {
+  public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInModal modal = new TrackingOptInModal();
-    modal.acceptOptInModal(driver, POLAND, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, POLAND, ADS_ARTICLE1_PAGE);
+    AdsBaseObject ads = new AdsBaseObject(driver);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+
+    // Check tracking pixels on consecutive page views
+    for (String linkName : articles) {
+      ads.clickOnArticleLink(linkName);
+      modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    }
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      groups = "AdsTrackingPixels",
+      dataProvider = "adsTrackingPixelsOnConsecutivePages"
+  )
+  public void adsTrackingPixelsOnConsecutivePagesOutsideUE(List<String> urlPatterns, String[] articles) {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver);
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.setGeoCookie(driver, "NA", "US");
+    modal.getUrl(ADS_ARTICLE1_PAGE);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    // Check tracking pixels on consecutive page views
+    for (String linkName : articles) {
+      ads.clickOnArticleLink(linkName);
+      modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    }
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(
+      dataProviderClass = TrackingOptInDataProvider.class,
+      groups = "AdsTrackingPixels",
+      dataProvider = "adsTrackingPixelsSent"
+  )
+  public void adsTrackingPixelsOutsideUE(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInModal modal = new TrackingOptInModal();
+    modal.setGeoCookie(driver, "NA", "US");
+    modal.getUrl(ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
