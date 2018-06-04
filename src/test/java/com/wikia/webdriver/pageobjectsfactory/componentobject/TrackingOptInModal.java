@@ -109,7 +109,7 @@ public class TrackingOptInModal extends BasePageObject {
 
   public void rejectOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
-    getUrl(page);
+    getUrl(urlOptInModalDisplayedOasis(page));
     clickRejectButton();
   }
 
