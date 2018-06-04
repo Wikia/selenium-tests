@@ -146,7 +146,6 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void anonUserCanNotVoteInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        poll.clickPollTitle();
         manageSignInModal(poll);
     }
 
