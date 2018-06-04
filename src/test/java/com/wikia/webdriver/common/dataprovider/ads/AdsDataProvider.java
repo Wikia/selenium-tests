@@ -2,9 +2,7 @@ package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
 import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
@@ -531,59 +529,6 @@ public class AdsDataProvider {
         },
     };
   }
-
-  @DataProvider
-  public static Object[][] adsTrackingPixelsOnConsecutivePages() {
-    return new Object[][]{
-        {
-            new Page(WIKI_SPECIAL, "TrackingPixels/Article1"),
-            new String[]{
-                "TrackingPixels/Article2",
-                "TrackingPixels/Article3",
-                "TrackingPixels/Article2",
-                "TrackingPixels/Article1",
-                "Project43 Wikia"
-            },
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
-            }
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsTrackingPixelsSent() {
-    return new Object[][]{
-        {
-            WIKI_SPECIAL, "Project43_Wikia",
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
-            }
-        },
-        {
-            "angrybirds", " Angry_Birds_Wiki",
-            new String[]{
-                TestAdsTrackingPixels.GA_PIXEL_URL
-            }
-        }
-    };
-  }
-
-    @DataProvider
-    public static Object[][] adsTrackingPixelsSentAuthPage() {
-        return new Object[][]{
-            {
-                MercuryWikis.MERCURY_AUTOMATION_TESTING,
-                "/join",
-                new String[]{
-                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
-                }
-            }
-        };
-    }
 
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {

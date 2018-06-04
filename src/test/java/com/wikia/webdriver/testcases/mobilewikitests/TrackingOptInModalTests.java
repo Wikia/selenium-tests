@@ -26,9 +26,22 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
   @Test(groups = {"mobile-wiki-tracking-opt-in"},
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "GDPRcountries"
+      dataProvider = "GDPRCountriesForTest"
   )
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
+    TrackingOptInModal.setGeoCookie(driver, continent, country);
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
+  }
+
+  @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
+  @Test(groups = {"mobile-wiki-tracking-opt-in-all-countries"},
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "GDPRcountries"
+  )
+  public void testModalVisibilityForAnonAllCountries(String continent, String country, boolean shouldGetModal) {
     TrackingOptInModal.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
@@ -39,9 +52,23 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   @Execute(asUser = User.USER, trackingOptIn = false)
   @Test(groups = {"mobile-wiki-tracking-opt-in"},
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "GDPRcountries"
+      dataProvider = "GDPRCountriesForTest"
   )
   public void testModalVisibilityForLoggedInWhoNeverOptedIn(String continent, String country,
+                                                            boolean shouldGetModal) {
+    TrackingOptInModal.setGeoCookie(driver, continent, country);
+    new ArticlePage().open();
+
+    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
+  }
+
+  @Execute(asUser = User.USER, trackingOptIn = false)
+  @Test(groups = {"mobile-wiki-tracking-opt-in-all-countries"},
+      dataProviderClass = TrackingOptInDataProvider.class,
+      dataProvider = "GDPRcountries"
+  )
+  public void testModalVisibilityForLoggedInWhoNeverOptedInAllCountries(String continent, String country,
                                                             boolean shouldGetModal) {
     TrackingOptInModal.setGeoCookie(driver, continent, country);
     new ArticlePage().open();

@@ -384,7 +384,7 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '3.5.3'
+    def webdriverVersion = '3.11.0'
 
     testCompile "org.apache.velocity:velocity:1.7"
     testCompile "org.apache.velocity:velocity-tools:2.0"
