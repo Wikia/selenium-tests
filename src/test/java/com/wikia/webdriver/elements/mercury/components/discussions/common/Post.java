@@ -53,7 +53,7 @@ public class Post extends BasePage {
   @FindBy(css = ".post-detail .og-container")
   private WebElement postOpenGraph;
 
-  @FindBy(css = ".post-detail .poll-bar")
+  @FindBy(css = ".post-detail .poll-wrapper")
   private List<WebElement> postsWithPollList;
 
   public boolean isPostListEmpty() {
