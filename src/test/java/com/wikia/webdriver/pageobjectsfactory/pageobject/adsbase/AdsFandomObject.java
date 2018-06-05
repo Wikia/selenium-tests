@@ -53,7 +53,9 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public By getIframeSelector(String slotName) {
-    return By.cssSelector(AdsContent.IFRAME_SLOT_SELECTORS.getOrDefault(slotName, getDefaultIframeSelector(slotName)));
+    return By.cssSelector(
+        AdsFandomContent.IFRAME_SLOT_SELECTORS.getOrDefault(slotName, getDefaultIframeSelector(slotName))
+    );
   }
 
   private String getDefaultIframeSelector(String slotName) {
