@@ -32,9 +32,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   public void anonCanLogInViaAuthModalWhenAddingVideo() {
-    SpecialVideosPageObject specialPage = new WikiBasePageObject()
-      .openSpecialVideoPage()
-      .clickAddButton();
+    SpecialVideosPageObject specialPage = new WikiBasePageObject().openSpecialVideoPage().clickAddButton();
     new DetachedRegisterPage().navigateToSignIn().login(user);
     new AddMediaModalComponentObject().closeAddVideoModal();
     specialPage.verifyUserLoggedIn(user.getUserName());
