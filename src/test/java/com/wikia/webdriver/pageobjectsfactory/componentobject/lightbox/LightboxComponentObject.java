@@ -20,7 +20,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement imageThumbnail;
   @FindBy(css = "#LightboxModal")
   private WebElement lightBoxModal;
-  @FindBy(css = "span[data-pinned-title='Unpin top and bottom bars']")
+  @FindBy(css = "span.pin")
   private WebElement pinButton;
   @FindBy(css = ".WikiaLightbox .share")
   private WebElement shareScreen;
