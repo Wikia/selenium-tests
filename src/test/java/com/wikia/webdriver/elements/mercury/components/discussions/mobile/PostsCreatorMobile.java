@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorMobile extends BasePostsCreator {
 
   @Getter
-  @FindBy(className = "new-post")
+  @FindBy(css = ".new-post .plus")
   private WebElement postsCreator;
 
   @Getter
