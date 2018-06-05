@@ -236,7 +236,7 @@ public class Helios {
 
   private static String getUserIdUrl(String encodedUsername) {
     return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
-      new UrlBuilder().getUrlForWiki("community"), encodedUsername, DateTime.now().getMillis());
+      new UrlBuilder().getUrlForWiki("community", "en"), encodedUsername, DateTime.now().getMillis());
   }
 
   private static CloseableHttpClient getDefaultClient() {
