@@ -44,7 +44,7 @@ public class PostEntity {
   }
 
   public boolean hasPoll() {
-    return !post.findElements(By.cssSelector(".poll-bar")).isEmpty();
+    return !post.findElements(By.cssSelector(".poll-wrapper")).isEmpty();
   }
 
   private WebElement findTopNoteElement() {

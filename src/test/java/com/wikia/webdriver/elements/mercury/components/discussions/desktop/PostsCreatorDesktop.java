@@ -32,7 +32,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement signInButtonInSignInDialog;
 
   @Getter
-  @FindBy(css = ".inline-editor")
+  @FindBy(css = ".inline-wrapper")
   private WebElement editor;
 
   @Getter
