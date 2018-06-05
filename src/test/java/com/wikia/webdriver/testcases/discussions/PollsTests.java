@@ -146,7 +146,6 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void anonUserCanNotVoteInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        poll.clickPollTitle();
         manageSignInModal(poll);
     }
 
@@ -155,7 +154,6 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        poll.clickNthAnswer(0);
         poll.clickVoteButton();
 
         Assertion.assertTrue(poll.isChosenResultBarDisplayed());

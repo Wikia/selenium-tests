@@ -686,15 +686,6 @@ public class AdsDataProvider {
     };
   }
 
-    @DataProvider
-    public static Object[][] adsDetectionPageFair() {
-        return new Object[][]{
-                {
-                        new Page(WIKI_SPECIAL)
-                }
-        };
-    }
-
   @DataProvider
   public static Object[][] adsVuapClickToPlayDesktop() {
     return new Object[][]{
