@@ -51,7 +51,6 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void anonUserCanNotVoteInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        poll.clickPollTitle();
         manageSignInModal(poll);
     }
 
@@ -65,7 +64,7 @@ public class PollsTests extends NewTestTemplate {
 
         Assertion.assertTrue(poll.isChosenResultBarDisplayed());
         Assertion.assertTrue(poll.getBarResultsList().size() > 0);
-        Assertion.assertTrue(poll.isAlreadyVotedMessageVisible());
+        Assertion.assertTrue(poll.isShareButtonDisplayed());
     }
 
     @Test(groups = "discussions-polls")
@@ -147,7 +146,6 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void anonUserCanNotVoteInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        poll.clickPollTitle();
         manageSignInModal(poll);
     }
 
@@ -156,12 +154,11 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
-        poll.clickNthAnswer(0);
         poll.clickVoteButton();
 
         Assertion.assertTrue(poll.isChosenResultBarDisplayed());
         Assertion.assertTrue(poll.getBarResultsList().size() > 0);
-        Assertion.assertTrue(poll.isAlreadyVotedMessageVisible());
+        Assertion.assertTrue(poll.isShareButtonDisplayed());
     }
 
     @Test(groups = "discussions-polls")

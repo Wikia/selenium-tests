@@ -144,7 +144,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
-    return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
+    return currentURL.substring(0, currentURL.lastIndexOf("/wiki/"));
   }
 
   public String getUrl() {
@@ -201,13 +201,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialVideosPageObject openSpecialVideoPage() {
     return openSpecialVideoPage(getWikiUrl());
-  }
-
-  public SpecialVideosPageObject openSpecialVideoPage(String wikiURL, String queryString) {
-    String url =
-        urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.SPECIAL_VIDEOS, queryString);
-    getUrl(url);
-    return new SpecialVideosPageObject(driver);
   }
 
   public SpecialVideosPageObject openSpecialVideoPageMostRecent(String wikiURL) {
@@ -574,12 +567,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyHeader(String fileName) {
     wait.forElementVisible(articleTitle);
     Assertion.assertStringContains(articleTitle.getText(), fileName);
-  }
-
-  public void disableCaptcha() {
-    String url =
-        urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.DISABLE_CAPTCHA);
-    getUrl(url);
   }
 
   public String getNameForArticle() {

@@ -22,8 +22,8 @@ public class Poll extends BasePageObject {
     @FindBy(css = ".poll-footer > button")
     private WebElement voteButton;
 
-    @FindBy(css = ".poll-footer__voted")
-    private WebElement votedMessage;
+    @FindBy(css = ".poll-footer__share")
+    private WebElement shareButton;
 
     @Getter
     @FindBy(css = ".poll-answer__input")
@@ -38,7 +38,7 @@ public class Poll extends BasePageObject {
     private List<WebElement> answersRadioButtonsList;
 
     @Getter
-    @FindBy(css = "span.poll-answer__result-bar.is-active")
+    @FindBy(css = ".is-selected  > .poll-answer__result > .poll-answer__result-bar")
     private WebElement activeBarResult;
 
     @Getter
@@ -176,8 +176,8 @@ public class Poll extends BasePageObject {
         return isElementDisplayed(activeBarResult);
     }
 
-    public boolean isAlreadyVotedMessageVisible() {
-        return isElementDisplayed(votedMessage);
+    public boolean isShareButtonDisplayed() {
+        return isElementDisplayed(shareButton);
     }
 
     public boolean isVotersListDisplayed() { return isElementDisplayed(votersListModal); }
