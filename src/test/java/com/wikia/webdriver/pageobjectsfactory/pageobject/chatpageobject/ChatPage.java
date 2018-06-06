@@ -93,7 +93,7 @@ public class ChatPage extends WikiBasePageObject {
   private static final int REGULAR_USER_DROPDOWN_ELEMENTS_COUNT = 3;
 
   public ChatPage open() {
-    getUrl(urlBuilder.getUrl() + URLsContent.SPECIAL_CHAT);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_CHAT));
 
     return this;
   }

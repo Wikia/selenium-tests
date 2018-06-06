@@ -37,7 +37,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement useAdvancedRecentChangesCheckbox;
 
   public PreferencesPageObject open(){
-    getUrl(urlBuilder.getUrl() + URLsContent.SPECIAL_PREFERENCES);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_PREFERENCES));
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 
     return this;
