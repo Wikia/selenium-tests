@@ -26,7 +26,7 @@ public class WeiboTests extends NewTestTemplate {
   private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "WeiboMercury/OneWidget";
   private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "WeiboMercury/MultipleWidgets";
   private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "WeiboMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = WEIBO_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryWeiboWidgetTest_001")

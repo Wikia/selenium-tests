@@ -25,7 +25,7 @@ public class SoundCloudTests extends NewTestTemplate {
 
   private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "SoundCloudMercury/OneWidget";
   private static final String SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME = "SoundCloudMercury/MultipleWidgets";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercurySoundCloudWidgetTest_001")
