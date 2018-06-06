@@ -16,7 +16,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
 
   private static final Page GTA_WIKI_HOME_PAGE = new Page("gta", "Main_Page");
 
-  @Execute(asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
   @Test(groups = {"oasis-tracking-opt-in"},
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "GDPRcountries"
@@ -29,7 +29,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
     Assertion.assertEquals(modal.isVisible(), shouldGetModal);
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER, trackingOptIn = false)
   @Test(groups = {"oasis-tracking-opt-in"},
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "GDPRcountries"
@@ -44,7 +44,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   }
 
   @Test(groups = {"oasis-tracking-opt-in"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER, trackingOptIn = false)
   public void loggedInUserInEUShouldNotGetModalIfOptInAccepted() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     TrackingOptInModal modal = new TrackingOptInModal();
@@ -57,7 +57,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   }
 
   @Test(groups = {"oasis-tracking-opt-in"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER, trackingOptIn = false)
   public void loggedInUserInEUShouldNotGetModalIfOptInRejected() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     TrackingOptInModal modal = new TrackingOptInModal();
@@ -70,6 +70,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   }
 
   @Test(groups = {"oasis-tracking-opt-in"})
+  @Execute(trackingOptIn = false)
   public void anonUserInEUShouldNotGetModalIfOptInAccepted() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     TrackingOptInModal modal = new TrackingOptInModal();
@@ -82,6 +83,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   }
 
   @Test(groups = {"oasis-tracking-opt-in"})
+  @Execute(trackingOptIn = false)
   public void anonUserInEUShouldNotGetModalIfOptInRejected() {
     TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
     TrackingOptInModal modal = new TrackingOptInModal();

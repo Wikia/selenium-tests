@@ -23,7 +23,7 @@ public class NewTestTemplate extends CoreTestTemplate {
   }
 
   protected void loadFirstPage() {
-    driver.get(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_VERSION));
+    driver.get(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_VERSION) + "?noexternals=1");
   }
 
   protected void prepareURLs() {

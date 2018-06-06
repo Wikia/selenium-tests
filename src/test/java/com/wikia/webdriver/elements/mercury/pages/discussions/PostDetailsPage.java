@@ -4,6 +4,8 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import lombok.Getter;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 public class PostDetailsPage extends PageWithPosts {
@@ -29,6 +31,9 @@ public class PostDetailsPage extends PageWithPosts {
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
+  @FindBy(css = ".discussion-tooltip")
+  private WebElement followingTooltip;
+
   private static final String PATH = "/d/p/%s";
 
   // post with this ID does not exist on wiki discussions-empty
@@ -43,6 +48,13 @@ public class PostDetailsPage extends PageWithPosts {
   public boolean isPostFollowed() {
     waitForEmberLoad();
     return getPost().findNewestPost().isFollowed();
+  }
+
+  public PostDetailsPage clickFollowingTooltip(){
+    wait.forElementClickable(followingTooltip);
+    followingTooltip.click();
+
+    return this;
   }
 
   public PostDetailsPage openEmptyPost() {
@@ -61,4 +73,6 @@ public class PostDetailsPage extends PageWithPosts {
   public PostDetailsPage open() {
     return openEmptyPost();
   }
+
+  public Poll getPoll() { return new Poll(); }
 }

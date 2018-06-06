@@ -16,7 +16,7 @@ public class DeleteMWVideo extends ApiCall {
 
   @Override
   protected String getURL() {
-    return UrlBuilder.createUrlBuilder().getUrl()
+    return UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
         + "/wikia.php?controller=VideoHandler&method=removeVideo&format=json";
   }
 
@@ -30,5 +30,10 @@ public class DeleteMWVideo extends ApiCall {
     ArrayList<BasicNameValuePair> params = new ArrayList<>();
     params.add(new BasicNameValuePair("title", videoTitle));
     return params;
+  }
+
+  @Override
+  protected String getUserName() {
+    return null;
   }
 }

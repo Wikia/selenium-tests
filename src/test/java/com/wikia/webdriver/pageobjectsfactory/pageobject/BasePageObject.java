@@ -700,4 +700,15 @@ public class BasePageObject {
     getUrl(getEmailChangeConfirmationLink(email, password));
   }
 
+  public boolean isVisible(WebElement element) {
+    boolean result;
+    try {
+      wait.forElementVisible(element);
+      result = true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Element: "+ element.toString() + " not found.", e);
+      result = false;
+    }
+    return result;
+  }
 }

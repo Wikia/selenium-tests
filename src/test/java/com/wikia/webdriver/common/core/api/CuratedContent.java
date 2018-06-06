@@ -12,7 +12,7 @@ public class CuratedContent extends ApiCall {
   }
 
   @Override protected String getURL() {
-    return UrlBuilder.createUrlBuilder().getUrl()
+    return UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
            + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
   }
 
@@ -24,6 +24,12 @@ public class CuratedContent extends ApiCall {
   protected ArrayList<BasicNameValuePair> getParams() {
     return null;
   }
+
+  @Override
+  protected String getUserName() {
+    return null;
+  }
+
 
   /**
    * Clear Curated Content of current wiki Sets empty array as value of wgWikiaCuratedContent

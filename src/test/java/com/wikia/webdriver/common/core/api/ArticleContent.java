@@ -16,17 +16,21 @@ import java.util.ArrayList;
 
 @lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
-  private String baseURL = UrlBuilder.createUrlBuilder().getUrl()
+  private String baseURL = UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
       + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
+  private String username;
 
   /**
    * Push content, overriding a default user
-   * @param user
    */
   public ArticleContent(User user) {
     this.user = user;
+  }
+
+  public ArticleContent(String username) {
+    this.username = username;
   }
 
   @Override
@@ -34,8 +38,14 @@ public class ArticleContent extends ApiCall {
     return URL_STRING;
   }
 
-  @Override protected User getUser() {
+  @Override
+  protected User getUser() {
     return user;
+  }
+
+  @Override
+  protected String getUserName() {
+      return username;
   }
 
   @Override
@@ -45,7 +55,12 @@ public class ArticleContent extends ApiCall {
   }
 
   public void push(String text, String articleTitle) {
-    String editToken = new EditToken(user).getEditToken();
+    String editToken = "";
+    if (username != null) {
+      editToken = new EditToken(username).getEditToken();
+    } else {
+      editToken = new EditToken(user).getEditToken();
+    }
     try {
       URL_STRING = new URIBuilder(baseURL)
           .setParameter("text", text)

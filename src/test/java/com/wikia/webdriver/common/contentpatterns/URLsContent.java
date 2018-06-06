@@ -55,6 +55,8 @@ public class URLsContent {
   public static final String COMMUNITY_CENTRAL = "Community_Central";
   public static final String FANDOM_UNIVERSITY = "Fandom_University";
   public static final String NOT_A_VALID_COMMUNITY = "Community_Central:Not_a_valid_community";
+  public static final String SPECIAL_ANONYMIZATION = "Special:RequestToBeForgottenInternal";
+
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
