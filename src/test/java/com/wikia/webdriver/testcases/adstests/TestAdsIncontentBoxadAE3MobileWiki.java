@@ -56,7 +56,7 @@ public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
   }
 
   @Test()
-  public void incontentBoxadNotDisplayedBeforeEachSection() {
+  public void incontentBoxadNotDisplayedBeforeSection() {
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.getUrl(urlWithInstantGlobals(INCONTENT_DISABLED));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(FOURTH_HEADER_NUMBER))));
