@@ -39,7 +39,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "mercury_lightbox_openAndClose")
   public void mercury_lightbox_openAndClose() {
     init();
-    gallery.clickGalleryImage(0);
+    gallery.clickGalleryImage(1);
 
     Assertion.assertTrue(
         lightbox.isLightboxOpened(),

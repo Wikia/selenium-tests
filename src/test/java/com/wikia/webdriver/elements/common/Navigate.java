@@ -15,6 +15,12 @@ public class Navigate extends BasePageObject {
 
     driver.get(urlBuilder.getUrl() + path + query);
 
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
     return this;
   }
 
