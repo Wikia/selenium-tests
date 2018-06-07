@@ -25,7 +25,7 @@ public class TemplateEditPage extends WikiBasePageObject {
   }
 
   public TemplateEditPage open(String templateName) {
-    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(),
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrl(),
        URLsContent.WIKI_DIR, URLsContent.TEMPLATE_NAMESPACE, templateName),
        URLsContent.ACTION_EDIT));
 

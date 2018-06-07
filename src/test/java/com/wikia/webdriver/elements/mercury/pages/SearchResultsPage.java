@@ -38,7 +38,7 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(
-        String.format("%s%s", urlBuilder.getUrlForWiki(),
+        String.format("%s%s", urlBuilder.getUrl(),
         URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query))
     );
 

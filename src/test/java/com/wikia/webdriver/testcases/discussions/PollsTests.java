@@ -149,7 +149,7 @@ public class PollsTests extends NewTestTemplate {
         manageSignInModal(poll);
     }
 
-    @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
+    @Test()//dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @Execute(asUser = User.USER_3, onWikia = MercuryWikis.DISCUSSIONS_2)
     public void loggedInUserCanVoteOnceInPollOnMobile() {

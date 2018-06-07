@@ -2,11 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,11 +33,11 @@ public class SpecialBlockPage extends WikiBasePageObject {
   }
 
   public SpecialBlockPage open(){
-    return open(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    return open(urlBuilder.getUrl());
   }
 
   public SpecialBlockPage open(String wikiUrl){
-    getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
+    getUrl(wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_BLOCK);
     PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
     wait.forElementVisible(blockButton);
 

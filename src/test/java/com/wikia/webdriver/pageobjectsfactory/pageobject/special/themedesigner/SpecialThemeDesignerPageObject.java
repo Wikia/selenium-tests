@@ -68,7 +68,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   private WebElement imageSubmit;
 
   public SpecialThemeDesignerPageObject open() {
-    getUrl(urlBuilder.getUrlForPage(URLsContent.SPECIAL_THEME_DESIGNER));
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_THEME_DESIGNER));
 
     return this;
   }

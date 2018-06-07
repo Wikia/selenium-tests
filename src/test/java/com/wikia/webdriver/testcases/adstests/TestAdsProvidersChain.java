@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -49,7 +50,7 @@ public class TestAdsProvidersChain extends TemplateNoFirstLoad {
                                  String slotName,
                                  String providers,
                                  Dimension browserDimension) {
-    String url = urlBuilder.getUrlForPath(wikiName, article);
+    String url = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
 
     new AdsBaseObject(driver, url, browserDimension)
         .verifyProvidersChain(slotName, providers);

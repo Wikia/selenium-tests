@@ -40,7 +40,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
    * @return
    */
   public CreateNewWikiPageObjectStep1 open(){
-    getUrl(urlBuilder.getUrlForWiki("wikia") + URLsContent.SPECIAL_CREATE_NEW_WIKI);
+    getUrl(urlBuilder.getWikiGlobalURL() + URLsContent.SPECIAL_CREATE_NEW_WIKI);
 
     return this;
   }

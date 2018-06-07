@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -17,7 +18,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   private static final String CUSTOM_NAMESPACE_PAGE_PATH = "Koperek:SyntheticTests/NoAds";
 
   private AdsBaseObject buildAdsObject(String pagePath) {
-    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, pagePath);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME).getUrlForPath(pagePath);
     return new AdsBaseObject(driver, testedPage);
   }
 

@@ -83,8 +83,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public VisualEditorPageObject open(){
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(
-            "/" + TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWikiPage(
+            TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
 
     return this;
   }

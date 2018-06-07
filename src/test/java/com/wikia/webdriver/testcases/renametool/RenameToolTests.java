@@ -198,7 +198,7 @@ public class RenameToolTests extends NewTestTemplate {
     wall.open(newName);
     String encodedUrl = renameUserPage.encodeToURL(newName);
 
-    String expectedWallUrl = String.format("%s/wiki/Message_Wall:%s", urlBuilder.getUrlForWiki(),
+    String expectedWallUrl = String.format("%s/wiki/Message_Wall:%s", urlBuilder.getUrl(),
                                            encodedUrl);
 
     Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);

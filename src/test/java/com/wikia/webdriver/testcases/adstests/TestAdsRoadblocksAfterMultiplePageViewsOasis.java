@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -21,7 +22,7 @@ public class TestAdsRoadblocksAfterMultiplePageViewsOasis extends TemplateNoFirs
                                     String expectedAdSkinRightPartPath,
                                     String backgroundColor,
                                     String middleColor) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
     for (int i = 0; i < PAGE_VIEWS_COUNT; i++) {
       wikiPage.verifyTopLeaderboard();

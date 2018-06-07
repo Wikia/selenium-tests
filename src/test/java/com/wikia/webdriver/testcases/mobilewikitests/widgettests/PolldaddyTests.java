@@ -27,7 +27,7 @@ public class PolldaddyTests extends NewTestTemplate {
   private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "PollDaddyMercury/OneWidget";
   private static final String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollDaddyMercury/MultipleWidgets";
   private static final String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "PollDaddymercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = POLLDADDY_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryPolldaddyWidgetTest_001")
@@ -45,7 +45,7 @@ public class PolldaddyTests extends NewTestTemplate {
     WidgetPageObject widget =
             new PolldaddyWidgetPageObject().create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

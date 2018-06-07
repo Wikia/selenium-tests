@@ -39,7 +39,7 @@ public class PostsListPage extends PageWithPosts {
 
   @Override
   public PostsListPage open() {
-    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + PATH));
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrl() + PATH));
     waitForEmberLoad();
     return this;
   }
