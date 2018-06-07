@@ -75,7 +75,7 @@ public class VEImageTests extends NewTestTemplate {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject().getTimeStamp();
     VisualEditorPageObject veCreatePage =
         new VisualEditorPageObject().openVEOnArticle(wikiURL, randomArticleName);
-    VisualEditorAddMediaDialog mediaDialog =  veCreatePage.searchImage("h");
+    VisualEditorAddMediaDialog mediaDialog =  veCreatePage.searchImage("i");
     veCreatePage = mediaDialog.addExistingMedia(numOfMedia);
     veCreatePage.verifyMedias(numOfMedia);
     veCreatePage.clickPublishButton();
