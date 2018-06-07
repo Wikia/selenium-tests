@@ -29,7 +29,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   private WebElement sourceButton;
 
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VIDEOS);
     return new SpecialVideosPageObject(driver);
   }
 

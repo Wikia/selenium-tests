@@ -21,7 +21,7 @@ public class YoutubeVideo implements Video {
     this.url = url;
     this.title = capitaliseFirstWord(escapeSpecialCharactersAndReduceSpacesFromTitle(title));
 
-    this.fileName = (new UrlBuilder()).normalizePageName(this.title);
+    this.fileName = UrlBuilder.createUrlBuilder().normalizePageName(this.title);
     this.videoID = videoId;
   }
 

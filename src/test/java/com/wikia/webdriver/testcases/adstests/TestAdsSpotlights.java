@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -16,7 +17,7 @@ public class TestAdsSpotlights extends TemplateNoFirstLoad {
       groups = {"AdsSpotlightsOasis"}
   )
   public void adsSpotlightsOasis(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.scrollToPosition(WIKIA_FOOTER);
     wikiPage.verifySpotlights();

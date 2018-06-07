@@ -1,128 +1,84 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
+import static com.wikia.webdriver.common.core.configuration.Configuration.getEnv;
+import static com.wikia.webdriver.common.core.configuration.Configuration.getEnvType;
+import static com.wikia.webdriver.common.core.configuration.Configuration.getForceHttps;
+import static com.wikia.webdriver.common.core.configuration.Configuration.getForceLanguageInPath;
+import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiLanguage;
+import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiName;
+
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import okhttp3.HttpUrl;
-import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriverException;
 
-public class UrlBuilder {
+public class UrlBuilder extends BaseUrlBuilder {
 
 
-  protected String env;
-  protected EnvType envType;
+  private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
-  protected static final String HTTP_PREFIX = "http://";
+  private String language;
 
-  public UrlBuilder() {
-    this.env = Configuration.getEnv();
-    this.envType = Configuration.getEnvType(this.env);
-    this.forceHttps = Configuration.getForceHttps();
-    this.forceLanguageInPath = Configuration.getForceLanguageInPath();
-  }
-
-  public UrlBuilder(String env, Boolean forceHttps) {
-    this.env = env;
-    this.envType = Configuration.getEnvType(this.env);
-    this.forceHttps = forceHttps;
-    this.forceLanguageInPath = Configuration.getForceLanguageInPath();
-  }
-
-  public UrlBuilder(String env, Boolean forceHttps, Boolean forceLanguageInPath) {
-    this.env = env;
-    this.envType = Configuration.getEnvType(this.env);
+  private UrlBuilder(String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
+    super(env);
+    this.wikiName = wiki;
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
+    this.language = language;
   }
 
-  public String getLanguageForWiki() {
-    return Configuration.getWikiLanguage() == null ? Configuration.DEFAULT_LANGUAGE : Configuration.getWikiLanguage();
+  public static UrlBuilder createUrlBuilder() {
+    return createUrlBuilderForWikiAndLang(getWikiName(), getWikiLanguage());
+  }
+
+  public static UrlBuilder createUrlBuilderForWiki(String wiki) {
+    return createUrlBuilderForWikiAndLang(wiki, getWikiLanguage());
+  }
+
+  public static UrlBuilder createUrlBuilderForWikiAndLang(String wiki, String language) {
+    return new UrlBuilder(wiki, getEnv(), getForceHttps(), getForceLanguageInPath(), language);
   }
 
   public String normalizePageName(String pageName) {
+    if ("".equals(pageName))
+      throw new WebDriverException("Page name is missing");
     return pageName.replace(" ", "_");
   }
 
-  public String getUrlForPageWithWWW(String pageName) {
-    return getUrlForWiki(Configuration.getWikiName(), true) + pageName;
+  public String getUrlForWikiPageWithWWW(String pageName) {
+    if ("".equals(pageName))
+      throw new WebDriverException("Page name is missing");
+    return getUrl(getWikiName(), true) + URLsContent.WIKI_DIR + pageName;
   }
 
-  public String getUrlForPage(String pageName) {
-    return getUrlForWiki() + pageName;
-  }
-
-  public String getUrlForPage(String wikiName, String pageName) {
-    return getUrlForWiki(wikiName) + pageName;
-  }
-
-  public String getUrlForPage(Page page) {
-    if (page.getWikiPath() == null) {
-      return getUrlForWiki(page.getWikiName(), page.getWikiLanguage(), false);
-    }
-    return getUrlForPath(page.getWikiName(), page.getWikiLanguage(), page.getWikiPath());
-  }
-
-  public String getUrlForPage(Page page, String qs) {
-    return appendQueryStringToURL(page.getUrl(), qs);
-  }
-
-  public String getUrlForPath(String wikiName, String language, String wikiPath) {
-    return addPathToUrl(getUrlForWiki(wikiName, language, false, envType), wikiPath);
-  }
-
-  public String getUrlForPath(String wikiName, String wikiPath) {
-    return addPathToUrl(getUrlForWiki(wikiName), wikiPath);
+  public String getUrlForWikiPage(String pageName) {
+    if ("".equals(pageName))
+      throw new WebDriverException("Page name is missing");
+    return getUrl() + URLsContent.WIKI_DIR + pageName;
   }
 
   public String getUrlForPath(String wikiPath) {
-    return getUrlForPath(Configuration.getWikiName(), getLanguageForWiki(), wikiPath);
+    return addPathToUrl(getUrl(), wikiPath);
   }
 
-  /** It actually adds string to url, so the path might consist a query
-  @param  url wiki's url.
-  @param  path path to be added to the url
-   **/
-  protected String addPathToUrl(String url, String path) {
-
-    String outputUrl = (!path.startsWith("/")) ? String.format("%s/%s", url, path): String.format("%s%s", url, path);
-
-    String qs = Configuration.getQS();
-    if (StringUtils.isNotBlank(qs)) {
-      outputUrl = appendQueryStringToURL(outputUrl, qs);
-    }
-    return outputUrl;
+  public String getUrl() {
+    return getUrl(this.language, false);
   }
 
-  public String getUrlForWiki() {
-    return getUrlForWiki(Configuration.getWikiName(), getLanguageForWiki(), false);
+  public String getUrl(String language, boolean addWWW) {
+    return getUrl(language, addWWW, envType);
   }
 
-  public String getUrlForWiki(String wikiName, String language, boolean addWWW) {
-    return getUrlForWiki(wikiName, language, addWWW, envType);
+  public String getUrl(boolean addWWW) {
+    return getUrl(wikiName, addWWW, envType);
   }
 
-  public String getUrlForWiki(String wikiName) {
-    return getUrlForWiki(wikiName, false);
-  }
+  public String getUrl(String language, boolean addWWW, EnvType envType) {
+      final String wikiaName = getWikiaGlobalName(wikiName);
 
-  public String getUrlForWiki(String wikiName, boolean addWWW) {
-    return getUrlForWiki(wikiName, addWWW, envType);
-  }
-
-
-  public String getUrlForWiki(String wikiName, boolean addWWW, EnvType envType) {
-    return getUrlForWiki(wikiName, getLanguageForWiki(), addWWW, envType);
-  }
-
-  public String getUrlForWiki(String wikiName, String language) {
-    return getUrlForWiki(wikiName, language, false, envType);
-  }
-
-  public String getUrlForWiki(String wikiName, String language, boolean addWWW, EnvType envType) {
-    final String wikiaName = getWikiaGlobalName(wikiName);
-
-    if (language == null || wikiName == null)
+      if (language == null || wikiName == null)
       throw new NullPointerException("Wikia name and language are required");
 
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
@@ -130,8 +86,8 @@ public class UrlBuilder {
     String www = addWWW ? "www." : "";
     String host = getFormattedWikiHost(www, wikiaName, envType, language);
 
-    if (!("en").equals(language) && forceLanguageInPath) {
-        urlBuilder.addEncodedPathSegments(language);
+    if (!DEFAULT_LANGUAGE.equals(language) && forceLanguageInPath) {
+      urlBuilder.addEncodedPathSegments(language);
     }
     return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString().replaceFirst("/$","");
   }
@@ -139,7 +95,7 @@ public class UrlBuilder {
   private String getFormattedWikiHost(String www, String wikiaName, EnvType envType, String language) {
 
 
-    if (!forceLanguageInPath && !("en").equals(language)) {
+    if (!forceLanguageInPath && !(DEFAULT_LANGUAGE).equals(language)) {
       return getFormattedWikiHost(www, String.join(".", language, wikiaName), envType);
     }
     return getFormattedWikiHost(www, wikiaName, envType);
@@ -185,7 +141,7 @@ public class UrlBuilder {
 
   public String getWikiGlobalURL() {
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
-    EnvType env = Configuration.getEnvType(this.env);
+    EnvType env = getEnvType(this.env);
 
     return urlBuilder
             .scheme(getUrlProtocol())
@@ -196,7 +152,7 @@ public class UrlBuilder {
 
   private String getWikiaGlobalName(String wikiName) {
     if (wikiName.endsWith(".wikia")) {
-      if (Configuration.getEnvType(this.env) == EnvType.DEV) {
+      if (getEnvType(this.env) == EnvType.DEV) {
         return "wikiaglobal";
       } else {
         return wikiName.replace(".wikia", "");
@@ -204,24 +160,5 @@ public class UrlBuilder {
     } else {
       return wikiName;
     }
-  }
-
-  public String appendQueryStringToURL(String url, String qs) {
-    String separator = url.contains("?") ? "&" : "?";
-
-    String[] filteredUrl = url.split("#");
-    if (filteredUrl.length > 1) {
-      return filteredUrl[0] + separator + qs + "#" + filteredUrl[1];
-    } else {
-      return url + separator + qs;
-    }
-  }
-
-  public String globallyEnableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
-    return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[XX]", instantGlobal));
-  }
-
-  public String globallyDisableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
-    return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[ZZ]", instantGlobal));
   }
 }

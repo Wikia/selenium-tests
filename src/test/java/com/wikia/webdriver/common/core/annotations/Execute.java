@@ -22,7 +22,7 @@ public @interface Execute {
 
   String disableCommunityPageSalesPitchDialog() default "";
 
-  String language() default Configuration.DEFAULT_LANGUAGE;
+  String language() default "";
 
   boolean trackingOptIn() default true;
 

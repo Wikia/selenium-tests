@@ -35,7 +35,7 @@ public class UserPostsPage extends PageWithPosts {
   private static final String NON_EXISTING_USER_ID = "4809883";
 
   public UserPostsPage open(String userId) {
-    driver.get(getUrlWithCacheBuster(urlBuilder.getUrlForWiki() + String.format(PATH, userId)));
+    driver.get(getUrlWithCacheBuster(urlBuilder.getUrl() + String.format(PATH, userId)));
     waitForEmberLoad();
     return this;
   }

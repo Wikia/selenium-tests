@@ -17,8 +17,8 @@ public class RedirectionTests extends NewTestTemplate {
 
   @Test(groups = "mercury_redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW")
   public void mercury_redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW() {
-    String navigateUrl = urlBuilder.getUrlForPageWithWWW(MercurySubpages.MAIN_PAGE);
-    String expectedUrl = urlBuilder.getUrlForPage(MercurySubpages.MAIN_PAGE);
+    String navigateUrl = urlBuilder.getUrlForWikiPageWithWWW(MercurySubpages.MAIN_PAGE);
+    String expectedUrl = urlBuilder.getUrlForWikiPage(MercurySubpages.MAIN_PAGE);
 
     driver.get(navigateUrl);
 

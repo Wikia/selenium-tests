@@ -1,14 +1,12 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionFormPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionItemListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Getter;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * This class represents the main editor view on mercury. The editor home is responsible for adding
@@ -29,7 +27,7 @@ public class EditorHomePageObject extends BasePageObject {
   private final SectionItemListPageObject sectionItemList = new SectionItemListPageObject();
 
   public EditorHomePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/main/edit");
+    getUrl(urlBuilder.getUrl() + "/main/edit");
 
     return this;
   }

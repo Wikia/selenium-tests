@@ -41,7 +41,7 @@ public class GuidelinesPage extends BasePage {
   private WebElement guidelinesText;
 
   public GuidelinesPage open() {
-    driver.get(getUrlWithCacheBuster(String.format("%s%s", urlBuilder.getUrlForWiki(), PATH)));
+    driver.get(getUrlWithCacheBuster(String.format("%s%s", urlBuilder.getUrl(), PATH)));
 
     return this;
   }

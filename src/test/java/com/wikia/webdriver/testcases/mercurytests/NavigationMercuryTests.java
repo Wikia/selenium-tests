@@ -88,7 +88,7 @@ public class NavigationMercuryTests extends NavigationTests {
   @RelatedIssue(issueID = "XW-3858")
   public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack()
       throws InterruptedException {
-    ArticlePage testPage = new ArticlePage().open("/ScrollPreserveTest");
+    ArticlePage testPage = new ArticlePage().open("ScrollPreserveTest");
     Long firstPosition = testPage.scrollToLink(0, 200);
     testPage.clickArticleLink(0);
 

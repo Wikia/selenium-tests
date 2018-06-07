@@ -18,6 +18,7 @@ forceLanguageInPath: false
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
 useZapProxy: false
+language: en # run tests on wikis with specific language unless there is an annotation
 
 # Specify browser window size in format <width>x<height>, example: 800x600
 # use "maximised" value if you want browser to be maximised

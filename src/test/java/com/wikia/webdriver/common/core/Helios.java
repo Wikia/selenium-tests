@@ -36,6 +36,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+
 public class Helios {
 
   private static final Map<String, String> tokenCache = new HashMap<>();
@@ -235,8 +237,9 @@ public class Helios {
   }
 
   private static String getUserIdUrl(String encodedUsername) {
+    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, Configuration.DEFAULT_LANGUAGE).getUrl();
     return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
-      new UrlBuilder().getUrlForWiki("community"), encodedUsername, DateTime.now().getMillis());
+            communityUrl, encodedUsername, DateTime.now().getMillis());
   }
 
   private static CloseableHttpClient getDefaultClient() {
