@@ -148,12 +148,12 @@ public class ArticlePageTests extends NewTestTemplate {
 
     PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
 
-    topBar.openSearch().navigateToPage(MercurySubpages.COLON.substring(6));
+    topBar.openSearch().navigateToPage(MercurySubpages.COLON);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    topBar.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
+    topBar.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));

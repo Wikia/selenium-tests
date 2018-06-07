@@ -26,12 +26,13 @@ public class WikiActivityTests extends NewTestTemplate {
   private User testUser = User.WIKIACTIVITY_USER;
 
   public void articleEditionIsRecordedInWikiActivity() {
+
     String articleName = editArticleWithContentAndGetTitle(createArticle(), PageContent.ARTICLE_TEXT_EDIT);
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
-      .open()
-      .isArticleEditionActivityDisplayed(articleName, testUser.getUserName()),
-      String.format("Activity for edited article with title %s was not found", articleName));
+                    .open()
+                    .isArticleEditionActivityDisplayed(articleName, testUser.getUserName()),
+            String.format("Activity for edited article with title %s was not found", articleName));
   }
 
   public void newPageCreationIsRecordedInWikiActivity() {

@@ -131,7 +131,7 @@ public class TrackingOptInModal extends BasePageObject {
   }
 
   public String urlOptInModalDisplayedOasis(Page page) {
-    return urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), MODAL_INSTANT_GLOBAL);
+    return urlBuilder.appendQueryStringToURL(page.getUrl(), MODAL_INSTANT_GLOBAL);
   }
 
   public void isTrackingRequestsNotSend(List<String> elementsList,
@@ -183,7 +183,7 @@ public class TrackingOptInModal extends BasePageObject {
   }
 
   private static String appendTrackingOptOutParameters(String url, String[] instantGlobals) {
-    UrlBuilder urlBuilder = new UrlBuilder();
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();
     String newUrl = url;
 
     for (String instantGlobal : instantGlobals) {

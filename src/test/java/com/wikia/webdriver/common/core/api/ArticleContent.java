@@ -2,11 +2,9 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -18,9 +16,8 @@ import java.util.ArrayList;
 
 @lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
-
-  private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName()).replace("https","http")
-                           + "/api.php";
+  private String baseURL = UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
+      + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
   private String username;

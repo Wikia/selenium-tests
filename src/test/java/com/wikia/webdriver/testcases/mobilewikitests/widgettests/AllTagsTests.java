@@ -28,8 +28,8 @@ import java.util.List;
 public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "AllTagsWidgetMercury";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
-  private static final String QUERY_2 = ARTICLE_NAME.substring(0, 6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
+  private static final String QUERY_2 = ARTICLE_NAME;
   private static List<WidgetPageObject> widgets;
 
   @BeforeMethod(alwaysRun = true)

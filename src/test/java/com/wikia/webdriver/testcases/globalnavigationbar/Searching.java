@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.globalnavigationbar;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
@@ -29,7 +30,7 @@ public class Searching extends NewTestTemplate {
       String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
-    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName, wikiLanguage));
+    homePage.getUrl(UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, wikiLanguage).getUrl());
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 
@@ -46,7 +47,7 @@ public class Searching extends NewTestTemplate {
       String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
-    homePage.getUrl(urlBuilder.getUrlForWiki(wikiName, wikiLanguage));
+    homePage.getUrl(UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, wikiLanguage).getUrl());
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 

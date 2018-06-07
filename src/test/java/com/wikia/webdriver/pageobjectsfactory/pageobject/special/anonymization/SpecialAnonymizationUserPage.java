@@ -16,7 +16,7 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   private WebElement requestConfirmation;
 
   public SpecialAnonymizationUserPage open() {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_ANONYMIZATION);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_ANONYMIZATION));
 
     driver.navigate().refresh();
     return this;

@@ -1,11 +1,11 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 
@@ -45,7 +45,8 @@ public class TestAdsDisableGpt extends TemplateNoFirstLoad {
                              String slotName,
                              String disasterProviders) {
 
-    String url = urlBuilder.getUrlForPath(wikiName, article);
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(wikiName);
+    String url = urlBuilder.getUrlForPath(article);
     url = urlBuilder.appendQueryStringToURL(url, DISASTER_RECOVERY_URL_PARAM);
     if (StringUtils.isNotEmpty(instantGlobals)) {
       url = urlBuilder.appendQueryStringToURL(url, instantGlobals);
