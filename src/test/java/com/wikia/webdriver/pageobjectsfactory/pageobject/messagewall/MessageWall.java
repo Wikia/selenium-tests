@@ -351,8 +351,14 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyInternalLink(String title, String target, String text, String wikiURL) {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href"), wikiURL + "/wiki/" + target);
+
+    String actualURL =
+        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+        .getAttribute("href").replaceAll("^http[s]?:\\/\\/", "");
+    String expectedURL =
+        String.format("%s/wiki/%s",wikiURL,target).replaceAll("^http[s]?:\\/\\/", "");
+
+    Assertion.assertEquals(expectedURL, actualURL);
     Assertion.assertEquals(
         editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text);
   }
