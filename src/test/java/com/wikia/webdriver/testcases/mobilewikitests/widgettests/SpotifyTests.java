@@ -47,7 +47,7 @@ public class SpotifyTests extends NewTestTemplate {
     WidgetPageObject widget =
             new SpotifyWidgetPageObject().create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

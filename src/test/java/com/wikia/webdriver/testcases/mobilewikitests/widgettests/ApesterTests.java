@@ -44,7 +44,7 @@ public class ApesterTests extends NewTestTemplate {
     WidgetPageObject widget =
             new ApesterWidgetPageObject().createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

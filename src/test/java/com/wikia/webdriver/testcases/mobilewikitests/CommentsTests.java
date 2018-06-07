@@ -38,7 +38,7 @@ public class CommentsTests extends NewTestTemplate {
   private void init() {
     this.comments = new CommentsPageObject(driver);
 
-    new Navigate().toPageByPath(MercurySubpages.COMMENTS);
+    new Navigate().toPage(MercurySubpages.COMMENTS);
   }
 
   @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")

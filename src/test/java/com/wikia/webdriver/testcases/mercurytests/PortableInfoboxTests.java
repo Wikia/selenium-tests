@@ -33,7 +33,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")
   public void mercury_infobox_verifyElementsBeforeAndAfterExpanding() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Before infobox expanding
     infobox
@@ -61,7 +61,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_expandAndCollapseByButtonClickAndTap")
   public void mercury_infobox_expandAndCollapseByButtonClickAndTap() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // expand by clicking button
     infobox
@@ -80,7 +80,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_externalLinkRedirectsToCorrespondingUrl")
   public void mercury_infobox_externalLinkRedirectsToCorrespondingUrl() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     String externalLinkName = infobox
         .clickExpandButton()
@@ -97,7 +97,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox")
   public void mercury_infobox_imagesAndVideosOpenInLightbox() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Check image
     infobox
@@ -115,7 +115,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages")
   public void mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_3);
+    navigate.toPage(MercurySubpages.INFOBOX_3);
 
     infobox
         .clickGalleryImage(0)
@@ -130,7 +130,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks")
   public void mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_5);
+    navigate.toPage(MercurySubpages.INFOBOX_5);
 
     infobox
         .isImageInCollectionVisible()
@@ -143,7 +143,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_headerIsNotVisibleInArticleTOC", enabled = false)
   public void mercury_infobox_headerIsNotVisibleInArticleTOC() {
     init();
-    navigate.toPageByPath(MercurySubpages.INFOBOX_2);
+    navigate.toPage(MercurySubpages.INFOBOX_2);
 
     toc.clickOnTOC();
     toc.TOCItemNotContainsText(0, infobox.getHeaderName(0));
