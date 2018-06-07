@@ -39,7 +39,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
     String slotName = slotInfo.get("slotName").toString();
     Dimension slotSize = (Dimension) slotInfo.get("slotSize");
 
-    String url = urlBuilder.getUrlForPage(page);
+    String url = page.getUrl();
     if (StringUtils.isNotEmpty(urlParamToEnable)) {
       url = urlBuilder.appendQueryStringToURL(url, urlParamToEnable);
     }

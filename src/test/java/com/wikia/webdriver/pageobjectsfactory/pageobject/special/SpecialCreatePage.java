@@ -18,12 +18,12 @@ public class SpecialCreatePage extends SpecialPageObject {
 
 
   public SpecialCreatePage open(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_PAGE);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_CREATE_PAGE);
     return this;
   }
 
   public SpecialCreatePage open() {
-    return open(urlBuilder.getUrlForWiki());
+    return open(urlBuilder.getUrl());
   }
 
   public VisualEditModePageObject populateTitleField(String title) {

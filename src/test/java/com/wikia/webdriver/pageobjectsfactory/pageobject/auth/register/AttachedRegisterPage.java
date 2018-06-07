@@ -42,7 +42,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override
   public AttachedRegisterPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + URLsContent.USER_SIGNUP);
+    driver.get(urlBuilder.getUrl() + URLsContent.USER_SIGNUP);
     return this;
   }
 

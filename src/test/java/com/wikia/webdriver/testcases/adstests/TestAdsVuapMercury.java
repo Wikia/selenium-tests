@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
@@ -125,7 +126,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       groups = "AdsVuapTimeProgressMercury"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));
+    AdsBaseObject ads = new AdsBaseObject(driver, UrlBuilder.createUrlBuilderForWiki("project43").getUrl());
     ads.getUrl(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
     ads.scrollToSlot(slot);

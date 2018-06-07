@@ -27,7 +27,7 @@ public class SpotifyTests extends NewTestTemplate {
   private static final String SPOTIFY_ONE_WIDGET_ARTICLE_NAME = "SpotifyMercury/OneWidget";
   private static final String SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME = "SpotifyMercury/MultipleWidgets";
   private static final String SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME = "SpotifyMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = SPOTIFY_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercurySpotifyWidgetTest_001")
@@ -47,7 +47,7 @@ public class SpotifyTests extends NewTestTemplate {
     WidgetPageObject widget =
             new SpotifyWidgetPageObject().create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

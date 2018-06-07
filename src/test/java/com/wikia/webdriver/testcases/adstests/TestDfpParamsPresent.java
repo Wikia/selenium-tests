@@ -1,9 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 
@@ -26,7 +26,8 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
                                              String slot,
                                              List<String> pageParams,
                                              List<String> slotParams) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(wikiName);
+    String testedPage = urlBuilder.getUrlForPath(article);
     if (StringUtils.isNotEmpty(queryString)) {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
     }
@@ -47,7 +48,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
                                     String slot,
                                     List<String> pageParams,
                                     List<String> slotParams) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, slot, "gpt");

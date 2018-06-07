@@ -1,14 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
+import com.google.common.base.Function;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.EmailUtils;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.purge.PurgeMethod;
+import com.wikia.webdriver.common.core.url.FandomUrlBuilder;
+import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -29,23 +35,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.google.common.base.Function;
-
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.EmailUtils;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.core.purge.PurgeMethod;
-import com.wikia.webdriver.common.core.url.FandomUrlBuilder;
-import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
 
@@ -56,8 +53,8 @@ public class BasePageObject {
   public Actions builder;
   protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   protected int timeOut = 15;
-  protected UrlBuilder urlBuilder = new UrlBuilder();
-  protected UrlBuilder fandomUrlBuilder = new FandomUrlBuilder();
+  protected UrlBuilder urlBuilder = UrlBuilder.createUrlBuilder();
+  protected FandomUrlBuilder fandomUrlBuilder = new FandomUrlBuilder();
   protected JavascriptActions jsActions;
 
   public BasePageObject() {
@@ -314,11 +311,11 @@ public class BasePageObject {
   }
 
   public void getUrl(Page page) {
-    getUrl(urlBuilder.getUrlForPage(page));
+    getUrl(page.getUrl());
   }
 
   public void getUrl(Page page, String queryString) {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(page), queryString));
+    getUrl(urlBuilder.appendQueryStringToURL(page.getUrl(), queryString));
   }
 
   public void refreshPage() {
@@ -452,7 +449,7 @@ public class BasePageObject {
   }
 
   public String getWikiUrl() {
-    return urlBuilder.getUrlForWiki(Configuration.getWikiName());
+    return UrlBuilder.createUrlBuilder().getUrl();
   }
 
   public void fillInput(WebElement input, String value) {
@@ -466,18 +463,18 @@ public class BasePageObject {
     waitFor.until(CommonExpectedConditions.newWindowPresent());
   }
 
-  public void appendToUrl(String additionToUrl) {
+  public void goToCurrentUrlWithSuffix(String additionToUrl) {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
     PageObjectLogging.log("appendToUrl", additionToUrl + " has been appended to url", true);
   }
 
-  public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
+  public void goToCurrentUrlWithAppendedMultipleQueryStrings(String[] queryStrings) {
     String currentUrl = getCurrentUrl();
     for (String queryString : queryStrings) {
       currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryString);
     }
     driver.get(currentUrl);
-    PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
+    PageObjectLogging.log("appendQueryToUrl", queryStrings + " have been appended to url", true);
   }
 
   public void pressDownArrow(WebElement element) {

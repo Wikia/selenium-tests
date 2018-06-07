@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsHopObject;
@@ -19,7 +20,7 @@ public class TestAdsHopMercury extends TemplateNoFirstLoad {
                                        String providerName,
                                        String extraParam) {
 
-    AdsHopObject adsHopObject = new AdsHopObject(driver, urlBuilder.getUrlForPath(wikiName, article));
+    AdsHopObject adsHopObject = new AdsHopObject(driver, UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article));
 
     adsHopObject.verifyClassHidden(AdsContent.MOBILE_TOP_LB, providerName);
     adsHopObject.verifyPostMessage(AdsContent.MOBILE_TOP_LB, providerName, extraParam);

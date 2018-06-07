@@ -30,7 +30,7 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
 
   @Override
   public FormPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + URLsContent.USER_FORGOT_PASSWORD);
+    driver.get(urlBuilder.getUrl() + URLsContent.USER_FORGOT_PASSWORD);
     return this;
   }
 

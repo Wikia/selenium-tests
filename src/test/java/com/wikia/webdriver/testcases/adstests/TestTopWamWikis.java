@@ -2,12 +2,15 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.apache.commons.lang3.Range;
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
 
 public class TestTopWamWikis extends TemplateNoFirstLoad {
 
@@ -17,8 +20,8 @@ public class TestTopWamWikis extends TemplateNoFirstLoad {
 
   @Test(groups = "TopWamWikisWhereIsMyExtension")
   public void TestTopWamWikisCountInRange() {
-    String whereIsExtensionUrl = urlBuilder.getUrlForPath(URLsContent.COMMUNITY_WIKI,
-                                                          URLsContent.SPECIAL_WHERE_IS_EXTENSION);
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(URLsContent.COMMUNITY_WIKI, DEFAULT_LANGUAGE);
+    String whereIsExtensionUrl = urlBuilder.getUrlForPath(URLsContent.SPECIAL_WHERE_IS_EXTENSION);
     whereIsExtensionUrl = urlBuilder.appendQueryStringToURL(whereIsExtensionUrl, extensionURL);
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     wikiPage.getUrl(whereIsExtensionUrl);

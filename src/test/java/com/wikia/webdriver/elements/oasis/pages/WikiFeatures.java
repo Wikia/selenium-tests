@@ -27,7 +27,7 @@ public class WikiFeatures extends BasePageObject {
   public WikiFeatures() { super(); }
 
   public WikiFeatures openWikiFeatures(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_WIKI_FEATURES);
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_WIKI_FEATURES);
     PageObjectLogging.log("openWikiFeaturesPage", "special wiki features page opened", true, driver);
 
     return this;

@@ -3,22 +3,22 @@ package com.wikia.webdriver.common.contentpatterns;
 public class MercurySubpages {
 
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
-  public static final String MAIN_PAGE = "/wiki/Mercury_automation_testing_Wikia";
-  public static final String GALLERY = "/wiki/Gallery";
-  public static final String TOC = "/wiki/TOC";
-  public static final String TOC_WITHOUT_H2 = "/wiki/TOCWithoutH2";
-  public static final String TOC_WITH_PORTABLE_INFOBOX = "/wiki/TOC_with_portable_infobox";
-  public static final String COMMENTS = "/wiki/Comments";
-  public static final String MAP = "/wiki/Map";
-  public static final String QUESTION_MARK = "/wiki/Question?mark?question";
-  public static final String COLON = "/wiki/Colon:colon:colon";
-  public static final String NO_INFOBOX = "/wiki/Article_without_infobox";
+  public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
+  public static final String GALLERY = "Gallery";
+  public static final String TOC = "TOC";
+  public static final String TOC_WITHOUT_H2 = "TOCWithoutH2";
+  public static final String TOC_WITH_PORTABLE_INFOBOX = "TOC_with_portable_infobox";
+  public static final String COMMENTS = "Comments";
+  public static final String MAP = "Map";
+  public static final String QUESTION_MARK = "Question?mark?question";
+  public static final String COLON = "Colon:colon:colon";
+  public static final String NO_INFOBOX = "Article_without_infobox";
 
-  public static final String INFOBOX_1 = "/wiki/Infobox1";
-  public static final String INFOBOX_2 = "/wiki/Infobox2";
-  public static final String INFOBOX_3 = "/wiki/Infobox3";
-  public static final String INFOBOX_4 = "/wiki/Infobox4";
-  public static final String INFOBOX_5 = "/wiki/Infobox5";
+  public static final String INFOBOX_1 = "Infobox1";
+  public static final String INFOBOX_2 = "Infobox2";
+  public static final String INFOBOX_3 = "Infobox3";
+  public static final String INFOBOX_4 = "Infobox4";
+  public static final String INFOBOX_5 = "Infobox5";
 
 
   /**
@@ -43,9 +43,6 @@ public class MercurySubpages {
 
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
   public static final String ECC_MAIN_PAGE = "/wiki/Mercury_Empty_CC_Editor_Wikia";
-
-  // Articles on mlp.wikia.com
-  public static final String MLP_MAIN_PAGE = "/wiki/My_Little_Pony_Friendship_is_Magic_Wiki";
 
   // Login and SignUp pages
   public static final String JOIN_PAGE = "/join";
