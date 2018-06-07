@@ -251,15 +251,4 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended_4", "RTE_extended_021"})
-  public void RTE_021_YoutubeTag_Publish() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
-    String videoID = video.getID();
-    source.addContentInSourceMode("<youtube>\n" + videoID + "\n</youtube>");
-    ArticlePageObject article = source.clickPublishButton();
-    article.verifyArticleTitle(articleName);
-  }
 }
