@@ -27,7 +27,7 @@ public class ApesterTests extends NewTestTemplate {
   private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "ApesterMercury/OneWidget";
   private static final String APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "ApesterMercury/MultipleWidgets";
   private static final String APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "ApesterMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = APESTER_ONE_WIDGET_ARTICLE_NAME;
   @Test(groups = "MercuryApesterWidgetTest_001")
   public void MercuryApesterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
@@ -44,7 +44,7 @@ public class ApesterTests extends NewTestTemplate {
     WidgetPageObject widget =
             new ApesterWidgetPageObject().createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

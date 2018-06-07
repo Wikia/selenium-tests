@@ -94,7 +94,7 @@ public abstract class CoreTestTemplate {
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       setTestProperty("mockAds", method.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
-          method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
+              method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
     }
 
     if (method.isAnnotationPresent(InBrowser.class)) {

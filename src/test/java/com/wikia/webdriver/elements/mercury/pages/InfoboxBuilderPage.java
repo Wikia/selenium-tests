@@ -1,14 +1,5 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -17,6 +8,13 @@ import com.wikia.webdriver.elements.Frame;
 import com.wikia.webdriver.elements.FrameScope;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
 
@@ -92,9 +90,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   private final Frame builderFrame = new Frame(builderIFrame);
 
   public InfoboxBuilderPage openNew(String templateName) {
-    getUrl(urlBuilder.appendQueryStringToURL(
-        String.format("%s/wiki/%s:%s", urlBuilder.getUrlForWiki(), "Template", templateName),
-        URLsContent.ACTION_EDIT));
+    getUrl(urlBuilder
+        .appendQueryStringToURL(urlBuilder.getUrlForWikiPage("Template:" + templateName),
+            URLsContent.ACTION_EDIT));
     new TemplateEditPage().getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
 
@@ -106,8 +104,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage openExisting(String templateName) {
     getUrl(
-        urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s/%s", urlBuilder.getUrlForWiki(),
-            "Special:InfoboxBuilder", templateName), URLsContent.ACTION_EDIT));
+        urlBuilder.appendQueryStringToURL(
+            urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_INFOBOX_BUILDER + "/" + templateName),
+            URLsContent.ACTION_EDIT));
     driver.switchTo().frame(builderIFrame);
 
     return this;
@@ -115,7 +114,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage open() {
     new TemplateEditPage().open("temp_template");
-    getUrl(String.format("%s/wiki/%s", urlBuilder.getUrlForWiki(), "Special:InfoboxBuilder"));
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_INFOBOX_BUILDER));
     driver.switchTo().frame(builderIFrame);
     wait.forElementVisible(previewArea);
 

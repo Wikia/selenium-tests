@@ -19,13 +19,12 @@ public class ArticleHistoryPage extends WikiBasePageObject {
   private List<WebElement> history;
 
 
-  private static String ARTICLE_HISTORY_FORMAT = "/wiki/%s?action=history";
+  private static String ARTICLE_HISTORY_FORMAT = "%s?action=history";
 
-  private static String SPECIFIC_ARTICLE_FORMAT = "/wiki/AnonymizationTest?oldid=%s";
+  private static String SPECIFIC_ARTICLE_FORMAT = "AnonymizationTest?oldid=%s";
 
   public ArticleHistoryPage open(String articleName) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
-           + String.format(ARTICLE_HISTORY_FORMAT, articleName));
+    getUrl(urlBuilder.getUrlForWikiPage(String.format(ARTICLE_HISTORY_FORMAT, articleName)));
 
     this.refreshPageAddingCacheBuster();
 
@@ -33,8 +32,7 @@ public class ArticleHistoryPage extends WikiBasePageObject {
   }
 
   public ArticleHistoryPage openArticleId(String articleId) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + String
-        .format(SPECIFIC_ARTICLE_FORMAT, articleId));
+    getUrl(urlBuilder.getUrlForWikiPage(String.format(SPECIFIC_ARTICLE_FORMAT, articleId)));
 
     this.refreshPageAddingCacheBuster();
 

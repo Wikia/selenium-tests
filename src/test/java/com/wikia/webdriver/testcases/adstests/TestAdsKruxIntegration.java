@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -37,7 +38,7 @@ public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
                                   String article,
                                   String kruxSiteId,
                                   String slotName) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsKruxObject ads = new AdsKruxObject(driver, testedPage);
     ads.verifyKruxControlTag(kruxSiteId);
 

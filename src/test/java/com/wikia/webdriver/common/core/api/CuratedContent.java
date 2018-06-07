@@ -1,9 +1,7 @@
 package com.wikia.webdriver.common.core.api;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ public class CuratedContent extends ApiCall {
   }
 
   @Override protected String getURL() {
-    return new UrlBuilder().getUrlForWiki(Configuration.getWikiName()).replace("https","http")
+    return UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
            + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
   }
 

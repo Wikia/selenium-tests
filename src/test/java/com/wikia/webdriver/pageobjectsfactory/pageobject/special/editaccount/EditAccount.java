@@ -33,7 +33,7 @@ public class EditAccount extends BasePageObject {
   }
 
   public EditAccount navigateToSpecialEditAccount(String communityWikiURL) {
-    driver.get(communityWikiURL + URLsContent.SPECIAL_EDIT_ACCOUNT);
+    driver.get(communityWikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_EDIT_ACCOUNT);
 
     return this;
   }

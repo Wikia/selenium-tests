@@ -47,7 +47,7 @@ public class UserProfilePage extends WikiBasePageObject {
    * @return
    */
   public UserProfilePage open(String userName) {
-    getUrl(urlBuilder.getUrlForPage(URLsContent.USER_PROFILE.replace("%userName%", userName)));
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.USER_PROFILE.replace("%userName%", userName)));
 
     return this;
   }

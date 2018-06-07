@@ -21,7 +21,7 @@ public class SmartBannerTest extends NewTestTemplate {
   private void init() {
     this.smartBanner = new SmartBanner(driver);
 
-    new Navigate().toPageByPath(MercurySubpages.GALLERY);
+    new Navigate().toPage(MercurySubpages.GALLERY);
   }
 
   @Test(groups = "mercury_smartBanner_isNotVisibleOnScrollDown")

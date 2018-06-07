@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -20,7 +21,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(URLsContent.VE_DISABLED_WIKI).getUrl();
     base = new WikiBasePageObject();
   }
 

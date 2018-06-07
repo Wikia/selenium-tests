@@ -26,7 +26,7 @@ public class TwitterTests extends NewTestTemplate {
   private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "TwitterMercury/OneWidget";
   private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "TwitterMercury/MultipleWidgets";
   private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "TwitterMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryTwitterWidgetTest_001")
@@ -44,7 +44,7 @@ public class TwitterTests extends NewTestTemplate {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

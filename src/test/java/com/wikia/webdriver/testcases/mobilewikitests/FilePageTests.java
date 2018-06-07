@@ -20,7 +20,7 @@ public class FilePageTests extends NewTestTemplate{
 
 @Test
 public void snippetIsNotAffectedByXSS() {
-  new ArticlePage().open("/File:Mala-mi.jpg");
+  new ArticlePage().open("File:Mala-mi.jpg");
   FilePageObject filePage = new FilePageObject();
 
   Assertion.assertTrue(filePage.doesSnippetContainXSS());
