@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -46,7 +46,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
               CommonUtils.getAbsolutePathForFile(
                   PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
     }
-    PageObjectLogging.log(
+    Log.log(
         "typeInFilesToUpload",
         filesNamesList.length + " files added to upload list",
         true
@@ -55,19 +55,19 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 
   public void typeInMultiUploadSummary(String summary) {
     multipleUploadSummaryField.sendKeys(summary);
-    PageObjectLogging
+    Log
         .log("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload", true);
   }
 
   public void checkIgnoreAnyWarnings() {
     scrollAndClick(ignoreAnyWarnings);
-    PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
+    Log.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
 
   }
 
   public void clickUploadButton() {
     scrollAndClick(uploadFileButton);
-    PageObjectLogging.log("ClickOnUploadFile", "Click on Upload File button", true);
+    Log.log("ClickOnUploadFile", "Click on Upload File button", true);
 
   }
 

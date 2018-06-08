@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -28,7 +28,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log(
+    Log.log(
         "assertStringContains",
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
@@ -51,7 +51,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log(
+    Log.log(
             "assertStringContainsAnyPattern",
             "assertion " + assertion + "! String: \"" + expectedElementEncoded +
                     "\". List of patterns \"" + currentListEncoded.stream().collect(Collectors.joining(", ")) + ".",
@@ -81,7 +81,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log(
+    Log.log(
             "assertStringContainsAnyPattern",
             "assertion " + assertion + "! String: \"" + expectedElementEncoded +
             "\". List of patterns \"" + currentListEncoded.stream().collect(Collectors.joining(", ")) + ".",
@@ -102,7 +102,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log(
+    Log.log(
         "assertStringNotContains",
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
@@ -123,14 +123,14 @@ public class Assertion extends Assert {
       assertion = false;
       caughtException = err;
     }
-    PageObjectLogging.log(
+    Log.log(
             "assertEquals",
             "assertion " + assertion + "! Pattern: \"" + patternEncoded
                     + "\" Current: \"" + currentEncoded + "\"",
             assertion
     );
     if (caughtException != null){
-      new PageObjectLogging().logAssertionStacktrace(caughtException);
+      Log.logAssertionStacktrace(caughtException);
     }
   }
 
@@ -144,7 +144,7 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    PageObjectLogging.log(
+    Log.log(
         "assertNotEquals",
         "assertion " + assertion + "! Pattern: \"" + patternEncoded
         + "\" Current: \"" + currentEncoded + "\"",
@@ -160,7 +160,7 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    PageObjectLogging.log("assertNumber", message + ", expected: "
+    Log.log("assertNumber", message + ", expected: "
                                           + expected + ", got: " + actual, assertion);
   }
 

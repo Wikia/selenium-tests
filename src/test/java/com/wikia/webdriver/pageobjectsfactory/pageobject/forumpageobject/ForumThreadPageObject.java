@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -75,7 +75,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(discussionBody.get(0));
     wait.forTextInElement(discussionTitle, title);
     wait.forTextInElement(discussionBody.get(0), message);
-    PageObjectLogging
+    Log
         .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
   }
 
@@ -86,7 +86,7 @@ public class ForumThreadPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickReplyButton();
-    PageObjectLogging
+    Log
         .log("reply", "write a reply with the following text: " + message, true, driver);
   }
 
@@ -95,7 +95,7 @@ public class ForumThreadPageObject extends BasePageObject {
         replyMessage =
         driver.findElement(By.cssSelector(".replies li:nth-child(" + replyNumber + ") p"));
     wait.forTextInElement(replyMessage, message);
-    PageObjectLogging.log("verifyReplyMessage", "verify that message number " + replyNumber
+    Log.log("verifyReplyMessage", "verify that message number " + replyNumber
                                                 + " has the following message: " + message, true);
   }
 
@@ -103,7 +103,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(replyButton);
     scrollAndClick(replyButton);
     wait.forElementVisible(By.cssSelector(".speech-bubble-buttons"));
-    PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);
+    Log.log("clickReplyButton", "reply button clicked", true, driver);
   }
 
   public void removeThread(String reason) {
@@ -114,20 +114,20 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(removeThreadModalRemoveButton);
     wait.forElementClickable(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
-    PageObjectLogging
+    Log
         .log("removeThread", "removed thread with the following reason: " + reason, true, driver);
   }
 
   public void clickOnRemoveButton() {
     wait.forElementVisible(removeButton);
     jsActions.click(".WikiaMenuElement .remove-message");
-    PageObjectLogging.log("clickOnRemoveButton", "click on 'remove' button", true, driver);
+    Log.log("clickOnRemoveButton", "click on 'remove' button", true, driver);
   }
 
   public void clickOnMoveThreadButton() {
     wait.forElementVisible(moveThreadButton);
     jsActions.click(".WikiaMenuElement .move-thread");
-    PageObjectLogging.log("clickOnMoveThreadButton", "click on 'move thread' button", true, driver);
+    Log.log("clickOnMoveThreadButton", "click on 'move thread' button", true, driver);
   }
 
   public void clickOnMoreButton() {
@@ -137,14 +137,14 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(moreButton);
     wait.forElementClickable(moreButton);
     scrollAndClick(moreButton);
-    PageObjectLogging.log("clickOnMoreButton", "click on 'more' button on a message", true);
+    Log.log("clickOnMoreButton", "click on 'more' button on a message", true);
   }
 
   public void clickOnCloseThreadButton() {
     wait.forElementVisible(closeThreadButton);
     wait.forElementClickable(closeThreadButton);
     scrollAndClick(closeThreadButton);
-    PageObjectLogging
+    Log
         .log("clickOnCloseThreadButton", "click on 'close thread' button on a message", true);
   }
 
@@ -152,30 +152,30 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(reopenThreadButton);
     wait.forElementClickable(reopenThreadButton);
     reopenThreadButton.click();
-    PageObjectLogging
+    Log
         .log("clickOnReopenThreadButton", "click on 'reopen thread' button on a message", true);
   }
 
   public void verifyThreadRemoved() {
     wait.forTextInElement(threadRemovedMessage, "thread has been removed");
-    PageObjectLogging.log("verifyThreadRemoved", "Thread has been removed", true);
+    Log.log("verifyThreadRemoved", "Thread has been removed", true);
   }
 
   public void verifyThreadClosed() {
     wait.forElementVisible(closeThreadMessage);
-    PageObjectLogging.log("verifyThreadClosed", "Thread has been closed", true);
+    Log.log("verifyThreadClosed", "Thread has been closed", true);
   }
 
   public void verifyThreadReopened() {
     waitForElementNotVisibleByElement(closeThreadMessage);
-    PageObjectLogging.log("verifyThreadReopened", "Thread has been reopened", true);
+    Log.log("verifyThreadReopened", "Thread has been reopened", true);
   }
 
   public void undoRemove() {
     wait.forElementVisible(undoThreadRemoveButton);
     wait.forElementClickable(undoThreadRemoveButton);
     scrollAndClick(undoThreadRemoveButton);
-    PageObjectLogging.log("undoRemove", "click on 'undo' button", true, driver);
+    Log.log("undoRemove", "click on 'undo' button", true, driver);
   }
 
   public String moveThread() {
@@ -187,7 +187,7 @@ public class ForumThreadPageObject extends BasePageObject {
     dropList.selectByIndex(1);
     wait.forElementClickable(moveThreadModalMoveThreadButton);
     scrollAndClick(moveThreadModalMoveThreadButton);
-    PageObjectLogging
+    Log
         .log("moveThread", "thread moved to the following board: " + selectedItem, true, driver);
 
     return selectedItem;
@@ -201,14 +201,14 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(removeThreadModalRemoveButton);
     wait.forElementClickable(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
-    PageObjectLogging
+    Log
         .log("closeThread", "closed thread with the following reason: " + reason, true, driver);
   }
 
   public void reopenThread() {
     clickOnMoreButton();
     clickOnReopenThreadButton();
-    PageObjectLogging.log("reopenThread", "reopened thread", true, driver);
+    Log.log("reopenThread", "reopened thread", true, driver);
   }
 
   public void verifyParentBoard(String forumBoardName) {
@@ -216,14 +216,14 @@ public class ForumThreadPageObject extends BasePageObject {
     
     wait.forElementVisible(breadCrumbs);
     wait.forTextInElement(breadCrumbs, forumBoardName + " board");
-    PageObjectLogging.log("verifyParentBoard",
+    Log.log("verifyParentBoard",
                           "verify that the parent board of current thread is the following: "
                           + forumBoardName, true);
   }
 
   public ForumHistoryPageObject openHistory() {
     getUrl(getCurrentUrl() + "?action=history");
-    PageObjectLogging.log("openHistory", "thread history page opened", true, driver);
+    Log.log("openHistory", "thread history page opened", true, driver);
     return new ForumHistoryPageObject(driver);
   }
 }

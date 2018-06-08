@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.Cookie;
@@ -54,11 +54,11 @@ public class TrackingOptInModal extends BasePageObject {
   public boolean isVisible() {
     try {
       wait.forElementVisible(optInModalOverlay);
-      PageObjectLogging.logInfo("Tracking modal visible");
+      Log.info("Tracking modal visible");
 
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Tracking modal not visible", e);
+      Log.info("Tracking modal not visible", e);
 
       return false;
     }
@@ -69,7 +69,7 @@ public class TrackingOptInModal extends BasePageObject {
       wait.forElementClickable(acceptButton);
       acceptButton.click();
     } catch (Exception e) {
-      PageObjectLogging.log("Accept button clicked", e, false);
+      Log.log("Accept button clicked", e, false);
     }
   }
 
@@ -78,7 +78,7 @@ public class TrackingOptInModal extends BasePageObject {
       wait.forElementClickable(rejectButton);
       rejectButton.click();
     } catch (Exception e) {
-      PageObjectLogging.log("Reject button clicked", e, false);
+      Log.log("Reject button clicked", e, false);
     }
   }
 
@@ -88,7 +88,7 @@ public class TrackingOptInModal extends BasePageObject {
       wait.forElementVisible(modal);
       isVisible = true;
     } catch (Exception e) {
-      PageObjectLogging.log("Modal is visible", e, false);
+      Log.log("Modal is visible", e, false);
     }
 
     return isVisible;
@@ -158,7 +158,7 @@ public class TrackingOptInModal extends BasePageObject {
       try {
         wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i));
       } catch (Exception e) {
-        PageObjectLogging
+        Log
             .log("Did not get successful response with element: " + elementsList.get(i),
                  e, false);
         result = false;
@@ -174,8 +174,8 @@ public class TrackingOptInModal extends BasePageObject {
       entry = trafficInterceptor.getEntryByUrlPattern(pattern);
       return entry.getResponse().getStatus() < 400;
     } catch (NullPointerException ex) {
-      PageObjectLogging
-          .logInfo("Did not get successful response",
+      Log
+          .info("Did not get successful response",
                ex);
 
       return false;
@@ -199,6 +199,6 @@ public class TrackingOptInModal extends BasePageObject {
   }
 
   public void logTrackingCookieValue() {
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
   }
 }

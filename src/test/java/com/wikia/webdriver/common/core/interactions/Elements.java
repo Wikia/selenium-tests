@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.interactions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,7 +24,7 @@ public class Elements {
       }
       if (value.equals(retAttribute)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByValue", "Element with attribute: " + attribute
+        Log.log("getElementByValue", "Element with attribute: " + attribute
             + " with the value: " + value + " is found from the list", true);
         break;
       }
@@ -41,7 +41,7 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByText", "Element with text: " + value
+        Log.log("getElementByText", "Element with text: " + value
             + " is found from the list", true);
         break;
       }
@@ -59,7 +59,7 @@ public class Elements {
     for (WebElement element : elements) {
       if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
         foundElement = element;
-        PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value
+        Log.log("getElementByChildText", "Element's child with text: " + value
             + " is found from the list", true);
         break;
       }

@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsVelesObject;
@@ -41,7 +41,7 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
       ads.waitForSlotExpanded(driver.findElement(By.cssSelector("#INCONTENT_PLAYER")));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("INCONTENT_PLAYER is not displayed", ex, true);
+      Log.log("INCONTENT_PLAYER is not displayed", ex, true);
       return false;
     }
   }

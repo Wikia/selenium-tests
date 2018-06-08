@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.video.VideoTile;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -100,7 +100,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
                     : v.getTitle()
     ).collect(Collectors.toList());
 
-    PageObjectLogging.log("verifyVideoAdded",
+    Log.log("verifyVideoAdded",
         "verify that video with following description was added: " + expectedVideoTitle, true);
     Assertion.assertStringContainsAnyPattern(expectedVideoTitle, patternList);
   }
@@ -119,7 +119,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     newestVideoDeleteIcon.click();
     wait.forElementVisible(deleteConfirmButton);
     deleteConfirmButton.click();
-    PageObjectLogging.log("Delete video", "Deleted video with title [" + videoTitle + "]", true);
+    Log.log("Delete video", "Deleted video with title [" + videoTitle + "]", true);
   }
 
   public boolean isNewVideoAdded() {
@@ -130,7 +130,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       wait.forElementVisible(newestVideo);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Title is not visible", e);
+      Log.info("Title is not visible", e);
       return false;
     }
   }
@@ -140,7 +140,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       wait.forElementVisible(h1Header);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Header is not visible", e);
+      Log.info("Header is not visible", e);
       return false;
     }
   }
@@ -150,7 +150,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       wait.forElementClickable(addVideo);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Add video button is not clickable", e);
+      Log.info("Add video button is not clickable", e);
       return false;
     }
   }
@@ -160,7 +160,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       wait.forElementVisible(newestVideo);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Newest video is not visible", e);
+      Log.info("Newest video is not visible", e);
       return false;
     }
   }

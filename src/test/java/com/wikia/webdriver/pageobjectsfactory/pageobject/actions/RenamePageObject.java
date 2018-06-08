@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.actions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,7 @@ public class RenamePageObject extends ArticlePageObject {
       leaveRedirectCheckbox.click();
     }
     scrollAndClick(submitRename);
-    PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
+    Log.log("ArticleRenamed", "Article renamed", true);
     return new ArticlePageObject();
   }
 }

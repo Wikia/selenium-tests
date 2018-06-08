@@ -2,11 +2,11 @@ package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
@@ -38,25 +38,25 @@ public class CuratedContentPageObject extends BasePageObject {
 
   public CuratedContentPageObject isTitleVisible() {
     wait.forElementVisible(sectionTitle);
-    PageObjectLogging.logInfo(Labels.SECTION_TITLE.name + " " + MercuryMessages.VISIBLE_MSG);
+    Log.info(Labels.SECTION_TITLE.name + " " + MercuryMessages.VISIBLE_MSG);
     return this;
   }
 
   public CuratedContentPageObject isLinkToMainPageVisible() {
     wait.forElementVisible(linkToMainPage);
-    PageObjectLogging.logInfo(Labels.LINK_TO_MAIN_PAGE.name + " " + MercuryMessages.VISIBLE_MSG);
+    Log.info(Labels.LINK_TO_MAIN_PAGE.name + " " + MercuryMessages.VISIBLE_MSG);
     return this;
   }
 
   public CuratedContentPageObject isSectionVisible() {
     wait.forElementVisible(sectionContainer);
-    PageObjectLogging.logInfo(Labels.SECTION.name + " " + MercuryMessages.VISIBLE_MSG);
+    Log.info(Labels.SECTION.name + " " + MercuryMessages.VISIBLE_MSG);
     return this;
   }
 
   public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
     wait.forElementVisible(curatedContentItems.get(elementNumber));
-    PageObjectLogging.logInfo(Labels.SECTION_ITEM.name + " " + MercuryMessages.VISIBLE_MSG);
+    Log.info(Labels.SECTION_ITEM.name + " " + MercuryMessages.VISIBLE_MSG);
     return this;
   }
 

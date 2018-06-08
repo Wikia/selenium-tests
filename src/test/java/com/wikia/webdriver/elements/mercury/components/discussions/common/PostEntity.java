@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -136,7 +136,7 @@ public class PostEntity {
           .getAttribute(CLASS_ATTRIBUTE)
           .contains(POST_EDITED_BY_CLASS_NAME);
     } catch (NoSuchElementException e) {
-      PageObjectLogging.log("Element not found", "Edited by section not found", true);
+      Log.log("Element not found", "Edited by section not found", true);
       return false;
     }
   }

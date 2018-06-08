@@ -15,10 +15,9 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriverException;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class EmailUtils {
 
@@ -36,7 +35,7 @@ public class EmailUtils {
 
   public static String getFirstEmailContent(String userName, String password, String subject) {
     try {
-      PageObjectLogging.logInfo("Checking emails for " + userName + " that contain '" + subject + "'");
+      Log.info("Checking emails for " + userName + " that contain '" + subject + "'");
 
       // establishing connections
       Properties props = System.getProperties();
@@ -55,7 +54,7 @@ public class EmailUtils {
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages = inbox.getMessages();
 
-        PageObjectLogging.log("Mail", "Waiting for the message", true);
+        Log.log("Mail", "Waiting for the message", true);
         Thread.sleep(2000);
         
         for (Message message : messages) {
@@ -70,7 +69,7 @@ public class EmailUtils {
         }
       }
 
-      PageObjectLogging.log("Mail", "Mail arrived", true);
+      Log.log("Mail", "Mail arrived", true);
 
       Message m = magicMessage;
       String line;
@@ -84,10 +83,10 @@ public class EmailUtils {
 
       return builder.toString();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("getFirstEmailContent", e, false);
+      Log.log("getFirstEmailContent", e, false);
       throw new WebDriverException();
     } catch (MessagingException | IOException | InterruptedException e) {
-      PageObjectLogging.log("getFirstEmailContent", e, false);
+      Log.log("getFirstEmailContent", e, false);
       throw new WebDriverException();
     }
   }
@@ -111,14 +110,14 @@ public class EmailUtils {
           messages[i].setFlag(Flags.Flag.DELETED, true);
         }
       } else {
-        PageObjectLogging.log("Mail", "There are no messages in inbox", true);
+        Log.log("Mail", "There are no messages in inbox", true);
       }
       
       store.close();
     } catch (NoSuchProviderException e) {
-      PageObjectLogging.log("Mail", e, false);
+      Log.log("Mail", e, false);
     } catch (MessagingException e) {
-      PageObjectLogging.log("Mail", e, false);
+      Log.log("Mail", e, false);
     }
   }
 

@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialo
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.interactions.Elements;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
@@ -136,7 +136,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(imageLicenseDropdown);
     Select imageLicenseSelect = new Select(imageLicenseDropdown);
     imageLicenseSelect.selectByValue(imageLicense.toString());
-    PageObjectLogging.log("selectImageLicense",
+    Log.log("selectImageLicense",
         "License: " + imageLicense.toString() + " selected", true);
   }
 
@@ -177,14 +177,14 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     fileUploadInput
         .sendKeys(CommonUtils.getAbsolutePathForFile(
             PageContent.IMAGE_UPLOAD_RESOURCES_PATH + fileName));
-    PageObjectLogging.log("selectFileToUpload", "file " + fileName + " added to upload", true);
+    Log.log("selectFileToUpload", "file " + fileName + " added to upload", true);
   }
 
   public VisualEditorPageObject previewExistingVideoByTitle(String title) {
     waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
     media.findElement(previewVideoButtonBy).click();
-    PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
+    Log.log("previewExistingMediaByTitle", "Media clicked", true);
     return new VisualEditorPageObject();
   }
 
@@ -192,7 +192,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
     media.findElement(previewPhotoButtonBy).click();
-    PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
+    Log.log("previewExistingMediaByTitle", "Media clicked", true);
     return new VisualEditorPageObject();
   }
 

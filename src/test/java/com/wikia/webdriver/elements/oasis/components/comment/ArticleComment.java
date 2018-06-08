@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.comment;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -23,7 +23,7 @@ public class ArticleComment extends BasePageObject {
       wait.forElementVisible(By.cssSelector("img"));
       return true;
     } catch(TimeoutException e) {
-      PageObjectLogging.logInfo("Video element is not visible", e);
+      Log.info("Video element is not visible", e);
       return false;
     }
   }

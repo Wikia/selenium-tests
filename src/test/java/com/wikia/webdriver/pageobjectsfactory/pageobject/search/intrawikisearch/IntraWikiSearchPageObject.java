@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -106,7 +106,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void searchFor(String query) {
     searchField.sendKeys(query + Keys.ENTER);
-    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+    Log.log("searchFor", "searching for query: " + query, true, driver);
   }
 
   public void verifySuggestions(String suggestion) {
@@ -181,20 +181,20 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void clickAdvancedButton() {
     advancedButton.click();
-    PageObjectLogging.log("clickAdvancedButton", "Advance button was clicked", true, driver);
+    Log.log("clickAdvancedButton", "Advance button was clicked", true, driver);
   }
 
   public void chooseAdvancedOption(int i) {
     wait.forElementVisible(advancedField);
     advancedOptionInputs.get(i).click();
-    PageObjectLogging
+    Log
         .log("chooseAdvancedOption", "chosen advance option is selected", true, driver);
   }
 
   public void selectAllAdvancedOptions() {
     clickAdvancedButton();
     chooseAdvancedOption(0);
-    PageObjectLogging.log("selectAllAdvancedOptions", "All advance options are selected", true,
+    Log.log("selectAllAdvancedOptions", "All advance options are selected", true,
                           driver);
   }
 
@@ -220,7 +220,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementVisible(photosVideos);
     scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
-    PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected", true,
+    Log.log("selectPhotosVideos", "Photos and videos option is selected", true,
                           driver);
   }
 
@@ -270,7 +270,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void selectPhotosOnly() {
     scrollAndClick(filterPhotos);
-    PageObjectLogging.log("selectPhotosOnly", "Photos option is selected", true, driver);
+    Log.log("selectPhotosOnly", "Photos option is selected", true, driver);
   }
 
   public void verifyAllResultsImages(int numberOfResults) {
@@ -283,7 +283,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void selectVideosOnly() {
     scrollAndClick(filterVideos);
-    PageObjectLogging.log("selectVideosOnly", "Videos option is selected", true, driver);
+    Log.log("selectVideosOnly", "Videos option is selected", true, driver);
   }
 
   public void verifyTitlesNotEmpty() {
@@ -329,7 +329,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void verifyPushToTopWikiThumbnail() {
     wait.forElementVisible(pushToTopWikiThumbnail);
-    PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
+    Log.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
                           true, driver);
   }
 
@@ -342,7 +342,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
     }
-    PageObjectLogging.log("verifyNewSuggestionsTextAndImages",
+    Log.log("verifyNewSuggestionsTextAndImages",
                           "Image and text next to every suggestion is verified", true);
   }
 
@@ -355,7 +355,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       searchField.sendKeys(query);
       searchButton.click();
     }
-    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+    Log.log("searchFor", "searching for query: " + query, true, driver);
   }
 
 

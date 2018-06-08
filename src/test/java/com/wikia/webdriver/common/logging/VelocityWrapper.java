@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import com.wikia.webdriver.common.core.CommonUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -31,19 +32,19 @@ public class VelocityWrapper {
     throw new IllegalAccessError("Utility class");
   }
 
-  static String fillLogRow(List<String> classList, String command, String description) {
+  static void fillLogRow(List<LogData> logData, String command, String description) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(LOG_ROW_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
 
-    context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
+    context.put("className", "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\"");
     context.put("command", command);
     context.put("description", description);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
     builder.append(writer.toString());
-    return builder.toString();
+    CommonUtils.appendTextToFile(Log.logPath, builder.toString());
   }
 
   static String fillLastLogRow() {
@@ -84,12 +85,12 @@ public class VelocityWrapper {
     return builder.toString();
   }
 
-  static String fillErrorLogRow(List<String> classList, String command, long imageCounter) {
+  static String fillErrorLogRow(List<LogData> logData, String command, long imageCounter) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(ERROR_LOG_ROW_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
+    context.put("className", "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\"");
     context.put("command", command);
     context.put("imageCounter", String.valueOf(imageCounter));
     StringWriter writer = new StringWriter();
@@ -98,12 +99,12 @@ public class VelocityWrapper {
     return builder.toString();
   }
 
-  static String fillErrorLogRowWoScreenshotAndSource(List<String> classList, String command) {
+  static String fillErrorLogRowWoScreenshotAndSource(List<LogData> classList, String command) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(ERROR_LOG_ROW_WO_SCREENSHOT_AND_SOURCE_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
+    context.put("className", "\"" + classList.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\"");
     context.put("command", command);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
@@ -111,13 +112,13 @@ public class VelocityWrapper {
     return builder.toString();
   }
 
-  static String fillLogRowWithScreenshot(List<String> classList, String command, String description,
-      long imageCounter) {
+  static String fillLogRowWithScreenshot(List<LogData> logData, String command, String description,
+                                         long imageCounter) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(LOG_ROW_WITH_SCREENSHOT_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
+    context.put("className", "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\"");
     context.put("command", command);
     context.put("description", description);
     context.put("imageCounter", String.valueOf(imageCounter));

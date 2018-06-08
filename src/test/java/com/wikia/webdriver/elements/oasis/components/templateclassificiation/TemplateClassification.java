@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -30,7 +30,7 @@ public class TemplateClassification extends WikiBasePageObject {
     entryPointLink.click();
 
     wait.forElementVisible(modalSelector);
-    PageObjectLogging.logInfo("Template classification modal was opened");
+    Log.info("Template classification modal was opened");
 
     return this;
   }
@@ -40,7 +40,7 @@ public class TemplateClassification extends WikiBasePageObject {
     closeButton.click();
 
     wait.forElementNotVisible(modalSelector);
-    PageObjectLogging.logInfo("Template classification modal was closed");
+    Log.info("Template classification modal was closed");
 
     return this;
   }
@@ -66,7 +66,7 @@ public class TemplateClassification extends WikiBasePageObject {
     wait.forElementClickable(typeInput);
     typeInput.click();
 
-    PageObjectLogging.logInfo(templateName + " template was chosen");
+    Log.info(templateName + " template was chosen");
 
     return this;
   }

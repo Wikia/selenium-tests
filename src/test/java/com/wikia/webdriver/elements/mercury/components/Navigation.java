@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -62,14 +62,14 @@ public class Navigation extends WikiBasePageObject {
   }
 
   public JoinTodayPage clickOnSignInRegisterButton() {
-    PageObjectLogging.logInfo("Open Join Today page on mobile");
+    Log.info("Open Join Today page on mobile");
     wait.forElementClickable(signInRegisterButton).click();
 
     return new JoinTodayPage();
   }
 
   public Navigation clickBackButton() {
-    PageObjectLogging.logInfo("Go back to previous navigation level");
+    Log.info("Go back to previous navigation level");
     wait.forElementClickable(backButton);
     backButton.click();
 
@@ -77,7 +77,7 @@ public class Navigation extends WikiBasePageObject {
   }
 
   public Navigation clickExploreWikiHeader(Skin fromSkin) {
-    PageObjectLogging.logInfo("Click 'Explore Wiki' header");
+    Log.info("Click 'Explore Wiki' header");
     wait.forElementClickable(exploreWikiHeader);
 
     exploreWikiHeader.click();
@@ -93,7 +93,7 @@ public class Navigation extends WikiBasePageObject {
   }
 
   public Navigation closeSubMenu() {
-    PageObjectLogging.logInfo("Close sub-menu");
+    Log.info("Close sub-menu");
     wait.forElementClickable(backButton);
     backButton.click();
 
@@ -101,7 +101,7 @@ public class Navigation extends WikiBasePageObject {
   }
 
   public Navigation openSubMenu(int index) {
-    PageObjectLogging.logInfo("Open sub-menu no.: " + index);
+    Log.info("Open sub-menu no.: " + index);
     WebElement wikiMenuLink = subMenuLinks.get(index);
     wait.forElementClickable(wikiMenuLink);
     wikiMenuLink.click();
@@ -112,18 +112,18 @@ public class Navigation extends WikiBasePageObject {
   public Navigation openPageLink(int index) {
     String oldUrl = driver.getCurrentUrl();
 
-    PageObjectLogging.logInfo("Open link to page no.: " + index);
+    Log.info("Open link to page no.: " + index);
     WebElement pageLink = localNavPageLinks.get(index);
     wait.forElementClickable(pageLink);
     pageLink.click();
     waitForPageReload();
 
-    PageObjectLogging.logInfo("Navigation is closed");
+    Log.info("Navigation is closed");
     wait.forElementNotVisible(navigationComponent);
 
     Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
                           "Navigation to selected page failed");
-    PageObjectLogging.logInfo("Successfully navigated to selected page");
+    Log.info("Successfully navigated to selected page");
 
 
     return this;
@@ -163,7 +163,7 @@ public class Navigation extends WikiBasePageObject {
     try {
       return element.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }

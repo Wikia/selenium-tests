@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialo
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
@@ -39,7 +39,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
         outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
     wait.forElementClickable(generalSetting);
     generalSetting.click();
-    PageObjectLogging.log("selectSettings", setting.toString() + " setting is selected", true);
+    Log.log("selectSettings", setting.toString() + " setting is selected", true);
     driver.switchTo().defaultContent();
   }
 
@@ -47,7 +47,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     waitForDialogVisible();
     wait.forElementVisible(captionEditArea);
     captionEditArea.sendKeys(text);
-    PageObjectLogging.log("typeCaption", "Typed " + text + " in caption area", true);
+    Log.log("typeCaption", "Typed " + text + " in caption area", true);
     driver.switchTo().defaultContent();
   }
 
@@ -64,7 +64,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     WebElement customSizeInput = customSizeInput = customSizeInputs.get(side.ordinal());
     customSizeInput.clear();
     customSizeInput.sendKeys(Integer.toString(size));
-    PageObjectLogging.log("typeCustomSize", "Typed " + size + " in the field", true, driver);
+    Log.log("typeCustomSize", "Typed " + size + " in the field", true, driver);
     driver.switchTo().defaultContent();
   }
 
@@ -79,7 +79,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     WebElement button = positionButtons.get(align.ordinal()).findElement(labelElementBy);
     wait.forElementClickable(button);
     button.click();
-    PageObjectLogging.log("clickAlignment", align.toString() + " align is selected", true);
+    Log.log("clickAlignment", align.toString() + " align is selected", true);
     driver.switchTo().defaultContent();
   }
 }

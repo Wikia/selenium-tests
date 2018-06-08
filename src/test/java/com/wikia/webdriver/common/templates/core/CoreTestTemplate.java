@@ -11,7 +11,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.BrowserAndTestEventListener;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -22,7 +23,7 @@ import org.testng.annotations.Listeners;
 import java.io.File;
 import java.lang.reflect.Method;
 
-@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
+@Listeners({BrowserAndTestEventListener.class,
     com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public abstract class CoreTestTemplate {
 
@@ -42,7 +43,7 @@ public abstract class CoreTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void initTestContext(Method method) {
     TestContext.writeMethodName(method);
-    PageObjectLogging.start(method);
+    Log.startTest(method);
 
     Configuration.clearCustomTestProperties();
 
@@ -52,7 +53,7 @@ public abstract class CoreTestTemplate {
     String currentBrowser = Configuration.getBrowser();
 
     if (!browser.equals(currentBrowser)) {
-      PageObjectLogging.logWarning("Parameter override", "Browser parameter changed by annotation"
+      Log.warning("Parameter override", "Browser parameter changed by annotation"
           + ", old value: " + browser + ", new value: " + currentBrowser);
     }
 
@@ -144,7 +145,7 @@ public abstract class CoreTestTemplate {
 
     String driverName =
         DriverProvider.getActiveDriver().equals(driver) ? "primary window" : "secondary window";
-    PageObjectLogging.log("switchToWindow", "================ " + driverName + " ================",
+    Log.log("switchToWindow", "================ " + driverName + " ================",
         true);
   }
 

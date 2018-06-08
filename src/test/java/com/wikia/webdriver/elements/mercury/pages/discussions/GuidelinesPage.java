@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -97,7 +97,7 @@ public class GuidelinesPage extends BasePage {
       wait.forTextInElement(guidelinesText, text);
       isPresent = true;
     } catch(Exception e) {
-      PageObjectLogging.log("Guidelines should contains text: " + text, e, false);
+      Log.log("Guidelines should contains text: " + text, e, false);
     }
 
     return isPresent;

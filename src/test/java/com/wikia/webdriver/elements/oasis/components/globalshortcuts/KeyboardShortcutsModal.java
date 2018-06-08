@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.oasis.components.globalshortcuts;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -35,7 +35,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
     closeButton.click();
 
     wait.forElementNotVisible(keyboardShortcutsModalSelector);
-    PageObjectLogging.logInfo("Keyboard shortcuts modal was closed by close button");
+    Log.info("Keyboard shortcuts modal was closed by close button");
 
     return this;
   }
@@ -68,7 +68,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
     actions.sendKeys(".").perform();
 
     wait.forElementVisible(actionExplorerModalSelector);
-    PageObjectLogging.logInfo("Action Explorer modal was opened by . button");
+    Log.info("Action Explorer modal was opened by . button");
 
     return this;
   }
@@ -77,7 +77,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
     actions.sendKeys(Keys.ESCAPE).perform();
 
     wait.forElementNotVisible(keyboardShortcutsModalSelector);
-    PageObjectLogging.logInfo("Keyboard shortcuts modal was closed by ESC keyboard button");
+    Log.info("Keyboard shortcuts modal was closed by ESC keyboard button");
 
     return this;
   }
@@ -86,7 +86,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
     actions.sendKeys("?").perform();
 
     wait.forElementVisible(keyboardShortcutsModalSelector);
-    PageObjectLogging.logInfo("Keyboard shortcuts modal was opened by ? keyboard button");
+    Log.info("Keyboard shortcuts modal was opened by ? keyboard button");
 
     return this;
   }
@@ -96,7 +96,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(INSIGHTS_PAGE),
                          "You were not redirected to Insights page by gi keyboard shortcut");
-    PageObjectLogging.logInfo("You were redirected to Insights page by gi keyboard shortcut");
+    Log.info("You were redirected to Insights page by gi keyboard shortcut");
 
     return this;
   }
@@ -106,11 +106,11 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
 
     Assertion.assertTrue(globalNavigationSearchInput.equals(driver.switchTo().activeElement()),
                          "Global navigation search input is not focused by gs keyboard shortcut");
-    PageObjectLogging.logInfo("Global navigation search input was focused by gs keyboard shortcut");
+    Log.info("Global navigation search input was focused by gs keyboard shortcut");
 
     Assertion.assertTrue(globalNavigationSearchInput.getAttribute("value").isEmpty(),
                          "Global navigation search input is not empty");
-    PageObjectLogging.logInfo("Global navigation search input is empty");
+    Log.info("Global navigation search input is empty");
 
     return this;
   }

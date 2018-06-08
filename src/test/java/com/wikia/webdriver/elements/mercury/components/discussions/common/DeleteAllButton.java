@@ -1,8 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import mx4j.log.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -22,7 +21,7 @@ public class DeleteAllButton extends BasePageObject {
     try {
       return button.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logError("Delete All button not found", e);
+      Log.logError("Delete All button not found", e);
       return false;
     }
   }
@@ -31,7 +30,7 @@ public class DeleteAllButton extends BasePageObject {
     try {
       return rightRail.isEnabled() && wait.forElementNotVisible(button);
     } catch (TimeoutException e) {
-      PageObjectLogging.logError("Delete All button not found", e);
+      Log.logError("Delete All button not found", e);
       return false;
     }
   }

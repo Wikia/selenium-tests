@@ -18,7 +18,7 @@ public class SocialButtonsTests extends NewTestTemplate {
   private Credentials credentials = Configuration.getCredentials();
 
   /**
-   * This tests executes for 11 users with different languages. Log in, open random article, compare
+   * This tests executes for 11 users with different languages. LogData in, open random article, compare
    * present social buttons to expected social buttons
    */
   @Test(groups = {"SocialButtons", "SocialButtons_001"}, dataProvider = "SocialButtonsDataProvider")

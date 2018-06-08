@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -34,6 +34,6 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
   public void restorePage() {
     wait.forElementClickable(submitRestore);
     scrollAndClick(submitRestore);
-    PageObjectLogging.log("ArticleRestored", "Article restored", true);
+    Log.log("ArticleRestored", "Article restored", true);
   }
 }

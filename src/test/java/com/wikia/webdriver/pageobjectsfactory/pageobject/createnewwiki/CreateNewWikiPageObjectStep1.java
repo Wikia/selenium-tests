@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
@@ -61,48 +61,48 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     hover(wikiLanguageDropdown);
     langElementInDropdown.click();
 
-    PageObjectLogging
+    Log
             .log("selectLanguage", "selected " + langElementInDropdown.getAttribute("innerHTML").trim() + " language", true, driver);
 
   }
 
   public void typeInWikiName(String name) {
     wikiName.sendKeys(name);
-    PageObjectLogging.log("typeInWikiName ", "Typed wiki name" + name, true);
+    Log.log("typeInWikiName ", "Typed wiki name" + name, true);
   }
 
   public void typeInWikiDomain(String domain) {
     wikiDomain.clear();
     wikiDomain.sendKeys(domain);
-    PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
+    Log.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
   }
 
   public void verifyNextButtonEnabled() {
     wait.forElementVisible(submitButton);
-    PageObjectLogging.log("waitForNextButton", "Next button enabled", true, driver);
+    Log.log("waitForNextButton", "Next button enabled", true, driver);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
     wait.forTextInElement(wikiDomainErrorMessage, wikiName.toLowerCase());
-    PageObjectLogging.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true);
+    Log.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true);
   }
 
   public void verifyIncorrectWikiName() {
     wait.forTextInElement(wikiDomainErrorMessage,
                                              CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
-    PageObjectLogging.log("verifyIncorrectWikiName",
+    Log.log("verifyIncorrectWikiName",
                           "Verified wiki name violates naming policy", true);
   }
 
   public CreateNewWikiPageObjectStep2 submit() {
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
+    Log.log("submit", "Submit button clicked", true, driver);
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
   public RegisterPage clickNextToSignIn() {
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "button \"Next\" clicked", true, driver);
+    Log.log("submit", "button \"Next\" clicked", true, driver);
     return new DetachedRegisterPage();
   }
 }

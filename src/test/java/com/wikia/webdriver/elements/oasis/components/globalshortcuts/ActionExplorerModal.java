@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.globalshortcuts;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -59,7 +59,7 @@ public class ActionExplorerModal extends WikiBasePageObject {
     actions.sendKeys(".").perform();
 
     wait.forElementVisible(actionExplorerModalSelector);
-    PageObjectLogging.logInfo("Action Explorer modal was opened by . button");
+    Log.info("Action Explorer modal was opened by . button");
 
     return this;
   }
@@ -68,7 +68,7 @@ public class ActionExplorerModal extends WikiBasePageObject {
     actions.sendKeys(Keys.ESCAPE).perform();
 
     wait.forElementNotVisible(actionExplorerModalSelector);
-    PageObjectLogging.logInfo("Action explorer was closed by esc button");
+    Log.info("Action explorer was closed by esc button");
 
     return this;
   }
@@ -76,19 +76,19 @@ public class ActionExplorerModal extends WikiBasePageObject {
   public ActionExplorerModal searchFor(String searchQuery) {
     wait.forElementClickable(searchField);
     actions.sendKeys(searchQuery).perform();
-    PageObjectLogging.logInfo("Typed in search box: " + searchQuery);
+    Log.info("Typed in search box: " + searchQuery);
 
     return this;
   }
 
   public ActionExplorerModal selectKeyboardShortcutsFromSearchSuggestions() {
     wait.forElementClickable(searchSuggestions);
-    PageObjectLogging.logInfo("Select: " + searchSuggestions.getText());
+    Log.info("Select: " + searchSuggestions.getText());
 
     actions.sendKeys(Keys.ENTER).perform();
 
     wait.forElementVisible(keyboardShortcutsModalSelector);
-    PageObjectLogging.logInfo("Keyboard shortcuts modal was opened");
+    Log.info("Keyboard shortcuts modal was opened");
 
     return this;
   }
@@ -98,7 +98,7 @@ public class ActionExplorerModal extends WikiBasePageObject {
     wait.forElementClickable(searchModal);
 
     jsActions.scrollToElementInModal(specialAllPagesLink, autocompleteSuggestions);
-    PageObjectLogging.logInfo("Scrolled to all pages link");
+    Log.info("Scrolled to all pages link");
 
     return this;
   }
@@ -107,7 +107,7 @@ public class ActionExplorerModal extends WikiBasePageObject {
     wait.forElementClickable(specialAllPagesLink);
     specialAllPagesLink.click();
 
-    PageObjectLogging.logInfo("Special all pages was opened");
+    Log.info("Special all pages was opened");
 
     return this;
   }

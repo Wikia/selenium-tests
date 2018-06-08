@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtio
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
@@ -77,7 +77,7 @@ public class NavigationBar extends WikiBasePageObject {
         searchInput.sendKeys(Keys.ARROW_DOWN);
       }
       searchInput.sendKeys(Keys.ENTER);
-      PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
+      Log.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
                                                      + suggestionText + "and clicked enter", true);
       return new ArticlePageObject();
     } else {
@@ -89,11 +89,11 @@ public class NavigationBar extends WikiBasePageObject {
     wait.forElementVisible(searchInput);
     searchInput.clear();
     searchInput.sendKeys(query);
-    PageObjectLogging.log("typeQuery", "typed query: " + query, true);
+    Log.log("typeQuery", "typed query: " + query, true);
   }
 
   public IntraWikiSearchPageObject searchFor(String query) {
-    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+    Log.log("searchFor", "searching for query: " + query, true, driver);
     typeQuery(query);
     return clickSearchButton();
   }
@@ -101,7 +101,7 @@ public class NavigationBar extends WikiBasePageObject {
   public IntraWikiSearchPageObject clickSearchButton() {
     wait.forElementClickable(searchSubmit);
     searchSubmit.click();
-    PageObjectLogging.log("clickSearchButton", "clicked on search button", true);
+    Log.log("clickSearchButton", "clicked on search button", true);
     return new IntraWikiSearchPageObject(driver);
   }
 
@@ -111,7 +111,7 @@ public class NavigationBar extends WikiBasePageObject {
   public ArticlePageObject goSearchFor(String query) {
     searchInput.sendKeys(query);
     searchSubmit.click();
-    PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
+    Log.log("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject();
   }
 

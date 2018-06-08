@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
@@ -53,7 +53,7 @@ public class UserPostsPage extends PageWithPosts {
     try {
       moderation.click();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Moderation dropdown not found", e);
+      Log.info("Moderation dropdown not found", e);
     }
     return this;
   }
