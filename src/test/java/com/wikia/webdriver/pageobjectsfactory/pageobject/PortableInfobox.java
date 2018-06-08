@@ -210,8 +210,7 @@ public class PortableInfobox extends BasePageObject {
   }
 
   public PortableInfobox open(String articleTitle) {
-    getUrl(urlBuilder.getUrl() +
-           URLsContent.WIKI_DIR + articleTitle);
+    getUrl(urlBuilder.getUrlForWikiPage(articleTitle));
 
     return this;
   }
