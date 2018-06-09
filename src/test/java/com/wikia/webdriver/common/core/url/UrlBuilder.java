@@ -50,7 +50,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   public String getUrlForWikiPageWithWWW(String pageName) {
     if ("".equals(pageName))
       throw new WebDriverException("Page name is missing");
-    return getUrl(getWikiName(), true) + URLsContent.WIKI_DIR + pageName;
+    return getUrl(true) + URLsContent.WIKI_DIR + pageName;
   }
 
   public String getUrlForWikiPage(String pageName) {
@@ -72,7 +72,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String getUrl(boolean addWWW) {
-    return getUrl(wikiName, addWWW, envType);
+    return getUrl(language, addWWW, envType);
   }
 
   public String getUrl(String language, boolean addWWW, EnvType envType) {
