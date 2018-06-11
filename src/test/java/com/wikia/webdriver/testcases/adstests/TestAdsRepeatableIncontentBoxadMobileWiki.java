@@ -13,9 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-@Test(groups = "AdsIncontentBoxadAE3Mobile")
+@Test(groups = "AdsRepeatableIncontentBoxadMobile")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
+public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   private static final Page page = new Page("project43", "SyntheticTests/Slots/Repeatable");
 
