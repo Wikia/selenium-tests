@@ -176,7 +176,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public ArticlePageObject openArticleByPath(String articlePath) {
-    getUrl(String.format("%s%s", urlBuilder.getUrl(), articlePath));
+    getUrl(String.format("%s/%s", urlBuilder.getUrl(), articlePath));
     return this;
   }
 
