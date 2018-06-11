@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.oasis.pages.PrivacyPolicyPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage;
 
 import org.testng.annotations.Test;
 
@@ -29,11 +29,11 @@ public class TrackingOptInModalTests extends NewTestTemplate {
       dataProvider = "GDPRCountriesForTest"
   )
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
-    TrackingOptInModal.setGeoCookie(driver, continent, country);
+    TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
+    Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
@@ -42,11 +42,11 @@ public class TrackingOptInModalTests extends NewTestTemplate {
       dataProvider = "GDPRcountries"
   )
   public void testModalVisibilityForAnonAllCountries(String continent, String country, boolean shouldGetModal) {
-    TrackingOptInModal.setGeoCookie(driver, continent, country);
+    TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
+    Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
   @Execute(asUser = User.USER, trackingOptIn = false)
@@ -56,11 +56,11 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   )
   public void testModalVisibilityForLoggedInWhoNeverOptedIn(String continent, String country,
                                                             boolean shouldGetModal) {
-    TrackingOptInModal.setGeoCookie(driver, continent, country);
+    TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
+    Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
   @Execute(asUser = User.USER, trackingOptIn = false)
@@ -70,114 +70,114 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   )
   public void testModalVisibilityForLoggedInWhoNeverOptedInAllCountries(String continent, String country,
                                                             boolean shouldGetModal) {
-    TrackingOptInModal.setGeoCookie(driver, continent, country);
+    TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertEquals(new TrackingOptInModal().isVisible(), shouldGetModal);
+    Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = true)
   public void loggedInUserInEUShouldNotGetModalIfOptedIn() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
   public void anonUserInEUShouldNotGetModalIfOptedIn() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = false, trackingOptOut = true)
   public void loggedInUserInEUShouldNotGetModalIfOptedOut() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false, trackingOptOut = true)
   public void anonUserInEUShouldNotGetModalIfOptedOut() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = true)
   public void loggedInUserInEUGetsModalBackWhenCookieExpires() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     driver.manage().deleteAllCookies();
 
     new ArticlePage().open();
 
-    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+    Assertion.assertTrue(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
   public void anonUserInEUGetsModalBackWhenCookieExpires() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     driver.manage().deleteAllCookies();
 
     new ArticlePage().open();
 
-    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+    Assertion.assertTrue(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
   public void anonUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
     privacyPolicy.navigateToPrivacyPolicyPage();
     privacyPolicy.clickResetTrackingButton();
 
-    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+    Assertion.assertTrue(new TrackingOptInPage().isVisible());
   }
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = true)
   public void loggedInUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInModal().isVisible());
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
     privacyPolicy.navigateToPrivacyPolicyPage();
     privacyPolicy.clickResetTrackingButton();
 
-    Assertion.assertTrue(new TrackingOptInModal().isVisible());
+    Assertion.assertTrue(new TrackingOptInPage().isVisible());
   }
 }

@@ -969,4 +969,9 @@ public class AdsBaseObject extends WikiBasePageObject {
     wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
     return networkTrafficInterceptor.getEntryByUrlPattern(pattern).getRequest().getUrl();
   }
+
+  public boolean wasRequestForAdSend(NetworkTrafficInterceptor networkTrafficInterceptor) {
+    final String pattern = ".*doubleclick\\.net\\/gampad.*ads.*";
+    return networkTrafficInterceptor.getEntryByUrlPattern(pattern) != null;
+  }
 }

@@ -29,6 +29,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFeaturedVideoSound"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsF2"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingOptInRequestsMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
@@ -54,6 +55,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsRepeatableIncontentBoxadMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
