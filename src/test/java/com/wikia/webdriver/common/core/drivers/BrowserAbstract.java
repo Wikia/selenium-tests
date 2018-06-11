@@ -16,7 +16,7 @@ import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.common.logging.BrowserAndTestEventListener;
+import com.wikia.webdriver.common.testnglisteners.BrowserAndTestEventListener;
 
 public abstract class BrowserAbstract {
 

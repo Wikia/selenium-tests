@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.logging.BrowserAndTestEventListener;
+import com.wikia.webdriver.common.testnglisteners.BrowserAndTestEventListener;
 import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterClass;

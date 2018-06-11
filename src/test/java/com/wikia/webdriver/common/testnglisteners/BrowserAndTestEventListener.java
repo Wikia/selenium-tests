@@ -1,6 +1,4 @@
-package com.wikia.webdriver.common.logging;
-
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+package com.wikia.webdriver.common.testnglisteners;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
@@ -14,15 +12,12 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
+import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.common.logging.VelocityWrapper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import java.lang.reflect.Method;
-import java.util.*;
-
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -35,7 +30,11 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-public class BrowserAndTestEventListener extends AbstractWebDriverEventListener implements ITestListener {
+import java.lang.reflect.Method;
+import java.util.Date;
+
+public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
+    implements ITestListener {
 
   private By lastFindBy;
   private WikiaWebDriver driver;
@@ -55,7 +54,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
 
     String cookieDomain = String.format(".%s", Configuration.getEnvType().getWikiaDomain());
 
-    Date cookieDate =new Date(new DateTime().plusYears(10).getMillis());
+    Date cookieDate = new Date(new DateTime().plusYears(10).getMillis());
 
     if (!AlertHandler.isAlertPresent(driver)) {
       String command = "Url after navigation";
@@ -83,7 +82,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
         new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
       } catch (WebDriverException e) {
         Log
-                .info("Hack for disabling notifications", "Failed to execute js action");
+            .info("Hack for disabling notifications", "Failed to execute js action");
       }
       /**
        * All of tests should be executed as an user who opted in (agreed) on using ads tracking.
@@ -99,7 +98,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
           userOptedIn = false;
         }
 
-        if (method.isAnnotationPresent(Execute.class) && method.getAnnotation(Execute.class).trackingOptOut()) {
+        if (method.isAnnotationPresent(Execute.class) && method.getAnnotation(Execute.class)
+            .trackingOptOut()) {
           userOptedOut = true;
         }
 
@@ -110,7 +110,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
         } else if (userOptedOut) {
           driver.manage().addCookie(
               new Cookie("tracking-opt-in-status", "rejected", cookieDomain, "/",
-                  cookieDate));
+                         cookieDate));
         }
       }
 
@@ -118,7 +118,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
        * We want to disable sales pitch dialog for new potential contributors to avoid hiding other
        * UI elements. see https://wikia-inc.atlassian.net/browse/CE-3768
        */
-      if (TestContext.isFirstLoad() && "true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
+      if (TestContext.isFirstLoad() && "true"
+          .equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
         driver.manage().addCookie(
             new Cookie("cpBenefitsModalShown", "1", cookieDomain, "/", cookieDate));
       }
@@ -126,8 +127,10 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
                                              cookieDomain, "/", cookieDate));
-        Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s", XMLReader.getValue("mock.ads_token"), String.format(".%s", Configuration.getEnvType()
-            .getWikiaDomain())));
+        Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s",
+                               XMLReader.getValue("mock.ads_token"),
+                               String.format(".%s", Configuration.getEnvType()
+                                   .getWikiaDomain())));
       }
     }
 
@@ -147,7 +150,9 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
         // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject().loginAs(user);
       }
-      NetworkTrafficInterceptor networkTrafficInterceptor = DriverProvider.getActiveDriver().getProxy();
+      NetworkTrafficInterceptor
+          networkTrafficInterceptor =
+          DriverProvider.getActiveDriver().getProxy();
       if (networkTrafficInterceptor != null && Configuration.getForceHttps()) {
         networkTrafficInterceptor.startIntercepting();
       }
@@ -182,7 +187,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
 
   @Override
   public void onTestStart(ITestResult result) {
-    Log.logsResults.clear();
+    Log.clearLogStack();
     String testName = result.getName();
     String className = result.getTestClass().getName();
     System.out.println(className + " " + testName);
@@ -197,23 +202,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
   public void onTestFailure(ITestResult result) {
     driver = DriverProvider.getActiveDriver();
 
-    Log.imageCounter += 1;
     if ("true".equals(Configuration.getLogEnabled())) {
-      String exception = escapeHtml(result.getThrowable().toString() + "\n"
-                                    + ExceptionUtils.getStackTrace(result.getThrowable()));
-
       Log.logError("Test Failed", result.getThrowable());
-
-      String html = VelocityWrapper.fillErrorLogRow(Arrays.asList(LogLevel.ERROR), exception, Log.imageCounter);
-      try {
-        new Shooter().savePageScreenshot(Log.screenPath + Log.imageCounter, driver);
-        CommonUtils.appendTextToFile(Log.screenPath + Log.imageCounter + ".html", Log.getPageSource(driver));
-        CommonUtils.appendTextToFile(Log.logPath, html);
-      } catch (Exception e) {
-        VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(Arrays.asList(LogLevel.ERROR), exception);
-        Log.log("onException",
-            "driver has no ability to catch screenshot or html source - driver may died", false);
-      }
       Log.logJSError();
       Log.stop();
     }
@@ -221,7 +211,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
 
   @Override
   public void onTestSkipped(ITestResult result) {
-    if (!Log.testStarted) {
+    if (!Log.isTestStarted()) {
       Log.startTest(result.getMethod().getConstructorOrMethod().getMethod());
     }
     if (result.getMethod().getConstructorOrMethod().getMethod()
@@ -234,7 +224,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
       result.setThrowable(new SkipException("TEST SKIPPED"));
       onTestFailure(result);
     }
-    if (Log.testStarted) {
+    if (Log.isTestStarted()) {
       Log.stop();
     }
   }
@@ -270,6 +260,6 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener 
 
   @Override
   public void onFinish(ITestContext context) {
-    CommonUtils.appendTextToFile(Log.logPath, "</body></html>");
+    CommonUtils.appendTextToFile(Log.LOG_PATH, "</body></html>");
   }
 }
