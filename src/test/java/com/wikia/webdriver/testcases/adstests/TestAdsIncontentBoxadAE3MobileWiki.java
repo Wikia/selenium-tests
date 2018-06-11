@@ -23,12 +23,9 @@ public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
   private static final String LAST_HEADER_AD_INFO_PATTERN =
       "https?://.*wikia-services\\.com.*kv_pos=INCONTENT_BOXAD.*kv_rv=6.*ad_status=viewport-conflict.*";
   private static final String AE3_INSTANT_GLOBAL = "wgAdDriverAdEngine3Countries";
-  private static final String MOBILE_INCONTENT_INSTANT_GLOBAL = "wgAdDriverRepeatMobileIncontentCountries";
+  private static final String REPEATABLE_INCONTENT_INSTANT_GLOBAL = "wgAdDriverRepeatMobileIncontentCountries";
   private static final String INCONTENT_SELECTOR = "incontent_boxad_%s";
   private static final String ARTICLE_HEADER_SELECTOR = "Section_%s";
-
-  private static final boolean INCONTENT_ENABLED = true;
-  private static final boolean INCONTENT_DISABLED = false;
 
   private static final int HEADERS_WITH_AD_NUMBER = 5;
   private static final int LAST_HEADER_WITHOUT_AD_NUMBER = 6;
@@ -37,23 +34,23 @@ public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
   @Test()
   public void adDisplayedBeforeSections() {
     AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.getUrl(urlWithInstantGlobals(INCONTENT_ENABLED));
+    ads.getUrl(urlWithInstantGlobals(true));
     for (int i = 1; i <= HEADERS_WITH_AD_NUMBER ; i++){
       ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(i))));
 
       Assertion.assertTrue(isIncontenAdDisplayed(i, ads),
-                           "IcontentBoxad is not displayed before section");
+                           "IncontentBoxad is not displayed before section");
     }
   }
 
   @Test()
   public void adNotDisplayedIfSectionInThisSameViewPort() {
     AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.getUrl(urlWithInstantGlobals(INCONTENT_DISABLED));
+    ads.getUrl(urlWithInstantGlobals(false));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Double.toString(HEADER_WITHOUT_AD_NUMBER))));
 
     Assertion.assertFalse(isIncontenAdDisplayed(3, ads),
-                          "IcontentBoxad is displayed before section");
+                          "IncontentBoxad is displayed before section");
   }
 
   @Test()
@@ -61,7 +58,7 @@ public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
   public void incontentBoxadTracking() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.getUrl(urlWithInstantGlobals(INCONTENT_ENABLED));
+    ads.getUrl(urlWithInstantGlobals(true));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER))));
 
     ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AD_INFO_PATTERN);
@@ -69,26 +66,26 @@ public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
 
   @Test()
   @NetworkTrafficDump(useMITM = true)
-  public void incontentBoxadTrackingLastSection() {
+  public void incontentBoxadViewportConflictTracking() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.getUrl(urlWithInstantGlobals(INCONTENT_ENABLED));
+    ads.getUrl(urlWithInstantGlobals(true));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(LAST_HEADER_WITHOUT_AD_NUMBER))));
 
     Assertion.assertFalse(isIncontenAdDisplayed(LAST_HEADER_WITHOUT_AD_NUMBER, ads),
-                          "IcontentBoxad is displayed before section");
+                          "IncontentBoxad is displayed before section");
     ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, LAST_HEADER_AD_INFO_PATTERN);
   }
 
-  private boolean isIncontenAdDisplayed(int headerNumber, AdsBaseObject ads){
+  private boolean isIncontenAdDisplayed(int incontentIndex, AdsBaseObject ads){
     try {
       WebElement slot =
-          driver.findElement(By.id(String.format(INCONTENT_SELECTOR, Integer.toString(headerNumber))));
+          driver.findElement(By.id(String.format(INCONTENT_SELECTOR, Integer.toString(incontentIndex))));
       ads.waitForSlotExpanded(slot);
       return true;
     } catch (Exception ex){
       PageObjectLogging
-          .logInfo("IcontentBoxad is not displayed", ex);
+          .logInfo("IncontentBoxad is not displayed", ex);
       return false;
     }
   }
@@ -98,9 +95,11 @@ public class TestAdsIncontentBoxadAE3MobileWiki extends NewTestTemplate {
     String url = page.getUrl();
     String newUrl = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, AE3_INSTANT_GLOBAL);
     if(!enabled) {
-      return urlBuilder.globallyDisableGeoInstantGlobalOnPage(newUrl, MOBILE_INCONTENT_INSTANT_GLOBAL);
+      return urlBuilder.globallyDisableGeoInstantGlobalOnPage(newUrl,
+                                                              REPEATABLE_INCONTENT_INSTANT_GLOBAL);
     } else {
-      return urlBuilder.globallyEnableGeoInstantGlobalOnPage(newUrl, MOBILE_INCONTENT_INSTANT_GLOBAL);
+      return urlBuilder.globallyEnableGeoInstantGlobalOnPage(newUrl,
+                                                             REPEATABLE_INCONTENT_INSTANT_GLOBAL);
     }
   }
 }
