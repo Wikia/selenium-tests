@@ -21,7 +21,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   private static final String AD_INFO_PATTERN = "https?://.*wikia-services\\.com.*kv_pos=INCONTENT_BOXAD.*kv_rv=4.*";
   private static final String LAST_HEADER_AD_INFO_PATTERN =
-      "https?://.*wikia-services\\.com.*kv_pos=INCONTENT_BOXAD.*kv_rv=6.*ad_status=viewport-conflict.*";
+      "https?://.*wikia-services\\.com.*ad_status=viewport-conflict.*kv_pos=INCONTENT_BOXAD.*kv_rv=6.*";
   private static final String AE3_INSTANT_GLOBAL = "wgAdDriverAdEngine3Countries";
   private static final String REPEATABLE_INCONTENT_INSTANT_GLOBAL = "wgAdDriverRepeatMobileIncontentCountries";
   private static final String INCONTENT_SELECTOR = "incontent_boxad_%s";
@@ -70,10 +70,12 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.getUrl(urlWithInstantGlobals(true));
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER))));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(LAST_HEADER_WITHOUT_AD_NUMBER))));
 
     Assertion.assertFalse(isIncontenAdDisplayed(LAST_HEADER_WITHOUT_AD_NUMBER, ads),
                           "IncontentBoxad is displayed before section");
+
     ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, LAST_HEADER_AD_INFO_PATTERN);
   }
 
