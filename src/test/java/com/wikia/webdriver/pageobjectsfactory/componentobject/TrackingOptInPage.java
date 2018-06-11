@@ -7,36 +7,20 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.common.TrackingOptInModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.TimeoutException;
 import net.lightbody.bmp.core.har.HarEntry;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.Cookie;
 
 import java.time.Duration;
 import java.util.List;
 
-public class TrackingOptInModal extends BasePageObject {
+public class TrackingOptInPage extends BasePageObject {
 
-  @FindBy(css = "body > div:nth-child(5) > div > div")
-  WebElement modal;
-
-  @FindBy(css = "div._36mdTyonPU0bxbU70dDO4f")
-  WebElement acceptButton;
-
-  @FindBy(css = "div._3mGMvAUi8MtSBaB1BUvLtz")
-  WebElement rejectButton;
-
-  @FindBy(css = "div[data-tracking-opt-in-overlay]")
-  private WebElement optInModalOverlay;
-
-  private HarEntry entry;
-  private static final Duration WAITNG_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
+  private TrackingOptInModal modal = new TrackingOptInModal(this);
+  private static final Duration WAITING_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
   private static final String MODAL_INSTANT_GLOBAL = "InstantGlobals.wgEnableTrackingOptInModal=1";
   private static final String EU_CONTINENT = "EU";
-
 
   public static void setGeoCookie(WikiaWebDriver driver, String continent, String country) {
     Cookie geoCookie = driver.manage().getCookieNamed("Geo");
@@ -52,72 +36,41 @@ public class TrackingOptInModal extends BasePageObject {
   }
 
   public boolean isVisible() {
-    try {
-      wait.forElementVisible(optInModalOverlay);
-      PageObjectLogging.logInfo("Tracking modal visible");
-
-      return true;
-    } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Tracking modal not visible", e);
-
-      return false;
-    }
+    return modal.isVisible();
   }
 
   public void clickAcceptButton() {
-    try {
-      wait.forElementClickable(acceptButton);
-      acceptButton.click();
-    } catch (Exception e) {
-      PageObjectLogging.log("Accept button clicked", e, false);
-    }
+    modal.clickAcceptButton();
   }
 
   public void clickRejectButton() {
-    try {
-      wait.forElementClickable(rejectButton);
-      rejectButton.click();
-    } catch (Exception e) {
-      PageObjectLogging.log("Reject button clicked", e, false);
-    }
-  }
-
-  public boolean isModalDisplayed() {
-    boolean isVisible = false;
-    try {
-      wait.forElementVisible(modal);
-      isVisible = true;
-    } catch (Exception e) {
-      PageObjectLogging.log("Modal is visible", e, false);
-    }
-
-    return isVisible;
+    modal.clickRejectButton();
   }
 
   public void acceptOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlOptInModalDisplayedOasis(page));
-    clickAcceptButton();
+    modal.clickAcceptButton();
   }
 
   public void acceptOptInModal(WikiaWebDriver driver, String country, Page page,
                                String[] instantGlobals) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlWithInstantGlobals(instantGlobals, page));
-    clickAcceptButton();
+    modal.clickAcceptButton();
   }
 
   public void rejectOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlOptInModalDisplayedOasis(page));
-    clickRejectButton();
+    modal.clickRejectButton();
   }
 
   public void rejectOptInModal(WikiaWebDriver driver, String country, Page page,
                                String[] instantGlobals) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlWithInstantGlobals(instantGlobals, page));
-    clickRejectButton();
+    modal.clickRejectButton();
   }
 
   public void verifyTrackingRequestsNotSend(List<String> urlPatterns,
@@ -134,33 +87,33 @@ public class TrackingOptInModal extends BasePageObject {
     return urlBuilder.appendQueryStringToURL(page.getUrl(), MODAL_INSTANT_GLOBAL);
   }
 
-  public void isTrackingRequestsNotSend(List<String> elementsList,
-                                        NetworkTrafficInterceptor networkTrafficInterceptor) {
-    wait.forX(WAITNG_TIME_FOR_ALL_REQUESTS);
-    for (int i = 0; i < elementsList.size(); i++) {
+  private void isTrackingRequestsNotSend(List<String> elementsList,
+                                         NetworkTrafficInterceptor networkTrafficInterceptor) {
+    wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
+    for (String anElementsList : elementsList) {
       Assertion.assertFalse(
-          isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i)),
-          "Request to " + elementsList.get(i) + " services was found");
+              isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList),
+              "Request to " + anElementsList + " services was found"
+      );
     }
   }
 
-  public void isTrackingRequestSend(List<String> elementsList,
-                                    NetworkTrafficInterceptor networkTrafficInterceptor) {
-    for (int i = 0; i < elementsList.size(); i++) {
-      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i));
+  private void isTrackingRequestSend(List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor) {
+    for (String anElementsList : elementsList) {
+      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
     }
   }
 
   public boolean areResponsesByUrlPatternSuccessful(List<String> elementsList,
                                                     NetworkTrafficInterceptor networkTrafficInterceptor) {
     boolean result = true;
-    for (int i = 0; i < elementsList.size(); i++) {
+    for (String anElementsList : elementsList) {
       try {
-        wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, elementsList.get(i));
+        wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
       } catch (Exception e) {
         PageObjectLogging
-            .log("Did not get successful response with element: " + elementsList.get(i),
-                 e, false);
+                .log("Did not get successful response with element: " + anElementsList,
+                        e, false);
         result = false;
       }
     }
@@ -171,7 +124,7 @@ public class TrackingOptInModal extends BasePageObject {
       final NetworkTrafficInterceptor trafficInterceptor,
       final String pattern) {
     try {
-      entry = trafficInterceptor.getEntryByUrlPattern(pattern);
+      HarEntry entry = trafficInterceptor.getEntryByUrlPattern(pattern);
       return entry.getResponse().getStatus() < 400;
     } catch (NullPointerException ex) {
       PageObjectLogging

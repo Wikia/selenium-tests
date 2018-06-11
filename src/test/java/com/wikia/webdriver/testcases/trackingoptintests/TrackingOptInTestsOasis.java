@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInModal;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage;
 
 import org.testng.annotations.Test;
 
@@ -22,8 +22,8 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
       dataProvider = "GDPRcountries"
   )
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
-    TrackingOptInModal.setGeoCookie(driver, continent, country);
-    TrackingOptInModal modal = new TrackingOptInModal();
+    TrackingOptInPage.setGeoCookie(driver, continent, country);
+    TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(GTA_WIKI_HOME_PAGE));
 
     Assertion.assertEquals(modal.isVisible(), shouldGetModal);
@@ -36,8 +36,8 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   )
   public void testModalVisibilityForLoggedInWhoNeverOptedIn(String continent, String country,
                                                             boolean shouldGetModal) {
-    TrackingOptInModal.setGeoCookie(driver, continent, country);
-    TrackingOptInModal modal = new TrackingOptInModal();
+    TrackingOptInPage.setGeoCookie(driver, continent, country);
+    TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(GTA_WIKI_HOME_PAGE));
 
     Assertion.assertEquals(modal.isVisible(), shouldGetModal);
@@ -46,8 +46,8 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   @Test(groups = {"oasis-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = false)
   public void loggedInUserInEUShouldNotGetModalIfOptInAccepted() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
-    TrackingOptInModal modal = new TrackingOptInModal();
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(GTA_WIKI_HOME_PAGE));
 
     modal.clickAcceptButton();
@@ -59,8 +59,8 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   @Test(groups = {"oasis-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = false)
   public void loggedInUserInEUShouldNotGetModalIfOptInRejected() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
-    TrackingOptInModal modal = new TrackingOptInModal();
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(GTA_WIKI_HOME_PAGE));
 
     modal.clickRejectButton();
@@ -72,8 +72,8 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   @Test(groups = {"oasis-tracking-opt-in"})
   @Execute(trackingOptIn = false)
   public void anonUserInEUShouldNotGetModalIfOptInAccepted() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
-    TrackingOptInModal modal = new TrackingOptInModal();
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(GTA_WIKI_HOME_PAGE));
 
     modal.clickAcceptButton();
@@ -85,8 +85,8 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   @Test(groups = {"oasis-tracking-opt-in"})
   @Execute(trackingOptIn = false)
   public void anonUserInEUShouldNotGetModalIfOptInRejected() {
-    TrackingOptInModal.setGeoCookie(driver, "EU", "DE");
-    TrackingOptInModal modal = new TrackingOptInModal();
+    TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
+    TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(GTA_WIKI_HOME_PAGE));
 
     modal.clickRejectButton();
