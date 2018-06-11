@@ -32,6 +32,10 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
           result.setThrowable((Throwable) failure);
         }
       }
+    }else {
+      if(result.getStatus() == ITestResult.FAILURE){
+        Log.logError("TEST CONFIGURATION FAILED", result.getThrowable());
+      }
     }
   }
 
