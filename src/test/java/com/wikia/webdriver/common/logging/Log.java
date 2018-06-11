@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class Log {
+
   private static final String POLISH_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss ZZ";
   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static final String REPORT_PATH = "." + File.separator + "logs" + File.separator;
@@ -301,11 +302,8 @@ public class Log {
     String date = DateTimeFormat.forPattern(Log.DATE_FORMAT).print(DateTime.now(DateTimeZone.UTC));
     String
         polishDate =
-        DateTimeFormat.forPattern(Log.POLISH_DATE_FORMAT).print(DateTime.now().withZone(DateTimeZone
-                                                                                            .forTimeZone(
-                                                                                                TimeZone
-                                                                                                    .getTimeZone(
-                                                                                                        "Europe/Warsaw"))));
+        DateTimeFormat.forPattern(Log.POLISH_DATE_FORMAT).print(DateTime.now().withZone(
+            DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
     String testingEnvironmentUrl = UrlBuilder.createUrlBuilder().getUrl();
