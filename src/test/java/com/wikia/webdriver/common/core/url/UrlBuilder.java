@@ -48,8 +48,9 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String getUrlForWikiPageWithWWW(String pageName) {
-    if ("".equals(pageName))
+    if ("".equals(pageName)) {
       throw new WebDriverException("Page name is missing");
+    }
     return getUrl(true) + URLsContent.WIKI_DIR + pageName;
   }
 
