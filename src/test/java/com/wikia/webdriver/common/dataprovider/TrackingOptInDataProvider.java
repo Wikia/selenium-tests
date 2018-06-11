@@ -28,9 +28,9 @@ public class TrackingOptInDataProvider {
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
   private static final String ADS_RUBBICON_FASTLANE_PATTERN =
       "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
-  private static final String ADS_GOOGLE_ANALYTICS_REJECTED_PATERN =
-      "https?://.*google-analytics\\.com/collect.*aip=1.*";
-  private static final String ADS_GOOGLE_ANALYTICS_PATERN =
+  public static final String ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN =
+      "https?://.*google-analytics\\.com(/r)?/collect.*aip=1.*";
+  private static final String ADS_GOOGLE_ANALYTICS_PATTERN =
       "https?://.*google-analytics\\.com/collect.*";
   private static final String ADS_TLB_NPA_FIRST_PARAMETER_PATTERN =
       "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
@@ -361,7 +361,7 @@ public class TrackingOptInDataProvider {
     return new Object[][]{
         {
             Arrays.asList(
-                ADS_GOOGLE_ANALYTICS_REJECTED_PATERN
+                    ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN
             )
         }
     };
@@ -399,9 +399,24 @@ public class TrackingOptInDataProvider {
                 ADS_COMSCORE_PATTERN,
                 ADS_QUANTCAST_PATTERN,
                 ADS_KRUX_PATTERN,
-                ADS_GOOGLE_ANALYTICS_PATERN
+                    ADS_GOOGLE_ANALYTICS_PATTERN
             )
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] f2TrackingURLsForOptIn() {
+    return new Object[][]{
+            {ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN, false},
+            {ADS_GOOGLE_ANALYTICS_PATTERN, true}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] f2TrackingURLsForOptOut() {
+    return new Object[][]{
+            {ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN, true},
     };
   }
 }
