@@ -409,7 +409,10 @@ public class TrackingOptInDataProvider {
   public static Object[][] f2TrackingURLsForOptIn() {
     return new Object[][]{
             {ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN, false},
-            {ADS_GOOGLE_ANALYTICS_PATTERN, true}
+            {ADS_GOOGLE_ANALYTICS_PATTERN, true},
+            {ADS_QUANTCAST_PATTERN, true},
+            {ADS_KRUX_PATTERN, true},
+            {ADS_COMSCORE_PATTERN, true}
     };
   }
 
@@ -417,6 +420,9 @@ public class TrackingOptInDataProvider {
   public static Object[][] f2TrackingURLsForOptOut() {
     return new Object[][]{
             {ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN, true},
+            {ADS_QUANTCAST_PATTERN, false},
+            {ADS_KRUX_PATTERN, false},
+            {ADS_COMSCORE_PATTERN, false}
     };
   }
 }
