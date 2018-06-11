@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.exceptions.TestFailedException;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;
@@ -12,7 +14,7 @@ public class Sidebar extends WikiBasePageObject {
   @FindBy(css = ".infobox-builder-sidebar-header .infobox-builder-sidebar-header-icon-delete")
   private WebElement deleteButton;
 
-  @FindBy(css = ".infobox-builder-sidebar-padding .check-box-input")
+  @FindBy(css = ".check-box-input")
   private WebElement sidebarCheckbox;
 
   @FindBy(css = ".infobox-builder-sidebar-padding .text-field-input")
@@ -28,7 +30,7 @@ public class Sidebar extends WikiBasePageObject {
   private WebElement goToSourceButton;
 
   @FindBy(css = ".pi-header")
-  private WebElement infoboxHeader;
+  private List<WebElement> infoboxHeader;
 
   @FindBy(css = ".infobox-builder-button")
   private List<WebElement> componentsButtons;
@@ -112,7 +114,13 @@ public class Sidebar extends WikiBasePageObject {
     wait.forElementClickable(sidebarCheckbox);
     sidebarCheckbox.click();
 
-    String chevronContent = getPseudoElementValue(infoboxHeader, ":after", "content");
+    String chevronContent = "";
+
+    if(infoboxHeader.isEmpty()){
+      PageObjectLogging.logError("No chevron", new RuntimeException("ERROR"));
+    }else {
+      chevronContent = getPseudoElementValue(infoboxHeader.get(0), ":after", "content");
+    }
 
     if (sidebarCheckbox.isSelected()) {
       Assertion.assertFalse(chevronContent.isEmpty());
