@@ -136,7 +136,7 @@ public class Log {
     if (ifLowLevel) {
       logTypeList.add(LogLevel.DEBUG);
     }
-    VelocityWrapper.fillLogRow(logTypeList, command, escapedDescription);
+    VelocityWrapper.fillLogRow(logTypeList, command, description);
     logJSError();
   }
 
