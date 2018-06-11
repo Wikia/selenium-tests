@@ -10,7 +10,7 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget='spotify']")
   private List<WebElement> widgetIFrameList;
-  @FindBy(css = "#container")
+  @FindBy(css = "#main")
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "spotify";
