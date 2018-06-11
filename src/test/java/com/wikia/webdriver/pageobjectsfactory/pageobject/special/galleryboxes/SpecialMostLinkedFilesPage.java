@@ -13,7 +13,7 @@ public final class SpecialMostLinkedFilesPage extends WikiBasePageObject {
   private final GalleryGrid galleryGrid = new GalleryGrid();
 
   public SpecialMostLinkedFilesPage open() {
-    getUrl(urlBuilder.getUrlForPath(SPECIAL_MOST_LINKED_FILES_PATH));
+    getUrl(urlBuilder.getUrlForWikiPage(SPECIAL_MOST_LINKED_FILES_PATH));
     PageObjectLogging.log("Special Most Linked Files Page",
         SPECIAL_MOST_LINKED_FILES_PATH + " opened", true);
 
