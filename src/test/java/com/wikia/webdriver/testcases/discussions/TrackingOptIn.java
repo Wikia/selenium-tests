@@ -127,14 +127,4 @@ public class TrackingOptIn extends NewTestTemplate {
 
         return trackingModal;
     }
-
-    private TrackingOptInPage setGeoCookieAndNavigate(String continent, String country) {
-        TrackingOptInPage trackingModal = new TrackingOptInPage();
-        trackingModal.setGeoCookie(driver, continent, country);
-        new PostsListPage().open();
-        trackingModal.logTrackingCookieValue();
-
-        return trackingModal;
-    }
-
 }

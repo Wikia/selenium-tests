@@ -18,7 +18,7 @@ import java.util.List;
 public class TrackingOptInPage extends BasePageObject {
 
   private TrackingOptInModal modal = new TrackingOptInModal(this);
-  private static final Duration WAITiNG_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
+  private static final Duration WAITING_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
   private static final String MODAL_INSTANT_GLOBAL = "InstantGlobals.wgEnableTrackingOptInModal=1";
   private static final String EU_CONTINENT = "EU";
 
@@ -89,7 +89,7 @@ public class TrackingOptInPage extends BasePageObject {
 
   private void isTrackingRequestsNotSend(List<String> elementsList,
                                          NetworkTrafficInterceptor networkTrafficInterceptor) {
-    wait.forX(WAITiNG_TIME_FOR_ALL_REQUESTS);
+    wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     for (String anElementsList : elementsList) {
       Assertion.assertFalse(
               isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList),
