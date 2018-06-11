@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -23,7 +23,7 @@ public class MessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
     removeReasonField.sendKeys(reason);
     removeConfirmButton.click();
     wait.forElementNotPresent(By.cssSelector(modalWrapper));
-    PageObjectLogging.log("closeRemoveThread", "thread removed with reason " + reason, true);
+    Log.log("closeRemoveThread", "thread removed with reason " + reason, true);
 
     return new MessageWall();
   }

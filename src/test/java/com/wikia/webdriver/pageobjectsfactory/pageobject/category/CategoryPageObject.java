@@ -2,12 +2,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.category;
 
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class CategoryPageObject extends WikiBasePageObject {
@@ -18,7 +18,7 @@ public class CategoryPageObject extends WikiBasePageObject {
   public String getCategoryPageTitle() {
     wait.forElementVisible(this.articleTitle);
     String title = articleTitle.getText();
-    PageObjectLogging.log("getCategoryname", "the name of the category is: " + title, true);
+    Log.log("getCategoryname", "the name of the category is: " + title, true);
 
     return title;
   }

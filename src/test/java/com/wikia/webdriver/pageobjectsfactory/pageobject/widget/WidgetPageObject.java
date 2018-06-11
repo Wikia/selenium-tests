@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.api.ArticleContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;
@@ -79,7 +79,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
 
   public boolean areAllValidSwappedForIFrames() {
     boolean result = getWidgetWrapperList().size() == getWidgetIFrameList().size();
-    PageObjectLogging.log(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG, result);
+    Log.log(getTagName(), MercuryMessages.ALL_VALID_WIDGETS_ARE_SWAPPED_MSG, result);
     return result;
   }
 
@@ -92,12 +92,12 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
     for (int i = 0; i < tags.length; i++) {
       if (!isWidgetVisible(i)) {
         result = false;
-        PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
+        Log.log(getTagName() + " #" + i, MercuryMessages.INVISIBLE_MSG, result);
         return result;
       }
-      PageObjectLogging.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
+      Log.log(getTagName() + " #" + i, MercuryMessages.VISIBLE_MSG, result);
     }
-    PageObjectLogging.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
+    Log.log("all " + getTagName() + " widgets", MercuryMessages.VISIBLE_MSG, result);
     return result;
   }
 
@@ -110,7 +110,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
   }
 
   protected void logVisibility(boolean result) {
-    PageObjectLogging
+    Log
         .log(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
              result);
   }

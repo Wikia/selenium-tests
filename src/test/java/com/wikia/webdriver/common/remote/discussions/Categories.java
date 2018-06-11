@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.remote.discussions;
 
 import com.jayway.jsonpath.*;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.RemoteException;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
@@ -30,7 +30,7 @@ public class Categories {
     try {
       return getCategories(remoteOperation.execute(buildUrl(context)), context);
     } catch(RemoteException e) {
-      PageObjectLogging.logError("error: ", e);
+      Log.logError("error: ", e);
       throw new CategoriesNotFetched("Could not fetch categories.", e);
     }
   }

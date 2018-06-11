@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.rte;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 
 import org.openqa.selenium.*;
@@ -53,7 +53,7 @@ public class CategoryModule {
     actions.moveToElement(categorySelectInput).perform();
 
     categorySelectInput.sendKeys(categoryName);
-    PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
+    Log.log("typeCategoryName", categoryName + " typed", true);
   }
 
   /**
@@ -70,7 +70,7 @@ public class CategoryModule {
     suggestion.click();
     webDriverWait.until(ExpectedConditions.invisibilityOf(suggestion));
 
-    PageObjectLogging.log("selectCategorySuggestions", "category selected from suggestions", true);
+    Log.log("selectCategorySuggestions", "category selected from suggestions", true);
 
     return categoryName;
   }
@@ -112,7 +112,7 @@ public class CategoryModule {
   public void removeExistingCategory(String categoryName) {
     clickOnIconForCategory(categoryName, removeCategoryIcon);
 
-    PageObjectLogging.log("removeCategory", "remove category button clicked on category "
+    Log.log("removeCategory", "remove category button clicked on category "
                                             + categoryName, true);
 
     // due to animation on category removal, we need to wait here to avoid false negatives

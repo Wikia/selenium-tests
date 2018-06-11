@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import org.openqa.selenium.By;
@@ -59,7 +59,7 @@ public class FilePage extends WikiBasePageObject {
     WebElement currentTab = tabList.get(tab);
     wait.forElementVisible(currentTab);
     scrollAndClick(currentTab);
-    PageObjectLogging.log("clickTab", tab + " selected", true);
+    Log.log("clickTab", tab + " selected", true);
   }
 
   public void selectHistoryTab() {
@@ -69,7 +69,7 @@ public class FilePage extends WikiBasePageObject {
   public void verifySelectedTab(String tabName) {
     wait.forElementVisible(tabBody);
     Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
-    PageObjectLogging.log("verified selected tab", tabName + " selected", true);
+    Log.log("verified selected tab", tabName + " selected", true);
   }
 
   public void refreshAndVerifyTabs(int tab) {
@@ -92,24 +92,24 @@ public class FilePage extends WikiBasePageObject {
 
   public void verifyEmbeddedVideoIsPresent() {
     wait.forElementVisible(fileEmbedded);
-    PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
+    Log.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
         true);
   }
 
   public boolean isNoFileTextBoxVisible(){
     try{
       wait.forElementVisible(noFileTextBox);
-      PageObjectLogging.log("isNoFileTextBoxVisible", "No-file textbox is visible ", true);
+      Log.log("isNoFileTextBoxVisible", "No-file textbox is visible ", true);
       return true;
     } catch (TimeoutException e){
-      PageObjectLogging.log("isNoFileTextBoxVisible", e, false);
+      Log.log("isNoFileTextBoxVisible", e, false);
       return false;
     }
   }
 
   public void verifyEmptyFilePage() {
     Assertion.assertEquals(isNoFileTextBoxVisible(), true);
-    PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
+    Log.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
         true);
   }
 
@@ -148,17 +148,17 @@ public class FilePage extends WikiBasePageObject {
     scrollAndClick(reuploadLink);
 
     uploadFileURL.sendKeys(url);
-    PageObjectLogging.log("replaceVideo", url + " typed into url field", true);
+    Log.log("replaceVideo", url + " typed into url field", true);
 
     wait.forElementVisible(addButton);
     scrollAndClick(addButton);
-    PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
+    Log.log("replaceVideo", "add url button clicked", true, driver);
   }
 
   public DeletePageObject deleteVersion(int num) {
     scrollAndClick(historyDeleteLinks.get(num - 1));
 
-    PageObjectLogging.log("deletePage", "delete page opened", true);
+    Log.log("deletePage", "delete page opened", true);
 
     return new DeletePageObject(driver);
   }

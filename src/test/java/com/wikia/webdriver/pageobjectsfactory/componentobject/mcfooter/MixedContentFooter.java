@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FandomPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -45,7 +45,7 @@ public class MixedContentFooter extends WikiBasePageObject {
 
   public MixedContentFooter openWikiMainPage() {
     getUrl(getWikiUrl() + URLsContent.WIKI_DIR);
-    PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+    Log.log("WikiPageOpened", "Wiki page is opened", true);
 
     return this;
   }
@@ -55,7 +55,7 @@ public class MixedContentFooter extends WikiBasePageObject {
     jsActions.scrollToElement(mcFooter);
     wait.forElementVisible(mcFooterHeader);
 
-    PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
+    Log.log("scrollToFooter", "Scroll to the footer of the page", true);
 
     return this;
   }
@@ -63,7 +63,7 @@ public class MixedContentFooter extends WikiBasePageObject {
   public boolean isMCFooterPresent() {
     //  MCF is lazy loaded when user scrolls to it, so to check if MCF is present we can check if its header is visible
     wait.forElementVisible(mcFooterHeader);
-    PageObjectLogging.log("verifyMcfooterPresent", "MCFooter appeared", true);
+    Log.log("verifyMcfooterPresent", "MCFooter appeared", true);
     return mcFooter.isDisplayed();
   }
 

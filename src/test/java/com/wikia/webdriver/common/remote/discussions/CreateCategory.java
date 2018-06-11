@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.RemoteException;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
@@ -38,7 +38,7 @@ public class CreateCategory {
     try {
       response = remoteOperation.execute(buildUrl(context), jsonObject);
     } catch(RemoteException e) {
-      PageObjectLogging.logError("error: ", e);
+      Log.logError("error: ", e);
       throw new CategoryNotCreated("Could not create a new category.", e);
     }
 

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpHeaders;
@@ -34,7 +34,7 @@ public class PutRemoteOperation extends BaseRemoteOperation implements RemoteOpe
       }
       result = super.execute(put);
     } catch (UnsupportedEncodingException x) {
-      PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);
+      Log.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);
     }
 
     return result;

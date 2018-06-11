@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.net.ssl.SSLException;
 
+import com.wikia.webdriver.common.logging.Log;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +30,6 @@ import org.json.JSONObject;
 
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.remote.RemoteException;
 import com.wikia.webdriver.common.remote.Utils;
 
@@ -55,7 +55,7 @@ class BaseRemoteOperation {
         .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build()) {
       result = makeRequest(client, request);
     } catch (IOException x) {
-      PageObjectLogging.log("Error while creating/closing http client.",
+      Log.log("Error while creating/closing http client.",
           ExceptionUtils.getStackTrace(x), false);
     }
 
@@ -70,9 +70,9 @@ class BaseRemoteOperation {
       request.setEntity(new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON));
       result = execute(request);
     } catch (RemoteException ex) {
-      PageObjectLogging.log("Request: ", getRequestString(request) + "\n" + request.getEntity(),
+      Log.log("Request: ", getRequestString(request) + "\n" + request.getEntity(),
           false);
-      PageObjectLogging.log("Error while creating http post entity.",
+      Log.log("Error while creating http post entity.",
           ExceptionUtils.getStackTrace(ex), false);
     }
 
@@ -97,9 +97,9 @@ class BaseRemoteOperation {
     try (CloseableHttpResponse response = client.execute(request)) {
       result = handleResponse(request, response);
     } catch (UnsupportedEncodingException | SSLException x) {
-      PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x),
+      Log.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x),
           false);
-      PageObjectLogging.log("Request: ", getRequestString(request), false);
+      Log.log("Request: ", getRequestString(request), false);
     }
 
     return result;
@@ -114,7 +114,7 @@ class BaseRemoteOperation {
       result = EntityUtils.toString(entity);
 
       if (response.getStatusLine().getStatusCode() >= 400) {
-        PageObjectLogging.logInfo("Error response:", result);
+        Log.info("Error response:", result);
         throw new RemoteException(
             "Error while invoking request. " + " Method: " + requestBase.getMethod() + " Url: "
                 + requestBase.getURI().toString() + " Response: " + result);

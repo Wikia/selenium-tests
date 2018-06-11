@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 import org.openqa.selenium.By;
@@ -45,17 +45,17 @@ public class AdsJWPlayerObject {
   }
 
   public void waitForAdPlaying() {
-    PageObjectLogging.log("Info", "Waiting for video ad playing", true);
+    Log.log("Info", "Waiting for video ad playing", true);
     wait.forElementVisible(AD_SELECTOR, 15);
   }
 
   public void waitForMoviePlaying() {
-    PageObjectLogging.log("Info", "Waiting for video movie playing", true);
+    Log.log("Info", "Waiting for video movie playing", true);
     wait.forElementVisible(MOVIE_SELECTOR, 15);
   }
 
   public void waitForAdFinish(Duration videoDuration) {
-    PageObjectLogging.log("Info", "Waiting for ad finish", true);
+    Log.log("Info", "Waiting for ad finish", true);
     wait.forElementNotVisible(AD_SELECTOR, videoDuration);
   }
 
@@ -70,28 +70,28 @@ public class AdsJWPlayerObject {
 
   public void verifyPreroll() {
     waitForAdPlaying();
-    PageObjectLogging.log("Info", "Waiting for blue preroll", true);
+    Log.log("Info", "Waiting for blue preroll", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_PREROLL);
     waitForAdFinish(Duration.ofSeconds(30));
   }
 
   public void verifyMidroll() {
     waitForAdPlaying();
-    PageObjectLogging.log("Info", "Waiting for grey midroll", true);
+    Log.log("Info", "Waiting for grey midroll", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_MIDROLL);
     waitForAdFinish(Duration.ofSeconds(15));
   }
 
   public void verifyPostroll() {
     waitForAdPlaying();
-    PageObjectLogging.log("Info", "Waiting for pink postroll", true);
+    Log.log("Info", "Waiting for pink postroll", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_POSTROLL);
     waitForAdFinish(Duration.ofSeconds(15));
   }
 
   public void verifyFeaturedVideo() {
     waitForMoviePlaying();
-    PageObjectLogging.log("Info", "Waiting for green movie", true);
+    Log.log("Info", "Waiting for green movie", true);
     verifyFeaturedVideoElementColor(PLAYER_SELECTOR, COLOR_VIDEO);
   }
 
@@ -120,7 +120,7 @@ public class AdsJWPlayerObject {
     try {
       Thread.sleep(duration.toMillis());
     } catch (InterruptedException e) {
-      PageObjectLogging.log("Error", e.getMessage(), false);
+      Log.log("Error", e.getMessage(), false);
     }
   }
 

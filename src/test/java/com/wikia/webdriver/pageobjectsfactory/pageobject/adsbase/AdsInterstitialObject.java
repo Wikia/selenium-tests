@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -45,7 +45,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
       wait.forElementVisible(interstitialAd);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Hight Impact Interstitial ad is not Displayed", ex, true);
+      Log.log("Hight Impact Interstitial ad is not Displayed", ex, true);
       return false;
     }
   }
@@ -84,9 +84,9 @@ public class AdsInterstitialObject extends AdsBaseObject {
     boolean isMercury = false;
     try {
       isMercury = interstitialCloseButtonMercury.isDisplayed();
-      PageObjectLogging.log("Interstitial Mercury", "Yes", true);
+      Log.log("Interstitial Mercury", "Yes", true);
     } catch (NoSuchElementException e) {
-      PageObjectLogging.log("Interstitial Mercury", "No", true);
+      Log.log("Interstitial Mercury", "No", true);
     }
 
 
@@ -94,7 +94,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
       String closeButtonText = interstitialCloseButtonMercury.getText();
       if (closeButtonText.length() > 0) {
         Integer waitTillCloseButtonAppears = Integer.parseInt(closeButtonText);
-        PageObjectLogging.log("Wait time for close button", String.valueOf(waitTillCloseButtonAppears), true);
+        Log.log("Wait time for close button", String.valueOf(waitTillCloseButtonAppears), true);
         Thread.sleep((waitTillCloseButtonAppears+WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
       }
     }

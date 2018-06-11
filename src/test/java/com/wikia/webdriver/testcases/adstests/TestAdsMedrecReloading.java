@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.By;
@@ -58,7 +58,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
       scrollAndWait(Duration.ofSeconds(1));
 
       if (isModuleVisible(ads, moduleSelector)) {
-        PageObjectLogging.log("Status", String.format("Module with %s visible", moduleSelector.toString()), true);
+        Log.log("Status", String.format("Module with %s visible", moduleSelector.toString()), true);
         return;
       }
     }
@@ -77,18 +77,18 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   private void scrollAndWait(Duration duration) {
     JavascriptActions jsActions = new JavascriptActions(driver);
 
-    PageObjectLogging.log("User action", String.format("Scroll %d", 200), true);
+    Log.log("User action", String.format("Scroll %d", 200), true);
     jsActions.scrollBy(0, 200);
 
     waitSomeTime(duration);
 
-    PageObjectLogging.log("User action", String.format("Scroll %d", -200), true);
+    Log.log("User action", String.format("Scroll %d", -200), true);
     jsActions.scrollBy(0, -200);
   }
 
   private void waitSomeTime(Duration reloadDelay) {
     try {
-      PageObjectLogging.log("Sleep", String.format("Wait for %d ms", reloadDelay.toMillis()), true);
+      Log.log("Sleep", String.format("Wait for %d ms", reloadDelay.toMillis()), true);
       Thread.sleep(reloadDelay.toMillis());
     } catch (InterruptedException ignored) {}
   }

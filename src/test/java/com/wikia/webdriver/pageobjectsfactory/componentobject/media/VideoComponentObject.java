@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.media;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -37,29 +37,29 @@ public class VideoComponentObject extends WikiBasePageObject {
   public void verifyVideoEmbedWidth() {
     Assertion.assertEquals(videoEmbed.findElement(By.tagName("div")).getCssValue("width"),
                            videoWidth + "px");
-    PageObjectLogging.log("verifyVideoEmbedWidth", "Width: " + videoWidth, true);
+    Log.log("verifyVideoEmbedWidth", "Width: " + videoWidth, true);
   }
 
   public void verifyVideoIframeWidth() {
     Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"),
                            videoWidth.toString());
-    PageObjectLogging.log("verifyVideoIframeWidth", "Width: " + videoWidth, true);
+    Log.log("verifyVideoIframeWidth", "Width: " + videoWidth, true);
   }
 
   public void verifyFlashVideoObjectVisible() {
     wait.forElementVisible(videoEmbed.findElement(By.cssSelector("object")));
-    PageObjectLogging.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
+    Log.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
   }
 
   public void verifyVideoIframeVisible() {
     wait.forElementVisible(videoEmbed.findElement(By.tagName("iframe")));
-    PageObjectLogging.log("verifyVideoIframeVisible", "Video iframe is visible", true);
+    Log.log("verifyVideoIframeVisible", "Video iframe is visible", true);
   }
 
   public void verifyVideoIgnEmbed() {
     String iframeSrc = "https://widgets.ign.com/video/embed/content.html?url=";
     Assertion.assertStringContains(getVideoPlayerIframe().getAttribute("src"), iframeSrc);
-    PageObjectLogging.log("verifyVideoIgnEmbed", "IGN video is embedded", true);
+    Log.log("verifyVideoIgnEmbed", "IGN video is embedded", true);
   }
 
   public void verifyVideoAnyclipEmbed() {
@@ -71,11 +71,11 @@ public class VideoComponentObject extends WikiBasePageObject {
     wait.forElementVisible(object);
     Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id")
     );
-    PageObjectLogging.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
+    Log.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
   }
 
   public void verifyVideoAutoplay(String providerName, boolean status) {
-    PageObjectLogging.log("verifyVideoPlay", "Provider: " + providerName, true);
+    Log.log("verifyVideoPlay", "Provider: " + providerName, true);
 
     String autoplayStr = "";
     String embedCode = "";

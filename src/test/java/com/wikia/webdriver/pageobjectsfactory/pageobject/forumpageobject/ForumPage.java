@@ -2,11 +2,11 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class ForumPage extends WikiBasePageObject {
@@ -27,19 +27,19 @@ public class ForumPage extends WikiBasePageObject {
   private void openFaqLightBox() {
     wait.forElementVisible(faqButton);
     scrollAndClick(faqButton);
-    PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
+    Log.log("openFaqLightBox", "faq lightbox opened", true);
   }
 
   private void closeFaqLightBox() {
     waitForElementNotVisibleByElement(faqModalLoadingState);
     wait.forElementVisible(closeFaqLightBoxButton);
     closeFaqLightBoxButton.click();
-    PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
+    Log.log("closeFaqLightBox", "faq lightbox closed", true);
   }
 
   private void checkFaqLightBoxOpened() {
     wait.forElementVisible(faqLightBox);
-    PageObjectLogging.log("checkFaqLightBoxOpened", "faq lightbox verified", true);
+    Log.log("checkFaqLightBoxOpened", "faq lightbox verified", true);
   }
 
   public void verifyFaqLightBox() {
@@ -50,7 +50,7 @@ public class ForumPage extends WikiBasePageObject {
 
   public ForumManageBoardsPageObject clickManageBoardsButton() {
     scrollAndClick(manageBoardsButton);
-    PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
+    Log.log("clickManageBoardsButton", "manage boards button clicked", true);
     return new ForumManageBoardsPageObject();
   }
 
@@ -66,7 +66,7 @@ public class ForumPage extends WikiBasePageObject {
     wait.forElementVisible(forumBoardLink);
     wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
-    PageObjectLogging.log("openForumBoard", "click on the forum Board", true, driver);
+    Log.log("openForumBoard", "click on the forum Board", true, driver);
     return new ForumBoardPage();
   }
 

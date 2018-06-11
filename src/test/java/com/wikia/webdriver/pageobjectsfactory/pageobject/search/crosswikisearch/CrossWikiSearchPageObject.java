@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
 import org.openqa.selenium.By;
@@ -69,14 +69,14 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     try {
       getUrl(searchUrl + "/index.php?title=Special:Search");
     } catch (TimeoutException e) {
-      PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
+      Log.log("goToSearchPage", "timeouted when opening search page", false);
     }
   }
 
   public CrossWikiSearchPageObject searchFor(String term) {
     searchInput.clear();
     searchInput.sendKeys(term + Keys.ENTER);
-    PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
+    Log.log("searchFor", "Search button clicked", true, driver);
     return this;
   }
 
@@ -162,27 +162,27 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public CrossWikiSearchPageObject prevPage() {
     scrollAndClick(paginatorPrev);
-    PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
+    Log.log("prevPage", "Moving to prev page of search results.",
                           true, driver);
     return this;
   }
 
   public CrossWikiSearchPageObject nextPage() {
     scrollAndClick(paginatorNext);
-    PageObjectLogging.log("nextPage", "Moving to next page of search results.",
+    Log.log("nextPage", "Moving to next page of search results.",
                           true, driver);
     return this;
   }
 
   public void verifyNoPagination() {
     wait.forElementNotPresent(paginationContainerBy);
-    PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
+    Log.log("verifyNoPagination", "pagination is not visible on the page",
         true);
   }
 
   public void verifyNoCommunitiesLink() {
     wait.forElementNotPresent(otherCommunitiesLinkBy);
-    PageObjectLogging.log("verifyNoCommunitiesLink", "other communities link is not visible",
+    Log.log("verifyNoCommunitiesLink", "other communities link is not visible",
         true);
   }
 
@@ -190,13 +190,13 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     wait.forElementVisible(noResultsCaption);
     String caption = noResultsCaption.getText();
     Assertion.assertTrue(caption.contains("No results found.") || caption.contains("no matches"));
-    PageObjectLogging.log("verifyNoResultsCaption", "verified no results caption",
+    Log.log("verifyNoResultsCaption", "verified no results caption",
                           true);
   }
 
   public void verifyThumbnailsAmount(int number) {
     Assertion.assertNumber(thumbnails.size(), number, "checking number of thumbnails");
-    PageObjectLogging.log("verifyThumbnailsAmount", "thumbnails verified",
+    Log.log("verifyThumbnailsAmount", "thumbnails verified",
                           true);
   }
 
@@ -204,13 +204,13 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     String jpgOrPngImage = ".*(\\.png|\\.jpg|Wikia-hero-image).*";
     for (WebElement elem : thumbnails) {
       boolean isImage = Pattern.matches(jpgOrPngImage, elem.getAttribute("src"));
-      PageObjectLogging.log("isImage", elem.getAttribute("src"), true);
+      Log.log("isImage", elem.getAttribute("src"), true);
       try {
         if (!isImage) {
           throw new AssertionError();
         }
       } catch (AssertionError ass) {
-        PageObjectLogging.log("Thumbnail does not contain image", ass, true);
+        Log.log("Thumbnail does not contain image", ass, true);
         return false;
       }
     }
@@ -222,7 +222,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     for (WebElement elem : descriptions) {
       Assertion.assertTrue(!elem.getText().isEmpty(), "checking if description is not empty");
     }
-    PageObjectLogging.log("verifyDescriptions", "descriptions verified",
+    Log.log("verifyDescriptions", "descriptions verified",
                           true);
   }
 

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
@@ -60,7 +60,7 @@ public class ImageComparison {
 
     final Color color = new Color(mostFrequentEntry.getKey());
 
-    PageObjectLogging.log("Most frequent color", "Image most frequent color is " + color, true);
+    Log.log("Most frequent color", "Image most frequent color is " + color, true);
 
     return color;
   }
@@ -106,7 +106,7 @@ public class ImageComparison {
   public boolean areImagesDifferent(BufferedImage image1, BufferedImage image2, int threshold) {
     int sameCount = 0;
     if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
-      PageObjectLogging.logWarning("areImagesDifferent", "Images have different sizes");
+      Log.warning("areImagesDifferent", "Images have different sizes");
       return true;
     }
     int count = image1.getHeight() * image1.getWidth();
@@ -125,7 +125,7 @@ public class ImageComparison {
 
   public boolean areImagesTheSame(BufferedImage image1, BufferedImage image2) {
     if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
-      PageObjectLogging.logWarning("areImagesTheSame", "Images have different sizes");
+      Log.warning("areImagesTheSame", "Images have different sizes");
       return false;
     }
     for (int x = 0; x < image1.getWidth(); x++) {

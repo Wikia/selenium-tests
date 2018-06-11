@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -181,7 +181,7 @@ public class RenameToolTests extends NewTestTemplate {
     try {
       Thread.sleep(15000);
     } catch (InterruptedException e) {
-      PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
+      Log.logError("Interruption during waiting for Message Wall background task",
                                  e);
     }
 

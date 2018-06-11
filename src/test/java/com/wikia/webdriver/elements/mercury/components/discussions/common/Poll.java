@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -91,7 +91,7 @@ public class Poll extends BasePageObject {
             wait.forElementClickable(answersInputsList.get(number));
             answersInputsList.get(number).sendKeys(answer);
         } catch (Exception e) {
-            PageObjectLogging.log("Could not add nth answer", e, false);
+            Log.log("Could not add nth answer", e, false);
         }
 
         return this;
@@ -130,7 +130,7 @@ public class Poll extends BasePageObject {
             wait.forElementClickable(answersList.get(number));
             answersList.get(number).click();
         } catch (Exception e) {
-            PageObjectLogging.log("Could not click nth answer", e, false);
+            Log.log("Could not click nth answer", e, false);
         }
 
 
@@ -163,7 +163,7 @@ public class Poll extends BasePageObject {
             wait.forElementClickable(answersInputsList.get(number));
             answersInputsList.get(number).click();
         } catch (Exception e) {
-            PageObjectLogging.log("Could not click nth answer", e, false);
+            Log.log("Could not click nth answer", e, false);
         }
 
         wait.forElementClickable(deleteAnswerIcon);

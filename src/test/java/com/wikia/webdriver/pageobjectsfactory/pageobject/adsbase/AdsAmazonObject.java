@@ -1,8 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class AdsAmazonObject extends AdsBaseObject {
   private static final String QS_TURN_ON_A9 = "InstantGlobals.wgAdDriverA9BidderCountries=[XX]";

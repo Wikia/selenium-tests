@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -73,10 +73,10 @@ public class AdsSkinHelper {
       patternImage = imageEditor.fileToImage(patternFile);
     }
     Dimension size = new Dimension(patternImage.getWidth(), patternImage.getHeight());
-    PageObjectLogging.logImage("EXPECTED", patternFile, true);
+    Log.image("EXPECTED", patternFile, true);
     Point startPoint = getStartPoint(patternImage, isLeft);
     File actualFile = shooter.capturePageAndCrop(startPoint, size, driver);
-    PageObjectLogging.logImage("ACTUAL", actualFile, true);
+    Log.image("ACTUAL", actualFile, true);
     BufferedImage actualImg = imageEditor.fileToImage(actualFile);
     return !imageComparison.areImagesDifferent(patternImage, actualImg, IMAGES_THRESHOLD_PERCENT);
   }

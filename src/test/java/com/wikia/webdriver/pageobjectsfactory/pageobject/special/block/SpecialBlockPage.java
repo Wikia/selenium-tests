@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,7 +38,7 @@ public class SpecialBlockPage extends WikiBasePageObject {
 
   public SpecialBlockPage open(String wikiUrl){
     getUrl(wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_BLOCK);
-    PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
+    Log.log("openSpecialBlockPage", "history page opened", true);
     wait.forElementVisible(blockButton);
 
     return this;
@@ -82,6 +82,6 @@ public class SpecialBlockPage extends WikiBasePageObject {
         .map(WebElement::isSelected)
         .forEach(Assertion::assertFalse);
 
-    PageObjectLogging.log("deselectAllSelections", "all selections deselected", true);
+    Log.log("deselectAllSelections", "all selections deselected", true);
   }
 }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
@@ -83,7 +83,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
           throw new NoSuchElementException("Non-existing link category selected");
       }
     }
-    PageObjectLogging.log("viewResults", "Category indexes sorted", true);
+    Log.log("viewResults", "Category indexes sorted", true);
   }
 
   private boolean isCategoryResult(int category) {

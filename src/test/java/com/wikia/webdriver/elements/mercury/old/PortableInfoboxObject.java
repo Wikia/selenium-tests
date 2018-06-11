@@ -3,7 +3,7 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
@@ -171,136 +171,136 @@ public class PortableInfoboxObject extends WikiBasePageObject{
 
   public PortableInfoboxObject isImageInTitleNotVisible() {
     wait.forElementNotVisible(By.cssSelector(".pi-title img"));
-    PageObjectLogging.log("Hero image title", MercuryMessages.INVISIBLE_MSG, true);
+    Log.log("Hero image title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isTitleNotVisible() {
     wait.forElementNotVisible(By.cssSelector(".portable-infobox .pi-title"));
-    PageObjectLogging.log("Portable infobox title", MercuryMessages.INVISIBLE_MSG, true);
+    Log.log("Portable infobox title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isInfoboxCollapsed() {
     wait.forElementVisible(infoboxIsCollapsed);
-    PageObjectLogging.log("Infobox", MercuryMessages.COLLAPSED_MSG, true);
+    Log.log("Infobox", MercuryMessages.COLLAPSED_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isInfoboxExpanded() {
     Assertion.assertEquals(infoboxWrapper.getAttribute("style"), "height: auto;");
-    PageObjectLogging.log("Infobox", MercuryMessages.EXPANDED_MSG, true);
+    Log.log("Infobox", MercuryMessages.EXPANDED_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isImageInCollectionVisible() {
     wait.forElementVisible(imageInCollection);
-    PageObjectLogging.log("Image in collection", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Image in collection", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isImageInTabberVisible() {
     wait.forElementVisible(imageInTabber);
-    PageObjectLogging.log("Image in tabber", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Image in tabber", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isImageCaptionInTabberVisible() {
     wait.forElementVisible(captionInTabber);
-    PageObjectLogging.log("Image caption in tabber", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Image caption in tabber", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isVideoVisible() {
     wait.forElementVisible(video);
-    PageObjectLogging.log("Video", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Video", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isVideoCaptionVisible() {
     wait.forElementVisible(videoCaption);
-    PageObjectLogging.log("Video caption", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Video caption", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isExternalLinkLabelInURL(String name, String url) {
     Assertion.assertStringContains(url, name);
-    PageObjectLogging.log("External links", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("External links", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areUnorderedListsVisible() {
     Assertion.assertFalse(unorderedLists.isEmpty());
-    PageObjectLogging.log("Unordered list", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Unordered list", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areOrderedListsVisible() {
     Assertion.assertFalse(orderedLists.isEmpty());
-    PageObjectLogging.log("Ordered list", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Ordered list", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areHeadersVisible() {
     Assertion.assertFalse(headers.isEmpty());
-    PageObjectLogging.log("Headers", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Headers", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areLinksVisible() {
     Assertion.assertFalse(externalLinks.isEmpty());
-    PageObjectLogging.log("Links", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Links", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areReferencesVisible() {
     Assertion.assertFalse(references.isEmpty());
-    PageObjectLogging.log("References", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("References", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areDataLabelsVisible() {
     Assertion.assertFalse(dataLabels.isEmpty());
-    PageObjectLogging.log("Data labels", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Data labels", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject areDataValuesVisible() {
     Assertion.assertFalse(dataValues.isEmpty());
-    PageObjectLogging.log("Data values", MercuryMessages.VISIBLE_MSG, true);
+    Log.log("Data values", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject verifyDataValueMargin() {
     Assertion.assertEquals(dataValues.get(0).getCssValue("margin"), "0px");
-    PageObjectLogging.log("Data values", "have correct margin", true);
+    Log.log("Data values", "have correct margin", true);
 
     return this;
   }
 
   public PortableInfoboxObject verifyListMargin() {
     Assertion.assertEquals(orderedLists.get(0).getCssValue("margin"), "0px 0px 8px 10px");
-    PageObjectLogging.log("Ordered list ", "have correct margin", true);
+    Log.log("Ordered list ", "have correct margin", true);
 
     Assertion.assertEquals(unorderedLists.get(0).getCssValue("margin"), "0px 0px 8px 10px");
-    PageObjectLogging.log("Unordered list ", "have correct margin", true);
+    Log.log("Unordered list ", "have correct margin", true);
 
     return this;
   }

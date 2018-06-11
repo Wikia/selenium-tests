@@ -5,7 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 
 import org.openqa.selenium.By;
@@ -89,7 +89,7 @@ public class Post extends BasePage {
       wait.forElementClickable(postsWithPollList.get(number));
       postsWithPollList.get(number).click();
     } catch (IndexOutOfBoundsException e) {
-      PageObjectLogging.log("Could not find and click nth post with a poll", e, false);
+      Log.log("Could not find and click nth post with a poll", e, false);
     }
 
     return this;
@@ -159,7 +159,7 @@ public class Post extends BasePage {
       //This sleep was introduced because of noticeable lag between vote and vote value change
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
+      Log.logError("waitForVoteCountChangeTimeLagToPass", e);
     }
 
     return this;
