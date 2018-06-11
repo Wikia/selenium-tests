@@ -145,7 +145,7 @@ public class Log {
   }
 
   public static void logError(String command, Throwable throwable) {
-    log(command, escapeHtml(throwable.toString()), false, DriverProvider.getActiveDriver());
+    log(command, escapeHtml(throwable.getMessage()), false, DriverProvider.getActiveDriver());
     stacktrace(throwable);
   }
 
