@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
@@ -43,14 +43,14 @@ public class SpecialNewFilesPage extends SpecialPageObject {
 
   public SpecialNewFilesPage addPhoto() {
     scrollAndClick(addPhotoButton);
-    PageObjectLogging.log("ClickAddPhotoButton", "Add photo button clicked", true);
+    Log.log("ClickAddPhotoButton", "Add photo button clicked", true);
 
     return this;
   }
 
   public SpecialNewFilesPage clickUploadButton() {
     scrollAndClick(uploadFileInput);
-    PageObjectLogging.log("ClickOnUploadaPhoto", "Click on upload a photo button", true);
+    Log.log("ClickOnUploadaPhoto", "Click on upload a photo button", true);
 
     return this;
   }
@@ -65,7 +65,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   public SpecialNewFilesPage clickOnMoreOptions() {
     jsActions.click(moreOrFewerOptions);
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
-    PageObjectLogging.log("ClickOnMoreOptions", "Click on More options", true);
+    Log.log("ClickOnMoreOptions", "Click on More options", true);
 
     return this;
   }
@@ -73,7 +73,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   public SpecialNewFilesPage clickOnFewerOptions() {
     jsActions.click(moreOrFewerOptions);
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "none");
-    PageObjectLogging.log("ClickOnFewerOptions", "Click on Fewer options", true);
+    Log.log("ClickOnFewerOptions", "Click on Fewer options", true);
 
     return this;
   }
@@ -81,7 +81,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   public SpecialNewFilesPage checkIgnoreAnyWarnings() {
     wait.forElementVisible(ignoreAnyWarnings);
     ignoreAnyWarnings.click();
-    PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
+    Log.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
 
     return this;
   }
@@ -92,7 +92,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
 
     waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");
 
-    PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
+    Log.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 
     return this;
   }
@@ -101,11 +101,11 @@ public class SpecialNewFilesPage extends SpecialPageObject {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      PageObjectLogging.log("SLEEP INTERRUPTED", e, false);
+      Log.log("SLEEP INTERRUPTED", e, false);
     }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(latestWikiaPreviewImg, "src", fileName);
-    PageObjectLogging.log("waitForFile",
+    Log.log("waitForFile",
         "Verify if " + fileName + " has been successfully uploaded", true);
   }
 
@@ -120,7 +120,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
       try {
         Thread.sleep(5000);
       } catch (InterruptedException e) {
-        PageObjectLogging.logInfo("Sleep interrupted");
+        Log.info("Sleep interrupted");
       }
       driver.navigate().refresh();
     }

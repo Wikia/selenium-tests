@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -69,8 +69,8 @@ public class Shooter {
             .shootingStrategy(ShootingStrategies.scaling(dpr))
             .takeScreenshot(driver, element).getImage();
 
-    PageObjectLogging.log("Image size",image.getWidth() + "x" + image.getHeight() + "with dpr: " + dpr,true);
-    PageObjectLogging.logImage("Shooter", createTempFileFromImage(image), true);
+    Log.log("Image size",image.getWidth() + "x" + image.getHeight() + "with dpr: " + dpr,true);
+    Log.image("Shooter", createTempFileFromImage(image), true);
     return image;
   }
 

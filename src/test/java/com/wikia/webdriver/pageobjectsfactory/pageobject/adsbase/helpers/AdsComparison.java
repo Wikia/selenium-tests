@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -40,7 +40,7 @@ public class AdsComparison {
   }
 
   private void changeOpacity(String selector, int value, WebDriver driver) {
-    PageObjectLogging.log("CSS selector", selector, true, driver);
+    Log.log("CSS selector", selector, true, driver);
     JavascriptActions javascriptActions = new JavascriptActions(driver);
     javascriptActions.changeElementOpacity(selector, value);
   }
@@ -49,7 +49,7 @@ public class AdsComparison {
                              final WebDriver driver) {
     hideSlot(selector, driver);
     final BufferedImage backgroundImg = shooter.takeScreenshot(element, driver);
-    PageObjectLogging.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
+    Log.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
     showSlot(selector, driver);
     try {
       WebDriverWait wait = new WebDriverWait(driver, AD_TIMEOUT_SEC);
@@ -57,7 +57,7 @@ public class AdsComparison {
         @Override
         public Object apply(WebDriver driver) {
           BufferedImage adImg = shooter.takeScreenshot(element, driver);
-          PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true);
+          Log.log("ScreenshotsComparison", "Ad image in " + selector, true);
           if (adImg.getHeight() == 1 || imageComparison.isMonocolorImage(adImg)) {
             return false;
           }
@@ -65,7 +65,7 @@ public class AdsComparison {
         }
       });
     } catch (TimeoutException e) {
-      PageObjectLogging.logWarning("ScreenshotsComparison", e);
+      Log.warning("ScreenshotsComparison", e);
       return false;
     }
     return true;
@@ -85,10 +85,10 @@ public class AdsComparison {
         Thread.sleep(TIME_STEP_MILLS);
         attempts += 1;
         currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
-        PageObjectLogging.log("verifyColor", "Current time: " + currentTime + " seconds", true);
+        Log.log("verifyColor", "Current time: " + currentTime + " seconds", true);
       } while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
     } catch (InterruptedException e) {
-      PageObjectLogging.log("verifyColor", e, false, driver);
+      Log.log("verifyColor", e, false, driver);
     }
   }
 
@@ -96,7 +96,7 @@ public class AdsComparison {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     Color mostFrequentColor = imageComparison.getMostFrequentColor(image);
 
-    PageObjectLogging.logWarning("Comparing two colors", "Actual: " + mostFrequentColor + "; expected: " + color);
+    Log.warning("Comparing two colors", "Actual: " + mostFrequentColor + "; expected: " + color);
 
     return imageComparison.areColorsSimilar(mostFrequentColor, color, 30);
   }
@@ -104,7 +104,7 @@ public class AdsComparison {
   private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
     BufferedImage image = shooter.takeScreenshot(element, driver);
     if (imageComparison.isColorImage(image, color, IMAGES_THRESHOLD_PERCENT)) {
-      PageObjectLogging.log(
+      Log.log(
           "verifyColor",
           "At least " + IMAGES_THRESHOLD_PERCENT + " percents of Ad has " + color,
           true,

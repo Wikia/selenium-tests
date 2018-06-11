@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
@@ -45,7 +45,7 @@ public class EditorTests extends NewTestTemplate {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
-    PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
+    Log.info(String.format("Curated content is visible: %s", result));
 
     new EditorHomePageObject()
         .open()
@@ -63,7 +63,7 @@ public class EditorTests extends NewTestTemplate {
 
     result = new ArticlePage().getCuratedMainPage().isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
-    PageObjectLogging.log("Featured Content", MercuryMessages.VISIBLE_MSG,
+    Log.log("Featured Content", MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG, result);
   }
 
@@ -74,7 +74,7 @@ public class EditorTests extends NewTestTemplate {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
-    PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
+    Log.info(String.format("Curated content is visible: %s", result));
 
     new EditorHomePageObject()
         .open()
@@ -103,7 +103,7 @@ public class EditorTests extends NewTestTemplate {
         .waitForAddCategoryButtonToBeVisible()
         .publish();
 
-    PageObjectLogging.log("Curated Content", MercuryMessages.VISIBLE_MSG,
+    Log.log("Curated Content", MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR));
 
     new CuratedContentPageObject().clickOnCuratedContentElementByIndex(0);
@@ -118,7 +118,7 @@ public class EditorTests extends NewTestTemplate {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
-    PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
+    Log.info(String.format("Curated content is visible: %s", result));
     new EditorHomePageObject()
         .open()
         .clickAddCategory()
@@ -133,7 +133,7 @@ public class EditorTests extends NewTestTemplate {
         .waitForAddCategoryButtonToBeVisible()
         .publish();
 
-    PageObjectLogging.log("Curated Content", MercuryMessages.VISIBLE_MSG,
+    Log.log("Curated Content", MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG, new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR));
   }
 }

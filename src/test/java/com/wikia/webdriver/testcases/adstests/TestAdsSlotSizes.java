@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.apache.commons.lang.StringUtils;
@@ -57,8 +57,8 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
   }
 
   private void log(String slotName, Dimension slotSize) {
-    PageObjectLogging.log("adsSlotSizes", "Slot name: " + slotName, true);
-    PageObjectLogging.log("adsSlotSizes", "Width: " + slotSize.getWidth(), true);
-    PageObjectLogging.log("adsSlotSizes", "Height: " + slotSize.getHeight(), true);
+    Log.log("adsSlotSizes", "Slot name: " + slotName, true);
+    Log.log("adsSlotSizes", "Width: " + slotSize.getWidth(), true);
+    Log.log("adsSlotSizes", "Height: " + slotSize.getHeight(), true);
   }
 }

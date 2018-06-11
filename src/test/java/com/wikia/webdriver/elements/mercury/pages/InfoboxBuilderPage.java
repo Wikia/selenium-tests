@@ -3,7 +3,7 @@ package com.wikia.webdriver.elements.mercury.pages;
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.Frame;
 import com.wikia.webdriver.elements.FrameScope;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
@@ -341,7 +341,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
       wait.forElementVisible(tooltip);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Tooltip not visible");
+      Log.info("Tooltip not visible");
       return false;
     }
   }

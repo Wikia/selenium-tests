@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.drivers.browsers.DefaultBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.GhostBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.HtmlUnitBrowser;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 public enum Browser {
   CHROME(ChromeBrowser.class, "CHROME"),
@@ -43,7 +43,7 @@ public enum Browser {
     try {
       return browserClass.newInstance().getInstance();
     } catch (InstantiationException | IllegalAccessException e) {
-      PageObjectLogging.logError("Could not initialize the browser", e);
+      Log.logError("Could not initialize the browser", e);
     }
     return null;
   }

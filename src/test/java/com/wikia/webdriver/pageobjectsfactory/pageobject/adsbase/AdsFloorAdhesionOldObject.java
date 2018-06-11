@@ -1,11 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
@@ -24,7 +23,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
                                          String expectedCreativeId) {
     verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
     wait.forElementVisible(By.cssSelector(FLOOR_ADHESION_CSS));
-    PageObjectLogging.log(
+    Log.log(
         "Check visibility of Floor Adhesion",
         "Floor Adhesion should be displayed",
         true
@@ -33,7 +32,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
   public void verifyThereIsNoFloorAdhesion() {
     waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(FLOOR_ADHESION_CSS)));
-    PageObjectLogging.log(
+    Log.log(
         "Check visibility",
         "Clicking Floor Adhesion close button hides ad unit",
         true
@@ -60,7 +59,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
   public void verifyModalOpened(String floorAdhesionModalSelector) {
     wait.forElementVisible(By.cssSelector(floorAdhesionModalSelector));
-    PageObjectLogging.log(
+    Log.log(
         "Check visibility",
         "Clicking Floor Adhesion opens light-box",
         true
@@ -69,7 +68,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
   public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
     wait.forElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
-    PageObjectLogging.log(
+    Log.log(
         "Check visibility",
         "Clicking light-box close button hides light-box",
         true
@@ -79,7 +78,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
   public void verifyThereIsNoWikiaBar(String browser) {
     if (driver.isChromeMobile()) {
       // Mercury does not have WikiaBar
-      PageObjectLogging.log(
+      Log.log(
           "Check visibility of Wikia Bar",
           "It is Mercury skin with no Wikia Bar",
           true
@@ -88,7 +87,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
     }
 
     waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(WIKIA_BAR_CSS)));
-    PageObjectLogging.log(
+    Log.log(
         "Check visibility of Wikia Bar",
         "There should be no Wikia Bar when Floor Adhesion is visible",
         true

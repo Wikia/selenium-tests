@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -27,7 +27,7 @@ public class ErrorPage extends WikiBasePageObject {
   public ErrorPage navigateToErrorPageFromUrl() {
     navigate.toPageByPath("/wiki/404_Error_Page");
     wait.forElementVisible(linkToOpenNavigation);
-    PageObjectLogging.logInfo("Navigated to error 404 page");
+    Log.info("Navigated to error 404 page");
 
     return this;
   }
@@ -37,7 +37,7 @@ public class ErrorPage extends WikiBasePageObject {
     linkToOpenNavigation.click();
 
     wait.forElementVisible(navMenu);
-    PageObjectLogging.logInfo("Navigation is opened");
+    Log.info("Navigation is opened");
 
     return new Navigation();
   }

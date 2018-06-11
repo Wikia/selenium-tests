@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.oasis.pages.PrivacyPolicyPage;
@@ -32,7 +32,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
@@ -45,7 +45,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
@@ -59,7 +59,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
@@ -73,7 +73,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertEquals(new TrackingOptInPage().isVisible(), shouldGetModal);
   }
 
@@ -83,7 +83,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
@@ -93,7 +93,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
@@ -103,7 +103,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
@@ -113,7 +113,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
   }
 
@@ -123,7 +123,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     driver.manage().deleteAllCookies();
@@ -139,7 +139,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     driver.manage().deleteAllCookies();
@@ -155,7 +155,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
@@ -171,7 +171,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
     new ArticlePage().open();
 
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();

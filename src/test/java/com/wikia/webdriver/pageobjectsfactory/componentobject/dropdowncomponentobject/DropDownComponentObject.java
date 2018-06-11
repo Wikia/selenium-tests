@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -49,7 +49,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
       restoreDefaultImplicitWait();
     }
 
-    PageObjectLogging.log("DropdownVisible", "Login dropdown is visible", true, driver);
+    Log.log("DropdownVisible", "Login dropdown is visible", true, driver);
 
     return this;
   }
@@ -57,10 +57,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
   public DropDownComponentObject openDropDownWithEntryPoint(final WebElement entryPoint) {
     try {
       wait.forElementClickable(entryPoint);
-      PageObjectLogging.log("DropdownClickable", "Dropdown is clickable", true, driver);
+      Log.log("DropdownClickable", "Dropdown is clickable", true, driver);
       entryPoint.click();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.log("DropdownClickable", "Dropdown is not clickable", false, driver);
+      Log.log("DropdownClickable", "Dropdown is not clickable", false, driver);
     }
 
     return this;

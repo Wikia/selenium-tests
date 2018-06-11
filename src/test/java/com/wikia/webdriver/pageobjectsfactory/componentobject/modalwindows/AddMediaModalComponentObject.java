@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;
@@ -19,14 +19,14 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 
   public void closeAddPhotoModal() {
     wait.forElementVisible(addPhotoModal);
-    PageObjectLogging.log(
+    Log.log(
         "UploadPhotoModalIsPresent",
         "Upload photo modal is present",
         true, driver
     );
     scrollAndClick(modalAddPhotoClose);
     waitForElementNotVisibleByElement(addPhotoModal);
-    PageObjectLogging.log(
+    Log.log(
         "UploadPhotoModalClosed",
         "Upload photo modal is closed",
         true, driver
@@ -35,14 +35,14 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 
   public void closeAddVideoModal() {
     wait.forElementVisible(addVideoModal);
-    PageObjectLogging.log(
+    Log.log(
         "UploadVideoModalIsPresent",
         "Upload video modal is present",
         true, driver
     );
     scrollAndClick(modalAddVideoClose);
     waitForElementNotVisibleByElement(addVideoModal);
-    PageObjectLogging.log(
+    Log.log(
         "UploadVideoModalClosed",
         "Upload video modal is closed",
         true, driver

@@ -2,7 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -44,7 +44,7 @@ public class DiscussionsPage extends BasePage {
 
       return discussionsFilter.isDisplayed();
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Sort By filter is not displayed", e);
+      Log.info("Sort By filter is not displayed", e);
 
       return false;
     }

@@ -3,7 +3,7 @@
  */
 package com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -28,7 +28,7 @@ public class EditCategoryComponentObject extends BasePageObject {
     categoryNameField.sendKeys(newCategoryName);
     saveButton.click();
     wait.forElementNotVisible(categoryNameField);
-    PageObjectLogging.log("editCategoryName", "category name changed to " + newCategoryName, true);
+    Log.log("editCategoryName", "category name changed to " + newCategoryName, true);
     return new ArticlePageObject();
   }
 }

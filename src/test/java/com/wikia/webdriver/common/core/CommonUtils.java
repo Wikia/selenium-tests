@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,7 +22,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 
 public class CommonUtils {
@@ -50,7 +50,7 @@ public class CommonUtils {
     try {
       FileUtils.deleteDirectory(new File(dirName));
     } catch (IOException e) {
-      PageObjectLogging.log("deleteDirectory", e, false);
+      Log.log("deleteDirectory", e, false);
     }
   }
 
@@ -91,13 +91,13 @@ public class CommonUtils {
       HttpEntity entity = response.getEntity();
       return EntityUtils.toString(entity);
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("sendPost", e, false);
+      Log.log("sendPost", e, false);
       return null;
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("sendPost", e, false);
+      Log.log("sendPost", e, false);
       return null;
     } catch (IOException e) {
-      PageObjectLogging.log("sendPost", e, false);
+      Log.log("sendPost", e, false);
       return null;
     }
   }

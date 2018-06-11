@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.articlepreview;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -54,8 +54,8 @@ public class MobilePreviewModal extends WikiBasePageObject {
   }
 
   private void waitForElementToBePresent(String cssSelector, String elementName) {
-    PageObjectLogging.logInfo("Waiting for: \"" + elementName + "\", to be present");
+    Log.info("Waiting for: \"" + elementName + "\", to be present");
     wait.forElementPresent(By.cssSelector(cssSelector));
-    PageObjectLogging.logInfo("\"" + elementName + "\", is present");
+    Log.info("\"" + elementName + "\", is present");
   }
 }

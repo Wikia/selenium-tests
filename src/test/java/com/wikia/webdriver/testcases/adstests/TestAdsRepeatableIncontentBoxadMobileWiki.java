@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.By;
@@ -86,8 +86,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
       ads.waitForSlotExpanded(slot);
       return true;
     } catch (Exception ex){
-      PageObjectLogging
-          .logInfo("IncontentBoxad is not displayed", ex);
+      Log.info("IncontentBoxad is not displayed", ex);
       return false;
     }
   }

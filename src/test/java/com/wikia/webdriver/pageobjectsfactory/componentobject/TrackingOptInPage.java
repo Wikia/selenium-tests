@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.TrackingOptInModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import net.lightbody.bmp.core.har.HarEntry;
@@ -111,9 +111,7 @@ public class TrackingOptInPage extends BasePageObject {
       try {
         wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
       } catch (Exception e) {
-        PageObjectLogging
-                .log("Did not get successful response with element: " + anElementsList,
-                        e, false);
+        Log.log("Did not get successful response with element: " + anElementsList, e, false);
         result = false;
       }
     }
@@ -127,8 +125,8 @@ public class TrackingOptInPage extends BasePageObject {
       HarEntry entry = trafficInterceptor.getEntryByUrlPattern(pattern);
       return entry.getResponse().getStatus() < 400;
     } catch (NullPointerException ex) {
-      PageObjectLogging
-          .logInfo("Did not get successful response",
+      Log
+          .info("Did not get successful response",
                ex);
 
       return false;
@@ -152,6 +150,6 @@ public class TrackingOptInPage extends BasePageObject {
   }
 
   public void logTrackingCookieValue() {
-    PageObjectLogging.logInfo("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+    Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
   }
 }

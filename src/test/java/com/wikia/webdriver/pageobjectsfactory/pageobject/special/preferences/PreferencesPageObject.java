@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -38,7 +38,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
   public PreferencesPageObject open(){
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_PREFERENCES));
-    PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
+    Log.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 
     return this;
   }
@@ -69,14 +69,14 @@ public class PreferencesPageObject extends WikiBasePageObject {
         throw new NoSuchElementException("Non-existing tab selected");
     }
     waitForValueToBePresentInElementsAttributeByElement(tabs.get(tabNum), "class", "selected");
-    PageObjectLogging.log("selectTab", "tab " + tab.toString() + " selected", true);
+    Log.log("selectTab", "tab " + tab.toString() + " selected", true);
     return this;
   }
 
   public PreferencesPageObject clickSaveButton() {
     wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
-    PageObjectLogging.log("clickSaveButton", "Save button clicked", true);
+    Log.log("clickSaveButton", "Save button clicked", true);
     return new PreferencesPageObject();
   }
 
@@ -84,7 +84,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     wait.forElementClickable(useAdvancedRecentChangesCheckbox);
     useAdvancedRecentChangesCheckbox.click();
-    PageObjectLogging.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
+    Log.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
 
     return this;
   }
@@ -101,7 +101,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
       useAdvancedRecentChangesCheckbox.click();
     }
     clickSaveButton();
-    PageObjectLogging.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
+    Log.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
 
     return this;
   }

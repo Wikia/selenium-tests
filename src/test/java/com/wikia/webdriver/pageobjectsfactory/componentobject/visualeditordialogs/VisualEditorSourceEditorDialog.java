@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
@@ -38,6 +38,6 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
     editArea.click();
     editArea.sendKeys(text);
     waitForValueToBePresentInElementsAttributeByElement(editArea, "value", text);
-    PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
+    Log.log("typeInEditArea", "Typed " + text, true, driver);
   }
 }

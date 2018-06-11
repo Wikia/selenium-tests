@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.By;
@@ -22,28 +22,28 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       verifyMobileWiki();
     }
 
-    PageObjectLogging.log("", "Page screenshot", true, driver);
+    Log.log("", "Page screenshot", true, driver);
   }
 
   public void verifyNoAdInSlot(String slotName) {
     scrollToSlotOnMobile(slotName);
     WebElement slot = driver.findElement(By.id(slotName));
     waitForSlotCollapsed(slot);
-    PageObjectLogging.log("AdInSlot", "Ad is not found in slot as expected.", true);
+    Log.log("AdInSlot", "Ad is not found in slot as expected.", true);
   }
 
   public void verifyNoSlotPresent(String slotName) {
     if (isElementOnPage(By.cssSelector("#" + slotName))) {
       throw new NoSuchElementException("Slot is added to the page");
     }
-    PageObjectLogging.log("AdInSlot", "No slot found as expected", true);
+    Log.log("AdInSlot", "No slot found as expected", true);
   }
 
   public void verifySlotExpanded(String slotName) {
     scrollToSlotOnMobile(slotName);
     WebElement slot = driver.findElement(By.id(slotName));
     if (checkIfSlotExpanded(slot)) {
-      PageObjectLogging.log("AdInSlot", "Slot expanded as expecting", true);
+      Log.log("AdInSlot", "Slot expanded as expecting", true);
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
@@ -58,7 +58,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     } else {
       throw new NoSuchElementException("Slot is collapsed - should be expanded");
     }
-    PageObjectLogging.log("AdInSlot", "Ad found in slot", true, driver);
+    Log.log("AdInSlot", "Ad found in slot", true, driver);
   }
 
   /**
@@ -71,7 +71,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (isElementOnPage(By.cssSelector(articleLinkSelector))) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
-      PageObjectLogging.log(
+      Log.log(
           "mercuryNavigateToAnArticle()",
           String.format(
               "Clicking: %s (%s)",
@@ -84,7 +84,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
       link.click();
     } else {
-      PageObjectLogging.logWarning(
+      Log.warning(
           "mercuryNavigateToAnArticle()",
           "Could not find the link to: /wiki/" + articleLinkName
       );
@@ -106,7 +106,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     try {
       wait.forElementVisible(By.cssSelector(MERCURY_ARTICLE_CONTAINER_SELECTOR));
     } catch (TimeoutException e) {
-      PageObjectLogging.logWarning("", "MOBILE WIKI FAILED TO LOAD");
+      Log.warning("", "MOBILE WIKI FAILED TO LOAD");
       throw e;
     }
   }

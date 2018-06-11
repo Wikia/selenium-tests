@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -26,7 +27,6 @@ import com.jayway.jsonpath.JsonPath;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.helpers.FacebookUser;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class GraphApi {
 
@@ -56,7 +56,7 @@ public class GraphApi {
       DocumentContext json = JsonPath.parse(entity);
       return new FacebookUser(json.read("$.email"), json.read("$.password"), json.read("$.id"));
     } catch (IOException | URISyntaxException e) {
-      PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      Log.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     }
 
@@ -66,7 +66,7 @@ public class GraphApi {
     try {
       deleteTestUser(userId);
     } catch (IOException | URISyntaxException e) {
-      PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      Log.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     }
 

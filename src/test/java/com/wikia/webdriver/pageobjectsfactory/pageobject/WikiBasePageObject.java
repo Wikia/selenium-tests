@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
@@ -167,25 +167,25 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + articlePage,
         URLsContent.ACTION_HISTORY));
-    PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
+    Log.log("openFileHistoryPage", "history page opened", true);
     return new HistoryPagePageObject();
   }
 
   public AttachedRegisterPage openSpecialUserSignUpPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_SIGNUP);
-    PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
+    Log.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
     return new AttachedRegisterPage();
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_PREFERENCES);
-    PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
+    Log.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
     return new PreferencesPageObject();
   }
 
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_LOGIN);
-    PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
+    Log.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
     return new AttachedSignInPage();
   }
 
@@ -233,13 +233,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public ForumPage openForumMainPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_FORUM);
-    PageObjectLogging.log("openForumPage", "forum page opened", true);
+    Log.log("openForumPage", "forum page opened", true);
     return new ForumPage();
   }
 
   public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_MULTI_WIKI_FINDER);
-    PageObjectLogging.log("openSpecialMultiWikiFinderPage",
+    Log.log("openSpecialMultiWikiFinderPage",
                           "Special MultiWikiFinder page was opened", true);
     return new SpecialMultiWikiFinderPageObject(driver);
   }
@@ -272,7 +272,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
     wait.forElementClickable(editButton);
     editButton.click();
-    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
+    Log.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
         driver);
     return new SourceEditModePageObject();
   }
@@ -280,7 +280,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
     this.openArticleEditDropdown();
     editButton.click();
-    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
+    Log.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
                           driver);
     return new SourceEditModePageObject();
   }
@@ -288,7 +288,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditModePageObject openCKModeWithMainEditButton() {
     this.openArticleEditDropdown();
     editButton.click();
-    PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
+    Log.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
     return new VisualEditModePageObject();
   }
@@ -296,7 +296,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditModePageObject openCKModeWithMainEditButtonDropdown() {
     this.openArticleEditDropdown();
     editButton.click();
-    PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
+    Log.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
                           driver);
     return new VisualEditModePageObject();
   }
@@ -304,7 +304,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openVEModeWithMainEditButton() {
     wait.forElementClickable(veEditButton);
     veEditButton.click();
-    PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
+    Log.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
         driver);
     return new VisualEditorPageObject();
   }
@@ -313,7 +313,7 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementClickable(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openVEModeWithSectionEditButton",
+    Log.log("openVEModeWithSectionEditButton",
         "VE edit button clicked at section: " + section, true, driver);
     return new VisualEditorPageObject();
   }
@@ -322,7 +322,7 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openCKModeWithSectionEditButton",
+    Log.log("openCKModeWithSectionEditButton",
                           "RTE edit button clicked at section: " + section, true, driver);
     return new VisualEditModePageObject();
   }
@@ -331,7 +331,7 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openSrcModeWithSectionEditButton",
+    Log.log("openSrcModeWithSectionEditButton",
                           "Src edit button clicked at section: " + section, true, driver);
     return new SourceEditModePageObject();
   }
@@ -404,7 +404,7 @@ public class WikiBasePageObject extends BasePageObject {
       restoreDefaultImplicitWait();
       driver.switchTo().defaultContent();
     }
-    PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
+    Log.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
   }
 
   public void verifyUserLoggedIn(User user) {
@@ -423,7 +423,7 @@ public class WikiBasePageObject extends BasePageObject {
     String url =
         urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_DELETE);
     getUrl(url);
-    PageObjectLogging.log("deletePage", "delete page opened", true);
+    Log.log("deletePage", "delete page opened", true);
     return new DeletePageObject(driver);
   }
 
@@ -459,13 +459,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void clickLoginOnSpecialPage() {
     wait.forElementVisible(specialUserLoginLink);
-    PageObjectLogging.log("Element found", "Link to login special page present", true);
+    Log.log("Element found", "Link to login special page present", true);
     scrollAndClick(specialUserLoginLink);
   }
 
   public void verifyRevisionMarkedAsMinor() {
     if (isElementOnPage(cssMinorEdit)) {
-      PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+      Log.log("cssEditSummary", "minor edit is marked in first revision", true);
     } else {
       throw new NoSuchElementException("Minor Edit is not present on the page");
     }
@@ -478,7 +478,7 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       getGlobalNavigation().clickSignOut();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
+      Log.log("logOut", "page loads for more than 30 seconds", true);
     }
   }
 
@@ -499,7 +499,7 @@ public class WikiBasePageObject extends BasePageObject {
     }
 
     this.verifyUserLoggedIn(userName);
-    PageObjectLogging.logInfo("loginCookie",
+    Log.info("loginCookie",
         "user was logged in by by helios using access token: " + token);
     logMercuryUserId();
 
@@ -514,25 +514,25 @@ public class WikiBasePageObject extends BasePageObject {
     Object scriptOut = driver.executeScript("return window.M && window.M.prop('userId')");
 
     if (scriptOut != null) {
-      PageObjectLogging.logInfo("Mercury userID: " + scriptOut.toString());
+      Log.info("Mercury userID: " + scriptOut.toString());
     }
   }
 
   public void openWikiPage(String wikiURL) {
     getUrl(wikiURL);
-    PageObjectLogging.log("openWikiPage", "Wiki page is opened", true);
+    Log.log("openWikiPage", "Wiki page is opened", true);
   }
 
   public void verifyPageUnfollowed() {
     wait.forTextInElement(followButton, "Follow");
-    PageObjectLogging.log("verifyPageUnfollowed", "page is not followed", true);
+    Log.log("verifyPageUnfollowed", "page is not followed", true);
   }
 
   public void follow() {
     wait.forElementVisible(followButton);
     jsActions.click(followButton);
     wait.forTextInElement(followButton, "Following");
-    PageObjectLogging.log("followArticle", "page is followed", true, driver);
+    Log.log("followArticle", "page is followed", true, driver);
   }
 
   public WatchPageObject unfollowCurrentUrl() {
@@ -597,7 +597,7 @@ public class WikiBasePageObject extends BasePageObject {
     waitForElementNotVisibleByElement(veMode);
     waitForElementNotVisibleByElement(focusMode);
     waitForElementNotVisibleByElement(veToolMenu);
-    PageObjectLogging.log("verifyVEPublishComplete", "Publish is done", true, driver);
+    Log.log("verifyVEPublishComplete", "Publish is done", true, driver);
   }
 
   public WikiHistoryPageObject openArticleHistoryPage() {
@@ -611,13 +611,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyArticleNameInWgPageName(String targetText) {
     Assertion.assertStringContains(targetText, getArticleName());
-    PageObjectLogging.log("verifyArticleNameInWgPageName",
+    Log.log("verifyArticleNameInWgPageName",
                           "The wgPageName variable contains article name" + targetText, true);
   }
 
   public void verifyNumberOfTop1kWikisInRange(Range expectedRange) {
     wait.forElementVisible(headerWhereIsMyExtensionPage);
-    PageObjectLogging.log("verifyNumberOfTop1kWikisInRange", "Verification of top 1k wikis", true, driver);
+    Log.log("verifyNumberOfTop1kWikisInRange", "Verification of top 1k wikis", true, driver);
     Pattern p = Pattern.compile("\\d+");
     Matcher m = p.matcher(headerWhereIsMyExtensionPage.getText());
     m.find();
@@ -639,12 +639,12 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(footer);
     jsActions.scrollToElement(footer);
 
-    PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
+    Log.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
   public void verifyGlobalNavigation() {
     wait.forElementVisible(globalNavigationBar);
-    PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
+    Log.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
   public boolean isFacebookButtonVisible() {
@@ -653,7 +653,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyAvatarVisible() {
     wait.forElementVisible(globalNavigationAvatar);
-    PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
+    Log.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
   }
 
   /**
