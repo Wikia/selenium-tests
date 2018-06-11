@@ -61,13 +61,13 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
       if (url.equals(driver.getCurrentUrl())) {
         Log.ok(command, VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl()));
       } else {
+        // A fast lane to stop executing any test on "not a valid community" page
+        if(driver.getCurrentUrl().contains(URLsContent.NOT_A_VALID_COMMUNITY)){
+          throw new SkipException(String.format("Wrong redirect to: %s", driver.getCurrentUrl()));
+        }
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
           Log.warning(command, driver.getCurrentUrl());
-        } else if (driver.getCurrentUrl().contains(URLsContent.NOT_A_VALID_COMMUNITY)) {
-          Log.warning(command, driver.getCurrentUrl());
-          driver.get("http://seleniumworkaround");
-          Log.log("Workaround", "Dummy redirect", true);
         } else {
           Log.warning(command, driver.getCurrentUrl());
         }
@@ -221,7 +221,9 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
       onTestSuccess(result);
     } else {
       result.setStatus(ITestResult.FAILURE);
-      result.setThrowable(new SkipException("TEST SKIPPED"));
+      if(result.getThrowable() == null) {
+        result.setThrowable(new SkipException("TEST SKIPPED"));
+      }
       onTestFailure(result);
     }
     if (Log.isTestStarted()) {
