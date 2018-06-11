@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -46,10 +46,10 @@ public class TopBar extends BasePageObject {
   private By parentBy = By.xpath("./..");
 
   public Navigation openNavigation() {
-    PageObjectLogging.logInfo("Open navigation");
+    Log.info("Open navigation");
     waitAndClick(hamburgerIcon);
     wait.forElementVisible(navMenu);
-    PageObjectLogging.logInfo("Navigation is opened");
+    Log.info("Navigation is opened");
     return new Navigation();
   }
 
@@ -67,11 +67,11 @@ public class TopBar extends BasePageObject {
   }
 
   public Search openSearch() {
-    PageObjectLogging.logInfo("Open search");
+    Log.info("Open search");
     wait.forElementClickable(searchIcon);
     searchIcon.click();
 
-    PageObjectLogging.logInfo("Search is opened");
+    Log.info("Search is opened");
     wait.forElementVisible(navigationComponent);
 
     return new Search();
@@ -81,7 +81,7 @@ public class TopBar extends BasePageObject {
     // Clicking on the inner element doesn't always work so we click the parent (<svg>) instead
     WebElement closeButton = closeButtonInnerElement.findElement(parentBy);
 
-    PageObjectLogging.logInfo("Click close button");
+    Log.info("Click close button");
     wait.forElementClickable(closeButton);
     closeButton.click();
 
@@ -89,7 +89,7 @@ public class TopBar extends BasePageObject {
   }
 
   public void clickWikiaLogo() {
-    PageObjectLogging.logInfo("Click Wikia logo");
+    Log.info("Click Wikia logo");
     wait.forElementClickable(logo);
     logo.click();
     wait.forElementVisible(logoFandom);
@@ -100,7 +100,7 @@ public class TopBar extends BasePageObject {
     try {
       return navBar.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }
@@ -109,7 +109,7 @@ public class TopBar extends BasePageObject {
     try {
       return logo.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }
@@ -118,7 +118,7 @@ public class TopBar extends BasePageObject {
     try {
       return hamburgerIcon.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }
@@ -127,7 +127,7 @@ public class TopBar extends BasePageObject {
     try {
       return searchIcon.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }
@@ -138,10 +138,10 @@ public class TopBar extends BasePageObject {
       wait.forElementClickable(searchIconClickableLink, 0);
       return true;
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }
@@ -150,7 +150,7 @@ public class TopBar extends BasePageObject {
     try {
       return closeButtonInnerElement.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }

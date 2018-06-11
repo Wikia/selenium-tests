@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.io.File;
 import org.openqa.selenium.WebElement;
@@ -19,17 +19,17 @@ public class AvatarComponentObject extends WikiBasePageObject {
                               + "ImagesForUploadTests"
                               + File.separator + file);
     if (!fileCheck.isFile()) {
-      PageObjectLogging.log("uploadAvatar", "the file doesn't exist", false);
+      Log.log("uploadAvatar", "the file doesn't exist", false);
     }
     uploadInput.sendKeys(fileCheck.getAbsoluteFile().toString());
-    PageObjectLogging
+    Log
         .log("typeInFileToUploadPath", "type file " + file + " to upload it", true, driver);
   }
 
   public void saveProfile() {
     wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
-    PageObjectLogging.log("save", "save profile button clicked", true);
+    Log.log("save", "save profile button clicked", true);
   }
 
 }

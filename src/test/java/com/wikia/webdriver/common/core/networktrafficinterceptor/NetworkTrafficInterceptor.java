@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.wikia.webdriver.common.logging.Log;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
@@ -12,8 +13,6 @@ import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriverException;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
@@ -57,7 +56,7 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
-        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(),
+        Log.log("RESPONSE STATUS: " + entry.getResponse().getStatus(),
             entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
       }
     }
@@ -83,7 +82,7 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
             expectedCorrelator = correlatorID;
           }
 
-          PageObjectLogging.log("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
+          Log.log("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
               correlatorID.equals(expectedCorrelator));
         } else {
           throw new WebDriverException("Missing correlator param in query string");

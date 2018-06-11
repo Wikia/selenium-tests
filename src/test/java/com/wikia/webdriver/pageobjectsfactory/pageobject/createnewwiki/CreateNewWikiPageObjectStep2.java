@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -45,26 +45,26 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
     try {
       selectedCategory = wikiCategoryList.get(categoryId);
     } catch (ArrayIndexOutOfBoundsException e){
-      PageObjectLogging.log("selectCategory","There is no category with index " + categoryId, false);
+      Log.log("selectCategory","There is no category with index " + categoryId, false);
       throw new WebDriverException("There is no category with index " + categoryId, e);
     }
     hover(wikiCategoryDropdown);
     wait.forElementClickable(selectedCategory);
     selectedCategory.click();
 
-    PageObjectLogging.log("selectCategory", "selected " + selectedCategory.getText() + " category", true, driver);
+    Log.log("selectCategory", "selected " + selectedCategory.getText() + " category", true, driver);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {
     wait.forElementVisible(submitButton);
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true);
+    Log.log("submit", "Submit button clicked", true);
     return new CreateNewWikiPageObjectStep3(driver);
   }
 
   public void selectAllAgesCheckbox() {
     scrollAndClick(allAgesCheckBox);
-    PageObjectLogging.log("selectAllAgesCheckbox", "all ages checkbox selected", true);
+    Log.log("selectAllAgesCheckbox", "all ages checkbox selected", true);
   }
 
   public void verifyCategoryError() {

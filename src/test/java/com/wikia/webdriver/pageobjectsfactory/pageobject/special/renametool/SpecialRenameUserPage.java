@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.renametool;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.WebElement;
@@ -41,7 +41,7 @@ public class SpecialRenameUserPage extends SpecialPageObject {
     try {
       encodedString = URLEncoder.encode(toEncode, "UTF-8").replace("+", "_");
     } catch (Exception e) {
-      PageObjectLogging.logInfo("Could not encode URLs");
+      Log.info("Could not encode URLs");
     }
 
     return encodedString;

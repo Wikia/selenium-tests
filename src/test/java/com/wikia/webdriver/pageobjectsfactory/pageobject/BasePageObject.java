@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.core.url.FandomUrlBuilder;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -76,7 +76,7 @@ public class BasePageObject {
     String mailSubject = "Confirm your email address change on FANDOM";
     String url = EmailUtils.getActivationLinkFromEmailContent(
         EmailUtils.getFirstEmailContent(email, password, mailSubject));
-    PageObjectLogging.log("getActivationLinkFromMail",
+    Log.log("getActivationLinkFromMail",
         "activation link is visible in email content: " + url, true);
     return url;
   }
@@ -85,7 +85,7 @@ public class BasePageObject {
     String passwordResetEmail =
         EmailUtils.getFirstEmailContent(email, password, "Reset your FANDOM password");
     String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
-    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
+    Log.log("Password reset link", "Password reset link received: " + resetLink,
         true);
 
     return resetLink;
@@ -96,7 +96,7 @@ public class BasePageObject {
         "Confirm your email and get started on FANDOM!");
     String confirmationLink =
         EmailUtils.getConfirmationLinkFromEmailContent(emailConfirmationMessage);
-    PageObjectLogging.log("Email confirmation link",
+    Log.log("Email confirmation link",
         "Email confirmation link received: " + confirmationLink, true);
 
     return confirmationLink;
@@ -169,7 +169,7 @@ public class BasePageObject {
     try {
       return element.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }
@@ -225,7 +225,7 @@ public class BasePageObject {
     try {
       o.run();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Timed out waiting", String.format("%s\n%s", message, e), true);
+      Log.log("Timed out waiting", String.format("%s\n%s", message, e), true);
     }
   }
 
@@ -269,12 +269,12 @@ public class BasePageObject {
   public boolean isStringInURL(String givenString) {
     String currentURL = driver.getCurrentUrl();
     if (currentURL.toLowerCase().contains(givenString.toLowerCase())) {
-      PageObjectLogging.log("isStringInURL",
+      Log.log("isStringInURL",
           String.format("Current url: %s contains given string: %s", currentURL, givenString),
           true);
       return true;
     } else {
-      PageObjectLogging.log("isStringInURL", String.format(
+      Log.log("isStringInURL", String.format(
           "Current url: %s does not contain given string: %s", currentURL, givenString), false);
       return false;
     }
@@ -305,7 +305,7 @@ public class BasePageObject {
   public void getUrl(String url, boolean makeScreenshot) {
     driver.get(url);
     if (makeScreenshot) {
-      PageObjectLogging.log("Take screenshot",
+      Log.log("Take screenshot",
           String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
   }
@@ -321,9 +321,9 @@ public class BasePageObject {
   public void refreshPage() {
     try {
       driver.navigate().refresh();
-      PageObjectLogging.log("refreshPage", "page refreshed", true);
+      Log.log("refreshPage", "page refreshed", true);
     } catch (TimeoutException e) {
-      PageObjectLogging.log("refreshPage", "page loaded for more than 30 seconds after click",
+      Log.log("refreshPage", "page loaded for more than 30 seconds after click",
           true);
     }
   }
@@ -338,10 +338,10 @@ public class BasePageObject {
         windows = driver.getWindowHandles().toArray();
         sumDelay += 500;
       } catch (InterruptedException e) {
-        PageObjectLogging.log(windowName, e, false);
+        Log.log(windowName, e, false);
       }
       if (sumDelay > 5000) {
-        PageObjectLogging.log(windowName, comment, false);
+        Log.log(windowName, comment, false);
         break;
       }
     }
@@ -364,12 +364,12 @@ public class BasePageObject {
             selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-          PageObjectLogging.log("JSError", "JQuery is not defined", false);
+          Log.log("JSError", "JQuery is not defined", false);
         }
       }
       return true;
     } else {
-      PageObjectLogging.log("SelectorNotFound", "Selector " + selector + " not found on page",
+      Log.log("SelectorNotFound", "Selector " + selector + " not found on page",
           true);
       return false;
     }
@@ -433,7 +433,7 @@ public class BasePageObject {
 
   public void waitForStringInURL(String givenString) {
     waitFor.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
-    PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
+    Log.log("waitForStringInURL", "verify that url contains " + givenString, true);
   }
 
   public String getRandomDigits(int length) {
@@ -445,7 +445,7 @@ public class BasePageObject {
 
   public void openWikiPage() {
     getUrl(getWikiUrl() + URLsContent.NOEXTERNALS);
-    PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+    Log.log("WikiPageOpened", "Wiki page is opened", true);
   }
 
   public String getWikiUrl() {
@@ -465,7 +465,7 @@ public class BasePageObject {
 
   public void goToCurrentUrlWithSuffix(String additionToUrl) {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
-    PageObjectLogging.log("appendToUrl", additionToUrl + " has been appended to url", true);
+    Log.log("appendToUrl", additionToUrl + " has been appended to url", true);
   }
 
   public void goToCurrentUrlWithAppendedMultipleQueryStrings(String[] queryStrings) {
@@ -474,7 +474,7 @@ public class BasePageObject {
       currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryString);
     }
     driver.get(currentUrl);
-    PageObjectLogging.log("appendQueryToUrl", queryStrings + " have been appended to url", true);
+    Log.log("appendQueryToUrl", queryStrings + " have been appended to url", true);
   }
 
   public void pressDownArrow(WebElement element) {
@@ -495,7 +495,7 @@ public class BasePageObject {
       if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
         throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
       }
-      PageObjectLogging.log("purge", url, true);
+      Log.log("purge", url, true);
       return;
     } finally {
       client.close();
@@ -547,7 +547,7 @@ public class BasePageObject {
       }
     }
     Assertion.assertEquals(statusCode, desiredStatus);
-    PageObjectLogging.log("verifyURLStatus", url + " has status " + statusCode, true);
+    Log.log("verifyURLStatus", url + " has status " + statusCode, true);
   }
 
   protected void changeImplicitWait(int value, TimeUnit timeUnit) {
@@ -569,7 +569,7 @@ public class BasePageObject {
     waitForStringInURL(url);
     driver.close();
     driver.switchTo().window(windows[0].toString());
-    PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
+    Log.log("verifyUrlInNewWindow", "url in new window verified", true);
   }
 
   public void verifyElementMoved(Point source, WebElement element) {
@@ -578,7 +578,7 @@ public class BasePageObject {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
           + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    PageObjectLogging.log("verifyElementMoved", "Element did move. From (" + source.x + ","
+    Log.log("verifyElementMoved", "Element did move. From (" + source.x + ","
         + source.y + ") to (" + target.x + "," + target.y + ")", true, driver);
   }
 
@@ -593,7 +593,7 @@ public class BasePageObject {
       Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
           + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
-    PageObjectLogging.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
+    Log.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
         + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
   }
 
@@ -632,7 +632,7 @@ public class BasePageObject {
       java.util.function.Predicate<? super Pair<String, String>> condition) {
     Optional<String> newTab = driver.getWindowHandles().stream()
         .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
-        .peek(handleTitle -> PageObjectLogging.log("Found window",
+        .peek(handleTitle -> Log.log("Found window",
             String.format("Window with title %s", handleTitle), true))
         .filter(condition).map(Pair::getKey).findFirst();
     return newTab
@@ -640,13 +640,13 @@ public class BasePageObject {
   }
 
   public WebDriver switchToWindowWithTitle(String title) {
-    PageObjectLogging.log("Switching windows",
+    Log.log("Switching windows",
         String.format("Switching to window with title: %s", title), true);
     return driver.switchTo().window(getTabWithTitle(title));
   }
 
   public WebDriver switchAwayFromWindowWithTitle(String title) {
-    PageObjectLogging.log("Switching windows",
+    Log.log("Switching windows",
         String.format("Switching away from window with title: %s", title), true);
     return driver.switchTo().window(getOtherTab(title));
   }
@@ -706,7 +706,7 @@ public class BasePageObject {
       wait.forElementVisible(element);
       result = true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Element: "+ element.toString() + " not found.", e);
+      Log.info("Element: "+ element.toString() + " not found.", e);
       result = false;
     }
     return result;

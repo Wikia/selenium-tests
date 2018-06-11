@@ -14,9 +14,9 @@ public class URLsContent {
   public static final String USER_FORGOT_PASSWORD = "/forgot-password";
   public static final String SPECIAL_CREATE_NEW_WIKI = "/Special:CreateNewWiki";
   public static final String SPECIAL_WHERE_IS_EXTENSION = "/Special:WhereIsExtension";
-  public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
 
   // Special Urls - used with WIKI_DIR
+  public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_NEW_FILES = "Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "Special:Videos";
   public static final String SPECIAL_UPLOAD = "Special:Upload";

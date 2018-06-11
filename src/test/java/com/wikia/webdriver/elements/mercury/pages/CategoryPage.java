@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -35,7 +35,7 @@ public class CategoryPage extends WikiBasePageObject {
     this.navigate.toPageByPath(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
-    PageObjectLogging.logInfo(String.format("%s category page opened", categoryName));
+    Log.info(String.format("%s category page opened", categoryName));
 
     return this;
   }
@@ -51,7 +51,7 @@ public class CategoryPage extends WikiBasePageObject {
     member.click();
 
     waitForPageReload();
-    PageObjectLogging.logInfo(String.format("You were redirected to page: \"%s\".", memberName));
+    Log.info(String.format("You were redirected to page: \"%s\".", memberName));
 
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
@@ -64,42 +64,42 @@ public class CategoryPage extends WikiBasePageObject {
 
   public boolean categoryMembersContainerIsVisible() {
     wait.forElementVisible(categoryMembersContainer);
-    PageObjectLogging.logInfo("Category members container is visible.");
+    Log.info("Category members container is visible.");
 
     return true;
   }
 
   public boolean hasCategoryMembers() {
     wait.forElementVisible(categoryMembers);
-    PageObjectLogging.logInfo("Category has members.");
+    Log.info("Category has members.");
 
     return driver.findElements(categoryMembers).size() > 0;
   }
 
   public boolean nextButtonIsVisible() {
     wait.forElementVisible(nextButton);
-    PageObjectLogging.logInfo("Next page button is visible.");
+    Log.info("Next page button is visible.");
 
     return driver.findElement(nextButton).isDisplayed();
   }
 
   public boolean previousButtonIsVisible() {
     wait.forElementVisible(previousButton);
-    PageObjectLogging.logInfo("Previous page button is visible.");
+    Log.info("Previous page button is visible.");
 
     return driver.findElement(previousButton).isDisplayed();
   }
 
   public CategoryPage clickNextButton() {
     this.scrollAndClick(driver.findElement(nextButton));
-    PageObjectLogging.logInfo("Next page button clicked.");
+    Log.info("Next page button clicked.");
 
     return this;
   }
 
   public CategoryPage clickPreviousButton() {
     this.scrollAndClick(driver.findElement(previousButton));
-    PageObjectLogging.logInfo("Previous page button clicked.");
+    Log.info("Previous page button clicked.");
 
     return this;
   }

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.notifications;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -44,7 +44,7 @@ public class Notifications extends BasePageObject {
   }
 
   public boolean contains(Notification notification) {
-    PageObjectLogging.log("Searching for notification", notification.getContent(), true);
+    Log.log("Searching for notification", notification.getContent(), true);
     List<WebElement> notifications = notificationCards
       .stream()
       .filter(card -> card

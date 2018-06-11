@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
@@ -29,7 +29,7 @@ public class AdsVelesObject extends AdsBaseObject {
       wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Video Veles ad not displayed", ex, true);
+      Log.log("Video Veles ad not displayed", ex, true);
       return false;
     }
   }

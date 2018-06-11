@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.fandom.components;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +17,7 @@ public class LoadMore extends BasePageObject {
         try {
             return loadMoreButton.isDisplayed();
         } catch (ElementNotFoundException e) {
-            PageObjectLogging.log("LoadMore", "Load More button is not displayed. " + e.getMessage(), false);
+            Log.log("LoadMore", "Load More button is not displayed. " + e.getMessage(), false);
             return false;
         }
     }
@@ -27,7 +27,7 @@ public class LoadMore extends BasePageObject {
             WebElement element = loadPosts();
             return element.isDisplayed();
         } catch (ElementNotFoundException e) {
-            PageObjectLogging.log("LoadMore", "More posts did not load. " + e.getMessage(), false);
+            Log.log("LoadMore", "More posts did not load. " + e.getMessage(), false);
             return false;
         }
     }

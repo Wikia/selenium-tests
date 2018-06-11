@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
@@ -26,7 +26,7 @@ public class Category extends WikiBasePageObject {
     wait.forElementClickable(categoryMenu);
     categoryMenu.click();
 
-    PageObjectLogging.logInfo("Category component was toggled");
+    Log.info("Category component was toggled");
 
     return this;
   }
@@ -36,14 +36,14 @@ public class Category extends WikiBasePageObject {
         By.cssSelector(String.format("a[title=\"%s\"]", name))
     );
 
-    PageObjectLogging.logInfo(String.format("Open category page named: \"%s\".", name));
+    Log.info(String.format("Open category page named: \"%s\".", name));
     wait.forElementClickable(link);
     link.click();
     waitForPageReload();
 
     Assertion.assertTrue(getCurrentUrl().contains("/wiki/Category:"),
                          "Url is different than /wiki/Category:");
-    PageObjectLogging.logInfo("You were redirected to /wiki/Category:");
+    Log.info("You were redirected to /wiki/Category:");
 
     return new CategoryPage();
   }

@@ -5,17 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialBlockListPage extends WikiBasePageObject {
 
-  private static final String SPECIAL_BLOCKLIST_PATH = "Special:BlockList";
+  private static final String SPECIAL_BLOCKLIST = "Special:BlockList";
 
   @FindBy(css = "#mw-input-wpTarget")
   private WebElement userNameField;
@@ -27,8 +27,8 @@ public class SpecialBlockListPage extends WikiBasePageObject {
   private WebElement expirationDateElement;
 
   public SpecialBlockListPage open() {
-    getUrl(urlBuilder.getUrlForPath(SPECIAL_BLOCKLIST_PATH));
-    PageObjectLogging.log("Open Special Block List Page", "blocked users list page opened", true);
+    getUrl(urlBuilder.getUrlForWikiPage(SPECIAL_BLOCKLIST));
+    Log.log("Open Special Block List Page", "blocked users list page opened", true);
 
     return this;
   }
@@ -36,14 +36,14 @@ public class SpecialBlockListPage extends WikiBasePageObject {
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    PageObjectLogging.log("Special:BlockList typeInUserName", userName + " typed in username field",
+    Log.log("Special:BlockList typeInUserName", userName + " typed in username field",
         true);
   }
 
   private void clickSearchButton() {
     wait.forElementVisible(searchButton);
     scrollAndClick(searchButton);
-    PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
+    Log.log("Special:BlockList clickSearchButton", "search button clicked", true);
   }
 
   public void searchForUser(String userName) {
@@ -53,14 +53,14 @@ public class SpecialBlockListPage extends WikiBasePageObject {
 
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
-    PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
+    Log.log("Special:BlockList verifyUSerUnblocked",
         "verified that user is not on blocked users list", true, driver);
   }
 
   public void verifyUserBlocked(String userName) {
     wait.forElementVisible(
         By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
-    PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
+    Log.log("Special:BlockList verifyUSerUnblocked",
         "verified that user is on blocked users list", true, driver);
   }
 
@@ -85,7 +85,7 @@ public class SpecialBlockListPage extends WikiBasePageObject {
     } catch (ParseException ex) {
       throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
-    PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"),
+    Log.log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"),
         true);
     return isBlocked;
   }

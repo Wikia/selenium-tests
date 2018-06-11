@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -128,7 +128,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(userPostedMessage);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Message on chat not displayed", ex, true);
+      Log.log("Message on chat not displayed", ex, true);
       return false;
     }
   }
@@ -137,7 +137,7 @@ public class ChatPage extends WikiBasePageObject {
     try {
       return messageLengthExceeded.isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Warning about too long message not displayed", ex, true);
+      Log.log("Warning about too long message not displayed", ex, true);
       return false;
     }
   }
@@ -147,7 +147,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(privateMessagesHeader);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Message header not displayed", ex, true);
+      Log.log("Message header not displayed", ex, true);
       return false;
     }
   }
@@ -157,7 +157,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forTextInElementAfterRefresh(By.cssSelector("#PageHeader"),"Permissions error.");
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Permission error title not displayed", ex, true);
+      Log.log("Permission error title not displayed", ex, true);
       return false;
     }
   }
@@ -167,7 +167,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(privateMessageNotification);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Private message notification not displayed", ex, true);
+      Log.log("Private message notification not displayed", ex, true);
       return false;
     }
   }
@@ -177,7 +177,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(userPrivateMessageNotification(notificationCount));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Private messages counter not displayed", ex, true);
+      Log.log("Private messages counter not displayed", ex, true);
       return false;
     }
   }
@@ -186,7 +186,7 @@ public class ChatPage extends WikiBasePageObject {
     try {
       return privateMassageButton.isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Private message button not displayed", ex, true);
+      Log.log("Private message button not displayed", ex, true);
       return false;
     }
   }
@@ -196,7 +196,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(privateChatHeader);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Private chat header not displayed", ex, true);
+      Log.log("Private chat header not displayed", ex, true);
       return false;
     }
   }
@@ -209,7 +209,7 @@ public class ChatPage extends WikiBasePageObject {
     try {
       return userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("User in private section not displayed", ex, true);
+      Log.log("User in private section not displayed", ex, true);
       return false;
     }
   }
@@ -219,7 +219,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(getUserUnbanMessage(userName));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Un-ban message not displayed", ex, true);
+      Log.log("Un-ban message not displayed", ex, true);
       return false;
     }
   }
@@ -229,7 +229,7 @@ public class ChatPage extends WikiBasePageObject {
       Assertion.assertEquals(userName, userNameTitle.getText());
       return userPageMessageWallTab.isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Message Wall tab not displayed", ex, true);
+      Log.log("Message Wall tab not displayed", ex, true);
       return false;
     }
   }
@@ -239,7 +239,7 @@ public class ChatPage extends WikiBasePageObject {
       Assertion.assertEquals(userName, userNameTitle.getText());
       return userPageContributionsTab.isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Contribution tab is not displayed", ex, true);
+      Log.log("Contribution tab is not displayed", ex, true);
       return false;
     }
   }
@@ -249,7 +249,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(userBlockedMessageField);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("User kicked message not displayed", ex, true);
+      Log.log("User kicked message not displayed", ex, true);
       return false;
     }
   }
@@ -259,7 +259,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(blockPrivateMassageButton);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Block private message button not displayed", ex, true);
+      Log.log("Block private message button not displayed", ex, true);
       return false;
     }
   }
@@ -269,43 +269,43 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(userModOptions);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Staff options are not displayed", ex, true);
+      Log.log("Staff options are not displayed", ex, true);
       return false;
     }
   }
 
   public void clickOnMainChat() {
     chatWordmarkImage.click();
-    PageObjectLogging.log("clickOnMainChat", "main chat is clicked", true);
+    Log.log("clickOnMainChat", "main chat is clicked", true);
   }
 
   public void clickOnUserInPrivateMessageSection(String userName) {
     //We need two clicks to see user options in privet section
     userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
     userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
-    PageObjectLogging.log("clickOnUserInPrivateMessageSection", "private messages user " + userName
+    Log.log("clickOnUserInPrivateMessageSection", "private messages user " + userName
             + " is clicked", true);
   }
 
   private void clickBanUser(String userName) {
     banUserButton.click();
     wait.forElementVisible(chatBanModal);
-    PageObjectLogging.log("clickBanUser", "ban user " + userName + " is clicked", true);
+    Log.log("clickBanUser", "ban user " + userName + " is clicked", true);
   }
 
   public void clickOpenUserMessageWall() {
     userMessageWallButton.click();
-    PageObjectLogging.log("clickOpenUserMessageWall", " Message wall button is clicked", true);
+    Log.log("clickOpenUserMessageWall", " Message wall button is clicked", true);
   }
 
   public void clickOpenUserContributions() {
     userContributionsButton.click();
-    PageObjectLogging.log("clickOpenUserContributions", " Cotributions button is clicked", true);
+    Log.log("clickOpenUserContributions", " Cotributions button is clicked", true);
   }
 
   public void clickOnUserOptionsKickButton() {
     kickUserButton.click();
-    PageObjectLogging.log("clickOnUserOptionsKikButton", " kick user button is clicked", true);
+    Log.log("clickOnUserOptionsKikButton", " kick user button is clicked", true);
   }
 
   public void clickOnDifferentUser(String userName) {
@@ -320,7 +320,7 @@ public class ChatPage extends WikiBasePageObject {
       }
       i++;
     }
-    PageObjectLogging.log("clickOnDifferentUser", userName + " button clicked", true);
+    Log.log("clickOnDifferentUser", userName + " button clicked", true);
   }
 
   public void switchToSecondTab(String firstTab) {
@@ -335,14 +335,14 @@ public class ChatPage extends WikiBasePageObject {
   public void unBanUser(String userName) {
     wait.forElementClickable(getUserUnbanLink(userName));
     getUserUnbanLink(userName).click();
-    PageObjectLogging.log("unBanUser", userName + " is no longer banned", true);
+    Log.log("unBanUser", userName + " is no longer banned", true);
   }
 
   public void banUser(String userName) {
     clickOnDifferentUser(userName);
     clickBanUser(userName);
     chatBanModalButton.click();
-    PageObjectLogging.log("clickBanUser", userName + " ban modal is closed", true);
+    Log.log("clickBanUser", userName + " ban modal is closed", true);
   }
 
   public void openUserDropDownInPrivateMessageSection(String userName) {
@@ -355,7 +355,7 @@ public class ChatPage extends WikiBasePageObject {
       }
       i++;
     }
-    PageObjectLogging.log("openUserDropDownInPrivateMessageSection", userName + " button clicked",
+    Log.log("openUserDropDownInPrivateMessageSection", userName + " button clicked",
             true);
   }
 
@@ -384,7 +384,7 @@ public class ChatPage extends WikiBasePageObject {
       }
       i++;
     }
-    PageObjectLogging.log("allowPrivateMessageFromUser", "private messages from " + userName
+    Log.log("allowPrivateMessageFromUser", "private messages from " + userName
             + " are allowed now", true);
   }
 
@@ -404,7 +404,7 @@ public class ChatPage extends WikiBasePageObject {
       try {
         Thread.sleep(1500);
       } catch (InterruptedException e) {
-        PageObjectLogging.logInfo("Sleep Interrupted", e);
+        Log.info("Sleep Interrupted", e);
       }
       messagesSent.add(message);
     }
@@ -436,7 +436,7 @@ public class ChatPage extends WikiBasePageObject {
     privateMassageButton.click();
     wait.forElementVisible(privateMessagesHeader);
     clickOnUserInPrivateMessageSection(userName);
-    PageObjectLogging.log("selectPrivateMessageToUser", "private message selected from dropdown",
+    Log.log("selectPrivateMessageToUser", "private message selected from dropdown",
             true);
   }
 
@@ -445,7 +445,7 @@ public class ChatPage extends WikiBasePageObject {
       wait.forElementVisible(By.xpath(String.format(PATH_EMOTICON_ON_CHAT, emoticon)));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Emoticon " + emoticon + " on chat not displayed", ex, true);
+      Log.log("Emoticon " + emoticon + " on chat not displayed", ex, true);
       return false;
     }
   }

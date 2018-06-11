@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.dpl;
 
 import static com.google.common.collect.ImmutableSet.of;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class DplQueryTestPageObject extends WikiBasePageObject {
 
   public void openDplQueryTestPage(String wikiURL) {
     getUrl(wikiURL + "/wiki/" + DPL_QUERY_TEST_PAGE);
-    PageObjectLogging.log("openDplQueryTestPage",
+    Log.log("openDplQueryTestPage",
         "DPL query test page was opened", true);
   }
 

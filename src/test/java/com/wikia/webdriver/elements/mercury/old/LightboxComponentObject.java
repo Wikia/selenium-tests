@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.old;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
@@ -30,7 +30,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
     try {
       wait.forElementVisible(lightboxContent, 5, 1000);
     } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
-      PageObjectLogging.log("Lightbox not opened", e, true);
+      Log.log("Lightbox not opened", e, true);
 
       return false;
     }

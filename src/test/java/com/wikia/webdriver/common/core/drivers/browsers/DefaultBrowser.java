@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 public class DefaultBrowser extends BrowserAbstract {
 
@@ -14,7 +14,7 @@ public class DefaultBrowser extends BrowserAbstract {
     try {
       browserClass = Browser.lookup(Configuration.getBrowser()).getBrowserClass().newInstance();
     } catch (InstantiationException | IllegalAccessException e) {
-      PageObjectLogging.logError("Could not initialize the browser", e);
+      Log.logError("Could not initialize the browser", e);
     }
   }
 

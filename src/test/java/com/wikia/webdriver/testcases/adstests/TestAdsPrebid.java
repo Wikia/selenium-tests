@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
@@ -97,7 +97,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
         return true;
       }
     } catch (Exception ex) {
-      PageObjectLogging.log("Lack of rubicon request in all slots", ex, true);
+      Log.log("Lack of rubicon request in all slots", ex, true);
       return false;
     }
     return false;

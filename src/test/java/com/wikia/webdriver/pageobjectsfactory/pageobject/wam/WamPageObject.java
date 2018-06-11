@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.joda.time.DateTime;
@@ -10,16 +10,13 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.Period;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -61,7 +58,7 @@ public class WamPageObject extends BasePageObject {
   public void openWamPage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
     waitForPageLoad();
-    PageObjectLogging.log("openWamPage", "WAM page opened", true);
+    Log.log("openWamPage", "WAM page opened", true);
   }
 
   /**
@@ -71,12 +68,12 @@ public class WamPageObject extends BasePageObject {
   public void verifyTabIsSelected(WamTab tab) {
     WebElement wamTab =
             driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
-    PageObjectLogging.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
+    Log.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
     if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
-      PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's selected", true);
+      Log.log("verifyTabIsSelected", "the tab's anchor's selected", true);
     } else {
-      PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's NOT selected", false);
+      Log.log("verifyTabIsSelected", "the tab's anchor's NOT selected", false);
     }
   }
 
@@ -94,10 +91,10 @@ public class WamPageObject extends BasePageObject {
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
-      PageObjectLogging.log("verifyWamIndexIsNotEmpty",
+      Log.log("verifyWamIndexIsNotEmpty",
               "there are more rows in the table than just a head row (" + rows + ")", true);
     } else {
-      PageObjectLogging.log("verifyTabIsSelected", "there is only the head row", false);
+      Log.log("verifyTabIsSelected", "there is only the head row", false);
     }
   }
 
@@ -128,10 +125,10 @@ public class WamPageObject extends BasePageObject {
     }
 
     if (result.equals(true)) {
-      PageObjectLogging.log("verifyWamVerticalFilterOptions",
+      Log.log("verifyWamVerticalFilterOptions",
               "There are correct options in the vertical select box", true);
     } else {
-      PageObjectLogging.log("verifyWamVerticalFilterOptions",
+      Log.log("verifyWamVerticalFilterOptions",
               "There is invalid option in the vertical select box", false);
     }
   }
@@ -170,7 +167,7 @@ public class WamPageObject extends BasePageObject {
   public void clickNextPaginator() {
     wait.forElementVisible(paginationNext);
     scrollAndClick(paginationNext);
-    PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
+    Log.log("clickNextPaginator", "next button in pagination was clicked", true);
   }
 
   public void selectTab(WamTab tab) {

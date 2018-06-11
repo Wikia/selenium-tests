@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -26,7 +26,7 @@ public class SimpleViewportRelativeCoordsProvider extends CoordsProvider {
                 dimension.getWidth(),
                 dimension.getHeight());
 
-        PageObjectLogging.log("SimpleViewportRelativeCoordsProvider",
+        Log.log("SimpleViewportRelativeCoordsProvider",
                 "Start: " + coords.x + "x" + coords.y + " , size: " + coords.width + "x" + coords.height, true);
         return coords;
     }

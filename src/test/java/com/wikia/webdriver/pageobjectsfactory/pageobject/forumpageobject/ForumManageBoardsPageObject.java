@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -38,26 +38,26 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   private void openCreateNewBoardForm() {
     wait.forElementVisible(createBoardButton);
     createBoardButton.click();
-    PageObjectLogging.log("openCreateNewBoardForm", "create new board form opened", true);
+    Log.log("openCreateNewBoardForm", "create new board form opened", true);
   }
 
   private void typeBoardTitle(String title) {
     wait.forElementVisible(boardTitleField);
     boardTitleField.sendKeys(title);
-    PageObjectLogging.log("typeBoardTitle", "board title: '" + title + "' typed in", true);
+    Log.log("typeBoardTitle", "board title: '" + title + "' typed in", true);
   }
 
   private void typeBoradDescription(String description) {
     wait.forElementVisible(boardDescriptionField);
     boardDescriptionField.sendKeys(description);
-    PageObjectLogging
+    Log
         .log("typeBoardDescription", "board description: '" + description + "' typed in", true);
   }
 
   private void submitNewBoard() {
     wait.forElementVisible(boardSubmitButton);
     scrollAndClick(boardSubmitButton);
-    PageObjectLogging.log("submitNewBoard", "new board submitted", true);
+    Log.log("submitNewBoard", "new board submitted", true);
   }
 
   public void createNewBoard(String title, String description) {
@@ -70,7 +70,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   public void verifyBoardCreated(String title, String description) {
     wait.forElementVisible(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
                                     + "')]/../../../p[contains(text(), '" + description + "')]"));
-    PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);
+    Log.log("verifyBoardCreated", "recently created board verified", true);
   }
 
   private void clickDeleteForum(String name) {
@@ -79,7 +79,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']"));
     scrollAndClick(deleteButton);
-    PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true);
+    Log.log("clickDeleteForum", "delete forum button clicked", true);
   }
 
   private void confirmDeleteForum(String deletedName, String mergerdName) {
@@ -87,13 +87,13 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     deleteBoardConfirmationField.sendKeys(deletedName);
     Select select = new Select(mergeToBoard);
     select.selectByVisibleText(mergerdName);
-    PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
+    Log.log("confirmDeleteForum", "delete forum form populated", true);
   }
 
   private void clickDeleteAndMergeForum() {
     wait.forElementVisible(deleteAndMergeButton);
     scrollAndClick(deleteAndMergeButton);
-    PageObjectLogging.log("clickDeleteAndMergeForum", "delete and merge button clicked", true);
+    Log.log("clickDeleteAndMergeForum", "delete and merge button clicked", true);
   }
 
   private void verifyForumDeletedText(String deletedName) {
@@ -102,7 +102,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
             .map(Notification::getMessage)
             .collect(Collectors.toList()),
             "\"Board:" + deletedName + "\" has been deleted.");
-    PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);
+    Log.log("verifyForumDeletedText", "forum deleted text verified", true);
   }
 
   public void deleteForum(String sourceForumName, String destinationForumName) {
@@ -118,26 +118,26 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
 
       getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("verifyForumExists", e, false);
+      Log.log("verifyForumExists", e, false);
     }
     wait.forElementVisible(
         By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
-    PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
+    Log.log("verifyForumExists", "verified forum exists", true);
   }
 
   public void verifyForumNotExists(String forumName, String wikiURL) {
     try {
       getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("verifyForumNotExists", e, false);
+      Log.log("verifyForumNotExists", e, false);
     }
     Assertion.assertListContains(
         getNotifications(NotificationType.WARN).stream()
             .map(Notification::getMessage)
             .collect(Collectors.toList()),
         "There is no Forum Board with that title. Please try again or check out this list of Forum Boards.");
-    PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
+    Log.log("verifyForumNotExists", "verified forum not exists", true);
   }
 
   private void clickModifyForum(String forumName) {
@@ -146,7 +146,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']"));
     scrollAndClick(editPecil);
-    PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
+    Log.log("clickModifyForum", "modify forum button clicked", true);
   }
 
   private void clearEditBoardFields() {
@@ -154,7 +154,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     wait.forElementVisible(boardDescriptionField);
     boardTitleField.clear();
     boardDescriptionField.clear();
-    PageObjectLogging.log("clickEditBoardFields", "edit boards fields cleared", true);
+    Log.log("clickEditBoardFields", "edit boards fields cleared", true);
   }
 
   public void editForum(String forumName, String newTitle, String newDescription) {
@@ -178,7 +178,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     try {
       Thread.sleep(5000);
     } catch (InterruptedException e) {
-      PageObjectLogging.logInfo("Sleep interrupted while moving forum", e);
+      Log.info("Sleep interrupted while moving forum", e);
     }
   }
 
@@ -191,7 +191,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     try {
       Thread.sleep(5000);
     } catch (InterruptedException e) {
-      PageObjectLogging.logInfo("Sleep interrupted while moving forum", e);
+      Log.info("Sleep interrupted while moving forum", e);
     }
   }
 }

@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -73,11 +73,11 @@ public class AdsHopObject extends AdsBaseObject {
     }
     Set<String> lineItemsSet = new HashSet<>(lineItems);
     if (lineItemsSet.size() < lineItems.size()) {
-      PageObjectLogging.log("Line item ids",
+      Log.log("Line item ids",
                             slotName + " slot has the divs with the same line item ids",
                             false);
     } else {
-      PageObjectLogging.log("Line item ids",
+      Log.log("Line item ids",
                             slotName + " slot has the divs with the different line item ids",
                             true);
     }

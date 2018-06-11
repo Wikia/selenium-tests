@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,7 +28,7 @@ public class WikiFeatures extends BasePageObject {
 
   public WikiFeatures openWikiFeatures(String wikiURL) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_WIKI_FEATURES);
-    PageObjectLogging.log("openWikiFeaturesPage", "special wiki features page opened", true, driver);
+    Log.log("openWikiFeaturesPage", "special wiki features page opened", true, driver);
 
     return this;
   }

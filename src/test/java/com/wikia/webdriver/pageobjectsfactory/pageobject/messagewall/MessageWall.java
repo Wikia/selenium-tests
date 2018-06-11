@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -113,7 +113,7 @@ public class MessageWall extends WikiBasePageObject {
       jsActions.focus(messageBody);
     }
     wait.forAttributeToContain(newWallMessageContainer, HTML.Attribute.CLASS.toString(), "focused");
-    PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
+    Log.log("triggerMessageArea", "message area triggered", true);
 
     return new MiniEditorComponentObject(driver);
   }
@@ -122,7 +122,7 @@ public class MessageWall extends WikiBasePageObject {
     while (!driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy).isDisplayed()) {
       jsActions.focus(driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy));
     }
-    PageObjectLogging.log("triggerReplyMessageArea", "reply message area triggered", true);
+    Log.log("triggerReplyMessageArea", "reply message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
 
@@ -131,7 +131,7 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(editButtonBy));
     setDisplayStyle(FIRST_MESSAGE_MENU, "none");
-    PageObjectLogging.log("triggerEditMessageArea", "edit message area triggered", true);
+    Log.log("triggerEditMessageArea", "edit message area triggered", true);
   }
 
   public void submit() {
@@ -140,7 +140,7 @@ public class MessageWall extends WikiBasePageObject {
     builder.moveByOffset(0, 0).perform();
 
     wait.forElementNotVisible(postButton);
-    PageObjectLogging.log("submit", "message submitted", true);
+    Log.log("submit", "message submitted", true);
   }
 
   public void submitEdition() {
@@ -149,20 +149,20 @@ public class MessageWall extends WikiBasePageObject {
         driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
     jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
-    PageObjectLogging.log("submitEdition", "message wallEdition submitted", true);
+    Log.log("submitEdition", "message wallEdition submitted", true);
   }
 
   public void submitQuote() {
     driver.switchTo().defaultContent();
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy));
     wait.forElementNotPresent(By.cssSelector(".new-reply.loading"));
-    PageObjectLogging.log("submitQuote", "message quote submitted", true);
+    Log.log("submitQuote", "message quote submitted", true);
   }
 
   public MiniEditorPreviewComponentObject preview() {
     driver.switchTo().defaultContent();
     scrollAndClick(previewButton);
-    PageObjectLogging.log("preview", "MiniEditor preview opened", true);
+    Log.log("preview", "MiniEditor preview opened", true);
     return new MiniEditorPreviewComponentObject(driver);
   }
 
@@ -171,13 +171,13 @@ public class MessageWall extends WikiBasePageObject {
     messageTitleField.clear();
     Typing.sendKeysHumanSpeed(messageTitleField, title);
     wait.forAttributeToContain(messageTitleField, "value", title);
-    PageObjectLogging.log("writeTitle", "title written",
+    Log.log("writeTitle", "title written",
         messageTitleField.getAttribute("value").equals(title));
   }
 
   public void writeSourceMode(String text) {
     sourceModeInputField.sendKeys(text);
-    PageObjectLogging.log("writeSourceMode", "message " + text + " written in source mode", true);
+    Log.log("writeSourceMode", "message " + text + " written in source mode", true);
   }
 
   public MessageWallCloseRemoveThreadPageObject clickRemoveThread() {
@@ -187,7 +187,7 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(removeButtonBy));
     setDisplayStyle(NEW_MESSAGE_MENU, "none");
-    PageObjectLogging.log("clickRemoveThread", "remove thread button clicked", true);
+    Log.log("clickRemoveThread", "remove thread button clicked", true);
     return new MessageWallCloseRemoveThreadPageObject(driver);
   }
 
@@ -199,7 +199,7 @@ public class MessageWall extends WikiBasePageObject {
     jsActions.scrollElementIntoViewPort(closeButton);
     closeButton.click();
     setDisplayStyle(NEW_MESSAGE_MENU, "none");
-    PageObjectLogging.log("clickCloseThread", "close thread button clicked", true);
+    Log.log("clickCloseThread", "close thread button clicked", true);
     return new MessageWallCloseRemoveThreadPageObject(driver);
   }
 
@@ -207,7 +207,7 @@ public class MessageWall extends WikiBasePageObject {
     setDisplayStyle(FIRST_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(quoteButtonBy));
     setDisplayStyle(FIRST_MESSAGE_MENU, "none");
-    PageObjectLogging.log("clickQuoteButton", "quote button clicked", true);
+    Log.log("clickQuoteButton", "quote button clicked", true);
     return new MiniEditorComponentObject(driver);
   }
 
@@ -216,14 +216,14 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(reopenButtonBy));
     setDisplayStyle(FIRST_MESSAGE_MENU, "none");
-    PageObjectLogging.log("clickReopenThread", "reopen button clicked", true);
+    Log.log("clickReopenThread", "reopen button clicked", true);
   }
 
   public void clickSourceModeButton() {
     wait.forElementClickable(sourceModeButton);
     scrollAndClick(sourceModeButton);
     wait.forElementVisible(By.cssSelector(".editor-open.mode-source"));
-    PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
+    Log.log("clickSourceModeButton", "source mode button clicked", true);
   }
 
   public void clickBoldButton() {
@@ -232,10 +232,10 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(boldButton);
     if (state) {
       wait.forElementPresent(By.cssSelector(".cke_button__bold.cke__button_off"));
-      PageObjectLogging.log("clickBoldButton", "italic button is now OFF", true);
+      Log.log("clickBoldButton", "italic button is now OFF", true);
     } else {
       wait.forElementPresent(By.cssSelector(".cke_button__bold.cke_button_on"));
-      PageObjectLogging.log("clickBoldButton", "italic button is now ON", true);
+      Log.log("clickBoldButton", "italic button is now ON", true);
     }
   }
 
@@ -245,30 +245,30 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(italicButton);
     if (state) {
       wait.forElementPresent(By.cssSelector(".cke_button__italic.cke_button_off"));
-      PageObjectLogging.log("clickItalicButton", "italic button is now OFF", true);
+      Log.log("clickItalicButton", "italic button is now OFF", true);
     } else {
       wait.forElementPresent(By.cssSelector(".cke_button__italic.cke_button_on"));
-      PageObjectLogging.log("clickItalicButton", "italic button is now ON", true);
+      Log.log("clickItalicButton", "italic button is now ON", true);
     }
   }
 
   public MessageWallAddLinkComponentObject clickLinkButton() {
     wait.forElementVisible(linkButton);
     scrollAndClick(linkButton);
-    PageObjectLogging.log("clickLinkButton", "link button clicked", true);
+    Log.log("clickLinkButton", "link button clicked", true);
     return new MessageWallAddLinkComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickImageButton() {
     wait.forElementVisible(imageButton);
     scrollAndClick(imageButton);
-    PageObjectLogging.log("clickImageButton", "image button clicked", true);
+    Log.log("clickImageButton", "image button clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public void verifyThreadRemoved() {
     wait.forElementVisible(removedThreadMessage);
-    PageObjectLogging.log("verifyThreadRemoved", "verifyed thread removed", true);
+    Log.log("verifyThreadRemoved", "verifyed thread removed", true);
   }
 
   public void verifyThreadClosed(String userName, String reason) {
@@ -276,7 +276,7 @@ public class MessageWall extends WikiBasePageObject {
     Assertion.assertStringContains(
         driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
         userName + " closed this thread because:\n" + reason);
-    PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
+    Log.log("verifyThreadClosed", "verifyed thread closed", true);
   }
 
   public void verifyThreadReopened() {
@@ -285,12 +285,12 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     wait.forElementPresent(closeButtonBy);
     setDisplayStyle(FIRST_MESSAGE_MENU, "none");
-    PageObjectLogging.log("verifyThreadReopened", "verifyed thread reopened", true);
+    Log.log("verifyThreadReopened", "verifyed thread reopened", true);
   }
 
   public void verifyMessageTitle(String title) {
     wait.forTextInElement(messageTitleBy, title);
-    PageObjectLogging.log("verifyMessageTitle", "message with title: " + title + ", verified",
+    Log.log("verifyMessageTitle", "message with title: " + title + ", verified",
         true);
   }
 
@@ -380,7 +380,7 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyImageAdded(String title) {
     wait.forTextInElement(messageTitleBy, title);
     driver.findElement(firstMessageWrapperBy).findElement(imageBy);
-    PageObjectLogging.log("verifyImageAdded", "verifyed image " + title + " added", true);
+    Log.log("verifyImageAdded", "verifyed image " + title + " added", true);
   }
 
   public MessageWallThreadPageObject openThread(String threadName) {
@@ -398,14 +398,14 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyReplyAreaAvatarNotVisible() {
     waitForElementNotVisibleByElement(replyAreaAvatars);
-    PageObjectLogging.log("verifyReplyAreaAvatarNotVisible",
+    Log.log("verifyReplyAreaAvatarNotVisible",
         "as expected, avatar next to reply area is not visible", true);
   }
 
   public void verifyPostedMessageVideo(String title) {
     wait.forElementVisible(By.xpath("//div[@class='msg-title']/a[contains(text(), " + "'" + title
         + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
-    PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
+    Log.log("verifyPostedMessageImage", "message with image title verified", true);
   }
   public boolean isEditionVisible() {
     return isVisible(wallEdition);

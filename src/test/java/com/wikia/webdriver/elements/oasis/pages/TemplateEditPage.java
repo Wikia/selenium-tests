@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -41,7 +41,7 @@ public class TemplateEditPage extends WikiBasePageObject {
       wait.forElementVisible(editArea);
       return editArea.isDisplayed();
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Edit are was not displayed");
+      Log.info("Edit are was not displayed");
     }
     return false;
   }

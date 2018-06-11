@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
@@ -13,7 +13,7 @@ public class FacebookAuthContext extends BasePageObject {
 
   protected FacebookSignupModalComponentObject clickFacebookSignUp() {
     wait.forElementClickable(connectWithFacebookButton).click();
-    PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
+    Log.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
     return new FacebookSignupModalComponentObject();
   }
 

@@ -18,10 +18,6 @@ public class NewTestTemplate extends CoreTestTemplate {
   protected String wikiCorporateURL;
   protected String wikiCorpSetupURL;
 
-  @BeforeMethod(alwaysRun = true)
-  public void start(Method method, Object[] data) {
-  }
-
   protected void loadFirstPage() {
     driver.get(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_VERSION) + "?noexternals=1");
   }
