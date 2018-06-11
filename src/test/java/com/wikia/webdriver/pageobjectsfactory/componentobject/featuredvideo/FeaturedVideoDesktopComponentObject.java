@@ -81,7 +81,7 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
   }
 
   public FeaturedVideoDesktopComponentObject openWikiArticle(String articleName) {
-    this.openWikiPage(getWikiUrl() + articleName + "?noads=1");
+    this.openWikiPage(getWikiUrl() + "/" + articleName + "?noads=1");
 
     return this;
   }

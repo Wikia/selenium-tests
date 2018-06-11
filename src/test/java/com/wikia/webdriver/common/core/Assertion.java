@@ -96,7 +96,8 @@ public class Assertion extends Assert {
     boolean assertion = true;
     try {
       if (current.contains(pattern)) {
-        throw new AssertionError();
+        throw new AssertionError(
+            "String [" + currentEncoded + "] contains pattern [" + patternEncoded + "]");
       }
     } catch (AssertionError ass) {
       addVerificationFailure(ass);
