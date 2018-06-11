@@ -42,7 +42,7 @@ public class FilePage extends WikiBasePageObject {
 
   public FilePage open(String fileName, boolean noRedirect) {
     String url =
-        urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
+        urlBuilder.getUrl() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
     if (noRedirect) {
       url = urlBuilder.appendQueryStringToURL(url, "redirect=no");
     }

@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -83,8 +82,7 @@ public class MessageWall extends WikiBasePageObject {
 
 
   public MessageWall open(String userName) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
-        + userName);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.USER_MESSAGE_WALL + userName));
     waitForPageLoad();
 
     try {
@@ -353,8 +351,14 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyInternalLink(String title, String target, String text, String wikiURL) {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href"), wikiURL + "/wiki/" + target);
+
+    String actualURL =
+        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
+        .getAttribute("href").replaceAll("^http[s]?:\\/\\/", "");
+    String expectedURL =
+        String.format("%s/wiki/%s",wikiURL,target).replaceAll("^http[s]?:\\/\\/", "");
+
+    Assertion.assertEquals(expectedURL, actualURL);
     Assertion.assertEquals(
         editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text);
   }

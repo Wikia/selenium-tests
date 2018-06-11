@@ -1,7 +1,14 @@
 package com.wikia.webdriver.common.logging;
 
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.*;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -14,6 +21,18 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.commons.codec.binary.Base64;
@@ -23,23 +42,17 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -523,7 +536,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                                  .forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
-    String testingEnvironmentUrl = new UrlBuilder().getUrlForWiki();
+    String testingEnvironmentUrl = UrlBuilder.createUrlBuilder().getUrl();
     String testingEnvironment = Configuration.getEnv();
     String testedVersion = "TO DO: GET WIKI VERSION HERE";
 

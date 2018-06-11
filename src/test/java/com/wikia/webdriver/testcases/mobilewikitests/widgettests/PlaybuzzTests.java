@@ -28,7 +28,7 @@ public class PlaybuzzTests extends NewTestTemplate {
   private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "PlaybuzzMercury/OneWidget";
   private static final String PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME = "PlaybuzzMercury/MultipleWidgets";
   private static final String PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME = "PlaybuzzMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryPlaybuzzWidgetTest_001")
@@ -46,7 +46,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     WidgetPageObject widget =
             new PlaybuzzWidgetPageObject().create(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

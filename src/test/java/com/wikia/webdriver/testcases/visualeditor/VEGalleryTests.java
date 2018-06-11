@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertGalleryDialog;
@@ -27,7 +28,7 @@ public class VEGalleryTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
+    wikiURL = UrlBuilder.createUrlBuilderForWiki(URLsContent.VE_ENABLED_WIKI).getUrl();
     article = new ArticlePageObject();
     article.loginAs(credentials.userName10, credentials.password10, wikiURL);
   }

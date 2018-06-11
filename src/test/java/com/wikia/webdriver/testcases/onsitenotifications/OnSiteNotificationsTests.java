@@ -205,7 +205,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notifications getNotificationsOnArticlePageDesktop() {
     return getNotificationsDesktop(
-      new ArticlePageObject().openArticleByPath(MercurySubpages.MAIN_PAGE));
+      new ArticlePageObject().open(MercurySubpages.MAIN_PAGE));
   }
 
   private Notifications getNotificationsDesktop(WikiBasePageObject page) {

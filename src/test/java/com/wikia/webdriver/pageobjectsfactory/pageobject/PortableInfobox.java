@@ -2,13 +2,13 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class PortableInfobox extends BasePageObject {
@@ -210,7 +210,7 @@ public class PortableInfobox extends BasePageObject {
   }
 
   public PortableInfobox open(String articleTitle) {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) +
+    getUrl(urlBuilder.getUrl() +
            URLsContent.WIKI_DIR + articleTitle);
 
     return this;

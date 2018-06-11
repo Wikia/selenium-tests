@@ -1,9 +1,7 @@
 package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -24,10 +22,12 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.API_URL;
+
 public class EditToken {
 
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
-  private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName()).replace("https://", "http://") + "/api.php";
+  private String baseURL = API_URL;
   private User user;
   private String username;
 

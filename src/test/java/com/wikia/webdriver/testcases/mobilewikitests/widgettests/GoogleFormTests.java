@@ -26,7 +26,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
   private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "GoogleFormMercury/MultipleWidgets";
   private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
+  private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
@@ -44,7 +44,7 @@ public class GoogleFormTests extends NewTestTemplate {
     WidgetPageObject widget =
             new GoogleFormWidgetPageObject().create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new TopBar().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

@@ -33,13 +33,13 @@ public class LightboxTests extends NewTestTemplate {
     this.gallery = new GalleryComponentObject(driver);
     this.lightbox = new LightboxComponentObject();
 
-    new Navigate().toPageByPath(MercurySubpages.GALLERY);
+    new Navigate().toPage(MercurySubpages.GALLERY);
   }
 
   @Test(groups = "mercury_lightbox_openAndClose")
   public void mercury_lightbox_openAndClose() {
     init();
-    gallery.clickGalleryImage(0);
+    gallery.clickGalleryImage(1);
 
     Assertion.assertTrue(
         lightbox.isLightboxOpened(),
@@ -92,7 +92,7 @@ public class LightboxTests extends NewTestTemplate {
 
   @Test
   public void mercury_lightbox_PreserveScrollPositionAfterLightboxOpen() {
-    ArticlePage articlePage = new ArticlePage().open("/LightboxTest");
+    ArticlePage articlePage = new ArticlePage().open("LightboxTest");
     articlePage.getLightbox().openLightboxImage(0);
     Long startingPosition = new JavascriptActions().getCurrentPosition();
     articlePage.getLightbox().clickCloseButton();

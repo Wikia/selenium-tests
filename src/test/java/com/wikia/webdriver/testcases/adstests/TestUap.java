@@ -30,7 +30,7 @@ public class TestUap extends TemplateNoFirstLoad {
   public void adsUapOasis(Page page,
                           List<Map<String, Object>> atfSlots,
                           List<Map<String, Object>> btfSlots) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
@@ -49,7 +49,7 @@ public class TestUap extends TemplateNoFirstLoad {
                             List<Map<String, Object>> mobileTopLeaderboard,
                             List<Map<String, Object>> mobileInContent,
                             List<Map<String, Object>> mobileBottomLeaderboard) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsBlocked(ads, mobileInContent);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);

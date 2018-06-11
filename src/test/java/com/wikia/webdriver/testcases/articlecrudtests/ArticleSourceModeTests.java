@@ -148,6 +148,21 @@ public class ArticleSourceModeTests extends NewTestTemplate {
         PageContent.WIKI_TEXT_PHOTO.replace("%photoName%", photoName), PageContent.CAPTION));
   }
 
+  @Test(groups = {"RTE_extended_2", "RTE_extended_012A"})
+  @Execute(language = "szl", asUser = User.SUS_REGULAR_USER3, onWikia = "sustainingtest")
+  public void RTE_012A_Photo() {
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
+    PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
+    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("Image001.png");
+    photoOptions.setCaption(PageContent.CAPTION);
+    photoOptions.clickAddPhoto();
+    String photoName = photoAddPhoto.getPhotoName();
+
+    Assertion.assertEquals(source.getSourceContent(), String.format(
+        "[[Plik:%photoName%|thumb|%s]]".replace("%photoName%", photoName), PageContent.CAPTION));
+  }
+
   @Test(groups = {"RTE_extended_2", "RTE_extended_013"})
   public void RTE_013_Slideshow() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -251,27 +266,4 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.submitArticle();
   }
 
-  @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended_4", "RTE_extended_020"})
-  public void RTE_020_YoutubeTag_Preview() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
-    String videoID = video.getID();
-    source.addContentInSourceMode("<youtube>\n" + videoID + "\n</youtube>");
-    PreviewEditModePageObject preview = source.previewArticle();
-    preview.verifyVideoOnPreview(videoID);
-  }
-
-  @CreationTicket(ticketID = "CONCF-626")
-  @Test(groups = {"RTE_extended_4", "RTE_extended_021"})
-  public void RTE_021_YoutubeTag_Publish() {
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
-    String videoID = video.getID();
-    source.addContentInSourceMode("<youtube>\n" + videoID + "\n</youtube>");
-    ArticlePageObject article = source.clickPublishButton();
-    article.verifyArticleTitle(articleName);
-  }
 }

@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -20,7 +21,7 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
       groups = {"AdsNoAdsOnAdsFreeWikisOasis", "AdsEvolveOasis"}
   )
   public void testNoEvolveAdsOasis(String wikiName, String path) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
     wikiPage.enableEvolve(testedPage);
     wikiPage.verifyNoAdsOnPage();
@@ -32,7 +33,7 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
       groups = "AdsNoAdsOnAdsFreeWikisOasis"
   )
   public void testNoAdsOasis(String wikiName, String path) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
@@ -44,7 +45,7 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
       groups = "AdsNoAdsOnAdsFreeWikisMercury"
   )
   public void testNoAdsMercury(String wikiName, String path) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.setEnvironment(AdsContent.ENV_MOBILE);
     wikiPage.verifyNoAdsOnPage();

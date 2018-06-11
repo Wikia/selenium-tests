@@ -1,13 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 /**
  * Implements <a href="https://www.mediawiki.org/wiki/Help:New_pages">Special:NewPages</a>
@@ -22,8 +18,7 @@ public class SpecialNewPages extends WikiBasePageObject {
   private List<WebElement> newArticleLinks;
 
   public SpecialNewPages open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
-           + "Special:NewPages");
+    getUrl(urlBuilder.getUrlForWikiPage("Special:NewPages"));
     
     return this;
   }
