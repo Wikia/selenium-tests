@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialBlockListPage extends WikiBasePageObject {
 
-  private static final String SPECIAL_BLOCKLIST_PATH = "Special:BlockList";
+  private static final String SPECIAL_BLOCKLIST = "Special:BlockList";
 
   @FindBy(css = "#mw-input-wpTarget")
   private WebElement userNameField;
@@ -27,7 +27,7 @@ public class SpecialBlockListPage extends WikiBasePageObject {
   private WebElement expirationDateElement;
 
   public SpecialBlockListPage open() {
-    getUrl(urlBuilder.getUrlForPath(SPECIAL_BLOCKLIST_PATH));
+    getUrl(urlBuilder.getUrlForWikiPage(SPECIAL_BLOCKLIST));
     Log.log("Open Special Block List Page", "blocked users list page opened", true);
 
     return this;

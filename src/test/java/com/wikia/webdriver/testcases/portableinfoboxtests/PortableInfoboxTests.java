@@ -119,7 +119,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open("Infobox2_WhatLinksHere");
     String articleName = article.getArticleName();
 
-    SpecialWhatLinksHerePageObject whatLinksHere = article.openSpecialWhatLinksHere(wikiURL);
+    SpecialWhatLinksHerePageObject whatLinksHere = new SpecialWhatLinksHerePageObject().open();
 
     whatLinksHere.clickPageInputField().typeInfoboxImageName("Infobox2").clickShowButton();
 

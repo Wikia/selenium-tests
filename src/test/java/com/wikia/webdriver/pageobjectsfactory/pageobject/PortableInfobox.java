@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
@@ -210,8 +209,7 @@ public class PortableInfobox extends BasePageObject {
   }
 
   public PortableInfobox open(String articleTitle) {
-    getUrl(urlBuilder.getUrl() +
-           URLsContent.WIKI_DIR + articleTitle);
+    getUrl(urlBuilder.getUrlForWikiPage(articleTitle));
 
     return this;
   }

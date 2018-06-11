@@ -249,11 +249,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialMultipleUploadPageObject(driver);
   }
 
-  public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_WHAT_LINKS_HERE);
-    return new SpecialWhatLinksHerePageObject(driver);
-  }
-
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
     return new CreateNewWikiPageObjectStep1();

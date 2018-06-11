@@ -172,6 +172,22 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyReplyAreaAvatarNotVisible();
   }
 
+  @Test
+  @Execute(asUser = User.SUS_CHAT_STAFF2)
+  public void blockUserIfUnblocked() {
+    SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
+    String userName = User.CONSTANTLY_BLOCKED_USER.getUserName();
+    boolean isUserBlocked = blockListPage.isUserBlocked(userName);
+    if (!isUserBlocked) {
+      SpecialBlockPage blockPage = new SpecialBlockPage(driver).open();
+      blockPage.typeInUserName(userName);
+      blockPage.typeExpiration("10 year");
+      blockPage.typeReason("block QATestsBlockedUser");
+      blockPage.deselectAllSelections();
+      blockPage.clickBlockButton();
+    }
+  }
+
   /**
    * DAR-2133 bug prevention test case details jira: https://wikia-inc.atlassian.net/browse/DAR-2133
    * pre: test makes sure that QATestsBlockedUser is blocked on tested wikia. 1. user
@@ -179,20 +195,9 @@ public class MessageWallTests extends NewTestTemplate {
    * messageWall 3. QATestsBlockedUser should be able to post on his MessageWall 4.
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
-  @Test(groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
+  @Test(dependsOnMethods = {"blockUserIfUnblocked"}, groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
+  @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   public void blockedUserCanCreatePostOnHerMessageWall() {
-    SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
-    boolean isUserBlocked = blockListPage.isUserBlocked(User.CONSTANTLY_BLOCKED_USER.getUserName());
-    if (!isUserBlocked) {
-      blockListPage.loginAs(User.SUS_CHAT_STAFF2);
-      SpecialBlockPage blockPage = new SpecialBlockPage(driver).open();
-      blockPage.typeInUserName(User.CONSTANTLY_BLOCKED_USER.getUserName());
-      blockPage.typeExpiration("10 year");
-      blockPage.typeReason("block QATestsBlockedUser");
-      blockPage.deselectAllSelections();
-      blockPage.clickBlockButton();
-    }
-    blockListPage.loginAs(User.CONSTANTLY_BLOCKED_USER);
     MessageWall wall = new MessageWall().open(User.CONSTANTLY_BLOCKED_USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
