@@ -16,7 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage;
 import org.testng.annotations.Test;
 
 
-@Test(groups = {"mobile-wiki-tracking-opt-in"})
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
