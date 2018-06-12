@@ -23,6 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPage;
 
 @Execute(onWikia = "sustainingtest")
+@Test(groups = {"MessageWall"})
 public class MessageWallTests extends NewTestTemplate {
 
   @BeforeMethod
@@ -30,7 +31,7 @@ public class MessageWallTests extends NewTestTemplate {
     new Actions(driver).moveByOffset(0, 0).perform();
   }
 
-  @Test(groups = {"MessageWall_001", "MessageWall", "MessageWallTests", "Smoke3"})
+  @Test(groups = {"MessageWall_001", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanCreateAndEditMessage() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
@@ -48,7 +49,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageEditText(title, messageEdit, User.USER_MESSAGE_WALL.getUserName());
   }
 
-  @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_002", "MessageWallTests"})
   @Execute(asUser = User.SUS_REGULAR_USER3)
   public void userCanCreateAndRemoveMessage() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
@@ -64,7 +65,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyThreadRemoved();
   }
 
-  @Test(groups = {"MessageWall_003", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_003", "MessageWallTests"})
   @Execute(asUser = User.SUS_STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanCreateAndCloseMessage() {
@@ -84,7 +85,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyThreadReopened();
   }
 
-  @Test(groups = {"MessageWall_004", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_004", "MessageWallTests"})
   @Execute(asUser = User.SUS_STAFF)
   public void userCanCreateAndQuoteMessage() {
     MessageWall wall = new MessageWall().open(User.SUS_STAFF.getUserName());
@@ -102,7 +103,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyQuote(quote);
   }
 
-  @Test(groups = {"MessageWall_005", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_005", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanCreateAndPreviewMessage() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
@@ -117,7 +118,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
-  @Test(groups = {"MessageWall_006", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_006", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanCreateAndReplyToMessage() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
@@ -172,8 +173,8 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyReplyAreaAvatarNotVisible();
   }
 
-  @Test
   @Execute(asUser = User.SUS_CHAT_STAFF2)
+  @Test(groups = {"MessageWall_008", "MessageWallTests"})
   public void blockUserIfUnblocked() {
     SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
     String userName = User.CONSTANTLY_BLOCKED_USER.getUserName();
@@ -195,7 +196,7 @@ public class MessageWallTests extends NewTestTemplate {
    * messageWall 3. QATestsBlockedUser should be able to post on his MessageWall 4.
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
-  @Test(dependsOnMethods = {"blockUserIfUnblocked"}, groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
+  @Test(dependsOnMethods = {"blockUserIfUnblocked"}, groups = {"MessageWall_008", "MessageWallTests"})
   @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   public void blockedUserCanCreatePostOnHerMessageWall() {
     MessageWall wall = new MessageWall().open(User.CONSTANTLY_BLOCKED_USER.getUserName());
@@ -217,7 +218,7 @@ public class MessageWallTests extends NewTestTemplate {
    * SUS-1309: Regression test to ensure title, content, author info of new Thread shows properly in
    * Wiki Activity
    */
-  @Test(groups = {"MessageWall_009", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_009", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void newWallPostTitleIsShownInWikiActivity() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
