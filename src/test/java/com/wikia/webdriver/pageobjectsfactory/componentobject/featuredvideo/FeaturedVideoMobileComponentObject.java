@@ -44,7 +44,7 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
   }
 
   public FeaturedVideoMobileComponentObject openWikiArticle(String articleName) {
-    this.openWikiPage(getWikiUrl() + articleName + "?noads=1");
+    this.openWikiPage(getWikiUrl() + "/" + articleName + "?noads=1");
 
     return this;
   }
