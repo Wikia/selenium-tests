@@ -15,7 +15,7 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
 
   private By targetBy = By.cssSelector(".linkEditorDialog tr:nth-child(2) input");
   private By textBy = By.cssSelector(".linkEditorDialog tr:nth-child(3) input");
-  private By okButtonBy = By.cssSelector(".linkEditorDialog a[title=\"ok\"]");
+  private By okButtonBy = By.cssSelector(".linkEditorDialog a[title=\"OK\"]");
   private By
       externalRadioButtonBy =
       By.cssSelector(".linkEditorDialog tr:nth-child(1) input[value = ext]");
