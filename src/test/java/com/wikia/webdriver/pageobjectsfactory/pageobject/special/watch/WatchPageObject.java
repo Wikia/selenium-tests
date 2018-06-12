@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class WatchPageObject extends BasePageObject {
 
-  @FindBy(css = "[value=ok]")
+  @FindBy(css = "[value=OK]")
   private WebElement followUnfollowConfirmation;
 
   public WatchPageObject() {
