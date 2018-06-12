@@ -6,15 +6,7 @@ import lombok.Getter;
 import java.util.Map;
 
 public enum Emulator {
-  GOOGLE_NEXUS_5(
-      new ImmutableMap.Builder<String, Object>()
-          .put("width", 360)
-          .put("height", 640)
-          .put("pixelRatio", 3.0)
-          .put("touch", true)
-          .put("mobile", true)
-          .build(),
-      "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"),
+  GOOGLE_NEXUS_5("Nexus 5"),
   APPLE_IPHONE_6(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 375)
