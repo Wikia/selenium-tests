@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -22,7 +23,6 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class YoutubeVideoProvider {
 
@@ -71,7 +71,7 @@ public class YoutubeVideoProvider {
       videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
 
     } catch (IOException e) {
-      PageObjectLogging.log("A problem occurred while receiving a YouTube video", e, false);
+      Log.log("A problem occurred while receiving a YouTube video", e, false);
     }
 
     return new YoutubeVideo(videoTitle, videoUrl, videoId);

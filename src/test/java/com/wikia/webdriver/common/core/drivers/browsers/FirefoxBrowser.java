@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.drivers.browsers;
 import java.io.File;
 import java.io.IOException;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -11,7 +12,6 @@ import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class FirefoxBrowser extends BrowserAbstract {
 
@@ -35,7 +35,7 @@ public class FirefoxBrowser extends BrowserAbstract {
         try {
           tmpFile = File.createTempFile("webdriver", null, mozillaPath);
         } catch (IOException ex) {
-          PageObjectLogging.log("Can't create file", ex, false);
+          Log.log("Can't create file", ex, false);
           throw new WebDriverException(
               "Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
         }
@@ -43,7 +43,7 @@ public class FirefoxBrowser extends BrowserAbstract {
         try {
           tmpFile = File.createTempFile("webdriver", null, homePath);
         } catch (IOException ex) {
-          PageObjectLogging.log("Can't create file", ex, false);
+          Log.log("Can't create file", ex, false);
           throw new WebDriverException(
               "Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
         }

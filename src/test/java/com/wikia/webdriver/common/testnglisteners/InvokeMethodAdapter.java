@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.exceptions.TestFailedException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -20,7 +20,7 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
   public void afterInvocation(IInvokedMethod method, ITestResult result) {
     if (method.isTestMethod()) {
       List verificationFailures = Assertion.getVerificationFailures(result);
-      if (PageObjectLogging.getVerificationStack().contains(false)) {
+      if (Log.getVerificationStack().contains(false)) {
         result.setStatus(ITestResult.FAILURE);
         if (result.getThrowable() == null) {
           result.setThrowable(new TestFailedException(null));
@@ -31,6 +31,10 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
         for (Object failure : verificationFailures) {
           result.setThrowable((Throwable) failure);
         }
+      }
+    }else {
+      if(result.getStatus() == ITestResult.FAILURE){
+        Log.logError("TEST CONFIGURATION FAILED", result.getThrowable());
       }
     }
   }

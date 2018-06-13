@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -53,7 +53,7 @@ public class PreviewEditModePageObject extends EditMode {
             videoPostionSelector.replace("%position%", position)
         )
     );
-    PageObjectLogging.log(
+    Log.log(
         "verifyVideoAlignment",
         "video alignment is as exepected " + positions.toString(),
         true
@@ -73,7 +73,7 @@ public class PreviewEditModePageObject extends EditMode {
   public void closePreviewModal() {
     previewModal.findElement(closeButton).click();
     wait.forElementNotPresent(closeButton);
-    PageObjectLogging.log("closePreviewModal", "preview modal closed", true);
+    Log.log("closePreviewModal", "preview modal closed", true);
   }
 
 
@@ -83,17 +83,17 @@ public class PreviewEditModePageObject extends EditMode {
 
   public void verifyTOCpresentOnPreview() {
     wait.forElementVisible(previewModal.findElement(tableOfContents));
-    PageObjectLogging.log("verifyTOCpresentOnPreview", "TOC is present on preview", true);
+    Log.log("verifyTOCpresentOnPreview", "TOC is present on preview", true);
   }
 
   public void verifyTOCexpandedOnPreview() {
     wait.forElementVisible(previewModal.findElement(tableOfContentsOrderedList));
-    PageObjectLogging.log("verifyTOCexpandedOnPreview", "TOC is expanded on preview", true);
+    Log.log("verifyTOCexpandedOnPreview", "TOC is expanded on preview", true);
   }
 
   public void verifyTOCcollapsedOnPreview() {
     waitForElementNotVisibleByElement(previewModal.findElement(tableOfContentsOrderedList));
-    PageObjectLogging.log("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview", true);
+    Log.log("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview", true);
   }
 
   public void verifyVideoOnPreview(String videoID) {

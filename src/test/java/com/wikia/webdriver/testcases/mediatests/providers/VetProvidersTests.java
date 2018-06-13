@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
@@ -20,7 +20,7 @@ public class VetProvidersTests extends NewTestTemplate {
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
     new ArticleContent(User.SUS_REGULAR_USER3).clear();
 
-    PageObjectLogging.log("", videoUrl, true);
+    Log.log("", videoUrl, true);
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(videoUrl);

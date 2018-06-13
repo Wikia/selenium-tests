@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -68,13 +68,13 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   public void typeEmail(String email) {
     wait.forElementClickable(emailField);
     emailField.sendKeys(email);
-    PageObjectLogging.log("typeEmail", "email " + email + " typed into the field", true);
+    Log.log("typeEmail", "email " + email + " typed into the field", true);
   }
 
   public void typeUserName(String userName) {
     wait.forElementClickable(usernameField);
     usernameField.sendKeys(userName);
-    PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
+    Log.log("typeUserName", "username " + userName + " typed into the field", true);
   }
 
   public void typeBirthday(int month, int day, int year) {
@@ -94,7 +94,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   public void clickRegister() {
     wait.forElementVisible(registerButton);
     registerButton.click();
-    PageObjectLogging.log("clickRegister", "Create account button clicked", true);
+    Log.log("clickRegister", "Create account button clicked", true);
     waitForElementNotVisibleByElement(registerButton);
   }
 

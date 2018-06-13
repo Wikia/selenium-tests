@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -61,13 +61,13 @@ public class EditMode extends WikiBasePageObject {
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
 
-    PageObjectLogging.logInfo("Submit");
+    Log.info("Submit");
   }
 
   public ArticlePageObject submitArticle() {
     submit();
     wait.forElementNotPresent(submitButtonBy);
-    PageObjectLogging.logInfo("Page submitted");
+    Log.info("Page submitted");
 
     return new ArticlePageObject();
   }
@@ -78,7 +78,7 @@ public class EditMode extends WikiBasePageObject {
   public EditMode submitExpectingNotification() {
     submit();
     wait.forElementVisible(notificationForAnon);
-    PageObjectLogging.logInfo("Notification is visible");
+    Log.info("Notification is visible");
 
     return this;
   }
@@ -87,7 +87,7 @@ public class EditMode extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     wait.forElementClickable(desktopPreviewButton);
     desktopPreviewButton.click();
-    PageObjectLogging.log("preview", "Page preview displayed", true);
+    Log.log("preview", "Page preview displayed", true);
     return new PreviewEditModePageObject(driver);
   }
 
@@ -101,53 +101,53 @@ public class EditMode extends WikiBasePageObject {
   public PhotoAddComponentObject clickPhotoButton() {
     wait.forElementVisible(photoButton);
     scrollAndClick(photoButton);
-    PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
+    Log.log("clickPhotoButton", "photo button clicked", true);
     return new PhotoAddComponentObject(driver);
   }
 
   public VetAddVideoComponentObject clickVideoButton() {
     wait.forElementVisible(videoButton);
     scrollAndClick(videoButton);
-    PageObjectLogging.log("clickVideoButton", "video button clicked", true);
+    Log.log("clickVideoButton", "video button clicked", true);
     return new VetAddVideoComponentObject(driver);
   }
 
   public TableBuilderComponentObject clickAddTableButton() {
     wait.forElementClickable(addTableButton).click();
-    PageObjectLogging.log("addTable", "add table button clicked", true);
+    Log.log("addTable", "add table button clicked", true);
     return new TableBuilderComponentObject(driver);
   }
 
   public SliderBuilderComponentObject clickSliderButton() {
     wait.forElementVisible(sliderButton);
     scrollAndClick(sliderButton);
-    PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
+    Log.log("clickSliderButton", "slider button clicked", true);
     return new SliderBuilderComponentObject(driver);
   }
 
   public SlideshowBuilderComponentObject clickSlideshowButton() {
     wait.forElementVisible(slideshowButton);
     scrollAndClick(slideshowButton);
-    PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
+    Log.log("clickSlideshowButton", "slideshow button clicked", true);
     return new SlideshowBuilderComponentObject(driver);
   }
 
   public GalleryBuilderComponentObject clickGalleryButton() {
     wait.forElementVisible(galleryButton);
     scrollAndClick(galleryButton);
-    PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);
+    Log.log("clickGalleryButton", "gallery button clicked", true);
     return new GalleryBuilderComponentObject(driver);
   }
 
   public VisualEditModePageObject clickVisualButton() {
     visualButton.click();
-    PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
+    Log.log("clickVisualButton", "visual button clicked", true);
     return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject clickSourceButton() {
     sourceButton.click();
-    PageObjectLogging.log("clickSourceButton", "source button clicked", true);
+    Log.log("clickSourceButton", "source button clicked", true);
     return new SourceEditModePageObject();
   }
 }

@@ -1,8 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +20,11 @@ public class AdsFandomObject extends AdsBaseObject {
 
   private WebElement findSlotElement(String slotSelector) {
     return driver.findElement(By.cssSelector(AdsFandomContent.getSlotSelectorString(slotSelector)));
+  }
+
+  @Override
+  public void waitForPageLoad() {
+    wait.forElementPresent(By.cssSelector("body"));
   }
 
   public void triggerOnScrollSlots() {

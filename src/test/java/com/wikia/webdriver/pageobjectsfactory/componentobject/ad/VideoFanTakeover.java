@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -56,12 +56,12 @@ public class VideoFanTakeover extends AutoplayVuap {
 
   public void waitForVideoStart() {
     wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
-    PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
+    Log.log("waitForVideoStart", "video started", true, driver);
   }
 
   public void waitForVideoPlayerHidden() {
     wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
-    PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
+    Log.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
   }
 
   public void waitForAdToLoad() {
@@ -74,7 +74,7 @@ public class VideoFanTakeover extends AutoplayVuap {
       wait.forElementClickable(adImageTrigger);
       //do not click in the middle of image, there might be click to play there
       new Actions(driver).moveToElement(driver.findElement(adImageTrigger), 10, 10).click().build().perform();
-      PageObjectLogging.log("clickOnAdImage", "ad image clicked", true, driver);
+      Log.log("clickOnAdImage", "ad image clicked", true, driver);
     });
   }
 
@@ -82,7 +82,7 @@ public class VideoFanTakeover extends AutoplayVuap {
     scrollToAdVideo(getVideoCloseButton(slotName));
 
     getVideoCloseButton(slotName).click();
-    PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
+    Log.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
   public Double getCurrentVideoTimeOnMobile() {
@@ -108,7 +108,7 @@ public class VideoFanTakeover extends AutoplayVuap {
     if (videoHeight > imageHeight) {
       return true;
     }
-    PageObjectLogging.log("isVideoAdBiggerThanImageAdMobile",
+    Log.log("isVideoAdBiggerThanImageAdMobile",
             "Ad image height = " + imageHeight + " is not smaller than video height = " + videoHeight, false, driver);
     return false;
   }
@@ -123,7 +123,7 @@ public class VideoFanTakeover extends AutoplayVuap {
       TimeUnit.MILLISECONDS.sleep(200);
       time = System.currentTimeMillis();
     }
-    PageObjectLogging.log("isImageAdInCorrectSize",
+    Log.log("isImageAdInCorrectSize",
             "Image is not in correct, required size " + imageHeight + " is not equal with actual size " + getAdSlotHeight(slotSelector), false, driver);
     return false;
   }
@@ -132,7 +132,7 @@ public class VideoFanTakeover extends AutoplayVuap {
     if (quartileTime < midTime){
       return true;
     }
-    PageObjectLogging.log("isTimeProgressing",
+    Log.log("isTimeProgressing",
             "Video time is not progressing, quartileTime " + quartileTime + " is not smaller than midTime " + midTime , false, driver);
     return false;
   }

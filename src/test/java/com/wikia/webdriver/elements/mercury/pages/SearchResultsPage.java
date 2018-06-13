@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -48,7 +48,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   public String clickSearchResult(int index) {
     String clickedLink;
 
-    PageObjectLogging.logInfo("Select search result no.: " + index);
+    Log.info("Select search result no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(SEARCH_RESULT_SELECTOR)).get(index);
     wait.forElementClickable(searchResult);
 
@@ -97,7 +97,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   }
 
   public SearchResultsPage clickLoadMoreButton() {
-    PageObjectLogging.logInfo("Click Load More button ");
+    Log.info("Click Load More button ");
     jsActions.scrollToElement(loadMoreButton);
     wait.forElementClickable(loadMoreButton);
     loadMoreButton.click();
@@ -119,7 +119,7 @@ public class SearchResultsPage extends WikiBasePageObject {
     try {
       return element.isDisplayed();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }

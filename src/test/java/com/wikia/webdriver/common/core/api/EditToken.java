@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
@@ -42,9 +42,9 @@ public class EditToken {
   private static ResponseHandler<String> extractEditToken() {
     return res -> {
       HttpEntity entity = res.getEntity();
-      PageObjectLogging.logInfo("EDIT TOKEN HEADERS: ", res.toString());
+      Log.info("EDIT TOKEN HEADERS: ", res.toString());
       String source = EntityUtils.toString(entity);
-      PageObjectLogging.logInfo("EDIT TOKEN RESPONSE RAW: ", source);
+      Log.info("EDIT TOKEN RESPONSE RAW: ", source);
       try {
         JSONObject pagesValue =
             new JSONObject(source).getJSONObject("query").getJSONObject("pages");
@@ -57,7 +57,7 @@ public class EditToken {
           throw new WebDriverException("Could not find page in edit token response");
         }
       } catch (JSONException e) {
-        PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+        Log.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
         throw new WebDriverException(e);
       }
     };
@@ -80,20 +80,20 @@ public class EditToken {
         httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(user.getUserName()));
       }
 
-      PageObjectLogging.logInfo("QUERY EDIT TOKEN: ", httpGet.toString());
+      Log.info("QUERY EDIT TOKEN: ", httpGet.toString());
       String editToken = httpClient.execute(httpGet, extractEditToken());
 
-      PageObjectLogging.logInfo("QUERY EDIT TOKEN: ", "Token fetched: " + editToken);
+      Log.info("QUERY EDIT TOKEN: ", "Token fetched: " + editToken);
 
       return editToken;
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      Log.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(EDIT_TOKEN_ERROR_MESSAGE);
     } catch (IOException e) {
-      PageObjectLogging.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      Log.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(EDIT_TOKEN_ERROR_MESSAGE);
     } catch (URISyntaxException e) {
-      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      Log.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(EDIT_TOKEN_ERROR_MESSAGE);
     }
   }

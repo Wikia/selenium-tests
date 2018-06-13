@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -46,8 +46,8 @@ public class SearchPage extends WikiBasePageObject {
   }
 
   public void relatedCommunityModuleIsVisible() {
-    PageObjectLogging.logInfo("Is related community module visible?");
+    Log.info("Is related community module visible?");
     wait.forElementVisible(relatedCommunityModule);
-    PageObjectLogging.logInfo("Related community module is visible");
+    Log.info("Related community module is visible");
   }
 }

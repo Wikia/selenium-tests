@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
@@ -47,7 +47,7 @@ public class Search extends BasePageObject {
   public String clickSearchSuggestion(int index) {
     wait.forElementNotVisible(suggestionsLoading);
 
-    PageObjectLogging.logInfo("Select search suggestion no.: " + index);
+    Log.info("Select search suggestion no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
     String clickedSuggestion = searchResult.getText();
@@ -58,11 +58,11 @@ public class Search extends BasePageObject {
   }
 
   public Search typeInSearch(String text) {
-    PageObjectLogging.logInfo("Local nav is not present");
+    Log.info("Local nav is not present");
     wait.forElementClickable(searchInput);
     searchInput.click();
 
-    PageObjectLogging.logInfo("Search for query: " + text);
+    Log.info("Search for query: " + text);
     searchInput.sendKeys(text);
 
     return this;
@@ -73,16 +73,16 @@ public class Search extends BasePageObject {
   }
 
   public Search navigateToPage(String pageName) {
-    PageObjectLogging.logInfo("Type in search input field: " + pageName);
+    Log.info("Type in search input field: " + pageName);
     typeInSearch(pageName);
-    PageObjectLogging.logInfo("Select first search suggestion");
+    Log.info("Select first search suggestion");
     clickSearchSuggestion(0);
 
     return this;
   }
 
   public Search clickClearSearchButton() {
-    PageObjectLogging.logInfo("Cancel searching phrase ");
+    Log.info("Cancel searching phrase ");
     wait.forElementClickable(clearSearchButton);
     clearSearchButton.click();
 
@@ -119,7 +119,7 @@ public class Search extends BasePageObject {
       wait.forElementClickable(searchInput, 0).click();
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     } catch (WebDriverException e) {
       // @TODO: this would be best pushed to Selenium upstream to actually throw a more specific
@@ -156,7 +156,7 @@ public class Search extends BasePageObject {
       wait.forElementVisible(element);
       return element.isDisplayed();
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }

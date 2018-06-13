@@ -1,9 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import org.openqa.selenium.WebDriver;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -17,9 +16,10 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   @FindBy(css = "#mw-content-text > fieldset > legend")
   private WebElement filtersSection;
 
-  public SpecialWhatLinksHerePageObject(WebDriver driver) {
-    super();
-    PageFactory.initElements(driver, this);
+  public SpecialWhatLinksHerePageObject open(){
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_WHAT_LINKS_HERE));
+
+    return this;
   }
 
   public SpecialWhatLinksHerePageObject clickShowButton() {

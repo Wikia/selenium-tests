@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -129,7 +129,7 @@ public class VisualEditModePageObject extends EditMode {
    */
   public void addContent(String content) {
     editorFrame.frameScope(() -> contentInput.sendKeys(content));
-    PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
+    Log.log("addContent", "content " + content + " added to the article", true);
   }
 
   public boolean checkPortableInfoboxVisible() {
@@ -141,7 +141,7 @@ public class VisualEditModePageObject extends EditMode {
     driver.switchTo().frame(iframe);
     contentInput.sendKeys(content);
     driver.switchTo().defaultContent();
-    PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
+    Log.log("addContent", "content " + content + " added to the article", true);
   }
 
   private void verifyComponent(WebElement component) {
@@ -178,7 +178,7 @@ public class VisualEditModePageObject extends EditMode {
         wait.forElementVisible(contentInput);
         return true;
       } catch (TimeoutException e) {
-        PageObjectLogging.log("isContentLoaded", "RTE editor loaded", false, driver);
+        Log.log("isContentLoaded", "RTE editor loaded", false, driver);
         return false;
       }
     });
@@ -248,7 +248,7 @@ public class VisualEditModePageObject extends EditMode {
     mouseOverComponent(component);
     wait.forElementVisible(modifyComponentButton);
     modifyComponentButton.click();
-    PageObjectLogging.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
+    Log.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
     switch (component) {
       case GALLERY:
         return new GalleryBuilderComponentObject(driver);
@@ -271,7 +271,7 @@ public class VisualEditModePageObject extends EditMode {
     mouseOverComponent(component);
     removeComponentButton.click();
     removeConfirmationButton.click();
-    PageObjectLogging.log("removeComponent", "Click on 'remove button' on component", true);
+    Log.log("removeComponent", "Click on 'remove button' on component", true);
   }
 
   public void verifyComponentRemoved(Components component) {
@@ -293,12 +293,12 @@ public class VisualEditModePageObject extends EditMode {
           wait.forElementNotPresent(videoBy);
           break;
         default:
-          PageObjectLogging.log("verifyComponentRemoved", "Invalid component: " + component.name() + " selected", false);
+          Log.log("verifyComponentRemoved", "Invalid component: " + component.name() + " selected", false);
           break;
       }
     });
 
-    PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
+    Log.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
   }
 
   public void removePortableInfobox() {
@@ -323,7 +323,7 @@ public class VisualEditModePageObject extends EditMode {
   public void verifyBlockedUserMessage() {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
-    PageObjectLogging.log("verifyBlockedUserMessage",
+    Log.log("verifyBlockedUserMessage",
             "blocked user message when attempting to create article verified", true);
   }
 

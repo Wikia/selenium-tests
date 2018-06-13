@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.common;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
@@ -86,7 +86,7 @@ public class CommunityHeader extends BasePageObject {
   public MainPage clickWordmark() {
     wait.forElementClickable(wordmark).click();
 
-    PageObjectLogging.logInfo("clicked on wordmark image");
+    Log.info("clicked on wordmark image");
 
     return new MainPage();
   }
@@ -94,7 +94,7 @@ public class CommunityHeader extends BasePageObject {
   public MainPage clickWikiName() {
     wait.forElementClickable(wikiName).click();
 
-    PageObjectLogging.logInfo("clicked on wiki name");
+    Log.info("clicked on wiki name");
 
     return new MainPage();
   }
@@ -102,7 +102,7 @@ public class CommunityHeader extends BasePageObject {
   public CreateArticleModalComponentObject clickAddNewPage() {
     wait.forElementClickable(addNewPageButton).click();
 
-    PageObjectLogging.logInfo("clicked Add New Page button");
+    Log.info("clicked Add New Page button");
 
     return new CreateArticleModalComponentObject(this.driver);
   }
@@ -110,7 +110,7 @@ public class CommunityHeader extends BasePageObject {
   public SpecialWikiActivityPageObject clickWikiActivity() {
     wait.forElementClickable(wikiActivityButton).click();
 
-    PageObjectLogging.logInfo("clicked Wiki Activity Button");
+    Log.info("clicked Wiki Activity Button");
 
     return new SpecialWikiActivityPageObject();
   }
@@ -118,7 +118,7 @@ public class CommunityHeader extends BasePageObject {
   public SpecialAdminDashboardPageObject clickAdminDashboard() {
     wait.forElementClickable(adminDashboardButton).click();
 
-    PageObjectLogging.logInfo("clicked admin dashboard Button");
+    Log.info("clicked admin dashboard Button");
 
     return new SpecialAdminDashboardPageObject();
   }
@@ -126,7 +126,7 @@ public class CommunityHeader extends BasePageObject {
   public UserProfilePage clickUserAvatar(int index) {
     wait.forElementClickable(avatars.get(index)).click();
 
-    PageObjectLogging.logInfo("clicked user avatar");
+    Log.info("clicked user avatar");
 
     return new UserProfilePage();
   }
@@ -138,7 +138,7 @@ public class CommunityHeader extends BasePageObject {
   public CommunityHeader openExploreMenu() {
     new Actions(driver).moveToElement(exploreTab).perform();
 
-    PageObjectLogging.logInfo("explore dropdown opened");
+    Log.info("explore dropdown opened");
 
     return this;
   }
@@ -146,7 +146,7 @@ public class CommunityHeader extends BasePageObject {
   public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
     wait.forElementClickable(exploreWikiActivityLink).click();
 
-    PageObjectLogging.logInfo("explore -> wikiActivity link clicked");
+    Log.info("explore -> wikiActivity link clicked");
 
     return new SpecialWikiActivityPageObject();
   }
@@ -154,7 +154,7 @@ public class CommunityHeader extends BasePageObject {
   public ArticlePageObject clickExploreRandomLink() {
     wait.forElementClickable(exploreRandomLink).click();
 
-    PageObjectLogging.logInfo("explore -> random page link clicked");
+    Log.info("explore -> random page link clicked");
 
     return new ArticlePageObject();
   }
@@ -162,37 +162,37 @@ public class CommunityHeader extends BasePageObject {
   public void clickExploreCommunityLink() {
     wait.forElementClickable(exploreCommunityLink).click();
 
-    PageObjectLogging.logInfo("explore -> community link clicked");
+    Log.info("explore -> community link clicked");
   }
 
   public void clickExploreVideosLink() {
     wait.forElementClickable(exploreVideosLink).click();
 
-    PageObjectLogging.logInfo("explore -> videos link clicked");
+    Log.info("explore -> videos link clicked");
   }
 
   public void clickExploreImagesLink() {
     wait.forElementClickable(exploreImagesLink).click();
 
-    PageObjectLogging.logInfo("explore -> images link clicked");
+    Log.info("explore -> images link clicked");
   }
 
   public void clickDiscussLink() {
     wait.forElementClickable(discussLink).click();
 
-    PageObjectLogging.logInfo("discuss link clicked");
+    Log.info("discuss link clicked");
   }
 
   public void clickExploreForumLink() {
     wait.forElementClickable(exploreForumLink).click();
 
-    PageObjectLogging.logInfo("explore->forum link clicked");
+    Log.info("explore->forum link clicked");
   }
 
   public CommunityHeader openMoreToolsDropdown() {
     new Actions(driver).moveToElement(moreToolsDropdown).perform();
 
-    PageObjectLogging.logInfo("more tools dropdown opened");
+    Log.info("more tools dropdown opened");
 
     return this;
   }
@@ -200,13 +200,13 @@ public class CommunityHeader extends BasePageObject {
   public void clickMoreAddImageLink() {
     wait.forElementClickable(moreToolsAddImageLink).click();
 
-    PageObjectLogging.logInfo("more -> Add image link clicked");
+    Log.info("more -> Add image link clicked");
   }
 
   public AddMediaModalComponentObject clickMoreAddVideoLink() {
     wait.forElementClickable(moreToolsAddVideoLink).click();
 
-    PageObjectLogging.logInfo("more -> Add video link clicked");
+    Log.info("more -> Add video link clicked");
 
     return new AddMediaModalComponentObject();
   }
@@ -214,13 +214,13 @@ public class CommunityHeader extends BasePageObject {
   public void clickMoreRecentChanges() {
     wait.forElementClickable(moreToolsRecentChanges).click();
 
-    PageObjectLogging.logInfo("more -> Recent Changes link clicked");
+    Log.info("more -> Recent Changes link clicked");
   }
 
   public ActionExplorerModal clickMoreAllShortcuts() {
     wait.forElementClickable(moreToolsAllShortcuts).click();
 
-    PageObjectLogging.logInfo("more -> All shortcuts link clicked");
+    Log.info("more -> All shortcuts link clicked");
 
     return new ActionExplorerModal();
   }

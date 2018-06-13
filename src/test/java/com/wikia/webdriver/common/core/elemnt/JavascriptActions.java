@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.core.elemnt;
 
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -65,10 +65,10 @@ public class JavascriptActions {
       Thread.sleep(1000);
       return value;
     } catch (InterruptedException e) {
-      PageObjectLogging.log("execute", e, false);
+      Log.log("execute", e, false);
       return null;
     } catch (UnsupportedOperationException e) {
-      PageObjectLogging.log("execute", e, true);
+      Log.log("execute", e, true);
       return null;
     }
   }
@@ -117,7 +117,7 @@ public class JavascriptActions {
               "window.scroll(0,parseInt($(arguments[0]).offset().top - " + getOffset() + "));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+        Log.log("JSError", "JQuery is not defined", false);
       }
       js.executeScript(
               "window.scroll(0,parseInt(arguments[0].getBoundingClientRect().top + window.pageYOffset - " +
@@ -150,7 +150,7 @@ public class JavascriptActions {
           "arguments[0].scrollIntoView(true);", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+        Log.log("JSError", "JQuery is not defined", false);
       }
     }
   }
@@ -178,7 +178,7 @@ public class JavascriptActions {
         scrollToElement(element);
       }
     }catch(WebDriverException e){
-      PageObjectLogging.logInfo("There might be a problem with scrolling to element", e);
+      Log.info("There might be a problem with scrolling to element", e);
     }
   }
 
@@ -199,7 +199,7 @@ public class JavascriptActions {
           try {
             return (boolean) js.executeScript("return !!(" + script + ");");
           } catch (WebDriverException e) {
-            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
+            Log.logError("waitForJavaScriptTruthy", e);
             return false;
           }
         }

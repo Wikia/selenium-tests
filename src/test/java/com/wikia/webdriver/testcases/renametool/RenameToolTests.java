@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -149,60 +149,6 @@ public class RenameToolTests extends NewTestTemplate {
     Assertion
         .assertEquals(renameUserPage.getSuccessBoxMessage(), "Rename process is in progress. The "
                                                              + "rest will be done in background. You will be notified via e-mail when it is completed.");
-  }
-
-  @Test
-  public void newUserCreateEditMessageWallAndRenameDone() {
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    SignUpUser
-        user = new SignUpUser("QARename Usęr" + timestamp, credentials.email, "aaaa",
-                              LocalDate.of(1993, 3, 19));
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
-
-    MessageWall wall = new MessageWall().open(user.getUsername());
-    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
-    String message = String.format("%s%s", PageContent.MESSAGE_WALL_MESSAGE_PREFIX, timestamp);
-    String title = String.format("%s%s", PageContent.MESSAGE_WALL_TITLE_PREFIX, timestamp);
-    mini.switchAndWrite(message);
-    wall.setTitle(title);
-    wall.submit();
-    wall.verifyMessageText(title, message, user.getUsername());
-    wall.triggerEditMessageArea();
-    String
-        messageEdit =
-        PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + Long.toString(DateTime.now().getMillis());
-    mini.switchAndEditMessageWall(messageEdit);
-    wall.submitEdition();
-    wall.verifyMessageEditText(title, messageEdit, user.getUsername());
-
-    try {
-      Thread.sleep(15000);
-    } catch (InterruptedException e) {
-      PageObjectLogging.logError("Interruption during waiting for Message Wall background task",
-                                 e);
-    }
-
-    String newName = "NewUser Nąmę" + timestamp;
-    SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage()
-        .open()
-        .fillFormData(newName, newName, user.getPassword())
-        .agreeToTermsAndConditions()
-        .submitChange();
-    new ConfirmationModalPage().accept();
-    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(),
-                           "Rename process is in progress. The rest will be done in background. "
-                           + "You will be notified via e-mail when it is completed.");
-    wall.open(newName);
-    String encodedUrl = renameUserPage.encodeToURL(newName);
-
-    String expectedWallUrl = String.format("%s/wiki/Message_Wall:%s", urlBuilder.getUrl(),
-                                           encodedUrl);
-
-    Assertion.assertEquals(driver.getCurrentUrl(), expectedWallUrl);
-    wall.verifyMessageEditTextRenameDone(title, message, newName);
   }
 
   @Test

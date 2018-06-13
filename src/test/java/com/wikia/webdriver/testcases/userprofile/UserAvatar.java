@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
  * were redirected to User page
  *
  * Test removeAvatar 1. Open user profile page User:Username and remove avatar 2. Verify that avatar
- * was removed from user page, and placeholder appeared on global navigation 3. Log out and verify
+ * was removed from user page, and placeholder appeared on global navigation 3. LogData out and verify
  * that avatar is not visible on global navigation
  */
 @Test(groups = "userProfile-userAvatar")

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.WebDriver;
 
@@ -13,8 +13,8 @@ public class UrlChecker {
   public static void isPathContainedInCurrentUrl(WebDriver driver, String path) {
     String currentUrl = driver.getCurrentUrl().toLowerCase();
     path = path.toLowerCase();
-    PageObjectLogging.log(
-        "Log Url",
+    Log.log(
+        "LogData Url",
         "Path " + path + " is contained in " + currentUrl,
         "Path " + path + " isn't contained in " + currentUrl,
         currentUrl.contains(path)

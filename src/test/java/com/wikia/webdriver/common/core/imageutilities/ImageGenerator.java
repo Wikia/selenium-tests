@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebDriverException;
 
@@ -67,7 +67,7 @@ public class ImageGenerator {
 
     try {
       if (ImageIO.write(imageBuffer, imageExtension, new File(imagePath))) {
-        PageObjectLogging.logOnLowLevel(actionName, actionDescription, true);
+        Log.logOnLowLevel(actionName, actionDescription, true);
       }
     } catch (IOException e) {
       throw new WebDriverException(ExceptionUtils.getStackTrace(e));

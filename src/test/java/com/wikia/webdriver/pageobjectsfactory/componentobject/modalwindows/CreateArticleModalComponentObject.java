@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.TimeoutException;
@@ -44,7 +44,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     chooseLayout(layout);
     wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
-    PageObjectLogging.log(
+    Log.log(
         "PageCreated",
         "Page with given title created",
         true
@@ -56,7 +56,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     wait.forTextInElement(
         phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
     );
-    PageObjectLogging.log(
+    Log.log(
         "MessageAboutBlockPresent",
         "Message about block present",
         true,
@@ -91,7 +91,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
       wait.forElementVisible(addAPageButton);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      Log.info(e.getMessage());
       return false;
     }
   }

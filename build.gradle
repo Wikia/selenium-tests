@@ -378,6 +378,7 @@ test {
         testLogging.showStandardStreams = true
         testLogging.showStackTraces = true
         testLogging.exceptionFormat = TestExceptionFormat.FULL
+        configFailurePolicy = 'continue'
     }
 
     outputs.upToDateWhen { false }

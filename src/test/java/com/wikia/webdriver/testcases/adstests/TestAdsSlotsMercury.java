@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
@@ -48,8 +48,8 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX);
 
-    PageObjectLogging.log("Ad top position", String.valueOf(adPosition), true);
-    PageObjectLogging.log("Infobox bottom position", String.valueOf(pageElementPosition), true);
+    Log.log("Ad top position", String.valueOf(adPosition), true);
+    Log.log("Infobox bottom position", String.valueOf(pageElementPosition), true);
 
     Assertion.assertTrue(
         adPosition >= pageElementPosition,
@@ -68,8 +68,8 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER);
 
-    PageObjectLogging.log("Ad top position", String.valueOf(adPosition), true);
-    PageObjectLogging.log("Page header bottom position", String.valueOf(pageElementPosition), true);
+    Log.log("Ad top position", String.valueOf(adPosition), true);
+    Log.log("Page header bottom position", String.valueOf(pageElementPosition), true);
 
     Assertion.assertTrue(
         adPosition >= pageElementPosition,

@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.gallery;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -92,21 +92,21 @@ public class GalleryBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing orientation selected");
     }
-    PageObjectLogging.log("adjustOrientation", "dropdown selected", true);
+    Log.log("adjustOrientation", "dropdown selected", true);
 
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
     wait.forElementVisible(addPhotoButton);
     scrollAndClick(addPhotoButton);
-    PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+    Log.log("clickAddPhoto", "add photo button clicked", true);
     return new AddPhotoComponentObject(driver);
   }
 
   public void verifyPhotosCount(int photos) {
     for (int i = 0; i < photos; i++) {
       wait.forElementVisible(galleryPreviewPhotos.get(i));
-      PageObjectLogging
+      Log
           .log("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
     }
   }
@@ -114,7 +114,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    PageObjectLogging.log("clickFinish", "finish button clicked", true);
+    Log.log("clickFinish", "finish button clicked", true);
   }
 
   public enum PositionsGallery {

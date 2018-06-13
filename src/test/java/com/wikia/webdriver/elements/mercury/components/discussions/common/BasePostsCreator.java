@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
@@ -92,7 +92,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
       wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
       categoryPills.setEmpty(false);
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Category picker not found", e);
+      Log.info("Category picker not found", e);
       categoryPills.setEmpty(true);
     }
     return categoryPills;

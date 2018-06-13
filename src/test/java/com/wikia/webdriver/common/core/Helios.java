@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.HeliosConfig;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -79,13 +79,13 @@ public class Helios {
     httpDelete.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
     try (CloseableHttpResponse response = getDefaultClient().execute(httpDelete)) {
-      PageObjectLogging.log("DELETE TOKENS REQUEST: ", httpDelete.toString(), true);
-      PageObjectLogging.log("DELETE TOKENS RESPONSE: ", response.toString(), true);
+      Log.log("DELETE TOKENS REQUEST: ", httpDelete.toString(), true);
+      Log.log("DELETE TOKENS RESPONSE: ", response.toString(), true);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      Log.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+      Log.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
@@ -117,10 +117,10 @@ public class Helios {
       tokenCache.put(userName, token);
       return token;
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      Log.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+      Log.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
@@ -129,14 +129,14 @@ public class Helios {
   private static ResponseHandler<String> extractAccessToken() {
     return res -> {
       HttpEntity entity = res.getEntity();
-      PageObjectLogging.logInfo("LOGIN HEADERS: ", res.toString());
+      Log.info("LOGIN HEADERS: ", res.toString());
       String source = EntityUtils.toString(entity);
-      PageObjectLogging.logInfo("LOGIN RESPONSE RAW: ", source);
+      Log.info("LOGIN RESPONSE RAW: ", source);
       try {
         JSONObject responseValue = new JSONObject(source);
         return responseValue.getString("access_token");
       } catch (JSONException e) {
-        PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+        Log.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
         throw new WebDriverException(e);
       }
     };
@@ -145,15 +145,15 @@ public class Helios {
   private static ResponseHandler<String> extractUserId() {
     return res -> {
       HttpEntity entity = res.getEntity();
-      PageObjectLogging.logInfo("USER_ID HEADERS: ", res.toString());
+      Log.info("USER_ID HEADERS: ", res.toString());
       String source = EntityUtils.toString(entity);
-      PageObjectLogging.logInfo("USER_ID RESPONSE RAW: ", source);
+      Log.info("USER_ID RESPONSE RAW: ", source);
       try {
         JSONObject responseValue = new JSONObject(source);
         return responseValue.getJSONObject("query").getJSONArray("users").getJSONObject(0)
             .getString("userid");
       } catch (JSONException e) {
-        PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+        Log.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
         throw new WebDriverException(e);
       }
     };
@@ -165,7 +165,7 @@ public class Helios {
       try {
         return httpClient.execute(request, handler);
       } catch (ConnectTimeoutException e) {
-        PageObjectLogging.log("Timeout when connecting to helios", e, true);
+        Log.log("Timeout when connecting to helios", e, true);
         return httpClient.execute(request, handler);
       }
     }
@@ -185,7 +185,7 @@ public class Helios {
         }
       }
     } catch (IOException e) {
-      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+      Log.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
@@ -201,16 +201,16 @@ public class Helios {
       HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername).replace("https:","http:"));
       httpGet.setConfig(RequestConfig.custom().setProxy(getBorderProxy()).build());
 
-      PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
+      Log.info("USER_ID_REQUEST", httpGet.getURI().toString());
       return executeAndRetry(httpGet, extractUserId());
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
+      Log.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      Log.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+      Log.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }

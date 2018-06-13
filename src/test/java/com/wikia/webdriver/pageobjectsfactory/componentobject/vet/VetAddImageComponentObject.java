@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,13 +31,13 @@ public class VetAddImageComponentObject extends WikiBasePageObject {
   private void typeInPath(String path) {
     wait.forElementVisible(imageUploadTextBox);
     imageUploadTextBox.sendKeys(path);
-    PageObjectLogging.log(PAGE_NAME, path + " typed into path field", true);
+    Log.log(PAGE_NAME, path + " typed into path field", true);
   }
 
   private void clickUploadButton() {
     wait.forElementVisible(uploadButton);
     scrollAndClick(uploadButton);
-    PageObjectLogging.log(PAGE_NAME, "Upload button clicked", true, driver);
+    Log.log(PAGE_NAME, "Upload button clicked", true, driver);
   }
 
   public void uploadImage(String imagePath){
