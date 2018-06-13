@@ -72,18 +72,6 @@ public class Navigating extends NewTestTemplate {
     Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore");
   }
 
-  @Test(groups = {"fandomUniversityLinkClickOnEnCommunityOpensFandomUniversity"})
-  public void testFandomUniversityLink() {
-    new HomePage()
-        .getGlobalNavigation()
-        .openWikisMenu()
-        .clickFandomUniversityLink();
-
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, DEFAULT_LANGUAGE)
-                                   .getUrlForWikiPage(URLsContent.FANDOM_UNIVERSITY));
-  }
-
   @Test(groups = {"communityCentralLinkClickOnEnCommunityOpensEnCommunityCentral"})
   public void testCommunityCentralLink() {
     new HomePage()
