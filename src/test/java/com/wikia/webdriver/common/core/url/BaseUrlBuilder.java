@@ -9,7 +9,8 @@ import org.joda.time.DateTime;
 
 public class BaseUrlBuilder {
 
-    protected static final String HTTP_PREFIX = "http://";
+    public static final String HTTP_PREFIX = "http://";
+    public static final String HTTPS_PREFIX = "https://";
     protected String env;
     protected EnvType envType;
 
