@@ -1,9 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class AceEditor extends WikiBasePageObject {
@@ -21,7 +21,7 @@ public class AceEditor extends WikiBasePageObject {
   public AceEditor clearContent() {
     wait.forElementVisible(aceLayerTextArea);
     jsActions.execute("ace.edit('editarea').setValue('');");
-    PageObjectLogging.log("clearCssText", "ace editor was cleared", true, driver);
+    Log.log("clearCssText", "ace editor was cleared", true, driver);
 
     return this;
   }
@@ -30,7 +30,7 @@ public class AceEditor extends WikiBasePageObject {
     wait.forElementVisible(aceLayerTextArea);
     jsActions.execute("ace.edit('editarea').navigateFileEnd();");
     sendContent(cssText);
-    PageObjectLogging.log("sendAceCssText",
+    Log.log("sendAceCssText",
         "the following text was send to ace editor: " + cssText, true);
 
     return this;
@@ -39,7 +39,7 @@ public class AceEditor extends WikiBasePageObject {
   private AceEditor sendContent(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
     aceInputTextArea.sendKeys(cssText);
-    PageObjectLogging.log("sendCssText", "the following text was send to ace editor: " + cssText,
+    Log.log("sendCssText", "the following text was send to ace editor: " + cssText,
         true);
 
     return this;

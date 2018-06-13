@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.io.File;
 import lombok.Getter;
@@ -60,7 +60,7 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
   public VetAddVideoComponentObject clickAddVideo() {
     addVideoButton.click();
     wait.forElementVisible(addVideoModalBy);
-    PageObjectLogging.log("VetAddVideoComponentObject", "Add video button clicked", true);
+    Log.log("VetAddVideoComponentObject", "Add video button clicked", true);
     return new VetAddVideoComponentObject(driver);
   }
 
@@ -68,19 +68,19 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
     wait.forElementClickable(addVideoButtonBy);
     verifyVideoTitleUpdated(name);
     verifyVideoDisplayTitleUpdated(name);
-    PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
+    Log.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
   }
 
   public void verifyVideoTitleUpdated(String name) {
     wait.forElementClickable(addVideoButtonBy);
     Assertion.assertEquals(getTitle(), name);
-    PageObjectLogging.log("verifyVideoTitleUpdated", "Video title was updated", true);
+    Log.log("verifyVideoTitleUpdated", "Video title was updated", true);
   }
 
   public void verifyVideoDisplayTitleUpdated(String name) {
     wait.forElementClickable(addVideoButtonBy);
     Assertion.assertEquals(displayedTitleTextBox.getAttribute("value"), name);
-    PageObjectLogging.log("verifyVideoDisplayTitleUpdated",
+    Log.log("verifyVideoDisplayTitleUpdated",
             "Video display title input was populated", true);
   }
 
@@ -88,7 +88,7 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
     new Actions(driver).moveToElement(addImageButton).perform();
     addImageButton.click();
     wait.forElementVisible(addImageModalBy);
-    PageObjectLogging.log("VetAddVideoComponentObject", "Add image button clicked", true);
+    Log.log("VetAddVideoComponentObject", "Add image button clicked", true);
     return new VetAddImageComponentObject(driver);
   }
 

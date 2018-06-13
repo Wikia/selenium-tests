@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.openqa.selenium.By;
@@ -49,7 +49,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private void typeInSearchTextField(String input) {
     wait.forElementClickable(searchInput);
     searchInput.sendKeys(input);
-    PageObjectLogging.log("typeInSearchTextField", "Typed " + input + " in the search field", true);
+    Log.log("typeInSearchTextField", "Typed " + input + " in the search field", true);
   }
 
   private void clickAddGalleryButton() {

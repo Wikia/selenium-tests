@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -28,16 +28,16 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
     wait.forElementVisible(modal);
     wait.forElementClickable(addAPageButton);
     addAPageButton.click();
-    PageObjectLogging.log("createPage", "Add A Page button is clicked", true);
+    Log.log("createPage", "Add A Page button is clicked", true);
   }
 
   public void closeModal() {
     closeButton.click();
-    PageObjectLogging.log("closeModal", "The 'X' button is clicked", true);
+    Log.log("closeModal", "The 'X' button is clicked", true);
   }
 
   public void cancel() {
     cancelButton.click();
-    PageObjectLogging.log("cancel", "The cancel button is clicked", true);
+    Log.log("cancel", "The cancel button is clicked", true);
   }
 }

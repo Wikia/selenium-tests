@@ -1,8 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
+import com.wikia.webdriver.common.logging.Log;
 import lombok.Getter;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public final class SpecialMostLinkedFilesPage extends WikiBasePageObject {
@@ -13,8 +13,8 @@ public final class SpecialMostLinkedFilesPage extends WikiBasePageObject {
   private final GalleryGrid galleryGrid = new GalleryGrid();
 
   public SpecialMostLinkedFilesPage open() {
-    getUrl(urlBuilder.getUrlForPath(SPECIAL_MOST_LINKED_FILES_PATH));
-    PageObjectLogging.log("Special Most Linked Files Page",
+    getUrl(urlBuilder.getUrlForWikiPage(SPECIAL_MOST_LINKED_FILES_PATH));
+    Log.log("Special Most Linked Files Page",
         SPECIAL_MOST_LINKED_FILES_PATH + " opened", true);
 
     return this;

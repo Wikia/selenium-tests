@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
@@ -73,56 +73,56 @@ public class GlobalNavigation extends BasePageObject {
 
   public HomePage clickFandomLogo() {
     wait.forElementClickable(fandomLogo).click();
-    PageObjectLogging.log("clickFandomLogo", "clicked on fandom logo in global nav bar", true);
+    Log.log("clickFandomLogo", "clicked on fandom logo in global nav bar", true);
 
     return new HomePage();
   }
 
   public HomePage clickGamesHubLink() {
     wait.forElementClickable(gamesHubLink).click();
-    PageObjectLogging.log("clickGamesHubLink", "clicked on games hub link in global nav bar", true);
+    Log.log("clickGamesHubLink", "clicked on games hub link in global nav bar", true);
 
     return new HomePage();
   }
 
   public HomePage clickMoviesHubLink() {
     wait.forElementClickable(moviesHubLink).click();
-    PageObjectLogging.log("clickMoviesHubLink", "clicked on movies hub link in global nav bar", true);
+    Log.log("clickMoviesHubLink", "clicked on movies hub link in global nav bar", true);
 
     return new HomePage();
   }
 
   public HomePage clickTVHubLink() {
     wait.forElementClickable(tvHubLink).click();
-    PageObjectLogging.log("clickTVHubLink", "clicked on tv hub link in global nav bar", true);
+    Log.log("clickTVHubLink", "clicked on tv hub link in global nav bar", true);
 
     return new HomePage();
   }
 
   public GlobalNavigation openWikisMenu() {
     wait.forElementClickable(wikisMenu).click();
-    PageObjectLogging.log("openWikisMenu", "clicked on wikis menu in global nav bar", true);
+    Log.log("openWikisMenu", "clicked on wikis menu in global nav bar", true);
 
     return this;
   }
 
   public HomePage clickCommunityCentralLink() {
     wait.forElementClickable(communityCentralLink).click();
-    PageObjectLogging.log("clickCommunityCentralLink", "clicked on community central link in global nav bar", true);
+    Log.log("clickCommunityCentralLink", "clicked on community central link in global nav bar", true);
 
     return new HomePage();
   }
 
   public HomePage clickExploreWikisLink() {
     wait.forElementClickable(exploreWikisLink).click();
-    PageObjectLogging.logInfo("clicked on explore wikis link in global nav bar");
+    Log.info("clicked on explore wikis link in global nav bar");
 
     return new HomePage();
   }
 
   public HomePage clickFandomUniversityLink() {
     wait.forElementClickable(fandomUniversityLink).click();
-    PageObjectLogging.logInfo("clicked on fandom university link in global nav bar");
+    Log.info("clicked on fandom university link in global nav bar");
 
     return new HomePage();
   }
@@ -131,13 +131,13 @@ public class GlobalNavigation extends BasePageObject {
     searchInput.sendKeys(query);
     searchInput.submit();
 
-    PageObjectLogging.logInfo("search query typed and submitted");
+    Log.info("search query typed and submitted");
     return new SearchPageObject(driver);
   }
 
   public GlobalNavigation clickUserAvatar() {
     wait.forElementClickable(userAvatar).click();
-    PageObjectLogging.logInfo("clicked on user avatar in global nav bar");
+    Log.info("clicked on user avatar in global nav bar");
 
     return this;
   }
@@ -145,7 +145,7 @@ public class GlobalNavigation extends BasePageObject {
   public void clickSignOut() {
     clickUserAvatar();
     wait.forElementClickable(signOutButton).click();
-    PageObjectLogging.logInfo("link to sign out clicked");
+    Log.info("link to sign out clicked");
   }
 
   public boolean isUserMenuOpened() {

@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.util.List;
@@ -46,7 +46,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickCustomize() {
     wait.forElementVisible(customizeButton);
     jsActions.click(customizeButton);
-    PageObjectLogging.log("clickCustomize", "customize button clicked", true);
+    Log.log("clickCustomize", "customize button clicked", true);
   }
 
 
@@ -56,7 +56,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickResetDefaults() {
     wait.forElementVisible(resetDefaultsButton);
     jsActions.click(resetDefaultsButton);
-    PageObjectLogging.log("clickResetDefaults", "reset defaults button clicked", true);
+    Log.log("clickResetDefaults", "reset defaults button clicked", true);
   }
 
   /**
@@ -68,7 +68,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     wait.forElementVisible(findAToolField);
     findAToolField.clear();
     findAToolField.sendKeys(toolName);
-    PageObjectLogging.log("searchTool", toolName + " typed into search field", true);
+    Log.log("searchTool", toolName + " typed into search field", true);
 
   }
 
@@ -81,7 +81,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void typeNewName(String toolNewName) {
     renameItemDialogInput.clear();
     renameItemDialogInput.sendKeys(toolNewName);
-    PageObjectLogging.log("typeNewName", toolNewName + " typed into edit name field", true);
+    Log.log("typeNewName", toolNewName + " typed into edit name field", true);
   }
 
   /**
@@ -89,7 +89,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void clickSaveNewName() {
     scrollAndClick(saveItemDialogInput);
-    PageObjectLogging.log("clickSaveNewName", "save name button clicked", true);
+    Log.log("clickSaveNewName", "save name button clicked", true);
 
   }
 
@@ -104,7 +104,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
             By.cssSelector(String.format(searchSuggestionToolCss, toolName))
         )
     );
-    PageObjectLogging.log("clickSearchSuggestion",
+    Log.log("clickSearchSuggestion",
                           toolName + " selected from search suggestions", true);
   }
 
@@ -118,7 +118,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     jsActions.click(
         wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName)))
     );
-    PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
+    Log.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
 //********************************************************************************************************
   /**
@@ -129,7 +129,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage())
                     .collect(Collectors.toList()),
             "The page \"" + getArticleName().replace("_"," ") + "\" has been added to your watchlist.");
-    PageObjectLogging.log("verifyFollowMessage", "follow message verified", true);
+    Log.log("verifyFollowMessage", "follow message verified", true);
   }
 
   /**
@@ -139,7 +139,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void verifyFollowedToolbar() {
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
             "title", "Unfollow");
-    PageObjectLogging.log("verifyFollowedToolbar", "follow button verified", true);
+    Log.log("verifyFollowedToolbar", "follow button verified", true);
   }
 
   /**
@@ -154,7 +154,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
             "title", "Follow");
-    PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
+    Log.log("verifyUnfollowed", "unfollow button verified", true);
   }
 
   /**
@@ -164,12 +164,12 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    */
   public void verifyToolOnList(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
-    PageObjectLogging.log("verifyToolOnList", toolName + " visible on the list", true);
+    Log.log("verifyToolOnList", toolName + " visible on the list", true);
   }
 
   public void verifyToolNotOnList(String toolName) {
     wait.forElementNotPresent(By.cssSelector(String.format(toolsListToolCss, toolName)));
-    PageObjectLogging.log("verifyToolNotOnList", toolName + " not visible on the list", true);
+    Log.log("verifyToolNotOnList", toolName + " not visible on the list", true);
   }
 
   /**
@@ -180,7 +180,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickRemove(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolDeleteCss);
-    PageObjectLogging.log("clickRemove", "remove button for " + toolName + " clicked", true);
+    Log.log("clickRemove", "remove button for " + toolName + " clicked", true);
   }
 
   /**
@@ -192,7 +192,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickRename(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
-    PageObjectLogging.log("clickRename", "rename button for " + toolName + " clicked", true);
+    Log.log("clickRename", "rename button for " + toolName + " clicked", true);
   }
 
   /**
@@ -201,12 +201,12 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickSave() {
     wait.forElementVisible(saveButton);
     scrollAndClick(saveButton);
-    PageObjectLogging.log("clickSave", "save button clicked", true);
+    Log.log("clickSave", "save button clicked", true);
   }
 
   public void verifyToolOnToolbar(String toolName) {
     wait.forElementVisible(By.xpath(String.format(addedToolsPath, toolName)));
-    PageObjectLogging.log("verifyToolOnToolbar", "tool " + toolName + " visible on toolbar", true);
+    Log.log("verifyToolOnToolbar", "tool " + toolName + " visible on toolbar", true);
   }
 
   public void unfollowIfFollowed() {
@@ -216,12 +216,12 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
         clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
         wait.forTextInElement(toolsList, "Follow");
-        PageObjectLogging.log("unfollowIfFollowed",
+        Log.log("unfollowIfFollowed",
             "page was followed, unfollow button clicked", true);
         break;
       }
     }
-    PageObjectLogging.log("unfollowIfFollowed",
+    Log.log("unfollowIfFollowed",
                           "page was unfollowed", true);
   }
 
@@ -229,7 +229,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     wait.forElementNotPresent(
         By.xpath(String.format(addedToolsPath, toolName))
     );
-    PageObjectLogging.log("verifyToolRemoved", toolName + " removed from toolbar", true);
+    Log.log("verifyToolRemoved", toolName + " removed from toolbar", true);
   }
 
   public void addManyItems(String name, Integer count) {
@@ -243,14 +243,14 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void openMoreMenu() {
    jsActions.execute("$('.overflow-menu').mouseover();");
     wait.forElementVisible(By.cssSelector(".overflow-menu > .tools-menu"));
-    PageObjectLogging.log("openMoreMenu", "more menu opened", true);
+    Log.log("openMoreMenu", "more menu opened", true);
   }
 
   public void verifyToolInMoreTool(String toolName) {
     for (WebElement elem : myToolsList) {
       Assertion.assertEquals(elem.getAttribute("data-name").toLowerCase(), toolName.toLowerCase());
     }
-    PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
+    Log.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
   }
 
   public void waitForCustomizeToolbarModalToDisappear() {

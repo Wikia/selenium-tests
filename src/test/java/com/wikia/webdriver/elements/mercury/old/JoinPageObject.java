@@ -2,7 +2,7 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,7 +40,7 @@ public class JoinPageObject {
           URLEncoder.encode(urlBuilder.getUrl(), "UTF-8");
 
     } catch (UnsupportedEncodingException e) {
-      PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
+      Log.log("encoding", "problem occured during URL encoding", false);
     }
     driver.get(urlBuilder.getUrl() + "/join" + "?redirect="
                + redirectParameter);

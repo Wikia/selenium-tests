@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.TimeoutException;
@@ -26,7 +26,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(salesPitchDialog, 5);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.log(e.getMessage(), e, true);
+      Log.log(e.getMessage(), e, true);
       return false;
     }
   }
@@ -36,7 +36,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(helpOutButton);
       helpOutButton.click();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Button is not visible", e, true);
+      Log.log("Button is not visible", e, true);
     }
 
     return new SpecialCommunity();
@@ -47,7 +47,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(image);
       image.click();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Dialog image is not visible", e, true);
+      Log.log("Dialog image is not visible", e, true);
     }
 
     return new SpecialCommunity();
@@ -58,7 +58,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(dialogContent);
       dialogContent.click();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Dialog content is not visible", e, true);
+      Log.log("Dialog content is not visible", e, true);
     }
 
     return new SpecialCommunity();

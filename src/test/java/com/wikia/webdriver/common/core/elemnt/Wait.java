@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.core.elemnt;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.By;
@@ -58,7 +58,7 @@ public class Wait {
       return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     } catch (TimeoutException e) {
       if (failOnTimeout) {
-        PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
+        Log.log(ELEMENT_PRESENT_MESSAGE,
                               String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
       }
 
@@ -77,7 +77,7 @@ public class Wait {
       return new WebDriverWait(driver, timeout).until(ExpectedConditions
                                                           .presenceOfElementLocated(by));
     } catch (TimeoutException e) {
-      PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE, e, false);
+      Log.log(ELEMENT_PRESENT_MESSAGE, e, false);
       throw e;
     } finally {
       restoreDeaultImplicitWait();
@@ -94,7 +94,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -113,7 +113,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -131,7 +131,7 @@ public class Wait {
     try {
       elements.get(index).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       SelectorStack.contextRead();
@@ -177,7 +177,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -330,7 +330,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -387,7 +387,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -406,7 +406,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -536,11 +536,11 @@ public class Wait {
   }
 
   public void forX(Duration duration) {
-    PageObjectLogging.logInfo("Wait for " + duration.toMillis() + " ms");
+    Log.info("Wait for " + duration.toMillis() + " ms");
     try {
       Thread.sleep(duration.toMillis());
     } catch (InterruptedException e) {
-      PageObjectLogging.log("Wait.forXMilliseconds", e, false);
+      Log.log("Wait.forXMilliseconds", e, false);
     }
   }
 }

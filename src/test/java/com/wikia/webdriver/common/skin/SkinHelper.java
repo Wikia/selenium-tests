@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.skin;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
@@ -40,9 +40,9 @@ public class SkinHelper extends WikiBasePageObject {
     }
 
     if (isExpectedSkin) {
-      PageObjectLogging.logInfo("Expected skin is loaded: " + skin.toString());
+      Log.info("Expected skin is loaded: " + skin.toString());
     } else {
-      PageObjectLogging.logWarning("isSkin", "Expected skin is not loaded: " + skin.toString());
+      Log.warning("isSkin", "Expected skin is not loaded: " + skin.toString());
     }
 
     return isExpectedSkin;

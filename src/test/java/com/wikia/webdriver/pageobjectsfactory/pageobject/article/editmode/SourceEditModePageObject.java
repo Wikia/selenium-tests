@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
@@ -106,132 +106,132 @@ public class SourceEditModePageObject extends EditMode {
   public void clickBold() {
     focusTextArea();
     bold.click();
-    PageObjectLogging.log("clickBold", "bold button was clicked", true, driver);
+    Log.log("clickBold", "bold button was clicked", true, driver);
   }
 
   public void clickItalic() {
     focusTextArea();
     italic.click();
-    PageObjectLogging.log("clickItalic", "italic button was clicked", true, driver);
+    Log.log("clickItalic", "italic button was clicked", true, driver);
   }
 
   public void clickInternalLink() {
     focusTextArea();
     internalLink.click();
-    PageObjectLogging.log("clickInternalLink", "internal link button was clicked", true, driver);
+    Log.log("clickInternalLink", "internal link button was clicked", true, driver);
   }
 
   public void clickExternalLink() {
     focusTextArea();
     externalLink.click();
-    PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
+    Log.log("clickExternalLink", "external link button was clicked", true, driver);
   }
 
   public void clickLvl2Headline() {
     focusTextArea();
     lvl2headLine.click();
-    PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
+    Log.log("clickExternalLink", "external link button was clicked", true, driver);
   }
 
   public void clickEmbedFile() {
     focusTextArea();
     embedFile.click();
-    PageObjectLogging.log("clickEmbedFile", "embed file button was clicked", true, driver);
+    Log.log("clickEmbedFile", "embed file button was clicked", true, driver);
   }
 
   public void clickEmbedMedia() {
     focusTextArea();
     embedMedia.click();
-    PageObjectLogging.log("clickEmbedMedia", "embed media button was clicked", true, driver);
+    Log.log("clickEmbedMedia", "embed media button was clicked", true, driver);
   }
 
   public void clickMath() {
     focusTextArea();
     math.click();
-    PageObjectLogging.log("clickMath", "math button was clicked", true, driver);
+    Log.log("clickMath", "math button was clicked", true, driver);
   }
 
   public void clickNowiki() {
     focusTextArea();
     nowiki.click();
-    PageObjectLogging.log("clickNoWiki", "nowwiki button was clicked", true, driver);
+    Log.log("clickNoWiki", "nowwiki button was clicked", true, driver);
   }
 
   public void clickSignature() {
     focusTextArea();
     signature.click();
-    PageObjectLogging.log("clickSignature", "signature button was clicked", true, driver);
+    Log.log("clickSignature", "signature button was clicked", true, driver);
   }
 
   public void clickHorizontalLine() {
     focusTextArea();
     hline.click();
-    PageObjectLogging.log("clickHorizontalLine", "horizontal line button was clicked", true,
+    Log.log("clickHorizontalLine", "horizontal line button was clicked", true,
         driver);
   }
 
   public PhotoAddComponentObject clickAddPhoto() {
     focusTextArea();
     photo.click();
-    PageObjectLogging.log("clickAddPhot", "add photo button was clicked", true, driver);
+    Log.log("clickAddPhot", "add photo button was clicked", true, driver);
     return new PhotoAddComponentObject(driver);
   }
 
   public void clickAddGallery() {
     focusTextArea();
     gallery.click();
-    PageObjectLogging.log("clickAddGallery", "add gallery button was clicked", true, driver);
+    Log.log("clickAddGallery", "add gallery button was clicked", true, driver);
   }
 
   public VetAddVideoComponentObject clickAddVideo() {
     focusTextArea();
     video.click();
-    PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
+    Log.log("clickAddVideo", "add video button was clicked", true, driver);
     return new VetAddVideoComponentObject(driver);
   }
 
   public WikiTextShortCutsComponentObject clickMore() {
     focusTextArea();
     more.click();
-    PageObjectLogging.log("clickMore", "more button was clicked", true, driver);
+    Log.log("clickMore", "more button was clicked", true, driver);
     return new WikiTextShortCutsComponentObject(driver);
   }
 
   public void clearSource() {
     sourceModeTextArea.clear();
-    PageObjectLogging.log("clearSource", "source area erased", true, driver);
+    Log.log("clearSource", "source area erased", true, driver);
   }
 
   public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("addContent", "the following content was added: " + content, true);
+    Log.log("addContent", "the following content was added: " + content, true);
     return this;
   }
 
   public void verifyComponentSelector() {
     wait.forElementVisible(componentSelector);
-    PageObjectLogging.log("verifyComponentSelector", "component selector is visible", true, driver);
+    Log.log("verifyComponentSelector", "component selector is visible", true, driver);
   }
 
   public Object addComponent(String componentName) {
     if ("slideshow".equals(componentName)) {
       wait.forElementVisible(createSlideshow);
       createSlideshow.click();
-      PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
+      Log.log("addComponent", "selected " + componentName + " component", true);
       return new SlideshowBuilderComponentObject(driver);
     } else if ("gallery".equals(componentName)) {
       wait.forElementVisible(createGallery);
       createGallery.click();
-      PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
+      Log.log("addComponent", "selected " + componentName + " component", true);
       return new GalleryBuilderComponentObject(driver);
     } else if ("slider".equals(componentName)) {
       wait.forElementVisible(createSlider);
       createSlider.click();
-      PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
+      Log.log("addComponent", "selected " + componentName + " component", true);
       return new SliderBuilderComponentObject(driver);
     } else {
-      PageObjectLogging.log("addComponent", "not supported component name: " + componentName,
+      Log.log("addComponent", "not supported component name: " + componentName,
           false);
       return null;
     }
@@ -323,27 +323,27 @@ public class SourceEditModePageObject extends EditMode {
   private void appendContent(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("appendContent", "text: '" + content + "', added to the source mode",
+    Log.log("appendContent", "text: '" + content + "', added to the source mode",
         true);
   }
 
   public void clearContent() {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.clear();
-    PageObjectLogging.log("clearContent", "source mode cleared", true);
+    Log.log("clearContent", "source mode cleared", true);
   }
 
   public void verifySourceModeEnabled() {
     wait.forElementVisible(sourceModeTextArea);
     waitForElementNotVisibleByElement(sourceModeLoadingIndicator);
-    PageObjectLogging.log("verifySourceModeEnabled", "source mode enabled", true);
+    Log.log("verifySourceModeEnabled", "source mode enabled", true);
   }
 
   public void verifySourceOnlyMode() {
     wait.forElementVisible(sourceOnlyModeTextArea);
     if (!(Boolean) jsActions.execute(WikiaGlobalVariables.WG_IS_ARTICLE)) {
       wait.forElementVisible(srcOnlyMode);
-      PageObjectLogging.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
+      Log.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
     } else {
       throw new NoSuchElementException("Can not detect the page to be in Edit mode");
     }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
@@ -339,7 +339,7 @@ public class ArticleRTETest extends NewTestTemplate {
       if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)) {
         tmp1 = e.getAttribute("value").replace("<", "&lt");
         tmp1.replace(">", "&gt");
-        PageObjectLogging
+        Log
             .log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
       } else {
         tmp1 = e.getAttribute("value").replace("<", "&lt;");
@@ -349,8 +349,8 @@ public class ArticleRTETest extends NewTestTemplate {
         tmp2 = tmp2.replace(">", "&gt;");
         tmp2 = tmp2.replace(" ", "&nbsp;");
 
-        PageObjectLogging.log("checking value failed", "should be: <pre>" + tmp2 + "</pre>", false);
-        PageObjectLogging
+        Log.log("checking value failed", "should be: <pre>" + tmp2 + "</pre>", false);
+        Log
             .log("checking value failed", "result is: <pre>" + tmp1 + "</pre>", false, driver);
       }
     }

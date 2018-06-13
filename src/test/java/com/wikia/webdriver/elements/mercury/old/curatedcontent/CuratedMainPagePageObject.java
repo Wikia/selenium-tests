@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.TimeoutException;
@@ -19,7 +19,7 @@ public class CuratedMainPagePageObject extends BasePageObject {
     try {
       wait.forElementVisible(By.cssSelector(element));
     } catch (TimeoutException | ElementNotVisibleException ex) {
-      PageObjectLogging.log("Web element " + element +" not visible", ex, true);
+      Log.log("Web element " + element +" not visible", ex, true);
       return false;
     }
     return true;

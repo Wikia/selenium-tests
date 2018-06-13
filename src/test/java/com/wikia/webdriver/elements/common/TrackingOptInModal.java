@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.common;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -8,7 +8,7 @@ import org.openqa.selenium.TimeoutException;
 public class TrackingOptInModal{
   private static final By MODAL_SELECTOR = By.cssSelector("div[data-tracking-opt-in-overlay]");
   private static final By ACCEPT_BUTTON_SELECTOR = By.cssSelector("div[data-tracking-opt-in-accept]");
-  private static final By REJECT_BUTTON_SELECTOR = By.cssSelector("div[data-tracking-opt-in-accept]");
+  private static final By REJECT_BUTTON_SELECTOR = By.cssSelector("div[data-tracking-opt-in-reject]");
   private final BasePageObject page;
 
   public TrackingOptInModal(BasePageObject page) {
@@ -18,11 +18,11 @@ public class TrackingOptInModal{
   public boolean isVisible() {
     try {
       page.wait.forElementVisible(MODAL_SELECTOR);
-      PageObjectLogging.logInfo("Tracking modal visible");
+      Log.info("Tracking modal visible");
 
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Tracking modal not visible", e);
+      Log.info("Tracking modal not visible", e);
 
       return false;
     }
@@ -32,7 +32,7 @@ public class TrackingOptInModal{
     try {
       page.wait.forElementClickable(ACCEPT_BUTTON_SELECTOR).click();
     } catch (Exception e) {
-      PageObjectLogging.log("Accept button clicked", e, false);
+      Log.log("Accept button clicked", e, false);
     }
   }
 
@@ -40,7 +40,7 @@ public class TrackingOptInModal{
     try {
       page.wait.forElementClickable(REJECT_BUTTON_SELECTOR).click();
     } catch (Exception e) {
-      PageObjectLogging.log("Reject button clicked", e, false);
+      Log.log("Reject button clicked", e, false);
     }
   }
 }

@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +20,6 @@ import org.apache.http.message.BasicNameValuePair;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.http.util.EntityUtils;
 
 public class UserRegistration {
@@ -33,7 +33,7 @@ public class UserRegistration {
     try {
       url = new URL(baseURL + "user-registration/users/emailconfirmed");
     } catch (MalformedURLException e) {
-      PageObjectLogging.logError("Wrong internal services URL", e);
+      Log.logError("Wrong internal services URL", e);
     }
     try {
       HttpPost httpPost = new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(),
@@ -54,12 +54,12 @@ public class UserRegistration {
 
       CloseableHttpResponse resp = httpClient.execute(httpPost);
 
-      PageObjectLogging.logInfo("REGISTER USER: ",  httpPost.toString());
-      PageObjectLogging.logInfo("REGISTER USER: ",
+      Log.info("REGISTER USER: ",  httpPost.toString());
+      Log.info("REGISTER USER: ",
           "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
 
     } catch (URISyntaxException | IOException e) {
-      PageObjectLogging.logError("Error during registering user", e);
+      Log.logError("Error during registering user", e);
     }
   }
 }

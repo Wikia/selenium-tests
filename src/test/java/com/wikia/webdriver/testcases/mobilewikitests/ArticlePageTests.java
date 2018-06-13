@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -98,7 +98,7 @@ public class ArticlePageTests extends NewTestTemplate {
     String encodedQuestionMarkUrl = "/wiki/Question%3Fmark%3Fquestion";
     String encodedColonUrl = "/wiki/Colon%3Acolon%3Acolon";
 
-    PageObjectLogging.logWarning(
+    Log.warning(
         "Info",
         "Accessing article directly through URL"
     );
@@ -113,7 +113,7 @@ public class ArticlePageTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    PageObjectLogging.logWarning(
+    Log.warning(
         "Info",
         "Accessing article through link in content"
     );
@@ -130,7 +130,7 @@ public class ArticlePageTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
+    Log.warning("Info", "Accessing article through link in navigation side");
 
     topBar.openNavigation();
     navigation.openSubMenu(3);
@@ -146,7 +146,7 @@ public class ArticlePageTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
+    Log.warning("Info", "Accessing article through link in search result");
 
     topBar.openSearch().navigateToPage(MercurySubpages.COLON);
 

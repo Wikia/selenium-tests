@@ -6,7 +6,8 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import org.junit.Assert;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
@@ -52,8 +53,8 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   }
 
   private void verifyNoUAPSizesInSlot(AdsBaseObject ads, String slot) {
-    Assert.assertFalse(String.format("Slot %s has UAP supported 2x2 size", slot), ads.slotHasSize(slot, 2, 2));
-    Assert.assertFalse(String.format("Slot %s has UAP supported 3x3 size", slot), ads.slotHasSize(slot, 3, 3));
+    Assert.assertFalse(ads.slotHasSize(slot, 2, 2), String.format("Slot %s has UAP supported 2x2 size", slot));
+    Assert.assertFalse(ads.slotHasSize(slot, 3, 3), String.format("Slot %s has UAP supported 3x3 size", slot));
   }
 
   private void verifyOutstreamAdIsDisplayed(AdsBaseObject ads){

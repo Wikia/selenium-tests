@@ -1,9 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
+import com.wikia.webdriver.common.logging.Log;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class WikiEditMode extends WikiBasePageObject {
@@ -20,7 +20,7 @@ public class WikiEditMode extends WikiBasePageObject {
     publishButtonGeneral.click();
     wait.forElementPresent(editButtonBy);
 
-    PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
+    Log.log("ClickOnPublishButton", "Click on 'Publish' button", true);
     return new WikiArticleEditMode();
   }
 }

@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,9 +35,9 @@ public class AdsPrebidObject extends AdsBaseObject {
       assertKeyValue(keyValues, "hb_size", size, "Size passed in slot key-values");
       assertKeyValue(keyValues, "hb_pb", price, "Price passed in slot key-values");
     } catch (JSONException exception) {
-      PageObjectLogging
+      Log
           .log("Prebid.js key-values", "Prebid.js key-values not found in slot div", false);
-      PageObjectLogging.log("Prebid.js key-values", exception, false);
+      Log.log("Prebid.js key-values", exception, false);
     }
   }
 

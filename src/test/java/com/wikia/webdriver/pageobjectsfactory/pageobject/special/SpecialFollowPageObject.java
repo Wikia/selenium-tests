@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -32,7 +32,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
     wait.forElementVisible(By.xpath(
         "//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '" + articleName
         + "')]"));
-    PageObjectLogging.log("verifyFollowedArticle",
+    Log.log("verifyFollowedArticle",
                           articleName + "is visible on followed list", true);
   }
 
@@ -46,7 +46,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
     }
     Assertion.assertTrue(isPresent, "image " + imageVideo
                                     + " is not present on the following list");
-    PageObjectLogging.log("verifyFollowedImageVideo",
+    Log.log("verifyFollowedImageVideo",
                           imageVideo + "is visible on followed list", true);
   }
 
@@ -59,7 +59,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
       }
     }
     Assertion.assertTrue(isPresent, "blog " + blogTitle + " is not present on the following list");
-    PageObjectLogging.log("verifyFollowedBlog",
+    Log.log("verifyFollowedBlog",
                           userName + " blog is visible on followed list", true);
   }
 
@@ -67,7 +67,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
     wait.forElementVisible(By.xpath(
         "//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '" + blogPostName
         + "')]"));
-    PageObjectLogging.log("verifyFollowedBlogPost",
+    Log.log("verifyFollowedBlogPost",
                           blogPostName + " blog post is visible on followed list", true);
   }
 }

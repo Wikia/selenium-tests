@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.GalleryComponentObject;
@@ -46,14 +46,14 @@ public class LightboxTests extends NewTestTemplate {
         "Lightbox is closed"
     );
 
-    PageObjectLogging.log(
+    Log.log(
         "Lightbox",
         "is opened",
         true
     );
 
     boolean result = lightbox.isCurrentImageVisible();
-    PageObjectLogging.log(
+    Log.log(
         "Current image",
         "is visible",
         "is not visible",
@@ -63,7 +63,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.clickCloseButton();
 
     result = !lightbox.isLightboxOpened();
-    PageObjectLogging.log(
+    Log.log(
         "Lightbox",
         "is closed",
         "is opened",

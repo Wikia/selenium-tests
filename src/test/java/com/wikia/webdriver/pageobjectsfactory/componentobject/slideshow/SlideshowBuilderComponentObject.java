@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -40,7 +40,7 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   public void adjustPosition(Positions position) {
     Select pos = new Select(slideshowPosition);
     pos.selectByVisibleText(position.getPosition());
-    PageObjectLogging
+    Log
         .log("adjustPosition", "slideshow position set to " + position.getPosition(), true);
   }
 
@@ -53,6 +53,6 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   public void clickFinish() {
     wait.forElementVisible(finishButton);
     finishButton.click();
-    PageObjectLogging.log("clickFinish", "finish button clicked", true);
+    Log.log("clickFinish", "finish button clicked", true);
   }
 }
