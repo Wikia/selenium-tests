@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.contentpatterns;
 public class MercurySubpages {
 
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
-  public static final String MAIN_PAGE = "Mercury_automation_testing_Wikia";
+  public static final String MAIN_PAGE = "Mercury_automation_testing_Wiki";
   public static final String GALLERY = "Gallery";
   public static final String TOC = "TOC";
   public static final String TOC_WITHOUT_H2 = "TOCWithoutH2";
