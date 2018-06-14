@@ -20,27 +20,27 @@ public class TestAdsTrackingOptInRequestsF2 extends AdsFandomTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(groups = "AdsOptInModalF2")
   public void testModalVisible() {
-    networkTrafficInterceptor.startIntercepting();
-    AdsFandomObject page = loadPage(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject page = loadPageWithGeo();
     TrackingOptInModal modal = new TrackingOptInModal(page);
 
     Assertion.assertTrue(modal.isVisible());
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
   @Test(groups = "AdsOptInModalF2")
   public void testNoRequestForAdBeforeModal() throws InterruptedException {
-    networkTrafficInterceptor.startIntercepting();
-    AdsFandomObject fandomPage = loadPage(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
-    TrackingOptInModal modal = new TrackingOptInModal(fandomPage);
-    fandomPage.waitForPageLoad();
+    AdsFandomObject page = loadPageWithGeo();
+
+    TrackingOptInModal modal = new TrackingOptInModal(page);
+    page.waitForPageLoad();
 
     TimeUnit.SECONDS.sleep(10);
-    Assertion.assertFalse(fandomPage.wasRequestForAdSend(networkTrafficInterceptor));
+    Assertion.assertFalse(page.wasRequestForAdSend(networkTrafficInterceptor));
     modal.clickAcceptButton();
 
     TimeUnit.SECONDS.sleep(5);
-    Assertion.assertTrue(fandomPage.wasRequestForAdSend(networkTrafficInterceptor));
+    Assertion.assertTrue(page.wasRequestForAdSend(networkTrafficInterceptor));
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -80,7 +80,6 @@ public class TestAdsTrackingOptInRequestsF2 extends AdsFandomTestTemplate {
     TrackingOptInPage.setGeoCookie(driver, "EU", "PL");
     networkTrafficInterceptor.startIntercepting();
     page.refreshPage();
-    page.waitForPageLoad();
     return page;
   }
 
