@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class TestAdsTrackingOptInRequestsF2 extends AdsFandomTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false, trackingOptOut = false)
+  @Execute(trackingOptIn = false)
   @Test(groups = "AdsOptInModalF2")
   public void testModalVisible() {
     AdsFandomObject page = loadPageWithGeo();
@@ -27,11 +27,10 @@ public class TestAdsTrackingOptInRequestsF2 extends AdsFandomTestTemplate {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false, trackingOptOut = false)
+  @Execute(trackingOptIn = false)
   @Test(groups = "AdsOptInModalF2")
   public void testNoRequestForAdBeforeModal() throws InterruptedException {
-    networkTrafficInterceptor.startIntercepting();
-    AdsFandomObject page = loadPage(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
+    AdsFandomObject page = loadPageWithGeo();
 
     TrackingOptInModal modal = new TrackingOptInModal(page);
     page.waitForPageLoad();
