@@ -1,9 +1,14 @@
 package com.wikia.webdriver.common.core.api;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.API_URL;
+
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
-
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Iterator;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -18,16 +23,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Iterator;
-
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.API_URL;
-
 public class EditToken {
 
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
-  private String baseURL = API_URL;
+  private String baseURL = API_URL.replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX);
   private User user;
   private String username;
 
