@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
-  private String baseURL = UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
+  private String baseURL = UrlBuilder.createUrlBuilder().getUrl().replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
       + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;

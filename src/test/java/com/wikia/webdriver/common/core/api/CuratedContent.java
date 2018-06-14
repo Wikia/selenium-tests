@@ -12,7 +12,7 @@ public class CuratedContent extends ApiCall {
   }
 
   @Override protected String getURL() {
-    return UrlBuilder.createUrlBuilder().getUrl().replace("https","http")
+    return UrlBuilder.createUrlBuilder().getUrl().replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
            + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
   }
 
