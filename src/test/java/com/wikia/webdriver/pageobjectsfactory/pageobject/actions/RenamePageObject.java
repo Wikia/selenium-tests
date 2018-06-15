@@ -22,12 +22,13 @@ public class RenamePageObject extends ArticlePageObject {
 
   public ArticlePageObject rename(String newName, boolean leaveRedirect) {
     wait.forElementClickable(newNameInput);
+    jsActions.scrollElementIntoViewPort(newNameInput);
     newNameInput.clear();
     newNameInput.sendKeys(newName);
     if (leaveRedirect) {
       leaveRedirectCheckbox.click();
     }
-    scrollAndClick(submitRename);
+    submitRename.click();
     Log.log("ArticleRenamed", "Article renamed", true);
     return new ArticlePageObject();
   }

@@ -177,7 +177,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     Assertion.assertEquals(1, notificationsListForTitle.size());
     String notificationMessageBody =
         notificationsListForTitle.get(0).findElement(By.cssSelector("p")).getText();
-    Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
+    Assertion.assertStringContains(notificationMessageBody, messageAuthor);
   }
 
   /**
