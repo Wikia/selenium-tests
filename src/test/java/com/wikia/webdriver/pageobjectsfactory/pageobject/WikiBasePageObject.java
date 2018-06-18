@@ -486,6 +486,8 @@ public class WikiBasePageObject extends BasePageObject {
 
     driver.manage().addCookie(new Cookie("access_token", token,
         String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
+    driver.manage().addCookie(new Cookie("fandom-sb-closed", "1",
+        String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);
