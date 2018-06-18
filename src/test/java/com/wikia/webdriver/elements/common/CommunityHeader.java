@@ -144,7 +144,8 @@ public class CommunityHeader extends BasePageObject {
   }
 
   public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
-    wait.forElementClickable(exploreWikiActivityLink).click();
+    wait.forElementClickable(exploreWikiActivityLink);
+    scrollAndClick(exploreWikiActivityLink);
 
     Log.info("explore -> wikiActivity link clicked");
 
@@ -152,7 +153,8 @@ public class CommunityHeader extends BasePageObject {
   }
 
   public ArticlePageObject clickExploreRandomLink() {
-    wait.forElementClickable(exploreRandomLink).click();
+    wait.forElementClickable(exploreRandomLink);
+    scrollAndClick(exploreRandomLink);
 
     Log.info("explore -> random page link clicked");
 
@@ -160,31 +162,36 @@ public class CommunityHeader extends BasePageObject {
   }
 
   public void clickExploreCommunityLink() {
-    wait.forElementClickable(exploreCommunityLink).click();
+    wait.forElementClickable(exploreCommunityLink);
+    scrollAndClick(exploreCommunityLink);
 
     Log.info("explore -> community link clicked");
   }
 
   public void clickExploreVideosLink() {
-    wait.forElementClickable(exploreVideosLink).click();
+    wait.forElementClickable(exploreVideosLink);
+    scrollAndClick(exploreVideosLink);
 
     Log.info("explore -> videos link clicked");
   }
 
   public void clickExploreImagesLink() {
-    wait.forElementClickable(exploreImagesLink).click();
+    wait.forElementClickable(exploreImagesLink);
+    scrollAndClick(exploreImagesLink);
 
     Log.info("explore -> images link clicked");
   }
 
   public void clickDiscussLink() {
-    wait.forElementClickable(discussLink).click();
+    wait.forElementClickable(discussLink);
+    scrollAndClick(discussLink);
 
     Log.info("discuss link clicked");
   }
 
   public void clickExploreForumLink() {
-    wait.forElementClickable(exploreForumLink).click();
+    wait.forElementClickable(exploreForumLink);
+    scrollAndClick(exploreForumLink);
 
     Log.info("explore->forum link clicked");
   }

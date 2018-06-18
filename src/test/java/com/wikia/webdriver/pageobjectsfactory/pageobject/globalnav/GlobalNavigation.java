@@ -62,9 +62,6 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = "a[data-tracking-label=\"link.explore\"]")
   private WebElement exploreWikisLink;
 
-  @FindBy(css = "a[data-tracking-label=\"link.fandom-university\"]")
-  private WebElement fandomUniversityLink;
-
   @FindBy(css = ".wds-global-navigation__partner-slot-link")
   private WebElement partnerSlotLink;
 
@@ -116,13 +113,6 @@ public class GlobalNavigation extends BasePageObject {
   public HomePage clickExploreWikisLink() {
     wait.forElementClickable(exploreWikisLink).click();
     Log.info("clicked on explore wikis link in global nav bar");
-
-    return new HomePage();
-  }
-
-  public HomePage clickFandomUniversityLink() {
-    wait.forElementClickable(fandomUniversityLink).click();
-    Log.info("clicked on fandom university link in global nav bar");
 
     return new HomePage();
   }

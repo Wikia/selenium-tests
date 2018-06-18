@@ -12,7 +12,7 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 
 3. Go to "Annotation Processors"
     * Windows: click Settings -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
-    * OSX: click Intellij IDEA -> Preferences -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
+    * OSX: click Intellij IDEA -> Preferences -> Build, Execution, Deployment -> Compiler -> Annotation Processors. Set "Enable annotation processing".
 
 4. Install IDE configurations from [Wikia's Java Coding Guidelines](https://github.com/Wikia/guidelines/tree/master/Java)
 

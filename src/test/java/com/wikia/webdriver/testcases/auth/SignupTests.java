@@ -1,11 +1,19 @@
 package com.wikia.webdriver.testcases.auth;
 
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.*;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.helpers.UserWithEmail;
+import com.wikia.webdriver.common.core.helpers.UserWithEmailFactory;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -14,14 +22,9 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
-import org.testng.annotations.Test;
-
 import java.time.Instant;
 import java.time.LocalDate;
-
-import static com.wikia.webdriver.common.core.Assertion.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import org.testng.annotations.Test;
 
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -212,7 +215,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().openArticleByPath(MercurySubpages.MAIN_PAGE);
+    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
   }
 
   private RegisterPage navigateToSignUpOnMobile() {
