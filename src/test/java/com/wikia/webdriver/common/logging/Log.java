@@ -55,19 +55,12 @@ public class Log {
     LOGS_RESULTS.clear();
   }
 
-  private static String getPageSource(WebDriver driver) {
-    return driver.getPageSource().replaceAll("<script", "<textarea style=\"display: none\"><script")
-        .replaceAll("</script", "</script></textarea");
-  }
-
   public static void log(String command, String description, boolean success, WebDriver driver) {
     LOGS_RESULTS.add(success);
     imageCounter += 1;
 
     try {
       new Shooter().savePageScreenshot(Log.SCREEN_PATH + Log.imageCounter, driver);
-      CommonUtils.appendTextToFile(Log.SCREEN_PATH + Log.imageCounter + ".html",
-                                   Log.getPageSource(driver));
       VelocityWrapper.fillErrorLogRow(Arrays.asList(LogLevel.ERROR), description, Log.imageCounter);
     } catch (Exception e) {
       VelocityWrapper
@@ -77,7 +70,6 @@ public class Log {
     }
 
     new Shooter().savePageScreenshot(SCREEN_PATH + imageCounter, driver);
-    CommonUtils.appendTextToFile(SCREEN_PATH + imageCounter + ".html", getPageSource(driver));
 
     LogData logType = success ? LogLevel.OK : LogLevel.ERROR;
     VelocityWrapper
@@ -89,7 +81,6 @@ public class Log {
     LOGS_RESULTS.add(success);
     imageCounter += 1;
     new Shooter().savePageScreenshot(SCREEN_PATH + imageCounter, driver);
-    CommonUtils.appendTextToFile(SCREEN_PATH + imageCounter + ".html", getPageSource(driver));
     String
         html =
         VelocityWrapper
@@ -248,8 +239,6 @@ public class Log {
       String html = VelocityWrapper.fillErrorLogRow(classList, exceptionMessage, Log.imageCounter);
       try {
         new Shooter().savePageScreenshot(Log.SCREEN_PATH + Log.imageCounter, driver);
-        CommonUtils.appendTextToFile(Log.SCREEN_PATH + Log.imageCounter + ".html",
-                                     Log.getPageSource(driver));
         CommonUtils.appendTextToFile(Log.LOG_PATH, html);
       } catch (Exception e) {
         html = VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(classList, exceptionMessage);
