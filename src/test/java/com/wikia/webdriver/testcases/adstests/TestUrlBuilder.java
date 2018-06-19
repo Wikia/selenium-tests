@@ -410,7 +410,7 @@ public class TestUrlBuilder {
         .newInstance("mercuryautomationtesting", "preview", false, false, DEFAULT_LANGUAGE);
 
     Assert.assertEquals(urlBuilder.getUrlForWikiPageWithWWW(MercurySubpages.MAIN_PAGE),
-        "http://www.mercuryautomationtesting.preview.wikia.com/wiki/Mercury_automation_testing_Wikia");
+        "http://www.mercuryautomationtesting.preview.wikia.com/wiki/Mercury_automation_testing_Wiki");
   }
 
   @AfterMethod(alwaysRun = true)
