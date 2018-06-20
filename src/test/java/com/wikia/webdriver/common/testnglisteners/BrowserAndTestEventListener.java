@@ -155,7 +155,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
       NetworkTrafficInterceptor
           networkTrafficInterceptor =
           DriverProvider.getActiveDriver().getProxy();
-      if (networkTrafficInterceptor != null && Configuration.getForceHttps()) {
+      if (networkTrafficInterceptor != null) {
         networkTrafficInterceptor.startIntercepting();
       }
     }
