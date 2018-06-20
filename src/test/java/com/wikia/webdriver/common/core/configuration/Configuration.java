@@ -158,12 +158,12 @@ public class Configuration {
 
   public static Emulator getEmulator() {
     Emulator emulatorToUse = Emulator.DEFAULT;
-    if (TestContext.getCurrentTestMethod().getDeclaringClass()
-        .isAnnotationPresent(InBrowser.class)) {
+    if (TestContext.getCurrentTestMethod() != null &&
+            TestContext.getCurrentTestMethod().getDeclaringClass().isAnnotationPresent(InBrowser.class)) {
       emulatorToUse = TestContext.getCurrentTestMethod().getDeclaringClass()
           .getDeclaredAnnotation(InBrowser.class).emulator();
     }
-    if (TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
+    if (TestContext.getCurrentTestMethod() != null && TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
       emulatorToUse =
           TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
     }

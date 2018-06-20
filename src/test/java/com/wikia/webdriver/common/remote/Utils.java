@@ -29,7 +29,7 @@ public final class Utils {
   }
 
   public static String excractSiteIdFromWikiName(String wikiName) {
-    String wikiUrl = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrl();
+    String wikiUrl = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrl().replace("https://", "http://");
     return extractSiteIdFromMediaWiki(wikiUrl);
   }
 
