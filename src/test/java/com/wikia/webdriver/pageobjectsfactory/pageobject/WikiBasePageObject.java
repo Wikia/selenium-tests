@@ -632,7 +632,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void scrollToFooter() {
     wait.forElementVisible(footer);
-    jsActions.scrollToElement(footer);
+    jsActions.scrollIntoView(footer);
 
     Log.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
