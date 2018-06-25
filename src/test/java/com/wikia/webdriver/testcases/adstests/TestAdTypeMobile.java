@@ -68,6 +68,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String slotNameWithAd = AdsContent.MOBILE_BOTTOM_LB;
     String slotNameWithoutAd = AdsContent.MOBILE_AD_IN_CONTENT;
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    ads.scrollToFooter();
     ads.wait.forElementPresent(By.id(slotNameWithAd));
     ads.wait.forElementPresent(By.id(slotNameWithoutAd));
     ads.verifyImgAdLoadedInSlot(slotNameWithAd, DFP_IMAGE_URL);
