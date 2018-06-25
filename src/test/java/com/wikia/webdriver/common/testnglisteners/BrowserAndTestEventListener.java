@@ -149,9 +149,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
       if (user != null && user != User.ANONYMOUS) {
         // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject().loginAs(user);
-      }else{
-        new WikiBasePageObject().refreshPageAddingCacheBuster();
       }
+
       NetworkTrafficInterceptor
           networkTrafficInterceptor =
           DriverProvider.getActiveDriver().getProxy();
