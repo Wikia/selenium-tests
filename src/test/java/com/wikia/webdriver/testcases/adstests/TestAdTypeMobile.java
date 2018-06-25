@@ -27,7 +27,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
     Page page = new Page("project43", "SyntheticTests/AdType/Async/Success");
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
-    ads.scrollToFooter();
+    ads.scrollToRecirculationPrefooter();
     ads.waitForSlot(AdsContent.MOBILE_BOTTOM_LB);
     ads.verifyImgAdLoadedInSlot(AdsContent.MOBILE_BOTTOM_LB, DFP_IMAGE_URL);
   }
@@ -46,7 +46,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261075132&orderId=245575332
     Page page = new Page("project43", "SyntheticTests/AdType/Async/Success/NoAd");
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
-    ads.scrollToFooter();
+    ads.scrollToRecirculationPrefooter();
     ads.wait.forElementPresent(By.id(AdsContent.MOBILE_BOTTOM_LB));
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }
@@ -68,7 +68,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     String slotNameWithAd = AdsContent.MOBILE_BOTTOM_LB;
     String slotNameWithoutAd = AdsContent.MOBILE_AD_IN_CONTENT;
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
-    ads.scrollToFooter();
+    ads.scrollToRecirculationPrefooter();
     ads.wait.forElementPresent(By.id(slotNameWithAd));
     ads.wait.forElementPresent(By.id(slotNameWithoutAd));
     ads.verifyImgAdLoadedInSlot(slotNameWithAd, DFP_IMAGE_URL);
@@ -80,7 +80,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261157332&orderId=245575332
     Page page = new Page("project43", "SyntheticTests/AdType/ForcedSuccess");
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
-    ads.scrollToFooter();
+    ads.scrollToRecirculationPrefooter();
     ads.waitForSlot(AdsContent.MOBILE_BOTTOM_LB);
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }

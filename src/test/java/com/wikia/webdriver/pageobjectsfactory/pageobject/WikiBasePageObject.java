@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.google.common.base.Optional;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
@@ -35,6 +36,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
+import org.apache.xpath.operations.Bool;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.*;
@@ -70,6 +72,8 @@ public class WikiBasePageObject extends BasePageObject {
       ".wikia-nav__avatar img[alt*=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
   private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
+  private static final By RECIRCULATION_PREFOOTER = By.cssSelector(".recirculation-prefooter");
+  private static final By RECIRCULATION_PREFOOTER_FULFILLED = By.cssSelector(".recirculation-prefooter.has-items");
   @FindBy(css = ".banner-notifications-placeholder,.smart-banner")
   private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
@@ -635,6 +639,14 @@ public class WikiBasePageObject extends BasePageObject {
     jsActions.scrollIntoView(footer);
 
     Log.log("scrollToFooter", "Scroll to the footer of the page", true);
+  }
+
+  public void scrollToRecirculationPrefooter() {
+    wait.forElementPresent(RECIRCULATION_PREFOOTER);
+    jsActions.scrollIntoView(RECIRCULATION_PREFOOTER);
+    wait.forElementPresent(RECIRCULATION_PREFOOTER_FULFILLED);
+
+    Log.log("scrollToRecirculationPrefooter", "Scroll to the recirculation prefooter", true);
   }
 
   public void verifyGlobalNavigation() {
