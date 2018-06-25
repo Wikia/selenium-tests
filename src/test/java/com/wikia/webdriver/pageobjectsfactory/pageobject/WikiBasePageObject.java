@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.google.common.base.Optional;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
@@ -36,7 +35,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
-import org.apache.xpath.operations.Bool;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.*;
