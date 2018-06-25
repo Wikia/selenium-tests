@@ -125,6 +125,14 @@ public class JavascriptActions {
     }
   }
 
+  public void scrollIntoView(By elementBy) {
+    scrollIntoView(driver.findElement(elementBy));
+  }
+
+  public void scrollIntoView(WebElement element) {
+    js.executeScript("arguments[0].scrollIntoView();", element);
+  }
+
   /**
    * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobile or desktop.
    * @return offset
