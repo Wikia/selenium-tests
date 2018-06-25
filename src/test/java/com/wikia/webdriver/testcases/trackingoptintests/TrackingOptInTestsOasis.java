@@ -19,7 +19,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
   @Test(groups = {"oasis-tracking-opt-in"},
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "GDPRcountries"
+      dataProvider = "GDPRCountriesForTest"
   )
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
@@ -32,7 +32,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   @Execute(asUser = User.USER, trackingOptIn = false)
   @Test(groups = {"oasis-tracking-opt-in"},
       dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "GDPRcountries"
+      dataProvider = "GDPRCountriesForTest"
   )
   public void testModalVisibilityForLoggedInWhoNeverOptedIn(String continent, String country,
                                                             boolean shouldGetModal) {
