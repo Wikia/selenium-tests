@@ -19,9 +19,9 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   private static final Page page = new Page("project43", "SyntheticTests/Slots/Repeatable");
 
-  private static final String AD_INFO_PATTERN = "https?://.*wikia-services\\.com.*kv_pos=INCONTENT_BOXAD.*kv_rv=4.*";
+  private static final String AD_INFO_PATTERN = "https?://.*wikia-services\\.com.*kv_pos=incontent_boxad.*kv_rv=4.*";
   private static final String LAST_HEADER_AD_INFO_PATTERN =
-      "https?://.*wikia-services\\.com.*ad_status=viewport-conflict.*kv_pos=INCONTENT_BOXAD.*kv_rv=6.*";
+      "https?://.*wikia-services\\.com.*ad_status=viewport-conflict.*kv_pos=incontent_boxad.*kv_rv=6.*";
   private static final String AE3_INSTANT_GLOBAL = "wgAdDriverAdEngine3Countries";
   private static final String REPEATABLE_INCONTENT_INSTANT_GLOBAL = "wgAdDriverRepeatMobileIncontentCountries";
   private static final String INCONTENT_SELECTOR = "incontent_boxad_%s";
