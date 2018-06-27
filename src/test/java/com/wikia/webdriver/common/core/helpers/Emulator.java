@@ -15,6 +15,15 @@ public enum Emulator {
           .put("mobile", false)
           .build(),
       "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.170 Mobile Safari/537.36"),
+  GOOGLE_NEXUS_5_DEFAULT( // FIXME: this is workaround for mobile: false flag, remove it if original flag will be reverted
+      new ImmutableMap.Builder<String, Object>()
+          .put("width", 360)
+          .put("height", 640)
+          .put("pixelRatio", 3.0)
+          .put("touch", true)
+          .put("mobile", true)
+          .build(),
+      "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.170 Mobile Safari/537.36"),
   APPLE_IPHONE_6(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 375)

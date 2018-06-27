@@ -84,22 +84,22 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     String thirdArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3";
 
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
-    ads.scrollToFooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.scrollToRecirculationPrefooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
 
     ads.scrollToPosition(ARTICLE_BODY);
     ads.mercuryNavigateToAnArticle(secondArticle);
     ads.waitTitleChangesTo(secondArticle);
-    ads.scrollToFooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.scrollToRecirculationPrefooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
 
     ads.scrollToPosition(ARTICLE_BODY);
     ads.mercuryNavigateToAnArticle(thirdArticle);
     ads.waitTitleChangesTo(thirdArticle);
-    ads.scrollToFooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+    ads.scrollToRecirculationPrefooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
   }
 }
