@@ -32,7 +32,7 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-sign-out__button")
   private WebElement signOutButton;
 
-  @FindBy(css = ".wds-is-games")
+  @FindBy(css = ".wds-global-navigation__link")
   private WebElement gamesHubLink;
 
   @FindBy(css = ".wds-is-movies")

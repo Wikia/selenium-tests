@@ -62,7 +62,7 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".wds-avatar";
+      ".wds-dropdown__toggle .wds-avatar";
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
@@ -139,7 +139,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationAvatar;
   @FindBy(className = WDS_FOOTER_HEADER_CLASS)
   private WebElement footer;
-  @FindBy(id = "globalNavigation")
+  @FindBy(css = ".wds-global-navigation")
   private WebElement globalNavigationBar;
   @FindBy(id = "recirculation-rail")
   private WebElement recirculationRightRailModule;
