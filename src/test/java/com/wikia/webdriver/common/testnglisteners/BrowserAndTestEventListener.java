@@ -90,18 +90,18 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
        */
 
       if (TestContext.isFirstLoad()) {
-        boolean userOptedIn = true;
+        boolean userOptedIn = false;
         boolean userOptedOut = false;
 
-        if (method.isAnnotationPresent(Execute.class) && !method.getAnnotation(Execute.class)
-            .trackingOptIn()) {
-          userOptedIn = false;
-        }
-
-        if (method.isAnnotationPresent(Execute.class) && method.getAnnotation(Execute.class)
-            .trackingOptOut()) {
-          userOptedOut = true;
-        }
+//        if (method.isAnnotationPresent(Execute.class) && !method.getAnnotation(Execute.class)
+//            .trackingOptIn()) {
+//          userOptedIn = false;
+//        }
+//
+//        if (method.isAnnotationPresent(Execute.class) && method.getAnnotation(Execute.class)
+//            .trackingOptOut()) {
+//          userOptedOut = true;
+//        }
 
         if (userOptedIn) {
           driver.manage().addCookie(
