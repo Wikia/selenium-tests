@@ -70,6 +70,8 @@ public class WikiBasePageObject extends BasePageObject {
       ".wikia-nav__avatar img[alt*=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
   private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
+  private static final By RECIRCULATION_PREFOOTER = By.cssSelector(".recirculation-prefooter");
+  private static final By RECIRCULATION_PREFOOTER_FULFILLED = By.cssSelector(".recirculation-prefooter.has-items");
   @FindBy(css = ".banner-notifications-placeholder,.smart-banner")
   private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
@@ -632,9 +634,17 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void scrollToFooter() {
     wait.forElementVisible(footer);
-    jsActions.scrollToElement(footer);
+    jsActions.scrollIntoView(footer);
 
     Log.log("scrollToFooter", "Scroll to the footer of the page", true);
+  }
+
+  public void scrollToRecirculationPrefooter() {
+    wait.forElementPresent(RECIRCULATION_PREFOOTER);
+    jsActions.scrollIntoView(RECIRCULATION_PREFOOTER);
+    wait.forElementPresent(RECIRCULATION_PREFOOTER_FULFILLED);
+
+    Log.log("scrollToRecirculationPrefooter", "Scroll to the recirculation prefooter", true);
   }
 
   public void verifyGlobalNavigation() {
