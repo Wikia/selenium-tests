@@ -45,7 +45,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (checkIfSlotExpanded(slot)) {
       Log.log("AdInSlot", "Slot expanded as expecting", true);
     } else {
-      throw new NoSuchElementException("Slot is collapsed - should be expanded");
+      throw new NoSuchElementException("Slot (" + slotName + ") is collapsed - should be expanded");
     }
   }
 
@@ -56,7 +56,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       String foundImg = getSlotImageAd(slot);
       Assertion.assertStringContains(foundImg, expectedImg);
     } else {
-      throw new NoSuchElementException("Slot is collapsed - should be expanded");
+      throw new NoSuchElementException("Slot (" + slotName + ") is collapsed - should be expanded");
     }
     Log.log("AdInSlot", "Ad found in slot", true, driver);
   }
