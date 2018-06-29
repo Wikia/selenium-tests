@@ -104,39 +104,4 @@ public class ForumEditModeTests extends NewTestTemplate {
     manageForum.clickMoveUp(first);
     Assertion.assertTrue(beforeMoveDown == manageForum.getBoardPosition(first), "");
   }
-
-  @Test
-  public void clickExplore(){
-    new ArticleContent().push();
-
-    ArticlePageObject article = new ArticlePageObject().open();
-    article.getLocalNavigation().openExplore();
-    article.getLocalNavigation().clickImages();
-    Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Images"));
-  }
-
-  @Test
-  public void clickCommunity(){
-    new ArticleContent().push();
-
-    ArticlePageObject article = new ArticlePageObject().open();
-    article.getNestedNavigation().openCommunity();
-    article.getNestedNavigation().openScrollTest3();
-    article.getNestedNavigation().clickCat_3();
-    Assertion.assertTrue(driver.getCurrentUrl().contains("Category:Videos"));
-  }
-
-  @Test
-  @Execute(onWikia = "chesskynet", asUser = User.SUS_REGULAR_USER)
-  public void uploadVideo(){
-    new ArticleContent().push();
-
-    ArticlePageObject article = new ArticlePageObject().open();
-    article.getLocalNavigation().openExplore();
-    article.getLocalNavigation().clickVidoesButton();
-    article.getUploadVideo().clickAddVideo();
-    article.getUploadVideo().addVideo("https://www.youtube"
-                                      + ".com/watch?time_continue=3&v=KsVWdGOnHZU");
-  }
 }
-
