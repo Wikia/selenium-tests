@@ -36,6 +36,10 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   private void verifyTestBidsInSlot(String slotName) {
+    if (slotName == AdsContent.BOTTOM_LB) {
+      scrollToFooter();
+    }
+
     Assert.assertTrue(slotParamHasValue(slotName, "amznbid", "testBid"));
   }
 
