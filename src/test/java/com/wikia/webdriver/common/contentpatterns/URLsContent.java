@@ -131,6 +131,7 @@ public class URLsContent {
   public static final String LIST_PAGE = "List:Listing";
 
   // Other wikis to test on
+  public static final String MEDIAWIKI119_TEST_WIKI = "mediawiki119";
   public static final String VIDEO_TEST_WIKI = "sktest123";
   public static final String COMMUNITY_WIKI = "community";
   public static final String COMMUNITY_COUNCIL_WIKI = "communitycouncil";
