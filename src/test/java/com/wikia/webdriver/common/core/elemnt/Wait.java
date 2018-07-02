@@ -490,9 +490,14 @@ public class Wait {
 
   public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
                                                 final String pattern) {
+    forSuccessfulResponseByUrlPattern(trafficInterceptor, pattern, DEFAULT_TIMEOUT);
+  }
+
+  public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
+                                                final String pattern, int timeout) {
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
-      wait.until(
+      new WebDriverWait(driver, timeout).until(
           new ExpectedCondition<Boolean>() {
             private HarEntry entry;
 

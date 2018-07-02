@@ -966,7 +966,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public String getTrackingUrl(NetworkTrafficInterceptor networkTrafficInterceptor, String pos) {
     final String pattern = ".*adinfo.*kv_pos=" + pos.toLowerCase() + ".*";
-    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern, 30);
     return networkTrafficInterceptor.getEntryByUrlPattern(pattern).getRequest().getUrl();
   }
 
