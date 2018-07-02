@@ -40,12 +40,19 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   public void verifySlotExpanded(String slotName) {
+    By slotById = By.id(slotName);
+    WebElement slot = driver.findElement(slotById);
+
     scrollToSlotOnMobile(slotName);
-    WebElement slot = driver.findElement(By.id(slotName));
+    wait.forElementVisible(slotById);
+
     if (checkIfSlotExpanded(slot)) {
-      Log.log("AdInSlot", "Slot expanded as expecting", true);
+      Log.log("AdInSlot",
+              "Slot (" + slotName + ") expanded as expecting",
+              true
+      );
     } else {
-      throw new NoSuchElementException("Slot is collapsed - should be expanded");
+      throw new NoSuchElementException("Slot (" + slotName + ") is collapsed - should be expanded");
     }
   }
 
@@ -56,7 +63,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       String foundImg = getSlotImageAd(slot);
       Assertion.assertStringContains(foundImg, expectedImg);
     } else {
-      throw new NoSuchElementException("Slot is collapsed - should be expanded");
+      throw new NoSuchElementException("Slot (" + slotName + ") is collapsed - should be expanded");
     }
     Log.log("AdInSlot", "Ad found in slot", true, driver);
   }
@@ -95,9 +102,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     JavascriptExecutor js = driver;
     js.executeScript(
         "var element = document.getElementById(arguments[0]);" +
-        "var elementY = element.offsetTop;" +
-        "var elementH = element.offsetHeight;" +
-        "window.scrollTo(0, elementY - elementH);",
+        "element.scrollIntoView();",
         slotName
     );
   }
