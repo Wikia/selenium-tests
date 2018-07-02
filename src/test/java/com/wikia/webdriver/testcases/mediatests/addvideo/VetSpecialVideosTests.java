@@ -33,6 +33,8 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     FilePage filePage = new FilePage().open(video.getFileName());
+
+    //Because of downgrade log in on http again
     specialVideos.loginAs(User.SUS_CHAT_STAFF2);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
