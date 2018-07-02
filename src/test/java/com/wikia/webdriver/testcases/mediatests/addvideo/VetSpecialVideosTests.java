@@ -30,10 +30,10 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
     vetAddingVideo.addVideoWithoutDetailsByUrl(video.getUrl());
 
-    specialVideos.loginAs(User.SUS_CHAT_STAFF2);
     specialVideos.verifyVideoAdded(video.getTitle());
 
     FilePage filePage = new FilePage().open(video.getFileName());
+    specialVideos.loginAs(User.SUS_CHAT_STAFF2);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
