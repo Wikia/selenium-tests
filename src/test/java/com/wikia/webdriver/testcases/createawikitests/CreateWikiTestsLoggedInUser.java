@@ -22,7 +22,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   @Execute(asUser = User.USER_CNW)
-  public void createNewWiki001CreateDeleteWiki() {
+  public void createNewWiki001CreateWiki() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -36,9 +36,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
-    DeletePageObject deletePage = article.deleteUsingDropdown();
-    deletePage.submitDeletion();
-    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
