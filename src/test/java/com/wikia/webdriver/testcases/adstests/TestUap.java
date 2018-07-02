@@ -38,7 +38,7 @@ public class TestUap extends TemplateNoFirstLoad {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.GOOGLE_NEXUS_5_DEFAULT // FIXME: use default emulator if mobile flag will be reverted
   )
   @Test(
       dataProviderClass = AdsDataProvider.class,
