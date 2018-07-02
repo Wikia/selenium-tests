@@ -56,4 +56,5 @@ public class Navigating extends NewTestTemplate {
 
     Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore");
   }
+
 }

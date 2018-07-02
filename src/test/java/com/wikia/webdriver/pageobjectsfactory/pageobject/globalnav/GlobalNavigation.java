@@ -68,7 +68,7 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__start-a-wiki")
   private WebElement startWikiButton;
 
-  @FindBy(css = "a[data-tracking-label=\"link.explore\"]")
+  @FindBy(css = ".wds-is-linked a[href*='explore']")
   private WebElement exploreWikisLink;
 
   @FindBy(css = "a[href*='Videospiele']")
