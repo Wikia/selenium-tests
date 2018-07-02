@@ -43,8 +43,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     By slotById = By.id(slotName);
     WebElement slot = driver.findElement(slotById);
 
-    wait.forElementVisible(slotById);
     scrollToSlotOnMobile(slotName);
+    wait.forElementVisible(slotById);
 
     if (checkIfSlotExpanded(slot)) {
       Log.log("AdInSlot",
