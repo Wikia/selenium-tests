@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import static com.wikia.webdriver.common.contentpatterns.VideoContent.TEST_VIDEO_QUERY;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -50,7 +52,7 @@ public class VEImageTests extends NewTestTemplate {
   @Execute(asUser = User.USER_9)
   public void editImageCaption() {
     String captionText = "test123";
-    String searchPhrase = "WikiEvolution";
+    String searchPhrase = TEST_VIDEO_QUERY;
 
     VisualEditorPageObject ve =
         new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX

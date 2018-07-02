@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import static com.wikia.webdriver.common.contentpatterns.VideoContent.TEST_VIDEO_QUERY;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -42,7 +44,7 @@ public class VEVideoTests extends NewTestTemplate {
         new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
 
-    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("y");
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(TEST_VIDEO_QUERY);
     VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
     veNew.verifyVideos(2);
     veNew.verifyVEToolBarPresent();
@@ -91,7 +93,7 @@ public class VEVideoTests extends NewTestTemplate {
     VisualEditorPageObject ve =
         new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
-    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(TEST_VIDEO_QUERY);
     ve = mediaDialog.addExistingMedia(1);
     ve.verifyVideos(1);
     Dimension source = ve.getVideoDimension();
@@ -109,7 +111,7 @@ public class VEVideoTests extends NewTestTemplate {
     VisualEditorPageObject ve =
         new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
-    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(TEST_VIDEO_QUERY);
     ve = mediaDialog.addExistingMedia(1);
     ve.verifyVideos(1);
     Dimension source = ve.getVideoDimension();
