@@ -24,7 +24,7 @@ public class AdsJWPlayerObject {
   private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
   private static final Color COLOR_VIDEO = new Color(0, 255, 13);
 
-  public static final String VIDEO_AD_SELECTOR = ".jwplayer .jw-plugin-googima";
+  public static final String VIDEO_AD_SELECTOR = "#featured-video__player_googima";
   public static final String VIDEO_MOVIE_SELECTOR = ".jwplayer .jw-media video[src]";
   public static final String VIDEO_PLAYER_SELECTOR = ".jwplayer";
 
