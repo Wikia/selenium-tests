@@ -13,8 +13,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class GlobalNavigation extends BasePageObject {
 
-  @FindBy(css = ".wds-global-navigation__search")
+  @FindBy(css = ".wds-global-navigation__search-toggle")
   private WebElement searchButton;
+
+  @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
+  private WebElement searchInput;
+
+  @FindBy(css = ".wds-global-navigation__search-submit")
+  private WebElement searchSubmitButton;
 
   @FindBy(css = ".wds-global-navigation__logo")
   private WebElement fandomLogo;
@@ -120,8 +126,10 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public SearchPageObject search(String query) {
-    searchButton.sendKeys(query);
-    searchButton.submit();
+    wait.forElementClickable(searchButton);
+    searchButton.click();
+    searchInput.sendKeys(query);
+    searchSubmitButton.submit();
 
     Log.info("search query typed and submitted");
     return new SearchPageObject(driver);
