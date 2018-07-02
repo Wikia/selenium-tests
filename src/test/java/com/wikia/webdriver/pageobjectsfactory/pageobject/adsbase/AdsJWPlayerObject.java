@@ -41,6 +41,7 @@ public class AdsJWPlayerObject {
   }
 
   public void verifyPlayerOnPage() {
+    jsActions.scrollToElement(PLAYER_SELECTOR);
     wait.forElementPresent(PLAYER_SELECTOR);
   }
 
