@@ -62,7 +62,8 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".wds-dropdown__toggle .wds-avatar";
+      ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in img, "
+      + ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in svg";
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
@@ -135,7 +136,7 @@ public class WikiBasePageObject extends BasePageObject {
   private List<WebElement> notificationElements;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  @FindBy(css = ".wds-global-navigation__user-menu")
+  @FindBy(css = ".wds-dropdown__toggle .wds-avatar")
   private WebElement globalNavigationAvatar;
   @FindBy(className = WDS_FOOTER_HEADER_CLASS)
   private WebElement footer;
