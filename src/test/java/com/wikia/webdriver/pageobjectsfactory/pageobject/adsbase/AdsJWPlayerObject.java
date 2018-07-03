@@ -46,7 +46,7 @@ public class AdsJWPlayerObject {
 
   public void waitForAdPlaying() {
     Log.log("Info", "Waiting for video ad playing", true);
-    wait.forElementVisible(AD_SELECTOR, 15);
+    wait.forElementVisible(AD_SELECTOR, 30);
   }
 
   public void waitForMoviePlaying() {
