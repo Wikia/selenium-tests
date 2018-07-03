@@ -31,11 +31,10 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-anon")
   private WebElement anonAvatar;
 
-  @FindBy(css = ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content")
+  @FindBy(css = ".wds-global-navigation__user-logged-in .wds-dropdown__content")
   private WebElement userMenu;
 
-  @FindBy(css =
-      ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content li:first-child")
+  @FindBy(css = ".wds-global-navigation__user-logged-in a[href*='User:']")
   private WebElement viewProfile;
 
   @FindBy(css = ".wds-sign-out__button")
