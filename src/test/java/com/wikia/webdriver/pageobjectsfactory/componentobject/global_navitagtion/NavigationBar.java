@@ -20,6 +20,8 @@ public class NavigationBar extends WikiBasePageObject {
 
   final private String suggestionCss = ".autocomplete div";
 
+  @FindBy(css = ".wds-global-navigation__search-toggle")
+  private WebElement searchButton;
   @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
   private WebElement searchInput;
   @FindBy(css = ".wds-global-navigation__search-submit")
@@ -109,8 +111,9 @@ public class NavigationBar extends WikiBasePageObject {
    * Returns article page object if invoked by user with goSearch preference turned on
    */
   public ArticlePageObject goSearchFor(String query) {
-    searchInput.sendKeys(query);
-    searchSubmit.click();
+    wait.forElementClickable(searchButton).click();
+    wait.forElementClickable(searchInput).sendKeys(query);
+    wait.forElementClickable(searchSubmit).click();
     Log.log("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject();
   }
