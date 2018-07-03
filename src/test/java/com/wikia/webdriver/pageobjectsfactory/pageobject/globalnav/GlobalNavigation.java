@@ -62,6 +62,9 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__link-group .wds-global-navigation__dropdown-content")
   private WebElement wikisMenuContent;
 
+  @FindBy(css = "a[href*='Community_Central']")
+  private WebElement communityCentralLink;
+
   @FindBy(css = ".wds-global-navigation__notifications-dropdown")
   private WebElement notificationsIcon;
 
@@ -121,6 +124,13 @@ public class GlobalNavigation extends BasePageObject {
   public HomePage clickExploreWikisLink() {
     wait.forElementClickable(exploreWikisLink).click();
     Log.info("clicked on explore wikis link in global nav bar");
+
+    return new HomePage();
+  }
+
+  public HomePage clickCommunityCentralLink() {
+    wait.forElementClickable(communityCentralLink).click();
+    Log.log("clickCommunityCentralLink", "clicked on community central link in global nav bar", true);
 
     return new HomePage();
   }

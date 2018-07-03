@@ -1,7 +1,12 @@
 package com.wikia.webdriver.testcases.globalnavigationbar;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
+
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.EnvType;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
@@ -57,4 +62,15 @@ public class Navigating extends NewTestTemplate {
     Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore");
   }
 
+  @Test(groups = {"communityCentralLinkClickOnEnCommunityOpensEnCommunityCentral"})
+  public void testCommunityCentralLink() {
+    new HomePage()
+        .getGlobalNavigation()
+        .openWikisMenu()
+        .clickCommunityCentralLink();
+
+    Assertion.assertEquals(driver.getCurrentUrl(),
+            UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, DEFAULT_LANGUAGE).getUrlForWikiPage(
+                URLsContent.COMMUNITY_CENTRAL));
+  }
 }
