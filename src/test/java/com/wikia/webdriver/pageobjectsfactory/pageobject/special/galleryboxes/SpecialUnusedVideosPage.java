@@ -13,7 +13,7 @@ public final class SpecialUnusedVideosPage extends WikiBasePageObject {
   private final GalleryGrid galleryGrid = new GalleryGrid();
 
   public SpecialUnusedVideosPage open() {
-    getUrl(urlBuilder.getUrlForPath(SPECIAL_UNUSED_VIDEOS_PATH));
+    getUrl(urlBuilder.getUrlForWikiPage(SPECIAL_UNUSED_VIDEOS_PATH));
     Log.log("Special Unused Videos Page", SPECIAL_UNUSED_VIDEOS_PATH + " opened",
         true);
 

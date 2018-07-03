@@ -20,15 +20,12 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   private static final Page page = new Page("project43", "SyntheticTests/Slots/Repeatable");
 
   private static final String AD_INFO_PATTERN = "https?://.*wikia-services\\.com.*kv_pos=incontent_boxad.*kv_rv=4.*";
-  private static final String LAST_HEADER_AD_INFO_PATTERN =
-      "https?://.*wikia-services\\.com.*ad_status=viewport-conflict.*kv_pos=incontent_boxad.*kv_rv=6.*";
   private static final String AE3_INSTANT_GLOBAL = "wgAdDriverAdEngine3Countries";
   private static final String REPEATABLE_INCONTENT_INSTANT_GLOBAL = "wgAdDriverRepeatMobileIncontentCountries";
   private static final String INCONTENT_SELECTOR = "incontent_boxad_%s";
   private static final String ARTICLE_HEADER_SELECTOR = "Section_%s";
 
   private static final int HEADERS_WITH_AD_NUMBER = 5;
-  private static final int LAST_HEADER_WITHOUT_AD_NUMBER = 6;
   private static final double HEADER_WITHOUT_AD_NUMBER = 2.5;
 
   @Test()
@@ -62,21 +59,6 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER))));
 
     ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AD_INFO_PATTERN);
-  }
-
-  @Test()
-  @NetworkTrafficDump(useMITM = true)
-  public void incontentBoxadViewportConflictTracking() {
-    networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.getUrl(urlWithInstantGlobals(true));
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER))));
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(LAST_HEADER_WITHOUT_AD_NUMBER))));
-
-    Assertion.assertFalse(isIncontenAdDisplayed(LAST_HEADER_WITHOUT_AD_NUMBER, ads),
-                          "IncontentBoxad is displayed before section");
-
-    ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, LAST_HEADER_AD_INFO_PATTERN);
   }
 
   private boolean isIncontenAdDisplayed(int incontentIndex, AdsBaseObject ads){

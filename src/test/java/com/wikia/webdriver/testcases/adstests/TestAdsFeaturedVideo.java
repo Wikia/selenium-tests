@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -47,6 +48,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsFeaturedVideoMoatTrackingOasis"}
   )
+  @UnsafePageLoad
   public void adsFeaturedVideoMoatTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
@@ -108,7 +110,6 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
 
-    jwPlayerObject.verifyPlayerOnPage();
     jwPlayerObject.waitForAdPlaying();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
   }
