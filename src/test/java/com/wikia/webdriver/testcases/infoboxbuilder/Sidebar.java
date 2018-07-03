@@ -12,7 +12,7 @@ public class Sidebar extends WikiBasePageObject {
   @FindBy(css = ".infobox-builder-sidebar-header .infobox-builder-sidebar-header-icon-delete")
   private WebElement deleteButton;
 
-  @FindBy(css = ".infobox-builder-sidebar-padding .check-box-input")
+  @FindBy(css = ".check-box-input")
   private WebElement sidebarCheckbox;
 
   @FindBy(css = ".infobox-builder-sidebar-padding .text-field-input")
