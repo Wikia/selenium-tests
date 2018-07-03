@@ -116,7 +116,8 @@ public abstract class CoreTestTemplate {
           String.valueOf(method.getAnnotation(NetworkTrafficDump.class).useMITM()));
     }
 
-    if (method.isAnnotationPresent(UnsafePageLoad.class)){
+    if (method.isAnnotationPresent(UnsafePageLoad.class) || method.getDeclaringClass()
+        .isAnnotationPresent(UnsafePageLoad.class)) {
       setTestProperty("unsafePageLoad", "true");
     }
   }
