@@ -44,12 +44,14 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
   public HarEntry getEntryByUrlPattern(String pattern) {
     har = getHar();
+    HarEntry entryIwant = null;
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().matches(pattern)) {
-        return entry;
+        Log.info(entry.getRequest().getUrl());
+        entryIwant =  entry;
       }
     }
-    return null;
+    return entryIwant;
   }
 
   public void checkAssetsStatuses(String domain) {
