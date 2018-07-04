@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
@@ -113,6 +114,11 @@ public abstract class CoreTestTemplate {
       setTestProperty("useProxy", "true");
       setTestProperty("useMITM",
           String.valueOf(method.getAnnotation(NetworkTrafficDump.class).useMITM()));
+    }
+
+    if (method.isAnnotationPresent(UnsafePageLoad.class) || method.getDeclaringClass()
+        .isAnnotationPresent(UnsafePageLoad.class)) {
+      setTestProperty("unsafePageLoad", "true");
     }
   }
 

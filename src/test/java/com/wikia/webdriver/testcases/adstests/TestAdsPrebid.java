@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -68,6 +69,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  @UnsafePageLoad
   public void fvDirectVideoAd() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
@@ -82,6 +84,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  @UnsafePageLoad
   public void fvBidderVideoAd() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV_RUBICON.getUrl());

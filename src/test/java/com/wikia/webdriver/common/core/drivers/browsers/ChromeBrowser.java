@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.driverprovider.UserAgentsRegistry;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -65,7 +66,7 @@ public class ChromeBrowser extends BrowserAbstract {
 
     if (!emulator.equals(Emulator.DEFAULT)) {
       Map<String, Object> mobileEmulation = new HashMap<>();
-      if(StringUtils.isNotBlank(emulator.getUserAgent())){
+      if (StringUtils.isNotBlank(emulator.getUserAgent())) {
         mobileEmulation.put("userAgent", emulator.getUserAgent());
       }
       if (StringUtils.isNotBlank(emulator.getDeviceName())) {
@@ -81,6 +82,9 @@ public class ChromeBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+    if (Configuration.isUnsafePageLoad()) {
+      caps.setCapability("pageLoadStrategy", "none");
+    }
 
     return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
   }
