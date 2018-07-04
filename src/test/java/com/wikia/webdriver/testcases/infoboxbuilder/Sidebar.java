@@ -115,9 +115,9 @@ public class Sidebar extends WikiBasePageObject {
     String chevronContent = getPseudoElementValue(infoboxHeader, ":after", "content");
 
     if (sidebarCheckbox.isSelected()) {
-      Assertion.assertFalse(chevronContent.isEmpty());
+      Assertion.assertNotEquals(chevronContent,"none");
     } else {
-      Assertion.assertTrue(chevronContent.isEmpty());
+      Assertion.assertEquals(chevronContent,"none");
     }
 
     return this;
