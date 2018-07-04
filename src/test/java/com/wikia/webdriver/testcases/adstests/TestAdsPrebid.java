@@ -12,6 +12,8 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
+
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -67,12 +69,18 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
     Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, RUBICON_URL_PATTERNS), "Lack of rubicon request in all slots");
   }
 
-  @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"}, invocationCount = 20)
   @UnsafePageLoad
+  @NetworkTrafficDump(useMITM = true)
   public void fvDirectVideoAd() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
+
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
 
     Assertion.assertEquals(getFVStatus(ads), "success");
     Assertion.assertEquals(ads.getFVLineItem(), DIRECT_PREROLL_LINE_ITEM_ID);
@@ -82,12 +90,17 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
     return ads.getValueFromTracking(networkTrafficInterceptor, "FEATURED", "ad_status");
   }
 
-  @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   @UnsafePageLoad
   public void fvBidderVideoAd() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV_RUBICON.getUrl());
+
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
 
     Assertion.assertEquals(getFVStatus(ads), "error");
     Assertion.assertEquals(ads.getFVLineItem(), BIDDER_PREROLL_LINE_ITEM_ID);
