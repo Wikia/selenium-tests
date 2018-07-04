@@ -489,10 +489,10 @@ public class Wait {
   }
 
   public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
-                                                final String pattern) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+                                                final String pattern, int timeout) {
+    changeImplicitWait(500, TimeUnit.MILLISECONDS);
     try {
-      wait.until(
+      new WebDriverWait(driver, timeout).until(
           new ExpectedCondition<Boolean>() {
             private HarEntry entry;
 
@@ -512,6 +512,11 @@ public class Wait {
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
+                                                final String pattern) {
+    forSuccessfulResponseByUrlPattern(trafficInterceptor, pattern, DEFAULT_TIMEOUT);
   }
 
   public void forUrlContains(String text) {

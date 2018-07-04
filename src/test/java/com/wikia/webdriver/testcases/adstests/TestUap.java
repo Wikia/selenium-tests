@@ -38,7 +38,7 @@ public class TestUap extends TemplateNoFirstLoad {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.GOOGLE_NEXUS_5_DEFAULT // FIXME: use default emulator if mobile flag will be reverted
   )
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -60,6 +60,7 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, mobileInContent);
     verifySlotsUnblocked(ads, mobileBottomLeaderboard);
 
+    ads.scrollToRecirculationPrefooter();
     ads.scrollToPosition(By.id(AdsContent.MOBILE_BOTTOM_LB));
     Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(), "Mobile bottom leaderboard ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
