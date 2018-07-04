@@ -97,6 +97,7 @@ public abstract class BrowserAbstract {
         server.setRequestTimeout(90, TimeUnit.SECONDS);
         server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
             CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
+        server.setUseEcc(true);
         proxyServer = server.startBrowserMobProxyServer();
       }
       caps.setCapability(CapabilityType.PROXY, proxyServer);
