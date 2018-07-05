@@ -96,7 +96,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPatterns) {
     try {
       for (String urlPatern : urlPatterns) {
-        ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, urlPatern);
+        ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, urlPatern, 45);
         return true;
       }
     } catch (Exception ex) {

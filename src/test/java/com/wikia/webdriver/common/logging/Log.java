@@ -263,7 +263,7 @@ public class Log {
 
   public static void stop() {
     WikiaWebDriver driver = DriverProvider.getActiveDriver();
-    if (driver.getProxy() != null) {
+    if (driver.getProxy() != null && Configuration.getForceHttps()) {
       Har har = driver.getProxy().getHar();
       for (HarEntry entry : har.getLog().getEntries()) {
         URL url;
