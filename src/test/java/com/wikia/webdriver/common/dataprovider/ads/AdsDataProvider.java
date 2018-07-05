@@ -43,7 +43,7 @@ public class AdsDataProvider {
   public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
   public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
   public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
-  public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600");
+  public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL, "/wiki/SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600");
   public static final Page PAGE_PREBID = new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Wikia");
   public static final Page PAGE_CAP = new Page(WIKI_SPECIAL, "SyntheticTests/Cap");
 
