@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -12,6 +13,9 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
+
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -64,11 +68,22 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   public void adsPrebidRubiconRequestsInSlots() {
     networkTrafficInterceptor.startIntercepting();
     try {
-      Thread.sleep(10000);
+      Thread.sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    Har har = driver.getProxy().getHar();
+    for (HarEntry entry : har.getLog().getEntries()) {
+      boolean isHttps = entry.getRequest().getUrl().startsWith("https");
+      Log.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
+              !Configuration.getForceHttps() || isHttps);
+    }
     Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, RUBICON_URL_PATTERNS), "Lack of rubicon request in all slots");
   }
 
