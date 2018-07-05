@@ -18,7 +18,7 @@ public abstract class NavigationTests extends NewTestTemplate {
 
     topBar.clickCloseButton();
 
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
+    Assertion.assertTrue(topBar.isSearchIconVisible());
   }
 
   public void mercury_navigation_resetNavigationState(WikiBasePageObject page) {
