@@ -72,13 +72,19 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    Har har = driver.getProxy().getHar();
+    for (HarEntry entry : har.getLog().getEntries()) {
+      boolean isHttps = entry.getRequest().getUrl().startsWith("https");
+      Log.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
+              !Configuration.getForceHttps() || isHttps);
+    }
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
     try {
       Thread.sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    Har har = driver.getProxy().getHar();
+    har = driver.getProxy().getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       boolean isHttps = entry.getRequest().getUrl().startsWith("https");
       Log.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
