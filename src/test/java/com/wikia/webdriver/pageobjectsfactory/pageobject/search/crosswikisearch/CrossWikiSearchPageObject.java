@@ -74,7 +74,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public CrossWikiSearchPageObject searchFor(String term) {
-    searchInput.clear();
+    wait.forElementClickable(searchButton).click();
+    wait.forElementClickable(searchInput).clear();
     searchInput.sendKeys(term + Keys.ENTER);
     Log.log("searchFor", "Search button clicked", true, driver);
     return this;
