@@ -24,10 +24,10 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".site-head-icon-nav")
   private WebElement hamburgerIcon;
 
-  @FindBy(css = ".site-head-icon-search")
+  @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement searchIcon;
 
-  @FindBy(css = ".site-head-icon-search > a.icon-button")
+  @FindBy(css = ".wds-global-navigation__modal-control-search > svg.wds-icon")
   private WebElement searchIconClickableLink;
 
   @FindBy(css = ".site-head-icon.icon-button")
