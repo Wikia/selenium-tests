@@ -263,20 +263,12 @@ public class Log {
 
   public static void stop() {
     WikiaWebDriver driver = DriverProvider.getActiveDriver();
-    if (driver.getProxy() != null && Configuration.getForceHttps()) {
+    if (driver.getProxy() != null) {
       Har har = driver.getProxy().getHar();
       for (HarEntry entry : har.getLog().getEntries()) {
-        URL url;
-        try {
-          url = new URL(entry.getRequest().getUrl());
-          if (url.getHost().contains("wikia")) {
             boolean isHttps = entry.getRequest().getUrl().startsWith("https");
             Log.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
                     !Configuration.getForceHttps() || isHttps);
-          }
-        } catch (MalformedURLException e) {
-          Log.log("MALFORMED URL", "Url: " + entry.getRequest().getUrl(), false);
-        }
       }
     }
     String html = VelocityWrapper.fillLastLogRow();
