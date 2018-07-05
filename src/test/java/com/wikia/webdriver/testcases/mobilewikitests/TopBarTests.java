@@ -26,14 +26,12 @@ public class TopBarTests extends NewTestTemplate {
 
     Assertion.assertTrue(topBar.isNavigationBarVisible());
     Assertion.assertTrue(topBar.isLogoVisible());
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
     Assertion.assertTrue(topBar.isSearchIconVisible());
 
     driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
 
     Assertion.assertTrue(topBar.isNavigationBarVisible());
     Assertion.assertTrue(topBar.isLogoVisible());
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
     Assertion.assertTrue(topBar.isSearchIconVisible());
   }
 
@@ -49,28 +47,6 @@ public class TopBarTests extends NewTestTemplate {
 
     topBar.clickCloseButton();
     Assertion.assertTrue(topBar.isSearchIconVisible());
-
-    topBar.openNavigation();
-    Assertion.assertTrue(topBar.isCloseIconVisible());
-
-    topBar.clickCloseButton();
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
-  }
-
-  @Test(groups = "mercury_topbar_switchBetweenSearchAndNavigation")
-  public void mercury_topbar_switchBetweenSearchAndNavigation() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
-
-    topBar.openSearch();
-    Assertion.assertTrue(topBar.isCloseIconVisible());
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
-
-    topBar.openNavigation();
-    Assertion.assertTrue(topBar.isCloseIconVisible());
-    Assertion.assertTrue(topBar.isSearchIconVisible());
   }
 
   @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
@@ -80,7 +56,7 @@ public class TopBarTests extends NewTestTemplate {
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar();
 
-    topBar.clickWikiaLogo();
+    topBar.isFandomLogo();
 
     Assertion.assertTrue(topBar.getCurrentUrl().contains("fandom.wikia.com"));
   }

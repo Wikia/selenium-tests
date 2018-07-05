@@ -12,17 +12,11 @@ import java.util.NoSuchElementException;
 
 public class TopBar extends BasePageObject {
 
-  @FindBy(css = ".site-head")
+  @FindBy(css = ".wds-global-navigation")
   private WebElement navBar;
 
-  @FindBy(css = ".site-logo")
-  private WebElement logo;
-
-  @FindBy(css = ".global-navigation-mobile__logo")
+  @FindBy(css = ".wds-global-navigation__logo")
   private WebElement logoFandom;
-
-  @FindBy(css = ".site-head-icon-nav")
-  private WebElement hamburgerIcon;
 
   @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement searchIcon;
@@ -30,13 +24,13 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__modal-control-search > svg.wds-icon")
   private WebElement searchIconClickableLink;
 
-  @FindBy(css = ".site-head-icon.icon-button")
+  @FindBy(css = ".wds-global-navigation__modal-control-close")
   private WebElement closeButtonInnerElement;
 
-  @FindBy(css = ".site-head-icon-nav")
+  @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement navMenu;
 
-  @FindBy(css = ".wds-global-navigation__search-input")
+  @FindBy(css = ".wds-global-navigation__search-input-wrapper")
   private WebElement searchInput;
 
   @FindBy(css = ".wds-global-navigation__search-suggestions .wds-global-navigation__dropdown-link")
@@ -47,7 +41,6 @@ public class TopBar extends BasePageObject {
 
   public Navigation openNavigation() {
     Log.info("Open navigation");
-    waitAndClick(hamburgerIcon);
     wait.forElementVisible(navMenu);
     Log.info("Navigation is opened");
     return new Navigation();
@@ -88,11 +81,9 @@ public class TopBar extends BasePageObject {
     return new Navigation();
   }
 
-  public void clickWikiaLogo() {
-    Log.info("Click Wikia logo");
-    wait.forElementClickable(logo);
-    logo.click();
-    wait.forElementVisible(logoFandom);
+  public boolean isFandomLogo() {
+    Log.info("Click Wikia logoFandom");
+    return wait.forElementVisible(logoFandom).isDisplayed();
   }
 
 
@@ -107,21 +98,13 @@ public class TopBar extends BasePageObject {
 
   public boolean isLogoVisible() {
     try {
-      return logo.isDisplayed();
+      return logoFandom.isDisplayed();
     } catch (NoSuchElementException e) {
       Log.info(e.getMessage());
       return false;
     }
   }
 
-  public boolean isHamburgerIconVisible() {
-    try {
-      return hamburgerIcon.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
-  }
 
   public boolean isSearchIconVisible() {
     try {
