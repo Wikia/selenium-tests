@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -21,6 +22,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   @Test(
           groups = {"AdsRefreshFMR"}
   )
+  @UnsafePageLoad
   public void regularFloatingMedrecIsReloadingWithRecirculationModule() {
     Page page = new Page("project43", "SyntheticTests/LongPage");
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
