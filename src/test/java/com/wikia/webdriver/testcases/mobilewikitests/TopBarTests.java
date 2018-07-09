@@ -56,7 +56,7 @@ public class TopBarTests extends NewTestTemplate {
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar();
 
-    topBar.isFandomLogo();
+    topBar.clickFandomLogo();
 
     Assertion.assertTrue(topBar.getCurrentUrl().contains("fandom.wikia.com"));
   }

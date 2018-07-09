@@ -36,7 +36,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__search-suggestions .wds-global-navigation__dropdown-link")
   private List<WebElement> searchSuggestions;
 
-  private By navigationComponent = By.cssSelector(".side-nav-drawer");
+  private By navigationComponent = By.cssSelector(".wds-search-modal");
   private By parentBy = By.xpath("./..");
 
   public Navigation openNavigation() {
@@ -81,9 +81,9 @@ public class TopBar extends BasePageObject {
     return new Navigation();
   }
 
-  public boolean isFandomLogo() {
+  public void clickFandomLogo() {
     Log.info("Click Wikia logoFandom");
-    return wait.forElementVisible(logoFandom).isDisplayed();
+    wait.forElementClickable(logoFandom).click();
   }
 
 
@@ -107,12 +107,7 @@ public class TopBar extends BasePageObject {
 
 
   public boolean isSearchIconVisible() {
-    try {
-      return searchIcon.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
+  return wait.forElementVisible(searchIcon).isDisplayed();
   }
 
   public boolean isSearchIconClickable() {
