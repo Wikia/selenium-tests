@@ -15,7 +15,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".wds-global-navigation")
   private WebElement navBar;
 
-  @FindBy(css = ".wds-global-navigation__logo")
+  @FindBy(css = ".wds-global-navigation__logo-image")
   private WebElement logoFandom;
 
   @FindBy(css = ".wds-global-navigation__modal-control-search")
@@ -25,7 +25,7 @@ public class TopBar extends BasePageObject {
   private WebElement searchIconClickableLink;
 
   @FindBy(css = ".wds-global-navigation__modal-control-close")
-  private WebElement closeButtonInnerElement;
+  private WebElement closeButton;
 
   @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement navMenu;
@@ -72,9 +72,7 @@ public class TopBar extends BasePageObject {
 
   public Navigation clickCloseButton() {
     // Clicking on the inner element doesn't always work so we click the parent (<svg>) instead
-    WebElement closeButton = closeButtonInnerElement.findElement(parentBy);
 
-    Log.info("Click close button");
     wait.forElementClickable(closeButton);
     closeButton.click();
 
@@ -126,7 +124,7 @@ public class TopBar extends BasePageObject {
 
   public boolean isCloseIconVisible() {
     try {
-      return closeButtonInnerElement.isDisplayed();
+      return closeButton.isDisplayed();
     } catch (NoSuchElementException e) {
       Log.info(e.getMessage());
       return false;
