@@ -5,11 +5,11 @@ import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAUL
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
@@ -51,16 +51,6 @@ public class Navigating extends NewTestTemplate {
     Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/tv");
   }
 
-  @Test(groups = {"communityCentralLinkClickOnDeCommunityOpensDeCommunityCentral"})
-  @Execute(onWikia = "gta", language = "de")
-  public void testCommunityCentralLinkOnDeCommunity() {
-    new HomePage()
-        .getGlobalNavigation()
-        .clickCommunityCentralLink();
-
-    Assertion.assertEquals(driver.getCurrentUrl(),
-            UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "de").getUrlForPath("/wiki/Community_Deutschland"));
-  }
 
   @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})
   public void testExploreWikisLink() {
