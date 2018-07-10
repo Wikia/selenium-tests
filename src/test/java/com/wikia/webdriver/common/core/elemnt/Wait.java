@@ -450,6 +450,17 @@ public class Wait {
     }
   }
 
+  public boolean forAttributeToBePresent(WebElement element, String attribute) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions
+                            .attributeToBePresentInElement(element, attribute));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+
   /**
    * Wait for successful (http response code less than 400) response from specific service
    *

@@ -961,8 +961,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public String getFVLineItem() {
     final By FV_SLOT_SELECTOR = By.cssSelector("div.featured-video__player-container");
-    wait.forAttributeToContain(driver.findElement(FV_SLOT_SELECTOR),
-                               "data-vast-line-item-id", "");
+    wait.forAttributeToBePresent(driver.findElement(FV_SLOT_SELECTOR),
+                               "data-vast-line-item-id");
     return driver.findElement(FV_SLOT_SELECTOR).getAttribute("data-vast-line-item-id");
   }
 
