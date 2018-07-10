@@ -26,7 +26,7 @@ public class Searching extends NewTestTemplate {
   @Test(groups = {"serachGlobalNavigationBarAsAnon"},
       dataProvider = "getDataForGlobalSearch"
   )
-  public void serachGlobalNavigationBarAsAnon(
+  public void searchGlobalNavigationBarAsAnon(
       String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
@@ -43,7 +43,7 @@ public class Searching extends NewTestTemplate {
       dataProvider = "getDataForGlobalSearch"
   )
   @Execute(asUser = User.USER)
-  public void serachGlobalNavigationBarAsLoggedIn(
+  public void searchGlobalNavigationBarAsLoggedIn(
       String wikiName, String wikiLanguage, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
