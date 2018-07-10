@@ -20,17 +20,19 @@ public class NavigationBar extends WikiBasePageObject {
 
   final private String suggestionCss = ".autocomplete div";
 
-  @FindBy(css = "#searchInput")
+  @FindBy(css = ".wds-global-navigation__search-toggle")
+  private WebElement searchButton;
+  @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
   private WebElement searchInput;
-  @FindBy(css = "#searchSubmit")
+  @FindBy(css = ".wds-global-navigation__search-submit")
   private WebElement searchSubmit;
   @FindBy(css = suggestionCss)
   private List<WebElement> suggestionsList;
-  @FindBy(css = ".wds-global-navigation__account-menu-caption")
-  private WebElement myAccount;
-  @FindBy(css = "#global-navigation-anon-sign-in")
+  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-anon")
+  private WebElement anonAvatar;
+  @FindBy(css = "a[data-tracking-label='account.sign-in']")
   private WebElement signInLink;
-  @FindBy(css = "#global-navigation-anon-register")
+  @FindBy(css = "a[data-tracking-label='account.register']")
   private WebElement registerLink;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
@@ -109,20 +111,21 @@ public class NavigationBar extends WikiBasePageObject {
    * Returns article page object if invoked by user with goSearch preference turned on
    */
   public ArticlePageObject goSearchFor(String query) {
-    searchInput.sendKeys(query);
-    searchSubmit.click();
+    wait.forElementClickable(searchButton).click();
+    wait.forElementClickable(searchInput).sendKeys(query);
+    wait.forElementClickable(searchSubmit).click();
     Log.log("searchFor", "searching for query: " + query, true, driver);
     return new ArticlePageObject();
   }
 
   public AttachedSignInPage clickOnSignIn(){
-    myAccount.click();
+    anonAvatar.click();
     signInLink.click();
     return new AttachedSignInPage();
   }
 
   public AttachedRegisterPage clickOnRegister(){
-    myAccount.click();
+    anonAvatar.click();
     registerLink.click();
     return new AttachedRegisterPage();
   }
