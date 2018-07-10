@@ -60,6 +60,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   }
 
   @NetworkTrafficDump
+  @UnsafePageLoad
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"})
   public void adsPrebidRubiconRequestsInSlots() {
     networkTrafficInterceptor.startIntercepting();
