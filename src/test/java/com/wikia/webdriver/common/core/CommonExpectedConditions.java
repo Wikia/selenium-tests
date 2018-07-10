@@ -34,7 +34,7 @@ public class CommonExpectedConditions {
         try {
           String elementsAttributeValue = findElement(locator, from).getAttribute(attribute);
           return elementsAttributeValue != null && elementsAttributeValue.contains(value);
-        } catch (StaleElementReferenceException e) {
+        } catch (StaleElementReferenceException | NullPointerException e) {
           return false;
         }
       }
