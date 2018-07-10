@@ -69,6 +69,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvDirectVideoAd() {
     networkTrafficInterceptor.startIntercepting();
@@ -83,6 +84,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvBidderVideoAd() {
     networkTrafficInterceptor.startIntercepting();
