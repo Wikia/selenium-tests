@@ -95,8 +95,8 @@ public abstract class BrowserAbstract {
         server.setTrustAllServers(true);
         server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
         server.setRequestTimeout(90, TimeUnit.SECONDS);
-        server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
-            CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
+        server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS,
+            CaptureType.RESPONSE_HEADERS);
         server.setUseEcc(true);
         proxyServer = server.startBrowserMobProxyServer();
       }
