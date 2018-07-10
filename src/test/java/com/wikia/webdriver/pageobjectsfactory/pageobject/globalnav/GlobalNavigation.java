@@ -13,54 +13,71 @@ import org.openqa.selenium.support.FindBy;
 
 public class GlobalNavigation extends BasePageObject {
 
-  @FindBy(css = "#searchInput")
+  @FindBy(css = ".wds-global-navigation__search-toggle")
+  private WebElement searchButton;
+
+  @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
   private WebElement searchInput;
+
+  @FindBy(css = ".wds-global-navigation__search-submit")
+  private WebElement searchSubmitButton;
 
   @FindBy(css = ".wds-global-navigation__logo")
   private WebElement fandomLogo;
 
-  @FindBy(css = ".wds-global-navigation__user-menu")
+  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in")
   private WebElement userAvatar;
 
-  @FindBy(css = ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content")
+  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-anon")
+  private WebElement anonAvatar;
+
+  @FindBy(css = ".wds-global-navigation__user-logged-in .wds-dropdown__content")
   private WebElement userMenu;
 
-  @FindBy(css =
-      ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content li:first-child")
+  @FindBy(css = ".wds-global-navigation__user-logged-in a[href*='User:']")
   private WebElement viewProfile;
 
   @FindBy(css = ".wds-sign-out__button")
   private WebElement signOutButton;
 
-  @FindBy(css = ".wds-is-games")
+  @FindBy(css = "a[href*='games']")
   private WebElement gamesHubLink;
 
-  @FindBy(css = ".wds-is-movies")
+  @FindBy(css = "a[href*='movies']")
   private WebElement moviesHubLink;
 
-  @FindBy(css = ".wds-is-tv")
+  @FindBy(css = "a[href*='tv']")
   private WebElement tvHubLink;
 
-  @FindBy(css = ".wds-global-navigation__wikis-menu")
+  @FindBy(css = "a[href*='TV']")
+  private WebElement tvDEHubLink;
+
+  @FindBy(css = "a[href*='video']")
+  private WebElement videoHubLink;
+
+  @FindBy(css = ".wds-global-navigation__dropdown-toggle span")
   private WebElement wikisMenu;
 
-  @FindBy(css = ".wds-global-navigation__wikis-menu .wds-dropdown__content")
+  @FindBy(css = ".wds-global-navigation__link-group .wds-global-navigation__dropdown-content")
   private WebElement wikisMenuContent;
 
-  @FindBy(css = ".wds-global-navigation__notifications-menu")
-  private WebElement notificationsIcon;
-
-  @FindBy(css = ".wds-global-navigation__account-menu")
-  private WebElement accountMenu;
-
-  @FindBy(css = ".wds-global-navigation__start-a-wiki ")
-  private WebElement startWikiButton;
-
-  @FindBy(css = "a[data-tracking-label=\"link.community-central\"]")
+  @FindBy(css = "a[href*='Community_Central']")
   private WebElement communityCentralLink;
 
-  @FindBy(css = "a[data-tracking-label=\"link.explore\"]")
+  @FindBy(css = ".wds-global-navigation__notifications-dropdown")
+  private WebElement notificationsIcon;
+
+  @FindBy(css = ".wds-global-navigation__start-a-wiki")
+  private WebElement startWikiButton;
+
+  @FindBy(css = ".wds-is-linked a[href*='explore']")
   private WebElement exploreWikisLink;
+
+  @FindBy(css = "a[href*='Videospiele']")
+  private WebElement videospieleHubLink;
+
+  @FindBy(css = "a[href*='Filme']")
+  private WebElement filmeHubLink;
 
   @FindBy(css = ".wds-global-navigation__partner-slot-link")
   private WebElement partnerSlotLink;
@@ -103,13 +120,6 @@ public class GlobalNavigation extends BasePageObject {
     return this;
   }
 
-  public HomePage clickCommunityCentralLink() {
-    wait.forElementClickable(communityCentralLink).click();
-    Log.log("clickCommunityCentralLink", "clicked on community central link in global nav bar", true);
-
-    return new HomePage();
-  }
-
   public HomePage clickExploreWikisLink() {
     wait.forElementClickable(exploreWikisLink).click();
     Log.info("clicked on explore wikis link in global nav bar");
@@ -117,9 +127,18 @@ public class GlobalNavigation extends BasePageObject {
     return new HomePage();
   }
 
+  public HomePage clickCommunityCentralLink() {
+    wait.forElementClickable(communityCentralLink).click();
+    Log.log("clickCommunityCentralLink", "clicked on community central link in global nav bar", true);
+
+    return new HomePage();
+  }
+
   public SearchPageObject search(String query) {
+    wait.forElementClickable(searchButton);
+    searchButton.click();
     searchInput.sendKeys(query);
-    searchInput.submit();
+    searchSubmitButton.submit();
 
     Log.info("search query typed and submitted");
     return new SearchPageObject(driver);
@@ -158,12 +177,28 @@ public class GlobalNavigation extends BasePageObject {
     return isElementDisplayed(gamesHubLink, 3);
   }
 
+  public boolean isVideospieleHubVisible() {
+    return isElementDisplayed(videospieleHubLink, 3);
+  }
+
   public boolean isMoviesHubVisible() {
     return isElementDisplayed(moviesHubLink, 3);
   }
 
+  public boolean isFilmeHubVisible() {
+    return isElementDisplayed(filmeHubLink, 3);
+  }
+
   public boolean isTVHubVisible() {
     return isElementDisplayed(tvHubLink, 3);
+  }
+
+  public boolean isTVDEHubVisible() {
+    return isElementDisplayed(tvDEHubLink, 3);
+  }
+
+  public boolean isVideoHubVisible() {
+    return isElementDisplayed(videoHubLink, 3);
   }
 
   public boolean isWikisMenuVisible() {
@@ -171,7 +206,7 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isSearchInputVisible() {
-    return isElementDisplayed(searchInput, 3);
+    return isElementDisplayed(searchButton, 3);
   }
 
   public boolean isUserAvatarVisible() {
@@ -182,16 +217,8 @@ public class GlobalNavigation extends BasePageObject {
     return isElementDisplayed(notificationsIcon, 3);
   }
 
-  public boolean isAccountMenuVisible() {
-    return isElementDisplayed(accountMenu, 3);
-  }
-
   public boolean isStartWikiButtonVisible() {
     return isElementDisplayed(startWikiButton, 3);
-  }
-
-  public boolean isCommunityCentralLinkVisible() {
-    return isElementDisplayed(communityCentralLink, 3);
   }
 
   public boolean isPartnerSlotLinkVisible() {
