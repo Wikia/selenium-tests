@@ -950,7 +950,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void waitForVASTRequestWithAdUnit(NetworkTrafficInterceptor networkTrafficInterceptor, String adUnit) throws UnsupportedEncodingException {
     final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
     final String pattern = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
-    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern, 45);
   }
 
   public String getValueFromTracking(NetworkTrafficInterceptor networkTrafficInterceptor, String slotName, String paramName) {

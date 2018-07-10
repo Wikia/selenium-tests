@@ -25,7 +25,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private static final String AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
   private static final String[] TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS = {
     "InstantGlobals.wgAdDriverAdProductsBridgeMobileCountries=[XX]",
-    "InstantGlobals.wgAdDriverAdProductsBridgeCountries=[XX]"
+    "InstantGlobals.wgAdDriverAdProductsBridgeCountries=[XX]",
+    "InstantGlobals.wgAdDriverPubMaticBidderCountries=[ZZ]"
   };
 
   @Test(
@@ -303,6 +304,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
