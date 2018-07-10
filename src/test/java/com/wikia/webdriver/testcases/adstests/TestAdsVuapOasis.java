@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -282,6 +283,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
@@ -291,6 +293,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
