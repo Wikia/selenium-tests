@@ -134,14 +134,14 @@ public class ArticlePageTests extends NewTestTemplate {
     Log.warning("Info", "Accessing article through link in navigation side");
 
     topBar.openNavigation();
-    navigation.openSubMenu(3);
+    //navigation.openSubMenu(3);
     navigation.openPageLink(5);
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     topBar.openNavigation();
-    navigation.openSubMenu(3);
+    //navigation.openSubMenu(3);
     navigation.openPageLink(4);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
