@@ -2,10 +2,9 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.common.skin.Skin;
-import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.JoinTodayPage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -16,29 +15,29 @@ import java.util.List;
 
 public class Navigation extends WikiBasePageObject {
 
-  @FindBy(css = ".wikia-nav__avatar .wds-icon")
+  @FindBy(css = ".wds-global-navigation__modal-control-anon")
   private WebElement signInRegisterButton;
 
-  @FindBy(css = ".wikia-nav__back")
-  private WebElement backButton;
+  @FindBy(css = ".wds-global-navigation__modal-control-close")
+  private WebElement closeButton;
 
-  @FindBy(css = ".nav-menu__item.nav-menu--root")
-  private List<WebElement> subMenuLinks;
+  @FindBy(css = ".wds-global-navigation__link-group.wds-is-clicked .wds-global-navigation__dropdown-toggle")
+  private WebElement wikisDropdownMenu;
 
   @FindBy(css = "li.nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
-  @FindBy(css = ".wikia-nav__header")
-  private WebElement navigationMainHeader;
-
-  @FindBy(css = ".nav-menu--games")
+  @FindBy(css = "a[data-tracking-label='link.games']")
   private WebElement gamesHub;
 
-  @FindBy(css = ".nav-menu--movies")
+  @FindBy(css = "a[data-tracking-label='link.movies']")
   private WebElement moviesHub;
 
-  @FindBy(css = ".nav-menu--tv")
+  @FindBy(css = "a[data-tracking-label='link.tv']")
   private WebElement tvHub;
+
+  @FindBy(css = "a[data-tracking-label='link.video']")
+  private WebElement videoHub;
 
   @FindBy(css = ".wikia-nav__avatar")
   private WebElement userAvatar;
@@ -51,9 +50,6 @@ public class Navigation extends WikiBasePageObject {
 
   @FindBy(css = ".wds-menu-chevron")
   private WebElement userProfileArrow;
-
-  @FindBy(css = ".nav-menu__header")
-  private WebElement exploreWikiHeader;
 
   private By navigationComponent = By.cssSelector(".side-nav-menu");
 
@@ -68,43 +64,24 @@ public class Navigation extends WikiBasePageObject {
     return new JoinTodayPage();
   }
 
-  public Navigation clickBackButton() {
-    Log.info("Go back to previous navigation level");
-    wait.forElementClickable(backButton);
-    backButton.click();
-
-    return this;
-  }
-
-  public Navigation clickExploreWikiHeader(Skin fromSkin) {
-    Log.info("Click 'Explore Wiki' header");
-    wait.forElementClickable(exploreWikiHeader);
-
-    exploreWikiHeader.click();
-
-    // Mobile wiki opens the main page using AJAX, Mercury reloads the page and opens Mobile Wiki
-    if (fromSkin == Skin.MOBILE_WIKI) {
-      waitForPageReload();
-    } else {
-      new SkinHelper(driver).isSkin(Skin.DISCUSSIONS);
-    }
-
-    return this;
-  }
-
-  public Navigation closeSubMenu() {
+  public Navigation closeNavigation() {
     Log.info("Close sub-menu");
-    wait.forElementClickable(backButton);
-    backButton.click();
+    wait.forElementClickable(closeButton);
+    closeButton.click();
 
     return this;
   }
 
+  public Navigation clickWikisMenuLink() {
+    wait.forElementClickable(wikisDropdownMenu);
+    this.hover(wikisDropdownMenu);
+    return this;
+  }
   public Navigation openSubMenu(int index) {
     Log.info("Open sub-menu no.: " + index);
-    WebElement wikiMenuLink = subMenuLinks.get(index);
-    wait.forElementClickable(wikiMenuLink);
-    wikiMenuLink.click();
+    //WebElement wikiMenuLink = subMenuLinks.get(index);
+    //wait.forElementClickable(wikiMenuLink);
+    //wikiMenuLink.click();
 
     return this;
   }
@@ -129,14 +106,6 @@ public class Navigation extends WikiBasePageObject {
     return this;
   }
 
-  public boolean isMainHeaderVisible() {
-    return isElementVisible(navigationMainHeader);
-  }
-
-  public boolean isBackButtonVisible() {
-    return isElementVisible(backButton);
-  }
-
   public boolean isUserAvatarVisible() {
     return isElementVisible(userAvatar);
   }
@@ -153,10 +122,14 @@ public class Navigation extends WikiBasePageObject {
     return isElementVisible(userProfileArrow);
   }
 
-  public boolean areHubLinksVisible() {
+  public boolean areInterntionalHubLinksVisible() {
     return isElementVisible(gamesHub)
         && isElementVisible(moviesHub)
         && isElementVisible(tvHub);
+  }
+
+  public boolean isVideoHubLinkVisible() {
+    return isElementVisible(videoHub);
   }
 
   private boolean isElementVisible(WebElement element) {
@@ -166,12 +139,6 @@ public class Navigation extends WikiBasePageObject {
       Log.info(e.getMessage());
       return false;
     }
-  }
-
-  public String getNavigationHeaderText() {
-    wait.forElementVisible(navigationMainHeader);
-
-    return navigationMainHeader.getText();
   }
 
   public UserProfile openUserProfile() {

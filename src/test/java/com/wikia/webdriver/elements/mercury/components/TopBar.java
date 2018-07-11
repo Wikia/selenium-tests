@@ -41,7 +41,7 @@ public class TopBar extends BasePageObject {
 
   public Navigation openNavigation() {
     Log.info("Open navigation");
-    wait.forElementVisible(navMenu);
+    wait.forElementVisible(navMenu).click();
     Log.info("Navigation is opened");
     return new Navigation();
   }
