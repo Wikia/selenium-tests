@@ -113,25 +113,6 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertFalse(searchResults.getSearch().areSearchSuggestionsDisplayed());
   }
 
-
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_redirectToNewResultsPageFromNoResults",
-                  "MobileWiki_Search_002"})
-  public void mercury_search_redirectToNewResultsPageFromNoResults() {
-    SearchResultsPage searchResults =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE_NO_RESULTS)
-            .clickTryAnotherSearch()
-            .getSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .clickEnterAndNavigateToSearchResults(Skin.MOBILE_WIKI);
-
-    Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
-    Assertion.assertFalse(searchResults.isNoResultsPagePresent());
-    Assertion.assertTrue(searchResults.areResultsPresent());
-  }
-
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage"})
