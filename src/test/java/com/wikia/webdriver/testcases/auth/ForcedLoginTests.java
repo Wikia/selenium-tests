@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -15,8 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSig
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
-
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forced-login")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -46,11 +46,18 @@ public class ForcedLoginTests extends NewTestTemplate {
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
+  @Test(invocationCount = 5)
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialWatchListPage(wikiURL);
     base.clickLoginOnSpecialPage();
     new AttachedSignInPage().login(user);
+    //TODO: To delete
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
