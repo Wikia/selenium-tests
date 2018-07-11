@@ -28,11 +28,11 @@ public class NavigationBar extends WikiBasePageObject {
   private WebElement searchSubmit;
   @FindBy(css = suggestionCss)
   private List<WebElement> suggestionsList;
-  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-anon")
-  private WebElement anonAvatar;
-  @FindBy(css = "a[data-tracking-label='account.sign-in']")
+  @FindBy(css = ".wds-global-navigation__account-menu")
+  private WebElement userMenuDropdown;
+  @FindBy(css = "#global-navigation-anon-sign-in")
   private WebElement signInLink;
-  @FindBy(css = "a[data-tracking-label='account.register']")
+  @FindBy(css = "#global-navigation-anon-register")
   private WebElement registerLink;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
@@ -119,13 +119,13 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public AttachedSignInPage clickOnSignIn(){
-    anonAvatar.click();
+    userMenuDropdown.click();
     signInLink.click();
     return new AttachedSignInPage();
   }
 
   public AttachedRegisterPage clickOnRegister(){
-    anonAvatar.click();
+    userMenuDropdown.click();
     registerLink.click();
     return new AttachedRegisterPage();
   }
