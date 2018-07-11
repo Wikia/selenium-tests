@@ -32,19 +32,11 @@ public class Page {
     return wikiName;
   }
 
-  public String getWikiLanguage() {
-    return wikiLanguage;
-  }
-
-  public String getWikiPath() {
-    return wikiPath;
-  }
-
   public String getUrl() {
     if (this.wikiPath == null){
       return urlBuilder.getUrl(false);
     } else {
-      return urlBuilder.getUrlForPath(this.wikiPath);
+      return urlBuilder.getUrlForWikiPage(this.wikiPath);
     }
   }
 

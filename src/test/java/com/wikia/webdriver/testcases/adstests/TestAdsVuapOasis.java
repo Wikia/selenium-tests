@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -24,7 +25,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private static final String AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
   private static final String[] TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS = {
     "InstantGlobals.wgAdDriverAdProductsBridgeMobileCountries=[XX]",
-    "InstantGlobals.wgAdDriverAdProductsBridgeCountries=[XX]"
+    "InstantGlobals.wgAdDriverAdProductsBridgeCountries=[XX]",
+    "InstantGlobals.wgAdDriverPubMaticBidderCountries=[ZZ]"
   };
 
   @Test(
@@ -282,6 +284,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
@@ -291,6 +294,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
@@ -300,6 +304,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
   @Test(
       groups = {"AdsVuapClickToPlayDesktop"}
   )
