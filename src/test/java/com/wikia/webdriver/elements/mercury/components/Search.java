@@ -32,9 +32,8 @@ public class Search extends BasePageObject {
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
-  private static final String searchSuggestionClass = ".wikia-search__suggestions li";
-  private static final String focusedSearchInput = ".wikia-search--focused input";
-  private static final By suggestionsLoading = By.className("wikia-search__loading");
+  private static final String searchSuggestionClass = ".wds-search-modal .wds-global-navigation__search__suggestion";
+  private static final String focusedSearchInput = ".wds-search-modal input.wds-global-navigation__search-input:focus";
 
   public boolean isPresent(){
     return isElementOnPage(searchInput);
@@ -45,7 +44,7 @@ public class Search extends BasePageObject {
   }
 
   public String clickSearchSuggestion(int index) {
-    wait.forElementNotVisible(suggestionsLoading);
+    wait.forElementPresent(By.cssSelector(searchSuggestionClass));
 
     Log.info("Select search suggestion no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
