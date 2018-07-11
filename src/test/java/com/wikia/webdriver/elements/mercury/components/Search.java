@@ -17,10 +17,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
-  @FindBy(css = ".wikia-search__container input.side-search__input")
+  @FindBy(css = ".wds-search-modal input.wds-global-navigation__search-input")
   private WebElement searchInput;
 
-  @FindBy(css = ".wikia-search__clear.icon-button")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__search-clear")
   private WebElement clearSearchButton;
 
   @FindBy(css = ".wikia-search__search-icon > svg")
