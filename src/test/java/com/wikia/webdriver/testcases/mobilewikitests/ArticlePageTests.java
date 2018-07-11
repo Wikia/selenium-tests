@@ -87,7 +87,8 @@ public class ArticlePageTests extends NewTestTemplate {
     Assertion.assertFalse(driver.getCurrentUrl().equals(oldUrl));
   }
 
-  @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark")
+  //test disabled as it needs to be adjusted when new local nav tests will be created
+  @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark", enabled = false)
   public void mercury_article_navigateToArticlesWithColonAndQuestionMark() {
     new ArticleContent().push("Article about colon [[Question?mark?question]]", "Colon:colon:colon");
     new ArticleContent().push("Article about question mark [[Colon:colon:colon]]", "Question?mark?question");
@@ -133,14 +134,14 @@ public class ArticlePageTests extends NewTestTemplate {
     Log.warning("Info", "Accessing article through link in navigation side");
 
     topBar.openNavigation();
-    navigation.openSubMenu(3);
+    //navigation.openSubMenu(3);
     navigation.openPageLink(5);
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     topBar.openNavigation();
-    navigation.openSubMenu(3);
+    //navigation.openSubMenu(3);
     navigation.openPageLink(4);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
