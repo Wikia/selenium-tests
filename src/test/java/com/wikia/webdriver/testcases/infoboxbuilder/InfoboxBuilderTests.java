@@ -78,6 +78,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.clickDeleteButton();
     builderSidebar.addRowComponent();
     new Subhead().clickPublish();
+    builderPage.resetFrame();
 
     Assertion.assertEquals(templateName.toLowerCase(),
         new TemplatePage().getHeaderText().toLowerCase());
@@ -177,6 +178,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(builderPage.getLabelCssValue(1, "word-wrap"), "break-word");
 
     new Subhead().clickPublish();
+
+    builderPage.resetFrame();
 
     Assertion.assertTrue(template.isTemplatePagePresent());
 

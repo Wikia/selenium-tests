@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"TrackingOptIn"})
 public class TrackingOptInTestsOasis extends NewTestTemplate {
 
-  private static final Page TEST_PAGE = new Page(URLsContent.MEDIAWIKI119_TEST_WIKI,"/wiki/Main_Page");
+  private static final Page TEST_PAGE = new Page(URLsContent.MEDIAWIKI119_TEST_WIKI,"Main_Page");
 
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
   @Test(groups = {"oasis-tracking-opt-in"},

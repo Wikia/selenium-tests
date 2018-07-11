@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
 import org.testng.annotations.Test;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestAdsPrebid extends TemplateNoFirstLoad {
+public class TestAdsPrebid extends NewTestTemplate {
   private static final String STARTED_EVENT = "event_name=started";
   private static final String DIRECT_PREROLL_LINE_ITEM_ID = "314345172";
   private static final String BIDDER_PREROLL_LINE_ITEM_ID = "4618393909";
@@ -60,6 +60,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump
+  @UnsafePageLoad
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"})
   public void adsPrebidRubiconRequestsInSlots() {
     networkTrafficInterceptor.startIntercepting();
@@ -68,8 +69,8 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   @UnsafePageLoad
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvDirectVideoAd() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
@@ -83,8 +84,8 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   @UnsafePageLoad
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvBidderVideoAd() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV_RUBICON.getUrl());

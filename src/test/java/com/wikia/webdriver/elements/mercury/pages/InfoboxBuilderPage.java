@@ -126,6 +126,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     builderFrame.frameScope(frameScope);
   }
 
+  public void resetFrame() {
+    driver.switchTo().defaultContent();
+  }
+
   public boolean isGoToSourceModalPresent() {
     wait.forElementVisible(modalGoToSource);
 
