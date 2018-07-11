@@ -950,7 +950,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void waitForVASTRequestWithAdUnit(NetworkTrafficInterceptor networkTrafficInterceptor, String adUnit) throws UnsupportedEncodingException {
     final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
     final String pattern = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
-    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+    wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern, 45);
   }
 
   public String getValueFromTracking(NetworkTrafficInterceptor networkTrafficInterceptor, String slotName, String paramName) {
@@ -961,6 +961,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public String getFVLineItem() {
     final By FV_SLOT_SELECTOR = By.cssSelector("div.featured-video__player-container");
+    wait.forAttributeToBePresent(driver.findElement(FV_SLOT_SELECTOR),
+                               "data-vast-line-item-id");
     return driver.findElement(FV_SLOT_SELECTOR).getAttribute("data-vast-line-item-id");
   }
 
