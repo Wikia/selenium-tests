@@ -18,7 +18,8 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class NavigationMercuryTests extends NavigationTests {
 
-  @Test(groups = "mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu")
+  //test disabled until we find solution how to click 'Wikis' link in navigation
+  @Test(groups = "mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu", enabled = false)
   public void mercury_navigation_openAndCloseNavigationAndItsSubMenu() {
     super.mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu(
         new GuidelinesPage().open()

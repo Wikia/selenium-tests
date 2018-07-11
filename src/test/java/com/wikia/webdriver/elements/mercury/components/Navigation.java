@@ -21,22 +21,22 @@ public class Navigation extends WikiBasePageObject {
   @FindBy(css = ".wds-global-navigation__modal-control-close")
   private WebElement closeButton;
 
-  @FindBy(css = ".wds-global-navigation__link-group.wds-is-clicked .wds-global-navigation__dropdown-toggle")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__link-group.wds-is-clicked .wds-global-navigation__dropdown-toggle")
   private WebElement wikisDropdownMenu;
 
   @FindBy(css = "li.nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
-  @FindBy(css = "a[data-tracking-label='link.games']")
+  @FindBy(css = ".wds-search-modal a[data-tracking-label='link.games']")
   private WebElement gamesHub;
 
-  @FindBy(css = "a[data-tracking-label='link.movies']")
+  @FindBy(css = ".wds-search-modal a[data-tracking-label='link.movies']")
   private WebElement moviesHub;
 
-  @FindBy(css = "a[data-tracking-label='link.tv']")
+  @FindBy(css = ".wds-search-modal a[data-tracking-label='link.tv']")
   private WebElement tvHub;
 
-  @FindBy(css = "a[data-tracking-label='link.video']")
+  @FindBy(css = ".wds-search-modal a[data-tracking-label='link.video']")
   private WebElement videoHub;
 
   @FindBy(css = ".wikia-nav__avatar")
