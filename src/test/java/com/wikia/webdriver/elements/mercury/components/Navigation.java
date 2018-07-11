@@ -77,14 +77,6 @@ public class Navigation extends WikiBasePageObject {
     this.hover(wikisDropdownMenu);
     return this;
   }
-  public Navigation openSubMenu(int index) {
-    Log.info("Open sub-menu no.: " + index);
-    //WebElement wikiMenuLink = subMenuLinks.get(index);
-    //wait.forElementClickable(wikiMenuLink);
-    //wikiMenuLink.click();
-
-    return this;
-  }
 
   public Navigation openPageLink(int index) {
     String oldUrl = driver.getCurrentUrl();
