@@ -92,32 +92,6 @@ public class SearchMobileWikiTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_searchResultsPageHasNoSearchIconInTopBar", "MobileWiki_Search_001"})
-  public void mercury_search_searchResultsPageHasNoSearchIconInTopBar() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE);
-
-    Assertion.assertFalse(resultsPage.getTopBar().isSearchIconClickable());
-  }
-
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_searchInputDoesNotCoverNavigation", "MobileWiki_Search_001"})
-  public void mercury_search_searchInputDoesNotCoverNavigation() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE);
-
-    resultsPage
-        .getTopBar()
-        .openNavigation();
-
-    Assertion.assertFalse(resultsPage.getSearch().isSearchInputFieldEditable());
-  }
-
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_searchNoResultsPageDisplayed", "MobileWiki_Search_001"})
   public void mercury_search_searchNoResultsPageDisplayed() {
     SearchResultsPage searchResults =
@@ -139,18 +113,6 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertFalse(searchResults.getSearch().areSearchSuggestionsDisplayed());
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_focusOnTryAnotherSearchWhenNoResults", "MobileWiki_Search_002"})
-  public void mercury_search_focusOnTryAnotherSearchWhenNoResults() {
-    SearchResultsPage searchResults =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE_NO_RESULTS)
-            .clickTryAnotherSearch();
-
-    Assertion.assertTrue(searchResults.getSearch().isInputFieldFocused());
-    Assertion.assertTrue(searchResults.getSearch().getSearchPhrase().isEmpty());
-  }
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
