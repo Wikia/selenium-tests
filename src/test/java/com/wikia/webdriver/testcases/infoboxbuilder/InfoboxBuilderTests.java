@@ -78,6 +78,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.clickDeleteButton();
     builderSidebar.addRowComponent();
     new Subhead().clickPublish();
+    builderPage.resetFrame();
 
     Assertion.assertEquals(templateName.toLowerCase(),
         new TemplatePage().getHeaderText().toLowerCase());
