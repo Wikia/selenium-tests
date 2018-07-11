@@ -92,32 +92,6 @@ public class SearchMobileWikiTests extends SearchTests {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_searchResultsPageHasNoSearchIconInTopBar", "MobileWiki_Search_001"})
-  public void mercury_search_searchResultsPageHasNoSearchIconInTopBar() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE);
-
-    Assertion.assertFalse(resultsPage.getTopBar().isSearchIconClickable());
-  }
-
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_searchInputDoesNotCoverNavigation", "MobileWiki_Search_001"})
-  public void mercury_search_searchInputDoesNotCoverNavigation() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE);
-
-    resultsPage
-        .getTopBar()
-        .openNavigation();
-
-    Assertion.assertFalse(resultsPage.getSearch().isSearchInputFieldEditable());
-  }
-
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_searchNoResultsPageDisplayed", "MobileWiki_Search_001"})
   public void mercury_search_searchNoResultsPageDisplayed() {
     SearchResultsPage searchResults =

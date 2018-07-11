@@ -23,17 +23,15 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wds-search-modal .wds-global-navigation__search-clear")
   private WebElement clearSearchButton;
 
-  @FindBy(css = ".wikia-search__search-icon > svg")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__search-toggle-icon.wds-icon:not(.wds-icon-small)")
   private WebElement inputFieldSearchIcon;
 
-  @FindBy(css = ".wikia-search__container")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__search-container")
   private WebElement searchContainer;
 
-  public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
   private static final String searchSuggestionClass = ".wds-search-modal .wds-global-navigation__search__suggestion";
-  private static final String focusedSearchInput = ".wds-search-modal input.wds-global-navigation__search-input:focus";
 
   public boolean isPresent(){
     return isElementOnPage(searchInput);
@@ -135,15 +133,6 @@ public class Search extends BasePageObject {
     try {
       wait.forElementClickable(By.cssSelector(searchSuggestionClass),
                                SUGGESTIONS_TIMEOUT_IN_SECONDS);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    }
-  }
-
-  public boolean isInputFieldFocused() {
-    try {
-      wait.forElementPresent(By.cssSelector(focusedSearchInput), FOCUS_TIMEOUT_IN_SECONDS);
       return true;
     } catch (TimeoutException e) {
       return false;
