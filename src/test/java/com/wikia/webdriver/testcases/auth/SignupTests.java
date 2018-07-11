@@ -20,8 +20,9 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import java.time.Instant;
 import java.time.LocalDate;
 import org.testng.annotations.Test;
@@ -137,7 +138,7 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityDesktop() {
-    performPasswordToggleTest(openSignUpModalOnDesktop());
+    performPasswordToggleTest(openSignUpModalFromGlobalavOnDesktop());
   }
 
   @Test(groups = MOBILE)
@@ -229,12 +230,17 @@ public class SignupTests extends NewTestTemplate {
       .navigateToSignUp();
   }
 
-  private RegisterPage openSignUpModalOnDesktop() {
-    return new DetachedRegisterPage(new NavigationBar().clickOnRegister());
+//  private RegisterPage openSignUpModalFromGlobalavOnDesktop() {
+//    return new DetachedRegisterPage(new NavigationBar().clickOnRegister());
+//  }
+
+  private RegisterPage openSignUpModalFromGlobalavOnDesktop() {
+    new GlobalNavigation().clickOnRegister();
+    return new AttachedRegisterPage();
   }
 
   private void signUpOnDesktopAs(SignUpUser user) {
-    openSignUpModalOnDesktop().signUp(user);
+    openSignUpModalFromGlobalavOnDesktop().signUp(user);
   }
 
   private void signUpOnDesktopFromDiscussionPageAs(SignUpUser user) {
@@ -263,7 +269,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private RegisterPage performSignUpExpectingFailureOnDesktopAs(SignUpUser user) {
-    RegisterPage form = openSignUpModalOnDesktop().fillForm(user);
+    RegisterPage form = openSignUpModalFromGlobalavOnDesktop().fillForm(user);
     form.submit();
     return form;
   }
