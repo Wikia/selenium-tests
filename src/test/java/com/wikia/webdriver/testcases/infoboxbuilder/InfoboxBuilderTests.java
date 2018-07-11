@@ -178,6 +178,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     new Subhead().clickPublish();
 
+    builderPage.resetFrame();
+
     Assertion.assertTrue(template.isTemplatePagePresent());
 
     String infoboxTitle = template.getPortableInfobox().getTitleTextWithIndex(0);
