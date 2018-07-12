@@ -13,9 +13,9 @@ import java.util.List;
 
 public class ArticlePageObject extends BasePageObject {
 
-  @FindBy(css = ".fandom-logo")
+  @FindBy(css = ".wds-global-navigation__logo")
   private WebElement wikiaLogo;
-  @FindBy(css = ".site-head-icon-search")
+  @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement searchButton;
   @FindBy(css = ".contributors")
   private WebElement topContributorsSection;
