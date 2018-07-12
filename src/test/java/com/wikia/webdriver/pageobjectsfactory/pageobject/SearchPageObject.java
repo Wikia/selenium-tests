@@ -15,10 +15,14 @@ public class SearchPageObject extends WikiBasePageObject {
 
   protected static final String PAGINATION_PAGES_CSS = ".paginator-page";
 
-  @FindBy(css = "#searchInput")
-  protected WebElement searchInput;
-  @FindBy(css = "#search-v2-button")
+  @FindBy(css = ".wds-global-navigation__search-toggle")
   protected WebElement searchButton;
+  @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
+  protected WebElement searchInput;
+  @FindBy(css = ".wds-global-navigation__search-submit")
+  protected WebElement searchSubmit;;
+  @FindBy(css = "#search-v2-button")
+  protected WebElement searchV2Button;
   @FindBy(css = ".Results")
   protected WebElement resultsContainer;
   @FindBy(css = ".paginator-next")
@@ -79,7 +83,7 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public void clickSearchButton() {
-    searchButton.click();
+    searchV2Button.click();
     Log.log("clickSearchButton", "Search button was clicked", true, driver);
   }
 
