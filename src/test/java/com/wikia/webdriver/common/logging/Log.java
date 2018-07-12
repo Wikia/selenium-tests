@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
 
 public class Log {
 
-  private static By scriptLocation;
   public static String mobileWikiVersion = "";
   private static final String POLISH_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss ZZ";
   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
@@ -273,9 +272,9 @@ public class Log {
   }
 
   public static void stop() {
-    scriptLocation = By.cssSelector("script[src]");
-
     WikiaWebDriver driver = DriverProvider.getActiveDriver();
+    WebElement mercuryScriptVersion = driver.findElement(By.cssSelector("script[src*='mercury_ads_js']"));
+
     if (driver.getProxy() != null && Configuration.getForceHttps()) {
       Har har = driver.getProxy().getHar();
       for (HarEntry entry : har.getLog().getEntries()) {
@@ -315,22 +314,15 @@ public class Log {
               );
         }
       }
-      final List<WebElement> mercuryScriptVersion = driver.findElements(scriptLocation);
       Pattern pt = Pattern.compile("\\d{2,}");
 
-      String mercuryAdsJsValue = null;
-      for (WebElement element : mercuryScriptVersion) {
-        if (element.getAttribute("src").contains("mercury_ads_js")) {
-          mercuryAdsJsValue = element.getAttribute("src");
+      String mercuryAdsJsValue = mercuryScriptVersion.getAttribute("src");
 
-          Matcher matcher = pt.matcher(mercuryAdsJsValue);
-          if (matcher.find()) {
-            mercuryAdsJsValue = matcher.group(0);
-            break;
-          } else {
-            throw new WebDriverException("Missing mercury param in query string");
-          }
-        }
+      Matcher matcher = pt.matcher(mercuryAdsJsValue);
+      if (matcher.find()) {
+        mercuryAdsJsValue = matcher.group(0);
+      } else {
+        throw new WebDriverException("Missing mercury param in query string");
       }
       Log
           .info("Mercury Ads Version: " + mercuryAdsJsValue
