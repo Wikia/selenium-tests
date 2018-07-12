@@ -14,6 +14,7 @@ public class AdsVelesObject extends AdsBaseObject {
 
   private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER,.mobile-in-content";
   private static final String INCONTENT_VIDEO = ".video-display-wrapper";
+  private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
 
   public static final String BIDDER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_fallback_bid.*";
   public static final String DIRECT_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
@@ -41,7 +42,7 @@ public class AdsVelesObject extends AdsBaseObject {
   public void triggerIncontentPlayer() {
     final WebElement wrapper = driver.findElement(By.cssSelector(INCONTENT_WRAPPER));
 
-    jsActions.scrollToElement(wrapper);
+    jsActions.scrollElementIntoViewPort(wrapper);
   }
 
   public void triggerPorvataAlien() {
@@ -62,6 +63,10 @@ public class AdsVelesObject extends AdsBaseObject {
     } finally {
       driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
+  }
+
+  public boolean isVideoHidden() {
+    return isElementOnPage(By.cssSelector(INCONTENT_VIDEO_HIDDEN));
   }
 
   private ExpectedCondition<Boolean> isElementNotBlack(WebElement element) {
