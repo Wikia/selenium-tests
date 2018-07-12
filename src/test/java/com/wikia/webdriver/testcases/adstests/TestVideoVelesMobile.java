@@ -44,15 +44,14 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferEventMobile"}, invocationCount = 20)
+  @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferEventMobile"})
   public void adsVelesWithoutOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
 
     velesAds.triggerIncontentPlayer();
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN);
-    Assertion.assertTrue(velesAds.isVideoHidden(), "Video player not hidden");
-  }
+    Assertion.assertTrue(velesAds.isVideoHidden(), "Video player not hidden");}
 
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferHopToDisplayMobile"})
   public void adsVelesWithoutOfferHopToDisplay() {

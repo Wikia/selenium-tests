@@ -21,8 +21,7 @@ import org.assertj.core.util.Throwables;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,9 +34,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Log {
 
+  private static By scriptLocation;
+  public static String mobileWikiVersion = "";
   private static final String POLISH_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss ZZ";
   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static final String REPORT_PATH = "." + File.separator + "logs" + File.separator;
@@ -66,7 +69,8 @@ public class Log {
       VelocityWrapper
           .fillErrorLogRowWoScreenshotAndSource(Arrays.asList(LogLevel.ERROR), description);
       Log.log("onException",
-              "driver has no ability to catch screenshot or html source - driver may died", false);
+              "driver has no ability to catch screenshot or html source - driver may died", false
+      );
     }
 
     new Shooter().savePageScreenshot(SCREEN_PATH + imageCounter, driver);
@@ -85,7 +89,8 @@ public class Log {
         html =
         VelocityWrapper
             .fillErrorLogRow(Arrays.asList(success ? LogLevel.OK : LogLevel.ERROR), command,
-                             imageCounter);
+                             imageCounter
+            );
     CommonUtils.appendTextToFile(LOG_PATH, html);
     logJSError();
   }
@@ -99,8 +104,10 @@ public class Log {
     log(command, e.getMessage(), success, false);
   }
 
-  public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
-                         boolean success) {
+  public static void log(
+      String command, String descriptionOnSuccess, String descriptionOnFail,
+      boolean success
+  ) {
     String description = descriptionOnFail;
     if (success) {
       description = descriptionOnSuccess;
@@ -116,8 +123,10 @@ public class Log {
     log(command, description, success, true);
   }
 
-  private static void log(String command, String description, boolean isSuccess,
-                          boolean ifLowLevel) {
+  private static void log(
+      String command, String description, boolean isSuccess,
+      boolean ifLowLevel
+  ) {
     LOGS_RESULTS.add(isSuccess);
     String escapedDescription = escapeHtml(description);
 
@@ -243,9 +252,11 @@ public class Log {
       } catch (Exception e) {
         html = VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(classList, exceptionMessage);
         CommonUtils.appendTextToFile(Log.LOG_PATH, html);
-        Log.log("onException",
-                "driver has no ability to catch screenshot or html source - driver may died<br/>",
-                false);
+        Log.log(
+            "onException",
+            "driver has no ability to catch screenshot or html source - driver may died<br/>",
+            false
+        );
       }
       Log.logJSError();
     }
@@ -262,6 +273,8 @@ public class Log {
   }
 
   public static void stop() {
+    scriptLocation = By.cssSelector("script[src]");
+
     WikiaWebDriver driver = DriverProvider.getActiveDriver();
     if (driver.getProxy() != null && Configuration.getForceHttps()) {
       Har har = driver.getProxy().getHar();
@@ -272,13 +285,62 @@ public class Log {
           if (url.getHost().contains("wikia")) {
             boolean isHttps = entry.getRequest().getUrl().startsWith("https");
             Log.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
-                    !Configuration.getForceHttps() || isHttps);
+                    !Configuration.getForceHttps() || isHttps
+            );
           }
         } catch (MalformedURLException e) {
           Log.log("MALFORMED URL", "Url: " + entry.getRequest().getUrl(), false);
         }
       }
     }
+
+    if (driver.getProxy() != null && Configuration.getAdsData()) {
+      Har har = driver.getProxy().getHar();
+      for (HarEntry entry : har.getLog().getEntries()) {
+        try {
+          if (entry.getRequest().getUrl().contains("adeng")) {
+            String[] urlValue = entry.getRequest().getUrl().split("(adeng).+\\?");
+            String[] values = urlValue[1].split("&");
+
+            Log.info(
+                "Ad parameters",
+                "Header: " + Arrays.toString(values)
+            );
+          }
+        } catch (NullPointerException ex) {
+          Log
+              .info(
+                  "Did not get successful response",
+                  ex
+              );
+        }
+      }
+      final List<WebElement> mercuryScriptVersion = driver.findElements(scriptLocation);
+      Pattern pt = Pattern.compile("\\d{2,}");
+
+      String mercuryAdsJsValue = null;
+      for (WebElement element : mercuryScriptVersion) {
+        if (element.getAttribute("src").contains("mercury_ads_js")) {
+          mercuryAdsJsValue = element.getAttribute("src");
+
+          Matcher matcher = pt.matcher(mercuryAdsJsValue);
+          if (matcher.find()) {
+            mercuryAdsJsValue = matcher.group(0);
+            break;
+          } else {
+            throw new WebDriverException("Missing mercury param in query string");
+          }
+        }
+      }
+      Log
+          .info("Mercury Ads Version: " + mercuryAdsJsValue
+          );
+    }
+
+    if (Configuration.getMobileWikiVersion() != null) {
+      Log.info("Mobile Wiki Version: " + Configuration.getMobileWikiVersion());
+    }
+
     String html = VelocityWrapper.fillLastLogRow();
     CommonUtils.appendTextToFile(Log.LOG_PATH, html);
     Log.testStarted = false;
@@ -302,7 +364,8 @@ public class Log {
     String
         headerHtml =
         VelocityWrapper.fillHeader(date, polishDate, browser, os, testingEnvironmentUrl,
-                                   testingEnvironment, testedVersion);
+                                   testingEnvironment, testedVersion, mobileWikiVersion
+        );
     CommonUtils.appendTextToFile(Log.LOG_PATH, headerHtml);
     appendShowHideButtons();
     try {
