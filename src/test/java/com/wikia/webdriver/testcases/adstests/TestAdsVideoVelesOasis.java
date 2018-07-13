@@ -17,8 +17,8 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
   private static final String ASSERTION_VELES_PLAYER_NOT_RENDERED = "Veles player not rendered";
   private static final String ASSERTION_VELES_VIDEO_NOT_VISIBLE = "Veles video not visible";
 
-  private static final Page TEST_PAGE_BIDDER = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Bidder");
-  private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Direct");
+  private static final Page TEST_PAGE_BIDDER = new Page(WIKIA, "SyntheticTests/Video/Porvata/Bidder");
+  private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "SyntheticTests/Video/Porvata/Direct");
 
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithDirectOfferEventOasis"})

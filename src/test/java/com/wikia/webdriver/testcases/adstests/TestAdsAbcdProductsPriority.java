@@ -14,7 +14,7 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
   private static final String DEBUG_QUERY_STRING = "wikia_video_adapter=2000";
   private static final String WIKIA = "project43";
-  private static final Page TEST_PAGE = new Page(WIKIA, "/SyntheticTests/ProductsPriority/OutstreamOverABCD");
+  private static final Page TEST_PAGE = new Page(WIKIA, "SyntheticTests/ProductsPriority/OutstreamOverABCD");
 
   private static final String ABCD_LINE_ITEM_ID = "4417483196";
   private static final String OUTSTREAM_LINE_ITEM_ID = "4417473960";
