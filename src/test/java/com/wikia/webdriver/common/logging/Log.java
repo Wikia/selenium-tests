@@ -273,7 +273,6 @@ public class Log {
 
   public static void stop() {
     WikiaWebDriver driver = DriverProvider.getActiveDriver();
-    WebElement mercuryScriptVersion = driver.findElement(By.cssSelector("script[src*='mercury_ads_js']"));
 
     if (driver.getProxy() != null && Configuration.getForceHttps()) {
       Har har = driver.getProxy().getHar();
@@ -315,6 +314,11 @@ public class Log {
         }
       }
       Pattern pt = Pattern.compile("\\d{2,}");
+
+      WebElement mercuryScriptVersion = null;
+      if(Configuration.getEmulator().isMobile()){
+        mercuryScriptVersion = driver.findElement(By.cssSelector("script[src*='mercury_ads_js']"));
+      }
 
       String mercuryAdsJsValue = mercuryScriptVersion.getAttribute("src");
 
