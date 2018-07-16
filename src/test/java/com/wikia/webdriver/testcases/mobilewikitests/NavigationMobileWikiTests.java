@@ -18,7 +18,7 @@ public class NavigationMobileWikiTests {
 
   //test disabled until we find solution how to click 'Wikis' link in navigation
   @Test(groups = "mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu", enabled = false)
-  public void mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu() {
+  public void mobileWikiNavigationOpenAndCloseNavigationAndItsSubMenu() {
     GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
@@ -27,7 +27,7 @@ public class NavigationMobileWikiTests {
   }
 
   @Test(groups = "mobileWiki_navigation_navigationOnEnglishWiki")
-  public void mobileWiki_navigation_navigationOnEnglishWiki() {
+  public void mobileWikiNavigationOnEnglishWiki() {
     GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
@@ -37,7 +37,7 @@ public class NavigationMobileWikiTests {
 
   @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
   @Test(groups = "mobileWiki_navigation_navigationOnNonEnglishWiki")
-  public void mobileWiki_navigation_navigationOnNonEnglishWiki() {
+  public void mobileWikiNavigationOnNonEnglishWiki() {
     GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
