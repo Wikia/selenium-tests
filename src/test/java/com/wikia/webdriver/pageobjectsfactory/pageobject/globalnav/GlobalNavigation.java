@@ -6,11 +6,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
@@ -130,10 +132,6 @@ public class GlobalNavigation extends BasePageObject {
 
   public void clickNthSearchResult(int n) {
     wait.forElementVisible(searchSuggestionsList.get(n)).click();
-  }
-
-  public String getNthSearchResultText(int n) {
-    return wait.forElementVisible(searchSuggestionsList.get(n)).getText();
   }
 
   public HomePage clickFandomLogo() {
@@ -299,4 +297,13 @@ public class GlobalNavigation extends BasePageObject {
   public boolean isPartnerSlotLinkVisible() {
     return isElementDisplayed(partnerSlotLink ,3);
   }
+
+  public String getNthSearchResultText(int n) {
+    return wait.forElementVisible(searchSuggestionsList.get(n)).getText();
+  }
+
+  public Notifications getNotifications() {
+    return new Notifications();
+  }
+
 }
