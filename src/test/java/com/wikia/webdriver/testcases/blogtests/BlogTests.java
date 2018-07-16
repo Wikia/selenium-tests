@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.blogtests;
 
 import java.util.List;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -101,6 +103,7 @@ public class BlogTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF_FORUM)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_LARGE)
   public void StaffCanMoveUserBlogPosts() {
     String blogTitleMove =
         "Renamed - " + PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
