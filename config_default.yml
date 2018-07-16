@@ -12,6 +12,7 @@ disableFlash: true
 jsErrorsEnabled: false
 logEnabled: true
 takeScreenshots: true
+adsData: false
 mockAds: false
 forceHttps: false
 forceLanguageInPath: false

@@ -17,24 +17,21 @@ import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
-  @FindBy(css = ".wikia-search__container input.side-search__input")
+  @FindBy(css = ".wds-search-modal input.wds-global-navigation__search-input")
   private WebElement searchInput;
 
-  @FindBy(css = ".wikia-search__clear.icon-button")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__search-clear")
   private WebElement clearSearchButton;
 
-  @FindBy(css = ".wikia-search__search-icon > svg")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__search-toggle-icon.wds-icon:not(.wds-icon-small)")
   private WebElement inputFieldSearchIcon;
 
-  @FindBy(css = ".wikia-search__container")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__search-container")
   private WebElement searchContainer;
 
-  public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
-  private static final String searchSuggestionClass = ".wikia-search__suggestions li";
-  private static final String focusedSearchInput = ".wikia-search--focused input";
-  private static final By suggestionsLoading = By.className("wikia-search__loading");
+  private static final String searchSuggestionClass = ".wds-search-modal .wds-global-navigation__search__suggestion";
 
   public boolean isPresent(){
     return isElementOnPage(searchInput);
@@ -45,7 +42,7 @@ public class Search extends BasePageObject {
   }
 
   public String clickSearchSuggestion(int index) {
-    wait.forElementNotVisible(suggestionsLoading);
+    wait.forElementPresent(By.cssSelector(searchSuggestionClass));
 
     Log.info("Select search suggestion no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
@@ -136,15 +133,6 @@ public class Search extends BasePageObject {
     try {
       wait.forElementClickable(By.cssSelector(searchSuggestionClass),
                                SUGGESTIONS_TIMEOUT_IN_SECONDS);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    }
-  }
-
-  public boolean isInputFieldFocused() {
-    try {
-      wait.forElementPresent(By.cssSelector(focusedSearchInput), FOCUS_TIMEOUT_IN_SECONDS);
       return true;
     } catch (TimeoutException e) {
       return false;

@@ -51,7 +51,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
 
     velesAds.triggerIncontentPlayer();
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN);
-  }
+    Assertion.assertTrue(velesAds.isVideoHidden(), "Video player not hidden");}
 
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferHopToDisplayMobile"})
   public void adsVelesWithoutOfferHopToDisplay() {
