@@ -105,6 +105,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   public void userOnDesktopMarksAllNotificationsAsRead() {
     Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
     notificationsList.markAllAsRead();
+
+    Assertion.assertFalse(notificationsList.isMarkAllAsReadButtonVisible());
     Assertion.assertFalse(notificationsList.isAnyNotificationUnread(),
       String.format(ALL_READ, DISCUSSION));
     Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread(),
