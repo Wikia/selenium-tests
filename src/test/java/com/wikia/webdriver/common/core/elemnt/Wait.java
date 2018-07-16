@@ -467,12 +467,12 @@ public class Wait {
    * @param url Url which was used for making request
    */
   public void forSuccessfulResponse(final NetworkTrafficInterceptor networkTrafficInterceptor,
-                                    final String url) {
+                                    final String url, int timeout) {
     changeImplicitWait(0, TimeUnit.SECONDS);
 
     try {
 
-      wait.until(
+      new WebDriverWait(driver, timeout).until(
           new ExpectedCondition<Boolean>() {
             private HarEntry entry;
 
@@ -497,6 +497,11 @@ public class Wait {
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public void forSuccessfulResponse(final NetworkTrafficInterceptor networkTrafficInterceptor,
+                                    final String url) {
+    forSuccessfulResponse(networkTrafficInterceptor, url, DEFAULT_TIMEOUT);
   }
 
   public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,

@@ -19,6 +19,7 @@ public class FandomAdsDataProvider {
   public static final String INSTANT_GLOBAL_MIDROLL = "wgAdDriverVideoMidrollCountries";
   public static final String INSTANT_GLOBAL_MOAT_TRACKING = "wgAdDriverVideoMoatTrackingCountries";
   public static final String INSTANT_GLOBAL_POSTROLL = "wgAdDriverVideoPostrollCountries";
+  public static final String INSTANT_GLOBAL_PUBMATIC = "wgAdDriverPubMaticBidderCountries";
 
   public static final String PAGE_NON_UAP_TOPIC = "movies";
   public static final String PAGE_NON_UAP_ARTICLE = "young-fans-guide-cinema-part-3";
