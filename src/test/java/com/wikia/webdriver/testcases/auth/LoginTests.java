@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static org.testng.Assert.assertFalse;
-
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -21,8 +18,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-import java.time.Instant;
 import org.testng.annotations.Test;
+
+import java.time.Instant;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -230,10 +231,6 @@ public class LoginTests extends NewTestTemplate {
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
   }
-
-//  private SignInPage openLoginModalOnDesktop() {
-//    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
-//  }
 
   private SignInPage openLoginPageFromGlobalnavOnDesktop() {
     new GlobalNavigation().clickOnSignIn();

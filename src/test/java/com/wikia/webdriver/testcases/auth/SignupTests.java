@@ -1,19 +1,11 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.helpers.SignUpUser;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.helpers.UserWithEmail;
-import com.wikia.webdriver.common.core.helpers.UserWithEmailFactory;
+import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -23,9 +15,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import org.testng.annotations.Test;
+
 import java.time.Instant;
 import java.time.LocalDate;
-import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -229,10 +226,6 @@ public class SignupTests extends NewTestTemplate {
       .clickOnSignInRegisterButton()
       .navigateToSignUp();
   }
-
-//  private RegisterPage openSignUpModalFromGlobalavOnDesktop() {
-//    return new DetachedRegisterPage(new NavigationBar().clickOnRegister());
-//  }
 
   private RegisterPage openSignUpModalFromGlobalavOnDesktop() {
     new GlobalNavigation().clickOnRegister();
