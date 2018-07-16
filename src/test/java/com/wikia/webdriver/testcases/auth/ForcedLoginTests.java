@@ -57,7 +57,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      Log.log("Explicit wait in signing in", e, false);
     }
     base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
