@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorMobile extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".mobile-sticky-editor > .floating-entry-point__label")
+  @FindBy(css = ".floating-entry-point__label")
   private WebElement postsCreator;
 
   @Getter
