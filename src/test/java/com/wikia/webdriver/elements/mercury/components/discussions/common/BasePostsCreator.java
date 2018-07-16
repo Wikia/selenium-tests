@@ -43,10 +43,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public PostsCreator click() {
-    /*
-      This entry point is disabled until the outcome of experiment in IRIS-5829
-    */
-
     wait.forElementClickable(getPostsCreator());
     getPostsCreator().click();
 
