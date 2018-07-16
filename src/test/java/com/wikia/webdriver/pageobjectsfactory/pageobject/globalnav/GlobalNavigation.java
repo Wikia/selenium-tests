@@ -5,6 +5,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -82,8 +84,31 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__partner-slot-link")
   private WebElement partnerSlotLink;
 
+  @FindBy(css = ".wds-global-navigation__user-menu")
+  private WebElement myAccount;
+
+  @FindBy(xpath = "//div[contains(@class,\"wds-global-navigation__user-menu\")]//li[1]/a")
+  private WebElement signInLink;
+
+  @FindBy(xpath = "//div[contains(@class,\"wds-global-navigation__user-menu\")]//li[2]/a")
+  private WebElement registerLink;
+
   @Getter
   private NotificationsDropdown notificationsDropdown = new NotificationsDropdown();
+
+  By loggedOutUserAvatar = By.xpath("//div[@class=\"wds-avatar__inner-border\" and @alt=\"\"]");
+
+  public AttachedSignInPage clickOnSignIn(){
+    myAccount.click();
+    signInLink.click();
+    return new AttachedSignInPage();
+  }
+
+  public AttachedRegisterPage clickOnRegister(){
+    myAccount.click();
+    registerLink.click();
+    return new AttachedRegisterPage();
+  }
 
   public HomePage clickFandomLogo() {
     wait.forElementClickable(fandomLogo).click();
@@ -170,7 +195,7 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isUserLoggedOut() {
-    return driver.findElements(By.cssSelector(".wds-global-navigation__account-menu")).size() > 0;
+    return driver.findElements(loggedOutUserAvatar).size() > 0;
   }
 
   public boolean isGamesHubVisible() {

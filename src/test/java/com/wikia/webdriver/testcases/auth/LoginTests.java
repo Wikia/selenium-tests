@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static org.testng.Assert.assertFalse;
-
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -18,10 +15,15 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
-import java.time.Instant;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import org.testng.annotations.Test;
+
+import java.time.Instant;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -104,7 +106,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityOnDesktop() {
-    SignInPage signInPage = openLoginModalOnDesktop();
+    SignInPage signInPage = openLoginPageFromGlobalnavOnDesktop();
     signInPage.typePassword(USER.getPassword());
 
     Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
@@ -145,7 +147,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void nonexistentUserCannotLogInOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
+    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
     String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
     signIn.login(nonexistingUsername, USER.getPassword());
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
@@ -162,7 +164,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithInvalidPasswordOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
+    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
     String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
@@ -179,7 +181,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithBlankUsernameOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
+    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
     signIn.typeUsername("").typePassword(USER.getPassword());
     assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
@@ -194,7 +196,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithBlankPasswordOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
+    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
     signIn.typeUsername(USER.getUserName()).typePassword("");
     assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
@@ -230,12 +232,13 @@ public class LoginTests extends NewTestTemplate {
       .navigateToSignIn();
   }
 
-  private SignInPage openLoginModalOnDesktop() {
-    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
+  private SignInPage openLoginPageFromGlobalnavOnDesktop() {
+    new GlobalNavigation().clickOnSignIn();
+    return new AttachedSignInPage();
   }
 
   private void loginOnDesktopAs(User user) {
-    openLoginModalOnDesktop().login(user);
+    openLoginPageFromGlobalnavOnDesktop().login(user);
   }
 
   private void loginOnDesktopFromDiscussionPageAs(User user) {
