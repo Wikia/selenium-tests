@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@UnsafePageLoad
 public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
@@ -25,6 +24,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKikimoraRejectedDataProvider",
@@ -40,6 +40,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKruxDataProvider",
@@ -55,6 +56,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsNetzAthletenDataProvider",
@@ -70,6 +72,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsMoatDataProvider",
@@ -85,6 +88,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsNordicsDataProvider",
@@ -100,6 +104,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsPrebidDataProvider",
@@ -115,6 +120,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsA9DataProvider",
@@ -130,6 +136,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsQuantcastDataProvider",
@@ -146,6 +153,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsComscoreDataProvider",
@@ -162,6 +170,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsGoogleAnalyticsDataProvider",
@@ -177,6 +186,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsNpaHiViDataProviderOasis",
@@ -193,6 +203,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsPetametricsDataProvider",
@@ -208,6 +219,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKikimoraAcceptedDataProvider",
@@ -224,6 +236,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsKruxDataProvider",
@@ -239,6 +252,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsNetzAthletenDataProvider",
@@ -255,6 +269,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsNordicsDataProvider",
@@ -270,6 +285,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsMoatDataProvider",
@@ -285,6 +301,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsPrebidDataProvider",
@@ -300,6 +317,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsA9DataProvider",
@@ -315,6 +333,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsQuantcastDataProvider",
@@ -330,6 +349,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsComscoreDataProvider",
@@ -345,6 +365,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsNpaHiViDataProviderOasis",
@@ -361,6 +382,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsGoogleAnalyticsDataProvider",
@@ -376,6 +398,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       dataProvider = "adsPetametricsDataProvider",
@@ -435,6 +458,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
+  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       groups = "AdsTrackingPixels",
