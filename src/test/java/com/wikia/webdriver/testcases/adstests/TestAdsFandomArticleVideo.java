@@ -23,7 +23,7 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
         FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL);
 
     AdsFandomObject pageObject = loadPage(testedPage);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPlayerOnPage();
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
@@ -43,7 +43,7 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, FandomAdsDataProvider.IGNORE_SAMPLING);
 
     AdsFandomObject pageObject = loadPage(testedPage);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPlayerOnPage();
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);

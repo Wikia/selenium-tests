@@ -55,7 +55,7 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
 
   private void verifyFeaturedVideoWithSound(String pageUrl) {
     AdsBaseObject pageObject = new AdsBaseObject(driver, pageUrl);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.waitForAdPlaying();
     pageObject.scrollTo(driver.findElement(AdsJWPlayerObject.PLAYER_SELECTOR));
@@ -66,7 +66,7 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
 
   private void verifyFeaturedVideoWithoutSound(String pageUrl) {
     new AdsBaseObject(driver, pageUrl);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.waitForAdPlaying();
     jwPlayerObject.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));

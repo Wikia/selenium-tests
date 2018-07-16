@@ -101,20 +101,20 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   }
 
   private void verifyAdPositions() {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyAllAdPositions();
   }
 
   private void verifyNoAds() {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPlayerOnPage();
     jwPlayerObject.verifyFeaturedVideo();
   }
 
   private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.waitForAdPlaying();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL, 45);

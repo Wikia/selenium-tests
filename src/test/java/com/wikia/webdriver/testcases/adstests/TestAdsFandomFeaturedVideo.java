@@ -24,7 +24,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(testedPage, FandomAdsDataProvider.INSTANT_GLOBAL_PUBMATIC);
 
     AdsFandomObject pageObject = loadPage(testedPage);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPreroll();
     verifySlots(pageObject);
@@ -39,7 +39,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, FandomAdsDataProvider.IGNORE_SAMPLING);
 
     AdsFandomObject pageObject = loadPage(testedPage);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPlayerOnPage();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL);

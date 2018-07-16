@@ -34,7 +34,7 @@ public class TestAdsFandomVideoPage extends AdsFandomTestTemplate {
         FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL);
 
     AdsFandomObject pageObject = loadVideoPage(testedPage);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPreroll();
     verifySlots(pageObject);
