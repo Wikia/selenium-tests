@@ -36,11 +36,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -62,8 +62,8 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in img, "
-      + ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in svg";
+      ".wds-global-navigation__user-logged-in img, "
+      + ".wds-global-navigation__user-logged-in svg";
   
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
@@ -346,11 +346,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditModePageObject();
   }
 
-  public VisualEditModePageObject navigateToUniqueArticleEditPage() {
-    String title = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, LocalDateTime.now());
-    return navigateToArticleEditPage(getWikiUrl(), title);
-  }
-
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
@@ -408,10 +403,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyUserLoggedIn(User user) {
     this.verifyUserLoggedIn(user.getUserName());
-  }
-
-  public boolean userLoggedInMobile(final String username) {
-    return getTopBar().openNavigation().isUserAvatarVisible(username);
   }
 
   public boolean isUserLoggedOutMobile() {
@@ -479,10 +470,6 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (TimeoutException e) {
       Log.log("logOut", "page loads for more than 30 seconds", true);
     }
-  }
-
-  public void logoutFromAnywhere() {
-    driver.get(URLsContent.USER_SIGNOUT);
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
