@@ -24,7 +24,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   protected abstract String getBaseCssClassName();
-  protected abstract WebElement getTextPostType();
   protected abstract WebElement getPostsCreator();
   protected abstract WebElement getEditor();
   protected abstract WebElement getSignInDialog();
@@ -50,8 +49,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
     wait.forElementClickable(getPostsCreator());
     getPostsCreator().click();
-    wait.forElementClickable(getTextPostType());
-    getTextPostType().click();
 
     return this;
   }
