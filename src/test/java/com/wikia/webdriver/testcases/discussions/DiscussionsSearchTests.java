@@ -64,6 +64,13 @@ public class DiscussionsSearchTests extends SearchTests {
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  public void verifySearchLayoutFromDiscussionsGuidelinesPage() {
+    super.verifySearchLayout(
+        new GuidelinesPage().open()
+    );
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToSearchResultsPageFromDiscussionsGuidelinesPage() {
     SearchResultsPage searchResults =
         new GuidelinesPage()
