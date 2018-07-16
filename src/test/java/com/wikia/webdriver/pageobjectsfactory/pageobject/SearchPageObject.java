@@ -17,7 +17,7 @@ public class SearchPageObject extends WikiBasePageObject {
   @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
   protected WebElement searchInput;
   @FindBy(css = ".wds-global-navigation__search-submit")
-  protected WebElement searchSubmit;;
+  protected WebElement searchSubmit;
   @FindBy(css = "#search-v2-button")
   protected WebElement searchV2Button;
   @FindBy(css = ".Results")
