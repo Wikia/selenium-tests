@@ -51,7 +51,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   private By otherCommunitiesLinkBy = By.cssSelector(".other-communities-link a");
 
   public CrossWikiSearchPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyQuery(String query) {
@@ -74,7 +74,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public CrossWikiSearchPageObject searchFor(String term) {
-    wait.forElementClickable(searchButton).click();
+    this.getGlobalNavigation().clickSearch();
     wait.forElementClickable(searchInput).clear();
     searchInput.sendKeys(term + Keys.ENTER);
     Log.log("searchFor", "Search button clicked", true, driver);

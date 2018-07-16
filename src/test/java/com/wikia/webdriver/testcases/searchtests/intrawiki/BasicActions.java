@@ -200,7 +200,7 @@ public class BasicActions extends IntraWiki {
     search.openWikiPage(testedWiki);
     search.searchFor(searchPhrase);
     search.selectAllAdvancedOptions();
-    SearchPageObject searchPage = new SearchPageObject(driver);
+    SearchPageObject searchPage = new SearchPageObject();
     searchPage.clickSearchButton();
     searchPage.setSearchTab(SearchPageObject.SearchTab.EVERYTHING);
     search.verifyNamespace(namespace);

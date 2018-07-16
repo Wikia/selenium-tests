@@ -2,9 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -15,8 +14,6 @@ public class SearchPageObject extends WikiBasePageObject {
 
   protected static final String PAGINATION_PAGES_CSS = ".paginator-page";
 
-  @FindBy(css = ".wds-global-navigation__search-toggle")
-  protected WebElement searchButton;
   @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
   protected WebElement searchInput;
   @FindBy(css = ".wds-global-navigation__search-submit")
@@ -49,7 +46,7 @@ public class SearchPageObject extends WikiBasePageObject {
   @FindBy(css = ".everything")
   private WebElement filterEverything;
 
-  public SearchPageObject(WebDriver driver) {
+  public SearchPageObject() {
     super();
   }
 
@@ -78,12 +75,11 @@ public class SearchPageObject extends WikiBasePageObject {
   }
 
   public boolean isResultPresent() {
-    wait.forElementVisible(resultCountMessage);
-    return resultCountMessage.isDisplayed();
+    return isVisible(resultCountMessage);
   }
 
   public void clickSearchButton() {
-    searchV2Button.click();
+    new GlobalNavigation().clickSearch();
     Log.log("clickSearchButton", "Search button was clicked", true, driver);
   }
 

@@ -88,9 +88,10 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar();
+
   @FindBy(css = "body")
   protected WebElement body;
-  @FindBy(css = ".page-header__title")
+  @FindBy(css = "#PageHeader .page-header__title")
   protected WebElement articleTitle;
   @FindBy(css = "#ca-edit")
   protected WebElement editButton;

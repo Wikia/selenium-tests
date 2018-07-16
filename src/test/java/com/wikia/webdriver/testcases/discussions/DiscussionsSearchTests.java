@@ -10,9 +10,8 @@ import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.testcases.mobilewikitests.SearchTests;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "discussions-search")
@@ -41,16 +40,17 @@ public class DiscussionsSearchTests extends SearchTests {
 
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void navigateUsingSearchSuggestionsOnDesktopFromDiscussionsGuidelinesPage() {
+    Integer resultNo = 0;
+    GlobalNavigation nav = new GuidelinesPage().open().getGlobalNavigation();
 
-    String clickedSuggestion = new GuidelinesPage()
-        .open()
-        .getTopBar()
-        .typeInDesktopSearchAndSelectSuggestion(SEARCH_PHRASE, 0);
+    nav.typeInSearch(SEARCH_PHRASE);
+    String clickedSuggestion = nav.getNthSearchResultText(resultNo);
+    nav.clickNthSearchResult(resultNo);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
     Assertion.assertEquals(
         clickedSuggestion.toLowerCase(),
-        new ArticlePageObject().getArticleName().toLowerCase()
+        new ArticlePage().getArticleName().toLowerCase()
     );
   }
 

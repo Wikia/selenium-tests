@@ -318,6 +318,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public String getArticleName() {
+    wait.forElementVisible(articleTitle);
     String articleName = articleTitle.getText();
     Log.log("getArticleName", "the name of the article is: " + articleName, true);
     return articleName;
