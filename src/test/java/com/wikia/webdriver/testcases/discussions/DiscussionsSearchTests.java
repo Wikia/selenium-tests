@@ -54,18 +54,13 @@ public class DiscussionsSearchTests extends SearchTests {
     );
   }
 
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  public void clearSearchPhraseFromDiscussionsGuidelinesPage() {
-    super.clearSearchPhrase(
-        new GuidelinesPage().open()
-    );
-  }
+  public void clearSearchPhraseFromDiscussionsGuidelinesPageOnDesktop() {
+    GlobalNavigation nav = new GuidelinesPage().open().getGlobalNavigation();
 
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  public void verifySearchLayoutFromDiscussionsGuidelinesPage() {
-    super.verifySearchLayout(
-        new GuidelinesPage().open()
-    );
+    nav.typeInSearch(SEARCH_PHRASE);
+    nav.clearSearchPhrase();
+
+    Assertion.assertTrue(nav.getCurrentSearchPhrase().isEmpty());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)

@@ -205,6 +205,13 @@ public class GlobalNavigation extends BasePageObject {
     return this;
   }
 
+  public String getCurrentSearchPhrase() {
+    wait.forElementClickable(searchButton).click();
+    wait.forElementVisible(searchInput);
+
+    return searchInput.getText();
+  }
+
   public GlobalNavigation clickUserAvatar() {
     wait.forElementClickable(userAvatar).click();
     Log.info("clicked on user avatar in global nav bar");
