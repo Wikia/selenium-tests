@@ -27,10 +27,10 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__logo")
   private WebElement fandomLogo;
 
-  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in")
+  @FindBy(css = ".wds-global-navigation__user-logged-in")
   private WebElement userAvatar;
 
-  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-anon")
+  @FindBy(css = ".wds-global-navigation__user-anon")
   private WebElement anonAvatar;
 
   @FindBy(css = ".wds-global-navigation__user-logged-in .wds-dropdown__content")
@@ -215,6 +215,13 @@ public class GlobalNavigation extends BasePageObject {
   public GlobalNavigation clickUserAvatar() {
     wait.forElementClickable(userAvatar).click();
     Log.info("clicked on user avatar in global nav bar");
+
+    return this;
+  }
+
+  public GlobalNavigation clickAnonUserAvatar() {
+    wait.forElementClickable(anonAvatar).click();
+    Log.info("clicked on anon user avatar in global nav bar");
 
     return this;
   }
