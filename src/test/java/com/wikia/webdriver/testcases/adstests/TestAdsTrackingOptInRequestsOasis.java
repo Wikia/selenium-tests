@@ -414,7 +414,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
       groups = "AdsTrackingPixels",
