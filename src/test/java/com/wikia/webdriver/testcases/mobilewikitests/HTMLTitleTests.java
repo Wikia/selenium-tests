@@ -36,62 +36,62 @@ public class HTMLTitleTests extends NewTestTemplate {
   private String[][] testCases = {
       {
           "sktest123",
-          "/wiki/Sktest123_Wiki",
+          "Sktest123_Wiki",
           "Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
-          "/wiki/Style-5H2",
+          "Style-5H2",
           "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
-          "/wiki/TestDisplayTitle",
+          "TestDisplayTitle",
           "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
-          "/wiki/Category:Premium_Videos",
+          "Category:Premium_Videos",
           "Category:Premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
-          "/wiki/Category:Non-premium_Videos",
+          "Category:Non-premium_Videos",
           "Category:Non-premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
-          "/wiki/Category:Premium",
+          "Category:Premium",
           "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "es.pokemon",
-          "/wiki/WikiDex",
+          "WikiDex",
           "WikiDex | FANDOM powered by Wikia"
       },
       {
           "es.pokemon",
-          "/wiki/Lista_de_Pokémon",
+          "Lista_de_Pokémon",
           "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"
       },
       {
           "es.pokemon",
-          "/wiki/Categoría:Regiones",
+          "Categoría:Regiones",
           "Categoría:Regiones | WikiDex | FANDOM powered by Wikia"
       },
       {
           "starwars",
-          "/wiki/Main_Page",
+          "Main_Page",
           "Wookieepedia | FANDOM powered by Wikia"
       },
       {
           "starwars",
-          "/wiki/Droid_starfighter",
+          "Droid_starfighter",
           "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"
       },
       {
           "dnd4",
-          "/wiki/Dungeons_&_Dragons",
+          "Dungeons_&_Dragons",
           "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"
       }
   };

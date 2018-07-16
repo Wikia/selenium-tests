@@ -12,43 +12,36 @@ import java.util.NoSuchElementException;
 
 public class TopBar extends BasePageObject {
 
-  @FindBy(css = ".site-head")
+  @FindBy(css = ".wds-global-navigation")
   private WebElement navBar;
 
-  @FindBy(css = ".site-logo")
-  private WebElement logo;
-
-  @FindBy(css = ".global-navigation-mobile__logo")
+  @FindBy(css = ".wds-global-navigation__logo-image")
   private WebElement logoFandom;
 
-  @FindBy(css = ".site-head-icon-nav")
-  private WebElement hamburgerIcon;
-
-  @FindBy(css = ".site-head-icon-search")
+  @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement searchIcon;
 
-  @FindBy(css = ".site-head-icon-search > a.icon-button")
+  @FindBy(css = ".wds-global-navigation__modal-control-search > svg.wds-icon")
   private WebElement searchIconClickableLink;
 
-  @FindBy(css = ".site-head-icon.icon-button")
-  private WebElement closeButtonInnerElement;
+  @FindBy(css = ".wds-global-navigation__modal-control-close")
+  private WebElement closeButton;
 
-  @FindBy(css = ".site-head-icon-nav")
+  @FindBy(css = ".wds-global-navigation__modal-control-search")
   private WebElement navMenu;
 
-  @FindBy(css = ".wds-global-navigation__search-input")
+  @FindBy(css = ".wds-global-navigation__search-input-wrapper")
   private WebElement searchInput;
 
   @FindBy(css = ".wds-global-navigation__search-suggestions .wds-global-navigation__dropdown-link")
   private List<WebElement> searchSuggestions;
 
-  private By navigationComponent = By.cssSelector(".side-nav-drawer");
+  private By navigationComponent = By.cssSelector(".wds-search-modal");
   private By parentBy = By.xpath("./..");
 
   public Navigation openNavigation() {
     Log.info("Open navigation");
-    waitAndClick(hamburgerIcon);
-    wait.forElementVisible(navMenu);
+    wait.forElementVisible(navMenu).click();
     Log.info("Navigation is opened");
     return new Navigation();
   }
@@ -79,20 +72,16 @@ public class TopBar extends BasePageObject {
 
   public Navigation clickCloseButton() {
     // Clicking on the inner element doesn't always work so we click the parent (<svg>) instead
-    WebElement closeButton = closeButtonInnerElement.findElement(parentBy);
 
-    Log.info("Click close button");
     wait.forElementClickable(closeButton);
     closeButton.click();
 
     return new Navigation();
   }
 
-  public void clickWikiaLogo() {
-    Log.info("Click Wikia logo");
-    wait.forElementClickable(logo);
-    logo.click();
-    wait.forElementVisible(logoFandom);
+  public void clickFandomLogo() {
+    Log.info("Click Wikia logoFandom");
+    wait.forElementClickable(logoFandom).click();
   }
 
 
@@ -107,29 +96,16 @@ public class TopBar extends BasePageObject {
 
   public boolean isLogoVisible() {
     try {
-      return logo.isDisplayed();
+      return logoFandom.isDisplayed();
     } catch (NoSuchElementException e) {
       Log.info(e.getMessage());
       return false;
     }
   }
 
-  public boolean isHamburgerIconVisible() {
-    try {
-      return hamburgerIcon.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
-  }
 
   public boolean isSearchIconVisible() {
-    try {
-      return searchIcon.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
+  return wait.forElementVisible(searchIcon).isDisplayed();
   }
 
   public boolean isSearchIconClickable() {
@@ -148,7 +124,7 @@ public class TopBar extends BasePageObject {
 
   public boolean isCloseIconVisible() {
     try {
-      return closeButtonInnerElement.isDisplayed();
+      return closeButton.isDisplayed();
     } catch (NoSuchElementException e) {
       Log.info(e.getMessage());
       return false;

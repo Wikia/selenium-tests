@@ -9,8 +9,10 @@ import static com.wikia.webdriver.common.core.configuration.Configuration.getWik
 import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiName;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import okhttp3.HttpUrl;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriverException;
 
 public class UrlBuilder extends BaseUrlBuilder {
@@ -57,7 +59,13 @@ public class UrlBuilder extends BaseUrlBuilder {
   public String getUrlForWikiPage(String pageName) {
     if ("".equals(pageName))
       throw new WebDriverException("Page name is missing");
-    return getUrl() + URLsContent.WIKI_DIR + pageName;
+
+    String url = getUrl() + URLsContent.WIKI_DIR + pageName;
+
+    if (StringUtils.isNotBlank(Configuration.getQS())) {
+      return appendQueryStringToURL(url, Configuration.getQS());
+    }
+    return url;
   }
 
   public String getUrlForPath(String wikiPath) {

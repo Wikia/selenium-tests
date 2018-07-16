@@ -8,72 +8,28 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public abstract class NavigationTests extends NewTestTemplate {
 
-  public void mercury_navigation_openAndCloseNavigationAndItsSubMenu(WikiBasePageObject page) {
+  public void mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu(WikiBasePageObject page) {
     TopBar topBar = page.getTopBar();
 
     topBar
         .openNavigation()
-        .openSubMenu(1)
-        .closeSubMenu();
+        .clickWikisMenuLink()
+        .closeNavigation();
 
-    topBar.clickCloseButton();
-
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
+    Assertion.assertTrue(topBar.isSearchIconVisible());
   }
 
-  public void mercury_navigation_resetNavigationState(WikiBasePageObject page) {
-    TopBar topBar = page.getTopBar();
-
-    Navigation navigation = topBar.openNavigation();
-
-    Assertion.assertTrue(navigation.isMainHeaderVisible());
-    navigation.openSubMenu(1);
-
-    Assertion.assertTrue(navigation.isBackButtonVisible());
-    topBar.clickCloseButton();
-
-    topBar.openNavigation();
-    Assertion.assertTrue(navigation.isMainHeaderVisible());
-  }
-
-  public void mercury_navigation_backButton(WikiBasePageObject page) {
+  public void mobileWiki_navigation_navigationOnEnglishWiki(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
-    Assertion.assertTrue(navigation.isMainHeaderVisible());
-    navigation.openSubMenu(1);
-
-    Assertion.assertTrue(navigation.isBackButtonVisible());
-    navigation.clickBackButton();
-
-    Assertion.assertTrue(navigation.isMainHeaderVisible());
+    Assertion.assertTrue(navigation.areInterntionalHubLinksVisible());
+    Assertion.assertTrue(navigation.isVideoHubLinkVisible());
   }
 
-  public void mercury_navigation_navigationOnEnglishWiki(WikiBasePageObject page) {
+  public void mobileWiki_navigation_navigationOnNonEnglishWiki(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
-    Assertion.assertTrue(navigation.areHubLinksVisible());
-  }
-
-  public void mercury_navigation_navigationOnNonEnglishWiki(WikiBasePageObject page) {
-    Navigation navigation = page.getTopBar().openNavigation();
-
-    Assertion.assertFalse(navigation.areHubLinksVisible());
-  }
-
-  public void mercury_navigation_navigationElementsUserLoggedIn(WikiBasePageObject page) {
-    Navigation navigation = page.getTopBar().openNavigation();
-
-    Assertion.assertTrue(navigation.isUserAvatarVisible());
-    Assertion.assertTrue(navigation.isUserProfileLinkVisible());
-    Assertion.assertTrue(navigation.isNavigationToUserProfileVisible());
-  }
-
-  public void mercury_navigation_navigationElementsAnonymousUser(WikiBasePageObject page) {
-    Navigation navigation = page.getTopBar().openNavigation();
-
-    Assertion.assertTrue(navigation.isUserAvatarVisible());
-    Assertion.assertFalse(navigation.isUserProfileLinkVisible());
-    Assertion.assertFalse(navigation.isNavigationToUserProfileVisible());
-    Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
+    Assertion.assertTrue(navigation.areInterntionalHubLinksVisible());
+    Assertion.assertFalse(navigation.isVideoHubLinkVisible());
   }
 }

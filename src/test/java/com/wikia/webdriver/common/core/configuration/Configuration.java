@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.properties.Credentials;
+
 import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Dimension;
@@ -26,7 +27,8 @@ import java.util.logging.Logger;
  * Configuration handling:
  * <ol>
  * <li>Look for the property key in testConfig map, if key is present, return the value</li>
- * <li>Look for the property key in system properties - return value of this property if key present
+ * <li>Look for the property key in system properties - return value of this property if key
+ * present
  * </li>
  * <li>If no System Property is found - value is provided from configuration files
  * (config_default.yml and config.yml). Values provided in config.yml, are overriding values from
@@ -78,13 +80,16 @@ public class Configuration {
 
   private static String getPropertyFromFile(String propertyName) {
     return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null
-        : String.valueOf(readConfiguration().get(propertyName));
+                                                                                : String.valueOf(
+                                                                                    readConfiguration()
+                                                                                        .get(
+                                                                                            propertyName));
   }
 
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-          : getPropertyFromFile(propertyName);
+                                                      : getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }
@@ -93,9 +98,11 @@ public class Configuration {
   public static String getBrowser() {
     return getProp("browser");
   }
+
   public static String getDpr() {
     return getProp("dpr");
   }
+
   public static String getDefaultWikiName() {
     return getPropertyFromFile("wikiName");
   }
@@ -116,8 +123,11 @@ public class Configuration {
     return getProp("platform");
   }
 
+  public static String getMobileWikiVersion() { return getProp("mobileWikiVersion"); }
+
   public static String getCredentialsFilePath() {
-    return Paths.get(getProp("seleniumConfigPath"), SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME).toString();
+    return Paths.get(getProp("seleniumConfigPath"), SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME)
+        .toString();
   }
 
   public static String getQS() {
@@ -144,6 +154,8 @@ public class Configuration {
     return getProp("logEnabled");
   }
 
+  public static Boolean getAdsData() { return "true".equals(getProp("adsData")); }
+
   public static String getMockAds() {
     return getProp("mockAds");
   }
@@ -163,11 +175,14 @@ public class Configuration {
   public static Emulator getEmulator() {
     Emulator emulatorToUse = Emulator.DEFAULT;
     if (TestContext.getCurrentTestMethod() != null &&
-            TestContext.getCurrentTestMethod().getDeclaringClass().isAnnotationPresent(InBrowser.class)) {
+        TestContext.getCurrentTestMethod()
+            .getDeclaringClass()
+            .isAnnotationPresent(InBrowser.class)) {
       emulatorToUse = TestContext.getCurrentTestMethod().getDeclaringClass()
           .getDeclaredAnnotation(InBrowser.class).emulator();
     }
-    if (TestContext.getCurrentTestMethod() != null && TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
+    if (TestContext.getCurrentTestMethod() != null && TestContext.getCurrentTestMethod()
+        .isAnnotationPresent(InBrowser.class)) {
       emulatorToUse =
           TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
     }
@@ -227,7 +242,7 @@ public class Configuration {
 
   public static boolean useProxy() {
     return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode())
-        || Boolean.valueOf(getProp("useZapProxy"));
+           || Boolean.valueOf(getProp("useZapProxy"));
   }
 
   /**
@@ -240,8 +255,10 @@ public class Configuration {
       if ("maximised".equals(size)) {
         return null;
       } else {
-        return new Dimension(Integer.valueOf(size.split("x")[0]),
-            Integer.valueOf(size.split("x")[1]));
+        return new Dimension(
+            Integer.valueOf(size.split("x")[0]),
+            Integer.valueOf(size.split("x")[1])
+        );
       }
     } else {
       throw new WebDriverException("browser size: " + size + " is not a proper value");
@@ -252,7 +269,7 @@ public class Configuration {
     String exts = getProp("extensions");
 
     if (StringUtils.isEmpty(exts)) {
-      return new String[] {};
+      return new String[]{};
     }
 
     ArrayList<String> res = new ArrayList<>();

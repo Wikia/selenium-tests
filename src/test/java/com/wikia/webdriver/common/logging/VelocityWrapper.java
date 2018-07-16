@@ -185,7 +185,7 @@ public class VelocityWrapper {
 
   static String fillHeader(String date, String polishDate, String browser, String os,
                            String testingEnvironmentUrl, String testingEnvironment,
-                           String testedVersion) {
+                           String testedVersion, String mercuryVersion) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(HEADER_TEMPLATE_PATH);
@@ -198,6 +198,7 @@ public class VelocityWrapper {
     context.put("testingEnvironmentUrl", testingEnvironmentUrl);
     context.put("testingEnvironment", testingEnvironment);
     context.put("testedVersion", testedVersion);
+    context.put("mobileWikiVersion", mercuryVersion);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
     builder.append(writer.toString());
