@@ -20,7 +20,7 @@ public class PromotingTests extends NewTestTemplate {
 
   private static final String MOBILE_PROMOTION_TEXT = "Wikia: Fallout 4 Fan App";
   private static final String ANDROID_APP_TITLE = "FANDOM for: Fallout 4";
-  
+
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeeAppPromotion() {
