@@ -13,7 +13,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
@@ -242,7 +241,7 @@ public class LoginTests extends NewTestTemplate {
   }
 
   private void loginOnDesktopFromDiscussionPageAs(User user) {
-    new NavigationBar().clickOnSignIn().login(user);
+    new GlobalNavigation().clickOnSignIn().login(user);
   }
 
   private void loginOnMobileAs(ArticlePage article, User user) {
