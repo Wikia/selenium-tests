@@ -28,6 +28,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
+    testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_PUBMATIC);
 
     new AdsBaseObject(driver, testedPage);
 
@@ -66,6 +67,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
+  @UnsafePageLoad
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )
@@ -77,6 +79,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
+  @UnsafePageLoad
   @Test(
       groups = {"AdsFeaturedVideoMercury"}
   )

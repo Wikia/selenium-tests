@@ -15,11 +15,13 @@ import org.testng.annotations.Test;
 
 public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
   @Test(groups = "AdsFeaturedVideoF2Desktop")
+  @UnsafePageLoad
   public void adsFeaturedVideoAdsDesktop() {
     String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
         FandomAdsDataProvider.INSTANT_GLOBAL_MIDROLL);
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
         FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL);
+    testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(testedPage, FandomAdsDataProvider.INSTANT_GLOBAL_PUBMATIC);
 
     AdsFandomObject pageObject = loadPage(testedPage);
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
@@ -48,6 +50,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
+  @UnsafePageLoad
   @Test(groups = "AdsFeaturedVideoF2Mobile")
   public void adsFeaturedVideoAdsMobile() {
     adsFeaturedVideoAdsDesktop();
