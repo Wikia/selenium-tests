@@ -44,10 +44,10 @@ public class LoginTests extends NewTestTemplate {
     ArticlePage article = openArticleOnMobile();
     String previousTitle = article.getArticleTitle();
     article
-      .getTopBar()
-      .openNavigation()
-      .clickOnSignInRegisterButton()
+      .getGlobalNavigationMobile()
+      .clickOnAnonAvatar()
       .close();
+
     Assertion.assertEquals(article.getArticleTitle(), previousTitle);
   }
 

@@ -26,7 +26,7 @@ public class DiscussionsSearchTests extends SearchTests {
 
     String clickedSuggestion = new GuidelinesPage()
         .open()
-        .getTopBar()
+        .getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0);
@@ -75,7 +75,7 @@ public class DiscussionsSearchTests extends SearchTests {
     SearchResultsPage searchResults =
         new GuidelinesPage()
             .open()
-            .getTopBar()
+            .getGlobalNavigationMobile()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
             .clickEnterAndNavigateToSearchResults(Skin.DISCUSSIONS);

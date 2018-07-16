@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
@@ -217,11 +217,11 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private RegisterPage navigateToSignUpOnMobile() {
-    return navigateToSignUpOnMobile(openArticleOnMobile().getTopBar());
+    return navigateToSignUpOnMobile(openArticleOnMobile().getGlobalNavigationMobile());
   }
 
-  private RegisterPage navigateToSignUpOnMobile(TopBar topBar) {
-    return topBar.clickOnAvatar().navigateToRegister();
+  private RegisterPage navigateToSignUpOnMobile(GlobalNavigationMobile globalNavigationMobile) {
+    return globalNavigationMobile.clickOnAnonAvatar().navigateToRegister();
   }
 
   private RegisterPage openSignUpModalFromGlobalavOnDesktop() {
@@ -238,11 +238,11 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private void signUpOnMobileAs(ArticlePage article, SignUpUser user) {
-    navigateToSignUpOnMobile(article.getTopBar()).signUp(user);
+    navigateToSignUpOnMobile(article.getGlobalNavigationMobile()).signUp(user);
   }
 
   private void signUpOnDiscussionMobilePageAs(PostsListPage page, SignUpUser user) {
-    navigateToSignUpOnMobile(page.getTopBar()).signUp(user);
+    navigateToSignUpOnMobile(page.getGlobalNavigationMobile()).signUp(user);
   }
 
   private void performSignUpOnMobileAs(SignUpUser user) {

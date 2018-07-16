@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
@@ -87,7 +87,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
-  private final TopBar topBar = new TopBar();
+  private final GlobalNavigationMobile globalNavigationMobile = new GlobalNavigationMobile();
 
   @FindBy(css = "body")
   protected WebElement body;
@@ -146,6 +146,8 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationBar;
   @FindBy(id = "recirculation-rail")
   private WebElement recirculationRightRailModule;
+  @FindBy(css = ".wds-global-navigation__modal-control-anon")
+  private WebElement mobileAnonAvatarPlaceholder;
 
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
@@ -401,7 +403,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public boolean isUserLoggedOutMobile() {
-    return !getTopBar().openNavigation().isUserProfileLinkVisible();
+    return isVisible(mobileAnonAvatarPlaceholder);
   }
 
   public DeletePageObject deletePage() {
