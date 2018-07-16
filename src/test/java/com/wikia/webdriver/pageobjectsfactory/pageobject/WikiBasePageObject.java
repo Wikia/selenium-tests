@@ -67,13 +67,13 @@ public class WikiBasePageObject extends BasePageObject {
   
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
-  private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
-      ".wikia-nav__avatar img[alt*=%userName%]";
+      ".wds-global-navigation__modal-control-user .wds-avatar__inner-border[title=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
   private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
   private static final By RECIRCULATION_PREFOOTER = By.cssSelector(".recirculation-prefooter");
   private static final By RECIRCULATION_PREFOOTER_FULFILLED = By.cssSelector(".recirculation-prefooter.has-items");
+
   @FindBy(css = ".banner-notifications-placeholder,.smart-banner")
   private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
@@ -377,15 +377,9 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      // open nav if on mercury, required to see login data
       if (driver.findElements(MERCURY_SKIN).size() > 0) {
-        wait.forElementClickable(MERCURY_NAV_ICON);
-        driver.findElement(MERCURY_NAV_ICON).click();
         wait.forElementVisible(By.cssSelector(
             LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
-        // close nav on mercury
-        wait.forElementClickable(MERCURY_NAV_ICON);
-        driver.findElement(MERCURY_NAV_ICON).click();
       } else {
         WebElement avatar = wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
         String loggedInUserName = avatar.getAttribute("alt");

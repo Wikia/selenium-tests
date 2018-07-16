@@ -221,10 +221,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private RegisterPage navigateToSignUpOnMobile(TopBar topBar) {
-    return topBar
-      .openNavigation()
-      .clickOnSignInRegisterButton()
-      .navigateToSignUp();
+    return topBar.clickOnAvatar().navigateToRegister();
   }
 
   private RegisterPage openSignUpModalFromGlobalavOnDesktop() {

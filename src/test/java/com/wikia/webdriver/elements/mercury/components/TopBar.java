@@ -2,6 +2,8 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -14,6 +16,9 @@ public class TopBar extends BasePageObject {
 
   @FindBy(css = ".wds-global-navigation")
   private WebElement navBar;
+
+  @FindBy(css = ".wds-global-navigation__modal-control-anon")
+  private WebElement userAvatar;
 
   @FindBy(css = ".wds-global-navigation__logo-image")
   private WebElement logoFandom;
@@ -44,6 +49,13 @@ public class TopBar extends BasePageObject {
     wait.forElementVisible(navMenu).click();
     Log.info("Navigation is opened");
     return new Navigation();
+  }
+
+  public SignInPage clickOnAvatar() {
+    Log.info("Wait and click on avatar");
+    wait.forElementVisible(userAvatar).click();
+
+    return new AttachedSignInPage();
   }
 
   public String typeInDesktopSearchAndSelectSuggestion(String query, int suggestionIndex) {
