@@ -34,7 +34,7 @@ public class SearchMobileWikiTests extends SearchTests {
                   "MobileWiki_Search_001"})
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
     ArticlePage article = new ArticlePage().open(MercurySubpages.MAIN_PAGE);
-    String clickedSuggestion = article.getTopBar()
+    String clickedSuggestion = article.getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0);
@@ -82,7 +82,7 @@ public class SearchMobileWikiTests extends SearchTests {
     SearchResultsPage searchResults =
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar()
+            .getGlobalNavigationMobile()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
             .clickEnterAndNavigateToSearchResults(Skin.MOBILE_WIKI);

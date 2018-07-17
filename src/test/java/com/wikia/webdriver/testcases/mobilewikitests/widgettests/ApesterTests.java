@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 import org.testng.annotations.Test;
@@ -45,7 +45,7 @@ public class ApesterTests extends NewTestTemplate {
             new ApesterWidgetPageObject().createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
-    new TopBar().openSearch().navigateToPage(QUERY_2);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,8 +57,8 @@ public class ApesterTests extends NewTestTemplate {
             new ApesterWidgetPageObject().create(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
-    new TopBar().openSearch().navigateToPage(QUERY_1);
-    new TopBar().openSearch().navigateToPage(QUERY_2);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_1);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

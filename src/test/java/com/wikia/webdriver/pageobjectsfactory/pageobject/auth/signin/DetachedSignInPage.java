@@ -56,6 +56,12 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
   }
 
   @Override
+  public void close() {
+    gainFocus();
+    signInPage.close();
+  }
+
+  @Override
   public RegisterPage navigateToRegister() {
     gainFocus();
     return signInPage.navigateToRegister();

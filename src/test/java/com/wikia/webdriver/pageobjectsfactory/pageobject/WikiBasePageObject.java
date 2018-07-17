@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
@@ -36,11 +36,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -62,18 +62,18 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in img, "
-      + ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in svg";
+      ".wds-global-navigation__user-logged-in img, "
+      + ".wds-global-navigation__user-logged-in svg";
   
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
-  private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
-      ".wikia-nav__avatar img[alt*=%userName%]";
+      ".wds-global-navigation__modal-control-user .wds-avatar__inner-border[title=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
   private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
   private static final By RECIRCULATION_PREFOOTER = By.cssSelector(".recirculation-prefooter");
   private static final By RECIRCULATION_PREFOOTER_FULFILLED = By.cssSelector(".recirculation-prefooter.has-items");
+
   @FindBy(css = ".banner-notifications-placeholder,.smart-banner")
   private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
@@ -87,10 +87,11 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
-  private final TopBar topBar = new TopBar();
+  private final GlobalNavigationMobile globalNavigationMobile = new GlobalNavigationMobile();
+
   @FindBy(css = "body")
   protected WebElement body;
-  @FindBy(css = ".page-header__title")
+  @FindBy(css = "#PageHeader .page-header__title")
   protected WebElement articleTitle;
   @FindBy(css = "#ca-edit")
   protected WebElement editButton;
@@ -145,6 +146,8 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationBar;
   @FindBy(id = "recirculation-rail")
   private WebElement recirculationRightRailModule;
+  @FindBy(css = ".wds-global-navigation__modal-control-anon")
+  private WebElement mobileAnonAvatarPlaceholder;
 
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
@@ -346,11 +349,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditModePageObject();
   }
 
-  public VisualEditModePageObject navigateToUniqueArticleEditPage() {
-    String title = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, LocalDateTime.now());
-    return navigateToArticleEditPage(getWikiUrl(), title);
-  }
-
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
@@ -382,15 +380,9 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      // open nav if on mercury, required to see login data
       if (driver.findElements(MERCURY_SKIN).size() > 0) {
-        wait.forElementClickable(MERCURY_NAV_ICON);
-        driver.findElement(MERCURY_NAV_ICON).click();
         wait.forElementVisible(By.cssSelector(
             LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
-        // close nav on mercury
-        wait.forElementClickable(MERCURY_NAV_ICON);
-        driver.findElement(MERCURY_NAV_ICON).click();
       } else {
         WebElement avatar = wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
         String loggedInUserName = avatar.getAttribute("alt");
@@ -410,12 +402,8 @@ public class WikiBasePageObject extends BasePageObject {
     this.verifyUserLoggedIn(user.getUserName());
   }
 
-  public boolean userLoggedInMobile(final String username) {
-    return getTopBar().openNavigation().isUserAvatarVisible(username);
-  }
-
   public boolean isUserLoggedOutMobile() {
-    return !getTopBar().openNavigation().isUserProfileLinkVisible();
+    return isVisible(mobileAnonAvatarPlaceholder);
   }
 
   public DeletePageObject deletePage() {
@@ -479,10 +467,6 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (TimeoutException e) {
       Log.log("logOut", "page loads for more than 30 seconds", true);
     }
-  }
-
-  public void logoutFromAnywhere() {
-    driver.get(URLsContent.USER_SIGNOUT);
   }
 
   public String loginAs(String userName, String password, String wikiURL) {

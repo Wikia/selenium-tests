@@ -94,7 +94,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   final private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
   public IntraWikiSearchPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /*

@@ -4,10 +4,9 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
-
 import org.testng.annotations.Test;
 
 public class CuratedContentModal extends NewTestTemplate {
@@ -27,6 +26,6 @@ public class CuratedContentModal extends NewTestTemplate {
     CuratedContentToolModal modal = main.clickCuratedContentToolButton();
 
     Assertion.assertTrue(modal.isModalVisible());
-    Assertion.assertFalse(new TopBar().isNavigationBarVisible());
+    Assertion.assertFalse(new GlobalNavigationMobile().isNavigationBarVisible());
   }
 }

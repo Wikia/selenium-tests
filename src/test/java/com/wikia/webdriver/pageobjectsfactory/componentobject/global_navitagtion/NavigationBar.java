@@ -18,21 +18,19 @@ import java.util.List;
 
 public class NavigationBar extends WikiBasePageObject {
 
-  final private String suggestionCss = ".autocomplete div";
-
   @FindBy(css = ".wds-global-navigation__search-toggle")
   private WebElement searchButton;
   @FindBy(css = ".wds-global-navigation__search-input-wrapper input")
   private WebElement searchInput;
   @FindBy(css = ".wds-global-navigation__search-submit")
   private WebElement searchSubmit;
-  @FindBy(css = suggestionCss)
+  @FindBy(css = ".autocomplete div")
   private List<WebElement> suggestionsList;
-  @FindBy(css = ".wds-global-navigation__account-menu")
+  @FindBy(css = ".wds-global-navigation__user-menu")
   private WebElement userMenuDropdown;
-  @FindBy(css = "#global-navigation-anon-sign-in")
+  @FindBy(css = ".wds-global-navigation__dropdown-content > ul > li > a[data-tracking-label=\"account.login\"]")
   private WebElement signInLink;
-  @FindBy(css = "#global-navigation-anon-register")
+  @FindBy(css = ".wds-global-navigation__dropdown-content > ul > li > a[data-tracking-label=\"account.register\"]")
   private WebElement registerLink;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
@@ -44,7 +42,6 @@ public class NavigationBar extends WikiBasePageObject {
     searchInput.click();
     wait.forElementPresent(jqueryAutocompleteBy);
     Typing.sendKeysHumanSpeed(searchInput, query);
-    wait.forElementVisible(By.cssSelector(suggestionCss));
     wait.forElementVisible(suggestionsList.get(0));
   }
 
@@ -101,8 +98,7 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public IntraWikiSearchPageObject clickSearchButton() {
-    wait.forElementClickable(searchSubmit);
-    searchSubmit.click();
+    wait.forElementClickable(searchSubmit).click();
     Log.log("clickSearchButton", "clicked on search button", true);
     return new IntraWikiSearchPageObject(driver);
   }
@@ -119,14 +115,14 @@ public class NavigationBar extends WikiBasePageObject {
   }
 
   public AttachedSignInPage clickOnSignIn(){
-    userMenuDropdown.click();
-    signInLink.click();
+    wait.forElementVisible(userMenuDropdown).click();
+    wait.forElementVisible(signInLink).click();
     return new AttachedSignInPage();
   }
 
   public AttachedRegisterPage clickOnRegister(){
-    userMenuDropdown.click();
-    registerLink.click();
+    wait.forElementVisible(userMenuDropdown).click();
+    wait.forElementVisible(registerLink).click();
     return new AttachedRegisterPage();
   }
 }

@@ -11,7 +11,7 @@ public class SearchTests extends NewTestTemplate {
 
   public void clearSearchPhrase(WikiBasePageObject page) {
     String currentPhrase = page
-        .getTopBar()
+        .getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
         .clickClearSearchButton()
@@ -22,7 +22,7 @@ public class SearchTests extends NewTestTemplate {
 
   public void verifySearchLayout(WikiBasePageObject page) {
     Search search = page
-        .getTopBar()
+        .getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch("qAga");
 

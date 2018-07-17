@@ -2,18 +2,26 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
-public class TopBar extends BasePageObject {
+public class GlobalNavigationMobile extends BasePageObject {
 
   @FindBy(css = ".wds-global-navigation")
   private WebElement navBar;
+
+  @FindBy(css = ".wds-global-navigation__modal-control-anon")
+  private WebElement anonUserAvatar;
+
+  @FindBy(css = ".wds-global-navigation__modal-control-user")
+  private WebElement userAvatar;
 
   @FindBy(css = ".wds-global-navigation__logo-image")
   private WebElement logoFandom;
@@ -36,27 +44,35 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__search-suggestions .wds-global-navigation__dropdown-link")
   private List<WebElement> searchSuggestions;
 
+  @FindBy(css = ".wds-community-bar__navigation > .wds-dropdown__toggle")
+  private WebElement navigationHamburgerIcon;
+
+  @FindBy(css = ".wds-community-bar__level-1")
+  private WebElement firstLevelNavigationMenu;
+
   private By navigationComponent = By.cssSelector(".wds-search-modal");
   private By parentBy = By.xpath("./..");
 
-  public Navigation openNavigation() {
-    Log.info("Open navigation");
-    wait.forElementVisible(navMenu).click();
-    Log.info("Navigation is opened");
-    return new Navigation();
+  public SignInPage clickOnAnonAvatar() {
+    //When anon clicks avatar placeholder - auth page is opened
+    Log.info("Wait and click on anon user avatar");
+    wait.forElementVisible(anonUserAvatar).click();
+
+    return new AttachedSignInPage();
   }
 
-  public String typeInDesktopSearchAndSelectSuggestion(String query, int suggestionIndex) {
-    wait.forElementVisible(searchInput);
-    searchInput.sendKeys(query);
+  public GlobalNavigationMobile clickOnLoggedInUserAvatar() {
+    //When logged in clicks avatar - profile & notifications part is visible
+    Log.info("Wait and click on logged in user avatar");
+    wait.forElementVisible(userAvatar).click();
 
-    WebElement selectedSearchSuggestion = searchSuggestions.get(suggestionIndex);
-    wait.forElementClickable(selectedSearchSuggestion);
+    return new GlobalNavigationMobile();
+  }
 
-    String selectedSearchSuggestionText = selectedSearchSuggestion.getText();
-    selectedSearchSuggestion.click();
+  public GlobalNavigationMobile openNavigation() {
+    wait.forElementVisible(navigationHamburgerIcon).click();
 
-    return selectedSearchSuggestionText;
+    return this;
   }
 
   public Search openSearch() {
@@ -70,13 +86,12 @@ public class TopBar extends BasePageObject {
     return new Search();
   }
 
-  public Navigation clickCloseButton() {
+  public GlobalNavigation clickCloseButton() {
     // Clicking on the inner element doesn't always work so we click the parent (<svg>) instead
-
     wait.forElementClickable(closeButton);
     closeButton.click();
 
-    return new Navigation();
+    return new GlobalNavigation();
   }
 
   public void clickFandomLogo() {
@@ -84,50 +99,28 @@ public class TopBar extends BasePageObject {
     wait.forElementClickable(logoFandom).click();
   }
 
+  public boolean isFirstLevelMenuVisible() {
+    return isVisible(firstLevelNavigationMenu);
+  }
 
   public boolean isNavigationBarVisible() {
-    try {
-      return navBar.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
+    return isVisible(navBar);
   }
 
   public boolean isLogoVisible() {
-    try {
-      return logoFandom.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
+    return isVisible(logoFandom);
   }
-
 
   public boolean isSearchIconVisible() {
-  return wait.forElementVisible(searchIcon).isDisplayed();
-  }
-
-  public boolean isSearchIconClickable() {
-    try {
-      searchIconClickableLink.isDisplayed();
-      wait.forElementClickable(searchIconClickableLink, 0);
-      return true;
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    } catch (TimeoutException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
+    return isVisible(searchIcon);
   }
 
   public boolean isCloseIconVisible() {
-    try {
-      return closeButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
+    return isVisible(closeButton);
   }
+
+  public Notifications getNotifications() {
+    return new Notifications();
+  }
+
 }
