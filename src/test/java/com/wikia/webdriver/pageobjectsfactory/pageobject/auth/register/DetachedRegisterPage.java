@@ -27,7 +27,6 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
 
   @Override
   public boolean isDisplayed() {
-    gainFocus();
     return registerPage.isDisplayed();
   }
 
@@ -38,64 +37,52 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
 
   @Override
   public boolean isPasswordMasked() {
-    gainFocus();
     return registerPage.isPasswordMasked();
   }
 
   @Override
   public void togglePasswordVisibility() {
-    gainFocus();
     registerPage.togglePasswordVisibility();
   }
 
   @Override
   public RegisterPage typeEmailAddress(String email) {
-    gainFocus();
     return registerPage.typeEmailAddress(email);
   }
 
   @Override
   public RegisterPage typeUsername(String username) {
-    gainFocus();
     return registerPage.typeUsername(username);
   }
 
   @Override
   public RegisterPage typePassword(String password) {
-    gainFocus();
     return registerPage.typePassword(password);
   }
 
   @Override
   public RegisterPage typeBirthday(int month, int day, int year) {
-    gainFocus();
     return registerPage.typeBirthday(month, day, year);
   }
 
   @Override
   public String getError() {
-    gainFocus();
     return registerPage.getError();
   }
 
   @Override
   public void submit() {
-    gainFocus();
     registerPage.submit();
-    loseFocus();
   }
 
   @Override
   public DetachedSignInPage navigateToSignIn() {
-    gainFocus();
     return new DetachedSignInPage(registerPage.navigateToSignIn());
   }
 
   @Override
   public void signUp(String email, String username, String password, LocalDate birthday) {
-    gainFocus();
     registerPage.signUp(email, username, password, birthday);
-    loseFocus();
   }
 
   @Override
@@ -105,17 +92,14 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
 
   @Override
   public RegisterPage fillForm(SignUpUser user) {
-    gainFocus();
     return registerPage.fillForm(user);
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    gainFocus();
     return registerPage.clickFacebookSignUp();
   }
 
   public boolean isConnectWithFacebookButtonVisible() {
-    gainFocus();
     return registerPage.isConnectWithFacebookButtonVisible();
   }
 

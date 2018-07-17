@@ -24,30 +24,25 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
 
   @Override
   public ForgotPasswordPage clickForgotPasswordLink() {
-    gainFocus();
     AttachedForgotPasswordPage forgotPassword = signInPage.clickForgotPasswordLink();
     return new DetachedForgotPasswordPage(forgotPassword);
   }
 
   @Override
   public SignInPage typePassword(String password) {
-    gainFocus();
     signInPage.typePassword(password);
     return this;
   }
 
   @Override
   public SignInPage typeUsername(String username) {
-    gainFocus();
     signInPage.typeUsername(username);
     return this;
   }
 
   @Override
   public void login(String username, String password) {
-    gainFocus();
     signInPage.login(username, password);
-    loseFocus();
   }
 
   @Override
@@ -63,31 +58,26 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
 
   @Override
   public RegisterPage navigateToRegister() {
-    gainFocus();
     return signInPage.navigateToRegister();
   }
 
   @Override
   public String getError() {
-    gainFocus();
     return signInPage.getError();
   }
 
   @Override
   public boolean isPasswordMasked() {
-    gainFocus();
     return signInPage.isPasswordMasked();
   }
 
   @Override
   public void togglePasswordVisibility() {
-    gainFocus();
     signInPage.togglePasswordVisibility();
   }
 
   @Override
   public void submit() {
-    gainFocus();
     signInPage.submit();
   }
 
@@ -98,23 +88,19 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
 
   @Override
   public boolean isDisplayed() {
-    gainFocus();
     return signInPage.isDisplayed();
   }
 
   @Override
   public boolean submitButtonNotClickable() {
-    gainFocus();
     return signInPage.submitButtonNotClickable();
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    gainFocus();
     return signInPage.clickFacebookSignUp();
   }
 
   public boolean isConnectWithFacebookButtonVisible() {
-    gainFocus();
     return signInPage.isConnectWithFacebookButtonVisible();
   }
 

@@ -21,6 +21,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.ArticleHistoryPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
 
+import org.apache.tools.ant.taskdefs.Java;
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
