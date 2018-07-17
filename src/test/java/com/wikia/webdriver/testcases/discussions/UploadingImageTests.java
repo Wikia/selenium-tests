@@ -84,7 +84,8 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
-  @Test(groups = DESKTOP)
+  @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirPostOnDesktop() {
@@ -94,7 +95,8 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
-  @Test(groups = DESKTOP)
+  @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
@@ -114,8 +116,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_DELETED_IMAGE_NOT_VISIBLE);
   }
 
-  @Test(groups = DESKTOP, enabled = false)
-  @RelatedIssue(issueID = "IRIS-6198")
+  @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {
