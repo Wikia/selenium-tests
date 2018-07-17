@@ -10,12 +10,12 @@ import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import org.testng.annotations.Test;
 
-@Test(groups = "Mercury_Navigation")
+@Test(groups = "Discussions_Navigation")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
 public class NavigationTests {
 
-  @Test(groups = "mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu")
+  @Test(groups = "discussionsNavigationOpenAndCloseNavigationAndItsSubMenu")
   public void mercuryNavigationOpenAndCloseNavigationAndItsSubMenu() {
     GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
@@ -25,7 +25,7 @@ public class NavigationTests {
   }
 
   @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
-  @Test(groups = "mobileWiki_navigation_navigationOnNonEnglishWiki")
+  @Test(groups = "discussionsNavigationOnNonEnglishWiki")
   public void mercuryNavigationOnNonEnglishWiki() {
     GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
