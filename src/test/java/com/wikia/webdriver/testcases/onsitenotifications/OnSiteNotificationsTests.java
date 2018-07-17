@@ -226,7 +226,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   private Notifications getNotificationsMobile(WikiBasePageObject page) {
-    return page.getGlobalNavigation().clickUserAvatar().getNotifications();
+    return page.getGlobalNavigationMobile().clickOnLoggedInUserAvatar().getNotifications();
   }
 
   private String getMessageFor(Notification notification, String page) {
