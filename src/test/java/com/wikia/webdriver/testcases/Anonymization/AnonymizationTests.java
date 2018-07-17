@@ -12,12 +12,11 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.ArticleHistoryPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
@@ -37,8 +36,8 @@ public class AnonymizationTests extends NewTestTemplate {
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
 
-  private SignInPage openLoginModalOnDesktop() {
-    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
+  private SignInPage openLoginPageFromGlobalnavOnDesktop() {
+    return new GlobalNavigation().clickOnSignIn();
   }
 
   @Test
@@ -61,7 +60,7 @@ public class AnonymizationTests extends NewTestTemplate {
 
     anonymizationStaff.logOut();
 
-    SignInPage signIn = openLoginModalOnDesktop();
+    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
     signIn.login(qanon, passw);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
