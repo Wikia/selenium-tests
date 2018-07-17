@@ -1,23 +1,16 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.Log;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriverException;
+
+import javax.mail.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Store;
-
-import com.wikia.webdriver.common.logging.Log;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriverException;
 
 public class EmailUtils {
 
@@ -64,7 +57,7 @@ public class EmailUtils {
           }
         }
         
-        if (i > 15) {
+        if (i > 30) {
           throw new WebDriverException("Mail timeout exceeded");
         }
       }

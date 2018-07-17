@@ -10,12 +10,8 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorMobile extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".new-post .plus")
+  @FindBy(css = ".floating-entry-point__label")
   private WebElement postsCreator;
-
-  @Getter
-  @FindBy(css = ".post-entry-point__items > li:nth-child(1)")
-  private WebElement textPostType;
 
   @Getter
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")

@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -113,7 +114,8 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_DELETED_IMAGE_NOT_VISIBLE);
   }
 
-  @Test(groups = DESKTOP)
+  @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {

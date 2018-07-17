@@ -23,6 +23,8 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   private WebElement signInButton;
   @FindBy(css = ".password-toggler")
   private WebElement passwordToggler;
+  @FindBy(css = ".close")
+  private WebElement closeButton;
 
   private AuthPageContext authContext;
 
@@ -38,6 +40,11 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   public SignInPage typePassword(String password) {
     fillInput(passwordField, password);
     return this;
+  }
+
+  @Override
+  public void close() {
+    wait.forElementClickable(closeButton).click();
   }
 
   @Override

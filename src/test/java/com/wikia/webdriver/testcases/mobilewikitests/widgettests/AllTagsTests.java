@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.*;
@@ -68,7 +68,7 @@ public class AllTagsTests extends NewTestTemplate {
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     new HomePage().open();
 
-    new TopBar().openSearch().navigateToPage(QUERY_2);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -81,8 +81,8 @@ public class AllTagsTests extends NewTestTemplate {
     new ArticleContent().push("Mercury AllTags 003", "Map");
     new ArticlePageObject().open(ARTICLE_NAME);
 
-    new TopBar().openSearch().navigateToPage(QUERY_1);
-    new TopBar().openSearch().navigateToPage(QUERY_2);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_1);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

@@ -20,13 +20,13 @@ public class FiltersPopOver extends BasePage {
   @FindBy(css = ".discussion-filters .discussion-sort")
   private WebElement sortingFilter;
 
-  @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
+  @FindBy(css = ".pop-over-container .sortby-fieldset .sort-trending")
   private WebElement trendingOptionInSortMenu;
 
-  @FindBy(css = "label[for='sort-button-main.sort-by-latest']")
+  @FindBy(css = ".pop-over-container .sortby-fieldset .sort-latest")
   private WebElement latestOptionInSortMenu;
 
-  @FindBy(css = ".filters-apply")
+  @FindBy(css = ".pop-over-container .filters-apply-container .filters-apply")
   private WebElement applyButtonInSortMenu;
 
   @FindBy(css = ".pop-over-container")
@@ -40,9 +40,9 @@ public class FiltersPopOver extends BasePage {
 
   public FiltersPopOver chooseSortingOption(SortOption option) {
     if (option == SortOption.LATEST) {
-      waitAndClick(latestOptionInSortMenu);
+      scrollAndClick(latestOptionInSortMenu);
     } else if (option == SortOption.TRENDING){
-      waitAndClick(trendingOptionInSortMenu);
+      scrollAndClick(trendingOptionInSortMenu);
     } else {
       throw new IllegalArgumentException(String.format("Option %s not supported by sorting", option));
     }
@@ -50,7 +50,7 @@ public class FiltersPopOver extends BasePage {
   }
 
   public FiltersPopOver clickApplyButton() {
-    waitAndClick(applyButtonInSortMenu);
+    scrollAndClick(applyButtonInSortMenu);
     return this;
   }
 

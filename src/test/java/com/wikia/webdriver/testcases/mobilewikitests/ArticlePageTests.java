@@ -12,8 +12,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import org.testng.annotations.Test;
 
@@ -25,8 +24,7 @@ import org.testng.annotations.Test;
 )
 public class ArticlePageTests extends NewTestTemplate {
 
-  private TopBar topBar;
-  private Navigation navigation;
+  private GlobalNavigationMobile globalNavigationMobile;
   private Navigate navigate;
 
   private static final String MAIN_PAGE_CONTENT =
@@ -37,8 +35,7 @@ public class ArticlePageTests extends NewTestTemplate {
           ContentLoader.loadWikiTextContent("Mercury_Gallery");
 
   private void init() {
-    this.topBar = new TopBar();
-    this.navigation = new Navigation();
+    this.globalNavigationMobile = new GlobalNavigationMobile();
     this.navigate = new Navigate();
   }
 
@@ -133,28 +130,28 @@ public class ArticlePageTests extends NewTestTemplate {
 
     Log.warning("Info", "Accessing article through link in navigation side");
 
-    topBar.openNavigation();
+    globalNavigationMobile.openNavigation();
     //navigation.openSubMenu(3);
-    navigation.openPageLink(5);
+    //navigation.openPageLink(5);
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    topBar.openNavigation();
+    globalNavigationMobile.openNavigation();
     //navigation.openSubMenu(3);
-    navigation.openPageLink(4);
+    //navigation.openPageLink(4);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     Log.warning("Info", "Accessing article through link in search result");
 
-    topBar.openSearch().navigateToPage(MercurySubpages.COLON);
+    globalNavigationMobile.openSearch().navigateToPage(MercurySubpages.COLON);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    topBar.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK);
+    globalNavigationMobile.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
