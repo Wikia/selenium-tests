@@ -17,7 +17,7 @@ public class DiscussionCard extends WikiBasePageObject {
   @FindBy(css = ".mcf-card-discussions__user-subtitle")
   private WebElement avatarUsername;
 
-  @FindBy(css = ".wds-avatar")
+  @FindBy(css = ".mcf-card-discussions__user-info .wds-avatar")
   private WebElement avatarImage;
 
   @FindBy(css = ".mcf-card-discussions__content")

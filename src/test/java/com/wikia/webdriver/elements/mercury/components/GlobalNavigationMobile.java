@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,17 +54,19 @@ public class GlobalNavigationMobile extends BasePageObject {
   private By parentBy = By.xpath("./..");
 
   public SignInPage clickOnAnonAvatar() {
+    //When anon clicks avatar placeholder - auth page is opened
     Log.info("Wait and click on anon user avatar");
     wait.forElementVisible(anonUserAvatar).click();
 
     return new AttachedSignInPage();
   }
 
-  public SignInPage clickOnLoggedInUserAvatar() {
+  public GlobalNavigationMobile clickOnLoggedInUserAvatar() {
+    //When logged in clicks avatar - profile & notifications part is visible
     Log.info("Wait and click on logged in user avatar");
     wait.forElementVisible(userAvatar).click();
 
-    return new AttachedSignInPage();
+    return new GlobalNavigationMobile();
   }
 
   public GlobalNavigationMobile openNavigation() {
@@ -115,4 +118,9 @@ public class GlobalNavigationMobile extends BasePageObject {
   public boolean isCloseIconVisible() {
     return isVisible(closeButton);
   }
+
+  public Notifications getNotifications() {
+    return new Notifications();
+  }
+
 }
