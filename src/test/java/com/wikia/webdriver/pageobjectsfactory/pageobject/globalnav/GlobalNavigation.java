@@ -4,14 +4,16 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
 
@@ -27,10 +29,10 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__logo")
   private WebElement fandomLogo;
 
-  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-logged-in")
+  @FindBy(css = ".wds-global-navigation__user-logged-in")
   private WebElement userAvatar;
 
-  @FindBy(css = ".wds-global-navigation__user-menu.wds-global-navigation__user-anon")
+  @FindBy(css = ".wds-global-navigation__user-anon")
   private WebElement anonAvatar;
 
   @FindBy(css = ".wds-global-navigation__user-logged-in .wds-dropdown__content")
@@ -93,21 +95,43 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(xpath = "//div[contains(@class,\"wds-global-navigation__user-menu\")]//li[2]/a")
   private WebElement registerLink;
 
+  @FindBy(css = ".wds-global-navigation__search-close")
+  private WebElement clearSearchPhraseButton;
+
+  @FindBy(css = ".wds-global-navigation__search__suggestion")
+  private List<WebElement> searchSuggestionsList;
+
   @Getter
   private NotificationsDropdown notificationsDropdown = new NotificationsDropdown();
 
   By loggedOutUserAvatar = By.xpath("//div[@class=\"wds-avatar__inner-border\" and @alt=\"\"]");
 
   public AttachedSignInPage clickOnSignIn(){
-    myAccount.click();
-    signInLink.click();
+    wait.forElementClickable(myAccount).click();
+    wait.forElementClickable(signInLink).click();
     return new AttachedSignInPage();
   }
 
   public AttachedRegisterPage clickOnRegister(){
-    myAccount.click();
-    registerLink.click();
+    wait.forElementClickable(myAccount).click();
+    wait.forElementClickable(registerLink).click();
     return new AttachedRegisterPage();
+  }
+
+  public SearchPageObject clickSearch() {
+    wait.forElementClickable(searchButton).click();
+
+    return new SearchPageObject();
+  }
+
+  public GlobalNavigation clearSearchPhrase() {
+    wait.forElementClickable(clearSearchPhraseButton).click();
+
+    return this;
+  }
+
+  public void clickNthSearchResult(int n) {
+    wait.forElementVisible(searchSuggestionsList.get(n)).click();
   }
 
   public HomePage clickFandomLogo() {
@@ -160,18 +184,42 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public SearchPageObject search(String query) {
-    wait.forElementClickable(searchButton);
-    searchButton.click();
+    wait.forElementClickable(searchButton).click();
     searchInput.sendKeys(query);
     searchSubmitButton.submit();
 
     Log.info("search query typed and submitted");
-    return new SearchPageObject(driver);
+    return new SearchPageObject();
+  }
+
+  /*
+    typeInSearch() does not clicks the submit button
+   */
+  public GlobalNavigation typeInSearch(String query) {
+    wait.forElementClickable(searchButton).click();
+    searchInput.sendKeys(query);
+
+    Log.info("search query typed");
+    return this;
+  }
+
+  public String getCurrentSearchPhrase() {
+    wait.forElementClickable(searchButton).click();
+    wait.forElementVisible(searchInput);
+
+    return searchInput.getText();
   }
 
   public GlobalNavigation clickUserAvatar() {
     wait.forElementClickable(userAvatar).click();
     Log.info("clicked on user avatar in global nav bar");
+
+    return this;
+  }
+
+  public GlobalNavigation clickAnonUserAvatar() {
+    wait.forElementClickable(anonAvatar).click();
+    Log.info("clicked on anon user avatar in global nav bar");
 
     return this;
   }
@@ -187,7 +235,7 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public void clickViewProfile() {
-    viewProfile.click();
+    wait.forElementClickable(viewProfile).click();
   }
 
   public boolean isFandomLogoVisible() {
@@ -249,4 +297,13 @@ public class GlobalNavigation extends BasePageObject {
   public boolean isPartnerSlotLinkVisible() {
     return isElementDisplayed(partnerSlotLink ,3);
   }
+
+  public String getNthSearchResultText(int n) {
+    return wait.forElementVisible(searchSuggestionsList.get(n)).getText();
+  }
+
+  public Notifications getNotifications() {
+    return new Notifications();
+  }
+
 }

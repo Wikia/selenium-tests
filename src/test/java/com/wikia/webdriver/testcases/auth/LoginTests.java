@@ -10,10 +10,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
@@ -46,10 +44,10 @@ public class LoginTests extends NewTestTemplate {
     ArticlePage article = openArticleOnMobile();
     String previousTitle = article.getArticleTitle();
     article
-      .getTopBar()
-      .openNavigation()
-      .clickOnSignInRegisterButton()
+      .getGlobalNavigationMobile()
+      .clickOnAnonAvatar()
       .close();
+
     Assertion.assertEquals(article.getArticleTitle(), previousTitle);
   }
 
@@ -64,7 +62,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanLogInAsStaffOnMobile() {
     ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(article, STAFF);
+    loginOnMobileAs(STAFF);
     article.waitForPageReload();
     article.verifyUserLoggedIn(STAFF);
   }
@@ -80,7 +78,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void japaneseUserCanLogInOnMobile() {
     ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(article, JAPANESE_USER);
+    loginOnMobileAs(JAPANESE_USER);
     article.waitForPageReload();
     article.verifyUserLoggedIn(JAPANESE_USER);
   }
@@ -99,7 +97,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
-    loginOnDiscussionMobilePageAs(discussionPage, USER);
+    loginOnDiscussionMobilePageAs(USER);
     assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon log in");
   }
@@ -221,20 +219,12 @@ public class LoginTests extends NewTestTemplate {
     return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
   }
 
-  private SignInPage navigateToSignInOnMobile() {
-    return navigateToSignInOnMobile(openArticleOnMobile().getTopBar());
-  }
-
-  private SignInPage navigateToSignInOnMobile(TopBar topBar) {
-    return topBar
-      .openNavigation()
-      .clickOnSignInRegisterButton()
-      .navigateToSignIn();
+  private AttachedSignInPage navigateToSignInOnMobile() {
+    return new GlobalNavigation().clickAnonUserAvatar().clickOnRegister().navigateToSignIn();
   }
 
   private SignInPage openLoginPageFromGlobalnavOnDesktop() {
-    new GlobalNavigation().clickOnSignIn();
-    return new AttachedSignInPage();
+    return new GlobalNavigation().clickOnSignIn();
   }
 
   private void loginOnDesktopAs(User user) {
@@ -242,17 +232,15 @@ public class LoginTests extends NewTestTemplate {
   }
 
   private void loginOnDesktopFromDiscussionPageAs(User user) {
-    new NavigationBar().clickOnSignIn().login(user);
+    new GlobalNavigation().clickOnSignIn().login(user);
   }
 
-  private void loginOnMobileAs(ArticlePage article, User user) {
-    navigateToSignInOnMobile(article.getTopBar()).login(user);
+  private void loginOnMobileAs(User user) {
+    navigateToSignInOnMobile().login(user);
   }
 
-  private void loginOnDiscussionMobilePageAs(PostsListPage page, User user) {
-    navigateToSignInOnMobile(page.getTopBar()).login(user);
+  private void loginOnDiscussionMobilePageAs(User user) {
+    navigateToSignInOnMobile().login(user);
   }
-
-
 
 }

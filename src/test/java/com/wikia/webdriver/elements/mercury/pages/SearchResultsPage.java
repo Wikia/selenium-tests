@@ -4,10 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,11 +58,6 @@ public class SearchResultsPage extends WikiBasePageObject {
     return clickedLink;
   }
 
-  public SearchResultsPage clickTryAnotherSearch() {
-    wait.forElementClickable(this.tryAnotherSearchLink).click();
-    return this;
-  }
-
   public boolean isSearchResultsPageOpen() {
     try {
       wait.forElementVisible(searchResultsContainer);
@@ -84,16 +77,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   }
 
   public boolean isLoadMoreButtonVisible() {
-    return isElementVisible(loadMoreButton);
-  }
-
-  public boolean areResultsPresent() {
-    try {
-      wait.forElementClickable(By.cssSelector(SEARCH_RESULT_SELECTOR), 0);
-      return true;
-    } catch (TimeoutException e) {
-      return false;
-    }
+    return this.isVisible(loadMoreButton);
   }
 
   public SearchResultsPage clickLoadMoreButton() {
@@ -113,14 +97,5 @@ public class SearchResultsPage extends WikiBasePageObject {
   public int getResultCardsNumber() {
     waitForResultsLoaded();
     return resultCards.size();
-  }
-
-  private boolean isElementVisible(WebElement element) {
-    try {
-      return element.isDisplayed();
-    } catch (NoSuchElementException e) {
-      Log.info(e.getMessage());
-      return false;
-    }
   }
 }

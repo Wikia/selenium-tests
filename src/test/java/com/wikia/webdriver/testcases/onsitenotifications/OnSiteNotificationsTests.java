@@ -105,6 +105,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   public void userOnDesktopMarksAllNotificationsAsRead() {
     Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
     notificationsList.markAllAsRead();
+
+    Assertion.assertFalse(notificationsList.isMarkAllAsReadButtonVisible());
     Assertion.assertFalse(notificationsList.isAnyNotificationUnread(),
       String.format(ALL_READ, DISCUSSION));
     Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread(),
@@ -224,11 +226,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   private Notifications getNotificationsMobile(WikiBasePageObject page) {
-    return page
-      .getTopBar()
-      .openNavigation()
-      .openUserProfile()
-      .getNotifications();
+    return page.getGlobalNavigation().clickUserAvatar().getNotifications();
   }
 
   private String getMessageFor(Notification notification, String page) {

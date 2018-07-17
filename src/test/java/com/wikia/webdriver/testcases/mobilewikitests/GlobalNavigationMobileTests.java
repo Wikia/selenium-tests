@@ -8,56 +8,56 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_TopBar")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-public class TopBarTests extends NewTestTemplate {
+public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_topBarIsAlwaysVisible")
   public void mercury_topbar_topBarIsAlwaysVisible() {
-    TopBar topBar =
+    GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+            .getGlobalNavigationMobile();
 
-    Assertion.assertTrue(topBar.isNavigationBarVisible());
-    Assertion.assertTrue(topBar.isLogoVisible());
-    Assertion.assertTrue(topBar.isSearchIconVisible());
+    Assertion.assertTrue(globalNavigationMobile.isNavigationBarVisible());
+    Assertion.assertTrue(globalNavigationMobile.isLogoVisible());
+    Assertion.assertTrue(globalNavigationMobile.isSearchIconVisible());
 
     driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
 
-    Assertion.assertTrue(topBar.isNavigationBarVisible());
-    Assertion.assertTrue(topBar.isLogoVisible());
-    Assertion.assertTrue(topBar.isSearchIconVisible());
+    Assertion.assertTrue(globalNavigationMobile.isNavigationBarVisible());
+    Assertion.assertTrue(globalNavigationMobile.isLogoVisible());
+    Assertion.assertTrue(globalNavigationMobile.isSearchIconVisible());
   }
 
   @Test(groups = "mercury_topbar_closeButtonAppears")
   public void mercury_topbar_closeButtonAppears() {
-    TopBar topBar =
+    GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+            .getGlobalNavigationMobile();
 
-    topBar.openSearch();
-    Assertion.assertTrue(topBar.isCloseIconVisible());
+    globalNavigationMobile.openSearch();
+    Assertion.assertTrue(globalNavigationMobile.isCloseIconVisible());
 
-    topBar.clickCloseButton();
-    Assertion.assertTrue(topBar.isSearchIconVisible());
+    globalNavigationMobile.clickCloseButton();
+    Assertion.assertTrue(globalNavigationMobile.isSearchIconVisible());
   }
 
   @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
   public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
-    TopBar topBar =
+    GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+            .getGlobalNavigationMobile();
 
-    topBar.clickFandomLogo();
+    globalNavigationMobile.clickFandomLogo();
 
-    Assertion.assertTrue(topBar.getCurrentUrl().contains("fandom.wikia.com"));
+    Assertion.assertTrue(globalNavigationMobile.getCurrentUrl().contains("fandom.wikia.com"));
   }
 }

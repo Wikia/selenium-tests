@@ -6,15 +6,15 @@ import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import java.util.List;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 @SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})
 public class ArticlePage extends WikiBasePageObject {
@@ -24,9 +24,6 @@ public class ArticlePage extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final Navigate navigate = new Navigate();
-
-  @Getter(lazy = true)
-  private final Navigation navigation = new Navigation();
 
   @Getter(lazy = true)
   private final CuratedMainPagePageObject curatedMainPage = new CuratedMainPagePageObject();
