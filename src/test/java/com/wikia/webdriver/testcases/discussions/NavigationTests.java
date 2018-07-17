@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class NavigationTests {
 
   @Test(groups = "discussionsNavigationOpenAndCloseNavigationAndItsSubMenu")
-  public void mercuryNavigationOpenAndCloseNavigationAndItsSubMenu() {
+  public void discussionsNavigationOpenAndCloseNavigationAndItsSubMenu() {
     GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
@@ -26,7 +26,7 @@ public class NavigationTests {
 
   @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
   @Test(groups = "discussionsNavigationOnNonEnglishWiki")
-  public void mercuryNavigationOnNonEnglishWiki() {
+  public void discussionsNavigationOnNonEnglishWiki() {
     GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
