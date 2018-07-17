@@ -117,7 +117,6 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @RelatedIssue(issueID = "PLATFORM-3439")
   public void userIsTakenToDiscussionsAfterClickOnViewAll() {
     DiscussionsPage discussions = new MixedContentFooter()
         .openWikiMainPage()
@@ -129,7 +128,6 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @RelatedIssue(issueID = "PLATFORM-3439")
   public void userIsTakenToUserProfileAfterClickOnAvatar() {
     DiscussionCard discussions = new MixedContentFooter()
         .openWikiMainPage()
@@ -145,7 +143,6 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @RelatedIssue(issueID = "PLATFORM-3439")
   public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
     new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
