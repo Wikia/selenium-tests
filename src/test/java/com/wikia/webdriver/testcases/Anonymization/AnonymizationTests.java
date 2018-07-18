@@ -36,10 +36,6 @@ public class AnonymizationTests extends NewTestTemplate {
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
 
-  private SignInPage openLoginPageFromGlobalnavOnDesktop() {
-    return new GlobalNavigation().clickOnSignIn();
-  }
-
   @Test
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
@@ -60,7 +56,7 @@ public class AnonymizationTests extends NewTestTemplate {
 
     anonymizationStaff.logOut();
 
-    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
+    SignInPage signIn = new GlobalNavigation().clickOnSignIn();
     signIn.login(qanon, passw);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
