@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -21,13 +22,19 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
 
     @Test
     public void communityNewUserCanGetFreshAnnouncement() {
+        String login = "QA" + Long.toString(DateTime.now().getMillis());
+        String pass = Long.toString(DateTime.now().getMillis());
+        //create new account
         SignUpUser newUser = new SignUpUser(
-                "QA" + Long.toString(DateTime.now().getMillis()),
+                login,
                 new Credentials().emailQaart1,
-                Long.toString(DateTime.now().getMillis()),
+                pass,
                 LocalDate.of(1990, 3, 19)
         );
         UserRegistration.registerUserEmailConfirmed(newUser);
+        //login to brand new account
+        new GuidelinesPage().open().getGlobalNavigation().clickOnSignIn().login(login, pass);
+        
 
 
     }
