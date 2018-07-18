@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -18,7 +18,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Comments")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -38,7 +38,7 @@ public class CommentsTests extends NewTestTemplate {
   private void init() {
     this.comments = new CommentsPageObject(driver);
 
-    new Navigate().toPage(MercurySubpages.COMMENTS);
+    new Navigate().toPage(MobileSubpages.COMMENTS);
   }
 
   @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")

@@ -7,7 +7,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEn
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -19,7 +19,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_4)
 @Test(groups = {"discussions-upvoting"})
 public class UpvotingTests extends NewTestTemplate {
 
@@ -28,7 +28,7 @@ public class UpvotingTests extends NewTestTemplate {
   @BeforeSuite
   private void setUp() {
     User user = User.USER_5;
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_4);
+    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_4);
 
     existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
     DiscussionsClient.using(user, driver).createReplyToPost(siteId, existingPost);

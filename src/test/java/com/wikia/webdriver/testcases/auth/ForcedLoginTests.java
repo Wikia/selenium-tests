@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forced-login")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 public class ForcedLoginTests extends NewTestTemplate {
 
   private User user = User.FORCED_LOGIN_USER;

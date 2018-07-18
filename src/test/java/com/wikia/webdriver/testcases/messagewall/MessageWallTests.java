@@ -4,7 +4,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -138,7 +138,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = "MessageWallTests")
   @RelatedIssue(issueID = "IRIS-4352")
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5, asUser = User.USER_MESSAGE_WALL)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_5, asUser = User.USER_MESSAGE_WALL)
   public void userCanPreviewMessageWallThreadWhenDiscussionsEnabled() {
     MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea(true);

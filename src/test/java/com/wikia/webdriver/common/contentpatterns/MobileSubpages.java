@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-public class MercurySubpages {
+public class MobileSubpages {
 
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "Mercury_automation_testing_Wiki";
@@ -48,7 +48,7 @@ public class MercurySubpages {
   public static final String JOIN_PAGE = "/join";
   public static final String REGISTER_PAGE = "/register";
 
-  private MercurySubpages() {
+  private MobileSubpages() {
   }
 
 }

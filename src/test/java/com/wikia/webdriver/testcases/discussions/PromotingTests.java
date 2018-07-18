@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -14,7 +14,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 
-@Execute(onWikia = MercuryWikis.FALLOUT)
+@Execute(onWikia = MobileWikis.FALLOUT)
 @Test(groups = {"discussions-promoting"})
 public class PromotingTests extends NewTestTemplate {
 

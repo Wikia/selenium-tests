@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 
 
 @Test(groups = "Mercury_Lightbox")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -33,7 +33,7 @@ public class LightboxTests extends NewTestTemplate {
     this.gallery = new GalleryComponentObject(driver);
     this.lightbox = new LightboxComponentObject();
 
-    new Navigate().toPage(MercurySubpages.GALLERY);
+    new Navigate().toPage(MobileSubpages.GALLERY);
   }
 
   @Test(groups = "mercury_lightbox_openAndClose")

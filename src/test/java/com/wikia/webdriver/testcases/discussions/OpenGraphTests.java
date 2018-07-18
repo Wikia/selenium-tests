@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -26,7 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Test(groups = "discussions-opengraph")
-@Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
+@Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
 public class OpenGraphTests extends NewTestTemplate {
 
   private static final String URL = "http://fandom.wikia.com";
@@ -36,7 +36,7 @@ public class OpenGraphTests extends NewTestTemplate {
    */
 
   private PostEntity.Data setUp() {
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_2);
+    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_2);
     return DiscussionsClient.using(User.USER_6, driver).createPostWithUniqueData(siteId);
   }
 

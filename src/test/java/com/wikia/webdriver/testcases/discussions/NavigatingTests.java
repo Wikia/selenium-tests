@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import org.testng.annotations.Test;
 
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
 public class NavigatingTests extends NewTestTemplate {
 
@@ -68,7 +68,7 @@ public class NavigatingTests extends NewTestTemplate {
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   public void discussionsNavigationOpenAndCloseNavigationAndItsSubMenu() {
     GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
@@ -78,7 +78,7 @@ public class NavigatingTests extends NewTestTemplate {
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   public void discussionsNavigationOnNonEnglishWiki() {
     GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());

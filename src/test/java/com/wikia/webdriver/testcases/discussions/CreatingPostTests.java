@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -23,7 +23,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_2)
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
@@ -43,7 +43,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewPost() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
@@ -51,7 +51,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MobileSubpages.JOIN_PAGE));
   }
 
   /*
@@ -67,11 +67,11 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MobileSubpages.REGISTER_PAGE));
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_1)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_1)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
@@ -87,7 +87,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryOrAnyContent() {
     PostsListPage page = new PostsListPage().open();
@@ -96,21 +96,21 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MobileWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MobileWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotAddPostWithoutTitle() {
     PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorMobile();
@@ -147,14 +147,14 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MobileWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MobileWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = DESKTOP)

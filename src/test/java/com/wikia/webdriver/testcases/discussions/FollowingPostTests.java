@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.util.function.Function;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_4)
 public class FollowingPostTests extends NewTestTemplate {
 
   private static final String SIGN_IN_MODAL_SHOULD_APPEAR = "Sign in/Following modal dialog should appear.";

@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidget
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_GoogleFormWidget")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -26,7 +26,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
   private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "GoogleFormMercury/MultipleWidgets";
   private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP;
+  private static final String QUERY_1 = MobileSubpages.MAP;
   private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
@@ -44,7 +44,7 @@ public class GoogleFormTests extends NewTestTemplate {
     WidgetPageObject widget =
             new GoogleFormWidgetPageObject().create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MobileSubpages.MAIN_PAGE);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

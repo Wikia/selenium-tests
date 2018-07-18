@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -25,7 +25,7 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 
   private static final String USERNAME_TAKEN_MSG = "Username is taken";
@@ -115,7 +115,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
     signUpOnDesktopFromDiscussionPageAs(createNewUser(userWithEmail));
@@ -124,7 +124,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
@@ -209,11 +209,11 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private ArticlePage openArticleOnMobile() {
-    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePage().open(MobileSubpages.MAIN_PAGE);
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePageObject().open(MobileSubpages.MAIN_PAGE);
   }
 
   private RegisterPage navigateToSignUpOnMobile() {

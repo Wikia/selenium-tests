@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.communityheadertests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -29,7 +29,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
+  @Execute(onWikia = MobileWikis.DE_WIKI, language = "de")
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeader().clickWikiName();
 

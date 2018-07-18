@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_SpotifyWidget")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -27,7 +27,7 @@ public class SpotifyTests extends NewTestTemplate {
   private static final String SPOTIFY_ONE_WIDGET_ARTICLE_NAME = "SpotifyMercury/OneWidget";
   private static final String SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME = "SpotifyMercury/MultipleWidgets";
   private static final String SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME = "SpotifyMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP;
+  private static final String QUERY_1 = MobileSubpages.MAP;
   private static final String QUERY_2 = SPOTIFY_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercurySpotifyWidgetTest_001")
@@ -47,7 +47,7 @@ public class SpotifyTests extends NewTestTemplate {
     WidgetPageObject widget =
             new SpotifyWidgetPageObject().create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MobileSubpages.MAIN_PAGE);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

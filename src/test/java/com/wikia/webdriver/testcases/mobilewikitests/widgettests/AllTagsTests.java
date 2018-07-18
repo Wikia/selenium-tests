@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -23,12 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Test(groups = "Mercury_AllTagsWidget")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "AllTagsWidgetMercury";
-  private static final String QUERY_1 = MercurySubpages.MAP;
+  private static final String QUERY_1 = MobileSubpages.MAP;
   private static final String QUERY_2 = ARTICLE_NAME;
   private static List<WidgetPageObject> widgets;
 

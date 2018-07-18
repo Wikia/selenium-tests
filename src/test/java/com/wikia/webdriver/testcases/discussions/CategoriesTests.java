@@ -4,7 +4,7 @@ import static com.wikia.webdriver.elements.mercury.components.discussions.common
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_1)
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
@@ -72,7 +72,7 @@ public class CategoriesTests extends NewTestTemplate {
    */
   @BeforeClass(groups = {DESKTOP})
   private void deleteCategoriesDesktop() {
-    deleteCategories(MercuryWikis.DISCUSSIONS_1);
+    deleteCategories(MobileWikis.DISCUSSIONS_1);
   }
 
   /**
@@ -80,7 +80,7 @@ public class CategoriesTests extends NewTestTemplate {
    */
   @BeforeClass(groups = {MOBILE})
   private void deleteCategoriesMobile() {
-    deleteCategories(MercuryWikis.DISCUSSIONS_MOBILE);
+    deleteCategories(MobileWikis.DISCUSSIONS_MOBILE);
   }
 
   private void deleteCategories(String wikiName) {
@@ -103,7 +103,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private CategoryPill.Data setUp() {
-    return setUp(MercuryWikis.DISCUSSIONS_1);
+    return setUp(MobileWikis.DISCUSSIONS_1);
   }
 
   /**
@@ -121,7 +121,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private ArrayList<CategoryPill.Data> setUp(int size) {
-    return setUp(MercuryWikis.DISCUSSIONS_1, size);
+    return setUp(MobileWikis.DISCUSSIONS_1, size);
   }
 
   /**
@@ -146,14 +146,14 @@ public class CategoriesTests extends NewTestTemplate {
   // Anonymous user on mobile
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
@@ -178,14 +178,14 @@ public class CategoriesTests extends NewTestTemplate {
   // User on mobile
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
@@ -210,10 +210,10 @@ public class CategoriesTests extends NewTestTemplate {
   // Discussions Administrator on mobile
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
-    CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
     try {
@@ -226,7 +226,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanAddCategory() {
     final PostsListPage page = new PostsListPage().open();
@@ -247,10 +247,10 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanEditCategory() {
-    CategoryPill.Data editableCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data editableCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
     final String editedName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
@@ -270,11 +270,11 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategories() {
     deleteCategoriesMobile();
-    ArrayList<CategoryPill.Data> categoriesAdded = setUp(MercuryWikis.DISCUSSIONS_MOBILE,
+    ArrayList<CategoryPill.Data> categoriesAdded = setUp(MobileWikis.DISCUSSIONS_MOBILE,
       MAX_NUMBER_OF_CATEGORIES - 1);
     final PostsListPage page = new PostsListPage().open();
     final String newCategoryName = createUniqueCategoryName();
@@ -290,10 +290,10 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanRemoveCategory() {
-    CategoryPill.Data data = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data data = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final String temporaryCategoryName = createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page
@@ -420,7 +420,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void changeCategoryMobile() {
-    CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
     openPageAndSelectCategoryOnMobile(page, postCategory.getName());
     assertCategoryVisibleAndCleanUp(page, postCategory);
@@ -448,7 +448,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void cannotEditCategoryMobile() {
-    CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
     try {
       assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);

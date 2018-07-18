@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -27,13 +27,13 @@ public class SearchMobileWikiTests extends SearchTests {
   private static final int SEARCH_RESULTS_NUMBER_FIRST_BATCH = 24;
   private static final int SEARCH_RESULTS_NUMBER_NEXT_BATCH = 25;
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "IRIS-5167")
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
                   "MobileWiki_Search_001"})
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
-    ArticlePage article = new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    ArticlePage article = new ArticlePage().open(MobileSubpages.MAIN_PAGE);
     String clickedSuggestion = article.getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
@@ -45,7 +45,7 @@ public class SearchMobileWikiTests extends SearchTests {
     );
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_navigateToPageUsingSearchResults", "MobileWiki_Search_001"})
   public void mercury_search_navigateToPageUsingSearchResults() {
@@ -57,31 +57,31 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertEquals(driver.getCurrentUrl(), resultLink);
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_cancelSearchPhrase", "MobileWiki_Search_001"})
   public void mercury_search_clearSearchPhrase() {
     super.clearSearchPhrase(
-        new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        new ArticlePage().open(MobileSubpages.MAIN_PAGE)
     );
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_verifySearchLayout", "MobileWiki_Search_001"})
   public void mercury_search_verifySearchLayout() {
     super.verifySearchLayout(
-        new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        new ArticlePage().open(MobileSubpages.MAIN_PAGE)
     );
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_userIsRedirectedToSearchResultsPage", "MobileWiki_Search_001"})
   public void mercury_search_userIsRedirectedToSearchResultsPage() {
     SearchResultsPage searchResults =
         new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
+            .open(MobileSubpages.MAIN_PAGE)
             .getGlobalNavigationMobile()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
@@ -90,7 +90,7 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_searchNoResultsPageDisplayed", "MobileWiki_Search_001"})
   public void mercury_search_searchNoResultsPageDisplayed() {
@@ -102,7 +102,7 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertFalse(searchResults.isLoadMoreButtonVisible());
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_noSuggestionsOnSearchResultsPage", "MobileWiki_Search_001"})
   public void mercury_search_noSuggestionsOnSearchResultsPage() {
@@ -113,7 +113,7 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertFalse(searchResults.getSearch().areSearchSuggestionsDisplayed());
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage"})
   public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
@@ -124,7 +124,7 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_NUMBER_FIRST_BATCH);
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_loadingMoreResultsOnSearchResultsPage"})
   public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
@@ -145,7 +145,7 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_loadMoreResultsOnSearchResultsPageNotVisible",
                   "MobileWiki_Search_002"})
@@ -158,7 +158,7 @@ public class SearchMobileWikiTests extends SearchTests {
     Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
   }
 
-  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+  @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_loadMoreResultsOnSearchResultsPageNotVisible",
                   "MobileWiki_Search_002"})

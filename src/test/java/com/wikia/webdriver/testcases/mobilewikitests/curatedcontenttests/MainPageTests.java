@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -47,11 +47,11 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_001")
-  @Execute(onWikia = MercuryWikis.MERCURY_CC)
+  @Execute(onWikia = MobileWikis.MERCURY_CC)
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).isFooterVisible();
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
@@ -70,11 +70,11 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_002")
-  @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC)
+  @Execute(onWikia = MobileWikis.MERCURY_EMPTY_CC)
   public void MercuryCuratedMainPageTest_002_CheckElementsInvisibility() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             RIVERSED_ARTICLE_TITLE_SELECTOR
@@ -93,11 +93,11 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_003")
-  @Execute(onWikia = MercuryWikis.MERCURY_NTA_CC)
+  @Execute(onWikia = MobileWikis.MERCURY_NTA_CC)
   public void MercuryCuratedMainPageTest_003_CheckElementsForNoTrendingArticles() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.NTACC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.NTACC_MAIN_PAGE);
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             AD_TOP_LEADERBOARD_SELECTOR,
@@ -118,11 +118,11 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_004")
-  @Execute(onWikia = MercuryWikis.MERCURY_NTV_CC)
+  @Execute(onWikia = MobileWikis.MERCURY_NTV_CC)
   public void MercuryCuratedMainPageTest_004_CheckElementsVisibilityExceptTrendingVideos() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.NTVCC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.NTVCC_MAIN_PAGE);
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             AD_TOP_LEADERBOARD_SELECTOR,
@@ -143,10 +143,10 @@ public class MainPageTests extends NewTestTemplate {
 
 
   @Test(groups = "MercuryCuratedMainPageTest_005")
-  @Execute(onWikia = MercuryWikis.MERCURY_NTAV_CC)
+  @Execute(onWikia = MobileWikis.MERCURY_NTAV_CC)
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
     init();
-    navigate.toPageByPath(MercurySubpages.NTAVCC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.NTAVCC_MAIN_PAGE);
 
     List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(
             AD_TOP_LEADERBOARD_SELECTOR,

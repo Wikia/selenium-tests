@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -23,7 +23,7 @@ import java.time.Instant;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static org.testng.Assert.assertFalse;
 
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class LoginTests extends NewTestTemplate {
 
@@ -84,7 +84,7 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
     loginOnDesktopFromDiscussionPageAs(USER);
@@ -93,7 +93,7 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
@@ -212,11 +212,11 @@ public class LoginTests extends NewTestTemplate {
    */
 
   private ArticlePage openArticleOnMobile() {
-    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePage().open(MobileSubpages.MAIN_PAGE);
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePageObject().open(MobileSubpages.MAIN_PAGE);
   }
 
   private AttachedSignInPage navigateToSignInOnMobile() {

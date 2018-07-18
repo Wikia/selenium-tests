@@ -14,6 +14,7 @@ import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardSho
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.local.LocalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -88,6 +89,8 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final GlobalNavigationMobile globalNavigationMobile = new GlobalNavigationMobile();
+  @Getter(lazy = true)
+  private final LocalNavigationMobile localNavigationMobile = new LocalNavigationMobile();
 
   @FindBy(css = "body")
   protected WebElement body;

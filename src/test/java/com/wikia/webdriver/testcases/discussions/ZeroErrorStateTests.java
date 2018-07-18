@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -20,7 +20,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRe
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_EMPTY)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_EMPTY)
 @Test(groups = {"discussions-zero-error-state"})
 public class ZeroErrorStateTests extends NewTestTemplate {
 
@@ -71,7 +71,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -112,7 +112,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -151,7 +151,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.STAFF, onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -197,7 +197,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.STAFF, onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
