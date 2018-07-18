@@ -27,7 +27,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
 
   public AdsAmazonObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public void runA9DebugMode() {

@@ -64,7 +64,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"})
   public void adsPrebidRubiconRequestsInSlots() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
     Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, RUBICON_URL_PATTERNS), "Lack of rubicon request in all slots");
   }
 
@@ -73,7 +73,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvDirectVideoAd() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV.getUrl());
 
     Assertion.assertEquals(getFVStatus(ads), "success");
     Assertion.assertEquals(ads.getFVLineItem(), DIRECT_PREROLL_LINE_ITEM_ID);
@@ -88,7 +88,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvBidderVideoAd() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV_RUBICON.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON.getUrl());
 
     Assertion.assertEquals(getFVStatus(ads), "error");
     Assertion.assertEquals(ads.getFVLineItem(), BIDDER_PREROLL_LINE_ITEM_ID);

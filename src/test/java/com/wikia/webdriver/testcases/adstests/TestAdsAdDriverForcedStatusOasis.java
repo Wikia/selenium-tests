@@ -20,7 +20,7 @@ public class TestAdsAdDriverForcedStatusOasis extends TemplateNoFirstLoad {
                                                   String article,
                                                   List<String> slots) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.verifyForcedSuccessScriptInSlots(slots);
   }
 }

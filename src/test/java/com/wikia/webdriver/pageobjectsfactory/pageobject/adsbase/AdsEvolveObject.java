@@ -18,7 +18,7 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public AdsEvolveObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyEvolveInSlot(String slotName) {

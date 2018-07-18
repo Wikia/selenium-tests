@@ -27,7 +27,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   @Test
   public void adsAllSlotsOnPage() {
     Page page = new Page("project43", "SyntheticTests/Mercury/Slots/AllSlots");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
     ads.verifySlotExpanded(AdsContent.MOBILE_AD_IN_CONTENT);
     ads.scrollToPosition(ARTICLE_FOOTER);
@@ -39,7 +39,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   @Test
   public void adsLeaderboardOnPageWithInfobox() {
     Page page = new Page("project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     PortableInfobox infobox = new PortableInfobox();
 
     ads.waitForPageLoadedWithGpt();
@@ -60,7 +60,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   @Test
   public void adsLeaderboardOnPageWithoutInfobox() {
     Page page = new Page("project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
 
     ads.waitForPageLoadedWithGpt();
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
@@ -83,7 +83,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     String secondArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2";
     String thirdArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3";
 
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
     ads.scrollToRecirculationPrefooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);

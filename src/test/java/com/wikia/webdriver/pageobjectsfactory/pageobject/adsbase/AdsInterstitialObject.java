@@ -37,7 +37,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
   private WebElement interstitialAd;
 
   public AdsInterstitialObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isInterstitialAdDisplayed() {

@@ -30,7 +30,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
     testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_PUBMATIC);
 
-    new AdsBaseObject(driver, testedPage);
+    new AdsBaseObject(testedPage);
 
     verifyAdPositions();
   }
@@ -41,7 +41,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   public void adsFeaturedVideoNoAdsDesktop() {
     String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
 
-    new AdsBaseObject(driver, testedPage);
+    new AdsBaseObject(testedPage);
 
     verifyNoAds();
   }
@@ -58,7 +58,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_PUBMATIC);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
 
-    AdsBaseObject pageObject = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject pageObject = new AdsBaseObject(testedPage);
 
     verifyVideoMoatTracking(pageObject);
   }

@@ -416,14 +416,14 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      groups = "AdsTrackingPixels",
+      groups = "AdsTrackingPixelsOasis",
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, POLAND, ADS_ARTICLE1_PAGE);
-    AdsBaseObject ads = new AdsBaseObject(driver);
+    AdsBaseObject ads = new AdsBaseObject();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
 
@@ -438,12 +438,12 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      groups = "AdsTrackingPixels",
+      groups = "AdsTrackingPixelsOasis",
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
   public void adsTrackingPixelsOnConsecutivePagesOutsideUE(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver);
+    AdsBaseObject ads = new AdsBaseObject();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_ARTICLE1_PAGE);
@@ -461,7 +461,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @UnsafePageLoad
   @Test(
       dataProviderClass = TrackingOptInDataProvider.class,
-      groups = "AdsTrackingPixels",
+      groups = "AdsTrackingPixelsOasis",
       dataProvider = "adsTrackingPixelsSent"
   )
   public void adsTrackingPixelsOutsideUE(List<String> urlPatterns) {

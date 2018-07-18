@@ -21,7 +21,7 @@ public class AdsVelesObject extends AdsBaseObject {
   public static final String NO_OFFER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
   
   public AdsVelesObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public boolean isVelesPlayerInIncontentSlotDisplayed() {

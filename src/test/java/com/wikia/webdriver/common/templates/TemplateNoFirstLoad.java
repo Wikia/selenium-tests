@@ -14,7 +14,7 @@ public class TemplateNoFirstLoad extends NewTestTemplate {
   }
 
   protected AdsBaseObject openPageWithVideoInLocalStorage(Page page, VideoAd videoAd) {
-    final AdsBaseObject ads = new AdsBaseObject(driver, UrlBuilder.createUrlBuilderForWiki("project43").getUrl());
+    final AdsBaseObject ads = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki("project43").getUrl());
     putVASTToLocalStorage(videoAd.getVastXML());
     ads.getUrl(page);
     return ads;

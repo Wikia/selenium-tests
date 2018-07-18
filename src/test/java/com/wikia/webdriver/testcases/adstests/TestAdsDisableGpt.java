@@ -51,7 +51,7 @@ public class TestAdsDisableGpt extends TemplateNoFirstLoad {
     if (StringUtils.isNotEmpty(instantGlobals)) {
       url = urlBuilder.appendQueryStringToURL(url, instantGlobals);
     }
-    new AdsBaseObject(driver, url)
+    new AdsBaseObject(url)
         .verifyProvidersChain(slotName, disasterProviders);
   }
 }

@@ -23,7 +23,6 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   private AdsBaseObject openPage(Page page) {
     final AdsBaseObject adsBaseObject = new AdsBaseObject(
-        driver,
         page.getUrl()
     );
 
