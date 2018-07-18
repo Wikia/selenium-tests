@@ -463,7 +463,7 @@ public class WikiBasePageObject extends BasePageObject {
    */
   public void logOut() {
     try {
-      getGlobalNavigation().clickSignOut();
+      getGlobalNavigation().clickAvatarAndSignOut();
     } catch (TimeoutException e) {
       Log.log("logOut", "page loads for more than 30 seconds", true);
     }

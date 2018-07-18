@@ -7,10 +7,12 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.AnnouncementsPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
@@ -29,7 +31,7 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
         String login = "QA" + Long.toString(DateTime.now().getMillis());
         String pass = Long.toString(DateTime.now().getMillis());
 
-        //Create account and edit an article on a wiki
+        //Create regular user account and edit an article on a wiki
         SignUpUser newUser = new SignUpUser(
                 login,
                 new Credentials().emailQaart1,
@@ -39,11 +41,14 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
         UserRegistration.registerUserEmailConfirmed(newUser);
         GlobalNavigation nav = new PostsListPage().open().getGlobalNavigation();
         nav.clickOnSignIn().login(login, pass);
-        new ArticleContent().push(articleName, articleName);
-        new ArticlePage().open(articleName).navigateToArticleEditPage().clearContent().clickPublishButton();
-        nav.clickUserAvatar().clickSignOut();
 
-        
+        new ArticleContent().push(articleName, articleName);
+        new ArticlePageObject().open(articleName).openCKModeWithMainEditButton().clearContent().clickPublishButton();
+        nav.clickAvatarAndSignOut();
+
+        //Staff user creates an announcements
+        nav.clickOnSignIn().login(User.STAFF.getUserName(), User.STAFF.getPassword());
+        new AnnouncementsPage().open();
 
     }
 

@@ -224,7 +224,7 @@ public class GlobalNavigation extends BasePageObject {
     return this;
   }
 
-  public void clickSignOut() {
+  public void clickAvatarAndSignOut() {
     clickUserAvatar();
     wait.forElementClickable(signOutButton).click();
     Log.info("link to sign out clicked");
