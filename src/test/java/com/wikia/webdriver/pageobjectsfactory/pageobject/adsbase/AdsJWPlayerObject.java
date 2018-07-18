@@ -110,7 +110,7 @@ public class AdsJWPlayerObject extends BasePageObject {
   }
 
   public void clickVolumeButton() {
-    builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(1000).click(volumeButton).perform();
+    builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(1000).moveToElement(volumeButton, 30, 30).click().perform();
   }
 
   public void allowToPlayVideoForSomeTime(Duration duration) {
