@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 
@@ -469,6 +470,20 @@ public class CommonExpectedConditions {
       @Override
       public Boolean apply(WebDriver driver) {
         return expectedValue.equals(driver.findElement(bySelector).getCssValue(cssProperty));
+      }
+    };
+  }
+
+  public static ExpectedCondition<Boolean> scriptToExecute(final String script) {
+    return new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver driver) {
+        try{
+          new JavascriptActions(driver).execute(script);
+        }catch(WebDriverException e){
+          return false;
+        }
+        return true;
       }
     };
   }
