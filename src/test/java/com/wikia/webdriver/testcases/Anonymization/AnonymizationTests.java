@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.Anonymization;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -37,6 +38,7 @@ public class AnonymizationTests extends NewTestTemplate {
       "We don't recognize these credentials. Try again or register a new account.";
 
   @Test
+  @DontRun(env = "sandbox-https")
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
