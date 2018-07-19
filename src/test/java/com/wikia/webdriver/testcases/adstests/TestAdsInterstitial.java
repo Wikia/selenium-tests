@@ -14,22 +14,15 @@ import org.testng.annotations.Test;
 
 public class TestAdsInterstitial extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = "TestInterstitialOasis",
-      dataProvider = "interstitialOasis"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, groups = "TestInterstitialOasis", dataProvider = "interstitialOasis")
   public void adsInterstitialAdOnOasis(Page page, Dimension adSize) throws InterruptedException {
     testInterstitial(page, adSize);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = "TestInterstitialMercury",
-      dataProvider = "interstitialMercury"
-  )
-  public void adsInterstitialAdOnMobileInPortraitPosition(Page page,  Dimension adSize) throws InterruptedException {
+  @Test(dataProviderClass = AdsDataProvider.class, groups = "TestInterstitialMercury", dataProvider = "interstitialMercury")
+  public void adsInterstitialAdOnMobileInPortraitPosition(Page page, Dimension adSize)
+      throws InterruptedException {
     testInterstitial(page, adSize);
   }
 
@@ -38,7 +31,9 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     adsInterstitial.getUrl(page);
 
     adsInterstitial.waitForPageLoadedWithGpt();
-    Assertion.assertTrue(adsInterstitial.isInterstitialAdDisplayed(), "No Interstitial ad is not displayed");
+    Assertion.assertTrue(adsInterstitial.isInterstitialAdDisplayed(),
+                         "No Interstitial ad is not displayed"
+    );
     adsInterstitial.verifySize(adSize);
     adsInterstitial.closeInterstitial();
     adsInterstitial.verifyInterstitialIsClosed();

@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "vidauto", language = "de")

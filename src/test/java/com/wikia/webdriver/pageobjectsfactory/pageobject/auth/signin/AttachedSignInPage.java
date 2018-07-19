@@ -8,6 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -63,7 +64,6 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   @Override
   public void login(User user) {
     login(user.getUserName(), user.getPassword());
-
   }
 
   @Override

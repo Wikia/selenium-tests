@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
+
 import lombok.Getter;
 
 public class FollowPage extends PageWithPosts {

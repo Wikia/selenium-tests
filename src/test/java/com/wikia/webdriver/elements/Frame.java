@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.function.Supplier;
 
 public class Frame {
+
   private final WebDriver webDriver;
   private final WebElement frameElement;
 

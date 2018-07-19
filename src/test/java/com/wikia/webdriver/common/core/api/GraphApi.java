@@ -1,14 +1,11 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.List;
-
+import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.helpers.FacebookUser;
 import com.wikia.webdriver.common.logging.Log;
+
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,31 +19,45 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.WebDriverException;
 
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
-
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.helpers.FacebookUser;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.List;
 
 public class GraphApi {
 
-  private static final String ERROR_MESSAGE =
-      "Problem with Graph API call used to create new facebook test user";
+  private static final String
+      ERROR_MESSAGE
+      = "Problem with Graph API call used to create new facebook test user";
   private static final String URI_SYNTAX_EXCEPTION = "URI_SYNTAX EXCEPTION";
-  private static final String WIKIA_PRODUCTION_APP_ACCESS_TOKEN =
-      XMLReader.getValue("ci.user.facebook.prod.accessToken");
-  private static final String WIKIA_PRODUCTION_APP_ID =
-      XMLReader.getValue("ci.user.facebook.prod.appId");
+  private static final String WIKIA_PRODUCTION_APP_ACCESS_TOKEN = XMLReader.getValue(
+      "ci.user.facebook.prod.accessToken");
+  private static final String WIKIA_PRODUCTION_APP_ID = XMLReader.getValue(
+      "ci.user.facebook.prod.appId");
 
   private static HttpDelete getHttpDelete(URL url) throws URISyntaxException {
-    return new HttpDelete(new URIBuilder((new URI(url.getProtocol(), url.getUserInfo(),
-        url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef())))
-            .addParameter("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN).build());
+    return new HttpDelete(new URIBuilder((new URI(url.getProtocol(),
+                                                  url.getUserInfo(),
+                                                  url.getHost(),
+                                                  url.getPort(),
+                                                  url.getPath(),
+                                                  url.getQuery(),
+                                                  url.getRef()
+    ))).addParameter("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN).build());
   }
 
   private static HttpPost getHttpPost(URL url) throws URISyntaxException {
-    return new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-        url.getPath(), url.getQuery(), url.getRef()));
+    return new HttpPost(new URI(url.getProtocol(),
+                                url.getUserInfo(),
+                                url.getHost(),
+                                url.getPort(),
+                                url.getPath(),
+                                url.getQuery(),
+                                url.getRef()
+    ));
   }
 
   public FacebookUser createFacebookTestUser() {
@@ -59,7 +70,6 @@ public class GraphApi {
       Log.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     }
-
   }
 
   public void deleteFacebookTestUser(String userId) {
@@ -69,7 +79,6 @@ public class GraphApi {
       Log.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     }
-
   }
 
   private String getURLCreateUser(String appId) {
@@ -81,14 +90,17 @@ public class GraphApi {
   }
 
   private List<BasicNameValuePair> getParams() {
-    return Collections
-        .singletonList(new BasicNameValuePair("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN));
+    return Collections.singletonList(new BasicNameValuePair("access_token",
+                                                            WIKIA_PRODUCTION_APP_ACCESS_TOKEN
+    ));
   }
 
   private HttpResponse createTestUser(String appId) throws IOException, URISyntaxException {
     URL url = new URL(getURLCreateUser(appId));
-    CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries()
-        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+    CloseableHttpClient httpClient = HttpClientBuilder.create()
+        .disableAutomaticRetries()
+        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+        .build();
     HttpPost httpPost = getHttpPost(url);
     httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
     return httpClient.execute(httpPost);
@@ -96,8 +108,10 @@ public class GraphApi {
 
   private HttpResponse deleteTestUser(String userId) throws IOException, URISyntaxException {
     URL url = new URL(getURLDeleteUser(userId));
-    CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries()
-        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+    CloseableHttpClient httpClient = HttpClientBuilder.create()
+        .disableAutomaticRetries()
+        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+        .build();
     HttpDelete httpDelete = getHttpDelete(url);
     return httpClient.execute(httpDelete);
   }

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.DeleteMWVideo;
@@ -13,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
+import org.testng.annotations.Test;
+
 @Test(groups = {"VetTests", "SpecialVideo", "Media"})
 @Execute(onWikia = "sustainingtest")
 public class VetSpecialVideosTests extends NewTestTemplate {
@@ -21,7 +21,9 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   @Execute(asUser = User.SUS_REGULAR_USER2)
   public void StaffCanDeleteFilePage() {
     YoutubeVideo video = new YoutubeVideo("TEST VIDEO",
-        "https://www.youtube.com/watch?v=C0DPdy98e4c", "C0DPdy98e4c");
+                                          "https://www.youtube.com/watch?v=C0DPdy98e4c",
+                                          "C0DPdy98e4c"
+    );
 
     new DeleteMWVideo(video.getTitle()).call();
 
@@ -50,5 +52,4 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
     specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
   }
-
 }

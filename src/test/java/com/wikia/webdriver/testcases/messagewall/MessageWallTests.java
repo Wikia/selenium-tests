@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.messagewall;
 
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
@@ -21,6 +17,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPage;
+
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 @Execute(onWikia = "sustainingtest")
 @Test(groups = {"MessageWall"})
@@ -157,8 +157,8 @@ public class MessageWallTests extends NewTestTemplate {
    * unClosedDivComment 2. refresh the page 3. make sure that reply area avatar doesn't appear by
    * default
    */
-  @Test(
-      groups = {"MessageWall_007", "MeArticleTOCTestsArticleTOCTestsssageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_007", "MeArticleTOCTestsArticleTOCTestsssageWall",
+                  "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void CreatingMessageWithUnclosedTagDoesNotShowAvatar() {
     MessageWall wall = new MessageWall().open(User.USER_11.getUserName());
@@ -196,7 +196,8 @@ public class MessageWallTests extends NewTestTemplate {
    * messageWall 3. QATestsBlockedUser should be able to post on his MessageWall 4.
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
-  @Test(dependsOnMethods = {"blockUserIfUnblocked"}, groups = {"MessageWall_008", "MessageWallTests"})
+  @Test(dependsOnMethods = {"blockUserIfUnblocked"}, groups = {"MessageWall_008",
+                                                               "MessageWallTests"})
   @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   public void blockedUserCanCreatePostOnHerMessageWall() {
     MessageWall wall = new MessageWall().open(User.CONSTANTLY_BLOCKED_USER.getUserName());
@@ -231,9 +232,10 @@ public class MessageWallTests extends NewTestTemplate {
     wall.submit();
 
     wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
-    Assertion.assertTrue(new SpecialWikiActivityPageObject()
-      .open()
-      .isNewWallThreadActivityDisplayed(title, User.USER_MESSAGE_WALL.getUserName(), message),
-      String.format("WikiActivity page does not contain entry for new wall post: %s.", title));
+    Assertion.assertTrue(
+        new SpecialWikiActivityPageObject().open()
+            .isNewWallThreadActivityDisplayed(title, User.USER_MESSAGE_WALL.getUserName(), message),
+        String.format("WikiActivity page does not contain entry for new wall post: %s.", title)
+    );
   }
 }

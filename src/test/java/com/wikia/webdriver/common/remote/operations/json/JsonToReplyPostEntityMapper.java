@@ -1,7 +1,8 @@
 package com.wikia.webdriver.common.remote.operations.json;
 
-import com.jayway.jsonpath.DocumentContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
+
+import com.jayway.jsonpath.DocumentContext;
 
 public class JsonToReplyPostEntityMapper {
 
@@ -13,11 +14,10 @@ public class JsonToReplyPostEntityMapper {
 
   public ReplyEntityData toData() {
     return ReplyEntityData.builder()
-      .id(json.read("$.id"))
-      .threadId(json.read("$.threadId"))
-      .body(json.read("$.rawContent"))
-      .authorId(json.read("$.creatorId"))
-      .build();
+        .id(json.read("$.id"))
+        .threadId(json.read("$.threadId"))
+        .body(json.read("$.rawContent"))
+        .authorId(json.read("$.creatorId"))
+        .build();
   }
-
 }

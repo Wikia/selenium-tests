@@ -8,64 +8,45 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+
 import org.testng.annotations.Test;
 
 public class TestAdsFandom extends AdsFandomTestTemplate {
-  @Test(
-      groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
-  )
+
+  @Test(groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"})
   public void adsFandomAdsArticleDesktop() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_NON_UAP_ARTICLE);
     verifySlots(fandomPage);
   }
 
-  @Test(
-      groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
-  )
+  @Test(groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"})
   public void adsFandomAdsTopicDesktop() {
     AdsFandomObject fandomPage = loadTopic(FandomAdsDataProvider.PAGE_NON_UAP_TOPIC);
     verifySlots(fandomPage);
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"})
   public void adsFandomAdsArticleMobile() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_NON_UAP_ARTICLE);
     verifySlots(fandomPage);
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"})
   public void adsFandomAdsTopicMobile() {
     AdsFandomObject fandomPage = loadTopic(FandomAdsDataProvider.PAGE_NON_UAP_TOPIC);
     verifySlots(fandomPage);
   }
 
-  @Test(
-      groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
-  )
+  @Test(groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"})
   public void adsFandomAdsArticleUAPDesktop() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     verifyUAPSlots(fandomPage);
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"})
   public void adsFandomAdsArticleUAPMobile() {
     AdsFandomObject fandomPage = loadArticle(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
     verifyUAPSlots(fandomPage);

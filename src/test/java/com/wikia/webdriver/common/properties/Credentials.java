@@ -226,8 +226,12 @@ public class Credentials {
     emailQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.username");
     emailPasswordQaart4 = XMLReader.getValue(file, "ci.email.qawikia4.password");
 
-    emailAnonymousUserTestWikia = XMLReader.getValue(file, "ci.email.anonymoususertestwikia.username");
-    emailAnonymousUserTestWikiaPassword = XMLReader.getValue(file, "ci.email.anonymoususertestwikia.password");
+    emailAnonymousUserTestWikia = XMLReader.getValue(file,
+                                                     "ci.email.anonymoususertestwikia.username"
+    );
+    emailAnonymousUserTestWikiaPassword = XMLReader.getValue(file,
+                                                             "ci.email.anonymoususertestwikia.password"
+    );
 
     forgottenPasswordEmail1Address = XMLReader.getValue(file, "ci.email.forgotPass1.username");
     forgottenPasswordEmail1Password = XMLReader.getValue(file, "ci.email.forgotPass1.password");

@@ -1,23 +1,21 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ResetPasswordPage extends BasePageObject implements FormPage {
 
+  private static final String PASSWORD_RESET_SUCCESS = "Your password has been reset.";
   @FindBy(id = "newPassword")
   private WebElement newPasswordInput;
   @FindBy(id = "confirmNewPassword")
   private WebElement newPasswordConfirmationInput;
   @FindBy(id = "resetPasswordSubmit")
   private WebElement resetPasswordButton;
-  @FindBy (css = ".second-card .auth-header")
+  @FindBy(css = ".second-card .auth-header")
   private WebElement secondCardHeader;
-
-  private static final String PASSWORD_RESET_SUCCESS = "Your password has been reset.";
-
   private AuthPageContext authContext;
 
   public ResetPasswordPage(String url) {

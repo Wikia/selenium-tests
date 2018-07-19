@@ -52,7 +52,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = "CustomizeToolbar002")
   @Execute(asUser = User.USER_2)
-    // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
+  // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
   public void CustomizeToolbar002_Editing() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
@@ -83,7 +83,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar004"})
   @Execute(asUser = User.USER_2)
-    // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
+  // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
   public void CustomizeToolbar004_Finding() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
@@ -96,7 +96,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar005"})
   @Execute(asUser = User.USER_2)
-    // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
+  // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
   public void CustomizeToolbar005_ResetDefaults() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
@@ -135,7 +135,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   @Test(groups = {"CustomizeToolbar007"})
   @Execute(asUser = User.USER_2)
   @InBrowser(browserSize = BROWSER_SIZE)
-    public void CustomizeToolbar007_MoreButton() {
+  public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.addManyItems(toolPreferences, 8);

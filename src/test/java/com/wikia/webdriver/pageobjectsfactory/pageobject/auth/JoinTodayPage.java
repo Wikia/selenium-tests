@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -38,5 +39,4 @@ public class JoinTodayPage extends BasePageObject {
   public boolean isDisplayed() {
     return wait.forElementNotVisible(overlay);
   }
-
 }

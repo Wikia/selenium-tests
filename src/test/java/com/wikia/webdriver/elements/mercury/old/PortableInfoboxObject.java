@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.Log;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class PortableInfoboxObject extends WikiBasePageObject{
+public class PortableInfoboxObject extends WikiBasePageObject {
 
   @FindBy(css = "body")
   private WebElement bodyElement;
@@ -157,8 +157,7 @@ public class PortableInfoboxObject extends WikiBasePageObject{
   public PortableInfoboxObject clickNextImageArrow(int childIndex) {
     //'By' is needed here because we have to compute position of the nextImageArrow selector for each run.
     By nextImageArrow = By.cssSelector(".pi-image:nth-child(" + childIndex + ") .action-next");
-    wait.forElementClickable(nextImageArrow)
-        .click();
+    wait.forElementClickable(nextImageArrow).click();
 
     return this;
   }

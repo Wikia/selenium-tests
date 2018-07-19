@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
-import org.apache.http.client.methods.HttpGet;
 
+import org.apache.http.client.methods.HttpGet;
 
 public class GetRemoteOperation extends BaseRemoteOperation {
 

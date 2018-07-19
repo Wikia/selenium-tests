@@ -15,8 +15,10 @@ public class GoogleConnect extends NewTestTemplate {
   public void connectedUserCanLogInToWikiaByGoogle() {
     GoogleConnectPage googleConnectPage = new GoogleConnectPage(driver).open();
 
-    googleConnectPage.signInWithGoogleAccount(Configuration.getCredentials().emailQaart4,
-                                              Configuration.getCredentials().emailPasswordQaart4);
+    googleConnectPage.signInWithGoogleAccount(
+        Configuration.getCredentials().emailQaart4,
+        Configuration.getCredentials().emailPasswordQaart4
+    );
 
     Assertion.assertTrue(googleConnectPage.isUserLoggedIn());
 

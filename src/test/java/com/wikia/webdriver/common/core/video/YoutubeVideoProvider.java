@@ -1,10 +1,10 @@
 package com.wikia.webdriver.common.core.video;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.Log;
+
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -19,10 +19,9 @@ import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.ReadContext;
-
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class YoutubeVideoProvider {
 
@@ -32,13 +31,14 @@ public class YoutubeVideoProvider {
 
   /**
    * This method returns latest youtube video(added no longer then hour ago) for a specified query.
-   * This one is using a YouTube Data API (v3) - see for reference -
-   * https://developers.google.com/youtube/v3/
+   * This one is using a YouTube Data API (v3) - see for reference - https://developers.google.com/youtube/v3/
    */
   public static YoutubeVideo getLatestVideoForQuery(String searchQuery) {
     HttpClient httpclient = HttpClientBuilder.create()
-        .setConnectionBackoffStrategy(new DefaultBackoffStrategy()).disableAutomaticRetries()
-        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+        .setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+        .disableAutomaticRetries()
+        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+        .build();
 
     List<NameValuePair> nvps = new ArrayList<>();
 
@@ -48,7 +48,10 @@ public class YoutubeVideoProvider {
     nvps.add(new BasicNameValuePair("maxResults", "10"));
     nvps.add(new BasicNameValuePair("q", searchQuery));
     nvps.add(new BasicNameValuePair("publishedAfter",
-        DateTime.now(DateTimeZone.forID("UTC")).minusMinutes(60).toString()));
+                                    DateTime.now(DateTimeZone.forID("UTC"))
+                                        .minusMinutes(60)
+                                        .toString()
+    ));
     nvps.add(new BasicNameValuePair("type", "video"));
 
     HttpGet httpPost = new HttpGet(
@@ -69,7 +72,6 @@ public class YoutubeVideoProvider {
       videoId = responseValue.read("$.items[0].id.videoId");
 
       videoUrl = String.format("https://www.youtube.com/watch?v=%s", videoId);
-
     } catch (IOException e) {
       Log.log("A problem occurred while receiving a YouTube video", e, false);
     }

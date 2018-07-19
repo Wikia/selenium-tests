@@ -2,9 +2,9 @@ package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 
 public class SortingFilterDesktop extends BasePage {
 
@@ -23,7 +23,10 @@ public class SortingFilterDesktop extends BasePage {
     } else if (option == SortOption.TRENDING) {
       waitAndClick(trendingFilter);
     } else {
-      throw new IllegalArgumentException(String.format("Option %s not supported in sorting", option));
+      throw new IllegalArgumentException(String.format(
+          "Option %s not supported in sorting",
+          option
+      ));
     }
     return this;
   }
@@ -32,5 +35,4 @@ public class SortingFilterDesktop extends BasePage {
     wait.forElementVisible(fieldset);
     return isElementEnabled(fieldset);
   }
-
 }

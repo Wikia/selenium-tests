@@ -16,8 +16,8 @@ import org.testng.annotations.Test;
 public class ModalTests extends NewTestTemplate {
 
   @CreationTicket(ticketID = "CONCF-621")
-  @Test(groups = {"ModalTests_verifyScrollbarAppears_001", "ModalTests"},
-      dataProvider = "DimensionDataProvider")
+  @Test(groups = {"ModalTests_verifyScrollbarAppears_001",
+                  "ModalTests"}, dataProvider = "DimensionDataProvider")
   @Execute(asUser = User.USER)
   public void ModalTests_verifyScrollbarAppears(Dimension dimension) {
     String errorMessage = "can not scroll window";
@@ -31,10 +31,8 @@ public class ModalTests extends NewTestTemplate {
     Assertion.assertTrue(galleryBuilder.isFinishButtonVisibleOnPage(), errorMessage);
   }
 
-
   @DataProvider(name = "DimensionDataProvider")
   public final Dimension[][] DimensionProvider() {
     return new Dimension[][]{{new Dimension(1100, 570)}, {new Dimension(800, 570)}};
   }
-
 }

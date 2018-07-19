@@ -47,9 +47,10 @@ public class SpecialRenameUserPage extends SpecialPageObject {
     return encodedString;
   }
 
-  public SpecialRenameUserPage fillFormData(String newUsername, String confirmUsername, String
-      password) {
-    jsActions.scrollBy(0,400);
+  public SpecialRenameUserPage fillFormData(
+      String newUsername, String confirmUsername, String password
+  ) {
+    jsActions.scrollBy(0, 400);
 
     wait.forElementClickable(confirmNewUsernameTextBox);
     newUsernameTextBox.sendKeys(newUsername);
@@ -61,7 +62,7 @@ public class SpecialRenameUserPage extends SpecialPageObject {
   public SpecialRenameUserPage submitChange() {
     try {
       Thread.sleep(10000);
-    }catch (Exception e){
+    } catch (Exception e) {
 
     }
 

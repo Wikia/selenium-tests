@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -20,5 +21,4 @@ public class FacebookAuthContext extends BasePageObject {
   protected boolean isConnectWithFacebookButtonVisible() {
     return wait.forElementVisible(connectWithFacebookButton).isDisplayed();
   }
-
 }

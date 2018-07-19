@@ -28,7 +28,7 @@ public class ErrorMessages extends BasePageObject {
     return emptyPostsListMessageCopy.getText();
   }
 
-  public String getErrorMessageText(){
+  public String getErrorMessageText() {
     return errorMessage.getText();
   }
 }

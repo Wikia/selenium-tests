@@ -10,15 +10,12 @@ import org.testng.annotations.Test;
 public class TestAdsSpotlights extends TemplateNoFirstLoad {
 
   private static final String WIKIA_FOOTER = "#WikiaFooter";
-  
-  @Test(
-      dataProvider = "spotlights",
-      dataProviderClass = AdsDataProvider.class,
-      groups = {"AdsSpotlightsOasis"}
-  )
+
+  @Test(dataProvider = "spotlights", dataProviderClass = AdsDataProvider.class, groups = {
+      "AdsSpotlightsOasis"})
   public void adsSpotlightsOasis(String wikiName, String article) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject wikiPage = new AdsBaseObject(testedPage);
     wikiPage.scrollToPosition(WIKIA_FOOTER);
     wikiPage.verifySpotlights();
   }

@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform;
 
-import java.util.List;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedEditorFormPageObject;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedEditorFormPageObject;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
+import java.util.List;
 
 public class SectionItemListPageObject extends CuratedEditorFormPageObject {
 

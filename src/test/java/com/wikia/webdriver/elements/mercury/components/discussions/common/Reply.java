@@ -2,12 +2,12 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-
 
 public class Reply extends BasePageObject {
 
@@ -82,9 +82,10 @@ public class Reply extends BasePageObject {
 
   public boolean hasOpenGraph() {
     setShortImplicitWait();
-    boolean hasOpenGraph = !reply.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
+    boolean
+        hasOpenGraph
+        = !reply.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
     restoreDefaultImplicitWait();
     return hasOpenGraph;
   }
-
 }

@@ -1,11 +1,7 @@
 package com.wikia.webdriver.common.logging;
 
 public enum LogLevel implements LogData {
-  ERROR("error"),
-  OK("success"),
-  WARNING("warning"),
-  INFO("info"),
-  DEBUG("lowLevelAction");
+  ERROR("error"), OK("success"), WARNING("warning"), INFO("info"), DEBUG("lowLevelAction");
 
   private String cssClass;
 

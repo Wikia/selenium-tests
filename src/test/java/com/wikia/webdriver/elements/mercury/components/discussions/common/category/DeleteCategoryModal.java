@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -23,12 +24,11 @@ public class DeleteCategoryModal extends BasePage {
   }
 
   /**
-   *
    * @param categoryName name of destination category
    * @return this object
    */
   public DeleteCategoryModal clickPill(final String categoryName) {
-      categories.stream()
+    categories.stream()
         .filter(element -> element.getText().equalsIgnoreCase(categoryName))
         .collect(Collectors.toList())
         .get(0)

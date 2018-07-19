@@ -1,16 +1,11 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import org.joda.time.DateTime;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
@@ -22,6 +17,11 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 
+import org.joda.time.DateTime;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 @InBrowser(browser = Browser.CHROME)
 public class InfoboxBuilderTests extends NewTestTemplate {
 
@@ -30,12 +30,11 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   private static final String WIKI_WITH_EUROPA_THEME_ENABLED = "infoboxeuropathemetest";
   private static final String WIKI_WITH_EUROPA_THEME_DISABLED = "infoboxnoeuropathemetest";
 
-
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyDefaultStructure() {
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyDefaultStructure");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderVerifyDefaultStructure");
 
     Assertion.assertEquals(builderPage.countTitles(), 1);
     Assertion.assertEquals(builderPage.countImages(), 1);
@@ -51,8 +50,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void addingComponents() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("InfoboxBuilderAddingComponents");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderAddingComponents");
 
     int rowComponents = builderPage.countRows();
     int titleComponents = builderPage.countTitles();
@@ -81,15 +80,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.resetFrame();
 
     Assertion.assertEquals(templateName.toLowerCase(),
-        new TemplatePage().getHeaderText().toLowerCase());
+                           new TemplatePage().getHeaderText().toLowerCase()
+    );
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingDefaultComponents() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("InfoboxBuilderDeletingDefaultComponents");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderDeletingDefaultComponents");
 
     int rowComponents = builderPage.countRows();
     int titleComponents = builderPage.countTitles();
@@ -111,8 +111,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingDefaultComponentsUsingPopUp() {
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("InfoboxBuilderDeletingDefaultComponents");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderDeletingDefaultComponents");
 
     int rowComponents = builderPage.countRows();
     int titleComponents = builderPage.countTitles();
@@ -127,8 +127,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingAddedComponents() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("InfoboxBuilderDeletingAddedComponents");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderDeletingAddedComponents");
 
     int rowComponents = builderPage.countRows();
     int titleComponents = builderPage.countTitles();
@@ -163,8 +163,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     String labelText = "AutomatedTest";
     String labelLongText = "AutomatedTestVeryLongName";
 
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openExisting("InfoboxBuilderCustomizingComponents").selectHeaderWithIndex(0);
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
+        "InfoboxBuilderCustomizingComponents").selectHeaderWithIndex(0);
 
     builderSidebar.changeHeaderCollapsibilityState();
 
@@ -193,8 +193,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     TemplatePage template = new TemplatePage();
     Sidebar builderSidebar = new Sidebar();
 
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openExisting("SetInfoboxTitleToUseArticleName").deleteTitleUsingPopUp(0);
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
+        "SetInfoboxTitleToUseArticleName").deleteTitleUsingPopUp(0);
 
     builderSidebar.addTitleComponent();
     builderPage.selectTitleWithIndex(0);
@@ -211,9 +211,11 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void newInfoboxTemplateCreationRedirectsToInfoboxBuilder() {
-    new TemplateEditPage()
-        .open("NewInfoboxTemplateCreationRedirectsToInfoboxBuilder" + DateTime.now().getMillis())
-        .getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX).clickAddButton();
+    new TemplateEditPage().open(
+        "NewInfoboxTemplateCreationRedirectsToInfoboxBuilder" + DateTime.now().getMillis())
+        .getTemplateClassification()
+        .changeTemplateType(TemplateTypes.INFOBOX)
+        .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
@@ -222,8 +224,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifySidebarBackArrow() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
+        "InfoboxBuilderVerifyInterfaceFunctionality");
 
     builderPage.selectRowWithIndex(0);
     builderSidebar.clickBackArrow();
@@ -246,8 +248,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = "infoboxeuropathemetest")
   @RelatedIssue(issueID = "XW-3615")
   public void verifyInfoboxPreviewTheme() {
-    new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
-        "Template:InfoboxBuilderVerifyInfoboxTheme");
+    new ArticleContent().push(
+        ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
+        "Template:InfoboxBuilderVerifyInfoboxTheme"
+    );
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
     SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject();
@@ -257,8 +261,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     themeDesigner.submitTheme();
 
     String templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
-    String previewBgColor =
-        builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
+    String previewBgColor = builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme")
+        .getPreviewBackgroundColor();
 
     Assertion.assertEquals(previewBgColor, templateBgColor);
 
@@ -266,8 +270,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     themeDesigner.submitTheme();
 
     templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
-    previewBgColor =
-        builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
+    previewBgColor = builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme")
+        .getPreviewBackgroundColor();
 
     Assertion.assertEquals(templateBgColor, previewBgColor);
   }
@@ -290,8 +294,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyUserInteractions() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openNew("InfoboxBuilderVerifySelectedBorderStyling").hoverMouseOverComponent(0);
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderVerifySelectedBorderStyling").hoverMouseOverComponent(0);
 
     Assertion.assertTrue(builderPage.isTooltipVisible(), "Component tooltip is not visible");
 
@@ -306,8 +310,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage infoboxBuilder =
-        new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering");
+    InfoboxBuilderPage infoboxBuilder = new InfoboxBuilderPage().openNew(
+        "InfoboxBuilderVerifyReordering");
 
     builderSidebar.addRowComponent();
     infoboxBuilder.selectRowWithIndex(0);
@@ -355,8 +359,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     new Subhead().clickPublish();
 
-    String invocationLabelText =
-        new PortableInfobox().open("InfoboxBuilderImmutableExample").getDataLabelTextWithIndex(0);
+    String invocationLabelText = new PortableInfobox().open("InfoboxBuilderImmutableExample")
+        .getDataLabelTextWithIndex(0);
 
     Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
@@ -364,8 +368,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorClickOnModalBackground() {
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source");
+    InfoboxBuilderPage
+        builderPage
+        = new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source");
 
     new Sidebar().clickGoToSourceButton();
 
@@ -380,8 +385,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorSaveChanges() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openExisting("Infobox_verify_go_to_source_save_changes");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
+        "Infobox_verify_go_to_source_save_changes");
 
     builderSidebar.addRowComponent();
     builderPage.selectRowWithIndex(1);
@@ -401,8 +406,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorDropChanges() {
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source_drop_changes");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "Infobox_verify_go_to_source_drop_changes");
 
     new Sidebar().clickGoToSourceButton();
 
@@ -449,8 +454,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyChevronTooltip() {
     Sidebar builderSidebar = new Sidebar();
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
+        "InfoboxBuilderChevronPopup");
 
     Assertion.assertTrue(builderPage.isSectionTooltipPresentBelow(0));
     Assertion.assertTrue(builderPage.isSectionTooltipPresentAbove(1));
@@ -465,8 +470,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = WIKI_WITH_EUROPA_THEME_ENABLED)
   public void verifyLoadingEuropaTheme() {
-    new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
-        "Template:Infobox_theme_europa");
+    new ArticleContent().push(
+        ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
+        "Template:Infobox_theme_europa"
+    );
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_europa");
 
@@ -476,8 +483,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = WIKI_WITH_EUROPA_THEME_DISABLED)
   public void verifyLoadingDefaultTheme() {
-    new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
-        "Template:Infobox_theme_default");
+    new ArticleContent().push(
+        ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
+        "Template:Infobox_theme_default"
+    );
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
@@ -497,8 +506,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     final String templateName = "Infobox_other_content";
     final String infoboxRegexp = "(?s)<infobox[^>]*>.*</infobox>";
 
-    String beforePublish =
-        new TemplatePage().getRawContent(templateName).replaceAll(infoboxRegexp, "");
+    String beforePublish = new TemplatePage().getRawContent(templateName)
+        .replaceAll(infoboxRegexp, "");
 
     new TemplatePage().open(templateName).loginAs(User.USER_4);
 
@@ -511,8 +520,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     builderPage.logOut();
 
-    String afterPublish =
-        new TemplatePage().getRawContent(templateName).replaceAll(infoboxRegexp, "");
+    String afterPublish = new TemplatePage().getRawContent(templateName)
+        .replaceAll(infoboxRegexp, "");
 
     Assert.assertEquals(beforePublish, afterPublish);
   }
@@ -549,6 +558,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.waitUntilEditTitleModalIsClosed();
 
     Assertion.assertEquals(subhead.getSubheadTitle(),
-        "Editing template: InfoboxBuilderChangeTemplateNameBySubhead");
+                           "Editing template: InfoboxBuilderChangeTemplateNameBySubhead"
+    );
   }
 }

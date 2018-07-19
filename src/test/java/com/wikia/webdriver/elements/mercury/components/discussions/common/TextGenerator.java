@@ -23,6 +23,7 @@ public final class TextGenerator {
   }
 
   public static String createUniqueCategoryName() {
-    return String.format(CATEGORY_NAME_FORMAT, System.currentTimeMillis()).substring(0, MAX_CATEGORY_NAME_LENGTH);
+    return String.format(CATEGORY_NAME_FORMAT, System.currentTimeMillis())
+        .substring(0, MAX_CATEGORY_NAME_LENGTH);
   }
 }

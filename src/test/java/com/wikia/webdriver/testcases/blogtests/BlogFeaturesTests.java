@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.blogtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -24,6 +22,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
+
+import org.testng.annotations.Test;
 
 @Test(groups = "BlogFeaturesTests")
 @Execute(asUser = User.BLOGS)
@@ -93,8 +93,9 @@ public class BlogFeaturesTests extends NewTestTemplate {
     String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
     VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
     VetAddVideoComponentObject vetAddVideo = blogEdit.clickVideoButton();
-    VetOptionsComponentObject vetOptions =
-        vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     blogEdit.verifyVideo();

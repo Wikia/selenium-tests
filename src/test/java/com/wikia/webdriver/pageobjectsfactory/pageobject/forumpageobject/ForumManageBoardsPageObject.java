@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,8 +51,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   private void typeBoradDescription(String description) {
     wait.forElementVisible(boardDescriptionField);
     boardDescriptionField.sendKeys(description);
-    Log
-        .log("typeBoardDescription", "board description: '" + description + "' typed in", true);
+    Log.log("typeBoardDescription", "board description: '" + description + "' typed in", true);
   }
 
   private void submitNewBoard() {
@@ -74,10 +74,8 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   private void clickDeleteForum(String name) {
-    WebElement
-        deleteButton =
-        wait.forElementVisible(By.xpath(
-            "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']"));
+    WebElement deleteButton = wait.forElementVisible(By.xpath(
+        "//a[contains(text(), '" + name + "')]/../..//img[@class='sprite trash']"));
     scrollAndClick(deleteButton);
     Log.log("clickDeleteForum", "delete forum button clicked", true);
   }
@@ -97,11 +95,11 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   private void verifyForumDeletedText(String deletedName) {
-    Assertion.assertListContains(
-        getNotifications(NotificationType.CONFIRM).stream()
-            .map(Notification::getMessage)
-            .collect(Collectors.toList()),
-            "\"Board:" + deletedName + "\" has been deleted.");
+    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream()
+                                     .map(Notification::getMessage)
+                                     .collect(Collectors.toList()),
+                                 "\"Board:" + deletedName + "\" has been deleted."
+    );
     Log.log("verifyForumDeletedText", "forum deleted text verified", true);
   }
 
@@ -120,8 +118,8 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     } catch (UnsupportedEncodingException e) {
       Log.log("verifyForumExists", e, false);
     }
-    wait.forElementVisible(
-        By.xpath("//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
+    wait.forElementVisible(By.xpath(
+        "//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
     Log.log("verifyForumExists", "verified forum exists", true);
   }
@@ -136,15 +134,14 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
         getNotifications(NotificationType.WARN).stream()
             .map(Notification::getMessage)
             .collect(Collectors.toList()),
-        "There is no Forum Board with that title. Please try again or check out this list of Forum Boards.");
+        "There is no Forum Board with that title. Please try again or check out this list of Forum Boards."
+    );
     Log.log("verifyForumNotExists", "verified forum not exists", true);
   }
 
   private void clickModifyForum(String forumName) {
-    WebElement
-        editPecil =
-        wait.forElementVisible(By.xpath(
-            "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']"));
+    WebElement editPecil = wait.forElementVisible(By.xpath(
+        "//a[contains(text(), '" + forumName + "')]/../..//img[@class='sprite edit-pencil']"));
     scrollAndClick(editPecil);
     Log.log("clickModifyForum", "modify forum button clicked", true);
   }
@@ -165,15 +162,15 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     submitNewBoard();
   }
 
-  public int getBoardPosition(String boardName){
-    return driver.findElement(By.xpath("//a[contains(text(), '" + boardName + "')]/..")).getLocation().getY();
+  public int getBoardPosition(String boardName) {
+    return driver.findElement(By.xpath("//a[contains(text(), '" + boardName + "')]/.."))
+        .getLocation()
+        .getY();
   }
 
   public void clickMoveDown(String forumName) {
-    WebElement
-        down =
-        wait.forElementVisible(By.xpath(
-            "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']"));
+    WebElement down = wait.forElementVisible(By.xpath(
+        "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']"));
     down.click();
     try {
       Thread.sleep(5000);
@@ -183,10 +180,8 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   public void clickMoveUp(String forumName) {
-    WebElement
-        up =
-        wait.forElementVisible(By.xpath(
-            "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']"));
+    WebElement up = wait.forElementVisible(By.xpath(
+        "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']"));
     up.click();
     try {
       Thread.sleep(5000);

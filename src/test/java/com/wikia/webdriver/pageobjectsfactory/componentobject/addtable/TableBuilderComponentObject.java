@@ -34,21 +34,13 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   public void typeAmountOfRows(int rows) {
     tablePropertiesInputs.get(0).clear();
     tablePropertiesInputs.get(0).sendKeys(Integer.toString(rows));
-    Log.log(
-        "typeAmountOfRows",
-        "amount of rows was typed: " + rows,
-        true
-    );
+    Log.log("typeAmountOfRows", "amount of rows was typed: " + rows, true);
   }
 
   public void typeAmountOfColumns(int columns) {
     tablePropertiesInputs.get(1).clear();
     tablePropertiesInputs.get(1).sendKeys(Integer.toString(columns));
-    Log.log(
-        "typeAmountOfColumns",
-        "amount of columns was typed: " + columns,
-        true
-    );
+    Log.log("typeAmountOfColumns", "amount of columns was typed: " + columns, true);
   }
 
   public void typeBorderSize(int border) {
@@ -72,25 +64,13 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   public void typeCellSpacing(int cellSpacing) {
     tablePropertiesInputs.get(5).clear();
     tablePropertiesInputs.get(5).sendKeys(Integer.toString(cellSpacing));
-    Log.log(
-        "typeCellSpacing",
-        "cell spacing was typed: " + cellSpacing,
-        true
-    );
+    Log.log("typeCellSpacing", "cell spacing was typed: " + cellSpacing, true);
   }
 
   public void typeCellPadding(int cellPadding) {
     tablePropertiesInputs.get(6).clear();
     tablePropertiesInputs.get(6).sendKeys(Integer.toString(cellPadding));
-    Log.log(
-        "typeCellPadding",
-        "cell padding was typed: " + cellPadding,
-        true, driver
-    );
-  }
-
-  public enum Headers {
-    NONE, FIRSTROW, FIRSTCOLUMN, BOTH
+    Log.log("typeCellPadding", "cell padding was typed: " + cellPadding, true, driver);
   }
 
   public void selectHeader(Headers header) {
@@ -115,20 +95,6 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
     Log.log("selectHeader", header.toString() + " header selected", true, driver);
   }
 
-  public enum Alignment {
-    LEFT, CENTER, RIGHT;
-
-    private final String label;
-
-    Alignment() {
-      this.label = StringUtils.capitalize(this.toString().toLowerCase());
-    }
-
-    public String getAlignment() {
-      return this.label;
-    }
-  }
-
   public void selectAlignment(Alignment position) {
     wait.forElementVisible(tablePropertiesDropdownOptions.get(1));
     Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
@@ -145,8 +111,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing alignment selected");
     }
-    Log
-        .log("selectPosition", position.getAlignment() + " position selected", true, driver);
+    Log.log("selectPosition", position.getAlignment() + " position selected", true, driver);
   }
 
   public void submitTable() {
@@ -155,4 +120,21 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
     Log.log("submitButton", "Table submited", true);
   }
 
+  public enum Headers {
+    NONE, FIRSTROW, FIRSTCOLUMN, BOTH
+  }
+
+  public enum Alignment {
+    LEFT, CENTER, RIGHT;
+
+    private final String label;
+
+    Alignment() {
+      this.label = StringUtils.capitalize(this.toString().toLowerCase());
+    }
+
+    public String getAlignment() {
+      return this.label;
+    }
+  }
 }

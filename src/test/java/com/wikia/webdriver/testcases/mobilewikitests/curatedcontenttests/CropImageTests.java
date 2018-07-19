@@ -19,15 +19,10 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Searc
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_CropImage")
-@Execute(
-    onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-    asUser = User.STAFF
-)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CropImageTests extends NewTestTemplate {
 
   private static final String SEARCH_IMAGE_QUERY = "U";
@@ -63,7 +58,8 @@ public class CropImageTests extends NewTestTemplate {
     itemForm.clickOnImage();
 
     Assertion.assertFalse(imageModal.isCropOptionEnabled(),
-                          "Crop option enabled - Should be disabled");
+                          "Crop option enabled - Should be disabled"
+    );
 
     imageModal.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
@@ -71,8 +67,9 @@ public class CropImageTests extends NewTestTemplate {
     croppingTool.clickDoneButton();
     itemForm.clickOnImage();
 
-    Assertion
-        .assertTrue(imageModal.isCropOptionEnabled(), "Crop option disabled - Should be enabled");
+    Assertion.assertTrue(imageModal.isCropOptionEnabled(),
+                         "Crop option disabled - Should be enabled"
+    );
 
     imageModal.selectCrop();
     Assertion.assertTrue(croppingTool.isCropperLoaded(), "Cropper not loaded - Should be loaded");

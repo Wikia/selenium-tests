@@ -36,6 +36,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"ArticleFeaturesCRUDUser"})
 @Execute(asUser = User.USER)
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
+
   private static final int ADDITIONAL_PROPERTY_VALUE = 10;
 
   @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
@@ -60,12 +61,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"Smoke"})
   public void modifyGallery() {
-    new ArticleContent().push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
-                              + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
+    new ArticleContent().push(
+        "<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n" + "Image010.jpg\n"
+        + "Image009.jpg\n" + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
-    GalleryBuilderComponentObject galleryBuiler =
-        (GalleryBuilderComponentObject) visualEditMode.modifyComponent(Components.GALLERY);
+    GalleryBuilderComponentObject
+        galleryBuiler
+        = (GalleryBuilderComponentObject) visualEditMode.modifyComponent(Components.GALLERY);
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
     galleryAddPhoto.search("image");
     galleryAddPhoto.choosePhotos(2);
@@ -81,10 +84,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_002"})
   public void deleteGallery() {
-    new ArticleContent().push("<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n"
-                              + "Image010.jpg\n" + "Image009.jpg\n" + "Image008.jpg\n"
-                              + "Image007.jpg\n"
-                              + "</gallery>");
+    new ArticleContent().push(
+        "<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n" + "Image010.jpg\n"
+        + "Image009.jpg\n" + "Image008.jpg\n" + "Image007.jpg\n" + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.GALLERY);
@@ -116,9 +118,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
     VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     SlideshowBuilderComponentObject
-        slideshowBuilder =
-        (SlideshowBuilderComponentObject) visualEditor.modifyComponent(
-            Components.SLIDESHOW);
+        slideshowBuilder
+        = (SlideshowBuilderComponentObject) visualEditor.modifyComponent(Components.SLIDESHOW);
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
     slideshowAddPhoto.search("image");
     slideshowAddPhoto.choosePhotos(8);
@@ -164,9 +165,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
     VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     SliderBuilderComponentObject
-        sliderBuilder =
-        (SliderBuilderComponentObject) visualEditor.modifyComponent(
-            Components.SLIDER);
+        sliderBuilder
+        = (SliderBuilderComponentObject) visualEditor.modifyComponent(Components.SLIDER);
     sliderBuilder.selectMenuPosition(MenuPositions.HORIZONTAL);
     AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
     sliderAddPhoto.search("image");
@@ -194,8 +194,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject vetOptions =
-        vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     visualEditMode.verifyVideo();
@@ -205,13 +206,13 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_009", "Media"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void modifyVideo() {
-    new ArticleContent()
-        .push("[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
+    new ArticleContent().push(
+        "[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetOptionsComponentObject
-        vetOptions =
-        (VetOptionsComponentObject) visualEditMode.modifyComponent(Components.VIDEO);
+        vetOptions
+        = (VetOptionsComponentObject) visualEditMode.modifyComponent(Components.VIDEO);
     vetOptions.setCaption(PageContent.CAPTION2);
     vetOptions.update();
     visualEditMode.verifyVideo();
@@ -221,8 +222,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke5", "Media"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void deleteVideo() {
-    new ArticleContent()
-        .push("[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
+    new ArticleContent().push(
+        "[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
 
@@ -266,11 +267,11 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.PHOTO);
   }
 
-  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
-      dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_014"})
-  public void addingTable(int border, int width, int height,
-                          int cellspacing, int cellpadding,
-                          Alignment alignment) {
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", groups = {
+      "ArticleFeaturesCRUDUser_014"})
+  public void addingTable(
+      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
+  ) {
     new ArticleContent().clear();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
@@ -294,20 +295,23 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableSize(width, height);
   }
 
-  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
-      dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_0125"},
-      enabled = false)
-  public void modifyTable(int border, int width, int height,
-                          int cellspacing, int cellpadding,
-                          Alignment alignment) {
-    new ArticleContent()
-        .push(String.format("{| border=\"%d\" cellpadding=\"%d\" cellspacing=\"%d\" "
-                            + "class=\"article-table article-table-selected\" "
-                            + "style=\"float: %s; height: %dpx; width: %dpx;\"\n"
-                            + "! scope=\"row\"|\n|\n|-\n! scope=\"row\"|\n|\n"
-                            + "|-\n! scope=\"row\"|\n|\n"
-                            + "|}", border, cellpadding, cellspacing, alignment.getAlignment(),
-                            height, width));
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", groups = {
+      "ArticleFeaturesCRUDUser_0125"}, enabled = false)
+  public void modifyTable(
+      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
+  ) {
+    new ArticleContent().push(String.format(
+        "{| border=\"%d\" cellpadding=\"%d\" cellspacing=\"%d\" "
+        + "class=\"article-table article-table-selected\" "
+        + "style=\"float: %s; height: %dpx; width: %dpx;\"\n"
+        + "! scope=\"row\"|\n|\n|-\n! scope=\"row\"|\n|\n" + "|-\n! scope=\"row\"|\n|\n" + "|}",
+        border,
+        cellpadding,
+        cellspacing,
+        alignment.getAlignment(),
+        height,
+        width
+    ));
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
 
@@ -323,19 +327,23 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableCellpadding(cellpadding + ADDITIONAL_PROPERTY_VALUE);
   }
 
-  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
-      dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_016"})
-  public void deleteTable(int border, int width, int height,
-                          int cellspacing, int cellpadding,
-                          Alignment alignment) {
-    new ArticleContent()
-        .push(String.format("{| border=\"%d\" cellpadding=\"%d\" cellspacing=\"%d\" "
-                            + "class=\"article-table article-table-selected\" "
-                            + "style=\"float: %s; height: %dpx; width: %dpx;\"\n"
-                            + "! scope=\"row\"|\n|\n|-\n! scope=\"row\"|\n|\n"
-                            + "|-\n! scope=\"row\"|\n|\n"
-                            + "|}", border, cellpadding, cellspacing, alignment.getAlignment(),
-                            height, width));
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", groups = {
+      "ArticleFeaturesCRUDUser_016"})
+  public void deleteTable(
+      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
+  ) {
+    new ArticleContent().push(String.format(
+        "{| border=\"%d\" cellpadding=\"%d\" cellspacing=\"%d\" "
+        + "class=\"article-table article-table-selected\" "
+        + "style=\"float: %s; height: %dpx; width: %dpx;\"\n"
+        + "! scope=\"row\"|\n|\n|-\n! scope=\"row\"|\n|\n" + "|-\n! scope=\"row\"|\n|\n" + "|}",
+        border,
+        cellpadding,
+        cellspacing,
+        alignment.getAlignment(),
+        height,
+        width
+    ));
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.clickDeleteTableButton();
@@ -347,9 +355,11 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     new ArticleContent().clear();
 
     new ArticlePageObject().open();
-    VisualEditModePageObject visualEditMode =
-        new WikiBasePageObject()
-            .goToArticleDefaultContentEditPage(wikiURL, TestContext.getCurrentMethodName());
+    VisualEditModePageObject
+        visualEditMode
+        = new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
+                                                                     TestContext.getCurrentMethodName()
+    );
     ArticlePageObject article = visualEditMode.submitArticle();
     PhotoAddComponentObject photoAddPhoto = article.clickAddImagePlaceholder();
     PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 2);

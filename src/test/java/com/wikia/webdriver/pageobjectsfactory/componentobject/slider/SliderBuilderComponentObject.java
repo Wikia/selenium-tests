@@ -25,10 +25,6 @@ public class SliderBuilderComponentObject extends BasePageObject {
     // TODO Auto-generated constructor stub
   }
 
-  public enum MenuPositions {
-    HORIZONTAL, VERTICAL
-  }
-
   public void selectMenuPosition(MenuPositions pos) {
     wait.forElementVisible(hPosition);
     wait.forElementVisible(vPosition);
@@ -42,8 +38,7 @@ public class SliderBuilderComponentObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing position selected");
     }
-    Log
-        .log("selectMenuPosition", pos.toString() + " position selected", true, driver);
+    Log.log("selectMenuPosition", pos.toString() + " position selected", true, driver);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
@@ -59,4 +54,7 @@ public class SliderBuilderComponentObject extends BasePageObject {
     Log.log("clickFinish", "finish button clicked", true);
   }
 
+  public enum MenuPositions {
+    HORIZONTAL, VERTICAL
+  }
 }

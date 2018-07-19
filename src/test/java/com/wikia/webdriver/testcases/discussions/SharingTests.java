@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static java.util.stream.Collectors.toList;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -15,29 +17,29 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.ShareD
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 
-  private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE =
-      Arrays.asList("facebook", "twitter", "reddit", "tumblr");
+  private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE = Arrays.asList("facebook",
+                                                                                                  "twitter",
+                                                                                                  "reddit",
+                                                                                                  "tumblr"
+  );
 
   private PostEntity.Data existingPost;
 
   @BeforeSuite
   private void setUp() {
     String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_5);
-    existingPost = DiscussionsClient
-      .using(User.USER_4, driver)
-      .createPostWithUniqueData(siteId);
+    existingPost = DiscussionsClient.using(User.USER_4, driver).createPostWithUniqueData(siteId);
   }
 
   /**
@@ -49,8 +51,10 @@ public class SharingTests extends NewTestTemplate {
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   @Execute(asUser = User.ANONYMOUS)
@@ -58,8 +62,10 @@ public class SharingTests extends NewTestTemplate {
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   /**
@@ -71,8 +77,10 @@ public class SharingTests extends NewTestTemplate {
   public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   @Execute(asUser = User.ANONYMOUS)
@@ -80,8 +88,10 @@ public class SharingTests extends NewTestTemplate {
   public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   /**
@@ -93,8 +103,10 @@ public class SharingTests extends NewTestTemplate {
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   @Execute(asUser = User.USER_3)
@@ -102,8 +114,10 @@ public class SharingTests extends NewTestTemplate {
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   /**
@@ -115,8 +129,10 @@ public class SharingTests extends NewTestTemplate {
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   @Execute(asUser = User.USER_3)
@@ -124,8 +140,10 @@ public class SharingTests extends NewTestTemplate {
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
-    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
-        "Displayed social networks are different than expected.");
+    Assertion.assertEquals(socialNetworkNames,
+                           EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+                           "Displayed social networks are different than expected."
+    );
   }
 
   /**

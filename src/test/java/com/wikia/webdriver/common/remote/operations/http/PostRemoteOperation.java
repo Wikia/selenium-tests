@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
+
 import org.apache.http.client.methods.HttpPost;
 import org.json.JSONObject;
-
 
 public class PostRemoteOperation extends BaseRemoteOperation {
 

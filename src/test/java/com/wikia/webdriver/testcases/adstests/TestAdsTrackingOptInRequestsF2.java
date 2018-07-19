@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.elements.common.TrackingOptInModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
@@ -45,22 +46,14 @@ public class TestAdsTrackingOptInRequestsF2 extends AdsFandomTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = true)
-  @Test(
-          dataProviderClass = TrackingOptInDataProvider.class,
-          dataProvider = "f2TrackingURLsForOptIn",
-          groups = "AdsOptInAcceptF2"
-  )
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "f2TrackingURLsForOptIn", groups = "AdsOptInAcceptF2")
   public void testRequestsForOptIn(String pattern, boolean isExpected) {
     testRequests(pattern, isExpected);
   }
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false, trackingOptOut = true)
-  @Test(
-          dataProviderClass = TrackingOptInDataProvider.class,
-          dataProvider = "f2TrackingURLsForOptOut",
-          groups = "AdsOptInRejectF2"
-  )
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "f2TrackingURLsForOptOut", groups = "AdsOptInRejectF2")
   public void testRequestsForOptOut(String pattern, boolean isExpected) {
     testRequests(pattern, isExpected);
   }

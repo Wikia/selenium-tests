@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 
 public class ElementColor {
+
   private WikiaWebDriver driver;
 
   public ElementColor(WikiaWebDriver driver) {

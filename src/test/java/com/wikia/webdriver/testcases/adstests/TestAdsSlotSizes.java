@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -17,25 +18,21 @@ import java.util.Map;
 
 public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsSlotSizeOasis",
-      groups = "AdsSlotSizesOasis"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsSlotSizeOasis", groups = "AdsSlotSizesOasis")
   public void adsSlotSizesOasis(Page page, String urlParamToEnable, Map<String, Object> slotInfo) {
     adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo);
   }
 
-  @Test(
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "adsSlotSizeMercury",
-      groups = "AdsSlotSizesMercury"
-  )
-  public void adsSlotSizesMercury(Page page, String urlParamToEnable, Map<String, Object> slotInfo) {
+  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsSlotSizeMercury", groups = "AdsSlotSizesMercury")
+  public void adsSlotSizesMercury(
+      Page page, String urlParamToEnable, Map<String, Object> slotInfo
+  ) {
     adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo);
   }
 
-  private void adsSlotSizes(Page page, String urlParamToEnable, Dimension pageSize, Map<String, Object> slotInfo) {
+  private void adsSlotSizes(
+      Page page, String urlParamToEnable, Dimension pageSize, Map<String, Object> slotInfo
+  ) {
     String slotName = slotInfo.get("slotName").toString();
     Dimension slotSize = (Dimension) slotInfo.get("slotSize");
 
@@ -48,9 +45,8 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
     AdsBaseObject ads = new AdsBaseObject(driver, url, pageSize);
 
-    ads.triggerAdSlot(slotName)
-        .wait
-        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+    ads.triggerAdSlot(slotName).wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(
+        slotName)));
 
     ads.verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()));
     ads.verifyIframeSize(slotName, slotSize.getWidth(), slotSize.getHeight());

@@ -18,7 +18,7 @@ public class FilePageObject extends WikiBasePageObject {
     return snippetText.getText();
   }
 
-  public boolean doesSnippetContainXSS(){
+  public boolean doesSnippetContainXSS() {
     wait.forElementVisible(snippetSection);
     scrollTo(snippetTitle);
     return snippetText().contains("alert('xss')");

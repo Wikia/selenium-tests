@@ -4,36 +4,40 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.elements.Frame;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.CategoryModule;
-import com.wikia.webdriver.elements.Frame;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.FeaturesModule;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class VisualEditModePageObject extends EditMode {
 
+  public static final int ELEMENT_SHOW_UP_TIMEOUT = 3;
   private static final String IMAGE_COMPONENT_CSS = "img.image";
   private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
-  public static final int ELEMENT_SHOW_UP_TIMEOUT = 3;
+  private final By portableInfoboxBy = By.cssSelector(
+      ".placeholder-double-brackets .portable-infobox");
+  @FindBy(css = ".video-thumbnail")
+  protected WebElement videoArticle;
   @FindBy(css = "#wpSave")
   private WebElement submitButton;
   @FindBy(css = "a.cke_button_bold")
   private WebElement boldButton;
-  @FindBy(css = ".video-thumbnail")
-  protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
   private WebElement contentInput;
   @FindBy(css = ".cke_wysiwyg_frame")
   private WebElement iframe;
+  private final Frame editorFrame = new Frame(iframe);
   @FindBy(css = "img.image-gallery")
   private WebElement gallery;
   @FindBy(css = "img.image-slideshow")
@@ -56,8 +60,7 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement portableInfoboxTransclusion;
   @FindBy(css = "[style*=\"block\"] .RTEPlaceholderPreviewToolsDelete")
   private WebElement removeInfoboxButton;
-  @FindBy(
-      xpath = "//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
+  @FindBy(xpath = "//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
   private WebElement blockedUserMessage1;
   @FindBy(xpath = "//b[contains(text(), 'Your user name or IP address has been blocked.')]")
   private WebElement blockedUserMessage2;
@@ -69,6 +72,7 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement visualModeTable;
   @FindBy(css = ".cke_menu_panel iframe")
   private WebElement contextFrame;
+  private final Frame contextFrameWrapper = new Frame(contextFrame);
   @FindBy(css = ".cke_dialog_body")
   private WebElement addTableLightbox;
   @FindBy(css = IMAGE_COMPONENT_CSS)
@@ -77,19 +81,13 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement autoApproveCheckbox;
   @FindBy(css = ".rail-auto-height")
   private WebElement modalElement;
-
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
   private By sliderBy = By.cssSelector("img.image-gallery-slider");
   private By videoBy = By.cssSelector("img.video");
-  private final By portableInfoboxBy = By.cssSelector(".placeholder-double-brackets .portable-infobox");
-
   private AceEditor aceEditor;
-
   private FeaturesModule featuresModule;
   private CategoryModule categoryModule;
-  private final Frame editorFrame = new Frame(iframe);
-  private final Frame contextFrameWrapper = new Frame(contextFrame);
 
   public VisualEditModePageObject() {
     super();
@@ -101,14 +99,17 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public VisualEditModePageObject open() {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl()
-        + URLsContent.WIKI_DIR + TestContext.getCurrentMethodName(), URLsContent.ACTION_EDIT));
+    getUrl(urlBuilder.appendQueryStringToURL(
+        urlBuilder.getUrl() + URLsContent.WIKI_DIR + TestContext.getCurrentMethodName(),
+        URLsContent.ACTION_EDIT
+    ));
     return this;
   }
 
   public VisualEditModePageObject open(String articleName) {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl()
-        + URLsContent.WIKI_DIR + articleName, URLsContent.ACTION_EDIT));
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleName,
+                                             URLsContent.ACTION_EDIT
+    ));
     return this;
   }
 
@@ -135,7 +136,7 @@ public class VisualEditModePageObject extends EditMode {
   public boolean checkPortableInfoboxVisible() {
     return editorFrame.frameScope(portableInfoboxTransclusion::isDisplayed);
   }
-  
+
   public void addContentWithoutClear(String content) {
     wait.forElementVisible(iframe);
     driver.switchTo().frame(iframe);
@@ -202,8 +203,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public int getVideoWidth() {
-    return editorFrame
-        .frameScope(() -> Integer.parseInt(video.getAttribute("width")));
+    return editorFrame.frameScope(() -> Integer.parseInt(video.getAttribute("width")));
   }
 
   public String getVideoCaption() {
@@ -217,15 +217,18 @@ public class VisualEditModePageObject extends EditMode {
     switch (component) {
       case GALLERY:
         verifyComponent(gallery);
-        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image-gallery').mouseenter()");
+        driver.executeScript(
+            "$('.cke_wysiwyg_frame').contents().find('img.image-gallery').mouseenter()");
         break;
       case SLIDESHOW:
         verifyComponent(slideshow);
-        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image-slideshow').mouseenter()");
+        driver.executeScript(
+            "$('.cke_wysiwyg_frame').contents().find('img.image-slideshow').mouseenter()");
         break;
       case SLIDER:
         verifyComponent(slider);
-        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.image-gallery-slider').mouseenter()");
+        driver.executeScript(
+            "$('.cke_wysiwyg_frame').contents().find('img.image-gallery-slider').mouseenter()");
         break;
       case VIDEO:
         verifyComponent(video);
@@ -237,7 +240,8 @@ public class VisualEditModePageObject extends EditMode {
         break;
       case VIDEO_PLACEHOLDER:
         verifyComponent(videoPlaceholder);
-        driver.executeScript("$('.cke_wysiwyg_frame').contents().find('img.video-placeholder').mouseenter()");
+        driver.executeScript(
+            "$('.cke_wysiwyg_frame').contents().find('img.video-placeholder').mouseenter()");
         break;
       default:
         break;
@@ -293,7 +297,10 @@ public class VisualEditModePageObject extends EditMode {
           wait.forElementNotPresent(videoBy);
           break;
         default:
-          Log.log("verifyComponentRemoved", "Invalid component: " + component.name() + " selected", false);
+          Log.log("verifyComponentRemoved",
+                  "Invalid component: " + component.name() + " selected",
+                  false
+          );
           break;
       }
     });
@@ -303,7 +310,8 @@ public class VisualEditModePageObject extends EditMode {
 
   public void removePortableInfobox() {
     verifyComponent(portableInfoboxTransclusion);
-    driver.executeScript("$('.cke_wysiwyg_frame').contents().find('.placeholder-double-brackets .portable-infobox').mouseenter()");
+    driver.executeScript(
+        "$('.cke_wysiwyg_frame').contents().find('.placeholder-double-brackets .portable-infobox').mouseenter()");
 
     removeInfoboxButton.click();
     removeConfirmationButton.click();
@@ -323,8 +331,11 @@ public class VisualEditModePageObject extends EditMode {
   public void verifyBlockedUserMessage() {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
-    Log.log("verifyBlockedUserMessage",
-            "blocked user message when attempting to create article verified", true);
+    Log.log(
+        "verifyBlockedUserMessage",
+        "blocked user message when attempting to create article verified",
+        true
+    );
   }
 
   private void selectFromContextMenu(WebElement option) {
@@ -377,5 +388,4 @@ public class VisualEditModePageObject extends EditMode {
   public enum Components {
     PHOTO, GALLERY, SLIDESHOW, SLIDER, VIDEO, VIDEO_PLACEHOLDER
   }
-
 }

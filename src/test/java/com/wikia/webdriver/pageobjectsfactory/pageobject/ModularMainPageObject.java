@@ -42,7 +42,6 @@ public class ModularMainPageObject extends WikiBasePageObject {
   @FindBy(css = ".image-window")
   private WebElement imageWindowDragging;
 
-
   public ModularMainPageObject(WebDriver driver) {
     super();
     PageFactory.initElements(driver, this);
@@ -66,8 +65,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
 
   public void verifyDragToRepositionText() {
     wait.forElementVisible(dragToRepositionText);
-    Log.log("verifyDragToRepositionText",
-        "Drag to reposition text message is visible", true);
+    Log.log("verifyDragToRepositionText", "Drag to reposition text message is visible", true);
   }
 
   public void clickPublishButton() {
@@ -84,8 +82,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
     wait.forElementVisible(descriptionEditField);
     descriptionEditField.clear();
     descriptionEditField.sendKeys(momDescription);
-    Log.log("typeMoMDescription", momDescription + "MoM description was typed in",
-        true);
+    Log.log("typeMoMDescription", momDescription + "MoM description was typed in", true);
   }
 
   public void clickDescriptionPublishButton() {
@@ -158,7 +155,10 @@ public class ModularMainPageObject extends WikiBasePageObject {
 
   public void moveCoverImage() {
     Actions actions = new Actions(driver);
-    actions.clickAndHold(imageWindowDragging).clickAndHold().moveByOffset(-200, -200).release()
+    actions.clickAndHold(imageWindowDragging)
+        .clickAndHold()
+        .moveByOffset(-200, -200)
+        .release()
         .perform();
   }
 

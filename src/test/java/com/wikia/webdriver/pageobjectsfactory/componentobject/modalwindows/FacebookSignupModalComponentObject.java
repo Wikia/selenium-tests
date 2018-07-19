@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -89,7 +90,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
     waitAndClick(birthYearField);
     birthYearField.sendKeys(Integer.toString(year));
-    }
+  }
 
   public void clickRegister() {
     wait.forElementVisible(registerButton);
@@ -98,15 +99,15 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     waitForElementNotVisibleByElement(registerButton);
   }
 
-  public void createAccountNoEmail(String email, String userName,
-                                   Integer birthMonth, Integer birthDay, Integer birthYear) {
+  public void createAccountNoEmail(
+      String email, String userName, Integer birthMonth, Integer birthDay, Integer birthYear
+  ) {
     acceptWikiaAppPolicyNoEmail();
 
     wait.forElementVisible(facebookRegistrationForm);
     typeEmail(email);
     typeUserName(userName);
-    typeBirthday(birthMonth,birthDay,birthYear);
+    typeBirthday(birthMonth, birthDay, birthYear);
     clickRegister();
   }
-
 }

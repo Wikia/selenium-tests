@@ -10,10 +10,10 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "TestSlotsOasis")
   public void adsSmokeTestSlotsOasis() {
-    String testedPage = UrlBuilder.createUrlBuilderForWiki("project43").getUrlForPath("SyntheticTests/OasisSlots");
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    String testedPage = UrlBuilder.createUrlBuilderForWiki("project43")
+        .getUrlForPath("SyntheticTests/OasisSlots");
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.waitForPageLoadedWithGpt();
     ads.verifyAds();
   }
-
 }

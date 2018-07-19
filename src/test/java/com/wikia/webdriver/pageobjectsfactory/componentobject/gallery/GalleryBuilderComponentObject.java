@@ -4,11 +4,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.Select;
@@ -93,7 +89,6 @@ public class GalleryBuilderComponentObject extends BasePageObject {
         throw new NoSuchElementException("Non-existing orientation selected");
     }
     Log.log("adjustOrientation", "dropdown selected", true);
-
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
@@ -106,8 +101,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   public void verifyPhotosCount(int photos) {
     for (int i = 0; i < photos; i++) {
       wait.forElementVisible(galleryPreviewPhotos.get(i));
-      Log
-          .log("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
+      Log.log("verifyPhotosVisible", "photo no. " + i + 1 + "/photos is visible", true);
     }
   }
 

@@ -11,8 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterP
 
 public class DetachedSignInPage extends DetachedWindow implements SignInPage {
 
-  private AttachedSignInPage signInPage;
   private static final String TITLE = "Sign in";
+  private AttachedSignInPage signInPage;
 
   public DetachedSignInPage() {
     signInPage = new AttachedSignInPage();

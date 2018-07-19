@@ -9,17 +9,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
 public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
+
   private static final String WIKI_NAME = "project43";
   private static final String LONG_ARTICLE_PAGE_PATH = "SyntheticTests/LongPage";
   private static final String CATEGORY_PAGE_PATH = "Category:Browse";
   private static final String SPECIAL_PAGE_PATH = "Special:Videos";
-  private static final String FILE_PAGE_PATH =
-      "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)";
+  private static final String
+      FILE_PAGE_PATH
+      = "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)";
   private static final String CUSTOM_NAMESPACE_PAGE_PATH = "Koperek:SyntheticTests/NoAds";
 
   private AdsBaseObject buildAdsObject(String pagePath) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME).getUrlForPath(pagePath);
-    return new AdsBaseObject(driver, testedPage);
+    return new AdsBaseObject(testedPage);
   }
 
   @Test(groups = "NoAdsForUsersOasis")

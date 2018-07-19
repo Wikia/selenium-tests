@@ -1,9 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
 import com.wikia.webdriver.common.logging.Log;
-import lombok.Getter;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import lombok.Getter;
 
 public final class SpecialUnusedFilesPage extends WikiBasePageObject {
 

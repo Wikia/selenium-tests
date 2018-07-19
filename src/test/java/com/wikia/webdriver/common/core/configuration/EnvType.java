@@ -4,7 +4,8 @@ import lombok.Getter;
 
 public enum EnvType {
   PROD("wikia.com", "prod"), STAGING("wikia-staging.com", "staging"), DEV("wikia-dev.pl",
-      "dev"), SANDBOX("wikia.com", "sandbox");
+                                                                          "dev"
+  ), SANDBOX("wikia.com", "sandbox");
 
   @Getter
   private final String wikiaDomain;

@@ -7,10 +7,8 @@ import com.wikia.webdriver.elements.oasis.components.video.VideoTile;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -23,6 +21,7 @@ import java.util.stream.Collectors;
 public class SpecialVideosPageObject extends SpecialPageObject {
 
   private static final String LONG_TITLE_SUFFIX = " ...";
+  private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
   @FindBy(css = ".page-header__title")
   private WebElement h1Header;
   @FindBy(css = "a.addVideo")
@@ -44,9 +43,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   @FindBys(@FindBy(css = ".special-videos-grid li"))
   private List<WebElement> videoTileElements;
 
-
-  private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
-
   public SpecialVideosPageObject(WebDriver driver) {
     super();
     PageFactory.initElements(driver, this);
@@ -64,7 +60,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + videoName
-        + "?action=unwatch");
+           + "?action=unwatch");
     return new WatchPageObject();
   }
 
@@ -79,13 +75,14 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return new VetAddVideoComponentObject(driver);
   }
 
-  public List<VideoTile> getVideoTiles(int numberOfTiles){
+  public List<VideoTile> getVideoTiles(int numberOfTiles) {
     wait.forElementPresent(By.cssSelector(NEWEST_VIDEO_CSS));
     List<VideoTile> videoTileList = new ArrayList<>();
     //numberOfTilesToFetch set to max number of possible elements to fetch
-    int numberOfTilesToFetch = numberOfTiles>videoTileElements.size()?videoTileElements.size():numberOfTiles;
-    List<WebElement> subList = videoTileElements.subList(0,numberOfTilesToFetch);
-    for (WebElement videoTileElement : subList){
+    int numberOfTilesToFetch = numberOfTiles > videoTileElements.size() ? videoTileElements.size()
+                                                                        : numberOfTiles;
+    List<WebElement> subList = videoTileElements.subList(0, numberOfTilesToFetch);
+    for (WebElement videoTileElement : subList) {
       VideoTile notification = new VideoTile(videoTileElement);
       videoTileList.add(notification);
     }
@@ -94,14 +91,16 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public void verifyVideoAdded(String expectedVideoTitle) {
 
-    List<String> patternList = getVideoTiles(2).stream().map(
-            v->v.getTitle().endsWith(LONG_TITLE_SUFFIX)
-                    ? v.getTitle().replace(LONG_TITLE_SUFFIX, "")
-                    : v.getTitle()
-    ).collect(Collectors.toList());
+    List<String> patternList = getVideoTiles(2).stream()
+        .map(v -> v.getTitle().endsWith(LONG_TITLE_SUFFIX) ? v.getTitle()
+            .replace(LONG_TITLE_SUFFIX, "") : v.getTitle())
+        .collect(Collectors.toList());
 
-    Log.log("verifyVideoAdded",
-        "verify that video with following description was added: " + expectedVideoTitle, true);
+    Log.log(
+        "verifyVideoAdded",
+        "verify that video with following description was added: " + expectedVideoTitle,
+        true
+    );
     Assertion.assertStringContainsAnyPattern(expectedVideoTitle, patternList);
   }
 
@@ -164,5 +163,4 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       return false;
     }
   }
-
 }

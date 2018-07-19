@@ -5,7 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageOb
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
 public class EditActivity extends Activity {
 
   @FindBy(css = "a.activityfeed-diff")

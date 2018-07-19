@@ -13,13 +13,8 @@ import org.testng.annotations.Test;
 
 public class TestAdsRefreshingOasis extends TemplateNoFirstLoad {
 
-  private static final String[] CREATIVE_ID_CHAIN = {
-      "108480236412",
-      "108480237132",
-      "108480238572",
-      "108480239052",
-      "108480239532"
-  };
+  private static final String[] CREATIVE_ID_CHAIN = {"108480236412", "108480237132", "108480238572",
+                                                     "108480239052", "108480239532"};
 
   private static final String WIKI_NAME = "project43";
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
@@ -27,10 +22,9 @@ public class TestAdsRefreshingOasis extends TemplateNoFirstLoad {
 
   @UnsafePageLoad
   public void testRefreshingMedrecOasis() {
-    AdsBaseObject page = new AdsBaseObject(
-        driver,
-        urlBuilder.getUrlForPath(PATH),
-        WindowSize.DESKTOP
+    AdsBaseObject page = new AdsBaseObject(driver,
+                                           urlBuilder.getUrlForPath(PATH),
+                                           WindowSize.DESKTOP
     );
     page.verifyAdChainForSlot(CREATIVE_ID_CHAIN, AdsContent.MEDREC, page);
   }

@@ -1,25 +1,24 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import static java.util.stream.Collectors.toList;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import javax.annotation.CheckForNull;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
+import javax.annotation.CheckForNull;
 
 public class Post extends BasePage {
 
@@ -114,14 +113,13 @@ public class Post extends BasePage {
   }
 
   public List<PostEntity> getReportedPosts() {
-    return Lists.newArrayList(getPosts().stream().filter(PostEntity::isReported)
+    return Lists.newArrayList(getPosts().stream()
+                                  .filter(PostEntity::isReported)
                                   .collect(Collectors.toList()));
   }
 
   public List<PostEntity> getPosts() {
-    return postList.stream()
-        .map(PostEntity::new)
-        .collect(toList());
+    return postList.stream().map(PostEntity::new).collect(toList());
   }
 
   public boolean isUpvoteButtonVisible(int index) {
@@ -171,13 +169,10 @@ public class Post extends BasePage {
   }
 
   public Post waitForPostToAppearWithOpenGraph(final String url) {
-    new FluentWait<>(driver)
-        .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-        .until(
-            (Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(postOpenGraph)
-                .getAttribute("href")
-                .contains(url)
-        );
+    new FluentWait<>(driver).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+        .until((Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(postOpenGraph)
+            .getAttribute("href")
+            .contains(url));
     return this;
   }
 

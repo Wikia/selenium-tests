@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
+
 import org.testng.annotations.Test;
 
 public class CuratedContentModal extends NewTestTemplate {

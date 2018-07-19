@@ -1,11 +1,11 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.components.Header;
+
 import lombok.Getter;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;

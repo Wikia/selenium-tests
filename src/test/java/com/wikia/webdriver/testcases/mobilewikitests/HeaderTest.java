@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_Header")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -26,13 +27,9 @@ public class HeaderTest extends NewTestTemplate {
 
   private static final String ELEMENT_EXPECTATION_MESSAGE_TEMPLATE = "%s was expected to be %s.";
 
-
   @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
-    Header header =
-        new ArticlePage()
-            .open(MercurySubpages.NO_INFOBOX)
-            .getHeader();
+    Header header = new ArticlePage().open(MercurySubpages.NO_INFOBOX).getHeader();
 
     Assertion.assertTrue(
         header.isHeaderVisible(),
@@ -50,10 +47,7 @@ public class HeaderTest extends NewTestTemplate {
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage() {
-    Header header =
-        new ArticlePage()
-            .open(MercurySubpages.INFOBOX_1)
-            .getHeader();
+    Header header = new ArticlePage().open(MercurySubpages.INFOBOX_1).getHeader();
 
     Assertion.assertTrue(
         header.isHeaderVisible(),
@@ -68,5 +62,4 @@ public class HeaderTest extends NewTestTemplate {
         String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, VISIBLE_MESSAGE)
     );
   }
-
 }

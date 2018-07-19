@@ -20,13 +20,8 @@ public class MercurySubpages {
   public static final String INFOBOX_4 = "Infobox4";
   public static final String INFOBOX_5 = "Infobox5";
 
-
   /**
-   * Legend:
-   * FC - Featured Content
-   * CC - Curated Content
-   * TA - Trending Articles
-   * TV - Trending Videos
+   * Legend: FC - Featured Content CC - Curated Content TA - Trending Articles TV - Trending Videos
    */
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
@@ -50,5 +45,4 @@ public class MercurySubpages {
 
   private MercurySubpages() {
   }
-
 }
