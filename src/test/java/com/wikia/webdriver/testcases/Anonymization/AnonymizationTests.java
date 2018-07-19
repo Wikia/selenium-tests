@@ -36,10 +36,6 @@ public class AnonymizationTests extends NewTestTemplate {
       ERROR_MESSAGE
       = "We don't recognize these credentials. Try again or register a new account.";
 
-  private SignInPage openLoginPageFromGlobalnavOnDesktop() {
-    return new GlobalNavigation().clickOnSignIn();
-  }
-
   @Test
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
@@ -61,7 +57,7 @@ public class AnonymizationTests extends NewTestTemplate {
 
     anonymizationStaff.logOut();
 
-    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
+    SignInPage signIn = new GlobalNavigation().clickOnSignIn();
     signIn.login(qanon, passw);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -86,11 +82,10 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getNotExistsMessage()
-                             .equals(String.format(
-                                 "User account \"%s\" does not exist or has never logged in on this wiki.",
-                                 qanon
-                             )));
+    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format(
+        "User account \"%s\" does not exist or has never logged in on this wiki.",
+        qanon
+    )));
   }
 
   @Test
@@ -177,11 +172,10 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getNotExistsMessage()
-                             .equals(String.format(
-                                 "User account \"%s\" does not exist or has never logged in on this wiki.",
-                                 qanon
-                             )));
+    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format(
+        "User account \"%s\" does not exist or has never logged in on this wiki.",
+        qanon
+    )));
 
     articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));

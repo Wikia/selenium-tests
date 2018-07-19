@@ -61,9 +61,8 @@ public class HTMLTitleTests extends NewTestTemplate {
   @Test(groups = {"mercury_htmlTitleSet", "Mercury_htmlTitleSet"})
   public void mercury_htmlTitleSet() {
     for (String[] testCase : testCases) {
-      String testUrl = urlBuilder.appendQueryStringToURL(new Page(
-          testCase[0],
-          testCase[1]
+      String testUrl = urlBuilder.appendQueryStringToURL(new Page(testCase[0],
+                                                                  testCase[1]
       ).getUrl(), "cb=" + DateTime.now().getMillis());
 
       navigate.toUrl(testUrl);

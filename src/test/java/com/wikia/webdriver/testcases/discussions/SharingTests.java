@@ -28,11 +28,10 @@ import java.util.List;
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 
-  private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE = Arrays.asList(
-      "facebook",
-      "twitter",
-      "reddit",
-      "tumblr"
+  private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE = Arrays.asList("facebook",
+                                                                                                  "twitter",
+                                                                                                  "reddit",
+                                                                                                  "tumblr"
   );
 
   private PostEntity.Data existingPost;

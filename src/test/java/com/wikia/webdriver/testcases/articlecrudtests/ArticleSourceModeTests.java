@@ -141,12 +141,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
 
-    Assertion.assertEquals(
-        source.getSourceContent(),
-        String.format(PageContent.WIKI_TEXT_PHOTO.replace(
-            "%photoName%",
-            photoName
-        ), PageContent.CAPTION)
+    Assertion.assertEquals(source.getSourceContent(),
+                           String.format(PageContent.WIKI_TEXT_PHOTO.replace("%photoName%",
+                                                                             photoName
+                           ), PageContent.CAPTION)
     );
   }
 
@@ -161,12 +159,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
 
-    Assertion.assertEquals(
-        source.getSourceContent(),
-        String.format("[[Plik:%photoName%|thumb|%s]]".replace(
-            "%photoName%",
-            photoName
-        ), PageContent.CAPTION)
+    Assertion.assertEquals(source.getSourceContent(),
+                           String.format("[[Plik:%photoName%|thumb|%s]]".replace("%photoName%",
+                                                                                 photoName
+                           ), PageContent.CAPTION)
     );
   }
 

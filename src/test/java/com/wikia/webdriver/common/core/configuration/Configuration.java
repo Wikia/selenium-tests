@@ -57,9 +57,8 @@ public class Configuration {
         defaultConfig = (Map<String, String>) yaml.load(new FileInputStream(new File(
             DEFAULT_CONFIG_FILE_NAME)));
       } catch (FileNotFoundException e) {
-        throw new TestEnvInitFailedException(String.format(
-            "CANNOT FIND DEFAULT CONFIG FILE : %s",
-            DEFAULT_CONFIG_FILE_NAME
+        throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
+                                                           DEFAULT_CONFIG_FILE_NAME
         ), e);
       }
 

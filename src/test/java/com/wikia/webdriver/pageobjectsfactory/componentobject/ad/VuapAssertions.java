@@ -46,39 +46,34 @@ public class VuapAssertions {
     TimeUnit.SECONDS.sleep(3);
     vuap.togglePause();
 
-    Assert.assertTrue(
-        startProgressBarWidth < vuap.getProgressBarWidth(),
-        "Video time indicator should move."
+    Assert.assertTrue(startProgressBarWidth < vuap.getProgressBarWidth(),
+                      "Video time indicator should move."
     );
   }
 
   public static void verifyVideoPlay(final AutoplayVuap vuap) {
-    Assert.assertTrue(
-        vuap.isPauseLayerVisible(),
-        "VUAP did not automatically played when page was opened."
+    Assert.assertTrue(vuap.isPauseLayerVisible(),
+                      "VUAP did not automatically played when page was opened."
     );
     Assert.assertTrue(
         vuap.hasVideoExpectedColor(AutoplayVuap.COLOR_VUAP_VIDEO_AD),
         "VUAP video ad has wrong colour"
     );
-    Assert.assertEquals(
-        vuap.findTitle(),
-        "Advertisement",
-        "VUAP video title is not Advertisement."
+    Assert.assertEquals(vuap.findTitle(),
+                        "Advertisement",
+                        "VUAP video title is not Advertisement."
     );
   }
 
   public static void verifyReplyButtonDisplayedAfterVideoEnds(
-      final AutoplayVuap vuap,
-      long maxVideoDuration
+      final AutoplayVuap vuap, long maxVideoDuration
   ) {
     vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_START_DELAY);
     vuap.waitForVideoToEnd(maxVideoDuration);
   }
 
   public static void verifyReplyButtonDisplayedAfterVideoClose(
-      final AutoplayVuap vuap,
-      long maxVideoDuration
+      final AutoplayVuap vuap, long maxVideoDuration
   ) {
     vuap.waitForVideoToEnd(maxVideoDuration);
   }
@@ -111,8 +106,7 @@ public class VuapAssertions {
   }
 
   public static void verifyIsResolvedStateDisplayed(
-      double defaultVideoHeight,
-      double resolvedVideoHeight
+      double defaultVideoHeight, double resolvedVideoHeight
   ) {
     Assert.assertEquals(
         getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight),
@@ -128,8 +122,7 @@ public class VuapAssertions {
   }
 
   private static int getStatesPercentageDifference(
-      double defaultVideoHeight,
-      double resolvedVideoHeight
+      double defaultVideoHeight, double resolvedVideoHeight
   ) {
     return (int) Math.round(100 - (100 / (defaultVideoHeight / resolvedVideoHeight)));
   }

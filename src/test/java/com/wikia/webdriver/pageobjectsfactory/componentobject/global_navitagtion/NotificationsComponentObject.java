@@ -113,10 +113,9 @@ public class NotificationsComponentObject extends WikiBasePageObject {
           .findElement(By.cssSelector(".notification-message"))
           .getText()
           .contains(text)) {
-        Log.log(
-            "getNotificationLink",
-            "get addres that of " + i + 1 + " notification points to",
-            true
+        Log.log("getNotificationLink",
+                "get addres that of " + i + 1 + " notification points to",
+                true
         );
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }

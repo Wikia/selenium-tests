@@ -31,9 +31,10 @@ public class SearchResultsPage extends WikiBasePageObject {
   private List<WebElement> resultCards;
 
   public SearchResultsPage openForQuery(String query) {
-    getUrl(String.format("%s%s",
-                         urlBuilder.getUrl(),
-                         URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query)
+    getUrl(String.format(
+        "%s%s",
+        urlBuilder.getUrl(),
+        URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query)
     ));
 
     return this;

@@ -99,9 +99,10 @@ public class ArticleCommentsTests extends NewTestTemplate {
     delete.submitDeletion();
 
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),
-                           1,
-                           DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    Assertion.assertEquals(
+        confirmNotifications.size(),
+        1,
+        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
     );
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
     article.verifyCommentDeleted(commentText);

@@ -20,9 +20,8 @@ public class HeroUnitTest extends FandomTestTemplate {
   public void anonCanSeeFiveHeroUnits() {
     HomePage homePage = new HomePage().open();
 
-    Assertion.assertTrue(
-        homePage.getHeroBlock().hasFiveHeroUnits(),
-        "Hero block doesn't have five units."
+    Assertion.assertTrue(homePage.getHeroBlock().hasFiveHeroUnits(),
+                         "Hero block doesn't have five units."
     );
   }
 }

@@ -36,12 +36,12 @@ public class SocialButtonsTests extends NewTestTemplate {
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
-      Assertion.assertEquals(currentSocialNetwork,
-                             expectedSocialNetwork,
-                             "Expected network not found on its position. "
-                             + "Note that the order of social buttons is also important, "
-                             + "as defined in requirements. Missing network:"
-                             + expectedSocialNetwork
+      Assertion.assertEquals(
+          currentSocialNetwork,
+          expectedSocialNetwork,
+          "Expected network not found on its position. "
+          + "Note that the order of social buttons is also important, "
+          + "as defined in requirements. Missing network:" + expectedSocialNetwork
       );
     }
   }

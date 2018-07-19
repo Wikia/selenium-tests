@@ -48,10 +48,11 @@ public class SignupTests extends NewTestTemplate {
 
   static SignUpUser createNewUser(UserWithEmail user) {
 
-    return new SignUpUser(String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-                          getEmailAlias(user.getEmail()),
-                          String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-                          BIRTH_DATE
+    return new SignUpUser(
+        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
+        getEmailAlias(user.getEmail()),
+        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+        BIRTH_DATE
     );
   }
 
@@ -168,18 +169,20 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private SignUpUser createUserWithExistingEmail() {
-    return new SignUpUser(String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-                          userWithEmail.getEmail(),
-                          String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-                          BIRTH_DATE
+    return new SignUpUser(
+        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
+        userWithEmail.getEmail(),
+        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+        BIRTH_DATE
     );
   }
 
   private SignUpUser createUserWithExistingUsername() {
-    return new SignUpUser(existingUser.getUserName(),
-                          getEmailAlias(userWithEmail.getEmail()),
-                          String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-                          BIRTH_DATE
+    return new SignUpUser(
+        existingUser.getUserName(),
+        getEmailAlias(userWithEmail.getEmail()),
+        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+        BIRTH_DATE
     );
   }
 
@@ -189,18 +192,20 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private SignUpUser createTooYoungUser() {
-    return new SignUpUser(String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-                          getEmailAlias(userWithEmail.getEmail()),
-                          String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-                          LocalDate.now().minusYears(11)
+    return new SignUpUser(
+        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
+        getEmailAlias(userWithEmail.getEmail()),
+        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+        LocalDate.now().minusYears(11)
     );
   }
 
   private SignUpUser createNewUserWithSpecialCharacters() {
-    return new SignUpUser(String.format("ユーザー%s", Instant.now().getEpochSecond()),
-                          getEmailAlias(userWithEmail.getEmail()),
-                          String.format("ユーザザー_%s", Instant.now().getEpochSecond()),
-                          BIRTH_DATE
+    return new SignUpUser(
+        String.format("ユーザー%s", Instant.now().getEpochSecond()),
+        getEmailAlias(userWithEmail.getEmail()),
+        String.format("ユーザザー_%s", Instant.now().getEpochSecond()),
+        BIRTH_DATE
     );
   }
 

@@ -51,9 +51,8 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
-    IFRAME_SLOT_SELECTORS.put(
-        BOTTOM_LB,
-        "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
+    IFRAME_SLOT_SELECTORS.put(BOTTOM_LB,
+                              "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
     );
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
@@ -67,8 +66,10 @@ public class AdsContent {
         FLOATING_MEDREC,
         "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10500); })();"
     );
-    SLOTS_TRIGGERS.put(BOTTOM_LB,
-                       "(function(){function getHookElement(){var mixContentFooterSelector=\"#mixed-content-footer\",articleCategoriesSelector=\".article-categories\",isMixContentFooterOnPage=!!document.querySelectorAll(mixContentFooterSelector)[0],areArticleCategoriesOnPage=!!document.querySelectorAll(articleCategoriesSelector)[0];if(isMixContentFooterOnPage){return mixContentFooterSelector;}return articleCategoriesSelector;}var hookElement=getHookElement();document.querySelectorAll(hookElement)[0].scrollIntoView();setTimeout(function(){window.scrollBy(0, -10);},5000);})();");
+    SLOTS_TRIGGERS.put(
+        BOTTOM_LB,
+        "(function(){function getHookElement(){var mixContentFooterSelector=\"#mixed-content-footer\",articleCategoriesSelector=\".article-categories\",isMixContentFooterOnPage=!!document.querySelectorAll(mixContentFooterSelector)[0],areArticleCategoriesOnPage=!!document.querySelectorAll(articleCategoriesSelector)[0];if(isMixContentFooterOnPage){return mixContentFooterSelector;}return articleCategoriesSelector;}var hookElement=getHookElement();document.querySelectorAll(hookElement)[0].scrollIntoView();setTimeout(function(){window.scrollBy(0, -10);},5000);})();"
+    );
     SLOTS_TRIGGERS.put(
         MOBILE_BOTTOM_LB,
         "(function(){ document.querySelector('.recirculation-prefooter').scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 5000); })();"

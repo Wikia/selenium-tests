@@ -67,9 +67,8 @@ public class CropImageTests extends NewTestTemplate {
     croppingTool.clickDoneButton();
     itemForm.clickOnImage();
 
-    Assertion.assertTrue(
-        imageModal.isCropOptionEnabled(),
-        "Crop option disabled - Should be enabled"
+    Assertion.assertTrue(imageModal.isCropOptionEnabled(),
+                         "Crop option disabled - Should be enabled"
     );
 
     imageModal.selectCrop();

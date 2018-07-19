@@ -66,9 +66,8 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if given tab has an anchor with "selected" class
    */
   public void verifyTabIsSelected(WamTab tab) {
-    WebElement wamTab = driver.findElement(By.cssSelector(String.format(
-        WAM_TAB_CSS_SELECTOR_FORMAT,
-        tab.getId()
+    WebElement wamTab = driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
+                                                                        tab.getId()
     )));
     Log.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
@@ -108,10 +107,9 @@ public class WamPageObject extends BasePageObject {
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
-    Assertion.assertNumber(
-        wamIndexRows.size(),
-        expectedRowsNo,
-        "wam index rows equals " + expectedRowsNo
+    Assertion.assertNumber(wamIndexRows.size(),
+                           expectedRowsNo,
+                           "wam index rows equals " + expectedRowsNo
     );
   }
 
@@ -190,10 +188,11 @@ public class WamPageObject extends BasePageObject {
   }
 
   private void verifyTabSelected(WamTab tab) {
-    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(
-        WAM_TAB_CSS_SELECTOR_FORMAT,
-        tab.getId()
-    ))).getAttribute("class").contains("icon-vertical-selected"));
+    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
+                                                                         tab.getId()
+    )))
+                             .getAttribute("class")
+                             .contains("icon-vertical-selected"));
     wait.forElementVisible(tabSelected);
   }
 

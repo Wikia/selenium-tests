@@ -182,10 +182,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public boolean slotHasSize(String slotName, int width, int height) {
-    return getSlotAttribute(slotName, "data-gpt-slot-sizes").contains(String.format(
-        "%d,%d",
-        width,
-        height
+    return getSlotAttribute(slotName, "data-gpt-slot-sizes").contains(String.format("%d,%d",
+                                                                                    width,
+                                                                                    height
     ));
   }
 
@@ -262,10 +261,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifySlotAttribute(String slotName, String attribute, String value) {
     String slotParam = getSlotAttribute(slotName, attribute);
     Assertion.assertStringContains(slotParam, value);
-    Log.log(
-        "verifySlotAttribute",
-        String.format("%s has following [%s] attribute: %s", slotName, attribute, slotParam),
-        true
+    Log.log("verifySlotAttribute",
+            String.format("%s has following [%s] attribute: %s", slotName, attribute, slotParam),
+            true
     );
   }
 
@@ -413,10 +411,9 @@ public class AdsBaseObject extends WikiBasePageObject {
     Log.log("SKIN", "SKIN presents on the page", true);
 
     if (!Strings.isNullOrEmpty(backgroundColor)) {
-      Assertion.assertEquals(
-          skinHelper.getBackgroundColor(),
-          backgroundColor,
-          "Background colors differ"
+      Assertion.assertEquals(skinHelper.getBackgroundColor(),
+                             backgroundColor,
+                             "Background colors differ"
       );
       Log.log("SKIN", "SKIN has correct background color", true);
     }
@@ -609,12 +606,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
 
     try {
-      doUntilElementVisible(
-          By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)),
-          () -> {
-            jsActions.scrollBy(0, 100);
-            wait.forX(Duration.ofSeconds(1));
-          }
+      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)),
+                            () -> {
+                              jsActions.scrollBy(0, 100);
+                              wait.forX(Duration.ofSeconds(1));
+                            }
       );
     } catch (NoSuchElementException ex) {
       Log.log(AdsContent.FLOATING_MEDREC + " is not displayed", ex, true);
@@ -684,9 +680,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (!checkIfSlotExpanded(slot)) {
 
       Optional<WebElement> lastGptDiv = getLastGptDiv(slotSelector);
-      if (lastGptDiv.isPresent() && checkIfGptSlotHasCreativeContent(
-          lastGptDiv.get(),
-          HOP_AD_TYPE
+      if (lastGptDiv.isPresent() && checkIfGptSlotHasCreativeContent(lastGptDiv.get(),
+                                                                     HOP_AD_TYPE
       )) {
         Log.log("verifyAdVisibleInSlot", "Slot has " + HOP_AD_TYPE, true);
         return;
@@ -894,8 +889,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForVASTRequestWithAdUnit(
-      NetworkTrafficInterceptor networkTrafficInterceptor,
-      String adUnit
+      NetworkTrafficInterceptor networkTrafficInterceptor, String adUnit
   ) throws UnsupportedEncodingException {
     final String encodedAdUnit = URLEncoder.encode(adUnit, "UTF-8");
     final String pattern = ".*output=xml_vast.*iu=" + encodedAdUnit + ".*";
@@ -903,9 +897,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public String getValueFromTracking(
-      NetworkTrafficInterceptor networkTrafficInterceptor,
-      String slotName,
-      String paramName
+      NetworkTrafficInterceptor networkTrafficInterceptor, String slotName, String paramName
   ) {
     final String fvTrackingUrl = getTrackingUrl(networkTrafficInterceptor, slotName);
     Matcher matcher = Pattern.compile(".*" + paramName + "=([^&]+)&.*").matcher(fvTrackingUrl);

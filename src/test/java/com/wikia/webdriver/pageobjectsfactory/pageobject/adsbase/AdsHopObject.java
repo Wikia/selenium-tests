@@ -40,9 +40,8 @@ public class AdsHopObject extends AdsBaseObject {
   }
 
   public void verifyPostMessage(String slotName, String providerName, String extraParam) {
-    Assertion.assertEquals(
-        getPostMessageFromAdContent(slotName, providerName),
-        getPostMessagePattern(extraParam)
+    Assertion.assertEquals(getPostMessageFromAdContent(slotName, providerName),
+                           getPostMessagePattern(extraParam)
     );
   }
 
@@ -91,9 +90,8 @@ public class AdsHopObject extends AdsBaseObject {
   }
 
   private WebElement getTestedElement(final String elementSelector) {
-    return new WebDriverWait(
-        driver,
-        AD_SUCCESS_TIMEOUT_SEC
+    return new WebDriverWait(driver,
+                             AD_SUCCESS_TIMEOUT_SEC
     ).until(new ExpectedCondition<WebElement>() {
       @Override
       public WebElement apply(WebDriver driver) {

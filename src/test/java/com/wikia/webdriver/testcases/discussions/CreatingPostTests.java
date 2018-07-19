@@ -170,16 +170,15 @@ public class CreatingPostTests extends NewTestTemplate {
    *
    * This test covers all situations when post cannot be added (submit button is disabled).
    * <p>
-   * | Category | Title | Description | Open Graph | Content Image | |          |       |
-   *  |            |               | |          |     x |             |            |               |
-   * |          |       |           x |            |               | |          |       |
-   *  |          x |               | |          |       |             |            |             x |
-   * |          |     x |           x |            |               | |          |     x |
-   *  |          x |               | |          |     x |             |            |             x |
-   * |        x |       |             |            |               | |        x |     x |
-   *  |            |               | |        x |       |           x |            |               |
-   * |        x |       |             |          x |               | |        x |       |
-   * |            |             x |
+   * | Category | Title | Description | Open Graph | Content Image | |          |       | |
+   *   |               | |          |     x |             |            |               | |
+   * |       |           x |            |               | |          |       | |          x |
+   *        | |          |       |             |            |             x | |          |     x |
+   *         x |            |               | |          |     x | |          x |               | |
+   *         |     x |             |            |             x | |        x |       |             |
+   *            |               | |        x |     x | |            |               | |        x |
+   *     |           x |            |               | |        x |       |             |          x
+   * |               | |        x |       | |            |             x |
    *
    *
    * <p>
@@ -281,8 +280,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private CategoryPill fillPostCategoryWith(
-      final PostsCreator postsCreator,
-      final String description
+      final PostsCreator postsCreator, final String description
   ) {
     CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()

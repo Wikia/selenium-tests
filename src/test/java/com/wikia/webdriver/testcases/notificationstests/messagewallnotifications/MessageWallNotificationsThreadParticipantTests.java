@@ -75,10 +75,9 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();
-    notifications.verifyNotification(
-        title,
-        credentials.userName3,
-        "replied to " + credentials.userName3
+    notifications.verifyNotification(title,
+                                     credentials.userName3,
+                                     "replied to " + credentials.userName3
     );
   }
 }

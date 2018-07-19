@@ -23,8 +23,7 @@ public class CategoryContext extends RemoteContext {
   }
 
   public static CategoryContext defaultContextUsing(
-      final String siteId,
-      final CategoryPill.Data data
+      final String siteId, final CategoryPill.Data data
   ) {
     Objects.requireNonNull(data.getId());
 

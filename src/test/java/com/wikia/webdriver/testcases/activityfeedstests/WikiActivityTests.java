@@ -27,19 +27,16 @@ public class WikiActivityTests extends NewTestTemplate {
 
   public void articleEditionIsRecordedInWikiActivity() {
 
-    String articleName = editArticleWithContentAndGetTitle(
-        createArticle(),
-        PageContent.ARTICLE_TEXT_EDIT
+    String articleName = editArticleWithContentAndGetTitle(createArticle(),
+                                                           PageContent.ARTICLE_TEXT_EDIT
     );
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
-                             .isArticleEditionActivityDisplayed(
-                                 articleName,
-                                 testUser.getUserName()
+                             .isArticleEditionActivityDisplayed(articleName,
+                                                                testUser.getUserName()
                              ),
-                         String.format(
-                             "Activity for edited article with title %s was not found",
-                             articleName
+                         String.format("Activity for edited article with title %s was not found",
+                                       articleName
                          )
     );
   }
@@ -49,9 +46,8 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
                              .isNewArticleActivityDisplayed(articleName, testUser.getUserName()),
-                         String.format(
-                             "Activity for new article with title %s was not found",
-                             articleName
+                         String.format("Activity for new article with title %s was not found",
+                                       articleName
                          )
     );
   }
@@ -59,9 +55,8 @@ public class WikiActivityTests extends NewTestTemplate {
   public void newBlogCreationIsRecordedInWikiActivity() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-    UserProfilePage userProfile = new WikiBasePageObject().openProfilePage(
-        testUser.getUserName(),
-        wikiURL
+    UserProfilePage userProfile = new WikiBasePageObject().openProfilePage(testUser.getUserName(),
+                                                                           wikiURL
     );
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
@@ -75,31 +70,27 @@ public class WikiActivityTests extends NewTestTemplate {
                              .isNewBlogPostActivityDisplayed(blogTitle,
                                                              testUser.getUserName(),
                                                              blogContent
-                             ),
-                         String.format(
-                             "Activity for new blog post with title %s by user %s was not found",
-                             blogTitle,
-                             testUser.getUserName()
-                         )
-    );
+                             ), String.format(
+        "Activity for new blog post with title %s by user %s was not found",
+        blogTitle,
+        testUser.getUserName()
+    ));
   }
 
   public void newCategorizationIsRecordedInWikiActivity() {
     ArticlePageObject article = createArticle();
     String articleName = article.getArticleName();
-    String categoryName = String.format(
-        "%s %s",
-        PageContent.CATEGORY_NAME_PREFIX,
-        DateTime.now().getMillis()
+    String categoryName = String.format("%s %s",
+                                        PageContent.CATEGORY_NAME_PREFIX,
+                                        DateTime.now().getMillis()
     );
     article.addCategory(categoryName);
     article.submitCategory();
     Assertion.assertTrue(article.isCategoryPresent(categoryName));
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
-                             .isCategorizationActivityDisplayed(
-                                 articleName,
-                                 testUser.getUserName()
+                             .isCategorizationActivityDisplayed(articleName,
+                                                                testUser.getUserName()
                              ),
                          String.format(
                              "Activity for new category for article with title %s was not found",
@@ -113,15 +104,12 @@ public class WikiActivityTests extends NewTestTemplate {
     String articleName = editArticleWithContentAndGetTitle(article, article.getContent());
 
     Assertion.assertFalse(new SpecialWikiActivityPageObject().open()
-                              .isArticleEditionActivityDisplayed(
-                                  articleName,
-                                  testUser.getUserName()
-                              ),
-                          String.format(
-                              "Activity edit with no visual change for article with title %s was found",
-                              articleName
-                          )
-    );
+                              .isArticleEditionActivityDisplayed(articleName,
+                                                                 testUser.getUserName()
+                              ), String.format(
+        "Activity edit with no visual change for article with title %s was found",
+        articleName
+    ));
   }
 
   public void clickingTitleRedirectsToArticle() {
@@ -133,11 +121,10 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertEquals(article.getArticleTitle(),
                            title,
-                           String.format(
-                               "Link in activities list for article with title %s "
-                               + "redirected to article with title %s",
-                               title,
-                               article.getArticleTitle()
+                           String.format("Link in activities list for article with title %s "
+                                         + "redirected to article with title %s",
+                                         title,
+                                         article.getArticleTitle()
                            )
     );
   }
@@ -148,15 +135,11 @@ public class WikiActivityTests extends NewTestTemplate {
     String expectedUserName = articleActivity.getUserLink().getText();
     UserProfilePage userPage = articleActivity.clickOnUserLink();
 
-    Assertion.assertEquals(userPage.getUserName(),
-                           expectedUserName,
-                           String.format(
-                               "Link in activities list for username %s "
-                               + "redirected to user profile for %s",
-                               expectedUserName,
-                               userPage.getUserName()
-                           )
-    );
+    Assertion.assertEquals(userPage.getUserName(), expectedUserName, String.format(
+        "Link in activities list for username %s " + "redirected to user profile for %s",
+        expectedUserName,
+        userPage.getUserName()
+    ));
   }
 
   public void clickingIconNextToArticleRedirectsToDiff() {

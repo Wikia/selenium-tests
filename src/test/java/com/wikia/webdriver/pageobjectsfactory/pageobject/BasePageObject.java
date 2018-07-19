@@ -63,10 +63,9 @@ public class BasePageObject {
 
   private static String getEmailChangeConfirmationLink(String email, String password) {
     String mailSubject = "Confirm your email address change on FANDOM";
-    String url = EmailUtils.getActivationLinkFromEmailContent(EmailUtils.getFirstEmailContent(
-        email,
-        password,
-        mailSubject
+    String url = EmailUtils.getActivationLinkFromEmailContent(EmailUtils.getFirstEmailContent(email,
+                                                                                              password,
+                                                                                              mailSubject
     ));
     Log.log("getActivationLinkFromMail",
             "activation link is visible in email content: " + url,
@@ -76,10 +75,9 @@ public class BasePageObject {
   }
 
   public static String getPasswordResetLink(String email, String password) {
-    String passwordResetEmail = EmailUtils.getFirstEmailContent(
-        email,
-        password,
-        "Reset your FANDOM password"
+    String passwordResetEmail = EmailUtils.getFirstEmailContent(email,
+                                                                password,
+                                                                "Reset your FANDOM password"
     );
     String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
     Log.log("Password reset link", "Password reset link received: " + resetLink, true);
@@ -108,9 +106,8 @@ public class BasePageObject {
   }
 
   public BasePageObject waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(
-        By.className("loading-overlay"),
-        Duration.ofSeconds(3)
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"),
+                                            Duration.ofSeconds(3)
     ));
     waitSafely(
         () -> wait.forElementNotVisible(By.className("loading-overlay")),
@@ -278,13 +275,12 @@ public class BasePageObject {
       );
       return true;
     } else {
-      Log.log(
-          "isStringInURL",
-          String.format("Current url: %s does not contain given string: %s",
-                        currentURL,
-                        givenString
-          ),
-          false
+      Log.log("isStringInURL",
+              String.format("Current url: %s does not contain given string: %s",
+                            currentURL,
+                            givenString
+              ),
+              false
       );
       return false;
     }
@@ -371,10 +367,9 @@ public class BasePageObject {
   protected Boolean scrollToSelector(String selector) {
     if (isElementOnPage(By.cssSelector(selector))) {
       try {
-        driver.executeScript(
-            "var x = $(arguments[0]);" + "window.scroll(0,x.position()['top']+x.height()+100);"
-            + "$(window).trigger('scroll');",
-            selector
+        driver.executeScript("var x = $(arguments[0]);" + "window.scroll(0,x.position()['top']+x.height()+100);"
+                             + "$(window).trigger('scroll');",
+                             selector
         );
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
@@ -411,9 +406,8 @@ public class BasePageObject {
   public void waitForElementNotVisibleByElement(WebElement element, long timeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(
-          driver,
-          timeout
+      new WebDriverWait(driver,
+                        timeout
       ).until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
       restoreDefaultImplicitWait();
@@ -449,10 +443,9 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsAttributeByElement(
       WebElement element, String attribute, String value
   ) {
-    waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
-        element,
-        attribute,
-        value
+    waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element,
+                                                                               attribute,
+                                                                               value
     ));
   }
 
@@ -503,9 +496,8 @@ public class BasePageObject {
   }
 
   public void pressDownArrow(WebElement element) {
-    driver.executeScript(
-        "var e = jQuery.Event(\"keydown\"); " + "e.which=40; $(arguments[0]).trigger(e);",
-        element
+    driver.executeScript("var e = jQuery.Event(\"keydown\"); " + "e.which=40; $(arguments[0]).trigger(e);",
+                         element
     );
   }
 
@@ -608,12 +600,11 @@ public class BasePageObject {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
                      + "New coordinate (" + target.x + "," + target.y + ")");
     }
-    Log.log(
-        "verifyElementMoved",
-        "Element did move. From (" + source.x + "," + source.y + ") to (" + target.x + ","
-        + target.y + ")",
-        true,
-        driver
+    Log.log("verifyElementMoved",
+            "Element did move. From (" + source.x + "," + source.y + ") to (" + target.x + ","
+            + target.y + ")",
+            true,
+            driver
     );
   }
 
@@ -629,12 +620,11 @@ public class BasePageObject {
           "Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight + ") "
           + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
-    Log.log(
-        "verifyElementMoved",
-        "Element did resize. From (" + sourceWidth + "," + sourceHeight + ") to (" + targetWidth
-        + "," + targetHeight + ")",
-        true,
-        driver
+    Log.log("verifyElementMoved",
+            "Element did resize. From (" + sourceWidth + "," + sourceHeight + ") to (" + targetWidth
+            + "," + targetHeight + ")",
+            true,
+            driver
     );
   }
 
@@ -708,9 +698,8 @@ public class BasePageObject {
   private void waitForLinkOpenedInNewTab(WebElement link) {
     int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
-    new WebDriverWait(
-        driver,
-        TIMEOUT_PAGE_REGISTRATION
+    new WebDriverWait(driver,
+                      TIMEOUT_PAGE_REGISTRATION
     ).until((Function<WebDriver, Boolean>) input -> getTabsCount() > initialTabsNumber);
   }
 

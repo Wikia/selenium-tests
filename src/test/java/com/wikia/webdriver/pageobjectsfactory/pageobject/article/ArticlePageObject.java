@@ -396,9 +396,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyTableAlignment(Alignment alignment) {
     wait.forElementVisible(table);
-    Assertion.assertEquals(
-        table.getCssValue("float").toLowerCase(),
-        alignment.toString().toLowerCase()
+    Assertion.assertEquals(table.getCssValue("float").toLowerCase(),
+                           alignment.toString().toLowerCase()
     );
     Log.log("verifyTableAlignment", "table has correct alignment", true);
   }
@@ -494,9 +493,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public EditCategoryComponentObject editCategory(String category) {
-    WebElement editCategory = driver.findElement(By.cssSelector(editCategorySelector.replace(
-        "%categoryName%",
-        category
+    WebElement editCategory = driver.findElement(By.cssSelector(editCategorySelector.replace("%categoryName%",
+                                                                                             category
     )));
     scrollAndClick(editCategory);
     Log.log("editCategory", "edit button on category " + category + " clicked", true);
@@ -504,9 +502,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void removeCategory(String category) {
-    WebElement editCategory = driver.findElement(By.cssSelector(removeCategorySelector.replace(
-        "%categoryName%",
-        category
+    WebElement editCategory = driver.findElement(By.cssSelector(removeCategorySelector.replace("%categoryName%",
+                                                                                               category
     )));
     scrollAndClick(editCategory);
     Log.log("removeCategory", "remove button on category " + category + " clicked", true);
@@ -524,10 +521,9 @@ public class ArticlePageObject extends WikiBasePageObject {
     String desiredCategoryText = desiredCategory.getText();
     scrollAndClick(categorySuggestionsListItems.get(categoryIndex));
     waitForElementNotVisibleByElement(categorySuggestionsDialog);
-    Log.log(
-        "addCategorySuggestions",
-        "category " + desiredCategoryText + " added from suggestions",
-        true
+    Log.log("addCategorySuggestions",
+            "category " + desiredCategoryText + " added from suggestions",
+            true
     );
     return desiredCategoryText;
   }
@@ -537,9 +533,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public WatchPageObject unfollowArticle() {
-    String url = urlBuilder.appendQueryStringToURL(
-        urlBuilder.getUrl(),
-        "title=" + articleTitle.getText()
+    String url = urlBuilder.appendQueryStringToURL(urlBuilder.getUrl(),
+                                                   "title=" + articleTitle.getText()
     );
     url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
     getUrl(url);

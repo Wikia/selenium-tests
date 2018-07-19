@@ -61,10 +61,9 @@ public class ImageGenerator {
     int stringWidth = fontMetrics.stringWidth(imageText);
 
     // Draw the text in the middle of the image
-    g2.drawString(
-        imageText,
-        (imageBuffer.getWidth() - stringWidth) / 2,
-        imageBuffer.getHeight() / 2
+    g2.drawString(imageText,
+                  (imageBuffer.getWidth() - stringWidth) / 2,
+                  imageBuffer.getHeight() / 2
     );
 
     try {

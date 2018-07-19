@@ -28,10 +28,9 @@ public class CustomImageCropper extends DefaultCropper {
       return new Screenshot(image);
     }
 
-    BufferedImage cropped = new BufferedImage(
-        imageIntersection.width,
-        imageIntersection.height,
-        image.getType()
+    BufferedImage cropped = new BufferedImage(imageIntersection.width,
+                                              imageIntersection.height,
+                                              image.getType()
     );
     Graphics g = cropped.getGraphics();
     g.drawImage(image,
@@ -64,10 +63,9 @@ public class CustomImageCropper extends DefaultCropper {
       return new Screenshot(image);
     }
 
-    BufferedImage cropped = new BufferedImage(
-        imageIntersection.width,
-        imageIntersection.height,
-        image.getType()
+    BufferedImage cropped = new BufferedImage(imageIntersection.width,
+                                              imageIntersection.height,
+                                              image.getType()
     );
     Graphics g = cropped.getGraphics();
     g.drawImage(image,
@@ -84,9 +82,8 @@ public class CustomImageCropper extends DefaultCropper {
     g.dispose();
     Screenshot screenshot = new Screenshot(cropped);
     screenshot.setOriginShift(cropArea);
-    screenshot.setCoordsToCompare(setReferenceCoords(
-        screenshot.getOriginShift(),
-        Collections.singleton(cropArea)
+    screenshot.setCoordsToCompare(setReferenceCoords(screenshot.getOriginShift(),
+                                                     Collections.singleton(cropArea)
     ));
     return screenshot;
   }

@@ -77,14 +77,12 @@ public class LightboxTests extends NewTestTemplate {
     articlePage.getLightbox().clickCloseButton();
     Long closingPosition = new JavascriptActions().getCurrentPosition();
 
-    Assertion.assertEquals(
-        startingPosition,
-        closingPosition,
-        "Starting scroll position should be " + "the same as closing position"
+    Assertion.assertEquals(startingPosition,
+                           closingPosition,
+                           "Starting scroll position should be " + "the same as closing position"
     );
-    Assertion.assertTrue(
-        startingPosition > 0 && closingPosition > 0,
-        "Page shoudln't be scrolled" + "to top"
+    Assertion.assertTrue(startingPosition > 0 && closingPosition > 0,
+                         "Page shoudln't be scrolled" + "to top"
     );
   }
 }

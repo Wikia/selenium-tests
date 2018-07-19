@@ -57,18 +57,16 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     WebElement langElementInDropdown = wikiLanguageList.stream()
         .filter(e -> e.getAttribute("innerHTML").trim().contains(langSelector))
         .findAny()
-        .orElseThrow(() -> new WebDriverException(String.format(
-            "Couldn't find language [%s]",
-            lang
+        .orElseThrow(() -> new WebDriverException(String.format("Couldn't find language [%s]",
+                                                                lang
         )));
     hover(wikiLanguageDropdown);
     langElementInDropdown.click();
 
-    Log.log(
-        "selectLanguage",
-        "selected " + langElementInDropdown.getAttribute("innerHTML").trim() + " language",
-        true,
-        driver
+    Log.log("selectLanguage",
+            "selected " + langElementInDropdown.getAttribute("innerHTML").trim() + " language",
+            true,
+            driver
     );
   }
 

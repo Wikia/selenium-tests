@@ -17,11 +17,7 @@ public class UpdatePostContext extends RemoteContext {
 
   @Builder
   private UpdatePostContext(
-      String siteId,
-      String threadId,
-      String firstPostId,
-      String title,
-      String description
+      String siteId, String threadId, String firstPostId, String title, String description
   ) {
     super(siteId);
     this.threadId = threadId;

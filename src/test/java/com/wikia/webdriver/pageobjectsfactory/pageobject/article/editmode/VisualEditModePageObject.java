@@ -107,9 +107,8 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public VisualEditModePageObject open(String articleName) {
-    getUrl(urlBuilder.appendQueryStringToURL(
-        urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleName,
-        URLsContent.ACTION_EDIT
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleName,
+                                             URLsContent.ACTION_EDIT
     ));
     return this;
   }
@@ -298,10 +297,9 @@ public class VisualEditModePageObject extends EditMode {
           wait.forElementNotPresent(videoBy);
           break;
         default:
-          Log.log(
-              "verifyComponentRemoved",
-              "Invalid component: " + component.name() + " selected",
-              false
+          Log.log("verifyComponentRemoved",
+                  "Invalid component: " + component.name() + " selected",
+                  false
           );
           break;
       }
@@ -333,9 +331,10 @@ public class VisualEditModePageObject extends EditMode {
   public void verifyBlockedUserMessage() {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
-    Log.log("verifyBlockedUserMessage",
-            "blocked user message when attempting to create article verified",
-            true
+    Log.log(
+        "verifyBlockedUserMessage",
+        "blocked user message when attempting to create article verified",
+        true
     );
   }
 

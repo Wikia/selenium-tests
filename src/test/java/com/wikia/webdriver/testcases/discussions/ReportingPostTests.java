@@ -376,9 +376,8 @@ public class ReportingPostTests extends NewTestTemplate {
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
-    Assertion.assertFalse(
-        isReportPostOptionAvailableFor(postEntity),
-        NO_REPORT_POST_OPTION_MESSAGE
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity),
+                          NO_REPORT_POST_OPTION_MESSAGE
     );
   }
 
@@ -403,9 +402,8 @@ public class ReportingPostTests extends NewTestTemplate {
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
-    Assertion.assertFalse(
-        isReportPostOptionAvailableFor(postEntity),
-        NO_REPORT_POST_OPTION_MESSAGE
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity),
+                          NO_REPORT_POST_OPTION_MESSAGE
     );
   }
 
@@ -430,9 +428,8 @@ public class ReportingPostTests extends NewTestTemplate {
     final UserPostsPage userPostsPage = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     final PostEntity postEntity = userPostsPage.getPost().findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
-    Assertion.assertFalse(
-        isReportPostOptionAvailableFor(postEntity),
-        NO_REPORT_POST_OPTION_MESSAGE
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity),
+                          NO_REPORT_POST_OPTION_MESSAGE
     );
   }
 
@@ -719,9 +716,8 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertTrue(clickCancelOnDeletePostModalDialog(page, postEntity),
                          REPORTED_INDICATOR_ON_POST_MESSAGE
     );
-    Assertion.assertTrue(
-        clickApproveOnDeletePostModalDialog(page, postEntity),
-        DELETED_POST_MESSAGE
+    Assertion.assertTrue(clickApproveOnDeletePostModalDialog(page, postEntity),
+                         DELETED_POST_MESSAGE
     );
   }
 

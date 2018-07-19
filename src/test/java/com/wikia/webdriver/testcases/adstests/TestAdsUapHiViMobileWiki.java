@@ -47,9 +47,8 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   @Test
   public void shouldHaveResolvedStateAfterScroll() throws InterruptedException {
-    test().shouldHaveResolvedStateAfterScroll(
-        IMPACT_STATE_ASPECT_RATIO,
-        RESOLVED_STATE_ASPECT_RATIO
+    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO,
+                                              RESOLVED_STATE_ASPECT_RATIO
     );
   }
 
@@ -105,9 +104,8 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   @Test
   public void shouldDisplayResolvedStateOnNextPageView() {
-    test().shouldDisplayResolvedStateOnNextPageView(
-        IMPACT_STATE_ASPECT_RATIO,
-        RESOLVED_STATE_ASPECT_RATIO
+    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO,
+                                                    RESOLVED_STATE_ASPECT_RATIO
     );
   }
 

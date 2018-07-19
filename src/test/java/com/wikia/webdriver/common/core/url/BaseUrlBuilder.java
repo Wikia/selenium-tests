@@ -50,16 +50,14 @@ public class BaseUrlBuilder {
   }
 
   public String globallyEnableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
-    return this.appendQueryStringToURL(
-        pageUrl,
-        String.format("InstantGlobals.%s=[XX]", instantGlobal)
+    return this.appendQueryStringToURL(pageUrl,
+                                       String.format("InstantGlobals.%s=[XX]", instantGlobal)
     );
   }
 
   public String globallyDisableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
-    return this.appendQueryStringToURL(
-        pageUrl,
-        String.format("InstantGlobals.%s=[ZZ]", instantGlobal)
+    return this.appendQueryStringToURL(pageUrl,
+                                       String.format("InstantGlobals.%s=[ZZ]", instantGlobal)
     );
   }
 

@@ -44,9 +44,10 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(searchInput);
     searchInput.sendKeys(searchString);
     waitForValueToBePresentInElementsAttributeByElement(searchInput, "value", searchString);
-    Log.log("typeInSearchInput",
-            "Typed '" + searchString + "' into the template search textfield",
-            true
+    Log.log(
+        "typeInSearchInput",
+        "Typed '" + searchString + "' into the template search textfield",
+        true
     );
   }
 

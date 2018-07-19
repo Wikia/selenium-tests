@@ -26,10 +26,9 @@ public class ExtHelper {
       }
     }
 
-    throw new WebDriverException(String.format(
-        "Can't find '%s' extension in '%s'",
-        fullName,
-        extensions.getPath()
+    throw new WebDriverException(String.format("Can't find '%s' extension in '%s'",
+                                               fullName,
+                                               extensions.getPath()
     ));
   }
 }

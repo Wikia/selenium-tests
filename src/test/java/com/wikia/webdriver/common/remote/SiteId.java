@@ -14,6 +14,7 @@ public class SiteId {
   @Getter
   private String siteId;
   private String wikiUrl;
+
   public SiteId(String wikiUrl) {
     this.wikiUrl = wikiUrl;
     this.extractSiteIdFromSpecialVersion();

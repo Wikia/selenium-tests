@@ -41,9 +41,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
     );
   }
 
@@ -53,9 +52,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnMobileCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
     );
   }
 
@@ -65,9 +63,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnMobileCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
     );
   }
 
@@ -77,9 +74,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
     );
   }
 
@@ -89,9 +85,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
     );
   }
 
@@ -101,9 +96,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
     );
   }
 
@@ -113,9 +107,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
     );
   }
 
@@ -125,9 +118,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
     );
   }
 
@@ -137,9 +129,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
     );
   }
 
@@ -149,9 +140,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
     );
   }
 
@@ -161,9 +151,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
     );
   }
 
@@ -173,9 +162,8 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(
-        moreOptionsPopOver.hasLockPostOption(),
-        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(),
+                          String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
     );
   }
 
@@ -186,10 +174,9 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
     Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(
-        SHOULD_NOT_ADD_REPLY_MESSAGE,
-        User.USER.name(),
-        User.DISCUSSIONS_MODERATOR.name()
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE,
+                                         User.USER.name(),
+                                         User.DISCUSSIONS_MODERATOR.name()
     );
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
@@ -205,10 +192,9 @@ public class LockingPostTests extends NewTestTemplate {
     final String text = addReplyOnMobile(page);
     boolean actual = isReplyNotPresent(page, text);
 
-    final String message = String.format(
-        SHOULD_ADD_REPLY_MESSAGE,
-        User.USER.name(),
-        User.DISCUSSIONS_MODERATOR.name()
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE,
+                                         User.USER.name(),
+                                         User.DISCUSSIONS_MODERATOR.name()
     );
     Assertion.assertFalse(actual, message);
   }
@@ -220,10 +206,9 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
     Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(
-        SHOULD_NOT_ADD_REPLY_MESSAGE,
-        User.USER.name(),
-        User.DISCUSSIONS_MODERATOR.name()
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE,
+                                         User.USER.name(),
+                                         User.DISCUSSIONS_MODERATOR.name()
     );
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
@@ -239,10 +224,9 @@ public class LockingPostTests extends NewTestTemplate {
     final String text = addReplyOnDesktop(page);
     boolean actual = isReplyNotPresent(page, text);
 
-    final String message = String.format(
-        SHOULD_ADD_REPLY_MESSAGE,
-        User.USER.name(),
-        User.DISCUSSIONS_MODERATOR.name()
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE,
+                                         User.USER.name(),
+                                         User.DISCUSSIONS_MODERATOR.name()
     );
     Assertion.assertFalse(actual, message);
   }
@@ -255,9 +239,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(
-        postEntity.isLocked(),
-        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    Assertion.assertTrue(postEntity.isLocked(),
+                         String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
     );
   }
 
@@ -279,9 +262,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(
-        postEntity.isLocked(),
-        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    Assertion.assertTrue(postEntity.isLocked(),
+                         String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
     );
   }
 
@@ -303,9 +285,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(
-        postEntity.isLocked(),
-        String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name())
+    Assertion.assertTrue(postEntity.isLocked(),
+                         String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name())
     );
   }
 
@@ -327,9 +308,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(
-        postEntity.isLocked(),
-        String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name())
+    Assertion.assertTrue(postEntity.isLocked(),
+                         String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name())
     );
   }
 
@@ -351,9 +331,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(
-        postEntity.isLocked(),
-        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    Assertion.assertTrue(postEntity.isLocked(),
+                         String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
     );
   }
 
@@ -375,9 +354,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(
-        postEntity.isLocked(),
-        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    Assertion.assertTrue(postEntity.isLocked(),
+                         String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
     );
   }
 

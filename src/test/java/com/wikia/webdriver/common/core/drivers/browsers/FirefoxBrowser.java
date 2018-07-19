@@ -22,10 +22,9 @@ public class FirefoxBrowser extends BrowserAbstract {
     // Windows 8 requires to set webdriver.firefox.bin system variable
     // to path where executive file of FF is placed
     if ("WINDOWS 8".equalsIgnoreCase(System.getProperty("os.name"))) {
-      System.setProperty(
-          "webdriver.firefox.bin",
-          "c:" + File.separator + "Program Files (x86)" + File.separator + "Mozilla Firefox"
-          + File.separator + "Firefox.exe"
+      System.setProperty("webdriver.firefox.bin",
+                         "c:" + File.separator + "Program Files (x86)" + File.separator
+                         + "Mozilla Firefox" + File.separator + "Firefox.exe"
       );
     }
 
@@ -39,9 +38,8 @@ public class FirefoxBrowser extends BrowserAbstract {
           tmpFile = File.createTempFile("webdriver", null, mozillaPath);
         } catch (IOException ex) {
           Log.log("Can't create file", ex, false);
-          throw new WebDriverException("Can't create file in path: %s".replace(
-              "%s",
-              mozillaPath.getAbsolutePath()
+          throw new WebDriverException("Can't create file in path: %s".replace("%s",
+                                                                               mozillaPath.getAbsolutePath()
           ));
         }
       } else {
@@ -49,9 +47,8 @@ public class FirefoxBrowser extends BrowserAbstract {
           tmpFile = File.createTempFile("webdriver", null, homePath);
         } catch (IOException ex) {
           Log.log("Can't create file", ex, false);
-          throw new WebDriverException("Can't create file in path: %s".replace(
-              "%s",
-              homePath.getAbsolutePath()
+          throw new WebDriverException("Can't create file in path: %s".replace("%s",
+                                                                               homePath.getAbsolutePath()
           ));
         }
       }

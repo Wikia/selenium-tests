@@ -66,9 +66,8 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   public void adNotDisplayedIfSectionInThisSameViewPort() {
     AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(false));
-    ads.scrollTo(By.id(String.format(
-        ARTICLE_HEADER_SELECTOR,
-        Double.toString(HEADER_WITHOUT_AD_NUMBER)
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR,
+                                     Double.toString(HEADER_WITHOUT_AD_NUMBER)
     )));
 
     Assertion.assertFalse(isIncontenAdDisplayed(3, ads),
@@ -82,9 +81,8 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(true));
-    ads.scrollTo(By.id(String.format(
-        ARTICLE_HEADER_SELECTOR,
-        Integer.toString(HEADERS_WITH_AD_NUMBER)
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR,
+                                     Integer.toString(HEADERS_WITH_AD_NUMBER)
     )));
 
     ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AD_INFO_PATTERN);
@@ -92,9 +90,8 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   private boolean isIncontenAdDisplayed(int incontentIndex, AdsBaseObject ads) {
     try {
-      WebElement slot = driver.findElement(By.id(String.format(
-          INCONTENT_SELECTOR,
-          Integer.toString(incontentIndex)
+      WebElement slot = driver.findElement(By.id(String.format(INCONTENT_SELECTOR,
+                                                               Integer.toString(incontentIndex)
       )));
       ads.waitForSlotExpanded(slot);
       return true;

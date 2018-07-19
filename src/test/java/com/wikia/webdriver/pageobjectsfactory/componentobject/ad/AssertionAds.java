@@ -12,11 +12,10 @@ public class AssertionAds {
   public static void assertAspectRatio(Dimension size, double expected) {
     final double actual = (double) size.getWidth() / (double) size.getHeight();
     // Some divergent is possible because of browser size rounding
-    Assertion.assertEquals(
-        roundAspectRatio(actual),
-        roundAspectRatio(expected),
-        0.03,
-        "Aspect ratios are divergent"
+    Assertion.assertEquals(roundAspectRatio(actual),
+                           roundAspectRatio(expected),
+                           0.03,
+                           "Aspect ratios are divergent"
     );
   }
 

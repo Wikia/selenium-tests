@@ -90,9 +90,8 @@ public class GraphApi {
   }
 
   private List<BasicNameValuePair> getParams() {
-    return Collections.singletonList(new BasicNameValuePair(
-        "access_token",
-        WIKIA_PRODUCTION_APP_ACCESS_TOKEN
+    return Collections.singletonList(new BasicNameValuePair("access_token",
+                                                            WIKIA_PRODUCTION_APP_ACCESS_TOKEN
     ));
   }
 

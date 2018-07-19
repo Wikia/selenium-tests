@@ -32,9 +32,8 @@ public class Category extends WikiBasePageObject {
   }
 
   public CategoryPage openCategoryPage(String name) {
-    WebElement link = categoryList.findElement(By.cssSelector(String.format(
-        "a[title=\"%s\"]",
-        name
+    WebElement link = categoryList.findElement(By.cssSelector(String.format("a[title=\"%s\"]",
+                                                                            name
     )));
 
     Log.info(String.format("Open category page named: \"%s\".", name));

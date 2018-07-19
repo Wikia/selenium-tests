@@ -62,9 +62,9 @@ public class TemplateConfigurationModal {
     final int numberOfTemplatesOnPage = webDriver.findElements(templatePlaceholderBy).size();
     okButton.click();
 
-    editorFrame.frameScope(() -> webDriverWait.until(ExpectedConditions.numberOfElementsToBe(
-        templatePlaceholderBy,
-        numberOfTemplatesOnPage + 1
+    editorFrame.frameScope(() -> webDriverWait.until(ExpectedConditions.numberOfElementsToBe(templatePlaceholderBy,
+                                                                                             numberOfTemplatesOnPage
+                                                                                             + 1
     )));
   }
 }

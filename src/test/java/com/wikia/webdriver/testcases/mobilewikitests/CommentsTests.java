@@ -160,9 +160,8 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickCommentsHeader();
     comments.waitForCommentsToLoad();
 
-    boolean result = comments.isMediaThumbnailInComment(
-        MEDIA_TYPE_VIDEO,
-        COMMENT_NUMBER_WITH_VIDEO
+    boolean result = comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO,
+                                                        COMMENT_NUMBER_WITH_VIDEO
     );
     Log.log("Video thumbnail", "is displayed", "is not displayed", result);
 

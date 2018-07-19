@@ -71,9 +71,8 @@ public class VideoComponentObject extends WikiBasePageObject {
 
     WebElement object = container.findElement(By.tagName("object"));
     wait.forElementVisible(object);
-    Assertion.assertStringContains(
-        getVideoPlayerObject().getAttribute("value"),
-        object.getAttribute("id")
+    Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"),
+                                   object.getAttribute("id")
     );
     Log.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
   }

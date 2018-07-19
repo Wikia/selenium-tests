@@ -58,9 +58,8 @@ public class VetModalWidthTests extends NewTestTemplate {
   public void Vet_Modal_002_modalWidthOnEditing() {
     WikiBasePageObject base = new WikiBasePageObject();
 
-    VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPage(
-        wikiURL,
-        articleTitle
+    VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPage(wikiURL,
+                                                                                       articleTitle
     );
     VetOptionsComponentObject
         vetOptions

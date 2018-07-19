@@ -79,8 +79,7 @@ public class JavascriptActions {
     int offset = getOffset();
 
     try {
-      return (Boolean) js.executeScript("return ($(window).scrollTop() + " + offset
-                                        + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
+      return (Boolean) js.executeScript("return ($(window).scrollTop() + " + offset + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
                                         + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + "
                                         + offset + ")",
                                         element
@@ -93,11 +92,10 @@ public class JavascriptActions {
       String windowHeight = "(window.innerHeight)";
       String elementOuterHeight = "(arguments[0]).clientHeight";
 
-      return (boolean) js.executeScript(
-          "return (" + windowScrollTop + " + " + offset + " < " + elementOffsetTop + " && "
-          + windowScrollTop + " + " + windowHeight + " > " + elementOffsetTop + " + "
-          + elementOuterHeight + " + " + offset + ")",
-          element
+      return (boolean) js.executeScript("return (" + windowScrollTop + " + " + offset + " < " + elementOffsetTop + " && "
+                                        + windowScrollTop + " + " + windowHeight + " > " + elementOffsetTop + " + "
+                                        + elementOuterHeight + " + " + offset + ")",
+                                        element
       );
     }
   }
@@ -177,13 +175,11 @@ public class JavascriptActions {
   }
 
   public void scrollToElementInModal(WebElement element, WebElement modal) {
-    int elementOffsetTop = Integer.parseInt(js.executeScript(
-        "return Math.round($(arguments[0]).offset().top)",
-        element
+    int elementOffsetTop = Integer.parseInt(js.executeScript("return Math.round($(arguments[0]).offset().top)",
+                                                             element
     ).toString());
-    int modalOffsetTop = Integer.parseInt(js.executeScript(
-        "return Math.round($(arguments[0]).offset().top)",
-        modal
+    int modalOffsetTop = Integer.parseInt(js.executeScript("return Math.round($(arguments[0]).offset().top)",
+                                                           modal
     ).toString());
     int scrollTop = elementOffsetTop - modalOffsetTop;
 

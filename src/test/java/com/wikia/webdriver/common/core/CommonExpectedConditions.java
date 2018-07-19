@@ -255,10 +255,9 @@ public class CommonExpectedConditions {
 
       @Override
       public String toString() {
-        return String.format(
-            "text ('%s') to be present in element %s",
-            text,
-            selectorBy.toString()
+        return String.format("text ('%s') to be present in element %s",
+                             text,
+                             selectorBy.toString()
         );
       }
     };
@@ -302,10 +301,9 @@ public class CommonExpectedConditions {
 
       @Override
       public String toString() {
-        return String.format(
-            "text ('%s') to be present in element %s",
-            text,
-            selectorBy.toString()
+        return String.format("text ('%s') to be present in element %s",
+                             text,
+                             selectorBy.toString()
         );
       }
     };
@@ -342,10 +340,9 @@ public class CommonExpectedConditions {
 
       @Override
       public String toString() {
-        return String.format(
-            "text ('%s') to be present in element %s",
-            text,
-            selectorBy.toString()
+        return String.format("text ('%s') to be present in element %s",
+                             text,
+                             selectorBy.toString()
         );
       }
     };

@@ -242,9 +242,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void verifyNamespace(String namespace) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(
-          driver,
-          30
+      new WebDriverWait(driver,
+                        30
       ).until((ExpectedCondition<Boolean>) webDriver -> !titles.isEmpty());
     } finally {
       restoreDefaultImplicitWait();

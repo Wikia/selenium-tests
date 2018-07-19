@@ -20,9 +20,8 @@ public class TestTopWamWikis extends TemplateNoFirstLoad {
 
   @Test(groups = "TopWamWikisWhereIsMyExtension")
   public void TestTopWamWikisCountInRange() {
-    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(
-        URLsContent.COMMUNITY_WIKI,
-        DEFAULT_LANGUAGE
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(URLsContent.COMMUNITY_WIKI,
+                                                                      DEFAULT_LANGUAGE
     );
     String whereIsExtensionUrl = urlBuilder.getUrlForPath(URLsContent.SPECIAL_WHERE_IS_EXTENSION);
     whereIsExtensionUrl = urlBuilder.appendQueryStringToURL(whereIsExtensionUrl, extensionURL);

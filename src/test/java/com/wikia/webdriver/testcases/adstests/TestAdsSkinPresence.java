@@ -21,13 +21,14 @@ public class TestAdsSkinPresence extends NewTestTemplate {
       String backgroundColor,
       String middleColor
   ) {
-    verifySkin(wikiName,
-               article,
-               resolution,
-               expectedLeftSide,
-               expectedRightSide,
-               backgroundColor,
-               middleColor
+    verifySkin(
+        wikiName,
+        article,
+        resolution,
+        expectedLeftSide,
+        expectedRightSide,
+        backgroundColor,
+        middleColor
     );
   }
 

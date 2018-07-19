@@ -46,8 +46,7 @@ public class DplQueryTestPageObject extends WikiBasePageObject {
   }
 
   private boolean dplQueryHasExpectedPages(
-      Set<String> expectedPageSet,
-      List<WebElement> resultSet
+      Set<String> expectedPageSet, List<WebElement> resultSet
   ) {
     return resultSet.stream().map(WebElement::getText).allMatch(expectedPageSet::contains);
   }

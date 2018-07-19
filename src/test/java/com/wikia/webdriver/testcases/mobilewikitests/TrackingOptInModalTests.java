@@ -33,9 +33,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   @Test(groups = {
       "mobile-wiki-tracking-opt-in-all-countries"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRcountries")
   public void testModalVisibilityForAnonAllCountries(
-      String continent,
-      String country,
-      boolean shouldGetModal
+      String continent, String country, boolean shouldGetModal
   ) {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     new ArticlePage().open();

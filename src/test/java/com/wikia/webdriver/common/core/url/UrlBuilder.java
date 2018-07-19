@@ -18,11 +18,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   private String language;
 
   private UrlBuilder(
-      String wiki,
-      String env,
-      Boolean forceHttps,
-      Boolean forceLanguageInPath,
-      String language
+      String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language
   ) {
     super(env);
     this.wikiName = wiki;
@@ -105,10 +101,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   private String getFormattedWikiHost(
-      String www,
-      String wikiaName,
-      EnvType envType,
-      String language
+      String www, String wikiaName, EnvType envType, String language
   ) {
 
     if (!forceLanguageInPath && !(DEFAULT_LANGUAGE).equals(language)) {

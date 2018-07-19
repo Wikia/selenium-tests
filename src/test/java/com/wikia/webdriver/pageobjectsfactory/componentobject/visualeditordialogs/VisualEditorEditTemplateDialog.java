@@ -58,10 +58,9 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   public void typeInParam(String paramName, String text) {
     waitForDialogVisible();
     if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
-      WebElement targetParam = Elements.getElementByChildText(
-          templateParams,
-          PARAM_LABEL_BY,
-          paramName
+      WebElement targetParam = Elements.getElementByChildText(templateParams,
+                                                              PARAM_LABEL_BY,
+                                                              paramName
       );
       WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
       targetParamInput.sendKeys(text);

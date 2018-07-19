@@ -25,9 +25,8 @@ public class CreatePost {
                                                .put("siteId", context.getSiteId())
                                                .put("title", context.getTitle())
                                                .put("body", context.getDescription())
-                                               .put(
-                                                   "creatorId",
-                                                   remoteOperation.getUser().getUserId()
+                                               .put("creatorId",
+                                                    remoteOperation.getUser().getUserId()
                                                )
                                                .build());
 
@@ -36,10 +35,9 @@ public class CreatePost {
   }
 
   private String buildUrl(final CreatePostContext context) {
-    return DiscussionsClient.service(String.format(
-        CREATE_POST_URL_SUFFIX,
-        context.getSiteId(),
-        context.getCategoryId()
+    return DiscussionsClient.service(String.format(CREATE_POST_URL_SUFFIX,
+                                                   context.getSiteId(),
+                                                   context.getCategoryId()
     ));
   }
 }

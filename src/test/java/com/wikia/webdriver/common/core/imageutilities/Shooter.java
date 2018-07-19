@@ -88,9 +88,8 @@ public class Shooter {
 
     WebElement dummyElement = driver.findElement(By.tagName("body"));
 
-    BufferedImage image = new AShot().imageCropper(new CustomImageCropper().setCoordinates(
-        start,
-        size
+    BufferedImage image = new AShot().imageCropper(new CustomImageCropper().setCoordinates(start,
+                                                                                           size
     ))
         .shootingStrategy(ShootingStrategies.scaling(dpr))
         .takeScreenshot(driver, dummyElement)

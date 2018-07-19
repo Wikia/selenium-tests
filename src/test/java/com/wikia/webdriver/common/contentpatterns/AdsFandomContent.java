@@ -20,9 +20,8 @@ public class AdsFandomContent {
   static {
     SLOT_SELECTORS = new HashMap<>();
     SLOT_SELECTORS.put(TOP_LEADERBOARD, "div[id$='top_leaderboard_0__container__']");
-    SLOT_SELECTORS.put(
-        BOTTOM_LEADERBOARD,
-        "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__']"
+    SLOT_SELECTORS.put(BOTTOM_LEADERBOARD,
+                       "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__']"
     );
     SLOT_SELECTORS.put(TOP_BOXAD, "div[id$='top_boxad_0__container__']");
     SLOT_SELECTORS.put(INCONTENT_BOXAD, "div[id$='incontent_boxad_0__container__']");
@@ -30,9 +29,8 @@ public class AdsFandomContent {
     SLOT_SELECTORS.put(FEED_BOXAD, "div[id$='feed_boxad_0__container__']");
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
-    IFRAME_SLOT_SELECTORS.put(
-        BOTTOM_LEADERBOARD,
-        "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
+    IFRAME_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD,
+                              "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
     );
   }
 

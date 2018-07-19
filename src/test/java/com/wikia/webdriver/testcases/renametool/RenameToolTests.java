@@ -68,9 +68,8 @@ public class RenameToolTests extends NewTestTemplate {
   public void userAlreadyRenamedMessageShowed() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open();
 
-    Assertion.assertStringContains(
-        renameUserPage.getPageText(),
-        "This account has already been " + "renamed. As our "
+    Assertion.assertStringContains(renameUserPage.getPageText(),
+                                   "This account has already been " + "renamed. As our "
     );
   }
 
@@ -114,10 +113,9 @@ public class RenameToolTests extends NewTestTemplate {
         .submitChange();
     new ConfirmationModalPage().accept();
 
-    Assertion.assertEquals(
-        renameUserPage.getSuccessBoxMessage(),
-        "Rename process is in progress. The "
-        + "rest will be done in background. You will be notified via e-mail when it is completed."
+    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(),
+                           "Rename process is in progress. The "
+                           + "rest will be done in background. You will be notified via e-mail when it is completed."
     );
   }
 
@@ -143,19 +141,17 @@ public class RenameToolTests extends NewTestTemplate {
         .submitChange();
     new ConfirmationModalPage().accept();
 
-    Assertion.assertEquals(
-        renameUserPage.getSuccessBoxMessage(),
-        "Rename process is in progress. The "
-        + "rest will be done in background. You will be notified via e-mail when it is completed."
+    Assertion.assertEquals(renameUserPage.getSuccessBoxMessage(),
+                           "Rename process is in progress. The "
+                           + "rest will be done in background. You will be notified via e-mail when it is completed."
     );
   }
 
   @Test
   public void phalanxBlocksForbiddenPhrase() {
     String newName = "With all due respect Fuck You sir";
-    String expectedError = String.format(
-        "Phrase \"%s\" is globally blocked by Phalanx. See the list of blocks here.",
-        newName
+    String expectedError = String.format("Phrase \"%s\" is globally blocked by Phalanx. See the list of blocks here.",
+                                         newName
     );
     checkInvalidUserRenameFlow(newName, expectedError);
   }
@@ -164,9 +160,8 @@ public class RenameToolTests extends NewTestTemplate {
   public void antiSpoofBlocksForbiddenPhrase() {
 
     String newName = "MACbre";
-    String antiSpoofError = String.format(
-        "AntiSpoof warning - there is already a username similar to \"%s\".",
-        newName
+    String antiSpoofError = String.format("AntiSpoof warning - there is already a username similar to \"%s\".",
+                                          newName
     );
     checkInvalidUserRenameFlow(newName, antiSpoofError);
   }
@@ -174,9 +169,8 @@ public class RenameToolTests extends NewTestTemplate {
   @Test
   public void antiSpoofBlocksEmoticonPhrase() {
     String newName = "Chessky☠☠☠";
-    String antiSpoofError = String.format(
-        "AntiSpoof warning - there is already a username similar to \"%s\".",
-        newName
+    String antiSpoofError = String.format("AntiSpoof warning - there is already a username similar to \"%s\".",
+                                          newName
     );
     checkInvalidUserRenameFlow(newName, antiSpoofError);
   }

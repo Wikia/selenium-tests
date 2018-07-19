@@ -76,9 +76,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteReturningExpectedNotification(
-        User.USER_11,
-        User.USER_2
+    Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_11,
+                                                                              User.USER_2
     );
 
     verifyNotificationDisplayedOnDesktop(notification);
@@ -88,10 +87,9 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteReturningExpectedNotification(
-        User.USER_11,
-        User.USER_11,
-        User.USER_2
+    Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_11,
+                                                                               User.USER_11,
+                                                                               User.USER_2
     );
 
     verifyNotificationDisplayedOnDesktop(notification);
@@ -139,9 +137,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteReturningExpectedNotification(
-        User.USER_12,
-        User.USER_2
+    Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_12,
+                                                                              User.USER_2
     );
 
     verifyNotificationDisplayedOnMobile(notification);
@@ -151,10 +148,9 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteReturningExpectedNotification(
-        User.USER_12,
-        User.USER_12,
-        User.USER_2
+    Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_12,
+                                                                               User.USER_12,
+                                                                               User.USER_2
     );
 
     verifyNotificationDisplayedOnMobile(notification);
@@ -196,8 +192,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   private Notification createPostUpvoteReturningExpectedNotification(
-      User postAuthor,
-      User upvoteAuthor
+      User postAuthor, User upvoteAuthor
   ) {
     PostEntity.Data post = createPostAs(postAuthor);
     upvotePostAs(post, upvoteAuthor);
@@ -205,9 +200,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   private Notification createReplyUpvoteReturningExpectedNotification(
-      User postAuthor,
-      User replyAuthor,
-      User upvoteAuthor
+      User postAuthor, User replyAuthor, User upvoteAuthor
   ) {
     PostEntity.Data post = createPostAs(postAuthor);
     ReplyEntityData reply = createReplyToPostAs(post, replyAuthor);

@@ -17,6 +17,7 @@ public class Categories {
 
   private static final String GET_CATEGORIES_URL_SUFFIX = "%s/forums";
   private final GetRemoteOperation remoteOperation;
+
   Categories(User user) {
     remoteOperation = new GetRemoteOperation(user);
   }

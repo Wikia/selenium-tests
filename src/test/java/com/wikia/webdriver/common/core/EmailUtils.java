@@ -19,9 +19,8 @@ public class EmailUtils {
   private static final String
       EMAIL_LINK_PATTERN
       = ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>%s</a>.*";
-  private static final String PASSWORD_RESET_LINK = String.format(
-      EMAIL_LINK_PATTERN,
-      "SET NEW PASSWORD"
+  private static final String PASSWORD_RESET_LINK = String.format(EMAIL_LINK_PATTERN,
+                                                                  "SET NEW PASSWORD"
   );
   private static final String CONFIRM_EMAIL_LINK = String.format(EMAIL_LINK_PATTERN, "Confirm Now");
 

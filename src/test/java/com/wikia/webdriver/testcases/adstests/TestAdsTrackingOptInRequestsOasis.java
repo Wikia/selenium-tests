@@ -52,8 +52,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNetzAthletenDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForNetzAthleten(
-      String[] instantGlobals,
-      List<String> urlPatterns
+      String[] instantGlobals, List<String> urlPatterns
   ) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -342,8 +341,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsOasis", dataProvider = "adsTrackingPixelsOnConsecutivePages")
   public void adsTrackingPixelsOnConsecutivePagesOutsideUE(
-      List<String> urlPatterns,
-      String[] articles
+      List<String> urlPatterns, String[] articles
   ) {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject();

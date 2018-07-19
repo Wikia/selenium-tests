@@ -48,8 +48,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapClickToPlayMobile", groups = {
       "AdsVuapClickToPlayMobile"})
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(
-      Page page,
-      String slot
+      Page page, String slot
   ) {
     AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(
@@ -87,11 +86,10 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       "AdsVuapDefaultStateMercury"})
   public void vuapDefaultStateReplayIsNotMuted(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
-    final AutoplayVuap vuap = new AutoplayVuap(
-        driver,
-        slot,
-        ads.findFirstIframeWithAd(slot),
-        false
+    final AutoplayVuap vuap = new AutoplayVuap(driver,
+                                               slot,
+                                               ads.findFirstIframeWithAd(slot),
+                                               false
     );
     ads.scrollToSlot(slot);
 
@@ -107,11 +105,10 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       "AdsVuapDefaultStateMercury"})
   public void vuapDefaultStateIsMuted(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
-    final AutoplayVuap vuap = new AutoplayVuap(
-        driver,
-        slot,
-        ads.findFirstIframeWithAd(slot),
-        false
+    final AutoplayVuap vuap = new AutoplayVuap(driver,
+                                               slot,
+                                               ads.findFirstIframeWithAd(slot),
+                                               false
     );
     ads.scrollToSlot(slot);
 
