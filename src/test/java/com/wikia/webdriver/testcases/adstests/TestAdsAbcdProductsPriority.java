@@ -24,11 +24,10 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   @Test(groups = {"AdsOutstreamVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis",
                   "AbcdProductPriorityOasis"})
   public void adsOutstreamVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis() {
-    AdsBaseObject ads = new AdsBaseObject(driver,
-                                          urlBuilder.appendQueryStringToURL(TEST_PAGE.getUrl(),
-                                                                            DEBUG_QUERY_STRING
-                                          )
-    );
+    AdsBaseObject ads = new AdsBaseObject(urlBuilder.appendQueryStringToURL(
+        TEST_PAGE.getUrl(),
+        DEBUG_QUERY_STRING
+    ));
 
     ads.scrollToSlot(AdsContent.TOP_LB);
     verifyAbcdAdIsNotDisplayed(ads);
@@ -39,13 +38,13 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
   @Test(groups = {"AdsAbcdAdIsDisplayedIfBidersAreDisabledOasis", "AbcdProductPriorityOasis"})
   public void adsAbcdAdIsDisplayedIfBidersAreDisabledOasis() {
-    AdsBaseObject ads = new AdsBaseObject(driver, TEST_PAGE.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(TEST_PAGE.getUrl());
     verifyAbcdAdIsDisplayed(ads);
   }
 
   @Test(groups = {"AdsUAPFamilyAdIsNotDisplayedOnFeaturedVideoPage", "AbcdProductPriorityOasis"})
   public void adsUAPFamilyAdIsNotDisplayedOnFeaturedVideoPage() {
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV.getUrl());
     verifyAbcdAdIsNotDisplayed(ads);
 
     Assert.assertTrue(ads.slotHasSize(AdsContent.TOP_LB, 728, 90));

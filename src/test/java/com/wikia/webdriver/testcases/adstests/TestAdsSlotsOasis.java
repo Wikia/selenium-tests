@@ -12,7 +12,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
   public void adsSmokeTestSlotsOasis() {
     String testedPage = UrlBuilder.createUrlBuilderForWiki("project43")
         .getUrlForPath("SyntheticTests/OasisSlots");
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.waitForPageLoadedWithGpt();
     ads.verifyAds();
   }

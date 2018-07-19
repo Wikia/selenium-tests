@@ -10,7 +10,7 @@ public class AdsFandomObject extends AdsBaseObject {
   private static final By DESKTOP_NAVIGATION_BAR = By.cssSelector(".wds-global-navigation");
 
   public AdsFandomObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public AdsFandomObject(WebDriver driver, String testedPage, Dimension resolution) {

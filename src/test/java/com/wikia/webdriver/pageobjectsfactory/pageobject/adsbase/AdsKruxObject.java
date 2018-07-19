@@ -17,7 +17,7 @@ public class AdsKruxObject extends AdsBaseObject {
   private WebElement kruxControlTag;
 
   public AdsKruxObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   /**

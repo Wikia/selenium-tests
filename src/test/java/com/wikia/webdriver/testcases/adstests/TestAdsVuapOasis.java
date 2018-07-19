@@ -155,7 +155,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(groups = {
       "AdsVuapResolvedState"}, dataProviderClass = AdsDataProvider.class, dataProvider = "adsVuapResolvedState")
   public void vuapResolvedStateShouldStartPlayingAfterClickOnReplay(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
                                                ads.findFirstIframeWithAd(slot),
@@ -173,7 +173,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
       "AdsVuapResolvedTimeProgressOasis"}, dataProviderClass = AdsDataProvider.class, dataProvider = "adsVuapResolvedState")
   public void vuapResolvedStateShouldProgressInTime(Page page, String slot)
       throws InterruptedException {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
                                                ads.findFirstIframeWithAd(slot),
@@ -189,7 +189,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(groups = {
       "AdsVuapResolvedState"}, dataProviderClass = AdsDataProvider.class, dataProvider = "adsVuapResolvedState")
   public void vuapResolvedStateShouldRedirectToCorrectURL(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
     vuap.replay();
@@ -225,7 +225,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
       dataProvider = "adsVuapResolvedState")
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot) {
-    final AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
                                                ads.findFirstIframeWithAd(slot),
@@ -245,7 +245,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(groups = {
       "AdsVuapResolvedState"}, dataProviderClass = AdsDataProvider.class, dataProvider = "adsVuapResolvedState")
   public void vuapResolvedStateIsNotMuted(Page page, String slot) throws InterruptedException {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
                                                ads.findFirstIframeWithAd(slot),
@@ -303,7 +303,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayIcon(
       Page page, String slot
   ) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
                                                ads.findFirstIframeWithAd(slot),
@@ -346,7 +346,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private void checkRequestForAdUnit(Page page, String adUnit, String[] slotsToTrigger)
       throws UnsupportedEncodingException {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS));
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl(TURN_ON_AD_PRODUCTS_BRIDGE_PARAMS));
 
     for (String slotName : slotsToTrigger) {
       ads.triggerAdSlot(slotName);

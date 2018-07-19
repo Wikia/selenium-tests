@@ -1,11 +1,11 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 
 public class ReplyCreatorDesktop extends BaseReplyCreator {
 
@@ -71,5 +71,4 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
   }
-
 }

@@ -24,7 +24,7 @@ public class AdsAmazonObject extends AdsBaseObject {
                                                       QS_TURN_ON_A9_VIDEO_DEBUG};
 
   public AdsAmazonObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public void runA9DebugMode() {

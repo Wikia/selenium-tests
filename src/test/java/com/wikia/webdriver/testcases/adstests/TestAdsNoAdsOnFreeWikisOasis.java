@@ -27,7 +27,7 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adFreeWikis", groups = "AdsNoAdsOnAdsFreeWikisOasis")
   public void testNoAdsOasis(String wikiName, String path) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject wikiPage = new AdsBaseObject(testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
 
@@ -35,7 +35,7 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adFreeWikis", groups = "AdsNoAdsOnAdsFreeWikisMercury")
   public void testNoAdsMercury(String wikiName, String path) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject wikiPage = new AdsBaseObject(testedPage);
     wikiPage.setEnvironment(AdsContent.ENV_MOBILE);
     wikiPage.verifyNoAdsOnPage();
   }

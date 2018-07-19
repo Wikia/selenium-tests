@@ -22,7 +22,7 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
       = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   private AdsBaseObject openPage(Page page) {
-    final AdsBaseObject adsBaseObject = new AdsBaseObject(driver, page.getUrl());
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(page.getUrl());
 
     return adsBaseObject.waitForPageLoaded();
   }

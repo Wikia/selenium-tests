@@ -20,10 +20,8 @@ public class TestAdsGptPageParam extends TemplateNoFirstLoad {
   public void adsGptPageParamOasis(
       String wikiName, String article, String gptPattern, Boolean paramShouldPresent
   ) {
-    AdsBaseObject wikiPage = new AdsBaseObject(driver,
-                                               UrlBuilder.createUrlBuilderForWiki(wikiName)
-                                                   .getUrlForPath(article)
-    );
+    AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName)
+                                                   .getUrlForPath(article));
     String gptPageParams = wikiPage.getGptPageParams(AdsContent.TOP_LB);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);
@@ -38,10 +36,8 @@ public class TestAdsGptPageParam extends TemplateNoFirstLoad {
   public void adsGptPageParamMercury(
       String wikiName, String article, String gptPattern, Boolean paramShouldPresent
   ) {
-    AdsBaseObject wikiPage = new AdsBaseObject(driver,
-                                               UrlBuilder.createUrlBuilderForWiki(wikiName)
-                                                   .getUrlForPath(article)
-    );
+    AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName)
+                                                   .getUrlForPath(article));
     String gptPageParams = wikiPage.getGptPageParams(AdsContent.MOBILE_TOP_LB);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);

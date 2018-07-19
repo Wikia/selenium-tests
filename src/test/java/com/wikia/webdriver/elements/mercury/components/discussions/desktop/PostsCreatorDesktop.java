@@ -2,11 +2,11 @@ package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 
 public class PostsCreatorDesktop extends BasePostsCreator {
 
@@ -122,5 +122,4 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     signInButtonInSignInDialog.click();
     return this;
   }
-
 }

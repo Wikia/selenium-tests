@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,9 @@ public class ConfirmationDialog extends BasePageObject {
 
   WebElement getActiveDialog() {
 
-    List<WebElement> elements = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
+    List<WebElement>
+        elements
+        = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
     if (elements.isEmpty()) {
       // allow selenium to throw exception
       return driver.findElement(By.cssSelector(".discussion-dialog.is-visible.modal-dialog-approve"));
@@ -34,5 +36,4 @@ public class ConfirmationDialog extends BasePageObject {
   void clickConfirm() {
     getActiveDialog().findElement(By.className("confirm-button")).click();
   }
-
 }

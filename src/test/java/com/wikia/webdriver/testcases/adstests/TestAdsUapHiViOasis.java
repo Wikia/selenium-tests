@@ -22,7 +22,7 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   }
 
   private TestAdsUapHiVi test(Page page) {
-    return new TestAdsUapHiVi(driver, new AdsBaseObject(driver, page.getUrl()), AdsContent.TOP_LB);
+    return new TestAdsUapHiVi(driver, new AdsBaseObject(page.getUrl()), AdsContent.TOP_LB);
   }
 
   @Test

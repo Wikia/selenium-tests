@@ -28,7 +28,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapClickToPlayMobile", groups = {
       "AdsVuapClickToPlayMobile"})
   public void vuapCheckTopAreasMercury(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
     ads.scrollToSlot(slot);
 
@@ -50,11 +50,12 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(
       Page page, String slot
   ) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver,
-                                               slot,
-                                               ads.findFirstIframeWithAd(slot),
-                                               false
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
+    final AutoplayVuap vuap = new AutoplayVuap(
+        driver,
+        slot,
+        ads.findFirstIframeWithAd(slot),
+        false
     );
 
     ads.scrollToSlot(slot);
@@ -67,11 +68,12 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapMobile", groups = "AdsVuapDefaultStateMercury")
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver,
-                                               slot,
-                                               ads.findFirstIframeWithAd(slot),
-                                               false
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
+    final AutoplayVuap vuap = new AutoplayVuap(
+        driver,
+        slot,
+        ads.findFirstIframeWithAd(slot),
+        false
     );
 
     ads.scrollToSlot(slot);
@@ -118,9 +120,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapMobile", groups = "AdsVuapTimeProgressMercury")
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot)
       throws InterruptedException {
-    AdsBaseObject ads = new AdsBaseObject(driver,
-                                          UrlBuilder.createUrlBuilderForWiki("project43").getUrl()
-    );
+    AdsBaseObject ads = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki("project43").getUrl());
     ads.getUrl(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
     ads.scrollToSlot(slot);

@@ -51,7 +51,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   @Test()
   public void adDisplayedBeforeSections() {
-    AdsBaseObject ads = new AdsBaseObject(driver);
+    AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(true));
     for (int i = 1; i <= HEADERS_WITH_AD_NUMBER; i++) {
       ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(i))));
@@ -64,7 +64,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   @Test()
   public void adNotDisplayedIfSectionInThisSameViewPort() {
-    AdsBaseObject ads = new AdsBaseObject(driver);
+    AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(false));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR,
                                      Double.toString(HEADER_WITHOUT_AD_NUMBER)
@@ -79,7 +79,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   @NetworkTrafficDump(useMITM = true)
   public void incontentBoxadTracking() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver);
+    AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(true));
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR,
                                      Integer.toString(HEADERS_WITH_AD_NUMBER)

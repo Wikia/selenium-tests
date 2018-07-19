@@ -15,7 +15,7 @@ public class TestAdsSpotlights extends TemplateNoFirstLoad {
       "AdsSpotlightsOasis"})
   public void adsSpotlightsOasis(String wikiName, String article) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject wikiPage = new AdsBaseObject(testedPage);
     wikiPage.scrollToPosition(WIKIA_FOOTER);
     wikiPage.verifySpotlights();
   }

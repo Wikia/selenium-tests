@@ -27,7 +27,7 @@ public class AdsVelesObject extends AdsBaseObject {
   private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
 
   public AdsVelesObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public boolean isVelesPlayerInIncontentSlotDisplayed() {

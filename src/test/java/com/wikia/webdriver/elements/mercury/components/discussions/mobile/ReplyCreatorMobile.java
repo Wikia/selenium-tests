@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -60,5 +61,4 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();
   }
-
 }
