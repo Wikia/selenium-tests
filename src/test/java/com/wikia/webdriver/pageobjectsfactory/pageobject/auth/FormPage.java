@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
-
 public interface FormPage {
 
   String getError();
@@ -12,5 +11,4 @@ public interface FormPage {
   boolean isDisplayed();
 
   boolean submitButtonNotClickable();
-
 }

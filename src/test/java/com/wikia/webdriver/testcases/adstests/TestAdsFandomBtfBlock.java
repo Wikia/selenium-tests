@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+
 import org.testng.annotations.Test;
 
 public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
@@ -20,10 +21,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     itShouldHideBTFSlotsWhenBTFBlockerIsOnPage();
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFandomBtfBlockMobile")
   public void adsFandomBtfBlockMobile() {
     itShouldHideBTFSlotsWhenBTFBlockerIsOnPage();

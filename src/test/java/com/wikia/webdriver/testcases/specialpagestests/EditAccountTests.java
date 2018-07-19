@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -11,16 +13,18 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount.EditAccount;
-import org.testng.annotations.Test;
 
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+import org.testng.annotations.Test;
 
 @Test(groups = "EditAccountTest", enabled = false)
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
-  private String testedWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en").getUrl();
-  private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
+  private String testedWiki = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, "en")
+      .getUrl();
+  private String
+      expectedErrorMessage
+      = "We don't recognize these credentials. Try again or register a new account.";
 
   @Test(groups = {"EditAccountTest_001"})
   @Execute(asUser = User.STAFF)
@@ -40,7 +44,7 @@ public class EditAccountTests extends NewTestTemplate {
     Assertion.assertEquals(signInPage.getError(), expectedErrorMessage);
   }
 
-  @Test(dependsOnMethods = {"EditAccount_001_closeAccount","EditAccount_002_verifyAccountClosed"})
+  @Test(dependsOnMethods = {"EditAccount_001_closeAccount", "EditAccount_002_verifyAccountClosed"})
   @Execute(asUser = User.STAFF)
   public void EditAccount_003_reopenAccount() {
     EditAccount editAccount = new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
@@ -50,12 +54,12 @@ public class EditAccountTests extends NewTestTemplate {
   }
 
   @Test(groups = {"EditAccountTest_001"}, dependsOnMethods = {"EditAccount_001_closeAccount",
-      "EditAccount_002_verifyAccountClosed", "EditAccount_003_reopenAccount"})
+                                                              "EditAccount_002_verifyAccountClosed",
+                                                              "EditAccount_003_reopenAccount"})
   public void EditAccount_004_verifyAccountReopened() {
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
     signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
     base.verifyUserLoggedIn(credentials.userNameClosedAccount);
-
   }
 }

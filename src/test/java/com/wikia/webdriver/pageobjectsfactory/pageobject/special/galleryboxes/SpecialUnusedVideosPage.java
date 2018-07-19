@@ -1,9 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
 import com.wikia.webdriver.common.logging.Log;
-import lombok.Getter;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import lombok.Getter;
 
 public final class SpecialUnusedVideosPage extends WikiBasePageObject {
 
@@ -14,8 +14,7 @@ public final class SpecialUnusedVideosPage extends WikiBasePageObject {
 
   public SpecialUnusedVideosPage open() {
     getUrl(urlBuilder.getUrlForWikiPage(SPECIAL_UNUSED_VIDEOS_PATH));
-    Log.log("Special Unused Videos Page", SPECIAL_UNUSED_VIDEOS_PATH + " opened",
-        true);
+    Log.log("Special Unused Videos Page", SPECIAL_UNUSED_VIDEOS_PATH + " opened", true);
 
     return this;
   }

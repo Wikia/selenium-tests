@@ -1,23 +1,23 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.remote.Utils;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
 @Test(groups = {"discussions-upvoting"})
@@ -33,7 +33,7 @@ public class UpvotingTests extends NewTestTemplate {
     existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
     DiscussionsClient.using(user, driver).createReplyToPost(siteId, existingPost);
   }
-  
+
   /**
    * ANONS ON MOBILE SECTION
    */
@@ -135,7 +135,7 @@ public class UpvotingTests extends NewTestTemplate {
   private Post findPosts() {
     return new PostsListPage().open().getPost();
   }
-  
+
   private void postListUpvoteButtonClickDoesntAddAnUpvote() {
     Post post = findPosts();
     int replyIndex = 0;

@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -87,8 +88,8 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   }
 
   public SpecialNewFilesPage selectFileToUpload(String file) {
-    browseForFileInput.sendKeys(
-        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    browseForFileInput.sendKeys(CommonUtils.getAbsolutePathForFile(
+        PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
 
     waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");
 
@@ -105,8 +106,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
     }
     driver.navigate().refresh();
     waitForValueToBePresentInElementsAttributeByElement(latestWikiaPreviewImg, "src", fileName);
-    Log.log("waitForFile",
-        "Verify if " + fileName + " has been successfully uploaded", true);
+    Log.log("waitForFile", "Verify if " + fileName + " has been successfully uploaded", true);
   }
 
   public Boolean isImageOnPage(String fileName) {
@@ -151,7 +151,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   }
 
   /**
-   * @param imageName eg. test.png. This file should be visible on Special:NewFiles
+   * @param imageName  eg. test.png. This file should be visible on Special:NewFiles
    * @param noRedirect if true, ?redirect=no is added to current url
    * @return new file page object of file specified in imageName parameter
    */
@@ -168,7 +168,8 @@ public class SpecialNewFilesPage extends SpecialPageObject {
   public WatchPageObject unfollowImage(String wikiURL, String imageName) {
     String url = urlBuilder.appendQueryStringToURL(
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + imageName,
-        URLsContent.ACTION_UNFOLLOW);
+        URLsContent.ACTION_UNFOLLOW
+    );
     getUrl(url);
     return new WatchPageObject();
   }

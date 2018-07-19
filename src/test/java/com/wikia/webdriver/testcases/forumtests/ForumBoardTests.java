@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 

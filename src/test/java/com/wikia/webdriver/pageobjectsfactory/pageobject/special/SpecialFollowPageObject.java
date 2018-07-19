@@ -32,8 +32,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
     wait.forElementVisible(By.xpath(
         "//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '" + articleName
         + "')]"));
-    Log.log("verifyFollowedArticle",
-                          articleName + "is visible on followed list", true);
+    Log.log("verifyFollowedArticle", articleName + "is visible on followed list", true);
   }
 
   public void verifyFollowedImageVideo(String imageVideo) {
@@ -44,10 +43,10 @@ public class SpecialFollowPageObject extends SpecialPageObject {
         isPresent = true;
       }
     }
-    Assertion.assertTrue(isPresent, "image " + imageVideo
-                                    + " is not present on the following list");
-    Log.log("verifyFollowedImageVideo",
-                          imageVideo + "is visible on followed list", true);
+    Assertion.assertTrue(isPresent,
+                         "image " + imageVideo + " is not present on the following list"
+    );
+    Log.log("verifyFollowedImageVideo", imageVideo + "is visible on followed list", true);
   }
 
   public void verifyFollowedBlog(String userName, String blogTitle) {
@@ -59,8 +58,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
       }
     }
     Assertion.assertTrue(isPresent, "blog " + blogTitle + " is not present on the following list");
-    Log.log("verifyFollowedBlog",
-                          userName + " blog is visible on followed list", true);
+    Log.log("verifyFollowedBlog", userName + " blog is visible on followed list", true);
   }
 
   public void verifyFollowedBlogPost(String blogPostName) {
@@ -68,6 +66,8 @@ public class SpecialFollowPageObject extends SpecialPageObject {
         "//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '" + blogPostName
         + "')]"));
     Log.log("verifyFollowedBlogPost",
-                          blogPostName + " blog post is visible on followed list", true);
+            blogPostName + " blog post is visible on followed list",
+            true
+    );
   }
 }

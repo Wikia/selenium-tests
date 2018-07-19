@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.oasis;
 
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

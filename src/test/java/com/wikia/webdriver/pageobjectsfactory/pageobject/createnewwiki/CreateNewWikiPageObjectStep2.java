@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -44,8 +45,8 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
     WebElement selectedCategory;
     try {
       selectedCategory = wikiCategoryList.get(categoryId);
-    } catch (ArrayIndexOutOfBoundsException e){
-      Log.log("selectCategory","There is no category with index " + categoryId, false);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      Log.log("selectCategory", "There is no category with index " + categoryId, false);
       throw new WebDriverException("There is no category with index " + categoryId, e);
     }
     hover(wikiCategoryDropdown);

@@ -9,16 +9,15 @@ public class SelectorStack {
   private static Stack<By> byStack = new Stack<>();
   private static boolean contextStack = false;
 
-
   public static void contextWrite() {
-    contextStack=true;
+    contextStack = true;
   }
 
   public static void contextRead() {
-    contextStack=false;
+    contextStack = false;
   }
 
-  public static boolean isContextSet(){
+  public static boolean isContextSet() {
     return contextStack;
   }
 

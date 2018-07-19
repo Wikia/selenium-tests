@@ -37,14 +37,13 @@ import java.util.logging.Logger;
  */
 public class Configuration {
 
+  public static final String DEFAULT_LANGUAGE = "en";
   private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
   private static final String LOCAL_CONFIG_FILE_NAME = "config.yml";
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
+  private static final String SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME = "config.xml";
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
-  private static final String SELENIUM_CONFIG_REPO_CONFIG_FILE_NAME = "config.xml";
-  public static final String DEFAULT_LANGUAGE = "en";
-
   @Getter(lazy = true)
   private static final String wikiaDomain = getEnvType().getWikiaDomain();
 
@@ -55,18 +54,18 @@ public class Configuration {
       Yaml yaml = new Yaml();
 
       try {
-        defaultConfig = (Map<String, String>) yaml
-            .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
+        defaultConfig = (Map<String, String>) yaml.load(new FileInputStream(new File(
+            DEFAULT_CONFIG_FILE_NAME)));
       } catch (FileNotFoundException e) {
-        throw new TestEnvInitFailedException(
-            String.format("CANNOT FIND DEFAULT CONFIG FILE : %s", DEFAULT_CONFIG_FILE_NAME), e);
+        throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
+                                                           DEFAULT_CONFIG_FILE_NAME
+        ), e);
       }
 
       File localConfigFile = new File(LOCAL_CONFIG_FILE_NAME);
       if (localConfigFile.exists()) {
         try {
-          defaultConfig
-              .putAll((Map<String, String>) yaml.load(new FileInputStream(localConfigFile)));
+          defaultConfig.putAll((Map<String, String>) yaml.load(new FileInputStream(localConfigFile)));
         } catch (FileNotFoundException e) {
           LOGGER.log(Level.INFO, "local config file not found", e);
         }
@@ -174,17 +173,19 @@ public class Configuration {
 
   public static Emulator getEmulator() {
     Emulator emulatorToUse = Emulator.DEFAULT;
-    if (TestContext.getCurrentTestMethod() != null &&
-        TestContext.getCurrentTestMethod()
-            .getDeclaringClass()
-            .isAnnotationPresent(InBrowser.class)) {
-      emulatorToUse = TestContext.getCurrentTestMethod().getDeclaringClass()
-          .getDeclaredAnnotation(InBrowser.class).emulator();
+    if (TestContext.getCurrentTestMethod() != null && TestContext.getCurrentTestMethod()
+        .getDeclaringClass()
+        .isAnnotationPresent(InBrowser.class)) {
+      emulatorToUse = TestContext.getCurrentTestMethod()
+          .getDeclaringClass()
+          .getDeclaredAnnotation(InBrowser.class)
+          .emulator();
     }
     if (TestContext.getCurrentTestMethod() != null && TestContext.getCurrentTestMethod()
         .isAnnotationPresent(InBrowser.class)) {
-      emulatorToUse =
-          TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
+      emulatorToUse = TestContext.getCurrentTestMethod()
+          .getDeclaredAnnotation(InBrowser.class)
+          .emulator();
     }
     return emulatorToUse;
   }
@@ -255,9 +256,8 @@ public class Configuration {
       if ("maximised".equals(size)) {
         return null;
       } else {
-        return new Dimension(
-            Integer.valueOf(size.split("x")[0]),
-            Integer.valueOf(size.split("x")[1])
+        return new Dimension(Integer.valueOf(size.split("x")[0]),
+                             Integer.valueOf(size.split("x")[1])
         );
       }
     } else {

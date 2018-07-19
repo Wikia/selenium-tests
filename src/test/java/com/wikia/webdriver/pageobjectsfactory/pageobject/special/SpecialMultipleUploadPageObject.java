@@ -35,6 +35,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 
   /**
    * Selects given files in upload browser.
+   *
    * @param FilesNamesList List of files to be uploaded. Look at folder PageContent.resourcesPath
    */
   public void selectFilesToUpload(String[] filesNamesList) {
@@ -42,33 +43,25 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
     for (int i = 0; i < filesNamesList.length; i++) {
       jsActions.scrollToElement(fileInputs.get(i));
       fileInputs.get(i)
-          .sendKeys(
-              CommonUtils.getAbsolutePathForFile(
-                  PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
+          .sendKeys(CommonUtils.getAbsolutePathForFile(
+              PageContent.IMAGE_UPLOAD_RESOURCES_PATH + filesNamesList[i]));
     }
-    Log.log(
-        "typeInFilesToUpload",
-        filesNamesList.length + " files added to upload list",
-        true
-    );
+    Log.log("typeInFilesToUpload", filesNamesList.length + " files added to upload list", true);
   }
 
   public void typeInMultiUploadSummary(String summary) {
     multipleUploadSummaryField.sendKeys(summary);
-    Log
-        .log("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload", true);
+    Log.log("typeInMultiUploadSummary", "summary: " + summary + " added to multiupload", true);
   }
 
   public void checkIgnoreAnyWarnings() {
     scrollAndClick(ignoreAnyWarnings);
     Log.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
-
   }
 
   public void clickUploadButton() {
     scrollAndClick(uploadFileButton);
     Log.log("ClickOnUploadFile", "Click on Upload File button", true);
-
   }
 
   /**

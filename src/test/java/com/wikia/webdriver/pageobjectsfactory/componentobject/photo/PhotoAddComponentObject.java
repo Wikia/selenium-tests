@@ -56,9 +56,9 @@ public class PhotoAddComponentObject extends BasePageObject {
 
   public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
     WebElement photo = wait.forElementVisible(addThisPhotoList.get(photoNumber));
-    photoName =
-        addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img"))
-            .getAttribute("data-image-name");
+    photoName = addThisPhotoList.get(photoNumber)
+        .findElement(By.cssSelector("img"))
+        .getAttribute("data-image-name");
     scrollAndClick(photo);
     Log.log("clickAddPhoto", "add photo button clicked", true);
     return new PhotoOptionsComponentObject(driver);
@@ -104,9 +104,8 @@ public class PhotoAddComponentObject extends BasePageObject {
   }
 
   public void chooseFileToUpload(String file) {
-    chooseFileInput
-        .sendKeys(
-            CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    chooseFileInput.sendKeys(CommonUtils.getAbsolutePathForFile(
+        PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
     Log.log("selectFileToUpload", "select file " + file + " to upload it", true);
   }
 

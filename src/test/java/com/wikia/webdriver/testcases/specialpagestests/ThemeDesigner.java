@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject.Tab;
+
+import org.testng.annotations.Test;
 
 @Test(groups = "ThemeDesigner")
 @Execute(onWikia = "themedesignerautomation", asUser = User.THEME_DESIGNER)

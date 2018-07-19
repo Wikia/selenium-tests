@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -20,6 +19,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsC
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
@@ -113,7 +113,7 @@ public class OpenGraphTests extends NewTestTemplate {
    */
 
   private void verifyOpenGraphInNewPost(PostsListPage page, BasePostsCreator postsCreator)
-    throws MalformedURLException {
+      throws MalformedURLException {
     postsCreator.startPostCreationWithLink(new URL(URL));
 
     Assertion.assertTrue(postsCreator.hasOpenGraph());
@@ -124,9 +124,9 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
 
-  private void verifyOpenGraphWithLinkRemovedInNewPost(PostsListPage page, BasePostsCreator
-      postsCreator)
-      throws MalformedURLException {
+  private void verifyOpenGraphWithLinkRemovedInNewPost(
+      PostsListPage page, BasePostsCreator postsCreator
+  ) throws MalformedURLException {
     postsCreator.startPostCreationWithLink(new URL(URL));
     postsCreator.clearDescription();
     Assertion.assertTrue(postsCreator.hasOpenGraph());
@@ -139,7 +139,7 @@ public class OpenGraphTests extends NewTestTemplate {
   }
 
   private void verifyOpenGraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
-    throws MalformedURLException {
+      throws MalformedURLException {
     replyCreator.startReplyCreationWithLink(new URL(URL));
 
     Assertion.assertTrue(replyCreator.hasOpenGraph());
@@ -150,9 +150,9 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }
 
-  private void verifyOpenGraphWithLinkRemovedInNewReply(PostDetailsPage page, BaseReplyCreator
-      replyCreator)
-      throws MalformedURLException {
+  private void verifyOpenGraphWithLinkRemovedInNewReply(
+      PostDetailsPage page, BaseReplyCreator replyCreator
+  ) throws MalformedURLException {
     replyCreator.startReplyCreationWithLink(new URL(URL));
     replyCreator.clearText();
 
@@ -163,5 +163,4 @@ public class OpenGraphTests extends NewTestTemplate {
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }
-
 }

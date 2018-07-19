@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.remote.discussions;
 
-import com.jayway.jsonpath.*;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.RemoteException;
@@ -8,16 +7,13 @@ import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryConte
 import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Categories {
-
-  private class CategoriesNotFetched extends RuntimeException {
-    private CategoriesNotFetched(String message, RemoteException cause) {
-      super(message, cause);
-    }
-  }
 
   private static final String GET_CATEGORIES_URL_SUFFIX = "%s/forums";
   private final GetRemoteOperation remoteOperation;
@@ -29,7 +25,7 @@ public class Categories {
   public List<CategoryPill.Data> execute(final CreateCategoryContext context) {
     try {
       return getCategories(remoteOperation.execute(buildUrl(context)), context);
-    } catch(RemoteException e) {
+    } catch (RemoteException e) {
       Log.logError("error: ", e);
       throw new CategoriesNotFetched("Could not fetch categories.", e);
     }
@@ -51,5 +47,12 @@ public class Categories {
 
   private String buildUrl(final CreateCategoryContext context) {
     return DiscussionsClient.service(String.format(GET_CATEGORIES_URL_SUFFIX, context.getSiteId()));
+  }
+
+  private class CategoriesNotFetched extends RuntimeException {
+
+    private CategoriesNotFetched(String message, RemoteException cause) {
+      super(message, cause);
+    }
   }
 }

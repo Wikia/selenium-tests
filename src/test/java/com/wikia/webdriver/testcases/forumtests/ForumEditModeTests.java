@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -12,6 +9,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBo
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 // User has to be an admin on wiki to delete and create forum
 @Test(groups = {"Forum", "ForumEditMode"})
 public class ForumEditModeTests extends NewTestTemplate {
@@ -20,9 +20,11 @@ public class ForumEditModeTests extends NewTestTemplate {
 
   @DataProvider
   private static final Object[][] getForumName() {
-    return new Object[][] {{PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
-        {PageContent.FORUM_TITLE_PREFIX}, {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
-        {PageContent.FORUM_TITLE_SLASH_PREFIX}, {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}};
+    return new Object[][]{{PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
+                          {PageContent.FORUM_TITLE_PREFIX},
+                          {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
+                          {PageContent.FORUM_TITLE_SLASH_PREFIX},
+                          {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}};
   }
 
   @Test(groups = {"ForumEditModeTests_001"})

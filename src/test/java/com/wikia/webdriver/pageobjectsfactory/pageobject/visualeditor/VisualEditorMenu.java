@@ -1,22 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertGalleryDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertTemplateDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorKeyboardShortcutsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorOptionsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReferenceDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorReferenceListDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.*;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -32,15 +18,14 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private static final int STYLE_LIST = 1;
   private static final int INSERT_LIST = 2;
   private static final int HAMBURGER_LIST = 0;
-
+  @FindBy(css = ".oo-ui-frame")
+  protected WebElement linkIframe;
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
   @FindBy(css = ".oo-ui-icon-italic-i")
   private WebElement italicButton;
   @FindBy(css = ".oo-ui-icon-link")
   private WebElement linkButton;
-  @FindBy(css = ".oo-ui-frame")
-  protected WebElement linkIframe;
   @FindBy(css = ".oo-ui-icon-code")
   private WebElement codeButton;
   @FindBy(css = ".oo-ui-icon-clear")
@@ -86,8 +71,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
   private By indentBy = By.cssSelector(".oo-ui-icon-indent-list");
   private By outdentBy = By.cssSelector(".oo-ui-icon-outdent-list");
-  private By publishButtonDisabled = By
-      .cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
+  private By publishButtonDisabled = By.cssSelector(
+      ".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
   private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
   private By paragraphBy = By.cssSelector(".oo-ui-tool-name-paragraph");
   private By headingBy = By.cssSelector(".oo-ui-tool-name-heading2");
@@ -136,7 +121,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
     wait.forElementClickable(formattingDropDown);
     Actions actions = new Actions(driver);
     actions.click(formattingDropDown)
-        .click(formattingDropDownItems.findElement(formatBy).findElement(menuItemBy)).build()
+        .click(formattingDropDownItems.findElement(formatBy).findElement(menuItemBy))
+        .build()
         .perform();
   }
 
@@ -230,12 +216,16 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
   private void clickInsertItemFromDropDown(WebElement insertBy) {
     clickItemFromDropDown(toolListDropDowns.get(this.INSERT_LIST),
-                          toolListItems.get(this.INSERT_LIST), insertBy);
+                          toolListItems.get(this.INSERT_LIST),
+                          insertBy
+    );
   }
 
   private void clickHamburgerItemFromDropDown(WebElement insertBy) {
     clickItemFromDropDown(toolListDropDowns.get(this.HAMBURGER_LIST),
-                          toolListItems.get(this.HAMBURGER_LIST), insertBy);
+                          toolListItems.get(this.HAMBURGER_LIST),
+                          insertBy
+    );
   }
 
   private void clickItemFromDropDown(WebElement list, WebElement item, WebElement insertBy) {

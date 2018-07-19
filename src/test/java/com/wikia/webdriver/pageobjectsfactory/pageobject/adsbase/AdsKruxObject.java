@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

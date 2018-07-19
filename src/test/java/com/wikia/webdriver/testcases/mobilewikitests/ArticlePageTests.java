@@ -14,25 +14,23 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Article")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class ArticlePageTests extends NewTestTemplate {
 
+  private static final String MAIN_PAGE_CONTENT = ContentLoader.loadWikiTextContent(
+      "Mercury_MainPage");
+  private static final String LINKED_IMAGES_CONTENT = ContentLoader.loadWikiTextContent(
+      "Mercury_LinkedImages");
+  private static final String
+      GALLERY_CONTENT
+      = ContentLoader.loadWikiTextContent("Mercury_Gallery");
   private GlobalNavigationMobile globalNavigationMobile;
   private Navigate navigate;
-
-  private static final String MAIN_PAGE_CONTENT =
-          ContentLoader.loadWikiTextContent("Mercury_MainPage");
-  private static final String LINKED_IMAGES_CONTENT =
-          ContentLoader.loadWikiTextContent("Mercury_LinkedImages");
-  private static final String GALLERY_CONTENT =
-          ContentLoader.loadWikiTextContent("Mercury_Gallery");
 
   private void init() {
     this.globalNavigationMobile = new GlobalNavigationMobile();
@@ -87,8 +85,12 @@ public class ArticlePageTests extends NewTestTemplate {
   //test disabled as it needs to be adjusted when new local nav tests will be created
   @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark", enabled = false)
   public void mercury_article_navigateToArticlesWithColonAndQuestionMark() {
-    new ArticleContent().push("Article about colon [[Question?mark?question]]", "Colon:colon:colon");
-    new ArticleContent().push("Article about question mark [[Colon:colon:colon]]", "Question?mark?question");
+    new ArticleContent().push("Article about colon [[Question?mark?question]]",
+                              "Colon:colon:colon"
+    );
+    new ArticleContent().push("Article about question mark [[Colon:colon:colon]]",
+                              "Question?mark?question"
+    );
 
     init();
     ArticlePageObject article = new ArticlePageObject(driver);
@@ -96,37 +98,35 @@ public class ArticlePageTests extends NewTestTemplate {
     String encodedQuestionMarkUrl = "/wiki/Question%3Fmark%3Fquestion";
     String encodedColonUrl = "/wiki/Colon%3Acolon%3Acolon";
 
-    Log.warning(
-        "Info",
-        "Accessing article directly through URL"
-    );
+    Log.warning("Info", "Accessing article directly through URL");
 
     navigate.toPageByPath(encodedColonUrl);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
-    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
     navigate.toPageByPath(encodedQuestionMarkUrl);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
-    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
-    Log.warning(
-        "Info",
-        "Accessing article through link in content"
-    );
+    Log.warning("Info", "Accessing article through link in content");
 
     article.clickOnAnchorInContent(0);
     article.waitForPageReload();
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
-    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
     article.clickOnAnchorInContent(0);
     article.waitForPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
-    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
     Log.warning("Info", "Accessing article through link in navigation side");
 
@@ -135,25 +135,29 @@ public class ArticlePageTests extends NewTestTemplate {
     //navigation.openPageLink(5);
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
-    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
     globalNavigationMobile.openNavigation();
     //navigation.openSubMenu(3);
     //navigation.openPageLink(4);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
-    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
     Log.warning("Info", "Accessing article through link in search result");
 
     globalNavigationMobile.openSearch().navigateToPage(MercurySubpages.COLON);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
-    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
 
     globalNavigationMobile.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
-    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase()
+                             .contains(article.getArticleTitle().toLowerCase()));
   }
 }

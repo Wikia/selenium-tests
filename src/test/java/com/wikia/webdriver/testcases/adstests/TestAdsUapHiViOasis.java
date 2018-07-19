@@ -5,13 +5,17 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "AdsUapHiViOasis")
 public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
+
   private static final double IMPACT_STATE_ASPECT_RATIO = 1600 / 400;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 1600 / 160;
-  private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
+  private static final String
+      AD_REDIRECT
+      = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   private TestAdsUapHiVi test() {
     return test(AdsDataProvider.UAP_HIVI_PAGE);
@@ -33,7 +37,9 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
 
   @Test
   public void shouldHaveResolvedStateAfterScroll() throws InterruptedException {
-    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO, RESOLVED_STATE_ASPECT_RATIO);
+    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO,
+                                              RESOLVED_STATE_ASPECT_RATIO
+    );
   }
 
   @Test
@@ -83,7 +89,9 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
 
   @Test
   public void shouldDisplayResolvedStateOnNextPageView() {
-    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO, RESOLVED_STATE_ASPECT_RATIO);
+    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO,
+                                                    RESOLVED_STATE_ASPECT_RATIO
+    );
   }
 
   @Test

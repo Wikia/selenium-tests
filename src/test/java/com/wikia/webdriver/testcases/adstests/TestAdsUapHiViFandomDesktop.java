@@ -2,14 +2,18 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "AdsUapHiViFandomDesktop")
 public class TestAdsUapHiViFandomDesktop extends AdsFandomTestTemplate {
+
   private static final double IMPACT_STATE_ASPECT_RATIO = 4.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 10.0;
   private static final String TLB_SLOT_ID = "top_leaderboard";
-  private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
+  private static final String
+      AD_REDIRECT
+      = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   private TestAdsUapHiVi test() {
     return test(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);
@@ -31,7 +35,9 @@ public class TestAdsUapHiViFandomDesktop extends AdsFandomTestTemplate {
 
   @Test
   public void shouldHaveResolvedStateAfterScroll() throws InterruptedException {
-    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO, RESOLVED_STATE_ASPECT_RATIO);
+    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO,
+                                              RESOLVED_STATE_ASPECT_RATIO
+    );
   }
 
   @Test
@@ -81,7 +87,9 @@ public class TestAdsUapHiViFandomDesktop extends AdsFandomTestTemplate {
 
   @Test
   public void shouldDisplayResolvedStateOnNextPageView() {
-    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO, RESOLVED_STATE_ASPECT_RATIO);
+    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO,
+                                                    RESOLVED_STATE_ASPECT_RATIO
+    );
   }
 
   @Test

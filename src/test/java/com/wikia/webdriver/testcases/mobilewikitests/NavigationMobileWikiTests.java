@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "MobileWiki_Navigation")
@@ -19,7 +20,9 @@ public class NavigationMobileWikiTests {
   //test disabled until we find solution how to click 'Wikis' link in navigation
   @Test(groups = "mobileWiki_navigation_openAndCloseNavigationAndItsSubMenu", enabled = false)
   public void mobileWikiNavigationOpenAndCloseNavigationAndItsSubMenu() {
-    GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile().openNavigation();
+    GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        .getGlobalNavigationMobile()
+        .openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
     nav.clickCloseButton();
@@ -28,7 +31,9 @@ public class NavigationMobileWikiTests {
 
   @Test(groups = "mobileWiki_navigation_navigationOnEnglishWiki")
   public void mobileWikiNavigationOnEnglishWiki() {
-    GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile().openNavigation();
+    GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        .getGlobalNavigationMobile()
+        .openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
     nav.clickCloseButton();
@@ -38,11 +43,12 @@ public class NavigationMobileWikiTests {
   @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
   @Test(groups = "mobileWiki_navigation_navigationOnNonEnglishWiki")
   public void mobileWikiNavigationOnNonEnglishWiki() {
-    GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile().openNavigation();
+    GlobalNavigationMobile nav = new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        .getGlobalNavigationMobile()
+        .openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
     nav.clickCloseButton();
     Assertion.assertFalse(nav.isFirstLevelMenuVisible());
   }
-
 }

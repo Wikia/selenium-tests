@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,11 +12,9 @@ import java.util.List;
 
 public class GuidelinesPage extends BasePage {
 
+  private static final String PATH = "/d/g";
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
-
-  private static final String PATH = "/d/g";
-
   @FindBy(css = ".side-button.back-button")
   private WebElement backToDiscussionsButton;
 
@@ -96,7 +95,7 @@ public class GuidelinesPage extends BasePage {
     try {
       wait.forTextInElement(guidelinesText, text);
       isPresent = true;
-    } catch(Exception e) {
+    } catch (Exception e) {
       Log.log("Guidelines should contains text: " + text, e, false);
     }
 

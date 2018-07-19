@@ -13,25 +13,27 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObje
 import org.testng.annotations.Test;
 
 public class TestAdsFandomVideoPage extends AdsFandomTestTemplate {
+
   @Test(groups = "AdsVideoPageF2Desktop")
   public void adsVideoPageAdsDesktop() {
     adsVideoPageAds();
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsVideoPageF2Mobile")
   public void adsVideoPageAdsMobile() {
     adsVideoPageAds();
   }
 
   private void adsVideoPageAds() {
-    String testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.VIDEO_PAGE_SLUG,
-        FandomAdsDataProvider.INSTANT_GLOBAL_MIDROLL);
+    String
+        testedPage
+        = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.VIDEO_PAGE_SLUG,
+                                                          FandomAdsDataProvider.INSTANT_GLOBAL_MIDROLL
+    );
     testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
-        FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL);
+                                                                 FandomAdsDataProvider.INSTANT_GLOBAL_POSTROLL
+    );
 
     AdsFandomObject pageObject = loadVideoPage(testedPage);
     AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();

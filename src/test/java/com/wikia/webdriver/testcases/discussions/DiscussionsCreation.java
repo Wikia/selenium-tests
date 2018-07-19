@@ -9,6 +9,7 @@ import com.wikia.webdriver.elements.common.CommunityHeader;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.testcases.createawikitests.CreateWikiTestsLang;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "discussions-creation")

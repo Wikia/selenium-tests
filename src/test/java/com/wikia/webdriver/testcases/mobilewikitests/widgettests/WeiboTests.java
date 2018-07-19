@@ -14,13 +14,12 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_WeiboWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class WeiboTests extends NewTestTemplate {
 
   private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "WeiboMercury/OneWidget";
@@ -31,8 +30,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_001")
   public void MercuryWeiboWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new WeiboWidgetPageObject().create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new WeiboWidgetPageObject().create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
@@ -41,8 +39,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_002")
   public void MercuryWeiboWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new WeiboWidgetPageObject().create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new WeiboWidgetPageObject().create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
@@ -52,8 +49,7 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_003")
   public void MercuryWeiboWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new WeiboWidgetPageObject().create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new WeiboWidgetPageObject().create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
     new ArticleContent().push("Weibo test 003", "Map");
 
     new Navigate().toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
@@ -65,8 +61,8 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_004")
   public void MercuryWeiboWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new WeiboWidgetPageObject().createMultiple(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    WidgetPageObject widget = new WeiboWidgetPageObject().createMultiple(
+        WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
@@ -75,8 +71,8 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_005")
   public void MercuryWeiboWidgetTest_005_isErrorPresent() {
-    WidgetPageObject widget =
-            new WeiboWidgetPageObject().createIncorrect(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new WeiboWidgetPageObject().createIncorrect(
+        WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
 

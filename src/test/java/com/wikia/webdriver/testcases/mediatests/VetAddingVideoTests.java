@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
+
 import org.testng.annotations.Test;
 
 /**
@@ -31,8 +32,9 @@ public class VetAddingVideoTests extends NewTestTemplate {
     mini.switchAndWrite(message);
     wall.setTitle(title);
     VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL3);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL3);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     mini.verifyVideoMiniEditor();
@@ -51,8 +53,9 @@ public class VetAddingVideoTests extends NewTestTemplate {
     mini.switchAndWrite(message);
     wall.setTitle(title);
     VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     mini.verifyVideoMiniEditor();

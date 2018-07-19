@@ -10,7 +10,9 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
     wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
     Log.log("cssEditSummary",
-        "the following edit summary was get from Wikia.css: " + summary, true);
+            "the following edit summary was get from Wikia.css: " + summary,
+            true
+    );
     return summary;
   }
 

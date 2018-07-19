@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.historypage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

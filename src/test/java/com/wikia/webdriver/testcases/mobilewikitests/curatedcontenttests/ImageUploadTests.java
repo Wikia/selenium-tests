@@ -18,27 +18,20 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Cropp
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_ImageUpload")
-@Execute(
-    onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
-    asUser = User.STAFF
-)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class ImageUploadTests extends NewTestTemplate {
 
+  private static String CURATED_CONTENT_SELECTOR = ".curated-content";
   private CuratedMainPagePageObject curatedMainPage;
-
   private CroppingToolPageObject crop;
   private EditorHomePageObject editor;
   private ImageGenerator generator;
   private ItemFormPageObject itemForm;
   private UploadImageModalComponentObject upload;
   private Navigate navigate;
-
-  private static String CURATED_CONTENT_SELECTOR = ".curated-content";
 
   private void init() {
     this.curatedMainPage = new CuratedMainPagePageObject();

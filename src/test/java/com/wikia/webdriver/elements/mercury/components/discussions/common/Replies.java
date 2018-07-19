@@ -1,19 +1,15 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import java.util.concurrent.TimeUnit;
-
-import com.google.common.base.Function;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+import com.google.common.base.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import com.google.common.base.Function;
-
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.concurrent.TimeUnit;
 
 public class Replies extends BasePageObject {
 
@@ -40,18 +36,16 @@ public class Replies extends BasePageObject {
   }
 
   public Replies waitForReplyToAppearWithText(final String text) {
-    new FluentWait<>(driver)
-        .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+    new FluentWait<>(driver).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
         .until((Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(replyContent)
-          .getText()
-          .contains(text));
+            .getText()
+            .contains(text));
 
     return this;
   }
 
   public Replies waitForReplyToAppearWithOpenGraph(final String url) {
-    new FluentWait<>(driver)
-        .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+    new FluentWait<>(driver).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
         .until((Function<WikiaWebDriver, Boolean>) input -> wait.forElementVisible(replyOpenGraph)
             .getAttribute("href")
             .contains(url));

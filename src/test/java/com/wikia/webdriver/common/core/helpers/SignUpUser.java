@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Value
 public class SignUpUser {
+
   private String username;
   private String email;
   private String password;

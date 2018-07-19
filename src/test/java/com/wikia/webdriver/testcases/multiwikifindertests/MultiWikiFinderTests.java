@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 
 public class MultiWikiFinderTests extends NewTestTemplate {
 
-  private String pageName = "Wiki";
   Credentials credentials = Configuration.getCredentials();
+  private String pageName = "Wiki";
 
   @Test(groups = {"MultiWikiFinder_001", "MultiWikiFinder"})
   public void multiWikiFinderTests_001_notExistingPagename() {
@@ -36,8 +36,9 @@ public class MultiWikiFinderTests extends NewTestTemplate {
   @Test(groups = {"MultiWikiFinder_003", "MultiWikiFinder"})
   @Execute(asUser = User.STAFF)
   public void multiwikiFinderTests_003_checkPagination() {
-    SpecialMultiWikiFinderPageObject multiWikiFinder =
-        new SpecialMultiWikiFinderPageObject(driver).openSpecialMultiWikiFinderPage(wikiURL);
+    SpecialMultiWikiFinderPageObject
+        multiWikiFinder
+        = new SpecialMultiWikiFinderPageObject(driver).openSpecialMultiWikiFinderPage(wikiURL);
     multiWikiFinder.findPageName(pageName);
     multiWikiFinder.verifyPagination();
   }

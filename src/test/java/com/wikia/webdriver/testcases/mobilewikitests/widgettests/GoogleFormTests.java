@@ -14,25 +14,28 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_GoogleFormWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class GoogleFormTests extends NewTestTemplate {
 
   private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormMercury/OneWidget";
-  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "GoogleFormMercury/MultipleWidgets";
-  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "GoogleFormMercury/IncorrectWidget";
+  private static final String
+      GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME
+      = "GoogleFormMercury/MultipleWidgets";
+  private static final String
+      GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME
+      = "GoogleFormMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
   public void MercuryGoogleFormWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new GoogleFormWidgetPageObject().create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new GoogleFormWidgetPageObject().create(
+        GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
@@ -41,8 +44,8 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_002")
   public void MercuryGoogleFormWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new GoogleFormWidgetPageObject().create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new GoogleFormWidgetPageObject().create(
+        GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
@@ -52,8 +55,8 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_003")
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new GoogleFormWidgetPageObject().create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new GoogleFormWidgetPageObject().create(
+        GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     new ArticleContent().push("Mercury Google Form 003", "Map");
 
     new Navigate().toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
@@ -65,8 +68,8 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_004")
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new GoogleFormWidgetPageObject().createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    WidgetPageObject widget = new GoogleFormWidgetPageObject().createMultiple(
+        GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
@@ -75,8 +78,8 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_005")
   public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
-    WidgetPageObject widget =
-            new GoogleFormWidgetPageObject().createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new GoogleFormWidgetPageObject().createIncorrect(
+        GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 

@@ -10,14 +10,14 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
 import org.testng.annotations.Test;
-import java.util.List;
 
+import java.util.List;
 
 @Test(groups = "comments-blogComments")
 public class BlogCommentsTests extends NewTestTemplate {
@@ -65,7 +65,6 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyReplyCreator(User.SUS_REGULAR_USER.getUserName());
   }
 
-
   @Test(groups = "BlogComments_003")
   @Execute(asUser = User.SUS_REGULAR_USER)
   public void UserCanEditComment() {
@@ -104,10 +103,15 @@ public class BlogCommentsTests extends NewTestTemplate {
     delete.submitDeletion();
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
-    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+    Assertion.assertEquals(
+        confirmNotifications.size(),
+        1,
+        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
+    Assertion.assertTrue(
+        confirmNotifications.stream().findFirst().get().isVisible(),
+        DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE
+    );
     blogPage.verifyCommentDeleted(commentText);
   }
 }

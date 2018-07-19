@@ -33,16 +33,14 @@ public class VECategoryTests extends NewTestTemplate {
   }
 
   //CA01
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"}
-  )
+  @Test(groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"})
   public void VECategoryTests_001_AddNewCategory() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorOptionsDialog optionsDialog =
-        (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
+    VisualEditorOptionsDialog optionsDialog = (VisualEditorOptionsDialog) ve.openDialogFromMenu(
+        InsertDialog.CATEGORIES);
     optionsDialog.addCategory(testCategory);
     ve = optionsDialog.clickApplyChangesButton();
     ve.verifyVEToolBarPresent();
@@ -55,16 +53,14 @@ public class VECategoryTests extends NewTestTemplate {
   }
 
   //CA02
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_002", "VERemoveCategory"},
-      dependsOnGroups = "VECategoryTests_001"
-  )
+  @Test(groups = {"VECategoryTests", "VECategoryTests_002",
+                  "VERemoveCategory"}, dependsOnGroups = "VECategoryTests_001")
   public void VECategoryTests_002_RemoveCategory() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorOptionsDialog optionsDialog =
-        (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
+    VisualEditorOptionsDialog optionsDialog = (VisualEditorOptionsDialog) ve.openDialogFromMenu(
+        InsertDialog.CATEGORIES);
     optionsDialog.removeCategory(testCategory);
     ve = optionsDialog.clickApplyChangesButton();
     ve.verifyVEToolBarPresent();
@@ -77,37 +73,31 @@ public class VECategoryTests extends NewTestTemplate {
   }
 
   //CA03
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"}
-  )
+  @Test(groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"})
   public void VECategoryTests_003_NewCategorySuggestions() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorOptionsDialog optionsDialog =
-        (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
+    VisualEditorOptionsDialog optionsDialog = (VisualEditorOptionsDialog) ve.openDialogFromMenu(
+        InsertDialog.CATEGORIES);
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.NEW);
   }
 
   //CA04
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"}
-  )
+  @Test(groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"})
   public void VECategoryTests_004_MatchingCategorySuggestions() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorOptionsDialog optionsDialog =
-        (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
+    VisualEditorOptionsDialog optionsDialog = (VisualEditorOptionsDialog) ve.openDialogFromMenu(
+        InsertDialog.CATEGORIES);
     optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.MATCHING);
   }
 
   //CA05
-  @Test(
-      groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
-  )
+  @Test(groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"})
   public void VECategoryTests_005_AddNewCategoryWithSortKey() {
     String testCategory2 = "Newstuff";
     String sortKey = "testkey";
@@ -118,8 +108,8 @@ public class VECategoryTests extends NewTestTemplate {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorOptionsDialog optionsDialog =
-        (VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
+    VisualEditorOptionsDialog optionsDialog = (VisualEditorOptionsDialog) ve.openDialogFromMenu(
+        InsertDialog.CATEGORIES);
     optionsDialog.addCategory(testCategory2);
     optionsDialog.addSortKeyToCategory(testCategory2, sortKey);
     ve = optionsDialog.clickApplyChangesButton();

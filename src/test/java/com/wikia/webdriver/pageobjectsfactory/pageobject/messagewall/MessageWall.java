@@ -8,23 +8,26 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import javax.swing.text.html.HTML;
 import java.util.List;
 
+import javax.swing.text.html.HTML;
 
 public class MessageWall extends WikiBasePageObject {
 
-  private static final String NEW_MESSAGE_MENU =
-          ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
+  static final By firstMessageWrapperBy = By.cssSelector(
+      ".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  static final By replyButtonBy = By.cssSelector(".replyButton");
+  private static final String
+      NEW_MESSAGE_MENU
+      = ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private static final String FIRST_MESSAGE_MENU = ".comments li:nth-child(1) .buttons ";
   private static final String CLOSE_BUTTON_STRING = ".close-thread";
-  static final By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  static final By replyButtonBy = By.cssSelector(".replyButton");
   private static final By messageTitleBy = By.cssSelector(".msg-title");
   private static final By messageBodyBy = By.cssSelector(".msg-body");
   private static final By imageBy = By.cssSelector(".thumbimage");
@@ -80,14 +83,13 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".edited-by")
   private WebElement wallEdition;
 
-
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.USER_MESSAGE_WALL + userName));
     waitForPageLoad();
 
     try {
       Thread.sleep(10000);
-    }catch (Exception e){
+    } catch (Exception e) {
 
     }
 
@@ -103,7 +105,7 @@ public class MessageWall extends WikiBasePageObject {
   public MiniEditorComponentObject triggerMessageArea(Boolean sourceMode) {
     WebElement messageBody = messageMainBody;
     //Override messageBody if triggering in source mode
-    if(sourceMode){
+    if (sourceMode) {
       messageBody = messageMainBodySourceMode;
     }
     wait.forElementClickable(messageBody).click();
@@ -145,8 +147,8 @@ public class MessageWall extends WikiBasePageObject {
 
   public void submitEdition() {
     driver.switchTo().defaultContent();
-    WebElement saveButton =
-        driver.findElement(firstMessageWrapperBy).findElement(saveChangesButtonBy);
+    WebElement saveButton = driver.findElement(firstMessageWrapperBy)
+        .findElement(saveChangesButtonBy);
     jsActions.click(saveButton);
     waitForElementNotVisibleByElement(saveButton);
     Log.log("submitEdition", "message wallEdition submitted", true);
@@ -171,8 +173,7 @@ public class MessageWall extends WikiBasePageObject {
     messageTitleField.clear();
     Typing.sendKeysHumanSpeed(messageTitleField, title);
     wait.forAttributeToContain(messageTitleField, "value", title);
-    Log.log("writeTitle", "title written",
-        messageTitleField.getAttribute("value").equals(title));
+    Log.log("writeTitle", "title written", messageTitleField.getAttribute("value").equals(title));
   }
 
   public void writeSourceMode(String text) {
@@ -275,7 +276,8 @@ public class MessageWall extends WikiBasePageObject {
     refreshPageAddingCacheBuster();
     Assertion.assertStringContains(
         driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
-        userName + " closed this thread because:\n" + reason);
+        userName + " closed this thread because:\n" + reason
+    );
     Log.log("verifyThreadClosed", "verifyed thread closed", true);
   }
 
@@ -290,29 +292,42 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageTitle(String title) {
     wait.forTextInElement(messageTitleBy, title);
-    Log.log("verifyMessageTitle", "message with title: " + title + ", verified",
-        true);
+    Log.log("verifyMessageTitle", "message with title: " + title + ", verified", true);
   }
 
   public void verifyMessageText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
-    Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(), title);
-    Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText(), message);
-    Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText(),
-        userName);
+    Assertion.assertEquals(driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageTitleBy)
+                               .getText(), title);
+    Assertion.assertEquals(driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageBodyBy)
+                               .getText(), message);
+    Assertion.assertEquals(driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageUserNameBy)
+                               .getText(),
+                           userName
+    );
   }
 
   public void verifyMessageBoldText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(title,
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
-    Assertion.assertEquals(message, driver.findElement(firstMessageWrapperBy)
-        .findElement(messageBodyBy).findElement(messageTextBoldBy).getText());
+                           driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageTitleBy)
+                               .getText()
+    );
+    Assertion.assertEquals(message,
+                           driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageBodyBy)
+                               .findElement(messageTextBoldBy)
+                               .getText()
+    );
     Assertion.assertEquals(userName,
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
+                           driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageUserNameBy)
+                               .getText()
+    );
   }
 
   public void verifyMessageItalicText(String title, String message, String userName) {
@@ -352,29 +367,34 @@ public class MessageWall extends WikiBasePageObject {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
 
-    String actualURL =
-        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href").replaceAll("^http[s]?:\\/\\/", "");
-    String expectedURL =
-        String.format("%s/wiki/%s",wikiURL,target).replaceAll("^http[s]?:\\/\\/", "");
+    String actualURL = editMessageWrapper.findElement(messageBodyBy)
+        .findElement(messageLinkBy)
+        .getAttribute("href")
+        .replaceAll("^http[s]?:\\/\\/", "");
+    String expectedURL = String.format("%s/wiki/%s", wikiURL, target)
+        .replaceAll("^http[s]?:\\/\\/", "");
 
     Assertion.assertEquals(expectedURL, actualURL);
-    Assertion.assertEquals(
-        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy)
+                               .findElement(messageLinkBy)
+                               .getText(), text);
   }
 
   public void verifyExternalLink(String title, String target, String text, String wikiURL) {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href"), target);
-    Assertion.assertEquals(
-        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy)
+                               .findElement(messageLinkBy)
+                               .getAttribute("href"), target);
+    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy)
+                               .findElement(messageLinkBy)
+                               .getText(), text);
   }
 
   public void verifyQuote(String quoteText) {
-    Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy).getText(), quoteText);
+    Assertion.assertEquals(driver.findElement(firstMessageWrapperBy)
+                               .findElement(quoteMessageBy)
+                               .getText(), quoteText);
   }
 
   public void verifyImageAdded(String title) {
@@ -399,14 +419,17 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyReplyAreaAvatarNotVisible() {
     waitForElementNotVisibleByElement(replyAreaAvatars);
     Log.log("verifyReplyAreaAvatarNotVisible",
-        "as expected, avatar next to reply area is not visible", true);
+            "as expected, avatar next to reply area is not visible",
+            true
+    );
   }
 
   public void verifyPostedMessageVideo(String title) {
     wait.forElementVisible(By.xpath("//div[@class='msg-title']/a[contains(text(), " + "'" + title
-        + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
+                                    + "')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]"));
     Log.log("verifyPostedMessageImage", "message with image title verified", true);
   }
+
   public boolean isEditionVisible() {
     return isVisible(wallEdition);
   }

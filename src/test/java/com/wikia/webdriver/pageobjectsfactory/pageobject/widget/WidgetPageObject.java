@@ -103,16 +103,17 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
 
   public boolean isErrorPresent() {
     wait.forElementVisible(error);
-    boolean result =  error.getText().equals(getErrorMessage());
+    boolean result = error.getText().equals(getErrorMessage());
     logVisibility(result);
 
     return result;
   }
 
   protected void logVisibility(boolean result) {
-    Log
-        .log(getTagName(), result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
-             result);
+    Log.log(getTagName(),
+            result ? MercuryMessages.VISIBLE_MSG : MercuryMessages.INVISIBLE_MSG,
+            result
+    );
   }
 
   /**

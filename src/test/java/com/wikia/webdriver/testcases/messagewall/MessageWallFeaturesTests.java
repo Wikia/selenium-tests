@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.messagewall;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -11,6 +9,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallAddLinkComponentObject;
+
+import org.testng.annotations.Test;
 
 @Execute(onWikia = "sustainingtest")
 public class MessageWallFeaturesTests extends NewTestTemplate {

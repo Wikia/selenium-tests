@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,11 +33,11 @@ public class SpecialBlockPage extends WikiBasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public SpecialBlockPage open(){
+  public SpecialBlockPage open() {
     return open(urlBuilder.getUrl());
   }
 
-  public SpecialBlockPage open(String wikiUrl){
+  public SpecialBlockPage open(String wikiUrl) {
     getUrl(wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_BLOCK);
     Log.log("openSpecialBlockPage", "history page opened", true);
     wait.forElementVisible(blockButton);
@@ -74,13 +75,9 @@ public class SpecialBlockPage extends WikiBasePageObject {
   }
 
   public void deselectAllSelections() {
-    checkBoxes.stream()
-        .filter(WebElement::isSelected)
-        .forEach(WebElement::click);
+    checkBoxes.stream().filter(WebElement::isSelected).forEach(WebElement::click);
 
-    checkBoxes.stream()
-        .map(WebElement::isSelected)
-        .forEach(Assertion::assertFalse);
+    checkBoxes.stream().map(WebElement::isSelected).forEach(Assertion::assertFalse);
 
     Log.log("deselectAllSelections", "all selections deselected", true);
   }

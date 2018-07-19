@@ -10,22 +10,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-@InBrowser(
-  browser = Browser.CHROME_MOBILE,
-  emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME_MOBILE, emulator = Emulator.GOOGLE_NEXUS_5)
 @Test(groups = "AdsUapHiViMobileWiki")
 public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
+
   private static final double IMPACT_STATE_ASPECT_RATIO = 272.0 / 153.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 640.0 / 213;
   private static final String TLB_SLOT_ID = "MOBILE_TOP_LEADERBOARD";
-  private static final String AD_REDIRECT = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
+  private static final String
+      AD_REDIRECT
+      = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   private AdsBaseObject openPage(Page page) {
-    final AdsBaseObject adsBaseObject = new AdsBaseObject(
-        driver,
-        page.getUrl()
-    );
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(driver, page.getUrl());
 
     return adsBaseObject.waitForPageLoaded();
   }
@@ -50,7 +47,9 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   @Test
   public void shouldHaveResolvedStateAfterScroll() throws InterruptedException {
-    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO, RESOLVED_STATE_ASPECT_RATIO);
+    test().shouldHaveResolvedStateAfterScroll(IMPACT_STATE_ASPECT_RATIO,
+                                              RESOLVED_STATE_ASPECT_RATIO
+    );
   }
 
   @Test
@@ -105,7 +104,9 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   @Test
   public void shouldDisplayResolvedStateOnNextPageView() {
-    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO, RESOLVED_STATE_ASPECT_RATIO);
+    test().shouldDisplayResolvedStateOnNextPageView(IMPACT_STATE_ASPECT_RATIO,
+                                                    RESOLVED_STATE_ASPECT_RATIO
+    );
   }
 
   @Test

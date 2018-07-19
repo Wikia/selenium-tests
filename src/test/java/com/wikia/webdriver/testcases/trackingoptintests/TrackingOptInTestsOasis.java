@@ -11,17 +11,14 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage;
 
 import org.testng.annotations.Test;
 
-
 @Test(groups = {"TrackingOptIn"})
 public class TrackingOptInTestsOasis extends NewTestTemplate {
 
-  private static final Page TEST_PAGE = new Page(URLsContent.MEDIAWIKI119_TEST_WIKI,"Main_Page");
+  private static final Page TEST_PAGE = new Page(URLsContent.MEDIAWIKI119_TEST_WIKI, "Main_Page");
 
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
-  @Test(groups = {"oasis-tracking-opt-in"},
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "GDPRCountriesForTest"
-  )
+  @Test(groups = {
+      "oasis-tracking-opt-in"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRCountriesForTest")
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -31,12 +28,11 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER, trackingOptIn = false)
-  @Test(groups = {"oasis-tracking-opt-in"},
-      dataProviderClass = TrackingOptInDataProvider.class,
-      dataProvider = "GDPRCountriesForTest"
-  )
-  public void testModalVisibilityForLoggedInWhoNeverOptedIn(String continent, String country,
-                                                            boolean shouldGetModal) {
+  @Test(groups = {
+      "oasis-tracking-opt-in"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRCountriesForTest")
+  public void testModalVisibilityForLoggedInWhoNeverOptedIn(
+      String continent, String country, boolean shouldGetModal
+  ) {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.getUrl(modal.urlOptInModalDisplayedOasis(TEST_PAGE));

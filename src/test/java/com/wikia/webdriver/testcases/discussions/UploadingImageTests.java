@@ -11,12 +11,10 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
@@ -32,22 +30,29 @@ public class UploadingImageTests extends NewTestTemplate {
   private static final String MOBILE_COMMUNITY = MercuryWikis.DISCUSSIONS_2;
   private static final String DESKTOP_COMMUNITY = MercuryWikis.DISCUSSIONS_3;
 
-  private static final String UNSUPPORTED_IMAGE_MSG =
-    "Invalid image type, please use jpeg, png or gif.";
+  private static final String
+      UNSUPPORTED_IMAGE_MSG
+      = "Invalid image type, please use jpeg, png or gif.";
   private static final String POST_IMAGE_VISIBLE = "Uploaded image should be visible in new post";
-  private static final String POST_DELETED_IMAGE_NOT_VISIBLE =
-    "Deleted image should not be visible in new post";
-  private static final String POST_UNSUPPORTED_IMAGE_NOT_VISIBLE =
-    "Unsupported image should not be visible in new post";
-  private static final String POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE =
-    "Opengraph image should not be visible in new post with uploaded image";
+  private static final String
+      POST_DELETED_IMAGE_NOT_VISIBLE
+      = "Deleted image should not be visible in new post";
+  private static final String
+      POST_UNSUPPORTED_IMAGE_NOT_VISIBLE
+      = "Unsupported image should not be visible in new post";
+  private static final String
+      POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+      = "Opengraph image should not be visible in new post with uploaded image";
   private static final String REPLY_IMAGE_VISIBLE = "Uploaded image should be visible in new reply";
-  private static final String REPLY_DELETED_IMAGE_NOT_VISIBLE =
-    "Deleted image should not be visible in new reply";
-  private static final String REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE =
-    "Unsupported image should not be visible in new reply";
-  private static final String REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE =
-    "Opengraph image should not be visible in new reply with uploaded image";
+  private static final String
+      REPLY_DELETED_IMAGE_NOT_VISIBLE
+      = "Deleted image should not be visible in new reply";
+  private static final String
+      REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE
+      = "Unsupported image should not be visible in new reply";
+  private static final String
+      REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+      = "Opengraph image should not be visible in new reply with uploaded image";
 
   /**
    * fixture methods
@@ -55,9 +60,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private PostEntity.Data setUp(String wikiName) {
     String siteId = Utils.excractSiteIdFromWikiName(wikiName);
-    return DiscussionsClient
-      .using(User.USER_2, driver)
-      .createPostWithUniqueData(siteId);
+    return DiscussionsClient.using(User.USER_2, driver).createPostWithUniqueData(siteId);
   }
 
   /**
@@ -129,25 +132,27 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInPostWithUploadedImageOnDesktop()
-    throws MalformedURLException {
+      throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
-    Assertion.assertFalse(page.getPost().firstPostHasOpenGraph(), POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
+    Assertion.assertFalse(page.getPost().firstPostHasOpenGraph(),
+                          POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+    );
   }
 
   @Test(groups = DESKTOP)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInReplyWithUploadedImageOnDesktop()
-    throws MalformedURLException {
+      throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startReplyCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
-    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
+    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(),
+                          REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+    );
   }
-
-
 
   /**
    * mobile test methods
@@ -217,24 +222,24 @@ public class UploadingImageTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile()
-    throws MalformedURLException {
+      throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.getPost().firstPostHasOpenGraph());
   }
 
-
-
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile()
-    throws MalformedURLException {
+      throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
-    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
+    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(),
+                          REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+    );
   }
 
   /**
@@ -250,22 +255,22 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   private BasePostsCreator startPostCreationMobileWithLink(PostsListPage page)
-    throws MalformedURLException {
+      throws MalformedURLException {
     return page.getPostsCreatorMobile().startPostCreationWithLink(new URL(URL));
   }
 
   private BasePostsCreator startPostCreationDesktopWithLink(PostsListPage page)
-    throws MalformedURLException {
+      throws MalformedURLException {
     return page.getPostsCreatorDesktop().startPostCreationWithLink(new URL(URL));
   }
 
   private BaseReplyCreator startReplyCreationDesktopWithLink(PostDetailsPage page)
-    throws MalformedURLException {
+      throws MalformedURLException {
     return page.getReplyCreatorDesktop().startReplyCreationWithLink(new URL(URL));
   }
 
   private BaseReplyCreator startReplyCreationMobileWithLink(PostDetailsPage page)
-    throws MalformedURLException {
+      throws MalformedURLException {
     return page.getReplyCreatorMobile().startReplyCreationWithLink(new URL(URL));
   }
 
@@ -278,15 +283,12 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   private BaseReplyCreator startReplyCreation(BaseReplyCreator replyCreator) {
-    replyCreator.click()
-      .clickGuidelinesReadButton()
-      .add(TextGenerator.defaultText());
+    replyCreator.click().clickGuidelinesReadButton().add(TextGenerator.defaultText());
     return replyCreator;
   }
 
   private BaseReplyCreator startEmptyReplyCreation(BaseReplyCreator replyCreator) {
-    replyCreator.click()
-        .clickGuidelinesReadButton();
+    replyCreator.click().clickGuidelinesReadButton();
     return replyCreator;
   }
 
@@ -317,5 +319,4 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     replyCreator.waitForErrorMessageNotVisible().clickSubmitButton();
   }
-
 }

@@ -94,8 +94,10 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   private KeyboardShortcutsModal triggerGIShortcut() {
     actions.sendKeys("gi").perform();
 
-    Assertion.assertTrue(driver.getCurrentUrl().contains(INSIGHTS_PAGE),
-                         "You were not redirected to Insights page by gi keyboard shortcut");
+    Assertion.assertTrue(
+        driver.getCurrentUrl().contains(INSIGHTS_PAGE),
+        "You were not redirected to Insights page by gi keyboard shortcut"
+    );
     Log.info("You were redirected to Insights page by gi keyboard shortcut");
 
     return this;
@@ -104,12 +106,16 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   private KeyboardShortcutsModal triggerGSShortcut() {
     actions.sendKeys("gs").perform();
 
-    Assertion.assertTrue(globalNavigationSearchInput.equals(driver.switchTo().activeElement()),
-                         "Global navigation search input is not focused by gs keyboard shortcut");
+    Assertion.assertTrue(
+        globalNavigationSearchInput.equals(driver.switchTo().activeElement()),
+        "Global navigation search input is not focused by gs keyboard shortcut"
+    );
     Log.info("Global navigation search input was focused by gs keyboard shortcut");
 
-    Assertion.assertTrue(globalNavigationSearchInput.getAttribute("value").isEmpty(),
-                         "Global navigation search input is not empty");
+    Assertion.assertTrue(
+        globalNavigationSearchInput.getAttribute("value").isEmpty(),
+        "Global navigation search input is not empty"
+    );
     Log.info("Global navigation search input is empty");
 
     return this;

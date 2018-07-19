@@ -36,12 +36,13 @@ public class PreferencesPageObject extends WikiBasePageObject {
   @FindBy(css = "#mw-input-wpusenewrc")
   private WebElement useAdvancedRecentChangesCheckbox;
 
-  public PreferencesPageObject open(){
+  public PreferencesPageObject open() {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_PREFERENCES));
     Log.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 
     return this;
   }
+
   public PreferencesPageObject selectTab(tabNames tab) {
     int tabNum = -1;
     switch (tab) {
@@ -84,7 +85,11 @@ public class PreferencesPageObject extends WikiBasePageObject {
     selectTab(PreferencesPageObject.tabNames.UNDER);
     wait.forElementClickable(useAdvancedRecentChangesCheckbox);
     useAdvancedRecentChangesCheckbox.click();
-    Log.log("Use_advanced_recent_changes_checkbox", "Use_advanced_recent_changes_checkbox clicked", true);
+    Log.log(
+        "Use_advanced_recent_changes_checkbox",
+        "Use_advanced_recent_changes_checkbox clicked",
+        true
+    );
 
     return this;
   }
@@ -92,16 +97,20 @@ public class PreferencesPageObject extends WikiBasePageObject {
   public boolean getAdvancedRecentChangesCheckboxValue() {
     // Verify that the Get_advanced_recent_changes_checkbox_value is checked
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    return  useAdvancedRecentChangesCheckbox.getAttribute("checked") != null;
+    return useAdvancedRecentChangesCheckbox.getAttribute("checked") != null;
   }
 
   public PreferencesPageObject setAdvancedRecentChangesCheckboxValueToDefaultUnchecked() {
     selectTab(PreferencesPageObject.tabNames.UNDER);
-    if(useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) {// if Checked
+    if (useAdvancedRecentChangesCheckbox.getAttribute("checked") != null) {// if Checked
       useAdvancedRecentChangesCheckbox.click();
     }
     clickSaveButton();
-    Log.log("Set_advanced_recent_changes_checkbox_value_to_default_unchecked", "GSet_advanced_recent_changes_checkbox_value set to default unchecked", true);
+    Log.log(
+        "Set_advanced_recent_changes_checkbox_value_to_default_unchecked",
+        "GSet_advanced_recent_changes_checkbox_value set to default unchecked",
+        true
+    );
 
     return this;
   }

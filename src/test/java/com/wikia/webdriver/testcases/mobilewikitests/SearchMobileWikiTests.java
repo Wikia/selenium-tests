@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "SearchMobileWikiTests")
@@ -30,8 +31,7 @@ public class SearchMobileWikiTests extends SearchTests {
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "IRIS-5167")
-  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
-                  "MobileWiki_Search_001"})
+  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile", "MobileWiki_Search_001"})
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
     ArticlePage article = new ArticlePage().open(MercurySubpages.MAIN_PAGE);
     String clickedSuggestion = article.getGlobalNavigationMobile()
@@ -39,9 +39,8 @@ public class SearchMobileWikiTests extends SearchTests {
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0);
 
-    Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(),
-        article.getHeader().getPageTitle().toLowerCase()
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           article.getHeader().getPageTitle().toLowerCase()
     );
   }
 
@@ -49,10 +48,7 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_navigateToPageUsingSearchResults", "MobileWiki_Search_001"})
   public void mercury_search_navigateToPageUsingSearchResults() {
-    String resultLink =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE)
-            .clickSearchResult(0);
+    String resultLink = new SearchResultsPage().openForQuery(SEARCH_PHRASE).clickSearchResult(0);
 
     Assertion.assertEquals(driver.getCurrentUrl(), resultLink);
   }
@@ -61,31 +57,25 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_cancelSearchPhrase", "MobileWiki_Search_001"})
   public void mercury_search_clearSearchPhrase() {
-    super.clearSearchPhrase(
-        new ArticlePage().open(MercurySubpages.MAIN_PAGE)
-    );
+    super.clearSearchPhrase(new ArticlePage().open(MercurySubpages.MAIN_PAGE));
   }
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_verifySearchLayout", "MobileWiki_Search_001"})
   public void mercury_search_verifySearchLayout() {
-    super.verifySearchLayout(
-        new ArticlePage().open(MercurySubpages.MAIN_PAGE)
-    );
+    super.verifySearchLayout(new ArticlePage().open(MercurySubpages.MAIN_PAGE));
   }
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_userIsRedirectedToSearchResultsPage", "MobileWiki_Search_001"})
   public void mercury_search_userIsRedirectedToSearchResultsPage() {
-    SearchResultsPage searchResults =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getGlobalNavigationMobile()
-            .openSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .clickEnterAndNavigateToSearchResults(Skin.MOBILE_WIKI);
+    SearchResultsPage searchResults = new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        .getGlobalNavigationMobile()
+        .openSearch()
+        .typeInSearch(SEARCH_PHRASE)
+        .clickEnterAndNavigateToSearchResults(Skin.MOBILE_WIKI);
 
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
   }
@@ -94,9 +84,9 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_searchNoResultsPageDisplayed", "MobileWiki_Search_001"})
   public void mercury_search_searchNoResultsPageDisplayed() {
-    SearchResultsPage searchResults =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE_NO_RESULTS);
+    SearchResultsPage
+        searchResults
+        = new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
 
     Assertion.assertTrue(searchResults.isNoResultsPagePresent());
     Assertion.assertFalse(searchResults.isLoadMoreButtonVisible());
@@ -106,9 +96,9 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_noSuggestionsOnSearchResultsPage", "MobileWiki_Search_001"})
   public void mercury_search_noSuggestionsOnSearchResultsPage() {
-    SearchResultsPage searchResults =
-        new SearchResultsPage()
-            .openForQuery(SEARCH_PHRASE_NO_RESULTS);
+    SearchResultsPage
+        searchResults
+        = new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
 
     Assertion.assertFalse(searchResults.getSearch().areSearchSuggestionsDisplayed());
   }
@@ -117,9 +107,8 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage"})
   public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
+    SearchResultsPage resultsPage = new SearchResultsPage().openForQuery(
+        MULTIPLE_RESULTS_SEARCH_PHRASE);
 
     Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_NUMBER_FIRST_BATCH);
   }
@@ -128,9 +117,8 @@ public class SearchMobileWikiTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_loadingMoreResultsOnSearchResultsPage"})
   public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
+    SearchResultsPage resultsPage = new SearchResultsPage().openForQuery(
+        MULTIPLE_RESULTS_SEARCH_PHRASE);
 
     int defaultCardNumber = resultsPage.getResultCardsNumber();
 
@@ -150,9 +138,9 @@ public class SearchMobileWikiTests extends SearchTests {
   @Test(groups = {"mercury_search_loadMoreResultsOnSearchResultsPageNotVisible",
                   "MobileWiki_Search_002"})
   public void mercury_search_loadMoreResultsOnSearchResultsPageNotVisible() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(SINGLE_RESULT_SEARCH_PHRASE);
+    SearchResultsPage
+        resultsPage
+        = new SearchResultsPage().openForQuery(SINGLE_RESULT_SEARCH_PHRASE);
 
     Assertion.assertTrue(resultsPage.getResultCardsNumber() < SEARCH_RESULTS_NUMBER_FIRST_BATCH);
     Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
@@ -163,9 +151,7 @@ public class SearchMobileWikiTests extends SearchTests {
   @Test(groups = {"mercury_search_loadMoreResultsOnSearchResultsPageNotVisible",
                   "MobileWiki_Search_002"})
   public void mercury_search_emptySearchPhrase() {
-    SearchResultsPage resultsPage =
-        new SearchResultsPage()
-            .openForQuery(EMPTY_SEARCH_PHRASE);
+    SearchResultsPage resultsPage = new SearchResultsPage().openForQuery(EMPTY_SEARCH_PHRASE);
 
     Assertion.assertEquals(resultsPage.getResultCardsNumber(), 0);
     Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());

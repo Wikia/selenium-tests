@@ -23,25 +23,10 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
     super();
   }
 
-  public enum Positions {
-    LEFT, CENTER, RIGHT;
-
-    private final String label;
-
-    Positions() {
-      this.label = StringUtils.capitalize(this.toString().toLowerCase());
-    }
-
-    public String getPosition() {
-      return this.label;
-    }
-  }
-
   public void adjustPosition(Positions position) {
     Select pos = new Select(slideshowPosition);
     pos.selectByVisibleText(position.getPosition());
-    Log
-        .log("adjustPosition", "slideshow position set to " + position.getPosition(), true);
+    Log.log("adjustPosition", "slideshow position set to " + position.getPosition(), true);
   }
 
   public AddPhotoComponentObject clickAddPhoto() {
@@ -54,5 +39,19 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
     wait.forElementVisible(finishButton);
     finishButton.click();
     Log.log("clickFinish", "finish button clicked", true);
+  }
+
+  public enum Positions {
+    LEFT, CENTER, RIGHT;
+
+    private final String label;
+
+    Positions() {
+      this.label = StringUtils.capitalize(this.toString().toLowerCase());
+    }
+
+    public String getPosition() {
+      return this.label;
+    }
   }
 }

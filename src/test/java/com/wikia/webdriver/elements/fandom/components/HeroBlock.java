@@ -1,12 +1,11 @@
 package com.wikia.webdriver.elements.fandom.components;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class HeroBlock extends BasePageObject {
 

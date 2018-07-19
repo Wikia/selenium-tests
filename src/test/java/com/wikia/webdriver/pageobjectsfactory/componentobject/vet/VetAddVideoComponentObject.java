@@ -4,10 +4,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -66,8 +63,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   private void typeInSearchQuery(String query) {
     wait.forElementVisible(findField);
     findField.sendKeys(query);
-    Log.log("typeInSearchQuery",
-                          query + " query typed into search video field", true);
+    Log.log("typeInSearchQuery", query + " query typed into search video field", true);
   }
 
   private void clickFindButton() {
@@ -84,8 +80,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     wait.forElementClickable(addFromPreviewButtonBy);
     scrollAndClick(addFromPreviewButton);
     wait.forElementNotVisible(addFromPreviewButton);
-    Log.log("clickAddVideoLibrary",
-                          "add video button clicked: " + this.videoName, true, driver);
+    Log.log("clickAddVideoLibrary", "add video button clicked: " + this.videoName, true, driver);
   }
 
   private void checkIfLibraryIsPresent() {
@@ -108,7 +103,6 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
 
     return new VetOptionsComponentObject(driver);
   }
-
 
   public VetOptionsComponentObject addVideoByQuery(String query, int i) {
     typeInSearchQuery(query);
@@ -141,7 +135,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
       wait.forElementVisible(suggestedVideo);
 
       return true;
-    } catch(TimeoutException e) {
+    } catch (TimeoutException e) {
       Log.info("Suggestion are not displayed", e);
 
       return false;

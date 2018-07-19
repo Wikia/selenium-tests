@@ -8,6 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -31,8 +32,9 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_addByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode =
-        new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
+    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(wikiURL,
+                                                                                                articleTitle
+    );
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);
@@ -52,13 +54,14 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     article.verifyArticleTitle(articleTitle);
   }
 
-  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
-      groups = {"ArticleCRUDAnon_004"})
+  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles", groups = {
+      "ArticleCRUDAnon_004"})
   public void articleCRUDAnon_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode =
-        new ArticlePageObject().navigateToArticleEditPage(wikiURL, randomArticleTitle);
+    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(wikiURL,
+                                                                                                randomArticleTitle
+    );
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);
@@ -78,7 +81,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDAnon_006"})
   public void articleCRUDAnon_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown" + "?AbTest.ADD_NEW_PAGE=CONTROL1");
+    ArticlePageObject article = new ArticlePageObject().open(
+        "AnonEditDropdown" + "?AbTest.ADD_NEW_PAGE=CONTROL1");
     VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButtonDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitExpectingNotification().submitArticle();
@@ -89,8 +93,9 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_editArticleSecondTime() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode =
-        new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
+    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(wikiURL,
+                                                                                                articleTitle
+    );
     visualEditMode.addContent(articleContent);
     visualEditMode.submitExpectingNotification().submitArticle();
     String secondArticleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();

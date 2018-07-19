@@ -1,15 +1,14 @@
 package com.wikia.webdriver.common.remote.operations.http;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import javax.net.ssl.SSLException;
-
+import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.common.remote.RemoteException;
+import com.wikia.webdriver.common.remote.Utils;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.Header;
@@ -28,21 +27,22 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.RemoteException;
-import com.wikia.webdriver.common.remote.Utils;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import javax.net.ssl.SSLException;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 class BaseRemoteOperation {
 
   /**
    * Standard cookie spec is used instead of default one in order to suppress warnings about
-   * SetCookie header values containing un-escaped commas (e.g.
-   * "expires=Sat, 09 Sep 2017 15:33:53 GMT")
+   * SetCookie header values containing un-escaped commas (e.g. "expires=Sat, 09 Sep 2017 15:33:53
+   * GMT")
    */
-  private static RequestConfig requestConfig =
-      RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
+  private static RequestConfig requestConfig = RequestConfig.custom()
+      .setCookieSpec(CookieSpecs.STANDARD)
+      .build();
 
   @Getter
   private final User user;
@@ -50,13 +50,16 @@ class BaseRemoteOperation {
   public String execute(final HttpRequestBase request) {
     String result = StringUtils.EMPTY;
 
-    try (CloseableHttpClient client = HttpClientBuilder.create().disableContentCompression()
-        .setDefaultRequestConfig(requestConfig)
-        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build()) {
+    try (
+        CloseableHttpClient client = HttpClientBuilder.create()
+            .disableContentCompression()
+            .setDefaultRequestConfig(requestConfig)
+            .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+            .build()
+    ) {
       result = makeRequest(client, request);
     } catch (IOException x) {
-      Log.log("Error while creating/closing http client.",
-          ExceptionUtils.getStackTrace(x), false);
+      Log.log("Error while creating/closing http client.", ExceptionUtils.getStackTrace(x), false);
     }
 
     return result;
@@ -70,10 +73,8 @@ class BaseRemoteOperation {
       request.setEntity(new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON));
       result = execute(request);
     } catch (RemoteException ex) {
-      Log.log("Request: ", getRequestString(request) + "\n" + request.getEntity(),
-          false);
-      Log.log("Error while creating http post entity.",
-          ExceptionUtils.getStackTrace(ex), false);
+      Log.log("Request: ", getRequestString(request) + "\n" + request.getEntity(), false);
+      Log.log("Error while creating http post entity.", ExceptionUtils.getStackTrace(ex), false);
     }
 
     return result;
@@ -97,8 +98,7 @@ class BaseRemoteOperation {
     try (CloseableHttpResponse response = client.execute(request)) {
       result = handleResponse(request, response);
     } catch (UnsupportedEncodingException | SSLException x) {
-      Log.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x),
-          false);
+      Log.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);
       Log.log("Request: ", getRequestString(request), false);
     }
 
@@ -117,7 +117,7 @@ class BaseRemoteOperation {
         Log.info("Error response:", result);
         throw new RemoteException(
             "Error while invoking request. " + " Method: " + requestBase.getMethod() + " Url: "
-                + requestBase.getURI().toString() + " Response: " + result);
+            + requestBase.getURI().toString() + " Response: " + result);
       }
     }
     return result;

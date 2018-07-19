@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
+import static org.testng.Assert.assertTrue;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.core.helpers.FacebookUser;
@@ -12,13 +14,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.Instant;
-
-import static org.testng.Assert.assertTrue;
 
 @Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
@@ -27,7 +28,7 @@ public class FacebookTests extends NewTestTemplate {
   private FacebookUser facebookUser;
 
   @BeforeSuite
-  private void setUp(){
+  private void setUp() {
     facebookUser = facebookApi.createFacebookTestUser();
   }
 
@@ -51,7 +52,6 @@ public class FacebookTests extends NewTestTemplate {
     assertTrue(new DetachedRegisterPage().isConnectWithFacebookButtonVisible());
   }
 
-
   @Execute(asUser = User.USER)
   public void facebookButtonIsVisibleOnUserPreferencesPage() {
     PreferencesPageObject prefsPage = new WikiBasePageObject().openSpecialPreferencesPage(wikiURL);
@@ -69,5 +69,4 @@ public class FacebookTests extends NewTestTemplate {
     fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, 1, 1, 1970);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
   }
-
 }

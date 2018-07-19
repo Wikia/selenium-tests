@@ -3,11 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponent
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,10 +32,11 @@ public class DropDownComponentObject extends WikiBasePageObject {
       new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
-          if (!driver.findElement(By.cssSelector(LOGIN_DROPDOWN_TRIGGER_CSS)).getAttribute("class")
-                  .contains("active")) {
-            ((JavascriptExecutor) driver)
-                    .executeScript("$j('.ajaxLogin .avatar-container').trigger('click')");
+          if (!driver.findElement(By.cssSelector(LOGIN_DROPDOWN_TRIGGER_CSS))
+              .getAttribute("class")
+              .contains("active")) {
+            ((JavascriptExecutor) driver).executeScript(
+                "$j('.ajaxLogin .avatar-container').trigger('click')");
             return false;
           }
           return true;

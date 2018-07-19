@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_TopBar")
@@ -19,10 +20,9 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_topBarIsAlwaysVisible")
   public void mercury_topbar_topBarIsAlwaysVisible() {
-    GlobalNavigationMobile globalNavigationMobile =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getGlobalNavigationMobile();
+    GlobalNavigationMobile
+        globalNavigationMobile
+        = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile();
 
     Assertion.assertTrue(globalNavigationMobile.isNavigationBarVisible());
     Assertion.assertTrue(globalNavigationMobile.isLogoVisible());
@@ -37,10 +37,9 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_closeButtonAppears")
   public void mercury_topbar_closeButtonAppears() {
-    GlobalNavigationMobile globalNavigationMobile =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getGlobalNavigationMobile();
+    GlobalNavigationMobile
+        globalNavigationMobile
+        = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile();
 
     globalNavigationMobile.openSearch();
     Assertion.assertTrue(globalNavigationMobile.isCloseIconVisible());
@@ -51,10 +50,9 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
   public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
-    GlobalNavigationMobile globalNavigationMobile =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getGlobalNavigationMobile();
+    GlobalNavigationMobile
+        globalNavigationMobile
+        = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile();
 
     globalNavigationMobile.clickFandomLogo();
 

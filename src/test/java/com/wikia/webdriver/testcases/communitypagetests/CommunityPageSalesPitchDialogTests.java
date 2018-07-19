@@ -129,5 +129,4 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
 
     Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
-
 }

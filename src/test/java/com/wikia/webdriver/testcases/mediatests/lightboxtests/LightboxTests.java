@@ -13,10 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.*;
+
 import org.testng.annotations.Test;
 
 /**
@@ -34,8 +32,9 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_001")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void UserCanOpenLightBoxOnUnusedFiles() {
-    LightboxComponentObject lightbox =
-        new SpecialUnusedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
+    LightboxComponentObject lightbox = new SpecialUnusedFilesPage().open()
+        .getGalleryGrid()
+        .openLightboxForGridImage(0);
 
     lightbox.verifyLightboxPopup();
   }
@@ -43,8 +42,9 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_002")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void UserCanOpenLightBoxOnUnusedVideos() {
-    LightboxComponentObject lightbox =
-        new SpecialUnusedVideosPage().open().getGalleryGrid().openLightboxForGridVideo(0);
+    LightboxComponentObject lightbox = new SpecialUnusedVideosPage().open()
+        .getGalleryGrid()
+        .openLightboxForGridVideo(0);
 
     lightbox.verifyLightboxPopup();
   }
@@ -52,8 +52,9 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_003")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void UserCanOpenLightBoxOnUncategorizedFiles() {
-    LightboxComponentObject lightbox =
-        new SpecialUncategorizedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
+    LightboxComponentObject lightbox = new SpecialUncategorizedFilesPage().open()
+        .getGalleryGrid()
+        .openLightboxForGridImage(0);
 
     lightbox.verifyLightboxPopup();
   }
@@ -61,8 +62,9 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_004")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void UserCanOpenLightBoxOnMostLinkedFiles() {
-    LightboxComponentObject lightbox =
-        new SpecialMostLinkedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
+    LightboxComponentObject lightbox = new SpecialMostLinkedFilesPage().open()
+        .getGalleryGrid()
+        .openLightboxForGridImage(0);
 
     lightbox.verifyLightboxPopup();
   }

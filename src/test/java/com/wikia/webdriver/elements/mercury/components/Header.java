@@ -46,5 +46,4 @@ public class Header extends BasePageObject {
       return false;
     }
   }
-
 }

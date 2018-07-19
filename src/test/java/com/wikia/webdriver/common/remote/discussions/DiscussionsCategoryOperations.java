@@ -5,7 +5,9 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.discussions.context.CategoryContext;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
+
 import lombok.AllArgsConstructor;
+
 import java.util.List;
 
 @AllArgsConstructor(staticName = "using")
@@ -40,5 +42,4 @@ public class DiscussionsCategoryOperations {
       deleteCategory(siteId, category);
     }
   }
-
 }
