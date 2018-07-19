@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.commentstests;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -16,6 +11,11 @@ import com.wikia.webdriver.elements.oasis.components.notifications.NotificationT
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Test(groups = "comments-articleComments")
 @Execute(onWikia = "sustainingtest")
@@ -99,8 +99,10 @@ public class ArticleCommentsTests extends NewTestTemplate {
     delete.submitDeletion();
 
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(), 1,
-        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
     article.verifyCommentDeleted(commentText);
   }

@@ -29,8 +29,12 @@ public class TemplatePage extends WikiBasePageObject {
   }
 
   public TemplatePage open(String templateName) {
-    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrl(), URLsContent.WIKI_DIR,
-                         URLsContent.TEMPLATE_NAMESPACE, templateName));
+    getUrl(String.format("%s%s%s:%s",
+                         urlBuilder.getUrl(),
+                         URLsContent.WIKI_DIR,
+                         URLsContent.TEMPLATE_NAMESPACE,
+                         templateName
+    ));
 
     return this;
   }
@@ -42,11 +46,12 @@ public class TemplatePage extends WikiBasePageObject {
   }
 
   public String getRawContent(String templateName) {
-    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrl(),
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s",
+                                                           urlBuilder.getUrl(),
                                                            URLsContent.WIKI_DIR,
                                                            URLsContent.TEMPLATE_NAMESPACE,
-                                                           templateName),
-                                             URLsContent.ACTION_RAW));
+                                                           templateName
+    ), URLsContent.ACTION_RAW));
     wait.forElementPresent(By.cssSelector("body"));
     return body.getText();
   }

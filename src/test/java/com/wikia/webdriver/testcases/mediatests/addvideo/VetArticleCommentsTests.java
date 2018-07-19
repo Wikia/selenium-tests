@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -17,14 +15,16 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
+import org.testng.annotations.Test;
+
 @Test(groups = {"VetArticleComments", "VetTests", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "SUS-758",
-      comment = "This issue is related to API call and should not cause permanent "
-          + "test failure. Otherwise the failure must be caused by other issue")
+  @RelatedIssue(issueID = "SUS-758", comment =
+      "This issue is related to API call and should not cause permanent "
+      + "test failure. Otherwise the failure must be caused by other issue")
   public void RegularUserCanAddVideoInArticleCommentEditorByProvidingYoutubeVideoUrl() {
     new ArticleContent().clear();
 
@@ -40,8 +40,10 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     Assertion.assertTrue(article.getArticleComment().isVideoVisible());
 
     article.submitComment();
-    Assertion.assertEquals(article.getArticleComment().getLatestCommentCaption(), expectedCaption,
-        "Latest comment caption doesn't equal to expected caption");
+    Assertion.assertEquals(article.getArticleComment().getLatestCommentCaption(),
+                           expectedCaption,
+                           "Latest comment caption doesn't equal to expected caption"
+    );
   }
 
   @Test(groups = {"VetArticleComments_002"})
@@ -53,8 +55,9 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     String desiredVideoName = vetOptions.getVideoName();
     vetOptions.submit();
@@ -63,6 +66,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
     article.submitComment();
     Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName),
-        "Video comment doesn't have desired name");
+                         "Video comment doesn't have desired name"
+    );
   }
 }

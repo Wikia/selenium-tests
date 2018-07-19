@@ -11,9 +11,16 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-
 public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
+  private static final By MEDIA_RESULTS_WIDGET_BY = By.cssSelector(
+      ".ve-ui-wikiaMediaResultsWidget .oo-ui-selectWidget-depressed");
+  private static final By MEDIA_RESULTS_BY = By.cssSelector(".ve-ui-mwMediaResultWidget-done");
+  private static final By MEDIA_ADD_ICON_BY = By.cssSelector(".oo-ui-icon-unchecked");
+  private static final By MEDIA_TITLES_BY = By.cssSelector(
+      ".ve-ui-mwMediaResultWidget-done>.oo-ui-labelElement-label");
+  private static final By MEDIA_CHECKED_ICON_BY = By.cssSelector(".oo-ui-icon-checked");
+  private static final By MEDIA_META_BY = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
   @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget input")
   private WebElement searchInput;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
@@ -26,21 +33,9 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement queryPending;
   @FindBy(css = ".ve-ui-mwMediaResultWidget-done:nth-child(9)")
   private WebElement resultsList;
-
   //Cart
   @FindBy(css = ".ve-ui-wikiaSingleMediaCartOptionWidget")
   private List<WebElement> cartItems;
-
-  private static final By
-      MEDIA_RESULTS_WIDGET_BY =
-      By.cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-selectWidget-depressed");
-  private static final By MEDIA_RESULTS_BY = By.cssSelector(".ve-ui-mwMediaResultWidget-done");
-  private static final By MEDIA_ADD_ICON_BY = By.cssSelector(".oo-ui-icon-unchecked");
-  private static final By
-      MEDIA_TITLES_BY =
-      By.cssSelector(".ve-ui-mwMediaResultWidget-done>.oo-ui-labelElement-label");
-  private static final By MEDIA_CHECKED_ICON_BY = By.cssSelector(".oo-ui-icon-checked");
-  private static final By MEDIA_META_BY = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
 
   public VisualEditorInsertGalleryDialog(WebDriver driver) {
     super(driver);

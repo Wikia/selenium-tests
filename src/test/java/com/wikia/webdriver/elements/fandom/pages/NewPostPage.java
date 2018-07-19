@@ -1,13 +1,12 @@
 package com.wikia.webdriver.elements.fandom.pages;
 
 import com.wikia.webdriver.common.logging.Log;
-import lombok.Getter;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.elements.fandom.FandomWPPage;
 import com.wikia.webdriver.elements.fandom.components.TextEditor;
+
+import lombok.Getter;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class NewPostPage extends FandomWPPage<NewPostPage> {
 

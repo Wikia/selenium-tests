@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.remote.discussions.context;
 
 import com.wikia.webdriver.common.remote.context.RemoteContext;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -18,9 +19,6 @@ public class UpvoteContext extends RemoteContext {
   }
 
   public static UpvoteContext defaultContext(final String siteId, final String postId) {
-    return UpvoteContext.builder()
-      .siteId(siteId)
-      .postId(postId)
-      .build();
+    return UpvoteContext.builder().siteId(siteId).postId(postId).build();
   }
 }

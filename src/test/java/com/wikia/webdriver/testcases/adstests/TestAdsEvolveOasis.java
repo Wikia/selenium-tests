@@ -13,7 +13,8 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
   @Test(groups = "AdsEvolveOasis")
   public void adsEvolveOasis() {
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
-    String testedPage = UrlBuilder.createUrlBuilderForWiki("project43").getUrlForPath("SyntheticTests/Evolve");
+    String testedPage = UrlBuilder.createUrlBuilderForWiki("project43")
+        .getUrlForPath("SyntheticTests/Evolve");
     wikiPage.enableEvolve(testedPage);
     wikiPage.verifyEvolveInAdSlots();
   }

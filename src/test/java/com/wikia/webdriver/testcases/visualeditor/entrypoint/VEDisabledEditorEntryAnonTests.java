@@ -54,9 +54,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_004",
-                  "sectionEditEntry"},
-          enabled = false
-  )
+                  "sectionEditEntry"}, enabled = false)
   @RelatedIssue(issueID = "XW-3680")
   public void VEDisabledEditorEntryAnonTestsTests_004_SectionEditEntry() {
     ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
@@ -92,9 +90,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_008",
-                  "templateEntry"},
-          enabled = false
-  )
+                  "templateEntry"}, enabled = false)
   @RelatedIssue(issueID = "XW-3681")
   public void VEDisabledEditorEntryAnonTestsTests_008_TemplateNamespace() {
     ArticlePageObject article = new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);
@@ -105,8 +101,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_009",
                   "actionURLEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_009_actionEdit() {
-    VisualEditModePageObject ck =
-        base.navigateToArticleEditPage(wikiURL, base.getNameForArticle());
+    VisualEditModePageObject ck = base.navigateToArticleEditPage(wikiURL, base.getNameForArticle());
     Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }

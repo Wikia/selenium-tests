@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,16 +13,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SmartBanner {
 
+  private static final int SMART_BANNER_POS_Y = 50;
   @FindBy(css = ".fandom-app-smart-banner__close")
   private WebElement closeButton;
-
   private By smartBannerComponent = By.cssSelector(".fandom-app-smart-banner");
-
   private Wait wait;
   private JavascriptActions jsActions;
   private WebDriver driver;
-
-  private static final int SMART_BANNER_POS_Y = 50;
 
   public SmartBanner(WebDriver driver) {
     this.wait = new Wait(driver);

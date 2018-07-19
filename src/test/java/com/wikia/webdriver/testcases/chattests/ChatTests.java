@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import java.util.List;
-
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -13,18 +9,26 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
+import org.testng.annotations.Test;
+
+import java.util.List;
+
 @Test(groups = {"Chat", "ChatForUser"})
 @Execute(onWikia = "sustainingtest")
 public class ChatTests extends NewTestTemplate {
 
-  private static final String USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR =
-      "USER IS NOT DISPLAYED IN PRIVATE SECTION";
-  private static final String MESSAGE_ON_MAIN_CHAT =
-      "Test message on main chat with ąół characters and even þjóð";
-  private static final String MESSAGE_ON_PRIVATE_CHAT =
-      "Test message on private chat with ąół characters and even þjóð";
-  private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR =
-      "MESSAGE ON CHAT IS NOT DISPLAYED";
+  private static final String
+      USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR
+      = "USER IS NOT DISPLAYED IN PRIVATE SECTION";
+  private static final String
+      MESSAGE_ON_MAIN_CHAT
+      = "Test message on main chat with ąół characters and even þjóð";
+  private static final String
+      MESSAGE_ON_PRIVATE_CHAT
+      = "Test message on private chat with ąół characters and even þjóð";
+  private static final String
+      MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+      = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
@@ -49,7 +53,8 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     chatUserOne.clickOnDifferentUser(User.SUS_CHAT_USER2.getUserName());
     Assertion.assertTrue(chatUserOne.isRegularUserDropdownDisplayed(),
-        "REGULAR USER DROBDOWN IS NOT DISPLAYED");
+                         "REGULAR USER DROBDOWN IS NOT DISPLAYED"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_002"})
@@ -63,15 +68,18 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
     chatUserOne.selectPrivateMessageToUser(User.SUS_CHAT_USER2.getUserName());
     Assertion.assertTrue(
         chatUserOne.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()),
-        USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
+        USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR
+    );
     Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_003"})
@@ -85,7 +93,8 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserFour.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
 
     switchToWindow(1);
     chatUserFour.selectPrivateMessageToUser(User.SUS_CHAT_USER.getUserName());
@@ -94,12 +103,16 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserThree.isPrivateMessageHeaderDisplayed(),
-        "PRIVATE MESSAGE HEDER IS NOT DISPLAYED");
-    Assertion.assertTrue(chatUserThree.isPrivateMessageNotificationDisplayed(),
-        "PRIVATE MESSAGE NOTIFICATION ARE NOT DISPLAYED");
+                         "PRIVATE MESSAGE HEDER IS NOT DISPLAYED"
+    );
+    Assertion.assertTrue(
+        chatUserThree.isPrivateMessageNotificationDisplayed(),
+        "PRIVATE MESSAGE NOTIFICATION ARE NOT DISPLAYED"
+    );
     chatUserThree.clickOnUserInPrivateMessageSection(User.SUS_CHAT_USER2.getUserName());
     Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_004"})
@@ -112,19 +125,23 @@ public class ChatTests extends NewTestTemplate {
     chatUserSix.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserFive.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        "MESAGE ON PRIVATE CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(
+        chatUserFive.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
+        "MESAGE ON PRIVATE CHAT IS NOT DISPLAYED"
+    );
 
     switchToWindow(1);
     chatUserSix.selectPrivateMessageToUser(User.SUS_CHAT_USER2.getUserName());
-    Assertion
-        .assertTrue(chatUserSix.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()));
+    Assertion.assertTrue(chatUserSix.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()));
     List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(MESSAGE_ON_PRIVATE_CHAT,
-        NUMBER_OF_PRIVATE_MESSAGES);
+                                                                         NUMBER_OF_PRIVATE_MESSAGES
+    );
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserFive.isPrivateNotificationCountDisplayed(messagesSent.size()),
-        "PRIVATE MESSAGES COUNTER IS NOT CORRECT");
+    Assertion.assertTrue(
+        chatUserFive.isPrivateNotificationCountDisplayed(messagesSent.size()),
+        "PRIVATE MESSAGES COUNTER IS NOT CORRECT"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_005"})
@@ -140,14 +157,16 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     try {
       Assertion.assertTrue(userToBeBaned.isUserKickedFromChat(),
-          "BANED USER IS ABLE TO WRITE MESSAGE");
+                           "BANED USER IS ABLE TO WRITE MESSAGE"
+      );
     } finally {
       switchToWindow(1);
       chatUserStaff.unBanUser(User.CHAT_USER_TO_BE_BANNED.getUserName());
     }
     Assertion.assertTrue(
         chatUserStaff.isChatUnbanMessageDisplayed(User.CHAT_USER_TO_BE_BANNED.getUserName()),
-        "UNBAN MESSAGE IS NOT DISPLAYED");
+        "UNBAN MESSAGE IS NOT DISPLAYED"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_006", "fix"})
@@ -174,13 +193,15 @@ public class ChatTests extends NewTestTemplate {
     try {
       Assertion.assertFalse(
           chatUserOne.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()),
-          "USER IS DISPLAYED IN PRIVATE SECTION");
+          "USER IS DISPLAYED IN PRIVATE SECTION"
+      );
     } finally {
       chatUserOne.allowPrivateMessageFromUser(User.SUS_CHAT_USER2.getUserName());
     }
     Assertion.assertTrue(
         chatUserOne.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()),
-        USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
+        USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_007"})
@@ -194,8 +215,7 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     chatUserOne.clickOnDifferentUser(User.SUS_CHAT_USER2.getUserName());
     chatUserOne.selectPrivateMessageToUser(User.SUS_CHAT_USER2.getUserName());
-    Assertion
-        .assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()));
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()));
     chatUserOne.clickOnUserInPrivateMessageSection(User.SUS_CHAT_USER2.getUserName());
     chatUserOne.blockPrivateMessageFromUser(User.SUS_CHAT_USER2.getUserName());
 
@@ -203,13 +223,15 @@ public class ChatTests extends NewTestTemplate {
     chatUserFive.refreshPage();
     chatUserFive.clickOnDifferentUser(User.SUS_CHAT_USER.getUserName());
     Assertion.assertFalse(chatUserFive.isPrivateMessageButtonDisplayed(),
-        "PRIVATE MESSAGE BUTTON IS DISPLAYED");
+                          "PRIVATE MESSAGE BUTTON IS DISPLAYED"
+    );
 
     switchToWindow(0);
     chatUserOne.allowPrivateMessageFromUser(User.SUS_CHAT_USER2.getUserName());
     Assertion.assertTrue(
         chatUserOne.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()),
-        USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
+        USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_008"})
@@ -222,8 +244,10 @@ public class ChatTests extends NewTestTemplate {
     chatUserFive.clickOnDifferentUser(User.SUS_CHAT_USER.getUserName());
     chatUserFive.clickOpenUserMessageWall();
     chatUserFive.switchToSecondTab(currentBrowserTab());
-    Assertion.assertTrue(chatUserFive.isMessageWallOpened(User.SUS_CHAT_USER.getUserName()),
-        "MESSAGE WALL TAB IS NOT OPENED");
+    Assertion.assertTrue(
+        chatUserFive.isMessageWallOpened(User.SUS_CHAT_USER.getUserName()),
+        "MESSAGE WALL TAB IS NOT OPENED"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_009"})
@@ -236,8 +260,10 @@ public class ChatTests extends NewTestTemplate {
     chatUserFive.clickOnDifferentUser(User.SUS_CHAT_USER.getUserName());
     chatUserFive.clickOpenUserContributions();
     chatUserFive.switchToSecondTab(currentBrowserTab());
-    Assertion.assertTrue(chatUserFive.isContributionsPageOpened(User.SUS_CHAT_USER.getUserName()),
-        "CONTRIBUTION TAB IS NOT OPENED");
+    Assertion.assertTrue(
+        chatUserFive.isContributionsPageOpened(User.SUS_CHAT_USER.getUserName()),
+        "CONTRIBUTION TAB IS NOT OPENED"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_010"})
@@ -250,8 +276,10 @@ public class ChatTests extends NewTestTemplate {
     chatUserOne.clickOnDifferentUser(User.SUS_STAFF.getUserName());
     chatUserOne.selectPrivateMessageToUser(User.SUS_STAFF.getUserName());
     chatUserOne.openUserDropDownInPrivateMessageSection(User.SUS_STAFF.getUserName());
-    Assertion.assertFalse(chatUserOne.isBlockPrivateMessageButtonDisplayed(),
-        "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF");
+    Assertion.assertFalse(
+        chatUserOne.isBlockPrivateMessageButtonDisplayed(),
+        "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_011"})
@@ -274,15 +302,18 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatUserBanned = openChatForUser(User.SUS_CHAT_BANNED_PERMANENTLY);
 
     Assertion.assertTrue(chatUserBanned.isPermissionsErrorTitleDisplayed(),
-        "PERMISSION ERROR IS NOT DISPLAYED");
+                         "PERMISSION ERROR IS NOT DISPLAYED"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_013"})
   public void messageAppearsWhenMaxLengthExceeded() {
     ChatPage chatUserOne = openChatForUser(User.SUS_CHAT_USER);
     chatUserOne.writeLongMessage(1000);
-    Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(),
-        "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
+    Assertion.assertTrue(
+        chatUserOne.isMessageTooLongWarningDisplayed(),
+        "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_014"})
@@ -290,7 +321,8 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatPage = openChatForUser(User.SUS_CHAT_USER);
     chatPage.writeOnChat(":-)");
     Assertion.assertTrue(chatPage.isEmoticonVisible("Emoticon_happy.png"),
-        "Emoticon was not displayed");
+                         "Emoticon was not displayed"
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_015"})
@@ -311,7 +343,8 @@ public class ChatTests extends NewTestTemplate {
     chatPage.switchToSecondTab(currentBrowserTab());
     UserProfilePage wikiPage = new UserProfilePage();
     Assertion.assertStringContains(wikiPage.getUserNameTextBox().getText(),
-        User.SUS_CHAT_USER2.getUserName());
+                                   User.SUS_CHAT_USER2.getUserName()
+    );
   }
 
   @Test(groups = {"ChatTestsForUser_017"})

@@ -9,12 +9,12 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 @Test(groups = {"ArticleCRUDUser"})
-public class
-ArticleCRUDUserTests extends NewTestTemplate {
+public class ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_001"})
   @Execute(asUser = User.USER)
@@ -34,8 +34,7 @@ ArticleCRUDUserTests extends NewTestTemplate {
   public void ArticleCRUDUser_002_addByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode =
-        new VisualEditModePageObject().open(articleTitle);
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open(articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -56,15 +55,15 @@ ArticleCRUDUserTests extends NewTestTemplate {
     article.verifyArticleTitle(articleTitle);
   }
 
-
-  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
-      groups = {"ArticleCRUDUser_004"})
+  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles", groups = {
+      "ArticleCRUDUser_004"})
   @Execute(asUser = User.USER)
   public void ArticleCRUDUser_004_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode =
-        new VisualEditModePageObject().open(randomArticleTitle);
+    VisualEditModePageObject
+        visualEditMode
+        = new VisualEditModePageObject().open(randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);

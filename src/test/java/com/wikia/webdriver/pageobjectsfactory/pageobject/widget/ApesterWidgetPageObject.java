@@ -10,19 +10,14 @@ import java.util.List;
  */
 public class ApesterWidgetPageObject extends WidgetPageObject {
 
+  private static final String[] TAGS = {"<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />",
+                                        "<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />"};
   @FindBy(css = ".apester-media iframe")
   private List<WebElement> widgetIFrameList;
-
   @FindBy(css = ".apester-media")
   private List<WebElement> widgetWrapperList;
-
   @FindBy(css = "body")
   private List<WebElement> widgetBody;
-
-  private static final String[] TAGS = {
-      "<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />",
-      "<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />"
-  };
 
   @Override
   protected String getTagName() {

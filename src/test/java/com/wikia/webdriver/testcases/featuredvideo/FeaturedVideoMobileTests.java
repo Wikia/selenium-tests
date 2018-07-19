@@ -18,16 +18,19 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
 
   @Test
   public void videoIsPresentOnArticle() {
-    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoMobileComponentObject
+        video
+        = new FeaturedVideoMobileComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isFeaturedVideoDisplayed());
   }
+
   @Test
   public void videoTitleIsVisible() {
-    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoMobileComponentObject
+        video
+        = new FeaturedVideoMobileComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
     Assertion.assertEquals(video.getTitle(), "Papuga atakuje!");
@@ -35,8 +38,9 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
 
   @Test
   public void videoAttributionIsPresent() {
-    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
-        .openWikiArticle("FeaturedVideo");
+    FeaturedVideoMobileComponentObject
+        video
+        = new FeaturedVideoMobileComponentObject().openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isAttributionLinkVisible());
     Assertion.assertTrue(video.isAttributionAvatarVisible());
@@ -44,10 +48,10 @@ public class FeaturedVideoMobileTests extends NewTestTemplate {
 
   @Test
   public void videoAttributionIsNotPresent() {
-    FeaturedVideoMobileComponentObject video = new FeaturedVideoMobileComponentObject()
-        .openWikiArticle("FeaturedVideo3");
+    FeaturedVideoMobileComponentObject
+        video
+        = new FeaturedVideoMobileComponentObject().openWikiArticle("FeaturedVideo3");
 
     Assertion.assertTrue(video.isAttributionLinkNotVisible());
   }
-
 }

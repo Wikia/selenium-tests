@@ -30,16 +30,12 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Log {
 
-  public static String mobileWikiVersion = "";
   private static final String POLISH_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss ZZ";
   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static final String REPORT_PATH = "." + File.separator + "logs" + File.separator;
@@ -48,6 +44,7 @@ public class Log {
   private static final String LOG_FILE_NAME = "log.html";
   public static final String LOG_PATH = REPORT_PATH + LOG_FILE_NAME;
   private static final ArrayList<Boolean> LOGS_RESULTS = new ArrayList<>();
+  public static String mobileWikiVersion = "";
   private static long imageCounter;
 
   @Getter
@@ -65,18 +62,25 @@ public class Log {
       new Shooter().savePageScreenshot(Log.SCREEN_PATH + Log.imageCounter, driver);
       VelocityWrapper.fillErrorLogRow(Arrays.asList(LogLevel.ERROR), description, Log.imageCounter);
     } catch (Exception e) {
-      VelocityWrapper
-          .fillErrorLogRowWoScreenshotAndSource(Arrays.asList(LogLevel.ERROR), description);
+      VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(
+          Arrays.asList(LogLevel.ERROR),
+          description
+      );
       Log.log("onException",
-              "driver has no ability to catch screenshot or html source - driver may died", false
+              "driver has no ability to catch screenshot or html source - driver may died",
+              false
       );
     }
 
     new Shooter().savePageScreenshot(SCREEN_PATH + imageCounter, driver);
 
     LogData logType = success ? LogLevel.OK : LogLevel.ERROR;
-    VelocityWrapper
-        .fillLogRowWithScreenshot(Arrays.asList(logType), command, description, imageCounter);
+    VelocityWrapper.fillLogRowWithScreenshot(
+        Arrays.asList(logType),
+        command,
+        description,
+        imageCounter
+    );
     logJSError();
   }
 
@@ -84,12 +88,8 @@ public class Log {
     LOGS_RESULTS.add(success);
     imageCounter += 1;
     new Shooter().savePageScreenshot(SCREEN_PATH + imageCounter, driver);
-    String
-        html =
-        VelocityWrapper
-            .fillErrorLogRow(Arrays.asList(success ? LogLevel.OK : LogLevel.ERROR), command,
-                             imageCounter
-            );
+    String html = VelocityWrapper.fillErrorLogRow(Arrays.asList(
+        success ? LogLevel.OK : LogLevel.ERROR), command, imageCounter);
     CommonUtils.appendTextToFile(LOG_PATH, html);
     logJSError();
   }
@@ -104,8 +104,7 @@ public class Log {
   }
 
   public static void log(
-      String command, String descriptionOnSuccess, String descriptionOnFail,
-      boolean success
+      String command, String descriptionOnSuccess, String descriptionOnFail, boolean success
   ) {
     String description = descriptionOnFail;
     if (success) {
@@ -123,8 +122,7 @@ public class Log {
   }
 
   private static void log(
-      String command, String description, boolean isSuccess,
-      boolean ifLowLevel
+      String command, String description, boolean isSuccess, boolean ifLowLevel
   ) {
     LOGS_RESULTS.add(isSuccess);
     String escapedDescription = escapeHtml(description);
@@ -193,15 +191,18 @@ public class Log {
 
   public static void image(String command, String imageAsBase64, boolean success) {
     String imgHtml = VelocityWrapper.fillImage(imageAsBase64);
-    VelocityWrapper
-        .fillLogRow(Arrays.asList(success ? LogLevel.OK : LogLevel.ERROR), command, imgHtml);
+    VelocityWrapper.fillLogRow(
+        Arrays.asList(success ? LogLevel.OK : LogLevel.ERROR),
+        command,
+        imgHtml
+    );
   }
 
   public static void logJSError() {
     if ("true".equals(Configuration.getJSErrorsEnabled())) {
       JavascriptExecutor js = DriverProvider.getActiveDriver();
-      List<String> error =
-          (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
+      List<String> error = (ArrayList<String>) js.executeScript(
+          "return window.JSErrorCollector_errors.pump()");
       if (!error.isEmpty()) {
         VelocityWrapper.fillLogRow(Arrays.asList(LogLevel.ERROR), "click", error.toString());
       }
@@ -223,9 +224,8 @@ public class Log {
       String jiraUrl = jiraPath + issueID;
       String jiraLink = VelocityWrapper.fillLink(jiraUrl, issueID);
       command = "Known failure";
-      description =
-          testName + " - " + jiraLink + " " + testMethod.getAnnotation(RelatedIssue.class)
-              .comment();
+      description = testName + " - " + jiraLink + " " + testMethod.getAnnotation(RelatedIssue.class)
+          .comment();
     } else {
       command = "";
       description = testName;
@@ -267,8 +267,11 @@ public class Log {
     classList.add(LogLevel.ERROR);
     classList.add(LogType.STACKTRACE);
 
-    VelocityWrapper
-        .fillLogRow(classList, "STACKTRACE", escapeHtml(exceptionMessage).replace("\n", "<br>"));
+    VelocityWrapper.fillLogRow(
+        classList,
+        "STACKTRACE",
+        escapeHtml(exceptionMessage).replace("\n", "<br>")
+    );
   }
 
   public static void stop() {
@@ -282,7 +285,8 @@ public class Log {
           url = new URL(entry.getRequest().getUrl());
           if (url.getHost().contains("wikia")) {
             boolean isHttps = entry.getRequest().getUrl().startsWith("https");
-            Log.log("VISITED URL", "Url: " + entry.getRequest().getUrl(),
+            Log.log("VISITED URL",
+                    "Url: " + entry.getRequest().getUrl(),
                     !Configuration.getForceHttps() || isHttps
             );
           }
@@ -300,23 +304,16 @@ public class Log {
             String[] urlValue = entry.getRequest().getUrl().split("(adeng).+\\?");
             String[] values = urlValue[1].split("&");
 
-            Log.info(
-                "Ad parameters",
-                "Header: " + Arrays.toString(values)
-            );
+            Log.info("Ad parameters", "Header: " + Arrays.toString(values));
           }
         } catch (NullPointerException ex) {
-          Log
-              .info(
-                  "Did not get successful response",
-                  ex
-              );
+          Log.info("Did not get successful response", ex);
         }
       }
       Pattern pt = Pattern.compile("\\d{2,}");
 
       WebElement mercuryScriptVersion = null;
-      if(Configuration.getEmulator().isMobile()){
+      if (Configuration.getEmulator().isMobile()) {
         mercuryScriptVersion = driver.findElement(By.cssSelector("script[src*='mercury_ads_js']"));
       }
 
@@ -328,9 +325,7 @@ public class Log {
       } else {
         throw new WebDriverException("Missing mercury param in query string");
       }
-      Log
-          .info("Mercury Ads Version: " + mercuryAdsJsValue
-          );
+      Log.info("Mercury Ads Version: " + mercuryAdsJsValue);
     }
 
     if (Configuration.getMobileWikiVersion() != null) {
@@ -347,21 +342,24 @@ public class Log {
     imageCounter = 0;
 
     String date = DateTimeFormat.forPattern(Log.DATE_FORMAT).print(DateTime.now(DateTimeZone.UTC));
-    String
-        polishDate =
-        DateTimeFormat.forPattern(Log.POLISH_DATE_FORMAT).print(DateTime.now().withZone(
-            DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
+    String polishDate = DateTimeFormat.forPattern(Log.POLISH_DATE_FORMAT)
+        .print(DateTime.now()
+                   .withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))));
     String browser = Configuration.getBrowser();
     String os = System.getProperty("os.name");
     String testingEnvironmentUrl = UrlBuilder.createUrlBuilder().getUrl();
     String testingEnvironment = Configuration.getEnv();
     String testedVersion = "TO DO: GET WIKI VERSION HERE";
 
-    String
-        headerHtml =
-        VelocityWrapper.fillHeader(date, polishDate, browser, os, testingEnvironmentUrl,
-                                   testingEnvironment, testedVersion, mobileWikiVersion
-        );
+    String headerHtml = VelocityWrapper.fillHeader(date,
+                                                   polishDate,
+                                                   browser,
+                                                   os,
+                                                   testingEnvironmentUrl,
+                                                   testingEnvironment,
+                                                   testedVersion,
+                                                   mobileWikiVersion
+    );
     CommonUtils.appendTextToFile(Log.LOG_PATH, headerHtml);
     appendShowHideButtons();
     try {

@@ -5,10 +5,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Category
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
@@ -165,8 +162,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
     if (foundResults.isEmpty()) {
       throw new NoSuchElementException(
-          "No '" + matchCategoryStr + "' found with the search word: " + searchStr
-      );
+          "No '" + matchCategoryStr + "' found with the search word: " + searchStr);
     }
 
     Log.log(

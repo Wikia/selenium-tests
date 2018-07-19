@@ -11,11 +11,11 @@ public class AdsInterstitialObject extends AdsBaseObject {
   /**
    * Checks if the actual size (width or height) is within the "range of correctness" ;)
    *
-   * We don't want to be pixel perfect in terms of checking the size of element because
-   * it depends on many things such as in example components of a browser's window.
+   * We don't want to be pixel perfect in terms of checking the size of element because it depends
+   * on many things such as in example components of a browser's window.
    *
-   * We also don't want to just check if the content of scalable interstitial is bigger
-   * than the original image. So, we came up with a reasonable size difference margin.
+   * We also don't want to just check if the content of scalable interstitial is bigger than the
+   * original image. So, we came up with a reasonable size difference margin.
    *
    * The size defined here is doubled at the end.
    *
@@ -25,7 +25,9 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
   private static final int WAIT_BUTTON_DELAY_TOLERANCE = 2;
 
-  private static final String INTERSTITSIAL_AD_SELECTOR = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe";
+  private static final String
+      INTERSTITSIAL_AD_SELECTOR
+      = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe";
 
   @FindBy(css = "a.close")
   private WebElement interstitialCloseButton;
@@ -55,27 +57,22 @@ public class AdsInterstitialObject extends AdsBaseObject {
     Dimension actualSize = driver.findElement(By.cssSelector(INTERSTITSIAL_AD_SELECTOR)).getSize();
     Dimension expectedSize = expectedAdSize;
 
-
-    Assertion.assertTrue(
-        isSizeCorrect(actualSize.getWidth(), expectedSize.getWidth()),
-        String.format(
-            "The width of ad unit is not within tolerance range " +
-                "[actual: %d, expected: %d, tolerance: +-%d]",
-            actualSize.getWidth(),
-            expectedSize.getWidth(),
-            SIZE_DIFFERENCE_TOLERANCE
-        )
+    Assertion.assertTrue(isSizeCorrect(actualSize.getWidth(), expectedSize.getWidth()),
+                         String.format("The width of ad unit is not within tolerance range "
+                                       + "[actual: %d, expected: %d, tolerance: +-%d]",
+                                       actualSize.getWidth(),
+                                       expectedSize.getWidth(),
+                                       SIZE_DIFFERENCE_TOLERANCE
+                         )
     );
 
-    Assertion.assertTrue(
-        isSizeCorrect(actualSize.getHeight(), expectedSize.getHeight()),
-        String.format(
-            "The width of ad unit is not within tolerance range " +
-                "[actual: %d, expected: %d, tolerance: +-%d]",
-            actualSize.getHeight(),
-            expectedSize.getHeight(),
-            SIZE_DIFFERENCE_TOLERANCE
-        )
+    Assertion.assertTrue(isSizeCorrect(actualSize.getHeight(), expectedSize.getHeight()),
+                         String.format("The width of ad unit is not within tolerance range "
+                                       + "[actual: %d, expected: %d, tolerance: +-%d]",
+                                       actualSize.getHeight(),
+                                       expectedSize.getHeight(),
+                                       SIZE_DIFFERENCE_TOLERANCE
+                         )
     );
   }
 
@@ -89,13 +86,12 @@ public class AdsInterstitialObject extends AdsBaseObject {
       Log.log("Interstitial Mercury", "No", true);
     }
 
-
     if (isMercury) {
       String closeButtonText = interstitialCloseButtonMercury.getText();
       if (closeButtonText.length() > 0) {
         Integer waitTillCloseButtonAppears = Integer.parseInt(closeButtonText);
         Log.log("Wait time for close button", String.valueOf(waitTillCloseButtonAppears), true);
-        Thread.sleep((waitTillCloseButtonAppears+WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
+        Thread.sleep((waitTillCloseButtonAppears + WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
       }
     }
 
@@ -108,8 +104,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
   }
 
   private boolean isSizeCorrect(int actualSize, int expectedSize) {
-    return
-        actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE &&
-        actualSize <= expectedSize + SIZE_DIFFERENCE_TOLERANCE;
+    return actualSize >= expectedSize - SIZE_DIFFERENCE_TOLERANCE
+           && actualSize <= expectedSize + SIZE_DIFFERENCE_TOLERANCE;
   }
 }

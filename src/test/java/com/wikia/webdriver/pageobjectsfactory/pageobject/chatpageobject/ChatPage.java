@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,23 @@ import java.util.List;
 
 public class ChatPage extends WikiBasePageObject {
 
+  private static final String USER_UNBAN_LINK = "//a[@data-type='ban-undo' and @data-user='%s']";
+  private static final String
+      USER_UNBAN_CONFIRM_MESSAGE
+      = "//div[@class='Chat']//li[contains(text(), 'has ended the Chat ban for %s')]";
+  private static final String USER_SELECTOR = "#user-%s";
+  private static final String PRIVATE_MESSAGE_USER_SELECTOR = "#priv-user-%s";
+  private static final String PATH_MESSAGE_ON_CHAT =
+      "//span[@class='message' and contains(text(), '%1$s')] | "
+      + "//span[@class='message']//*[contains(text(), '%1$s')]";
+  private static final String
+      NOTIFICATION_COUNTER
+      = "//span[@class='splotch' and contains(text(), '%s')]";
+  private static final String
+      PATH_EMOTICON_ON_CHAT
+      = "//span[@class='message']/img[contains(@src,'%s')]";
+  private static final int REGULAR_USER_DROPDOWN_ELEMENTS_COUNT = 3;
+  private final By newMessageTextBoxBy = By.cssSelector(".message");
   @FindBy(css = "textarea[name='message']")
   private WebElement messageWritingArea;
   @FindBy(css = "div.Rail")
@@ -78,20 +96,6 @@ public class ChatPage extends WikiBasePageObject {
   @FindBy(css = "div.limit-reached-msg")
   private WebElement messageLengthExceeded;
 
-  private static final String USER_UNBAN_LINK = "//a[@data-type='ban-undo' and @data-user='%s']";
-  private static final String USER_UNBAN_CONFIRM_MESSAGE =
-          "//div[@class='Chat']//li[contains(text(), 'has ended the Chat ban for %s')]";
-  private static final String USER_SELECTOR = "#user-%s";
-  private static final String PRIVATE_MESSAGE_USER_SELECTOR = "#priv-user-%s";
-  private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message' and contains(text(), '%1$s')] | " +
-          "//span[@class='message']//*[contains(text(), '%1$s')]";
-  private static final String NOTIFICATION_COUNTER =
-          "//span[@class='splotch' and contains(text(), '%s')]";
-  private static final String PATH_EMOTICON_ON_CHAT = "//span[@class='message']/img[contains(@src,'%s')]";
-  private final By newMessageTextBoxBy = By.cssSelector(".message");
-
-  private static final int REGULAR_USER_DROPDOWN_ELEMENTS_COUNT = 3;
-
   public ChatPage open() {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_CHAT));
 
@@ -115,10 +119,10 @@ public class ChatPage extends WikiBasePageObject {
   }
 
   private WebElement getUserUnbanLink(String userName) {
-   return driver.findElement(By.xpath(String.format(USER_UNBAN_LINK, userName)));
+    return driver.findElement(By.xpath(String.format(USER_UNBAN_LINK, userName)));
   }
 
-  public String getUsername(){
+  public String getUsername() {
     return userNameTextBox.getText();
   }
 
@@ -133,7 +137,7 @@ public class ChatPage extends WikiBasePageObject {
     }
   }
 
-  public boolean isMessageTooLongWarningDisplayed () {
+  public boolean isMessageTooLongWarningDisplayed() {
     try {
       return messageLengthExceeded.isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
@@ -154,7 +158,7 @@ public class ChatPage extends WikiBasePageObject {
 
   public boolean isPermissionsErrorTitleDisplayed() {
     try {
-      wait.forTextInElementAfterRefresh(By.cssSelector("#PageHeader"),"Permissions error.");
+      wait.forTextInElementAfterRefresh(By.cssSelector("#PageHeader"), "Permissions error.");
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       Log.log("Permission error title not displayed", ex, true);
@@ -265,7 +269,7 @@ public class ChatPage extends WikiBasePageObject {
   }
 
   public boolean areStaffOptionsDisplayed() {
-    try{
+    try {
       wait.forElementVisible(userModOptions);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
@@ -283,8 +287,11 @@ public class ChatPage extends WikiBasePageObject {
     //We need two clicks to see user options in privet section
     userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
     userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
-    Log.log("clickOnUserInPrivateMessageSection", "private messages user " + userName
-            + " is clicked", true);
+    Log.log(
+        "clickOnUserInPrivateMessageSection",
+        "private messages user " + userName + " is clicked",
+        true
+    );
   }
 
   private void clickBanUser(String userName) {
@@ -355,8 +362,7 @@ public class ChatPage extends WikiBasePageObject {
       }
       i++;
     }
-    Log.log("openUserDropDownInPrivateMessageSection", userName + " button clicked",
-            true);
+    Log.log("openUserDropDownInPrivateMessageSection", userName + " button clicked", true);
   }
 
   public void blockPrivateMessageFromUser(String userName) {
@@ -384,8 +390,11 @@ public class ChatPage extends WikiBasePageObject {
       }
       i++;
     }
-    Log.log("allowPrivateMessageFromUser", "private messages from " + userName
-            + " are allowed now", true);
+    Log.log(
+        "allowPrivateMessageFromUser",
+        "private messages from " + userName + " are allowed now",
+        true
+    );
   }
 
   private boolean checkIfPrivateMessagesNotAllowed(String userName) {
@@ -417,7 +426,7 @@ public class ChatPage extends WikiBasePageObject {
     new Actions(driver).sendKeys(messageWritingArea, Keys.ENTER).perform();
   }
 
-  public void writeLongMessage (int length){
+  public void writeLongMessage(int length) {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i <= length; i++) {
       sb.append('A');
@@ -436,8 +445,7 @@ public class ChatPage extends WikiBasePageObject {
     privateMassageButton.click();
     wait.forElementVisible(privateMessagesHeader);
     clickOnUserInPrivateMessageSection(userName);
-    Log.log("selectPrivateMessageToUser", "private message selected from dropdown",
-            true);
+    Log.log("selectPrivateMessageToUser", "private message selected from dropdown", true);
   }
 
   public Boolean isEmoticonVisible(String emoticon) {

@@ -1,14 +1,8 @@
 package com.wikia.webdriver.testcases.blogtests;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
@@ -22,6 +16,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Test(groups = "BlogTests")
 public class BlogTests extends NewTestTemplate {
@@ -45,7 +44,7 @@ public class BlogTests extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles")
   @Execute(asUser = User.BLOGS)
-  public void UserCanCreateBlogsWithSpecialCharacters (String blogTitle) {
+  public void UserCanCreateBlogsWithSpecialCharacters(String blogTitle) {
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     String randomBlogTitle = blogTitle + DateTime.now().getMillis();
     SpecialCreatePage createBlogPage = new SpecialCreatePage().open();
@@ -61,7 +60,11 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     new ArticleContent(User.BLOGS).push(blogContent,
-        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
+                                        String.format(USER_BLOG_PATH_FORMAT,
+                                                      User.BLOGS.getUserName(),
+                                                      blogTitle
+                                        )
+    );
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
@@ -76,38 +79,54 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     new ArticleContent(User.BLOGS).push(blogContent,
-        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
+                                        String.format(USER_BLOG_PATH_FORMAT,
+                                                      User.BLOGS.getUserName(),
+                                                      blogTitle
+                                        )
+    );
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(), 1,
-        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
-    SpecialRestorePageObject restore =
-        blogPage.getNotifications(NotificationType.CONFIRM).stream().findFirst().get().undelete();
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
+    SpecialRestorePageObject restore = blogPage.getNotifications(NotificationType.CONFIRM)
+        .stream()
+        .findFirst()
+        .get()
+        .undelete();
 
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
 
     confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(), 1,
-        SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-        SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                         SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE
+    );
 
     blogPage.getBlogTitle();
   }
 
   @Execute(asUser = User.STAFF_FORUM)
   public void StaffCanMoveUserBlogPosts() {
-    String blogTitleMove =
-        "Renamed - " + PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogTitleMove = "Renamed - " + PageContent.BLOG_POST_NAME_PREFIX + DateTime.now()
+        .getMillis();
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     new ArticleContent(User.BLOGS).push(blogContent,
-        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
+                                        String.format(USER_BLOG_PATH_FORMAT,
+                                                      User.BLOGS.getUserName(),
+                                                      blogTitle
+                                        )
+    );
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     RenamePageObject renamePage = blogPage.renameUsingDropdown();
@@ -115,9 +134,12 @@ public class BlogTests extends NewTestTemplate {
     blogPage.getBlogTitle();
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(), 1,
-        RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-        RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                         RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE
+    );
   }
 }

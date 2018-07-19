@@ -3,8 +3,10 @@ package com.wikia.webdriver.elements.oasis.pages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class WikiFeatures extends BasePageObject {
@@ -55,5 +57,4 @@ public class WikiFeatures extends BasePageObject {
 
     return this;
   }
-
 }

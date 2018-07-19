@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.helpers;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

@@ -1,12 +1,7 @@
 package com.wikia.webdriver.common.testnglisteners;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.*;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -21,10 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.joda.time.DateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.testng.SkipException;
+import org.testng.*;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -78,8 +70,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         try {
           new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
         } catch (WebDriverException e) {
-          Log
-              .info("Hack for disabling notifications", "Failed to execute js action");
+          Log.info("Hack for disabling notifications", "Failed to execute js action");
         }
         /**
          * All of tests should be executed as an user who opted in (agreed) on using ads tracking.
@@ -110,14 +101,20 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
           }
 
           if (userOptedIn) {
-            driver.manage().addCookie(
-                new Cookie("tracking-opt-in-status", "accepted", cookieDomain, "/",
-                           cookieDate
+            driver.manage()
+                .addCookie(new Cookie("tracking-opt-in-status",
+                                      "accepted",
+                                      cookieDomain,
+                                      "/",
+                                      cookieDate
                 ));
           } else if (userOptedOut) {
-            driver.manage().addCookie(
-                new Cookie("tracking-opt-in-status", "rejected", cookieDomain, "/",
-                           cookieDate
+            driver.manage()
+                .addCookie(new Cookie("tracking-opt-in-status",
+                                      "rejected",
+                                      cookieDomain,
+                                      "/",
+                                      cookieDate
                 ));
           }
         }
@@ -126,21 +123,23 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
          * We want to disable sales pitch dialog for new potential contributors to avoid hiding other
          * UI elements. see https://wikia-inc.atlassian.net/browse/CE-3768
          */
-        if (TestContext.isFirstLoad() && "true"
-            .equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
-          driver.manage().addCookie(
-              new Cookie("cpBenefitsModalShown", "1", cookieDomain, "/", cookieDate));
+        if (TestContext.isFirstLoad()
+            && "true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
+          driver.manage()
+              .addCookie(new Cookie("cpBenefitsModalShown", "1", cookieDomain, "/", cookieDate));
         }
 
         if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
-          driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-                                               cookieDomain, "/", cookieDate
-          ));
-          Log.info(String.format(
-              "Adding moc-ads cookie with value: %s, and domain: %s",
-              XMLReader.getValue("mock.ads_token"),
-              String.format(".%s", Configuration.getEnvType()
-                  .getWikiaDomain())
+          driver.manage()
+              .addCookie(new Cookie("mock-ads",
+                                    XMLReader.getValue("mock.ads_token"),
+                                    cookieDomain,
+                                    "/",
+                                    cookieDate
+              ));
+          Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s",
+                                 XMLReader.getValue("mock.ads_token"),
+                                 String.format(".%s", Configuration.getEnvType().getWikiaDomain())
           ));
         }
       }
@@ -162,9 +161,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
           new WikiBasePageObject().loginAs(user);
         }
 
-        NetworkTrafficInterceptor
-            networkTrafficInterceptor =
-            DriverProvider.getActiveDriver().getProxy();
+        NetworkTrafficInterceptor networkTrafficInterceptor = DriverProvider.getActiveDriver()
+            .getProxy();
         if (networkTrafficInterceptor != null) {
           networkTrafficInterceptor.startIntercepting();
         }
@@ -226,7 +224,9 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     if (!Log.isTestStarted()) {
       Log.startTest(result.getMethod().getConstructorOrMethod().getMethod());
     }
-    if (result.getMethod().getConstructorOrMethod().getMethod()
+    if (result.getMethod()
+        .getConstructorOrMethod()
+        .getMethod()
         .isAnnotationPresent(DontRun.class)) {
       Log.ok("Test SKIPPED", "this test is not supported in this environment");
       result.setStatus(ITestResult.SUCCESS);

@@ -3,11 +3,16 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class HiViUap {
+
+  private final Wait wait;
+  private final WikiaWebDriver driver;
+  private final IframeRunner iframeRunner;
   private By adIframe;
   private By fullScreenButton;
   private By learnMore;
@@ -20,10 +25,6 @@ public class HiViUap {
   private By videoClickArea;
   private By videoPlayer;
   private By videoThumbnail;
-
-  private final Wait wait;
-  private final WikiaWebDriver driver;
-  private final IframeRunner iframeRunner;
 
   public HiViUap(WikiaWebDriver driver, String slot) {
     this.wait = new Wait(driver);
@@ -113,7 +114,10 @@ public class HiViUap {
   }
 
   public void clickAd() {
-    iframeRunner.usingIframe(adIframe, () -> wait.forElementClickable(By.id("adContainer")).click());
+    iframeRunner.usingIframe(
+        adIframe,
+        () -> wait.forElementClickable(By.id("adContainer")).click()
+    );
   }
 
   public WebElement waitForAdLoaded() {

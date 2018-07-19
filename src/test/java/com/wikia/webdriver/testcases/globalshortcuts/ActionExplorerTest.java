@@ -16,8 +16,7 @@ public class ActionExplorerTest extends NewTestTemplate {
 
   @Test(enabled = false, groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
-    new HomePage()
-        .openAndWaitForGlobalShortcuts()
+    new HomePage().openAndWaitForGlobalShortcuts()
         .getActionExplorer()
         .useShortcut(".")
         .useShortcut("ESC");
@@ -25,8 +24,7 @@ public class ActionExplorerTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch")
   public void globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch() {
-    new HomePage()
-        .openAndWaitForGlobalShortcuts()
+    new HomePage().openAndWaitForGlobalShortcuts()
         .getActionExplorer()
         .useShortcut(".")
         .searchFor("Keyboard")
@@ -35,8 +33,7 @@ public class ActionExplorerTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions")
   public void globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions() {
-    new HomePage()
-        .openAndWaitForGlobalShortcuts()
+    new HomePage().openAndWaitForGlobalShortcuts()
         .getActionExplorer()
         .useShortcut(".")
         .scrollToAllPagesLink()

@@ -61,7 +61,8 @@ public class TemplateClassification extends WikiBasePageObject {
 
   public TemplateClassification changeTemplateType(TemplateTypes templateType) {
     String templateName = templateType.getType();
-    WebElement typeInput = driver.findElement(By.cssSelector("#template-classification-" + templateName.toLowerCase()));
+    WebElement typeInput = driver.findElement(By.cssSelector(
+        "#template-classification-" + templateName.toLowerCase()));
 
     wait.forElementClickable(typeInput);
     typeInput.click();

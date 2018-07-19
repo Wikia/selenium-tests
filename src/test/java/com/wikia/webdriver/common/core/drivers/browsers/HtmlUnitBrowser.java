@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.drivers.browsers;
 
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
+
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class HtmlUnitBrowser extends BrowserAbstract {
 

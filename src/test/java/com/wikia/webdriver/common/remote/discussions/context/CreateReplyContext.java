@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote.discussions.context;
 
 import com.wikia.webdriver.common.remote.context.RemoteContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -25,9 +26,9 @@ public class CreateReplyContext extends RemoteContext {
     Objects.requireNonNull(threadId);
 
     return CreateReplyContext.builder()
-      .siteId(siteId)
-      .threadId(threadId)
-      .body(TextGenerator.defaultText())
-      .build();
+        .siteId(siteId)
+        .threadId(threadId)
+        .body(TextGenerator.defaultText())
+        .build();
   }
 }

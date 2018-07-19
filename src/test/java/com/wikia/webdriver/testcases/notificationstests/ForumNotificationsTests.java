@@ -1,20 +1,20 @@
 package com.wikia.webdriver.testcases.notificationstests;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
-import com.wikia.webdriver.common.logging.Log;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
+
+import org.testng.annotations.Test;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 public class ForumNotificationsTests extends NewTestTemplate {
 
@@ -40,24 +40,27 @@ public class ForumNotificationsTests extends NewTestTemplate {
     forumThread.verifyDiscussionTitleAndMessage(title, message);
   }
 
-  @Test(groups = {"ForumNotificationsTests_002", "ForumNotificationsTests", "NotificationsTests"},
-      dependsOnMethods = {"forumNotificationsTests_001_userAStartsDiscussion"})
+  @Test(groups = {"ForumNotificationsTests_002", "ForumNotificationsTests",
+                  "NotificationsTests"}, dependsOnMethods = {
+      "forumNotificationsTests_001_userAStartsDiscussion"})
   @Execute(asUser = User.USER_2)
   public void forumNotificationsTests_002_userBLeavesReply() {
     userLeavesAReplayOnFormBoard();
   }
 
-  @Test(groups = {"ForumNotificationsTests_003", "ForumNotificationsTests", "NotificationsTests"},
-      dependsOnMethods = {"forumNotificationsTests_002_userBLeavesReply"})
+  @Test(groups = {"ForumNotificationsTests_003", "ForumNotificationsTests",
+                  "NotificationsTests"}, dependsOnMethods = {
+      "forumNotificationsTests_002_userBLeavesReply"})
   @Execute(asUser = User.STAFF)
   public void forumNotificationsTests_003_userCLeavesReply() {
     userLeavesAReplayOnFormBoard();
   }
 
-  @Test(groups = {"ForumNotificationsTests_004", "ForumNotificationsTests", "NotificationsTests"},
-      dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply",
-          "forumNotificationsTests_002_userBLeavesReply",
-          "forumNotificationsTests_001_userAStartsDiscussion"})
+  @Test(groups = {"ForumNotificationsTests_004", "ForumNotificationsTests",
+                  "NotificationsTests"}, dependsOnMethods = {
+      "forumNotificationsTests_003_userCLeavesReply",
+      "forumNotificationsTests_002_userBLeavesReply",
+      "forumNotificationsTests_001_userAStartsDiscussion"})
   @Execute(asUser = User.USER)
   public void userIsNotifiedWhenRegularAndStaffUsersReplyToHerDiscussion() {
     ForumPage forumMainPage = new ForumPage();
@@ -67,9 +70,10 @@ public class ForumNotificationsTests extends NewTestTemplate {
     notifications.showNotifications();
     String anchoredLink = null;
     try {
-      anchoredLink = notifications.getNotificationLink(User.STAFF.getUserName() + " and "
-          + User.USER_2.getUserName() + " replied to your thread on the "
-          + URLDecoder.decode(forumBoardTitle, "UTF-8").replace("_", " "));
+      anchoredLink = notifications.getNotificationLink(
+          User.STAFF.getUserName() + " and " + User.USER_2.getUserName()
+          + " replied to your thread on the " + URLDecoder.decode(forumBoardTitle, "UTF-8")
+              .replace("_", " "));
     } catch (UnsupportedEncodingException e) {
       Log.logError("Could not decode forum board name", e);
     }

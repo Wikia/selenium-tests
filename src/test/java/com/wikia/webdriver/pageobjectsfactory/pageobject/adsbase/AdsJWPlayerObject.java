@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.ElementColor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,21 +14,18 @@ import java.awt.*;
 import java.time.Duration;
 
 public class AdsJWPlayerObject extends BasePageObject {
-  protected final Wait wait;
-
-  private static final Color COLOR_PREROLL = new Color(0, 1, 253);
-  private static final Color COLOR_MIDROLL = new Color(137, 137, 137);
-  private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
-  private static final Color COLOR_VIDEO = new Color(0, 255, 13);
 
   public static final String VIDEO_AD_SELECTOR = ".jwplayer .jw-plugin-googima";
   public static final String VIDEO_MOVIE_SELECTOR = ".jwplayer .jw-media video[src]";
   public static final String VIDEO_PLAYER_SELECTOR = ".jwplayer";
-
   public static final By AD_SELECTOR = By.cssSelector(VIDEO_AD_SELECTOR);
   public static final By MOVIE_SELECTOR = By.cssSelector(VIDEO_MOVIE_SELECTOR);
   public static final By PLAYER_SELECTOR = By.cssSelector(VIDEO_PLAYER_SELECTOR);
-
+  private static final Color COLOR_PREROLL = new Color(0, 1, 253);
+  private static final Color COLOR_MIDROLL = new Color(137, 137, 137);
+  private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
+  private static final Color COLOR_VIDEO = new Color(0, 255, 13);
+  protected final Wait wait;
   @FindBy(css = ".jwplayer")
   private WebElement playButton;
 
@@ -110,7 +108,11 @@ public class AdsJWPlayerObject extends BasePageObject {
   }
 
   public void clickVolumeButton() {
-    builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(1000).moveToElement(volumeButton, 30, 30).click().perform();
+    builder.moveToElement(driver.findElement(PLAYER_SELECTOR))
+        .pause(1000)
+        .moveToElement(volumeButton, 30, 30)
+        .click()
+        .perform();
   }
 
   public void allowToPlayVideoForSomeTime(Duration duration) {

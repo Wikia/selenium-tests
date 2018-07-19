@@ -22,20 +22,18 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   private List<WebElement> suggestedTemplates;
   @FindBy(css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions)")
   private WebElement resultWidget;
-  @FindBy(
-      css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions) " +
-            ".ve-ui-wikiaTemplateOptionWidget")
+  @FindBy(css = ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions) "
+                + ".ve-ui-wikiaTemplateOptionWidget")
   private List<WebElement> resultTemplates;
   @FindBy(css = ".oo-ui-searchWidget-query .oo-ui-pendingElement-pending")
   private WebElement queryPending;
 
   private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
-  private By
-      suggestedTemplatesBy =
-      By.cssSelector(".ve-ui-wikiaTemplateSearchWidget-suggestions div");
-  private By resulteTemplateBy =
-      By.cssSelector(".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions)"
-                   + " .ve-ui-wikiaTemplateOptionWidget");
+  private By suggestedTemplatesBy = By.cssSelector(
+      ".ve-ui-wikiaTemplateSearchWidget-suggestions div");
+  private By resulteTemplateBy = By.cssSelector(
+      ".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions)"
+      + " .ve-ui-wikiaTemplateOptionWidget");
 
   public VisualEditorInsertTemplateDialog(WebDriver driver) {
     super(driver);
@@ -46,10 +44,9 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(searchInput);
     searchInput.sendKeys(searchString);
     waitForValueToBePresentInElementsAttributeByElement(searchInput, "value", searchString);
-    Log.log(
-        "typeInSearchInput",
-        "Typed '" + searchString + "' into the template search textfield",
-        true
+    Log.log("typeInSearchInput",
+            "Typed '" + searchString + "' into the template search textfield",
+            true
     );
   }
 
@@ -63,11 +60,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(suggestedWidget);
     WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
     selected.click();
-    Log.log(
-        "selectSuggestedTemplate",
-        "Suggested template selected: " + selected.getText(),
-        true
-    );
+    Log.log("selectSuggestedTemplate", "Suggested template selected: " + selected.getText(), true);
     return new VisualEditorEditTemplateDialog(driver);
   }
 
@@ -77,11 +70,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     wait.forElementVisible(resultWidget);
     WebElement selected = resultTemplates.get(index).findElement(labelBy);
     selected.click();
-    Log.log(
-        "selectResultTemplate",
-        "Search result template selected: " + selected.getText(),
-        true
-    );
+    Log.log("selectResultTemplate", "Search result template selected: " + selected.getText(), true);
     return new VisualEditorEditTemplateDialog(driver);
   }
 
@@ -103,8 +92,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   }
 
   public void verifyIsSuggestedTemplate() {
-    Assertion
-        .assertTrue(isElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
+    Assertion.assertTrue(isElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
     Log.log("verifyIsSuggestedTemplate", "Suggested templates found", true);
   }
 }

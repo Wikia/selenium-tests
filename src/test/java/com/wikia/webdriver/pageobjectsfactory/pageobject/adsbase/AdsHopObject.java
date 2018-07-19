@@ -16,8 +16,9 @@ import java.util.Set;
 
 public class AdsHopObject extends AdsBaseObject {
 
-  private static final String POST_MESSAGE_SCRIPT_XPATH =
-      "//script[contains(text(), 'parent.postMessage')]";
+  private static final String
+      POST_MESSAGE_SCRIPT_XPATH
+      = "//script[contains(text(), 'parent.postMessage')]";
   private static final int AD_SUCCESS_TIMEOUT_SEC = 15;
 
   public AdsHopObject(WebDriver driver, String page) {
@@ -39,7 +40,10 @@ public class AdsHopObject extends AdsBaseObject {
   }
 
   public void verifyPostMessage(String slotName, String providerName, String extraParam) {
-    Assertion.assertEquals(getPostMessageFromAdContent(slotName, providerName), getPostMessagePattern(extraParam));
+    Assertion.assertEquals(
+        getPostMessageFromAdContent(slotName, providerName),
+        getPostMessagePattern(extraParam)
+    );
   }
 
   private String getPostMessageFromAdContent(String slotName, String providerName) {
@@ -56,16 +60,15 @@ public class AdsHopObject extends AdsBaseObject {
   }
 
   private WebElement getIframe(String slotName, String providerName) {
-    String iframeSelector = AdsContent.getSlotSelector(slotName) + " > div[id*='" + providerName + "'] iframe";
+    String iframeSelector = AdsContent.getSlotSelector(slotName) + " > div[id*='" + providerName
+                            + "'] iframe";
     return driver.findElement(By.cssSelector(iframeSelector));
   }
 
   public void verifyLineItemIdsDiffer(String slotName) {
     String lineItemIdAttribute = "data-gpt-line-item-id";
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    java.util.List<WebElement>
-        divs =
-        driver.findElements(By.cssSelector(slotSelector + " > div"));
+    java.util.List<WebElement> divs = driver.findElements(By.cssSelector(slotSelector + " > div"));
     ArrayList<String> lineItems = new ArrayList<>();
     for (WebElement div : divs) {
       String lineItem = div.findElement(By.tagName("div")).getAttribute(lineItemIdAttribute);
@@ -73,13 +76,12 @@ public class AdsHopObject extends AdsBaseObject {
     }
     Set<String> lineItemsSet = new HashSet<>(lineItems);
     if (lineItemsSet.size() < lineItems.size()) {
-      Log.log("Line item ids",
-                            slotName + " slot has the divs with the same line item ids",
-                            false);
+      Log.log("Line item ids", slotName + " slot has the divs with the same line item ids", false);
     } else {
       Log.log("Line item ids",
-                            slotName + " slot has the divs with the different line item ids",
-                            true);
+              slotName + " slot has the divs with the different line item ids",
+              true
+      );
     }
   }
 
@@ -89,24 +91,25 @@ public class AdsHopObject extends AdsBaseObject {
   }
 
   private WebElement getTestedElement(final String elementSelector) {
-    return new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(
-        new ExpectedCondition<WebElement>() {
-          @Override
-          public WebElement apply(WebDriver driver) {
-            java.util.List<WebElement> elements = driver
-                .findElements(By.cssSelector(elementSelector));
-            return elements.isEmpty() ? null : elements.get(0);
-          }
+    return new WebDriverWait(
+        driver,
+        AD_SUCCESS_TIMEOUT_SEC
+    ).until(new ExpectedCondition<WebElement>() {
+      @Override
+      public WebElement apply(WebDriver driver) {
+        java.util.List<WebElement> elements = driver.findElements(By.cssSelector(elementSelector));
+        return elements.isEmpty() ? null : elements.get(0);
+      }
 
-          @Override
-          public String toString() {
-            return "could not find element:" + elementSelector;
-          }
-        });
+      @Override
+      public String toString() {
+        return "could not find element:" + elementSelector;
+      }
+    });
   }
 
   private String getPostMessagePattern(String extra) {
-    return "\nparent.postMessage('{\"AdEngine\":{\"status\":\"hop\",\"extra\":{" +
-           extra + "}}}', '*');\n";
+    return "\nparent.postMessage('{\"AdEngine\":{\"status\":\"hop\",\"extra\":{" + extra
+           + "}}}', '*');\n";
   }
 }

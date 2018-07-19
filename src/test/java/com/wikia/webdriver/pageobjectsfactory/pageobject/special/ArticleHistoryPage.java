@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -11,17 +10,14 @@ import java.util.List;
 
 public class ArticleHistoryPage extends WikiBasePageObject {
 
+  private static String ARTICLE_HISTORY_FORMAT = "%s?action=history";
+  private static String SPECIFIC_ARTICLE_FORMAT = "AnonymizationTest?oldid=%s";
   @FindBy(css = ".mw-userlink")
   private List<WebElement> activityList;
   @FindBy(css = ".mw-userlink")
   private WebElement anonName;
   @FindBy(css = "#pagehistory li")
   private List<WebElement> history;
-
-
-  private static String ARTICLE_HISTORY_FORMAT = "%s?action=history";
-
-  private static String SPECIFIC_ARTICLE_FORMAT = "AnonymizationTest?oldid=%s";
 
   public ArticleHistoryPage open(String articleName) {
     getUrl(urlBuilder.getUrlForWikiPage(String.format(ARTICLE_HISTORY_FORMAT, articleName)));

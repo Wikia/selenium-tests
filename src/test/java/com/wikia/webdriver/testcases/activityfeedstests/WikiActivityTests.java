@@ -15,9 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
 
 @Test(groups = "activityFeeds-wikiActivity")
 @Execute(onWikia = "wikiActivities", asUser = User.WIKIACTIVITY_USER)
@@ -27,28 +27,42 @@ public class WikiActivityTests extends NewTestTemplate {
 
   public void articleEditionIsRecordedInWikiActivity() {
 
-    String articleName = editArticleWithContentAndGetTitle(createArticle(), PageContent.ARTICLE_TEXT_EDIT);
+    String articleName = editArticleWithContentAndGetTitle(
+        createArticle(),
+        PageContent.ARTICLE_TEXT_EDIT
+    );
 
-    Assertion.assertTrue(new SpecialWikiActivityPageObject()
-                    .open()
-                    .isArticleEditionActivityDisplayed(articleName, testUser.getUserName()),
-            String.format("Activity for edited article with title %s was not found", articleName));
+    Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
+                             .isArticleEditionActivityDisplayed(
+                                 articleName,
+                                 testUser.getUserName()
+                             ),
+                         String.format(
+                             "Activity for edited article with title %s was not found",
+                             articleName
+                         )
+    );
   }
 
   public void newPageCreationIsRecordedInWikiActivity() {
     String articleName = new ArticleContent(testUser).createUniqueArticle();
 
-    Assertion.assertTrue(new SpecialWikiActivityPageObject()
-      .open()
-      .isNewArticleActivityDisplayed(articleName, testUser.getUserName()),
-      String.format("Activity for new article with title %s was not found", articleName));
+    Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
+                             .isNewArticleActivityDisplayed(articleName, testUser.getUserName()),
+                         String.format(
+                             "Activity for new article with title %s was not found",
+                             articleName
+                         )
+    );
   }
 
   public void newBlogCreationIsRecordedInWikiActivity() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-    UserProfilePage userProfile =
-        new WikiBasePageObject().openProfilePage(testUser.getUserName(), wikiURL);
+    UserProfilePage userProfile = new WikiBasePageObject().openProfilePage(
+        testUser.getUserName(),
+        wikiURL
+    );
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
@@ -57,34 +71,57 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertEquals(blogPage.getBlogTitle(), blogTitle);
 
-    Assertion.assertTrue(new SpecialWikiActivityPageObject()
-      .open()
-      .isNewBlogPostActivityDisplayed(blogTitle, testUser.getUserName(), blogContent),
-      String.format("Activity for new blog post with title %s by user %s was not found", blogTitle, testUser.getUserName()));
+    Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
+                             .isNewBlogPostActivityDisplayed(blogTitle,
+                                                             testUser.getUserName(),
+                                                             blogContent
+                             ),
+                         String.format(
+                             "Activity for new blog post with title %s by user %s was not found",
+                             blogTitle,
+                             testUser.getUserName()
+                         )
+    );
   }
 
   public void newCategorizationIsRecordedInWikiActivity() {
     ArticlePageObject article = createArticle();
     String articleName = article.getArticleName();
-    String categoryName = String.format("%s %s", PageContent.CATEGORY_NAME_PREFIX, DateTime.now().getMillis());
+    String categoryName = String.format(
+        "%s %s",
+        PageContent.CATEGORY_NAME_PREFIX,
+        DateTime.now().getMillis()
+    );
     article.addCategory(categoryName);
     article.submitCategory();
     Assertion.assertTrue(article.isCategoryPresent(categoryName));
 
-    Assertion.assertTrue(new SpecialWikiActivityPageObject()
-      .open()
-      .isCategorizationActivityDisplayed(articleName, testUser.getUserName()),
-      String.format("Activity for new category for article with title %s was not found", articleName));
+    Assertion.assertTrue(new SpecialWikiActivityPageObject().open()
+                             .isCategorizationActivityDisplayed(
+                                 articleName,
+                                 testUser.getUserName()
+                             ),
+                         String.format(
+                             "Activity for new category for article with title %s was not found",
+                             articleName
+                         )
+    );
   }
 
   public void articleEditWithoutVisualChangeIsNotRecordedInWikiActivity() {
     ArticlePageObject article = createArticle();
     String articleName = editArticleWithContentAndGetTitle(article, article.getContent());
 
-    Assertion.assertFalse(new SpecialWikiActivityPageObject()
-      .open()
-      .isArticleEditionActivityDisplayed(articleName, testUser.getUserName()),
-      String.format("Activity edit with no visual change for article with title %s was found", articleName));
+    Assertion.assertFalse(new SpecialWikiActivityPageObject().open()
+                              .isArticleEditionActivityDisplayed(
+                                  articleName,
+                                  testUser.getUserName()
+                              ),
+                          String.format(
+                              "Activity edit with no visual change for article with title %s was found",
+                              articleName
+                          )
+    );
   }
 
   public void clickingTitleRedirectsToArticle() {
@@ -94,9 +131,15 @@ public class WikiActivityTests extends NewTestTemplate {
     articleActivity.getTitleLink().click();
     ArticlePageObject article = new ArticlePageObject();
 
-    Assertion.assertEquals(article.getArticleTitle(), title,
-      String.format("Link in activities list for article with title %s "
-        + "redirected to article with title %s", title, article.getArticleTitle()));
+    Assertion.assertEquals(article.getArticleTitle(),
+                           title,
+                           String.format(
+                               "Link in activities list for article with title %s "
+                               + "redirected to article with title %s",
+                               title,
+                               article.getArticleTitle()
+                           )
+    );
   }
 
   public void clickingUsernameRedirectsToUserPage() {
@@ -105,16 +148,21 @@ public class WikiActivityTests extends NewTestTemplate {
     String expectedUserName = articleActivity.getUserLink().getText();
     UserProfilePage userPage = articleActivity.clickOnUserLink();
 
-    Assertion.assertEquals(userPage.getUserName(), expectedUserName,
-      String.format("Link in activities list for username %s "
-        + "redirected to user profile for %s", expectedUserName, userPage.getUserName()));
+    Assertion.assertEquals(userPage.getUserName(),
+                           expectedUserName,
+                           String.format(
+                               "Link in activities list for username %s "
+                               + "redirected to user profile for %s",
+                               expectedUserName,
+                               userPage.getUserName()
+                           )
+    );
   }
 
   public void clickingIconNextToArticleRedirectsToDiff() {
     DiffPagePageObject diffPage = createArticleEditAndGetRecentActivity().clickOnDiffLink();
 
-    Assertion.assertTrue(diffPage.isDiffTableVisible(),
-      "Diff table was not found on page");
+    Assertion.assertTrue(diffPage.isDiffTableVisible(), "Diff table was not found on page");
   }
 
   private Activity createArticleEditAndGetRecentActivity() {
@@ -122,9 +170,7 @@ public class WikiActivityTests extends NewTestTemplate {
     content.push("content");
     content.push("content_after_edition");
 
-    return new SpecialWikiActivityPageObject()
-      .open()
-      .getMostRecentEditActivity();
+    return new SpecialWikiActivityPageObject().open().getMostRecentEditActivity();
   }
 
   private ArticlePageObject createArticle() {
@@ -140,5 +186,4 @@ public class WikiActivityTests extends NewTestTemplate {
     visualEditMode.submitArticle();
     return articleName;
   }
-
 }

@@ -6,9 +6,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Iterator;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -22,6 +20,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Iterator;
 
 public class EditToken {
 
@@ -45,8 +47,8 @@ public class EditToken {
       String source = EntityUtils.toString(entity);
       Log.info("EDIT TOKEN RESPONSE RAW: ", source);
       try {
-        JSONObject pagesValue =
-            new JSONObject(source).getJSONObject("query").getJSONObject("pages");
+        JSONObject pagesValue = new JSONObject(source).getJSONObject("query")
+            .getJSONObject("pages");
         Iterator pageIterator = pagesValue.keys();
         if (pageIterator.hasNext()) {
           String key = (String) pageIterator.next();
@@ -64,13 +66,18 @@ public class EditToken {
 
   public String getEditToken() {
     try {
-      String apiURL =
-          new URIBuilder(baseURL).setParameter("action", "query").setParameter("prop", "info")
-              .setParameter("format", "json").setParameter("intoken", "edit")
-              .setParameter("titles", "Main Page").build().toASCIIString();
+      String apiURL = new URIBuilder(baseURL).setParameter("action", "query")
+          .setParameter("prop", "info")
+          .setParameter("format", "json")
+          .setParameter("intoken", "edit")
+          .setParameter("titles", "Main Page")
+          .build()
+          .toASCIIString();
 
-      CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries()
-          .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+      CloseableHttpClient httpClient = HttpClientBuilder.create()
+          .disableAutomaticRetries()
+          .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+          .build();
       HttpGet httpGet = new HttpGet(apiURL);
       // set header
       if (username != null) {

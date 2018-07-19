@@ -1,9 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
+
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -49,5 +51,4 @@ public class AuthPageContext extends WikiBasePageObject {
   public boolean confirmationDisplayed(String text) {
     return wait.forElementVisible(secondCardHeader).getText().contains(text);
   }
-
 }

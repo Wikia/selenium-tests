@@ -8,29 +8,32 @@ public class PageContent {
   public static final String LOREM_IPSUM_SHORT = "Lorem ipsum dolor";
   public static final String LOREM_IPSUM_LONG =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit "
-          + "Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur "
-          + "adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet,"
-          + " consectetur adipiscing elit Lorem ipsum dolor sit adipiscing";
+      + "Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur "
+      + "adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet,"
+      + " consectetur adipiscing elit Lorem ipsum dolor sit adipiscing";
 
   // articles
   public static final String ARTICLE_NAME_PREFIX = "QAarticle";
-  public static final String ARTICLE_TEXT =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-  public static final String ARTICLE_TEXT_DROZDY =
-      "Drozdy latają kluczem.";
+  public static final String
+      ARTICLE_TEXT
+      = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  public static final String ARTICLE_TEXT_DROZDY = "Drozdy latają kluczem.";
   public static final String ARTICLE_TEXT_EDIT = "Brand new content";
   public static final String ARTICLE_TEXT_SECOND_EDIT =
       "Ut enim ad minim veniam, quis nostrud exercitation "
-          + "ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+      + "ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   public static final String COMMENT_TEXT = "Lorem ipsum dolor sit amet, comment";
   public static final String REPLY_TEXT = "Brand new reply";
 
   // articles with TOC
-  public static final String ARTICLE_WITH_TOC_LINES =
-      "==First Heading==\n" + "text of the sub-heading number 2\n" + "==Second heading==\n"
-          + "text of the second heading\n" + "===sub-heading number 1===\n"
-          + "text of the sub-heading number 1\n" + "===sub-heading number 2===\n"
-          + "text of the sub-heading number 2\n";
+  public static final String ARTICLE_WITH_TOC_LINES = "==First Heading==\n"
+                                                      + "text of the sub-heading number 2\n"
+                                                      + "==Second heading==\n"
+                                                      + "text of the second heading\n"
+                                                      + "===sub-heading number 1===\n"
+                                                      + "text of the sub-heading number 1\n"
+                                                      + "===sub-heading number 2===\n"
+                                                      + "text of the sub-heading number 2\n";
 
   // templates
   public static final String TEMPLATE_NAMESPACE = "Template";
@@ -55,12 +58,15 @@ public class PageContent {
   // image storage
   public static final String FILERENAME = "Image003.jpg";
 
-  public static final String[] LIST_OF_FILES =
-      {"Image001.jpg", "Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
-          "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
-  public static final String IMAGE_UPLOAD_RESOURCES_PATH =
-      "." + File.separator + "src" + File.separator + "test" + File.separator + "resources"
-          + File.separator + "ImagesForUploadTests" + File.separator;
+  public static final String[] LIST_OF_FILES = {"Image001.jpg", "Image002.jpg", "Image003.jpg",
+                                                "Image004.jpg", "Image005.jpg", "Image006.jpg",
+                                                "Image007.jpg", "Image008.jpg", "Image009.jpg",
+                                                "Image010.jpg"};
+  public static final String IMAGE_UPLOAD_RESOURCES_PATH = "." + File.separator + "src"
+                                                           + File.separator + "test"
+                                                           + File.separator + "resources"
+                                                           + File.separator + "ImagesForUploadTests"
+                                                           + File.separator;
 
   // message wall
   public static final String MESSAGE_WALL_TITLE_PREFIX = "QAMessageWallTitle";
@@ -83,23 +89,27 @@ public class PageContent {
   public static final String FORUM_TITLE_SLASH_PREFIX = "QABoard/Title";
   public static final String FORUM_TITLE_UNDER_SCORE_PREFIX = "QABoard_Title";
   public static final String FORUM_TITLE_NON_LATIN_PREFIX = "QABoard查爾斯";
-  public static final String FORUM_DESCRIPTION_PREFIX =
-      "Duis quam ante, fringilla at cursus tristique ";
-  public static final String FORUM_DESCRIPTION_EDIT_PREFIX =
-      "Duis quam ante, fringilla at cursus tristique edit ";
+  public static final String
+      FORUM_DESCRIPTION_PREFIX
+      = "Duis quam ante, fringilla at cursus tristique ";
+  public static final String
+      FORUM_DESCRIPTION_EDIT_PREFIX
+      = "Duis quam ante, fringilla at cursus tristique edit ";
   public static final String FORUM_MESSAGE = "QAforumMessage%s";
   public static final String CLOSE_REASON = "QA reason";
 
   // Messages
-  public static final String PHALANX_BLOCK_TITLE_MESSAGE =
-      "Sorry, the page title was rejected by our spam filter. Please use a different title.";
+  public static final String
+      PHALANX_BLOCK_TITLE_MESSAGE
+      = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
 
   // wikiText
   public static final String WIKI_TEXT_PHOTO = "[[File:%photoName%|thumb|%s]]";
 
   // Hero Module edit field default message
-  public static final String WIKIA_HERO_PROMOTE_MESSAGE =
-      "Add a summary that will promote your wikia in searches and on hubs.";
+  public static final String
+      WIKIA_HERO_PROMOTE_MESSAGE
+      = "Add a summary that will promote your wikia in searches and on hubs.";
 
   // Portable Infoboxes content
   public static final String INFOBOX_1 = "Infobox1";

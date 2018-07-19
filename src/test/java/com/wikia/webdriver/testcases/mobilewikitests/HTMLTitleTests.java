@@ -29,72 +29,25 @@ import java.util.List;
 public class HTMLTitleTests extends NewTestTemplate {
 
   /**
-   * [0] wikiName
-   * [1] path
-   * [2] expected title
+   * [0] wikiName [1] path [2] expected title
    */
   private String[][] testCases = {
-      {
-          "sktest123",
-          "Sktest123_Wiki",
-          "Sktest123 Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "sktest123",
-          "Style-5H2",
-          "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "sktest123",
-          "TestDisplayTitle",
-          "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "sktest123",
-          "Category:Premium_Videos",
-          "Category:Premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "sktest123",
-          "Category:Non-premium_Videos",
-          "Category:Non-premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "sktest123",
-          "Category:Premium",
-          "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"
-      },
-      {
-          "es.pokemon",
-          "WikiDex",
-          "WikiDex | FANDOM powered by Wikia"
-      },
-      {
-          "es.pokemon",
-          "Lista_de_Pokémon",
-          "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"
-      },
-      {
-          "es.pokemon",
-          "Categoría:Regiones",
-          "Categoría:Regiones | WikiDex | FANDOM powered by Wikia"
-      },
-      {
-          "starwars",
-          "Main_Page",
-          "Wookieepedia | FANDOM powered by Wikia"
-      },
-      {
-          "starwars",
-          "Droid_starfighter",
-          "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"
-      },
-      {
-          "dnd4",
-          "Dungeons_&_Dragons",
-          "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"
-      }
-  };
+      {"sktest123", "Sktest123_Wiki", "Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "Style-5H2", "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "TestDisplayTitle", "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "Category:Premium_Videos",
+       "Category:Premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "Category:Non-premium_Videos",
+       "Category:Non-premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "Category:Premium", "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"es.pokemon", "WikiDex", "WikiDex | FANDOM powered by Wikia"},
+      {"es.pokemon", "Lista_de_Pokémon", "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"},
+      {"es.pokemon", "Categoría:Regiones",
+       "Categoría:Regiones | WikiDex | FANDOM powered by Wikia"},
+      {"starwars", "Main_Page", "Wookieepedia | FANDOM powered by Wikia"},
+      {"starwars", "Droid_starfighter",
+       "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"},
+      {"dnd4", "Dungeons_&_Dragons", "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"}};
 
   private Head head;
   private Navigate navigate;
@@ -108,9 +61,10 @@ public class HTMLTitleTests extends NewTestTemplate {
   @Test(groups = {"mercury_htmlTitleSet", "Mercury_htmlTitleSet"})
   public void mercury_htmlTitleSet() {
     for (String[] testCase : testCases) {
-      String testUrl = urlBuilder.appendQueryStringToURL
-          (new Page(testCase[0], testCase[1]).getUrl(),
-           "cb=" + DateTime.now().getMillis());
+      String testUrl = urlBuilder.appendQueryStringToURL(new Page(
+          testCase[0],
+          testCase[1]
+      ).getUrl(), "cb=" + DateTime.now().getMillis());
 
       navigate.toUrl(testUrl);
       String actualTitle = head.getDocumentTitle();
@@ -146,15 +100,16 @@ public class HTMLTitleTests extends NewTestTemplate {
 
       out.close();
       out2.close();
-    } catch (FileNotFoundException e) {}
+    } catch (FileNotFoundException e) {
+    }
   }
 
   private void pushMetaTagsToFile(PrintWriter file) {
     file.println("==============================================================================");
     file.println(driver.getCurrentUrl());
     file.println("==============================================================================");
-    List<WebElement> metaTags =  driver.findElements(
-        By.cssSelector("head meta, head title, head link"));
+    List<WebElement> metaTags = driver.findElements(By.cssSelector(
+        "head meta, head title, head link"));
     ArrayList<String> headData = new ArrayList<>();
 
     for (WebElement metaTag : metaTags) {

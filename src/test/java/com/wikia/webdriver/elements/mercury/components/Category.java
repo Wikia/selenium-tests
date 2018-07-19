@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,6 @@ public class Category extends WikiBasePageObject {
 
   @FindBy(css = ".article-footer .collapsible-menu ul")
   private WebElement categoryList;
-
 
   public Category() {
     PageFactory.initElements(driver, this);
@@ -32,9 +32,10 @@ public class Category extends WikiBasePageObject {
   }
 
   public CategoryPage openCategoryPage(String name) {
-    WebElement link = categoryList.findElement(
-        By.cssSelector(String.format("a[title=\"%s\"]", name))
-    );
+    WebElement link = categoryList.findElement(By.cssSelector(String.format(
+        "a[title=\"%s\"]",
+        name
+    )));
 
     Log.info(String.format("Open category page named: \"%s\".", name));
     wait.forElementClickable(link);
@@ -42,7 +43,8 @@ public class Category extends WikiBasePageObject {
     waitForPageReload();
 
     Assertion.assertTrue(getCurrentUrl().contains("/wiki/Category:"),
-                         "Url is different than /wiki/Category:");
+                         "Url is different than /wiki/Category:"
+    );
     Log.info("You were redirected to /wiki/Category:");
 
     return new CategoryPage();

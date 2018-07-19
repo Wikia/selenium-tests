@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,5 +37,4 @@ public class FacebookMainPageObject extends BasePageObject {
   private void typeEmail(String email) {
     fillInput(emailField, email);
   }
-
 }

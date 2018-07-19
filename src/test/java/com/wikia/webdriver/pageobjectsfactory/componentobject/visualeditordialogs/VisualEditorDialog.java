@@ -10,10 +10,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class VisualEditorDialog extends WikiBasePageObject {
 
-  @FindBy(css = ".oo-ui-window-ready .oo-ui-window-frame")
-  private WebElement frame;
   @FindBy(css = ".oo-ui-window-ready")
   protected WebElement dialog;
+  @FindBy(css = ".oo-ui-window-ready .oo-ui-window-frame")
+  private WebElement frame;
   @FindBy(css = ".oo-ui-window-ready .oo-ui-icon-close")
   private WebElement closeButton;
 

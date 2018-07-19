@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core.helpers;
 
-import lombok.Getter;
-
 import com.wikia.webdriver.common.core.XMLReader;
+
+import lombok.Getter;
 
 public enum FandomUser {
   EDITOR("fandom.users.admin.username", "fandom.users.admin.password");

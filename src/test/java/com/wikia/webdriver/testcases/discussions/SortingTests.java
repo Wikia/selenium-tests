@@ -47,10 +47,7 @@ public class SortingTests extends NewTestTemplate {
   @Execute(asUser = User.USER_4)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotChangeSortingOnFollowingTab() {
-    Assertion.assertFalse(new FollowPage()
-      .open()
-      .getSortingFilterDesktop()
-      .isEnabled());
+    Assertion.assertFalse(new FollowPage().open().getSortingFilterDesktop().isEnabled());
   }
 
   @Test(enabled = false)
@@ -58,11 +55,10 @@ public class SortingTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotChangeSortingOnFollowingTab() {
-    Assertion.assertFalse(new FollowPage()
-      .open()
-      .getDiscussionsHeader()
-      .openFilterMenu()
-      .isSortingFilterEnabled());
+    Assertion.assertFalse(new FollowPage().open()
+                              .getDiscussionsHeader()
+                              .openFilterMenu()
+                              .isSortingFilterEnabled());
   }
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown(PageWithPosts page) {
@@ -76,21 +72,16 @@ public class SortingTests extends NewTestTemplate {
   }
 
   private void performSortingCheckOnMobile(PageWithPosts page, SortOption sortOption) {
-    page
-      .getDiscussionsHeader()
-      .openFilterMenu()
-      .chooseSortingOption(sortOption)
-      .clickApplyButton()
-      .waitForLoadingSpinner();
+    page.getDiscussionsHeader()
+        .openFilterMenu()
+        .chooseSortingOption(sortOption)
+        .clickApplyButton()
+        .waitForLoadingSpinner();
     Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));
   }
 
   private void performSortingCheckOnDesktop(PageWithPosts page, SortOption sortOption) {
-    page
-      .getSortingFilterDesktop()
-      .chooseSortingOption(sortOption)
-      .waitForLoadingSpinner();
+    page.getSortingFilterDesktop().chooseSortingOption(sortOption).waitForLoadingSpinner();
     Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));
   }
-
 }

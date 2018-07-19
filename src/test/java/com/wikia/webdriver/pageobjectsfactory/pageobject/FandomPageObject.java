@@ -10,6 +10,6 @@ public class FandomPageObject extends WikiBasePageObject {
 
   public boolean isFeaturedVideo() {
     wait.forElementVisible(featuredVideo);
-    return featuredVideo.isDisplayed(); }
-
+    return featuredVideo.isDisplayed();
+  }
 }

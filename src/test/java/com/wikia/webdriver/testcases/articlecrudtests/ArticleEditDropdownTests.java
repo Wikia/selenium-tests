@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
+import org.testng.annotations.Test;
 
 @Test(groups = {"ArticleEditDropdown"})
 public class ArticleEditDropdownTests extends NewTestTemplate {

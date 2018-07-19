@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,7 +30,8 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   private String text = WikiTextContent.TEXT;
   private List<String> wikiTexts, firstSourceEditText, secondSourceEditText;
 
-  private String startingWikiText = ContentLoader.loadWikiTextContent("Visual_Editor_Existing_Article");
+  private String startingWikiText = ContentLoader.loadWikiTextContent(
+      "Visual_Editor_Existing_Article");
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
@@ -57,8 +59,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     secondSourceEditText.add(text + "\n" + text);
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_002"})
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_002"})
   public void VisualEditorEditing_002_delete() {
     new ArticleContent().push(startingWikiText);
 
@@ -79,8 +80,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_003"})
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_003"})
   public void VisualEditorEditing_003_insertToExistingArticle() {
     new ArticleContent().push(startingWikiText);
 
@@ -102,8 +102,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyContent(text);
   }
 
-  @Test(
-      groups = {"VisualEditorLinks", "VisualEditorEditing_004"})
+  @Test(groups = {"VisualEditorLinks", "VisualEditorEditing_004"})
   public void VisualEditorEditing_004_insertLinks() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArrayList<String> linkWikiTexts = new ArrayList<>();
@@ -141,12 +140,11 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
     article.verifyElementInContent(By.cssSelector("a[href*='" + PageContent.INTERNAL_LINK + "']"));
     article.verifyElementInContent(By.cssSelector("a.new[href*='" + PageContent.REDLINK + "']"));
-    article.verifyElementInContent(
-        By.cssSelector("a.external[href*='" + PageContent.EXTERNAL_LINK + "']"));
+    article.verifyElementInContent(By.cssSelector(
+        "a.external[href*='" + PageContent.EXTERNAL_LINK + "']"));
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_005"})
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_005"})
   public void VisualEditorEditing_005_switchToSourceMode() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
@@ -170,11 +168,11 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     article.verifyContent(text);
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_006"})
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_006"})
   public void VisualEditorEditing_006_editSummary() {
-    String summaryText =
-        "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
+    String
+        summaryText
+        = "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
@@ -189,9 +187,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     historyPage.verifyLatestEditSummary(summaryText);
   }
 
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_007"}
-  )
+  @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_007"})
   public void VisualEditorEditing_007_minorEdit() {
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

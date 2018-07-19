@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.driverprovider;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.logging.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DriverProvider {
 
@@ -20,7 +20,7 @@ public class DriverProvider {
   }
 
   private static WikiaWebDriver getBrowserDriver(int index) {
-    for (; drivers.size() <= index;) {
+    for (; drivers.size() <= index; ) {
       newInstance();
     }
 
@@ -43,7 +43,7 @@ public class DriverProvider {
           String path = System.getenv("PATH");
           System.out.println(path);
           webDriver.quit();
-        }catch (UnsatisfiedLinkError | NoClassDefFoundError | NullPointerException e){
+        } catch (UnsatisfiedLinkError | NoClassDefFoundError | NullPointerException e) {
 
           Log.log("Closing Browser", e, true);
         }

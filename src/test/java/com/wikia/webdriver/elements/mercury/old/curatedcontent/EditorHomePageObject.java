@@ -4,6 +4,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionFormPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionItemListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class EditorHomePageObject extends BasePageObject {
 
+  @Getter(lazy = true)
+  private final SectionItemListPageObject sectionItemList = new SectionItemListPageObject();
   @FindBy(css = ".sub-head--done")
   private WebElement publishButton;
   @FindBy(css = "section:nth-of-type(2) .curated-content-editor-add-item-btn")
@@ -22,9 +25,6 @@ public class EditorHomePageObject extends BasePageObject {
   private WebElement addNewSectionButton;
   @FindBy(css = "section:nth-of-type(4) .curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
-
-  @Getter(lazy = true)
-  private final SectionItemListPageObject sectionItemList = new SectionItemListPageObject();
 
   public EditorHomePageObject open() {
     getUrl(urlBuilder.getUrl() + "/main/edit");

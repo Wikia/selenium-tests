@@ -25,8 +25,9 @@ public class VelocityWrapper {
   private static final String FIRST_LOG_ROW_TEMPLATE_PATH = "firstLogRow.vm";
   private static final String BUTTON_TEMPLATE_PATH = "button.vm";
   private static final String HEADER_TEMPLATE_PATH = "header.vm";
-  private static final String ERROR_LOG_ROW_WO_SCREENSHOT_AND_SOURCE_TEMPLATE_PATH =
-      "errorLogRowWoScreenshotAndSource.vm";
+  private static final String
+      ERROR_LOG_ROW_WO_SCREENSHOT_AND_SOURCE_TEMPLATE_PATH
+      = "errorLogRowWoScreenshotAndSource.vm";
   private static VelocityEngine velocityEngine = getVelocityEngine();
 
   private VelocityWrapper() {
@@ -39,9 +40,10 @@ public class VelocityWrapper {
     Template t = velocityEngine.getTemplate(LOG_ROW_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
 
-    context.put("className",
-                "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" "))
-                + "\"");
+    context.put(
+        "className",
+        "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\""
+    );
     context.put("command", command);
     context.put("description", description);
     StringWriter writer = new StringWriter();
@@ -93,9 +95,10 @@ public class VelocityWrapper {
 
     Template t = velocityEngine.getTemplate(ERROR_LOG_ROW_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("className",
-                "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" "))
-                + "\"");
+    context.put(
+        "className",
+        "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\""
+    );
     context.put("command", command);
     context.put("imageCounter", String.valueOf(imageCounter));
     StringWriter writer = new StringWriter();
@@ -109,9 +112,10 @@ public class VelocityWrapper {
 
     Template t = velocityEngine.getTemplate(ERROR_LOG_ROW_WO_SCREENSHOT_AND_SOURCE_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("className",
-                "\"" + classList.stream().map(e -> e.cssClass()).collect(Collectors.joining(" "))
-                + "\"");
+    context.put(
+        "className",
+        "\"" + classList.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\""
+    );
     context.put("command", command);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
@@ -119,15 +123,17 @@ public class VelocityWrapper {
     return builder.toString();
   }
 
-  static void fillLogRowWithScreenshot(List<LogData> logData, String command, String description,
-                                       long imageCounter) {
+  static void fillLogRowWithScreenshot(
+      List<LogData> logData, String command, String description, long imageCounter
+  ) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(LOG_ROW_WITH_SCREENSHOT_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("className",
-                "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" "))
-                + "\"");
+    context.put(
+        "className",
+        "\"" + logData.stream().map(e -> e.cssClass()).collect(Collectors.joining(" ")) + "\""
+    );
     context.put("command", command);
     context.put("description", description);
     context.put("imageCounter", String.valueOf(imageCounter));
@@ -152,8 +158,9 @@ public class VelocityWrapper {
     return builder.toString();
   }
 
-  static String fillFirstLogRow(String className, String testName, String command,
-                                String description) {
+  static String fillFirstLogRow(
+      String className, String testName, String command, String description
+  ) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(FIRST_LOG_ROW_TEMPLATE_PATH);
@@ -183,9 +190,16 @@ public class VelocityWrapper {
     return builder.toString();
   }
 
-  static String fillHeader(String date, String polishDate, String browser, String os,
-                           String testingEnvironmentUrl, String testingEnvironment,
-                           String testedVersion, String mercuryVersion) {
+  static String fillHeader(
+      String date,
+      String polishDate,
+      String browser,
+      String os,
+      String testingEnvironmentUrl,
+      String testingEnvironment,
+      String testedVersion,
+      String mercuryVersion
+  ) {
     StringBuilder builder = new StringBuilder();
 
     Template t = velocityEngine.getTemplate(HEADER_TEMPLATE_PATH);

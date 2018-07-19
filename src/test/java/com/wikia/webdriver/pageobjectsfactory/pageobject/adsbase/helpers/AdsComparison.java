@@ -5,10 +5,7 @@ import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.Log;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -45,8 +42,9 @@ public class AdsComparison {
     javascriptActions.changeElementOpacity(selector, value);
   }
 
-  public boolean isAdVisible(final WebElement element, final String selector,
-                             final WebDriver driver) {
+  public boolean isAdVisible(
+      final WebElement element, final String selector, final WebDriver driver
+  ) {
     hideSlot(selector, driver);
     final BufferedImage backgroundImg = shooter.takeScreenshot(element, driver);
     Log.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
@@ -112,8 +110,8 @@ public class AdsComparison {
       );
     } else {
       throw new NoSuchElementException(
-          "At least " + (100 - IMAGES_THRESHOLD_PERCENT) + " percents of Ad does not have " + color
-      );
+          "At least " + (100 - IMAGES_THRESHOLD_PERCENT) + " percents of Ad does not have "
+          + color);
     }
   }
 }
