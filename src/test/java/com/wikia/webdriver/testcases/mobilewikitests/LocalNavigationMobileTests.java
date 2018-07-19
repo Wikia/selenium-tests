@@ -96,7 +96,7 @@ public class LocalNavigationMobileTests extends NewTestTemplate {
   }
 
   @Test
-  public void backButtonNavigatesBack() {
+  public void navigationThroughMenuLevelsWorksCorrectly() {
     LocalNavigationMobile localNavMobile =
         new ArticlePage()
             .open(MobileSubpages.MAIN_PAGE)
