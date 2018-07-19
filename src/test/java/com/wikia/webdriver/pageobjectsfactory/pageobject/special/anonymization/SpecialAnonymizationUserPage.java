@@ -22,7 +22,6 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
     return this;
   }
 
-
   public SpecialAnonymizationUserPage fillFutureAnon(String anonymizedUser) {
     wait.forElementClickable(submitButton);
     AnonymizationTextBox.sendKeys(anonymizedUser);
@@ -34,7 +33,6 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
     submitButton.click();
     return this;
   }
-
 
   public String getAnonConfirmation() {
     wait.forElementVisible(requestConfirmation);

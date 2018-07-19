@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+
 import org.testng.annotations.Test;
 
 public class TestCorrelatorDFP extends TemplateNoFirstLoad {
@@ -25,10 +26,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
     networkTrafficInterceptor.logDFP(correlatorDesktop);
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "DFPCorrelatorMercury")
   @NetworkTrafficDump
   public void correlatorIDInQueryStringShouldBeTheSameMercury() {

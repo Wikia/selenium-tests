@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
@@ -16,12 +17,11 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
+
   private static final By RECIRCULATION_SELECTOR = By.id("recirculation-rail");
   private static final By FMR_SELECTOR = By.id(AdsContent.FLOATING_MEDREC);
 
-  @Test(
-          groups = {"AdsRefreshFMR"}
-  )
+  @Test(groups = {"AdsRefreshFMR"})
   @UnsafePageLoad
   public void regularFloatingMedrecIsReloadingWithRecirculationModule() {
     Page page = new Page("project43", "SyntheticTests/LongPage");
@@ -37,9 +37,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
   }
 
-  @Test(
-          groups = {"AdsRefreshFMRWithUAP"}
-  )
+  @Test(groups = {"AdsRefreshFMRWithUAP"})
   public void uapFloatingMedrecIsReloadingOnceWithRecirculationModule() {
     AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.UAP_PAGE.getUrl());
 
@@ -56,7 +54,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   }
 
   private void imitateUserActionUntilModuleVisible(AdsBaseObject ads, By moduleSelector) {
-    for (int i = 0; i < 15 ; i++) {
+    for (int i = 0; i < 15; i++) {
       scrollAndWait(Duration.ofSeconds(1));
 
       if (isModuleVisible(ads, moduleSelector)) {
@@ -72,10 +70,12 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
     try {
       ads.wait.forElementVisible(moduleSelector, 1);
       return true;
-    } catch (TimeoutException ignored) {}
+    } catch (TimeoutException ignored) {
+    }
 
     return false;
   }
+
   private void scrollAndWait(Duration duration) {
     JavascriptActions jsActions = new JavascriptActions(driver);
 
@@ -92,6 +92,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
     try {
       Log.log("Sleep", String.format("Wait for %d ms", reloadDelay.toMillis()), true);
       Thread.sleep(reloadDelay.toMillis());
-    } catch (InterruptedException ignored) {}
+    } catch (InterruptedException ignored) {
+    }
   }
 }

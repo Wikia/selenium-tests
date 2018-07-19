@@ -7,21 +7,21 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 /**
  * https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
  */
-@InBrowser(
-  browser = Browser.CHROME,
-  emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 @Test(groups = "AdTypeMercury")
 public class TestAdTypeMobile extends MobileTestTemplate {
-  private static final String DFP_IMAGE_URL =
-      "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
-  
+
+  private static final String
+      DFP_IMAGE_URL
+      = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
+
   @Test
   public void adsAdTypeAsyncSuccessWithAd() {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332

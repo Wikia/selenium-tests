@@ -5,17 +5,13 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
-  public MobileAdsBaseObject(){
+  public MobileAdsBaseObject() {
     super();
 
     if (driver.isChromeMobile()) {
@@ -57,10 +53,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     wait.forElementVisible(slotById);
 
     if (checkIfSlotExpanded(slot)) {
-      Log.log("AdInSlot",
-              "Slot (" + slotName + ") expanded as expecting",
-              true
-      );
+      Log.log("AdInSlot", "Slot (" + slotName + ") expanded as expecting", true);
     } else {
       throw new NoSuchElementException("Slot (" + slotName + ") is collapsed - should be expanded");
     }
@@ -88,22 +81,16 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     if (isElementOnPage(By.cssSelector(articleLinkSelector))) {
       WebElement link = driver.findElement(By.cssSelector(articleLinkSelector));
 
-      Log.log(
-          "mercuryNavigateToAnArticle()",
-          String.format(
-              "Clicking: %s (%s)",
-              link.getText(),
-              link.getAttribute("href")
-          ),
-          true,
-          driver
+      Log.log("mercuryNavigateToAnArticle()",
+              String.format("Clicking: %s (%s)", link.getText(), link.getAttribute("href")),
+              true,
+              driver
       );
 
       link.click();
     } else {
-      Log.warning(
-          "mercuryNavigateToAnArticle()",
-          "Could not find the link to: /wiki/" + articleLinkName
+      Log.warning("mercuryNavigateToAnArticle()",
+                  "Could not find the link to: /wiki/" + articleLinkName
       );
     }
   }
@@ -113,8 +100,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     JavascriptActions jsActions = new JavascriptActions();
     WebElement slot = driver.findElement(By.id(slotName));
     js.executeScript(
-        "var element = document.getElementById(arguments[0]);" +
-        "element.scrollIntoView();",
+        "var element = document.getElementById(arguments[0]);" + "element.scrollIntoView();",
         slotName
     );
 

@@ -63,5 +63,4 @@ public class SalesPitchDialog extends WikiBasePageObject {
 
     return new SpecialCommunity();
   }
-
 }

@@ -14,25 +14,27 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_ApesterWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class ApesterTests extends NewTestTemplate {
 
   private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "ApesterMercury/OneWidget";
-  private static final String APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "ApesterMercury/MultipleWidgets";
-  private static final String APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "ApesterMercury/IncorrectWidget";
+  private static final String
+      APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME
+      = "ApesterMercury/MultipleWidgets";
+  private static final String
+      APESTER_INCORRECT_WIDGET_ARTICLE_NAME
+      = "ApesterMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = APESTER_ONE_WIDGET_ARTICLE_NAME;
+
   @Test(groups = "MercuryApesterWidgetTest_001")
   public void MercuryApesterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new ApesterWidgetPageObject().create(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new ApesterWidgetPageObject().create(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
@@ -41,8 +43,8 @@ public class ApesterTests extends NewTestTemplate {
 
   @Test(groups = "MercuryApesterWidgetTest_002")
   public void MercuryApesterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new ApesterWidgetPageObject().createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    WidgetPageObject widget = new ApesterWidgetPageObject().createMultiple(
+        APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
@@ -53,8 +55,7 @@ public class ApesterTests extends NewTestTemplate {
   @Test(groups = "MercuryApesterWidgetTest_003")
   public void MercuryApesterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     new ArticleContent().push("Apester Test 003", "Map");
-    WidgetPageObject widget =
-            new ApesterWidgetPageObject().create(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new ApesterWidgetPageObject().create(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_1);
@@ -65,8 +66,8 @@ public class ApesterTests extends NewTestTemplate {
 
   @Test(groups = "MercuryApesterWidgetTest_004")
   public void MercuryApesterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new ApesterWidgetPageObject().createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    WidgetPageObject widget = new ApesterWidgetPageObject().createMultiple(
+        APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
@@ -75,8 +76,8 @@ public class ApesterTests extends NewTestTemplate {
 
   @Test(groups = "MercuryApesterWidgetTest_005")
   public void MercuryApesterWidgetTest_005_isErrorPresent() {
-    WidgetPageObject widget =
-            new ApesterWidgetPageObject().createIncorrect(APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new ApesterWidgetPageObject().createIncorrect(
+        APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
 

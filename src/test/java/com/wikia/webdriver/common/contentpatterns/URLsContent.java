@@ -24,10 +24,12 @@ public class URLsContent {
   public static final String SPECIAL_WATCHLIST = "Special:Watchlist";
   public static final String SPECIAL_PREFERENCES = "Special:Preferences";
   public static final String SPECIAL_RENAME_TOOL = "Special:UserRenameTool";
-  public static final String SPECIAL_EDITING_PREFERENCES =
-      "Special:Preferences#mw-prefsection-editing";
-  public static final String SPECIAL_EDITING_PREFERENCES_EMAIL =
-      "Special:Preferences#mw-prefsection-emailv2";
+  public static final String
+      SPECIAL_EDITING_PREFERENCES
+      = "Special:Preferences#mw-prefsection-editing";
+  public static final String
+      SPECIAL_EDITING_PREFERENCES_EMAIL
+      = "Special:Preferences#mw-prefsection-emailv2";
   public static final String SPECIAL_PROMOTE = "Special:Promote";
   public static final String SPECIAL_CREATE_PAGE = "Special:CreatePage";
   public static final String SPECIAL_CREATE_BLOGPAGE = "Special:CreateBlogPage";
@@ -56,7 +58,6 @@ public class URLsContent {
   public static final String FANDOM_UNIVERSITY = "Fandom_University";
   public static final String NOT_A_VALID_COMMUNITY = "Community_Central:Not_a_valid_community";
   public static final String SPECIAL_ANONYMIZATION = "Special:RequestToBeForgottenInternal";
-
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
@@ -88,8 +89,7 @@ public class URLsContent {
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
-  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrl()
-      + "/api.php";
+  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrl() + "/api.php";
 
   // File Pages
   public static final String FILE_NAMESPACE = "File:";
@@ -111,8 +111,9 @@ public class URLsContent {
   // Facebook
   public static final String FACEBOOK_MAINPAGE = "https://www.facebook.com/";
   public static final String FACEBOOK_SETTINGSPAGE = "https://www.facebook.com/settings";
-  public static final String FACEBOOK_SETTINGS_APP_TAB =
-      "https://www.facebook.com/settings?tab=applications";
+  public static final String
+      FACEBOOK_SETTINGS_APP_TAB
+      = "https://www.facebook.com/settings?tab=applications";
 
   // avatars
   public static final String AVATAR_GENERIC = "Avatar.jpg";
@@ -136,7 +137,6 @@ public class URLsContent {
   public static final String COMMUNITY_WIKI = "community";
   public static final String COMMUNITY_COUNCIL_WIKI = "communitycouncil";
   public static final String MUPPET_WIKI = "muppet";
-
 
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";

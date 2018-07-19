@@ -1,11 +1,12 @@
 package com.wikia.webdriver.elements.oasis.components.navigation;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-public class LocalNavigation extends BasePageObject{
+public class LocalNavigation extends BasePageObject {
 
   @FindBy(xpath = "//*[name()='svg' and @id='wds-icons-explore-tiny']/../..")
   private WebElement exploreButton;

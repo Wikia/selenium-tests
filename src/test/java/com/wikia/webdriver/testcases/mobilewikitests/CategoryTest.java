@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.MainPage;
 
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_Category")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -18,8 +19,7 @@ public class CategoryTest extends NewTestTemplate {
   @Test(groups = "mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage")
   @RelatedIssue(issueID = "QAART-1044")
   public void mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage() {
-    new MainPage()
-        .openRegularMainPage()
+    new MainPage().openRegularMainPage()
         .useCategoryComponent()
         .toggleMenu()
         .openCategoryPage("Galleries");

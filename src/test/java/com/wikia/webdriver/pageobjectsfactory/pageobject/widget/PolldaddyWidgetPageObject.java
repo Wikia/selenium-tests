@@ -9,18 +9,16 @@ import java.util.List;
 
 public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
+  private static final String TAG_NAME = "pollydaddy";
+  private static final String[] TAGS = {"<polldaddy id=\"8956579\"/>",
+                                        "<polldaddy id=\"9022741\"/>"};
+  private static final String INCORRECT_TAG = "<polldaddy />";
+  private static final String
+      ERROR_MESSAGE
+      = "Failed to render the Polldaddy widget. Please check if all required parameters are in place.";
+  By polldaddyBody = By.cssSelector("*");
   @FindBy(css = ".PDS_Poll")
   private List<WebElement> polldaddyDivList;
-  By polldaddyBody = By.cssSelector("*");
-
-  private static final String TAG_NAME = "pollydaddy";
-  private static final String[] TAGS = {
-      "<polldaddy id=\"8956579\"/>",
-      "<polldaddy id=\"9022741\"/>"
-  };
-  private static final String INCORRECT_TAG = "<polldaddy />";
-  private static final String ERROR_MESSAGE =
-      "Failed to render the Polldaddy widget. Please check if all required parameters are in place.";
 
   protected String getTagName() {
     return TAG_NAME;
@@ -48,8 +46,7 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected List<WebElement> getWidgetIFrameList() {
-    throw new NotImplementedException(
-        "Polldaddy widget is not kept inside any IFrame");
+    throw new NotImplementedException("Polldaddy widget is not kept inside any IFrame");
   }
 
   protected WebElement getWidgetBody() {

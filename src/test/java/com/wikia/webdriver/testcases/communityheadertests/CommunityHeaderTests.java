@@ -10,6 +10,7 @@ import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplo
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
+
 import org.testng.annotations.Test;
 
 public class CommunityHeaderTests extends NewTestTemplate {
@@ -56,8 +57,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(addNewPageModal.isCreateNewArticleModalVisible());
     addNewPageModal.close();
 
-    communityHeader.openMoreToolsDropdown()
-        .clickMoreAddImageLink();
+    communityHeader.openMoreToolsDropdown().clickMoreAddImageLink();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Upload"));
 
     AddMediaModalComponentObject addVideoModal = communityHeader.openMoreToolsDropdown()
@@ -67,8 +67,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     addVideoModal.closeAddVideoModal();
 
-    communityHeader.openMoreToolsDropdown()
-        .clickMoreRecentChanges();
+    communityHeader.openMoreToolsDropdown().clickMoreRecentChanges();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:RecentChanges"));
 
     ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
@@ -91,8 +90,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(addNewPageModal.isCreateNewArticleModalVisible());
     addNewPageModal.close();
 
-    communityHeader.openMoreToolsDropdown()
-        .clickMoreAddImageLink();
+    communityHeader.openMoreToolsDropdown().clickMoreAddImageLink();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Upload"));
 
     AddMediaModalComponentObject addVideoModal = communityHeader.openMoreToolsDropdown()
@@ -102,8 +100,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     addVideoModal.closeAddVideoModal();
 
-    communityHeader.openMoreToolsDropdown()
-        .clickMoreRecentChanges();
+    communityHeader.openMoreToolsDropdown().clickMoreRecentChanges();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:RecentChanges"));
 
     ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
@@ -115,36 +112,26 @@ public class CommunityHeaderTests extends NewTestTemplate {
   public void testExploreMenuLinks() {
     CommunityHeader communityHeader = new CommunityHeader();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreWikiActivityLink();
+    communityHeader.openExploreMenu().clickExploreWikiActivityLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreCommunityLink();
+    communityHeader.openExploreMenu().clickExploreCommunityLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Community"));
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreVideosLink();
+    communityHeader.openExploreMenu().clickExploreVideosLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreImagesLink();
+    communityHeader.openExploreMenu().clickExploreImagesLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Images"));
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreRandomLink();
+    communityHeader.openExploreMenu().clickExploreRandomLink();
 
-    Assertion.assertTrue(driver.getCurrentUrl().matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
-
+    Assertion.assertTrue(driver.getCurrentUrl()
+                             .matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
   }
 
   @Test(groups = {"CommunityHeaderTests"})
@@ -160,9 +147,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   public void testDiscussLinkOnWikiWithDiscussionsAndForum() {
     CommunityHeader communityHeader = new CommunityHeader();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreForumLink();
+    communityHeader.openExploreMenu().clickExploreForumLink();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Forum"));
 
     communityHeader.clickDiscussLink();
@@ -195,6 +180,4 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     Assertion.assertFalse(communityHeader.isVisible());
   }
-
-
 }

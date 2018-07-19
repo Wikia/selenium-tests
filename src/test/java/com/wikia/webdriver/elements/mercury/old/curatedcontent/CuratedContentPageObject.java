@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 /**
  * This class represents all the levels below Curated Main Page
@@ -61,14 +61,10 @@ public class CuratedContentPageObject extends BasePageObject {
   }
 
   private enum Labels {
-    ARTICLE("Article wrapper"),
-    SECTION_TITLE("Section title"),
-    LINK_TO_MAIN_PAGE("Link to main page"),
-    SECTION("Section as the container of many elements"),
-    SECTION_ITEM("Item in a section"),
-    LOAD_MORE_BUTTON("Load more button"),
-    NUMBER_OF_ITEMS("Number of items in curated content section"),
-    ITEM_LABELS("Curated Content items labels");
+    ARTICLE("Article wrapper"), SECTION_TITLE("Section title"), LINK_TO_MAIN_PAGE(
+        "Link to main page"), SECTION("Section as the container of many elements"), SECTION_ITEM(
+        "Item in a section"), LOAD_MORE_BUTTON("Load more button"), NUMBER_OF_ITEMS(
+        "Number of items in curated content section"), ITEM_LABELS("Curated Content items labels");
 
     private String name;
 

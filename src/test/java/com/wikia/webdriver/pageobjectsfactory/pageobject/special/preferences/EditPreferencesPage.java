@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;

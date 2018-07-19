@@ -13,6 +13,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.MoreOp
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.*;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
@@ -21,16 +22,18 @@ public class LockingPostTests extends NewTestTemplate {
   private static final String SHOULD_BE_LOCKED_MESSAGE = "Post should be locked.";
   private static final String SHOULD_NOT_LOCK_MESSAGE = "%s should not be able to lock a post.";
   private static final String SHOULD_LOCK_MESSAGE = "%s should be able to lock the post.";
-  private static final String SHOULD_UNLOCK_MESSAGE =
-    "%s should be able to unlock post locked by %s.";
-  private static final String SHOULD_NOT_ADD_REPLY_MESSAGE =
-    "%s should not be able to create reply under post locked by %s.";
-  private static final String SHOULD_ADD_REPLY_MESSAGE =
-    "%s should be able to add reply to post unlocked by %s.";
+  private static final String
+      SHOULD_UNLOCK_MESSAGE
+      = "%s should be able to unlock post locked by %s.";
+  private static final String
+      SHOULD_NOT_ADD_REPLY_MESSAGE
+      = "%s should not be able to create reply under post locked by %s.";
+  private static final String
+      SHOULD_ADD_REPLY_MESSAGE
+      = "%s should be able to add reply to post unlocked by %s.";
 
   private static final String MOBILE = "discussions-locking-posts-mobile";
   private static final String DESKTOP = "discussions-locking-posts-desktop";
-
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
@@ -38,7 +41,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -47,7 +53,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnMobileCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -56,7 +65,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnMobileCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -65,7 +77,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -74,7 +89,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -83,9 +101,11 @@ public class LockingPostTests extends NewTestTemplate {
   public void anonymousUserOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name())
+    );
   }
-
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2)
@@ -93,7 +113,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -102,7 +125,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -111,7 +137,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -120,7 +149,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -129,7 +161,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -138,7 +173,10 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+    Assertion.assertFalse(
+        moreOptionsPopOver.hasLockPostOption(),
+        String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -148,7 +186,11 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
     Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    final String message = String.format(
+        SHOULD_NOT_ADD_REPLY_MESSAGE,
+        User.USER.name(),
+        User.DISCUSSIONS_MODERATOR.name()
+    );
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
 
@@ -157,14 +199,17 @@ public class LockingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
-        .unlockPost(data);
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data).unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final String text = addReplyOnMobile(page);
     boolean actual = isReplyNotPresent(page, text);
 
-    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    final String message = String.format(
+        SHOULD_ADD_REPLY_MESSAGE,
+        User.USER.name(),
+        User.DISCUSSIONS_MODERATOR.name()
+    );
     Assertion.assertFalse(actual, message);
   }
 
@@ -175,7 +220,11 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
     Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    final String message = String.format(
+        SHOULD_NOT_ADD_REPLY_MESSAGE,
+        User.USER.name(),
+        User.DISCUSSIONS_MODERATOR.name()
+    );
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
@@ -184,14 +233,17 @@ public class LockingPostTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
-        .unlockPost(data);
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data).unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final String text = addReplyOnDesktop(page);
     boolean actual = isReplyNotPresent(page, text);
 
-    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    final String message = String.format(
+        SHOULD_ADD_REPLY_MESSAGE,
+        User.USER.name(),
+        User.DISCUSSIONS_MODERATOR.name()
+    );
     Assertion.assertFalse(actual, message);
   }
 
@@ -203,7 +255,10 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+    Assertion.assertTrue(
+        postEntity.isLocked(),
+        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -224,7 +279,10 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+    Assertion.assertTrue(
+        postEntity.isLocked(),
+        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -245,7 +303,10 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name()));
+    Assertion.assertTrue(
+        postEntity.isLocked(),
+        String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -266,7 +327,10 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name()));
+    Assertion.assertTrue(
+        postEntity.isLocked(),
+        String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -287,7 +351,10 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+    Assertion.assertTrue(
+        postEntity.isLocked(),
+        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    );
   }
 
   @Test(groups = MOBILE)
@@ -308,7 +375,10 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = lockPost(data);
 
-    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+    Assertion.assertTrue(
+        postEntity.isLocked(),
+        String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name())
+    );
   }
 
   @Test(groups = DESKTOP)
@@ -322,7 +392,8 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private MoreOptionsPopOver findMoreOptionsOnPostDetailsPage() {
-    final PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    final PostEntity.Data data = DiscussionsClient.using(User.USER, driver)
+        .createPostWithUniqueData();
     final PageWithPosts page = new PostDetailsPage().open(data.getId());
 
     return findMoreOptions(page);
@@ -344,7 +415,8 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private MoreOptionsPopOver findMoreOptionsOnUserPostsPage() {
-    final PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    final PostEntity.Data data = DiscussionsClient.using(User.USER, driver)
+        .createPostWithUniqueData();
     final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
 
     return findMoreOptions(page, data);
@@ -374,10 +446,7 @@ public class LockingPostTests extends NewTestTemplate {
   private String addReplyOnMobile(PostDetailsPage page) {
     final String text = TextGenerator.createUniqueText();
 
-    page.getReplyCreatorMobile().click()
-        .clickGuidelinesReadButton()
-        .add(text)
-        .clickSubmitButton();
+    page.getReplyCreatorMobile().click().clickGuidelinesReadButton().add(text).clickSubmitButton();
 
     return text;
   }
@@ -385,10 +454,7 @@ public class LockingPostTests extends NewTestTemplate {
   private String addReplyOnDesktop(PostDetailsPage page) {
     final String text = TextGenerator.createUniqueText();
 
-    page.getReplyCreatorDesktop().click()
-        .clickGuidelinesReadButton()
-        .add(text)
-        .clickSubmitButton();
+    page.getReplyCreatorDesktop().click().clickGuidelinesReadButton().add(text).clickSubmitButton();
 
     return text;
   }
@@ -415,8 +481,6 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private boolean isReplyNotPresent(PostDetailsPage page, String text) {
-    return page.getReplies()
-        .waitForReplyToAppearWithText(text)
-        .isEmpty();
+    return page.getReplies().waitForReplyToAppearWithText(text).isEmpty();
   }
 }

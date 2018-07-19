@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,14 +37,11 @@ public class JoinPageObject {
   public JoinPageObject get() {
     String redirectParameter = "";
     try {
-      redirectParameter =
-          URLEncoder.encode(urlBuilder.getUrl(), "UTF-8");
-
+      redirectParameter = URLEncoder.encode(urlBuilder.getUrl(), "UTF-8");
     } catch (UnsupportedEncodingException e) {
       Log.log("encoding", "problem occured during URL encoding", false);
     }
-    driver.get(urlBuilder.getUrl() + "/join" + "?redirect="
-               + redirectParameter);
+    driver.get(urlBuilder.getUrl() + "/join" + "?redirect=" + redirectParameter);
     return this;
   }
 

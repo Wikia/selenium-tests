@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.testcases.mobilewikitests.SearchTests;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "discussions-search")
@@ -24,8 +25,7 @@ public class DiscussionsSearchTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage() {
 
-    String clickedSuggestion = new GuidelinesPage()
-        .open()
+    String clickedSuggestion = new GuidelinesPage().open()
         .getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
@@ -34,7 +34,8 @@ public class DiscussionsSearchTests extends SearchTests {
     ArticlePage page = new ArticlePage();
     page.getHeader().waitForLoaded();
     Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(), page.getHeader().getPageTitle().toLowerCase()
+        clickedSuggestion.toLowerCase(),
+        page.getHeader().getPageTitle().toLowerCase()
     );
   }
 
@@ -48,9 +49,8 @@ public class DiscussionsSearchTests extends SearchTests {
     nav.clickNthSearchResult(resultNo);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
-    Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(),
-        new ArticlePage().getArticleName().toLowerCase()
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           new ArticlePage().getArticleName().toLowerCase()
     );
   }
 
@@ -65,20 +65,16 @@ public class DiscussionsSearchTests extends SearchTests {
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void verifySearchLayoutFromDiscussionsGuidelinesPage() {
-    super.verifySearchLayout(
-        new GuidelinesPage().open()
-    );
+    super.verifySearchLayout(new GuidelinesPage().open());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToSearchResultsPageFromDiscussionsGuidelinesPage() {
-    SearchResultsPage searchResults =
-        new GuidelinesPage()
-            .open()
-            .getGlobalNavigationMobile()
-            .openSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .clickEnterAndNavigateToSearchResults(Skin.DISCUSSIONS);
+    SearchResultsPage searchResults = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
+        .openSearch()
+        .typeInSearch(SEARCH_PHRASE)
+        .clickEnterAndNavigateToSearchResults(Skin.DISCUSSIONS);
 
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
   }

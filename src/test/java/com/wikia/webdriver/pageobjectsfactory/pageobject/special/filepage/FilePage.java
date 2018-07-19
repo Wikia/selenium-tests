@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -41,8 +42,7 @@ public class FilePage extends WikiBasePageObject {
   private WebElement tabBody;
 
   public FilePage open(String fileName, boolean noRedirect) {
-    String url =
-        urlBuilder.getUrl() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
+    String url = urlBuilder.getUrl() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
     if (noRedirect) {
       url = urlBuilder.appendQueryStringToURL(url, "redirect=no");
     }
@@ -92,16 +92,15 @@ public class FilePage extends WikiBasePageObject {
 
   public void verifyEmbeddedVideoIsPresent() {
     wait.forElementVisible(fileEmbedded);
-    Log.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
-        true);
+    Log.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
-  public boolean isNoFileTextBoxVisible(){
-    try{
+  public boolean isNoFileTextBoxVisible() {
+    try {
       wait.forElementVisible(noFileTextBox);
       Log.log("isNoFileTextBoxVisible", "No-file textbox is visible ", true);
       return true;
-    } catch (TimeoutException e){
+    } catch (TimeoutException e) {
       Log.log("isNoFileTextBoxVisible", e, false);
       return false;
     }
@@ -109,8 +108,7 @@ public class FilePage extends WikiBasePageObject {
 
   public void verifyEmptyFilePage() {
     Assertion.assertEquals(isNoFileTextBoxVisible(), true);
-    Log.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
-        true);
+    Log.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
   }
 
   public String getImageUrl() {
@@ -132,7 +130,11 @@ public class FilePage extends WikiBasePageObject {
     int numberOfTabs = tabs.size();
     int expectedNumberOfTabs = expectedTabs.length;
     Assertion.assertTrue(numberOfTabs >= expectedNumberOfTabs,
-            String.format("Number of tabs (%s) is not greater or equal to %s,", numberOfTabs, expectedNumberOfTabs));
+                         String.format("Number of tabs (%s) is not greater or equal to %s,",
+                                       numberOfTabs,
+                                       expectedNumberOfTabs
+                         )
+    );
     verifyTabsExist(expectedTabs);
   }
 

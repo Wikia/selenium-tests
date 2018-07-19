@@ -8,10 +8,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.ArticlePurger;
-import com.wikia.webdriver.common.core.helpers.ContentLoader;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
@@ -31,12 +28,12 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME)
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  private static final String INFOBOX_EMPTY_TAGS_INVOCATION =
-      ContentLoader.loadWikiTextContent("Infobox_Empty_Tags_Invocation");
-  private static final String INFOBOX2_INVOCATION =
-      ContentLoader.loadWikiTextContent("Infobox2_Invocation");
-  private static final String INFOBOX2_TEMPLATE =
-      ContentLoader.loadWikiTextContent("Infobox2_Template");
+  private static final String INFOBOX_EMPTY_TAGS_INVOCATION = ContentLoader.loadWikiTextContent(
+      "Infobox_Empty_Tags_Invocation");
+  private static final String INFOBOX2_INVOCATION = ContentLoader.loadWikiTextContent(
+      "Infobox2_Invocation");
+  private static final String INFOBOX2_TEMPLATE = ContentLoader.loadWikiTextContent(
+      "Infobox2_Template");
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyElementsVisibility() {
@@ -52,7 +49,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.getItalicElementsNumber() > 0);
     Assertion.assertTrue(infobox.areQuotationMarksPresented());
     Assertion.assertTrue(infobox.isReferenceElementVisible());
-
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
@@ -87,8 +83,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String internalLinkName = infobox.getInternalLinkRedirectTitle(0);
 
-    String internalURL =
-        infobox.clickInternalLinkWithIndex(0).waitForUrlToContain(internalLinkName).getCurrentUrl();
+    String internalURL = infobox.clickInternalLinkWithIndex(0)
+        .waitForUrlToContain(internalLinkName)
+        .getCurrentUrl();
 
     Assertion.assertEquals(internalLinkName, internalURL);
   }
@@ -102,8 +99,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String externalLinkName = infobox.getExternalLinkRedirectTitle(0);
 
-    String externalUrl =
-        infobox.clickExternalLinkWithIndex(0).waitForUrlToContain(externalLinkName).getCurrentUrl();
+    String externalUrl = infobox.clickExternalLinkWithIndex(0)
+        .waitForUrlToContain(externalLinkName)
+        .getCurrentUrl();
 
     Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
   }
@@ -111,7 +109,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyImagesInWhatLinksHerePage() {
     new ArticleContent().push(String.format("[[%s]]", PageContent.INFOBOX_2),
-                              "Infobox2_WhatLinksHere");
+                              "Infobox2_WhatLinksHere"
+    );
     // provide an article linking to testing Infobox
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
@@ -185,7 +184,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     Assertion.assertEquals(infobox.getItemValuesFontSize(1), infobox.getOrderedElementFontSize(1));
     Assertion.assertEquals(infobox.getItemValuesFontSize(1),
-                           infobox.getUnorderedElementFontSize(1));
+                           infobox.getUnorderedElementFontSize(1)
+    );
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
@@ -210,9 +210,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertEquals(infobox.getItemLabelsFontSize(0),
-                           infobox.getHorizontalItemLabelFontSize(0));
+                           infobox.getHorizontalItemLabelFontSize(0)
+    );
     Assertion.assertEquals(infobox.getItemValuesFontSize(0),
-                           infobox.getHorizontalItemValuesFontSize(0));
+                           infobox.getHorizontalItemValuesFontSize(0)
+    );
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
@@ -223,10 +225,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     AceEditor editor = new AceEditor();
 
-    template
-        .openArticleByName(wikiURL,
-                           String.format("%s:%s", PageContent.TEMPLATE_NAMESPACE,
-                                         PageContent.INFOBOX_2))
+    template.openArticleByName(wikiURL,
+                               String.format("%s:%s",
+                                             PageContent.TEMPLATE_NAMESPACE,
+                                             PageContent.INFOBOX_2
+                               )
+    )
         .editArticleInSrcUsingDropdown();
     String templateSyntax = editor.getContent();
 
@@ -280,9 +284,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    VisualEditorPageObject visualEditor =
-        article.openVEModeWithMainEditButton().clickInsertToolButton()
-            .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).applyChanges();
+    VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -296,7 +302,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticlePurger().purgeArticleAsAnon();
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
-        .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
@@ -312,7 +320,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticlePurger().purgeArticleAsAnon();
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
-        .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
@@ -320,8 +330,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     visualEditor.clickEditArea();
     visualEditor.clickInfobox();
-    visualEditor
-        .clickInfoboxPopup()
+    visualEditor.clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
@@ -344,7 +353,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticlePurger().purgeArticleAsLoggedUser();
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
-        .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 

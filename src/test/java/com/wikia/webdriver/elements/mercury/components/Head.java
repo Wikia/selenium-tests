@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

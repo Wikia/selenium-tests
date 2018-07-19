@@ -1,19 +1,20 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
-import com.google.common.collect.Iterables;
+
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 
+import com.google.common.collect.Iterables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.annotation.CheckForNull;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.annotation.CheckForNull;
 
 public class CategoriesFieldset extends BasePage {
 
@@ -67,44 +68,37 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public CategoryPill.Data findCategoryOrElseThrow(final String categoryName)
-    throws NotFoundException {
-    return findCategoryWith(categoryName)
-      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
-      .toData();
+      throws NotFoundException {
+    return findCategoryWith(categoryName).orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+        .toData();
   }
 
   /**
-   *
    * @param categoryName to match
    * @return first WebElement category that matches the name
    */
   private Optional<WebElement> getCategory(List<WebElement> categoryList, final String categoryName)
-    throws NotFoundException {
+      throws NotFoundException {
     List<WebElement> foundCategories = categoryList.stream()
-      .filter(element -> element
-        .getAttribute("innerText")
-        .trim()
-        .equalsIgnoreCase(categoryName)
-      )
-      .collect(Collectors.toList());
+        .filter(element -> element.getAttribute("innerText").trim().equalsIgnoreCase(categoryName))
+        .collect(Collectors.toList());
 
-      // because of differences in mobile and desktop views
-      if (foundCategories.isEmpty()) {
-        return Optional.empty();
-      } else if (foundCategories.size() == 1) {
-        return Optional.of(foundCategories.get(0));
-      } else {
-        return foundCategories
-          .stream()
-          .filter(WebElement::isDisplayed)
-          .findFirst();
-      }
+    // because of differences in mobile and desktop views
+    if (foundCategories.isEmpty()) {
+      return Optional.empty();
+    } else if (foundCategories.size() == 1) {
+      return Optional.of(foundCategories.get(0));
+    } else {
+      return foundCategories.stream().filter(WebElement::isDisplayed).findFirst();
+    }
   }
 
   private int getCategoryPosition(List<WebElement> categoryList, final String categoryName)
-    throws NotFoundException {
-    WebElement category = getCategory(categoryList, categoryName)
-      .orElseThrow(()-> new NotFoundException(CATEGORY_NOT_FOUND));
+      throws NotFoundException {
+    WebElement category = getCategory(
+        categoryList,
+        categoryName
+    ).orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND));
     return categoryList.indexOf(category);
   }
 
@@ -117,11 +111,10 @@ public class CategoriesFieldset extends BasePage {
   }
 
   /**
-   *
    * @param categoryName to look for
-   * @return this category on list of editable categories
-   * Categories on editable categories list don't have any attribute based on their names,
-   * and thus a lookup in non-editable categories list must be made beforehand
+   * @return this category on list of editable categories Categories on editable categories list
+   * don't have any attribute based on their names, and thus a lookup in non-editable categories
+   * list must be made beforehand
    */
   private WebElement getEditableCategoryWith(String categoryName) {
     return editableCategories.get(getCategoryPosition(categories, categoryName));
@@ -135,9 +128,8 @@ public class CategoriesFieldset extends BasePage {
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
     Log.log("Clicking on category", categoryName, true);
-    getCategoryWith(categoryName)
-      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
-      .click();
+    getCategoryWith(categoryName).orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+        .click();
     return this;
   }
 
@@ -148,15 +140,15 @@ public class CategoriesFieldset extends BasePage {
 
   /**
    * For mobile "All" category is not visible, that is why it's always false - can not be edited.
-   * TODO: please remember to change this line when SOC-3793 is done:
-   * TODO: "isCategoryEditable(editableCategoryAll)"
+   * TODO: please remember to change this line when SOC-3793 is done: TODO:
+   * "isCategoryEditable(editableCategoryAll)"
+   *
    * @return true if "All" category can be edited
    */
   public boolean canEditAllCategory() {
-    return !isMobile() && !editableCategoryAll
-      .findElement(By.className("fancy-check-box-span"))
-      .getAttribute("class")
-      .contains("disabled");
+    return !isMobile() && !editableCategoryAll.findElement(By.className("fancy-check-box-span"))
+        .getAttribute("class")
+        .contains("disabled");
   }
 
   private boolean isMobile() {
@@ -171,7 +163,8 @@ public class CategoriesFieldset extends BasePage {
     WebElement result = null;
 
     for (WebElement element : editableCategories) {
-      final String value = element.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR)).getAttribute("value");
+      final String value = element.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR))
+          .getAttribute("value");
       if (value.equals(categoryName)) {
         result = element;
       }
@@ -200,17 +193,21 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public boolean hasCategory(final String categoryName) {
-    return categories.stream()
-        .map(WebElement::getText)
-        .anyMatch(name -> name.equals(categoryName));
+    return categories.stream().map(WebElement::getText).anyMatch(name -> name.equals(categoryName));
   }
 
-  public CategoriesFieldset renameMobile(final String oldCategoryName, final String newCategoryName) {
+  public CategoriesFieldset renameMobile(
+      final String oldCategoryName,
+      final String newCategoryName
+  ) {
     WebElement category = getEditableCategoryWith(oldCategoryName);
     return rename(category, newCategoryName);
   }
 
-  public CategoriesFieldset renameDesktop(final String oldCategoryName, final String newCategoryName) {
+  public CategoriesFieldset renameDesktop(
+      final String oldCategoryName,
+      final String newCategoryName
+  ) {
     WebElement category = getEditableCategoriesDesktop(oldCategoryName);
     return rename(category, newCategoryName);
   }
@@ -251,15 +248,10 @@ public class CategoriesFieldset extends BasePage {
     if (null != element) {
       WebElement dragElement = element.findElement(By.className(MOVE_COMMAND));
 
-      builder.moveToElement(element)
-          .clickAndHold(dragElement)
-          .perform();
+      builder.moveToElement(element).clickAndHold(dragElement).perform();
 
       // The first move doesn't work properly so do a no-op
-      builder
-          .moveByOffset(0, 0)
-          .moveByOffset(0, offset * CATEGORY_INPUT_HEIGHT_PX)
-          .perform();
+      builder.moveByOffset(0, 0).moveByOffset(0, offset * CATEGORY_INPUT_HEIGHT_PX).perform();
 
       wait.forX(Duration.ofMillis(100));
 

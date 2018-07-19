@@ -80,9 +80,10 @@ public abstract class BrowserAbstract {
     if (Configuration.useProxy()) {
       Proxy proxyServer = new Proxy();
       if ("true".equals(Configuration.useZap())) {
-        String zapProxyAddress = String.format("%s:%s", XMLReader.getValue("zap_proxy.address"),
-                                               Integer
-                                                   .parseInt(XMLReader.getValue("zap_proxy.port")));
+        String zapProxyAddress = String.format("%s:%s",
+                                               XMLReader.getValue("zap_proxy.address"),
+                                               Integer.parseInt(XMLReader.getValue("zap_proxy.port"))
+        );
         proxyServer.setHttpProxy(zapProxyAddress);
         proxyServer.setSslProxy(zapProxyAddress);
       } else {
@@ -92,8 +93,7 @@ public abstract class BrowserAbstract {
         server.setTrustSource(TrustSource.defaultTrustSource());
         server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
         server.setRequestTimeout(90, TimeUnit.SECONDS);
-        server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS,
-                                     CaptureType.RESPONSE_HEADERS);
+        server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.RESPONSE_HEADERS);
         server.setUseEcc(true);
         proxyServer = server.startBrowserMobProxyServer();
       }

@@ -8,92 +8,66 @@ import com.wikia.webdriver.elements.Frame;
 import com.wikia.webdriver.elements.FrameScope;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
-
+  private final Frame builderFrame = new Frame(builderIFrame);
   @FindBy(css = ".pop-over-container .infobox-builder-sidebar-header-icon-delete")
   private WebElement deletePopUp;
-
   @FindBy(css = ".infobox-builder-preview")
   private WebElement previewArea;
-
   @FindBy(css = ".on-hover-tooltip")
   private WebElement tooltip;
-
   @FindBy(css = ".infobox-builder-preview")
   private WebElement builderBackground;
-
   @FindBy(css = ".infobox-builder-go-to-source-modal")
   private WebElement goToSourceModalBackground;
-
   @FindBy(css = ".pop-over .orient-below")
   private WebElement sectionTooltipOrientedBelow;
-
   @FindBy(css = ".pop-over .orient-above")
   private WebElement sectionTooltipOrientedAbove;
-
   @FindBy(css = ".infobox-builder-go-to-source-modal > div")
   private WebElement modalGoToSource;
-
-  @FindBy(
-      css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  @FindBy(css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
   private WebElement saveChangesButton;
-
-  @FindBy(
-      css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(2)")
+  @FindBy(css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(2)")
   private WebElement dropChangesButton;
-
   @FindBy(css = ".text-field-error-message")
   private WebElement errorMessage;
-
   @FindBy(css = ".infobox-builder-edit-title-modal > div")
   private WebElement modalEditTitle;
-
-  @FindBy(
-      css = ".infobox-builder-edit-title-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  @FindBy(css = ".infobox-builder-edit-title-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
   private WebElement publishEditedTitleButton;
-
   @FindBy(css = "#editTemplateTitle")
   private WebElement editTemplateTitleInput;
-
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
-
   @FindBy(css = ".portable-infobox .pi-data")
   private List<WebElement> rows;
-
   @FindBy(css = ".portable-infobox .pi-title")
   private List<WebElement> titles;
-
   @FindBy(css = ".portable-infobox .pi-image")
   private List<WebElement> images;
-
   @FindBy(css = ".portable-infobox .pi-header")
   private List<WebElement> headers;
-
   @FindBy(css = ".portable-infobox .sortable-item")
   private List<WebElement> component;
-
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
-  private final Frame builderFrame = new Frame(builderIFrame);
-
   public InfoboxBuilderPage openNew(String templateName) {
-    getUrl(urlBuilder
-        .appendQueryStringToURL(urlBuilder.getUrlForWikiPage("Template:" + templateName),
-            URLsContent.ACTION_EDIT));
-    new TemplateEditPage().getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX)
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWikiPage(
+        "Template:" + templateName), URLsContent.ACTION_EDIT));
+    new TemplateEditPage().getTemplateClassification()
+        .changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
@@ -103,10 +77,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage openExisting(String templateName) {
-    getUrl(
-        urlBuilder.appendQueryStringToURL(
-            urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_INFOBOX_BUILDER + "/" + templateName),
-            URLsContent.ACTION_EDIT));
+    getUrl(urlBuilder.appendQueryStringToURL(
+        urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_INFOBOX_BUILDER + "/" + templateName),
+        URLsContent.ACTION_EDIT
+    ));
     driver.switchTo().frame(builderIFrame);
 
     return this;
@@ -261,7 +235,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     selectedComponent.click();
 
     String script = "return window.getComputedStyle("
-        + "document.querySelector('.active'),':before').getPropertyValue('Border')";
+                    + "document.querySelector('.active'),':before').getPropertyValue('Border')";
 
     return driver.executeScript(script).toString();
   }
@@ -364,14 +338,14 @@ public class InfoboxBuilderPage extends SpecialPageObject {
    * `. ,^. ,' | | | | `. | __| | `. | | | . ' , | /`,' . | | | | |`.`. | |__ | . `.| | | |`.'| | `.
    * ,'| | | | | | `.`. | __| | |`. | | | | | ,' . `. | | | | |____` / | |__ | | `| | |_| | | \,'
    * `.__| |_| |_______/ `.__| |_| | | `.| `.|
-   * 
+   *
    * Dragging move is actually a 20 small moves, to make is a bit slower
    */
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
-    WebElement infoboxBackground =
-        driver.findElement(By.cssSelector(".portable-infobox.pi-background"));
+    WebElement infoboxBackground = driver.findElement(By.cssSelector(
+        ".portable-infobox.pi-background"));
 
     Point location = infoboxBackground.getLocation();
     Integer targetY = draggedElement.getLocation().getY() - location.getY() + 50;

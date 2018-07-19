@@ -1,12 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 
 public class AdsFandomObject extends AdsBaseObject {
+
   private static final By MOBILE_NAVIGATION_BAR = By.cssSelector(".global-navigation-mobile");
   private static final By DESKTOP_NAVIGATION_BAR = By.cssSelector(".wds-global-navigation");
 
@@ -56,13 +55,16 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public By getIframeSelector(String slotName) {
-    return By.cssSelector(
-        AdsFandomContent.IFRAME_SLOT_SELECTORS.getOrDefault(slotName, getDefaultIframeSelector(slotName))
-    );
+    return By.cssSelector(AdsFandomContent.IFRAME_SLOT_SELECTORS.getOrDefault(
+        slotName,
+        getDefaultIframeSelector(slotName)
+    ));
   }
 
   private String getDefaultIframeSelector(String slotName) {
-    return String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']", slotName);
+    return String.format(
+        "iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']",
+        slotName
+    );
   }
-
 }

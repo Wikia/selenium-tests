@@ -1,12 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
+
   @FindBy(css = "input[name=target]")
   private WebElement pageInputField;
   @FindBy(css = ".namespaceselector + input[type=submit]")
@@ -16,7 +18,7 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   @FindBy(css = "#mw-content-text > fieldset > legend")
   private WebElement filtersSection;
 
-  public SpecialWhatLinksHerePageObject open(){
+  public SpecialWhatLinksHerePageObject open() {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_WHAT_LINKS_HERE));
 
     return this;
@@ -41,9 +43,9 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
 
   public boolean whatLinksHereContainsArticleName(String articleName) {
     boolean containsArticleName = false;
-    for(int i=0; i<whatLinksList.size(); i++) {
+    for (int i = 0; i < whatLinksList.size(); i++) {
       wait.forElementVisible(whatLinksList.get(i));
-      if(whatLinksList.get(i).getText().contains(articleName)) {
+      if (whatLinksList.get(i).getText().contains(articleName)) {
         containsArticleName = true;
       }
     }

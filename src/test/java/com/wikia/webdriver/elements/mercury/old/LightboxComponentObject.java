@@ -2,13 +2,11 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import java.util.List;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
 
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class LightboxComponentObject extends WikiBasePageObject {

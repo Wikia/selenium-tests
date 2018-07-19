@@ -28,32 +28,19 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   /**
    * Selects given file in upload browser.
    *
-   *  @param file file to Be uploaded
-   *              Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests
-   *              this is where those files are stored
+   * @param file file to Be uploaded Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests
+   *             this is where those files are stored
    */
   public void selectFileToUpload(String file) {
-    browseForFileInput.sendKeys(
-        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
-    );
-    Log.log(
-        "typeInFileToUploadPath",
-        "file " + file + " added to upload",
-        true
-    );
-
+    browseForFileInput.sendKeys(CommonUtils.getAbsolutePathForFile(
+        PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
+    Log.log("typeInFileToUploadPath", "file " + file + " added to upload", true);
   }
 
   public void checkIgnoreAnyWarnings() {
     wait.forElementClickable(ignoreAnyWarnings);
     scrollAndClick(ignoreAnyWarnings);
-    Log.log(
-        "checkIgnoreAnyWarnings",
-        "ignore warnings checkbox selected",
-        true,
-        driver
-    );
-
+    Log.log("checkIgnoreAnyWarnings", "ignore warnings checkbox selected", true, driver);
   }
 
   public FilePage clickUploadButton() {

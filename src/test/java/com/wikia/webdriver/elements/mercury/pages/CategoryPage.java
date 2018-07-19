@@ -40,7 +40,6 @@ public class CategoryPage extends WikiBasePageObject {
     return this;
   }
 
-
   public ArticlePage navigateToCategoryMemberPage() {
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 

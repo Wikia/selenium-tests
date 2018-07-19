@@ -21,6 +21,7 @@ import java.util.List;
 
 public class ForumThreadPageObject extends BasePageObject {
 
+  MiniEditorComponentObject miniEditor;
   @FindBy(css = "div.msg-title a")
   private WebElement discussionTitle;
   @FindBy(css = ".replyButton")
@@ -59,10 +60,7 @@ public class ForumThreadPageObject extends BasePageObject {
   private WebElement breadCrumbs;
   @FindBy(className = "speech-bubble-message")
   private WebElement speechBubble;
-
   private String wikiaEditorTextarea = "textarea.replyBody";
-
-  MiniEditorComponentObject miniEditor;
 
   public ForumThreadPageObject(WebDriver driver) {
     super();
@@ -75,8 +73,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(discussionBody.get(0));
     wait.forTextInElement(discussionTitle, title);
     wait.forTextInElement(discussionBody.get(0), message);
-    Log
-        .log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
+    Log.log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
   }
 
   public void reply(String message) {
@@ -86,17 +83,18 @@ public class ForumThreadPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickReplyButton();
-    Log
-        .log("reply", "write a reply with the following text: " + message, true, driver);
+    Log.log("reply", "write a reply with the following text: " + message, true, driver);
   }
 
   public void verifyReplyMessage(int replyNumber, String message) {
-    WebElement
-        replyMessage =
-        driver.findElement(By.cssSelector(".replies li:nth-child(" + replyNumber + ") p"));
+    WebElement replyMessage = driver.findElement(By.cssSelector(
+        ".replies li:nth-child(" + replyNumber + ") p"));
     wait.forTextInElement(replyMessage, message);
-    Log.log("verifyReplyMessage", "verify that message number " + replyNumber
-                                                + " has the following message: " + message, true);
+    Log.log(
+        "verifyReplyMessage",
+        "verify that message number " + replyNumber + " has the following message: " + message,
+        true
+    );
   }
 
   public void clickReplyButton() {
@@ -114,8 +112,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(removeThreadModalRemoveButton);
     wait.forElementClickable(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
-    Log
-        .log("removeThread", "removed thread with the following reason: " + reason, true, driver);
+    Log.log("removeThread", "removed thread with the following reason: " + reason, true, driver);
   }
 
   public void clickOnRemoveButton() {
@@ -144,16 +141,14 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(closeThreadButton);
     wait.forElementClickable(closeThreadButton);
     scrollAndClick(closeThreadButton);
-    Log
-        .log("clickOnCloseThreadButton", "click on 'close thread' button on a message", true);
+    Log.log("clickOnCloseThreadButton", "click on 'close thread' button on a message", true);
   }
 
   public void clickOnReopenThreadButton() {
     wait.forElementVisible(reopenThreadButton);
     wait.forElementClickable(reopenThreadButton);
     reopenThreadButton.click();
-    Log
-        .log("clickOnReopenThreadButton", "click on 'reopen thread' button on a message", true);
+    Log.log("clickOnReopenThreadButton", "click on 'reopen thread' button on a message", true);
   }
 
   public void verifyThreadRemoved() {
@@ -187,8 +182,7 @@ public class ForumThreadPageObject extends BasePageObject {
     dropList.selectByIndex(1);
     wait.forElementClickable(moveThreadModalMoveThreadButton);
     scrollAndClick(moveThreadModalMoveThreadButton);
-    Log
-        .log("moveThread", "thread moved to the following board: " + selectedItem, true, driver);
+    Log.log("moveThread", "thread moved to the following board: " + selectedItem, true, driver);
 
     return selectedItem;
   }
@@ -201,8 +195,7 @@ public class ForumThreadPageObject extends BasePageObject {
     wait.forElementVisible(removeThreadModalRemoveButton);
     wait.forElementClickable(removeThreadModalRemoveButton);
     scrollAndClick(removeThreadModalRemoveButton);
-    Log
-        .log("closeThread", "closed thread with the following reason: " + reason, true, driver);
+    Log.log("closeThread", "closed thread with the following reason: " + reason, true, driver);
   }
 
   public void reopenThread() {
@@ -213,12 +206,13 @@ public class ForumThreadPageObject extends BasePageObject {
 
   public void verifyParentBoard(String forumBoardName) {
     driver.navigate().refresh();
-    
+
     wait.forElementVisible(breadCrumbs);
     wait.forTextInElement(breadCrumbs, forumBoardName + " board");
     Log.log("verifyParentBoard",
-                          "verify that the parent board of current thread is the following: "
-                          + forumBoardName, true);
+            "verify that the parent board of current thread is the following: " + forumBoardName,
+            true
+    );
   }
 
   public ForumHistoryPageObject openHistory() {

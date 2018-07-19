@@ -23,8 +23,8 @@ public class AddPhotoComponentObject extends BasePageObject {
   @FindBy(css = "#WikiaPhotoGallerySearchResultsSelect")
   private WebElement selectButton;
 
-  private By galleryDialogPhotosList = By
-      .cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li");
+  private By galleryDialogPhotosList = By.cssSelector(
+      "ul[class='WikiaPhotoGalleryResults'][type='results'] li");
 
   public AddPhotoComponentObject(WebDriver driver) {
     super();
@@ -55,11 +55,9 @@ public class AddPhotoComponentObject extends BasePageObject {
       scrollAndClick(list.get(i).findElement(By.cssSelector("[type=checkbox]")));
       photoNames.add(list.get(i).getAttribute("title"));
     }
-    Log.log("CheckGalleryImageInputs", "Check first " + photoNum
-                                                     + " image inputs", true, driver);
+    Log.log("CheckGalleryImageInputs", "Check first " + photoNum + " image inputs", true, driver);
     return photoNames;
   }
-
 
   public void clickSelect() {
     wait.forElementVisible(selectButton);

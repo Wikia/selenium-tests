@@ -33,7 +33,6 @@ public class ArticleTOCTests extends NewTestTemplate {
     article.verifyTOCpresent();
   }
 
-
   /**
    * 1. as anon open an article with TOC 3. verify TOC is collapsed 2. verify that show/hide buttons
    * work

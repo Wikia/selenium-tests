@@ -1,7 +1,8 @@
 package com.wikia.webdriver.common.remote.operations.json;
 
-import com.jayway.jsonpath.DocumentContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+
+import com.jayway.jsonpath.DocumentContext;
 
 public class JsonToPostEntityMapper {
 

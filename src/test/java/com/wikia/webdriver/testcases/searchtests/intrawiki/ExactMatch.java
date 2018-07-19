@@ -9,10 +9,8 @@ import org.testng.annotations.Test;
 @Test(groups = {"IntraWikiSearchExtraMatch"})
 public class ExactMatch extends NewTestTemplate {
 
-  @Test(dataProviderClass = IntraWikiSearchProvider.class,
-      dataProvider = "getArticleName",
-      groups = {"IntraWikiSearch_001", "IntraWikiSearchExactMatch", "Search"}
-  )
+  @Test(dataProviderClass = IntraWikiSearchProvider.class, dataProvider = "getArticleName", groups = {
+      "IntraWikiSearch_001", "IntraWikiSearchExactMatch", "Search"})
   public void IntraWikiSearch_001_exactMatch(String query) {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(wikiURL);

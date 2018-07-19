@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "sustainingtest")
 @Test(groups = {"newpages"})
 public class NewPagesTests extends NewTestTemplate {
+
   @Test
   public void newArticleShowsUpOnSpecialNewPages() {
     ArticleContent articleContent = new ArticleContent();

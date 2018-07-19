@@ -37,9 +37,9 @@ public class ImageServingTests extends NewTestTemplate {
     newFiles.verifyURLStatus(200, imageURL);
   }
 
- @Test(groups = {"ImageServing_002", "ImageServing"}, dataProviderClass = FileDataProvider.class,
-      dataProvider = "getFileNames")
- @Execute(asUser = User.USER)
+  @Test(groups = {"ImageServing_002",
+                  "ImageServing"}, dataProviderClass = FileDataProvider.class, dataProvider = "getFileNames")
+  @Execute(asUser = User.USER)
   public void ImageServing_002_SpecialUploadTest(String fileName) {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
@@ -53,8 +53,8 @@ public class ImageServingTests extends NewTestTemplate {
     String imageURL = filePage.getImageUrl();
     String imageThumbnailURL = filePage.getImageThumbnailUrl();
 
-   filePage.verifyURLStatus(200, imageURL);
-   filePage.verifyURLStatus(200, imageThumbnailURL);
+    filePage.verifyURLStatus(200, imageURL);
+    filePage.verifyURLStatus(200, imageThumbnailURL);
   }
 
   @Test(groups = {"ImageServing_003", "ImageServing"})

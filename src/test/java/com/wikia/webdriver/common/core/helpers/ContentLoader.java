@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.helpers;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -16,12 +15,6 @@ public class ContentLoader {
 
   private ContentLoader() {}
 
-  public static class ContentLoaderException extends RuntimeException {
-    public ContentLoaderException(String reason, Exception ex) {
-      super(reason, ex);
-    }
-  }
-
   /**
    * @param filename - name of file which content should be loaded
    * @return content of desired file
@@ -30,8 +23,11 @@ public class ContentLoader {
     StringBuilder textContent = new StringBuilder();
     String separator = System.getProperty("line.separator");
     String path = String.format(TEXT_FILES_PATH_FORMAT, filename);
-    try (Scanner scanner = new Scanner(new File(ClassLoader.getSystemResource(path).getPath()),
-      "UTF-8")) {
+    try (
+        Scanner scanner = new Scanner(new File(ClassLoader.getSystemResource(path).getPath()),
+                                      "UTF-8"
+        )
+    ) {
       while (scanner.hasNextLine()) {
         textContent.append(scanner.nextLine()).append(separator);
       }
@@ -42,8 +38,8 @@ public class ContentLoader {
   }
 
   private static String getImageResource(String filename) {
-    String filePath =
-      ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
+    String filePath = ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename))
+        .getPath();
     // calling new File(...) as a workaround to be compliant with windows and unix paths
     // File constructor calls FileSystem.normalize(...) on path
     return new File(filePath).getAbsolutePath();
@@ -57,4 +53,10 @@ public class ContentLoader {
     return getImageResource("dragon.bmp");
   }
 
+  public static class ContentLoaderException extends RuntimeException {
+
+    public ContentLoaderException(String reason, Exception ex) {
+      super(reason, ex);
+    }
+  }
 }

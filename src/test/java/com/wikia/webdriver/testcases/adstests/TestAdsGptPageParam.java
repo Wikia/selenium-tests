@@ -15,17 +15,13 @@ import org.testng.annotations.Test;
 
 public class TestAdsGptPageParam extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsGptPageParam",
-      groups = "AdsGptPageParamOasis"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsGptPageParam", groups = "AdsGptPageParamOasis")
   @UseUnstablePageLoadStrategy
-  public void adsGptPageParamOasis(String wikiName,
-                                   String article,
-                                   String gptPattern,
-                                   Boolean paramShouldPresent) {
-    AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article));
+  public void adsGptPageParamOasis(
+      String wikiName, String article, String gptPattern, Boolean paramShouldPresent
+  ) {
+    AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName)
+                                                   .getUrlForPath(article));
     String gptPageParams = wikiPage.getGptPageParams(AdsContent.TOP_LB);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);
@@ -34,21 +30,14 @@ public class TestAdsGptPageParam extends TemplateNoFirstLoad {
     }
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsGptPageParam",
-      groups = "AdsGptPageParamMercury"
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsGptPageParam", groups = "AdsGptPageParamMercury")
   @UseUnstablePageLoadStrategy
-  public void adsGptPageParamMercury(String wikiName,
-                                   String article,
-                                   String gptPattern,
-                                   Boolean paramShouldPresent) {
-    AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article));
+  public void adsGptPageParamMercury(
+      String wikiName, String article, String gptPattern, Boolean paramShouldPresent
+  ) {
+    AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName)
+                                                   .getUrlForPath(article));
     String gptPageParams = wikiPage.getGptPageParams(AdsContent.MOBILE_TOP_LB);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);

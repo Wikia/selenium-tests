@@ -8,6 +8,7 @@ import com.wikia.webdriver.elements.common.CommunityHeader;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
+
 import org.testng.annotations.Test;
 
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -44,42 +45,33 @@ public class CommunityHeaderTests extends NewTestTemplate {
     new PostsListPage().open();
     CommunityHeader communityHeader = new CommunityHeader();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreWikiActivityLink();
+    communityHeader.openExploreMenu().clickExploreWikiActivityLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
 
     new PostsListPage().open();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreCommunityLink();
+    communityHeader.openExploreMenu().clickExploreCommunityLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Community"));
 
     new PostsListPage().open();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreVideosLink();
+    communityHeader.openExploreMenu().clickExploreVideosLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
 
     new PostsListPage().open();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreImagesLink();
+    communityHeader.openExploreMenu().clickExploreImagesLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Images"));
 
     new PostsListPage().open();
 
-    communityHeader
-        .openExploreMenu()
-        .clickExploreRandomLink();
+    communityHeader.openExploreMenu().clickExploreRandomLink();
 
-    Assertion.assertTrue(driver.getCurrentUrl().matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
+    Assertion.assertTrue(driver.getCurrentUrl()
+                             .matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
   }
 }

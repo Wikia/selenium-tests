@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ResetPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -50,19 +51,20 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   private String getLowercaseFirstLetterUsername(UserWithEmail user) {
     return String.format("%s%s",
-      Character.toLowerCase(user.getUsername().charAt(0)),
-      user.getUsername().substring(1));
+                         Character.toLowerCase(user.getUsername().charAt(0)),
+                         user.getUsername().substring(1)
+    );
   }
 
-  private void requestPasswordResetOnModal(String username){
-    new AttachedSignInPage()
-      .open()
-      .clickForgotPasswordLink()
-      .requestLinkForUsername(username);
+  private void requestPasswordResetOnModal(String username) {
+    new AttachedSignInPage().open().clickForgotPasswordLink().requestLinkForUsername(username);
   }
 
   private ResetPasswordPage setNewPasswordForUser(UserWithEmail user) {
-    String resetLink = BasePageObject.getPasswordResetLink(user.getEmail(), user.getEmailPassword());
+    String resetLink = BasePageObject.getPasswordResetLink(
+        user.getEmail(),
+        user.getEmailPassword()
+    );
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(user.getPassword());
     return resetPass;
@@ -70,8 +72,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   private void executeResetPasswordFlow(UserWithEmail user) {
     new GlobalNavigation().clickOnSignIn();
-    new AttachedSignInPage()
-      .clickForgotPasswordLink()
-      .requestLinkForUsername(user.getUsername());
+    new AttachedSignInPage().clickForgotPasswordLink().requestLinkForUsername(user.getUsername());
   }
 }

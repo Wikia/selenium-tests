@@ -15,14 +15,12 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedNavigation")
 @Execute(onWikia = MercuryWikis.MERCURY_CC)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class NavigationTests extends NewTestTemplate {
 
   private CuratedContentPageObject curatedContent;
@@ -55,14 +53,12 @@ public class NavigationTests extends NewTestTemplate {
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
 
-    curatedContent
-        .isTitleVisible()
+    curatedContent.isTitleVisible()
         .isLinkToMainPageVisible()
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
-    UrlChecker.isPathContainedInCurrentUrl(
-        driver, MercurySubpages.CC_MAIN_PAGE);
+    UrlChecker.isPathContainedInCurrentUrl(driver, MercurySubpages.CC_MAIN_PAGE);
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")
@@ -73,10 +69,8 @@ public class NavigationTests extends NewTestTemplate {
 
     // if value of redirect is changed, test may fail because of icache - after purge it will pass
     // curl -X PURGE http://staging.icache.service.sjc.consul/wikia.php?controller=MercuryApi&method=getPage&title=NavigationTestsMercuryCuratedNavigationTest_003_redirectToExistingArticle
-    String redirect = WikiTextContent.REDIRECT + " " +
-                      WikiTextContent.INTERNAL_LINK_OPENING +
-                      redirectDestination +
-                      WikiTextContent.INTERNAL_LINK_CLOSING;
+    String redirect = WikiTextContent.REDIRECT + " " + WikiTextContent.INTERNAL_LINK_OPENING
+                      + redirectDestination + WikiTextContent.INTERNAL_LINK_CLOSING;
 
     new ArticleContent().push(redirect);
     new ArticleContent().push("just dummy text", redirectDestination);

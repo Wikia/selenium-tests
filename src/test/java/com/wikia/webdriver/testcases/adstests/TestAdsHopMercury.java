@@ -10,17 +10,15 @@ import org.testng.annotations.Test;
 
 public class TestAdsHopMercury extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "testAdsHopPostMessage",
-      groups = "AdsHopPostMessageMercury"
-  )
-  public void adsHopPostMessageMercury(String wikiName,
-                                       String article,
-                                       String providerName,
-                                       String extraParam) {
+  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "testAdsHopPostMessage", groups = "AdsHopPostMessageMercury")
+  public void adsHopPostMessageMercury(
+      String wikiName, String article, String providerName, String extraParam
+  ) {
 
-    AdsHopObject adsHopObject = new AdsHopObject(driver, UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article));
+    AdsHopObject adsHopObject = new AdsHopObject(driver,
+                                                 UrlBuilder.createUrlBuilderForWiki(wikiName)
+                                                     .getUrlForPath(article)
+    );
 
     adsHopObject.verifyClassHidden(AdsContent.MOBILE_TOP_LB, providerName);
     adsHopObject.verifyPostMessage(AdsContent.MOBILE_TOP_LB, providerName, extraParam);

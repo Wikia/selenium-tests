@@ -6,11 +6,8 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,14 +21,14 @@ public class JavascriptActions {
   private final static int WEBDRIVER_WAIT_TIMEOUT_SEC = 15;
   private final JavascriptExecutor js;
   private final WebDriver driver;
-  private final By bannerNotificationContainerBy = By.cssSelector(".banner-notifications-placeholder");
+  private final By bannerNotificationContainerBy = By.cssSelector(
+      ".banner-notifications-placeholder");
   private final By globalNavigationBy = By.cssSelector("#globalNavigation");
 
   public JavascriptActions(WebDriver driver) {
     this.js = (JavascriptExecutor) driver;
     this.driver = driver;
   }
-
 
   public JavascriptActions() {
     this.driver = DriverProvider.getActiveDriver();
@@ -82,20 +79,26 @@ public class JavascriptActions {
     int offset = getOffset();
 
     try {
-      return (Boolean) js.executeScript(
-              "return ($(window).scrollTop() + " + offset + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
-                      + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + " + offset + ")",
-              element);
+      return (Boolean) js.executeScript("return ($(window).scrollTop() + " + offset
+                                        + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
+                                        + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + "
+                                        + offset + ")",
+                                        element
+      );
     } catch (WebDriverException e) {
-      String windowScrollTop = "((window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement " +
-              "|| document.body.parentNode || document.body).scrollTop)";
+      String windowScrollTop =
+          "((window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement "
+          + "|| document.body.parentNode || document.body).scrollTop)";
       String elementOffsetTop = "(arguments[0]).offsetTop";
       String windowHeight = "(window.innerHeight)";
       String elementOuterHeight = "(arguments[0]).clientHeight";
 
-      return (boolean) js.executeScript("return (" + windowScrollTop + " + " + offset + " < " + elementOffsetTop +
-              " && " + windowScrollTop + " + " + windowHeight + " > " + elementOffsetTop + " + " + elementOuterHeight +
-              " + " + offset + ")", element);
+      return (boolean) js.executeScript(
+          "return (" + windowScrollTop + " + " + offset + " < " + elementOffsetTop + " && "
+          + windowScrollTop + " + " + windowHeight + " > " + elementOffsetTop + " + "
+          + elementOuterHeight + " + " + offset + ")",
+          element
+      );
     }
   }
 
@@ -114,14 +117,18 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element) {
     try {
       js.executeScript(
-              "window.scroll(0,parseInt($(arguments[0]).offset().top - " + getOffset() + "));", element);
+          "window.scroll(0,parseInt($(arguments[0]).offset().top - " + getOffset() + "));",
+          element
+      );
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         Log.log("JSError", "JQuery is not defined", false);
       }
       js.executeScript(
-              "window.scroll(0,parseInt(arguments[0].getBoundingClientRect().top + window.pageYOffset - " +
-                      "arguments[0].clientTop - " + getOffset() + "));", element);
+          "window.scroll(0,parseInt(arguments[0].getBoundingClientRect().top + window.pageYOffset - "
+          + "arguments[0].clientTop - " + getOffset() + "));",
+          element
+      );
     }
   }
 
@@ -134,7 +141,9 @@ public class JavascriptActions {
   }
 
   /**
-   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobile or desktop.
+   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobile or
+   * desktop.
+   *
    * @return offset
    */
   private int getOffset() {
@@ -154,8 +163,7 @@ public class JavascriptActions {
 
   public void scrollToSpecificElement(WebElement element) {
     try {
-      js.executeScript(
-          "arguments[0].scrollIntoView(true);", element);
+      js.executeScript("arguments[0].scrollIntoView(true);", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         Log.log("JSError", "JQuery is not defined", false);
@@ -165,16 +173,18 @@ public class JavascriptActions {
 
   public void scrollToElement(WebElement element, int offset) {
     int elementPosition = element.getLocation().getY() - offset;
-    js.executeScript(
-        "window.scroll(0,arguments[0])", elementPosition
-    );
+    js.executeScript("window.scroll(0,arguments[0])", elementPosition);
   }
 
   public void scrollToElementInModal(WebElement element, WebElement modal) {
-    int elementOffsetTop = Integer.parseInt(
-        js.executeScript("return Math.round($(arguments[0]).offset().top)", element).toString());
-    int modalOffsetTop = Integer.parseInt(
-        js.executeScript("return Math.round($(arguments[0]).offset().top)", modal).toString());
+    int elementOffsetTop = Integer.parseInt(js.executeScript(
+        "return Math.round($(arguments[0]).offset().top)",
+        element
+    ).toString());
+    int modalOffsetTop = Integer.parseInt(js.executeScript(
+        "return Math.round($(arguments[0]).offset().top)",
+        modal
+    ).toString());
     int scrollTop = elementOffsetTop - modalOffsetTop;
 
     js.executeScript("$(arguments[0]).scrollTop(arguments[1])", modal, scrollTop);
@@ -185,7 +195,7 @@ public class JavascriptActions {
       if (!isElementInViewPort(element)) {
         scrollToElement(element);
       }
-    }catch(WebDriverException e){
+    } catch (WebDriverException e) {
       Log.info("There might be a problem with scrolling to element", e);
     }
   }
@@ -218,9 +228,10 @@ public class JavascriptActions {
   }
 
   public void changeElementOpacity(String selector, int value) {
-    js.executeScript(
-        "document.querySelector(arguments[0]).style.opacity = arguments[1];",
-        selector, value);
+    js.executeScript("document.querySelector(arguments[0]).style.opacity = arguments[1];",
+                     selector,
+                     value
+    );
   }
 
   public String getWindowErrors() {
@@ -233,7 +244,6 @@ public class JavascriptActions {
         + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
         + "document.querySelector('body').appendChild(script);");
   }
-
 
   public Long getCurrentPosition() {
     return (Long) js.executeScript("return window.pageYOffset;");

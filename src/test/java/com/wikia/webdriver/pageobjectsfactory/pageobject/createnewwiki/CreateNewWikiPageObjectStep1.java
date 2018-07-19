@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
+
 import lombok.Getter;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriverException;
@@ -35,11 +36,10 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private String wikiNameString;
 
   /**
-   * Open special Page to create new Wikia. This special page 'Special:CreateNewWiki'
-   * is only available on www.wikia.com domain
-   * @return
+   * Open special Page to create new Wikia. This special page 'Special:CreateNewWiki' is only
+   * available on www.wikia.com domain
    */
-  public CreateNewWikiPageObjectStep1 open(){
+  public CreateNewWikiPageObjectStep1 open() {
     getUrl(urlBuilder.getWikiGlobalURL() + URLsContent.SPECIAL_CREATE_NEW_WIKI);
 
     return this;
@@ -50,20 +50,26 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     return this.wikiNameString;
   }
 
-
   public void selectLanguage(String lang) {
     jsActions.scrollToElement(wait.forElementClickable(wikiLanguageDropdown));
     String langSelector = lang + ":";
 
     WebElement langElementInDropdown = wikiLanguageList.stream()
-            .filter(e -> e.getAttribute("innerHTML").trim().contains(langSelector)).findAny()
-            .orElseThrow(() -> new WebDriverException(String.format("Couldn't find language [%s]", lang)));
+        .filter(e -> e.getAttribute("innerHTML").trim().contains(langSelector))
+        .findAny()
+        .orElseThrow(() -> new WebDriverException(String.format(
+            "Couldn't find language [%s]",
+            lang
+        )));
     hover(wikiLanguageDropdown);
     langElementInDropdown.click();
 
-    Log
-            .log("selectLanguage", "selected " + langElementInDropdown.getAttribute("innerHTML").trim() + " language", true, driver);
-
+    Log.log(
+        "selectLanguage",
+        "selected " + langElementInDropdown.getAttribute("innerHTML").trim() + " language",
+        true,
+        driver
+    );
   }
 
   public void typeInWikiName(String name) {
@@ -88,10 +94,8 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   }
 
   public void verifyIncorrectWikiName() {
-    wait.forTextInElement(wikiDomainErrorMessage,
-                                             CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
-    Log.log("verifyIncorrectWikiName",
-                          "Verified wiki name violates naming policy", true);
+    wait.forTextInElement(wikiDomainErrorMessage, CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
+    Log.log("verifyIncorrectWikiName", "Verified wiki name violates naming policy", true);
   }
 
   public CreateNewWikiPageObjectStep2 submit() {

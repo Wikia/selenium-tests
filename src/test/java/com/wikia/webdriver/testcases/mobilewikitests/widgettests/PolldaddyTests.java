@@ -14,25 +14,28 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_PollydaddyWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class PolldaddyTests extends NewTestTemplate {
 
   private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "PollDaddyMercury/OneWidget";
-  private static final String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollDaddyMercury/MultipleWidgets";
-  private static final String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "PollDaddymercury/IncorrectWidget";
+  private static final String
+      POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME
+      = "PollDaddyMercury/MultipleWidgets";
+  private static final String
+      POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME
+      = "PollDaddymercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP;
   private static final String QUERY_2 = POLLDADDY_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryPolldaddyWidgetTest_001")
   public void MercuryPolldaddyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new PolldaddyWidgetPageObject().create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new PolldaddyWidgetPageObject().create(
+        POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
@@ -41,8 +44,8 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_002")
   public void MercuryPolldaddyWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new PolldaddyWidgetPageObject().create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new PolldaddyWidgetPageObject().create(
+        POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
     new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
@@ -52,8 +55,8 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_003")
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
-    WidgetPageObject widget =
-            new PolldaddyWidgetPageObject().create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new PolldaddyWidgetPageObject().create(
+        POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     new ArticleContent().push("Polldaddy Widget 003", "Map");
 
     new Navigate().toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
@@ -65,8 +68,8 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    WidgetPageObject widget =
-            new PolldaddyWidgetPageObject().createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    WidgetPageObject widget = new PolldaddyWidgetPageObject().createMultiple(
+        POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
@@ -75,8 +78,8 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_005")
   public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
-    WidgetPageObject widget =
-            new PolldaddyWidgetPageObject().createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget = new PolldaddyWidgetPageObject().createIncorrect(
+        POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
 
     new Navigate().toPage(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
 

@@ -2,13 +2,19 @@ package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 
-public class TrackingOptInModal{
+public class TrackingOptInModal {
+
   private static final By MODAL_SELECTOR = By.cssSelector("div[data-tracking-opt-in-overlay]");
-  private static final By ACCEPT_BUTTON_SELECTOR = By.cssSelector("div[data-tracking-opt-in-accept]");
-  private static final By REJECT_BUTTON_SELECTOR = By.cssSelector("div[data-tracking-opt-in-reject]");
+  private static final By
+      ACCEPT_BUTTON_SELECTOR
+      = By.cssSelector("div[data-tracking-opt-in-accept]");
+  private static final By
+      REJECT_BUTTON_SELECTOR
+      = By.cssSelector("div[data-tracking-opt-in-reject]");
   private final BasePageObject page;
 
   public TrackingOptInModal(BasePageObject page) {

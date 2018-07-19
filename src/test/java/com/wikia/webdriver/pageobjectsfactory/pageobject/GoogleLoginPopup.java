@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class GoogleLoginPopup extends BasePageObject{
+public class GoogleLoginPopup extends BasePageObject {
 
   @FindBy(css = "#Email")
   private WebElement usernameInput;
@@ -22,7 +22,7 @@ public class GoogleLoginPopup extends BasePageObject{
     super();
   }
 
-  public void SignInToGoogle(String userName, String password){
+  public void SignInToGoogle(String userName, String password) {
     wait.forElementVisible(usernameInput);
     usernameInput.sendKeys(userName);
     nextButton.click();

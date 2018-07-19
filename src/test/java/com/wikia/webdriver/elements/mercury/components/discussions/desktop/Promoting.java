@@ -5,7 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
 public class Promoting extends BasePageObject {
 
   @FindBy(css = ".smart-banner-android")
@@ -25,6 +24,4 @@ public class Promoting extends BasePageObject {
   public void clickInstallOnMobileBanner() {
     openLinkInNewTab(mobileInstallButton);
   }
-
-
 }
