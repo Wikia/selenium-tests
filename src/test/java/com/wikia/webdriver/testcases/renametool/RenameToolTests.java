@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
 public class RenameToolTests extends NewTestTemplate {
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void userProvidesCorrectNewNameDoesntClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
@@ -41,7 +41,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void userProvidesInCorrectNewNameDoesClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
@@ -55,7 +55,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void userProvidesNoNewUserNameErrorIsShown() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
@@ -76,7 +76,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void goToHelpPage() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open();
@@ -98,7 +98,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   public void newUserCreateAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -124,7 +124,7 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   @Execute(onWikia = "communitytest")
   public void newUserCreateEditProfileAndRenameDone() {
     Credentials credentials = new Credentials();

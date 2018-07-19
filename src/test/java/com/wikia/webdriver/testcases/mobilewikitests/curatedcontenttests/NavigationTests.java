@@ -35,7 +35,7 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_001")
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   public void mercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 

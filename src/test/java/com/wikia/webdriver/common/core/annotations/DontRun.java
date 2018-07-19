@@ -11,5 +11,6 @@ import java.lang.annotation.*;
 
 public @interface DontRun {
 
-  String[] env();
+  String[] env() default "";
+  String[] language() default "";
 }

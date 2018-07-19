@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mobilewikitests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -140,6 +141,7 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
+  @DontRun(language = "szl")
   public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
     init();
 

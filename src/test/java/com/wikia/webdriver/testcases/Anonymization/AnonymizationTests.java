@@ -38,7 +38,7 @@ public class AnonymizationTests extends NewTestTemplate {
       = "We don't recognize these credentials. Try again or register a new account.";
 
   @Test
-  @DontRun(env = "sandbox-https")
+  @DontRun(language = "szl")
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());

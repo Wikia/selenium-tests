@@ -228,7 +228,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         .getConstructorOrMethod()
         .getMethod()
         .isAnnotationPresent(DontRun.class)) {
-      Log.ok("Test SKIPPED", "this test is not supported in this environment");
+      Log.ok("Test SKIPPED", result.getThrowable().getMessage());
       result.setStatus(ITestResult.SUCCESS);
       onTestSuccess(result);
     } else {
