@@ -42,9 +42,8 @@ public class VideoFanTakeover extends AutoplayVuap {
   }
 
   private WebElement getVideoCloseButton(String slotName) {
-    return wait.forElementVisible(By.cssSelector(String.format(
-        UI_ELEMENT_CLOSE_BUTTON_FORMAT,
-        slotName
+    return wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT,
+                                                               slotName
     )));
   }
 
@@ -95,9 +94,8 @@ public class VideoFanTakeover extends AutoplayVuap {
   public Double getCurrentVideoTimeOnMobile() {
     String result;
 
-    result = driver.findElement(By.cssSelector(String.format(
-        MOBILE_VIDEO_SELECTOR_FORMAT,
-        slotName
+    result = driver.findElement(By.cssSelector(String.format(MOBILE_VIDEO_SELECTOR_FORMAT,
+                                                             slotName
     ))).getAttribute("currentTime");
     return Double.parseDouble(result);
   }

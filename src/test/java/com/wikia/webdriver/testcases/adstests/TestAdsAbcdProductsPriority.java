@@ -14,9 +14,8 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
   private static final String DEBUG_QUERY_STRING = "wikia_video_adapter=2000";
   private static final String WIKIA = "project43";
-  private static final Page TEST_PAGE = new Page(
-      WIKIA,
-      "SyntheticTests/ProductsPriority/OutstreamOverABCD"
+  private static final Page TEST_PAGE = new Page(WIKIA,
+                                                 "SyntheticTests/ProductsPriority/OutstreamOverABCD"
   );
 
   private static final String ABCD_LINE_ITEM_ID = "4417483196";
@@ -25,12 +24,10 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   @Test(groups = {"AdsOutstreamVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis",
                   "AbcdProductPriorityOasis"})
   public void adsOutstreamVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis() {
-    AdsBaseObject ads = new AdsBaseObject(
-        driver,
-        urlBuilder.appendQueryStringToURL(
-            TEST_PAGE.getUrl(),
-            DEBUG_QUERY_STRING
-        )
+    AdsBaseObject ads = new AdsBaseObject(driver,
+                                          urlBuilder.appendQueryStringToURL(TEST_PAGE.getUrl(),
+                                                                            DEBUG_QUERY_STRING
+                                          )
     );
 
     ads.scrollToSlot(AdsContent.TOP_LB);
@@ -56,13 +53,11 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   }
 
   private void verifyNoUAPSizesInSlot(AdsBaseObject ads, String slot) {
-    Assert.assertFalse(
-        ads.slotHasSize(slot, 2, 2),
-        String.format("Slot %s has UAP supported 2x2 size", slot)
+    Assert.assertFalse(ads.slotHasSize(slot, 2, 2),
+                       String.format("Slot %s has UAP supported 2x2 size", slot)
     );
-    Assert.assertFalse(
-        ads.slotHasSize(slot, 3, 3),
-        String.format("Slot %s has UAP supported 3x3 size", slot)
+    Assert.assertFalse(ads.slotHasSize(slot, 3, 3),
+                       String.format("Slot %s has UAP supported 3x3 size", slot)
     );
   }
 

@@ -39,9 +39,8 @@ public class VetModalCaptionTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
-    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(
-        wikiURL,
-        articleTitleCaption
+    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL,
+                                                                             articleTitleCaption
     );
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject
@@ -68,9 +67,8 @@ public class VetModalCaptionTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
     String captionText = String.format("Caption-%d", DateTime.now().getMillis());
-    new ArticleContent().push(String.format(
-        "[[File:WikiEvolution - Poznańska Wiki|thumb|right|335 px|%s]]",
-        captionText
+    new ArticleContent().push(String.format("[[File:WikiEvolution - Poznańska Wiki|thumb|right|335 px|%s]]",
+                                            captionText
     ));
 
     VetOptionsComponentObject
@@ -86,9 +84,8 @@ public class VetModalCaptionTests extends NewTestTemplate {
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleNotEditable = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(
-        wikiURL,
-        articleTitleNotEditable
+    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL,
+                                                                             articleTitleNotEditable
     );
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject

@@ -17,26 +17,22 @@ public class AdsDataProvider {
   public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
   public static final Page UAP_ABCD_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP/ABCD");
   public static final Page UAP_HIVI_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP/HiVi");
-  public static final Page UAP_CTP_HIVI_PAGE = new Page(
-      WIKI_SPECIAL,
-      "SyntheticTests/UAP/HiVi/CTP"
+  public static final Page UAP_CTP_HIVI_PAGE = new Page(WIKI_SPECIAL,
+                                                        "SyntheticTests/UAP/HiVi/CTP"
   );
   public static final Page PAGE_A9_DISPLAY = new Page(WIKI_SPECIAL, "SyntheticTests/Amazon");
   public static final Page PAGE_FV = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo");
-  public static final Page PAGE_FV_RUBICON = new Page(
-      WIKI_SPECIAL,
-      "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000"
+  public static final Page PAGE_FV_RUBICON = new Page(WIKI_SPECIAL,
+                                                      "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000"
   );
   public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
   public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
   public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
-  public static final Page PAGE_LONG_WITH_FMR = new Page(
-      WIKI_SPECIAL,
-      "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"
+  public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL,
+                                                         "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"
   );
-  public static final Page PAGE_PREBID = new Page(
-      WIKI_SPECIAL,
-      "SyntheticTests/RTB/Prebid.js/Wikia"
+  public static final Page PAGE_PREBID = new Page(WIKI_SPECIAL,
+                                                  "SyntheticTests/RTB/Prebid.js/Wikia"
   );
   public static final Page PAGE_CAP = new Page(WIKI_SPECIAL, "SyntheticTests/Cap");
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
@@ -56,9 +52,8 @@ public class AdsDataProvider {
   private static final String
       FV_JWPLAYER_WITH_SOUND_PAGE_URI
       = "SyntheticTests/Premium/FeaturedVideo/JWPlayer/WithSound";
-  public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(
-      WIKI_SPECIAL,
-      FV_JWPLAYER_WITH_SOUND_PAGE_URI
+  public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(WIKI_SPECIAL,
+                                                                 FV_JWPLAYER_WITH_SOUND_PAGE_URI
   );
 
   private AdsDataProvider() {}
@@ -369,13 +364,17 @@ public class AdsDataProvider {
         {new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"), "",
          ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)
              .put("slotSize", new Dimension(300, 250))
-             .put("lineItemId", "269679732").build()}, {new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"
-    ), "", ImmutableMap.<String, Object>builder().put(
-        "slotName",
-        AdsContent.FLOATING_MEDREC
-    ).put("slotSize", new Dimension(300, 250)).put("lineItemId", "269679732").build()},
+             .put("lineItemId", "269679732").build()}, {new Page(WIKI_SPECIAL,
+                                                                 "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"
+    ), "", ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)
+                                                            .put(
+                                                                "slotSize",
+                                                                new Dimension(300, 250)
+                                                            )
+                                                            .put(
+                                                                "lineItemId",
+                                                                "269679732"
+                                                            ).build()},
         {new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"), "",
          ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)
              .put("slotSize", new Dimension(160, 600))
@@ -406,9 +405,8 @@ public class AdsDataProvider {
                                                        .put("slotSize", new Dimension(300, 250))
                                                        .put("lineItemId", "365404452")
                                                        .build()
-    ), Arrays.asList(ImmutableMap.<String, Object>builder().put(
-        "slotName",
-        AdsContent.FLOATING_MEDREC
+    ), Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
+                                                                AdsContent.FLOATING_MEDREC
                      )
                          .put("slotSize", new Dimension(300, 250))
                          .put("lineItemId", "365416332")
@@ -425,39 +423,37 @@ public class AdsDataProvider {
     return new Object[][]{{UAP_PAGE, Arrays.asList(ImmutableMap.<String, Object>builder().put(
         "slotName",
         AdsContent.MOBILE_TOP_LB
-    ).put("slotSize", new Dimension(360, 540)).put("lineItemId", "365404452").build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put(
-                               "slotName",
-                               AdsContent.MOBILE_AD_IN_CONTENT
+    )
+                                                       .put("slotSize", new Dimension(360, 540))
+                                                       .put("lineItemId", "365404452")
+                                                       .build()),
+                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
+                                                                                    AdsContent.MOBILE_AD_IN_CONTENT
                            )
                                              .put("slotSize", new Dimension(300, 250))
                                              .put("lineItemId", "365416332")
                                              .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put(
-                               "slotName",
-                               AdsContent.MOBILE_BOTTOM_LB
+                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
+                                                                                    AdsContent.MOBILE_BOTTOM_LB
                            )
                                              .put("slotSize", new Dimension(360, 540))
                                              .put("lineItemId", "365416332")
                                              .build())},
                           {new Page(WIKI_SPECIAL, "SyntheticTests/UAP/Infobox"),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put(
-                               "slotName",
-                               AdsContent.MOBILE_TOP_LB
+                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
+                                                                                    AdsContent.MOBILE_TOP_LB
                            )
                                              .put("slotSize", new Dimension(360, 540))
                                              .put("lineItemId", "365404452")
                                              .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put(
-                               "slotName",
-                               AdsContent.MOBILE_AD_IN_CONTENT
+                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
+                                                                                    AdsContent.MOBILE_AD_IN_CONTENT
                            )
                                              .put("slotSize", new Dimension(300, 250))
                                              .put("lineItemId", "365416332")
                                              .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put(
-                               "slotName",
-                               AdsContent.MOBILE_BOTTOM_LB
+                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
+                                                                                    AdsContent.MOBILE_BOTTOM_LB
                            )
                                              .put("slotSize", new Dimension(360, 540))
                                              .put("lineItemId", "365416332")
@@ -466,12 +462,12 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] adsVuapClickToPlayDesktop() {
-    return new Object[][]{{new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING
-    ), AdsContent.TOP_LB}, {new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/VUAP/ClickToPlay/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING
+    return new Object[][]{{new Page(WIKI_SPECIAL,
+                                    "SyntheticTests/VUAP/ClickToPlay/BlueAd"
+                                    + PORVATA_OVERRIDE_VAST_QUERY_STRING
+    ), AdsContent.TOP_LB}, {new Page(WIKI_SPECIAL,
+                                     "SyntheticTests/VUAP/ClickToPlay/BlueAd"
+                                     + PORVATA_OVERRIDE_VAST_QUERY_STRING
     ), AdsContent.BOTTOM_LB}};
   }
 
@@ -491,25 +487,23 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] adsVuapDesktop() {
-    return new Object[][]{{new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING
-    ), AdsContent.TOP_LB}, {new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING
+    return new Object[][]{{new Page(WIKI_SPECIAL,
+                                    "SyntheticTests/VUAP/ResolvedState/BlueAd"
+                                    + PORVATA_OVERRIDE_VAST_QUERY_STRING
+    ), AdsContent.TOP_LB}, {new Page(WIKI_SPECIAL,
+                                     "SyntheticTests/VUAP/ResolvedState/BlueAd"
+                                     + PORVATA_OVERRIDE_VAST_QUERY_STRING
     ), AdsContent.BOTTOM_LB}};
   }
 
   @DataProvider
   public static Object[][] adsVuapResolvedState() {
-    return new Object[][]{{new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING
-        + "&resolved_state=true"
-    ), AdsContent.TOP_LB}, {new Page(
-        WIKI_SPECIAL,
-        "SyntheticTests/VUAP/ResolvedState/BlueAd" + PORVATA_OVERRIDE_VAST_QUERY_STRING
-        + "&resolved_state=true"
+    return new Object[][]{{new Page(WIKI_SPECIAL,
+                                    "SyntheticTests/VUAP/ResolvedState/BlueAd"
+                                    + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"
+    ), AdsContent.TOP_LB}, {new Page(WIKI_SPECIAL,
+                                     "SyntheticTests/VUAP/ResolvedState/BlueAd"
+                                     + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"
     ), AdsContent.BOTTOM_LB}};
   }
 

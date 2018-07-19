@@ -31,9 +31,8 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     adsInterstitial.getUrl(page);
 
     adsInterstitial.waitForPageLoadedWithGpt();
-    Assertion.assertTrue(
-        adsInterstitial.isInterstitialAdDisplayed(),
-        "No Interstitial ad is not displayed"
+    Assertion.assertTrue(adsInterstitial.isInterstitialAdDisplayed(),
+                         "No Interstitial ad is not displayed"
     );
     adsInterstitial.verifySize(adSize);
     adsInterstitial.closeInterstitial();

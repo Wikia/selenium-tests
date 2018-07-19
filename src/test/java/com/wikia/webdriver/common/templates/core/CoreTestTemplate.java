@@ -45,10 +45,9 @@ public abstract class CoreTestTemplate {
     String currentBrowser = Configuration.getBrowser();
 
     if (!browser.equals(currentBrowser)) {
-      Log.warning(
-          "Parameter override",
-          "Browser parameter changed by annotation" + ", old value: " + browser + ", new value: "
-          + currentBrowser
+      Log.warning("Parameter override",
+                  "Browser parameter changed by annotation" + ", old value: " + browser
+                  + ", new value: " + currentBrowser
       );
     }
 

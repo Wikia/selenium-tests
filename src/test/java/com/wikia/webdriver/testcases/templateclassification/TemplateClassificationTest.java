@@ -30,16 +30,14 @@ public class TemplateClassificationTest extends NewTestTemplate {
 
     String oldTemplateType = templateClassification.getTemplateType();
 
-    Assertion.assertEquals(
-        templateClassification.getTemplateType(),
-        TemplateTypes.UNKNOWN.getType()
+    Assertion.assertEquals(templateClassification.getTemplateType(),
+                           TemplateTypes.UNKNOWN.getType()
     );
 
     templateClassification.open().changeTemplateType(TemplateTypes.INFOBOX).save();
 
-    Assertion.assertEquals(
-        templateClassification.getTemplateType(),
-        TemplateTypes.INFOBOX.getType()
+    Assertion.assertEquals(templateClassification.getTemplateType(),
+                           TemplateTypes.INFOBOX.getType()
     );
 
     templateClassification.open().changeTemplateType(TemplateTypes.QUOTE).save();

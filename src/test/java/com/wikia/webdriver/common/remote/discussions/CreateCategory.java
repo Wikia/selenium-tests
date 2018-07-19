@@ -17,6 +17,7 @@ public class CreateCategory {
   private static final int PARENT_ID = 1;
   private static final String CREATE_CATEGORY_URL_SUFFIX = "%s/forums";
   private final PostRemoteOperation remoteOperation;
+
   CreateCategory(User user) {
     remoteOperation = new PostRemoteOperation(user);
   }
@@ -44,9 +45,8 @@ public class CreateCategory {
   }
 
   private String buildUrl(final CreateCategoryContext context) {
-    return DiscussionsClient.service(String.format(
-        CREATE_CATEGORY_URL_SUFFIX,
-        context.getSiteId()
+    return DiscussionsClient.service(String.format(CREATE_CATEGORY_URL_SUFFIX,
+                                                   context.getSiteId()
     ));
   }
 

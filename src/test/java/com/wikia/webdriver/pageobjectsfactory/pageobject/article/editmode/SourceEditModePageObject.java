@@ -299,9 +299,8 @@ public class SourceEditModePageObject extends EditMode {
   public int getVideoWidth() {
     String content = getContent();
 
-    return Integer.parseInt(content.substring(
-        content.indexOf("px") - 4,
-        content.indexOf("px") - 1
+    return Integer.parseInt(content.substring(content.indexOf("px") - 4,
+                                              content.indexOf("px") - 1
     ));
   }
 

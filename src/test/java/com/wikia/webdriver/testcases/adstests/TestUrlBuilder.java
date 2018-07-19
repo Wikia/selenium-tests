@@ -224,7 +224,8 @@ public class TestUrlBuilder {
                                         (Boolean) data[2],
                                         (Boolean) data[3],
                                         DEFAULT_LANGUAGE
-      ).getUrlForPath((String) data[1]), (String) data[8]);
+      )
+                              .getUrlForPath((String) data[1]), (String) data[8]);
       Assert.assertEquals(c.newInstance((String) data[0],
                                         "staging",
                                         (Boolean) data[2],
@@ -273,7 +274,8 @@ public class TestUrlBuilder {
                                         (Boolean) data[2],
                                         (Boolean) data[3],
                                         (String) data[10]
-      ).getUrlForPath((String) data[1]), (String) data[8]);
+      )
+                              .getUrlForPath((String) data[1]), (String) data[8]);
       Assert.assertEquals(c.newInstance((String) data[0],
                                         "staging",
                                         (Boolean) data[2],
@@ -350,12 +352,11 @@ public class TestUrlBuilder {
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void appendQueryStringTests() throws Exception {
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
-    UrlBuilder urlBuilder = c.newInstance(
-        "mediawiki119",
-        "preview",
-        false,
-        false,
-        DEFAULT_LANGUAGE
+    UrlBuilder urlBuilder = c.newInstance("mediawiki119",
+                                          "preview",
+                                          false,
+                                          false,
+                                          DEFAULT_LANGUAGE
     );
 
     Assert.assertEquals(
@@ -370,12 +371,11 @@ public class TestUrlBuilder {
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void getUrlWithWWW() throws Exception {
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
-    UrlBuilder urlBuilder = c.newInstance(
-        "mercuryautomationtesting",
-        "preview",
-        false,
-        false,
-        DEFAULT_LANGUAGE
+    UrlBuilder urlBuilder = c.newInstance("mercuryautomationtesting",
+                                          "preview",
+                                          false,
+                                          false,
+                                          DEFAULT_LANGUAGE
     );
 
     Assert.assertEquals(

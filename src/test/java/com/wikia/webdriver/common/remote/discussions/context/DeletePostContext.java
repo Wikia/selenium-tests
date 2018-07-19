@@ -20,8 +20,7 @@ public class DeletePostContext extends RemoteContext {
   }
 
   public static DeletePostContext defaultContextUsing(
-      final String siteId,
-      final PostEntity.Data data
+      final String siteId, final PostEntity.Data data
   ) {
     Objects.requireNonNull(data.getId());
 

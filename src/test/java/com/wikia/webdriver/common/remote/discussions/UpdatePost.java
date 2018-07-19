@@ -33,10 +33,9 @@ public class UpdatePost {
   }
 
   private String buildUrl(final UpdatePostContext context) {
-    return DiscussionsClient.service(String.format(
-        UPDATE_POST_URL_SUFFIX,
-        context.getSiteId(),
-        context.getThreadId()
+    return DiscussionsClient.service(String.format(UPDATE_POST_URL_SUFFIX,
+                                                   context.getSiteId(),
+                                                   context.getThreadId()
     ));
   }
 }

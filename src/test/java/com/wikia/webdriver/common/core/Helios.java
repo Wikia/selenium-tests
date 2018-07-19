@@ -69,17 +69,15 @@ public class Helios {
 
   public static void deleteAllTokens(User user) {
     if (user.getUserId().isEmpty()) {
-      throw new IllegalArgumentException(String.format(
-          "No userId found for user %s",
-          user.getUserName()
+      throw new IllegalArgumentException(String.format("No userId found for user %s",
+                                                       user.getUserName()
       ));
     }
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS);
 
-    HttpDelete httpDelete = new HttpDelete(String.format(
-        "%s/%s/tokens",
-        heliosGetTokenURL,
-        user.getUserId()
+    HttpDelete httpDelete = new HttpDelete(String.format("%s/%s/tokens",
+                                                         heliosGetTokenURL,
+                                                         user.getUserId()
     ));
     httpDelete.setHeader(THE_SCHWARTZ, Configuration.getCredentials().apiToken);
     httpDelete.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
@@ -254,9 +252,8 @@ public class Helios {
   }
 
   private static String getUserIdUrl(String encodedUsername) {
-    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(
-        COMMUNITY_WIKI,
-        Configuration.DEFAULT_LANGUAGE
+    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI,
+                                                                    Configuration.DEFAULT_LANGUAGE
     ).getUrl();
     return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
                          communityUrl,

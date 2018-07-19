@@ -20,8 +20,7 @@ public class ModeratePostContext extends RemoteContext {
   }
 
   public static ModeratePostContext defaultContextUsing(
-      final String siteId,
-      final PostEntity.Data data
+      final String siteId, final PostEntity.Data data
   ) {
     Objects.requireNonNull(
         data.getFirstPostId(),

@@ -381,12 +381,11 @@ public class WikiBasePageObject extends BasePageObject {
         driver.switchTo().frame("PreviewFrame");
       }
       if (driver.findElements(MERCURY_SKIN).size() > 0) {
-        wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR_MERCURY.replace(
-            "%userName%",
-            userName.replace(
-                " ",
-                "_"
-            )
+        wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%",
+                                                                                      userName.replace(
+                                                                                          " ",
+                                                                                          "_"
+                                                                                      )
         )));
       } else {
         WebElement avatar = wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
@@ -412,9 +411,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public DeletePageObject deletePage() {
-    String url = urlBuilder.appendQueryStringToURL(
-        driver.getCurrentUrl(),
-        URLsContent.ACTION_DELETE
+    String url = urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
+                                                   URLsContent.ACTION_DELETE
     );
     getUrl(url);
     Log.log("deletePage", "delete page opened", true);
@@ -480,15 +478,13 @@ public class WikiBasePageObject extends BasePageObject {
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName);
 
-    driver.manage().addCookie(new Cookie("access_token",
-                                         token,
-                                         String.format(
-                                             ".%s",
-                                             Configuration.getEnvType().getWikiaDomain()
-                                         ),
-                                         null,
-                                         null
-    ));
+    driver.manage()
+        .addCookie(new Cookie("access_token",
+                              token,
+                              String.format(".%s", Configuration.getEnvType().getWikiaDomain()),
+                              null,
+                              null
+        ));
 
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);
@@ -533,9 +529,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public WatchPageObject unfollowCurrentUrl() {
-    driver.get(urlBuilder.appendQueryStringToURL(
-        driver.getCurrentUrl(),
-        URLsContent.ACTION_UNFOLLOW
+    driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
+                                                 URLsContent.ACTION_UNFOLLOW
     ));
     return new WatchPageObject();
   }
@@ -573,9 +568,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   protected String getPseudoElementValue(
-      WebElement element,
-      String pseudoElement,
-      String cssValue
+      WebElement element, String pseudoElement, String cssValue
   ) {
     return driver.executeScript("return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
                                 element,
@@ -628,12 +621,11 @@ public class WikiBasePageObject extends BasePageObject {
     Pattern p = Pattern.compile("\\d+");
     Matcher m = p.matcher(headerWhereIsMyExtensionPage.getText());
     m.find();
-    Assertion.assertTrue(expectedRange.contains(Integer.parseInt(m.group())),
-                         String.format("Number of Top 1k Wikis between %s and %s",
-                                       expectedRange.getMinimum(),
-                                       expectedRange.getMaximum()
-                         )
-    );
+    Assertion.assertTrue(expectedRange.contains(Integer.parseInt(m.group())), String.format(
+        "Number of Top 1k Wikis between %s and %s",
+        expectedRange.getMinimum(),
+        expectedRange.getMaximum()
+    ));
   }
 
   protected Boolean isNewGlobalNavPresent() {
@@ -681,10 +673,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getUrlWithCacheBuster(String url) {
-    return urlBuilder.appendQueryStringToURL(
-        url,
-        "cb=" + DateTime.now().getMillis()
-        + "&AbTest.DISCUSSIONS_LIGHTWEIGHT_CONTRIBUTION_MENU=OLD_1"
+    return urlBuilder.appendQueryStringToURL(url,
+                                             "cb=" + DateTime.now().getMillis()
+                                             + "&AbTest.DISCUSSIONS_LIGHTWEIGHT_CONTRIBUTION_MENU=OLD_1"
     );
     //Temporary change until the outcome of experiment in IRIS-5829
   }

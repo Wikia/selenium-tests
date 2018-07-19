@@ -103,17 +103,19 @@ public class EditorTests extends NewTestTemplate {
         .waitForAddCategoryButtonToBeVisible()
         .publish();
 
-    Log.log("Curated Content",
-            MercuryMessages.VISIBLE_MSG,
-            MercuryMessages.INVISIBLE_MSG,
-            new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR)
+    Log.log(
+        "Curated Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR)
     );
 
     new CuratedContentPageObject().clickOnCuratedContentElementByIndex(0);
 
-    Assertion.assertNumber(new CuratedContentPageObject().getCuratedContentItemsNumber(),
-                           1,
-                           "If error says that 3 elements were found - it means getList API returned cached response - ticket created: XW-1281"
+    Assertion.assertNumber(
+        new CuratedContentPageObject().getCuratedContentItemsNumber(),
+        1,
+        "If error says that 3 elements were found - it means getList API returned cached response - ticket created: XW-1281"
     );
   }
 
@@ -138,10 +140,11 @@ public class EditorTests extends NewTestTemplate {
         .waitForAddCategoryButtonToBeVisible()
         .publish();
 
-    Log.log("Curated Content",
-            MercuryMessages.VISIBLE_MSG,
-            MercuryMessages.INVISIBLE_MSG,
-            new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR)
+    Log.log(
+        "Curated Content",
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        new CuratedMainPagePageObject().isCuratedElementVisible(CURATED_CONTENT_SELECTOR)
     );
   }
 }

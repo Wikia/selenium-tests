@@ -84,8 +84,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   }
 
   private void anonymousUserOnReplyEditorClickIsRedirectedTo(
-      final ReplyCreator replyCreator,
-      final String urlFragment
+      final ReplyCreator replyCreator, final String urlFragment
   ) {
     Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
     replyCreator.clickOkButtonInSignInDialog();

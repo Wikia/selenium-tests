@@ -34,13 +34,14 @@ public class UserRegistration {
       Log.logError("Wrong internal services URL", e);
     }
     try {
-      HttpPost httpPost = new HttpPost(new URI(url.getProtocol(),
-                                               url.getUserInfo(),
-                                               url.getHost(),
-                                               url.getPort(),
-                                               url.getPath(),
-                                               url.getQuery(),
-                                               url.getRef()
+      HttpPost httpPost = new HttpPost(new URI(
+          url.getProtocol(),
+          url.getUserInfo(),
+          url.getHost(),
+          url.getPort(),
+          url.getPath(),
+          url.getQuery(),
+          url.getRef()
       ));
 
       httpPost.setHeader("X-Client-Ip", "8.8.8.8");

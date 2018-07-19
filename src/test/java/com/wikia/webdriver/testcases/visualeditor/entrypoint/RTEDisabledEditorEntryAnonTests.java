@@ -99,9 +99,8 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009",
                   "actionURLEntry"})
   public void RTEDisabledEditorEntryAnonTests_009_actionEdit() {
-    SourceEditModePageObject src = base.navigateToArticleEditPageSrc(
-        wikiURL,
-        base.getNameForArticle()
+    SourceEditModePageObject src = base.navigateToArticleEditPageSrc(wikiURL,
+                                                                     base.getNameForArticle()
     );
     src.verifySourceOnlyMode();
   }

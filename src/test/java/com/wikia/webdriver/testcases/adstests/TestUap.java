@@ -48,9 +48,8 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
     ads.scrollToPosition(MOBILE_IN_CONTENT);
-    Assertion.assertTrue(
-        ads.isMobileInContentAdDisplayed(),
-        "Mobile in content ad is not displayed"
+    Assertion.assertTrue(ads.isMobileInContentAdDisplayed(),
+                         "Mobile in content ad is not displayed"
     );
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
@@ -58,9 +57,8 @@ public class TestUap extends TemplateNoFirstLoad {
 
     ads.scrollToRecirculationPrefooter();
     ads.scrollToPosition(By.id(AdsContent.MOBILE_BOTTOM_LB));
-    Assertion.assertTrue(
-        ads.isMobileBottomLeaderboardAdDisplayed(),
-        "Mobile bottom leaderboard ad is not dispalyed"
+    Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(),
+                         "Mobile bottom leaderboard ad is not dispalyed"
     );
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);

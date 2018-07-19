@@ -150,10 +150,9 @@ public class GlobalNavigation extends BasePageObject {
 
   public HomePage clickCommunityCentralLink() {
     wait.forElementClickable(communityCentralLink).click();
-    Log.log(
-        "clickCommunityCentralLink",
-        "clicked on community central link in global nav bar",
-        true
+    Log.log("clickCommunityCentralLink",
+            "clicked on community central link in global nav bar",
+            true
     );
 
     return new HomePage();

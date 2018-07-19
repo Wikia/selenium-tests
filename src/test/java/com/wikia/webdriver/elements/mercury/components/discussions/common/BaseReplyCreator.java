@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,18 +15,31 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   private By errorNotification = By.className("error");
 
   protected abstract WebElement getReplyCreatorTextArea();
+
   protected abstract WebElement getEditor();
+
   protected abstract WebElement getDialogSignIn();
+
   protected abstract WebElement getOkButtonInSignInDialog();
+
   protected abstract WebElement getSignInButtonInSignInDialog();
+
   protected abstract WebElement getGuidelinesReadButton();
+
   protected abstract WebElement getTextarea();
+
   protected abstract WebElement getSubmitButton();
+
   protected abstract WebElement getLoadingSuccess();
+
   protected abstract WebElement getImagePreview();
+
   protected abstract WebElement getUploadButton();
+
   protected abstract WebElement getImageDeleteButton();
+
   protected abstract By getOpenGraphContainer();
+
   protected abstract By getOpenGraphText();
 
   @Override
@@ -44,7 +58,6 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     getOkButtonInSignInDialog().click();
     return this;
   }
-
 
   @Override
   public ReplyCreator clickSignInButtonInSignInDialog() {
@@ -107,8 +120,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   public boolean hasOpenGraph() {
     boolean result = false;
-    final WebElement openGraphContainer = getEditor()
-      .findElement(getOpenGraphContainer());
+    final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
     if (null != openGraphContainer) {
       result = null != openGraphContainer.findElement(getOpenGraphText());
     }
@@ -134,5 +146,4 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
     return this;
   }
-
 }

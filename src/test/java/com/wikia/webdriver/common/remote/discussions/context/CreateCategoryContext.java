@@ -17,8 +17,7 @@ public class CreateCategoryContext extends RemoteContext {
   }
 
   public static CreateCategoryContext defaultContextUsing(
-      final String siteId,
-      final String categoryName
+      final String siteId, final String categoryName
   ) {
     return CreateCategoryContext.builder().siteId(siteId).categoryName(categoryName).build();
   }

@@ -49,10 +49,9 @@ public class EditingPostTests extends NewTestTemplate {
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
-    Assertion.assertEquals(
-        post.getEditedBySectionText(),
-        EDITED_BY_ADMINISTRATORS,
-        EDITED_BY_ADMINISTRATORS_MESSAGE
+    Assertion.assertEquals(post.getEditedBySectionText(),
+                           EDITED_BY_ADMINISTRATORS,
+                           EDITED_BY_ADMINISTRATORS_MESSAGE
     );
   }
 
@@ -86,10 +85,9 @@ public class EditingPostTests extends NewTestTemplate {
         .getPost()
         .findPostById(data.getId());
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
-    Assertion.assertEquals(
-        post.getEditedBySectionText(),
-        EDITED_BY_STAFF,
-        SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE
+    Assertion.assertEquals(post.getEditedBySectionText(),
+                           EDITED_BY_STAFF,
+                           SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE
     );
   }
 
@@ -101,10 +99,9 @@ public class EditingPostTests extends NewTestTemplate {
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
-    Assertion.assertEquals(
-        post.getEditedBySectionText(),
-        EDITED_BY_ADMINISTRATORS,
-        EDITED_BY_ADMINISTRATORS_MESSAGE
+    Assertion.assertEquals(post.getEditedBySectionText(),
+                           EDITED_BY_ADMINISTRATORS,
+                           EDITED_BY_ADMINISTRATORS_MESSAGE
     );
   }
 
@@ -138,10 +135,9 @@ public class EditingPostTests extends NewTestTemplate {
         .getPost()
         .findPostById(data.getId());
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
-    Assertion.assertEquals(
-        post.getEditedBySectionText(),
-        EDITED_BY_STAFF,
-        SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE
+    Assertion.assertEquals(post.getEditedBySectionText(),
+                           EDITED_BY_STAFF,
+                           SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE
     );
   }
 

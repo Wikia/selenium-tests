@@ -52,20 +52,22 @@ public class SpecialBlockListPage extends WikiBasePageObject {
 
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
-    Log.log("Special:BlockList verifyUSerUnblocked",
-            "verified that user is not on blocked users list",
-            true,
-            driver
+    Log.log(
+        "Special:BlockList verifyUSerUnblocked",
+        "verified that user is not on blocked users list",
+        true,
+        driver
     );
   }
 
   public void verifyUserBlocked(String userName) {
     wait.forElementVisible(By.cssSelector(
         "table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
-    Log.log("Special:BlockList verifyUSerUnblocked",
-            "verified that user is on blocked users list",
-            true,
-            driver
+    Log.log(
+        "Special:BlockList verifyUSerUnblocked",
+        "verified that user is on blocked users list",
+        true,
+        driver
     );
   }
 

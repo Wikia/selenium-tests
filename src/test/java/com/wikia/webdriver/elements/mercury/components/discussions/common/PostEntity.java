@@ -1,10 +1,8 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.logging.Log;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.SneakyThrows;
+
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -19,13 +17,11 @@ public class PostEntity {
   private static final String CLASS_ATTRIBUTE = "class";
 
   private static final String POST_EDITED_BY_CLASS_NAME = "post-edited-by-row";
-
+  @Getter(AccessLevel.PACKAGE)
+  private final WebElement post;
   @Getter
   @FindBy(css = ".follow-area.is-active")
   private WebElement followingActiveState;
-
-  @Getter(AccessLevel.PACKAGE)
-  private final WebElement post;
 
   public PostEntity(WebElement post) {
     this.post = post;
@@ -76,8 +72,8 @@ public class PostEntity {
   }
 
   public String findId() {
-    final String idAttribute =
-        post.findElement(By.className("discussion-more-options")).getAttribute("id");
+    final String idAttribute = post.findElement(By.className("discussion-more-options"))
+        .getAttribute("id");
     return StringUtils.substringAfterLast(idAttribute, "-");
   }
 
@@ -91,13 +87,13 @@ public class PostEntity {
   }
 
   public String findDescription() {
-    return isOnPostDetailsPage()
-           ? createDescriptionOnPostDetailsPage()
-           : findDescriptionElement().getText();
+    return isOnPostDetailsPage() ? createDescriptionOnPostDetailsPage()
+                                 : findDescriptionElement().getText();
   }
 
   private boolean isOnPostDetailsPage() {
-    return post.findElements(By.tagName("a")).stream()
+    return post.findElements(By.tagName("a"))
+        .stream()
         .noneMatch(e -> e.getAttribute(CLASS_ATTRIBUTE).contains("post-details-link"));
   }
 
@@ -192,6 +188,7 @@ public class PostEntity {
   @Builder
   @lombok.Data
   public static class Data {
+
     private final String id;
     private final String authorId;
     private final String category;

@@ -84,9 +84,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
   public VisualEditorPageObject open() {
-    getUrl(urlBuilder.appendQueryStringToURL(
-        urlBuilder.getUrlForWikiPage(TestContext.getCurrentMethodName()),
-        URLsContent.VEACTION_EDIT
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWikiPage(TestContext.getCurrentMethodName()),
+                                             URLsContent.VEACTION_EDIT
     ));
 
     return this;
@@ -455,10 +454,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   private Point getTransclusionLocation(int index, Transclusion transclusion) {
     JavascriptExecutor js = driver;
-    Object templateBounding = js.executeScript(
-        VEContent.BOUNDING_SCRIPT,
-        transclusion.getCssSelector(),
-        index
+    Object templateBounding = js.executeScript(VEContent.BOUNDING_SCRIPT,
+                                               transclusion.getCssSelector(),
+                                               index
     );
     Map<String, String> mapBounding = (Map) templateBounding;
     int tempLeft = getMapValueAsInt(String.valueOf(mapBounding.get("left")));

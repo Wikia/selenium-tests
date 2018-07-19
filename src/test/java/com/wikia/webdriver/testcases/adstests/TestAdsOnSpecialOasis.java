@@ -27,30 +27,27 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialVideoPageOasis() {
-    AdsBaseObject ads = new AdsBaseObject(
-        driver,
-        AdsDataProvider.PAGE_SPECIAL_VIDEOS.getUrl(),
-        RESOLUTION
+    AdsBaseObject ads = new AdsBaseObject(driver,
+                                          AdsDataProvider.PAGE_SPECIAL_VIDEOS.getUrl(),
+                                          RESOLUTION
     );
     testSpecialPage(ads);
   }
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialImagesPageOasis() {
-    AdsBaseObject ads = new AdsBaseObject(
-        driver,
-        AdsDataProvider.PAGE_SPECIAL_IMAGES.getUrl(),
-        RESOLUTION
+    AdsBaseObject ads = new AdsBaseObject(driver,
+                                          AdsDataProvider.PAGE_SPECIAL_IMAGES.getUrl(),
+                                          RESOLUTION
     );
     testSpecialPage(ads);
   }
 
   @Test(groups = "TestAdsOnFilePagesOasis")
   public void testAdsOnFilePageOasis() {
-    AdsBaseObject ads = new AdsBaseObject(
-        driver,
-        AdsDataProvider.PAGE_SPECIAL_FILE.getUrl(),
-        RESOLUTION
+    AdsBaseObject ads = new AdsBaseObject(driver,
+                                          AdsDataProvider.PAGE_SPECIAL_FILE.getUrl(),
+                                          RESOLUTION
     );
     ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
 

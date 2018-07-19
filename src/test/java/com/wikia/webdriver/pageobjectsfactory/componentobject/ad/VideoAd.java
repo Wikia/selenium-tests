@@ -41,11 +41,10 @@ public class VideoAd {
         seconds
             = (int) Math.floor(duration % 60);
 
-    return String.format(
-        "%s:%s:%s",
-        formatter.format(hours),
-        formatter.format(minutes),
-        formatter.format(seconds)
+    return String.format("%s:%s:%s",
+                         formatter.format(hours),
+                         formatter.format(minutes),
+                         formatter.format(seconds)
     );
   }
 }

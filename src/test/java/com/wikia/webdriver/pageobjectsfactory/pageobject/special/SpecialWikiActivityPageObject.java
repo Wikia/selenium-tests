@@ -37,9 +37,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
    * @see com.wikia.webdriver.testcases.messagewall.MessageWallTests
    */
   public boolean isNewWallThreadActivityDisplayed(
-      String title,
-      String threadAuthor,
-      String threadContent
+      String title, String threadAuthor, String threadContent
   ) {
     return activities.stream()
         .filter(activity -> activity.getType() == ActivityType.WALL_POST)
@@ -49,15 +47,12 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   }
 
   public boolean isNewBlogPostActivityDisplayed(
-      String blogPostName,
-      String userName,
-      String blogPostContent
+      String blogPostName, String userName, String blogPostContent
   ) {
-    return isActivityDisplayedWithType(
-        ActivityType.NEW_PAGE,
-        blogPostName,
-        userName,
-        blogPostContent
+    return isActivityDisplayedWithType(ActivityType.NEW_PAGE,
+                                       blogPostName,
+                                       userName,
+                                       blogPostContent
     );
   }
 
@@ -85,10 +80,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   }
 
   private boolean isActivityDisplayedWithType(
-      ActivityType type,
-      String title,
-      String author,
-      String description
+      ActivityType type, String title, String author, String description
   ) {
     return activities.stream()
         .filter(activity -> activity.getType() == type)

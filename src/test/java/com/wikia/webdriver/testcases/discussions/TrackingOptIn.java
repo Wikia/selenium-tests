@@ -68,9 +68,8 @@ public class TrackingOptIn extends NewTestTemplate {
     Assertion.assertTrue(trackingModal.isVisible());
     trackingModal.clickRejectButton();
 
-    Assertion.assertTrue(trackingModal.areResponsesByUrlPatternSuccessful(
-        urlPatterns,
-        networkTrafficInterceptor
+    Assertion.assertTrue(trackingModal.areResponsesByUrlPatternSuccessful(urlPatterns,
+                                                                          networkTrafficInterceptor
     ));
   }
 

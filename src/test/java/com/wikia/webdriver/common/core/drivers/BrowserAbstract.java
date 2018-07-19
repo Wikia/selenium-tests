@@ -80,9 +80,10 @@ public abstract class BrowserAbstract {
     if (Configuration.useProxy()) {
       Proxy proxyServer = new Proxy();
       if ("true".equals(Configuration.useZap())) {
-        String zapProxyAddress = String.format("%s:%s",
-                                               XMLReader.getValue("zap_proxy.address"),
-                                               Integer.parseInt(XMLReader.getValue("zap_proxy.port"))
+        String zapProxyAddress = String.format(
+            "%s:%s",
+            XMLReader.getValue("zap_proxy.address"),
+            Integer.parseInt(XMLReader.getValue("zap_proxy.port"))
         );
         proxyServer.setHttpProxy(zapProxyAddress);
         proxyServer.setSslProxy(zapProxyAddress);

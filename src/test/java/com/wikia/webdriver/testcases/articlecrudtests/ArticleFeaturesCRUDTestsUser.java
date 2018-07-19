@@ -357,9 +357,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     new ArticlePageObject().open();
     VisualEditModePageObject
         visualEditMode
-        = new WikiBasePageObject().goToArticleDefaultContentEditPage(
-        wikiURL,
-        TestContext.getCurrentMethodName()
+        = new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
+                                                                     TestContext.getCurrentMethodName()
     );
     ArticlePageObject article = visualEditMode.submitArticle();
     PhotoAddComponentObject photoAddPhoto = article.clickAddImagePlaceholder();

@@ -45,9 +45,8 @@ public abstract class PageWithPosts extends BasePage {
         .peek(postEntity -> scrollTo(postEntity.getWebElement()))
         .filter(postEntity -> postEntity.findId().equals(postId))
         .findFirst()
-        .orElseThrow(() -> new RuntimeException(String.format(
-            "Post with id [%s] not found on page",
-            postId
+        .orElseThrow(() -> new RuntimeException(String.format("Post with id [%s] not found on page",
+                                                              postId
         )));
   }
 }

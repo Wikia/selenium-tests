@@ -1,10 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class WikiEditMode extends WikiBasePageObject {
 

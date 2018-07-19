@@ -47,9 +47,8 @@ public class ConfirmEmailTests extends NewTestTemplate {
   }
 
   private UserProfilePage confirmEmailForUser(UserWithEmail user) {
-    String confirmationLink = BasePageObject.getEmailConfirmationLink(
-        user.getEmail(),
-        user.getEmailPassword()
+    String confirmationLink = BasePageObject.getEmailConfirmationLink(user.getEmail(),
+                                                                      user.getEmailPassword()
     );
     UserProfilePage page = new UserProfilePage();
     page.openWikiPage(confirmationLink);

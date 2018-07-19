@@ -103,12 +103,14 @@ public class BlogCommentsTests extends NewTestTemplate {
     delete.submitDeletion();
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),
-                           1,
-                           DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    Assertion.assertEquals(
+        confirmNotifications.size(),
+        1,
+        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
     );
-    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE
+    Assertion.assertTrue(
+        confirmNotifications.stream().findFirst().get().isVisible(),
+        DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE
     );
     blogPage.verifyCommentDeleted(commentText);
   }

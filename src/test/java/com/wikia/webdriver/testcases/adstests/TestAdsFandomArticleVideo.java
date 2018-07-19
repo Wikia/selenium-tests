@@ -45,9 +45,8 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
         = urlBuilder.globallyEnableGeoInstantGlobalOnPage(FandomAdsDataProvider.FEATURED_VIDEO_PAGE_SLUG,
                                                           FandomAdsDataProvider.INSTANT_GLOBAL_MOAT_TRACKING
     );
-    testedPage = urlBuilder.appendQueryStringToURL(
-        testedPage,
-        FandomAdsDataProvider.IGNORE_SAMPLING
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage,
+                                                   FandomAdsDataProvider.IGNORE_SAMPLING
     );
 
     AdsFandomObject pageObject = loadPage(testedPage);
@@ -56,9 +55,8 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
     jwPlayerObject.verifyPlayerOnPage();
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
     jwPlayerObject.clickOnPlayer();
-    pageObject.wait.forSuccessfulResponse(
-        networkTrafficInterceptor,
-        FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL
+    pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor,
+                                          FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL
     );
     verifyFeaturedVideoSlots(pageObject);
   }

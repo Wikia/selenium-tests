@@ -29,9 +29,8 @@ public class TrackingOptInPage extends BasePageObject {
     driver.manage().addCookie(new Cookie("Geo",
                                          "{%22region%22:%22WP%22%2C%22country%22:%22" + country
                                          + "%22%2C%22continent%22:%22" + continent + "%22}",
-                                         String.format(
-                                             ".%s",
-                                             Configuration.getEnvType().getWikiaDomain()
+                                         String.format(".%s",
+                                                       Configuration.getEnvType().getWikiaDomain()
                                          ),
                                          null,
                                          null
@@ -110,9 +109,8 @@ public class TrackingOptInPage extends BasePageObject {
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     for (String anElementsList : elementsList) {
-      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(
-          networkTrafficInterceptor,
-          anElementsList
+      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                             anElementsList
                             ),
                             "Request to " + anElementsList + " services was found"
       );
@@ -120,8 +118,7 @@ public class TrackingOptInPage extends BasePageObject {
   }
 
   private void isTrackingRequestSend(
-      List<String> elementsList,
-      NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     for (String anElementsList : elementsList) {
       wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);

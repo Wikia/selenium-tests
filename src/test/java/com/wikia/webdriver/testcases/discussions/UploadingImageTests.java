@@ -136,9 +136,8 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
-    Assertion.assertFalse(
-        page.getPost().firstPostHasOpenGraph(),
-        POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+    Assertion.assertFalse(page.getPost().firstPostHasOpenGraph(),
+                          POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
     );
   }
 
@@ -150,9 +149,8 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startReplyCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
-    Assertion.assertFalse(
-        page.findNewestReply().hasOpenGraph(),
-        REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(),
+                          REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
     );
   }
 
@@ -239,9 +237,8 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
-    Assertion.assertFalse(
-        page.findNewestReply().hasOpenGraph(),
-        REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
+    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(),
+                          REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE
     );
   }
 

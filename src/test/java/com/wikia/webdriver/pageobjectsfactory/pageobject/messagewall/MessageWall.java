@@ -317,12 +317,11 @@ public class MessageWall extends WikiBasePageObject {
                                .findElement(messageTitleBy)
                                .getText()
     );
-    Assertion.assertEquals(
-        message,
-        driver.findElement(firstMessageWrapperBy)
-            .findElement(messageBodyBy)
-            .findElement(messageTextBoldBy)
-            .getText()
+    Assertion.assertEquals(message,
+                           driver.findElement(firstMessageWrapperBy)
+                               .findElement(messageBodyBy)
+                               .findElement(messageTextBoldBy)
+                               .getText()
     );
     Assertion.assertEquals(userName,
                            driver.findElement(firstMessageWrapperBy)

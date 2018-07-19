@@ -41,9 +41,8 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
 
   private void checkAmazonSlots(String[] slots) {
     networkTrafficInterceptor.startIntercepting();
-    AdsAmazonObject amazonAds = new AdsAmazonObject(
-        driver,
-        AdsDataProvider.PAGE_A9_DISPLAY.getUrl()
+    AdsAmazonObject amazonAds = new AdsAmazonObject(driver,
+                                                    AdsDataProvider.PAGE_A9_DISPLAY.getUrl()
     );
     amazonAds.runA9DebugMode();
 
@@ -54,14 +53,12 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
 
   private void testAmazonVideo() {
     networkTrafficInterceptor.startIntercepting();
-    AdsAmazonObject amazonAds = new AdsAmazonObject(
-        driver,
-        AdsDataProvider.PAGE_FV.getUrl(AdsAmazonObject.A9_VIDEO_DEBUG_MODE)
+    AdsAmazonObject amazonAds = new AdsAmazonObject(driver,
+                                                    AdsDataProvider.PAGE_FV.getUrl(AdsAmazonObject.A9_VIDEO_DEBUG_MODE)
     );
     amazonAds.refreshPage(); // Added to make test more stable
-    amazonAds.wait.forSuccessfulResponseByUrlPattern(
-        networkTrafficInterceptor,
-        AdsAmazonObject.A9_VIDEO_DEBUG_BID_PATTERN
+    amazonAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                     AdsAmazonObject.A9_VIDEO_DEBUG_BID_PATTERN
     );
   }
 }

@@ -27,10 +27,9 @@ public class UpvotePost {
   }
 
   private String buildUrl(final UpvoteContext context) {
-    return DiscussionsClient.service(String.format(
-        UPVOTE_POST_SUFFIX,
-        context.getSiteId(),
-        context.getPostId()
+    return DiscussionsClient.service(String.format(UPVOTE_POST_SUFFIX,
+                                                   context.getSiteId(),
+                                                   context.getPostId()
     ));
   }
 }

@@ -18,10 +18,10 @@ public class SimpleViewportRelativeCoordsProvider extends CoordsProvider {
 
     Coords coords = new Coords(start.x, start.y, dimension.getWidth(), dimension.getHeight());
 
-    Log.log("SimpleViewportRelativeCoordsProvider",
-            "Start: " + coords.x + "x" + coords.y + " , size: " + coords.width + "x"
-            + coords.height,
-            true
+    Log.log(
+        "SimpleViewportRelativeCoordsProvider",
+        "Start: " + coords.x + "x" + coords.y + " , size: " + coords.width + "x" + coords.height,
+        true
     );
     return coords;
   }

@@ -54,9 +54,8 @@ public class ContentReviewTests extends NewTestTemplate {
         .insertContent("console.log(\"content review test 2\");");
 
     editPage.clickAutoApproveCheckbox().clickPublishButton();
-    Assertion.assertEquals(
-        specialJsPage.getScriptContent(),
-        "console.log(\"content review test 2\");"
+    Assertion.assertEquals(specialJsPage.getScriptContent(),
+                           "console.log(\"content review test 2\");"
     );
     Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkNotVisible());
   }

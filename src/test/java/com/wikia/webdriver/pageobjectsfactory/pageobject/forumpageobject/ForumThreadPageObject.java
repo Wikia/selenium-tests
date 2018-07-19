@@ -209,9 +209,10 @@ public class ForumThreadPageObject extends BasePageObject {
 
     wait.forElementVisible(breadCrumbs);
     wait.forTextInElement(breadCrumbs, forumBoardName + " board");
-    Log.log("verifyParentBoard",
-            "verify that the parent board of current thread is the following: " + forumBoardName,
-            true
+    Log.log(
+        "verifyParentBoard",
+        "verify that the parent board of current thread is the following: " + forumBoardName,
+        true
     );
   }
 

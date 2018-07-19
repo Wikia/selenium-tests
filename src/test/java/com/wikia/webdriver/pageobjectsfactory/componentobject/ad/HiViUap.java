@@ -114,9 +114,8 @@ public class HiViUap {
   }
 
   public void clickAd() {
-    iframeRunner.usingIframe(
-        adIframe,
-        () -> wait.forElementClickable(By.id("adContainer")).click()
+    iframeRunner.usingIframe(adIframe,
+                             () -> wait.forElementClickable(By.id("adContainer")).click()
     );
   }
 

@@ -45,34 +45,33 @@ public enum Emulator {
       true
   ), // NEXUS_5X_WITHOUT_TOUCH is a hack due to touch event issues, more: https://wikia-inc.atlassian.net/browse/ADEN-6264
   NEXUS_5X_WITHOUT_TOUCH(
-          new ImmutableMap.Builder<String, Object>().put("width", 412)
-              .put("height", 732)
-              .put("pixelRatio", 3.0)
-              .put("touch", false)
-              .put("mobile", true)
-              .build(),
-          "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Mobile Safari/537.36",
-          true
-      ), DESKTOP_BREAKPOINT_BIG(new ImmutableMap.Builder<String, Object>().put("width", 1296)
-                                    .put("height", 900)
-                                    .put("pixelRatio", 1.0)
-                                    .put("touch", false)
-                                    .put("mobile", false)
-                                    .build(),
-                                false
+      new ImmutableMap.Builder<String, Object>().put("width", 412)
+          .put("height", 732)
+          .put("pixelRatio", 3.0)
+          .put("touch", false)
+          .put("mobile", true)
+          .build(),
+      "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Mobile Safari/537.36",
+      true
+  ), DESKTOP_BREAKPOINT_BIG(new ImmutableMap.Builder<String, Object>().put("width", 1296)
+                                .put("height", 900)
+                                .put("pixelRatio", 1.0)
+                                .put("touch", false)
+                                .put("mobile", false)
+                                .build(),
+                            false
   ), DESKTOP_BREAKPOINT_SMALL(new ImmutableMap.Builder<String, Object>().put("width", 1024)
                                   .put("height", 720)
                                   .put("pixelRatio", 1.0)
                                   .put("touch", false)
                                   .put("mobile", false)
-                                  .build(),
-                              false
-  ), DESKTOP_BREAKPOINT_LARGE(new ImmutableMap.Builder<String, Object>().put("width", 1920)
-                                  .put("height", 1080)
-                                  .put("pixelRatio", 1.0)
-                                  .put("touch", false)
-                                  .put("mobile", false)
-                                  .build(), false), DEFAULT("", false);
+                                  .build(), false), DESKTOP_BREAKPOINT_LARGE(
+      new ImmutableMap.Builder<String, Object>().put(
+          "width",
+          1920
+      ).put("height", 1080).put("pixelRatio", 1.0).put("touch", false).put("mobile", false).build(),
+      false
+  ), DEFAULT("", false);
 
   @Getter
   private String deviceName;

@@ -26,10 +26,9 @@ public class DeleteCategory {
   }
 
   private String buildUrl(final CategoryContext context) {
-    return DiscussionsClient.service(String.format(
-        DELETE_CATEGORY_URL_SUFFIX,
-        context.getSiteId(),
-        context.getCategoryId()
+    return DiscussionsClient.service(String.format(DELETE_CATEGORY_URL_SUFFIX,
+                                                   context.getSiteId(),
+                                                   context.getCategoryId()
     ));
   }
 }

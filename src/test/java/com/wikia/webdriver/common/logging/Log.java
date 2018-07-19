@@ -62,24 +62,23 @@ public class Log {
       new Shooter().savePageScreenshot(Log.SCREEN_PATH + Log.imageCounter, driver);
       VelocityWrapper.fillErrorLogRow(Arrays.asList(LogLevel.ERROR), description, Log.imageCounter);
     } catch (Exception e) {
-      VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(
-          Arrays.asList(LogLevel.ERROR),
-          description
+      VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(Arrays.asList(LogLevel.ERROR),
+                                                           description
       );
-      Log.log("onException",
-              "driver has no ability to catch screenshot or html source - driver may died",
-              false
+      Log.log(
+          "onException",
+          "driver has no ability to catch screenshot or html source - driver may died",
+          false
       );
     }
 
     new Shooter().savePageScreenshot(SCREEN_PATH + imageCounter, driver);
 
     LogData logType = success ? LogLevel.OK : LogLevel.ERROR;
-    VelocityWrapper.fillLogRowWithScreenshot(
-        Arrays.asList(logType),
-        command,
-        description,
-        imageCounter
+    VelocityWrapper.fillLogRowWithScreenshot(Arrays.asList(logType),
+                                             command,
+                                             description,
+                                             imageCounter
     );
     logJSError();
   }
@@ -191,10 +190,9 @@ public class Log {
 
   public static void image(String command, String imageAsBase64, boolean success) {
     String imgHtml = VelocityWrapper.fillImage(imageAsBase64);
-    VelocityWrapper.fillLogRow(
-        Arrays.asList(success ? LogLevel.OK : LogLevel.ERROR),
-        command,
-        imgHtml
+    VelocityWrapper.fillLogRow(Arrays.asList(success ? LogLevel.OK : LogLevel.ERROR),
+                               command,
+                               imgHtml
     );
   }
 
@@ -267,10 +265,9 @@ public class Log {
     classList.add(LogLevel.ERROR);
     classList.add(LogType.STACKTRACE);
 
-    VelocityWrapper.fillLogRow(
-        classList,
-        "STACKTRACE",
-        escapeHtml(exceptionMessage).replace("\n", "<br>")
+    VelocityWrapper.fillLogRow(classList,
+                               "STACKTRACE",
+                               escapeHtml(exceptionMessage).replace("\n", "<br>")
     );
   }
 

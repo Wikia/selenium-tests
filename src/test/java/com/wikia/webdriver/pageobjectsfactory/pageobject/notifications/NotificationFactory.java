@@ -14,9 +14,7 @@ public final class NotificationFactory {
   }
 
   public static Notification getPostReplyConsolidatedNotification(
-      User lastActor,
-      int remainingActors,
-      PostEntity.Data post
+      User lastActor, int remainingActors, PostEntity.Data post
   ) {
     String actor = String.format("%s and %d other users", lastActor.getUserName(), remainingActors);
     return getPostReplyNotfication(actor, post.getTitle());

@@ -63,12 +63,10 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   @Test(groups = "AdsFloorAdhesionOasis")
   public void testFloorAdhesionPresenceOasis() {
     String browser = Configuration.getBrowser();
-    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(
-        driver,
-        getArticleUrl(
-            ARTICLE_TITLE,
-            URL_TRIGGER
-        )
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver,
+                                                                 getArticleUrl(ARTICLE_TITLE,
+                                                                               URL_TRIGGER
+                                                                 )
     );
 
     wikiPage.verifyFloorAdhesionPresent(SLOT_NAME, LINE_ITEM_ID, CREATIVE_ID);
@@ -77,12 +75,10 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   @Test(groups = "AdsFloorAdhesionOasis")
   public void testFloorAdhesionCloseButtonOasis() {
-    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(
-        driver,
-        getArticleUrl(
-            ARTICLE_TITLE,
-            URL_TRIGGER
-        )
+    AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver,
+                                                                 getArticleUrl(ARTICLE_TITLE,
+                                                                               URL_TRIGGER
+                                                                 )
     );
     wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
   }
@@ -96,13 +92,12 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     String browser = Configuration.getBrowser();
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
-    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(
-        driver,
-        getArticleUrl(
-            OLD_ARTICLE_TITLE,
-            OLD_URL_TRIGGER
-        ),
-        resolution
+    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
+                                                                       getArticleUrl(
+                                                                           OLD_ARTICLE_TITLE,
+                                                                           OLD_URL_TRIGGER
+                                                                       ),
+                                                                       resolution
     );
 
     wikiPage.verifyFloorAdhesionPresent(skinContext.getSlotName(),
@@ -115,13 +110,12 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private void testOldFloorAdhesionModal(Dimension resolution) {
     String browser = Configuration.getBrowser();
 
-    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(
-        driver,
-        getArticleUrl(
-            OLD_ARTICLE_TITLE,
-            OLD_URL_TRIGGER
-        ),
-        resolution
+    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
+                                                                       getArticleUrl(
+                                                                           OLD_ARTICLE_TITLE,
+                                                                           OLD_URL_TRIGGER
+                                                                       ),
+                                                                       resolution
     );
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
@@ -135,13 +129,12 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   private void testOldFloorAdhesionCloseButton(Dimension resolution) {
-    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(
-        driver,
-        getArticleUrl(
-            OLD_ARTICLE_TITLE,
-            OLD_URL_TRIGGER
-        ),
-        resolution
+    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
+                                                                       getArticleUrl(
+                                                                           OLD_ARTICLE_TITLE,
+                                                                           OLD_URL_TRIGGER
+                                                                       ),
+                                                                       resolution
     );
     wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
   }

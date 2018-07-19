@@ -186,9 +186,8 @@ public class FollowingPostTests extends NewTestTemplate {
                            SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT,
                            SIGN_IN_MODAL_SHOULD_APPEAR
     );
-    Assertion.assertFalse(
-        new PostDetailsPage().open(data.getId()).isPostFollowed(),
-        SHOULD_UNFOLLOW_POST
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(),
+                          SHOULD_UNFOLLOW_POST
     );
   }
 
@@ -209,24 +208,20 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(
-      PageWithPosts page,
-      PostEntity.Data data
+      PageWithPosts page, PostEntity.Data data
   ) {
     clickFollowOn(page, data);
-    Assertion.assertTrue(
-        new PostDetailsPage().open(data.getId()).isPostFollowed(),
-        SHOULD_FOLLOW_POST
+    Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(),
+                         SHOULD_FOLLOW_POST
     );
   }
 
   private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(
-      PageWithPosts page,
-      PostEntity.Data data
+      PageWithPosts page, PostEntity.Data data
   ) {
     clickFollowOn(page, data);
-    Assertion.assertFalse(
-        new PostDetailsPage().open(data.getId()).isPostFollowed(),
-        SHOULD_UNFOLLOW_POST
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(),
+                          SHOULD_UNFOLLOW_POST
     );
   }
 

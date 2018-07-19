@@ -85,13 +85,11 @@ public class ArticlePageTests extends NewTestTemplate {
   //test disabled as it needs to be adjusted when new local nav tests will be created
   @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark", enabled = false)
   public void mercury_article_navigateToArticlesWithColonAndQuestionMark() {
-    new ArticleContent().push(
-        "Article about colon [[Question?mark?question]]",
-        "Colon:colon:colon"
+    new ArticleContent().push("Article about colon [[Question?mark?question]]",
+                              "Colon:colon:colon"
     );
-    new ArticleContent().push(
-        "Article about question mark [[Colon:colon:colon]]",
-        "Question?mark?question"
+    new ArticleContent().push("Article about question mark [[Colon:colon:colon]]",
+                              "Question?mark?question"
     );
 
     init();

@@ -97,9 +97,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @param toolName toolname appearing on the list of found tools
    */
   public void clickSearchSuggestion(String toolName) {
-    scrollAndClick(driver.findElement(By.cssSelector(String.format(
-        searchSuggestionToolCss,
-        toolName
+    scrollAndClick(driver.findElement(By.cssSelector(String.format(searchSuggestionToolCss,
+                                                                   toolName
     ))));
     Log.log("clickSearchSuggestion", toolName + " selected from search suggestions", true);
   }
@@ -111,9 +110,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    *                 want to click.
    */
   public void clickOnTool(String toolName) {
-    jsActions.click(wait.forElementVisible(By.cssSelector(String.format(
-        toolbarToolCss,
-        toolName
+    jsActions.click(wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss,
+                                                                        toolName
     ))));
     Log.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
@@ -138,9 +136,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Before that, "follow" button does not have 'title' attribute which is necessary in the method
    */
   public void verifyFollowedToolbar() {
-    waitForValueToBePresentInElementsAttributeByCss(String.format(
-        toolbarToolCss,
-        PageContent.FOLLOW
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss,
+                                                                  PageContent.FOLLOW
     ), "title", "Unfollow");
     Log.log("verifyFollowedToolbar", "follow button verified", true);
   }
@@ -158,9 +155,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
                                  + "\" has been removed from your watchlist."
     );
 
-    waitForValueToBePresentInElementsAttributeByCss(String.format(
-        toolbarToolCss,
-        PageContent.FOLLOW
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss,
+                                                                  PageContent.FOLLOW
     ), "title", "Follow");
     Log.log("verifyUnfollowed", "unfollow button verified", true);
   }

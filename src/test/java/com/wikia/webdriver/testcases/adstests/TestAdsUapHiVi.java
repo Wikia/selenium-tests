@@ -31,9 +31,8 @@ public class TestAdsUapHiVi {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
 
-    AssertionAds.assertAspectRatio(
-        driver.findElement(By.id(slotName)).getSize(),
-        impactStateAspectRatio
+    AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(),
+                                   impactStateAspectRatio
     );
   }
 
@@ -46,15 +45,13 @@ public class TestAdsUapHiVi {
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
 
-    AssertionAds.assertAspectRatio(
-        driver.findElement(By.id(slotName)).getSize(),
-        expectedResolvedState
+    AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(),
+                                   expectedResolvedState
     );
   }
 
   public void shouldHaveResolvedStateAfterScroll(
-      double impactStateAspectRatio,
-      double resolvedStateAspectRatio
+      double impactStateAspectRatio, double resolvedStateAspectRatio
   ) throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
@@ -109,9 +106,8 @@ public class TestAdsUapHiVi {
     final double startProgressBarWidth = hiViUap.getProgressBarWidth();
     TimeUnit.SECONDS.sleep(3);
 
-    Assert.assertTrue(
-        startProgressBarWidth < hiViUap.getProgressBarWidth(),
-        "Video time indicator should move."
+    Assert.assertTrue(startProgressBarWidth < hiViUap.getProgressBarWidth(),
+                      "Video time indicator should move."
     );
   }
 
@@ -170,10 +166,9 @@ public class TestAdsUapHiVi {
     TimeUnit.SECONDS.sleep(3);
 
     Assert.assertTrue(hiViUap.getProgressBarWidth() > 0, "Video did not start");
-    Assert.assertEquals(
-        startProgressBarWidth,
-        hiViUap.getProgressBarWidth(),
-        "Video did not togglePause"
+    Assert.assertEquals(startProgressBarWidth,
+                        hiViUap.getProgressBarWidth(),
+                        "Video did not togglePause"
     );
   }
 
@@ -187,8 +182,7 @@ public class TestAdsUapHiVi {
   }
 
   public void shouldDisplayResolvedStateOnNextPageView(
-      double impactStateAspectRatio,
-      double resolvedStateAspectRatio
+      double impactStateAspectRatio, double resolvedStateAspectRatio
   ) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
 

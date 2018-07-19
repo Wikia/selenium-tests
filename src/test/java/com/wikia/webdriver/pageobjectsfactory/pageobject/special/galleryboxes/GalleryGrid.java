@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
-import java.util.List;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 public class GalleryGrid extends BasePageObject {
 

@@ -80,10 +80,9 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   }
 
   public void verifyRecaptchaImageSrc() {
-    Assertion.assertNotEquals(
-        "",
-        getRecaptchaImageSrc(),
-        "Verify RECAPTCHA image source is not empty"
+    Assertion.assertNotEquals("",
+                              getRecaptchaImageSrc(),
+                              "Verify RECAPTCHA image source is not empty"
     );
   }
 

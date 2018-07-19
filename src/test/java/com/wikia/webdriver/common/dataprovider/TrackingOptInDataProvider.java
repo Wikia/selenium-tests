@@ -205,33 +205,36 @@ public class TrackingOptInDataProvider {
 
   @DataProvider
   public static Object[][] adsPrebidDataProvider() {
-    return new Object[][]{{ADS_PREBID_INSTANT_GLOBALS, Arrays.asList(ADS_PUBMATIC_PATTERN,
-                                                                     ADS_APP_NEXUS_PATTERN,
-                                                                     ADS_OPOENX_PATTERN,
-                                                                     ADS_INDEX_EXCHANGE_PATTERN,
-                                                                     ADS_RUBBICON_FASTLANE_PATTERN
+    return new Object[][]{{ADS_PREBID_INSTANT_GLOBALS, Arrays.asList(
+        ADS_PUBMATIC_PATTERN,
+        ADS_APP_NEXUS_PATTERN,
+        ADS_OPOENX_PATTERN,
+        ADS_INDEX_EXCHANGE_PATTERN,
+        ADS_RUBBICON_FASTLANE_PATTERN
     )}};
   }
 
   @DataProvider
   public static Object[][] adsNpaHiViDataProviderOasis() {
-    return new Object[][]{{Arrays.asList(ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
-                                         ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
-                                         ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
-                                         ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
-                                         ADS_VAST_NPA_FIRST_PARAMETER_PATTERN,
-                                         ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
+    return new Object[][]{{Arrays.asList(
+        ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
+        ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
+        ADS_VAST_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
     )}};
   }
 
   @DataProvider
   public static Object[][] adsNpaSlotsDataProviderMobile() {
-    return new Object[][]{{Arrays.asList(ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
-                                         ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
-                                         ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
-                                         ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
-                                         ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN,
-                                         ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
+    return new Object[][]{{Arrays.asList(
+        ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
+        ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
+        ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
     )}};
   }
 
@@ -283,10 +286,11 @@ public class TrackingOptInDataProvider {
 
   @DataProvider
   public static Object[][] adsTrackingPixelsSent() {
-    return new Object[][]{{Arrays.asList(ADS_COMSCORE_PATTERN,
-                                         ADS_QUANTCAST_PATTERN,
-                                         ADS_KRUX_PATTERN,
-                                         ADS_GOOGLE_ANALYTICS_PATTERN
+    return new Object[][]{{Arrays.asList(
+        ADS_COMSCORE_PATTERN,
+        ADS_QUANTCAST_PATTERN,
+        ADS_KRUX_PATTERN,
+        ADS_GOOGLE_ANALYTICS_PATTERN
     )}};
   }
 

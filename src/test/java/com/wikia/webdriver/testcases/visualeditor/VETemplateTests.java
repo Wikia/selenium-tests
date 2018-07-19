@@ -116,18 +116,16 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorInsertTemplateDialog
         templateDialog
         = (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-    VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectResultTemplate(
-        VEContent.TEMPLATE_SEARCH_EXACTMATCH,
-        0
+    VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH,
+                                                                                            0
     );
     ve = editTemplateDialog.clickDone();
     ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
     ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
     templateDialog
         = (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-    editTemplateDialog = templateDialog.selectResultTemplate(
-        VEContent.TEMPLATE_SEARCH_EXACTMATCH,
-        0
+    editTemplateDialog = templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH,
+                                                             0
     );
     ve = editTemplateDialog.clickDone();
     ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
@@ -165,13 +163,11 @@ public class VETemplateTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     ve.clickTransclusion(0, Transclusion.INLINE);
     VisualEditorEditTemplateDialog editTemplateDialog = ve.openEditTemplateDialog();
-    editTemplateDialog.typeInParam(
-        VEContent.TEMPLATE_PARAM_LABEL1,
-        VEContent.TEMPLATE_PARAM_VALUE1
+    editTemplateDialog.typeInParam(VEContent.TEMPLATE_PARAM_LABEL1,
+                                   VEContent.TEMPLATE_PARAM_VALUE1
     );
-    editTemplateDialog.typeInParam(
-        VEContent.TEMPLATE_PARAM_LABEL2,
-        VEContent.TEMPLATE_PARAM_VALUE2
+    editTemplateDialog.typeInParam(VEContent.TEMPLATE_PARAM_LABEL2,
+                                   VEContent.TEMPLATE_PARAM_VALUE2
     );
     ve = editTemplateDialog.clickDone();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();

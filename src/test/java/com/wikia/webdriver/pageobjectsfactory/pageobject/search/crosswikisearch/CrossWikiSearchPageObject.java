@@ -90,9 +90,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public void verifyFirstResultVertical(String vertical) {
     wait.forTextInElement(firstResultVertical, vertical);
-    Assertion.assertFalse(
-        firstResultVertical.getText().isEmpty(),
-        "Vertical (Hub) string is empty."
+    Assertion.assertFalse(firstResultVertical.getText().isEmpty(),
+                          "Vertical (Hub) string is empty."
     );
   }
 
@@ -110,9 +109,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public void verifyFirstResultPageImages() {
     wait.forElementVisible(firstResultStatisticsPageImages);
-    Assertion.assertFalse(
-        firstResultStatisticsPageImages.getText().isEmpty(),
-        "Images count is empty."
+    Assertion.assertFalse(firstResultStatisticsPageImages.getText().isEmpty(),
+                          "Images count is empty."
     );
   }
 

@@ -452,9 +452,8 @@ public class CategoriesTests extends NewTestTemplate {
                                                                         postCategory.getName()
     );
     try {
-      assertTrue(
-          isCategoryVisible,
-          String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, postCategory.getName())
+      assertTrue(isCategoryVisible,
+                 String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, postCategory.getName())
       );
     } finally {
       cleanUp(postCategory);
@@ -531,8 +530,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private CategoriesFieldset addCategory(
-      CategoriesFieldset categoriesFieldset,
-      String categoryName
+      CategoriesFieldset categoriesFieldset, String categoryName
   ) {
     return categoriesFieldset.clickEdit().addCategory(categoryName).clickApproveButton();
   }
@@ -561,9 +559,7 @@ public class CategoriesTests extends NewTestTemplate {
    * @param categoriesFieldset categories where category to be removed exists
    */
   private void removeCategory(
-      CategoryPill.Data data,
-      PostsListPage page,
-      CategoriesFieldset categoriesFieldset
+      CategoryPill.Data data, PostsListPage page, CategoriesFieldset categoriesFieldset
   ) {
     categoriesFieldset.clickEdit()
         .removeCategory(data.getName())
@@ -574,9 +570,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void addAndRemoveTemporaryCategory(
-      PostsListPage page,
-      String temporaryCategoryName,
-      CategoriesFieldset categoriesFieldset
+      PostsListPage page, String temporaryCategoryName, CategoriesFieldset categoriesFieldset
   ) {
     categoriesFieldset.clickEdit()
         .addCategory(temporaryCategoryName)

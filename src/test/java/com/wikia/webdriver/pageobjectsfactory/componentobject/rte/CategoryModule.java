@@ -116,9 +116,8 @@ public class CategoryModule {
     Log.log("removeCategory", "remove category button clicked on category " + categoryName, true);
 
     // due to animation on category removal, we need to wait here to avoid false negatives
-    webDriverWait.until(ExpectedConditions.invisibilityOfElementWithText(
-        categoryNamesBy,
-        categoryName
+    webDriverWait.until(ExpectedConditions.invisibilityOfElementWithText(categoryNamesBy,
+                                                                         categoryName
     ));
   }
 

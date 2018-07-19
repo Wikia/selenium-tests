@@ -26,9 +26,8 @@ public class Navigating extends NewTestTemplate {
   public void testGamesHubLink() {
     new HomePage().getGlobalNavigation().clickGamesHubLink();
 
-    Assertion.assertEquals(
-        driver.getCurrentUrl(),
-        fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/games"
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/games"
     );
   }
 
@@ -36,9 +35,8 @@ public class Navigating extends NewTestTemplate {
   public void testMoviesHubLink() {
     new HomePage().getGlobalNavigation().clickMoviesHubLink();
 
-    Assertion.assertEquals(
-        driver.getCurrentUrl(),
-        fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/movies"
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/movies"
     );
   }
 
@@ -46,9 +44,8 @@ public class Navigating extends NewTestTemplate {
   public void testTVHubLink() {
     new HomePage().getGlobalNavigation().clickTVHubLink();
 
-    Assertion.assertEquals(
-        driver.getCurrentUrl(),
-        fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/tv"
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/tv"
     );
   }
 
@@ -56,9 +53,8 @@ public class Navigating extends NewTestTemplate {
   public void testExploreWikisLink() {
     new HomePage().getGlobalNavigation().openWikisMenu().clickExploreWikisLink();
 
-    Assertion.assertEquals(
-        driver.getCurrentUrl(),
-        fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore"
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore"
     );
   }
 
@@ -67,11 +63,9 @@ public class Navigating extends NewTestTemplate {
     new HomePage().getGlobalNavigation().openWikisMenu().clickCommunityCentralLink();
 
     Assertion.assertEquals(driver.getCurrentUrl(),
-                           UrlBuilder.createUrlBuilderForWikiAndLang(
-                               COMMUNITY_WIKI,
-                               DEFAULT_LANGUAGE
-                           )
-                               .getUrlForWikiPage(URLsContent.COMMUNITY_CENTRAL)
+                           UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI,
+                                                                     DEFAULT_LANGUAGE
+                           ).getUrlForWikiPage(URLsContent.COMMUNITY_CENTRAL)
     );
   }
 }

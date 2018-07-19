@@ -43,9 +43,8 @@ public class SpecialFollowPageObject extends SpecialPageObject {
         isPresent = true;
       }
     }
-    Assertion.assertTrue(
-        isPresent,
-        "image " + imageVideo + " is not present on the following list"
+    Assertion.assertTrue(isPresent,
+                         "image " + imageVideo + " is not present on the following list"
     );
     Log.log("verifyFollowedImageVideo", imageVideo + "is visible on followed list", true);
   }

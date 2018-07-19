@@ -29,17 +29,14 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   @Test(groups = {"AdsFeaturedVideoOasis"})
   public void adsFeaturedVideoAdsDesktop() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(
-        testedPage,
-        INSTANT_GLOBAL_MIDROLL
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_MIDROLL
     );
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(
-        testedPage,
-        INSTANT_GLOBAL_POSTROLL
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_POSTROLL
     );
-    testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(
-        testedPage,
-        INSTANT_GLOBAL_PUBMATIC
+    testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(testedPage,
+                                                                  INSTANT_GLOBAL_PUBMATIC
     );
 
     new AdsBaseObject(driver, testedPage);
@@ -49,9 +46,8 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
 
   @Test(groups = {"AdsFeaturedVideoOasis"})
   public void adsFeaturedVideoNoAdsDesktop() {
-    String testedPage = urlBuilder.appendQueryStringToURL(
-        AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(),
-        "noads=1"
+    String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(),
+                                                          "noads=1"
     );
 
     new AdsBaseObject(driver, testedPage);
@@ -65,13 +61,11 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
   public void adsFeaturedVideoMoatTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(
-        testedPage,
-        INSTANT_GLOBAL_MOAT_TRACKING
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_MOAT_TRACKING
     );
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(
-        testedPage,
-        INSTANT_GLOBAL_PUBMATIC
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_PUBMATIC
     );
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
 

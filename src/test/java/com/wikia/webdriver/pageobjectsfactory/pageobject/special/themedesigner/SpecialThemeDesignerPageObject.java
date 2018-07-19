@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
@@ -93,8 +93,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
       wait.forElementClickable(thirdThemesSet);
       scrollAndClick(themes, number);
     }
-    String themeName =
-        themes.get(number).getAttribute("data-theme").toLowerCase();
+    String themeName = themes.get(number).getAttribute("data-theme").toLowerCase();
     Log.log("selectTheme", "theme " + themeName + " selected", true);
     return themeName;
   }
@@ -102,8 +101,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   public void verifyThemeSelected(String themeName) {
     wait.forElementVisible(By.cssSelector("li.selected[data-theme='" + themeName + "']"));
     Assertion.assertEquals((String) jsActions.execute("ThemeDesigner.settings.theme"), themeName);
-    Log.log("verifyThemeSelected", "theme " + themeName + " selection verified",
-        true);
+    Log.log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
   }
 
   public void submitTheme() {
@@ -114,17 +112,21 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void uploadLargeImage() {
-    fileUploadInput.sendKeys(CommonUtils.getAbsolutePathForFile(
-        ClassLoader.getSystemResource("ImagesForUploadTests/2000x150.png").getPath()));
+    fileUploadInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
+        "ImagesForUploadTests/2000x150.png").getPath()));
     imageSubmit.click();
   }
 
   public void selectTab(Tab tabName) {
-    WebElement tab = wait
-        .forElementVisible(By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
+    WebElement tab = wait.forElementVisible(By.cssSelector(tabSelector.replace(
+        "%tabName%",
+        tabName.toString()
+    )));
     scrollAndClick(tab);
-    wait.forElementVisible(
-        By.cssSelector(selectedTabSelector.replace("%tabName%", tabName.toString())));
+    wait.forElementVisible(By.cssSelector(selectedTabSelector.replace(
+        "%tabName%",
+        tabName.toString()
+    )));
     Log.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 
@@ -172,5 +174,4 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   public enum Tab {
     THEME, CUSTOMIZE, WORDMARK
   }
-
 }

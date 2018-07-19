@@ -28,10 +28,10 @@ public class VEImageTests extends NewTestTemplate {
   public void previewImage() {
     String mediaTitle = "Thomas Wright 1792 - 1849";
 
-    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(
-        wikiURL,
-        PageContent.ARTICLE_NAME_PREFIX + DateTime.now()
-            .getMillis()
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
+                                                                             PageContent.ARTICLE_NAME_PREFIX
+                                                                             + DateTime.now()
+                                                                                 .getMillis()
     );
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -46,10 +46,10 @@ public class VEImageTests extends NewTestTemplate {
   public void editImageCaption() {
     String captionText = "test123";
 
-    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(
-        wikiURL,
-        PageContent.ARTICLE_NAME_PREFIX + DateTime.now()
-            .getMillis()
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
+                                                                             PageContent.ARTICLE_NAME_PREFIX
+                                                                             + DateTime.now()
+                                                                                 .getMillis()
     );
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -75,9 +75,8 @@ public class VEImageTests extends NewTestTemplate {
 
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX
                                + new VisualEditorPageObject().getTimeStamp();
-    VisualEditorPageObject veCreatePage = new VisualEditorPageObject().openVEOnArticle(
-        wikiURL,
-        randomArticleName
+    VisualEditorPageObject veCreatePage = new VisualEditorPageObject().openVEOnArticle(wikiURL,
+                                                                                       randomArticleName
     );
     VisualEditorAddMediaDialog mediaDialog = veCreatePage.searchImage("i");
     veCreatePage = mediaDialog.addExistingMedia(numOfMedia);

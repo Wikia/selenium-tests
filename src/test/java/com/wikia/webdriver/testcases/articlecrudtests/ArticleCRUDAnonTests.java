@@ -32,9 +32,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_addByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(
-        wikiURL,
-        articleTitle
+    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(wikiURL,
+                                                                                                articleTitle
     );
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitExpectingNotification().submitArticle();
@@ -60,9 +59,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(
-        wikiURL,
-        randomArticleTitle
+    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(wikiURL,
+                                                                                                randomArticleTitle
     );
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitExpectingNotification().submitArticle();
@@ -95,9 +93,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_editArticleSecondTime() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(
-        wikiURL,
-        articleTitle
+    VisualEditModePageObject visualEditMode = new ArticlePageObject().navigateToArticleEditPage(wikiURL,
+                                                                                                articleTitle
     );
     visualEditMode.addContent(articleContent);
     visualEditMode.submitExpectingNotification().submitArticle();

@@ -42,11 +42,12 @@ public class ForumBoardPage extends BasePageObject {
    * Navigate to forum board width specified title
    */
   public ForumBoardPage open(String forumBoardTitle) {
-    getUrl(String.format("%s%s%s:%s",
-                         urlBuilder.getUrl(),
-                         URLsContent.WIKI_DIR,
-                         URLsContent.FORUM_BOARD_NAMESPACE,
-                         forumBoardTitle
+    getUrl(String.format(
+        "%s%s%s:%s",
+        urlBuilder.getUrl(),
+        URLsContent.WIKI_DIR,
+        URLsContent.FORUM_BOARD_NAMESPACE,
+        forumBoardTitle
     ));
 
     return this;
@@ -85,10 +86,11 @@ public class ForumBoardPage extends BasePageObject {
     driver.switchTo().defaultContent();
     checkHighlightCheckbox(highlight);
     clickPostButton();
-    Log.log("startDiscussion",
-            "discussion with message: " + message + ", with title " + title + " posted",
-            true,
-            driver
+    Log.log(
+        "startDiscussion",
+        "discussion with message: " + message + ", with title " + title + " posted",
+        true,
+        driver
     );
     return new ForumThreadPageObject(driver);
   }
@@ -114,10 +116,11 @@ public class ForumBoardPage extends BasePageObject {
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickPostNotitleButton();
-    Log.log("startDiscussionWithoutTitle",
-            "discussion with message: " + message + " without title, posted",
-            true,
-            driver
+    Log.log(
+        "startDiscussionWithoutTitle",
+        "discussion with message: " + message + " without title, posted",
+        true,
+        driver
     );
     return new ForumThreadPageObject(driver);
   }
@@ -165,19 +168,21 @@ public class ForumBoardPage extends BasePageObject {
     miniEditor.writeMiniEditor(Keys.ENTER);
     driver.switchTo().defaultContent();
     miniEditor.addExternalLink(externalLink);
-    Log.log("startDiscussionWithLink",
-            "internal and external links: " + internalLink + " and" + externalLink + "added",
-            true,
-            driver
+    Log.log(
+        "startDiscussionWithLink",
+        "internal and external links: " + internalLink + " and" + externalLink + "added",
+        true,
+        driver
     );
   }
 
   public void verifyStartedDiscussionWithLinks(String internalLink, String externalLink) {
     wait.forTextInElement(discussionBody, 0, internalLink);
     wait.forTextInElement(discussionBody, 1, externalLink);
-    Log.log("verifyStartedDiscussionWithLinks",
-            "internal and external links: " + internalLink + " and" + externalLink + "verified",
-            true
+    Log.log(
+        "verifyStartedDiscussionWithLinks",
+        "internal and external links: " + internalLink + " and" + externalLink + "verified",
+        true
     );
   }
 
@@ -198,9 +203,10 @@ public class ForumBoardPage extends BasePageObject {
     WebElement followButton = wait.forElementVisible(followButtonBy);
 
     if (followButton.getText().contains("Following")) {
-      Log.log("unfollowIfDiscussionIsFollowed",
-              "discussion is followed. Preparing to click \"unfollowed\"",
-              true
+      Log.log(
+          "unfollowIfDiscussionIsFollowed",
+          "discussion is followed. Preparing to click \"unfollowed\"",
+          true
       );
       wait.forElementClickable(followButton);
       scrollAndClick(followButton);
@@ -214,9 +220,10 @@ public class ForumBoardPage extends BasePageObject {
     WebElement followButton = driver.findElement(By.cssSelector(
         ".thread:nth-child(" + threadNumber + ") li.follow"));
     wait.forTextInElement(followButton, followStatus);
-    Log.log("verifyTextOnFollowButton",
-            "verify that thread number " + threadNumber + " has the status: " + followStatus,
-            true
+    Log.log(
+        "verifyTextOnFollowButton",
+        "verify that thread number " + threadNumber + " has the status: " + followStatus,
+        true
     );
   }
 
@@ -226,10 +233,11 @@ public class ForumBoardPage extends BasePageObject {
     wait.forElementVisible(followButton);
     wait.forElementClickable(followButton);
     scrollAndClick(followButton);
-    Log.log("clickOnFollowButton",
-            "click on follow button of thread number " + threadNumber,
-            true,
-            driver
+    Log.log(
+        "clickOnFollowButton",
+        "click on follow button of thread number " + threadNumber,
+        true,
+        driver
     );
   }
 

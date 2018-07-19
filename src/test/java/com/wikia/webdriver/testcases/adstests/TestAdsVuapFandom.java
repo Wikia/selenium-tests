@@ -47,9 +47,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(dataProviderClass = FandomAdsDataProvider.class, dataProvider = "vuapPage", groups = {
       "AdsVuapFandomDesktop", "AdsVuapVideoClosesWhenTapCloseButtonFandom"})
   public void adsVuapVideoClosesWhenTapCloseButtonFandom(
-      String pageType,
-      String pageName,
-      String slotName
+      String pageType, String pageName, String slotName
   ) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
@@ -127,9 +125,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(dataProviderClass = FandomAdsDataProvider.class, dataProvider = "vuapPage", groups = {
       "AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"})
   public void adsVideoClosedAfterPlayingFandomMobile(
-      String pageType,
-      String pageName,
-      String slotName
+      String pageType, String pageName, String slotName
   ) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage, true);
@@ -142,9 +138,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(dataProviderClass = FandomAdsDataProvider.class, dataProvider = "vuapPage", groups = {
       "AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"})
   public void adsImageClickedOpensNewPageFandomMobile(
-      String pageType,
-      String pageName,
-      String slotName
+      String pageType, String pageName, String slotName
   ) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage, true);
@@ -158,9 +152,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(dataProviderClass = FandomAdsDataProvider.class, dataProvider = "vuapPage", groups = {
       "AdsVuapMobileFandom", "AdsVuapVideoClosesWhenTapCloseButtonMobileFandom"})
   public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(
-      String pageType,
-      String pageName,
-      String slotName
+      String pageType, String pageName, String slotName
   ) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
@@ -184,11 +176,10 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
     fandomPage.triggerOnScrollSlots();
-    AutoplayVuap videoFanTakeover = new AutoplayVuap(
-        driver,
-        slotName,
-        fandomPage.getIframeSelector(slotName),
-        isMobile
+    AutoplayVuap videoFanTakeover = new AutoplayVuap(driver,
+                                                     slotName,
+                                                     fandomPage.getIframeSelector(slotName),
+                                                     isMobile
     );
     fandomPage.scrollTo(AdsFandomContent.getSlotSelector(slotName));
     fandomPage.scrollTwitch();

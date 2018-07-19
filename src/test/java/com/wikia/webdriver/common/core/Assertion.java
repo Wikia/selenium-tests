@@ -27,10 +27,11 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    Log.log("assertStringContains",
-            "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
-            + patternEncoded + "\"",
-            assertion
+    Log.log(
+        "assertStringContains",
+        "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
+        + patternEncoded + "\"",
+        assertion
     );
     return assertion;
   }
@@ -50,11 +51,12 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    Log.log("assertStringContainsAnyPattern",
-            "assertion " + assertion + "! String: \"" + expectedElementEncoded
-            + "\". List of patterns \"" + currentListEncoded.stream()
-                .collect(Collectors.joining(", ")) + ".",
-            assertion
+    Log.log(
+        "assertStringContainsAnyPattern",
+        "assertion " + assertion + "! String: \"" + expectedElementEncoded
+        + "\". List of patterns \"" + currentListEncoded.stream().collect(Collectors.joining(", "))
+        + ".",
+        assertion
     );
     return assertion;
   }
@@ -67,8 +69,7 @@ public class Assertion extends Assert {
    * @param currentList List of patterns
    */
   public static boolean assertStringContainsAnyPattern(
-      String expectedElement,
-      List<String> currentList
+      String expectedElement, List<String> currentList
   ) {
     List<String> currentListEncoded = currentList.stream()
         .map(e -> encodeSpecialChars(e))
@@ -85,11 +86,12 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    Log.log("assertStringContainsAnyPattern",
-            "assertion " + assertion + "! String: \"" + expectedElementEncoded
-            + "\". List of patterns \"" + currentListEncoded.stream()
-                .collect(Collectors.joining(", ")) + ".",
-            assertion
+    Log.log(
+        "assertStringContainsAnyPattern",
+        "assertion " + assertion + "! String: \"" + expectedElementEncoded
+        + "\". List of patterns \"" + currentListEncoded.stream().collect(Collectors.joining(", "))
+        + ".",
+        assertion
     );
     return assertion;
   }
@@ -107,10 +109,11 @@ public class Assertion extends Assert {
       addVerificationFailure(ass);
       assertion = false;
     }
-    Log.log("assertStringNotContains",
-            "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
-            + patternEncoded + "\"",
-            assertion
+    Log.log(
+        "assertStringNotContains",
+        "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
+        + patternEncoded + "\"",
+        assertion
     );
     return assertion;
   }
@@ -127,10 +130,11 @@ public class Assertion extends Assert {
       assertion = false;
       caughtException = err;
     }
-    Log.log("assertEquals",
-            "assertion " + assertion + "! Pattern: \"" + patternEncoded + "\" Current: \""
-            + currentEncoded + "\"",
-            assertion
+    Log.log(
+        "assertEquals",
+        "assertion " + assertion + "! Pattern: \"" + patternEncoded + "\" Current: \""
+        + currentEncoded + "\"",
+        assertion
     );
     if (caughtException != null) {
       Log.logAssertionStacktrace(caughtException);
@@ -147,10 +151,11 @@ public class Assertion extends Assert {
       addVerificationFailure(err);
       assertion = false;
     }
-    Log.log("assertNotEquals",
-            "assertion " + assertion + "! Pattern: \"" + patternEncoded + "\" Current: \""
-            + currentEncoded + "\"",
-            assertion
+    Log.log(
+        "assertNotEquals",
+        "assertion " + assertion + "! Pattern: \"" + patternEncoded + "\" Current: \""
+        + currentEncoded + "\"",
+        assertion
     );
   }
 

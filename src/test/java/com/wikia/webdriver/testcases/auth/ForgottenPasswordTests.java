@@ -61,9 +61,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   private ResetPasswordPage setNewPasswordForUser(UserWithEmail user) {
-    String resetLink = BasePageObject.getPasswordResetLink(
-        user.getEmail(),
-        user.getEmailPassword()
+    String resetLink = BasePageObject.getPasswordResetLink(user.getEmail(),
+                                                           user.getEmailPassword()
     );
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(user.getPassword());

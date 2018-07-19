@@ -164,9 +164,8 @@ public class MainPageTests extends NewTestTemplate {
 
     for (int i = 0; i < elementsList.size(); i++) {
       float newPosition = curatedMainPage.getElementOffsetTop(elementsList.get(i));
-      Assertion.assertTrue(
-          lastPosition <= newPosition,
-          elementsList.get(i) + "is in wrong position"
+      Assertion.assertTrue(lastPosition <= newPosition,
+                           elementsList.get(i) + "is in wrong position"
       );
       lastPosition = newPosition;
     }

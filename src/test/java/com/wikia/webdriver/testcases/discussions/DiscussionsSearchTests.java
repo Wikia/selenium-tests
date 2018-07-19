@@ -33,9 +33,8 @@ public class DiscussionsSearchTests extends SearchTests {
 
     ArticlePage page = new ArticlePage();
     page.getHeader().waitForLoaded();
-    Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(),
-        page.getHeader().getPageTitle().toLowerCase()
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           page.getHeader().getPageTitle().toLowerCase()
     );
   }
 
