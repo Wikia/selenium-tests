@@ -10,10 +10,10 @@ public class AnnouncementsPage extends BasePage {
 
     private static final String URL_PATH = "/announcements";
 
-    @FindBy(xpath = "//textarea[1]")
+    @FindBy(xpath = "(//textarea)[1]")
     private WebElement announcementTextField;
 
-    @FindBy(xpath = "//textarea[2]")
+    @FindBy(xpath = "(//textarea)[2]")
     private WebElement urlField;
 
     @FindBy(css = ".wds-button[type='submit']")

@@ -28,19 +28,19 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
     @Test()
     public void communityNewUserCanGetFreshAnnouncement() {
         String articleName = "QA_article_" + Long.toString(DateTime.now().getMillis());
-        String login = "QA" + Long.toString(DateTime.now().getMillis());
-        String pass = Long.toString(DateTime.now().getMillis());
+        String tempLogin = "QA" + Long.toString(DateTime.now().getMillis());
+        String tempPass = Long.toString(DateTime.now().getMillis());
 
         //Create regular user account and edit an article on a wiki
         SignUpUser newUser = new SignUpUser(
-                login,
+                tempLogin,
                 new Credentials().emailQaart1,
-                pass,
+                tempPass,
                 LocalDate.of(1990, 3, 19)
         );
         UserRegistration.registerUserEmailConfirmed(newUser);
         GlobalNavigation nav = new PostsListPage().open().getGlobalNavigation();
-        nav.clickOnSignIn().login(login, pass);
+        nav.clickOnSignIn().login(tempLogin, tempPass);
 
         new ArticleContent().push(articleName, articleName);
         new ArticlePageObject().open(articleName).openCKModeWithMainEditButton().clearContent().clickPublishButton();
@@ -48,7 +48,14 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
 
         //Staff user creates an announcements
         nav.clickOnSignIn().login(User.STAFF.getUserName(), User.STAFF.getPassword());
-        new AnnouncementsPage().open();
+        new AnnouncementsPage().open().postNewAnnouncement(
+                "Automatic announcement",
+                "fandom.wikia.com"
+        );
+        nav.clickAvatarAndSignOut();
+
+        //Regular user logs in and gets an announcement
+        new ArticlePageObject().open(articleName).getGlobalNavigation().clickOnSignIn().login(tempLogin, tempPass);
 
     }
 
