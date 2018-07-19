@@ -155,6 +155,7 @@ public class CommentsTests extends NewTestTemplate {
     Log.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:", result);
   }
 
+  @DontRun(language = "szl")
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     init();
