@@ -310,7 +310,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
     // Check tracking pixels on consecutive page views
     for (String linkName : articles) {
-//      ads.waitForSlotExpanded(driver.findElement(By.cssSelector("#MOBILE_TOP_LEADERBOARD")));
       ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
       ads.clickOnArticleLink(linkName);
       modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
