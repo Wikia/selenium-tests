@@ -1,29 +1,29 @@
 package com.wikia.webdriver.common.core.url;
 
-import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
-import static com.wikia.webdriver.common.core.configuration.Configuration.getEnv;
-import static com.wikia.webdriver.common.core.configuration.Configuration.getEnvType;
-import static com.wikia.webdriver.common.core.configuration.Configuration.getForceHttps;
-import static com.wikia.webdriver.common.core.configuration.Configuration.getForceLanguageInPath;
-import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiLanguage;
-import static com.wikia.webdriver.common.core.configuration.Configuration.getWikiName;
+import static com.wikia.webdriver.common.core.configuration.Configuration.*;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
+
 import okhttp3.HttpUrl;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriverException;
 
 public class UrlBuilder extends BaseUrlBuilder {
 
-
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
   private String language;
 
-  private UrlBuilder(String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
+  private UrlBuilder(
+      String wiki,
+      String env,
+      Boolean forceHttps,
+      Boolean forceLanguageInPath,
+      String language
+  ) {
     super(env);
     this.wikiName = wiki;
     this.forceHttps = forceHttps;
@@ -44,8 +44,9 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String normalizePageName(String pageName) {
-    if ("".equals(pageName))
+    if ("".equals(pageName)) {
       throw new WebDriverException("Page name is missing");
+    }
     return pageName.replace(" ", "_");
   }
 
@@ -57,8 +58,9 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String getUrlForWikiPage(String pageName) {
-    if ("".equals(pageName))
+    if ("".equals(pageName)) {
       throw new WebDriverException("Page name is missing");
+    }
 
     String url = getUrl() + URLsContent.WIKI_DIR + pageName;
 
@@ -85,10 +87,11 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public String getUrl(String language, boolean addWWW, EnvType envType) {
-      final String wikiaName = getWikiaGlobalName(wikiName);
+    final String wikiaName = getWikiaGlobalName(wikiName);
 
-      if (language == null || wikiName == null)
+    if (language == null || wikiName == null) {
       throw new NullPointerException("Wikia name and language are required");
+    }
 
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
 
@@ -98,11 +101,15 @@ public class UrlBuilder extends BaseUrlBuilder {
     if (!DEFAULT_LANGUAGE.equals(language) && forceLanguageInPath) {
       urlBuilder.addEncodedPathSegments(language);
     }
-    return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString().replaceFirst("/$","");
+    return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString().replaceFirst("/$", "");
   }
 
-  private String getFormattedWikiHost(String www, String wikiaName, EnvType envType, String language) {
-
+  private String getFormattedWikiHost(
+      String www,
+      String wikiaName,
+      EnvType envType,
+      String language
+  ) {
 
     if (!forceLanguageInPath && !(DEFAULT_LANGUAGE).equals(language)) {
       return getFormattedWikiHost(www, String.join(".", language, wikiaName), envType);
@@ -140,7 +147,7 @@ public class UrlBuilder extends BaseUrlBuilder {
         return String.join(".", "www", this.env, envType.getWikiaDomain());
       }
       default:
-        return String.join(".", "www" , envType.getWikiaDomain());
+        return String.join(".", "www", envType.getWikiaDomain());
     }
   }
 
@@ -152,11 +159,11 @@ public class UrlBuilder extends BaseUrlBuilder {
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
     EnvType env = getEnvType(this.env);
 
-    return urlBuilder
-            .scheme(getUrlProtocol())
-            .host(getFormattedHostForGlobalUrl(env))
-            .build()
-            .toString().replaceFirst("/$","");
+    return urlBuilder.scheme(getUrlProtocol())
+        .host(getFormattedHostForGlobalUrl(env))
+        .build()
+        .toString()
+        .replaceFirst("/$", "");
   }
 
   private String getWikiaGlobalName(String wikiName) {

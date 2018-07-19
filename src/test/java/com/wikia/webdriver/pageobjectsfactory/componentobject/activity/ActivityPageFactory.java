@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
-
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
@@ -19,5 +18,4 @@ public class ActivityPageFactory {
   private List<Activity> buildActivities(List<WebElement> activities) {
     return activities.stream().map(Activity::new).collect(Collectors.toList());
   }
-
 }

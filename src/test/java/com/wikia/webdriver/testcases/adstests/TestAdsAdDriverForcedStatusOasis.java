@@ -11,14 +11,10 @@ import java.util.List;
 
 public class TestAdsAdDriverForcedStatusOasis extends TemplateNoFirstLoad {
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adDriverForcedStatusSuccess",
-      groups = "AdsAdDriverForcedStatusOasis"
-  )
-  public void adsAdDriverForcedStatusSuccessOasis(String wikiName,
-                                                  String article,
-                                                  List<String> slots) {
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adDriverForcedStatusSuccess", groups = "AdsAdDriverForcedStatusOasis")
+  public void adsAdDriverForcedStatusSuccessOasis(
+      String wikiName, String article, List<String> slots
+  ) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyForcedSuccessScriptInSlots(slots);

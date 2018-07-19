@@ -31,5 +31,4 @@ public class MiniEditorPreviewComponentObject extends WikiBasePageObject {
     previewModal.findElement(publishButton).click();
     Log.log("publish", "publish button clicked", true);
   }
-
 }

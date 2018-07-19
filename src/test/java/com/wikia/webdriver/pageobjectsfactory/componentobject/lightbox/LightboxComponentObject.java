@@ -110,8 +110,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   public void clickCloseShareScreenButton() {
     wait.forElementVisible(closeShareScreenButton);
     closeShareScreenButton.click();
-    Log
-        .log("clickCloseShareScreenButton", "close share screen button was clicked", true);
+    Log.log("clickCloseShareScreenButton", "close share screen button was clicked", true);
   }
 
   public void verifyShareScreenClosed() {
@@ -145,8 +144,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   public void clickStumbleUponShareButton() {
     stumbleUponShareLink.click();
-    Log
-        .log("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
+    Log.log("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
   }
 
   public void clickRedditShareButton() {
@@ -192,5 +190,4 @@ public class LightboxComponentObject extends WikiBasePageObject {
   public VideoComponentObject getVideoPlayer() {
     return new VideoComponentObject(driver, videoContainer, VIDEO_WIDTH_LIGHTBOX);
   }
-
 }

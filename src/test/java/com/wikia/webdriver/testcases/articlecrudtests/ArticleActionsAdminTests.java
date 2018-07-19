@@ -19,10 +19,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-
 @Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {
-
 
   @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
@@ -35,17 +33,24 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     SpecialRestorePageObject restore = article.getNotifications(NotificationType.CONFIRM)
-            .stream().findFirst().get().undelete();
+        .stream()
+        .findFirst()
+        .get()
+        .undelete();
 
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
     confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
 
     article.verifyArticleTitle(articleTitle);
@@ -65,12 +70,18 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
 
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     Assertion.assertEquals(confirmNotifications.stream().findFirst().get().getMessage(),
-            "\"" + articleOldTitle + "\" has been renamed \"" + articleNewName + "\"",
-            "Banner notification messsage is invalid");
-    Assertion.assertEquals(article.getArticleName(), articleNewName,
-            "New article title is invalid");
+                           "\"" + articleOldTitle + "\" has been renamed \"" + articleNewName
+                           + "\"",
+                           "Banner notification messsage is invalid"
+    );
+    Assertion.assertEquals(article.getArticleName(),
+                           articleNewName,
+                           "New article title is invalid"
+    );
   }
 }

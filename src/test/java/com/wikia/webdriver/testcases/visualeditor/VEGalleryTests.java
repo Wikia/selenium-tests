@@ -16,8 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * These tests are failing in FF, but was tested manually
- * - VEGalleryTests_005_Remove
+ * These tests are failing in FF, but was tested manually - VEGalleryTests_005_Remove
  */
 @InBrowser(browser = Browser.CHROME)
 public class VEGalleryTests extends NewTestTemplate {
@@ -34,9 +33,7 @@ public class VEGalleryTests extends NewTestTemplate {
   }
 
   //AG01
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"}
-  )
+  @Test(groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"})
   public void VEGalleryTests_001_AddGallery() {
     int numOfMedias = 9;
     int numOfGalleries = 1;
@@ -55,9 +52,7 @@ public class VEGalleryTests extends NewTestTemplate {
   }
 
   //AG02
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
-  )
+  @Test(groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"})
   public void VEGalleryTests_002_GalleryCart() {
     int numOfMediaToRemoveFirst = 1;
     int numOfMediaToRemoveSecond = 2;
@@ -91,9 +86,7 @@ public class VEGalleryTests extends NewTestTemplate {
   }
 
   //AG03
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
-  )
+  @Test(groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"})
   public void VEGalleryTests_003_PreviewOnTitle() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
@@ -107,9 +100,7 @@ public class VEGalleryTests extends NewTestTemplate {
   }
 
   //AG04
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
-  )
+  @Test(groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"})
   public void VEGalleryTests_004_PreviewOnMetadata() {
     String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
@@ -122,10 +113,8 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyPreviewImage();
   }
 
-  @Test(
-      groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"},
-      dependsOnGroups = "VEGalleryTests_001"
-  )
+  @Test(groups = {"VEGallery", "VEGalleryTests_005",
+                  "VEGalleryRemove"}, dependsOnGroups = "VEGalleryTests_001")
   public void VEGalleryTests_005_Remove() {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();

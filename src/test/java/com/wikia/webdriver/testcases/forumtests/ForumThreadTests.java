@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -13,6 +10,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 @Test(groups = {"ForumThreadTests", "Forum"})
 @Execute(onWikia = "sustainingtest")
@@ -50,8 +50,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.SUS_STAFF2)
-  @RelatedIssue(issueID = "SUS-1770",
-      comment = "Test wont pass until product is fixed, don't bother reruning")
+  @RelatedIssue(issueID = "SUS-1770", comment = "Test wont pass until product is fixed, don't bother reruning")
   @Test(groups = {"ForumThreadTests_003"})
   public void staffUserCanMoveThreadToOtherBoard() {
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, DateTime.now().getMillis());

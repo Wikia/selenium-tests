@@ -14,23 +14,21 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * The template configuration modal allows users to customize the transclusion parameters of a template
- * and offers preview functionality.
+ * The template configuration modal allows users to customize the transclusion parameters of a
+ * template and offers preview functionality.
  */
 public class TemplateConfigurationModal {
+
+  private final By templatePlaceholderBy = By.className("placeholder-double-brackets");
+  private final Frame editorFrame;
+  private final WebDriver webDriver;
+  private final WebDriverWait webDriverWait;
   @FindBy(className = "cke_wysiwyg_frame")
   private WebElement editorFrameElement;
   @FindBy(css = "#templateParameters textarea")
   private List<WebElement> templateParameters;
   @FindBy(css = "a[title=\"ok\"] .cke_dialog_ui_button")
   private WebElement okButton;
-
-  private final By templatePlaceholderBy = By.className("placeholder-double-brackets");
-
-  private final Frame editorFrame;
-
-  private final WebDriver webDriver;
-  private final WebDriverWait webDriverWait;
 
   public TemplateConfigurationModal(WebDriver webDriver) {
     PageFactory.initElements(webDriver, this);
@@ -41,7 +39,8 @@ public class TemplateConfigurationModal {
 
   /**
    * Set a value for one of the template's parameters
-   * @param name name of the parameter to set
+   *
+   * @param name  name of the parameter to set
    * @param value value to set for the parameter
    * @throws NoSuchElementException if there is no parameter with the provided name
    */
@@ -54,8 +53,8 @@ public class TemplateConfigurationModal {
   }
 
   /**
-   * Insert the configured template into the article.
-   * This method blocks until the inserted template becomes visible, with a timeout of 10 seconds.
+   * Insert the configured template into the article. This method blocks until the inserted template
+   * becomes visible, with a timeout of 10 seconds.
    */
   public void clickOkButton() {
     webDriverWait.until(ExpectedConditions.elementToBeClickable(okButton));
@@ -63,6 +62,9 @@ public class TemplateConfigurationModal {
     final int numberOfTemplatesOnPage = webDriver.findElements(templatePlaceholderBy).size();
     okButton.click();
 
-    editorFrame.frameScope(() -> webDriverWait.until(ExpectedConditions.numberOfElementsToBe(templatePlaceholderBy, numberOfTemplatesOnPage + 1)));
+    editorFrame.frameScope(() -> webDriverWait.until(ExpectedConditions.numberOfElementsToBe(
+        templatePlaceholderBy,
+        numberOfTemplatesOnPage + 1
+    )));
   }
 }

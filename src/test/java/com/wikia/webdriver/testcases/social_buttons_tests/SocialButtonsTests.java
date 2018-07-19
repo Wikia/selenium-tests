@@ -18,12 +18,13 @@ public class SocialButtonsTests extends NewTestTemplate {
   private Credentials credentials = Configuration.getCredentials();
 
   /**
-   * This tests executes for 11 users with different languages. LogData in, open random article, compare
-   * present social buttons to expected social buttons
+   * This tests executes for 11 users with different languages. LogData in, open random article,
+   * compare present social buttons to expected social buttons
    */
   @Test(groups = {"SocialButtons", "SocialButtons_001"}, dataProvider = "SocialButtonsDataProvider")
-  public void SocialButtons_001_differentLanguages(String[] credentials,
-      String[] expectedSocialNetworks) {
+  public void SocialButtons_001_differentLanguages(
+      String[] credentials, String[] expectedSocialNetworks
+  ) {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     WikiBasePageObject base = new WikiBasePageObject();
@@ -35,10 +36,13 @@ public class SocialButtonsTests extends NewTestTemplate {
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
-      Assertion.assertEquals(currentSocialNetwork, expectedSocialNetwork,
-          "Expected network not found on its position. "
-              + "Note that the order of social buttons is also important, "
-              + "as defined in requirements. Missing network:" + expectedSocialNetwork);
+      Assertion.assertEquals(currentSocialNetwork,
+                             expectedSocialNetwork,
+                             "Expected network not found on its position. "
+                             + "Note that the order of social buttons is also important, "
+                             + "as defined in requirements. Missing network:"
+                             + expectedSocialNetwork
+      );
     }
   }
 
@@ -49,25 +53,26 @@ public class SocialButtonsTests extends NewTestTemplate {
    */
   @DataProvider(name = "SocialButtonsDataProvider")
   public final String[][][] SocialButtonsDataProvider() {
-    return new String[][][] {
-        { {credentials.userNameEnglish, credentials.passwordEnglish},
-            {"Facebook", "Twitter", "Reddit", "Tumblr"}},
-        { {credentials.userNameJapanese, credentials.passwordJapanese},
-            {"Facebook", "Twitter", "Google+"}},
-        { {credentials.userNameBrazilianPortuguese, credentials.passwordBrazilianPortuguese},
-            {"Facebook", "Twitter", "Reddit", "Tumblr"}},
-        { {credentials.userNameChinese, credentials.passwordChinese}, {"Facebook", "Sina Weibo"}},
-        { {credentials.userNameGerman, credentials.passwordGerman},
-            {"Facebook", "Twitter", "Tumblr"}},
-        { {credentials.userNameFrench, credentials.passwordFrench}, {"Facebook", "Twitter"}},
-        { {credentials.userNameSpanish, credentials.passwordSpanish},
-            {"Facebook", "Twitter", "Menéame", "Tumblr"}},
-        { {credentials.userNameRussian, credentials.passwordRussian},
-            {"VK", "Facebook", "Odnoklassniki", "Twitter"}},
-        { {credentials.userNamePolish, credentials.passwordPolish},
-            {"Facebook", "Twitter", "NK", "Wykop"}},
-        { {credentials.userNameItalian, credentials.passwordItalian},
-            {"Facebook", "Twitter", "Reddit", "Tumblr"}}};
+    return new String[][][]{{{credentials.userNameEnglish, credentials.passwordEnglish},
+                             {"Facebook", "Twitter", "Reddit", "Tumblr"}},
+                            {{credentials.userNameJapanese, credentials.passwordJapanese},
+                             {"Facebook", "Twitter", "Google+"}},
+                            {{credentials.userNameBrazilianPortuguese,
+                              credentials.passwordBrazilianPortuguese},
+                             {"Facebook", "Twitter", "Reddit", "Tumblr"}},
+                            {{credentials.userNameChinese, credentials.passwordChinese},
+                             {"Facebook", "Sina Weibo"}},
+                            {{credentials.userNameGerman, credentials.passwordGerman},
+                             {"Facebook", "Twitter", "Tumblr"}},
+                            {{credentials.userNameFrench, credentials.passwordFrench},
+                             {"Facebook", "Twitter"}},
+                            {{credentials.userNameSpanish, credentials.passwordSpanish},
+                             {"Facebook", "Twitter", "Menéame", "Tumblr"}},
+                            {{credentials.userNameRussian, credentials.passwordRussian},
+                             {"VK", "Facebook", "Odnoklassniki", "Twitter"}},
+                            {{credentials.userNamePolish, credentials.passwordPolish},
+                             {"Facebook", "Twitter", "NK", "Wykop"}},
+                            {{credentials.userNameItalian, credentials.passwordItalian},
+                             {"Facebook", "Twitter", "Reddit", "Tumblr"}}};
   }
-
 }

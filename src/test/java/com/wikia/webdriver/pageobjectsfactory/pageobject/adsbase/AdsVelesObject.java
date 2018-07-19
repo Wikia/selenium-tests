@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
@@ -12,14 +13,19 @@ import java.util.concurrent.TimeUnit;
 
 public class AdsVelesObject extends AdsBaseObject {
 
+  public static final String
+      BIDDER_PLAYER_EVENT_PATTERN
+      = ".*adengplayerinfo.*event_name=in_viewport_with_fallback_bid.*";
+  public static final String
+      DIRECT_PLAYER_EVENT_PATTERN
+      = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
+  public static final String
+      NO_OFFER_PLAYER_EVENT_PATTERN
+      = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
   private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER,.mobile-in-content";
   private static final String INCONTENT_VIDEO = ".video-display-wrapper";
   private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
 
-  public static final String BIDDER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_fallback_bid.*";
-  public static final String DIRECT_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
-  public static final String NO_OFFER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
-  
   public AdsVelesObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
   }

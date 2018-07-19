@@ -3,23 +3,18 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.Log;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.coordinates.CoordsProvider;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Class responsible for taking and saving screenshots
@@ -53,7 +48,6 @@ public class Shooter {
 
   public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
 
-
     JavascriptActions jsActions = new JavascriptActions();
     CoordsProvider coordsProvider;
     if (!"FF".equals(Configuration.getBrowser())) {
@@ -64,12 +58,12 @@ public class Shooter {
       dpr = 1;
     }
 
-    BufferedImage image = new AShot()
-            .coordsProvider(coordsProvider)
-            .shootingStrategy(ShootingStrategies.scaling(dpr))
-            .takeScreenshot(driver, element).getImage();
+    BufferedImage image = new AShot().coordsProvider(coordsProvider)
+        .shootingStrategy(ShootingStrategies.scaling(dpr))
+        .takeScreenshot(driver, element)
+        .getImage();
 
-    Log.log("Image size",image.getWidth() + "x" + image.getHeight() + "with dpr: " + dpr,true);
+    Log.log("Image size", image.getWidth() + "x" + image.getHeight() + "with dpr: " + dpr, true);
     Log.image("Shooter", createTempFileFromImage(image), true);
     return image;
   }
@@ -94,10 +88,13 @@ public class Shooter {
 
     WebElement dummyElement = driver.findElement(By.tagName("body"));
 
-    BufferedImage image = new AShot()
-            .imageCropper(new CustomImageCropper().setCoordinates(start, size))
-              .shootingStrategy(ShootingStrategies.scaling(dpr))
-            .takeScreenshot(driver, dummyElement).getImage();
+    BufferedImage image = new AShot().imageCropper(new CustomImageCropper().setCoordinates(
+        start,
+        size
+    ))
+        .shootingStrategy(ShootingStrategies.scaling(dpr))
+        .takeScreenshot(driver, dummyElement)
+        .getImage();
 
     return createTempFileFromImage(image);
   }

@@ -5,14 +5,11 @@ import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.exceptions.TestFailedException;
 import com.wikia.webdriver.common.logging.Log;
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.ITestResult;
-import org.testng.SkipException;
+
+import org.testng.*;
 
 import java.lang.reflect.Method;
 import java.util.List;
-
 
 public class InvokeMethodAdapter implements IInvokedMethodListener {
 
@@ -32,8 +29,8 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
           result.setThrowable((Throwable) failure);
         }
       }
-    }else {
-      if(result.getStatus() == ITestResult.FAILURE){
+    } else {
+      if (result.getStatus() == ITestResult.FAILURE) {
         Log.logError("TEST CONFIGURATION FAILED", result.getThrowable());
       }
     }
@@ -41,8 +38,10 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
 
   @Override
   public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-    if (method.isTestMethod() && isTestExcludedFromEnv(method.getTestMethod().getConstructorOrMethod().getMethod())) {
-        throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
+    if (method.isTestMethod() && isTestExcludedFromEnv(method.getTestMethod()
+                                                           .getConstructorOrMethod()
+                                                           .getMethod())) {
+      throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
     }
   }
 

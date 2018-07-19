@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.remote;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,8 @@ public final class Utils {
   }
 
   public static String extractSiteIdFromMediaWikiUsing(final WebDriver driver) {
-    String text = driver.findElement(By.cssSelector(".wikitable tr:nth-child(5) td:nth-child(2)")).getText();
+    String text = driver.findElement(By.cssSelector(".wikitable tr:nth-child(5) td:nth-child(2)"))
+        .getText();
     // Found text: "city_id: 1362702, cluster: c7, dc: sjc"
     return StringUtils.substringBetween(text, ": ", ",");
   }
@@ -29,7 +31,9 @@ public final class Utils {
   }
 
   public static String excractSiteIdFromWikiName(String wikiName) {
-    String wikiUrl = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrl().replace("https://", "http://");
+    String wikiUrl = UrlBuilder.createUrlBuilderForWiki(wikiName)
+        .getUrl()
+        .replace("https://", "http://");
     return extractSiteIdFromMediaWiki(wikiUrl);
   }
 
@@ -38,7 +42,9 @@ public final class Utils {
     final String environment = Configuration.getEnvType().getKey();
     final String url = XMLReader.getValue(configurationFile, "services." + environment);
     Objects.requireNonNull(url,
-        "Please check if your configuration file contains url for service " + environment);
+                           "Please check if your configuration file contains url for service "
+                           + environment
+    );
     return url;
   }
 }

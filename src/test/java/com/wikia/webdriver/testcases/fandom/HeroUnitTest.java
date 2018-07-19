@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.fandom;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.fandom.FandomTestTemplate;
 import com.wikia.webdriver.elements.fandom.pages.HomePage;
+
+import org.testng.annotations.Test;
 
 @Test(groups = {"Fandom", "Fandom_HeroUnit"})
 public class HeroUnitTest extends FandomTestTemplate {
@@ -20,8 +20,9 @@ public class HeroUnitTest extends FandomTestTemplate {
   public void anonCanSeeFiveHeroUnits() {
     HomePage homePage = new HomePage().open();
 
-    Assertion.assertTrue(homePage.getHeroBlock().hasFiveHeroUnits(), "Hero block doesn't have five units.");
+    Assertion.assertTrue(
+        homePage.getHeroBlock().hasFiveHeroUnits(),
+        "Hero block doesn't have five units."
+    );
   }
-
-
 }

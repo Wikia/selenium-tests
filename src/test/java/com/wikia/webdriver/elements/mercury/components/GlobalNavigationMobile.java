@@ -6,6 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSig
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -122,5 +123,4 @@ public class GlobalNavigationMobile extends BasePageObject {
   public Notifications getNotifications() {
     return new Notifications();
   }
-
 }

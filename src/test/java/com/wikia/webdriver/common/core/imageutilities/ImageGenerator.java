@@ -3,10 +3,10 @@ package com.wikia.webdriver.common.core.imageutilities;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.WebDriverException;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,6 +15,8 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.imageio.ImageIO;
 
 public class ImageGenerator {
 
@@ -25,15 +27,11 @@ public class ImageGenerator {
   private int defaultHeight = 200;
 
   public ImageGenerator() {
-    imageBuffer =
-        new BufferedImage(defaultWidth, defaultHeight,
-                          BufferedImage.TYPE_INT_ARGB);
+    imageBuffer = new BufferedImage(defaultWidth, defaultHeight, BufferedImage.TYPE_INT_ARGB);
   }
 
   public ImageGenerator(int width, int height) {
-    imageBuffer =
-            new BufferedImage(width, height,
-                    BufferedImage.TYPE_INT_ARGB);
+    imageBuffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
   }
 
   /**
@@ -63,7 +61,11 @@ public class ImageGenerator {
     int stringWidth = fontMetrics.stringWidth(imageText);
 
     // Draw the text in the middle of the image
-    g2.drawString(imageText, (imageBuffer.getWidth() - stringWidth) / 2, imageBuffer.getHeight() / 2);
+    g2.drawString(
+        imageText,
+        (imageBuffer.getWidth() - stringWidth) / 2,
+        imageBuffer.getHeight() / 2
+    );
 
     try {
       if (ImageIO.write(imageBuffer, imageExtension, new File(imagePath))) {

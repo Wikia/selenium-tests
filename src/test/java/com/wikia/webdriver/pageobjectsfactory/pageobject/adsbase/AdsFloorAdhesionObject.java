@@ -16,25 +16,17 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
     getUrl(testedPage, true);
   }
 
-  public void verifyFloorAdhesionPresent(String expectedSlotName,
-                                         String expectedLineItemId,
-                                         String expectedCreativeId) {
+  public void verifyFloorAdhesionPresent(
+      String expectedSlotName, String expectedLineItemId, String expectedCreativeId
+  ) {
     verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
     wait.forElementVisible(By.cssSelector(FLOOR_ADHESION_CSS));
-    Log.log(
-        "Check visibility of Floor Adhesion",
-        "Floor Adhesion should be displayed",
-        true
-    );
+    Log.log("Check visibility of Floor Adhesion", "Floor Adhesion should be displayed", true);
   }
 
   public void verifyThereIsNoFloorAdhesion() {
     waitForElementNotVisibleByElement(driver.findElement(By.cssSelector(FLOOR_ADHESION_CSS)));
-    Log.log(
-        "Check visibility",
-        "Clicking Floor Adhesion close button hides ad unit",
-        true
-    );
+    Log.log("Check visibility", "Clicking Floor Adhesion close button hides ad unit", true);
   }
 
   public AdsFloorAdhesionObject clickFloorAdhesionClose() {
@@ -45,11 +37,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   public void verifyThereIsNoWikiaBar(String browser) {
     if (driver.isChromeMobile()) {
       // Mercury does not have WikiaBar
-      Log.log(
-          "Check visibility of Wikia Bar",
-          "It is Mercury skin with no Wikia Bar",
-          true
-      );
+      Log.log("Check visibility of Wikia Bar", "It is Mercury skin with no Wikia Bar", true);
       return;
     }
 

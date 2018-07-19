@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -288,7 +289,7 @@ public class PortableInfobox extends BasePageObject {
 
   public boolean areQuotationMarksPresented() {
     boolean questionMarkPresented = false;
-    for(int i=0; i<h3Elements.size(); i++) {
+    for (int i = 0; i < h3Elements.size(); i++) {
       wait.forElementVisible(h3Elements.get(i));
       if (h3Elements.get(i).getText().contains("?")) {
         questionMarkPresented = true;

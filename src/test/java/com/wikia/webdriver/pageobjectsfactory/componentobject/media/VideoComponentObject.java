@@ -36,13 +36,15 @@ public class VideoComponentObject extends WikiBasePageObject {
 
   public void verifyVideoEmbedWidth() {
     Assertion.assertEquals(videoEmbed.findElement(By.tagName("div")).getCssValue("width"),
-                           videoWidth + "px");
+                           videoWidth + "px"
+    );
     Log.log("verifyVideoEmbedWidth", "Width: " + videoWidth, true);
   }
 
   public void verifyVideoIframeWidth() {
     Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"),
-                           videoWidth.toString());
+                           videoWidth.toString()
+    );
     Log.log("verifyVideoIframeWidth", "Width: " + videoWidth, true);
   }
 
@@ -69,7 +71,9 @@ public class VideoComponentObject extends WikiBasePageObject {
 
     WebElement object = container.findElement(By.tagName("object"));
     wait.forElementVisible(object);
-    Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id")
+    Assertion.assertStringContains(
+        getVideoPlayerObject().getAttribute("value"),
+        object.getAttribute("id")
     );
     Log.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
   }
@@ -124,5 +128,4 @@ public class VideoComponentObject extends WikiBasePageObject {
 
     Assertion.assertStringContains(embedCode, autoplayStr);
   }
-
 }

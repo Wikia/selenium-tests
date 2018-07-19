@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.onsitenotifications;
 
-import com.google.common.collect.Lists;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -21,6 +20,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationFactory;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
+
+import com.google.common.collect.Lists;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,20 +33,21 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private static final String MOBILE = "on-site-notifications-mobile";
 
   private static final String ALL_READ = "All notifications should be marked as read on %s page";
-  private static final String NOTIFICATION_VISIBLE_MSG = "Notification [%s] should be displayed on %s page";
+  private static final String
+      NOTIFICATION_VISIBLE_MSG
+      = "Notification [%s] should be displayed on %s page";
   private static final String ARTICLE = "article";
   private static final String DISCUSSION = "discussion";
-
-  private String siteId;
   private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_6;
   private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_7;
-  private List<User> replyUsers = Lists.newArrayList(
-    User.USER_2,
-    User.USER_3,
-    User.USER_4,
-    User.USER_5,
-    User.USER_6,
-    User.USER_9);
+  private String siteId;
+  private List<User> replyUsers = Lists.newArrayList(User.USER_2,
+                                                     User.USER_3,
+                                                     User.USER_4,
+                                                     User.USER_5,
+                                                     User.USER_6,
+                                                     User.USER_9
+  );
 
   @BeforeClass(groups = DESKTOP)
   public void setUpDesktop() {
@@ -74,8 +76,10 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
-    Notification notification =
-      createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
+    Notification notification = createPostUpvoteReturningExpectedNotification(
+        User.USER_11,
+        User.USER_2
+    );
 
     verifyNotificationDisplayedOnDesktop(notification);
   }
@@ -84,8 +88,11 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
-    Notification notification =
-      createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
+    Notification notification = createReplyUpvoteReturningExpectedNotification(
+        User.USER_11,
+        User.USER_11,
+        User.USER_2
+    );
 
     verifyNotificationDisplayedOnDesktop(notification);
   }
@@ -108,9 +115,11 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
     Assertion.assertFalse(notificationsList.isMarkAllAsReadButtonVisible());
     Assertion.assertFalse(notificationsList.isAnyNotificationUnread(),
-      String.format(ALL_READ, DISCUSSION));
+                          String.format(ALL_READ, DISCUSSION)
+    );
     Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread(),
-      String.format(ALL_READ, ARTICLE));
+                          String.format(ALL_READ, ARTICLE)
+    );
   }
 
   /**
@@ -130,8 +139,10 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
-    Notification notification =
-      createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
+    Notification notification = createPostUpvoteReturningExpectedNotification(
+        User.USER_12,
+        User.USER_2
+    );
 
     verifyNotificationDisplayedOnMobile(notification);
   }
@@ -140,8 +151,11 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
-    Notification notification =
-      createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
+    Notification notification = createReplyUpvoteReturningExpectedNotification(
+        User.USER_12,
+        User.USER_12,
+        User.USER_2
+    );
 
     verifyNotificationDisplayedOnMobile(notification);
   }
@@ -181,13 +195,20 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     return NotificationFactory.getPostReplyNotification(replyAuthor, post);
   }
 
-  private Notification createPostUpvoteReturningExpectedNotification(User postAuthor, User upvoteAuthor) {
+  private Notification createPostUpvoteReturningExpectedNotification(
+      User postAuthor,
+      User upvoteAuthor
+  ) {
     PostEntity.Data post = createPostAs(postAuthor);
     upvotePostAs(post, upvoteAuthor);
     return NotificationFactory.getPostUpvoteNotification(post);
   }
 
-  private Notification createReplyUpvoteReturningExpectedNotification(User postAuthor, User replyAuthor, User upvoteAuthor) {
+  private Notification createReplyUpvoteReturningExpectedNotification(
+      User postAuthor,
+      User replyAuthor,
+      User upvoteAuthor
+  ) {
     PostEntity.Data post = createPostAs(postAuthor);
     ReplyEntityData reply = createReplyToPostAs(post, replyAuthor);
     upvoteReplyAs(reply, upvoteAuthor);
@@ -202,19 +223,14 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notifications getNotificationsOnDiscussionsPageDesktop() {
     return getNotificationsDesktop(new PostsListPage().open());
-
   }
 
   private Notifications getNotificationsOnArticlePageDesktop() {
-    return getNotificationsDesktop(
-      new ArticlePageObject().open(MercurySubpages.MAIN_PAGE));
+    return getNotificationsDesktop(new ArticlePageObject().open(MercurySubpages.MAIN_PAGE));
   }
 
   private Notifications getNotificationsDesktop(WikiBasePageObject page) {
-    return page
-      .getNotificationsDropdown()
-      .expand()
-      .getNotifications();
+    return page.getNotificationsDropdown().expand().getNotifications();
   }
 
   private Notifications getNotificationsOnDiscussionsPageMobile() {
@@ -235,15 +251,19 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private void verifyNotificationDisplayedOnDesktop(Notification notification) {
     Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification),
-      getMessageFor(notification, DISCUSSION));
+                         getMessageFor(notification, DISCUSSION)
+    );
     Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification),
-      getMessageFor(notification, ARTICLE));
+                         getMessageFor(notification, ARTICLE)
+    );
   }
 
   private void verifyNotificationDisplayedOnMobile(Notification notification) {
     Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification),
-      getMessageFor(notification, DISCUSSION));
+                         getMessageFor(notification, DISCUSSION)
+    );
     Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification),
-      getMessageFor(notification, ARTICLE));
+                         getMessageFor(notification, ARTICLE)
+    );
   }
 }

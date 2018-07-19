@@ -1,10 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class AceEditor extends WikiBasePageObject {
 
@@ -30,8 +30,7 @@ public class AceEditor extends WikiBasePageObject {
     wait.forElementVisible(aceLayerTextArea);
     jsActions.execute("ace.edit('editarea').navigateFileEnd();");
     sendContent(cssText);
-    Log.log("sendAceCssText",
-        "the following text was send to ace editor: " + cssText, true);
+    Log.log("sendAceCssText", "the following text was send to ace editor: " + cssText, true);
 
     return this;
   }
@@ -39,8 +38,7 @@ public class AceEditor extends WikiBasePageObject {
   private AceEditor sendContent(String cssText) {
     wait.forElementVisible(aceLayerTextArea);
     aceInputTextArea.sendKeys(cssText);
-    Log.log("sendCssText", "the following text was send to ace editor: " + cssText,
-        true);
+    Log.log("sendCssText", "the following text was send to ace editor: " + cssText, true);
 
     return this;
   }

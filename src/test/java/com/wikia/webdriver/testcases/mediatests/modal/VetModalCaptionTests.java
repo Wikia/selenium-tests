@@ -15,6 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Previe
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -38,11 +39,14 @@ public class VetModalCaptionTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
-    VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPage(wikiURL, articleTitleCaption);
+    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(
+        wikiURL,
+        articleTitleCaption
+    );
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     caption = PageContent.CAPTION + vetOptions.getTimeStamp();
     vetOptions.setCaption(caption);
     vetOptions.submit();
@@ -64,12 +68,15 @@ public class VetModalCaptionTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
     String captionText = String.format("Caption-%d", DateTime.now().getMillis());
-    new ArticleContent().push(String
-        .format("[[File:WikiEvolution - Poznańska Wiki|thumb|right|335 px|%s]]", captionText));
+    new ArticleContent().push(String.format(
+        "[[File:WikiEvolution - Poznańska Wiki|thumb|right|335 px|%s]]",
+        captionText
+    ));
 
-    VetOptionsComponentObject vetOptions =
-        (VetOptionsComponentObject) new VisualEditModePageObject().open()
-            .modifyComponent(Components.VIDEO);
+    VetOptionsComponentObject
+        vetOptions
+        = (VetOptionsComponentObject) new VisualEditModePageObject().open()
+        .modifyComponent(Components.VIDEO);
 
     vetOptions.verifyCaption(captionText);
   }
@@ -79,11 +86,14 @@ public class VetModalCaptionTests extends NewTestTemplate {
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleNotEditable = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPage(wikiURL, articleTitleNotEditable);
+    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(
+        wikiURL,
+        articleTitleNotEditable
+    );
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 1);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 1);
     vetOptions.verifyNameNotEditable();
   }
 }

@@ -1,31 +1,22 @@
 package com.wikia.webdriver.common.templates.core;
 
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
+import com.wikia.webdriver.common.core.*;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.testnglisteners.BrowserAndTestEventListener;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.common.testnglisteners.BrowserAndTestEventListener;
+
 import org.openqa.selenium.Dimension;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.lang.reflect.Method;
 
 @Listeners({BrowserAndTestEventListener.class,
-    com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
+            com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public abstract class CoreTestTemplate {
 
   protected WikiaWebDriver driver;
@@ -54,8 +45,11 @@ public abstract class CoreTestTemplate {
     String currentBrowser = Configuration.getBrowser();
 
     if (!browser.equals(currentBrowser)) {
-      Log.warning("Parameter override", "Browser parameter changed by annotation"
-          + ", old value: " + browser + ", new value: " + currentBrowser);
+      Log.warning(
+          "Parameter override",
+          "Browser parameter changed by annotation" + ", old value: " + browser + ", new value: "
+          + currentBrowser
+      );
     }
 
     prepareURLs();
@@ -80,7 +74,9 @@ public abstract class CoreTestTemplate {
       setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
       setTestProperty("mockAds", declaringClass.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
-          declaringClass.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
+                      declaringClass.getAnnotation(Execute.class)
+                          .disableCommunityPageSalesPitchDialog()
+      );
     }
 
     if (declaringClass.isAnnotationPresent(InBrowser.class)) {
@@ -96,7 +92,8 @@ public abstract class CoreTestTemplate {
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       setTestProperty("mockAds", method.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
-              method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
+                      method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog()
+      );
     }
 
     if (method.isAnnotationPresent(InBrowser.class)) {
@@ -110,10 +107,13 @@ public abstract class CoreTestTemplate {
 
     if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
       setTestProperty("dumpNetworkTraffic",
-          String.valueOf(method.getAnnotation(NetworkTrafficDump.class).networkTrafficDump()));
+                      String.valueOf(method.getAnnotation(NetworkTrafficDump.class)
+                                         .networkTrafficDump())
+      );
       setTestProperty("useProxy", "true");
       setTestProperty("useMITM",
-          String.valueOf(method.getAnnotation(NetworkTrafficDump.class).useMITM()));
+                      String.valueOf(method.getAnnotation(NetworkTrafficDump.class).useMITM())
+      );
     }
 
     if (method.isAnnotationPresent(UnsafePageLoad.class) || method.getDeclaringClass()
@@ -149,14 +149,12 @@ public abstract class CoreTestTemplate {
     DriverProvider.switchActiveWindow(index);
     refreshDriver();
 
-    String driverName =
-        DriverProvider.getActiveDriver().equals(driver) ? "primary window" : "secondary window";
-    Log.log("switchToWindow", "================ " + driverName + " ================",
-        true);
+    String driverName = DriverProvider.getActiveDriver().equals(driver) ? "primary window"
+                                                                        : "secondary window";
+    Log.log("switchToWindow", "================ " + driverName + " ================", true);
   }
 
   protected abstract void prepareURLs();
 
   protected abstract void loadFirstPage();
-
 }

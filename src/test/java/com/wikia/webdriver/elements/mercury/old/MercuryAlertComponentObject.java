@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class MercuryAlertComponentObject {
+
   private Wait wait;
   private String alertMessage;
   private By alertBox = By.cssSelector(".alert-notifications .alert-box");
@@ -22,11 +23,14 @@ public class MercuryAlertComponentObject {
     this.alertMessage = message.getMessage();
   }
 
+  public boolean isAlertMessageVisible() {
+    return wait.forTextInElement(alertBox, alertMessage);
+  }
+
   public enum AlertMessage {
     NOT_EXISTING_REDIRECT(
-        "The link you followed is a redirect, but the page it directs to does not exist."),
-    NOT_EXISTING_CATEGORY("Category not found"),
-    NOT_EXISTING_SECTION("Section not found");
+        "The link you followed is a redirect, but the page it directs to does not exist."), NOT_EXISTING_CATEGORY(
+        "Category not found"), NOT_EXISTING_SECTION("Section not found");
 
     private String message;
 
@@ -37,9 +41,5 @@ public class MercuryAlertComponentObject {
     public String getMessage() {
       return message;
     }
-  }
-
-  public boolean isAlertMessageVisible() {
-    return wait.forTextInElement(alertBox, alertMessage);
   }
 }

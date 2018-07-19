@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -39,13 +40,14 @@ public class ForumBoardPage extends BasePageObject {
 
   /**
    * Navigate to forum board width specified title
-   *
-   * @param forumBoardTitle
-   * @return
    */
   public ForumBoardPage open(String forumBoardTitle) {
-    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrl(),
-        URLsContent.WIKI_DIR, URLsContent.FORUM_BOARD_NAMESPACE, forumBoardTitle));
+    getUrl(String.format("%s%s%s:%s",
+                         urlBuilder.getUrl(),
+                         URLsContent.WIKI_DIR,
+                         URLsContent.FORUM_BOARD_NAMESPACE,
+                         forumBoardTitle
+    ));
 
     return this;
   }
@@ -70,7 +72,6 @@ public class ForumBoardPage extends BasePageObject {
       highlight.click();
       Log.log("checkHighlightCheckbox", "highlight checkbox clicked", true, driver);
     }
-
   }
 
   public ForumThreadPageObject startDiscussion(String title, String message, boolean highlight) {
@@ -85,7 +86,10 @@ public class ForumBoardPage extends BasePageObject {
     checkHighlightCheckbox(highlight);
     clickPostButton();
     Log.log("startDiscussion",
-        "discussion with message: " + message + ", with title " + title + " posted", true, driver);
+            "discussion with message: " + message + ", with title " + title + " posted",
+            true,
+            driver
+    );
     return new ForumThreadPageObject(driver);
   }
 
@@ -93,13 +97,11 @@ public class ForumBoardPage extends BasePageObject {
     for (WebElement elem : threadTitlesList) {
       if (elem.getText().contains(title)) {
         scrollAndClick(elem);
-        Log.log("openDiscussion", "discussion with title: " + title + ", opened",
-            true, driver);
+        Log.log("openDiscussion", "discussion with title: " + title + ", opened", true, driver);
         return new ForumThreadPageObject(driver);
       }
     }
-    Log.log("openDiscussion", "discussion with title: " + title + ", not found",
-        false, driver);
+    Log.log("openDiscussion", "discussion with title: " + title + ", not found", false, driver);
     return null;
   }
 
@@ -113,7 +115,10 @@ public class ForumBoardPage extends BasePageObject {
     driver.switchTo().defaultContent();
     clickPostNotitleButton();
     Log.log("startDiscussionWithoutTitle",
-        "discussion with message: " + message + " without title, posted", true, driver);
+            "discussion with message: " + message + " without title, posted",
+            true,
+            driver
+    );
     return new ForumThreadPageObject(driver);
   }
 
@@ -138,8 +143,7 @@ public class ForumBoardPage extends BasePageObject {
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
     PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 0);
     photoOptions.clickAddPhoto();
-    Log.log("startDiscussionWithImage", "discussion with image started" + title, true,
-        driver);
+    Log.log("startDiscussionWithImage", "discussion with image started" + title, true, driver);
   }
 
   public void verifyDiscussionWithImage() {
@@ -162,16 +166,19 @@ public class ForumBoardPage extends BasePageObject {
     driver.switchTo().defaultContent();
     miniEditor.addExternalLink(externalLink);
     Log.log("startDiscussionWithLink",
-        "internal and external links: " + internalLink + " and" + externalLink + "added", true,
-        driver);
-
+            "internal and external links: " + internalLink + " and" + externalLink + "added",
+            true,
+            driver
+    );
   }
 
   public void verifyStartedDiscussionWithLinks(String internalLink, String externalLink) {
     wait.forTextInElement(discussionBody, 0, internalLink);
     wait.forTextInElement(discussionBody, 1, externalLink);
     Log.log("verifyStartedDiscussionWithLinks",
-        "internal and external links: " + internalLink + " and" + externalLink + "verified", true);
+            "internal and external links: " + internalLink + " and" + externalLink + "verified",
+            true
+    );
   }
 
   public void startDiscussionWithVideo(String title) {
@@ -181,8 +188,7 @@ public class ForumBoardPage extends BasePageObject {
     wait.forElementVisible(wikiaEditorTextArea);
     jsActions.focus(wikiaEditorTextArea);
     miniEditor.addVideoMiniEditor();
-    Log.log("startDiscussionWithVideo", "discussion with video started" + title, true,
-        driver);
+    Log.log("startDiscussionWithVideo", "discussion with video started" + title, true, driver);
   }
 
   public void unfollowIfDiscussionIsFollowed(int threadNumber) {
@@ -193,33 +199,38 @@ public class ForumBoardPage extends BasePageObject {
 
     if (followButton.getText().contains("Following")) {
       Log.log("unfollowIfDiscussionIsFollowed",
-          "discussion is followed. Preparing to click \"unfollowed\"", true);
+              "discussion is followed. Preparing to click \"unfollowed\"",
+              true
+      );
       wait.forElementClickable(followButton);
       scrollAndClick(followButton);
-      Log.log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true,
-          driver);
+      Log.log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true, driver);
     } else {
-      Log.log("unfollowIfDiscussionIsFollowed", "discussion was unfollowed already",
-          true);
+      Log.log("unfollowIfDiscussionIsFollowed", "discussion was unfollowed already", true);
     }
   }
 
   public void verifyTextOnFollowButton(int threadNumber, String followStatus) {
-    WebElement followButton =
-        driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
+    WebElement followButton = driver.findElement(By.cssSelector(
+        ".thread:nth-child(" + threadNumber + ") li.follow"));
     wait.forTextInElement(followButton, followStatus);
     Log.log("verifyTextOnFollowButton",
-        "verify that thread number " + threadNumber + " has the status: " + followStatus, true);
+            "verify that thread number " + threadNumber + " has the status: " + followStatus,
+            true
+    );
   }
 
   public void clickOnFollowButton(int threadNumber) {
-    WebElement followButton =
-        driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
+    WebElement followButton = driver.findElement(By.cssSelector(
+        ".thread:nth-child(" + threadNumber + ") li.follow"));
     wait.forElementVisible(followButton);
     wait.forElementClickable(followButton);
     scrollAndClick(followButton);
     Log.log("clickOnFollowButton",
-        "click on follow button of thread number " + threadNumber, true, driver);
+            "click on follow button of thread number " + threadNumber,
+            true,
+            driver
+    );
   }
 
   public String getTitle() {

@@ -16,8 +16,7 @@ public class DiffPagePageObject extends BasePageObject {
     Log.log("Verify diff table", "diff table is visible", true);
   }
 
-  public boolean isDiffTableVisible(){
+  public boolean isDiffTableVisible() {
     return diffTable.isDisplayed();
   }
-
 }

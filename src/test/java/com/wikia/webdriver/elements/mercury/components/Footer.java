@@ -5,7 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Footer extends WikiBasePageObject{
+public class Footer extends WikiBasePageObject {
 
   @FindBy(css = ".wds-global-footer")
   private WebElement footer;

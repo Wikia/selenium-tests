@@ -20,6 +20,13 @@ import java.util.stream.Collectors;
  */
 public class CategoryModule {
 
+  private final By autoCompleteSuggestion = By.className("ui-menu-item");
+  private final By editCategoryIcon = By.className("edit");
+  private final By removeCategoryIcon = By.className("delete");
+  private final By categoryNamesBy = By.cssSelector(".category .name");
+  private final WebDriver webDriver;
+  private final WebDriverWait webDriverWait;
+  private final Actions actions;
   @FindBy(css = ".module_categories h3")
   private WebElement categoryModuleHeader;
   @FindBy(id = "CategorySelect")
@@ -28,15 +35,6 @@ public class CategoryModule {
   private WebElement categorySelectInput;
   @FindBy(className = "category")
   private List<WebElement> categoryList;
-
-  private final By autoCompleteSuggestion = By.className("ui-menu-item");
-  private final By editCategoryIcon = By.className("edit");
-  private final By removeCategoryIcon = By.className("delete");
-  private final By categoryNamesBy = By.cssSelector(".category .name");
-
-  private final WebDriver webDriver;
-  private final WebDriverWait webDriverWait;
-  private final Actions actions;
 
   public CategoryModule(WebDriver webDriver) {
     PageFactory.initElements(webDriver, this);
@@ -47,6 +45,7 @@ public class CategoryModule {
 
   /**
    * Type the given category name into the new category input field
+   *
    * @param categoryName the category name to input
    */
   public void typeCategoryName(String categoryName) {
@@ -57,8 +56,8 @@ public class CategoryModule {
   }
 
   /**
-   * Activate category suggestions based on the current content of the new category input field.
-   * The first item will be selected and added as a new category.
+   * Activate category suggestions based on the current content of the new category input field. The
+   * first item will be selected and added as a new category.
    *
    * @return the name of the newly added category from suggestions
    */
@@ -84,6 +83,7 @@ public class CategoryModule {
 
   /**
    * Get the current list of categories this page belongs to
+   *
    * @return a list of category names
    */
   public List<String> getCategoryList() {
@@ -107,17 +107,19 @@ public class CategoryModule {
 
   /**
    * Remove a category this page belongs to
+   *
    * @param categoryName name of the category to remove
    */
   public void removeExistingCategory(String categoryName) {
     clickOnIconForCategory(categoryName, removeCategoryIcon);
 
-    Log.log("removeCategory", "remove category button clicked on category "
-                                            + categoryName, true);
+    Log.log("removeCategory", "remove category button clicked on category " + categoryName, true);
 
     // due to animation on category removal, we need to wait here to avoid false negatives
-    webDriverWait
-        .until(ExpectedConditions.invisibilityOfElementWithText(categoryNamesBy, categoryName));
+    webDriverWait.until(ExpectedConditions.invisibilityOfElementWithText(
+        categoryNamesBy,
+        categoryName
+    ));
   }
 
   private void clickOnIconForCategory(String categoryName, By iconSelector) {

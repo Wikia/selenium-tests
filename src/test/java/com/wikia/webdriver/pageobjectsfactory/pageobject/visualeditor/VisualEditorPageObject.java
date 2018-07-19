@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.*;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -82,9 +83,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By blockTransclusionBy = By.cssSelector("div[typeof='mw:Transclusion']");
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
-  public VisualEditorPageObject open(){
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWikiPage(
-            TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
+  public VisualEditorPageObject open() {
+    getUrl(urlBuilder.appendQueryStringToURL(
+        urlBuilder.getUrlForWikiPage(TestContext.getCurrentMethodName()),
+        URLsContent.VEACTION_EDIT
+    ));
 
     return this;
   }
@@ -115,33 +118,27 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void putCursorAtTheEnd() {
     wait.forElementVisible(editArea);
-    String putCursorAtTheEndJS = "ve.init.target.getSurface().getModel().setLinearSelection(" +
-            "new ve.Range(" +
-            "ve.init.target.getSurface().getView().getNearestCorrectOffset(" +
-            "ve.init.target.getSurface().getModel().getDocument().getInternalList().getListNode().getOuterRange().to," +
-            "1" +
-            ")" +
-            ")" +
-            ")";
+    String putCursorAtTheEndJS = "ve.init.target.getSurface().getModel().setLinearSelection("
+                                 + "new ve.Range("
+                                 + "ve.init.target.getSurface().getView().getNearestCorrectOffset("
+                                 + "ve.init.target.getSurface().getModel().getDocument().getInternalList().getListNode().getOuterRange().to,"
+                                 + "1" + ")" + ")" + ")";
     driver.executeScript(putCursorAtTheEndJS);
   }
 
   public void selectText(int from, int to) {
-    String
-        selectTextJS =
-        "ve.init.target.getSurface().getModel().change(" +
-        "null, new ve.dm.LinearSelection(" +
-        "ve.init.target.getSurface().getModel().getDocument(),new ve.Range(" +
-        from + "," + to + " )));";
+    String selectTextJS = "ve.init.target.getSurface().getModel().change("
+                          + "null, new ve.dm.LinearSelection("
+                          + "ve.init.target.getSurface().getModel().getDocument(),new ve.Range("
+                          + from + "," + to + " )));";
     driver.executeScript(selectTextJS);
   }
 
   public void selectText(String text) {
     wait.forElementVisible(editArea);
     String textDump = editArea.getText();
-    int
-        from =
-        textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
+    int from = textDump.indexOf(text)
+               + 1; //+1 because index is counted differently in selectText() method
     int to = from + text.length();
     selectText(from, to);
   }
@@ -216,8 +213,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void verifyVideos(int expected) {
     wait.forElementVisible(editArea);
-    Assertion.assertNumber(videoNodes.size(), expected,
-            "Checking the correct number of video nodes added");
+    Assertion.assertNumber(videoNodes.size(),
+                           expected,
+                           "Checking the correct number of video nodes added"
+    );
     Log.log("verifyVideos", videoNodes.size() + " videos displayed", true);
   }
 
@@ -225,9 +224,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     if (expected > 0) {
       wait.forElementVisible(galleryNode);
     }
-    Assertion.assertNumber(
-        getNumOfElementOnPage(By.cssSelector(".media-gallery-wrapper.ve-ce-branchNode")), expected,
-        "Checking the correct number of gallery nodes");
+    Assertion.assertNumber(getNumOfElementOnPage(By.cssSelector(
+        ".media-gallery-wrapper.ve-ce-branchNode")),
+                           expected,
+                           "Checking the correct number of gallery nodes"
+    );
   }
 
   public void verifyMediasInGallery(int expected) {
@@ -235,17 +236,20 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     String className = galleryNode.getAttribute("class");
     String count = className.substring(className.indexOf("count-"));
     int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
-    Assertion.assertNumber(numOfMediasInGallery, expected,
-                           "Checking the correct number of media in gallery");
-    Log
-        .log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
+    Assertion.assertNumber(numOfMediasInGallery,
+                           expected,
+                           "Checking the correct number of media in gallery"
+    );
+    Log.log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
   }
 
   public void verifyMedias(int expected) {
     wait.forElementVisible(mediaNode);
     wait.forElementVisible(mediaNode);
-    Assertion.assertNumber(mediaNodes.size(), expected,
-                           "Checking the correct number of media nodes added");
+    Assertion.assertNumber(mediaNodes.size(),
+                           expected,
+                           "Checking the correct number of media nodes added"
+    );
     Log.log("verifyMedias", mediaNodes.size() + " media displayed", true);
   }
 
@@ -316,8 +320,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject typeInSourceEditor(String text) {
-    VisualEditorSourceEditorDialog veSrcDialog =
-        (VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
+    VisualEditorSourceEditorDialog
+        veSrcDialog
+        = (VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
     veSrcDialog.typeInEditArea(text);
     return veSrcDialog.clickApplyChangesButton();
   }
@@ -363,10 +368,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     selectMedia();
     wait.forElementVisible(swResizeHandle);
     Actions actions = new Actions(driver);
-    actions
-        .dragAndDropBy(swResizeHandle, xOffSet, yOffset)
-        .build()
-        .perform();
+    actions.dragAndDropBy(swResizeHandle, xOffSet, yOffset).build().perform();
     Log.log("resizeMedia", "After resizing", true, driver);
   }
 
@@ -395,20 +397,23 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void verifyNumberOfBlockTransclusion(int expected) {
-    Assertion.assertNumber(getNumOfElementOnPage(blockTransclusionBy), expected,
-                           "The number of blocked transclusion node is not equal");
+    Assertion.assertNumber(getNumOfElementOnPage(blockTransclusionBy),
+                           expected,
+                           "The number of blocked transclusion node is not equal"
+    );
   }
 
   public void verifyNumberOfInlineTransclusion(int expected) {
-    Assertion.assertNumber(getNumOfElementOnPage(inlineTransclusionBy), expected,
-                           "The number of inline transclusion node is not equal");
+    Assertion.assertNumber(getNumOfElementOnPage(inlineTransclusionBy),
+                           expected,
+                           "The number of inline transclusion node is not equal"
+    );
   }
 
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
     wait.forElementClickable(selectedGallery);
     selectedGallery.click();
-
   }
 
   public void deleteGallery(int index) {
@@ -438,20 +443,23 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     int tempTop = tempLocation.y + yOffset;
     editArea.click();
     Actions actions = new Actions(driver);
-    actions.moveToElement(mainContent, tempLeft, tempTop).clickAndHold().release().build()
+    actions.moveToElement(mainContent, tempLeft, tempTop)
+        .clickAndHold()
+        .release()
+        .build()
         .perform();
     WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
     wait.forElementVisible(contextEdit);
-    Log
-        .log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true,
-             driver);
+    Log.log("clickTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true, driver);
   }
 
   private Point getTransclusionLocation(int index, Transclusion transclusion) {
     JavascriptExecutor js = driver;
-    Object
-        templateBounding =
-        js.executeScript(VEContent.BOUNDING_SCRIPT, transclusion.getCssSelector(), index);
+    Object templateBounding = js.executeScript(
+        VEContent.BOUNDING_SCRIPT,
+        transclusion.getCssSelector(),
+        index
+    );
     Map<String, String> mapBounding = (Map) templateBounding;
     int tempLeft = getMapValueAsInt(String.valueOf(mapBounding.get("left")));
     int tempTop = getMapValueAsInt(String.valueOf(mapBounding.get("top")));
@@ -562,5 +570,4 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     infoboxInArticle.click();
     return this;
   }
-
 }

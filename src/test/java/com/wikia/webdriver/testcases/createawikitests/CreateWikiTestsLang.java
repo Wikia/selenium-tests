@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
-import org.testng.annotations.Test;
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -13,14 +13,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
-
-import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_lang"})
 public class CreateWikiTestsLang extends NewTestTemplate {
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs",
-      groups = {"CreateNewWiki_lang_001", "CNW_lang_first"})
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs", groups = {
+      "CreateNewWiki_lang_001", "CNW_lang_first"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWikiLangTC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -42,8 +41,8 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
-      groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf", groups = {
+      "CreateNewWiki_lang_001", "CNW_lang_second"})
   @Execute(asUser = User.USER_CNW)
   public void langSecondHalf(String lang) {
     createNewWikiLangTC001(lang);

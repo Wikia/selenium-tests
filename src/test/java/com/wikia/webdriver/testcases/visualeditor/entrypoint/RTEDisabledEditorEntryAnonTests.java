@@ -23,10 +23,8 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplate {
     base = new WikiBasePageObject();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_001",
-                "createPageEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_001",
+                  "createPageEntry"})
   public void RTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
@@ -35,98 +33,76 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_002",
-                "articleEditEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_002",
+                  "articleEditEntry"})
   public void RTEDisabledEditorEntryAnonTests_002_MainEditEntry() {
-    ArticlePageObject article =
-        new ArticlePageObject().open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_003",
-                "redlinkEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_003",
+                  "redlinkEntry"})
   public void RTEDisabledEditorEntryAnonTests_003_RedlinkEntry() {
-    ArticlePageObject article =
-        new ArticlePageObject().open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_004",
-                "sectionEditEntry"},
-      enabled = false
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_004",
+                  "sectionEditEntry"}, enabled = false)
   @RelatedIssue(issueID = "XW-3680")
   public void RTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
-    ArticlePageObject article =
-        new ArticlePageObject().open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_005",
-                "veactionURLEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_005",
+                  "veactionURLEntry"})
   public void RTEDisabledEditorEntryAnonTests_005_URLEntry() {
     VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_006",
-                "listEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_006",
+                  "listEntry"})
   public void RTEDisabledEditorEntryAnonTests_006_ListNamespace() {
-    ArticlePageObject article =
-        new ArticlePageObject().open(URLsContent.LIST_PAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.LIST_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_007",
-                "categoryEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_007",
+                  "categoryEntry"})
   public void RTEDisabledEditorEntryAnonTests_007_CategoryNamespace() {
-    ArticlePageObject article =
-        new ArticlePageObject().open(URLsContent.CATEGORY_PAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.CATEGORY_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_008",
-                "templateEntry"},
-      enabled = false
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_008",
+                  "templateEntry"}, enabled = false)
   @RelatedIssue(issueID = "XW-3681")
   public void RTEDisabledEditorEntryAnonTests_008_TemplateNamespace() {
-    ArticlePageObject article =
-        new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);
     SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
     src.verifySourceOnlyMode();
   }
 
-  @Test(
-      groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009",
-                "actionURLEntry"}
-  )
+  @Test(groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009",
+                  "actionURLEntry"})
   public void RTEDisabledEditorEntryAnonTests_009_actionEdit() {
-    SourceEditModePageObject src =
-        base.navigateToArticleEditPageSrc(wikiURL, base.getNameForArticle());
+    SourceEditModePageObject src = base.navigateToArticleEditPageSrc(
+        wikiURL,
+        base.getNameForArticle()
+    );
     src.verifySourceOnlyMode();
   }
 }

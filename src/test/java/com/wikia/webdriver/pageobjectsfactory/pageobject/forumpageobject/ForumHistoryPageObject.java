@@ -23,7 +23,6 @@ public class ForumHistoryPageObject extends WikiBasePageObject {
   public void verifyImportandPageElements() {
     wait.forElementVisible(threadHistoryTable);
     wait.forTextInElement(creatorActionCell, "created this thread");
-    Log
-        .log("verifyImportandPageElements", "thread history page basic content verified", true);
+    Log.log("verifyImportandPageElements", "thread history page basic content verified", true);
   }
 }

@@ -20,7 +20,6 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   public String getError() {
     gainFocus();
     return forgotPasswordPage.getError();
-
   }
 
   @Override
@@ -50,7 +49,7 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   public void requestLinkForUsername(String username) {
     gainFocus();
     forgotPasswordPage.requestLinkForUsername(username);
-    if(forgotPasswordPage.isConfirmationDisplayed()) {
+    if (forgotPasswordPage.isConfirmationDisplayed()) {
       loseFocus();
     }
   }

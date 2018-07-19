@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -15,9 +17,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import org.testng.annotations.Test;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import org.testng.annotations.Test;
 
 @Test(groups = "auth-forced-login")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -33,7 +34,8 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   public void anonCanLogInViaAuthModalWhenAddingVideo() {
-    SpecialVideosPageObject specialPage = new WikiBasePageObject().openSpecialVideoPage().clickAddButton();
+    SpecialVideosPageObject specialPage = new WikiBasePageObject().openSpecialVideoPage()
+        .clickAddButton();
     new DetachedRegisterPage().navigateToSignIn().login(user);
     new AddMediaModalComponentObject().closeAddVideoModal();
     specialPage.verifyUserLoggedIn(user.getUserName());

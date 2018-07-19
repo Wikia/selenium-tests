@@ -12,15 +12,13 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
@@ -167,26 +165,21 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-
   /**
    * TESTING METHODS SECTION
    *
    * This test covers all situations when post cannot be added (submit button is disabled).
    * <p>
-   * | Category | Title | Description | Open Graph | Content Image |
-   * |          |       |             |            |               |
-   * |          |     x |             |            |               |
-   * |          |       |           x |            |               |
-   * |          |       |             |          x |               |
-   * |          |       |             |            |             x |
-   * |          |     x |           x |            |               |
-   * |          |     x |             |          x |               |
-   * |          |     x |             |            |             x |
-   * |        x |       |             |            |               |
-   * |        x |     x |             |            |               |
-   * |        x |       |           x |            |               |
-   * |        x |       |             |          x |               |
-   * |        x |       |             |            |             x |
+   * | Category | Title | Description | Open Graph | Content Image | |          |       |
+   *  |            |               | |          |     x |             |            |               |
+   * |          |       |           x |            |               | |          |       |
+   *  |          x |               | |          |       |             |            |             x |
+   * |          |     x |           x |            |               | |          |     x |
+   *  |          x |               | |          |     x |             |            |             x |
+   * |        x |       |             |            |               | |        x |     x |
+   *  |            |               | |        x |       |           x |            |               |
+   * |        x |       |             |          x |               | |        x |       |
+   * |            |             x |
    *
    *
    * <p>
@@ -197,9 +190,8 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
-    Assertion.assertFalse(
-        postsCreator.isPostButtonActive(),
-        "User should not be able to add post with only title."
+    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+                          "User should not be able to add post with only title."
     );
     postsCreator.clearTitle();
 
@@ -254,15 +246,16 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clearTitle();
 
     // Add category at the end because there is no way to clear it
-    postsCreator.clickAddCategoryButton()
-        .findCategoryOn(0)
-        .click();
+    postsCreator.clickAddCategoryButton().findCategoryOn(0).click();
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
-        "User should not be able to add post with only category.");
+                          "User should not be able to add post with only category."
+    );
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
-    Assertion.assertTrue(postsCreator.isPostButtonActive(),
-        "User should be able to add post with only category and title.");
+    Assertion.assertTrue(
+        postsCreator.isPostButtonActive(),
+        "User should be able to add post with only category and title."
+    );
     postsCreator.clearTitle();
 
     postsCreator.addDescriptionWith(TextGenerator.defaultText());
@@ -287,7 +280,10 @@ public class CreatingPostTests extends NewTestTemplate {
     );
   }
 
-  private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
+  private CategoryPill fillPostCategoryWith(
+      final PostsCreator postsCreator,
+      final String description
+  ) {
     CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()
         .addDescriptionWith(description)
@@ -316,11 +312,10 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private void assertPostWithWeirdCharactersDisplayedOnPostsListPage(String wiki) {
     PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
-    String description = new PostsListPage()
-      .open()
-      .getPost()
-      .findPostById(post.getId())
-      .findDescription();
+    String description = new PostsListPage().open()
+        .getPost()
+        .findPostById(post.getId())
+        .findDescription();
     try {
       Assertion.assertStringContains(description, FIRST_LINE);
     } finally {
@@ -330,10 +325,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private void assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(String wiki) {
     PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
-    String description = new PostDetailsPage()
-      .open(post.getId())
-      .getPost()
-      .getPostDetailText();
+    String description = new PostDetailsPage().open(post.getId()).getPost().getPostDetailText();
     try {
       Assertion.assertStringContains(description, FIRST_LINE);
     } finally {

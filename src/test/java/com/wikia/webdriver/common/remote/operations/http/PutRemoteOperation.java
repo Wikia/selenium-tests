@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpHeaders;

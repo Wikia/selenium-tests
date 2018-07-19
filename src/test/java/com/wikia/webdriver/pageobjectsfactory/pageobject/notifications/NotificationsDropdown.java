@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.notifications;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

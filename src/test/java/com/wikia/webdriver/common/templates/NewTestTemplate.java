@@ -6,9 +6,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.url.FandomUrlBuilder;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
-import org.testng.annotations.BeforeMethod;
-
-import java.lang.reflect.Method;
 
 public class NewTestTemplate extends CoreTestTemplate {
 

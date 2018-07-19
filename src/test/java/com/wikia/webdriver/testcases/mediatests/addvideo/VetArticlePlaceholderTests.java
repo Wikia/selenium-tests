@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
@@ -16,8 +13,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
+import org.testng.annotations.Test;
+
 @Test(groups = {"VetTests", "Media", "VideoArticlePlacehoder"})
 public class VetArticlePlaceholderTests extends NewTestTemplate {
+
   @Test(groups = {"VideoArticlePlacehoder_001"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void userCanAddVideoByUrlUsingPlaceholder() {
@@ -25,8 +25,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject().open();
     VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.submit();
     article.verifyVideo();
   }
@@ -38,8 +39,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject().open();
     VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.submit();
     article.verifyVideo();
   }
@@ -53,10 +55,12 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     new ArticlePageObject().open();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
-    VetAddVideoComponentObject vetAddingVideo =
-        (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetAddVideoComponentObject
+        vetAddingVideo
+        = (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     visualEditMode.verifyVideo();
@@ -73,10 +77,12 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     new ArticlePageObject().open();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
-    VetAddVideoComponentObject vetAddingVideo =
-        (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
+    VetAddVideoComponentObject
+        vetAddingVideo
+        = (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByQuery(VideoContent.TEST_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     visualEditMode.verifyVideo();
