@@ -485,6 +485,15 @@ public class Wait {
     }
   }
 
+  public boolean forScriptToExecute(String script) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.scriptToExecute(script));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   /**
    * Wait for successful (http response code less than 400) response from specific service
    *
