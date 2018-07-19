@@ -27,11 +27,11 @@ public class LocalNavigationMobileTests extends NewTestTemplate {
               .open(MobileSubpages.MAIN_PAGE)
               .getLocalNavigationMobile();
 
-      Assertion.assertTrue(localNavMobile.isCommunityBarVisible());
-      Assertion.assertTrue(localNavMobile.isCommunityNameVisible());
-      Assertion.assertTrue(localNavMobile.isNavigationEntryPointVisible());
+   Assertion.assertTrue(localNavMobile.isCommunityBarVisible());
+   Assertion.assertTrue(localNavMobile.isCommunityNameVisible());
+   Assertion.assertTrue(localNavMobile.isDiscussionsEntrypointVisible());
+   Assertion.assertTrue(localNavMobile.isNavigationEntryPointVisible());
 
-      Assertion.assertFalse(localNavMobile.isDiscussionsEntrypointVisible());
   }
 
   @Test
@@ -48,8 +48,6 @@ public class LocalNavigationMobileTests extends NewTestTemplate {
     Assertion.assertTrue(localNavMobile.isNavigationEntryPointVisible());
 
   }
-
-
 
   @Test
   public void clickOnCommunityNameTakesUserToWikiMainpage() {
@@ -94,7 +92,25 @@ public class LocalNavigationMobileTests extends NewTestTemplate {
 
     localNavMobile.clickNavigationEntrypoint();
 
-    Assertion.assertFalse(localNavMobile.isSubMenuOpened());
+    Assertion.assertTrue(localNavMobile.isSubMenuClosed());
+  }
+
+  @Test
+  public void backButtonNavigatesBack() {
+    LocalNavigationMobile localNavMobile =
+        new ArticlePage()
+            .open(MobileSubpages.MAIN_PAGE)
+            .getLocalNavigationMobile();
+    localNavMobile
+        .clickNavigationEntrypoint()
+        .open1stlevelMenuElement(0);
+
+    Assertion.assertTrue(localNavMobile.isBackButtonVisible());
+    Assertion.assertTrue(localNavMobile.is2ndLevelMenuHeaderVisible());
+
+    localNavMobile.clickBackButton();
+
+    Assertion.assertTrue(localNavMobile.isSubMenuOpened());
   }
 
 }

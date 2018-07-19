@@ -14,7 +14,7 @@ public class LocalNavigationMobile extends WikiBasePageObject {
   @FindBy(css = ".wds-community-bar")
   private WebElement communityBar;
 
-  @FindBy(css = ".site-head-container .wds-community-bar__sitename")
+  @FindBy(css = ".wds-community-bar .wds-community-bar__sitename")
   private WebElement communityName;
 
   @FindBy(css = ".wds-community-bar__discussions")
@@ -26,14 +26,19 @@ public class LocalNavigationMobile extends WikiBasePageObject {
   @FindBy(css = ".wds-dropdown__content")
   private WebElement navigationToogleDropdown;
 
-  @FindBy(css = ".wds-community-bar__level-1")
+  @FindBy(css = ".wds-community-bar__level-1 ")
   private WebElement subMenu;
 
-  @FindBy(css = ".wds-community-bar__level-1")
-  private List<WebElement> subMenuLinks;
+  @FindBy(css = ".wds-community-bar__level-1 > li > a")
+  private List<WebElement> firstLevelMenuLinks
+      ;
 
-  @FindBy(css = ".wds-community-bar__navigation-back")
+  @FindBy(css = ".wds-dropdown__content .wds-community-bar__navigation-back")
   private WebElement backButton;
+
+  @FindBy(css = ".wds-community-bar__navigation-header")
+  private WebElement secondLevelMenuHeader;
+
 
   private boolean isElementVisible(WebElement element) {
     try {
@@ -84,7 +89,10 @@ public class LocalNavigationMobile extends WikiBasePageObject {
     return isElementVisible(subMenu);
   }
 
-
+  public boolean isSubMenuClosed() {
+    wait.forElementNotVisible(subMenu);
+    return true;
+  }
   public LocalNavigationMobile clickBackButton() {
     Log.info("Go back to previous navigation level");
     wait.forElementClickable(backButton);
@@ -93,22 +101,22 @@ public class LocalNavigationMobile extends WikiBasePageObject {
     return this;
   }
 
-  public LocalNavigationMobile openSubMenu(int index) {
+  public LocalNavigationMobile open1stlevelMenuElement(int index) {
     Log.info("Open sub-menu no.: " + index);
-    WebElement wikiMenuLink = subMenuLinks.get(index);
-    wait.forElementClickable(wikiMenuLink);
-    wikiMenuLink.click();
+    WebElement menuElement = firstLevelMenuLinks.get(index);
+    wait.forElementClickable(menuElement);
+    menuElement.click();
 
     return this;
   }
-
-
-
 
   public boolean isBackButtonVisible() {
     return isElementVisible(backButton);
   }
 
+  public boolean is2ndLevelMenuHeaderVisible() {
+    return isElementVisible(secondLevelMenuHeader);
+  }
 
 
 }
