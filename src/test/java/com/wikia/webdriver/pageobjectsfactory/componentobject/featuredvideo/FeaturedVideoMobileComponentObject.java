@@ -7,7 +7,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
+public class FeaturedVideoMobileComponentObject extends WikiBasePageObject {
 
   private static final String AUTOPLAY_COOKIE = "featuredVideoAutoplay";
 
@@ -23,10 +23,10 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
   @FindBy(css = ".article-featured-video__on-scroll-video-wrapper")
   private WebElement player;
 
-  @FindBy (css = ".article-featured-video__attribution-link")
+  @FindBy(css = ".article-featured-video__attribution-link")
   private WebElement attributionLink;
 
-  @FindBy (css = ".article-featured-video__attribution-avatar")
+  @FindBy(css = ".article-featured-video__attribution-avatar")
   private WebElement attributionAvatar;
 
   public FeaturedVideoMobileComponentObject setAutoplayCookie(boolean autoplay) {
@@ -61,22 +61,21 @@ public class FeaturedVideoMobileComponentObject extends WikiBasePageObject{
     return primaryTitle.getText();
   }
 
-  public boolean isAttributionLinkVisible () {
+  public boolean isAttributionLinkVisible() {
     wait.forElementVisible(attributionLink);
 
     return attributionLink.isDisplayed();
   }
 
-  public boolean isAttributionLinkNotVisible () {
+  public boolean isAttributionLinkNotVisible() {
     wait.forElementNotVisible(attributionLink);
 
     return true;
   }
-  public boolean isAttributionAvatarVisible () {
+
+  public boolean isAttributionAvatarVisible() {
     wait.forElementVisible(attributionAvatar);
 
     return attributionAvatar.isDisplayed();
   }
-
-
 }

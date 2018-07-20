@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
+
 @Test(groups = {"NotificationsTests", "MessageWallNotificationsFollowersResponseTests"})
 public class MessageWallNotificationsFollowersResponseTests extends NewTestTemplate {
 
@@ -19,9 +20,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 
   String title;
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersResponseTests_001"}
-  )
+  @Test(groups = {"MessageWallNotificationsFollowersResponseTests_001"})
   public void followerNotificationResponse_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
@@ -30,10 +29,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     watch.confirmWatchUnwatch();
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersResponseTests_002" },
-      dependsOnMethods = "followerNotificationResponse_setup_1"
-  )
+  @Test(groups = {
+      "MessageWallNotificationsFollowersResponseTests_002"}, dependsOnMethods = "followerNotificationResponse_setup_1")
   public void followerNotificationResponse_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
@@ -47,10 +44,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     wall.verifyMessageText(title, message, credentials.userName8);
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersResponseTests_003"},
-      dependsOnMethods = "followerNotificationResponse_setup_2"
-  )
+  @Test(groups = {
+      "MessageWallNotificationsFollowersResponseTests_003"}, dependsOnMethods = "followerNotificationResponse_setup_2")
   public void followerNotificationResponse_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
@@ -58,10 +53,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     wall.follow();
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersResponseTests_004"},
-      dependsOnMethods = "followerNotificationResponse_setup_3"
-  )
+  @Test(groups = {
+      "MessageWallNotificationsFollowersResponseTests_004"}, dependsOnMethods = "followerNotificationResponse_setup_3")
   public void followerNotificationResponse_setup_4() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
@@ -74,10 +67,9 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     thread.verifyLastReply(credentials.userName8, reply);
   }
 
-
-  @Test(groups = {"MessageWallNotificationsFollowersResponseTests_005"},
-        dependsOnMethods = "followerNotificationResponse_setup_4")
- public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
+  @Test(groups = {
+      "MessageWallNotificationsFollowersResponseTests_005"}, dependsOnMethods = "followerNotificationResponse_setup_4")
+  public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

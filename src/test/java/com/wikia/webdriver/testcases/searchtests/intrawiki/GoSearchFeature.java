@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 /*
  *  AnonFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for anonymous
- *  UserFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for logged in user 
+ *  UserFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for logged in user
  *  goSearchPreference: Make sure clicking search button after typing article name to the search field takes you to destination page when user has the preference enabled
  */
 @Test(groups = {"IntraWikiSearchGoSearch"})

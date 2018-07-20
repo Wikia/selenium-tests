@@ -44,24 +44,13 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     chooseLayout(layout);
     wait.forElementVisible(createPageButton);
     scrollAndClick(createPageButton);
-    Log.log(
-        "PageCreated",
-        "Page with given title created",
-        true
-    );
+    Log.log("PageCreated", "Page with given title created", true);
   }
 
   public void verifyMessageAboutBlockPresent() {
     wait.forElementVisible(phalanxBlockMessageContainer);
-    wait.forTextInElement(
-        phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE
-    );
-    Log.log(
-        "MessageAboutBlockPresent",
-        "Message about block present",
-        true,
-        driver
-    );
+    wait.forTextInElement(phalanxBlockMessageContainer, PageContent.PHALANX_BLOCK_TITLE_MESSAGE);
+    Log.log("MessageAboutBlockPresent", "Message about block present", true, driver);
   }
 
   /**

@@ -11,6 +11,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.SmartBanner;
 
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_SmartBanner")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -16,6 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Previe
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
+
+import org.testng.annotations.Test;
 
 @Test(groups = {"VetModalWidth", "VetTests", "Media"})
 @Execute(onWikia = "sustainingtestchat")
@@ -34,8 +34,9 @@ public class VetModalWidthTests extends NewTestTemplate {
 
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.adjustWith(MODAL_WIDTH);
     vetOptions.submit();
     Assertion.assertEquals(visualEditMode.getVideoWidth(), MODAL_WIDTH);
@@ -57,10 +58,12 @@ public class VetModalWidthTests extends NewTestTemplate {
   public void Vet_Modal_002_modalWidthOnEditing() {
     WikiBasePageObject base = new WikiBasePageObject();
 
-    VisualEditModePageObject visualEditModePageObject =
-        base.navigateToArticleEditPage(wikiURL, articleTitle);
-    VetOptionsComponentObject vetOptions =
-        (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+    VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPage(wikiURL,
+                                                                                       articleTitle
+    );
+    VetOptionsComponentObject
+        vetOptions
+        = (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 
     Assertion.assertEquals(vetOptions.getVideoWidth(), MODAL_WIDTH);
   }

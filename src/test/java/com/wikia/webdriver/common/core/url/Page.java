@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.url;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class Page {
+
   private String wikiName;
   private String wikiPath;
   private String wikiLanguage;
@@ -33,7 +34,7 @@ public class Page {
   }
 
   public String getUrl() {
-    if (this.wikiPath == null){
+    if (this.wikiPath == null) {
       return urlBuilder.getUrl(false);
     } else {
       return urlBuilder.getUrlForWikiPage(this.wikiPath);

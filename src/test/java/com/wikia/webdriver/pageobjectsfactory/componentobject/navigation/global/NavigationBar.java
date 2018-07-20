@@ -76,8 +76,11 @@ public class NavigationBar extends WikiBasePageObject {
         searchInput.sendKeys(Keys.ARROW_DOWN);
       }
       searchInput.sendKeys(Keys.ENTER);
-      Log.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
-                                                     + suggestionText + "and clicked enter", true);
+      Log.log(
+          "ArrowDownToSuggestion",
+          "arrowed down to desired suggestion" + suggestionText + "and clicked enter",
+          true
+      );
       return new ArticlePageObject();
     } else {
       return null;
@@ -114,13 +117,13 @@ public class NavigationBar extends WikiBasePageObject {
     return new ArticlePageObject();
   }
 
-  public AttachedSignInPage clickOnSignIn(){
+  public AttachedSignInPage clickOnSignIn() {
     wait.forElementVisible(userMenuDropdown).click();
     wait.forElementVisible(signInLink).click();
     return new AttachedSignInPage();
   }
 
-  public AttachedRegisterPage clickOnRegister(){
+  public AttachedRegisterPage clickOnRegister() {
     wait.forElementVisible(userMenuDropdown).click();
     wait.forElementVisible(registerLink).click();
     return new AttachedRegisterPage();

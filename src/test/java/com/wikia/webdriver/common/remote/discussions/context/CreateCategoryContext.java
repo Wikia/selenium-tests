@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.remote.discussions.context;
 
 import com.wikia.webdriver.common.remote.context.RemoteContext;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,11 +16,9 @@ public class CreateCategoryContext extends RemoteContext {
     this.categoryName = categoryName;
   }
 
-  public static CreateCategoryContext defaultContextUsing(final String siteId, final String categoryName) {
-    return CreateCategoryContext.builder()
-        .siteId(siteId)
-        .categoryName(categoryName)
-        .build();
+  public static CreateCategoryContext defaultContextUsing(
+      final String siteId, final String categoryName
+  ) {
+    return CreateCategoryContext.builder().siteId(siteId).categoryName(categoryName).build();
   }
-
 }

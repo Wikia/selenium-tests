@@ -4,11 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
@@ -20,9 +17,10 @@ import java.util.stream.Collectors;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
+  private static final String TITLES_CSS = ".Results article h1 .result-link";
   final private String photoExtension = ".jpg";
   final private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
-
+  final private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
   @FindBy(css = ".photos-and-videos")
   private WebElement photosVideos;
   @FindBy(css = "#searchInput")
@@ -35,7 +33,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   private WebElement filterVideos;
   @FindBy(css = "[name=rank]")
   private WebElement sortingOptions;
-  private static final String TITLES_CSS = ".Results article h1 .result-link";
   @FindBy(css = TITLES_CSS)
   private List<WebElement> titles;
   @FindBy(css = ".Results article img")
@@ -90,8 +87,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   private WebElement searchInputInGlobalNav;
   @FindBy(id = "searchForm")
   private WebElement searchFormInGlobalNav;
-
-  final private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
   public IntraWikiSearchPageObject(WebDriver driver) {
     super();
@@ -187,20 +182,18 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void chooseAdvancedOption(int i) {
     wait.forElementVisible(advancedField);
     advancedOptionInputs.get(i).click();
-    Log
-        .log("chooseAdvancedOption", "chosen advance option is selected", true, driver);
+    Log.log("chooseAdvancedOption", "chosen advance option is selected", true, driver);
   }
 
   public void selectAllAdvancedOptions() {
     clickAdvancedButton();
     chooseAdvancedOption(0);
-    Log.log("selectAllAdvancedOptions", "All advance options are selected", true,
-                          driver);
+    Log.log("selectAllAdvancedOptions", "All advance options are selected", true, driver);
   }
 
   /*
-  * Make sure namespace checkboxes are empty, except Articles and Category
-  */
+   * Make sure namespace checkboxes are empty, except Articles and Category
+   */
   public void verifyDefaultNamespaces() {
     wait.forElementVisible(advancedField);
     for (int i = 0; i < advancedOptions.size(); i++) {
@@ -220,8 +213,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementVisible(photosVideos);
     scrollAndClick(photosVideos);
     wait.forElementVisible(sortingOptions);
-    Log.log("selectPhotosVideos", "Photos and videos option is selected", true,
-                          driver);
+    Log.log("selectPhotosVideos", "Photos and videos option is selected", true, driver);
   }
 
   public void verifyPhotosOnly() {
@@ -250,8 +242,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void verifyNamespace(String namespace) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 30)
-          .until((ExpectedCondition<Boolean>) webDriver -> !titles.isEmpty());
+      new WebDriverWait(driver,
+                        30
+      ).until((ExpectedCondition<Boolean>) webDriver -> !titles.isEmpty());
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -292,10 +285,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     }
   }
 
-  public enum sortOptions {
-    RELEVANCY, PUBLISH_DATE, DURATION;
-  }
-
   public void sortBy(sortOptions option) {
     Select dropDown = new Select(sortingOptions);
     switch (option) {
@@ -314,9 +303,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public List<String> getTitles() {
-    return titles.stream()
-        .map(WebElement::getText)
-        .collect(Collectors.toList());
+    return titles.stream().map(WebElement::getText).collect(Collectors.toList());
   }
 
   public void compareTitleListsNotEquals(List<String> titles1, List<String> titles2) {
@@ -329,8 +316,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
   public void verifyPushToTopWikiThumbnail() {
     wait.forElementVisible(pushToTopWikiThumbnail);
-    Log.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified",
-                          true, driver);
+    Log.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true, driver);
   }
 
   public void verifyNewSuggestionsTextAndImages(String query) {
@@ -343,7 +329,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
       Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
     }
     Log.log("verifyNewSuggestionsTextAndImages",
-                          "Image and text next to every suggestion is verified", true);
+            "Image and text next to every suggestion is verified",
+            true
+    );
   }
 
   public void searchForInGlobalNavIfPresent(String query) {
@@ -358,5 +346,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     Log.log("searchFor", "searching for query: " + query, true, driver);
   }
 
-
+  public enum sortOptions {
+    RELEVANCY, PUBLISH_DATE, DURATION;
+  }
 }

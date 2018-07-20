@@ -15,11 +15,11 @@ import org.testng.annotations.Test;
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
-
   @Test
   public void videoIsPresentOnArticle() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isFeaturedVideoDisplayed());
@@ -27,29 +27,30 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoTitleIsVisible() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
     Assertion.assertEquals(video.getTitle(), "Papuga atakuje!");
   }
-// Test is disabled until Derek decides if we want to show subtitle to a user
+
+  // Test is disabled until Derek decides if we want to show subtitle to a user
   @Test(enabled = false)
   public void videoSubtitleIsVisible() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo");
 
-    Assertion.assertEquals(
-        video.getSubtitle(),
-        "Czyli jak wyprowadzic papuge z rownowagi"
-    );
+    Assertion.assertEquals(video.getSubtitle(), "Czyli jak wyprowadzic papuge z rownowagi");
   }
 
   @Test
   public void feedbackIsVisibleWhenVideoPlayed() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
         .clickPlay();
 
@@ -58,8 +59,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoIsPlaying() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isVideoPlaying());
@@ -67,8 +69,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoIsPaused() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause();
 
@@ -77,8 +80,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void feedbackIsNotVisibleWhenVideoPaused() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause();
 
@@ -87,8 +91,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void autoplayToggleIsOn() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
         .openSettingsMenu();
@@ -98,8 +103,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void autoplayToggleIsOff() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(false)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(false)
         .openWikiArticle("FeaturedVideo")
         .clickPlay()
         .clickPause()
@@ -110,8 +116,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoMutedWhenAutoplayed() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
         .showControlBar();
@@ -121,8 +128,9 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoQualityCanBeChanged() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
         .showControlBar()
@@ -130,13 +138,13 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .openQualityMenu();
 
     Assertion.assertTrue(video.isQualityAvailable());
-
   }
 
   @Test
   public void videoCaptionsCanBeChanged() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .setAutoplayCookie(true)
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().setAutoplayCookie(true)
         .openWikiArticle("FeaturedVideo")
         .clickPause()
         .showControlBar()
@@ -144,13 +152,13 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
         .openCaptionsMenu();
 
     Assertion.assertTrue(video.areCaptionsAvailable());
-
   }
 
   @Test
   public void videoAttributionIsPresent() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .openWikiArticle("FeaturedVideo");
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().openWikiArticle("FeaturedVideo");
 
     Assertion.assertTrue(video.isAttributionLinkVisible());
     Assertion.assertTrue(video.isAttributionAvatarVisible());
@@ -158,10 +166,10 @@ public class FeaturedVideoDesktopTests extends NewTestTemplate {
 
   @Test
   public void videoAttributionIsNotPresent() {
-    FeaturedVideoDesktopComponentObject video = new FeaturedVideoDesktopComponentObject()
-        .openWikiArticle("FeaturedVideo3");
+    FeaturedVideoDesktopComponentObject
+        video
+        = new FeaturedVideoDesktopComponentObject().openWikiArticle("FeaturedVideo3");
 
     Assertion.assertTrue(video.isAttributionLinkNotVisible());
   }
-
 }

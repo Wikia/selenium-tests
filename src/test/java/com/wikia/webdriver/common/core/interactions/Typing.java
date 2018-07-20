@@ -10,8 +10,7 @@ public class Typing {
   }
 
   /**
-   * Send keys at the speed of good typist human. based on research:
-   * http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
+   * Send keys at the speed of good typist human. based on research: http://smallbusiness.chron.com/good-typing-speed-per-minute-71789.html
    * "A professional or good typist hits around 325 to 335 CPM (chars per minute)" This means 60 000
    * / 330 = 182ms
    */

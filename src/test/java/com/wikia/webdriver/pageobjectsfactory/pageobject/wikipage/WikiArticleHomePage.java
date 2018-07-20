@@ -1,8 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage;
 
-import org.openqa.selenium.By;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import org.openqa.selenium.By;
 
 public class WikiArticleHomePage extends WikiBasePageObject {
 

@@ -16,7 +16,7 @@ public class TestAdsBrowserError extends TemplateNoFirstLoad {
 
     String testPage = AdsDataProvider.UAP_PAGE.getUrl();
     testPage = urlBuilder.appendQueryStringToURL(testPage, "scrollhandler=1");
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver);
+    AdsBaseObject adsBaseObject = new AdsBaseObject();
     adsBaseObject.getUrl(testPage);
 
     jsActions.addErrorListenerScript();

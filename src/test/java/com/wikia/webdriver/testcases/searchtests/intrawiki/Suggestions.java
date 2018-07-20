@@ -7,9 +7,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.
 import org.testng.annotations.Test;
 
 /*
-*  dropDownSuggestions: Type at least 3 chars and verify suggestions are displaying and contain given phrase
-*  searchSuggestionsVisibility: Verify Image and text is shown next to every suggestion
-*/
+ *  dropDownSuggestions: Type at least 3 chars and verify suggestions are displaying and contain given phrase
+ *  searchSuggestionsVisibility: Verify Image and text is shown next to every suggestion
+ */
 @Test(groups = {"IntraWikiSearchSuggestions"})
 public class Suggestions extends IntraWiki {
 
@@ -19,7 +19,6 @@ public class Suggestions extends IntraWiki {
     search.openWikiPage(testedWiki);
     search.triggerSuggestions(SearchContent.SEARCH_SUGGESTION_PHRASE);
     search.verifySuggestions(SearchContent.SEARCH_ARTICLE);
-
   }
 
   @Test(enabled = false, groups = {"searchSuggestionsVisibility", "IntraWikiSearch", "Search"})
@@ -28,5 +27,4 @@ public class Suggestions extends IntraWiki {
     search.openWikiPage(searchSuggestionsWiki);
     search.verifyNewSuggestionsTextAndImages(SearchContent.SEARCH_PHRASE_NEW_SUGGESTIONS);
   }
-
 }

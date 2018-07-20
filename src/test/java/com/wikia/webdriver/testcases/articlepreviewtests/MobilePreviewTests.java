@@ -12,8 +12,7 @@ public class MobilePreviewTests extends NewTestTemplate {
 
   @Test(groups = "oasis-articlePreview-mobilePreviewIsRenderedCorrectlyInModal")
   public void mobilePreviewIsRenderedCorrectlyInModal() {
-    new ArticlePreviewPage()
-        .navigateToArticlePreviewPageInEditMode()
+    new ArticlePreviewPage().navigateToArticlePreviewPageInEditMode()
         .clickOnMobilePreviewButton()
         .heroImageIsPresent()
         .infoboxIsPresent()

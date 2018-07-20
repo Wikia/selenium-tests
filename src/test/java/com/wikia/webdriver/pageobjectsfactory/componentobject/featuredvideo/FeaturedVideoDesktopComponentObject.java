@@ -62,10 +62,10 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
   @FindBy(css = ".wikia-jw-settings__submenu")
   private List<WebElement> videoSettingsSubmenu;
 
-  @FindBy (css = ".featured-video__attribution-username")
+  @FindBy(css = ".featured-video__attribution-username")
   private WebElement attributionLink;
 
-  @FindBy (css = ".featured-video__attribution-avatar")
+  @FindBy(css = ".featured-video__attribution-avatar")
   private WebElement attributionAvatar;
 
   public FeaturedVideoDesktopComponentObject setAutoplayCookie(boolean autoplay) {
@@ -130,7 +130,6 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
     return playerStatePaused.isDisplayed();
   }
 
-
   public boolean isVideoFeedbackDisplayed() {
     wait.forElementVisible(videoFeedback);
 
@@ -157,22 +156,19 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
 
   public FeaturedVideoDesktopComponentObject openSettingsMenu() {
     showControlBar();
-    wait.forElementClickable(settingsMenu)
-        .click();
+    wait.forElementClickable(settingsMenu).click();
 
     return this;
   }
 
   public FeaturedVideoDesktopComponentObject openQualityMenu() {
-    wait.forElementClickable(videoQualityButton)
-        .click();
+    wait.forElementClickable(videoQualityButton).click();
 
     return this;
   }
 
   public FeaturedVideoDesktopComponentObject openCaptionsMenu() {
-   wait.forElementClickable(videoCaptionsButton)
-        .click();
+    wait.forElementClickable(videoCaptionsButton).click();
 
     return this;
   }
@@ -185,33 +181,29 @@ public class FeaturedVideoDesktopComponentObject extends WikiBasePageObject {
   public boolean isQualityAvailable() {
 
     return wait.forTextInElement(videoSettingsSubmenu, 0, "Auto");
-
   }
 
   public boolean areCaptionsAvailable() {
     By last = By.xpath("//*[@data-track='0']");
     return wait.forTextInElement(last, "No captions");
-
   }
 
-  public boolean isAttributionLinkVisible () {
+  public boolean isAttributionLinkVisible() {
     wait.forElementVisible(attributionLink);
 
     return attributionLink.isDisplayed();
   }
 
-  public boolean isAttributionLinkNotVisible () {
+  public boolean isAttributionLinkNotVisible() {
     wait.forElementNotVisible(attributionLink);
 
     return true;
   }
 
-
-  public boolean isAttributionAvatarVisible () {
+  public boolean isAttributionAvatarVisible() {
     wait.forElementVisible(attributionAvatar);
 
     return attributionAvatar.isDisplayed();
   }
-
 }
 

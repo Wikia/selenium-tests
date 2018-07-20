@@ -1,14 +1,8 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,8 +15,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonUtils {
 

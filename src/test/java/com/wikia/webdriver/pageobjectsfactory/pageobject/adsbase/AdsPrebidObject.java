@@ -19,13 +19,13 @@ public class AdsPrebidObject extends AdsBaseObject {
   private static final String NEXT_TITLE = "SyntheticTests/RTB/Prebid.js/Wikia/2";
 
   public AdsPrebidObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public void verifyKeyValues(String slotName, String adapter, String size, String price) {
-    WebElement slotContainer = driver.findElement(
-        By.cssSelector(AdsContent.getSlotSelector(slotName))
-    );
+    WebElement
+        slotContainer
+        = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
     WebElement gptNode = slotContainer.findElement(By.cssSelector(GPT_NODE));
 
     try {
@@ -35,16 +35,15 @@ public class AdsPrebidObject extends AdsBaseObject {
       assertKeyValue(keyValues, "hb_size", size, "Size passed in slot key-values");
       assertKeyValue(keyValues, "hb_pb", price, "Price passed in slot key-values");
     } catch (JSONException exception) {
-      Log
-          .log("Prebid.js key-values", "Prebid.js key-values not found in slot div", false);
+      Log.log("Prebid.js key-values", "Prebid.js key-values not found in slot div", false);
       Log.log("Prebid.js key-values", exception, false);
     }
   }
 
   public void verifyPrebidCreative(String slotName, boolean rendered) {
-    WebElement slotContainer = driver.findElement(
-        By.cssSelector(AdsContent.getSlotSelector(slotName))
-    );
+    WebElement
+        slotContainer
+        = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
     WebElement iframe = slotContainer.findElement(By.cssSelector(IFRAME_NODE));
     driver.switchTo().frame(iframe);
 

@@ -16,15 +16,15 @@ import org.testng.annotations.Test;
 @Test(groups = "MobileWiki_FilePage")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-public class FilePageTests extends NewTestTemplate{
+public class FilePageTests extends NewTestTemplate {
 
-@Test
-public void snippetIsNotAffectedByXSS() {
-  new ArticlePage().open("File:Mala-mi.jpg");
-  FilePageObject filePage = new FilePageObject();
+  @Test
+  public void snippetIsNotAffectedByXSS() {
+    new ArticlePage().open("File:Mala-mi.jpg");
+    FilePageObject filePage = new FilePageObject();
 
-  Assertion.assertTrue(filePage.doesSnippetContainXSS());
+    Assertion.assertTrue(filePage.doesSnippetContainXSS());
 
-  Assertion.assertFalse(AlertHandler.isAlertPresent(driver));
+    Assertion.assertFalse(AlertHandler.isAlertPresent(driver));
   }
 }

@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,7 +16,6 @@ public class SpecialCreatePage extends SpecialPageObject {
   public SpecialCreatePage() {
     super();
   }
-
 
   public SpecialCreatePage open(String wikiURL) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_CREATE_PAGE);

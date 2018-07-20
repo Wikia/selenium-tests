@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.configuration.XMLConfiguration;

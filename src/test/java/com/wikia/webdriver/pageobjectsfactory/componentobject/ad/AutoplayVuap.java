@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +15,7 @@ import java.util.function.Function;
 
 public class AutoplayVuap {
 
+  public static final Color COLOR_VUAP_VIDEO_AD = new Color(0, 1, 253);
   private static final String SLOT_SELECTOR_PREFIX = "#%s ";
   private static final String PAUSE_SELECTOR = ".pause-overlay";
   private static final String REPLAY_SELECTOR = ".replay-overlay";
@@ -22,27 +24,23 @@ public class AutoplayVuap {
   private static final String CLOSE_BUTTON_SELECTOR = ".close-ad";
   private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
-
-  public static final Color COLOR_VUAP_VIDEO_AD = new Color(0, 1, 253);
-
   // #TOP_LEADERBOARD .pause-overlay
-  private static final String PAUSE_BUTTON_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + PAUSE_SELECTOR;
+  private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_SELECTOR;
 
   // #TOP_LEADERBOARD .replay-overlay
-  private static final String REPLAY_BUTTON_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + REPLAY_SELECTOR;
+  private static final String REPLAY_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX
+                                                              + REPLAY_SELECTOR;
 
   // #TOP_LEADERBOARD .current-time
-  private static final String CURRENT_TIME_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + CURRENT_TIME_SELECTOR;
+  private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX
+                                                             + CURRENT_TIME_SELECTOR;
 
   // #TOP_LEADERBOARD .speaker
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_SELECTOR;
 
   // #TOP_LEADERBOARD .close-ad
-  private static final String CLOSE_BUTTON_SELECTOR_FORMAT =
-      SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_SELECTOR;
+  private static final String CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX
+                                                             + CLOSE_BUTTON_SELECTOR;
 
   private final WikiaWebDriver driver;
 
@@ -146,8 +144,8 @@ public class AutoplayVuap {
   }
 
   private void clickOnTopLeftCornerOfElement(WebElement element) {
-    int y = element.getSize().height/4;
-    int x = element.getSize().width/4;
+    int y = element.getSize().height / 4;
+    int x = element.getSize().width / 4;
 
     new Actions(driver).moveToElement(element, x, y).click().build().perform();
   }
@@ -209,8 +207,7 @@ public class AutoplayVuap {
   }
 
   private void waitFor(final Function<AutoplayVuap, Boolean> predicate, final long timeout) {
-    new FluentWait<>(this)
-        .withTimeout(timeout, TimeUnit.SECONDS)
+    new FluentWait<>(this).withTimeout(timeout, TimeUnit.SECONDS)
         .pollingEvery(1, TimeUnit.SECONDS)
         .until(predicate);
   }

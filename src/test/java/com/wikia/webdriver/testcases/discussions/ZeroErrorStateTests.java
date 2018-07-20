@@ -13,11 +13,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Replies;
-import com.wikia.webdriver.elements.mercury.pages.discussions.FollowPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.*;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_EMPTY)
@@ -29,10 +26,14 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   private static final String MESSAGE_3 = "All Discussions";
   private static final String NO_REPLIES_MESSAGE = "No replies yet. Be the first!";
   private static final String FOLLOW_MESSAGE_HEADER_TEXT = "Welcome to your Following tab.";
-  private static final String FOLLOW_MESSAGE_CONTENT_TEXT = "Hit the “Follow” icon at the bottom of any post to fill your list with discussions that matter most to you. We’ll put them here and notify you of new activity.";
+  private static final String
+      FOLLOW_MESSAGE_CONTENT_TEXT
+      = "Hit the “Follow” icon at the bottom of any post to fill your list with discussions that matter most to you. We’ll put them here and notify you of new activity.";
   private static final String FOLLOW_MESSAGE_BUTTON_TEXT = "FIND POSTS TO FOLLOW";
   private static final String NO_REPLIES_ICON_MESSAGE = "No replies icon should be visible.";
-  private static final String NO_REPLIES_UNDER_POST_MESSAGE = "There should be no replies on new post (without replies).";
+  private static final String
+      NO_REPLIES_UNDER_POST_MESSAGE
+      = "There should be no replies on new post (without replies).";
 
   private static final String DESKTOP = "discussions-zero-error-state-desktop";
   private static final String MOBILE = "discussions-zero-error-state-mobile";
@@ -80,7 +81,6 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   /**
    * ANONS ON MOBILE SECTION
    */
-
 
   @Test(groups = MOBILE, enabled = false)
   @RelatedIssue(issueID = "SOC-3667")
@@ -231,7 +231,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     Assertion.assertTrue(errorMessage.isErrorMessagePresent());
     Assertion.assertEquals(
         errorMessage.getErrorMessageText(),
-        "There are no reported posts or replies.\n" + MESSAGE_2);
+        "There are no reported posts or replies.\n" + MESSAGE_2
+    );
   }
 
   private void userSeesProperMessageWhenOpensEmptyPostsListPage() {
@@ -239,7 +240,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     Assertion.assertTrue(errorMessage.isEmptyPostsListMessageDisplayed());
     Assertion.assertEquals(
         errorMessage.getEmptyPostsListMessageText(),
-        "No posts yet. Get the discussion started, create the first post now!");
+        "No posts yet. Get the discussion started, create the first post now!"
+    );
   }
 
   private void userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
@@ -256,7 +258,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   private void userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     final String postId = DiscussionsClient.using(User.USER, driver)
-        .createPostWithUniqueData().getId();
+        .createPostWithUniqueData()
+        .getId();
 
     final Replies replies = new PostDetailsPage().open(postId).getReplies();
 
@@ -266,12 +269,12 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   private void userSeesProperMessageWhenOpensEmptyFollowPage() {
-    NoFollowedPostsMessage noFollowedPostsMessage = new FollowPage().open().getNoFollowedPostsMessage();
+    NoFollowedPostsMessage noFollowedPostsMessage = new FollowPage().open()
+        .getNoFollowedPostsMessage();
 
     Assertion.assertEquals(noFollowedPostsMessage.getHeaderText(), FOLLOW_MESSAGE_HEADER_TEXT);
     Assertion.assertEquals(noFollowedPostsMessage.getContentText(), FOLLOW_MESSAGE_CONTENT_TEXT);
     Assertion.assertEquals(noFollowedPostsMessage.getButtonText(), FOLLOW_MESSAGE_BUTTON_TEXT);
-
   }
 }
 

@@ -7,33 +7,26 @@ import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
+  public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
+  private static final String
+      searchSuggestionClass
+      = ".wds-search-modal .wds-global-navigation__search__suggestion";
   @FindBy(css = ".wds-search-modal input.wds-global-navigation__search-input")
   private WebElement searchInput;
-
   @FindBy(css = ".wds-search-modal .wds-global-navigation__search-clear")
   private WebElement clearSearchButton;
-
   @FindBy(css = ".wds-search-modal .wds-global-navigation__search-toggle-icon.wds-icon:not(.wds-icon-small)")
   private WebElement inputFieldSearchIcon;
-
   @FindBy(css = ".wds-search-modal .wds-global-navigation__search-container")
   private WebElement searchContainer;
 
-  public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
-
-  private static final String searchSuggestionClass = ".wds-search-modal .wds-global-navigation__search__suggestion";
-
-  public boolean isPresent(){
+  public boolean isPresent() {
     return isElementOnPage(searchInput);
   }
 
@@ -132,7 +125,8 @@ public class Search extends BasePageObject {
   public boolean areSearchSuggestionsDisplayed() {
     try {
       wait.forElementClickable(By.cssSelector(searchSuggestionClass),
-                               SUGGESTIONS_TIMEOUT_IN_SECONDS);
+                               SUGGESTIONS_TIMEOUT_IN_SECONDS
+      );
       return true;
     } catch (TimeoutException e) {
       return false;

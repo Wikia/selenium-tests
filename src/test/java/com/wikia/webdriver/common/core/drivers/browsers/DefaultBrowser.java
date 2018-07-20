@@ -2,8 +2,8 @@ package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.logging.Log;
 
 public class DefaultBrowser extends BrowserAbstract {

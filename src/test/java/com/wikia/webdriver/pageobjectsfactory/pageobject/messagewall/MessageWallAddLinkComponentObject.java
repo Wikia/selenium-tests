@@ -16,9 +16,8 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
   private By targetBy = By.cssSelector(".linkEditorDialog tr:nth-child(2) input");
   private By textBy = By.cssSelector(".linkEditorDialog tr:nth-child(3) input");
   private By okButtonBy = By.cssSelector(".linkEditorDialog a[title=\"OK\"]");
-  private By
-      externalRadioButtonBy =
-      By.cssSelector(".linkEditorDialog tr:nth-child(1) input[value = ext]");
+  private By externalRadioButtonBy = By.cssSelector(
+      ".linkEditorDialog tr:nth-child(1) input[value = ext]");
 
   public MessageWallAddLinkComponentObject(WebDriver driver) {
     super();
@@ -33,15 +32,13 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
   public void addInternalLink(String target, String text) {
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
-    Log
-        .log("addInternalLink", "internal link " + target + " and text " + text + " added", true);
+    Log.log("addInternalLink", "internal link " + target + " and text " + text + " added", true);
   }
 
   public void addExternalLink(String target, String text) {
     addLinkModal.findElement(externalRadioButtonBy).click();
     typeTargetAndText(target, text);
     addLinkModal.findElement(okButtonBy).click();
-    Log
-        .log("addExternalLink", "external link " + target + " and text " + text + " added", true);
+    Log.log("addExternalLink", "external link " + target + " and text " + text + " added", true);
   }
 }

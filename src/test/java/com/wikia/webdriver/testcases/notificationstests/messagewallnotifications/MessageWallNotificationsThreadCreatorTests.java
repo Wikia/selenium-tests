@@ -10,6 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
 import org.testng.annotations.Test;
+
 @Test(groups = {"NotificationsTests", "MessageWallNotificationsThreadCreatorTests"})
 public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate {
 
@@ -17,9 +18,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
 
   String title;
 
-  @Test(
-      groups = {"MessageWallNotificationsThreadCreatorTests_001"}
-  )
+  @Test(groups = {"MessageWallNotificationsThreadCreatorTests_001"})
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
@@ -33,10 +32,8 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
     wall.verifyMessageText(title, message, credentials.userName11);
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsThreadCreatorTests_002"},
-      dependsOnMethods = "threadCreatorNotification_setup_1"
-  )
+  @Test(groups = {
+      "MessageWallNotificationsThreadCreatorTests_002"}, dependsOnMethods = "threadCreatorNotification_setup_1")
   public void threadCreatorNotification_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName12, credentials.password12, wikiURL);
@@ -48,11 +45,9 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
     wall.verifyQuote(reply);
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsThreadCreatorTests_003"},
-      dependsOnMethods = "threadCreatorNotification_setup_2"
-  )
- public void userIsNotifiedWhenOtherUserWritesResponseOnHerMessageWal() {
+  @Test(groups = {
+      "MessageWallNotificationsThreadCreatorTests_003"}, dependsOnMethods = "threadCreatorNotification_setup_2")
+  public void userIsNotifiedWhenOtherUserWritesResponseOnHerMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

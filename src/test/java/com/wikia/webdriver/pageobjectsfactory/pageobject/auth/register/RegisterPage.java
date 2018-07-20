@@ -27,5 +27,4 @@ public interface RegisterPage extends FormPage {
   boolean isPasswordMasked();
 
   void togglePasswordVisibility();
-
 }

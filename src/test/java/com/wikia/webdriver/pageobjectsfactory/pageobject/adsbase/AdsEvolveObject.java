@@ -18,7 +18,7 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public AdsEvolveObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyEvolveInSlot(String slotName) {
@@ -48,8 +48,9 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public void enableEvolve(String testedPage) {
-    String url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, "wgAdDriverEvolve2Countries");
+    String url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 "wgAdDriverEvolve2Countries"
+    );
     driver.get(url);
   }
-
 }

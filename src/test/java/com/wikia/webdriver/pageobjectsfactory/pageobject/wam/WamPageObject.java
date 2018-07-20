@@ -7,8 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
 import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,8 +66,9 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if given tab has an anchor with "selected" class
    */
   public void verifyTabIsSelected(WamTab tab) {
-    WebElement wamTab =
-            driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
+    WebElement wamTab = driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
+                                                                        tab.getId()
+    )));
     Log.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
     if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
@@ -92,7 +93,9 @@ public class WamPageObject extends BasePageObject {
 
     if (rows > 1) {
       Log.log("verifyWamIndexIsNotEmpty",
-              "there are more rows in the table than just a head row (" + rows + ")", true);
+              "there are more rows in the table than just a head row (" + rows + ")",
+              true
+      );
     } else {
       Log.log("verifyTabIsSelected", "there is only the head row", false);
     }
@@ -104,8 +107,10 @@ public class WamPageObject extends BasePageObject {
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
-    Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals "
-            + expectedRowsNo);
+    Assertion.assertNumber(wamIndexRows.size(),
+                           expectedRowsNo,
+                           "wam index rows equals " + expectedRowsNo
+    );
   }
 
   /**
@@ -126,10 +131,14 @@ public class WamPageObject extends BasePageObject {
 
     if (result.equals(true)) {
       Log.log("verifyWamVerticalFilterOptions",
-              "There are correct options in the vertical select box", true);
+              "There are correct options in the vertical select box",
+              true
+      );
     } else {
       Log.log("verifyWamVerticalFilterOptions",
-              "There is invalid option in the vertical select box", false);
+              "There is invalid option in the vertical select box",
+              false
+      );
     }
   }
 
@@ -172,28 +181,33 @@ public class WamPageObject extends BasePageObject {
 
   public void selectTab(WamTab tab) {
     scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-            tab.getId()))));
+                                                                   tab.getId()
+    ))));
     isLoaded();
     verifyTabSelected(tab);
   }
 
   private void verifyTabSelected(WamTab tab) {
-    Assertion.assertTrue(driver
-            .findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
-            .getAttribute("class").contains("icon-vertical-selected"));
+    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
+                                                                         tab.getId()
+    )))
+                             .getAttribute("class")
+                             .contains("icon-vertical-selected"));
     wait.forElementVisible(tabSelected);
   }
 
   public void verifyLatestDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
-    String yesterday =
-        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-            .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
-    String dayBeforeYesterday =
-        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-            .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
-    Assertion.assertTrue(yesterday.equals(currentDate) || dayBeforeYesterday.equals(currentDate),
-        "Current date does not match yesterday or the day before");
+    String yesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
+        .withLocale(Locale.ENGLISH)
+        .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
+    String dayBeforeYesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
+        .withLocale(Locale.ENGLISH)
+        .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
+    Assertion.assertTrue(
+        yesterday.equals(currentDate) || dayBeforeYesterday.equals(currentDate),
+        "Current date does not match yesterday or the day before"
+    );
   }
 
   public void verifyDateInDatePicker(String date) {

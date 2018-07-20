@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.pages.discussions.*;
+
 import org.testng.annotations.Test;
 
 import java.util.function.Function;
@@ -20,7 +21,9 @@ import java.util.function.Function;
 @Execute(onWikia = MobileWikis.DISCUSSIONS_4)
 public class FollowingPostTests extends NewTestTemplate {
 
-  private static final String SIGN_IN_MODAL_SHOULD_APPEAR = "Sign in/Following modal dialog should appear.";
+  private static final String
+      SIGN_IN_MODAL_SHOULD_APPEAR
+      = "Sign in/Following modal dialog should appear.";
   private static final String SHOULD_FOLLOW_POST = "User should be able follow post.";
   private static final String SHOULD_UNFOLLOW_POST = "User should be able unfollow post.";
   private static final String DESKTOP = "discussions-following-post-desktop";
@@ -143,7 +146,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   *   Discussions Administrator on mobile
+   * Discussions Administrator on mobile
    */
 
   @Test(groups = MOBILE)
@@ -180,8 +183,12 @@ public class FollowingPostTests extends NewTestTemplate {
     clickFollowOn(page, data);
 
     Assertion.assertEquals(page.getSignInDialog().getText(),
-      SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT, SIGN_IN_MODAL_SHOULD_APPEAR);
-    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
+                           SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT,
+                           SIGN_IN_MODAL_SHOULD_APPEAR
+    );
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(),
+                          SHOULD_UNFOLLOW_POST
+    );
   }
 
   private void clickFollowOn(PageWithPosts page, PostEntity.Data data) {
@@ -200,14 +207,22 @@ public class FollowingPostTests extends NewTestTemplate {
     followPostOnPageAndCheckIfFollowedAfterPageRefresh(page.open(), data);
   }
 
-  private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(PageWithPosts page, PostEntity.Data data) {
+  private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(
+      PageWithPosts page, PostEntity.Data data
+  ) {
     clickFollowOn(page, data);
-    Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_FOLLOW_POST);
+    Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(),
+                         SHOULD_FOLLOW_POST
+    );
   }
 
-  private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(PageWithPosts page, PostEntity.Data data) {
+  private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(
+      PageWithPosts page, PostEntity.Data data
+  ) {
     clickFollowOn(page, data);
-    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(),
+                          SHOULD_UNFOLLOW_POST
+    );
   }
 
   private PostEntity.Data createPostAsUserRemotely() {

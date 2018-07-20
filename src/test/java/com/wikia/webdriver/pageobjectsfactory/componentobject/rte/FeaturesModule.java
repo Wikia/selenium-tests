@@ -8,11 +8,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FeaturesModule {
-  @FindBy(css = ".cke_button__addinfobox span.cke_button_label")
-  private WebElement infoboxButton;
 
   private final WebDriver webDriver;
   private final WebDriverWait webDriverWait;
+  @FindBy(css = ".cke_button__addinfobox span.cke_button_label")
+  private WebElement infoboxButton;
 
   public FeaturesModule(WebDriver webDriver) {
     PageFactory.initElements(webDriver, this);

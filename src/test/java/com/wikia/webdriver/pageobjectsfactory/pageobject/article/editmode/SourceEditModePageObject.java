@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -100,7 +101,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().replaceAll("(-\\d+)\\|","|"), desiredContent);
+    Assertion.assertEquals(getSourceContent().replaceAll("(-\\d+)\\|", "|"), desiredContent);
   }
 
   public void clickBold() {
@@ -166,8 +167,7 @@ public class SourceEditModePageObject extends EditMode {
   public void clickHorizontalLine() {
     focusTextArea();
     hline.click();
-    Log.log("clickHorizontalLine", "horizontal line button was clicked", true,
-        driver);
+    Log.log("clickHorizontalLine", "horizontal line button was clicked", true, driver);
   }
 
   public PhotoAddComponentObject clickAddPhoto() {
@@ -231,8 +231,7 @@ public class SourceEditModePageObject extends EditMode {
       Log.log("addComponent", "selected " + componentName + " component", true);
       return new SliderBuilderComponentObject(driver);
     } else {
-      Log.log("addComponent", "not supported component name: " + componentName,
-          false);
+      Log.log("addComponent", "not supported component name: " + componentName, false);
       return null;
     }
   }
@@ -243,14 +242,10 @@ public class SourceEditModePageObject extends EditMode {
     for (int i = 1; i < wikitextShortcutsInsertSection; i++) {
       clearSource();
       clickMore();
-      String content = driver
-          .findElement(
-              By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
-          .getText();
-      driver
-          .findElement(
-              By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
-          .click();
+      String content = driver.findElement(By.xpath(
+          "//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]")).getText();
+      driver.findElement(By.xpath(
+          "//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]")).click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
       checkSourceContent(content);
@@ -263,11 +258,10 @@ public class SourceEditModePageObject extends EditMode {
     for (int i = 1; i < wikitextShortcutsWikiMarkupSection; i++) {
       clearSource();
       clickMore();
-      String content = (String) jsActions
-          .execute("$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
-      driver
-          .findElement(By.xpath(
-              "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
+      String content = (String) jsActions.execute(
+          "$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
+      driver.findElement(By.xpath(
+          "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
           .click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
@@ -281,14 +275,11 @@ public class SourceEditModePageObject extends EditMode {
     for (int i = 1; i < wikitextShortcutsSymbolsSection; i++) {
       clearSource();
       clickMore();
-      String content = driver
-          .findElement(By.xpath(
-              "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
+      String content = driver.findElement(By.xpath(
+          "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
           .getText();
-      driver
-          .findElement(By.xpath(
-              "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
-          .click();
+      driver.findElement(By.xpath(
+          "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]")).click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
       checkSourceContent(content);
@@ -308,8 +299,9 @@ public class SourceEditModePageObject extends EditMode {
   public int getVideoWidth() {
     String content = getContent();
 
-    return Integer
-        .parseInt(content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1));
+    return Integer.parseInt(content.substring(content.indexOf("px") - 4,
+                                              content.indexOf("px") - 1
+    ));
   }
 
   /**
@@ -323,8 +315,7 @@ public class SourceEditModePageObject extends EditMode {
   private void appendContent(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    Log.log("appendContent", "text: '" + content + "', added to the source mode",
-        true);
+    Log.log("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   public void clearContent() {

@@ -1,28 +1,26 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserRegistration {
+
   private UserRegistration() {}
 
   public static void registerUserEmailConfirmed(SignUpUser user) {
@@ -36,8 +34,15 @@ public class UserRegistration {
       Log.logError("Wrong internal services URL", e);
     }
     try {
-      HttpPost httpPost = new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(),
-          url.getPort(), url.getPath(), url.getQuery(), url.getRef()));
+      HttpPost httpPost = new HttpPost(new URI(
+          url.getProtocol(),
+          url.getUserInfo(),
+          url.getHost(),
+          url.getPort(),
+          url.getPath(),
+          url.getQuery(),
+          url.getRef()
+      ));
 
       httpPost.setHeader("X-Client-Ip", "8.8.8.8");
       httpPost.setHeader("X-Wikia-Internal-Request", "1");
@@ -54,10 +59,8 @@ public class UserRegistration {
 
       CloseableHttpResponse resp = httpClient.execute(httpPost);
 
-      Log.info("REGISTER USER: ",  httpPost.toString());
-      Log.info("REGISTER USER: ",
-          "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
-
+      Log.info("REGISTER USER: ", httpPost.toString());
+      Log.info("REGISTER USER: ", "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
     } catch (URISyntaxException | IOException e) {
       Log.logError("Error during registering user", e);
     }

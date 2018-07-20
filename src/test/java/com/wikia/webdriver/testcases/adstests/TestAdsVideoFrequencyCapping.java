@@ -6,22 +6,24 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsVelesObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
-  private static final String CONFIG = "InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2min]";
+
+  private static final String
+      CONFIG
+      = "InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2min]";
 
   private static final String DIRECT_VELES_WIKI = "project43";
   private static final String DIRECT_VELES_PAGE_URI = "SyntheticTests/Video/Porvata/Direct";
 
   private static final Page PAGE_WITH_VELES = new Page(DIRECT_VELES_WIKI, DIRECT_VELES_PAGE_URI);
 
-  @Test(
-      groups = "AdsVideoFrequencyCapping"
-  )
+  @Test(groups = "AdsVideoFrequencyCapping")
   public void adsVideoFrequencyCapping() {
     String testedPage = PAGE_WITH_VELES.getUrl();
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, CONFIG);

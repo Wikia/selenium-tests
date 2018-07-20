@@ -14,8 +14,8 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
-import org.testng.annotations.Test;
 
+import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
@@ -30,7 +30,6 @@ public class NavigatingTests extends NewTestTemplate {
   public void anonUserOnMobileCanClickOnPostAuthorUsername() {
     clickingOnPostAuthorUsernameLoadsUserPage();
   }
-
 
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -60,7 +59,6 @@ public class NavigatingTests extends NewTestTemplate {
     clickingOnPostAuthorUsernameLoadsUserPage();
   }
 
-
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNavigateToPostDetailsPageByClickingOnPost() {
@@ -70,7 +68,9 @@ public class NavigatingTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   public void discussionsNavigationOpenAndCloseNavigationAndItsSubMenu() {
-    GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
+    GlobalNavigationMobile nav = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
+        .openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
     nav.clickCloseButton();
@@ -80,7 +80,9 @@ public class NavigatingTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   public void discussionsNavigationOnNonEnglishWiki() {
-    GlobalNavigationMobile nav = new GuidelinesPage().open().getGlobalNavigationMobile().openNavigation();
+    GlobalNavigationMobile nav = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
+        .openNavigation();
     Assertion.assertTrue(nav.isFirstLevelMenuVisible());
 
     nav.clickCloseButton();
@@ -111,5 +113,4 @@ public class NavigatingTests extends NewTestTemplate {
     postDetailsPage.waitForEmberLoad();
     Assertion.assertTrue(postDetailsPage.isDisplayed());
   }
-
- }
+}

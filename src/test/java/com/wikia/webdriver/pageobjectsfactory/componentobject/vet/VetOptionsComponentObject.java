@@ -5,16 +5,13 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
+  private static final int VIDEO_THUMBNAIL_WIDTH = 350;
   @FindBy(css = "#VideoEmbedLayoutRow")
   private WebElement videoEmbedLayotRow;
   @FindBy(css = "#VideoEmbedCaption")
@@ -39,8 +36,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   private WebElement videoThumbnail;
   @FindBy(css = "div#VideoEmbedNameRow p")
   private WebElement videoNameCaption;
-
-  private static final int VIDEO_THUMBNAIL_WIDTH = 350;
 
   public VetOptionsComponentObject(WebDriver driver) {
     super();
@@ -126,8 +121,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public void verifyVideoAlignmentSelected(PositionsVideo positions) {
     wait.forElementVisible(videoEmbedLayotRow);
-    String selectedPositionId = videoEmbedLayotRow
-        .findElement(By.cssSelector(".selected"))
+    String selectedPositionId = videoEmbedLayotRow.findElement(By.cssSelector(".selected"))
         .getAttribute("id");
     String desiredPositionId;
     switch (positions) {
