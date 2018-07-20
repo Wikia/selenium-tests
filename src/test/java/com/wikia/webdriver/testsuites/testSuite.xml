@@ -165,6 +165,7 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.LightboxTests"/>
+            <class name="com.wikia.webdriver.testcases.mobilewikitests.LocalNavigationMobileTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.TrackingOptInModalTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.ApesterTests"/>

@@ -1,10 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static org.testng.Assert.assertFalse;
-
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -19,12 +16,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-
 import org.testng.annotations.Test;
 
 import java.time.Instant;
 
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static org.testng.Assert.assertFalse;
+
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class LoginTests extends NewTestTemplate {
 
@@ -35,9 +34,8 @@ public class LoginTests extends NewTestTemplate {
   private static final String DESKTOP = "auth-login-desktop";
   private static final String MOBILE = "auth-login-mobile";
 
-  private static final String
-      ERROR_MESSAGE
-      = "We don't recognize these credentials. Try again or register a new account.";
+  private static final String ERROR_MESSAGE =
+    "We don't recognize these credentials. Try again or register a new account.";
   private static final String SUBMIT_BUTTON_DISABLED_MSG = "Submit button should be disabled";
 
   @Test(groups = MOBILE)
@@ -45,7 +43,10 @@ public class LoginTests extends NewTestTemplate {
   public void userCanCloseJoinPage() {
     ArticlePage article = openArticleOnMobile();
     String previousTitle = article.getArticleTitle();
-    article.getGlobalNavigationMobile().clickOnAnonAvatar().close();
+    article
+      .getGlobalNavigationMobile()
+      .clickOnAnonAvatar()
+      .close();
 
     Assertion.assertEquals(article.getArticleTitle(), previousTitle);
   }
@@ -83,26 +84,22 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
     loginOnDesktopFromDiscussionPageAs(USER);
-    assertTrue(
-        discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-        "User should be redirected to discussion post list view upon log in"
-    );
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
+      "User should be redirected to discussion post list view upon log in");
   }
 
   @Test(groups = MOBILE)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
     loginOnDiscussionMobilePageAs(USER);
-    assertTrue(
-        discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-        "User should be redirected to discussion post list view upon log in"
-    );
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
+      "User should be redirected to discussion post list view upon log in");
   }
 
   @Test(groups = DESKTOP)
@@ -215,11 +212,11 @@ public class LoginTests extends NewTestTemplate {
    */
 
   private ArticlePage openArticleOnMobile() {
-    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePage().open(MobileSubpages.MAIN_PAGE);
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePageObject().open(MobileSubpages.MAIN_PAGE);
   }
 
   private AttachedSignInPage navigateToSignInOnMobile() {
@@ -245,4 +242,5 @@ public class LoginTests extends NewTestTemplate {
   private void loginOnDiscussionMobilePageAs(User user) {
     navigateToSignInOnMobile().login(user);
   }
+
 }

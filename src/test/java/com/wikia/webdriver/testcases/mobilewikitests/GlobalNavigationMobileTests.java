@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -10,19 +10,19 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_TopBar")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_topBarIsAlwaysVisible")
   public void mercury_topbar_topBarIsAlwaysVisible() {
-    GlobalNavigationMobile
-        globalNavigationMobile
-        = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile();
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .open(MobileSubpages.MAIN_PAGE)
+            .getGlobalNavigationMobile();
 
     Assertion.assertTrue(globalNavigationMobile.isNavigationBarVisible());
     Assertion.assertTrue(globalNavigationMobile.isLogoVisible());
@@ -37,9 +37,10 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_closeButtonAppears")
   public void mercury_topbar_closeButtonAppears() {
-    GlobalNavigationMobile
-        globalNavigationMobile
-        = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile();
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .open(MobileSubpages.MAIN_PAGE)
+            .getGlobalNavigationMobile();
 
     globalNavigationMobile.openSearch();
     Assertion.assertTrue(globalNavigationMobile.isCloseIconVisible());
@@ -50,9 +51,10 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
   public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
-    GlobalNavigationMobile
-        globalNavigationMobile
-        = new ArticlePage().open(MercurySubpages.MAIN_PAGE).getGlobalNavigationMobile();
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .open(MobileSubpages.MAIN_PAGE)
+            .getGlobalNavigationMobile();
 
     globalNavigationMobile.clickFandomLogo();
 

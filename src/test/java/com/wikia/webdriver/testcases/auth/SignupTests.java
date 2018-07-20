@@ -1,11 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -14,51 +10,37 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-
 import org.testng.annotations.Test;
 
 import java.time.Instant;
 import java.time.LocalDate;
 
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 
-  static final String PASS_PATTERN = "pass_%s";
-  static final String USERNAME_PATTERN = "QA%s";
-  static final LocalDate BIRTH_DATE = LocalDate.of(1993, 3, 19);
   private static final String USERNAME_TAKEN_MSG = "Username is taken";
   private static final String PASSWORD_MATCHING_USERNAME_MSG = "Password and username cannot match";
-  private static final String
-      GENERIC_ERROR_MSG
-      = "We cannot complete your registration at this time";
+  private static final String GENERIC_ERROR_MSG =
+    "We cannot complete your registration at this time";
+
   private static final String DESKTOP = "auth-signup-desktop";
   private static final String MOBILE = "auth-signup-mobile";
+  static final String PASS_PATTERN = "pass_%s";
+  static final String USERNAME_PATTERN = "QA%s";
+
   private UserWithEmail userWithEmail = UserWithEmailFactory.getEmailOnlyUser1();
   private User existingUser = User.LOGIN_USER;
-
-  /**
-   * HELPER METHODS
-   */
-
-  static SignUpUser createNewUser(UserWithEmail user) {
-
-    return new SignUpUser(
-        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-        getEmailAlias(user.getEmail()),
-        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-        BIRTH_DATE
-    );
-  }
-
-  static String getEmailAlias(String email) {
-    return email.replace("@", String.format("+%s@", Instant.now().getEpochSecond()));
-  }
+  static final LocalDate BIRTH_DATE = LocalDate.of(1993, 3, 19);
 
   @Test(groups = DESKTOP)
   public void newUserCanSignUpDesktop() {
@@ -97,16 +79,14 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithPasswordMatchingUsernameDesktop() {
-    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(
-        createUserWithPasswordMatchingUsername());
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithPasswordMatchingUsernameMobile() {
-    RegisterPage form = performSignUpExpectingFailureOnMobileAs(
-        createUserWithPasswordMatchingUsername());
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
@@ -135,26 +115,22 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
     signUpOnDesktopFromDiscussionPageAs(createNewUser(userWithEmail));
-    assertTrue(
-        discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-        "User should be redirected to discussion post list view upon sign up"
-    );
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
+      "User should be redirected to discussion post list view upon sign up");
   }
 
   @Test(groups = MOBILE)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
     signUpOnDiscussionMobilePageAs(discussionPage, createNewUser(userWithEmail));
-    assertTrue(
-        discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-        "User should be redirected to discussion post list view upon sign up"
-    );
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
+      "User should be redirected to discussion post list view upon sign up");
   }
 
   @Test(groups = DESKTOP)
@@ -168,53 +144,76 @@ public class SignupTests extends NewTestTemplate {
     performPasswordToggleTest(navigateToSignUpOnMobile());
   }
 
+  /**
+   * HELPER METHODS
+   */
+
+  static SignUpUser createNewUser(UserWithEmail user) {
+
+    return new SignUpUser(
+      String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
+      getEmailAlias(user.getEmail()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+      BIRTH_DATE
+    );
+  }
+
   private SignUpUser createUserWithExistingEmail() {
     return new SignUpUser(
-        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-        userWithEmail.getEmail(),
-        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-        BIRTH_DATE
+      String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
+      userWithEmail.getEmail(),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+      BIRTH_DATE
     );
   }
 
   private SignUpUser createUserWithExistingUsername() {
     return new SignUpUser(
-        existingUser.getUserName(),
-        getEmailAlias(userWithEmail.getEmail()),
-        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-        BIRTH_DATE
+      existingUser.getUserName(),
+      getEmailAlias(userWithEmail.getEmail()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+      BIRTH_DATE
     );
   }
 
   private SignUpUser createUserWithPasswordMatchingUsername() {
     String username = String.format(USERNAME_PATTERN, Instant.now().getEpochSecond());
-    return new SignUpUser(username, getEmailAlias(userWithEmail.getEmail()), username, BIRTH_DATE);
+    return new SignUpUser(
+      username,
+      getEmailAlias(userWithEmail.getEmail()),
+      username,
+      BIRTH_DATE
+    );
   }
 
   private SignUpUser createTooYoungUser() {
     return new SignUpUser(
-        String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
-        getEmailAlias(userWithEmail.getEmail()),
-        String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-        LocalDate.now().minusYears(11)
+      String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
+      getEmailAlias(userWithEmail.getEmail()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
+      LocalDate.now().minusYears(11)
     );
   }
 
   private SignUpUser createNewUserWithSpecialCharacters() {
     return new SignUpUser(
-        String.format("ユーザー%s", Instant.now().getEpochSecond()),
-        getEmailAlias(userWithEmail.getEmail()),
-        String.format("ユーザザー_%s", Instant.now().getEpochSecond()),
-        BIRTH_DATE
+      String.format("ユーザー%s", Instant.now().getEpochSecond()),
+      getEmailAlias(userWithEmail.getEmail()),
+      String.format("ユーザザー_%s", Instant.now().getEpochSecond()),
+      BIRTH_DATE
     );
   }
 
+  static String getEmailAlias(String email) {
+    return email.replace("@", String.format("+%s@", Instant.now().getEpochSecond()));
+  }
+
   private ArticlePage openArticleOnMobile() {
-    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePage().open(MobileSubpages.MAIN_PAGE);
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePageObject().open(MobileSubpages.MAIN_PAGE);
   }
 
   private RegisterPage navigateToSignUpOnMobile() {
@@ -278,4 +277,5 @@ public class SignupTests extends NewTestTemplate {
     signUpPage.togglePasswordVisibility();
     assertFalse(signUpPage.isPasswordMasked(), "password should be readable");
   }
+
 }

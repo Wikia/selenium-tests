@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -15,12 +15,11 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEn
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.testng.SkipException;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-layout"})
 public class LayoutTests extends NewTestTemplate {
 
@@ -28,8 +27,10 @@ public class LayoutTests extends NewTestTemplate {
 
   @BeforeSuite
   private void setUp() {
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_5);
-    existingPost = DiscussionsClient.using(User.USER_4, driver).createPostWithUniqueData(siteId);
+    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_5);
+    existingPost = DiscussionsClient
+      .using(User.USER_4, driver)
+      .createPostWithUniqueData(siteId);
   }
 
   /**
@@ -128,7 +129,7 @@ public class LayoutTests extends NewTestTemplate {
   private void userCanViewMorePosts() {
     Post post = new PostsListPage().open().getPost();
     int startingListLength = post.getPostsListLength();
-    if (startingListLength < 20) {
+    if(startingListLength < 20) {
       throw new SkipException("Skipping test because the condition of minimum 20 posts not met");
     }
     post.clickLoadMore().waitForLoadingSpinner();

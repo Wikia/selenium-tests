@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -18,8 +18,11 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Comments")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class CommentsTests extends NewTestTemplate {
 
   private static final String MEDIA_TYPE_VIDEO = "Video";
@@ -35,38 +38,77 @@ public class CommentsTests extends NewTestTemplate {
   private void init() {
     this.comments = new CommentsPageObject(driver);
 
-    new Navigate().toPage(MercurySubpages.COMMENTS);
+    new Navigate().toPage(MobileSubpages.COMMENTS);
   }
 
   @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")
   public void mercury_comments_containsAvatarUsernameTimestampAndContent() {
     init();
 
-    Assertion.assertTrue(comments.isCommentsListCollapsed(), "Comments are expanded");
+    Assertion.assertTrue(
+        comments.isCommentsListCollapsed(),
+        "Comments are expanded"
+    );
 
-    Log.log("Comments list", "is collapsed", true);
+    Log.log(
+        "Comments list",
+        "is collapsed",
+        true
+    );
 
     comments.clickCommentsHeader();
     comments.waitForCommentsToLoad();
 
-    Assertion.assertFalse(comments.isCommentsListCollapsed(), "Comments are collapsed");
+    Assertion.assertFalse(
+        comments.isCommentsListCollapsed(),
+        "Comments are collapsed"
+    );
 
-    Log.log("Comments list", "is expanded", true);
+    Log.log(
+        "Comments list",
+        "is expanded",
+        true
+    );
 
     boolean result = comments.getNumberOfCommentsPerPage() == NUMBER_OF_COMMENTS_PER_PAGE;
-    Log.log("Number of comments per page", "is correct", "is incorrect", result);
+    Log.log(
+        "Number of comments per page",
+        "is correct",
+        "is incorrect",
+        result
+    );
 
     result = comments.isUserAvatarInComment(0);
-    Log.log("User avatar", "is displayed", "is not displayed", result);
+    Log.log(
+        "User avatar",
+        "is displayed",
+        "is not displayed",
+        result
+    );
 
     result = comments.isUserUsernameInComment(0);
-    Log.log("User username", "is displayed", "is not displayed", result);
+    Log.log(
+        "User username",
+        "is displayed",
+        "is not displayed",
+        result
+    );
 
     result = comments.isTimeStampInComment(0);
-    Log.log("Time stamp", "is displayed", "is not displayed", result);
+    Log.log(
+        "Time stamp",
+        "is displayed",
+        "is not displayed",
+        result
+    );
 
     result = comments.isContentInComment(0);
-    Log.log("Comment content", "is displayed", "is not displayed", result);
+    Log.log(
+        "Comment content",
+        "is displayed",
+        "is not displayed",
+        result
+    );
   }
 
   @Test(groups = "mercury_comments_containsCounterNextButtonAndPreviousButton", enabled = false)
@@ -83,11 +125,16 @@ public class CommentsTests extends NewTestTemplate {
         "There is less than 25 on that page"
     );
 
-    Assertion.assertTrue(comments.isNextCommentPageButtonDisplayed(),
-                         "Next page button isn't displayed"
+    Assertion.assertTrue(
+        comments.isNextCommentPageButtonDisplayed(),
+        "Next page button isn't displayed"
     );
 
-    Log.log("Next page button", "is displayed", true);
+    Log.log(
+        "Next page button",
+        "is displayed",
+        true
+    );
 
     while (comments.isNextCommentPageButtonDisplayed()) {
       numberOfComments -= comments.getNumberOfAllCommentsOnPage();
@@ -98,23 +145,34 @@ public class CommentsTests extends NewTestTemplate {
     numberOfComments -= comments.getNumberOfAllCommentsOnPage();
 
     boolean result = numberOfComments == 0;
-    Log.log("Comments counter",
-            "is correct",
-            "There are " + numberOfComments + " untracked comments",
-            result
+    Log.log(
+        "Comments counter",
+        "is correct",
+        "There are " + numberOfComments + " untracked comments",
+        result
     );
 
-    Assertion.assertTrue(comments.isPreviousCommentPageButtonDisplayed(),
-                         "Previous page button isn't displayed"
+    Assertion.assertTrue(
+        comments.isPreviousCommentPageButtonDisplayed(),
+        "Previous page button isn't displayed"
     );
 
-    Log.log("Previous page button", "is displayed", true);
+    Log.log(
+        "Previous page button",
+        "is displayed",
+        true
+    );
 
     comments.clickPreviousCommentPageButton();
     new Wait(driver).forXMilliseconds(2500);
 
     result = !comments.isPreviousCommentPageButtonDisplayed();
-    Log.log("Previous page button", "is not displayed", "is displayed", result);
+    Log.log(
+        "Previous page button",
+        "is not displayed",
+        "is displayed",
+        result
+    );
   }
 
   @Test(groups = "mercury_comments_repliesCounterCountsCorrect")
@@ -124,19 +182,38 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickCommentsHeader();
     comments.waitForCommentsToLoad();
 
-    Assertion.assertFalse(comments.isRepliesListExpanded(), "Replies list is expanded");
+    Assertion.assertFalse(
+        comments.isRepliesListExpanded(),
+        "Replies list is expanded"
+    );
 
-    Log.log("Replies list", "is collapsed", true);
+    Log.log(
+        "Replies list",
+        "is collapsed",
+        true
+    );
 
     comments.clickViewReplies(0);
 
-    Assertion.assertTrue(comments.isRepliesListExpanded(), "Replies list is collapsed");
+    Assertion.assertTrue(
+        comments.isRepliesListExpanded(),
+        "Replies list is collapsed"
+    );
 
-    Log.log("Replies list", "is expanded", true);
+    Log.log(
+        "Replies list",
+        "is expanded",
+        true
+    );
 
-    boolean result = comments.getNumberOfRepliesFromHeader(0)
-                     == comments.getNumberOfRepliesFromList(0);
-    Log.log("Replies counter", "is correct", "is incorrect", result);
+    boolean result =
+        comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0);
+    Log.log(
+        "Replies counter",
+        "is correct",
+        "is incorrect",
+        result
+    );
   }
 
   @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
@@ -150,7 +227,12 @@ public class CommentsTests extends NewTestTemplate {
     new Wait(driver).forElementVisible(OASIS_BODY);
 
     boolean result = username.equals(comments.getUsernameFromUrl());
-    Log.log("Url", "match pattern /wiki/User:", "does not match pattern /wiki/User:", result);
+    Log.log(
+        "Url",
+        "match pattern /wiki/User:",
+        "does not match pattern /wiki/User:",
+        result
+    );
   }
 
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
@@ -160,18 +242,37 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickCommentsHeader();
     comments.waitForCommentsToLoad();
 
-    boolean result = comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO,
-                                                        COMMENT_NUMBER_WITH_VIDEO
+    boolean result =
+        comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
+    Log.log(
+        "Video thumbnail",
+        "is displayed",
+        "is not displayed",
+        result
     );
-    Log.log("Video thumbnail", "is displayed", "is not displayed", result);
 
     result = comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    Log.log("Video link", "is present", "is not present", result);
+    Log.log(
+        "Video link",
+        "is present",
+        "is not present",
+        result
+    );
 
     result = comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    Log.log("Image thumbnail", "is displayed", "is not displayed", result);
+    Log.log(
+        "Image thumbnail",
+        "is displayed",
+        "is not displayed",
+        result
+    );
 
     result = comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    Log.log("Image link", "is present", "is not present", result);
+    Log.log(
+        "Image link",
+        "is present",
+        "is not present",
+        result
+    );
   }
 }

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -17,9 +17,13 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 
 import org.testng.annotations.Test;
 
+
 @Test(groups = "Mercury_Lightbox")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class LightboxTests extends NewTestTemplate {
 
   private GalleryComponentObject gallery;
@@ -29,7 +33,7 @@ public class LightboxTests extends NewTestTemplate {
     this.gallery = new GalleryComponentObject(driver);
     this.lightbox = new LightboxComponentObject();
 
-    new Navigate().toPage(MercurySubpages.GALLERY);
+    new Navigate().toPage(MobileSubpages.GALLERY);
   }
 
   @Test(groups = "mercury_lightbox_openAndClose")
@@ -37,17 +41,34 @@ public class LightboxTests extends NewTestTemplate {
     init();
     gallery.clickGalleryImage(1);
 
-    Assertion.assertTrue(lightbox.isLightboxOpened(), "Lightbox is closed");
+    Assertion.assertTrue(
+        lightbox.isLightboxOpened(),
+        "Lightbox is closed"
+    );
 
-    Log.log("Lightbox", "is opened", true);
+    Log.log(
+        "Lightbox",
+        "is opened",
+        true
+    );
 
     boolean result = lightbox.isCurrentImageVisible();
-    Log.log("Current image", "is visible", "is not visible", result);
+    Log.log(
+        "Current image",
+        "is visible",
+        "is not visible",
+        result
+    );
 
     lightbox.clickCloseButton();
 
     result = !lightbox.isLightboxOpened();
-    Log.log("Lightbox", "is closed", "is opened", result);
+    Log.log(
+        "Lightbox",
+        "is closed",
+        "is opened",
+        result
+    );
   }
 
   @Test(groups = "mercury_lightbox_UIShowsAndHidesByTapOnCenter")
@@ -77,12 +98,9 @@ public class LightboxTests extends NewTestTemplate {
     articlePage.getLightbox().clickCloseButton();
     Long closingPosition = new JavascriptActions().getCurrentPosition();
 
-    Assertion.assertEquals(startingPosition,
-                           closingPosition,
-                           "Starting scroll position should be " + "the same as closing position"
-    );
-    Assertion.assertTrue(startingPosition > 0 && closingPosition > 0,
-                         "Page shoudln't be scrolled" + "to top"
-    );
+    Assertion.assertEquals(startingPosition, closingPosition, "Starting scroll position should be "
+                                                              + "the same as closing position");
+    Assertion.assertTrue(startingPosition > 0 && closingPosition > 0, "Page shoudln't be scrolled"
+                                                                      + "to top");
   }
 }

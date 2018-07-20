@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -13,7 +13,7 @@ import com.wikia.webdriver.elements.mercury.components.SmartBanner;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_SmartBanner")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class SmartBannerTest extends NewTestTemplate {
 
@@ -22,7 +22,7 @@ public class SmartBannerTest extends NewTestTemplate {
   private void init() {
     this.smartBanner = new SmartBanner(driver);
 
-    new Navigate().toPage(MercurySubpages.GALLERY);
+    new Navigate().toPage(MobileSubpages.GALLERY);
   }
 
   @Test(groups = "mercury_smartBanner_isNotVisibleOnScrollDown")
