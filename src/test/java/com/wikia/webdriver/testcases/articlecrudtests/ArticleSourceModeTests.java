@@ -133,6 +133,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     Assertion.assertEquals(source.getSourceContent(), "\n----\n");
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
   public void RTE_012_Photo() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
