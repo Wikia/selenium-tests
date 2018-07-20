@@ -15,14 +15,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsComponentObject extends WikiBasePageObject {
+/**
+ * This class is a Page object for Messages Notifications related with Message Wall.
+ * NOT general on site notifications.
+ */
+
+public class MessagesNotifications extends WikiBasePageObject {
 
   @FindBy(css = "#notificationsEntryPoint div.bubbles")
   protected WebElement notificationsBubbles;
   @FindBys(@FindBy(css = "#notificationsEntryPoint .notification.unread"))
   private List<WebElement> notificationsList;
   @FindBy(css = "#notificationsContainer")
-  private WebElement notificationsDropdown;
+  private WebElement messagesNotificationsDropdown;
   @FindBy(css = ".bubbles .wds-global-navigation__notifications-counter")
   private WebElement bubblesCount;
   @FindBy(css = "#wall-notifications-markasread-sub")
@@ -36,26 +41,20 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   @FindBy(css = "#notificationsEntryPoint")
   private WebElement accountNavigationEntryPoint;
 
-  private By notificationDropdownForCurrentWiki = By.cssSelector(
-      "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
-
-  private By emptyNotificationDropdownForCurrentWiki = By.cssSelector(
-      "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
-
   private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
 
-  public NotificationsComponentObject(WebDriver driver) {
+  public MessagesNotifications() {
     super();
   }
 
   /**
    * hover the mouse over the notification bubble and wait for it to expand
    */
-  private void openNotifications() {
+  private void openDropdown() {
     new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver webDriver) {
-        if (!notificationsDropdown.isDisplayed()) {
+        if (!messagesNotificationsDropdown.isDisplayed()) {
           accountNavigationEntryPoint.click();
 
           return false;
@@ -66,34 +65,12 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   }
 
   /**
-   * After expanding the notifications dropdown, the notification messages are loaded using ajax
-   * request. This method waits until this requests completes.
-   */
-  private void waitForNotificationsMessagesToLoad() {
-    wait.forElementVisible(notificationsDropdown);
-    wait.forElementPresent(notificationDropdownForCurrentWiki);
-    wait.forElementNotPresent(emptyNotificationDropdownForCurrentWiki);
-  }
-
-  /**
    * expand the notifications and wait until the notifications for the current wiki are loaded
    */
-  public void showNotifications() {
+  public void showMessagesNotifications() {
     waitForNotificationsLoaded();
-    openNotifications();
+    openDropdown();
     Log.log("#WallNotifications li ul.subnav", "show notifications", true);
-  }
-
-  /**
-   * click notifications bubble
-   *
-   * @todo: is this needed? the notifications expand on mouse hover so we should use the
-   * showNotifications method
-   */
-  public void clickNotifications() {
-    wait.forElementVisible(notificationsBubbles);
-    scrollAndClick(notificationsBubbles);
-    Log.log("clickshowNotifications", "click on notifications bubbles", true);
   }
 
   /**
@@ -140,6 +117,18 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   }
 
   /**
+   *
+   * Get message body of a given notification with specific message title
+   */
+
+  public String getNotificationMessageBody(String messageTitle) {
+    return getUnreadNotificationsForTitle(messageTitle)
+            .get(0)
+            .findElement(By.cssSelector("div.notification-message"))
+            .getText();
+  }
+
+  /**
    * This should be called after expanding the notifications dropdown It will return a list of
    * unread notifications that have a given title
    */
@@ -174,7 +163,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   }
 
   /**
-   * This should be called after showNotifications method
+   * This should be called after showMessagesNotifications method
    */
   public void verifyNotification(String messageTitle, String messageAuthor) {
     Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
@@ -187,23 +176,14 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   }
 
   /**
-   * This should be called after showNotifications method
+   * This should be called after showMessagesNotifications method
    */
   public void verifyNotification(String messageTitle, String messageAuthor, String messageContent) {
     Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
     List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
     Assertion.assertEquals(1, notificationsListForTitle.size());
-    String notificationMessageBody = notificationsListForTitle.get(0)
-        .findElement(By.cssSelector("div.notification-message"))
-        .getText();
+    String notificationMessageBody = getNotificationMessageBody(messageTitle);
     Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
     Assertion.assertTrue(notificationMessageBody.contains(messageContent));
-  }
-
-  public void markAllNotificationsAsRead() {
-    if (getNumberOfUnreadNotifications() > 0) {
-      showNotifications();
-      clickMarkNotificationsAsRead();
-    }
   }
 }

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
 import org.openqa.selenium.WebElement;
@@ -71,7 +70,7 @@ public class AnnouncementsPage extends BasePage {
     public AnnouncementsPage expireAnnouncement() {
         wait.forElementClickable(expireButton).click();
         Log.info("'Expire' button has been clicked");
-        Assertion.assertTrue(isVisible(confirmationModal), "confirmation modal is visible");
+        wait.forElementVisible(confirmationModal);
         this.clickOKButton();
 
         return this;
