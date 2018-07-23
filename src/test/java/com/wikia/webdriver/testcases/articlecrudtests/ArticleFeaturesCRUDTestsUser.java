@@ -93,6 +93,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.GALLERY);
   }
 
+  /**
+   * @perequisites: 4 images with image in the name
+   */
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   public void addSlideshow() {
     new ArticleContent().clear();
@@ -109,6 +112,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifySlideshow();
   }
 
+  /**
+   * @prerequisites 8 images with "Image" in the name
+   */
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   public void modifySlideshow() {
     new ArticleContent().push(
@@ -142,6 +148,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.SLIDESHOW);
   }
 
+  /**
+   * @prerequisites 4 images with image in the name
+   */
   @Test(groups = {"ArticleFeaturesCRUDUser_005"})
   public void addSlider() {
     new ArticleContent().clear();
@@ -203,9 +212,12 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyVideo();
   }
 
+  /**
+   * @prerequisites added video with title Top 20 Shots the Tennis World will NEVER Forget
+   */
   @Test(groups = {"ArticleFeaturesCRUDUser_009", "Media"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
-  public void modifyVideo() {
+  public void modifyVideo(String test) {
     new ArticleContent().push(
         "[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
 

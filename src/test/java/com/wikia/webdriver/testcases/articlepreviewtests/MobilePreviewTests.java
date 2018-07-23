@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mercuryautomationtesting")
 public class MobilePreviewTests extends NewTestTemplate {
 
+  /**
+   * @prerequisites Video on ArticlePreview wiki is required
+   */
   @Test(groups = "oasis-articlePreview-mobilePreviewIsRenderedCorrectlyInModal")
   public void mobilePreviewIsRenderedCorrectlyInModal() {
     new ArticlePreviewPage().navigateToArticlePreviewPageInEditMode()

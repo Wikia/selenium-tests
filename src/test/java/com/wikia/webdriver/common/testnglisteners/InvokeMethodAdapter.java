@@ -67,6 +67,10 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
     if (method.isAnnotationPresent(RunOnly.class)) {
       String[] includedEnvs = method.getAnnotation(RunOnly.class).env();
 
+      if (includedEnvs.length == 1 && includedEnvs[0].isEmpty()) {
+        return false;
+      }
+
       for (String includedEnv : includedEnvs) {
         if (Configuration.getEnv().equals(includedEnv)) {
           return false;
@@ -92,6 +96,10 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
     }
     if (method.isAnnotationPresent(RunOnly.class)) {
       String[] includedLangs = method.getAnnotation(RunOnly.class).language();
+
+      if (includedLangs.length == 0 && includedLangs[0].isEmpty()) {
+        return false;
+      }
 
       for (String includedLang : includedLangs) {
         if (Configuration.getWikiLanguage().contains(includedLang)) {

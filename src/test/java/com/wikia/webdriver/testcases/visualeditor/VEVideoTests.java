@@ -72,6 +72,10 @@ public class VEVideoTests extends NewTestTemplate {
     ve.publish();
   }
 
+  /**
+   * @prerequisites Add a video from youtube with title
+   * "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013"
+   */
   @Test(groups = {"VEVideo", "VEVideoPreview"})
   @Execute(asUser = User.USER_9)
   public void previewVideo() {
