@@ -34,9 +34,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
   public void selectSettings(Setting setting) {
     waitForDialogVisible();
-    WebElement
-        generalSetting =
-        outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
+    WebElement generalSetting = outlineMenuItems.get(setting.ordinal()).findElement(labelElementBy);
     wait.forElementClickable(generalSetting);
     generalSetting.click();
     Log.log("selectSettings", setting.toString() + " setting is selected", true);

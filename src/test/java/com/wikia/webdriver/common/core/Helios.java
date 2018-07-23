@@ -1,11 +1,14 @@
 package com.wikia.webdriver.common.core;
 
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
+
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.HeliosConfig;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -14,11 +17,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.*;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -36,8 +35,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
-
 public class Helios {
 
   private static final Map<String, String> tokenCache = new HashMap<>();
@@ -49,11 +46,14 @@ public class Helios {
 
   /**
    * Standard cookie spec is used instead of default one in order to suppress warnings about
-   * SetCookie header values containing un-escaped commas (e.g.
-   * "expires=Sat, 09 Sep 2017 15:33:53 GMT")
+   * SetCookie header values containing un-escaped commas (e.g. "expires=Sat, 09 Sep 2017 15:33:53
+   * GMT")
    */
-  private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setConnectTimeout(3000)
-      .setSocketTimeout(3000).setCookieSpec(CookieSpecs.STANDARD).build();
+  private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom()
+      .setConnectTimeout(3000)
+      .setSocketTimeout(3000)
+      .setCookieSpec(CookieSpecs.STANDARD)
+      .build();
 
   private Helios() {
     for (User user : User.values()) {
@@ -69,12 +69,16 @@ public class Helios {
 
   public static void deleteAllTokens(User user) {
     if (user.getUserId().isEmpty()) {
-      throw new IllegalArgumentException(String.format("No userId found for user %s", user.getUserName()));
+      throw new IllegalArgumentException(String.format("No userId found for user %s",
+                                                       user.getUserName()
+      ));
     }
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS);
 
-    HttpDelete httpDelete =
-        new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
+    HttpDelete httpDelete = new HttpDelete(String.format("%s/%s/tokens",
+                                                         heliosGetTokenURL,
+                                                         user.getUserId()
+    ));
     httpDelete.setHeader(THE_SCHWARTZ, Configuration.getCredentials().apiToken);
     httpDelete.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
@@ -86,12 +90,14 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       Log.log(IOEXCEPTION_COMMAND,
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+              IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e),
+              false
+      );
       throw new WebDriverException(e);
     }
   }
 
-  public static void updateTokenCache(){
+  public static void updateTokenCache() {
     for (User user : User.values()) {
       if (StringUtils.isNotBlank(user.getAccessToken())) {
         tokenCache.put(user.getUserName(), user.getAccessToken());
@@ -105,12 +111,12 @@ public class Helios {
     }
 
     String heliosGetTokenURL = String.format("%s/%s/tokens",
-        HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS), getUserId(userName));
+                                             HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS),
+                                             getUserId(userName)
+    );
 
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
     httpPost.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
-
-
 
     try {
       String token = executeAndRetry(httpPost, extractAccessToken());
@@ -121,7 +127,9 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       Log.log(IOEXCEPTION_COMMAND,
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+              IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e),
+              false
+      );
       throw new WebDriverException(e);
     }
   }
@@ -150,7 +158,9 @@ public class Helios {
       Log.info("USER_ID RESPONSE RAW: ", source);
       try {
         JSONObject responseValue = new JSONObject(source);
-        return responseValue.getJSONObject("query").getJSONArray("users").getJSONObject(0)
+        return responseValue.getJSONObject("query")
+            .getJSONArray("users")
+            .getJSONObject(0)
             .getString("userid");
       } catch (JSONException e) {
         Log.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
@@ -176,7 +186,7 @@ public class Helios {
       if (tokenCache.containsKey(userName)) {
 
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
-            + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
+                                 + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
         getInfo.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
@@ -186,7 +196,9 @@ public class Helios {
       }
     } catch (IOException e) {
       Log.log(IOEXCEPTION_COMMAND,
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+              IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e),
+              false
+      );
       throw new WebDriverException(e);
     }
     return "";
@@ -198,7 +210,7 @@ public class Helios {
       String encodedUsername = URLEncoder.encode(userName, "UTF-8");
 
       //Downgrade to use http proxy
-      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername).replace("https:","http:"));
+      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername).replace("https:", "http:"));
       httpGet.setConfig(RequestConfig.custom().setProxy(getBorderProxy()).build());
 
       Log.info("USER_ID_REQUEST", httpGet.getURI().toString());
@@ -211,7 +223,9 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       Log.log(IOEXCEPTION_COMMAND,
-          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+              IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e),
+              false
+      );
       throw new WebDriverException(e);
     }
   }
@@ -222,29 +236,39 @@ public class Helios {
     File configFile = new File(Configuration.getCredentialsFilePath());
 
     switch (envType) {
-      case DEV : {
-        return new HttpHost(
-            XMLReader.getValue(configFile, "border.poz.address"),
-            Integer.parseInt(XMLReader.getValue(configFile, "border.poz.port")),
-            XMLReader.getValue(configFile, "border.poz.protocol"));
-      } default: {
-        return new HttpHost(
-                XMLReader.getValue(configFile, "border.sjc.address"),
-                Integer.parseInt(XMLReader.getValue(configFile, "border.sjc.port")),
-                XMLReader.getValue(configFile, "border.sjc.protocol"));
+      case DEV: {
+        return new HttpHost(XMLReader.getValue(configFile, "border.poz.address"),
+                            Integer.parseInt(XMLReader.getValue(configFile, "border.poz.port")),
+                            XMLReader.getValue(configFile, "border.poz.protocol")
+        );
+      }
+      default: {
+        return new HttpHost(XMLReader.getValue(configFile, "border.sjc.address"),
+                            Integer.parseInt(XMLReader.getValue(configFile, "border.sjc.port")),
+                            XMLReader.getValue(configFile, "border.sjc.protocol")
+        );
       }
     }
   }
 
   private static String getUserIdUrl(String encodedUsername) {
-    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI, Configuration.DEFAULT_LANGUAGE).getUrl();
+    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI,
+                                                                    Configuration.DEFAULT_LANGUAGE
+    ).getUrl();
     return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
-            communityUrl, encodedUsername, DateTime.now().getMillis());
+                         communityUrl,
+                         encodedUsername,
+                         DateTime.now().getMillis()
+    );
   }
 
   private static CloseableHttpClient getDefaultClient() {
-    return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-        .disableAutomaticRetries().setDefaultRequestConfig(REQUEST_CONFIG).setSSLHostnameVerifier(
-            NoopHostnameVerifier.INSTANCE).build();
+    return HttpClientBuilder.create()
+        .disableCookieManagement()
+        .disableConnectionState()
+        .disableAutomaticRetries()
+        .setDefaultRequestConfig(REQUEST_CONFIG)
+        .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+        .build();
   }
 }

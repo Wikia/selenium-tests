@@ -11,24 +11,26 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSiz
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
 import org.joda.time.DateTime;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- * These tests are failing in FF, but was tested manually
- * - removeVideoFromArticle
- * - resizeVideoWithHandle
- * - resizeVideoWithHandle
+ * These tests are failing in FF, but was tested manually - removeVideoFromArticle -
+ * resizeVideoWithHandle - resizeVideoWithHandle
  */
 @InBrowser(browser = Browser.CHROME)
 public class VEVideoTests extends NewTestTemplate {
+
   @Test(groups = {"VEVideo", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
   public void addNonPremiumVideo() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-                                                                    + DateTime.now().getMillis());
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
+                                                                             PageContent.ARTICLE_NAME_PREFIX
+                                                                             + DateTime.now()
+                                                                                 .getMillis()
+    );
     VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
@@ -38,9 +40,11 @@ public class VEVideoTests extends NewTestTemplate {
   @Test(groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
   public void addExistingVideo() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-                                                                    + DateTime.now().getMillis());
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
+                                                                             PageContent.ARTICLE_NAME_PREFIX
+                                                                             + DateTime.now()
+                                                                                 .getMillis()
+    );
 
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("y");
     VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
@@ -49,14 +53,12 @@ public class VEVideoTests extends NewTestTemplate {
     veNew.publish();
   }
 
-
   @Test(enabled = false, groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-757")
   public void removeVideoFromArticle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
     VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
@@ -73,12 +75,12 @@ public class VEVideoTests extends NewTestTemplate {
   @Test(groups = {"VEVideo", "VEVideoPreview"})
   @Execute(asUser = User.USER_9)
   public void previewVideo() {
-    String mediaTitle =
-        "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
+    String
+        mediaTitle
+        = "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(mediaTitle);
     ve = mediaDialog.previewExistingVideoByTitle(mediaTitle);
     ve.verifyPreviewVideo();
@@ -88,8 +90,7 @@ public class VEVideoTests extends NewTestTemplate {
   @Execute(asUser = User.USER_9)
   public void resizeVideoWithHandle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
     ve = mediaDialog.addExistingMedia(1);
@@ -106,8 +107,7 @@ public class VEVideoTests extends NewTestTemplate {
     int resizeNumber = 250;
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
     ve = mediaDialog.addExistingMedia(1);

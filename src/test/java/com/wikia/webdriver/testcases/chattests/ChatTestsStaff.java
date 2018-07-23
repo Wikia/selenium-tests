@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -10,14 +8,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
+import org.testng.annotations.Test;
+
 @Test(groups = {"Chat", "ChatForStaff"})
 @Execute(onWikia = "sustainingtestchat")
 public class ChatTestsStaff extends NewTestTemplate {
 
   private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
   private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
-  private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR =
-      "MESSAGE ON CHAT IS NOT DISPLAYED";
+  private static final String
+      MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+      = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private ChatPage openChatForUser(User user) {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -36,12 +37,14 @@ public class ChatTestsStaff extends NewTestTemplate {
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
     chatUserOne.selectPrivateMessageToUser(User.SUS_CHAT_USER3.getUserName());
     Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
   }
 
   @Test
@@ -55,7 +58,8 @@ public class ChatTestsStaff extends NewTestTemplate {
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT),
-        MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
+                         MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR
+    );
 
     switchToWindow(1);
     chatUserTwo.selectPrivateMessageToUser(User.SUS_CHAT_STAFF.getUserName());
@@ -64,12 +68,16 @@ public class ChatTestsStaff extends NewTestTemplate {
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserOne.isPrivateMessageHeaderDisplayed(),
-        "PRIVATE MESSAGE HEDER IS DISPLAYED");
+                         "PRIVATE MESSAGE HEDER IS DISPLAYED"
+    );
     Assertion.assertTrue(chatUserOne.isPrivateMessageNotificationDisplayed(),
-        "PRIVATE MESSAGE HEDER IS DISPLAYED");
+                         "PRIVATE MESSAGE HEDER IS DISPLAYED"
+    );
     chatUserOne.clickOnUserInPrivateMessageSection(User.SUS_CHAT_USER3.getUserName());
-    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT),
-        "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(
+        chatUserOne.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT),
+        "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED"
+    );
   }
 
   @Test
@@ -93,7 +101,9 @@ public class ChatTestsStaff extends NewTestTemplate {
     chatUserStaff2.selectPrivateMessageToUser(User.SUS_CHAT_STAFF.getUserName());
     Assertion.assertTrue(chatUserStaff2.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserStaff2.clickOnUserInPrivateMessageSection(User.SUS_CHAT_STAFF.getUserName());
-    Assertion.assertFalse(chatUserStaff2.isBlockPrivateMessageButtonDisplayed(),
-        "BLOCK PRIVATE MESSAGE BUTTON IS DISPLAYED");
+    Assertion.assertFalse(
+        chatUserStaff2.isBlockPrivateMessageButtonDisplayed(),
+        "BLOCK PRIVATE MESSAGE BUTTON IS DISPLAYED"
+    );
   }
 }

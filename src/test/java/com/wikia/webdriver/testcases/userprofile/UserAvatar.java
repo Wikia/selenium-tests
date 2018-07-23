@@ -3,13 +3,11 @@ package com.wikia.webdriver.testcases.userprofile;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
 import org.testng.annotations.Test;
@@ -22,8 +20,8 @@ import org.testng.annotations.Test;
  * were redirected to User page
  *
  * Test removeAvatar 1. Open user profile page User:Username and remove avatar 2. Verify that avatar
- * was removed from user page, and placeholder appeared on global navigation 3. LogData out and verify
- * that avatar is not visible on global navigation
+ * was removed from user page, and placeholder appeared on global navigation 3. LogData out and
+ * verify that avatar is not visible on global navigation
  */
 @Test(groups = "userProfile-userAvatar")
 @Execute(onWikia = "sustainingtestchat")
@@ -42,7 +40,7 @@ public class UserAvatar extends NewTestTemplate {
 
   @Test(groups = "UserAvatar_userCanEnterHisProfileFromUserMenu")
   @Execute(asUser = User.SUS_STAFF2)
-  public void userCanEnterHisProfileFromUserMenu(){
+  public void userCanEnterHisProfileFromUserMenu() {
     new SpecialVersionPage().open();
 
     GlobalNavigation userAvatar = new GlobalNavigation();
@@ -55,9 +53,7 @@ public class UserAvatar extends NewTestTemplate {
   @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
   @Execute(asUser = User.SUS_STAFF2)
   public void staffUserCanUploadAvatar() {
-    UserProfilePage
-        profile =
-        new UserProfilePage().open(User.SUS_STAFF2.getUserName());
+    UserProfilePage profile = new UserProfilePage().open(User.SUS_STAFF2.getUserName());
     AvatarComponentObject avatar = profile.clickEditAvatar();
     profile.verifyAvatar();
     String avatarUrl = profile.getAvatarImageSrc();
@@ -70,19 +66,16 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
-
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.SUS_STAFF2)
   public void staffUserCanRemoveAvatar() {
-    UserProfilePage profile = new UserProfilePage().open(
-        User.SUS_STAFF2.getUserName());
+    UserProfilePage profile = new UserProfilePage().open(User.SUS_STAFF2.getUserName());
     String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
     profile.openWikiPage(); //user needs to visit other page to get avatar refreshed
-    UserProfilePage changedProfile = new UserProfilePage().open(
-        User.SUS_STAFF2.getUserName());
+    UserProfilePage changedProfile = new UserProfilePage().open(User.SUS_STAFF2.getUserName());
 
     changedProfile.verifyAvatarChanged(avatarUrl);
     String changedAvatarUrl = changedProfile.getAvatarImageSrc();

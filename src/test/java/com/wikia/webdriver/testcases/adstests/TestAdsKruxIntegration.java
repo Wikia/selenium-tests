@@ -15,29 +15,20 @@ public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
   private static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
   private static final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
 
-  @Test(
-      dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "kruxIntegration",
-      groups = "AdsKruxIntegrationMercury"
-  )
+  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "kruxIntegration", groups = "AdsKruxIntegrationMercury")
   @UseUnstablePageLoadStrategy
   public void adsKruxIntegrationMercury(String wikiName, String article) {
     adsKruxIntegration(wikiName, article, KRUX_SITE_ID_MOBILE, AdsContent.MOBILE_TOP_LB);
   }
 
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "kruxIntegration",
-      groups = "AdsKruxIntegrationOasis"
-  )
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "kruxIntegration", groups = "AdsKruxIntegrationOasis")
   public void adsKruxIntegrationOasis(String wikiName, String article) {
     adsKruxIntegration(wikiName, article, KRUX_SITE_ID_DESKTOP, AdsContent.TOP_LB);
   }
 
-  private void adsKruxIntegration(String wikiName,
-                                  String article,
-                                  String kruxSiteId,
-                                  String slotName) {
+  private void adsKruxIntegration(
+      String wikiName, String article, String kruxSiteId, String slotName
+  ) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsKruxObject ads = new AdsKruxObject(driver, testedPage);
     ads.verifyKruxControlTag(kruxSiteId);

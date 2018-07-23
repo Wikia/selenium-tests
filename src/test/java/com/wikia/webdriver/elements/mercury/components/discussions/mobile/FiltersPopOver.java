@@ -3,10 +3,10 @@ package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
+
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 
 public class FiltersPopOver extends BasePage {
 
@@ -20,18 +20,17 @@ public class FiltersPopOver extends BasePage {
   @FindBy(css = ".discussion-filters .discussion-sort")
   private WebElement sortingFilter;
 
-  @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
+  @FindBy(css = ".pop-over-container .sortby-fieldset .sort-trending")
   private WebElement trendingOptionInSortMenu;
 
-  @FindBy(css = "label[for='sort-button-main.sort-by-latest']")
+  @FindBy(css = ".pop-over-container .sortby-fieldset .sort-latest")
   private WebElement latestOptionInSortMenu;
 
-  @FindBy(css = ".filters-apply")
+  @FindBy(css = ".pop-over-container .filters-apply-container .filters-apply")
   private WebElement applyButtonInSortMenu;
 
   @FindBy(css = ".pop-over-container")
   private WebElement sortOptionsMobile;
-
 
   public FiltersPopOver click() {
     waitAndClick(filterButton);
@@ -40,22 +39,24 @@ public class FiltersPopOver extends BasePage {
 
   public FiltersPopOver chooseSortingOption(SortOption option) {
     if (option == SortOption.LATEST) {
-      waitAndClick(latestOptionInSortMenu);
-    } else if (option == SortOption.TRENDING){
-      waitAndClick(trendingOptionInSortMenu);
+      scrollAndClick(latestOptionInSortMenu);
+    } else if (option == SortOption.TRENDING) {
+      scrollAndClick(trendingOptionInSortMenu);
     } else {
-      throw new IllegalArgumentException(String.format("Option %s not supported by sorting", option));
+      throw new IllegalArgumentException(String.format(
+          "Option %s not supported by sorting",
+          option
+      ));
     }
     return this;
   }
 
   public FiltersPopOver clickApplyButton() {
-    waitAndClick(applyButtonInSortMenu);
+    scrollAndClick(applyButtonInSortMenu);
     return this;
   }
 
   public boolean isSortingFilterEnabled() {
     return isElementEnabled(getSortingFilter());
   }
-
 }

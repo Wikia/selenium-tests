@@ -51,27 +51,22 @@ public class WikiTextContent {
   public static final String PREFORMATTED_TEXT = PREFORMATTED + TEXT;
   public static final String BOLD_TEXT = BOLD + TEXT + BOLD;
   public static final String ITALIC_TEXT = ITALIC + TEXT + ITALIC;
-  public static final String
-      STRIKETROUGH_TEXT =
-      STRIKETHROUGH_OPENING + TEXT + STRIKETHROUGH_CLOSING;
+  public static final String STRIKETROUGH_TEXT = STRIKETHROUGH_OPENING + TEXT
+                                                 + STRIKETHROUGH_CLOSING;
   public static final String UNDERLINE_TEXT = UNDERLINE_OPENING + TEXT + UNDERLINE_CLOSING;
   public static final String SUBSCRIPT_TEXT = SUBSCRIPT_OPENING + TEXT + SUBSCRIPT_CLOSING;
   public static final String SUPERSCRIPT_TEXT = SUPERSCRIPT_OPENING + TEXT + SUPERSCRIPT_CLOSING;
   public static final String BULLET_LIST_TEXT = BULLET_LIST + TEXT;
   public static final String NUMBERED_LIST_TEXT = NUMBERED_LIST + TEXT;
 
-  public static final String
-      BLUELINK_TEXT =
-      INTERNAL_LINK_OPENING + PageContent.INTERNAL_LINK + INTERNAL_LINK_CLOSING;
-  public static final String
-      EXTERNAL_LINK_TEXT =
-      EXT_LINK_OPENING + PageContent.EXTERNAL_LINK + EXT_LINK_CLOSING;
-  public static final String
-      REDLINK_TEXT =
-      INTERNAL_LINK_OPENING + PageContent.REDLINK + INTERNAL_LINK_CLOSING;
-  public static final String
-      REDIRECT_LINK_TEXT =
-      INTERNAL_LINK_OPENING + PageContent.REDIRECT_LINK + INTERNAL_LINK_CLOSING;
+  public static final String BLUELINK_TEXT = INTERNAL_LINK_OPENING + PageContent.INTERNAL_LINK
+                                             + INTERNAL_LINK_CLOSING;
+  public static final String EXTERNAL_LINK_TEXT = EXT_LINK_OPENING + PageContent.EXTERNAL_LINK
+                                                  + EXT_LINK_CLOSING;
+  public static final String REDLINK_TEXT = INTERNAL_LINK_OPENING + PageContent.REDLINK
+                                            + INTERNAL_LINK_CLOSING;
+  public static final String REDIRECT_LINK_TEXT = INTERNAL_LINK_OPENING + PageContent.REDIRECT_LINK
+                                                  + INTERNAL_LINK_CLOSING;
 
   private WikiTextContent() {
 

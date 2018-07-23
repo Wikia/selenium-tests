@@ -6,15 +6,16 @@ import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import java.util.List;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 @SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})
 public class ArticlePage extends WikiBasePageObject {
@@ -26,23 +27,17 @@ public class ArticlePage extends WikiBasePageObject {
   private final Navigate navigate = new Navigate();
 
   @Getter(lazy = true)
-  private final Navigation navigation = new Navigation();
-
-  @Getter(lazy = true)
   private final CuratedMainPagePageObject curatedMainPage = new CuratedMainPagePageObject();
 
   @Getter(lazy = true)
   private final LightboxComponentObject lightbox = new LightboxComponentObject();
-
-  @FindBy(css = ".wiki-page-header__title")
-  private WebElement articleTitle;
-
-  @FindBy(css = "article a")
-  private List<WebElement> linksList;
-
   private final By articleContent = By.cssSelector(".article-content");
   private final By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");
   private final By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
+  @FindBy(css = ".wiki-page-header__title")
+  private WebElement articleTitle;
+  @FindBy(css = "article a")
+  private List<WebElement> linksList;
 
   public CategoryPage openCategoryPageFromCategoriesDropdown() {
     wait.forElementClickable(categoriesDropdown);

@@ -23,13 +23,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
 import lombok.Getter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -38,6 +34,13 @@ import java.util.List;
 
 public class ArticlePageObject extends WikiBasePageObject {
 
+  private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
+  private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
+  private static final String COMMENT_AUTHOR_LINK = ".edited-by";
+  private static final String REPLY_COMMENT_SELECTOR = ".article-comm-reply";
+  final Integer minInlineVideoSize = 400;
+  @Getter(lazy = true)
+  private final ArticleComment articleComment = new ArticleComment();
   @FindBy(css = ".page-header__title")
   protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
@@ -94,6 +97,9 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement videoThumbnailWrapper;
   @FindBy(css = "#mw-content-text .inline-video")
   protected WebElement videoInline;
+  String editCategorySelector = "li[data-name='%categoryName%'] .toolbar .editCategory";
+  String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
+  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
   @FindBy(css = ".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
   private WebElement videoAddPlaceholder;
   @FindBy(css = ".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
@@ -137,21 +143,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   @FindBy(css = ".featured-video")
   private WebElement featuredVideo;
 
-  @Getter(lazy = true)
-  private final ArticleComment articleComment = new ArticleComment();
-
-  private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
-  private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
-  private static final String COMMENT_AUTHOR_LINK = ".edited-by";
-  private static final String REPLY_COMMENT_SELECTOR = ".article-comm-reply";
-
-  final Integer minInlineVideoSize = 400;
-
-  String editCategorySelector = "li[data-name='%categoryName%'] .toolbar .editCategory";
-  String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
-  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
-
-
   /**
    * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME
    */
@@ -173,10 +164,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public String getAtricleTextRaw() {
     return pageContentContainer.getText();
-
   }
 
-  public String getArticleTitle(){
+  public String getArticleTitle() {
     wait.forElementVisible(articleTitle);
     return articleTitle.getText();
   }
@@ -252,20 +242,24 @@ public class ArticlePageObject extends WikiBasePageObject {
   public MiniEditorComponentObject triggerEditCommentArea() {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
-    Log.log("First check",mostRecentComment.getText(), true);
+    Log.log("First check", mostRecentComment.getText(), true);
 
     WebElement editButton = mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR));
     new Actions(driver).moveToElement(editButton).perform();
-    driver.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
-                     EDIT_BUTTON_SELECTOR);
+    driver.executeScript("arguments[0].querySelector(arguments[1]).click()",
+                         mostRecentComment,
+                         EDIT_BUTTON_SELECTOR
+    );
     return new MiniEditorComponentObject(driver);
   }
 
   public DeletePageObject deleteFirstComment() {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
-    driver.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
-                     DELETE_BUTTON_SELECTOR);
+    driver.executeScript("arguments[0].querySelector(arguments[1]).click()",
+                         mostRecentComment,
+                         DELETE_BUTTON_SELECTOR
+    );
     return new DeletePageObject(driver);
   }
 
@@ -318,6 +312,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public String getArticleName() {
+    wait.forElementVisible(articleTitle);
     String articleName = articleTitle.getText();
     Log.log("getArticleName", "the name of the article is: " + articleName, true);
     return articleName;
@@ -384,8 +379,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   private void verifyTableProperty(String propertyName, int propertyValue) {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
-    Log.log("verifyTableProperty", "table has correct " + propertyName + " property",
-                          true);
+    Log.log("verifyTableProperty", "table has correct " + propertyName + " property", true);
   }
 
   public void verifyTableBorder(int propertyValue) {
@@ -402,8 +396,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyTableAlignment(Alignment alignment) {
     wait.forElementVisible(table);
-    Assertion.assertEquals(table.getCssValue("float").toLowerCase(), alignment.toString()
-        .toLowerCase());
+    Assertion.assertEquals(table.getCssValue("float").toLowerCase(),
+                           alignment.toString().toLowerCase()
+    );
     Log.log("verifyTableAlignment", "table has correct alignment", true);
   }
 
@@ -498,36 +493,38 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public EditCategoryComponentObject editCategory(String category) {
-    WebElement editCategory =
-        driver
-            .findElement(By.cssSelector(editCategorySelector.replace("%categoryName%", category)));
+    WebElement editCategory = driver.findElement(By.cssSelector(editCategorySelector.replace("%categoryName%",
+                                                                                             category
+    )));
     scrollAndClick(editCategory);
     Log.log("editCategory", "edit button on category " + category + " clicked", true);
     return new EditCategoryComponentObject(driver);
   }
 
   public void removeCategory(String category) {
-    WebElement editCategory =
-        driver.findElement(By.cssSelector(removeCategorySelector
-                                              .replace("%categoryName%", category)));
+    WebElement editCategory = driver.findElement(By.cssSelector(removeCategorySelector.replace("%categoryName%",
+                                                                                               category
+    )));
     scrollAndClick(editCategory);
-    Log.log("removeCategory", "remove button on category " + category + " clicked",
-                          true);
+    Log.log("removeCategory", "remove button on category " + category + " clicked", true);
   }
 
   public String addCategorySuggestions(String category, int categoryIndex) {
     clickAddCategoryButton();
     typeCategoryName(category);
     wait.forElementVisible(categorySuggestionsDialog);
-    if (categoryIndex > categorySuggestionsListItems.size()-1){
-      throw new WebDriverException("List of category suggestions doesn't contain sufficient number of elements");
+    if (categoryIndex > categorySuggestionsListItems.size() - 1) {
+      throw new WebDriverException(
+          "List of category suggestions doesn't contain sufficient number of elements");
     }
     WebElement desiredCategory = categorySuggestionsListItems.get(categoryIndex);
     String desiredCategoryText = desiredCategory.getText();
     scrollAndClick(categorySuggestionsListItems.get(categoryIndex));
     waitForElementNotVisibleByElement(categorySuggestionsDialog);
-    Log.log("addCategorySuggestions", "category " + desiredCategoryText
-                                                    + " added from suggestions", true);
+    Log.log("addCategorySuggestions",
+            "category " + desiredCategoryText + " added from suggestions",
+            true
+    );
     return desiredCategoryText;
   }
 
@@ -536,10 +533,9 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public WatchPageObject unfollowArticle() {
-    String
-        url =
-        urlBuilder
-            .appendQueryStringToURL(urlBuilder.getUrl(), "title=" + articleTitle.getText());
+    String url = urlBuilder.appendQueryStringToURL(urlBuilder.getUrl(),
+                                                   "title=" + articleTitle.getText()
+    );
     url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
     return new WatchPageObject();
@@ -566,8 +562,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void clickTOCshowHideButton() {
     wait.forElementVisible(tableOfContentsShowHideButton);
     scrollAndClick(tableOfContentsShowHideButton);
-    Log.log("clickTOCshowHideButton", "table of contents 'show/hide' button clicked",
-                          true);
+    Log.log("clickTOCshowHideButton", "table of contents 'show/hide' button clicked", true);
   }
 
   /**
@@ -587,8 +582,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertNotEquals(sectionYbefore, sectionYafter);
     // assume that if section is less than 5px from top, it is scrolled up properly
     Assertion.assertTrue(sectionYafter < 5);
-    Log.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID
-                                                       + " was scrolled up", true);
+    Log.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID + " was scrolled up", true);
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
@@ -599,8 +593,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void closeNewWikiCongratulationsLightBox() {
     wait.forElementClickable(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
-    Log.log("closeNewWikiCongratulationsLightBox ",
-                          "congratulations lightbox closed", true);
+    Log.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
   }
 
   public void verifyWikiTitleHeader(String wikiName) {
@@ -681,7 +674,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new SourceEditModePageObject();
   }
 
-  public ArticlePageObject clickCommentButton(){
+  public ArticlePageObject clickCommentButton() {
     commentButton.click();
 
     return this;

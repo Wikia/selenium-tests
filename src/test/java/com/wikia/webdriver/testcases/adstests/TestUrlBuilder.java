@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import java.lang.reflect.Constructor;
@@ -409,7 +409,7 @@ public class TestUrlBuilder {
     UrlBuilder urlBuilder = c
         .newInstance("mercuryautomationtesting", "preview", false, false, DEFAULT_LANGUAGE);
 
-    Assert.assertEquals(urlBuilder.getUrlForWikiPageWithWWW(MercurySubpages.MAIN_PAGE),
+    Assert.assertEquals(urlBuilder.getUrlForWikiPageWithWWW(MobileSubpages.MAIN_PAGE),
         "http://www.mercuryautomationtesting.preview.wikia.com/wiki/Mercury_automation_testing_Wiki");
   }
 

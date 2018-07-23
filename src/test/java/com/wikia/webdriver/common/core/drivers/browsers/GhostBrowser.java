@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.core.drivers.browsers;
 
-import java.io.File;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
+import java.io.File;
 
 public class GhostBrowser extends BrowserAbstract {
 
@@ -18,12 +18,14 @@ public class GhostBrowser extends BrowserAbstract {
     if (osName.contains("WINDOWS")) {
       phantomJSBinaryName = "phantomjs.exe";
 
-      File phantomJSBinary =
-          new File("." + File.separator + "src" + File.separator + "test" + File.separator
-              + "resources" + File.separator + "PhantomJS" + File.separator + phantomJSBinaryName);
+      File phantomJSBinary = new File(
+          "." + File.separator + "src" + File.separator + "test" + File.separator + "resources"
+          + File.separator + "PhantomJS" + File.separator + phantomJSBinaryName);
 
-      caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-          phantomJSBinary.getAbsolutePath());
+      caps.setCapability(
+          PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+          phantomJSBinary.getAbsolutePath()
+      );
     }
   }
 

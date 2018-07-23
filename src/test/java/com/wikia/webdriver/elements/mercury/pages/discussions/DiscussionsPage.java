@@ -1,12 +1,10 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.components.Header;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
 
 import lombok.Getter;
 import org.openqa.selenium.TimeoutException;
@@ -22,10 +20,7 @@ public class DiscussionsPage extends BasePage {
   private final Navigate navigate = new Navigate();
 
   @Getter(lazy = true)
-  private final Navigation navigation = new Navigation();
-
-  @Getter(lazy = true)
-  private final TopBar topbar = new TopBar();
+  private final GlobalNavigationMobile topbar = new GlobalNavigationMobile();
 
   @FindBy(css = ".discussion-filter-header")
   private WebElement discussionsFilter;

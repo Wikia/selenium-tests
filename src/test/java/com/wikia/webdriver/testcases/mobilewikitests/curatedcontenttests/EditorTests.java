@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -22,7 +22,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedEditor")
-@Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.CURATED_CONTENT_USER)
+@Execute(onWikia = MobileWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.CURATED_CONTENT_USER)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class EditorTests extends NewTestTemplate {
 
@@ -42,7 +42,7 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTest_001")
   @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
@@ -71,7 +71,7 @@ public class EditorTests extends NewTestTemplate {
   @RelatedIssue(issueID = "XF-241")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
-    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
@@ -115,7 +115,7 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTest_003")
   @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
-    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));

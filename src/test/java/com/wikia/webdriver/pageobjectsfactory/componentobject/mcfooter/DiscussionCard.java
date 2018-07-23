@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -17,7 +18,7 @@ public class DiscussionCard extends WikiBasePageObject {
   @FindBy(css = ".mcf-card-discussions__user-subtitle")
   private WebElement avatarUsername;
 
-  @FindBy(css = ".wds-avatar")
+  @FindBy(css = ".mcf-card-discussions__user-info .wds-avatar")
   private WebElement avatarImage;
 
   @FindBy(css = ".mcf-card-discussions__content")
@@ -28,7 +29,6 @@ public class DiscussionCard extends WikiBasePageObject {
 
   @FindBy(css = ".mcf-card-discussions__item")
   private WebElement discussionsPost;
-
 
   public boolean isDiscussionsCardPresent() {
     wait.forElementVisible(discussionsCard);
@@ -44,8 +44,7 @@ public class DiscussionCard extends WikiBasePageObject {
 
   public DiscussionsPage clickOnViewAllLinkInDiscussions() {
     scrollTo(viewAllLink);
-    wait.forElementClickable(viewAllLink)
-        .click();
+    wait.forElementClickable(viewAllLink).click();
 
     return new DiscussionsPage();
   }
@@ -82,5 +81,4 @@ public class DiscussionCard extends WikiBasePageObject {
 
     return this;
   }
-  
 }

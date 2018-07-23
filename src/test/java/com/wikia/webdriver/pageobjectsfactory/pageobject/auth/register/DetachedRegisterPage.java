@@ -9,8 +9,8 @@ import java.time.LocalDate;
 
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage {
 
-  private AttachedRegisterPage registerPage;
   private static final String TITLE = "Join FANDOM Today";
+  private AttachedRegisterPage registerPage;
 
   public DetachedRegisterPage() {
     registerPage = new AttachedRegisterPage();

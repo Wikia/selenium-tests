@@ -11,21 +11,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class ActionExplorerModal extends WikiBasePageObject {
 
-  @FindBy(css = ".label-in-suggestions")
-  private WebElement searchSuggestions;
-
-  @FindBy(css = "#global_shortcuts_search_field")
-  private WebElement searchField;
-
-  @FindBy(css = ".global-shortcuts-search div[data-index='16']")
-  private WebElement specialAllPagesLink;
-
-  @FindBy(css = ".autocomplete-suggestions")
-  private WebElement autocompleteSuggestions;
-
   private final By actionExplorerModalSelector = By.cssSelector(".global-shortcuts-search");
   private final By keyboardShortcutsModalSelector = By.cssSelector(".global-shortcuts-help");
-
+  @FindBy(css = ".label-in-suggestions")
+  private WebElement searchSuggestions;
+  @FindBy(css = "#global_shortcuts_search_field")
+  private WebElement searchField;
+  @FindBy(css = ".global-shortcuts-search div[data-index='16']")
+  private WebElement specialAllPagesLink;
+  @FindBy(css = ".autocomplete-suggestions")
+  private WebElement autocompleteSuggestions;
   private Actions actions;
 
   public ActionExplorerModal() {

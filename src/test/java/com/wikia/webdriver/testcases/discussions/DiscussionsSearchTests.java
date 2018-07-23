@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.testcases.mobilewikitests.SearchTests;
 
 import org.testng.annotations.Test;
@@ -25,58 +25,55 @@ public class DiscussionsSearchTests extends SearchTests {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage() {
 
-    String clickedSuggestion = new GuidelinesPage()
-        .open()
-        .getTopBar()
+    String clickedSuggestion = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0);
 
     ArticlePage page = new ArticlePage();
     page.getHeader().waitForLoaded();
-    Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(), page.getHeader().getPageTitle().toLowerCase()
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           page.getHeader().getPageTitle().toLowerCase()
     );
   }
 
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void navigateUsingSearchSuggestionsOnDesktopFromDiscussionsGuidelinesPage() {
+    Integer resultNo = 0;
+    GlobalNavigation nav = new GuidelinesPage().open().getGlobalNavigation();
 
-    String clickedSuggestion = new GuidelinesPage()
-        .open()
-        .getTopBar()
-        .typeInDesktopSearchAndSelectSuggestion(SEARCH_PHRASE, 0);
+    nav.typeInSearch(SEARCH_PHRASE);
+    String clickedSuggestion = nav.getNthSearchResultText(resultNo);
+    nav.clickNthSearchResult(resultNo);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
-    Assertion.assertEquals(
-        clickedSuggestion.toLowerCase(),
-        new ArticlePageObject().getArticleName().toLowerCase()
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           new ArticlePage().getArticleName().toLowerCase()
     );
   }
 
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  public void clearSearchPhraseFromDiscussionsGuidelinesPage() {
-    super.clearSearchPhrase(
-        new GuidelinesPage().open()
-    );
+  public void clearSearchPhraseFromDiscussionsGuidelinesPageOnDesktop() {
+    GlobalNavigation nav = new GuidelinesPage().open().getGlobalNavigation();
+
+    nav.typeInSearch(SEARCH_PHRASE);
+    nav.clearSearchPhrase();
+
+    Assertion.assertTrue(nav.getCurrentSearchPhrase().isEmpty());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void verifySearchLayoutFromDiscussionsGuidelinesPage() {
-    super.verifySearchLayout(
-        new GuidelinesPage().open()
-    );
+    super.verifySearchLayout(new GuidelinesPage().open());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToSearchResultsPageFromDiscussionsGuidelinesPage() {
-    SearchResultsPage searchResults =
-        new GuidelinesPage()
-            .open()
-            .getTopBar()
-            .openSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .clickEnterAndNavigateToSearchResults(Skin.DISCUSSIONS);
+    SearchResultsPage searchResults = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
+        .openSearch()
+        .typeInSearch(SEARCH_PHRASE)
+        .clickEnterAndNavigateToSearchResults(Skin.DISCUSSIONS);
 
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
   }

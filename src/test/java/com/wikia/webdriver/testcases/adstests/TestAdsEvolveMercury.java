@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "AdsEvolveMercury")

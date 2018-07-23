@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
@@ -19,9 +19,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 
   String title;
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersMessageTests_001"}
-  )
+  @Test(groups = {"MessageWallNotificationsFollowersMessageTests_001"})
   public void followerNotificationNewMessage_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);
@@ -31,10 +29,8 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
     wall.follow();
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersMessageTests_002"},
-      dependsOnMethods = "followerNotificationNewMessage_setup_1"
-  )
+  @Test(groups = {
+      "MessageWallNotificationsFollowersMessageTests_002"}, dependsOnMethods = "followerNotificationNewMessage_setup_1")
   public void followerNotificationNewMessage_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName6, credentials.password6, wikiURL);
@@ -48,10 +44,8 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
     wall.verifyMessageText(title, message, credentials.userName6);
   }
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersMessageTests_003"},
-      dependsOnMethods = "followerNotificationNewMessage_setup_2"
-  )
+  @Test(groups = {
+      "MessageWallNotificationsFollowersMessageTests_003"}, dependsOnMethods = "followerNotificationNewMessage_setup_2")
   public void userIsNotifiedWhenOtherUserWritesMessageOnFollowedMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);

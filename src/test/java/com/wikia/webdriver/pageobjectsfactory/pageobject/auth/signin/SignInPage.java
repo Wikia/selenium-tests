@@ -17,6 +17,8 @@ public interface SignInPage extends FormPage {
 
   void login(User user);
 
+  void close();
+
   RegisterPage navigateToRegister();
 
   String getError();
@@ -24,5 +26,4 @@ public interface SignInPage extends FormPage {
   boolean isPasswordMasked();
 
   void togglePasswordVisibility();
-
 }

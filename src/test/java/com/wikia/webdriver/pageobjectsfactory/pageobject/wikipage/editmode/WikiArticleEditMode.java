@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
-import com.wikia.webdriver.common.logging.Log;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class WikiArticleEditMode extends WikiEditMode {
 
@@ -59,8 +59,7 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void verifySourceEditorContentIsEmpty() {
     wait.forElementVisible(sourceModeTextArea);
     Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
-    Log.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned",
-        true);
+    Log.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
   }
 
   public void clearSource() {
@@ -75,7 +74,10 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementVisible(bodyContent);
     bodyContent.sendKeys(content);
     Log.log("typeInContent",
-        "content " + bodyContent.getText() + " - type into article body", true, driver);
+            "content " + bodyContent.getText() + " - type into article body",
+            true,
+            driver
+    );
     driver.switchTo().defaultContent();
   }
 

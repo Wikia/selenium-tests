@@ -22,6 +22,7 @@ import java.time.Instant;
 
 @Execute(asUser = User.USER)
 public class RTETemplateTests extends NewTestTemplate {
+
   private static final String PI_TEMPLATE_NAME = "Template:RTEPortableInfobox_";
   private static final String PI_TITLE_PARAM = "name";
   private static final String TEST_PI_TITLE = "karambadawaj";
@@ -58,8 +59,7 @@ public class RTETemplateTests extends NewTestTemplate {
       Subhead subhead = new Subhead();
       subhead.clickSubheadTitle();
 
-      infoboxBuilderModal
-          .insertTemplateTitle(PI_TEMPLATE_NAME + Instant.now().toString())
+      infoboxBuilderModal.insertTemplateTitle(PI_TEMPLATE_NAME + Instant.now().toString())
           .clickPublishEditedTitleButton();
       infoboxBuilderModal.waitUntilEditTitleModalIsClosed();
 
@@ -90,7 +90,9 @@ public class RTETemplateTests extends NewTestTemplate {
 
     assertThat(visualEditModePageObject.checkPortableInfoboxVisible()).isTrue();
 
-    SourceEditModePageObject sourceEditModePageObject = visualEditModePageObject.clickSourceButton();
+    SourceEditModePageObject
+        sourceEditModePageObject
+        = visualEditModePageObject.clickSourceButton();
 
     assertThat(sourceEditModePageObject.getContent()).isEqualTo(piTemplateCall.trim());
 

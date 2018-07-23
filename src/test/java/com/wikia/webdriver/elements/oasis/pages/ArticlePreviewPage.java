@@ -1,26 +1,22 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.elements.oasis.components.articlepreview.MobilePreviewModal;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ArticlePreviewPage extends WikiBasePageObject {
 
-  @FindBy(css = "#wpPreviewMobile")
-  private WebElement mobilePreviewButton;
-
-  @FindBy(css = ".mobile-preview")
-  private WebElement mobilePreviewModal;
-
-  @FindBy(css = ".mobile-preview iframe")
-  private WebElement mobilePreviewIframe;
-
   private static final String ARTICLE_PREVIEW_PAGE = "/wiki/ArticlePreview";
   private static final String[] EDIT_QUERY_PARAM = {"action=edit"};
-
+  @FindBy(css = "#wpPreviewMobile")
+  private WebElement mobilePreviewButton;
+  @FindBy(css = ".mobile-preview")
+  private WebElement mobilePreviewModal;
+  @FindBy(css = ".mobile-preview iframe")
+  private WebElement mobilePreviewIframe;
   private Navigate navigate;
 
   public ArticlePreviewPage() {

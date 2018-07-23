@@ -7,6 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AssertionAds;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiViUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ import org.testng.Assert;
 import java.util.concurrent.TimeUnit;
 
 public class TestAdsUapHiVi {
+
   private WikiaWebDriver driver;
   private AdsBaseObject page;
   private String slotName;
@@ -29,7 +31,9 @@ public class TestAdsUapHiVi {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
 
-    AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(), impactStateAspectRatio);
+    AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(),
+                                   impactStateAspectRatio
+    );
   }
 
   public void shouldHaveCorrectAspectRatioForResolvedState(double expectedResolvedState) {
@@ -41,10 +45,14 @@ public class TestAdsUapHiVi {
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
 
-    AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(), expectedResolvedState);
+    AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(),
+                                   expectedResolvedState
+    );
   }
 
-  public void shouldHaveResolvedStateAfterScroll(double impactStateAspectRatio, double resolvedStateAspectRatio) throws InterruptedException {
+  public void shouldHaveResolvedStateAfterScroll(
+      double impactStateAspectRatio, double resolvedStateAspectRatio
+  ) throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(By.id(slotName));
@@ -63,7 +71,8 @@ public class TestAdsUapHiVi {
     AssertionAds.assertAspectRatio(slot.getSize(), resolvedStateAspectRatio);
   }
 
-  public void shouldKeepResolvedStateAspectRatioAfterScroll(double resolvedStateAspectRatio) throws InterruptedException {
+  public void shouldKeepResolvedStateAspectRatioAfterScroll(double resolvedStateAspectRatio)
+      throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     page.refreshPage();
@@ -97,7 +106,9 @@ public class TestAdsUapHiVi {
     final double startProgressBarWidth = hiViUap.getProgressBarWidth();
     TimeUnit.SECONDS.sleep(3);
 
-    Assert.assertTrue(startProgressBarWidth < hiViUap.getProgressBarWidth(), "Video time indicator should move.");
+    Assert.assertTrue(startProgressBarWidth < hiViUap.getProgressBarWidth(),
+                      "Video time indicator should move."
+    );
   }
 
   public void shouldMuteVideoForAutoplayedImpactState() throws InterruptedException {
@@ -155,7 +166,10 @@ public class TestAdsUapHiVi {
     TimeUnit.SECONDS.sleep(3);
 
     Assert.assertTrue(hiViUap.getProgressBarWidth() > 0, "Video did not start");
-    Assert.assertEquals(startProgressBarWidth, hiViUap.getProgressBarWidth(), "Video did not togglePause");
+    Assert.assertEquals(startProgressBarWidth,
+                        hiViUap.getProgressBarWidth(),
+                        "Video did not togglePause"
+    );
   }
 
   public void shouldBeResolvedStateAfterVideoEnds(double resolvedStateAspectRatio) {
@@ -167,7 +181,9 @@ public class TestAdsUapHiVi {
     AssertionAds.assertAspectRatio(slot.getSize(), resolvedStateAspectRatio);
   }
 
-  public void shouldDisplayResolvedStateOnNextPageView(double impactStateAspectRatio, double resolvedStateAspectRatio) {
+  public void shouldDisplayResolvedStateOnNextPageView(
+      double impactStateAspectRatio, double resolvedStateAspectRatio
+  ) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
 
     hiViUap.waitForAdLoaded();

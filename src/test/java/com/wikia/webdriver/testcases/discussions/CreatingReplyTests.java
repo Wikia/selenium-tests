@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -14,14 +14,17 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEn
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_3)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_3)
 @Test(groups = {"discussions-creating-replies"})
 public class CreatingReplyTests extends NewTestTemplate {
 
   private static final String REPLY_ADDED_MESSAGE = "Reply should appear below post.";
-  private static final String POST_FOLLOWED_BY_DEFAULT = "Post should be followed by default when reply was created for post.";
+  private static final String
+      POST_FOLLOWED_BY_DEFAULT
+      = "Post should be followed by default when reply was created for post.";
 
   private static final String MOBILE = "discussions-creating-replies-mobile";
   private static final String DESKTOP = "discussions-creating-replies-desktop";
@@ -29,7 +32,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   // Anonymous on mobile
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
@@ -49,7 +52,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   // User on mobile
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER_2, onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER_2, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
@@ -68,20 +71,21 @@ public class CreatingReplyTests extends NewTestTemplate {
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
 
     assertThatUserCanCreateReply(page, replyCreator);
-
   }
 
   // Testing methods
 
   private void userOnDesktopMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
-    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.REGISTER_PAGE);
+    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.REGISTER_PAGE);
   }
 
   private void userOnMobileMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
-    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.JOIN_PAGE);
+    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.JOIN_PAGE);
   }
 
-  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final ReplyCreator replyCreator, final String urlFragment) {
+  private void anonymousUserOnReplyEditorClickIsRedirectedTo(
+      final ReplyCreator replyCreator, final String urlFragment
+  ) {
     Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
     replyCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
@@ -102,5 +106,4 @@ public class CreatingReplyTests extends NewTestTemplate {
     Assertion.assertFalse(pageAfterRefresh.getReplies().isEmpty(), REPLY_ADDED_MESSAGE);
     Assertion.assertTrue(pageAfterRefresh.isPostFollowed(), POST_FOLLOWED_BY_DEFAULT);
   }
-
 }

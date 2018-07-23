@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -11,10 +11,11 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Category")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryPageTest extends NewTestTemplate {
 
@@ -68,9 +69,7 @@ public class CategoryPageTest extends NewTestTemplate {
 
     new ArticleContent().push(String.format("[[%s]]", categoryName));
 
-    CategoryPage categoryPage = new ArticlePage()
-        .open()
-        .openCategoryPageFromCategoriesDropdown();
+    CategoryPage categoryPage = new ArticlePage().open().openCategoryPageFromCategoriesDropdown();
 
     Assertion.assertTrue(categoryPage.hasCategoryMembers());
   }
@@ -82,9 +81,7 @@ public class CategoryPageTest extends NewTestTemplate {
 
     new ArticleContent().push(String.format("%s [[%s]]", articleContent, categoryName));
 
-    ArticlePage article = new CategoryPage()
-        .open(categoryName)
-        .navigateToCategoryMemberPage();
+    ArticlePage article = new CategoryPage().open(categoryName).navigateToCategoryMemberPage();
 
     Assertion.assertEquals(articleContent, article.getArticleContent());
   }

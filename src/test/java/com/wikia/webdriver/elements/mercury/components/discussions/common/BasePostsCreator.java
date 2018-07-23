@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,34 +25,43 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   protected abstract String getBaseCssClassName();
-  protected abstract WebElement getTextPostType();
+
   protected abstract WebElement getPostsCreator();
+
   protected abstract WebElement getEditor();
+
   protected abstract WebElement getSignInDialog();
+
   protected abstract WebElement getGuidelinesMessageCloseButton();
+
   protected abstract WebElement getTitleTextarea();
+
   protected abstract WebElement getDescriptionTextarea();
+
   protected abstract WebElement getAddCategoryButton();
+
   protected abstract WebElement getSubmitButton();
+
   protected abstract WebElement getImagePreview();
+
   protected abstract WebElement getPollPreview();
+
   protected abstract WebElement getUploadButton();
+
   protected abstract WebElement getAddPollButton();
+
   protected abstract WebElement getImageDeleteButton();
+
   protected abstract WebElement getOpenGraphDeleteButton();
+
   protected abstract By getOpenGraphContainer();
+
   protected abstract By getOpenGraphText();
 
   @Override
   public PostsCreator click() {
-    /*
-      This entry point is disabled until the outcome of experiment in IRIS-5829
-    */
-
     wait.forElementClickable(getPostsCreator());
     getPostsCreator().click();
-    wait.forElementClickable(getTextPostType());
-    getTextPostType().click();
 
     return this;
   }
@@ -60,7 +70,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   public boolean isSignInDialogVisible() {
     return getSignInDialog().isDisplayed();
   }
-
 
   @Override
   public boolean isPostButtonActive() {
@@ -168,8 +177,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   public BasePostsCreator startPostCreationWithoutDescription() {
-    click()
-        .closeGuidelinesMessage()
+    click().closeGuidelinesMessage()
         .addTitleWith(TextGenerator.defaultText())
         .clickAddCategoryButton()
         .selectFirstCategory();
@@ -177,8 +185,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   public BasePostsCreator startPostCreationWith(String description) {
-    startPostCreationWithoutDescription()
-        .addDescriptionWith(description);
+    startPostCreationWithoutDescription().addDescriptionWith(description);
     return this;
   }
 

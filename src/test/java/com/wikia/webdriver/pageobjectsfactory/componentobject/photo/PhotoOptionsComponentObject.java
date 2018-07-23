@@ -54,7 +54,6 @@ public class PhotoOptionsComponentObject extends BasePageObject {
         break;
       default:
         Log.log("adjustAlignment", "invalid alignment selected", false);
-
     }
   }
 

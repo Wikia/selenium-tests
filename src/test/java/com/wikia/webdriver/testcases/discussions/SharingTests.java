@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -23,7 +23,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 
@@ -34,7 +34,7 @@ public class SharingTests extends NewTestTemplate {
 
   @BeforeSuite
   private void setUp() {
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_5);
+    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_5);
     existingPost = DiscussionsClient
       .using(User.USER_4, driver)
       .createPostWithUniqueData(siteId);

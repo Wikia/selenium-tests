@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -13,7 +13,7 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_Header")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {
 
@@ -31,7 +31,7 @@ public class HeaderTest extends NewTestTemplate {
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
     Header header =
         new ArticlePage()
-            .open(MercurySubpages.NO_INFOBOX)
+            .open(MobileSubpages.NO_INFOBOX)
             .getHeader();
 
     Assertion.assertTrue(
@@ -52,7 +52,7 @@ public class HeaderTest extends NewTestTemplate {
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage() {
     Header header =
         new ArticlePage()
-            .open(MercurySubpages.INFOBOX_1)
+            .open(MobileSubpages.INFOBOX_1)
             .getHeader();
 
     Assertion.assertTrue(

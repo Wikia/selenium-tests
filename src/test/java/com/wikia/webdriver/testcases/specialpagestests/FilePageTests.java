@@ -17,6 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
+
 import org.testng.annotations.Test;
 
 public class FilePageTests extends NewTestTemplate {
@@ -134,7 +135,7 @@ public class FilePageTests extends NewTestTemplate {
 
     //Removed following lines until SUS-317 is fixed
     //// Go to the history tab and verify there are at least two videos
-   //filePage.selectHistoryTab();
+    //filePage.selectHistoryTab();
     //filePage.verifyVersionCountAtLeast(2);
 
     //// Delete the second version

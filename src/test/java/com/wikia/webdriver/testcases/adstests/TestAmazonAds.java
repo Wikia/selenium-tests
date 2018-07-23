@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -8,6 +7,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "AmazonAds")
@@ -41,7 +41,9 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
 
   private void checkAmazonSlots(String[] slots) {
     networkTrafficInterceptor.startIntercepting();
-    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, AdsDataProvider.PAGE_A9_DISPLAY.getUrl());
+    AdsAmazonObject amazonAds = new AdsAmazonObject(driver,
+                                                    AdsDataProvider.PAGE_A9_DISPLAY.getUrl()
+    );
     amazonAds.runA9DebugMode();
 
     for (String slotName : slots) {
@@ -51,8 +53,12 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
 
   private void testAmazonVideo() {
     networkTrafficInterceptor.startIntercepting();
-    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, AdsDataProvider.PAGE_FV.getUrl(AdsAmazonObject.A9_VIDEO_DEBUG_MODE));
+    AdsAmazonObject amazonAds = new AdsAmazonObject(driver,
+                                                    AdsDataProvider.PAGE_FV.getUrl(AdsAmazonObject.A9_VIDEO_DEBUG_MODE)
+    );
     amazonAds.refreshPage(); // Added to make test more stable
-    amazonAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsAmazonObject.A9_VIDEO_DEBUG_BID_PATTERN);
+    amazonAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                     AdsAmazonObject.A9_VIDEO_DEBUG_BID_PATTERN
+    );
   }
 }

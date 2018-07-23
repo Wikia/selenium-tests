@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-public class MercurySubpages {
+public class MobileSubpages {
 
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "Mercury_automation_testing_Wiki";
@@ -20,13 +20,8 @@ public class MercurySubpages {
   public static final String INFOBOX_4 = "Infobox4";
   public static final String INFOBOX_5 = "Infobox5";
 
-
   /**
-   * Legend:
-   * FC - Featured Content
-   * CC - Curated Content
-   * TA - Trending Articles
-   * TV - Trending Videos
+   * Legend: FC - Featured Content CC - Curated Content TA - Trending Articles TV - Trending Videos
    */
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
@@ -48,7 +43,6 @@ public class MercurySubpages {
   public static final String JOIN_PAGE = "/join";
   public static final String REGISTER_PAGE = "/register";
 
-  private MercurySubpages() {
+  private MobileSubpages() {
   }
-
 }

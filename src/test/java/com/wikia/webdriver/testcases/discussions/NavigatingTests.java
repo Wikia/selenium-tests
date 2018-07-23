@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -8,14 +8,16 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
+
 import org.testng.annotations.Test;
 
-
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
 public class NavigatingTests extends NewTestTemplate {
 
@@ -28,7 +30,6 @@ public class NavigatingTests extends NewTestTemplate {
   public void anonUserOnMobileCanClickOnPostAuthorUsername() {
     clickingOnPostAuthorUsernameLoadsUserPage();
   }
-
 
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -58,12 +59,36 @@ public class NavigatingTests extends NewTestTemplate {
     clickingOnPostAuthorUsernameLoadsUserPage();
   }
 
-
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNavigateToPostDetailsPageByClickingOnPost() {
     clickingPostContentRedirectsToPostDetailsPage();
   }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  public void discussionsNavigationOpenAndCloseNavigationAndItsSubMenu() {
+    GlobalNavigationMobile nav = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
+        .openNavigation();
+    Assertion.assertTrue(nav.isFirstLevelMenuVisible());
+
+    nav.clickCloseButton();
+    Assertion.assertFalse(nav.isFirstLevelMenuVisible());
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  public void discussionsNavigationOnNonEnglishWiki() {
+    GlobalNavigationMobile nav = new GuidelinesPage().open()
+        .getGlobalNavigationMobile()
+        .openNavigation();
+    Assertion.assertTrue(nav.isFirstLevelMenuVisible());
+
+    nav.clickCloseButton();
+    Assertion.assertFalse(nav.isFirstLevelMenuVisible());
+  }
+
   /**
    * TESTING METHODS SECTION
    */
@@ -88,5 +113,4 @@ public class NavigatingTests extends NewTestTemplate {
     postDetailsPage.waitForEmberLoad();
     Assertion.assertTrue(postDetailsPage.isDisplayed());
   }
-
- }
+}

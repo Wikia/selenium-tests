@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,7 @@ public class AdsKruxObject extends AdsBaseObject {
   private WebElement kruxControlTag;
 
   public AdsKruxObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   /**

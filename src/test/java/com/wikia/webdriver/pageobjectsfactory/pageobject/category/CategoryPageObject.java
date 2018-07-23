@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.category;
 
-import java.util.List;
-
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
 public class CategoryPageObject extends WikiBasePageObject {
 
@@ -25,15 +25,19 @@ public class CategoryPageObject extends WikiBasePageObject {
 
   /**
    * Get image URL for a specific article from gallery
-   * 
+   *
    * @param articleName - name of the article
-   * @return
    */
   public String getImageURLFromGallery(String articleName) {
     return categoryGalleryItems.stream()
-        .filter(page -> page.findElement(By.cssSelector("a")).getAttribute("title").equals(articleName))
+        .filter(page -> page.findElement(By.cssSelector("a"))
+            .getAttribute("title")
+            .equals(articleName))
         .findFirst()
         .map(page -> page.findElement(By.cssSelector("img")).getAttribute("src"))
-        .orElseThrow(() -> new NoSuchElementException(String.format("Could not find article with name %s", articleName)));
+        .orElseThrow(() -> new NoSuchElementException(String.format(
+            "Could not find article with name %s",
+            articleName
+        )));
   }
 }

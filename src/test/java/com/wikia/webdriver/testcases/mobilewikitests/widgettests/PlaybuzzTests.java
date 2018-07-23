@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -12,13 +12,13 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_PlaybuzzWidget")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -28,7 +28,7 @@ public class PlaybuzzTests extends NewTestTemplate {
   private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "PlaybuzzMercury/OneWidget";
   private static final String PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME = "PlaybuzzMercury/MultipleWidgets";
   private static final String PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME = "PlaybuzzMercury/IncorrectWidget";
-  private static final String QUERY_1 = MercurySubpages.MAP;
+  private static final String QUERY_1 = MobileSubpages.MAP;
   private static final String QUERY_2 = PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryPlaybuzzWidgetTest_001")
@@ -46,8 +46,8 @@ public class PlaybuzzTests extends NewTestTemplate {
     WidgetPageObject widget =
             new PlaybuzzWidgetPageObject().create(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
 
-    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
-    new TopBar().openSearch().navigateToPage(QUERY_2);
+    new Navigate().toPage(MobileSubpages.MAIN_PAGE);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -60,8 +60,8 @@ public class PlaybuzzTests extends NewTestTemplate {
     new ArticleContent().push("Playbuzz Mercury Widget 003", "Map");
 
     new Navigate().toPage(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
-    new TopBar().openSearch().navigateToPage(QUERY_1);
-    new TopBar().openSearch().navigateToPage(QUERY_2);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_1);
+    new GlobalNavigationMobile().openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

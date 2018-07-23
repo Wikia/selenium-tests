@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -9,10 +9,10 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
+
 import org.testng.annotations.Test;
 
-
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_2)
 @Test(groups = {"discussions-guidelines"})
 public class GuidelinesTests extends NewTestTemplate {
 

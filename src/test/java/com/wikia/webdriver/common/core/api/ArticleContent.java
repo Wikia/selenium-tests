@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -16,8 +17,11 @@ import java.util.ArrayList;
 
 @lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
-  private String baseURL = UrlBuilder.createUrlBuilder().getUrl().replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
-      + "/api.php";
+
+  private String baseURL = UrlBuilder.createUrlBuilder()
+                               .getUrl()
+                               .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
+                           + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
   private String username;
@@ -45,7 +49,7 @@ public class ArticleContent extends ApiCall {
 
   @Override
   protected String getUserName() {
-      return username;
+    return username;
   }
 
   @Override
@@ -62,14 +66,14 @@ public class ArticleContent extends ApiCall {
       editToken = new EditToken(user).getEditToken();
     }
     try {
-      URL_STRING = new URIBuilder(baseURL)
-          .setParameter("text", text)
+      URL_STRING = new URIBuilder(baseURL).setParameter("text", text)
           .setParameter("summary", "SUMMARY_QM")
           .setParameter("title", articleTitle)
           .setParameter("action", "edit")
           .setParameter("format", "json")
           .setParameter("token", editToken)
-          .build().toASCIIString();
+          .build()
+          .toASCIIString();
     } catch (URISyntaxException e) {
       Log.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException("Failed to build edit API URL");

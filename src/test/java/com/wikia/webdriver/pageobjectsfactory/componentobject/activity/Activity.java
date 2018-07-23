@@ -1,16 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import javax.swing.text.html.HTML;
 import java.util.Arrays;
 
+import javax.swing.text.html.HTML;
 
 public class Activity extends BasePageObject {
 
@@ -35,9 +35,12 @@ public class Activity extends BasePageObject {
   private ActivityType getTypeFromEntry() {
     String cssClass = entry.getAttribute(HTML.Attribute.CLASS.toString());
     return Arrays.stream(ActivityType.values())
-      .filter(existingType -> cssClass.contains(existingType.getCssType()))
-      .findAny()
-      .orElseThrow(() -> new RuntimeException(String.format("Activity type cannot be matched for element: %s", cssClass)));
+        .filter(existingType -> cssClass.contains(existingType.getCssType()))
+        .findAny()
+        .orElseThrow(() -> new RuntimeException(String.format(
+            "Activity type cannot be matched for element: %s",
+            cssClass
+        )));
   }
 
   public WebElement getTitleLink() {
@@ -89,5 +92,4 @@ public class Activity extends BasePageObject {
   public boolean containsDescription(String description) {
     return getDescription().getText().contains(description);
   }
-
 }

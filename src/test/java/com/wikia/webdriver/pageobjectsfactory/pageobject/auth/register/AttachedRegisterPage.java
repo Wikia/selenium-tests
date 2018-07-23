@@ -4,13 +4,15 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 
 public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
@@ -42,7 +44,12 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override
   public AttachedRegisterPage open() {
-    driver.get(urlBuilder.getUrl() + URLsContent.USER_SIGNUP);
+    try {
+      driver.get(urlBuilder.getWikiGlobalURL() + URLsContent.USER_SIGNUP + "?redirect=" + URLEncoder
+          .encode(urlBuilder.getUrl(), "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
     return this;
   }
 
@@ -128,6 +135,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
 
     return this;
   }
+
   @Override
   public RegisterPage fillForm(SignUpUser user) {
     return fillForm(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
@@ -145,5 +153,4 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   public boolean isConnectWithFacebookButtonVisible() {
     return authContext.isConnectWithFacebookButtonVisible();
   }
-
 }

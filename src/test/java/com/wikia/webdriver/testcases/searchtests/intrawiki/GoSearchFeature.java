@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 /*
  *  AnonFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for anonymous
- *  UserFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for logged in user 
+ *  UserFromSuggestion: Make sure clicking enter on suggestion takes you to destination page for logged in user
  *  goSearchPreference: Make sure clicking search button after typing article name to the search field takes you to destination page when user has the preference enabled
  */
 @Test(groups = {"IntraWikiSearchGoSearch"})

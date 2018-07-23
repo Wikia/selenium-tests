@@ -5,8 +5,8 @@ import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
 
 public class FandomTestTemplate extends CoreTestTemplate {
 
-  private String mainURL = "http://sandbox-qa.fandom.wikia.com/";
   protected FandomUrlBuilder urlBuilder = new FandomUrlBuilder();
+  private String mainURL = "http://sandbox-qa.fandom.wikia.com/";
 
   @Override
   protected void prepareURLs() {

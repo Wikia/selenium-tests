@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 @Getter
 public class ReplyCreatorMobile extends BaseReplyCreator {
 
-  @FindBy(css = ".mobile-reply-entry-point .discussion-editor-entry-point-content")
+  @FindBy(css = ".floating-entry-point__label")
   private WebElement replyCreatorTextArea;
 
   @FindBy(css = ".discussion-standalone-content-wrapper")
@@ -60,5 +61,4 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();
   }
-
 }

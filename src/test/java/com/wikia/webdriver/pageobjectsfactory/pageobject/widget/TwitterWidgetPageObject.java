@@ -7,13 +7,6 @@ import java.util.List;
 
 public class TwitterWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = ".widget-twitter")
-  private List<WebElement> widgetWrapperList;
-  @FindBy(css = ".widget-twitter iframe")
-  private List<WebElement> widgetIFrameList;
-  @FindBy(css = "div.timeline-Widget")
-  private WebElement widgetBody;
-
   private static final String TAG_NAME = "twitter";
   private static final String[] TAGS = {
       //twitter.com/Wikia
@@ -23,11 +16,17 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
       "<twitter widget-id=\"430155638820200448\" />",
 
       //twitter.com/Nukapedia overridden to SFBART
-      "<twitter widget-id=\"430155638820200448\" screen-name=\"sfbart\" />",
-  };
+      "<twitter widget-id=\"430155638820200448\" screen-name=\"sfbart\" />",};
   private static final String INCORRECT_TAG = "<twitter />";
-  private static final String ERROR_MESSAGE =
-      "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
+  private static final String
+      ERROR_MESSAGE
+      = "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
+  @FindBy(css = ".widget-twitter")
+  private List<WebElement> widgetWrapperList;
+  @FindBy(css = ".widget-twitter iframe")
+  private List<WebElement> widgetIFrameList;
+  @FindBy(css = "div.timeline-Widget")
+  private WebElement widgetBody;
 
   protected String getTagName() {
     return TAG_NAME;

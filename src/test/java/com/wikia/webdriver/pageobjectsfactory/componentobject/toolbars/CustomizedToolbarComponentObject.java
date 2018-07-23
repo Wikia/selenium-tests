@@ -5,11 +5,13 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import java.util.List;
-import java.util.stream.Collectors;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
@@ -49,7 +51,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     Log.log("clickCustomize", "customize button clicked", true);
   }
 
-
   /**
    * Clicks on "ResetDefaults" button.
    */
@@ -69,9 +70,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     findAToolField.clear();
     findAToolField.sendKeys(toolName);
     Log.log("searchTool", toolName + " typed into search field", true);
-
   }
-
 
   /**
    * Types GivenString to Find A Tool field
@@ -90,7 +89,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickSaveNewName() {
     scrollAndClick(saveItemDialogInput);
     Log.log("clickSaveNewName", "save name button clicked", true);
-
   }
 
   /**
@@ -99,36 +97,37 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * @param toolName toolname appearing on the list of found tools
    */
   public void clickSearchSuggestion(String toolName) {
-    scrollAndClick(
-        driver.findElement(
-            By.cssSelector(String.format(searchSuggestionToolCss, toolName))
-        )
-    );
-    Log.log("clickSearchSuggestion",
-                          toolName + " selected from search suggestions", true);
+    scrollAndClick(driver.findElement(By.cssSelector(String.format(searchSuggestionToolCss,
+                                                                   toolName
+    ))));
+    Log.log("clickSearchSuggestion", toolName + " selected from search suggestions", true);
   }
 
   /**
    * Click on a toolbar tool.
    *
-   * @param toolName data-name of the toolbar tool.
-   *            You should check the data-name of the tool you want to click.
+   * @param toolName data-name of the toolbar tool. You should check the data-name of the tool you
+   *                 want to click.
    */
   public void clickOnTool(String toolName) {
-    jsActions.click(
-        wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss, toolName)))
-    );
+    jsActions.click(wait.forElementVisible(By.cssSelector(String.format(toolbarToolCss,
+                                                                        toolName
+    ))));
     Log.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
 //********************************************************************************************************
+
   /**
-   * Verify if any of banner notifications has expected message stating user is following an article
-   *
+   * Verify if any of banner notifications has expected message stating user is following an
+   * article
    */
   public void verifyFollowMessage() {
-    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage())
-                    .collect(Collectors.toList()),
-            "The page \"" + getArticleName().replace("_"," ") + "\" has been added to your watchlist.");
+    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream()
+                                     .map(n -> n.getMessage())
+                                     .collect(Collectors.toList()),
+                                 "The page \"" + getArticleName().replace("_", " ")
+                                 + "\" has been added to your watchlist."
+    );
     Log.log("verifyFollowMessage", "follow message verified", true);
   }
 
@@ -137,8 +136,9 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Before that, "follow" button does not have 'title' attribute which is necessary in the method
    */
   public void verifyFollowedToolbar() {
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
-            "title", "Unfollow");
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss,
+                                                                  PageContent.FOLLOW
+    ), "title", "Unfollow");
     Log.log("verifyFollowedToolbar", "follow button verified", true);
   }
 
@@ -148,12 +148,16 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * method
    */
   public void verifyUnfollowed() {
-    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage())
-                    .collect(Collectors.toList()),
-            "The page \"" + getArticleName().replace("_"," ") + "\" has been removed from your watchlist.");
+    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream()
+                                     .map(n -> n.getMessage())
+                                     .collect(Collectors.toList()),
+                                 "The page \"" + getArticleName().replace("_", " ")
+                                 + "\" has been removed from your watchlist."
+    );
 
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
-            "title", "Follow");
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss,
+                                                                  PageContent.FOLLOW
+    ), "title", "Follow");
     Log.log("verifyUnfollowed", "unfollow button verified", true);
   }
 
@@ -216,19 +220,15 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
         clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
         wait.forTextInElement(toolsList, "Follow");
-        Log.log("unfollowIfFollowed",
-            "page was followed, unfollow button clicked", true);
+        Log.log("unfollowIfFollowed", "page was followed, unfollow button clicked", true);
         break;
       }
     }
-    Log.log("unfollowIfFollowed",
-                          "page was unfollowed", true);
+    Log.log("unfollowIfFollowed", "page was unfollowed", true);
   }
 
   public void verifyToolRemoved(String toolName) {
-    wait.forElementNotPresent(
-        By.xpath(String.format(addedToolsPath, toolName))
-    );
+    wait.forElementNotPresent(By.xpath(String.format(addedToolsPath, toolName)));
     Log.log("verifyToolRemoved", toolName + " removed from toolbar", true);
   }
 
@@ -241,7 +241,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   public void openMoreMenu() {
-   jsActions.execute("$('.overflow-menu').mouseover();");
+    jsActions.execute("$('.overflow-menu').mouseover();");
     wait.forElementVisible(By.cssSelector(".overflow-menu > .tools-menu"));
     Log.log("openMoreMenu", "more menu opened", true);
   }

@@ -12,18 +12,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * The Infobox modal allows to insert an existing infobox (based on template classification)
- * or create a new one using the Infobox Builder.
+ * The Infobox modal allows to insert an existing infobox (based on template classification) or
+ * create a new one using the Infobox Builder.
  */
 public class InfoboxChoiceModal {
-  @FindBy(css = ".infobox-templates-list a")
-  private List<WebElement> availableInfoboxList;
-
-  @FindBy(css= ".infobox-dialog-button")
-  private WebElement createNewInfoboxButton;
 
   private final WebDriver webDriver;
   private final Actions actions;
+  @FindBy(css = ".infobox-templates-list a")
+  private List<WebElement> availableInfoboxList;
+  @FindBy(css = ".infobox-dialog-button")
+  private WebElement createNewInfoboxButton;
 
   InfoboxChoiceModal(WebDriver webDriver) {
     PageFactory.initElements(webDriver, this);
@@ -32,8 +31,8 @@ public class InfoboxChoiceModal {
   }
 
   /**
-   * Select an infobox based on its name from the list of available infoboxes.
-   * A modal window will be launched to manipulate the transclusion parameters.
+   * Select an infobox based on its name from the list of available infoboxes. A modal window will
+   * be launched to manipulate the transclusion parameters.
    *
    * @param name name of the infobox to search for
    * @return wrapper for modal that allows editing template parameters
@@ -51,6 +50,7 @@ public class InfoboxChoiceModal {
 
   /**
    * Create a new infobox using the infobox builder flow.
+   *
    * @return wrapper object for infobox builder modal
    */
   public InfoboxBuilderPage clickCreateNewInfoboxButton() {

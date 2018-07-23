@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
@@ -94,8 +94,7 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_005", "Search", "Search2"})
-  @RelatedIssue(issueID = "MAIN-7142",
-      comment = "Product code defect. No need to test manually")
+  @RelatedIssue(issueID = "MAIN-7142", comment = "Product code defect. No need to test manually")
   public void filtering() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -111,8 +110,7 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_006", "Search", "Search3"})
-  @RelatedIssue(issueID = "MAIN-7142",
-      comment = "Product code defect. No need to test manually")
+  @RelatedIssue(issueID = "MAIN-7142", comment = "Product code defect. No need to test manually")
   public void sortingVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -132,8 +130,7 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_007", "Search", "Search4"})
-  @RelatedIssue(issueID = "MAIN-7142",
-      comment = "Product code defect. No need to test manually")
+  @RelatedIssue(issueID = "MAIN-7142", comment = "Product code defect. No need to test manually")
   public void sortingImages() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -158,8 +155,7 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_010", "Search", "Search2"})
-  @RelatedIssue(issueID = "MAIN-7142",
-      comment = "Product code defect. No need to test manually")
+  @RelatedIssue(issueID = "MAIN-7142", comment = "Product code defect. No need to test manually")
   public void selectImagesOrVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -172,8 +168,7 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_011", "Search", "Search3"})
-  @RelatedIssue(issueID = "MAIN-7142",
-      comment = "Product code defect. No need to test manually")
+  @RelatedIssue(issueID = "MAIN-7142", comment = "Product code defect. No need to test manually")
   public void defaultNamespaces() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -191,16 +186,15 @@ public class BasicActions extends IntraWiki {
     search.verifyFirstResultExtension(SearchContent.SEARCH_RESULT_WITH_EXTENSION);
   }
 
-  @Test(dataProviderClass = IntraWikiSearchProvider.class, dataProvider = "getNamespaces",
-      groups = {"IntraWikiSearch_013", "Search", "Search1"})
-  @RelatedIssue(issueID = "MAIN-7142",
-      comment = "Product code defect. No need to test manually")
+  @Test(dataProviderClass = IntraWikiSearchProvider.class, dataProvider = "getNamespaces", groups = {
+      "IntraWikiSearch_013", "Search", "Search1"})
+  @RelatedIssue(issueID = "MAIN-7142", comment = "Product code defect. No need to test manually")
   public void namespaces(String searchPhrase, String namespace) {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
     search.searchFor(searchPhrase);
     search.selectAllAdvancedOptions();
-    SearchPageObject searchPage = new SearchPageObject(driver);
+    SearchPageObject searchPage = new SearchPageObject();
     searchPage.clickSearchButton();
     searchPage.setSearchTab(SearchPageObject.SearchTab.EVERYTHING);
     search.verifyNamespace(namespace);

@@ -4,16 +4,20 @@ import static com.google.common.collect.ImmutableSet.of;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import java.util.List;
-import java.util.Set;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+import java.util.Set;
+
 /**
- * A wiki page that contains <a href="http://community.wikia.com/wiki/Help%3ADynamicPageList">DPL</a> queries
- * Each query is wrapped in an element with an unique ID so that their result set can be tested separately
+ * A wiki page that contains <a href="http://community.wikia.com/wiki/Help%3ADynamicPageList">DPL</a>
+ * queries Each query is wrapped in an element with an unique ID so that their result set can be
+ * tested separately
  */
 public class DplQueryTestPageObject extends WikiBasePageObject {
+
   private static final String DPL_QUERY_TEST_PAGE = "DplQueryTest";
 
   private static final String DPL_TEST_PAGE_ONE = "DplTestPageOne";
@@ -28,8 +32,7 @@ public class DplQueryTestPageObject extends WikiBasePageObject {
 
   public void openDplQueryTestPage(String wikiURL) {
     getUrl(wikiURL + "/wiki/" + DPL_QUERY_TEST_PAGE);
-    Log.log("openDplQueryTestPage",
-        "DPL query test page was opened", true);
+    Log.log("openDplQueryTestPage", "DPL query test page was opened", true);
   }
 
   public boolean dplCategoryQueryContainsExpectedPageSet() {
@@ -42,7 +45,9 @@ public class DplQueryTestPageObject extends WikiBasePageObject {
     return dplQueryHasExpectedPages(resultSet, dplCreatedByQuery);
   }
 
-  private boolean dplQueryHasExpectedPages(Set<String> expectedPageSet, List<WebElement> resultSet) {
+  private boolean dplQueryHasExpectedPages(
+      Set<String> expectedPageSet, List<WebElement> resultSet
+  ) {
     return resultSet.stream().map(WebElement::getText).allMatch(expectedPageSet::contains);
   }
 }

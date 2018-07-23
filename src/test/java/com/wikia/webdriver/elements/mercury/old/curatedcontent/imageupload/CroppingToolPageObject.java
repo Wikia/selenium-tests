@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class CroppingToolPageObject extends CuratedEditorFormPageObject {
 
-  @FindBy (css=".cropper-container")
+  @FindBy(css = ".cropper-container")
   private WebElement cropperContainer;
 
   public CroppingToolPageObject(WebDriver driver) {

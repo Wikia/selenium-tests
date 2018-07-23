@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -20,7 +20,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Uploa
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_ImageUpload")
 @Execute(
-    onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
+    onWikia = MobileWikis.MERCURY_EMPTY_CC_EDITOR,
     asUser = User.STAFF
 )
 @InBrowser(
@@ -54,7 +54,7 @@ public class ImageUploadTests extends NewTestTemplate {
   public void MercuryImageUploadTest_001_saveNewPhoto() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
     curatedMainPage.isCuratedElementVisible(CURATED_CONTENT_SELECTOR);
 
     navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);

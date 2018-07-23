@@ -1,19 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.Log;
-import lombok.Getter;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
+import java.util.List;
 
 public class UserProfilePage extends WikiBasePageObject {
 
@@ -37,14 +36,10 @@ public class UserProfilePage extends WikiBasePageObject {
   @Getter
   private WebElement userNameTextBox;
 
-
   private By avatarImage = By.cssSelector("img.avatar");
 
   /**
    * Open User Profile Page
-   *
-   * @param userName
-   * @return
    */
   public UserProfilePage open(String userName) {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.USER_PROFILE.replace("%userName%", userName)));
@@ -74,8 +69,7 @@ public class UserProfilePage extends WikiBasePageObject {
         Log.log("openFirstPost", "valid post found on " + i + " position", true);
         break;
       }
-      Log.log("openFirstPost",
-          "deleted post found on " + i + " position, trying next one", true);
+      Log.log("openFirstPost", "deleted post found on " + i + " position, trying next one", true);
       driver.navigate().back();
     }
     return new BlogPage();
@@ -85,8 +79,7 @@ public class UserProfilePage extends WikiBasePageObject {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
-    Log.log("clickOnCreateBlogPost", "Click on create blog post button", true,
-        driver);
+    Log.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);
     return new SpecialCreatePage();
   }
 

@@ -1,33 +1,31 @@
 package com.wikia.webdriver.testcases.auth;
 
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.*;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import org.testng.annotations.Test;
+
+import java.time.Instant;
+import java.time.LocalDate;
+
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.helpers.SignUpUser;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.helpers.UserWithEmail;
-import com.wikia.webdriver.common.core.helpers.UserWithEmailFactory;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
-import java.time.Instant;
-import java.time.LocalDate;
-import org.testng.annotations.Test;
-
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 
   private static final String USERNAME_TAKEN_MSG = "Username is taken";
@@ -117,7 +115,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
     signUpOnDesktopFromDiscussionPageAs(createNewUser(userWithEmail));
@@ -126,7 +124,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
+  @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
@@ -137,7 +135,7 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityDesktop() {
-    performPasswordToggleTest(openSignUpModalOnDesktop());
+    performPasswordToggleTest(openSignUpModalFromGlobalavOnDesktop());
   }
 
   @Test(groups = MOBILE)
@@ -211,30 +209,28 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private ArticlePage openArticleOnMobile() {
-    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePage().open(MobileSubpages.MAIN_PAGE);
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
+    return new ArticlePageObject().open(MobileSubpages.MAIN_PAGE);
   }
 
   private RegisterPage navigateToSignUpOnMobile() {
-    return navigateToSignUpOnMobile(openArticleOnMobile().getTopBar());
+    return navigateToSignUpOnMobile(openArticleOnMobile().getGlobalNavigationMobile());
   }
 
-  private RegisterPage navigateToSignUpOnMobile(TopBar topBar) {
-    return topBar
-      .openNavigation()
-      .clickOnSignInRegisterButton()
-      .navigateToSignUp();
+  private RegisterPage navigateToSignUpOnMobile(GlobalNavigationMobile globalNavigationMobile) {
+    return globalNavigationMobile.clickOnAnonAvatar().navigateToRegister();
   }
 
-  private RegisterPage openSignUpModalOnDesktop() {
-    return new DetachedRegisterPage(new NavigationBar().clickOnRegister());
+  private RegisterPage openSignUpModalFromGlobalavOnDesktop() {
+    new GlobalNavigation().clickOnRegister();
+    return new AttachedRegisterPage();
   }
 
   private void signUpOnDesktopAs(SignUpUser user) {
-    openSignUpModalOnDesktop().signUp(user);
+    openSignUpModalFromGlobalavOnDesktop().signUp(user);
   }
 
   private void signUpOnDesktopFromDiscussionPageAs(SignUpUser user) {
@@ -242,11 +238,11 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private void signUpOnMobileAs(ArticlePage article, SignUpUser user) {
-    navigateToSignUpOnMobile(article.getTopBar()).signUp(user);
+    navigateToSignUpOnMobile(article.getGlobalNavigationMobile()).signUp(user);
   }
 
   private void signUpOnDiscussionMobilePageAs(PostsListPage page, SignUpUser user) {
-    navigateToSignUpOnMobile(page.getTopBar()).signUp(user);
+    navigateToSignUpOnMobile(page.getGlobalNavigationMobile()).signUp(user);
   }
 
   private void performSignUpOnMobileAs(SignUpUser user) {
@@ -263,7 +259,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private RegisterPage performSignUpExpectingFailureOnDesktopAs(SignUpUser user) {
-    RegisterPage form = openSignUpModalOnDesktop().fillForm(user);
+    RegisterPage form = openSignUpModalFromGlobalavOnDesktop().fillForm(user);
     form.submit();
     return form;
   }

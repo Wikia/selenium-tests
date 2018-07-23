@@ -11,25 +11,19 @@ import java.util.List;
 
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
-  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
-  private WebElement returnToSaveFormButton;
-
-  @FindBy(css = ".ve-ui-mwSaveDialog-viewer")
-  private WebElement wikiaArticleReviewDialog;
-
-  @FindBy(css = ".ve-ui-mwSaveDialog-viewer pre")
-  private WebElement wikiaAritlceFirstPreview;
-
-  @FindBy(css = ".diff-addedline")
-  private List<WebElement> addedLines;
-
-  @FindBy(css = ".diff-deletedline")
-  private List<WebElement> deletedLines;
-
   private static final String DIFF_LINE_STRING = ".diffchange-inline";
-
   private static final int DELETE = 0;
   private static final int INSERT = 1;
+  @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
+  private WebElement returnToSaveFormButton;
+  @FindBy(css = ".ve-ui-mwSaveDialog-viewer")
+  private WebElement wikiaArticleReviewDialog;
+  @FindBy(css = ".ve-ui-mwSaveDialog-viewer pre")
+  private WebElement wikiaAritlceFirstPreview;
+  @FindBy(css = ".diff-addedline")
+  private List<WebElement> addedLines;
+  @FindBy(css = ".diff-deletedline")
+  private List<WebElement> deletedLines;
 
   public VisualEditorReviewChangesDialog(WebDriver driver) {
     super(driver);

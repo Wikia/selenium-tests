@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +41,7 @@ public class VetAddImageComponentObject extends WikiBasePageObject {
     Log.log(PAGE_NAME, "Upload button clicked", true, driver);
   }
 
-  public void uploadImage(String imagePath){
+  public void uploadImage(String imagePath) {
     typeInPath(imagePath);
     clickUploadButton();
     wait.forElementNotVisible(uploadButton);

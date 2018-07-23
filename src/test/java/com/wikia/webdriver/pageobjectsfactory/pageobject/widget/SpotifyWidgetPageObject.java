@@ -8,19 +8,17 @@ import java.util.List;
 
 public class SpotifyWidgetPageObject extends WidgetPageObject {
 
+  private static final String TAG_NAME = "spotify";
+  private static final String[] TAGS = {"<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
+                                        "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",};
+  private static final String INCORRECT_TAG = "<spotify />";
+  private static final String
+      ERROR_MESSAGE
+      = "Failed to render the Spotify widget. Please check if all required parameters are in place.";
   @FindBy(css = "iframe[data-wikia-widget='spotify']")
   private List<WebElement> widgetIFrameList;
   @FindBy(css = "#main")
   private WebElement widgetBody;
-
-  private static final String TAG_NAME = "spotify";
-  private static final String[] TAGS = {
-      "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
-      "<spotify uri=\"spotify:track:5JunxkcjfCYcY7xJ29tLai\" />",
-  };
-  private static final String INCORRECT_TAG = "<spotify />";
-  private static final String ERROR_MESSAGE =
-      "Failed to render the Spotify widget. Please check if all required parameters are in place.";
 
   protected String getTagName() {
     return TAG_NAME;
@@ -44,8 +42,7 @@ public class SpotifyWidgetPageObject extends WidgetPageObject {
 
   protected List<WebElement> getWidgetWrapperList() {
     throw new NotImplementedException(
-        "Spotify widgets are loaded directly as inline frames and have no wrapper."
-    );
+        "Spotify widgets are loaded directly as inline frames and have no wrapper.");
   }
 
   protected List<WebElement> getWidgetIFrameList() {

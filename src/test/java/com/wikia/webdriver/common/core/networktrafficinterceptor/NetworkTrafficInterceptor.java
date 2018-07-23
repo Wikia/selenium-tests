@@ -1,18 +1,18 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import java.net.InetSocketAddress;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.wikia.webdriver.common.logging.Log;
+
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
-
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriverException;
+
+import java.net.InetSocketAddress;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
@@ -56,8 +56,11 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
-        Log.log("RESPONSE STATUS: " + entry.getResponse().getStatus(),
-            entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+        Log.log(
+            "RESPONSE STATUS: " + entry.getResponse().getStatus(),
+            entry.getRequest().getUrl(),
+            entry.getResponse().getStatus() < 400
+        );
       }
     }
   }
@@ -72,8 +75,10 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
     Pattern pt = Pattern.compile("(correlator=)\\d*");
 
     for (HarEntry entry : har.getLog().getEntries()) {
-      if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net")
-          && entry.getRequest().getQueryString().toString().contains(skinCorrelator)) {
+      if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net") && entry.getRequest()
+          .getQueryString()
+          .toString()
+          .contains(skinCorrelator)) {
         Matcher matcher = pt.matcher(entry.getRequest().getQueryString().toString());
         if (matcher.find()) {
           String correlatorID = matcher.group(0);
@@ -82,8 +87,11 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
             expectedCorrelator = correlatorID;
           }
 
-          Log.log("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
-              correlatorID.equals(expectedCorrelator));
+          Log.log(
+              "CORRELATOR CHECK",
+              "CORRELATOR ID: " + correlatorID,
+              correlatorID.equals(expectedCorrelator)
+          );
         } else {
           throw new WebDriverException("Missing correlator param in query string");
         }

@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.onsitenotifications;
 
 import com.google.common.collect.Lists;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -37,8 +37,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private static final String DISCUSSION = "discussion";
 
   private String siteId;
-  private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_6;
-  private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_7;
+  private static final String WIKI_DESKTOP = MobileWikis.DISCUSSIONS_6;
+  private static final String WIKI_MOBILE = MobileWikis.DISCUSSIONS_7;
   private List<User> replyUsers = Lists.newArrayList(
     User.USER_2,
     User.USER_3,
@@ -105,6 +105,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   public void userOnDesktopMarksAllNotificationsAsRead() {
     Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
     notificationsList.markAllAsRead();
+
+    Assertion.assertFalse(notificationsList.isMarkAllAsReadButtonVisible());
     Assertion.assertFalse(notificationsList.isAnyNotificationUnread(),
       String.format(ALL_READ, DISCUSSION));
     Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread(),
@@ -205,7 +207,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notifications getNotificationsOnArticlePageDesktop() {
     return getNotificationsDesktop(
-      new ArticlePageObject().open(MercurySubpages.MAIN_PAGE));
+      new ArticlePageObject().open(MobileSubpages.MAIN_PAGE));
   }
 
   private Notifications getNotificationsDesktop(WikiBasePageObject page) {
@@ -224,11 +226,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   private Notifications getNotificationsMobile(WikiBasePageObject page) {
-    return page
-      .getTopBar()
-      .openNavigation()
-      .openUserProfile()
-      .getNotifications();
+    return page.getGlobalNavigationMobile().clickOnLoggedInUserAvatar().getNotifications();
   }
 
   private String getMessageFor(Notification notification, String page) {

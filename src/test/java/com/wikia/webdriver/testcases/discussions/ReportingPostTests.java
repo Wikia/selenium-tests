@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -18,7 +18,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRe
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_1)
 public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST =

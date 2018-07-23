@@ -1,10 +1,10 @@
 package com.wikia.webdriver.elements.fandom.components;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.helpers.FandomUser;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class WPLoginBox extends BasePageObject {
 

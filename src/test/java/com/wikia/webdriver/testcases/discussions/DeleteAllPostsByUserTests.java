@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -24,7 +24,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 /**
  * Tests for deleting all posts by some user
  */
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_4)
 public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   private static final User userWithPosts = User.USER_12;
@@ -48,7 +48,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   }
 
   private PostEntity.Data setUp() {
-    return setUp(MercuryWikis.DISCUSSIONS_4);
+    return setUp(MobileWikis.DISCUSSIONS_4);
   }
 
   /**
@@ -186,19 +186,19 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   // MODERATOR
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_MESSAGING)
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_MESSAGING)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopDeleteAllOptionNotVisibleOnDifferentWiki() {
-    PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_MESSAGING);
+    PostEntity.Data post = setUp(MobileWikis.DISCUSSIONS_MESSAGING);
     assertTrue(deleteAllOptionNotVisibleDesktop(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_MESSAGING)
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_MESSAGING)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void modUserMobileDeleteAllOptionNotVisibleOnDifferentWiki() {
-    PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_MESSAGING);
+    PostEntity.Data post = setUp(MobileWikis.DISCUSSIONS_MESSAGING);
     assertTrue(deleteAllOptionNotVisibleMobile(userWithPosts.getUserId()));
     cleanUp(post);
   }

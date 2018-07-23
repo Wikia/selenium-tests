@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class ImageComparison {
 
     for (int x = 0; x < image.getWidth(); x++) {
       for (int y = 0; y < image.getHeight(); y++) {
-        int pixelColor = image.getRGB(x,y);
+        int pixelColor = image.getRGB(x, y);
         if (colorFreq.get(pixelColor) == null) {
           colorFreq.put(pixelColor, 0);
         }
@@ -53,7 +53,8 @@ public class ImageComparison {
 
     HashMap.Entry<Integer, Integer> mostFrequentEntry = null;
     for (HashMap.Entry<Integer, Integer> entry : colorFreq.entrySet()) {
-      if (mostFrequentEntry == null || entry.getValue().compareTo(mostFrequentEntry.getValue()) > 0) {
+      if (mostFrequentEntry == null
+          || entry.getValue().compareTo(mostFrequentEntry.getValue()) > 0) {
         mostFrequentEntry = entry;
       }
     }
@@ -73,7 +74,7 @@ public class ImageComparison {
     int diffCount = 0;
     for (int x = 0; x < image.getWidth(); x++) {
       for (int y = 0; y < image.getHeight(); y++) {
-        Color pixelColor = new Color(image.getRGB(x,y));
+        Color pixelColor = new Color(image.getRGB(x, y));
         if (!areColorsSimilar(pixelColor, color)) {
           diffCount += 1;
         }
@@ -143,9 +144,8 @@ public class ImageComparison {
   }
 
   public boolean areColorsSimilar(Color c1, Color c2, int acceptableColorDistance) {
-    double distance = Math.pow(c1.getRed() - c2.getRed(), 2) +
-                      Math.pow(c1.getGreen() - c2.getGreen(), 2) +
-                      Math.pow(c1.getBlue() - c2.getBlue(), 2);
+    double distance = Math.pow(c1.getRed() - c2.getRed(), 2) + Math.pow(
+        c1.getGreen() - c2.getGreen(), 2) + Math.pow(c1.getBlue() - c2.getBlue(), 2);
     return Math.sqrt(distance) < acceptableColorDistance;
   }
 }

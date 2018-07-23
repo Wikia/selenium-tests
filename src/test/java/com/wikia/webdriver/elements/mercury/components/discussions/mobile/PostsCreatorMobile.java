@@ -1,21 +1,17 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
 public class PostsCreatorMobile extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".new-post .plus")
+  @FindBy(css = ".floating-entry-point__label")
   private WebElement postsCreator;
-
-  @Getter
-  @FindBy(css = ".post-entry-point__items > li:nth-child(1)")
-  private WebElement textPostType;
 
   @Getter
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
@@ -28,7 +24,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement signInButtonInSignInDialog;
 
   @Getter
-  @FindBy (className = "discussion-standalone-editor")
+  @FindBy(className = "discussion-standalone-editor")
   private WebElement editor;
 
   @Getter
@@ -44,7 +40,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor .editor-form__title .editor-textarea")
+  @FindBy(css = ".discussion-standalone-editor .editor-form__title .editor-textarea")
   private WebElement titleTextarea;
 
   @Getter

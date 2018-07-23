@@ -2,58 +2,48 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
+
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
+
   private static final Duration AD_LENGTH = Duration.ofSeconds(30);
 
-  @Test(
-      groups = {"AdsFeaturedVideoSoundOasis"}
-  )
+  @Test(groups = {"AdsFeaturedVideoSoundOasis"})
   public void adsFeaturedVideoWithSoundOasis() {
     verifyFeaturedVideoWithSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
   }
 
-  @Test(
-      groups = {"AdsFeaturedVideoSoundOasis"}
-  )
+  @Test(groups = {"AdsFeaturedVideoSoundOasis"})
   public void adsFeaturedVideoWithoutSoundOasis() {
     verifyFeaturedVideoWithoutSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH
-  )
-  @Test(
-      groups = {"AdsFeaturedVideoSoundMercury"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH)
+  @UnsafePageLoad
+  @Test(groups = {"AdsFeaturedVideoSoundMercury"})
   public void adsFeaturedVideoWithSoundMercury() {
     verifyFeaturedVideoWithSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = {"AdsFeaturedVideoSoundMercury"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = {"AdsFeaturedVideoSoundMercury"})
   public void adsFeaturedVideoWithoutSoundMercury() {
     verifyFeaturedVideoWithoutSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
   }
 
   private void verifyFeaturedVideoWithSound(String pageUrl) {
-    AdsBaseObject pageObject = new AdsBaseObject(driver, pageUrl);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsBaseObject pageObject = new AdsBaseObject(pageUrl);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.waitForAdPlaying();
     pageObject.scrollTo(driver.findElement(AdsJWPlayerObject.PLAYER_SELECTOR));
@@ -63,8 +53,8 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
   }
 
   private void verifyFeaturedVideoWithoutSound(String pageUrl) {
-    new AdsBaseObject(driver, pageUrl);
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    new AdsBaseObject(pageUrl);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.waitForAdPlaying();
     jwPlayerObject.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));

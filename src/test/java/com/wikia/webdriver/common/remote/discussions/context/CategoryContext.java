@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote.discussions.context;
 
 import com.wikia.webdriver.common.remote.context.RemoteContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,7 +22,9 @@ public class CategoryContext extends RemoteContext {
     this.categoryName = categoryName;
   }
 
-  public static CategoryContext defaultContextUsing(final String siteId, final CategoryPill.Data data) {
+  public static CategoryContext defaultContextUsing(
+      final String siteId, final CategoryPill.Data data
+  ) {
     Objects.requireNonNull(data.getId());
 
     return CategoryContext.builder()

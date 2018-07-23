@@ -1,13 +1,12 @@
 package com.wikia.webdriver.elements.fandom.components;
 
-
-import java.util.List;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 public class WPNotifications extends BasePageObject {
 

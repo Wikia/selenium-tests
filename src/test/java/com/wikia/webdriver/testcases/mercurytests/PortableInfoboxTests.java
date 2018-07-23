@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -13,7 +13,7 @@ import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_Infobox")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -33,7 +33,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")
   public void mercury_infobox_verifyElementsBeforeAndAfterExpanding() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     // Before infobox expanding
     infobox
@@ -61,7 +61,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_expandAndCollapseByButtonClickAndTap")
   public void mercury_infobox_expandAndCollapseByButtonClickAndTap() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     // expand by clicking button
     infobox
@@ -80,7 +80,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_externalLinkRedirectsToCorrespondingUrl")
   public void mercury_infobox_externalLinkRedirectsToCorrespondingUrl() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     String externalLinkName = infobox
         .clickExpandButton()
@@ -97,7 +97,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox")
   public void mercury_infobox_imagesAndVideosOpenInLightbox() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     // Check image
     infobox
@@ -115,7 +115,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages")
   public void mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_3);
+    navigate.toPage(MobileSubpages.INFOBOX_3);
 
     infobox
         .clickGalleryImage(0)
@@ -130,7 +130,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks")
   public void mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_5);
+    navigate.toPage(MobileSubpages.INFOBOX_5);
 
     infobox
         .isImageInCollectionVisible()
@@ -143,7 +143,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_headerIsNotVisibleInArticleTOC", enabled = false)
   public void mercury_infobox_headerIsNotVisibleInArticleTOC() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_2);
+    navigate.toPage(MobileSubpages.INFOBOX_2);
 
     toc.clickOnTOC();
     toc.TOCItemNotContainsText(0, infobox.getHeaderName(0));

@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
@@ -18,7 +18,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPag
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedNavigation")
-@Execute(onWikia = MercuryWikis.MERCURY_CC)
+@Execute(onWikia = MobileWikis.MERCURY_CC)
 @InBrowser(
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
@@ -39,7 +39,7 @@ public class NavigationTests extends NewTestTemplate {
   public void mercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(1);
     curatedContent.waitForPageReload();
@@ -51,7 +51,7 @@ public class NavigationTests extends NewTestTemplate {
   public void mercuryCuratedNavigationTest_002_navigateThroughSection() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
 
@@ -62,7 +62,7 @@ public class NavigationTests extends NewTestTemplate {
         .isCuratedContentItemVisibleByIndex(1);
 
     UrlChecker.isPathContainedInCurrentUrl(
-        driver, MercurySubpages.CC_MAIN_PAGE);
+        driver, MobileSubpages.CC_MAIN_PAGE);
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")

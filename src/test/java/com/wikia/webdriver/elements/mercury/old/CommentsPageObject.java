@@ -2,15 +2,9 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -18,6 +12,7 @@ import java.util.List;
 
 public class CommentsPageObject extends WikiBasePageObject {
 
+  By firstCommentBy = By.cssSelector("ul.comments > li.article-comment:first-child");
   @FindBy(css = ".article-comments > div")
   private WebElement commentsHeader;
   @FindBy(css = ".avatar")
@@ -44,9 +39,6 @@ public class CommentsPageObject extends WikiBasePageObject {
   private WebElement previousCommentPageButton;
   @FindBy(css = "li.article-comment")
   private List<WebElement> allComments;
-
-  By firstCommentBy = By.cssSelector("ul.comments > li.article-comment:first-child");
-
   private Wait wait;
   private WebDriver driver;
   private JavascriptActions jsActions;
@@ -85,15 +77,16 @@ public class CommentsPageObject extends WikiBasePageObject {
   }
 
   public void clickOnUsername(int index) {
-    commentsUsernames.stream().forEach(e->wait.forElementClickable(e));
+    commentsUsernames.stream().forEach(e -> wait.forElementClickable(e));
     scrollAndClick(commentsUsernames.get(index));
   }
 
   public int getNumberOfRepliesFromHeader(int index) {
     int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
-    return Integer
-        .parseInt(showRepliesButtons.get(index).getText().substring(stringStart, stringEnd));
+    return Integer.parseInt(showRepliesButtons.get(index)
+                                .getText()
+                                .substring(stringStart, stringEnd));
   }
 
   public int getNumberOfRepliesFromList(int index) {
@@ -106,8 +99,10 @@ public class CommentsPageObject extends WikiBasePageObject {
   }
 
   public String getUsernameFromUrl() {
-    return driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/User:") + 11,
-            driver.getCurrentUrl().indexOf("?"));
+    return driver.getCurrentUrl()
+        .substring(driver.getCurrentUrl().indexOf("/wiki/User:") + 11,
+                   driver.getCurrentUrl().indexOf("?")
+        );
   }
 
   public int getNumberOfAllCommentsOnPage() {
@@ -119,9 +114,8 @@ public class CommentsPageObject extends WikiBasePageObject {
   }
 
   public int getNumberOfCommentsFromHeader() {
-    return Integer.parseInt(commentsHeader.getText().substring(0,
-                                                               commentsHeader.getText()
-                                                                   .indexOf(" ")));
+    return Integer.parseInt(commentsHeader.getText()
+                                .substring(0, commentsHeader.getText().indexOf(" ")));
   }
 
   public int getNumberOfRepliesOnThatPage() {

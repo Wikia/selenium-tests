@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.widgettests;
 
-import java.util.ArrayList;
-
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -13,16 +8,12 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.*;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 @InBrowser(browser = Browser.CHROME)
 public class AllTagsTests extends NewTestTemplate {

@@ -3,8 +3,10 @@ package com.wikia.webdriver.testcases.infoboxbuilder;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class Sidebar extends WikiBasePageObject {
@@ -115,9 +117,9 @@ public class Sidebar extends WikiBasePageObject {
     String chevronContent = getPseudoElementValue(infoboxHeader, ":after", "content");
 
     if (sidebarCheckbox.isSelected()) {
-      Assertion.assertNotEquals(chevronContent,"none");
+      Assertion.assertNotEquals(chevronContent, "none");
     } else {
-      Assertion.assertEquals(chevronContent,"none");
+      Assertion.assertEquals(chevronContent, "none");
     }
 
     return this;
@@ -145,5 +147,4 @@ public class Sidebar extends WikiBasePageObject {
 
     return new TemplateEditPage();
   }
-
 }

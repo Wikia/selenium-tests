@@ -10,19 +10,15 @@ import java.util.List;
  */
 public class PlaybuzzWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = ".playbuzz iframe")
-  private List<WebElement> widgetIFrameList;
-
-  @FindBy(css = "#pb-body-container")
-  private List<WebElement> widgetWrapperList;
-
-  @FindBy(css = "body")
-  private List<WebElement> widgetBody;
-
   private static final String[] TAGS = {
       "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />",
-      "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />"
-  };
+      "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />"};
+  @FindBy(css = ".playbuzz iframe")
+  private List<WebElement> widgetIFrameList;
+  @FindBy(css = "#pb-body-container")
+  private List<WebElement> widgetWrapperList;
+  @FindBy(css = "body")
+  private List<WebElement> widgetBody;
 
   @Override
   protected String getTagName() {

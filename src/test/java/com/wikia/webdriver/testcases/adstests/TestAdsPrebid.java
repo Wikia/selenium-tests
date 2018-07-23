@@ -12,18 +12,22 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
+
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class TestAdsPrebid extends NewTestTemplate {
+
   private static final String STARTED_EVENT = "event_name=started";
   private static final String DIRECT_PREROLL_LINE_ITEM_ID = "314345172";
   private static final String BIDDER_PREROLL_LINE_ITEM_ID = "4618393909";
   private static final int VELES_LINE_ITEM_ID = 333201132;
   private static final List<String> RUBICON_URL_PATTERNS = Arrays.asList(
-    ".*fastlane.json.*TOP_LEADERBOARD.*", ".*fastlane.json.*TOP_RIGHT_BOXAD.*", ".*fastlane.json.*INCONTENT_BOXAD_1.*"
+      ".*fastlane.json.*TOP_LEADERBOARD.*",
+      ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
+      ".*fastlane.json.*INCONTENT_BOXAD_1.*"
   );
 
   @Test(groups = "AdsPrebidOasis")
@@ -35,10 +39,7 @@ public class TestAdsPrebid extends NewTestTemplate {
     prebidAds.verifyPrebidCreative(AdsContent.TOP_LB, true);
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsPrebidMercury")
   public void adsPrebidMercury() {
     String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=831");
@@ -64,8 +65,11 @@ public class TestAdsPrebid extends NewTestTemplate {
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"})
   public void adsPrebidRubiconRequestsInSlots() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
-    Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, RUBICON_URL_PATTERNS), "Lack of rubicon request in all slots");
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_LONG_WITH_FMR.getUrl());
+    Assertion.assertTrue(
+        isRubiconRequestSendInAllSlots(ads, RUBICON_URL_PATTERNS),
+        "Lack of rubicon request in all slots"
+    );
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -73,7 +77,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvDirectVideoAd() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV.getUrl());
 
     Assertion.assertEquals(getFVStatus(ads), "success");
     Assertion.assertEquals(ads.getFVLineItem(), DIRECT_PREROLL_LINE_ITEM_ID);
@@ -88,7 +92,7 @@ public class TestAdsPrebid extends NewTestTemplate {
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
   public void fvBidderVideoAd() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.PAGE_FV_RUBICON.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON.getUrl());
 
     Assertion.assertEquals(getFVStatus(ads), "error");
     Assertion.assertEquals(ads.getFVLineItem(), BIDDER_PREROLL_LINE_ITEM_ID);

@@ -9,17 +9,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchPage extends WikiBasePageObject {
 
-  @FindBy(css = "#search-v2-input")
-  private WebElement searchInput;
-
-  @FindBy(css = "#search-v2-button")
-  private WebElement searchButton;
-
-  @FindBy(css = ".exact-wiki-match__result")
-  private WebElement relatedCommunityModule;
-
   private static final String SPECIAL_SEARCH_PAGE = "/wiki/Special:Search";
   private static final String EXISTING_COMMUNITY_NAME = "pokemon";
+  @FindBy(css = "#search-v2-input")
+  private WebElement searchInput;
+  @FindBy(css = "#search-v2-button")
+  private WebElement searchButton;
+  @FindBy(css = ".exact-wiki-match__result")
+  private WebElement relatedCommunityModule;
 
   public SearchPage() {
     super();

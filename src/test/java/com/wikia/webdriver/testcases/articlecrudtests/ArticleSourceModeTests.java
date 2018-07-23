@@ -3,11 +3,8 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.video.YoutubeVideo;
-import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -22,9 +19,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -113,7 +109,8 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.clickNowiki();
 
     Assertion.assertEquals(source.getSourceContent(),
-        "<nowiki>Insert non-formatted text here</nowiki>");
+                           "<nowiki>Insert non-formatted text here</nowiki>"
+    );
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_010"})
@@ -144,8 +141,11 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
 
-    Assertion.assertEquals(source.getSourceContent(), String.format(
-        PageContent.WIKI_TEXT_PHOTO.replace("%photoName%", photoName), PageContent.CAPTION));
+    Assertion.assertEquals(source.getSourceContent(),
+                           String.format(PageContent.WIKI_TEXT_PHOTO.replace("%photoName%",
+                                                                             photoName
+                           ), PageContent.CAPTION)
+    );
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_012A"})
@@ -159,8 +159,11 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
 
-    Assertion.assertEquals(source.getSourceContent(), String.format(
-        "[[Plik:%photoName%|thumb|%s]]".replace("%photoName%", photoName), PageContent.CAPTION));
+    Assertion.assertEquals(source.getSourceContent(),
+                           String.format("[[Plik:%photoName%|thumb|%s]]".replace("%photoName%",
+                                                                                 photoName
+                           ), PageContent.CAPTION)
+    );
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_013"})
@@ -169,8 +172,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.clickAddGallery();
     source.verifyComponentSelector();
-    SlideshowBuilderComponentObject slideshowBuilder =
-        (SlideshowBuilderComponentObject) source.addComponent("slideshow");
+    SlideshowBuilderComponentObject
+        slideshowBuilder
+        = (SlideshowBuilderComponentObject) source.addComponent("slideshow");
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
     slideshowAddPhoto.search("image");
     List<String> photoNames = slideshowAddPhoto.choosePhotos(4);
@@ -179,9 +183,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     slideshowBuilder.clickFinish();
 
     Assertion.assertEquals(source.getSourceContent(),
-        "<gallery type=\"slideshow\" position=\"center\">\n" + photoNames.get(0) + "\n"
-            + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3)
-            + "\n</gallery>");
+                           "<gallery type=\"slideshow\" position=\"center\">\n" + photoNames.get(0)
+                           + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames
+                               .get(3) + "\n</gallery>"
+    );
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_014"})
@@ -190,8 +195,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.clickAddGallery();
     source.verifyComponentSelector();
-    GalleryBuilderComponentObject galleryBuiler =
-        (GalleryBuilderComponentObject) source.addComponent("gallery");
+    GalleryBuilderComponentObject
+        galleryBuiler
+        = (GalleryBuilderComponentObject) source.addComponent("gallery");
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
     galleryAddPhoto.search("image");
     List<String> photoNames = galleryAddPhoto.choosePhotos(4);
@@ -203,9 +209,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     galleryBuiler.clickFinish();
 
     Assertion.assertEquals(source.getSourceContent(),
-        "<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n" + photoNames.get(0) + "\n"
-            + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3)
-            + "\n</gallery>");
+                           "<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"
+                           + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2)
+                           + "\n" + photoNames.get(3) + "\n</gallery>"
+    );
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_015"})
@@ -214,8 +221,8 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.clickAddGallery();
     source.verifyComponentSelector();
-    SliderBuilderComponentObject sliderBuilder =
-        (SliderBuilderComponentObject) source.addComponent("slider");
+    SliderBuilderComponentObject sliderBuilder = (SliderBuilderComponentObject) source.addComponent(
+        "slider");
     sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
     AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
     sliderAddPhoto.search("image");
@@ -224,9 +231,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     sliderBuilder.clickFinish();
 
     Assertion.assertEquals(source.getSourceContent(),
-        "<gallery type=\"slider\" orientation=\"right\">\n" + photoNames.get(0) + "\n"
-            + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3)
-            + "\n</gallery>");
+                           "<gallery type=\"slider\" orientation=\"right\">\n" + photoNames.get(0)
+                           + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames
+                               .get(3) + "\n</gallery>"
+    );
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_016", "Media"})
@@ -234,8 +242,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
-    VetOptionsComponentObject vetOptions =
-        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject
+        vetOptions
+        = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     source.checkSourceVideoContent(
@@ -265,5 +274,4 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.checkSymbolsTools();
     source.submitArticle();
   }
-
 }

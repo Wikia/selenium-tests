@@ -1,8 +1,8 @@
 package com.wikia.webdriver.elements.fandom;
 
-import lombok.Getter;
-
 import com.wikia.webdriver.elements.fandom.components.WPNotifications;
+
+import lombok.Getter;
 
 public abstract class FandomWPPage<T> extends FandomPage<T> {
 

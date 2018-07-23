@@ -6,11 +6,9 @@ import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.Log;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -116,7 +114,7 @@ public class AdsSkinHelper {
   }
 
   private void closeWikiaNotifications() {
-    if (!driver.findElements(By.cssSelector(WIKIA_MESSAGE_BUBLE)).isEmpty()){
+    if (!driver.findElements(By.cssSelector(WIKIA_MESSAGE_BUBLE)).isEmpty()) {
       driver.findElement(By.cssSelector(WIKIA_MESSAGE_BUBLE_CLOSE_BUTTON)).click();
     }
   }

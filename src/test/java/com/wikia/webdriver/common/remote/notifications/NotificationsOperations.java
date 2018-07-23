@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote.notifications;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor(staticName = "using")
@@ -17,5 +18,4 @@ public class NotificationsOperations {
   public void markAllAsRead() {
     new MarkAsRead(user).execute();
   }
-
 }

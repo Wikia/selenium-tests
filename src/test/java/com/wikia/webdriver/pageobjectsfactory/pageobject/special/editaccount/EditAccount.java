@@ -10,8 +10,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class EditAccount extends BasePageObject {
 
-  private static final String USER_ACCOUNT_REOPEN_MESSAGE =
-      "Successfully removed disabled bit for account";
+  private static final String
+      USER_ACCOUNT_REOPEN_MESSAGE
+      = "Successfully removed disabled bit for account";
   private static final String USER_ACCOUNT_CLOSED_MESSAGE = "Successfully disabled account";
   @FindBy(css = "[name=wpUserName]")
   private WebElement userNameField;

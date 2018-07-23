@@ -1,5 +1,10 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.logging.Log;
+
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriverException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,30 +12,24 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Store;
-
-import com.wikia.webdriver.common.logging.Log;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriverException;
+import javax.mail.*;
 
 public class EmailUtils {
 
-  private static final String EMAIL_LINK_PATTERN = ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>%s</a>.*";
-  private static final String PASSWORD_RESET_LINK = String.format(EMAIL_LINK_PATTERN, "SET NEW PASSWORD");
+  private static final String
+      EMAIL_LINK_PATTERN
+      = ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>%s</a>.*";
+  private static final String PASSWORD_RESET_LINK = String.format(EMAIL_LINK_PATTERN,
+                                                                  "SET NEW PASSWORD"
+  );
   private static final String CONFIRM_EMAIL_LINK = String.format(EMAIL_LINK_PATTERN, "Confirm Now");
+
+  private EmailUtils() {
+  }
 
   // Pattern.DOTALL flag forces dot in regex to also match line terminators
   private static Pattern getPatternForString(String value) {
     return Pattern.compile(value, Pattern.DOTALL);
-  }
-
-  private EmailUtils() {
   }
 
   public static String getFirstEmailContent(String userName, String password, String subject) {
@@ -50,21 +49,21 @@ public class EmailUtils {
 
       boolean forgottenPasswordMessageFound = false;
       Message magicMessage = null;
-      
+
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages = inbox.getMessages();
 
         Log.log("Mail", "Waiting for the message", true);
         Thread.sleep(2000);
-        
+
         for (Message message : messages) {
           if (message.getSubject().contains(subject)) {
             forgottenPasswordMessageFound = true;
             magicMessage = message;
           }
         }
-        
-        if (i > 15) {
+
+        if (i > 30) {
           throw new WebDriverException("Mail timeout exceeded");
         }
       }
@@ -104,7 +103,7 @@ public class EmailUtils {
       Folder inbox = store.getFolder("Inbox");
       inbox.open(Folder.READ_WRITE);
       Message messages[] = inbox.getMessages();
-      
+
       if (messages.length != 0) {
         for (int i = 0; i < messages.length; i++) {
           messages[i].setFlag(Flags.Flag.DELETED, true);
@@ -112,7 +111,7 @@ public class EmailUtils {
       } else {
         Log.log("Mail", "There are no messages in inbox", true);
       }
-      
+
       store.close();
     } catch (NoSuchProviderException e) {
       Log.log("Mail", e, false);
@@ -129,7 +128,7 @@ public class EmailUtils {
     Pattern p = Pattern.compile("button\" href3D\"http[\\s\\S]*?(?=\")"); // getting activation URL
     // from mail content
     Matcher m = p.matcher(content);
-    
+
     if (m.find()) {
       return m.group(0).replace("button\" href3D\"", "");
       // m.group(0) returns first match for the regexp
@@ -158,22 +157,20 @@ public class EmailUtils {
     if (m.find()) {
       return m.group("url");
     } else {
-      throw new WebDriverException("There was no match in the following content: \n" + formattedContent);
+      throw new WebDriverException(
+          "There was no match in the following content: \n" + formattedContent);
     }
   }
 
   /**
-   * Method generates a new "fake" email, by adding number of "+" characters before "@" symbol,
-   * this way, you can trick system that you changed email, but in fact,
-   * message will arrive to the same address
-   * @param emailAddress
-   * @return
+   * Method generates a new "fake" email, by adding number of "+" characters before "@" symbol, this
+   * way, you can trick system that you changed email, but in fact, message will arrive to the same
+   * address
    */
   public static String getEmail(String emailAddress) {
     int specialsToAdd = 1 + StringUtils.countMatches(emailAddress, "+") % 3;
-    
-    return emailAddress.replace("+", "").replace("@",
-        new String(new char[specialsToAdd]).replace("\0", "+") + "@");
-  }
 
+    return emailAddress.replace("+", "")
+        .replace("@", new String(new char[specialsToAdd]).replace("\0", "+") + "@");
+  }
 }

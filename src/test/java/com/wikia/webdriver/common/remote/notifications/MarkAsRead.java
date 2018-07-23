@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote.notifications;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
+
 import org.json.JSONObject;
 
 class MarkAsRead {
@@ -20,5 +21,4 @@ class MarkAsRead {
   private String buildUrl() {
     return NotificationsOperations.service(MARK_AS_READ_SUFFIX);
   }
-
 }

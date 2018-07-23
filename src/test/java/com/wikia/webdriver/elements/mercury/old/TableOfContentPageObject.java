@@ -3,11 +3,7 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -53,14 +49,14 @@ public class TableOfContentPageObject {
 
   public boolean isTOCAtTheTopOfTheArticle() {
     wait.forElementVisible(tocAtTheTop);
-    return tocAtTheTop.isDisplayed() &&
-           tocAtTheTop.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
+    return tocAtTheTop.isDisplayed() && tocAtTheTop.findElement(By.cssSelector(
+        "nav.table-of-contents")).isDisplayed();
   }
 
   public boolean isTOCBelowFirstAdSlot() {
     wait.forElementVisible(tocBelowFirstAdSlot);
-    return tocBelowFirstAdSlot.isDisplayed() &&
-           tocBelowFirstAdSlot.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
+    return tocBelowFirstAdSlot.isDisplayed() && tocBelowFirstAdSlot.findElement(By.cssSelector(
+        "nav.table-of-contents")).isDisplayed();
   }
 
   public void clickOnTOC() {
@@ -82,8 +78,8 @@ public class TableOfContentPageObject {
 
   public boolean isH2PaddingTopMoreThan(int index, int value) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    String h2PaddingString =
-        js.executeScript("return $('h2').eq(" + index + ").css('padding-top')").toString();
+    String h2PaddingString = js.executeScript("return $('h2').eq(" + index + ").css('padding-top')")
+        .toString();
     h2PaddingString = h2PaddingString.substring(0, h2PaddingString.length() - 2);
     int h2Padding = Integer.parseInt(h2PaddingString);
     return h2Padding >= value;

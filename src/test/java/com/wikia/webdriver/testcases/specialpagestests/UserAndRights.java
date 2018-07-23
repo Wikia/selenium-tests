@@ -17,10 +17,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-import java.util.List;
 
+import java.util.List;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -36,8 +37,7 @@ public class UserAndRights extends NewTestTemplate {
     block.selectExpiration("2 hours");
     block.clickBlockButton();
 
-    SpecialBlockListPage list =
-        new SpecialBlockListPage().open();
+    SpecialBlockListPage list = new SpecialBlockListPage().open();
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserBlocked(credentials.userNameBlocked);
   }
@@ -45,9 +45,11 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights002"}, dependsOnMethods = {"staffCanBlockUser"})
   @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldSeeMessageOnArticleEdit() {
-    VisualEditModePageObject edit =
-        new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
-            PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
+    VisualEditModePageObject edit = new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
+                                                                                               PageContent.ARTICLE_NAME_PREFIX
+                                                                                               + DateTime.now()
+                                                                                                   .getMillis()
+    );
 
     edit.verifyUserLoggedIn(User.BLOCKED_USER);
 
@@ -71,10 +73,13 @@ public class UserAndRights extends NewTestTemplate {
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(),
+                           1,
+                           PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS
+    );
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                         PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE
+    );
 
     prefPage.enterEmailChangeLink(username, password);
 
@@ -85,8 +90,7 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights004"}, dependsOnMethods = {"staffCanBlockUser"})
   @Execute(asUser = User.STAFF)
   public void staffCanUnblockUser() {
-    SpecialUnblockPage unblock =
-        new SpecialUnblockPage().open();
+    SpecialUnblockPage unblock = new SpecialUnblockPage().open();
     unblock.unblockUser(credentials.userNameBlocked);
     unblock.verifyUnblockMessage(credentials.userNameBlocked);
 
@@ -100,9 +104,10 @@ public class UserAndRights extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject edit =
-        base.navigateToArticleEditPage(wikiURL,
-            PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
+    VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL,
+                                                                   PageContent.ARTICLE_NAME_PREFIX
+                                                                   + base.getTimeStamp()
+    );
     edit.clearContent();
     edit.addContent(String.valueOf(DateTime.now().getMillis()));
     edit.submitArticle().verifyArticleTitle(title);

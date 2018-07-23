@@ -9,108 +9,110 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsJWPlayerObject;
+
 import org.testng.annotations.Test;
 
 public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
 
   private static final String IGNORE_SAMPLING = "ignored_samplers=moatTrackingForFeaturedVideo";
   private static final String INSTANT_GLOBAL_MIDROLL = "wgAdDriverFVMidrollCountries";
-  private static final String INSTANT_GLOBAL_MOAT_TRACKING = "wgAdDriverMoatTrackingForFeaturedVideoAdCountries";
+  private static final String
+      INSTANT_GLOBAL_MOAT_TRACKING
+      = "wgAdDriverMoatTrackingForFeaturedVideoAdCountries";
+  private static final String INSTANT_GLOBAL_PUBMATIC = "wgAdDriverPubMaticBidderCountries";
   private static final String INSTANT_GLOBAL_POSTROLL = "wgAdDriverFVPostrollCountries";
 
-  private static final String MOAT_VIDEO_TRACKING_URL = "https://z.moatads.com/wikiajwint101173217941/moatvideo.js";
+  private static final String
+      MOAT_VIDEO_TRACKING_URL
+      = "https://z.moatads.com/wikiajwint101173217941/moatvideo.js";
 
-  @Test(
-      groups = {"AdsFeaturedVideoOasis"}
-  )
+  @Test(groups = {"AdsFeaturedVideoOasis"})
   public void adsFeaturedVideoAdsDesktop() {
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MIDROLL);
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_POSTROLL);
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_MIDROLL
+    );
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_POSTROLL
+    );
+    testedPage = urlBuilder.globallyDisableGeoInstantGlobalOnPage(testedPage,
+                                                                  INSTANT_GLOBAL_PUBMATIC
+    );
 
-    new AdsBaseObject(driver, testedPage);
+    new AdsBaseObject(testedPage);
 
     verifyAdPositions();
   }
 
-  @Test(
-      groups = {"AdsFeaturedVideoOasis"}
-  )
+  @Test(groups = {"AdsFeaturedVideoOasis"})
   public void adsFeaturedVideoNoAdsDesktop() {
-    String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(), "noads=1");
+    String testedPage = urlBuilder.appendQueryStringToURL(AdsDataProvider.PAGE_FV_JWPLAYER.getUrl(),
+                                                          "noads=1"
+    );
 
-    new AdsBaseObject(driver, testedPage);
+    new AdsBaseObject(testedPage);
 
     verifyNoAds();
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsFeaturedVideoMoatTrackingOasis"}
-  )
+  @Test(groups = {"AdsFeaturedVideoMoatTrackingOasis"})
   @UnsafePageLoad
   public void adsFeaturedVideoMoatTrackingDesktop() {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = AdsDataProvider.PAGE_FV_JWPLAYER.getUrl();
-    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, INSTANT_GLOBAL_MOAT_TRACKING);
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_MOAT_TRACKING
+    );
+    testedPage = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage,
+                                                                 INSTANT_GLOBAL_PUBMATIC
+    );
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
 
-    AdsBaseObject pageObject = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject pageObject = new AdsBaseObject(testedPage);
 
     verifyVideoMoatTracking(pageObject);
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = {"AdsFeaturedVideoMercury"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @UnsafePageLoad
+  @Test(groups = {"AdsFeaturedVideoMercury"})
   public void adsFeaturedVideoAdsMobile() {
     adsFeaturedVideoAdsDesktop();
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      groups = {"AdsFeaturedVideoMercury"}
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @UnsafePageLoad
+  @Test(groups = {"AdsFeaturedVideoMercury"})
   public void adsFeaturedVideoNoAdsMobile() {
     adsFeaturedVideoNoAdsDesktop();
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsFeaturedVideoMoatTrackingMercury"}
-  )
+  @UnsafePageLoad
+  @Test(groups = {"AdsFeaturedVideoMoatTrackingMercury"})
   public void adsFeaturedVideoMoatTrackingMobile() {
     adsFeaturedVideoMoatTrackingDesktop();
   }
 
   private void verifyAdPositions() {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyAllAdPositions();
   }
 
   private void verifyNoAds() {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.verifyPlayerOnPage();
     jwPlayerObject.verifyFeaturedVideo();
   }
 
   private void verifyVideoMoatTracking(AdsBaseObject pageObject) {
-    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject(driver);
+    AdsJWPlayerObject jwPlayerObject = new AdsJWPlayerObject();
 
     jwPlayerObject.waitForAdPlaying();
-    pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
+    pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL, 45);
   }
 }

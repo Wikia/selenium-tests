@@ -12,12 +12,11 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.ArticleHistoryPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization.SpecialAnonymizationUserPage;
@@ -33,13 +32,9 @@ import java.time.LocalDate;
 @Test(groups = "anonymization")
 public class AnonymizationTests extends NewTestTemplate {
 
-
-  private static final String ERROR_MESSAGE =
-      "We don't recognize these credentials. Try again or register a new account.";
-
-  private SignInPage openLoginModalOnDesktop() {
-    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
-  }
+  private static final String
+      ERROR_MESSAGE
+      = "We don't recognize these credentials. Try again or register a new account.";
 
   @Test
   public void anonymizedUserCannotLogin() {
@@ -47,21 +42,22 @@ public class AnonymizationTests extends NewTestTemplate {
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
     String passw = "makak";
-    SignUpUser
-        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
-                              LocalDate.of(1990, 3, 19));
+    SignUpUser user = new SignUpUser(qanon,
+                                     credentials.emailAnonymousUserTestWikia,
+                                     passw,
+                                     LocalDate.of(1990, 3, 19)
+    );
     UserRegistration.registerUserEmailConfirmed(user);
 
     SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
     anonymizationStaff.loginAs(User.SUS_STAFF);
-    anonymizationStaff.fillFutureAnon(qanon)
-        .submitAnonymization();
+    anonymizationStaff.fillFutureAnon(qanon).submitAnonymization();
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     anonymizationStaff.logOut();
 
-    SignInPage signIn = openLoginModalOnDesktop();
+    SignInPage signIn = new GlobalNavigation().clickOnSignIn();
     signIn.login(qanon, passw);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -72,20 +68,24 @@ public class AnonymizationTests extends NewTestTemplate {
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
     String passw = "makak";
-    SignUpUser
-        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
-                              LocalDate.of(1990, 3, 19));
+    SignUpUser user = new SignUpUser(qanon,
+                                     credentials.emailAnonymousUserTestWikia,
+                                     passw,
+                                     LocalDate.of(1990, 3, 19)
+    );
     UserRegistration.registerUserEmailConfirmed(user);
 
     SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
     anonymizationStaff.loginAs(User.SUS_STAFF);
-    anonymizationStaff.fillFutureAnon(qanon)
-        .submitAnonymization();
+    anonymizationStaff.fillFutureAnon(qanon).submitAnonymization();
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
+    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format(
+        "User account \"%s\" does not exist or has never logged in on this wiki.",
+        qanon
+    )));
   }
 
   @Test
@@ -94,9 +94,11 @@ public class AnonymizationTests extends NewTestTemplate {
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
     String passw = "makak";
-    SignUpUser
-        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
-                              LocalDate.of(1990, 3, 19));
+    SignUpUser user = new SignUpUser(qanon,
+                                     credentials.emailAnonymousUserTestWikia,
+                                     passw,
+                                     LocalDate.of(1990, 3, 19)
+    );
     UserRegistration.registerUserEmailConfirmed(user);
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
@@ -111,8 +113,7 @@ public class AnonymizationTests extends NewTestTemplate {
 
     SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
     anonymizationStaff.loginAs(User.SUS_STAFF);
-    anonymizationStaff.fillFutureAnon(qanon)
-        .submitAnonymization();
+    anonymizationStaff.fillFutureAnon(qanon).submitAnonymization();
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
@@ -120,16 +121,17 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
   }
 
-
   @Test
   public void anonyizationMessageWallRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String qanon = "QAanon" + timestamp;
     String passw = "makak";
-    SignUpUser
-        user = new SignUpUser(qanon, credentials.emailAnonymousUserTestWikia, passw,
-                              LocalDate.of(1990, 3, 19));
+    SignUpUser user = new SignUpUser(qanon,
+                                     credentials.emailAnonymousUserTestWikia,
+                                     passw,
+                                     LocalDate.of(1990, 3, 19)
+    );
     UserRegistration.registerUserEmailConfirmed(user);
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
@@ -143,9 +145,8 @@ public class AnonymizationTests extends NewTestTemplate {
     wall.submit();
     wall.verifyMessageText(title, message, user.getUsername());
     wall.triggerEditMessageArea();
-    String
-        messageEdit =
-        PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + Long.toString(DateTime.now().getMillis());
+    String messageEdit = PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + Long.toString(DateTime.now()
+                                                                                          .getMillis());
     mini.switchAndEditMessageWall(messageEdit);
     wall.submitEdition();
     wall.verifyMessageEditText(title, messageEdit, user.getUsername());
@@ -153,8 +154,7 @@ public class AnonymizationTests extends NewTestTemplate {
     try {
       Thread.sleep(15000);
     } catch (InterruptedException e) {
-      Log.logError("Interruption during waiting for Message Wall background task",
-                                 e);
+      Log.logError("Interruption during waiting for Message Wall background task", e);
     }
 
     new ArticleContent(user.getUsername()).push("Test" + timestamp, "AnonymizationTest");
@@ -167,13 +167,15 @@ public class AnonymizationTests extends NewTestTemplate {
 
     SpecialAnonymizationUserPage anonymizationStaff = new SpecialAnonymizationUserPage().open();
     anonymizationStaff.loginAs(User.SUS_STAFF);
-    anonymizationStaff.fillFutureAnon(qanon)
-        .submitAnonymization();
+    anonymizationStaff.fillFutureAnon(qanon).submitAnonymization();
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
     UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format("User account \"%s\" does not exist or has never logged in on this wiki.", qanon)));
+    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format(
+        "User account \"%s\" does not exist or has never logged in on this wiki.",
+        qanon
+    )));
 
     articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));

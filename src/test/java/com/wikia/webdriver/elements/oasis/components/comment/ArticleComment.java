@@ -22,7 +22,7 @@ public class ArticleComment extends BasePageObject {
     try {
       wait.forElementVisible(By.cssSelector("img"));
       return true;
-    } catch(TimeoutException e) {
+    } catch (TimeoutException e) {
       Log.info("Video element is not visible", e);
       return false;
     }

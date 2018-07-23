@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
+package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
@@ -36,12 +36,11 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   @FindBy(css = "#notificationsEntryPoint")
   private WebElement accountNavigationEntryPoint;
 
-  private By notificationDropdownForCurrentWiki = By
-      .cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
+  private By notificationDropdownForCurrentWiki = By.cssSelector(
+      "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
 
-  private By emptyNotificationDropdownForCurrentWiki =
-      By.cssSelector(
-          "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
+  private By emptyNotificationDropdownForCurrentWiki = By.cssSelector(
+      "#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
 
   private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
 
@@ -110,15 +109,21 @@ public class NotificationsComponentObject extends WikiBasePageObject {
    */
   public String getNotificationLink(String text) {
     for (int i = 0; i < notificationsList.size(); i++) {
-      if (notificationsList.get(i).findElement(By.cssSelector(".notification-message")).getText()
+      if (notificationsList.get(i)
+          .findElement(By.cssSelector(".notification-message"))
+          .getText()
           .contains(text)) {
-        Log.log("getNotificationLink", "get addres that of " + i + 1
-                                                     + " notification points to", true);
+        Log.log("getNotificationLink",
+                "get addres that of " + i + 1 + " notification points to",
+                true
+        );
         return notificationsList.get(i).findElement(By.tagName("a")).getAttribute("href");
       }
     }
     Log.log("getNotificationLink",
-                          "No notification that contains the following text: " + text, false);
+            "No notification that contains the following text: " + text,
+            false
+    );
     return null;
   }
 
@@ -175,8 +180,9 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
     List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
     Assertion.assertEquals(1, notificationsListForTitle.size());
-    String notificationMessageBody =
-        notificationsListForTitle.get(0).findElement(By.cssSelector("p")).getText();
+    String notificationMessageBody = notificationsListForTitle.get(0)
+        .findElement(By.cssSelector("p"))
+        .getText();
     Assertion.assertStringContains(notificationMessageBody, messageAuthor);
   }
 
@@ -187,9 +193,9 @@ public class NotificationsComponentObject extends WikiBasePageObject {
     Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
     List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
     Assertion.assertEquals(1, notificationsListForTitle.size());
-    String notificationMessageBody =
-        notificationsListForTitle.get(0).findElement(By.cssSelector("div.notification-message"))
-            .getText();
+    String notificationMessageBody = notificationsListForTitle.get(0)
+        .findElement(By.cssSelector("div.notification-message"))
+        .getText();
     Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
     Assertion.assertTrue(notificationMessageBody.contains(messageContent));
   }

@@ -10,8 +10,7 @@ public class SearchTests extends NewTestTemplate {
   private static final String SEARCH_PHRASE = "Infobox";
 
   public void clearSearchPhrase(WikiBasePageObject page) {
-    String currentPhrase = page
-        .getTopBar()
+    String currentPhrase = page.getGlobalNavigationMobile()
         .openSearch()
         .typeInSearch(SEARCH_PHRASE)
         .clickClearSearchButton()
@@ -21,10 +20,7 @@ public class SearchTests extends NewTestTemplate {
   }
 
   public void verifySearchLayout(WikiBasePageObject page) {
-    Search search = page
-        .getTopBar()
-        .openSearch()
-        .typeInSearch("qAga");
+    Search search = page.getGlobalNavigationMobile().openSearch().typeInSearch("qAga");
 
     Assertion.assertTrue(search.isSearchInputFieldVisible());
     Assertion.assertTrue(search.isClearSearchButtonVisible());

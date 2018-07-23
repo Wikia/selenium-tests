@@ -10,15 +10,16 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
+
 import org.testng.annotations.Test;
 
-@InBrowser(
-  browser = Browser.CHROME,
-  emulator = Emulator.GOOGLE_NEXUS_5
-)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 @Test(groups = "AdsSlotsMercury")
 public class TestAdsSlotsMercury extends MobileTestTemplate {
-  private static final String CREATIVE_IMAGE_URL = "googlesyndication.com/simgad/8216620376696319112";
+
+  private static final String
+      CREATIVE_IMAGE_URL
+      = "googlesyndication.com/simgad/8216620376696319112";
   private static final String PORTABLE_INFOBOX = ".portable-infobox";
   private static final String ARTICLE_HEADER = ".wiki-page-header";
   private static final String ARTICLE_BODY = ".article-body";
@@ -27,7 +28,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   @Test
   public void adsAllSlotsOnPage() {
     Page page = new Page("project43", "SyntheticTests/Mercury/Slots/AllSlots");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
     ads.verifySlotExpanded(AdsContent.MOBILE_AD_IN_CONTENT);
     ads.scrollToPosition(ARTICLE_FOOTER);
@@ -39,13 +40,15 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   @Test
   public void adsLeaderboardOnPageWithInfobox() {
     Page page = new Page("project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     PortableInfobox infobox = new PortableInfobox();
 
     ads.waitForPageLoadedWithGpt();
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
 
-    int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
+    int
+        adPosition
+        = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX);
 
     Log.log("Ad top position", String.valueOf(adPosition), true);
@@ -60,12 +63,14 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   @Test
   public void adsLeaderboardOnPageWithoutInfobox() {
     Page page = new Page("project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
 
     ads.waitForPageLoadedWithGpt();
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
 
-    int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
+    int
+        adPosition
+        = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER);
 
     Log.log("Ad top position", String.valueOf(adPosition), true);
@@ -83,7 +88,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     String secondArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2";
     String thirdArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3";
 
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
     ads.scrollToRecirculationPrefooter();
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);

@@ -11,15 +11,14 @@ import org.testng.annotations.Test;
 /**
  * Set of Test Cases: https://wikia-inc.atlassian.net/browse/DAT-2563
  *
- * TC18: Add a new MoM image, refresh the page and verify it is still visible
- * TC04: upload a new image and verify it is displayed immediately
- * TC09: Make,publish and verify changes for description fields are visible immediately
- * TC15: check anons and regular users cant modify MoM
- * TC06: verify discarding an image will display previous state
- * TC05: verify dragging to reposition image is working
- * TC10: delete description field and then verify a promotional message and Publish button disability
- * TC11: delete text from desc field and click discard to view previous state
- * TC12: delete text from desc field and populate the field with a character to check Publish button is enabled
+ * TC18: Add a new MoM image, refresh the page and verify it is still visible TC04: upload a new
+ * image and verify it is displayed immediately TC09: Make,publish and verify changes for
+ * description fields are visible immediately TC15: check anons and regular users cant modify MoM
+ * TC06: verify discarding an image will display previous state TC05: verify dragging to reposition
+ * image is working TC10: delete description field and then verify a promotional message and Publish
+ * button disability TC11: delete text from desc field and click discard to view previous state
+ * TC12: delete text from desc field and populate the field with a character to check Publish button
+ * is enabled
  */
 public class HeroModuleTests extends NewTestTemplate {
 
