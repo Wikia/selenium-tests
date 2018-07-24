@@ -10,8 +10,13 @@ public class ContentRecommendationsMobile extends BasePageObject {
   @FindBy(css = ".wds-content-recommendations")
   private WebElement trendingArticlesModule;
 
-  public boolean areTrendingArticlesVisible() {
+  public boolean isTrendingArticlesModuleVisible() {
     return isVisible(trendingArticlesModule);
+  }
+
+  public boolean isTrendingArticlesModuleNotVisible() {
+    wait.forElementNotVisible(trendingArticlesModule);
+    return true;
   }
 
 }

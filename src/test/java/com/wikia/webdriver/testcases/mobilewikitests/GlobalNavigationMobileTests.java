@@ -63,7 +63,7 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
   }
 
   @Test
-  public void trendingArticlesModuleOpensUnderMobileSearch() {
+  public void trendingArticlesModuleOpensUnderMobileSearchOnEnWikis() {
     GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()
             .open(MobileSubpages.MAIN_PAGE)
@@ -72,7 +72,21 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
 
     ContentRecommendationsMobile trendingArticles = new ContentRecommendationsMobile();
 
-    Assertion.assertTrue(trendingArticles.areTrendingArticlesVisible());
+    Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleVisible());
+  }
+
+  @Test
+  @Execute(onWikia = MobileWikis.DE_WIKI)
+  public void trendingArticlesModuleDoesNotOpenUnderMobileSearchOnNonEnWikis() {
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .openDefault()
+            .getGlobalNavigationMobile();
+    globalNavigationMobile.openSearch();
+
+    ContentRecommendationsMobile trendingArticles = new ContentRecommendationsMobile();
+
+    Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleNotVisible());
 
 
   }
