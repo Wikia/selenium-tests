@@ -1,11 +1,18 @@
 package com.wikia.webdriver.elements.common;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+import org.openqa.selenium.TimeoutException;
 
 public class Navigate extends BasePageObject {
 
   public Navigate toPage(String pageName) {
-    driver.get(urlBuilder.getUrlForWikiPage(pageName) + urlBuilder.getCacheBusterQuery(pageName));
+    try {
+      driver.get(urlBuilder.getUrlForWikiPage(pageName) + urlBuilder.getCacheBusterQuery(pageName));
+    }catch (TimeoutException e){
+      new JavascriptActions(driver).execute("window.stop()");
+    }
 
     return this;
   }

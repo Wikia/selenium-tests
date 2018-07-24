@@ -89,6 +89,11 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
+  public void pushTest(){
+    new ArticleContent().push("Test12345", "AnonymizationTest");
+  }
+
+  @Test
   public void anonymizationWikiEdits() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
