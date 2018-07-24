@@ -117,7 +117,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
-    driver.manage().deleteAllCookies();
+    TrackingOptInPage.deleteTrackingOptInCookie(driver);
 
     new ArticlePage().open();
 
@@ -133,7 +133,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
     Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
-    driver.manage().deleteAllCookies();
+    TrackingOptInPage.deleteTrackingOptInCookie(driver);
 
     new ArticlePage().open();
 
