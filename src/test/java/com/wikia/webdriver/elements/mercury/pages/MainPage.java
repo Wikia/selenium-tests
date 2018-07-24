@@ -21,7 +21,7 @@ public class MainPage extends WikiBasePageObject {
   }
 
   public MainPage openRegularMainPage() {
-    navigate.toPageByPath("/wiki/Mercury_automation_testing_Wikia");
+    navigate.toPageByPath("/wiki/Mercury_automation_testing_Wiki");
 
     return this;
   }
