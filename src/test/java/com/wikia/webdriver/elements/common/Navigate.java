@@ -13,7 +13,6 @@ public class Navigate extends BasePageObject {
     }catch (TimeoutException e){
       new JavascriptActions(driver).execute("window.stop()");
     }
-
     return this;
   }
 
