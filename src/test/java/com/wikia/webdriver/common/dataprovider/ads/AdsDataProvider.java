@@ -286,7 +286,7 @@ public class AdsDataProvider {
                                           "\"s2\":\"article\"",
                                           "\"ar\":\"4:3\"",
                                           "\"artid\":\"4219\"",
-                                          "\"cat\":[\"items\",\"yggdrasil_items\"]",
+                                          "\"cat\":[\"items\",\"yggdrasil_items\",\"substances\"]",
                                           "\"hostpre\":",
                                           "\"lang\":\"en\"",
                                           "\"wpage\":\"blood_of_jormungandr\"",
