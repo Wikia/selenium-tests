@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.TimeoutException;
 
 public class Navigate extends BasePageObject {
