@@ -25,7 +25,9 @@ public class TrackingOptInPage extends BasePageObject {
 
   public static void setGeoCookie(WikiaWebDriver driver, String continent, String country) {
     Cookie geoCookie = driver.manage().getCookieNamed("Geo");
-    driver.manage().deleteCookie(geoCookie);
+    if (geoCookie != null) {
+      driver.manage().deleteCookie(geoCookie);
+    }
     driver.manage().addCookie(new Cookie("Geo",
                                          "{%22region%22:%22WP%22%2C%22country%22:%22" + country
                                          + "%22%2C%22continent%22:%22" + continent + "%22}",
@@ -35,6 +37,13 @@ public class TrackingOptInPage extends BasePageObject {
                                          null,
                                          null
     ));
+  }
+
+  public static void deleteTrackingOptInCookie(WikiaWebDriver driver) {
+    Cookie optInCookie = driver.manage().getCookieNamed("tracking-opt-in-status");
+    if (optInCookie != null) {
+      driver.manage().deleteCookie(optInCookie);
+    }
   }
 
   private static String appendTrackingOptOutParameters(String url, String[] instantGlobals) {

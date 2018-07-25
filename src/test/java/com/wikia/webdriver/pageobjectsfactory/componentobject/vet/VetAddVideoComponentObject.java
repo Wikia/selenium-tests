@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
 import java.util.List;
 
 public class VetAddVideoComponentObject extends WikiBasePageObject {
@@ -99,7 +100,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   public VetOptionsComponentObject addVideoWithoutDetailsByUrl(String url) {
     typeInUrl(url);
     clickAddButtonProvider();
-    wait.forElementNotVisible(addVideoModalBy);
+    wait.forElementNotVisible(addVideoModalBy, Duration.ofSeconds(30));
 
     return new VetOptionsComponentObject(driver);
   }

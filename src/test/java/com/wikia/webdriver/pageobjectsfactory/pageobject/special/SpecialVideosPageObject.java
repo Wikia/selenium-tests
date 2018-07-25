@@ -40,7 +40,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   private WebElement deleteConfirmButton;
   @FindBy(css = "#sorting-dropdown")
   private WebElement sortDropdown;
-  @FindBys(@FindBy(css = ".special-videos-grid li"))
+  @FindBy(css = ".special-videos-grid > li")
   private List<WebElement> videoTileElements;
 
   public SpecialVideosPageObject(WebDriver driver) {
