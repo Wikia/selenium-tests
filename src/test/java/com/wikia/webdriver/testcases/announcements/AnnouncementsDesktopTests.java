@@ -30,10 +30,9 @@ import java.time.LocalDate;
 
 @InBrowser(browser = Browser.CHROME)
 @Execute(onWikia = MobileWikis.DISCUSSIONS_7)
-@Test(groups = "Announcements_Desktop")
 public class AnnouncementsDesktopTests extends NewTestTemplate {
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     public void communityNewUserCanGetFreshAnnouncement() {
         String articleName = "QA_article_" + Long.toString(DateTime.now().getMillis());
         String tempLogin = "QA" + Long.toString(DateTime.now().getMillis());
@@ -68,37 +67,37 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
         );
     }
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     @Execute(asUser = User.ANONYMOUS)
     public void regularUserDoesNotHaveAccessToAnnouncements() {
         Assertion.assertTrue(new AnnouncementsPage().open().isErrorMessageVisible());
     }
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     @Execute(asUser = User.STAFF)
     public void staffHasAccessToAnnouncements() {
         verifyLayout();
     }
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     @Execute(asUser = User.VSTF)
     public void vstfHasAccessToAnnouncements() {
         verifyLayout();
     }
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     @Execute(asUser = User.HELPER)
     public void helperHasAccessToAnnouncements() {
         verifyLayout();
     }
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_2)
     public void discussionsModHasAccessToAnnouncements() {
         verifyLayout();
     }
 
-    @Test()
+    @Test(groups = "Announcements_Desktop")
     @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_5)
     public void discussionsAdminHasAccessToAnnouncements() {
         verifyLayout();
