@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NotificationsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.MessagesNotifications;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
@@ -64,10 +64,10 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void userIsNotifiedWhenRegularAndStaffUsersReplyToHerDiscussion() {
     ForumPage forumMainPage = new ForumPage();
-    NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
+    MessagesNotifications notifications = new MessagesNotifications();
 
     forumMainPage.openForumMainPage(wikiURL);
-    notifications.showNotifications();
+    notifications.showMessagesNotifications();
     String anchoredLink = null;
     try {
       anchoredLink = notifications.getNotificationLink(
