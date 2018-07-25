@@ -21,6 +21,12 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
+/**
+ * Announcements is a feature page for admins & mods to create notifications for community's active users.
+ * Active user is a person who contributed on wiki or discussion in the last 90 days.
+ * Announcements are available via <wiki>/announcements URL, entry point is in the Admin Dashboard.
+ * More info: https://community.wikia.com/wiki/Help:Notifications
+ */
 
 @InBrowser(browser = Browser.CHROME)
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_7)
@@ -60,6 +66,54 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
         Assertion.assertTrue(
                 new OnSiteNotifications().showMessagesNotifications().isNotificationWithGivenTitleVisible(announcement)
         );
+    }
+
+    @Test()
+    @Execute(asUser = User.ANONYMOUS)
+    public void regularUserDoesNotHaveAccessToAnnouncements() {
+        Assertion.assertTrue(new AnnouncementsPage().open().isErrorMessageVisible());
+    }
+
+    @Test()
+    @Execute(asUser = User.STAFF)
+    public void staffHasAccessToAnnouncements() {
+        verifyLayout();
+    }
+
+    @Test()
+    @Execute(asUser = User.VSTF)
+    public void vstfHasAccessToAnnouncements() {
+        verifyLayout();
+    }
+
+    @Test()
+    @Execute(asUser = User.HELPER)
+    public void helperHasAccessToAnnouncements() {
+        verifyLayout();
+    }
+
+    @Test()
+    @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_2)
+    public void discussionsModHasAccessToAnnouncements() {
+        verifyLayout();
+    }
+
+    @Test()
+    @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_5)
+    public void discussionsAdminHasAccessToAnnouncements() {
+        verifyLayout();
+    }
+
+    /*
+        HELPERS
+     */
+
+    public void verifyLayout() {
+        AnnouncementsPage page = new AnnouncementsPage().open();
+        Assertion.assertTrue(page.isPageHeaderVisible());
+        Assertion.assertTrue(page.isAboutAnnouncementsVisible());
+        Assertion.assertTrue(page.isAnnouncementFormVisible());
+        Assertion.assertTrue(page.isPastAnnouncementsListVisible());
     }
 
 }

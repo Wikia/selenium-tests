@@ -7,6 +7,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class AnnouncementsPage extends BasePage {
 
+    /**
+     * Announcements is a feature page for admins & mods to create notifications for community's active users.
+     * Active user is a person who contributed on wiki or discussion in the last 90 days.
+     * Announcements are available via <wiki>/announcements URL, entry point is in the Admin Dashboard.
+     * More info: https://community.wikia.com/wiki/Help:Notifications
+     */
+
     private static final String URL_PATH = "/announcements";
 
     @FindBy(xpath = "(//textarea)[1]")
@@ -26,6 +33,21 @@ public class AnnouncementsPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='wds-dialog__actions']/button[2]")
     private WebElement confirmationModalOKButton;
+
+    @FindBy(css = ".announcements-error")
+    private WebElement errorMessage;
+
+    @FindBy(css = ".page-header")
+    private WebElement pageHeader;
+
+    @FindBy(css = ".about-announcements")
+    private WebElement aboutAnnouncements;
+
+    @FindBy(css = ".announcements-form")
+    private WebElement announcementForm;
+
+    @FindBy(css = ".announcements-list")
+    private WebElement pastAnnouncementsList;
 
     public AnnouncementsPage open() {
         driver.get(getUrlWithCacheBuster(String.format("%s%s", urlBuilder.getUrl(), URL_PATH)));
@@ -74,6 +96,29 @@ public class AnnouncementsPage extends BasePage {
         this.clickOKButton();
 
         return this;
+    }
+
+    public boolean isErrorMessageVisible() {
+        return isVisible(errorMessage);
+    }
+
+    /*
+     * Page header in this context is the rails on the left hand side
+     */
+    public boolean isPageHeaderVisible() {
+        return isVisible(pageHeader);
+    }
+
+    public boolean isAboutAnnouncementsVisible() {
+        return isVisible(aboutAnnouncements);
+    }
+
+    public boolean isAnnouncementFormVisible() {
+        return isVisible(announcementForm);
+    }
+
+    public boolean isPastAnnouncementsListVisible(){
+        return isVisible(pastAnnouncementsList);
     }
 
 }
