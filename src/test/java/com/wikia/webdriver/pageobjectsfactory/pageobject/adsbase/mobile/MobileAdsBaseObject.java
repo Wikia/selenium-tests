@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -11,8 +11,18 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
 
-  public MobileAdsBaseObject(WikiaWebDriver driver, String page) {
-    super(driver, page);
+  public MobileAdsBaseObject() {
+    super();
+
+    if (driver.isChromeMobile()) {
+      verifyMobileWiki();
+    }
+
+    Log.log("", "Page screenshot", true, driver);
+  }
+
+  public MobileAdsBaseObject(String page) {
+    super(page);
 
     if (driver.isChromeMobile()) {
       verifyMobileWiki();
@@ -87,10 +97,14 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private void scrollToSlotOnMobile(String slotName) {
     JavascriptExecutor js = driver;
+    JavascriptActions jsActions = new JavascriptActions();
+    WebElement slot = driver.findElement(By.id(slotName));
     js.executeScript(
         "var element = document.getElementById(arguments[0]);" + "element.scrollIntoView();",
         slotName
     );
+
+    jsActions.scrollElementIntoViewPort(slot);
   }
 
   private void verifyMobileWiki() {

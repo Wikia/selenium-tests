@@ -1,13 +1,15 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.annotation.CheckForNull;
 import java.util.List;
+
+import javax.annotation.CheckForNull;
 
 public class CategoryPills extends BasePageObject {
 
@@ -18,7 +20,6 @@ public class CategoryPills extends BasePageObject {
   private WebElement categoryPillsPopover;
 
   /**
-   *
    * @param position - category position in pop over, counted from 0
    * @return category pill or null if category pill was not found
    */

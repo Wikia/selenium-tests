@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion;
+package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;

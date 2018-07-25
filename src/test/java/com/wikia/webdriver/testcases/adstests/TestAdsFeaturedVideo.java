@@ -39,7 +39,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
                                                                   INSTANT_GLOBAL_PUBMATIC
     );
 
-    new AdsBaseObject(driver, testedPage);
+    new AdsBaseObject(testedPage);
 
     verifyAdPositions();
   }
@@ -50,7 +50,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
                                                           "noads=1"
     );
 
-    new AdsBaseObject(driver, testedPage);
+    new AdsBaseObject(testedPage);
 
     verifyNoAds();
   }
@@ -69,7 +69,7 @@ public class TestAdsFeaturedVideo extends TemplateNoFirstLoad {
     );
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, IGNORE_SAMPLING);
 
-    AdsBaseObject pageObject = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject pageObject = new AdsBaseObject(testedPage);
 
     verifyVideoMoatTracking(pageObject);
   }

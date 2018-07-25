@@ -31,7 +31,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     if (StringUtils.isNotEmpty(queryString)) {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
     }
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
@@ -48,7 +48,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
       List<String> slotParams
   ) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
 
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);

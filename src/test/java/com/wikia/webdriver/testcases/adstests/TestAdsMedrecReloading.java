@@ -25,7 +25,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
   @UnsafePageLoad
   public void regularFloatingMedrecIsReloadingWithRecirculationModule() {
     Page page = new Page("project43", "SyntheticTests/LongPage");
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
 
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
     ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
@@ -39,7 +39,7 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
 
   @Test(groups = {"AdsRefreshFMRWithUAP"})
   public void uapFloatingMedrecIsReloadingOnceWithRecirculationModule() {
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_PAGE.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.UAP_PAGE.getUrl());
 
     ads.wait.forElementPresent(RECIRCULATION_SELECTOR);
     ads.scrollToPosition(RECIRCULATION_SELECTOR);

@@ -1,14 +1,14 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
 
 import org.testng.annotations.Test;
 
@@ -18,6 +18,7 @@ import java.util.List;
 public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
+  private static final Page ADS_ARTICLE1_PAGE = new Page("project43", "TrackingPixels/Article1");
   private static final Page ADS_UAP_PAGE = new Page("project43", "SyntheticTests/UAP");
   private static final Page ADS_MERCURY_PAGE = new Page("mercuryautomationtesting", "/join");
   private static final String POLAND = "PL";
@@ -292,6 +293,60 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_MERCURY_PAGE);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsMobileWiki", dataProvider = "adsTrackingPixelsOnConsecutivePages")
+  public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInPage modal = new TrackingOptInPage();
+    modal.acceptOptInModal(driver, POLAND, ADS_ARTICLE1_PAGE);
+    MobileAdsBaseObject ads = new MobileAdsBaseObject();
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+
+    // Check tracking pixels on consecutive page views
+    for (String linkName : articles) {
+      ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+      ads.clickOnArticleLink(linkName);
+      modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    }
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsMobileWiki", dataProvider = "adsTrackingPixelsOnConsecutivePages")
+  public void adsTrackingPixelsOnConsecutivePagesOutsideUE(
+      List<String> urlPatterns,
+      String[] articles
+  ) {
+    networkTrafficInterceptor.startIntercepting();
+    MobileAdsBaseObject ads = new MobileAdsBaseObject();
+    TrackingOptInPage modal = new TrackingOptInPage();
+    modal.setGeoCookie(driver, "NA", "US");
+    modal.getUrl(ADS_ARTICLE1_PAGE);
+
+    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    // Check tracking pixels on consecutive page views
+    for (String linkName : articles) {
+      ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
+      ads.clickOnArticleLink(linkName);
+      modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    }
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Execute(trackingOptIn = false)
+  @UnsafePageLoad
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsMobileWiki", dataProvider = "adsTrackingPixelsSent")
+  public void adsTrackingPixelsOutsideUE(List<String> urlPatterns) {
+    networkTrafficInterceptor.startIntercepting();
+    TrackingOptInPage modal = new TrackingOptInPage();
+    modal.setGeoCookie(driver, "NA", "US");
+    modal.getUrl(ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }

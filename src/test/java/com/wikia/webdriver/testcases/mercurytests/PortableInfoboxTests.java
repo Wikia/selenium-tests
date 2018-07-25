@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -12,10 +12,12 @@ import com.wikia.webdriver.elements.mercury.old.PortableInfoboxObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
-
 @Test(groups = "Mercury_Infobox")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class PortableInfoboxTests extends NewTestTemplate {
 
   private PortableInfoboxObject infobox;
@@ -31,16 +33,18 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")
   public void mercury_infobox_verifyElementsBeforeAndAfterExpanding() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     // Before infobox expanding
-    infobox.isTitleNotVisible()
+    infobox
+        .isTitleNotVisible()
         .isImageInTitleNotVisible()
         .isImageInTabberVisible()
         .isImageCaptionInTabberVisible();
 
     // After infobox expanding
-    infobox.clickExpandButton()
+    infobox
+        .clickExpandButton()
         .isVideoVisible()
         .isVideoCaptionVisible()
         .areDataLabelsVisible()
@@ -57,27 +61,35 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_expandAndCollapseByButtonClickAndTap")
   public void mercury_infobox_expandAndCollapseByButtonClickAndTap() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     // expand by clicking button
-    infobox.isInfoboxCollapsed()
+    infobox
+        .isInfoboxCollapsed()
         .clickExpandButton()
         .isInfoboxExpanded()
         .clickExpandButton()
         .isInfoboxCollapsed();
 
     // tapping on infobox content - doesn't expand infobox
-    infobox.tapInfoboxContent().isInfoboxCollapsed();
+    infobox
+        .tapInfoboxContent()
+        .isInfoboxCollapsed();
   }
 
   @Test(groups = "mercury_infobox_externalLinkRedirectsToCorrespondingUrl")
   public void mercury_infobox_externalLinkRedirectsToCorrespondingUrl() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
-    String externalLinkName = infobox.clickExpandButton().areLinksVisible().getExternalLinkName(0);
+    String externalLinkName = infobox
+        .clickExpandButton()
+        .areLinksVisible()
+        .getExternalLinkName(0);
 
-    String externalURL = infobox.clickExternalLink(0).getUrlFromExternalLinkAfterPageIsLoaded();
+    String externalURL = infobox
+        .clickExternalLink(0)
+        .getUrlFromExternalLinkAfterPageIsLoaded();
 
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
@@ -85,21 +97,28 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox")
   public void mercury_infobox_imagesAndVideosOpenInLightbox() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
+    navigate.toPage(MobileSubpages.INFOBOX_1);
 
     // Check image
-    infobox.clickOnImageInInfobox().isLightboxOpened().closeLightbox();
+    infobox
+        .clickOnImageInInfobox()
+        .isLightboxOpened()
+        .closeLightbox();
 
     // Check video
-    infobox.clickExpandButton().clickVideo().isLightboxOpened();
+    infobox
+        .clickExpandButton()
+        .clickVideo()
+        .isLightboxOpened();
   }
 
   @Test(groups = "mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages")
   public void mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_3);
+    navigate.toPage(MobileSubpages.INFOBOX_3);
 
-    infobox.clickGalleryImage(0)
+    infobox
+        .clickGalleryImage(0)
         .isLightboxOpened()
         .closeLightbox()
         .isInfoboxCollapsed()
@@ -111,9 +130,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks")
   public void mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_5);
+    navigate.toPage(MobileSubpages.INFOBOX_5);
 
-    infobox.isImageInCollectionVisible()
+    infobox
+        .isImageInCollectionVisible()
         .clickNextImageArrow(1)
         .isImageInCollectionVisible()
         .clickNextImageArrow(2)
@@ -123,7 +143,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = "mercury_infobox_headerIsNotVisibleInArticleTOC", enabled = false)
   public void mercury_infobox_headerIsNotVisibleInArticleTOC() {
     init();
-    navigate.toPage(MercurySubpages.INFOBOX_2);
+    navigate.toPage(MobileSubpages.INFOBOX_2);
 
     toc.clickOnTOC();
     toc.TOCItemNotContainsText(0, infobox.getHeaderName(0));

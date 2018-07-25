@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.announcements;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -29,7 +29,7 @@ import java.time.LocalDate;
  */
 
 @InBrowser(browser = Browser.CHROME)
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_7)
+@Execute(onWikia = MobileWikis.DISCUSSIONS_7)
 @Test(groups = "Announcements_Desktop")
 public class AnnouncementsDesktopTests extends NewTestTemplate {
 
@@ -93,13 +93,13 @@ public class AnnouncementsDesktopTests extends NewTestTemplate {
     }
 
     @Test()
-    @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_2)
     public void discussionsModHasAccessToAnnouncements() {
         verifyLayout();
     }
 
     @Test()
-    @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_5)
+    @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_5)
     public void discussionsAdminHasAccessToAnnouncements() {
         verifyLayout();
     }

@@ -21,7 +21,7 @@ public class TestAdType extends TemplateNoFirstLoad {
   @Test(dataProviderClass = AdTypeDataProvider.class, dataProvider = "collapse")
   public void adsAdTypeCollapse(String wikiName, String article, String adUnit, String[] slots) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
 
     for (String slotName : slots) {
       ads.verifyGptIframe(adUnit, slotName, "gpt");
@@ -33,7 +33,7 @@ public class TestAdType extends TemplateNoFirstLoad {
   public void adsAdTypeInspectIframe() {
     Page page = new Page("project43", "SyntheticTests/AdType/InspectIframe");
     final By slotSelector = By.id(AdsContent.MEDREC);
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, page.getUrl());
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     ads.waitForSlotExpanded(slotSelector);
     ads.scrollToPosition(slotSelector);
     ads.verifyImgAdLoadedInSlot(AdsContent.MEDREC, DFP_IMAGE_URL);

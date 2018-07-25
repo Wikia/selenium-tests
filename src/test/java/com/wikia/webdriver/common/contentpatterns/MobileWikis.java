@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-public class MercuryWikis {
+public class MobileWikis {
 
   // Normal wiki
   public static final String MERCURY_AUTOMATION_TESTING = "mercuryautomationtesting";
@@ -15,7 +15,7 @@ public class MercuryWikis {
 
   // Other wikis
   public static final String MLP = "mlp";
-  public static final String DE_WIKI = "demercurytests";
+  public static final String DE_WIKI = "de.dman";
   // for discussions desktop view tests
   public static final String DISCUSSIONS_1 = "dauto";
   public static final String DISCUSSIONS_2 = "dauto2";
@@ -32,6 +32,6 @@ public class MercuryWikis {
   // read-only tests for Promoting
   public static final String FALLOUT = "fallout";
 
-  private MercuryWikis() {
+  private MobileWikis() {
   }
 }

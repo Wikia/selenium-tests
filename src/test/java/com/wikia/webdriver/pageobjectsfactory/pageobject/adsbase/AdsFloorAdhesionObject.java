@@ -12,7 +12,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
 
   public AdsFloorAdhesionObject(WebDriver driver, String testedPage) {
-    super(driver);
+    super();
     getUrl(testedPage, true);
   }
 

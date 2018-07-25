@@ -74,11 +74,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
 
-  public AdsBaseObject(WebDriver driver) {
+  public AdsBaseObject() {
     super();
   }
 
-  public AdsBaseObject(WebDriver driver, String page) {
+  public AdsBaseObject(String page) {
     super();
     getUrl(page, true);
   }
@@ -334,6 +334,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void waitForSlotCollapsed(WebElement slot) {
     waitForElementToHaveSize(0, 0, slot);
+  }
+
+  public void waitForSlotExpanded(final String slotSelector) {
+    waitForSlotExpanded(By.cssSelector(slotSelector));
   }
 
   public void waitForSlotExpanded(final By slotSelector) {

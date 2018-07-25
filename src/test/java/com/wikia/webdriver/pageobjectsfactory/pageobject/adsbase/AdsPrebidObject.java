@@ -19,7 +19,7 @@ public class AdsPrebidObject extends AdsBaseObject {
   private static final String NEXT_TITLE = "SyntheticTests/RTB/Prebid.js/Wikia/2";
 
   public AdsPrebidObject(WebDriver driver, String testedPage) {
-    super(driver, testedPage);
+    super(testedPage);
   }
 
   public void verifyKeyValues(String slotName, String adapter, String size, String price) {

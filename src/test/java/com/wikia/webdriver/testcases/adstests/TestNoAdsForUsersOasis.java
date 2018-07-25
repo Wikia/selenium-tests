@@ -21,7 +21,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
 
   private AdsBaseObject buildAdsObject(String pagePath) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME).getUrlForPath(pagePath);
-    return new AdsBaseObject(driver, testedPage);
+    return new AdsBaseObject(testedPage);
   }
 
   @Test(groups = "NoAdsForUsersOasis")

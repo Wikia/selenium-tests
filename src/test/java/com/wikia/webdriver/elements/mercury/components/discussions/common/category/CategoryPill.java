@@ -18,7 +18,8 @@ public class CategoryPill {
   }
 
   public String getId() {
-    return StringUtils.substringAfterLast(webElement.findElement(By.tagName("label")).getAttribute("for"), "-");
+    return StringUtils.substringAfterLast(webElement.findElement(By.tagName("label"))
+                                              .getAttribute("for"), "-");
   }
 
   public void click() {

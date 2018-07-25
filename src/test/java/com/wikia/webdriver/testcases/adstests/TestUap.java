@@ -42,7 +42,7 @@ public class TestUap extends TemplateNoFirstLoad {
       List<Map<String, Object>> mobileInContent,
       List<Map<String, Object>> mobileBottomLeaderboard
   ) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsBlocked(ads, mobileInContent);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);

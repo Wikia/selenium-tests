@@ -1,11 +1,11 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 
 public class PostsCreatorMobile extends BasePostsCreator {
 
@@ -24,7 +24,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement signInButtonInSignInDialog;
 
   @Getter
-  @FindBy (className = "discussion-standalone-editor")
+  @FindBy(className = "discussion-standalone-editor")
   private WebElement editor;
 
   @Getter
@@ -40,7 +40,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor .editor-form__title .editor-textarea")
+  @FindBy(css = ".discussion-standalone-editor .editor-form__title .editor-textarea")
   private WebElement titleTextarea;
 
   @Getter

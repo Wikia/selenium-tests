@@ -22,7 +22,7 @@ public class AdsHopObject extends AdsBaseObject {
   private static final int AD_SUCCESS_TIMEOUT_SEC = 15;
 
   public AdsHopObject(WebDriver driver, String page) {
-    super(driver, page);
+    super(page);
   }
 
   public void verifyClassHidden(final String slotName, final String containerId) {

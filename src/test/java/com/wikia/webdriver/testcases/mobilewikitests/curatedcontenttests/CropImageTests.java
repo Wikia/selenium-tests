@@ -1,8 +1,8 @@
 package com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
+import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -19,10 +19,15 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Searc
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.Test;
-
 @Test(groups = "Mercury_CropImage")
-@Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@Execute(
+    onWikia = MobileWikis.MERCURY_EMPTY_CC_EDITOR,
+    asUser = User.STAFF
+)
+@InBrowser(
+    browser = Browser.CHROME,
+    emulator = Emulator.GOOGLE_NEXUS_5
+)
 public class CropImageTests extends NewTestTemplate {
 
   private static final String SEARCH_IMAGE_QUERY = "U";
@@ -50,7 +55,7 @@ public class CropImageTests extends NewTestTemplate {
   public void MercuryCropImageTest_001_cropOptionInModal() {
     init();
 
-    navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
     curatedMainPage.isCuratedElementVisible(ARTICLE_TITLE_SELECTOR);
 
     navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);
@@ -58,8 +63,7 @@ public class CropImageTests extends NewTestTemplate {
     itemForm.clickOnImage();
 
     Assertion.assertFalse(imageModal.isCropOptionEnabled(),
-                          "Crop option enabled - Should be disabled"
-    );
+                          "Crop option enabled - Should be disabled");
 
     imageModal.clickSearchForImageButton();
     search.type(SEARCH_IMAGE_QUERY);
@@ -67,9 +71,8 @@ public class CropImageTests extends NewTestTemplate {
     croppingTool.clickDoneButton();
     itemForm.clickOnImage();
 
-    Assertion.assertTrue(imageModal.isCropOptionEnabled(),
-                         "Crop option disabled - Should be enabled"
-    );
+    Assertion
+        .assertTrue(imageModal.isCropOptionEnabled(), "Crop option disabled - Should be enabled");
 
     imageModal.selectCrop();
     Assertion.assertTrue(croppingTool.isCropperLoaded(), "Cropper not loaded - Should be loaded");
