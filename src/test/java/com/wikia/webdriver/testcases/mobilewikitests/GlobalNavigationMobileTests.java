@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.ContentRecommendationsMobile;
 import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import org.testng.annotations.Test;
@@ -59,5 +60,34 @@ public class GlobalNavigationMobileTests extends NewTestTemplate {
     globalNavigationMobile.clickFandomLogo();
 
     Assertion.assertTrue(globalNavigationMobile.getCurrentUrl().contains("fandom.wikia.com"));
+  }
+
+  @Test
+  public void trendingArticlesModuleOpensUnderMobileSearchOnEnWikis() {
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .open(MobileSubpages.MAIN_PAGE)
+            .getGlobalNavigationMobile();
+    globalNavigationMobile.openSearch();
+
+    ContentRecommendationsMobile trendingArticles = new ContentRecommendationsMobile();
+
+    Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleVisible());
+  }
+
+  @Test
+  @Execute(onWikia = MobileWikis.DE_WIKI)
+  public void trendingArticlesModuleDoesNotOpenUnderMobileSearchOnNonEnWikis() {
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .openDefault()
+            .getGlobalNavigationMobile();
+    globalNavigationMobile.openSearch();
+
+    ContentRecommendationsMobile trendingArticles = new ContentRecommendationsMobile();
+
+    Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleNotVisible());
+
+
   }
 }
