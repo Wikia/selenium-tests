@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NotificationsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.MessagesNotifications;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
@@ -73,8 +73,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   public void userIsNotifiedWhenOtherUserWritesResponseToHerResponseOnMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
-    NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
-    notifications.showNotifications();
+    MessagesNotifications notifications = new MessagesNotifications();
+    notifications.showMessagesNotifications();
     notifications.verifyNotification(title,
                                      credentials.userName3,
                                      "replied to " + credentials.userName3
