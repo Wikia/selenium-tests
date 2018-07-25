@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.TimeoutException;
 
@@ -11,6 +12,7 @@ public class Navigate extends BasePageObject {
       driver.get(urlBuilder.getUrlForWikiPage(pageName) + urlBuilder.getCacheBusterQuery(pageName));
     }catch (TimeoutException e){
       new JavascriptActions(driver).execute("window.stop()");
+    Log.log("Externals loading timeout", e, false);
     }
     return this;
   }
