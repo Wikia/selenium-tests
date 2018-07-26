@@ -5,8 +5,6 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.TimeoutException;
 
-import java.util.logging.Logger;
-
 public class Navigate extends BasePageObject {
 
   public Navigate toPage(String pageName) {
