@@ -5,6 +5,8 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.TimeoutException;
 
+import java.util.logging.Logger;
+
 public class Navigate extends BasePageObject {
 
   public Navigate toPage(String pageName) {
@@ -25,10 +27,8 @@ public class Navigate extends BasePageObject {
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
-      e.printStackTrace();
       Log.log("URL builder fail", e, false);
     }
-
     return this;
   }
 
