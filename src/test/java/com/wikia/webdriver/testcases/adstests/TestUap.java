@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class TestUap extends TemplateNoFirstLoad {
 
-  private static final String MOBILE_IN_CONTENT = ".mobile-in-content";
+  private static final String MOBILE_IN_CONTENT = ".mobileNav-in-content";
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsUapOasis", groups = "AdsUapOasis")
   public void adsUapOasis(
@@ -33,7 +33,7 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
   }
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5_DEFAULT // FIXME: use default emulator if mobile flag will be reverted
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5_DEFAULT // FIXME: use default emulator if mobileNav flag will be reverted
   )
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsUapMercury", groups = "AdsUapMercury")
   public void adsUapMercury(

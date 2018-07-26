@@ -10,12 +10,12 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PageWithPosts;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.ReportedPostsAndRepliesPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_1)
@@ -38,14 +38,14 @@ public class ReportingPostTests extends NewTestTemplate {
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE =
       "User should not see deleted post.";
   
-  private static final String ANON_MOBILE = "discussions-reporting-anon-mobile";
-  private static final String ANON_DESKTOP = "discussions-reporting-anon-desktop";
-  private static final String USER_MOBILE = "discussions-reporting-user-mobile";
-  private static final String USER_DESKTOP = "discussions-reporting-user-desktop";
-  private static final String MOD_MOBILE = "discussions-reporting-moderator-mobile";
-  private static final String MOD_DESKTOP = "discussions-reporting-moderator-desktop";
+  private static final String ANON_MOBILE = "discussions-reporting-anon-mobileNav";
+  private static final String ANON_DESKTOP = "discussions-reporting-anon-desktopNav";
+  private static final String USER_MOBILE = "discussions-reporting-user-mobileNav";
+  private static final String USER_DESKTOP = "discussions-reporting-user-desktopNav";
+  private static final String MOD_MOBILE = "discussions-reporting-moderator-mobileNav";
+  private static final String MOD_DESKTOP = "discussions-reporting-moderator-desktopNav";
 
-  // Anonymous user on mobile
+  // Anonymous user on mobileNav
 
   @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
@@ -132,7 +132,7 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  // Anonymous user on desktop
+  // Anonymous user on desktopNav
 
   @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
@@ -221,7 +221,7 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  // User on mobile
+  // User on mobileNav
 
   @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
@@ -521,7 +521,7 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  // Third user on desktop
+  // Third user on desktopNav
 
   @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_3)

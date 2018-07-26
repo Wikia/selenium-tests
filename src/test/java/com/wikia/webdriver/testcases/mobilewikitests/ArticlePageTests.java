@@ -12,8 +12,8 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
-import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global.GlobalNavigationMobile;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePageObject;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Article")
@@ -130,14 +130,14 @@ public class ArticlePageTests extends NewTestTemplate {
 
     Log.warning("Info", "Accessing article through link in navigation side");
 
-    globalNavigationMobile.openNavigation();
+    //globalNavigationMobile.openNavigation();
     //navigation.openSubMenu(3);
     //navigation.openPageLink(5);
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MobileSubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    globalNavigationMobile.openNavigation();
+    //globalNavigationMobile.openNavigation();
     //navigation.openSubMenu(3);
     //navigation.openPageLink(4);
 

@@ -9,8 +9,8 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePage;
+import com.wikia.webdriver.elements.mobile.pages.CategoryPage;
 
 import org.testng.annotations.Test;
 

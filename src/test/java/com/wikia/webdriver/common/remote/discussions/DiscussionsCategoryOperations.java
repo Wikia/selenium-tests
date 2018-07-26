@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.discussions.context.CategoryContext;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoryPill;
 
 import lombok.AllArgsConstructor;
 

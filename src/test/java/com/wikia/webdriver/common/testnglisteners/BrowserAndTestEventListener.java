@@ -84,7 +84,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
           try {
             JavascriptExecutor js = DriverProvider.getActiveDriver();
             Object mobileWikiVersion = js.executeScript(
-                "return requirejs.entries['mobile-wiki/config/environment'].module.exports.default.APP.version");
+                "return requirejs.entries['mobileNav-wiki/config/environment'].module.exports.default.APP.version");
             Configuration.setTestValue("mobileWikiVersion", mobileWikiVersion.toString());
           } catch (WebDriverException e) {
             Configuration.setTestValue("mobileWikiVersion", null);

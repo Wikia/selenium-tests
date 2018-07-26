@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

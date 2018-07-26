@@ -7,14 +7,14 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global.GlobalNavigationMobile;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigationDesktop;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
 import org.testng.annotations.Test;
 
 import java.time.Instant;
@@ -33,8 +33,8 @@ public class SignupTests extends NewTestTemplate {
   private static final String GENERIC_ERROR_MSG =
     "We cannot complete your registration at this time";
 
-  private static final String DESKTOP = "auth-signup-desktop";
-  private static final String MOBILE = "auth-signup-mobile";
+  private static final String DESKTOP = "auth-signup-desktopNav";
+  private static final String MOBILE = "auth-signup-mobileNav";
   static final String PASS_PATTERN = "pass_%s";
   static final String USERNAME_PATTERN = "QA%s";
 
@@ -234,7 +234,7 @@ public class SignupTests extends NewTestTemplate {
   }
 
   private void signUpOnDesktopFromDiscussionPageAs(SignUpUser user) {
-    new NavigationBar().clickOnRegister().signUp(user);
+    new GlobalNavigationDesktop().clickOnRegister().signUp(user);
   }
 
   private void signUpOnMobileAs(ArticlePage article, SignUpUser user) {

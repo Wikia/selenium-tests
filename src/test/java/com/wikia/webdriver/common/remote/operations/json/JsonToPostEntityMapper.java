@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.remote.operations.json;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
 
 import com.jayway.jsonpath.DocumentContext;
 

@@ -11,17 +11,17 @@ public enum Emulator {
           .put("height", 640)
           .put("pixelRatio", 3.0)
           .put("touch", true)
-          .put("mobile", false)
+          .put("mobileNav", false)
           .build(),
       "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.170 Mobile Safari/537.36",
       true
   ), GOOGLE_NEXUS_5_DEFAULT(
-      // FIXME: this is workaround for mobile: false flag, remove it if original flag will be reverted
+      // FIXME: this is workaround for mobileNav: false flag, remove it if original flag will be reverted
       new ImmutableMap.Builder<String, Object>().put("width", 360)
           .put("height", 640)
           .put("pixelRatio", 3.0)
           .put("touch", true)
-          .put("mobile", true)
+          .put("mobileNav", true)
           .build(),
       "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.170 Mobile Safari/537.36",
       true
@@ -30,7 +30,7 @@ public enum Emulator {
           .put("height", 667)
           .put("pixelRatio", 2.0)
           .put("touch", true)
-          .put("mobile", true)
+          .put("mobileNav", true)
           .build(),
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25",
       true
@@ -39,7 +39,7 @@ public enum Emulator {
           .put("height", 732)
           .put("pixelRatio", 3.0)
           .put("touch", true)
-          .put("mobile", true)
+          .put("mobileNav", true)
           .build(),
       "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Mobile Safari/537.36",
       true
@@ -49,7 +49,7 @@ public enum Emulator {
           .put("height", 732)
           .put("pixelRatio", 3.0)
           .put("touch", false)
-          .put("mobile", true)
+          .put("mobileNav", true)
           .build(),
       "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Mobile Safari/537.36",
       true
@@ -57,19 +57,19 @@ public enum Emulator {
                                 .put("height", 900)
                                 .put("pixelRatio", 1.0)
                                 .put("touch", false)
-                                .put("mobile", false)
+                                .put("mobileNav", false)
                                 .build(),
                             false
   ), DESKTOP_BREAKPOINT_SMALL(new ImmutableMap.Builder<String, Object>().put("width", 1024)
                                   .put("height", 720)
                                   .put("pixelRatio", 1.0)
                                   .put("touch", false)
-                                  .put("mobile", false)
+                                  .put("mobileNav", false)
                                   .build(), false), DESKTOP_BREAKPOINT_LARGE(
       new ImmutableMap.Builder<String, Object>().put(
           "width",
           1920
-      ).put("height", 1080).put("pixelRatio", 1.0).put("touch", false).put("mobile", false).build(),
+      ).put("height", 1080).put("pixelRatio", 1.0).put("touch", false).put("mobileNav", false).build(),
       false
   ), DEFAULT("", false);
 

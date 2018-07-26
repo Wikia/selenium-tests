@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator.createUniqueCategoryName;
+import static com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator.createUniqueCategoryName;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
@@ -14,12 +14,12 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostsCreator;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoriesFieldset;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoryPill;
+import com.wikia.webdriver.elements.mobile.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -62,8 +62,8 @@ public class CategoriesTests extends NewTestTemplate {
 
   // test groups
 
-  private static final String DESKTOP = "discussions-categories-desktop";
-  private static final String MOBILE = "discussions-categories-mobile";
+  private static final String DESKTOP = "discussions-categories-desktopNav";
+  private static final String MOBILE = "discussions-categories-mobileNav";
 
   // fixtures
 
@@ -143,7 +143,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
 
-  // Anonymous user on mobile
+  // Anonymous user on mobileNav
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
@@ -159,7 +159,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryMobile();
   }
 
-  // Anonymous user on desktop
+  // Anonymous user on desktopNav
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
@@ -175,7 +175,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryDesktop();
   }
 
-  // User on mobile
+  // User on mobileNav
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
@@ -191,7 +191,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryMobile();
   }
 
-  // User on desktop
+  // User on desktopNav
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
@@ -207,7 +207,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryDesktop();
   }
 
-  // Discussions Administrator on mobile
+  // Discussions Administrator on mobileNav
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
@@ -303,7 +303,7 @@ public class CategoriesTests extends NewTestTemplate {
     canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
   }
 
-  // Discussions Administrator on desktop
+  // Discussions Administrator on desktopNav
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)

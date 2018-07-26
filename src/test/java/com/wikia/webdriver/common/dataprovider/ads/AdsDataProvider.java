@@ -186,7 +186,7 @@ public class AdsDataProvider {
             "\"sex\":[\"m\"]",
             "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
             "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
-            "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+            "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobileNav\"]",
             "\"pub\":[\"bethesda\"]",
             "\"esrb\":\"mature\"",
             "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
@@ -252,7 +252,7 @@ public class AdsDataProvider {
                        "\"sex\":[\"m\"]",
                        "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
                        "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
-                       "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
+                       "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobileNav\",\"wii\",\"ds\"]",
                        "\"esrb\":\"everyone\""
          ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")},
         {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "TOP_LEADERBOARD",

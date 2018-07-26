@@ -10,10 +10,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.ReplyCreator;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
 
 import org.testng.annotations.Test;
 
@@ -26,10 +26,10 @@ public class CreatingReplyTests extends NewTestTemplate {
       POST_FOLLOWED_BY_DEFAULT
       = "Post should be followed by default when reply was created for post.";
 
-  private static final String MOBILE = "discussions-creating-replies-mobile";
-  private static final String DESKTOP = "discussions-creating-replies-desktop";
+  private static final String MOBILE = "discussions-creating-replies-mobileNav";
+  private static final String DESKTOP = "discussions-creating-replies-desktopNav";
 
-  // Anonymous on mobile
+  // Anonymous on mobileNav
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
@@ -39,7 +39,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     userOnMobileMustBeLoggedInToUseReplyCreator(page.getReplyCreatorMobile());
   }
 
-  // Anonymous on desktop
+  // Anonymous on desktopNav
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
@@ -49,7 +49,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     userOnDesktopMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
   }
 
-  // User on mobile
+  // User on mobileNav
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2, onWikia = MobileWikis.DISCUSSIONS_2)
@@ -61,7 +61,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     assertThatUserCanCreateReply(page, replyCreator);
   }
 
-  // User on desktop
+  // User on desktopNav
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)

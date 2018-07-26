@@ -8,9 +8,9 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.*;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 public class PollsTests extends NewTestTemplate {

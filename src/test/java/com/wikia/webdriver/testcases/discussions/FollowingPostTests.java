@@ -10,9 +10,9 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.elements.mercury.pages.discussions.*;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.SignInToFollowModalDialog;
+import com.wikia.webdriver.elements.mobile.pages.discussions.*;
 
 import org.testng.annotations.Test;
 
@@ -26,11 +26,11 @@ public class FollowingPostTests extends NewTestTemplate {
       = "Sign in/Following modal dialog should appear.";
   private static final String SHOULD_FOLLOW_POST = "User should be able follow post.";
   private static final String SHOULD_UNFOLLOW_POST = "User should be able unfollow post.";
-  private static final String DESKTOP = "discussions-following-post-desktop";
-  private static final String MOBILE = "discussions-following-post-mobile";
+  private static final String DESKTOP = "discussions-following-post-desktopNav";
+  private static final String MOBILE = "discussions-following-post-mobileNav";
 
   /**
-   * Anonymous user on mobile
+   * Anonymous user on mobileNav
    */
 
   @Test(groups = MOBILE)
@@ -55,7 +55,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * Anonymous user on desktop
+   * Anonymous user on desktopNav
    */
 
   @Test(groups = DESKTOP)
@@ -80,7 +80,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * User on mobile
+   * User on mobileNav
    */
 
   @Test(groups = MOBILE)
@@ -113,7 +113,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * User on desktop
+   * User on desktopNav
    */
 
   @Test(groups = DESKTOP)
@@ -146,7 +146,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * Discussions Administrator on mobile
+   * Discussions Administrator on mobileNav
    */
 
   @Test(groups = MOBILE)
@@ -160,7 +160,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * Discussions Administrator on desktop
+   * Discussions Administrator on desktopNav
    */
 
   @Test(groups = DESKTOP)

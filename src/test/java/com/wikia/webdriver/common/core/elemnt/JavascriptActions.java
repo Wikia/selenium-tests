@@ -3,8 +3,8 @@ package com.wikia.webdriver.common.core.elemnt;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mercury.components.Search;
-import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
+import com.wikia.webdriver.elements.mobile.components.Search;
+import com.wikia.webdriver.elements.mobile.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.*;
@@ -139,8 +139,8 @@ public class JavascriptActions {
   }
 
   /**
-   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobile or
-   * desktop.
+   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobileNav or
+   * desktopNav.
    *
    * @return offset
    */

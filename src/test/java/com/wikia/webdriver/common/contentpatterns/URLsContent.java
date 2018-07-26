@@ -143,10 +143,10 @@ public class URLsContent {
 
   public static final String USER_SIGNOUT = EXTERNAL_URL + "/logout";
 
-  // Recent wiki activity on mobile
+  // Recent wiki activity on mobileNav
   public static final String RECENT_WIKI_ACTIVITY = "/recent-wiki-activity";
 
-  // Search results page on mobile, replace %query% with searched string
+  // Search results page on mobileNav, replace %query% with searched string
   public static final String MOBILE_SEARCH_RESULTS_PAGE = "/search?query=%query%";
 
   private URLsContent() {

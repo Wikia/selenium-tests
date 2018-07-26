@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.rte;
 
-import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
+import com.wikia.webdriver.elements.mobile.pages.InfoboxBuilderPage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -13,8 +13,8 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePageObject;
+import com.wikia.webdriver.elements.mobile.pages.curatedcontent.CuratedContentPageObject;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedNavigation")

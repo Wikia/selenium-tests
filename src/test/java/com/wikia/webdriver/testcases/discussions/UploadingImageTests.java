@@ -11,9 +11,9 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.*;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
@@ -24,8 +24,8 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private static final String URL = "http://fandom.wikia.com";
 
-  private static final String DESKTOP = "discussions-uploading-image-desktop";
-  private static final String MOBILE = "discussions-uploading-image-mobile";
+  private static final String DESKTOP = "discussions-uploading-image-desktopNav";
+  private static final String MOBILE = "discussions-uploading-image-mobileNav";
 
   private static final String MOBILE_COMMUNITY = MobileWikis.DISCUSSIONS_2;
   private static final String DESKTOP_COMMUNITY = MobileWikis.DISCUSSIONS_3;
@@ -155,7 +155,7 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   /**
-   * mobile test methods
+   * mobileNav test methods
    */
 
   @Test(groups = MOBILE)

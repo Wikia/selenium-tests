@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.notifications;
 
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
 
 public final class NotificationFactory {
 

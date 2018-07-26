@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.Header;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.mobile.components.Header;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePage;
 
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_Header")

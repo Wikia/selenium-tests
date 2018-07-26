@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.remote.operations.json;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.ReplyEntityData;
 
 import com.jayway.jsonpath.DocumentContext;
 

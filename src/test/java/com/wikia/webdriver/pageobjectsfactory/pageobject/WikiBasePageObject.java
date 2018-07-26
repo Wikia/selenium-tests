@@ -8,13 +8,13 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.local.LocalNavigationMobile;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.local.CommunityBarMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -24,7 +24,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.*;
@@ -90,7 +90,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final GlobalNavigationMobile globalNavigationMobile = new GlobalNavigationMobile();
   @Getter(lazy = true)
-  private final LocalNavigationMobile localNavigationMobile = new LocalNavigationMobile();
+  private final CommunityBarMobile communityBarMobile = new CommunityBarMobile();
 
   @FindBy(css = "body")
   protected WebElement body;

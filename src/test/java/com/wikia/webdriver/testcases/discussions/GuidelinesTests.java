@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mobile.pages.discussions.GuidelinesPage;
 
 import org.testng.annotations.Test;
 
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-guidelines"})
 public class GuidelinesTests extends NewTestTemplate {
 
-  private static final String DESKTOP = "discussions-guidelines-desktop";
+  private static final String DESKTOP = "discussions-guidelines-desktopNav";
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)

@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.CommunityHeader;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.local.CommunityHeaderDesktop;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
@@ -17,14 +17,14 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
   @Test(groups = {"CommunityHeaderTests"})
   public void wordmarkShouldLinkToMainPage() {
-    MainPage mainPage = new CommunityHeader().clickWordmark();
+    MainPage mainPage = new CommunityHeaderDesktop().clickWordmark();
 
     Assertion.assertTrue(mainPage.isMainPage());
   }
 
   @Test(groups = {"CommunityHeaderTests"})
   public void wikiNameShouldLinkToMainPage() {
-    MainPage mainPage = new CommunityHeader().clickWikiName();
+    MainPage mainPage = new CommunityHeaderDesktop().clickWikiName();
 
     Assertion.assertTrue(mainPage.isMainPage());
   }
@@ -32,7 +32,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = MobileWikis.DE_WIKI, language = "de")
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
-    MainPage mainPage = new CommunityHeader().clickWikiName();
+    MainPage mainPage = new CommunityHeaderDesktop().clickWikiName();
 
     Assertion.assertTrue(mainPage.isMainPage());
   }
@@ -40,7 +40,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.ANONYMOUS)
   public void testAnonWikiButtons() {
-    CreateArticleModalComponentObject modal = new CommunityHeader().clickAddNewPage();
+    CreateArticleModalComponentObject modal = new CommunityHeaderDesktop().clickAddNewPage();
 
     Assertion.assertTrue(modal.isCreateNewArticleModalVisible());
   }
@@ -48,7 +48,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.USER)
   public void testLoggedInWikiButtons() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.clickWikiActivity();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
@@ -78,7 +78,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.MW119_ADMINISTRATOR)
   public void testAdminWikiButtons() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.clickWikiActivity();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
@@ -110,7 +110,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
   @Test(groups = {"CommunityHeaderTests"})
   public void testExploreMenuLinks() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.openExploreMenu().clickExploreWikiActivityLink();
 
@@ -137,7 +137,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestdiscussionsnoforum")
   public void testDiscussLinkOnWikiWithDiscussionsWithoutForum() {
-    new CommunityHeader().clickDiscussLink();
+    new CommunityHeaderDesktop().clickDiscussLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("wikia.com/d/f"));
   }
@@ -145,7 +145,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestdiscussiosandforum")
   public void testDiscussLinkOnWikiWithDiscussionsAndForum() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.openExploreMenu().clickExploreForumLink();
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Forum"));
@@ -157,7 +157,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestforumnodiscussions")
   public void testDiscussLinkOnWikiWithNoDiscussionsAndWithForum() {
-    new CommunityHeader().clickDiscussLink();
+    new CommunityHeaderDesktop().clickDiscussLink();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("Special:Forum"));
   }
@@ -165,7 +165,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestnodiscussionsnoforum")
   public void testNoDiscussLinkOnWikiWithNoDiscussionsAndWithNoForum() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     Assertion.assertFalse(communityHeader.isDiscussLinkDisplayed());
 
@@ -176,7 +176,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "testprivatewiki", asUser = User.ANONYMOUS)
   public void testCommunityHeaderNotVisibleOnPrivateWiki() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     Assertion.assertFalse(communityHeader.isVisible());
   }

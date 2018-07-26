@@ -9,17 +9,17 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 public class EditingPostTests extends NewTestTemplate {
 
-  private static final String MOBILE = "discussions-editing-post-mobile";
-  private static final String DESKTOP = "discussions-editing-post-desktop";
+  private static final String MOBILE = "discussions-editing-post-mobileNav";
+  private static final String DESKTOP = "discussions-editing-post-desktopNav";
 
   private static final String EDITED_BY = "(edited by %s)";
   private static final String EDITED_BY_ADMINISTRATORS = String.format(EDITED_BY, "administrators");

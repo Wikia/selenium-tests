@@ -22,7 +22,7 @@ public class AdsVelesObject extends AdsBaseObject {
   public static final String
       NO_OFFER_PLAYER_EVENT_PATTERN
       = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
-  private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER,.mobile-in-content";
+  private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER,.mobileNav-in-content";
   private static final String INCONTENT_VIDEO = ".video-display-wrapper";
   private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
 

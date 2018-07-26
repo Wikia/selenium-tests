@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.discussions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -14,10 +14,10 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.Reply;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_4)
 @Test(groups = {"discussions-upvoting"})

@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigationDesktop;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
@@ -41,7 +41,7 @@ public class BasicActions extends IntraWiki {
   public void anonSearch() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar();
+    GlobalNavigationDesktop navigation = new GlobalNavigationDesktop();
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
   }
@@ -51,7 +51,7 @@ public class BasicActions extends IntraWiki {
   public void userSearch() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar();
+    GlobalNavigationDesktop navigation = new GlobalNavigationDesktop();
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
   }

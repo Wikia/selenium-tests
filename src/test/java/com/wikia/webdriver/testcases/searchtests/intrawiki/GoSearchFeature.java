@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.global.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigationDesktop;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -26,7 +26,7 @@ public class GoSearchFeature extends IntraWiki {
   public void AnonFromSuggestion() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar();
+    GlobalNavigationDesktop navigation = new GlobalNavigationDesktop();
     navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
     navigation.verifySuggestions(SEARCH_ARTICLE);
     ArticlePageObject article = navigation.ArrowDownAndEnterSuggestion(SEARCH_ARTICLE);
@@ -38,7 +38,7 @@ public class GoSearchFeature extends IntraWiki {
   public void UserFromSuggestion() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar();
+    GlobalNavigationDesktop navigation = new GlobalNavigationDesktop();
     navigation.openWikiPage(testedWiki);
     navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
     navigation.verifySuggestions(SEARCH_ARTICLE);
@@ -50,7 +50,7 @@ public class GoSearchFeature extends IntraWiki {
   @Execute(asUser = User.USER_GO_SEARCH_PREFERRED, onWikia = "muppet")
   public void goSearchPreference() {
     new WikiBasePageObject().openWikiPage(wikiURL);
-    NavigationBar navigation = new NavigationBar();
+    GlobalNavigationDesktop navigation = new GlobalNavigationDesktop();
     ArticlePageObject article = navigation.goSearchFor(SearchContent.SEARCH_ARTICLE);
     article.verifyArticleNameInWgPageName(SearchContent.SEARCH_ARTICLE);
   }

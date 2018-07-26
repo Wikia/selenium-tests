@@ -12,10 +12,10 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.ReplyEntityData;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notification;
@@ -28,8 +28,8 @@ import java.util.List;
 
 public class OnSiteNotificationsTests extends NewTestTemplate {
 
-  private static final String DESKTOP = "on-site-notifications-desktop";
-  private static final String MOBILE = "on-site-notifications-mobile";
+  private static final String DESKTOP = "on-site-notifications-desktopNav";
+  private static final String MOBILE = "on-site-notifications-mobileNav";
 
   private static final String ALL_READ = "All notifications should be marked as read on %s page";
   private static final String NOTIFICATION_VISIBLE_MSG = "Notification [%s] should be displayed on %s page";

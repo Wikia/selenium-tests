@@ -12,12 +12,12 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.*;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoryPill;
+import com.wikia.webdriver.elements.mobile.components.discussions.desktop.PostsCreatorDesktop;
+import com.wikia.webdriver.elements.mobile.components.discussions.mobile.PostsCreatorMobile;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
@@ -27,8 +27,8 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private static final String FIRST_LINE = "# Big List of Naughty Strings\n";
 
-  private static final String DESKTOP = "discussions-creating-posts-desktop";
-  private static final String MOBILE = "discussions-creating-posts-mobile";
+  private static final String DESKTOP = "discussions-creating-posts-desktopNav";
+  private static final String MOBILE = "discussions-creating-posts-mobileNav";
 
   private String siteId;
 

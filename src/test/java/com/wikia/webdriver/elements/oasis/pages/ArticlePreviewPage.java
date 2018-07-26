@@ -13,9 +13,9 @@ public class ArticlePreviewPage extends WikiBasePageObject {
   private static final String[] EDIT_QUERY_PARAM = {"action=edit"};
   @FindBy(css = "#wpPreviewMobile")
   private WebElement mobilePreviewButton;
-  @FindBy(css = ".mobile-preview")
+  @FindBy(css = ".mobileNav-preview")
   private WebElement mobilePreviewModal;
-  @FindBy(css = ".mobile-preview iframe")
+  @FindBy(css = ".mobileNav-preview iframe")
   private WebElement mobilePreviewIframe;
   private Navigate navigate;
 

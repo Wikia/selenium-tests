@@ -10,10 +10,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Replies;
-import com.wikia.webdriver.elements.mercury.pages.discussions.*;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.NoFollowedPostsMessage;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.Replies;
+import com.wikia.webdriver.elements.mobile.pages.discussions.*;
 
 import org.testng.annotations.Test;
 
@@ -35,8 +35,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
       NO_REPLIES_UNDER_POST_MESSAGE
       = "There should be no replies on new post (without replies).";
 
-  private static final String DESKTOP = "discussions-zero-error-state-desktop";
-  private static final String MOBILE = "discussions-zero-error-state-mobile";
+  private static final String DESKTOP = "discussions-zero-error-state-desktopNav";
+  private static final String MOBILE = "discussions-zero-error-state-mobileNav";
 
   /**
    * ANONS ON DESKTOP SECTION

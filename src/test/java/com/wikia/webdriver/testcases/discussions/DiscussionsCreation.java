@@ -5,9 +5,9 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.elements.common.CommunityHeader;
-import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.local.CommunityHeaderDesktop;
+import com.wikia.webdriver.elements.mobile.pages.discussions.GuidelinesPage;
+import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.testcases.createawikitests.CreateWikiTestsLang;
 
 import org.testng.annotations.Test;
@@ -40,7 +40,7 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
   }
 
   private PostsListPage navigateToDiscussions() {
-    new CommunityHeader().clickDiscussLink();
+    new CommunityHeaderDesktop().clickDiscussLink();
     PostsListPage page = new PostsListPage();
     page.waitForEmberLoad();
     return page;

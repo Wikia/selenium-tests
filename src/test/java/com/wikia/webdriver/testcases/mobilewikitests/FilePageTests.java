@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.mobile.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FilePageObject;
 
 import org.testng.annotations.Test;

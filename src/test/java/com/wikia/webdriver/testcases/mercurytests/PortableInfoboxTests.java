@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.old.PortableInfoboxObject;
-import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
+import com.wikia.webdriver.elements.mobile.components.PortableInfoboxObject;
+import com.wikia.webdriver.elements.mobile.pages.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_Infobox")

@@ -9,10 +9,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.MoreOptionsPopOver;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.pages.discussions.*;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.MoreOptionsPopOver;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mobile.pages.discussions.*;
 
 import org.testng.annotations.Test;
 
@@ -32,8 +32,8 @@ public class LockingPostTests extends NewTestTemplate {
       SHOULD_ADD_REPLY_MESSAGE
       = "%s should be able to add reply to post unlocked by %s.";
 
-  private static final String MOBILE = "discussions-locking-posts-mobile";
-  private static final String DESKTOP = "discussions-locking-posts-desktop";
+  private static final String MOBILE = "discussions-locking-posts-mobileNav";
+  private static final String DESKTOP = "discussions-locking-posts-desktopNav";
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
