@@ -121,8 +121,9 @@ public class VisualEditModePageObject extends EditMode {
     return aceEditor;
   }
 
-  public void clearContent() {
+  public VisualEditModePageObject clearContent() {
     editorFrame.frameScope(contentInput::clear);
+    return this;
   }
 
   /**
