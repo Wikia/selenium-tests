@@ -238,7 +238,7 @@ public class TestAdsUapHiVi {
     Assertion.assertFalse(SoundMonitor.wasSoundHeardOnPage(new JavascriptActions()));
   }
 
-  // mobileNav only
+  // mobile only
   public void shouldRedirectAfterClickOnLearnMore(String url) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
     hiViUap.clickLearnMore();

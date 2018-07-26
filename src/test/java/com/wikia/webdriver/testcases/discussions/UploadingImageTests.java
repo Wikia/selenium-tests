@@ -24,8 +24,8 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private static final String URL = "http://fandom.wikia.com";
 
-  private static final String DESKTOP = "discussions-uploading-image-desktopNav";
-  private static final String MOBILE = "discussions-uploading-image-mobileNav";
+  private static final String DESKTOP = "discussions-uploading-image-desktop";
+  private static final String MOBILE = "discussions-uploading-image-mobile";
 
   private static final String MOBILE_COMMUNITY = MobileWikis.DISCUSSIONS_2;
   private static final String DESKTOP_COMMUNITY = MobileWikis.DISCUSSIONS_3;
@@ -155,7 +155,7 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   /**
-   * mobileNav test methods
+   * mobile test methods
    */
 
   @Test(groups = MOBILE)

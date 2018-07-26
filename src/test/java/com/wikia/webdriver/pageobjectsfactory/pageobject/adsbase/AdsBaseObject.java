@@ -67,11 +67,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement presentFloatingMedrec;
   @FindBy(css = "#WikiaFooter")
   private WebElement wikiaFooter;
-  @FindBy(css = ".mobileNav-in-content")
+  @FindBy(css = ".mobile-in-content")
   private WebElement mobileInContent;
-  @FindBy(css = ".mobileNav-prefooter")
+  @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
-  @FindBy(css = ".mobileNav-bottom-leaderboard")
+  @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
 
   public AdsBaseObject() {

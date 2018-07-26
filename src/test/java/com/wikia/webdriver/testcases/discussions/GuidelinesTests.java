@@ -16,8 +16,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-guidelines"})
 public class GuidelinesTests extends NewTestTemplate {
 
-  private static final String DESKTOP = "discussions-guidelines-desktopNav";
-
+  private static final String DESKTOP = "discussions-guidelines-desktop";
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)

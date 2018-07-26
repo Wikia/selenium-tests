@@ -16,7 +16,7 @@ public class MobileWikis {
   // Other wikis
   public static final String MLP = "mlp";
   public static final String DE_WIKI = "de.dman";
-  // for discussions desktopNav view tests
+  // for discussions desktop view tests
   public static final String DISCUSSIONS_1 = "dauto";
   public static final String DISCUSSIONS_2 = "dauto2";
   public static final String DISCUSSIONS_3 = "dauto3";
@@ -24,8 +24,8 @@ public class MobileWikis {
   public static final String DISCUSSIONS_5 = "dauto5";
   public static final String DISCUSSIONS_6 = "dauto6";
   public static final String DISCUSSIONS_7 = "dauto7";
-  // for discussions mobileNav view tests
-  public static final String DISCUSSIONS_MOBILE = "dauto-mobileNav";
+  // for discussions mobile view tests
+  public static final String DISCUSSIONS_MOBILE = "dauto-mobile";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";
   // for testing zero state messages - please don't add any posts!
   public static final String DISCUSSIONS_EMPTY = "discussions-empty";

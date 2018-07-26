@@ -62,8 +62,8 @@ public class CategoriesTests extends NewTestTemplate {
 
   // test groups
 
-  private static final String DESKTOP = "discussions-categories-desktopNav";
-  private static final String MOBILE = "discussions-categories-mobileNav";
+  private static final String DESKTOP = "discussions-categories-desktop";
+  private static final String MOBILE = "discussions-categories-mobile";
 
   // fixtures
 
@@ -143,7 +143,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
 
-  // Anonymous user on mobileNav
+  // Anonymous user on mobile
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
@@ -159,7 +159,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryMobile();
   }
 
-  // Anonymous user on desktopNav
+  // Anonymous user on desktop
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
@@ -175,7 +175,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryDesktop();
   }
 
-  // User on mobileNav
+  // User on mobile
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
@@ -191,7 +191,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryMobile();
   }
 
-  // User on desktopNav
+  // User on desktop
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
@@ -207,7 +207,7 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryDesktop();
   }
 
-  // Discussions Administrator on mobileNav
+  // Discussions Administrator on mobile
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
@@ -303,7 +303,7 @@ public class CategoriesTests extends NewTestTemplate {
     canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
   }
 
-  // Discussions Administrator on desktopNav
+  // Discussions Administrator on desktop
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)

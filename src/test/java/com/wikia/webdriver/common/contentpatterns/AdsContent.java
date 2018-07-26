@@ -6,8 +6,8 @@ import java.util.Map;
 public class AdsContent {
 
   public static final Map<String, String> IFRAME_SLOT_SELECTORS;
-  public static final String ENV_DESKTOP = "desktopNav";
-  public static final String ENV_MOBILE = "mobileNav";
+  public static final String ENV_DESKTOP = "desktop";
+  public static final String ENV_MOBILE = "mobile";
   public static final String
       AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT
       = "top.window.adDriver2ForcedStatus['%s']='success';";

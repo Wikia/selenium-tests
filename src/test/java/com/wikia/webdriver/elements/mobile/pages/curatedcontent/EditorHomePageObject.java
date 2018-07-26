@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * This class represents the main editor view on mobileNav. The editor home is responsible for adding
+ * This class represents the main editor view on mobile. The editor home is responsible for adding
  * top level curated content items
  */
 public class EditorHomePageObject extends BasePageObject {

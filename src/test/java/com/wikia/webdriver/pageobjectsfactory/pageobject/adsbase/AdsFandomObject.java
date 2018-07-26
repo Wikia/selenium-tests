@@ -6,7 +6,7 @@ import org.openqa.selenium.*;
 
 public class AdsFandomObject extends AdsBaseObject {
 
-  private static final By MOBILE_NAVIGATION_BAR = By.cssSelector(".global-navigation-mobileNav");
+  private static final By MOBILE_NAVIGATION_BAR = By.cssSelector(".global-navigation-mobile");
   private static final By DESKTOP_NAVIGATION_BAR = By.cssSelector(".wds-global-navigation");
 
   public AdsFandomObject(WebDriver driver, String testedPage) {

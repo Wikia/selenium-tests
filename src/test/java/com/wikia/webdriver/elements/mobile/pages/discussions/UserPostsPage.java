@@ -24,7 +24,7 @@ public class UserPostsPage extends PageWithPosts {
   @Getter(lazy = true)
   private final DeleteAllButton deleteAll = new DeleteAllButton();
   /**
-   * moderation section visible to mod+ users in mobileNav view
+   * moderation section visible to mod+ users in mobile view
    */
   @FindBy(className = "header-dropdown-button")
   private WebElement moderation;

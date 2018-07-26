@@ -114,7 +114,7 @@ public class VideoFanTakeover extends AutoplayVuap {
     Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);
   }
 
-  // Different way of checking slot sizes on mobileNav because of the very small difference between two slots sizes
+  // Different way of checking slot sizes on mobile because of the very small difference between two slots sizes
   public boolean isVideoAdBiggerThanImageAdMobile(double videoHeight, double imageHeight) {
     if (videoHeight > imageHeight) {
       return true;

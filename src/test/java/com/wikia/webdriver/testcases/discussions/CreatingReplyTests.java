@@ -26,10 +26,10 @@ public class CreatingReplyTests extends NewTestTemplate {
       POST_FOLLOWED_BY_DEFAULT
       = "Post should be followed by default when reply was created for post.";
 
-  private static final String MOBILE = "discussions-creating-replies-mobileNav";
-  private static final String DESKTOP = "discussions-creating-replies-desktopNav";
+  private static final String MOBILE = "discussions-creating-replies-mobile";
+  private static final String DESKTOP = "discussions-creating-replies-desktop";
 
-  // Anonymous on mobileNav
+  // Anonymous on mobile
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
@@ -39,7 +39,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     userOnMobileMustBeLoggedInToUseReplyCreator(page.getReplyCreatorMobile());
   }
 
-  // Anonymous on desktopNav
+  // Anonymous on desktop
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
@@ -49,8 +49,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     userOnDesktopMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
   }
 
-  // User on mobileNav
-
+  // User on mobile
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2, onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -61,7 +60,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     assertThatUserCanCreateReply(page, replyCreator);
   }
 
-  // User on desktopNav
+  // User on desktop
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)

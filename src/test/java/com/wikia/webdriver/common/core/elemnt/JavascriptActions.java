@@ -139,8 +139,8 @@ public class JavascriptActions {
   }
 
   /**
-   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobileNav or
-   * desktopNav.
+   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobile or
+   * desktop.
    *
    * @return offset
    */

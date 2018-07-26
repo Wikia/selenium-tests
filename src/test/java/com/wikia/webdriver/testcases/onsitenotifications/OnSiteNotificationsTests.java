@@ -28,8 +28,8 @@ import java.util.List;
 
 public class OnSiteNotificationsTests extends NewTestTemplate {
 
-  private static final String DESKTOP = "on-site-notifications-desktopNav";
-  private static final String MOBILE = "on-site-notifications-mobileNav";
+  private static final String DESKTOP = "on-site-notifications-desktop";
+  private static final String MOBILE = "on-site-notifications-mobile";
 
   private static final String ALL_READ = "All notifications should be marked as read on %s page";
   private static final String NOTIFICATION_VISIBLE_MSG = "Notification [%s] should be displayed on %s page";

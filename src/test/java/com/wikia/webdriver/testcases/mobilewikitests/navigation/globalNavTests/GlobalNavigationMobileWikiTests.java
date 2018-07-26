@@ -85,6 +85,8 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
             .open(MobileSubpages.MAIN_PAGE)
             .getGlobalNavigationMobile();
 
+    globalNavigationMobile.openSearch();
+
     Assertion.assertTrue(globalNavigationMobile.areInterntionalHubLinksVisible());
     Assertion.assertTrue(globalNavigationMobile.isVideoHubLinkVisible());
   }

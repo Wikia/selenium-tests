@@ -38,14 +38,14 @@ public class ReportingPostTests extends NewTestTemplate {
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE =
       "User should not see deleted post.";
   
-  private static final String ANON_MOBILE = "discussions-reporting-anon-mobileNav";
-  private static final String ANON_DESKTOP = "discussions-reporting-anon-desktopNav";
-  private static final String USER_MOBILE = "discussions-reporting-user-mobileNav";
-  private static final String USER_DESKTOP = "discussions-reporting-user-desktopNav";
-  private static final String MOD_MOBILE = "discussions-reporting-moderator-mobileNav";
-  private static final String MOD_DESKTOP = "discussions-reporting-moderator-desktopNav";
+  private static final String ANON_MOBILE = "discussions-reporting-anon-mobile";
+  private static final String ANON_DESKTOP = "discussions-reporting-anon-desktop";
+  private static final String USER_MOBILE = "discussions-reporting-user-mobile";
+  private static final String USER_DESKTOP = "discussions-reporting-user-desktop";
+  private static final String MOD_MOBILE = "discussions-reporting-moderator-mobile";
+  private static final String MOD_DESKTOP = "discussions-reporting-moderator-desktop";
 
-  // Anonymous user on mobileNav
+  // Anonymous user on mobile
 
   @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
@@ -132,7 +132,7 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  // Anonymous user on desktopNav
+  // Anonymous user on desktop
 
   @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
@@ -221,7 +221,7 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  // User on mobileNav
+  // User on mobile
 
   @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
@@ -521,7 +521,7 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  // Third user on desktopNav
+  // Third user on desktop
 
   @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_3)

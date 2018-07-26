@@ -13,7 +13,7 @@ public class Footer extends WikiBasePageObject {
   @FindBy(css = ".wds-global-footer__button-link")
   private WebElement viewFullSiteLink;
 
-  @FindBy(css = ".mobileNav-site-link")
+  @FindBy(css = ".mobile-site-link")
   private WebElement viewMobileSiteLink;
 
   public void clickViewFullSiteLink() {

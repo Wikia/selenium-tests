@@ -23,12 +23,12 @@ import java.util.List;
 public class MainPageTests extends NewTestTemplate {
 
   private static String RIVERSED_ARTICLE_TITLE_SELECTOR = ".wiki-page-header__title";
-  private static String AD_TOP_LEADERBOARD_SELECTOR = ".mobileNav-top-leaderboard";
+  private static String AD_TOP_LEADERBOARD_SELECTOR = ".mobile-top-leaderboard";
   private static String ARTICLE_TITLE_SELECTOR = ".wiki-page-title";
   private static String WIKIA_STATS_SELECTOR = ".wikia-stats-container";
   private static String FEATURED_CONTENT_SELECTOR = ".featured-content";
   private static String CURATED_CONTENT_SELECTOR = ".curated-content";
-  private static String AD_MOBILE_IN_CONTENT_SELECTOR = ".mobileNav-in-content";
+  private static String AD_MOBILE_IN_CONTENT_SELECTOR = ".mobile-in-content";
   private static String TRENDING_ARTICLES_SELECTOR = ".trending-articles";
   private static String TRENDING_VIDEOS_SELECTOR = ".trending-videos";
 

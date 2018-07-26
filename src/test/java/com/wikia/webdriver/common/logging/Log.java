@@ -320,7 +320,7 @@ public class Log {
       if (matcher.find()) {
         mercuryAdsJsValue = matcher.group(0);
       } else {
-        throw new WebDriverException("Missing mobileNav param in query string");
+        throw new WebDriverException("Missing mobile param in query string");
       }
       Log.info("Mercury Ads Version: " + mercuryAdsJsValue);
     }

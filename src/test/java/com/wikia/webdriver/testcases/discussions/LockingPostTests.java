@@ -32,8 +32,8 @@ public class LockingPostTests extends NewTestTemplate {
       SHOULD_ADD_REPLY_MESSAGE
       = "%s should be able to add reply to post unlocked by %s.";
 
-  private static final String MOBILE = "discussions-locking-posts-mobileNav";
-  private static final String DESKTOP = "discussions-locking-posts-desktopNav";
+  private static final String MOBILE = "discussions-locking-posts-mobile";
+  private static final String DESKTOP = "discussions-locking-posts-desktop";
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)

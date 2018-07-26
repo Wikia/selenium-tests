@@ -18,7 +18,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
-  private static final String SRC_MOBILE = "mobileNav";
+  private static final String SRC_MOBILE = "mobile";
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "dfpParamsSynthetic", groups = {

@@ -26,11 +26,11 @@ public class FollowingPostTests extends NewTestTemplate {
       = "Sign in/Following modal dialog should appear.";
   private static final String SHOULD_FOLLOW_POST = "User should be able follow post.";
   private static final String SHOULD_UNFOLLOW_POST = "User should be able unfollow post.";
-  private static final String DESKTOP = "discussions-following-post-desktopNav";
-  private static final String MOBILE = "discussions-following-post-mobileNav";
+  private static final String DESKTOP = "discussions-following-post-desktop";
+  private static final String MOBILE = "discussions-following-post-mobile";
 
   /**
-   * Anonymous user on mobileNav
+   * Anonymous user on mobile
    */
 
   @Test(groups = MOBILE)
@@ -55,7 +55,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * Anonymous user on desktopNav
+   * Anonymous user on desktop
    */
 
   @Test(groups = DESKTOP)
@@ -80,7 +80,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * User on mobileNav
+   * User on mobile
    */
 
   @Test(groups = MOBILE)
@@ -113,7 +113,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * User on desktopNav
+   * User on desktop
    */
 
   @Test(groups = DESKTOP)
@@ -146,7 +146,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * Discussions Administrator on mobileNav
+   * Discussions Administrator on mobile
    */
 
   @Test(groups = MOBILE)
@@ -160,7 +160,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   /**
-   * Discussions Administrator on desktopNav
+   * Discussions Administrator on desktop
    */
 
   @Test(groups = DESKTOP)

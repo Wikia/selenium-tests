@@ -18,8 +18,8 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 public class EditingPostTests extends NewTestTemplate {
 
-  private static final String MOBILE = "discussions-editing-post-mobileNav";
-  private static final String DESKTOP = "discussions-editing-post-desktopNav";
+  private static final String MOBILE = "discussions-editing-post-mobile";
+  private static final String DESKTOP = "discussions-editing-post-desktop";
 
   private static final String EDITED_BY = "(edited by %s)";
   private static final String EDITED_BY_ADMINISTRATORS = String.format(EDITED_BY, "administrators");

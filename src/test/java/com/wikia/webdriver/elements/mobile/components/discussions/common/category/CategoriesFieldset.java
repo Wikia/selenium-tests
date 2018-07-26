@@ -30,7 +30,7 @@ public class CategoriesFieldset extends BasePage {
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
 
-  @FindBy(css = ".discussion-categories > legend.mobileNav-hidden")
+  @FindBy(css = ".discussion-categories > legend.mobile-hidden")
   private WebElement label;
 
   @FindBy(className = "discussion-categories-edit-link")
@@ -83,7 +83,7 @@ public class CategoriesFieldset extends BasePage {
         .filter(element -> element.getAttribute("innerText").trim().equalsIgnoreCase(categoryName))
         .collect(Collectors.toList());
 
-    // because of differences in mobileNav and desktopNav views
+    // because of differences in mobile and desktop views
     if (foundCategories.isEmpty()) {
       return Optional.empty();
     } else if (foundCategories.size() == 1) {
@@ -139,7 +139,7 @@ public class CategoriesFieldset extends BasePage {
   }
 
   /**
-   * For mobileNav "All" category is not visible, that is why it's always false - can not be edited.
+   * For mobile "All" category is not visible, that is why it's always false - can not be edited.
    * TODO: please remember to change this line when SOC-3793 is done: TODO:
    * "isCategoryEditable(editableCategoryAll)"
    *

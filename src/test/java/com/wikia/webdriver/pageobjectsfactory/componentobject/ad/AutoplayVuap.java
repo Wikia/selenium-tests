@@ -88,7 +88,7 @@ public class AutoplayVuap {
 
   public void togglePause() {
     wait.forElementClickable(pauseOverlaySelector);
-    // hack to click pause overlay on mobileNav
+    // hack to click pause overlay on mobile
     clickByJS(pauseOverlaySelector);
   }
 

@@ -15,7 +15,7 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   private static final String SPECIAL_PAGE_AD_UNIT = "wka.life/_project43//special";
   private static final String
       FILE_PAGE_BLB_MEGA_AD_UNIT
-      = "wka1a.PF/bottom_leaderboard/desktopNav/oasis-file/_project43-life";
+      = "wka1a.PF/bottom_leaderboard/desktop/oasis-file/_project43-life";
   private static final Dimension RESOLUTION = new Dimension(1292, 1000);
 
   private void testSpecialPage(AdsBaseObject ads) {

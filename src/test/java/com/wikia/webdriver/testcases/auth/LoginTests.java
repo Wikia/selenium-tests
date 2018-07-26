@@ -31,8 +31,8 @@ public class LoginTests extends NewTestTemplate {
   private static final User JAPANESE_USER = User.USER_JAPAN;
   private static final User STAFF = User.LOGIN_STAFF;
 
-  private static final String DESKTOP = "auth-login-desktopNav";
-  private static final String MOBILE = "auth-login-mobileNav";
+  private static final String DESKTOP = "auth-login-desktop";
+  private static final String MOBILE = "auth-login-mobile";
 
   private static final String ERROR_MESSAGE =
     "We don't recognize these credentials. Try again or register a new account.";

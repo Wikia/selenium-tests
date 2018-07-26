@@ -35,8 +35,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
       NO_REPLIES_UNDER_POST_MESSAGE
       = "There should be no replies on new post (without replies).";
 
-  private static final String DESKTOP = "discussions-zero-error-state-desktopNav";
-  private static final String MOBILE = "discussions-zero-error-state-mobileNav";
+  private static final String DESKTOP = "discussions-zero-error-state-desktop";
+  private static final String MOBILE = "discussions-zero-error-state-mobile";
 
   /**
    * ANONS ON DESKTOP SECTION

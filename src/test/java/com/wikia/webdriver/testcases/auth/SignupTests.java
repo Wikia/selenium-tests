@@ -33,8 +33,8 @@ public class SignupTests extends NewTestTemplate {
   private static final String GENERIC_ERROR_MSG =
     "We cannot complete your registration at this time";
 
-  private static final String DESKTOP = "auth-signup-desktopNav";
-  private static final String MOBILE = "auth-signup-mobileNav";
+  private static final String DESKTOP = "auth-signup-desktop";
+  private static final String MOBILE = "auth-signup-mobile";
   static final String PASS_PATTERN = "pass_%s";
   static final String USERNAME_PATTERN = "QA%s";
 

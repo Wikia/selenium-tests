@@ -15,7 +15,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   private static final String HOME_PAGE = "Project43_Wikia";
 
   String correlatorDesktop = "_adtest,home,gpt";
-  String correlatorMobile = "_adtest,home,mobileNav";
+  String correlatorMobile = "_adtest,home,mobile";
   UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKIA);
 
   @Test(groups = "DFPCorrelatorOasis")

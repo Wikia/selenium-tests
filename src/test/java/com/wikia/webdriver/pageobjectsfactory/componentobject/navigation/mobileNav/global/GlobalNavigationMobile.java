@@ -25,7 +25,7 @@ public class GlobalNavigationMobile extends BasePageObject {
   @FindBy(css = ".wds-global-navigation__modal-control-user")
   private WebElement userAvatar;
 
-  @FindBy(css = ".wds-global-navigation__logo-image")
+  @FindBy(css = "a.wds-global-navigation__logo")
   private WebElement logoFandom;
 
   @FindBy(css = ".wds-global-navigation__logo-heart-link")
@@ -81,8 +81,8 @@ public class GlobalNavigationMobile extends BasePageObject {
 
   public Search openSearch() {
     Log.info("Open search");
-    wait.forElementClickable(searchIconClickableLink);
-    searchIconClickableLink.click();
+    wait.forElementClickable(searchIcon);
+    searchIcon.click();
 
     Log.info("Search is opened");
     wait.forElementVisible(navigationComponent);
@@ -131,12 +131,18 @@ public class GlobalNavigationMobile extends BasePageObject {
   }
 
   public boolean areInterntionalHubLinksVisible() {
+    wait.forElementVisible(navigationComponent);
+
     return isVisible(gamesHub)
            && isVisible(moviesHub)
            && isVisible(tvHub);
   }
 
-  public boolean isVideoHubLinkVisible() {return isVisible(videoHub); }
+  public boolean isVideoHubLinkVisible() {
+    wait.forElementVisible(navigationComponent);
+
+    return isVisible(videoHub);
+  }
 
   public Notifications getNotifications() {
     return new Notifications();
