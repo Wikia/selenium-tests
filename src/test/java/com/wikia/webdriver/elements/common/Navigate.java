@@ -26,6 +26,7 @@ public class Navigate extends BasePageObject {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
+      Log.log("URL builder fail", e, false);
     }
 
     return this;
