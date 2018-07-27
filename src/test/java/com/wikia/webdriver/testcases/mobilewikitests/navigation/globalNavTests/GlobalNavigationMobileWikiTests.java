@@ -92,11 +92,14 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
   }
 
   @Test
+  @Execute(onWikia = "de.dman")
   public void hubsLinksOnNonEnWiki() {
     GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()
             .open(MobileSubpages.MAIN_PAGE)
             .getGlobalNavigationMobile();
+
+    globalNavigationMobile.openSearch();
 
     Assertion.assertTrue(globalNavigationMobile.areInterntionalHubLinksVisible());
     Assertion.assertFalse(globalNavigationMobile.isVideoHubLinkVisible());
@@ -123,6 +126,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
         new ArticlePage()
             .openDefault()
             .getGlobalNavigationMobile();
+
     globalNavigationMobile.openSearch();
 
     ContentRecommendationsMobile trendingArticles = new ContentRecommendationsMobile();
