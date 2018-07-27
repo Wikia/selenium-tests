@@ -8,13 +8,10 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
-import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
@@ -64,31 +61,6 @@ public class NavigatingTests extends NewTestTemplate {
   public void anonUserOnDesktopCanNavigateToPostDetailsPageByClickingOnPost() {
     clickingPostContentRedirectsToPostDetailsPage();
   }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
-  public void discussionsNavigationOpenAndCloseNavigationAndItsSubMenu() {
-    GlobalNavigationMobile nav = new GuidelinesPage().open()
-        .getGlobalNavigationMobile()
-        .openNavigation();
-    Assertion.assertTrue(nav.isFirstLevelMenuVisible());
-
-    nav.clickCloseButton();
-    Assertion.assertFalse(nav.isFirstLevelMenuVisible());
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = MobileWikis.DISCUSSIONS_MOBILE)
-  public void discussionsNavigationOnNonEnglishWiki() {
-    GlobalNavigationMobile nav = new GuidelinesPage().open()
-        .getGlobalNavigationMobile()
-        .openNavigation();
-    Assertion.assertTrue(nav.isFirstLevelMenuVisible());
-
-    nav.clickCloseButton();
-    Assertion.assertFalse(nav.isFirstLevelMenuVisible());
-  }
-
   /**
    * TESTING METHODS SECTION
    */
