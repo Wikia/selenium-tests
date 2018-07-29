@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import static com.wikia.webdriver.common.contentpatterns.VideoContent.TEST_VIDEO_QUERY;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -41,10 +43,15 @@ public class VEImageTests extends NewTestTemplate {
     ve.verifyPreviewImage();
   }
 
+
+  /**
+   * Prerequisites: Added video with name containing "WikiEvolution"
+   */
   @Test(groups = {"VEImageTests", "VEMediaSetting"})
   @Execute(asUser = User.USER_9)
   public void editImageCaption() {
     String captionText = "test123";
+    String searchPhrase = TEST_VIDEO_QUERY;
 
     VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
                                                                              PageContent.ARTICLE_NAME_PREFIX
@@ -54,7 +61,7 @@ public class VEImageTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog = ve.clickImageButton();
-    mediaDialog = mediaDialog.searchMedia("h");
+    mediaDialog = mediaDialog.searchMedia(searchPhrase);
     ve = mediaDialog.addExistingMedia(1);
     ve.verifyVideos(1);
     ve.selectMedia();
