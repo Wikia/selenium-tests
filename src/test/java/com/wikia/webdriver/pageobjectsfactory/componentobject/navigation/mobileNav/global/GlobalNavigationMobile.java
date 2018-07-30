@@ -5,14 +5,11 @@ import com.wikia.webdriver.elements.mobile.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 public class GlobalNavigationMobile extends BasePageObject {
 
@@ -32,19 +29,13 @@ public class GlobalNavigationMobile extends BasePageObject {
   private WebElement logoFandomHeart;
 
   @FindBy(css = ".wds-global-navigation__modal-control-search")
-  private WebElement searchIcon;
-
-  @FindBy(css = ".wds-global-navigation__modal-control-search > svg.wds-icon")
-  private WebElement searchIconClickableLink;
+  private WebElement searchEntrypoint;
 
   @FindBy(css = ".wds-global-navigation__modal-control-close")
   private WebElement closeButton;
 
-  @FindBy(css = ".wds-global-navigation__search-input-wrapper")
-  private WebElement searchInput;
-
-  @FindBy(css = ".wds-global-navigation__search-suggestions .wds-global-navigation__dropdown-link")
-  private List<WebElement> searchSuggestions;
+  @FindBy(css = ".wds-global-navigation__search")
+  private WebElement searchComponent;
 
   @FindBy(css = ".wds-search-modal a[data-tracking-label='link.games']")
   private WebElement gamesHub;
@@ -58,8 +49,14 @@ public class GlobalNavigationMobile extends BasePageObject {
   @FindBy(css = ".wds-search-modal a[data-tracking-label='link.video']")
   private WebElement videoHub;
 
-  @FindBy(css = ".wds-search-modal wds-global-navigation__dropdown-toggle']")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__dropdown-toggle']")
   private WebElement wikisMenuLink;
+
+  @FindBy(css = ".wds-global-navigation__dropdown-content")
+  private WebElement wikisMenuDropdown;
+
+  @FindBy(css = ".wds-search-modal a[data-tracking-label='link.start-a-wiki']")
+  private WebElement startAwikiButtonInDropdown;
 
   private By navigationComponent = By.cssSelector(".wds-search-modal");
 
@@ -80,9 +77,10 @@ public class GlobalNavigationMobile extends BasePageObject {
   }
 
   public Search openSearch() {
+    //click on search is entry point for search and navigation through hubs
     Log.info("Open search");
-    wait.forElementClickable(searchIcon);
-    searchIcon.click();
+    wait.forElementClickable(searchEntrypoint);
+    searchEntrypoint.click();
 
     Log.info("Search is opened");
     wait.forElementVisible(navigationComponent);
@@ -91,7 +89,6 @@ public class GlobalNavigationMobile extends BasePageObject {
   }
 
   public GlobalNavigationMobile clickCloseButton() {
-    // Clicking on the inner element doesn't always work so we click the parent (<svg>) instead
     wait.forElementClickable(closeButton);
     closeButton.click();
 
@@ -107,10 +104,15 @@ public class GlobalNavigationMobile extends BasePageObject {
 
   public GlobalNavigationMobile clickWikisMenuLink() {
     wait.forElementClickable(wikisMenuLink);
-    this.hover(wikisMenuLink);
+    wikisMenuLink.click();
+
     return this;
   }
 
+  public boolean isStartAwikiButtonNotVisibleinWikisDropdown() {
+    wait.forElementVisible(wikisMenuDropdown);
+    return isElementDisplayed(startAwikiButtonInDropdown);
+  }
 
   public boolean isNavigationBarVisible() {return isVisible(globalNavBar); }
 
@@ -121,8 +123,10 @@ public class GlobalNavigationMobile extends BasePageObject {
   public boolean isLogoHeartVisible() {return isVisible(logoFandomHeart); }
 
   public boolean isSearchIconVisible() {
-    return isVisible(searchIcon);
+    return isVisible(searchEntrypoint);
   }
+
+  public boolean isSearchComponentPresent() { return isElementOnPage(searchComponent); }
 
   public boolean isAnonUserAvatarVisible() {return isVisible(anonUserAvatar); }
 

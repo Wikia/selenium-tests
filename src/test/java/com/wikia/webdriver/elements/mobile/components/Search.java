@@ -104,24 +104,6 @@ public class Search extends BasePageObject {
     return isElementVisible(searchInput);
   }
 
-  public boolean isSearchInputFieldEditable() {
-    try {
-      wait.forElementClickable(searchInput, 0).click();
-      return true;
-    } catch (TimeoutException e) {
-      Log.info(e.getMessage());
-      return false;
-    } catch (WebDriverException e) {
-      // @TODO: this would be best pushed to Selenium upstream to actually throw a more specific
-      // exception
-      if (e.getMessage().contains("Other element would receive the click")) {
-        return false;
-      } else {
-        throw e;
-      }
-    }
-  }
-
   public boolean areSearchSuggestionsDisplayed() {
     try {
       wait.forElementClickable(By.cssSelector(searchSuggestionClass),
