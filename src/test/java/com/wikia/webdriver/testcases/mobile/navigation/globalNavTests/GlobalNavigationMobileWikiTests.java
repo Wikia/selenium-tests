@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileN
 
 import org.testng.annotations.Test;
 
-@Test(groups = "MobileWiki_GlobalNav")
+@Test(groups = "MobileWiki_GlobalNavigation")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
