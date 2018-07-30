@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static com.wikia.webdriver.testcases.auth.SignupTests.createNewUser;
-
 import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.UserWithEmail;
@@ -14,10 +11,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static com.wikia.webdriver.testcases.auth.SignupTests.createNewUser;
 
 @Test(groups = "auth-confirm-email")
 public class ConfirmEmailTests extends NewTestTemplate {
