@@ -88,8 +88,11 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedLangs = method.getAnnotation(DontRun.class).language();
 
+      String langFromConfig = System.getProperty("language") != null ? System.getProperty("language")
+          : Configuration.getPropertyFromFile("language");
+
       for (String excludedLang : excludedLangs) {
-        if (Configuration.getWikiLanguage().contains(excludedLang)) {
+        if (Configuration.getWikiLanguage().contains(excludedLang) || langFromConfig.equals(excludedLang)) {
           return true;
         }
       }
