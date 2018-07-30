@@ -31,9 +31,19 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(mainPage.isMainPage());
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = MercuryWikis.DE_WIKI, language = "de")
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
+    MainPage mainPage = new CommunityHeader().clickWikiName();
+
+    Assertion.assertTrue(mainPage.isMainPage());
+  }
+
+  @RunOnly(language = "szl")
+  @Test(groups = {"CommunityHeaderTests"})
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  public void wikiNameOnNonEnglishWikiShouldLinkToMainPageSzl() {
     MainPage mainPage = new CommunityHeader().clickWikiName();
 
     Assertion.assertTrue(mainPage.isMainPage());
@@ -47,6 +57,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(modal.isCreateNewArticleModalVisible());
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.USER)
   public void testLoggedInWikiButtons() {
@@ -71,6 +82,37 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     communityHeader.openMoreToolsDropdown().clickMoreRecentChanges();
     Assertion.assertStringContains(driver.getCurrentUrl(), "Special:RecentChanges");
+
+    ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
+        .clickMoreAllShortcuts();
+    Assertion.assertTrue(actionExplorerModal.isVisible());
+  }
+
+  @RunOnly(language = "szl")
+  @Test(groups = {"CommunityHeaderTests"})
+  @Execute(asUser = User.USER)
+  public void testLoggedInWikiButtonsSzl() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    communityHeader.clickWikiActivity();
+    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Aktywno%C5%9B%C4%87_na_wiki");
+
+    CreateArticleModalComponentObject addNewPageModal = communityHeader.clickAddNewPage();
+    Assertion.assertTrue(addNewPageModal.isCreateNewArticleModalVisible());
+    addNewPageModal.close();
+
+    communityHeader.openMoreToolsDropdown().clickMoreAddImageLink();
+    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Prze%C5%9Blij");
+
+    AddMediaModalComponentObject addVideoModal = communityHeader.openMoreToolsDropdown()
+        .clickMoreAddVideoLink();
+    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Filmy");
+    Assertion.assertTrue(addVideoModal.isVideoModalVisible());
+
+    addVideoModal.closeAddVideoModal();
+
+    communityHeader.openMoreToolsDropdown().clickMoreRecentChanges();
+    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Ostatnie_zmiany");
 
     ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
         .clickMoreAllShortcuts();
@@ -145,7 +187,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     communityHeader.openExploreMenu().clickExploreWikiActivityLink();
 
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:WikiActivity");
+    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Aktywno%C5%9B%C4%87_na_wiki");
 
     communityHeader.openExploreMenu().clickExploreCommunityLink();
 
@@ -184,7 +226,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   /**
-   * @prerequisites: use wiki with enabled forum and discussions
+   * @prerequisites use wiki with enabled forum and discussions
    */
   @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
@@ -200,7 +242,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   /**
-   * @prerequisites: use wiki with enabled forum and discussions
+   * @prerequisites use wiki with enabled forum and discussions
    */
   @RunOnly(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
@@ -245,7 +287,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   /**
-   * @prerequisites: set privileges in wgGroupPermissionsLocal variable in Wiki Factory
+   * @prerequisites set privileges in wgGroupPermissionsLocal variable in Wiki Factory
    */
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "testprivatewiki", asUser = User.ANONYMOUS)
