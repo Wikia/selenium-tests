@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.EmailUtils;
-import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.UserWithEmail;
 import com.wikia.webdriver.common.core.helpers.UserWithEmailFactory;
@@ -30,8 +29,7 @@ public class ConfirmEmailTests extends NewTestTemplate {
     EmailUtils.deleteAllEmails(user.getEmail(), user.getEmailPassword());
   }
 
-  @Test()
-  @Execute(trackingOptIn = false)
+  @Test
   public void testEmailConfirmationFlow() {
     SignUpUser newUser = createNewUser(user);
     new DetachedRegisterPage(new GlobalNavigation().clickOnRegister()).signUp(newUser);
