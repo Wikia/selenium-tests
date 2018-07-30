@@ -49,7 +49,7 @@ public class GlobalNavigationMobile extends BasePageObject {
   @FindBy(css = ".wds-search-modal a[data-tracking-label='link.video']")
   private WebElement videoHub;
 
-  @FindBy(css = ".wds-search-modal .wds-global-navigation__dropdown-toggle']")
+  @FindBy(css = ".wds-search-modal .wds-global-navigation__link-group .wds-global-navigation__dropdown-toggle']")
   private WebElement wikisMenuLink;
 
   @FindBy(css = ".wds-global-navigation__dropdown-content")
