@@ -77,7 +77,7 @@ public class Configuration {
     return defaultConfig;
   }
 
-  private static String getPropertyFromFile(String propertyName) {
+  public static String getPropertyFromFile(String propertyName) {
     return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null
                                                                                 : String.valueOf(
                                                                                     readConfiguration()
@@ -160,7 +160,7 @@ public class Configuration {
   }
 
   public static Boolean getForceHttps() {
-    return "true".equals(getProp("forceHttps"));
+    return "true".equals(getProp("forceHttps").toLowerCase());
   }
 
   public static Boolean isUnsafePageLoad() {
@@ -168,7 +168,7 @@ public class Configuration {
   }
 
   public static Boolean getForceLanguageInPath() {
-    return "true".equals(getProp("forceLanguageInPath"));
+    return "true".equals(getProp("forceLanguageInPath").toLowerCase());
   }
 
   public static Emulator getEmulator() {
