@@ -1,20 +1,18 @@
 package com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category;
 
+import com.google.common.collect.Iterables;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.BasePage;
-
-import com.google.common.collect.Iterables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import javax.annotation.CheckForNull;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.annotation.CheckForNull;
 
 public class CategoriesFieldset extends BasePage {
 
@@ -34,7 +32,7 @@ public class CategoriesFieldset extends BasePage {
   private WebElement label;
 
   @FindBy(className = "discussion-categories-edit-link")
-  private WebElement editLink;
+  private List<WebElement> editLinks;
 
   @FindBy(css = ".discussion-categories-list > li")
   private List<WebElement> categories;
@@ -134,7 +132,7 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public CategoriesFieldset clickEdit() {
-    editLink.click();
+    editLinks.get(1).click();
     return this;
   }
 

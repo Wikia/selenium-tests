@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.NotificationsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.MessagesNotifications;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
@@ -72,8 +72,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
-    NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
-    notifications.showNotifications();
+    MessagesNotifications notifications = new MessagesNotifications();
+    notifications.showMessagesNotifications();
     notifications.verifyNotification(title, credentials.userName8);
   }
 }

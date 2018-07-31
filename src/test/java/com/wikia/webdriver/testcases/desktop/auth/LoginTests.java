@@ -36,7 +36,6 @@ public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
     "We don't recognize these credentials. Try again or register a new account.";
-  private static final String SUBMIT_BUTTON_DISABLED_MSG = "Submit button should be disabled";
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -144,24 +143,7 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  public void nonexistentUserCannotLogInOnDesktop() {
-    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
-    String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
-    signIn.login(nonexistingUsername, USER.getPassword());
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void nonexistentUserCannotLogInOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
-    signIn.login(nonexistingUsername, USER.getPassword());
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  @Test(groups = DESKTOP)
-  public void userCannotLogInWithInvalidPasswordOnDesktop() {
+  public void invalidPasswordErrorMessagesIsPresentedOnDesktop() {
     SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
     String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
@@ -170,41 +152,11 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCannotLogInWithInvalidPasswordOnMobile() {
+  public void invalidPasswordErrorMessagesIsPresentedOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  @Test(groups = DESKTOP)
-  public void userCannotLogInWithBlankUsernameOnDesktop() {
-    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
-    signIn.typeUsername("").typePassword(USER.getPassword());
-    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
-  }
-
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCannotLogInWithBlankUsernameOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    signIn.typeUsername("").typePassword(USER.getPassword());
-    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
-  }
-
-  @Test(groups = DESKTOP)
-  public void userCannotLogInWithBlankPasswordOnDesktop() {
-    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
-    signIn.typeUsername(USER.getUserName()).typePassword("");
-    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
-  }
-
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCannotLogInWithBlankPasswordOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    signIn.typeUsername(USER.getUserName()).typePassword("");
-    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
   /**

@@ -1,4 +1,4 @@
-p.ackage com.wikia.webdriver.elements.common;
+package com.wikia.webdriver.elements.common;
 
 @FunctionalInterface
 public interface FrameScope {

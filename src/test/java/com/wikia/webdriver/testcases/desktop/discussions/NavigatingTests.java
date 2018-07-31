@@ -12,7 +12,6 @@ import com.wikia.webdriver.elements.communities.mobile.components.discussions.co
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_5)

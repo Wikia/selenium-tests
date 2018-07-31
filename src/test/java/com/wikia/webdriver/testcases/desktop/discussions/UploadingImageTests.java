@@ -98,6 +98,7 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
+  @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
