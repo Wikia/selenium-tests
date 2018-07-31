@@ -18,7 +18,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
 
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = false)
   @Test(groups = {
-      "oasis-tracking-opt-in"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRCountriesForTest")
+      "desktop-tracking-opt-in"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRCountriesForTest")
   public void testModalVisibilityForAnon(String continent, String country, boolean shouldGetModal) {
     TrackingOptInPage.setGeoCookie(driver, continent, country);
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -29,7 +29,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
 
   @Execute(asUser = User.USER, trackingOptIn = false)
   @Test(groups = {
-      "oasis-tracking-opt-in"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRCountriesForTest")
+      "desktop-tracking-opt-in"}, dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "GDPRCountriesForTest")
   public void testModalVisibilityForLoggedInWhoNeverOptedIn(
       String continent, String country, boolean shouldGetModal
   ) {
@@ -40,7 +40,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
     Assertion.assertEquals(modal.isVisible(), shouldGetModal);
   }
 
-  @Test(groups = {"oasis-tracking-opt-in"})
+  @Test(groups = {"desktop-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = false)
   public void loggedInUserInEUShouldNotGetModalIfOptInAccepted() {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
@@ -53,7 +53,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
     Assertion.assertFalse(modal.isVisible());
   }
 
-  @Test(groups = {"oasis-tracking-opt-in"})
+  @Test(groups = {"desktop-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = false)
   public void loggedInUserInEUShouldNotGetModalIfOptInRejected() {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
@@ -66,7 +66,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
     Assertion.assertFalse(modal.isVisible());
   }
 
-  @Test(groups = {"oasis-tracking-opt-in"})
+  @Test(groups = {"desktop-tracking-opt-in"})
   @Execute(trackingOptIn = false)
   public void anonUserInEUShouldNotGetModalIfOptInAccepted() {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
@@ -79,7 +79,7 @@ public class TrackingOptInTestsOasis extends NewTestTemplate {
     Assertion.assertFalse(modal.isVisible());
   }
 
-  @Test(groups = {"oasis-tracking-opt-in"})
+  @Test(groups = {"desktop-tracking-opt-in"})
   @Execute(trackingOptIn = false)
   public void anonUserInEUShouldNotGetModalIfOptInRejected() {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");

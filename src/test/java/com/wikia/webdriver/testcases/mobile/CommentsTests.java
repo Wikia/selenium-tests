@@ -31,7 +31,7 @@ public class CommentsTests extends NewTestTemplate {
   private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
   private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
 
-  private static final By OASIS_BODY = By.cssSelector("body.skin-oasis");
+  private static final By OASIS_BODY = By.cssSelector("body.skin-desktop");
 
   private CommentsPageObject comments;
 

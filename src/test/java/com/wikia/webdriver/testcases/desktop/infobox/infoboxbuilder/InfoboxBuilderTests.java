@@ -12,8 +12,8 @@ import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.mobile.pages.InfoboxBuilderPage;
-import com.wikia.webdriver.elements.communities.oasis.pages.TemplateEditPage;
-import com.wikia.webdriver.elements.communities.oasis.pages.TemplatePage;
+import com.wikia.webdriver.elements.communities.desktop.pages.TemplateEditPage;
+import com.wikia.webdriver.elements.communities.desktop.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 

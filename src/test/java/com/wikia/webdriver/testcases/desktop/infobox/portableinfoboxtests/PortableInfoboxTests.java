@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.oasis.pages.TemplatePage;
+import com.wikia.webdriver.elements.communities.desktop.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;

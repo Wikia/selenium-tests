@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.desktop.articlepreviewtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.oasis.pages.ArticlePreviewPage;
+import com.wikia.webdriver.elements.communities.desktop.pages.ArticlePreviewPage;
 
 import org.testng.annotations.Test;
 
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mercuryautomationtesting")
 public class MobilePreviewTests extends NewTestTemplate {
 
-  @Test(groups = "oasis-articlePreview-mobilePreviewIsRenderedCorrectlyInModal")
+  @Test(groups = "desktop-articlePreview-mobilePreviewIsRenderedCorrectlyInModal")
   public void mobilePreviewIsRenderedCorrectlyInModal() {
     new ArticlePreviewPage().navigateToArticlePreviewPageInEditMode()
         .clickOnMobilePreviewButton()

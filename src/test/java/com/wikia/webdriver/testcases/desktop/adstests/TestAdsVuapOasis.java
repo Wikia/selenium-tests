@@ -320,7 +320,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @UnsafePageLoad
   @Test(groups = {"AdsVuapClickToPlayDesktop"})
   public void ABCDShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
-    final String adUnit = "/5441/wka1a.VIDEO/abcd/desktop/oasis-article/_project43-life";
+    final String adUnit = "/5441/wka1a.VIDEO/abcd/desktop/desktop-article/_project43-life";
     checkRequestForAdUnit(AdsDataProvider.UAP_ABCD_PAGE, adUnit);
   }
 
@@ -328,7 +328,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @UnsafePageLoad
   @Test(groups = {"AdsVuapClickToPlayDesktop"})
   public void HiViATFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
-    final String adUnit = "/5441/wka1a.VIDEO/uap_bfaa/desktop/oasis-article/_project43-life";
+    final String adUnit = "/5441/wka1a.VIDEO/uap_bfaa/desktop/desktop-article/_project43-life";
     checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE, adUnit);
   }
 
@@ -336,7 +336,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @UnsafePageLoad
   @Test(groups = {"AdsVuapClickToPlayDesktop"})
   public void HiViBTFShouldRequestForMEGAAdUnitVAST() throws UnsupportedEncodingException {
-    final String adUnit = "/5441/wka1a.VIDEO/uap_bfab/desktop/oasis-article/_project43-life";
+    final String adUnit = "/5441/wka1a.VIDEO/uap_bfab/desktop/desktop-article/_project43-life";
     checkRequestForAdUnit(AdsDataProvider.UAP_HIVI_PAGE,
                           adUnit,
                           new String[]{AdsContent.BOTTOM_LB}

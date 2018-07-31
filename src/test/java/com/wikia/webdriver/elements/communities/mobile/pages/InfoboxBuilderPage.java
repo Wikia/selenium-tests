@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Frame;
 import com.wikia.webdriver.elements.common.FrameScope;
-import com.wikia.webdriver.elements.communities.oasis.pages.TemplateEditPage;
+import com.wikia.webdriver.elements.communities.desktop.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.*;

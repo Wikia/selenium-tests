@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class SkinHelper extends WikiBasePageObject {
 
-  @FindBy(css = "body.skin-oasis")
+  @FindBy(css = "body.skin-desktop")
   private WebElement oasisSkin;
 
   @FindBy(css = "body.discussions")

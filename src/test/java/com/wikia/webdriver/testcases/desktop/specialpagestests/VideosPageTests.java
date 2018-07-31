@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.oasis.components.notifications.Notification;
-import com.wikia.webdriver.elements.communities.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.elements.communities.desktop.components.notifications.Notification;
+import com.wikia.webdriver.elements.communities.desktop.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 

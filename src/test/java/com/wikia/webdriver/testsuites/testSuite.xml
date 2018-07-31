@@ -63,7 +63,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVideoFrequencyCapping"/>
-            <class name="com.wikia.webdriver.testcases.desktop.Anonymization.AnonymizationTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.anonymization.AnonymizationTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleCRUDUserTests"/>
@@ -91,7 +91,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.chattests.ChatTestsStaff"/>
             <class name="com.wikia.webdriver.testcases.desktop.commentstests.ArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.commentstests.BlogCommentsTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.navigation.localnav.CommunityHeaderTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.navigation.local.CommunityHeaderTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.contentreview.ContentReviewTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.createawikitests.CreateWikiTestsLang"/>
             <class name="com.wikia.webdriver.testcases.desktop.createawikitests.CreateWikiTestsLoggedInUser"/>
@@ -132,9 +132,9 @@
             <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumEditModeTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumThreadTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumAnonTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.navigation.globalnav.GlobalNavigationLayout"/>
-            <class name="com.wikia.webdriver.testcases.desktop.navigation.globalnav.GlobalNavigationSearching"/>
-            <class name="com.wikia.webdriver.testcases.desktop.navigation.globalnav.GlobalNavigationNavigating"/>
+            <class name="com.wikia.webdriver.testcases.desktop.navigation.global.GlobalNavigationLayout"/>
+            <class name="com.wikia.webdriver.testcases.desktop.navigation.global.GlobalNavigationSearching"/>
+            <class name="com.wikia.webdriver.testcases.desktop.navigation.global.GlobalNavigationNavigating"/>
             <class name="com.wikia.webdriver.testcases.desktop.globalshortcuts.ActionExplorerTest"/>
             <class name="com.wikia.webdriver.testcases.desktop.globalshortcuts.KeyboardShortcutsTest"/>
             <class name="com.wikia.webdriver.testcases.desktop.googleconnect.GoogleConnect"/>
@@ -184,7 +184,6 @@
             <class name="com.wikia.webdriver.testcases.mobile.GlobalFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mobile.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mobile.HTMLTitleTests"/>
-            <class name="com.wikia.webdriver.testcases.mobile.navigation.globalNavTests.NavigationMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobile.search.SearchMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobile.SmartBannerTest"/>
             <class name="com.wikia.webdriver.testcases.desktop.multiwikifindertests.MultiWikiFinderTests"/>
@@ -194,7 +193,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.messagewallnotifications.MessageWallNotificationsOwnerTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.messagewallnotifications.MessageWallNotificationsThreadCreatorTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.oasismainpage.CuratedContentModal"/>
+            <class name="com.wikia.webdriver.testcases.desktop.mainpage.CuratedContentModal"/>
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.onsitenotifications.OnSiteNotificationsTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.infobox.portableinfoboxtests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.searchtests.CrossWikiSearchTests"/>
@@ -203,8 +202,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.searchtests.intrawiki.ExactMatch"/>
             <class name="com.wikia.webdriver.testcases.desktop.searchtests.intrawiki.GoSearchFeature"/>
             <class name="com.wikia.webdriver.testcases.desktop.searchtests.intrawiki.Suggestions"/>
-            <class name="com.wikia.webdriver.testcases.desktop.social_buttons_tests.SocialButtonsTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.social.MercuryAssetCheck"/>
+            <class name="com.wikia.webdriver.testcases.desktop.socialbuttonstests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.specialpagestests.EditAccountTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.specialpagestests.EditingPreferencesTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.specialpagestests.FilePageTests"/>
