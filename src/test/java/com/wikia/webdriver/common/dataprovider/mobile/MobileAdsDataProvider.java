@@ -77,7 +77,7 @@ public class MobileAdsDataProvider {
                        "\"sex\":[\"m\"]"
 
          ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                          "\"src\":\"mercury\"",
+                          "\"src\":\"mobile\"",
                           "\"loc\":\"top\""
         )}, {"fallout", "Fallout", "wka.gaming/_fallout//article", "MOBILE_TOP_LEADERBOARD",
              Arrays.asList("\"s0\":\"gaming\"",
@@ -103,13 +103,13 @@ public class MobileAdsDataProvider {
                            "\"sex\":[\"m\"]",
                            "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                            "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
-                           "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mercury\"]",
+                           "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
                            "\"pub\":[\"bethesda\"]",
                            "\"esrb\":\"mature\"",
                            "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
 
              ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                              "\"src\":\"mercury\"",
+                              "\"src\":\"mobile\"",
                               "\"loc\":\"top\""
     )}, {"runescape", "Grew", "wka.gaming/_runescape//article", "MOBILE_TOP_LEADERBOARD",
          Arrays.asList("\"s0\":\"gaming\"",
@@ -137,7 +137,7 @@ public class MobileAdsDataProvider {
                        "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
 
          ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                          "\"src\":\"mercury\"",
+                          "\"src\":\"mobile\"",
                           "\"loc\":\"top\""
     )}, {"lego", "LEGO_Wiki", "wka.ent/_lego//home", "MOBILE_TOP_LEADERBOARD", Arrays.asList(
         "\"s0\":\"ent\"",
@@ -164,7 +164,7 @@ public class MobileAdsDataProvider {
         "\"theme\":[\"lego\"]",
         "\"esrb\":\"everyone\""
     ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                     "\"src\":\"mercury\"",
+                     "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
     )}, {"civilization", "Category:Browse", "wka.gaming/_civilization//article",
          "MOBILE_TOP_LEADERBOARD", Arrays.asList("\"s0\":\"gaming\"",
@@ -188,10 +188,10 @@ public class MobileAdsDataProvider {
                                                  "\"sex\":[\"m\"]",
                                                  "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
                                                  "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
-                                                 "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mercury\",\"wii\",\"ds\"]",
+                                                 "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                                                  "\"esrb\":\"everyone\""
     ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                     "\"src\":\"mercury\"",
+                     "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
     )}, {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "MOBILE_TOP_LEADERBOARD",
          Arrays.asList("\"s0\":\"gaming\"",
@@ -222,7 +222,7 @@ public class MobileAdsDataProvider {
                        "\"pub\":[\"blizzard\"]",
                        "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
          ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                          "\"src\":\"mercury\"",
+                          "\"src\":\"mobile\"",
                           "\"loc\":\"top\"",
                           "\"loc\":\"top\""
     )}, {"overlordmaruyama", "Blood_of_Jormungandr", "wka.ent/_not_a_top1k_wiki//article",
@@ -246,7 +246,7 @@ public class MobileAdsDataProvider {
                                                  "\"pv\":\"1\"",
                                                  "\"esrb\":\"teen\""
     ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                     "\"src\":\"mercury\"",
+                     "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
     )}};
   }
@@ -267,7 +267,7 @@ public class MobileAdsDataProvider {
                                                                    "\"esrb\":\"teen\""
     ), Arrays.asList("\"pos\":\"a\"",
                      "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
-                     "\"wsrc\":\"mercury_evolve\""
+                     "\"wsrc\":\"mobile_evolve\""
     )}};
   }
 
