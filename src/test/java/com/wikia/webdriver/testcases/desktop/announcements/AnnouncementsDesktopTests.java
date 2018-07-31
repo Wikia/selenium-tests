@@ -11,11 +11,11 @@ import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
 import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.OnSiteNotifications;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.AnnouncementsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
