@@ -9,10 +9,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.MoreOptionsPopOver;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mobile.pages.discussions.*;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.MoreOptionsPopOver;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.*;
 
 import org.testng.annotations.Test;
 

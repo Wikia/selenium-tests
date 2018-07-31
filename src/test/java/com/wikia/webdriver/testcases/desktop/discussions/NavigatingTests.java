@@ -8,9 +8,9 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.Post;
-import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.Post;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 
 import org.testng.annotations.Test;

@@ -12,12 +12,12 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.*;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mobile.components.discussions.desktop.PostsCreatorDesktop;
-import com.wikia.webdriver.elements.mobile.components.discussions.mobile.PostsCreatorMobile;
-import com.wikia.webdriver.elements.mobile.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.*;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoryPill;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.desktop.PostsCreatorDesktop;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.PostsCreatorMobile;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 

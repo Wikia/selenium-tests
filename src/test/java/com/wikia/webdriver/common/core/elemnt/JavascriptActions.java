@@ -3,8 +3,8 @@ package com.wikia.webdriver.common.core.elemnt;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mobile.components.Search;
-import com.wikia.webdriver.elements.mobile.pages.SearchResultsPage;
+import com.wikia.webdriver.elements.communities.mobile.components.Search;
+import com.wikia.webdriver.elements.communities.mobile.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.*;

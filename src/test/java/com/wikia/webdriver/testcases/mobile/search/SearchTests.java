@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.mobile.search;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.Search;
+import com.wikia.webdriver.elements.communities.mobile.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SearchTests extends NewTestTemplate {

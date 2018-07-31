@@ -1,0 +1,27 @@
+package com.wikia.webdriver.elements.communities.mobile.pages.discussions;
+
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.NoFollowedPostsMessage;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.SignInToFollowModalDialog;
+
+import lombok.Getter;
+
+public class FollowPage extends PageWithPosts {
+
+  private static final String PATH = "/d/follow";
+
+  @Getter(lazy = true)
+  private final NoFollowedPostsMessage noFollowedPostsMessage = new NoFollowedPostsMessage();
+
+  @Override
+  public FollowPage open() {
+    final FollowPage page = new FollowPage();
+    page.getUrl(getUrlWithCacheBuster(page.urlBuilder.getUrl() + PATH));
+    page.waitForEmberLoad();
+    return page;
+  }
+
+  @Override
+  public SignInToFollowModalDialog getSignInDialog() {
+    throw new UnsupportedOperationException("FollowPage not reachable for unauthorized users");
+  }
+}

@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mobile.pages.discussions.GuidelinesPage;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.GuidelinesPage;
 
 import org.testng.annotations.Test;
 

@@ -6,8 +6,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.discussions.desktop.Promoting;
-import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.desktop.Promoting;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertStringContains;

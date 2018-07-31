@@ -11,11 +11,11 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.ImageGenerator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mobile.pages.curatedcontent.CuratedMainPagePageObject;
-import com.wikia.webdriver.elements.mobile.pages.curatedcontent.EditorHomePageObject;
-import com.wikia.webdriver.elements.mobile.pages.curatedcontent.curatededitorform.ItemFormPageObject;
-import com.wikia.webdriver.elements.mobile.pages.curatedcontent.imageupload.CroppingToolPageObject;
-import com.wikia.webdriver.elements.mobile.pages.curatedcontent.imageupload.UploadImageModalComponentObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.CuratedMainPagePageObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.EditorHomePageObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.curatededitorform.ItemFormPageObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.imageupload.CroppingToolPageObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_ImageUpload")

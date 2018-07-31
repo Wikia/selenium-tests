@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.local;
 
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
+import com.wikia.webdriver.elements.communities.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;

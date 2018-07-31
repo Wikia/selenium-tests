@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mobile.components.Head;
+import com.wikia.webdriver.elements.communities.mobile.components.Head;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;

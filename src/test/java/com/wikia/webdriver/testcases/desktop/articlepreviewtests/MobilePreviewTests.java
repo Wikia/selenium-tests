@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.desktop.articlepreviewtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.oasis.pages.ArticlePreviewPage;
+import com.wikia.webdriver.elements.communities.oasis.pages.ArticlePreviewPage;
 
 import org.testng.annotations.Test;
 

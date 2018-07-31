@@ -3,8 +3,8 @@ package com.wikia.webdriver.common.remote.discussions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.context.*;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.ReplyEntityData;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.ReplyEntityData;
 
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;

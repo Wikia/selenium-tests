@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.oasis.pages.SearchPage;
+import com.wikia.webdriver.elements.communities.oasis.pages.SearchPage;
 
 import org.testng.annotations.Test;
 

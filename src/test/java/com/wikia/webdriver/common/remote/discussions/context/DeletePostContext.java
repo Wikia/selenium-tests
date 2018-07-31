@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.remote.discussions.context;
 
 import com.wikia.webdriver.common.remote.context.RemoteContext;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.PostEntity;
 
 import lombok.Builder;
 import lombok.Getter;

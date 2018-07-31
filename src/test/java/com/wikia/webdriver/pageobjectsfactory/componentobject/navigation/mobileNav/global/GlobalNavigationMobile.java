@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global;
 
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mobile.components.Search;
+import com.wikia.webdriver.elements.communities.mobile.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;

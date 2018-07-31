@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.infobox.infoboxbuilder;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
+import com.wikia.webdriver.elements.communities.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;

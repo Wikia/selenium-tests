@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
-import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
+import com.wikia.webdriver.elements.communities.oasis.components.templateclassificiation.TemplateClassification;
+import com.wikia.webdriver.elements.communities.oasis.pages.TemplatePage;
 
 import org.testng.annotations.Test;
 

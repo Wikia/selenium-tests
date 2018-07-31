@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import static com.wikia.webdriver.elements.mobile.components.discussions.common.TextGenerator.createUniqueCategoryName;
+import static com.wikia.webdriver.elements.communities.mobile.components.discussions.common.TextGenerator.createUniqueCategoryName;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
@@ -14,12 +14,12 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoriesFieldset;
-import com.wikia.webdriver.elements.mobile.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mobile.components.discussions.mobile.FiltersPopOver;
-import com.wikia.webdriver.elements.mobile.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.PostsCreator;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoriesFieldset;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoryPill;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

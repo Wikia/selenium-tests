@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mobile.pages.InfoboxBuilderPage;
+import com.wikia.webdriver.elements.communities.mobile.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.FeaturesModule;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.InfoboxChoiceModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.rte.TemplateConfigurationModal;

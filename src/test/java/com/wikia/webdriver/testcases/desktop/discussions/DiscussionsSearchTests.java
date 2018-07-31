@@ -7,9 +7,9 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
-import com.wikia.webdriver.elements.mobile.pages.ArticlePage;
-import com.wikia.webdriver.elements.mobile.pages.SearchResultsPage;
-import com.wikia.webdriver.elements.mobile.pages.discussions.GuidelinesPage;
+import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
+import com.wikia.webdriver.elements.communities.mobile.pages.SearchResultsPage;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.GuidelinesPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
 import com.wikia.webdriver.testcases.mobile.search.SearchTests;
 
