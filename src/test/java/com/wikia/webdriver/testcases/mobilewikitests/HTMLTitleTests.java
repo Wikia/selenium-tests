@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mobilewikitests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -58,6 +59,7 @@ public class HTMLTitleTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"mercury_htmlTitleSet", "Mercury_htmlTitleSet"})
   public void mercury_htmlTitleSet() {
     for (String[] testCase : testCases) {
