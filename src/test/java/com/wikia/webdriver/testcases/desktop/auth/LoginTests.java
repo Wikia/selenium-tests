@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsLi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
 import org.testng.annotations.Test;
 
 import java.time.Instant;

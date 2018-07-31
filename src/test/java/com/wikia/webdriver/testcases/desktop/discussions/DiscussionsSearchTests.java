@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.SearchResultsPage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.GuidelinesPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
 import com.wikia.webdriver.testcases.mobile.search.SearchTests;
 
 import org.testng.annotations.Test;

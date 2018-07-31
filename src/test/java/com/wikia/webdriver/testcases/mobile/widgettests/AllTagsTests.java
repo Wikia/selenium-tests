@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global.GlobalNavigationMobile;
+import com.wikia.webdriver.elements.communities.mobile.components.navigation.global.GlobalNavigationMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.*;

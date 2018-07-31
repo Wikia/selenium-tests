@@ -7,14 +7,14 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global.GlobalNavigationMobile;
+import com.wikia.webdriver.elements.communities.mobile.components.navigation.global.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigationDesktop;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigationDesktop;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigation;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
 import org.testng.annotations.Test;
 
 import java.time.Instant;

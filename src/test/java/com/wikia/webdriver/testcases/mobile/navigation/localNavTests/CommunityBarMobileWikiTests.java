@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.DiscussionsPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.local.CommunityBarMobile;
+import com.wikia.webdriver.elements.communities.mobile.components.navigation.local.CommunityBarMobile;
 
 import org.testng.annotations.Test;
 

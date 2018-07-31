@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.local.CommunityHeaderDesktop;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.local.CommunityHeaderDesktop;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;

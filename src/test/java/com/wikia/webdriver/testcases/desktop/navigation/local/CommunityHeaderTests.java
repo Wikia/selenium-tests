@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.local.CommunityHeaderDesktop;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.local.CommunityHeaderDesktop;
 import com.wikia.webdriver.elements.communities.desktop.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;

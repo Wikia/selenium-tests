@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.local;
+package com.wikia.webdriver.elements.communities.mobile.components.navigation.local;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;

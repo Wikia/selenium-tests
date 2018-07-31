@@ -12,7 +12,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.OnSiteNotifications;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.OnSiteNotifications;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.AnnouncementsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;

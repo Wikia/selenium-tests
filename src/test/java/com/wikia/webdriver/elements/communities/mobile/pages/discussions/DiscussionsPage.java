@@ -3,7 +3,7 @@ package com.wikia.webdriver.elements.communities.mobile.pages.discussions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.mobileNav.global.GlobalNavigationMobile;
+import com.wikia.webdriver.elements.communities.mobile.components.navigation.global.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.communities.mobile.components.Header;
 
 import lombok.Getter;

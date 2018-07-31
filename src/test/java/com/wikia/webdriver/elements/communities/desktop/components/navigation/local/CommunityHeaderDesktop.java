@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.local;
+package com.wikia.webdriver.elements.communities.desktop.components.navigation.local;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.communities.desktop.components.globalshortcuts.ActionExplorerModal;

@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global.GlobalNavigationDesktop;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigationDesktop;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 

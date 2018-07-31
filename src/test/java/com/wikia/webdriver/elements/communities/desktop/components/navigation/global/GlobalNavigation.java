@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.componentobject.navigation.desktopNav.global;
+package com.wikia.webdriver.elements.communities.desktop.components.navigation.global;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
