@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.mercury.pages.discussions.BasePage;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

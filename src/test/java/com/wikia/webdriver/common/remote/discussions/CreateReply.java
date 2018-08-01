@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.context.CreateReplyContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import com.wikia.webdriver.common.remote.operations.json.JsonToReplyPostEntityMapper;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.ReplyEntityData;
 
 import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.JsonPath;
