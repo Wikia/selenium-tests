@@ -882,7 +882,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   /**
-   * Iframe finder for oasis slots WARNING: it's able to find only first call result!
+   * Iframe finder for desktop slots WARNING: it's able to find only first call result!
    */
   public By findFirstIframeWithAd(String slotName) {
     return By.cssSelector("#" + slotName + " iframe[title='3rd party ad content']");

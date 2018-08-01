@@ -3,8 +3,8 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
-import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.elements.communities.desktop.components.notifications.Notification;
+import com.wikia.webdriver.elements.communities.desktop.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
