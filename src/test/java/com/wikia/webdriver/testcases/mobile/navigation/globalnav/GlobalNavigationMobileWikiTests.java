@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mobile.navigation.globalNavTests;
+package com.wikia.webdriver.testcases.mobile.navigation.globalnav;
 
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
