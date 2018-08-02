@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.desktop.createawikitests;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.helpers.WikiaProperties;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -34,6 +35,9 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+
     article.verifyWikiTitleHeader(wikiName);
   }
 
@@ -52,6 +56,9 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
 
     Assertion.assertTrue(WikiaProperties.isWikiForChildren(driver), "Wiki is not for children");
@@ -73,6 +80,9 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
     article.isStringInURL(wikiDomain);
   }

@@ -4,6 +4,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -38,6 +39,9 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -35,6 +36,9 @@ public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+
     article.verifyWikiTitleHeader(wikiName);
     article.verifyUserLoggedIn(credentials.userName10);
   }
