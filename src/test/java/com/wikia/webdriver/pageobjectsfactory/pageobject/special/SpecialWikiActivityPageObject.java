@@ -34,7 +34,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
    * @param title         title of new Wall Thread that is expected to be title of entry
    * @param threadAuthor  name of user who posted new thread who is expected to be author of entry
    * @param threadContent content of new Wall Thread that is expected to be shown in entry
-   * @see com.wikia.webdriver.testcases.messagewall.MessageWallTests
+   * @see com.wikia.webdriver.testcases.desktop.messagewall.MessageWallTests
    */
   public boolean isNewWallThreadActivityDisplayed(
       String title, String threadAuthor, String threadContent

@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.RemoteException;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoryPill;
 
 import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.DocumentContext;

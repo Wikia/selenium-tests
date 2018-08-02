@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.rte;
 
-import com.wikia.webdriver.elements.Frame;
+import com.wikia.webdriver.elements.common.Frame;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

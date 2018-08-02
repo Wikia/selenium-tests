@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
+import com.wikia.webdriver.elements.communities.desktop.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;

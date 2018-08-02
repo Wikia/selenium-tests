@@ -1,0 +1,32 @@
+package com.wikia.webdriver.elements.communities.mobile.components.discussions.common;
+
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoryPills;
+
+public interface PostsCreator {
+
+  boolean isSignInDialogVisible();
+
+  boolean isPostButtonActive();
+
+  boolean hasOpenGraph();
+
+  PostsCreator click();
+
+  PostsCreator closeGuidelinesMessage();
+
+  CategoryPills clickAddCategoryButton();
+
+  PostsCreator addTitleWith(final String text);
+
+  PostsCreator clearTitle();
+
+  PostsCreator addDescriptionWith(final String text);
+
+  PostsCreator addDescriptionWithLink(final String url);
+
+  PostsCreator clearDescription();
+
+  PostsCreator clickSubmitButton();
+
+  PostsCreator clearOpenGraph();
+}
