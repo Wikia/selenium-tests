@@ -47,7 +47,7 @@ public class AdsKruxObject extends AdsBaseObject {
     Log.log("krux users", user1 + ", " + user2, true);
 
     // TODO: figure out why we get krux user id in GPT calls from localStorage.kxuser in current PV OR from previous PV
-    if (!gptPageParams.contains("u\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
+    if (!gptPageParams.contains("kuid\":\"" + user1) && !gptPageParams.contains("u\":\"" + user2)) {
       throw new AssertionError("Gpt page params don't have the krux users from localStorage");
     }
   }

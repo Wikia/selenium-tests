@@ -26,7 +26,7 @@ public class AdsJWPlayerObject extends BasePageObject {
   private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
   private static final Color COLOR_VIDEO = new Color(0, 255, 13);
   protected final Wait wait;
-  @FindBy(css = ".jwplayer")
+  @FindBy(css = ".jw-icon-display.jw-button-color[role='button']")
   private WebElement playButton;
 
   @FindBy(css = ".jwplayer div.jw-icon.jw-icon-volume")

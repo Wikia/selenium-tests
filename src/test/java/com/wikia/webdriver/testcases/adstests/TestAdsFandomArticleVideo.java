@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
@@ -15,6 +16,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
 
+  @UnsafePageLoad
   @Test(groups = {"AdsArticleVideoF2Desktop"})
   public void adsArticleVideoAdsDesktop() {
     String
@@ -36,6 +38,7 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
     verifyInlineVideoSlots(pageObject);
   }
 
+  @UnsafePageLoad
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsArticleVideoF2Desktop"})
   public void adsArticleVideoMOATTrackingDesktop() {
