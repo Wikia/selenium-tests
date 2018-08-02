@@ -3,12 +3,9 @@ package com.wikia.webdriver.common.core.api;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
-
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriverException;
-
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
