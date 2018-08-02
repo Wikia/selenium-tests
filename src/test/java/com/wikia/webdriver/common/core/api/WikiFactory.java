@@ -57,8 +57,6 @@ public class WikiFactory extends ApiCall {
       params.add(new BasicNameValuePair("token", editToken));
       params.add(new BasicNameValuePair("action", "wfsavevariable"));
       params.add(new BasicNameValuePair("format", "json"));
-
-      URL_STRING = new URIBuilder(baseURL).build().toASCIIString();
     } catch (URISyntaxException e) {
       Log.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException("Failed to build edit API URL");
