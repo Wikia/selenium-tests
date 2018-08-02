@@ -57,19 +57,20 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
 
     jwPlayerObject.verifyPlayerOnPage();
     pageObject.scrollTo(AdsJWPlayerObject.VIDEO_PLAYER_SELECTOR);
-    jwPlayerObject.clickOnPlayer();
     pageObject.wait.forSuccessfulResponse(networkTrafficInterceptor,
                                           FandomAdsDataProvider.MOAT_VIDEO_TRACKING_URL
     );
     verifyFeaturedVideoSlots(pageObject);
   }
 
+  @UnsafePageLoad
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH)
   @Test(groups = "AdsArticleVideoF2Mobile")
   public void adsArticleVideoAdsMobile() {
     adsArticleVideoAdsDesktop();
   }
 
+  @UnsafePageLoad
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsArticleVideoF2Mobile"})
