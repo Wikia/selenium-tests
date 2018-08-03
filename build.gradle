@@ -360,20 +360,12 @@ task runFailed {
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
     ignoreFailures = true;
-    def groups = ''
-
-    if(!project.hasProperty('failedMatrix')) {
-        groups = project.hasProperty('groups') ? groups : System.getProperty('groups', '')
-    }else{
-        groups = "NOT EXISITNG"
-    }
+    testLogging.showStandardStreams = true
 
     useTestNG {
         suiteXmlFiles = testSuite.split(',').
                 collect({ path -> new File(path) })
-        includeGroups = groups.split(',')
         useDefaultListeners = true
-        scanForTestClasses = false
 
         testLogging.showStandardStreams = true
         testLogging.showStackTraces = true
@@ -404,7 +396,7 @@ dependencies {
     testCompile 'org.seleniumhq.selenium:jetty-repacked:7.6.1'
     testCompile 'commons-lang:commons-lang:2.4'
     testCompile 'com.github.detro.ghostdriver:phantomjsdriver:1.1.0'
-    testCompile 'org.testng:testng:6.9.6'
+    testCompile 'org.testng:testng:6.14.3'
     testCompile 'org.jsoup:jsoup:1.8.3'
     testCompile 'com.google.guava:guava:18.0'
     testCompile 'org.yaml:snakeyaml:1.8'

@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.classifiers.*;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -33,13 +34,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"ArticleFeaturesCRUDUser"})
+@Test(groups = {Team.SUS, View.DESKTOP, Feature.ADVANCED_FEATURES, EndUser.LOGGED_IN})
 @Execute(asUser = User.USER)
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   private static final int ADDITIONAL_PROPERTY_VALUE = 10;
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_001", "Smoke"})
   public void addGallery() {
     new ArticleContent().clear();
 
@@ -59,7 +59,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyGallery();
   }
 
-  @Test(groups = {"Smoke"})
   public void modifyGallery() {
     new ArticleContent().push(
         "<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n" + "Image010.jpg\n"
@@ -82,7 +81,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyGallery();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_002"})
   public void deleteGallery() {
     new ArticleContent().push(
         "<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n" + "Image010.jpg\n"
@@ -93,7 +91,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.GALLERY);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   public void addSlideshow() {
     new ArticleContent().clear();
 
@@ -109,7 +106,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifySlideshow();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   public void modifySlideshow() {
     new ArticleContent().push(
         "<gallery type=\"slideshow\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n"
@@ -130,7 +126,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditor.submitArticle().verifySlideshow();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_004"})
   public void deleteSlideshow() {
     new ArticleContent().push(
         "<gallery type=\"slideshow\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n"
@@ -142,7 +137,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.SLIDESHOW);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_005"})
   public void addSlider() {
     new ArticleContent().clear();
 
@@ -158,7 +152,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifySlider();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_006"})
   public void modifySlider() {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
                               + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
@@ -177,7 +170,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditor.submitArticle().verifySlider();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_007"})
   public void deleteSlider() {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
                               + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
@@ -187,7 +179,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditor.verifyComponentRemoved(Components.SLIDER);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_008", "Media"})
+  @Test(groups = {Feature.MEDIA})
   @RelatedIssue(issueID = "XW-3797")
   public void addVideo() {
     new ArticleContent().clear();
@@ -203,7 +195,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyVideo();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_009", "Media"})
+  @Test(groups = {Feature.MEDIA})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void modifyVideo() {
     new ArticleContent().push(
@@ -219,7 +211,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyVideo();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke5", "Media"})
+  @Test(groups = {Feature.MEDIA})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void deleteVideo() {
     new ArticleContent().push(
@@ -231,7 +223,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.VIDEO);
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_011", "Smoke4"})
+  @Test(groups = {Feature.MEDIA})
   public void modifyImage() {
     new ArticleContent().push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
 
@@ -244,7 +236,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyPhoto();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_012", "Smoke1"})
   @InBrowser(browserSize = "1024x720")
   public void addImage() {
     new ArticleContent().clear();
@@ -258,7 +249,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_013"})
   public void deleteImage() {
     new ArticleContent().push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
 
@@ -267,8 +257,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.verifyComponentRemoved(Components.PHOTO);
   }
 
-  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", groups = {
-      "ArticleFeaturesCRUDUser_014"})
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties")
   public void addingTable(
       int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
   ) {
@@ -295,8 +284,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableSize(width, height);
   }
 
-  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", groups = {
-      "ArticleFeaturesCRUDUser_0125"}, enabled = false)
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", enabled = false)
   public void modifyTable(
       int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
   ) {
@@ -327,8 +315,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     article.verifyTableCellpadding(cellpadding + ADDITIONAL_PROPERTY_VALUE);
   }
 
-  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties", groups = {
-      "ArticleFeaturesCRUDUser_016"})
+  @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class, dataProvider = "getTableProperties")
   public void deleteTable(
       int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
   ) {
@@ -350,7 +337,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     visualEditMode.submitArticle().verifyTableRemoved();
   }
 
-  @Test(groups = {"ArticleFeaturesCRUDUser_017"})
   public void addingImagePlaceholder() {
     new ArticleContent().clear();
 

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.classifiers.*;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -12,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = "ArticleCRUDAnon")
+@Test(groups = {Team.SUS, EndUser.ANON, Feature.ARTICLE, View.DESKTOP, "ArticleCRUD"})
 public class ArticleCRUDAnonTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDAnon_001"})
@@ -54,8 +55,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     article.verifyArticleTitle(articleTitle);
   }
 
-  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles", groups = {
-      "ArticleCRUDAnon_004"})
+  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles")
   public void articleCRUDAnon_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();

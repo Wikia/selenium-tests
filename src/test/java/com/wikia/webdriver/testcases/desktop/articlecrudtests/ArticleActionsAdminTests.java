@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.classifiers.*;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,12 +20,11 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Test(groups = {"ArticleActionsAdmin"})
+@Test(groups = {Team.SUS, EndUser.STAFF, Feature.ARTICLE, View.DESKTOP})
+@Execute(asUser = User.STAFF)
 public class ArticleActionsAdminTests extends NewTestTemplate {
 
-  @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
-  @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
     String articleTitle = "DeleteUndeleArticle1";
     new ArticleContent().push(PageContent.ARTICLE_TEXT, articleTitle);
@@ -56,9 +56,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     article.verifyArticleTitle(articleTitle);
   }
 
-  @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
-  @Execute(asUser = User.STAFF)
   public void moveArticle() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
