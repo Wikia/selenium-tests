@@ -92,6 +92,7 @@ public class AnonymizationTests extends NewTestTemplate {
   public void anonymizationWikiEdits() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
+    String testsite = "AnonymizationTest";
     String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
     String passw = User.SUS_REGULAR_USER.getPassword();
     SignUpUser user = new SignUpUser(qanon,
@@ -103,10 +104,9 @@ public class AnonymizationTests extends NewTestTemplate {
 
     new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
 
-    new ArticleContent(user.getUsername()).push("Test" + timestamp, "AnonymizationTest");
+    new ArticleContent(user.getUsername()).push("Test" + timestamp, testsite);
 
-    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
-    String id = articleHistoryPage.getHistoryID(user.getUsername());
+    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open(testsite);
     Assertion.assertTrue(articleHistoryPage.isUserInHistory(user.getUsername()));
 
     articleHistoryPage.logOut();
@@ -117,7 +117,7 @@ public class AnonymizationTests extends NewTestTemplate {
 
     Assertion.assertStringContains(anonymizationStaff.getAnonConfirmation(), qanon);
 
-    articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    articleHistoryPage = new ArticleHistoryPage().open(testsite);
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
   }
 
@@ -125,6 +125,7 @@ public class AnonymizationTests extends NewTestTemplate {
   public void anonyizationMessageWallRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
+    String testsite = "AnonymizationTest";
     String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
     String passw = User.SUS_REGULAR_USER.getPassword();
     SignUpUser user = new SignUpUser(qanon,
@@ -157,9 +158,9 @@ public class AnonymizationTests extends NewTestTemplate {
       Log.logError("Interruption during waiting for Message Wall background task", e);
     }
 
-    new ArticleContent(user.getUsername()).push("Test" + timestamp, "AnonymizationTest");
+    new ArticleContent(user.getUsername()).push("Test" + timestamp, testsite);
 
-    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open(testsite);
     String id = articleHistoryPage.getHistoryID(user.getUsername());
     Assertion.assertTrue(articleHistoryPage.isUserInHistory(user.getUsername()));
 
@@ -177,7 +178,7 @@ public class AnonymizationTests extends NewTestTemplate {
         qanon
     )));
 
-    articleHistoryPage = new ArticleHistoryPage().open("AnonymizationTest");
+    articleHistoryPage = new ArticleHistoryPage().open(testsite);
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
 
     ArticleHistoryPage articleHistoryPageID = new ArticleHistoryPage().openArticleId(id);
