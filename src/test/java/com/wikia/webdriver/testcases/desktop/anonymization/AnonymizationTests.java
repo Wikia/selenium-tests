@@ -40,8 +40,8 @@ public class AnonymizationTests extends NewTestTemplate {
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = "QAanon" + timestamp;
-    String passw = "makak";
+    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
+    String passw = User.SUS_REGULAR_USER.getPassword();
     SignUpUser user = new SignUpUser(qanon,
                                      credentials.emailAnonymousUserTestWikia,
                                      passw,
@@ -66,8 +66,8 @@ public class AnonymizationTests extends NewTestTemplate {
   public void anonymizedUserProfilePageRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = "QAanon" + timestamp;
-    String passw = "makak";
+    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
+    String passw = User.SUS_REGULAR_USER.getPassword();
     SignUpUser user = new SignUpUser(qanon,
                                      credentials.emailAnonymousUserTestWikia,
                                      passw,
@@ -92,8 +92,8 @@ public class AnonymizationTests extends NewTestTemplate {
   public void anonymizationWikiEdits() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = "QAanon" + timestamp;
-    String passw = "makak";
+    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
+    String passw = User.SUS_REGULAR_USER.getPassword();
     SignUpUser user = new SignUpUser(qanon,
                                      credentials.emailAnonymousUserTestWikia,
                                      passw,
@@ -125,8 +125,8 @@ public class AnonymizationTests extends NewTestTemplate {
   public void anonyizationMessageWallRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = "QAanon" + timestamp;
-    String passw = "makak";
+    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
+    String passw = User.SUS_REGULAR_USER.getPassword();
     SignUpUser user = new SignUpUser(qanon,
                                      credentials.emailAnonymousUserTestWikia,
                                      passw,
