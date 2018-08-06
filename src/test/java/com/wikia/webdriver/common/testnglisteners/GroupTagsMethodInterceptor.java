@@ -52,7 +52,6 @@ public class GroupTagsMethodInterceptor implements IMethodInterceptor {
         }
       }
     }
-
-ko     return result;
+    return result;
   }
 }
