@@ -38,6 +38,7 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
     verifySlots(pageObject);
   }
 
+  @UnsafePageLoad
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = "AdsFeaturedVideoMoatTrackingF2Desktop")
   public void adsFeaturedVideoMOATTrackingDesktop() {
