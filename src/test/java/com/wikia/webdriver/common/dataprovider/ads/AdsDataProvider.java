@@ -327,8 +327,8 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] disableGptOasis() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain",
-                           "InstantGlobals.wgAdDriverEvolve2Countries=[XX]", AdsContent.TOP_LB,
-                           "Evolve2"},};
+                           "", AdsContent.TOP_LB,
+                           ""},};
   }
 
   @DataProvider

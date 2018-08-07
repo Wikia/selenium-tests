@@ -15,8 +15,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsAdDriverForcedStatusOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsDisableGpt"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsEvolveMercury"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsEvolveOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandom"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandomArticleVideo"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandomBtfBlock"/>
