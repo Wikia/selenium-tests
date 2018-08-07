@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,7 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSig
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_Anon"})
@@ -35,6 +35,9 @@ public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), true);
+
     article.verifyWikiTitleHeader(wikiName);
     article.verifyUserLoggedIn(credentials.userName10);
   }

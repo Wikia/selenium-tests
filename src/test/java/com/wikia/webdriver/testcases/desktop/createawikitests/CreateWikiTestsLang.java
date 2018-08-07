@@ -4,6 +4,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_lang"})
@@ -38,6 +38,9 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
+
+    new WikiFactory().setIsTestWiki(article.getWikiID(), true);
+
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 
