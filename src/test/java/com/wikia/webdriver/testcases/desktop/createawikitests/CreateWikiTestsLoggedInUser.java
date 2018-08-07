@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_User"})
@@ -36,7 +35,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
 
-    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+    new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
     article.verifyWikiTitleHeader(wikiName);
   }
@@ -57,7 +56,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
 
-    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+    new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
 
@@ -81,7 +80,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
 
-    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+    new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
     article.isStringInURL(wikiDomain);

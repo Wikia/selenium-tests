@@ -35,7 +35,7 @@ public class WikiFactory extends ApiCall {
     return username;
   }
 
-  public void setIsTestWiki(String wikiId, int value) {
+  public void setIsTestWiki(String wikiId, boolean value) {
     String editToken = "";
     if (username != null) {
       editToken = new EditToken(username).getEditToken();
@@ -44,7 +44,7 @@ public class WikiFactory extends ApiCall {
     }
     params.add(new BasicNameValuePair("wiki_id", wikiId));
     params.add(new BasicNameValuePair("variable_id", "1856"));
-    params.add(new BasicNameValuePair("variable_value", Integer.toString(value)));
+    params.add(new BasicNameValuePair("variable_value", value ? "1" : "0"));
     params.add(new BasicNameValuePair("reason", "QA wikia"));
     params.add(new BasicNameValuePair("token", editToken));
     params.add(new BasicNameValuePair("action", "wfsavevariable"));

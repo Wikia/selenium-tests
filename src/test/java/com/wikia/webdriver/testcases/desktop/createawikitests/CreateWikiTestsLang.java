@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_lang"})
@@ -40,7 +39,7 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
 
-    new WikiFactory().setIsTestWiki(article.getWikiID(), 1);
+    new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
