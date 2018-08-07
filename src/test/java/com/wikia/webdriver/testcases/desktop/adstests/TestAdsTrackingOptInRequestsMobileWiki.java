@@ -99,7 +99,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingRejectedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, POLAND, ADS_HOME_PAGE, instantGlobals);
+    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
