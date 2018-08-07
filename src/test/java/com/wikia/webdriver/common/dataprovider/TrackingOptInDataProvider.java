@@ -29,7 +29,7 @@ public class TrackingOptInDataProvider {
   private static final String
       ADS_NORDICS_PATTERN
       = "https?://.*doubleclick\\.net/gampad/ads.*Nordics_RoN.*";
-  private static final String ADS_OPOENX_PATTERN = "http?://.*wikia-d\\.openx\\.net/.*/arj.*";
+  private static final String ADS_OPOENX_PATTERN = "https?://.*wikia-d.*openx.*arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
   private static final String
       ADS_RUBBICON_FASTLANE_PATTERN
