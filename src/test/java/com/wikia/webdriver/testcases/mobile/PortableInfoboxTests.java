@@ -39,14 +39,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox
         .isTitleNotVisible()
         .isImageInTitleNotVisible()
-        .isImageInTabberVisible()
-        .isImageCaptionInTabberVisible();
+        .isImageInTabberVisible();
 
     // After infobox expanding
     infobox
         .clickExpandButton()
         .isVideoVisible()
-        .isVideoCaptionVisible()
         .areDataLabelsVisible()
         .areDataValuesVisible()
         .areLinksVisible()
@@ -134,9 +132,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     infobox
         .isImageInCollectionVisible()
-        .clickNextImageArrow(1)
-        .isImageInCollectionVisible()
-        .clickNextImageArrow(2)
         .isImageInCollectionVisible();
   }
 
