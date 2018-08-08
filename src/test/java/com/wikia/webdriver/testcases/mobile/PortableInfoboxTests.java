@@ -12,6 +12,12 @@ import com.wikia.webdriver.elements.communities.mobile.components.PortableInfobo
 import com.wikia.webdriver.elements.communities.mobile.pages.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
+
+/*
+ * Portable Infobox is a special case table with information and medias about some character or entity.
+ * More info: https://community.wikia.com/wiki/Help:Infoboxes
+ */
+
 @Test(groups = "Mercury_Infobox")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
@@ -30,8 +36,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")
-  public void mercury_infobox_verifyElementsBeforeAndAfterExpanding() {
+  @Test(groups = "infoboxElementsBeforeAndAfterExpanding")
+  public void infoboxElementsBeforeAndAfterExpanding() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_1);
 
@@ -56,8 +62,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyListMargin();
   }
 
-  @Test(groups = "mercury_infobox_expandAndCollapseByButtonClickAndTap")
-  public void mercury_infobox_expandAndCollapseByButtonClickAndTap() {
+  @Test(groups = "expandAndCollapseByButtonClickAndTap")
+  public void expandAndCollapseByButtonClickAndTap() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_1);
 
@@ -75,8 +81,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxCollapsed();
   }
 
-  @Test(groups = "mercury_infobox_externalLinkRedirectsToCorrespondingUrl")
-  public void mercury_infobox_externalLinkRedirectsToCorrespondingUrl() {
+  @Test(groups = "externalLinkRedirectsToCorrespondingUrl")
+  public void externalLinkRedirectsToCorrespondingUrl() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_1);
 
@@ -92,8 +98,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
 
-  @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox")
-  public void mercury_infobox_imagesAndVideosOpenInLightbox() {
+  @Test(groups = "imagesAndVideosOpenInLightbox")
+  public void imagesAndVideosOpenInLightbox() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_1);
 
@@ -110,8 +116,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened();
   }
 
-  @Test(groups = "mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages")
-  public void mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages() {
+  @Test(groups = "infoboxSizeIsNotAffectedByClickOnImages")
+  public void infoboxSizeIsNotAffectedByClickOnImages() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_3);
 
@@ -125,16 +131,16 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxExpanded();
   }
 
-  @Test(groups = "mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks")
-  public void mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks() {
+  @Test(groups = "imageCollectionIsVisibleAndChangingImagesWorks")
+  public void imageCollectionIsVisibleAndChangingImagesWorks() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_5);
 
     infobox.isImageInCollectionVisible();
   }
 
-  @Test(groups = "mercury_infobox_headerIsNotVisibleInArticleTOC", enabled = false)
-  public void mercury_infobox_headerIsNotVisibleInArticleTOC() {
+  @Test(groups = "headerIsNotVisibleInArticleTOC", enabled = false)
+  public void headerIsNotVisibleInArticleTOC() {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_2);
 
