@@ -130,9 +130,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     init();
     navigate.toPage(MobileSubpages.INFOBOX_5);
 
-    infobox
-        .isImageInCollectionVisible()
-        .isImageInCollectionVisible();
+    infobox.isImageInCollectionVisible();
   }
 
   @Test(groups = "mercury_infobox_headerIsNotVisibleInArticleTOC", enabled = false)
