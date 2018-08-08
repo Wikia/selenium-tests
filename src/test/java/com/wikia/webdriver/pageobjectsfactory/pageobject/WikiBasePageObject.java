@@ -663,8 +663,11 @@ public class WikiBasePageObject extends BasePageObject {
     //Temporary change until the outcome of experiment in IRIS-5829
   }
 
+  public String getWikiID() {
+    return (String) driver.executeScript("return wgCityId");
+  }
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
-
 }
