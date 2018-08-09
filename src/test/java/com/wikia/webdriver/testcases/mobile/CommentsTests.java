@@ -217,6 +217,7 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
+  @RelatedIssue(issueID = "XW-5188")
   public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
     init();
 
@@ -236,6 +237,7 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
+  @RelatedIssue(issueID = "XW-5047")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     init();
 
