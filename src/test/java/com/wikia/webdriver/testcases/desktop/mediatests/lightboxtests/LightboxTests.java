@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.desktop.mediatests.lightboxtests;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -70,6 +71,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_005")
+  @RelatedIssue(issueID = "MAIN-17206")
   @Execute(asUser = User.SUS_REGULAR_USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void UserCanShareAFileFromArticlePageOnSocialMedia() {
