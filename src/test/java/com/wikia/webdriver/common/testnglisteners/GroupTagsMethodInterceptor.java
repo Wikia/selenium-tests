@@ -19,6 +19,7 @@ public class GroupTagsMethodInterceptor implements IMethodInterceptor {
       Set<String> groups = new HashSet<>();
 
       groups.add(m.getMethod().getMethodName());
+      groups.add(m.getMethod().getConstructorOrMethod().getDeclaringClass().getSimpleName());
 
       if (m.getMethod()
           .getConstructorOrMethod()
