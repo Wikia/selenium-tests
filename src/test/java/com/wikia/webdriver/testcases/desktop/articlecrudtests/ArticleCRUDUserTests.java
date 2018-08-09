@@ -14,7 +14,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = {Team.SUS, EndUser.LOGGED_IN, Feature.ARTICLE, View.DESKTOP})
+@Test(groups = {
+    Team.SUS,
+    EndUser.LOGGED_IN,
+    Feature.ARTICLE,
+    View.DESKTOP
+})
 @Execute(asUser = User.USER)
 public class ArticleCRUDUserTests extends NewTestTemplate {
 

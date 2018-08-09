@@ -9,7 +9,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-@Test(groups = {Team.SUS, Feature.EDIT_DROPDOWN, View.DESKTOP})
+@Test(groups = {
+    Team.SUS,
+    Feature.EDIT_DROPDOWN,
+    View.DESKTOP
+})
 public class ArticleEditDropdownTests extends NewTestTemplate {
 
   private static final String articleName = "DropdownStatus";

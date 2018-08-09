@@ -20,7 +20,12 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Test(groups = {Team.SUS, EndUser.STAFF, Feature.ARTICLE, View.DESKTOP})
+@Test(groups = {
+    Team.SUS,
+    EndUser.STAFF,
+    Feature.ARTICLE,
+    View.DESKTOP
+})
 @Execute(asUser = User.STAFF)
 public class ArticleActionsAdminTests extends NewTestTemplate {
 
