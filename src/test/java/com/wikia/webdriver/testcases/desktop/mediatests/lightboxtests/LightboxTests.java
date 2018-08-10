@@ -87,8 +87,6 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyUrlInNewWindow(URLsContent.FACEBOOK_DOMAIN);
     lightbox.clickTwitterShareButton();
     lightbox.verifyUrlInNewWindow(URLsContent.TWITTER_DOMAIN);
-    lightbox.clickStumbleUponShareButton();
-    lightbox.verifyUrlInNewWindow(URLsContent.STUMPLEUPON_DOMAIN);
     lightbox.clickRedditShareButton();
     lightbox.verifyUrlInNewWindow(URLsContent.REDDIT_DOMAIN);
     lightbox.clickPlusOneShareButton();
