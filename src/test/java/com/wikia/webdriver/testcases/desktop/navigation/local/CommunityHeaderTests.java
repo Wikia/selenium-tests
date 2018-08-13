@@ -42,9 +42,9 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
   @RunOnly(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Execute(onWikia = MobileWikis.DE_WIKI)
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPageSzl() {
-    MainPage mainPage = new CommunityHeader().clickWikiName();
+    MainPage mainPage = new CommunityHeaderDesktop().clickWikiName();
 
     Assertion.assertTrue(mainPage.isMainPage());
   }
@@ -92,7 +92,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.USER)
   public void testLoggedInWikiButtonsSzl() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.clickWikiActivity();
     Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Aktywno%C5%9B%C4%87_na_wiki");
@@ -183,7 +183,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @RunOnly(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   public void testExploreMenuLinksSzl() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.openExploreMenu().clickExploreWikiActivityLink();
 
@@ -220,7 +220,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestdiscussionsnoforum")
   public void testDiscussLinkOnWikiWithDiscussionsWithoutForumSzl() {
-    new CommunityHeader().clickDiscussLink();
+    new CommunityHeaderDesktop().clickDiscussLink();
 
     Assertion.assertStringContains(driver.getCurrentUrl(),"wikia.com/szl/d/f");
   }
@@ -248,7 +248,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestdiscussiosandforum")
   public void testDiscussLinkOnWikiWithDiscussionsAndForumSzl() {
-    CommunityHeader communityHeader = new CommunityHeader();
+    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
     communityHeader.openExploreMenu().clickExploreForumLink();
     Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Forum");
@@ -270,7 +270,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestforumnodiscussions")
   public void testDiscussLinkOnWikiWithNoDiscussionsAndWithForumSzl() {
-    new CommunityHeader().clickDiscussLink();
+    new CommunityHeaderDesktop().clickDiscussLink();
 
     Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Forum");
   }

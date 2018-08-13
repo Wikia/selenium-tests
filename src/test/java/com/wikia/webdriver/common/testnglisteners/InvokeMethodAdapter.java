@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.exceptions.TestFailedException;
 import com.wikia.webdriver.common.logging.Log;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -55,61 +56,57 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
    * Returns true if test is excluded from running on current test environment
    */
   private boolean isTestExcludedFromEnv(Method method) {
+    String envFromConfig = Configuration.getEnv();
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
 
-      for (String excludedEnv : excludedEnvs) {
-        if (Configuration.getEnv().equals(excludedEnv)) {
-          return true;
-        }
+      if (Arrays.stream(excludedEnvs).anyMatch(e->e.equals(envFromConfig))) {
+        return true;
       }
     }
     if (method.isAnnotationPresent(RunOnly.class)) {
       String[] includedEnvs = method.getAnnotation(RunOnly.class).env();
 
-      if (includedEnvs.length == 1 && includedEnvs[0].isEmpty()) {
+      if (hasOnlyDefaultValue(includedEnvs)) {
         return false;
+      } else if (Arrays.stream(includedEnvs).anyMatch(e->e.equals(envFromConfig))) {
+        return false;
+      } else {
+        return true;
       }
-
-      for (String includedEnv : includedEnvs) {
-        if (Configuration.getEnv().equals(includedEnv)) {
-          return false;
-        }
-      }
-      return true;
     }
     return false;
+  }
+
+  private boolean hasOnlyDefaultValue(String[] includedValues) {
+    return includedValues.length == 1 && includedValues[0].isEmpty();
   }
 
   /**
    * Returns true if test is excluded from running with current language
    */
   private boolean isTestExcludedFromLang(Method method) {
+    String langFromConfig = System.getProperty("language") != null ? System.getProperty("language")
+        : Configuration.getPropertyFromFile("language");
+
     if (method.isAnnotationPresent(DontRun.class)) {
       String[] excludedLangs = method.getAnnotation(DontRun.class).language();
 
-      String langFromConfig = System.getProperty("language") != null ? System.getProperty("language")
-          : Configuration.getPropertyFromFile("language");
-
-      for (String excludedLang : excludedLangs) {
-        if (Configuration.getWikiLanguage().contains(excludedLang) || langFromConfig.equals(excludedLang)) {
-          return true;
-        }
+      if (Arrays.stream(excludedLangs)
+          .anyMatch(e -> Configuration.getWikiLanguage().contains(e) || langFromConfig.equals(e))) {
+        return true;
       }
     }
     if (method.isAnnotationPresent(RunOnly.class)) {
       String[] includedLangs = method.getAnnotation(RunOnly.class).language();
 
-      if (includedLangs.length == 0 && includedLangs[0].isEmpty()) {
+      if (hasOnlyDefaultValue(includedLangs)) {
         return false;
+      } else if (Arrays.stream(includedLangs).anyMatch(e->Configuration.getWikiLanguage().contains(e))) {
+        return false;
+      } else {
+        return true;
       }
-
-      for (String includedLang : includedLangs) {
-        if (Configuration.getWikiLanguage().contains(includedLang)) {
-          return false;
-        }
-      }
-      return true;
     }
     return false;
   }

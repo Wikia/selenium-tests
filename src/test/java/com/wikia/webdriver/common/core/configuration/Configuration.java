@@ -160,15 +160,15 @@ public class Configuration {
   }
 
   public static Boolean getForceHttps() {
-    return "true".equals(getProp("forceHttps").toLowerCase());
+    return "true".equalsIgnoreCase(getProp("forceHttps"));
   }
 
   public static Boolean isUnsafePageLoad() {
-    return "true".equals(getProp("unsafePageLoad"));
+    return "true".equalsIgnoreCase(getProp("unsafePageLoad"));
   }
 
   public static Boolean getForceLanguageInPath() {
-    return "true".equals(getProp("forceLanguageInPath").toLowerCase());
+    return "true".equalsIgnoreCase(getProp("forceLanguageInPath"));
   }
 
   public static Emulator getEmulator() {
