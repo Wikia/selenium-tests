@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.Frame;
+import com.wikia.webdriver.elements.common.Frame;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -121,8 +121,9 @@ public class VisualEditModePageObject extends EditMode {
     return aceEditor;
   }
 
-  public void clearContent() {
+  public VisualEditModePageObject clearContent() {
     editorFrame.frameScope(contentInput::clear);
+    return this;
   }
 
   /**

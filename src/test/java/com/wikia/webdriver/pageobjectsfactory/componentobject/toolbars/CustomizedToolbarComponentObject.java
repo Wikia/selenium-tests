@@ -3,7 +3,8 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.elements.communities.desktop.components.notifications.Notification;
+import com.wikia.webdriver.elements.communities.desktop.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
@@ -148,16 +149,15 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * method
    */
   public void verifyUnfollowed() {
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss,
+                                                                  PageContent.FOLLOW
+    ), "title", "Follow");
     Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream()
-                                     .map(n -> n.getMessage())
+                                     .map(Notification::getMessage)
                                      .collect(Collectors.toList()),
                                  "The page \"" + getArticleName().replace("_", " ")
                                  + "\" has been removed from your watchlist."
     );
-
-    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss,
-                                                                  PageContent.FOLLOW
-    ), "title", "Follow");
     Log.log("verifyUnfollowed", "unfollow button verified", true);
   }
 

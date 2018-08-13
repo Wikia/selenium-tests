@@ -32,8 +32,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement facebookShareLink;
   @FindBy(css = "a.twitter")
   private WebElement twitterShareLink;
-  @FindBy(css = "a.stumbleupon")
-  private WebElement stumbleUponShareLink;
   @FindBy(css = "a.reddit")
   private WebElement redditShareLink;
   @FindBy(css = "a.plusone")
@@ -126,7 +124,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
   public void verifyShareButtons() {
     wait.forElementVisible(plusoneShareLink);
     wait.forElementVisible(redditShareLink);
-    wait.forElementVisible(stumbleUponShareLink);
     wait.forElementVisible(twitterShareLink);
     wait.forElementVisible(facebookShareLink);
     Log.log("verifyShareButtons", "all share buttons are visible", true);
@@ -140,11 +137,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
   public void clickTwitterShareButton() {
     twitterShareLink.click();
     Log.log("clickTwitterShareButton", "twitter share button is clicked", true);
-  }
-
-  public void clickStumbleUponShareButton() {
-    stumbleUponShareLink.click();
-    Log.log("clickStumbleUponShareButton", "stumbleupon share button is clicked", true);
   }
 
   public void clickRedditShareButton() {

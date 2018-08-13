@@ -286,7 +286,7 @@ public class AdsDataProvider {
                                           "\"s2\":\"article\"",
                                           "\"ar\":\"4:3\"",
                                           "\"artid\":\"4219\"",
-                                          "\"cat\":[\"items\",\"yggdrasil_items\"]",
+                                          "\"cat\":[\"items\",\"yggdrasil_items\",\"substances\"]",
                                           "\"hostpre\":",
                                           "\"lang\":\"en\"",
                                           "\"wpage\":\"blood_of_jormungandr\"",
@@ -327,8 +327,8 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] disableGptOasis() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain",
-                           "InstantGlobals.wgAdDriverEvolve2Countries=[XX]", AdsContent.TOP_LB,
-                           "Evolve2"},};
+                           "", AdsContent.TOP_LB,
+                           ""},};
   }
 
   @DataProvider

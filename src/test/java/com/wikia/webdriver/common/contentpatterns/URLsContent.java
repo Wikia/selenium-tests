@@ -106,7 +106,6 @@ public class URLsContent {
   public static final String TWITTER_DOMAIN = "twitter.com";
   public static final String GOOGLE_DOMAIN = "accounts.google.com";
   public static final String REDDIT_DOMAIN = "reddit.com";
-  public static final String STUMPLEUPON_DOMAIN = "stumbleupon.com";
 
   // Facebook
   public static final String FACEBOOK_MAINPAGE = "https://www.facebook.com/";

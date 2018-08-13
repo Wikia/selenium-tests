@@ -54,7 +54,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   }
 
   /**
-   * Checks layout's radiobutton accroding to layout type given as param Layout can have values:
+   * Checks layout's radiobutton accroding to layout type given as param layout can have values:
    * standard - layout with video and image placeholders top - layout for top10List page blank -
    * blank page's layout
    */

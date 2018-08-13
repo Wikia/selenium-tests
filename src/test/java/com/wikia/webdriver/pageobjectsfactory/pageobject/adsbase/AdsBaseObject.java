@@ -286,8 +286,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Builds GPT iframe id
    *
-   * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or
-   *                    Turtle
+   * @param dfpClientId in most cases it's Wikia id but we have other partners like Turtle
    * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
@@ -308,8 +307,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Test whether the correct GPT ad unit is called
    *
-   * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or
-   *                    Turtle
+   * @param dfpClientId in most cases it's Wikia id but we have other partners like Turtle
    * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
@@ -882,7 +880,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   /**
-   * Iframe finder for oasis slots WARNING: it's able to find only first call result!
+   * Iframe finder for desktop slots WARNING: it's able to find only first call result!
    */
   public By findFirstIframeWithAd(String slotName) {
     return By.cssSelector("#" + slotName + " iframe[title='3rd party ad content']");

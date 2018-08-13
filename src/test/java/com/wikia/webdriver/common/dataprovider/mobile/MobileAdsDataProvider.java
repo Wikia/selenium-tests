@@ -91,8 +91,8 @@ public class MobileAdsDataProvider {
                            "\"hostpre\":",
                            "\"cat\":[",
                            "\"ab\":[",
-                           "\"ksgmnt\":[",
-                           "\"u\":\"",
+                           "\"ksg\":[",
+                           "\"kuid\":\"",
                            "\"dmn\":\"",
                            "\"skin\":\"mercury\"",
                            "\"lang\":\"en\"",
@@ -176,8 +176,8 @@ public class MobileAdsDataProvider {
                                                  "\"artid\":\"25\"",
                                                  "\"hostpre\":",
                                                  "\"ab\":[",
-                                                 "\"ksgmnt\":[",
-                                                 "\"u\":\"",
+                                                 "\"ksg\":[",
+                                                 "\"kuid\":\"",
                                                  "\"dmn\":\"",
                                                  "\"skin\":\"mercury",
                                                  "\"lang\":\"en\"",
@@ -204,8 +204,8 @@ public class MobileAdsDataProvider {
                        "\"dmn\":\"wikiacom\"",
                        "\"hostpre\":",
                        "\"ab\":[",
-                       "\"ksgmnt\":[",
-                       "\"u\":\"",
+                       "\"ksg\":[",
+                       "\"kuid\":\"",
                        "\"dmn\":\"",
                        "\"skin\":\"mercury\"",
                        "\"lang\":\"en\"",
@@ -234,8 +234,8 @@ public class MobileAdsDataProvider {
                                                  "\"ar\":\"3:4\"",
                                                  "\"artid\":\"4219\"",
                                                  "\"ab\":[",
-                                                 "\"ksgmnt\":[",
-                                                 "\"u\":\"",
+                                                 "\"ksg\":[",
+                                                 "\"kuid\":\"",
                                                  "\"dmn\":\"",
                                                  "\"hostpre\":",
                                                  "\"cat\":[",
@@ -252,26 +252,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpEvolveParamsMercury() {
-    return new Object[][]{{"project43", "SyntheticTests/DfpParams", 4403, "ev/wikia_intl/ros",
-                           "MOBILE_TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
-                                                                   "\"s0v\":\"lifestyle\"",
-                                                                   "\"s1\":\"_project43\"",
-                                                                   "\"s2\":\"article\"",
-                                                                   "\"dmn\":\"wikiacom\"",
-                                                                   "\"hostpre\":\"",
-                                                                   "\"skin\":\"mercury\"",
-                                                                   "\"wpage\":\"synthetictests/dfpparams\"",
-                                                                   "\"ref\":\"direct\"",
-                                                                   "\"lang\":\"en\"",
-                                                                   "\"esrb\":\"teen\""
-    ), Arrays.asList("\"pos\":\"a\"",
-                     "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
-                     "\"wsrc\":\"mobile_evolve\""
-    )}};
-  }
-
-  @DataProvider
   public static Object[][] providersChainMercury() {
     return new Object[][]{{"project43", "SyntheticTests/ProvidersChain", AdsContent.MOBILE_TOP_LB,
                            "DirectGptMobile"}};
@@ -280,10 +260,10 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{{"project43", "SyntheticTests/ProvidersChain",
-                           "InstantGlobals.wgAdDriverEvolve2Countries=[]", AdsContent.MOBILE_TOP_LB,
+                           "", AdsContent.MOBILE_TOP_LB,
                            ""}, {"project43", "SyntheticTests/ProvidersChain",
-                                 "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
-                                 AdsContent.MOBILE_TOP_LB, "Evolve2"},};
+                                 "",
+                                 AdsContent.MOBILE_TOP_LB, ""},};
   }
 
   @DataProvider

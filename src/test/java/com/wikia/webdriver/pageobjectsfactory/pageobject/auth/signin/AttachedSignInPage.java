@@ -39,6 +39,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   }
 
   public SignInPage typePassword(String password) {
+    wait.forElementClickable(passwordField).click();
     fillInput(passwordField, password);
     return this;
   }
@@ -50,6 +51,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
 
   @Override
   public SignInPage typeUsername(String username) {
+    wait.forElementClickable(usernameField).click();
     fillInput(usernameField, username);
     return this;
   }
