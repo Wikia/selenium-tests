@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
@@ -62,22 +61,4 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "dfpEvolveParamsMercury", groups = {
-      "MobileAds", "AdsEvolveMercury"})
-  public void dfpEvolveParamsPresentMercury(
-      String wikiName,
-      String article,
-      Integer dfpClientId,
-      String adUnit,
-      String slot,
-      List<String> pageParams,
-      List<String> slotParams
-  ) {
-    AdsEvolveObject ads = new AdsEvolveObject(driver);
-    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    ads.enableEvolve(testedPage);
-    ads.verifyGptIframe(dfpClientId, adUnit, slot);
-    ads.verifyGptParams(slot, pageParams, slotParams);
-  }
 }
