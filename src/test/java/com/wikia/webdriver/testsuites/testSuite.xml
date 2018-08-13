@@ -61,6 +61,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVideoFrequencyCapping"/>
+            <class name="com.wikia.webdriver.testcases.desktop.announcements.AnnouncementsDesktopTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.anonymization.AnonymizationTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleCRUDAnonTests"/>
