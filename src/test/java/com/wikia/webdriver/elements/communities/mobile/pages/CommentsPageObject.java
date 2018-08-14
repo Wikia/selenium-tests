@@ -15,7 +15,7 @@ public class CommentsPageObject extends WikiBasePageObject {
   By firstCommentBy = By.cssSelector("ul.comments > li.article-comment:first-child");
   @FindBy(css = ".article-comments > div")
   private WebElement commentsHeader;
-  @FindBy(css = ".avatar")
+  @FindBy(css = ".comments .wds-avatar")
   private List<WebElement> commentsAvatars;
   @FindBy(css = ".username")
   private List<WebElement> commentsUsernames;
