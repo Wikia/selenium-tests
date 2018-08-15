@@ -239,7 +239,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     }
     if (method.isAnnotationPresent(DontRun.class) || method.isAnnotationPresent(RunOnly.class)) {
       Log.ok("Test SKIPPED", result.getThrowable().getMessage());
-      result.setStatus(ITestResult.SKIP);
+      result.setStatus(ITestResult.SUCCESS);
       onTestSuccess(result);
     } else {
       result.setStatus(ITestResult.FAILURE);
