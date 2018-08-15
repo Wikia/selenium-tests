@@ -69,11 +69,8 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
 
       if (hasOnlyDefaultValue(includedEnvs)) {
         return false;
-      } else if (Arrays.stream(includedEnvs).anyMatch(e->e.equals(envFromConfig))) {
-        return false;
-      } else {
-        return true;
       }
+      return !Arrays.stream(includedEnvs).anyMatch(e->e.equals(envFromConfig));
     }
     return false;
   }
@@ -102,11 +99,8 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
 
       if (hasOnlyDefaultValue(includedLangs)) {
         return false;
-      } else if (Arrays.stream(includedLangs).anyMatch(e->Configuration.getWikiLanguage().contains(e))) {
-        return false;
-      } else {
-        return true;
       }
+      return !Arrays.stream(includedLangs).anyMatch(e->Configuration.getWikiLanguage().contains(e));
     }
     return false;
   }

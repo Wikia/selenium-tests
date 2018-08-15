@@ -1,9 +1,15 @@
 package com.wikia.webdriver.common.testnglisteners;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.*;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -12,14 +18,20 @@ import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.logging.VelocityWrapper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.joda.time.DateTime;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-import org.testng.*;
-
 import java.lang.reflect.Method;
 import java.util.Date;
+import org.joda.time.DateTime;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+import org.testng.SkipException;
 
 public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     implements ITestListener {
@@ -221,15 +233,13 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
 
   @Override
   public void onTestSkipped(ITestResult result) {
+    Method method = result.getMethod().getConstructorOrMethod().getMethod();
     if (!Log.isTestStarted()) {
-      Log.startTest(result.getMethod().getConstructorOrMethod().getMethod());
+      Log.startTest(method);
     }
-    if (result.getMethod()
-        .getConstructorOrMethod()
-        .getMethod()
-        .isAnnotationPresent(DontRun.class)) {
+    if (method.isAnnotationPresent(DontRun.class) || method.isAnnotationPresent(RunOnly.class)) {
       Log.ok("Test SKIPPED", result.getThrowable().getMessage());
-      result.setStatus(ITestResult.SUCCESS);
+      result.setStatus(ITestResult.SKIP);
       onTestSuccess(result);
     } else {
       result.setStatus(ITestResult.FAILURE);

@@ -40,15 +40,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(mainPage.isMainPage());
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = MobileWikis.DE_WIKI)
-  public void wikiNameOnNonEnglishWikiShouldLinkToMainPageSzl() {
-    MainPage mainPage = new CommunityHeaderDesktop().clickWikiName();
-
-    Assertion.assertTrue(mainPage.isMainPage());
-  }
-
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.ANONYMOUS)
   public void testAnonWikiButtons() {
