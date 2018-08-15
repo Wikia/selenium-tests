@@ -16,6 +16,10 @@ import com.wikia.webdriver.elements.communities.mobile.components.navigation.glo
 import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePageObject;
 import org.testng.annotations.Test;
 
+/*
+ * Tests for wiki article's content for mobile view
+ */
+
 @Test(groups = "Mercury_Article")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
@@ -39,8 +43,8 @@ public class ArticlePageTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
-  public void mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
+  @Test(groups = "articleWikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
+  public void articleWikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
     new ArticleContent().push(MAIN_PAGE_CONTENT, "Main_Page");
 
     init();
@@ -55,21 +59,21 @@ public class ArticlePageTests extends NewTestTemplate {
     Assertion.assertTrue(articlePage.isFooterLogoVisible());
   }
 
-  @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
-  public void mercury_article_linksInTopContributorsSectionRedirectsToUserPage() {
+  @Test(groups = "articleLinksInTopContributorsSectionRedirectsToUserPage")
+  public void articleLinksInTopContributorsSectionRedirectsToUserPage() {
     new ArticleContent().push(MAIN_PAGE_CONTENT, "Main_Page");
 
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPageByPath("/wiki/Main_Page");
 
-    articlePage.clickTopContributor(0);
+    articlePage.clickNthTopContributorAvatar(0);
 
-    Assertion.assertTrue(articlePage.isUrlContainingUserPage());
+    Assertion.assertTrue(articlePage.getCurrentUrl().contains("/wiki/User:"));
   }
 
-  @Test(groups = "mercury_article_linkedImagesRedirectToCorrespondingUrl")
-  public void mercury_article_linkedImagesRedirectToCorrespondingUrl() {
+  @Test(groups = "articleLinkedImagesRedirectToCorrespondingUrl")
+  public void articleLinkedImagesRedirectToCorrespondingUrl() {
     new ArticleContent().push(LINKED_IMAGES_CONTENT, "LinkedImages");
     new ArticleContent().push(GALLERY_CONTENT, "Gallery");
 
@@ -85,8 +89,8 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   //test disabled as it needs to be adjusted when new local nav tests will be created
-  @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark", enabled = false)
-  public void mercury_article_navigateToArticlesWithColonAndQuestionMark() {
+  @Test(groups = "articleNavigateToArticlesWithColonAndQuestionMark", enabled = false)
+  public void articleNavigateToArticlesWithColonAndQuestionMark() {
     new ArticleContent().push("Article about colon [[Question?mark?question]]", "Colon:colon:colon");
     new ArticleContent().push("Article about question mark [[Colon:colon:colon]]", "Question?mark?question");
 

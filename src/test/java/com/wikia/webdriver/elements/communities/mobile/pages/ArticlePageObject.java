@@ -11,6 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+/*
+ * This is Page Object for the mobile view of the wiki article
+ */
+
 public class ArticlePageObject extends BasePageObject {
 
   @FindBy(css = ".wds-global-navigation__logo")
@@ -27,8 +31,8 @@ public class ArticlePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = ".wds-global-footer__header-logo")
   private WebElement footerLogo;
-  @FindBy(css = ".contributors > ul > li > a")
-  private List<WebElement> topContributorsLinks;
+  @FindBy(css = ".wds-avatar-stack > .wds-avatar > a > img")
+  private List<WebElement> topContributorsAvatars;
   @FindBy(css = ".wiki-page-header__title")
   private WebElement articleTitle;
   @FindBy(css = ".article-content p a")
@@ -48,10 +52,10 @@ public class ArticlePageObject extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public void clickTopContributor(int index) {
-    wait.forElementVisible(topContributorsLinks.get(0), 5, 500);
-    jsActions.scrollToElement(topContributorsLinks.get(index));
-    topContributorsLinks.get(index).click();
+  public void clickNthTopContributorAvatar(int index) {
+    wait.forElementVisible(topContributorsAvatars.get(0), 5, 500);
+    jsActions.scrollToElement(topContributorsAvatars.get(index));
+    topContributorsAvatars.get(index).click();
   }
 
   public void clickOnImage(int index) {
@@ -98,12 +102,6 @@ public class ArticlePageObject extends BasePageObject {
     wait.forElementVisible(footerLogo);
 
     return footerLogo.isDisplayed();
-  }
-
-  public boolean isUrlContainingUserPage() {
-    wait.forElementVisible(userAvatar, 5, 500);
-
-    return driver.getCurrentUrl().contains("/wiki/User:");
   }
 
   public String getArticleTitle() {
