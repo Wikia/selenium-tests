@@ -288,7 +288,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingAcceptedForHiViAdSlots(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, AdsDataProvider.UAP_HIVI_PAGE);
+    modal.acceptOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE);
     modal.scrollTo(driver.findElement(By.className("wds-global-footer__header")));
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
