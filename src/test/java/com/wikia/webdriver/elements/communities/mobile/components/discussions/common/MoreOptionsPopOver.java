@@ -39,7 +39,6 @@ public class MoreOptionsPopOver {
   }
 
   public MoreOptionsPopOver clickLockPostOption() {
-    // should be changed to post.findElement(By.className("<class name>")).click(); after SOC-3791
     clickReportLinkOption("Lock Post");
     waitFor(PostEntity::isLocked);
     return this;
@@ -67,11 +66,10 @@ public class MoreOptionsPopOver {
 
   public ShareDialog clickSharePostOption() {
     post.findElement(By.className("share-link")).click();
-    return new ShareDialog(post.findElement(By.cssSelector(".discussion-share-dialog .modal-dialog")));
+    return new ShareDialog(post.findElement(By.cssSelector(".share-dialog .modal-dialog")));
   }
 
   public MoreOptionsPopOver clickUnlockPostOption() {
-    // should be changed to post.findElement(By.className("<class name>")).click(); after SOC-3791
     clickReportLinkOption("Unlock Post");
     waitFor(PostEntity::isNotLocked);
     return this;
