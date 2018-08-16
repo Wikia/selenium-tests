@@ -74,9 +74,4 @@ public class MoreOptionsPopOver {
     waitFor(PostEntity::isNotLocked);
     return this;
   }
-
-  public UserPostsPage clickViewAllPostsByOption() {
-    post.findElement(By.cssSelector("a[href^='/d/u/']")).click();
-    return new UserPostsPage();
-  }
 }
