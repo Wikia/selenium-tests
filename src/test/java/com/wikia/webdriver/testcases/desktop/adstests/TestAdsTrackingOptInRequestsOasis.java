@@ -67,7 +67,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingRejectedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
+    modal.rejectOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -228,7 +228,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
+    modal.acceptOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -324,7 +324,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_ARTICLE1_PAGE);
+    modal.acceptOptInModal(driver, GERMANY, ADS_ARTICLE1_PAGE);
     AdsBaseObject ads = new AdsBaseObject();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
