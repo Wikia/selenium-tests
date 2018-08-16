@@ -67,7 +67,7 @@ public class MoreOptionsPopOver {
 
   public ShareDialog clickSharePostOption() {
     post.findElement(By.className("share-link")).click();
-    return new ShareDialog(post.findElement(By.cssSelector(".discussion-share-dialog .modal-dialog")));
+    return new ShareDialog(post.findElement(By.cssSelector(".share-dialog .modal-dialog")));
   }
 
   public MoreOptionsPopOver clickUnlockPostOption() {

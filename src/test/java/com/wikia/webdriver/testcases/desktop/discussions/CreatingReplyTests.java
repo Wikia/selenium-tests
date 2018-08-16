@@ -36,7 +36,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    userOnMobileMustBeLoggedInToUseReplyCreator(page.getReplyCreatorMobile());
+    userMustBeLoggedInToUseReplyCreator(page.getReplyCreatorMobile());
   }
 
   // Anonymous on desktop
@@ -46,7 +46,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    userOnDesktopMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
+    userMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
   }
 
   // User on mobile
@@ -74,11 +74,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   // Testing methods
 
-  private void userOnDesktopMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
-    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.REGISTER_PAGE);
-  }
-
-  private void userOnMobileMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
+  private void userMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.JOIN_PAGE);
   }
 
