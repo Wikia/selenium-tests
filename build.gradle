@@ -82,10 +82,6 @@ dependencies {
 
     def webdriverVersion = '3.13.0'
 
-    runtime 'xml-apis:xml-apis:1.4.01'
-    runtime "org.seleniumhq.selenium:selenium-ie-driver:${webdriverVersion}"
-    runtime "org.seleniumhq.selenium:selenium-safari-driver:${webdriverVersion}"
-
     testCompile "org.apache.velocity:velocity:1.7"
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
