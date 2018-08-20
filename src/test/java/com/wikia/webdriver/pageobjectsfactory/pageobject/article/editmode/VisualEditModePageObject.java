@@ -107,6 +107,9 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public VisualEditModePageObject open(String articleName) {
+    String url = urlBuilder.appendQueryStringToURL(urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleName,
+                                                   URLsContent.ACTION_EDIT
+    );
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleName,
                                              URLsContent.ACTION_EDIT
     ));
