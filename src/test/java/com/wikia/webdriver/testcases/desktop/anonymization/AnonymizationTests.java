@@ -28,7 +28,7 @@ import java.time.LocalDate;
 
 @SuppressWarnings("SpellCheckingInspection")
 @InBrowser(browser = Browser.CHROME)
-@Execute(onWikia = "communitytest")
+// @Execute(onWikia = "communitytest") communitytest is a real existing wiki. test should not be executed there
 @Test(groups = "anonymization")
 public class AnonymizationTests extends NewTestTemplate {
 
