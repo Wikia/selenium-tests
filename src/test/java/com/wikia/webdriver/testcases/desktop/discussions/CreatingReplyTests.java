@@ -75,11 +75,11 @@ public class CreatingReplyTests extends NewTestTemplate {
   // Testing methods
 
   private void userOnDesktopMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
-    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.REGISTER_PAGE);
+    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.LOGIN_PAGE);
   }
 
   private void userOnMobileMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
-    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.JOIN_PAGE);
+    anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MobileSubpages.LOGIN_PAGE);
   }
 
   private void anonymousUserOnReplyEditorClickIsRedirectedTo(

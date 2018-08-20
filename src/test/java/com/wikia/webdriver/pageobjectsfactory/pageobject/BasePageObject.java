@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
 
-  private static final int TIMEOUT_PAGE_REGISTRATION = 3000;
+  private static final int TIMEOUT_PAGE_REGISTRATION = 3;
   private static final String
       COMSCORE_PIXEL_URL
       = "script[src*='b.scorecardresearch.com/beacon.js']";
