@@ -58,7 +58,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
   @FindBy(css = ".wds-community-header a[data-tracking=\"discuss\"], .wds-community-header a[data-tracking=\"forum\"]")
   private WebElement discussLink;
 
-  @FindBy(css = ".wds-community-header .wds-avatar-stack__avatar a")
+  @FindBy(css = ".wds-community-header .wds-avatar-stack .wds-avatar a img")
   private List<WebElement> avatars;
 
   @FindBy(css = ".wds-community-header")
@@ -132,7 +132,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
   }
 
   public String getUserNameFromAvatar(int index) {
-    return avatars.get(index).getAttribute("title");
+    return avatars.get(index).getAttribute("alt");
   }
 
   public CommunityHeaderDesktop openExploreMenu() {

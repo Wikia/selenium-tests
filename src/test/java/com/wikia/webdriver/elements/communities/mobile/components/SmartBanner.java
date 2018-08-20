@@ -14,9 +14,9 @@ import org.openqa.selenium.support.PageFactory;
 public class SmartBanner {
 
   private static final int SMART_BANNER_POS_Y = 50;
-  @FindBy(css = ".smart-banner__close")
+  @FindBy(css = ".fandom-app-smart-banner__close")
   private WebElement closeButton;
-  private By smartBannerComponent = By.cssSelector(".smart-banner");
+  private By smartBannerComponent = By.cssSelector(".fandom-app-smart-banner");
   private Wait wait;
   private JavascriptActions jsActions;
   private WebDriver driver;
