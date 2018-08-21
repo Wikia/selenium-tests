@@ -82,7 +82,7 @@ public class CommentsPageObject extends WikiBasePageObject {
   }
 
   public int getNumberOfRepliesFromHeader(int index) {
-    int stringStart = showRepliesButtons.get(index).getText().indexOf(" ") + 1;
+    int stringStart = 0;
     int stringEnd = showRepliesButtons.get(index).getText().indexOf(" ", stringStart + 1);
     return Integer.parseInt(showRepliesButtons.get(index)
                                 .getText()
