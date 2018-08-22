@@ -136,6 +136,7 @@ public class URLsContent {
   public static final String COMMUNITY_WIKI = "community";
   public static final String COMMUNITY_COUNCIL_WIKI = "communitycouncil";
   public static final String MUPPET_WIKI = "muppet";
+  public static final String COMMUNITYTEST_WIKI = "communitytest";
 
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
