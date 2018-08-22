@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class SpecialAnonymizationUserPage extends SpecialPageObject {
 
   @FindBy(css = "#username")
-  private WebElement AnonymizationTextBox;
+  private WebElement anonymizationTextBox;
   @FindBy(css = "input[type=\"submit\"]")
   private WebElement submitButton;
   @FindBy(css = "#mw-content-text > section > span")
