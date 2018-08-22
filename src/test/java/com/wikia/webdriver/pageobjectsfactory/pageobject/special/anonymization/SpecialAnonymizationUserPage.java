@@ -1,8 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.anonymization;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
+import com.sun.javafx.fxml.builder.URLBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,7 +17,9 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   @FindBy(css = "#mw-content-text > section > span")
   private WebElement requestConfirmation;
 
+
   public SpecialAnonymizationUserPage open() {
+    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(URLsContent.COMMUNITYTEST_WIKI);
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_ANONYMIZATION));
 
     driver.navigate().refresh();
