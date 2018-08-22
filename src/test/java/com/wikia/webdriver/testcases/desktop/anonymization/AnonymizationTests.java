@@ -62,7 +62,6 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "anonymization")
   public void anonymizedUserProfilePageRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -122,7 +121,6 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "anonymization")
   public void anonyizationMessageWallRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());

@@ -17,7 +17,6 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   @FindBy(css = "#mw-content-text > section > span")
   private WebElement requestConfirmation;
 
-
   public SpecialAnonymizationUserPage open() {
     UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(URLsContent.COMMUNITYTEST_WIKI);
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_ANONYMIZATION));
