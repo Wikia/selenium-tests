@@ -16,8 +16,8 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
   private WebElement requestConfirmation;
 
   public SpecialAnonymizationUserPage open() {
-    UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(URLsContent.COMMUNITYTEST_WIKI);
-    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_ANONYMIZATION));
+    UrlBuilder communitytestUrlBuilder = UrlBuilder.createUrlBuilderForWiki(URLsContent.COMMUNITYTEST_WIKI);
+    getUrl(communitytestUrlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_ANONYMIZATION));
 
     driver.navigate().refresh();
     return this;
@@ -25,7 +25,7 @@ public class SpecialAnonymizationUserPage extends SpecialPageObject {
 
   public SpecialAnonymizationUserPage fillFutureAnon(String anonymizedUser) {
     wait.forElementClickable(submitButton);
-    AnonymizationTextBox.sendKeys(anonymizedUser);
+    anonymizationTextBox.sendKeys(anonymizedUser);
     return this;
   }
 
