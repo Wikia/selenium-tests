@@ -26,7 +26,7 @@ public class UserPostsPage extends PageWithPosts {
   /**
    * moderation section visible to mod+ users in mobile view
    */
-  @FindBy(className = "header-dropdown-button")
+  @FindBy(css = ".discussion-dropdown > .wds-dropdown")
   private WebElement moderation;
 
   public static boolean is(String url) {
