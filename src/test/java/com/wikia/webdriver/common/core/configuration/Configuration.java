@@ -219,8 +219,6 @@ public class Configuration {
 
     if (env.contains("prod")) {
       return EnvType.PROD;
-    } else if (env.contains("staging")) {
-      return EnvType.STAGING;
     } else if (StringUtils.indexOfAny(env, sandboxEnvs) != -1) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {

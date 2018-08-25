@@ -119,9 +119,6 @@ public class UrlBuilder extends BaseUrlBuilder {
       case PROD: {
         return String.join(".", www + wikiaName, envType.getWikiaDomain());
       }
-      case STAGING: {
-        return String.join(".", www + wikiaName, envType.getWikiaDomain());
-      }
       case SANDBOX: {
         return String.join(".", www + wikiaName, this.env, envType.getWikiaDomain());
       }
