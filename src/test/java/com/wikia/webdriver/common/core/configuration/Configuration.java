@@ -45,7 +45,7 @@ public class Configuration {
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
   @Getter(lazy = true)
-  private static final String wikiaDomain = getEnvType().getWikiaDomain();
+  private static final String domain = getEnvType().getDomain();
 
   private Configuration() {}
 
@@ -168,7 +168,11 @@ public class Configuration {
   }
 
   public static Boolean getForceLanguageInPath() {
-    return "true".equals(getProp("forceLanguageInPath"));
+    return "true".equalsIgnoreCase(getProp("forceLanguageInPath"));
+  }
+
+  public static Boolean getForceFandomDomain() {
+    return "true".equalsIgnoreCase(getProp("forceFandomDomain"));
   }
 
   public static Emulator getEmulator() {

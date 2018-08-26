@@ -114,13 +114,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", www + wikiaName, devBoxOwner, envType.getWikiaDomain());
+        return String.join(".", www + wikiaName, devBoxOwner, envType.getDomain());
       }
       case PROD: {
-        return String.join(".", www + wikiaName, envType.getWikiaDomain());
+        return String.join(".", www + wikiaName, envType.getDomain());
       }
       case SANDBOX: {
-        return String.join(".", www + wikiaName, this.env, envType.getWikiaDomain());
+        return String.join(".", www + wikiaName, this.env, envType.getDomain());
       }
       default:
         throw new WebDriverException("Unknown environment type");
@@ -131,13 +131,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", "www", devBoxOwner, envType.getWikiaDomain());
+        return String.join(".", "www", devBoxOwner, envType.getDomain());
       }
       case SANDBOX: {
-        return String.join(".", "www", this.env, envType.getWikiaDomain());
+        return String.join(".", "www", this.env, envType.getDomain());
       }
       default:
-        return String.join(".", "www", envType.getWikiaDomain());
+        return String.join(".", "www", envType.getDomain());
     }
   }
 
