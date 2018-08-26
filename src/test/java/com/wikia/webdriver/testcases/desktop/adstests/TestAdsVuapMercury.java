@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdSlot;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -27,10 +28,10 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapClickToPlayMobile", groups = {
       "AdsVuapClickToPlayMobile"})
-  public void vuapCheckTopAreasMercury(Page page, String slot) {
+  public void vuapCheckTopAreasMercury(Page page, AdSlot slot) {
     AdsBaseObject ads = new AdsBaseObject(page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
-    ads.scrollToSlot(slot);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot.getId()), true);
+    ads.scrollToSlot(slot.getId());
 
     vuap.clickOnArea(1);
     vuap.clickOnArea(2);
@@ -48,17 +49,17 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapClickToPlayMobile", groups = {
       "AdsVuapClickToPlayMobile"})
   public void vuapClickToPlayShouldStartPlayingAdvertisementAfterClickOnPlayArea(
-      Page page, String slot
+      Page page, AdSlot slot
   ) {
     AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(
         driver,
         slot,
-        ads.findFirstIframeWithAd(slot),
+        ads.findFirstIframeWithAd(slot.getId()),
         false
     );
 
-    ads.scrollToSlot(slot);
+    ads.scrollToSlot(slot.getId());
 
     vuap.clickOnArea(3);
     vuap.waitForVideoStart();
@@ -67,16 +68,16 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   }
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapMobile", groups = "AdsVuapDefaultStateMercury")
-  public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
+  public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, AdSlot slot) {
     AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(
         driver,
         slot,
-        ads.findFirstIframeWithAd(slot),
+        ads.findFirstIframeWithAd(slot.getId()),
         false
     );
 
-    ads.scrollToSlot(slot);
+    ads.scrollToSlot(slot.getId());
     vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoPlay(vuap);
@@ -84,14 +85,14 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapMobile", groups = {
       "AdsVuapDefaultStateMercury"})
-  public void vuapDefaultStateReplayIsNotMuted(Page page, String slot) throws InterruptedException {
+  public void vuapDefaultStateReplayIsNotMuted(Page page, AdSlot slot) throws InterruptedException {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
-                                               ads.findFirstIframeWithAd(slot),
+                                               ads.findFirstIframeWithAd(slot.getId()),
                                                false
     );
-    ads.scrollToSlot(slot);
+    ads.scrollToSlot(slot.getId());
 
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
 
@@ -103,14 +104,14 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapMobile", groups = {
       "AdsVuapDefaultStateMercury"})
-  public void vuapDefaultStateIsMuted(Page page, String slot) {
+  public void vuapDefaultStateIsMuted(Page page, AdSlot slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver,
                                                slot,
-                                               ads.findFirstIframeWithAd(slot),
+                                               ads.findFirstIframeWithAd(slot.getId()),
                                                false
     );
-    ads.scrollToSlot(slot);
+    ads.scrollToSlot(slot.getId());
 
     vuap.waitForVideoStart();
     vuap.togglePause();
@@ -118,12 +119,12 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   }
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsVuapMobile", groups = "AdsVuapTimeProgressMercury")
-  public void vuapDefaultStateShouldProgressInTime(Page page, String slot)
+  public void vuapDefaultStateShouldProgressInTime(Page page, AdSlot slot)
       throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki("project43").getUrl());
     ads.getUrl(page);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
-    ads.scrollToSlot(slot);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot.getId()), true);
+    ads.scrollToSlot(slot.getId());
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
   }

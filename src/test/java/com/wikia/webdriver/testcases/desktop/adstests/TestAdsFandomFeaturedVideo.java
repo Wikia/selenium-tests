@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdSlot;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -79,8 +80,8 @@ public class TestAdsFandomFeaturedVideo extends AdsFandomTestTemplate {
 
   private void verifySlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
+    fandomPage.verifySlot(AdSlot.TOP_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdSlot.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdSlot.BOTTOM_LEADERBOARD));
   }
 }
