@@ -40,7 +40,7 @@ public class MobileSubpages {
   public static final String ECC_MAIN_PAGE = "/wiki/Mercury_Empty_CC_Editor_Wikia";
 
   // Login and SignUp pages
-  public static final String JOIN_PAGE = "/join";
+  public static final String LOGIN_PAGE = "/signin";
   public static final String REGISTER_PAGE = "/register";
 
   private MobileSubpages() {

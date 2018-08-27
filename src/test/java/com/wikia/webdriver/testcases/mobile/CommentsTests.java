@@ -127,14 +127,16 @@ public class CommentsTests extends NewTestTemplate {
 
     Log.log("Replies list", "is collapsed", true);
 
+    int counter = comments.getNumberOfRepliesFromHeader(0);
+    int repliesCount = comments.getNumberOfRepliesFromList(0);
+    boolean result = counter == repliesCount;
+    Log.log("Replies counter", "is correct", "is incorrect", result);
+
     comments.clickViewReplies(0);
 
     Assertion.assertTrue(comments.isRepliesListExpanded(), "Replies list is collapsed");
 
     Log.log("Replies list", "is expanded", true);
-
-    boolean result = comments.getNumberOfRepliesFromHeader(0) == comments.getNumberOfRepliesFromList(0);
-    Log.log("Replies counter", "is correct", "is incorrect", result);
   }
 
   @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")

@@ -38,7 +38,7 @@ public class ContentReviewTests extends NewTestTemplate {
   public void editJS() {
     final String expectedContent = "console.log(\"content review test\");";
 
-    VisualEditModePageObject editPage = new VisualEditModePageObject().open("mediawiki:wikia.js");
+    VisualEditModePageObject editPage = new VisualEditModePageObject().open("MediaWiki:Wikia.js");
 
     editPage.getAceEditor().clearContent().insertContent(expectedContent);
 
@@ -48,7 +48,7 @@ public class ContentReviewTests extends NewTestTemplate {
     Assertion.assertEquals(specialJsPage.getScriptContent(), expectedContent);
     Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkVisible());
 
-    editPage.open("mediawiki:wikia.js")
+    editPage.open("MediaWiki:Wikia.js")
         .getAceEditor()
         .clearContent()
         .insertContent("console.log(\"content review test 2\");");

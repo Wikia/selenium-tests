@@ -17,8 +17,7 @@ public class ArticleDataProvider {
 
   @DataProvider
   public static final Object[][] articleTitles() {
-    return new Object[][]{{"QAarticleĄŻŁ"}, {"QAarticle國歷史"}, {"QAarticle/"},
-                          {"QAarticle QAarticle"}};
+    return new Object[][]{{"QAarticleĄŻŁ"}, {"QAarticle國歷史"}, {"QAarticle/"}, {"QAarticle QAarticle"}};
   }
 
   @DataProvider

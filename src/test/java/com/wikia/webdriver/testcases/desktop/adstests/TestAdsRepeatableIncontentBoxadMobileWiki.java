@@ -31,7 +31,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   private static final String INCONTENT_SELECTOR = "incontent_boxad_%s";
   private static final String ARTICLE_HEADER_SELECTOR = "Section_%s";
 
-  private static final int HEADERS_WITH_AD_NUMBER = 5;
+  private static final int HEADERS_WITH_AD_NUMBER = 4;
   private static final double HEADER_WITHOUT_AD_NUMBER = 2.5;
 
   private static String urlWithInstantGlobals(boolean enabled) {
@@ -60,6 +60,11 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
                            "IncontentBoxad is not displayed before section"
       );
     }
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER + 1))));
+
+    Assertion.assertFalse(isIncontenAdDisplayed(HEADERS_WITH_AD_NUMBER + 1, ads),
+                            "IncontentBoxad is displayed before section"
+      );
   }
 
   @Test()

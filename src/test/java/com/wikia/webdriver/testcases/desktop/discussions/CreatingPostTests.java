@@ -49,7 +49,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MobileSubpages.JOIN_PAGE));
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MobileSubpages.LOGIN_PAGE));
   }
 
   /*
@@ -65,7 +65,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MobileSubpages.REGISTER_PAGE));
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MobileSubpages.LOGIN_PAGE));
   }
 
   @Test(groups = DESKTOP)
