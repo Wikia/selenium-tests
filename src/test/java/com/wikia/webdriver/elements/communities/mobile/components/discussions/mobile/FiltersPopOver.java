@@ -13,7 +13,7 @@ public class FiltersPopOver extends BasePage {
   @Getter(lazy = true)
   private final CategoriesFieldset categoriesFieldset = new CategoriesFieldset();
 
-  @FindBy(css = ".discussion-header .wds-icon.filter-default")
+  @FindBy(css = ".discussion-dropdown > .wds-dropdown")
   private WebElement filterButton;
 
   @Getter
