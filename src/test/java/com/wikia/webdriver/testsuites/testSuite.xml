@@ -110,7 +110,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.discussions.NavigatingTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.OpenGraphTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.PollsTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.discussions.PromotingTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.ReportingPostTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.SharingTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.SortingTests"/>
