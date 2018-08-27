@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.desktop.articlecrudtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -75,6 +76,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     Assertion.assertEquals(source.getSourceContent(), "\n== Headline text ==\n");
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"RTE_extended_1", "RTE_extended_006"})
   public void RTE_006_EmbedFile() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -131,6 +133,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     Assertion.assertEquals(source.getSourceContent(), "\n----\n");
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
   public void RTE_012_Photo() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -237,6 +240,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     );
   }
 
+  @DontRun(language = "szl")
   @Test(groups = {"RTE_extended_3", "RTE_extended_016", "Media"})
   public void RTE_016_Video() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
