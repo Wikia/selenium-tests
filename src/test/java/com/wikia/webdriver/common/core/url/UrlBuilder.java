@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriverException;
 
 public class UrlBuilder extends BaseUrlBuilder {
 
-  public static final String WIKI_NAME_FANDOM_SUFFIX = "_fandom";
+  public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
