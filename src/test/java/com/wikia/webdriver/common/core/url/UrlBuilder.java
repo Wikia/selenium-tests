@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriverException;
 
 public class UrlBuilder extends BaseUrlBuilder {
 
+  public static final String WIKI_NAME_FANDOM_SUFFIX = "_fandom";
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
@@ -21,7 +22,8 @@ public class UrlBuilder extends BaseUrlBuilder {
       String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language
   ) {
     super(env);
-    this.wikiName = wiki;
+    //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis
+    this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
     this.language = language;
