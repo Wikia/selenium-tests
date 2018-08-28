@@ -53,18 +53,53 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   public void adDisplayedBeforeSections() {
     AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(true));
-    for (int i = 1; i <= HEADERS_WITH_AD_NUMBER; i++) {
+    for (int i = 1; i <= HEADERS_WITH_AD_NUMBER + 1; i++) {
       ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(i))));
+      switch (i) {
+        case 1:
+          Assertion.assertTrue(isIncontenAdDisplayed(i, ads),
+                               "IncontentBoxad is not displayed before section"
+          );
+          break;
 
-      Assertion.assertTrue(isIncontenAdDisplayed(i, ads),
-                           "IncontentBoxad is not displayed before section"
-      );
+        case 2:
+          Assertion.assertFalse(isIncontenAdDisplayed(3, ads),
+                                "IncontentBoxad is displayed before section"
+          );
+          break;
+
+        case 3:
+          Assertion.assertTrue(isIncontenAdDisplayed(2, ads),
+                               "IncontentBoxad is not displayed before section"
+          );
+          break;
+
+        case 4:
+          Assertion.assertTrue(isIncontenAdDisplayed(i, ads),
+                               "IncontentBoxad is not displayed before section"
+          );
+          break;
+
+        case 5:
+          Assertion.assertFalse(isIncontenAdDisplayed(i, ads),
+                                "IncontentBoxad is displayed before section"
+          );
+          break;
+
+        case 6:
+          Assertion.assertFalse(isIncontenAdDisplayed(i, ads),
+                                "IncontentBoxad is displayed before section"
+          );
+          break;
+
+        // You can have any number of case statements.
+        default:
+          Assertion.assertFalse(
+              isIncontenAdDisplayed(HEADERS_WITH_AD_NUMBER + 1, ads),
+              "IncontentBoxad is displayed before section"
+          );
+      }
     }
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER + 1))));
-
-    Assertion.assertFalse(isIncontenAdDisplayed(HEADERS_WITH_AD_NUMBER + 1, ads),
-                            "IncontentBoxad is displayed before section"
-      );
   }
 
   @Test()
