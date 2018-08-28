@@ -19,7 +19,7 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   private WebElement findSlotElement(AdSlot slot) {
-    return driver.findElement(By.cssSelector(AdsFandomContent.getSlotSelectorString(slot)));
+    return driver.findElement(By.cssSelector(slot.getId()));
   }
 
   @Override
@@ -41,7 +41,7 @@ public class AdsFandomObject extends AdsBaseObject {
   public void verifySlot(AdSlot slot) {
     String selector = slot.getId();
 
-    scrollTo(AdsFandomContent.getSlotSelector(slot));
+    scrollTo(slot.getId());
     verifyAdVisibleInSlot(selector, findSlotElement(slot));
   }
 
