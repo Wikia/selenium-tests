@@ -72,7 +72,7 @@ public class PostEntity {
   }
 
   public String findId() {
-    final String idAttribute = post.findElement(By.className("discussion-more-options"))
+    final String idAttribute = post.findElement(By.className("options-menu"))
         .getAttribute("id");
     return StringUtils.substringAfterLast(idAttribute, "-");
   }
@@ -148,7 +148,7 @@ public class PostEntity {
   }
 
   public MoreOptionsPopOver clickMoreOptions() {
-    post.findElement(By.className("discussion-more-options")).click();
+    post.findElement(By.className("options-menu")).click();
     return MoreOptionsPopOver.fromPostEntity(this);
   }
 
