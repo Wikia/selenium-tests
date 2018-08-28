@@ -30,7 +30,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsF2"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsMobileWiki"/>
-            <!--<class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapFandom"/>-->
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsInterstitial"/>
@@ -58,8 +57,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRefreshingOasis"/>
-            <!--<class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapOasis"/>-->
-            <!--<class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVuapMercury"/>-->
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVideoFrequencyCapping"/>
             <class name="com.wikia.webdriver.testcases.desktop.announcements.AnnouncementsDesktopTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.anonymization.AnonymizationTests"/>
