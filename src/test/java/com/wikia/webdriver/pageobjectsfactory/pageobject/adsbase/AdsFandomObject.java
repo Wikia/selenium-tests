@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdSlot;
-import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 
 import org.openqa.selenium.*;
 
