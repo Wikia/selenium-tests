@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mobile;
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -139,6 +140,7 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
+  @DontRun(language = "szl")
   @RelatedIssue(issueID = "XW-5188")
   public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
     this.comments = new CommentsPageObject(driver);
@@ -155,6 +157,7 @@ public class CommentsTests extends NewTestTemplate {
             "does not match pattern /wiki/User:", result);
   }
 
+  @DontRun(language = "szl")
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
   @RelatedIssue(issueID = "XW-5047")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {

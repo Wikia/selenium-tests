@@ -1,6 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.contentpatterns.AdSlot;
 
 import org.openqa.selenium.*;
 
@@ -17,8 +17,8 @@ public class AdsFandomObject extends AdsBaseObject {
     super(driver, testedPage, resolution);
   }
 
-  private WebElement findSlotElement(String slotSelector) {
-    return driver.findElement(By.cssSelector(AdsFandomContent.getSlotSelectorString(slotSelector)));
+  private WebElement findSlotElement(AdSlot slot) {
+    return driver.findElement(By.cssSelector(slot.getId()));
   }
 
   @Override
@@ -37,33 +37,20 @@ public class AdsFandomObject extends AdsBaseObject {
     jsActions.scrollBy(0, -navbarHeight);
   }
 
-  public void verifySlot(String slotName) {
-    String selector = AdsFandomContent.getSlotSelectorString(slotName);
+  public void verifySlot(AdSlot slot) {
+    String selector = slot.getId();
 
-    scrollTo(AdsFandomContent.getSlotSelector(slotName));
-    verifyAdVisibleInSlot(selector, findSlotElement(slotName));
+    scrollTo(slot.getId());
+    verifyAdVisibleInSlot(selector, findSlotElement(slot));
   }
 
-  public WebElement getSlot(String slotName) {
-    String selector = AdsFandomContent.getSlotSelectorString(slotName);
+  public WebElement getSlot(AdSlot slot) {
+    String selector = slot.getId();
 
     if (isElementOnPage(By.cssSelector(selector))) {
       return driver.findElement(By.cssSelector(selector));
     }
 
     return null;
-  }
-
-  public By getIframeSelector(String slotName) {
-    return By.cssSelector(AdsFandomContent.IFRAME_SLOT_SELECTORS.getOrDefault(slotName,
-                                                                              getDefaultIframeSelector(
-                                                                                  slotName)
-    ));
-  }
-
-  private String getDefaultIframeSelector(String slotName) {
-    return String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']",
-                         slotName
-    );
   }
 }
