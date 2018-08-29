@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdSlot;
-import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;

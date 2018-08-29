@@ -28,7 +28,6 @@ public class AdsFandomContent {
     SLOT_SELECTORS.put(BOTTOM_BOXAD, "div[id$='bottom_boxad_0__container__']");
     SLOT_SELECTORS.put(FEED_BOXAD, "div[id$='google_ads_iframe_/5441/wka1a.PF/feed_boxad/desktop/ns-article/_fandom-all_0__container__']");
 
-    // TODO move to ad slots
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD,
                               "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"

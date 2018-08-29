@@ -54,17 +54,4 @@ public class AdsFandomObject extends AdsBaseObject {
 
     return null;
   }
-
-  public By getIframeSelector(AdSlot slot) {
-    return By.cssSelector(AdsFandomContent.IFRAME_SLOT_SELECTORS.getOrDefault(slot,
-                                                                              getDefaultIframeSelector(
-                                                                                  slot.getId())
-    ));
-  }
-
-  private String getDefaultIframeSelector(String slotName) {
-    return String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']",
-                         slotName
-    );
-  }
 }
