@@ -53,18 +53,32 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   public void adDisplayedBeforeSections() {
     AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(true));
-    for (int i = 1; i <= HEADERS_WITH_AD_NUMBER; i++) {
-      ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(i))));
 
-      Assertion.assertTrue(isIncontenAdDisplayed(i, ads),
-                           "IncontentBoxad is not displayed before section"
-      );
-    }
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(HEADERS_WITH_AD_NUMBER + 1))));
 
-    Assertion.assertFalse(isIncontenAdDisplayed(HEADERS_WITH_AD_NUMBER + 1, ads),
-                            "IncontentBoxad is displayed before section"
-      );
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(1))));
+    Assertion.assertTrue(isIncontenAdDisplayed(1, ads),
+                         "IncontentBoxad is not displayed before section"
+    );
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(2))));
+    Assertion.assertFalse(isIncontenAdDisplayed(3, ads),
+                          "IncontentBoxad is displayed before section"
+    );
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(3))));
+    Assertion.assertTrue(isIncontenAdDisplayed(2, ads),
+                         "IncontentBoxad is not displayed before section"
+    );
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(4))));
+    Assertion.assertTrue(isIncontenAdDisplayed(4, ads),
+                         "IncontentBoxad is not displayed before section"
+    );
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(5))));
+    Assertion.assertFalse(isIncontenAdDisplayed(5, ads),
+                          "IncontentBoxad is displayed before section"
+    );
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(6))));
+    Assertion.assertFalse(isIncontenAdDisplayed(6, ads),
+                          "IncontentBoxad is displayed before section"
+    );
   }
 
   @Test()

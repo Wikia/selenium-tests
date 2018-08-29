@@ -26,7 +26,7 @@ public class AdsFandomContent {
     SLOT_SELECTORS.put(TOP_BOXAD, "div[id$='top_boxad_0__container__']");
     SLOT_SELECTORS.put(INCONTENT_BOXAD, "div[id$='incontent_boxad_0__container__']");
     SLOT_SELECTORS.put(BOTTOM_BOXAD, "div[id$='bottom_boxad_0__container__']");
-    SLOT_SELECTORS.put(FEED_BOXAD, "div[id$='feed_boxad_0__container__']");
+    SLOT_SELECTORS.put(FEED_BOXAD, "div[id$='google_ads_iframe_/5441/wka1a.PF/feed_boxad/desktop/ns-article/_fandom-all_0__container__']");
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD,
@@ -42,11 +42,11 @@ public class AdsFandomContent {
    *
    * @return String DOM id of element injected by GPT on a page
    */
-  public static String getSlotSelectorString(String slotName) {
-    return SLOT_SELECTORS.get(slotName);
+  public static String getSlotSelectorString(AdSlot slot) {
+    return slot.getId();
   }
 
-  public static By getSlotSelector(String slotName) {
-    return By.id(slotName);
+  public static By getSlotSelector(AdSlot slot) {
+    return By.id(slot.getName());
   }
 }

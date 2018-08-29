@@ -318,7 +318,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsOasis", dataProvider = "adsTrackingPixelsOnConsecutivePages")
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
