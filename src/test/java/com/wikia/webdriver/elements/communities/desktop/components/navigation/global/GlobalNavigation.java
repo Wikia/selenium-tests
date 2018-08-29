@@ -75,6 +75,14 @@ public class GlobalNavigation extends BasePageObject {
   private WebElement clearSearchPhraseButton;
   @FindBy(css = ".wds-global-navigation__search__suggestion")
   private List<WebElement> searchSuggestionsList;
+
+  @FindBy(css = ".wds-is-linked a[href*='exploruj']")
+  private WebElement explorujWikisLink;
+  @FindBy(css = "a[href*='Gry']")
+  private WebElement gryHubLink;
+  @FindBy(css = "a[href*='Filmy']")
+  private WebElement filmyHubLink;
+
   @Getter
   private NotificationsDropdown notificationsDropdown = new NotificationsDropdown();
 
@@ -229,8 +237,16 @@ public class GlobalNavigation extends BasePageObject {
     return isElementDisplayed(videospieleHubLink, 3);
   }
 
+  public boolean isGryHubVisible() {
+    return isElementDisplayed(gryHubLink, 3);
+  }
+
   public boolean isMoviesHubVisible() {
     return isElementDisplayed(moviesHubLink, 3);
+  }
+
+  public boolean isFilmyHubVisible() {
+    return isElementDisplayed(filmyHubLink, 3);
   }
 
   public boolean isFilmeHubVisible() {

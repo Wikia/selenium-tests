@@ -106,6 +106,7 @@ public class PortableInfoboxObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxObject clickExpandButton() {
+    jsActions.scrollElementIntoViewPort(expandButton);
     wait.forElementClickable(expandButton).click();
 
     return this;
