@@ -13,7 +13,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".lightbox-content")
   private WebElement lightboxContent;
-  @FindBy(css = ".current")
+  @FindBy(css = ".lightbox-image")
   private WebElement currentImage;
   @FindBy(css = ".lightbox-footer")
   private WebElement lightboxFooter;
@@ -42,22 +42,24 @@ public class LightboxComponentObject extends WikiBasePageObject {
     return true;
   }
 
-  public boolean isLightboxHeaderDisplayed() {
-    return !lightboxHeader.getCssValue("display").contains("none");
-  }
-
   public boolean isLightboxFooterDisplayed() {
-    return !lightboxFooter.getCssValue("display").contains("none");
+    try {
+      wait.forElementVisible(lightboxFooter);
+
+      return true;
+    } catch (TimeoutException e) {
+
+      return false;
+    }
   }
 
   public void clickCloseButton() {
-    wait.forElementVisible(closeLightboxButton);
+    wait.forElementClickable(closeLightboxButton);
     closeLightboxButton.click();
   }
 
   public void clickOnImage() {
-    waitForPageReload();
-    wait.forElementVisible(currentImage);
+    wait.forElementClickable(currentImage);
     currentImage.click();
   }
 
