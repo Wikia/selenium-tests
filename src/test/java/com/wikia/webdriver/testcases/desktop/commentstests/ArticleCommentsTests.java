@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.desktop.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -60,6 +61,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyReplyCreator(User.COMMENTS_REGULAR_USER.getUserName());
   }
 
+  @DontRun(language = "szl")
   @Test(groups = "ArticleComments_003")
   public void AnonCanReplyToAComment() {
     new ArticleContent(User.COMMENTS_REGULAR_USER).push(PageContent.ARTICLE_TEXT);

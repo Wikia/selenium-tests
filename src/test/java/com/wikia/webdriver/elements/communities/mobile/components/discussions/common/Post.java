@@ -40,7 +40,7 @@ public class Post extends BasePage {
   @FindBy(css = "li.upvote-area")
   private WebElement upvoteArea;
 
-  @FindBy(css = ".post-actions svg.upvote")
+  @FindBy(css = ".post-upvote")
   private WebElement upvoteButton;
 
   @FindBy(css = ".load-more-button")
