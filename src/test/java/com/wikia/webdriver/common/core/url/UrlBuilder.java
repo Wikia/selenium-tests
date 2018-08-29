@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriverException;
 
 public class UrlBuilder extends BaseUrlBuilder {
 
+  public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
@@ -21,7 +22,8 @@ public class UrlBuilder extends BaseUrlBuilder {
       String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language
   ) {
     super(env);
-    this.wikiName = wiki;
+    //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis
+    this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
     this.language = language;
@@ -114,16 +116,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", www + wikiaName, devBoxOwner, envType.getWikiaDomain());
+        return String.join(".", www + wikiaName, devBoxOwner, envType.getDomain());
       }
       case PROD: {
-        return String.join(".", www + wikiaName, envType.getWikiaDomain());
-      }
-      case STAGING: {
-        return String.join(".", www + wikiaName, envType.getWikiaDomain());
+        return String.join(".", www + wikiaName, envType.getDomain());
       }
       case SANDBOX: {
-        return String.join(".", www + wikiaName, this.env, envType.getWikiaDomain());
+        return String.join(".", www + wikiaName, this.env, envType.getDomain());
       }
       default:
         throw new WebDriverException("Unknown environment type");
@@ -134,13 +133,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", "www", devBoxOwner, envType.getWikiaDomain());
+        return String.join(".", "www", devBoxOwner, envType.getDomain());
       }
       case SANDBOX: {
-        return String.join(".", "www", this.env, envType.getWikiaDomain());
+        return String.join(".", "www", this.env, envType.getDomain());
       }
       default:
-        return String.join(".", "www", envType.getWikiaDomain());
+        return String.join(".", "www", envType.getDomain());
     }
   }
 
