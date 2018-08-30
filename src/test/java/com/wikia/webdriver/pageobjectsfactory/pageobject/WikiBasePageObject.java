@@ -38,9 +38,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -55,7 +52,6 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -206,18 +202,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
-
-    String signinUrl = urlBuilder.getWikiGlobalURL() + URLsContent.USER_LOGIN;
-    try {
-      getUrl(urlBuilder.appendQueryStringToURL(signinUrl,
-          URLEncoder.encode(wikiURL, StandardCharsets.UTF_8.name()))
-      );
-    } catch (UnsupportedEncodingException e) {
-      Log.log("openSpecialUserLogin", "Unable to encode redirect", false);
-      throw new WebDriverException("Unable to encode redirect", e);
-    }
-    Log.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-    return new AttachedSignInPage();
+    AttachedSignInPage signInPage = new AttachedSignInPage().open(wikiURL);
+    return signInPage;
   }
 
   public UserProfilePage openProfilePage(String userName, String wikiURL) {
