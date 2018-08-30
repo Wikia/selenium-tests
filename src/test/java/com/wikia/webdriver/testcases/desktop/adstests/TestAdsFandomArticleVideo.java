@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
-import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.contentpatterns.AdSlot;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
@@ -80,16 +80,16 @@ public class TestAdsFandomArticleVideo extends AdsFandomTestTemplate {
 
   private void verifyInlineVideoSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
+    fandomPage.verifySlot(AdSlot.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdSlot.TOP_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdSlot.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdSlot.BOTTOM_LEADERBOARD));
   }
 
   private void verifyFeaturedVideoSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
+    fandomPage.verifySlot(AdSlot.TOP_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdSlot.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdSlot.BOTTOM_LEADERBOARD));
   }
 }

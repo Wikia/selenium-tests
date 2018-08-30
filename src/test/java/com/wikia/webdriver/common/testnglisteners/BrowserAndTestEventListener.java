@@ -53,7 +53,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     if (method != null) {
       Class<?> declaringClass = method.getDeclaringClass();
 
-      String cookieDomain = String.format(".%s", Configuration.getEnvType().getWikiaDomain());
+      String cookieDomain = String.format(".%s", Configuration.getEnvType().getDomain());
 
       Date cookieDate = new Date(new DateTime().plusYears(10).getMillis());
 
@@ -77,7 +77,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         Log.warning("Url after navigation", "Unable to check URL after navigation - alert present");
       }
 
-      if (driver.getCurrentUrl().contains(Configuration.getWikiaDomain())) {
+      if (driver.getCurrentUrl().contains(Configuration.getDomain())) {
         // HACK FOR DISABLING NOTIFICATIONS
         try {
           new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
@@ -151,7 +151,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
               ));
           Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s",
                                  XMLReader.getValue("mock.ads_token"),
-                                 String.format(".%s", Configuration.getEnvType().getWikiaDomain())
+                                 String.format(".%s", Configuration.getEnvType().getDomain())
           ));
         }
       }
