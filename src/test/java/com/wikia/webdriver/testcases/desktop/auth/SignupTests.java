@@ -2,8 +2,7 @@ package com.wikia.webdriver.testcases.desktop.auth;
 
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -64,10 +63,18 @@ public class SignupTests extends NewTestTemplate {
     performSignUpOnMobileAs(createUserWithExistingEmail());
   }
 
+  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithExistingUsernameDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithExistingUsername());
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
+  }
+
+  @RunOnly(language = "szl")
+  @Test(groups = DESKTOP)
+  public void userCannotSignUpWithExistingUsernameDesktopSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithExistingUsername());
+    assertEquals(form.getError(), "Nazwa użytkownika jest już wykorzystywana");
   }
 
   @Test(groups = MOBILE)
@@ -77,10 +84,18 @@ public class SignupTests extends NewTestTemplate {
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
+  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithPasswordMatchingUsernameDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
+  }
+
+  @RunOnly(language = "szl")
+  @Test(groups = DESKTOP)
+  public void userCannotSignUpWithPasswordMatchingUsernameDesktopSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithPasswordMatchingUsername());
+    assertEquals(form.getError(), "Hasło i nazwa użytkownika nie mogą być takie same");
   }
 
   @Test(groups = MOBILE)
@@ -90,10 +105,18 @@ public class SignupTests extends NewTestTemplate {
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
+  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void userCannotSignUpWhenTooYoungDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
+  }
+
+  @RunOnly(language = "szl")
+  @Test(groups = DESKTOP)
+  public void userCannotSignUpWhenTooYoungDesktopSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createTooYoungUser());
+    assertEquals(form.getError(), "Nie możemy w tej chwili ukończyć rejestracji");
   }
 
   @Test(groups = MOBILE)
