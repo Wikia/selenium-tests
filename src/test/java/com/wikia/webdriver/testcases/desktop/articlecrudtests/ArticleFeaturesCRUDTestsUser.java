@@ -217,7 +217,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
    */
   @Test(groups = {"ArticleFeaturesCRUDUser_009", "Media"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
-  public void modifyVideo(String test) {
+  public void modifyVideo() {
     new ArticleContent().push(
         "[[File:Top 20 Shots the Tennis World will NEVER Forget|thumb|right|335 px]]");
 
