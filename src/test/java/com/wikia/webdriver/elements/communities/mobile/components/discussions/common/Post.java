@@ -1,24 +1,22 @@
 package com.wikia.webdriver.elements.communities.mobile.components.discussions.common;
 
-import static java.util.stream.Collectors.toList;
-
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.communities.mobile.pages.discussions.BasePage;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import javax.annotation.CheckForNull;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import javax.annotation.CheckForNull;
+import static java.util.stream.Collectors.toList;
 
 public class Post extends BasePage {
 
@@ -28,16 +26,16 @@ public class Post extends BasePage {
   @FindBy(css = ".post-detail figure.avatar")
   private WebElement avatarImage;
 
-  @FindBy(css = ".avatar-username")
+  @FindBy(css = ".user-avatar__username")
   private WebElement avatarUsername;
 
-  @FindBy(css = "li.upvote")
+  @FindBy(css = "li.post-upvote")
   private List<WebElement> postUpvoteButton;
 
   @FindBy(css = ".post-counters .upvote-count")
   private List<WebElement> postVoteCount;
 
-  @FindBy(css = "li.upvote-area")
+  @FindBy(css = "li.post-upvote")
   private WebElement upvoteArea;
 
   @FindBy(css = ".post-upvote")
