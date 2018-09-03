@@ -14,7 +14,7 @@ public class Reply extends BasePageObject {
   @FindBy(css = ".replies-list")
   private List<WebElement> repliesList;
 
-  @FindBy(css = ".upvote-reply")
+  @FindBy(css = ".reply-upvote")
   private List<WebElement> replyUpvoteButton;
 
   @FindBy(css = ".replies-list small")
