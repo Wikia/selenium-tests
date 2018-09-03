@@ -37,6 +37,8 @@ public class LoginTests extends NewTestTemplate {
     "We don't recognize these credentials. Try again or register a new account.";
   private static final String ERROR_MESSAGE_SZL = "Nie rozpoznajemy tych danych uwierzytelniania. Spróbuj ponownie lub zarejestruj nowe konto.";
 
+  private static final  String PASSWORD_FORM = "P@55_%s";
+
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanCloseJoinPage() {
@@ -146,7 +148,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   public void invalidPasswordErrorMessagesIsPresentedOnDesktop() {
     SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
-    String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
+    String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -155,7 +157,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   public void invalidPasswordErrorMessagesIsPresentedOnDesktopSzl() {
     SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
-    String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
+    String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE_SZL);
   }
@@ -165,7 +167,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void invalidPasswordErrorMessagesIsPresentedOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
-    String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
+    String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -175,7 +177,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void invalidPasswordErrorMessagesIsPresentedOnMobileSzl() {
     SignInPage signIn = navigateToSignInOnMobile();
-    String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
+    String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE_SZL);
   }
