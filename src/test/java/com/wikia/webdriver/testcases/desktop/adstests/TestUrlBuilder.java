@@ -265,6 +265,7 @@ public class TestUrlBuilder {
 
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void urlBuilderTests() throws Exception {
+    Configuration.setTestValue("forceFandomDomain", "false");
     Configuration.setTestValue("qs", "");
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
@@ -293,16 +294,12 @@ public class TestUrlBuilder {
               DEFAULT_LANGUAGE)
               .getUrlForPath((String) data[1]),
           (String) data[8]);
-      Assert.assertEquals(
-          c.newInstance((String) data[0], "staging", (Boolean) data[2], (Boolean) data[3],
-              DEFAULT_LANGUAGE)
-              .getUrlForPath((String) data[1]),
-          (String) data[9]);
     }
   }
 
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void urlWithLanguageBuilderTests() throws Exception {
+    Configuration.setTestValue("forceFandomDomain", "false");
     Configuration.setTestValue("qs", "");
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
@@ -330,16 +327,12 @@ public class TestUrlBuilder {
               (String) data[10])
               .getUrlForPath((String) data[1]),
           (String) data[8]);
-      Assert.assertEquals(
-          c.newInstance((String) data[0], "staging", (Boolean) data[2], (Boolean) data[3],
-              (String) data[10])
-              .getUrlForPath((String) data[1]),
-          (String) data[9]);
     }
   }
 
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void getWikiaUrlTests() throws Exception {
+    Configuration.setTestValue("forceFandomDomain", "false");
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
     Assert.assertEquals(c.newInstance("mediawiki119", "preview", false, false, DEFAULT_LANGUAGE)
@@ -364,6 +357,7 @@ public class TestUrlBuilder {
 
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void getUrlForPathTests() throws Exception {
+    Configuration.setTestValue("forceFandomDomain", "false");
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
     Assert.assertEquals(c.newInstance("mediawiki119", "preview", false, false, DEFAULT_LANGUAGE)
@@ -380,6 +374,7 @@ public class TestUrlBuilder {
 
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void getUrlForPathWithLanguageTests() throws Exception {
+    Configuration.setTestValue("forceFandomDomain", "false");
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
 
     Assert.assertEquals(c.newInstance("mediawiki119", "preview", false, true, "szl")
@@ -405,6 +400,7 @@ public class TestUrlBuilder {
 
   @Test(groups = {"TestUrlBuilder", "unitTests"})
   public void getUrlWithWWW() throws Exception {
+    Configuration.setTestValue("forceFandomDomain", "false");
     Constructor<UrlBuilder> c = getUrlBuilderConstructor();
     UrlBuilder urlBuilder = c
         .newInstance("mercuryautomationtesting", "preview", false, false, DEFAULT_LANGUAGE);

@@ -45,7 +45,7 @@ public class Configuration {
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
   @Getter(lazy = true)
-  private static final String wikiaDomain = getEnvType().getWikiaDomain();
+  private static final String domain = getEnvType().getDomain();
 
   private Configuration() {}
 
@@ -171,6 +171,10 @@ public class Configuration {
     return "true".equalsIgnoreCase(getProp("forceLanguageInPath"));
   }
 
+  public static Boolean getForceFandomDomain() {
+    return "true".equalsIgnoreCase(getProp("forceFandomDomain"));
+  }
+
   public static Emulator getEmulator() {
     Emulator emulatorToUse = Emulator.DEFAULT;
     if (TestContext.getCurrentTestMethod() != null && TestContext.getCurrentTestMethod()
@@ -219,8 +223,6 @@ public class Configuration {
 
     if (env.contains("prod")) {
       return EnvType.PROD;
-    } else if (env.contains("staging")) {
-      return EnvType.STAGING;
     } else if (StringUtils.indexOfAny(env, sandboxEnvs) != -1) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {

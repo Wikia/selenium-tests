@@ -2,8 +2,7 @@ package com.wikia.webdriver.testcases.desktop.auth;
 
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -29,9 +28,13 @@ import static org.testng.Assert.assertTrue;
 public class SignupTests extends NewTestTemplate {
 
   private static final String USERNAME_TAKEN_MSG = "Username is taken";
+  private static final String USERNAME_TAKEN_MSG_SZL = "Nazwa użytkownika jest już wykorzystywana";
   private static final String PASSWORD_MATCHING_USERNAME_MSG = "Password and username cannot match";
+  private static final String PASSWORD_MATCHING_USERNAME_MSG_SZL = "Hasło i nazwa użytkownika nie mogą być takie same";
   private static final String GENERIC_ERROR_MSG =
     "We cannot complete your registration at this time";
+  private static final String GENERIC_ERROR_MSG_SZL =
+      "Nie możemy w tej chwili ukończyć rejestracji";
 
   private static final String DESKTOP = "auth-signup-desktop";
   private static final String MOBILE = "auth-signup-mobile";
@@ -64,12 +67,21 @@ public class SignupTests extends NewTestTemplate {
     performSignUpOnMobileAs(createUserWithExistingEmail());
   }
 
+  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithExistingUsernameDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithExistingUsername());
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
+  @RunOnly(language = "szl")
+  @Test(groups = DESKTOP)
+  public void userCannotSignUpWithExistingUsernameDesktopSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithExistingUsername());
+    assertEquals(form.getError(), USERNAME_TAKEN_MSG_SZL);
+  }
+
+  @DontRun(language = "szl")
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithExistingUsernameMobile() {
@@ -77,12 +89,29 @@ public class SignupTests extends NewTestTemplate {
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
+  @RunOnly(language = "szl")
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotSignUpWithExistingUsernameMobileSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createUserWithExistingUsername());
+    assertEquals(form.getError(), USERNAME_TAKEN_MSG_SZL);
+  }
+
+  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithPasswordMatchingUsernameDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
+  @RunOnly(language = "szl")
+  @Test(groups = DESKTOP)
+  public void userCannotSignUpWithPasswordMatchingUsernameDesktopSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithPasswordMatchingUsername());
+    assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG_SZL);
+  }
+
+  @DontRun(language = "szl")
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithPasswordMatchingUsernameMobile() {
@@ -90,17 +119,42 @@ public class SignupTests extends NewTestTemplate {
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
+  @RunOnly(language = "szl")
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotSignUpWithPasswordMatchingUsernameMobileSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createUserWithPasswordMatchingUsername());
+    assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG_SZL);
+  }
+
+  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void userCannotSignUpWhenTooYoungDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
+  @RunOnly(language = "szl")
+  @Test(groups = DESKTOP)
+  public void userCannotSignUpWhenTooYoungDesktopSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createTooYoungUser());
+    assertEquals(form.getError(), GENERIC_ERROR_MSG_SZL);
+  }
+
+  @DontRun(language = "szl")
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWhenTooYoungMobile() {
     RegisterPage form = performSignUpExpectingFailureOnMobileAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
+  }
+
+  @RunOnly(language = "szl")
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotSignUpWhenTooYoungMobileSzl() {
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createTooYoungUser());
+    assertEquals(form.getError(), GENERIC_ERROR_MSG_SZL);
   }
 
   @Test(groups = DESKTOP)

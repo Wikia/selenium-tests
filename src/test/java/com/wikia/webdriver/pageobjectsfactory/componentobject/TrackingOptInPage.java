@@ -32,7 +32,7 @@ public class TrackingOptInPage extends BasePageObject {
                                          "{%22region%22:%22WP%22%2C%22country%22:%22" + country
                                          + "%22%2C%22continent%22:%22" + continent + "%22}",
                                          String.format(".%s",
-                                                       Configuration.getEnvType().getWikiaDomain()
+                                                       Configuration.getEnvType().getDomain()
                                          ),
                                          null,
                                          null
