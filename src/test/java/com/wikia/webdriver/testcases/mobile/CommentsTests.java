@@ -169,13 +169,13 @@ public class CommentsTests extends NewTestTemplate {
     boolean result = comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
     Log.log("Video thumbnail", "is displayed", "is not displayed", result);
 
-    result = comments.isMediaLinkInCommentVideo(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
+    result = comments.isMediaLinkInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
     Log.log("Video link", "is present", "is not present", result);
 
     result = comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
     Log.log("Image thumbnail", "is displayed", "is not displayed", result);
 
-    result = comments.isMediaLinkInCommentImage(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
+    result = comments.isMediaLinkInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
     Log.log("Image link", "is present", "is not present", result);
   }
 }
