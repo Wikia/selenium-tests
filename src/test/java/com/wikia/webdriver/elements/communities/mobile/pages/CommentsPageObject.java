@@ -181,13 +181,11 @@ public class CommentsPageObject extends WikiBasePageObject {
     return mediaInComment.findElement(By.cssSelector("img")).isDisplayed();
   }
 
-  public boolean isMediaLinkInComment(String mediaType, int index) throws WebDriverException {
-    WebElement mediaInComment;
+  public boolean isMediaLinkInCommentVideo(String mediaType, int index) throws WebDriverException {
+    WebElement mediaInComment = null;
     allComments.stream().forEach(e -> wait.forElementClickable(e));
     if ("Video".equals(mediaType)) {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .video"));
-    } else {
-      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .image"));
     }
     if (mediaInComment.getAttribute("href") == null) {
       throw new WebDriverException("Expected String but got null");
@@ -195,6 +193,17 @@ public class CommentsPageObject extends WikiBasePageObject {
     return mediaInComment.getAttribute("href").contains("/wiki/File:");
   }
 
+  public boolean isMediaLinkInCommentImage(String mediaType, int index) throws WebDriverException {
+    WebElement mediaInComment = null;
+    allComments.stream().forEach(e -> wait.forElementClickable(e));
+    if ("Image".equals(mediaType))  {
+      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .image"));
+    }
+    if (mediaInComment.getAttribute("href") == null) {
+      throw new WebDriverException("Expected String but got null");
+    }
+    return mediaInComment.getAttribute("href").contains("images");
+  }
   public void waitForCommentsToLoad() {
     wait.forElementVisible(commentsContainerBy);
   }
