@@ -26,7 +26,7 @@ public class AdsJWPlayerObject extends BasePageObject {
   private static final Color COLOR_POSTROLL = new Color(253, 93, 167);
   private static final Color COLOR_VIDEO = new Color(0, 255, 13);
   protected final Wait wait;
-  @FindBy(css = ".jw-icon-display.jw-button-color[role='button']")
+  @FindBy(css = ".jw-media")
   private WebElement playButton;
 
   @FindBy(css = ".jwplayer div.jw-icon.jw-icon-volume")
@@ -126,7 +126,7 @@ public class AdsJWPlayerObject extends BasePageObject {
   public void clickOnPlayer() {
     builder.moveToElement(playButton)
         .pause(1000)
-        .moveToElement(playButton, 100, 100)
+        .moveToElement(playButton, 100, 300)
         .click()
         .perform();
   }
