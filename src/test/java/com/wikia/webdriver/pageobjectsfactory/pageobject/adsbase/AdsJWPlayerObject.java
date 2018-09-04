@@ -126,7 +126,7 @@ public class AdsJWPlayerObject extends BasePageObject {
   public void clickOnPlayer() {
     builder.moveToElement(playButton)
         .pause(1000)
-        .moveToElement(playButton, 100, 300)
+        .moveToElement(playButton, 150, 350)
         .click()
         .perform();
   }
