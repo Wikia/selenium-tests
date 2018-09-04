@@ -166,16 +166,16 @@ public class CommentsTests extends NewTestTemplate {
     comments.clickCommentsHeader();
     comments.waitForCommentsToLoad();
 
-    boolean resultvar = comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    Log.log("Video thumbnail", "is displayed", "is not displayed", resultvar);
+    boolean result = comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
+    Log.log("Video thumbnail", "is displayed", "is not displayed", result);
 
-    resultvar = comments.isMediaLinkInCommentVideo(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
-    Log.log("Video link", "is present", "is not present", resultvar);
+    result = comments.isMediaLinkInCommentVideo(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
+    Log.log("Video link", "is present", "is not present", result);
 
-    resultvar = comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    Log.log("Image thumbnail", "is displayed", "is not displayed", resultvar);
+    result = comments.isMediaThumbnailInComment(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
+    Log.log("Image thumbnail", "is displayed", "is not displayed", result);
 
-    resultvar = comments.isMediaLinkInCommentImage(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
-    Log.log("Image link", "is present", "is not present", resultvar);
+    result = comments.isMediaLinkInCommentImage(MEDIA_TYPE_IMAGE, COMMENT_NUMBER_WITH_IMAGE);
+    Log.log("Image link", "is present", "is not present", result);
   }
 }
