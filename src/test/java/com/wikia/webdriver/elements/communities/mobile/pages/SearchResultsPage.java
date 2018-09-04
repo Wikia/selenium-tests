@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SearchResultsPage extends WikiBasePageObject {
 
-  private static final String SEARCH_RESULT_SELECTOR = ".search-results__list .wikia-card > a";
+  private static final String SEARCH_RESULT_SELECTOR = ".search-results .wikia-card > a";
   private static final String SPINNER_SELECTOR = ".spinner";
   @Getter
   private final Search search = new Search();
@@ -27,7 +27,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   private WebElement tryAnotherSearchLink;
   @FindBy(css = ".search-results__load-more-wrapper .wds-button")
   private WebElement loadMoreButton;
-  @FindBy(css = ".search-results__list .wikia-card")
+  @FindBy(css = ".search-results .wikia-card")
   private List<WebElement> resultCards;
 
   public SearchResultsPage openForQuery(String query) {
