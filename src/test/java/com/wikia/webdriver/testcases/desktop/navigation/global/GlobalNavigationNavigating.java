@@ -28,15 +28,6 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
 
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
-  public void logoClickOnEnglishCommunityOpensFandomSzl() {
-    new HomePage().getGlobalNavigation().clickFandomLogo();
-
-    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD) + HUBS_SZL);
-
-  }
-
   @DontRun(language = "szl")
   @Test(groups = {"gamesHubLinkClickOnEnCommunityOpensGamesHub"})
   public void testGamesHubLink() {
