@@ -92,7 +92,6 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(language = "szl")
   public void anonymizedUserProfilePageRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -119,34 +118,6 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
-  @RunOnly(language = "szl")
-  public void anonymizedUserProfilePageRemovedSzl() {
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
-    String passw = User.SUS_REGULAR_USER.getPassword();
-    SignUpUser user = new SignUpUser(qanon,
-                                     credentials.emailAnonymousUserTestWikia,
-                                     passw,
-                                     LocalDate.of(1990, 3, 19)
-    );
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    SpecialAnonymizationUserPage anonymizationPage = new SpecialAnonymizationUserPage().open();
-    anonymizationPage.loginAs(User.SUS_STAFF);
-    anonymizationPage.fillFutureAnon(qanon).submitAnonymization();
-
-    Assertion.assertStringContains(anonymizationPage.getAnonConfirmation(), qanon);
-
-    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertTrue(userProfilePage.getNotExistsMessage().equals(String.format(
-        "User account \"%s\" does not exist or has never logged in on this wiki.",
-        qanon
-    )));
-  }
-
-  @Test
-  @DontRun(language = "szl")
   public void anonymizationWikiEdits() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -180,110 +151,7 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
-  @RunOnly(language = "szl")
-  public void anonymizationWikiEditsSzl() {
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    String testsite = "AnonymizationTest";
-    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
-    String passw = User.SUS_REGULAR_USER.getPassword();
-    SignUpUser user = new SignUpUser(qanon,
-                                     credentials.emailAnonymousUserTestWikia,
-                                     passw,
-                                     LocalDate.of(1990, 3, 19)
-    );
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
-
-    new ArticleContent(user.getUsername()).push("Test" + timestamp, testsite);
-
-    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open(testsite);
-    Assertion.assertTrue(articleHistoryPage.isUserInHistory(user.getUsername()));
-
-    articleHistoryPage.logOut();
-
-    SpecialAnonymizationUserPage anonymizationPage = new SpecialAnonymizationUserPage().open();
-    anonymizationPage.loginAs(User.SUS_STAFF);
-    anonymizationPage.fillFutureAnon(qanon).submitAnonymization();
-
-    Assertion.assertStringContains(anonymizationPage.getAnonConfirmation(), qanon);
-
-    articleHistoryPage = new ArticleHistoryPage().open(testsite);
-    Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
-  }
-
-  @Test
-  @DontRun(language = "szl")
   public void anonyizationMessageWallRemoved() {
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    String testsite = "AnonymizationTest";
-    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
-    String passw = User.SUS_REGULAR_USER.getPassword();
-    SignUpUser user = new SignUpUser(qanon,
-                                     credentials.emailAnonymousUserTestWikia,
-                                     passw,
-                                     LocalDate.of(1990, 3, 19)
-    );
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
-
-    MessageWall wall = new MessageWall().open(user.getUsername());
-    MiniEditorComponentObject mini = wall.triggerMessageArea(true);
-    String message = String.format("%s%s", PageContent.MESSAGE_WALL_MESSAGE_PREFIX, timestamp);
-    String title = String.format("%s%s", PageContent.MESSAGE_WALL_TITLE_PREFIX, timestamp);
-    mini.switchAndWrite(message);
-    wall.setTitle(title);
-    wall.submit();
-    wall.verifyMessageText(title, message, user.getUsername());
-    wall.triggerEditMessageArea();
-    String messageEdit = PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + Long.toString(DateTime.now()
-                                                                                          .getMillis());
-    mini.switchAndEditMessageWall(messageEdit);
-    wall.submitEdition();
-    wall.verifyMessageEditText(title, messageEdit, user.getUsername());
-
-    try {
-      Thread.sleep(15000);
-    } catch (InterruptedException e) {
-      Log.logError("Interruption during waiting for Message Wall background task", e);
-    }
-
-    new ArticleContent(user.getUsername()).push("Test" + timestamp, testsite);
-
-    ArticleHistoryPage articleHistoryPage = new ArticleHistoryPage().open(testsite);
-    String id = articleHistoryPage.getHistoryID(user.getUsername());
-    Assertion.assertTrue(articleHistoryPage.isUserInHistory(user.getUsername()));
-
-    articleHistoryPage.logOut();
-
-    SpecialAnonymizationUserPage anonymizationPage = new SpecialAnonymizationUserPage().open();
-    anonymizationPage.loginAs(User.SUS_STAFF);
-    anonymizationPage.fillFutureAnon(qanon).submitAnonymization();
-
-    Assertion.assertStringContains(anonymizationPage.getAnonConfirmation(), qanon);
-
-    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertEquals(userProfilePage.getNotExistsMessage(), String.format(
-        "User account \"%s\" does not exist or has never logged in on this wiki.",
-        qanon
-    ));
-
-    articleHistoryPage = new ArticleHistoryPage().open(testsite);
-    Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
-
-    ArticleHistoryPage articleHistoryPageID = new ArticleHistoryPage().openArticleId(id);
-    String anonUser = articleHistoryPageID.getAnonByArticleID();
-
-    MessageWall messageWall = new MessageWall().open(anonUser);
-    Assertion.assertFalse(messageWall.isEditionVisible());
-  }
-
-  @Test
-  @RunOnly(language = "szl")
-  public void anonyizationMessageWallRemovedSzl() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String testsite = "AnonymizationTest";
