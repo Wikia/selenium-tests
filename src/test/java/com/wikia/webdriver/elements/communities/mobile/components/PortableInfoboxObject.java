@@ -132,8 +132,8 @@ public class PortableInfoboxObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxObject clickVideo() {
-    wait.forElementClickable(video).click();
-
+    wait.forElementClickable(video);
+    scrollAndClick(video);
     return this;
   }
 
