@@ -159,7 +159,6 @@ public class CommentsTests extends NewTestTemplate {
 
   @DontRun(language = "szl")
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
-  @RelatedIssue(issueID = "XW-5047")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     this.comments = new CommentsPageObject(driver);
     new Navigate().toPage(MobileSubpages.COMMENTS);
