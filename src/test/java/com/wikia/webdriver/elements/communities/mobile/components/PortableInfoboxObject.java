@@ -40,7 +40,7 @@ public class PortableInfoboxObject extends WikiBasePageObject {
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
 
-  @FindBy(css = ".portable-infobox .article-media-linked-gallery img")
+  @FindBy(css = ".article-media-gallery__column")
   private List<WebElement> galleryImageList;
 
   @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
@@ -139,12 +139,6 @@ public class PortableInfoboxObject extends WikiBasePageObject {
 
   public PortableInfoboxObject clickGalleryImage(int index) {
     wait.forElementClickable(galleryImageList.get(index)).click();
-
-    return this;
-  }
-
-  public PortableInfoboxObject clickGalleryButton(int index) {
-    wait.forElementClickable(galleryButtonList.get(index)).click();
 
     return this;
   }

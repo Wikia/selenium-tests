@@ -126,9 +126,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened()
         .closeLightbox()
         .isInfoboxCollapsed()
-        .clickExpandButton()
-        .clickGalleryButton(0)
-        .isInfoboxExpanded();
+        .clickExpandButton();
   }
 
   @Test(groups = "imageCollectionIsVisibleAndChangingImagesWorks")
