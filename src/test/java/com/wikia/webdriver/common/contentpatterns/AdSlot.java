@@ -6,7 +6,7 @@ public enum AdSlot {
   TOP_LEADERBOARD("top_leaderboard","div[id$='top_leaderboard_0__container__']"),
   BOTTOM_LEADERBOARD("bottom_leaderboard","div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__']"),
   TOP_BOXAD("top_boxad", "div[id*='top_boxad_0__container__']"),
-  INCONTENT_BOXAD("incontent_boxad", "div[id*='HiVi/incontent_boxad']"),
+  INCONTENT_BOXAD("incontent_boxad", "div[id*='/incontent_boxad']"),
   BOTTOM_BOXAD("bottom_boxad", "div[id$='bottom_boxad_0__container__']"),
   FEED_BOXAD("feed_boxad", "div[id$='google_ads_iframe_/5441/wka1a.PF/feed_boxad/desktop/ns-article/_fandom-all_0__container__']"),
   FEED_BOXAD_MOBILE("feed_boxad", "div[id$='google_ads_iframe_/5441/wka1a.PF/feed_boxad/smartphone/ns-article/_fandom-all_0__container__']"),
