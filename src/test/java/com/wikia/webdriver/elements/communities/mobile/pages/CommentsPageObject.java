@@ -182,17 +182,20 @@ public class CommentsPageObject extends WikiBasePageObject {
   }
 
   public boolean isMediaLinkInComment(String mediaType, int index) throws WebDriverException {
-    WebElement mediaInComment;
+    WebElement mediaInComment = null;
+    String linkPattern = null;
     allComments.stream().forEach(e -> wait.forElementClickable(e));
-    if ("Video".equals(mediaType)) {
-      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .video"));
-    } else {
+    if ("Image".equals(mediaType))  {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .image"));
+      linkPattern = "images";
+    } else if ("Video".equals(mediaType)) {
+      mediaInComment = allComments.get(index).findElement(By.cssSelector("figure .video"));
+      linkPattern = "/wiki/File:";
     }
     if (mediaInComment.getAttribute("href") == null) {
       throw new WebDriverException("Expected String but got null");
     }
-    return mediaInComment.getAttribute("href").contains("/wiki/File:");
+    return mediaInComment.getAttribute("href").contains(linkPattern);
   }
 
   public void waitForCommentsToLoad() {
