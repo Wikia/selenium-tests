@@ -22,7 +22,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   private static final String DENMARK = "DK";
   private static final String GERMANY = "DE";
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraRejectedDataProvider", groups = "AdsOptInRejectedOasis")
@@ -34,7 +34,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInRejectedOasis")
@@ -46,7 +46,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNetzAthletenDataProvider", groups = "AdsOptInRejectedOasis")
@@ -60,7 +60,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsMoatDataProvider", groups = "AdsOptInRejectedOasis")
@@ -72,7 +72,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInRejectedOasis")
@@ -84,7 +84,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPrebidDataProvider", groups = "AdsOptInRejectedOasis")
@@ -96,7 +96,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsA9DataProvider", groups = "AdsOptInRejectedOasis")
@@ -108,7 +108,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsQuantcastDataProvider", groups = "AdsOptInRejectedOasis")
@@ -120,7 +120,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInRejectedOasis")
@@ -132,7 +132,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsGoogleAnalyticsDataProvider", groups = "AdsOptInRejectedOasis")
@@ -144,7 +144,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNpaHiViDataProviderOasis", groups = "AdsOptInRejectedOasis")
@@ -157,7 +157,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPetametricsDataProvider", groups = "AdsOptInRejectedOasis")
@@ -169,7 +169,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraAcceptedDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -183,7 +183,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -195,7 +195,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNetzAthletenDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -209,7 +209,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -221,7 +221,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsMoatDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -233,7 +233,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPrebidDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -245,7 +245,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsA9DataProvider", groups = "AdsOptInAcceptedOasis")
@@ -269,7 +269,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -281,7 +281,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNpaHiViDataProviderOasis", groups = "AdsOptInAcceptedOasis")
@@ -294,7 +294,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsGoogleAnalyticsDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -306,7 +306,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPetametricsDataProvider", groups = "AdsOptInAcceptedOasis")
@@ -336,7 +336,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     }
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsOasis", dataProvider = "adsTrackingPixelsOnConsecutivePages")
   public void adsTrackingPixelsOnConsecutivePagesOutsideUE(
@@ -356,7 +356,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     }
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsOasis", dataProvider = "adsTrackingPixelsSent")
