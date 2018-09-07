@@ -40,7 +40,7 @@ public class PortableInfoboxObject extends WikiBasePageObject {
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
 
-  @FindBy(css = ".article-media-gallery__column")
+  @FindBy(css = ".article-media-gallery .article-media-thumbnail")
   private List<WebElement> galleryImageList;
 
   @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
