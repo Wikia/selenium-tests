@@ -25,7 +25,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
                                                         "SyntheticTests/Video/Porvata/Direct"
   );
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithDirectOfferEventOasis"})
   public void adsVelesWithDirectOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -39,7 +39,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     );
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithBidderOfferEventOasis"})
   public void adsVelesWithBidderOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -58,7 +58,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     );
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithoutOfferEventOasis"})
   public void adsVelesWithoutOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
@@ -70,7 +70,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     );
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Test(groups = {"AdsVideoVelesOasis", "AdsVelesDirectVisibleAllTheTimeOasis"})
   public void adsVelesDirectVisibleAllTheTime() {
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
