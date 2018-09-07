@@ -138,6 +138,12 @@ public class URLsContent {
   public static final String MUPPET_WIKI = "muppet";
   public static final String COMMUNITYTEST_WIKI = "communitytest";
 
+  // For szl tests
+  public static final String COMMUNITY_WIKI_SZL = "spolecznosc";
+  public static final String COMMUNITY_CENTRAL_SZL = "Centrum_Spo%C5%82eczno%C5%9Bci";
+  public static final String HUBS_SZL = "explore-pl?uselang=pl";
+
+
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
 
