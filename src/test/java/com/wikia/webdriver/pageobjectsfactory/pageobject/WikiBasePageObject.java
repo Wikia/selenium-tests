@@ -139,7 +139,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected String modalWrapper = "#WikiaConfirm";
   @FindBys(@FindBy(css = ".wds-banner-notification"))
   private List<WebElement> notificationElements;
-  @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
+  @FindBy(css="#mw-content-text > a")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-dropdown__toggle .wds-avatar")
   private WebElement globalNavigationAvatar;
