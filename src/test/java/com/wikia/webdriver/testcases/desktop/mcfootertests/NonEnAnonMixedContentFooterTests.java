@@ -204,7 +204,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .scrollToDiscussions()
         .clickOnViewAllLinkInDiscussions();
 
-    Assertion.assertTrue(discussions.isDiscussions());
+    Assertion.assertTrue(discussions.isDiscussionsPresent());
   }
 
   @RunOnly(language = "szl")
@@ -216,7 +216,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .scrollToDiscussions()
         .clickOnViewAllLinkInDiscussions();
 
-    Assertion.assertTrue(discussions.isDiscussions());
+    Assertion.assertTrue(discussions.isDiscussionsPresent());
   }
 
   @DontRun(language = "szl")
@@ -273,8 +273,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .scrollToDiscussions()
         .clickDiscussionsPost();
 
-    String url = driver.getCurrentUrl();
-    Assertion.assertTrue(url.contains(".wikia.com/szl/d/"));
+    Assertion.assertTrue(driver.getCurrentUrl().contains(".wikia.com/szl/d/"));
   }
 
   @DontRun(language = "szl")

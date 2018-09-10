@@ -115,7 +115,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
         .getDiscussionsCard()
         .clickOnViewAllLinkInDiscussions();
 
-    Assertion.assertTrue(discussions.isDiscussions());
+    Assertion.assertTrue(discussions.isDiscussionsPresent());
   }
 
   @DontRun( language = "szl")

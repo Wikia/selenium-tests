@@ -61,7 +61,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @DontRun(language = "szl")
-  @Test()
+  @Test
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialWatchListPage(wikiURL);
@@ -72,7 +72,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @RunOnly(language = "szl")
-  @Test(invocationCount = 5)
+  @Test
   public void anonCanLogInOnSpecialWatchListPageSzl() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialWatchListPage(wikiURL);

@@ -78,7 +78,7 @@ public class CommunityBarMobileWikiTests extends NewTestTemplate {
 
     DiscussionsPage discussions = new DiscussionsPage();
 
-    Assertion.assertTrue(discussions.isDiscussions());
+    Assertion.assertTrue(discussions.isDiscussionsPresent());
   }
 
   @Test
