@@ -62,7 +62,7 @@ public class CommunityBarMobileWikiTests extends NewTestTemplate {
 
     ArticlePage article = new ArticlePage();
 
-    Assertion.assertEquals(article.getArticleTitle(), "Mercury automation testing Wiki");
+    Assertion.assertTrue(article.getArticleTitle().contains("Mercury automation testing Wiki"),"Title should contain: 'Mercury automation testing Wikia' but it doesn't!");
 
   }
 
