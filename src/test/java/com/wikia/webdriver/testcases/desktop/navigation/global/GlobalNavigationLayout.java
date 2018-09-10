@@ -85,7 +85,6 @@ public class GlobalNavigationLayout extends NewTestTemplate {
     Assertion.assertTrue(globalNavigation.isFandomLogoVisible());
     Assertion.assertTrue(globalNavigation.isSearchInputVisible());
     Assertion.assertTrue(globalNavigation.isStartWikiButtonVisible());
-    Assertion.assertTrue(globalNavigation.isPartnerSlotLinkVisible());
     Assertion.assertTrue(globalNavigation.isGryHubVisible());
     Assertion.assertTrue(globalNavigation.isFilmyHubVisible());
     Assertion.assertTrue(globalNavigation.isTVDEHubVisible());
