@@ -23,7 +23,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   private static final String
       AD_INFO_PATTERN
-      = "https?://.*wikia-services\\.com.*kv_pos=incontent_boxad.*kv_rv=4.*";
+      = "https?://.*wikia-services\\.com.*kv_pos=incontent_boxad.*kv_rv=3.*";
   private static final String AE3_INSTANT_GLOBAL = "wgAdDriverAdEngine3Countries";
   private static final String
       REPEATABLE_INCONTENT_INSTANT_GLOBAL
@@ -59,16 +59,12 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
     Assertion.assertTrue(isIncontenAdDisplayed(1, ads),
                          "IncontentBoxad is not displayed before section"
     );
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(2))));
-    Assertion.assertFalse(isIncontenAdDisplayed(3, ads),
-                          "IncontentBoxad is displayed before section"
-    );
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(3))));
     Assertion.assertTrue(isIncontenAdDisplayed(2, ads),
                          "IncontentBoxad is not displayed before section"
     );
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(4))));
-    Assertion.assertTrue(isIncontenAdDisplayed(4, ads),
+    Assertion.assertTrue(isIncontenAdDisplayed(3, ads),
                          "IncontentBoxad is not displayed before section"
     );
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(5))));
