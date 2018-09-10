@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -130,10 +129,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   private KeyboardShortcutsModal triggerGIShortcutSzl() {
     actions.sendKeys("gi").perform();
 
-    Assertion.assertTrue(
-        driver.getCurrentUrl().contains(INSIGHTS_PAGE_SZL),
-        "You were not redirected to Insights page by gi keyboard shortcut"
-    );
+    Assertion.assertStringContains(driver.getCurrentUrl(),INSIGHTS_PAGE_SZL);
     Log.info("You were redirected to Insights page by gi keyboard shortcut");
 
     return this;
