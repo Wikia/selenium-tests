@@ -45,7 +45,7 @@ public class DiscussionsPage extends BasePage {
     }
   }
 
-  public boolean isDiscussions() {
+  public boolean isDiscussionsPresent() {
     return discussionsBody.isDisplayed();
   }
 }

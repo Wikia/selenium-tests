@@ -60,20 +60,26 @@ public class ForcedLoginTests extends NewTestTemplate {
     Assertion.assertStringContains(base.getUrl(),URLsContent.SPECIAL_UPLOAD_SZL);
   }
 
-  @Test()
+  @DontRun(language = "szl")
+  @Test
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialWatchListPage(wikiURL);
     base.clickLoginOnSpecialPage();
     new AttachedSignInPage().login(user);
-    //TODO: To delete
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      Log.log("Explicit wait in signing in", e, false);
-    }
     base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
+  }
+
+  @RunOnly(language = "szl")
+  @Test
+  public void anonCanLogInOnSpecialWatchListPageSzl() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    base.openSpecialWatchListPage(wikiURL);
+    base.clickLoginOnSpecialPage();
+    new AttachedSignInPage().login(user);
+    base.verifyUserLoggedIn(user.getUserName());
+    assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST_SZL));
   }
 
   public void anonCanLogInViaAuthModalWhenAddingPhoto() {
