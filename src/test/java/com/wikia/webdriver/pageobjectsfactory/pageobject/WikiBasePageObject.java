@@ -8,12 +8,13 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
-import com.wikia.webdriver.elements.communities.mobile.components.navigation.global.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.communities.desktop.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.communities.desktop.components.globalshortcuts.KeyboardShortcutsModal;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
 import com.wikia.webdriver.elements.communities.desktop.components.notifications.Notification;
 import com.wikia.webdriver.elements.communities.desktop.components.notifications.NotificationType;
 import com.wikia.webdriver.elements.communities.desktop.components.wikiabar.WikiaBar;
+import com.wikia.webdriver.elements.communities.mobile.components.navigation.global.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.communities.mobile.components.navigation.local.CommunityBarMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -24,30 +25,41 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
-import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.*;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
-import lombok.Getter;
-import org.apache.commons.lang3.Range;
-import org.joda.time.DateTime;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import org.apache.commons.lang3.Range;
+import org.joda.time.DateTime;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -139,7 +151,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected String modalWrapper = "#WikiaConfirm";
   @FindBys(@FindBy(css = ".wds-banner-notification"))
   private List<WebElement> notificationElements;
-  @FindBy(css="#mw-content-text > a")
+  //TODO: Remove szl part of the selector when szl tests are not needed
+  @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin'], a[href*='Specjalna:Zaloguj']")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-dropdown__toggle .wds-avatar")
   private WebElement globalNavigationAvatar;
@@ -194,7 +207,16 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
-    getUrl(wikiURL + URLsContent.USER_LOGIN);
+
+    String signinUrl = urlBuilder.getWikiGlobalURL() + URLsContent.USER_LOGIN;
+    try {
+      getUrl(urlBuilder.appendQueryStringToURL(signinUrl,
+          URLEncoder.encode(wikiURL, StandardCharsets.UTF_8.name()))
+      );
+    } catch (UnsupportedEncodingException e) {
+      Log.log("openSpecialUserLogin", "Unable to encode redirect", false);
+      throw new WebDriverException("Unable to encode redirect", e);
+    }
     Log.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
     return new AttachedSignInPage();
   }

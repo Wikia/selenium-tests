@@ -1,7 +1,10 @@
 package com.wikia.webdriver.testcases.desktop.auth;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RunOnly;
@@ -18,8 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSig
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
-
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forced-login")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
@@ -41,6 +42,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(user.getUserName());
   }
 
+  @DontRun(language = "szl")
   public void anonCanLogInViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject().openSpecialUpload();
     base.clickLoginOnSpecialPage();
@@ -49,8 +51,17 @@ public class ForcedLoginTests extends NewTestTemplate {
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
+  @RunOnly(language = "szl")
+  public void anonCanLogInViaUserLoginPageSzl() {
+    WikiBasePageObject base = new WikiBasePageObject().openSpecialUpload();
+    base.clickLoginOnSpecialPage();
+    new AttachedSignInPage().login(user);
+    base.verifyUserLoggedIn(user.getUserName());
+    Assertion.assertStringContains(base.getUrl(),URLsContent.SPECIAL_UPLOAD_SZL);
+  }
+
   @DontRun(language = "szl")
-  @Test(invocationCount = 5)
+  @Test()
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialWatchListPage(wikiURL);

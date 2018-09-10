@@ -20,6 +20,7 @@ public class URLsContent {
   public static final String SPECIAL_NEW_FILES = "Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "Special:Videos";
   public static final String SPECIAL_UPLOAD = "Special:Upload";
+  public static final String SPECIAL_UPLOAD_SZL = "Specjalna:Prze%C5%9Blij";
   public static final String SPECIAL_MULTIPLE_UPLOAD = "Special:MultipleUpload";
   public static final String SPECIAL_WATCHLIST = "Special:Watchlist";
   public static final String SPECIAL_PREFERENCES = "Special:Preferences";
