@@ -403,7 +403,7 @@ public class AdsDataProvider {
                                                        AdsContent.MEDREC
                                                    )
                                                        .put("slotSize", new Dimension(300, 250))
-                                                       .put("lineItemId", "365404452")
+                                                       .put("lineItemId", "365416332")
                                                        .build()
     ), Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
                                                                 AdsContent.FLOATING_MEDREC
