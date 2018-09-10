@@ -3,9 +3,9 @@ package com.wikia.webdriver.elements.communities.desktop.components.globalshortc
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -59,7 +59,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
         triggerGSShortcut();
         break;
       default:
-        break;
+        throw new IllegalArgumentException("Unrecognised shortcut");
     }
 
     return this;
@@ -83,7 +83,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
         triggerGSShortcut();
         break;
       default:
-        break;
+        throw new IllegalArgumentException("Unrecognised shortcut");
     }
 
     return this;
