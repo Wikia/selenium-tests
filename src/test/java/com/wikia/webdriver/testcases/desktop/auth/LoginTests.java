@@ -118,6 +118,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityOnMobile() {
+    openArticleOnMobile()
     SignInPage signInPage = navigateToSignInOnMobile();
     signInPage.typePassword(USER.getPassword());
 
@@ -168,6 +169,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void invalidPasswordErrorMessagesIsPresentedOnMobile() {
+    openArticleOnMobile();
     SignInPage signIn = navigateToSignInOnMobile();
     String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
@@ -178,6 +180,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void invalidPasswordErrorMessagesIsPresentedOnMobileSzl() {
+    openArticleOnMobile();
     SignInPage signIn = navigateToSignInOnMobile();
     String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
@@ -197,7 +200,6 @@ public class LoginTests extends NewTestTemplate {
   }
 
   private SignInPage navigateToSignInOnMobile() {
-    openArticleOnMobile();
     return new GlobalNavigationMobile().clickOnAnonAvatar().navigateToRegister().navigateToSignIn();
   }
 
