@@ -184,7 +184,7 @@ public class UrlBuilder extends BaseUrlBuilder {
     if (FANDOM_EXCULUDED_WIKIS.contains(wikiName)) {
       return envType.getWikiaDomain();
     } else {
-      return envType.getFandomDomain();
+      return envType.getDomain();
     }
   }
 }
