@@ -118,7 +118,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityOnMobile() {
-    openArticleOnMobile()
+    openArticleOnMobile();
     SignInPage signInPage = navigateToSignInOnMobile();
     signInPage.typePassword(USER.getPassword());
 
