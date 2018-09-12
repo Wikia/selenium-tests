@@ -139,7 +139,7 @@ public class CommentsTests extends NewTestTemplate {
     Log.log("Replies list", "is expanded", true);
   }
 
-  @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
+  @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage", enabled = false)
   @DontRun(language = "szl")
   @RelatedIssue(issueID = "XW-5188")
   public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
@@ -159,7 +159,6 @@ public class CommentsTests extends NewTestTemplate {
 
   @DontRun(language = "szl")
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
-  @RelatedIssue(issueID = "XW-5047")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     this.comments = new CommentsPageObject(driver);
     new Navigate().toPage(MobileSubpages.COMMENTS);

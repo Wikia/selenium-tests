@@ -20,6 +20,7 @@ public class URLsContent {
   public static final String SPECIAL_NEW_FILES = "Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "Special:Videos";
   public static final String SPECIAL_UPLOAD = "Special:Upload";
+  public static final String SPECIAL_UPLOAD_SZL = "Specjalna:Prze%C5%9Blij";
   public static final String SPECIAL_MULTIPLE_UPLOAD = "Special:MultipleUpload";
   public static final String SPECIAL_WATCHLIST = "Special:Watchlist";
   public static final String SPECIAL_PREFERENCES = "Special:Preferences";
@@ -137,6 +138,13 @@ public class URLsContent {
   public static final String COMMUNITY_COUNCIL_WIKI = "communitycouncil";
   public static final String MUPPET_WIKI = "muppet";
   public static final String COMMUNITYTEST_WIKI = "communitytest";
+
+  // For szl tests
+  public static final String COMMUNITY_WIKI_SZL = "spolecznosc";
+  public static final String COMMUNITY_CENTRAL_SZL = "Centrum_Spo%C5%82eczno%C5%9Bci";
+  public static final String HUBS_SZL = "explore-pl?uselang=pl";
+  public static final String SPECIAL_WATCHLIST_SZL = "Specjalna:Obserwowane";
+
 
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
