@@ -1,26 +1,28 @@
 package com.wikia.webdriver.testcases.desktop.auth;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static org.testng.Assert.assertFalse;
+
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.annotations.*;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
+import com.wikia.webdriver.elements.communities.mobile.components.navigation.global.GlobalNavigationMobile;
 import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
-import com.wikia.webdriver.elements.communities.desktop.components.navigation.global.GlobalNavigation;
-import org.testng.annotations.Test;
-
 import java.time.Instant;
-
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static org.testng.Assert.assertFalse;
+import org.testng.annotations.Test;
 
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -194,8 +196,9 @@ public class LoginTests extends NewTestTemplate {
     return new ArticlePageObject().open(MobileSubpages.MAIN_PAGE);
   }
 
-  private AttachedSignInPage navigateToSignInOnMobile() {
-    return new GlobalNavigation().clickAnonUserAvatar().clickOnRegister().navigateToSignIn();
+  private SignInPage navigateToSignInOnMobile() {
+    openArticleOnMobile();
+    return new GlobalNavigationMobile().clickOnAnonAvatar().navigateToRegister().navigateToSignIn();
   }
 
   private SignInPage openLoginPageFromGlobalnavOnDesktop() {
