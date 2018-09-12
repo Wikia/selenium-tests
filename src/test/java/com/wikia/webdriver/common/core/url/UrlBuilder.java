@@ -10,20 +10,30 @@ import okhttp3.HttpUrl;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriverException;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class UrlBuilder extends BaseUrlBuilder {
 
   public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
+  private static final Set<String>
+      FANDOM_EXCULUDED_WIKIS =
+      new HashSet<>(Arrays.asList(new String[]{"community"}));
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
   private String language;
 
   private UrlBuilder(
-      String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language
-  ) {
+      String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
     super(env);
     //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis
-    this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
+    if (FANDOM_EXCULUDED_WIKIS.contains(wiki)) {
+      this.wikiName = wiki;
+    } else {
+      this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
+    }
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
     this.language = language;
@@ -116,13 +126,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", www + wikiaName, devBoxOwner, envType.getDomain());
+        return String.join(".", www + wikiaName, devBoxOwner, getDomain(envType));
       }
       case PROD: {
-        return String.join(".", www + wikiaName, envType.getDomain());
+        return String.join(".", www + wikiaName, getDomain(envType));
       }
       case SANDBOX: {
-        return String.join(".", www + wikiaName, this.env, envType.getDomain());
+        return String.join(".", www + wikiaName, this.env, getDomain(envType));
       }
       default:
         throw new WebDriverException("Unknown environment type");
@@ -133,13 +143,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", "www", devBoxOwner, envType.getDomain());
+        return String.join(".", "www", devBoxOwner, getDomain(envType));
       }
       case SANDBOX: {
-        return String.join(".", "www", this.env, envType.getDomain());
+        return String.join(".", "www", this.env, getDomain(envType));
       }
       default:
-        return String.join(".", "www", envType.getDomain());
+        return String.join(".", "www", getDomain(envType));
     }
   }
 
@@ -167,6 +177,14 @@ public class UrlBuilder extends BaseUrlBuilder {
       }
     } else {
       return wikiName;
+    }
+  }
+
+  private String getDomain(EnvType env) {
+    if (FANDOM_EXCULUDED_WIKIS.contains(wikiName)) {
+      return envType.getWikiaDomain();
+    } else {
+      return envType.getFandomDomain();
     }
   }
 }
