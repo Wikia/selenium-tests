@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -32,7 +33,8 @@ import java.time.LocalDate;
 @Execute(onWikia = MobileWikis.DISCUSSIONS_7)
 public class AnnouncementsDesktopTests extends NewTestTemplate {
 
-    @Test(groups = "Announcements_Desktop")
+    @Test(groups = "Announcements_Desktop", enabled = false)
+    @RelatedIssue(issueID = "IRIS-6553")
     public void communityNewUserCanGetFreshAnnouncement() {
         String articleName = "QA_article_" + Long.toString(DateTime.now().getMillis());
         String tempLogin = "QA" + Long.toString(DateTime.now().getMillis());
