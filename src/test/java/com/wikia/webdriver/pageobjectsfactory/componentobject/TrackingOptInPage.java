@@ -103,6 +103,12 @@ public class TrackingOptInPage extends BasePageObject {
     isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
+  public void verifyTrackingRequestsSendForRejected(
+      List<String> urlPatterns, NetworkTrafficInterceptor networkTrafficInterceptor
+  ) {
+    isTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
+  }
+
   public void verifyTrackingRequestsSend(
       List<String> urlPatterns, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
@@ -117,6 +123,7 @@ public class TrackingOptInPage extends BasePageObject {
       List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
+    isConsentCookieSetToRejected();
     for (String anElementsList : elementsList) {
       Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
                                                              anElementsList
@@ -126,9 +133,25 @@ public class TrackingOptInPage extends BasePageObject {
     }
   }
 
+  private void isTrackingRequestsSendForRejected(
+      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+  ) {
+    wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
+    isConsentCookieSetToRejected();
+    for (String anElementsList : elementsList) {
+      Assertion.assertTrue(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                            anElementsList
+                           ),
+                           "Request to " + anElementsList + " services was not found"
+      );
+    }
+  }
+
   private void isTrackingRequestSend(
       List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
+    wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
+    isConsentCookieSetToAccepted();
     for (String anElementsList : elementsList) {
       wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
     }
@@ -169,5 +192,16 @@ public class TrackingOptInPage extends BasePageObject {
 
   public void logTrackingCookieValue() {
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
+  }
+
+  private void isConsentCookieSetToAccepted() {
+    final String cookieValue = driver.manage().getCookieNamed("euconsent").getValue();
+
+    Assertion.assertEquals(cookieValue.length(), 48);
+  }
+
+  private void isConsentCookieSetToRejected() {
+    final String cookieValue = driver.manage().getCookieNamed("euconsent").getValue();
+    Assertion.assertEquals(cookieValue.length(), 32);
   }
 }

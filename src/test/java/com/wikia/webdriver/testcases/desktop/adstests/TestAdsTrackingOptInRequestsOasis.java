@@ -93,7 +93,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -105,7 +105,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)

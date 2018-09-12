@@ -100,7 +100,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -111,7 +111,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -319,8 +319,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsMobileWiki", dataProvider = "adsTrackingPixelsOnConsecutivePages")
   public void adsTrackingPixelsOnConsecutivePagesOutsideUE(
-      List<String> urlPatterns,
-      String[] articles
+      List<String> urlPatterns, String[] articles
   ) {
     networkTrafficInterceptor.startIntercepting();
     MobileAdsBaseObject ads = new MobileAdsBaseObject();
