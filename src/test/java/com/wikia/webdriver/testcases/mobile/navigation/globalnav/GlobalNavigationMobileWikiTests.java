@@ -136,6 +136,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
 
   }
 
+  @DontRun(language = "szl")
   @Test
   public void trendingArticlesModuleOpensUnderMobileSearchOnEnWikis() {
     GlobalNavigationMobile globalNavigationMobile =
