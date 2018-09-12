@@ -31,7 +31,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -69,7 +69,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -117,7 +117,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -141,7 +141,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -154,7 +154,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.rejectOptInModal(driver, DENMARK, AdsDataProvider.UAP_HIVI_PAGE);
     modal.scrollTo(driver.findElement(By.className("wds-global-footer__header")));
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
