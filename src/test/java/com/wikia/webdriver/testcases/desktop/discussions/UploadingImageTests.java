@@ -97,7 +97,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
-  @Test(groups = DESKTOP)
+  @Test(groups = DESKTOP, enabled = false)
   @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
