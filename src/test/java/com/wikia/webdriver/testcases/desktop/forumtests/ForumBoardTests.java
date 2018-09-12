@@ -97,7 +97,8 @@ public class ForumBoardTests extends NewTestTemplate {
 
     forumBoard.open(boardTitle);
 
-    forumBoard.startDiscussion("A nice discussion", "A nice Message", false);
+    ForumThreadPageObject thread = forumBoard.startDiscussion("A nice discussion", "A nice Message", false);
+    thread.verifyDiscussionTitleAndMessage("A nice discussion", "A nice Message");
 
     forumBoard.open(boardTitle);
 
