@@ -75,8 +75,8 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".wds-global-navigation__user-logged-in img, "
-      + ".wds-global-navigation__user-logged-in svg";
+      ".wds-global-navigation__user-logged-in .wds-avatar svg, "
+          + ".wds-global-navigation__user-logged-in .wds-avatar img";
   
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
