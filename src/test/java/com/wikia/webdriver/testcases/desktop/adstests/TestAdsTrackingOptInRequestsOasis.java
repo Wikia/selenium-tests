@@ -213,10 +213,11 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInAcceptedOasis")
-  public void adsTrackingAcceptedForNordics(List<String> urlPatterns) {
+  public void adsTrackingAcceptedForNordics(
+      String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
