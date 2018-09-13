@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriverException;
 
 public abstract class AttachedPageBase<T extends AttachedPageBase<T>> extends BasePageObject{
 
-	public String siteSpecificPath;
+	private String siteSpecificPath;
 
 	public AttachedPageBase(String siteSpecificPath) {
 		this.siteSpecificPath = siteSpecificPath;
