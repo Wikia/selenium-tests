@@ -38,8 +38,7 @@ public class EditAccountTests extends NewTestTemplate {
 
   @Test(dependsOnMethods = "EditAccount_001_closeAccount")
   public void EditAccount_002_verifyAccountClosed() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = new AttachedSignInPage().open();
     signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
     Assertion.assertEquals(signInPage.getError(), expectedErrorMessage);
   }
@@ -58,7 +57,7 @@ public class EditAccountTests extends NewTestTemplate {
                                                               "EditAccount_003_reopenAccount"})
   public void EditAccount_004_verifyAccountReopened() {
     WikiBasePageObject base = new WikiBasePageObject();
-    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = new AttachedSignInPage().open();
     signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
     base.verifyUserLoggedIn(credentials.userNameClosedAccount);
   }
