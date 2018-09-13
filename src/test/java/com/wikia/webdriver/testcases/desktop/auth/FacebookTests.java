@@ -38,12 +38,12 @@ public class FacebookTests extends NewTestTemplate {
   }
 
   public void facebookButtonIsVisibleOnSignUpPage() {
-    AttachedRegisterPage registerPage = new WikiBasePageObject().openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage registerPage = new WikiBasePageObject().openUserSignUpPage(wikiURL);
     assertTrue(registerPage.isConnectWithFacebookButtonVisible());
   }
 
   public void facebookButtonIsVisibleOnLoginPage() {
-    AttachedSignInPage signInPage = new WikiBasePageObject().openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = new WikiBasePageObject().openUserLogin(wikiURL);
     assertTrue(signInPage.isConnectWithFacebookButtonVisible());
   }
 
