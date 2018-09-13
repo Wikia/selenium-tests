@@ -43,7 +43,7 @@ public class FacebookTests extends NewTestTemplate {
   }
 
   public void facebookButtonIsVisibleOnLoginPage() {
-    AttachedSignInPage signInPage = new WikiBasePageObject().openUserLogin(wikiURL);
+    AttachedSignInPage signInPage = new WikiBasePageObject().openUserLoginPage(wikiURL);
     assertTrue(signInPage.isConnectWithFacebookButtonVisible());
   }
 
