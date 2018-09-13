@@ -37,11 +37,11 @@ public class GlobalNavigation extends BasePageObject {
   private WebElement viewProfile;
   @FindBy(css = ".wds-sign-out__button")
   private WebElement signOutButton;
-  @FindBy(css = "a[href*='games']")
+  @FindBy(css = "a[data-tracking-label*='link.games']")
   private WebElement gamesHubLink;
-  @FindBy(css = "a[href*='movies']")
+  @FindBy(css = "a[data-tracking-label*='link.movies']")
   private WebElement moviesHubLink;
-  @FindBy(css = "a[href*='tv']")
+  @FindBy(css = "a[data-tracking-label*='link.tv']")
   private WebElement tvHubLink;
   @FindBy(css = "a[href*='TV']")
   private WebElement tvDEHubLink;
@@ -51,13 +51,13 @@ public class GlobalNavigation extends BasePageObject {
   private WebElement wikisMenu;
   @FindBy(css = ".wds-global-navigation__link-group .wds-global-navigation__dropdown-content")
   private WebElement wikisMenuContent;
-  @FindBy(css = "a[href*='Community_Central']")
+  @FindBy(css="a[data-tracking-label*='link.community-central']")
   private WebElement communityCentralLink;
   @FindBy(css = ".wds-global-navigation__notifications-dropdown")
   private WebElement notificationsIcon;
   @FindBy(css = ".wds-global-navigation__start-a-wiki")
   private WebElement startWikiButton;
-  @FindBy(css = ".wds-is-linked a[href*='explore']")
+  @FindBy(css = "a[data-tracking-label*='link.explore']")
   private WebElement exploreWikisLink;
   @FindBy(css = "a[href*='Videospiele']")
   private WebElement videospieleHubLink;

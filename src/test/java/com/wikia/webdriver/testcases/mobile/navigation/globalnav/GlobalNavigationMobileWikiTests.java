@@ -3,8 +3,7 @@ package com.wikia.webdriver.testcases.mobile.navigation.globalnav;
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -79,6 +78,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
     Assertion.assertTrue(globalNavigationMobile.isSearchComponentPresent());
   }
 
+  @DontRun(language = "szl")
   @Test
   public void hubsLinksOnEnWiki() {
     GlobalNavigationMobile globalNavigationMobile =
@@ -92,9 +92,24 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
     Assertion.assertTrue(globalNavigationMobile.isVideoHubLinkVisible());
   }
 
+  @DontRun(language = "szl")
   @Test
-  @Execute(onWikia = "de.dman")
+  @Execute(onWikia = "dman", language = "de")
   public void hubsLinksOnNonEnWiki() {
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .open(MobileSubpages.MAIN_PAGE)
+            .getGlobalNavigationMobile();
+
+    globalNavigationMobile.openSearch();
+
+    Assertion.assertTrue(globalNavigationMobile.areInterntionalHubLinksVisible());
+    Assertion.assertFalse(globalNavigationMobile.isVideoHubLinkVisible());
+  }
+
+  @RunOnly(language = "szl")
+  @Test
+  public void hubsLinksOnNonEnWikiSzl() {
     GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()
             .open(MobileSubpages.MAIN_PAGE)
@@ -135,6 +150,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
     Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleVisible());
   }
 
+  @DontRun(language = "szl")
   @Test
   @Execute(onWikia = MobileWikis.DE_WIKI)
   public void trendingArticlesModuleDoesNotOpenUnderMobileSearchOnNonEnWikis() {
@@ -150,4 +166,18 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
     Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleNotVisible());
   }
 
+  @RunOnly(language = "szl")
+  @Test
+  public void trendingArticlesModuleDoesNotOpenUnderMobileSearchOnNonEnWikisSzl() {
+    GlobalNavigationMobile globalNavigationMobile =
+        new ArticlePage()
+            .openDefault()
+            .getGlobalNavigationMobile();
+
+    globalNavigationMobile.openSearch();
+
+    ContentRecommendationsMobile trendingArticles = new ContentRecommendationsMobile();
+
+    Assertion.assertTrue(trendingArticles.isTrendingArticlesModuleNotVisible());
+  }
 }

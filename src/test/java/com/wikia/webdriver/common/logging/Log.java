@@ -65,6 +65,7 @@ public class Log {
       VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(Arrays.asList(LogLevel.ERROR),
                                                            description
       );
+      e.printStackTrace();
       Log.log(
           "onException",
           "driver has no ability to catch screenshot or html source - driver may died",

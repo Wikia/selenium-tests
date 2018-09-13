@@ -147,7 +147,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected String modalWrapper = "#WikiaConfirm";
   @FindBys(@FindBy(css = ".wds-banner-notification"))
   private List<WebElement> notificationElements;
-  @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
+  //TODO: Remove szl part of the selector when szl tests are not needed
+  @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin'], a[href*='Specjalna:Zaloguj']")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-dropdown__toggle .wds-avatar")
   private WebElement globalNavigationAvatar;
