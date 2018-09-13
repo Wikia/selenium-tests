@@ -1,15 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedPageBase;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedForgotPasswordPage extends BasePageObject implements ForgotPasswordPage {
+public class AttachedForgotPasswordPage extends
+    AttachedPageBase<AttachedForgotPasswordPage> implements ForgotPasswordPage {
 
   private static final String PASS_REQUESTED_SUCCESS = "Thanks! Please check your email.";
   @FindBy(id = "forgotPasswordSubmit")
@@ -19,6 +18,7 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
   private AuthPageContext authContext;
 
   public AttachedForgotPasswordPage() {
+    super(URLsContent.USER_FORGOT_PASSWORD);
     authContext = new AuthPageContext();
   }
 
@@ -27,8 +27,7 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
   }
 
   @Override
-  public FormPage open() {
-    driver.get(urlBuilder.getUrl() + URLsContent.USER_FORGOT_PASSWORD);
+  protected AttachedForgotPasswordPage getThis() {
     return this;
   }
 
