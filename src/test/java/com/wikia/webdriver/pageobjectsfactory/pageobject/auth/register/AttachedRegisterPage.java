@@ -3,19 +3,15 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedPageBase;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
-
+import java.time.LocalDate;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.time.LocalDate;
-
-public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
+public class AttachedRegisterPage extends AttachedPageBase<AttachedRegisterPage> implements RegisterPage {
 
   @FindBy(id = "signupEmail")
   private WebElement emailField;
@@ -39,17 +35,12 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   private AuthPageContext authContext;
 
   public AttachedRegisterPage() {
+    super(URLsContent.USER_SIGNUP);
     authContext = new AuthPageContext();
   }
 
   @Override
-  public AttachedRegisterPage open() {
-    try {
-      driver.get(urlBuilder.getWikiGlobalURL() + URLsContent.USER_SIGNUP + "?redirect=" + URLEncoder
-          .encode(urlBuilder.getUrl(), "UTF-8"));
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    }
+  protected AttachedRegisterPage getThis() {
     return this;
   }
 

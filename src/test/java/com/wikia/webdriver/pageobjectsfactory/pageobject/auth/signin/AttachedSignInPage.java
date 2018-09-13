@@ -3,16 +3,15 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedPageBase;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedSignInPage extends BasePageObject implements SignInPage {
+public class AttachedSignInPage extends AttachedPageBase<AttachedSignInPage> implements SignInPage {
 
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
@@ -30,8 +29,12 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   private AuthPageContext authContext;
 
   public AttachedSignInPage() {
+    super(URLsContent.USER_LOGIN);
     authContext = new AuthPageContext();
   }
+
+  @Override
+  protected AttachedSignInPage getThis() { return this; }
 
   public AttachedForgotPasswordPage clickForgotPasswordLink() {
     waitAndClick(forgottenPasswordLink);
@@ -91,12 +94,6 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   @Override
   public void submit() {
     waitAndClick(signInButton);
-  }
-
-  @Override
-  public AttachedSignInPage open() {
-    getUrl(getWikiUrl() + URLsContent.USER_LOGIN);
-    return this;
   }
 
   @Override
