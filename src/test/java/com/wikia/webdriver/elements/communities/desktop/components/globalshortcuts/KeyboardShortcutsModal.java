@@ -3,7 +3,6 @@ package com.wikia.webdriver.elements.communities.desktop.components.globalshortc
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -13,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 public class KeyboardShortcutsModal extends WikiBasePageObject {
 
   private static final String INSIGHTS_PAGE = "/wiki/Special:Insights";
+  private static final String INSIGHTS_PAGE_SZL = "/wiki/Specjalna:Podpowiedzi";
 
   @FindBy(css = ".global-shortcuts-help .close")
   private WebElement closeButton;
@@ -58,12 +58,35 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
         triggerGSShortcut();
         break;
       default:
-        break;
+        throw new IllegalArgumentException("Unrecognised shortcut");
     }
 
     return this;
   }
 
+  public KeyboardShortcutsModal useShortcutSzl(String shortcut) {
+    switch (shortcut) {
+      case ".":
+        triggerDotShortcut();
+        break;
+      case "ESC":
+        triggerEscapeShortcut();
+        break;
+      case "?":
+        triggerQuestionMarkShortcut();
+        break;
+      case "gi":
+        triggerGIShortcutSzl();
+        break;
+      case "gs":
+        triggerGSShortcut();
+        break;
+      default:
+        throw new IllegalArgumentException("Unrecognised shortcut");
+    }
+
+    return this;
+  }
   private KeyboardShortcutsModal triggerDotShortcut() {
     actions.sendKeys(".").perform();
 
@@ -102,6 +125,16 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
 
     return this;
   }
+
+  private KeyboardShortcutsModal triggerGIShortcutSzl() {
+    actions.sendKeys("gi").perform();
+
+    Assertion.assertStringContains(driver.getCurrentUrl(),INSIGHTS_PAGE_SZL);
+    Log.info("You were redirected to Insights page by gi keyboard shortcut");
+
+    return this;
+  }
+
 
   private KeyboardShortcutsModal triggerGSShortcut() {
     actions.sendKeys("gs").perform();
