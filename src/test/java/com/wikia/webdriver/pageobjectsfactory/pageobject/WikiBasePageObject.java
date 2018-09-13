@@ -191,9 +191,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AttachedRegisterPage openSpecialUserSignUpPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.USER_SIGNUP);
+    AttachedRegisterPage registerPage = new AttachedRegisterPage().open(wikiURL);
     Log.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
-    return new AttachedRegisterPage();
+    return registerPage;
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
@@ -204,6 +204,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
     AttachedSignInPage signInPage = new AttachedSignInPage().open(wikiURL);
+    Log.log("openSpecialUserLogin", "Signup page opened", true);
     return signInPage;
   }
 
