@@ -58,10 +58,12 @@ public class PageContent {
   // image storage
   public static final String FILERENAME = "default_Image003.jpg";
 
-  public static final String[] LIST_OF_FILES = {"default_Image001.jpg", "default_Image002.jpg", "default_Image003.jpg",
-                                                "default_Image004.jpg", "default_Image005.jpg", "default_Image006.jpg",
-                                                "default_Image007.jpg", "default_Image008.jpg", "default_Image009.jpg",
-                                                "Image010.jpg"};
+  public static final String[]
+      LIST_OF_FILES =
+      {"default_Image001.jpg", "default_Image002.jpg", "default_Image003.jpg",
+       "default_Image004.jpg", "default_Image005.jpg", "default_Image006.jpg",
+       "default_Image007.jpg", "default_Image008.jpg", "default_Image009.jpg",
+       "default_default_Image010.jpg"};
   public static final String IMAGE_UPLOAD_RESOURCES_PATH = "." + File.separator + "src"
                                                            + File.separator + "test"
                                                            + File.separator + "resources"
@@ -118,5 +120,6 @@ public class PageContent {
   // Customized toolbar
   public static final String FOLLOW = "follow";
 
-  private PageContent() {}
+  private PageContent() {
+  }
 }
