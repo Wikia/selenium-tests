@@ -6,7 +6,7 @@ Linked single images testing #1
 
 Linked single images testing #2
 
-[[File:Image010.jpg|thumb|left|link=https://www.facebook.com|Link to external site]]
+[[File:default_Image010.jpg|thumb|left|link=https://www.facebook.com|Link to external site]]
 
 Linked single images testing #3
 
@@ -15,7 +15,7 @@ Linked single images testing #3
 Linked slideshow images
 
 <gallery type="slideshow" navigation="true">
-Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
+default_Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
 default_Image006.jpg|Long caption no link THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW|linktext=THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW
 default_Image005.jpg
 default_Image002.jpg|bla bla
@@ -23,7 +23,7 @@ default_Image001.jpg
 </gallery>
 
 <gallery type="slideshow" navigation="true">
-Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
+default_Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
 default_Image006.jpg|Long caption no link THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW|linktext=THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW
 default_Image005.jpg
 default_Image002.jpg
@@ -39,7 +39,7 @@ default_Image004.jpg
 No  Linked Images
 
 <gallery>
-Image010.jpg
+default_Image010.jpg
 default_Image009.jpg
 default_Image006.jpg
 default_Image005.jpg

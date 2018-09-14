@@ -24,13 +24,13 @@ public class ArticleContent extends ApiCall {
   private User user = User.STAFF;
   private String username;
 
-  public ArticleContent(){
-    if(Configuration.getForceFandomDomain()){
+  public ArticleContent() {
+    if (Configuration.getForceFandomDomain()) {
       this.baseURL = UrlBuilder.createUrlBuilder()
                          .getUrl()
                          .replace(UrlBuilder.HTTP_PREFIX, UrlBuilder.HTTPS_PREFIX)
                      + "/api.php";
-    }else {
+    } else {
       this.baseURL = UrlBuilder.createUrlBuilder()
                          .getUrl()
                          .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
