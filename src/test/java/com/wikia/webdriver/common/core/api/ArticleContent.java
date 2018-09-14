@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
@@ -15,25 +16,38 @@ import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-@lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
 
-  private String baseURL = UrlBuilder.createUrlBuilder()
-                               .getUrl()
-                               .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
-                           + "/api.php";
+  private String baseURL;
+
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
   private String username;
+
+  public ArticleContent() {
+    if (Configuration.getForceFandomDomain()) {
+      this.baseURL = UrlBuilder.createUrlBuilder()
+                         .getUrl()
+                         .replace(UrlBuilder.HTTP_PREFIX, UrlBuilder.HTTPS_PREFIX)
+                     + "/api.php";
+    } else {
+      this.baseURL = UrlBuilder.createUrlBuilder()
+                         .getUrl()
+                         .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
+                     + "/api.php";
+    }
+  }
 
   /**
    * Push content, overriding a default user
    */
   public ArticleContent(User user) {
+    this();
     this.user = user;
   }
 
   public ArticleContent(String username) {
+    this();
     this.username = username;
   }
 
