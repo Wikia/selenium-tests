@@ -258,7 +258,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -269,7 +269,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)

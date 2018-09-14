@@ -103,6 +103,12 @@ public class TrackingOptInPage extends BasePageObject {
     isTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
 
+  public void verifyTrackingRequestsNotSendForAccepted(
+      List<String> urlPatterns, NetworkTrafficInterceptor networkTrafficInterceptor
+  ) {
+    isTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
+  }
+
   public void verifyTrackingRequestsSendForRejected(
       List<String> urlPatterns, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
@@ -124,6 +130,20 @@ public class TrackingOptInPage extends BasePageObject {
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToRejected();
+    for (String anElementsList : elementsList) {
+      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                             anElementsList
+                            ),
+                            "Request to " + anElementsList + " services was found"
+      );
+    }
+  }
+
+  private void isTrackingRequestsNotSendForAccepted(
+      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+  ) {
+    wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
+    isConsentCookieSetToAccepted();
     for (String anElementsList : elementsList) {
       Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
                                                              anElementsList
@@ -197,11 +217,11 @@ public class TrackingOptInPage extends BasePageObject {
   private void isConsentCookieSetToAccepted() {
     final String cookieValue = driver.manage().getCookieNamed("euconsent").getValue();
 
-    Assertion.assertEquals(cookieValue.length(), 48);
+    Assertion.assertEquals(cookieValue.length(), 48, "Incorrect length of accepted euconsent value");
   }
 
   private void isConsentCookieSetToRejected() {
     final String cookieValue = driver.manage().getCookieNamed("euconsent").getValue();
-    Assertion.assertEquals(cookieValue.length(), 32);
+    Assertion.assertEquals(cookieValue.length(), 32, "Incorrect length of rejected euconsent value");
   }
 }

@@ -292,7 +292,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.acceptOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE);
     modal.scrollTo(driver.findElement(By.className("wds-global-footer__header")));
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -304,7 +304,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
