@@ -1,6 +1,6 @@
 {{Infobox2
 |title1=Automation testing
-|image1=[[File:Image010.jpg]]
+|image1=[[File:default_Image010.jpg]]
 |caption1=$$ Example <> caption $$
 |row1=https://www.wikipedia.org <ref>Ref wikipedia</ref>
 |row2=Example? |row3=[[Category:VEINFOBOX]]
@@ -14,7 +14,7 @@
 
 |title2=http://www.wikia.com/Fandom
 |row5= == Nope ==
-|row6= <tabber> 1=[[File:Image009.jpg|thumb|Caption1]]</tabber> Text under the tabber.
+|row6= <tabber> 1=[[File:default_Image009.jpg|thumb|Caption1]]</tabber> Text under the tabber.
 |row7 = #VeryVeryVeryVeryVeryLongLine
 #Second very very very very very long line
 #Three
