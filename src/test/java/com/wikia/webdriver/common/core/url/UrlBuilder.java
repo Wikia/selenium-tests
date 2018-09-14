@@ -143,13 +143,13 @@ public class UrlBuilder extends BaseUrlBuilder {
     switch (env) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.join(".", "www", devBoxOwner, getDomain(envType));
+        return String.join(".", "www", devBoxOwner, envType.getWikiaDomain());
       }
       case SANDBOX: {
-        return String.join(".", "www", this.env, getDomain(envType));
+        return String.join(".", "www", this.env, envType.getWikiaDomain());
       }
       default:
-        return String.join(".", "www", getDomain(envType));
+        return String.join(".", "www", envType.getWikiaDomain());
     }
   }
 
