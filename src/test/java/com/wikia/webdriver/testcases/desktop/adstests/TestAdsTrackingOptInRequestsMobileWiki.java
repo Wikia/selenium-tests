@@ -293,7 +293,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_MERCURY_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)

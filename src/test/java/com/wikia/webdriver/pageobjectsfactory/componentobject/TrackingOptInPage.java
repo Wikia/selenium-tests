@@ -121,6 +121,12 @@ public class TrackingOptInPage extends BasePageObject {
     isTrackingRequestSend(urlPatterns, networkTrafficInterceptor);
   }
 
+  public void verifyTrackingRequestsSendOutsideEU(
+      List<String> urlPatterns, NetworkTrafficInterceptor networkTrafficInterceptor
+  ) {
+    isTrackingRequestSendOutsideEU(urlPatterns, networkTrafficInterceptor);
+  }
+
   public String urlOptInModalDisplayedOasis(Page page) {
     return urlBuilder.appendQueryStringToURL(page.getUrl(), MODAL_INSTANT_GLOBAL);
   }
@@ -172,6 +178,15 @@ public class TrackingOptInPage extends BasePageObject {
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToAccepted();
+    for (String anElementsList : elementsList) {
+      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
+    }
+  }
+
+  private void isTrackingRequestSendOutsideEU(
+      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+  ) {
+    wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     for (String anElementsList : elementsList) {
       wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
     }
