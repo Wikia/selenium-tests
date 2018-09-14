@@ -63,7 +63,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void modifyGallery() {
     new ArticleContent().push(
         "<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n" + "Image010.jpg\n"
-        + "Image009.jpg\n" + "</gallery>");
+        + "default_Image009.jpg\n" + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     GalleryBuilderComponentObject
@@ -86,7 +86,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void deleteGallery() {
     new ArticleContent().push(
         "<gallery position=\"right\" columns=\"2\" spacing=\"medium\">\n" + "Image010.jpg\n"
-        + "Image009.jpg\n" + "Image008.jpg\n" + "Image007.jpg\n" + "</gallery>");
+        + "default_default_Image009.jpg\n" + "default_Image008.jpg\n" + "default_Image007.jpg\n" + "</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.GALLERY);
@@ -118,9 +118,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_003"})
   public void modifySlideshow() {
     new ArticleContent().push(
-        "<gallery type=\"slideshow\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n"
-        + "Image010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\nImage006.jpg\nImage005.jpg\n"
-        + "Image004.jpg\nImage003.jpg\n</gallery>");
+        "<gallery type=\"slideshow\">\nImage010.jpg\ndefault_Image009.jpg\ndefault_Image008.jpg\ndefault_Image007.jpg\n"
+        + "Image010.jpg\ndefault_Image009.jpg\ndefault_Image008.jpg\ndefault_Image007.jpg\ndefault_Image006.jpg\ndefault_Image005.jpg\n"
+        + "default_Image004.jpg\ndefault_Image003.jpg\n</gallery>");
 
     VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     SlideshowBuilderComponentObject
@@ -139,9 +139,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_004"})
   public void deleteSlideshow() {
     new ArticleContent().push(
-        "<gallery type=\"slideshow\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n"
-        + "Image010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\nImage006.jpg\nImage005.jpg\n"
-        + "Image004.jpg\nImage003.jpg\n</gallery>");
+        "<gallery type=\"slideshow\">\nImage010.jpg\ndefault_Image009.jpg\ndefault_Image008.jpg\ndefault_Image007.jpg\n"
+        + "Image010.jpg\ndefault_Image009.jpg\ndefault_Image008.jpg\ndefault_Image007.jpg\ndefault_Image006.jpg\ndefault_Image005.jpg\n"
+        + "default_Image004.jpg\ndefault_Image003.jpg\n</gallery>");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.SLIDESHOW);
@@ -170,7 +170,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_006"})
   public void modifySlider() {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
-                              + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+                              + "default_Image009.jpg\ndefault_Image008.jpg\ndefault_Image007.jpg\n</gallery>");
 
     VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     SliderBuilderComponentObject
@@ -189,7 +189,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   @Test(groups = {"ArticleFeaturesCRUDUser_007"})
   public void deleteSlider() {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
-                              + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+                              + "default_Image009.jpg\ndefault_Image008.jpg\ndefault_Image007.jpg\n</gallery>");
 
     VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     visualEditor.removeComponent(Components.SLIDER);
@@ -272,7 +272,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_013"})
   public void deleteImage() {
-    new ArticleContent().push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
+    new ArticleContent().push("[[File:default_Image009.jpg|thumb|QAWebdriverCaption1]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.PHOTO);

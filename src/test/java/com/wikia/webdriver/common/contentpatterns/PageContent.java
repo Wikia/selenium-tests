@@ -51,16 +51,16 @@ public class PageContent {
   public static final String WIKIA_CONTRIBUTOR = "A FANDOM user";
 
   // image serving
-  public static final String FILE = "Image001.jpg";
-  public static final String FILEPNG = "Image001.png";
-  public static final String FILE2PNG = "Image002.png";
+  public static final String FILE = "default_Image001.jpg";
+  public static final String FILEPNG = "default_Image001.png";
+  public static final String FILE2PNG = "default_Image002.png";
 
   // image storage
-  public static final String FILERENAME = "Image003.jpg";
+  public static final String FILERENAME = "default_Image003.jpg";
 
-  public static final String[] LIST_OF_FILES = {"Image001.jpg", "Image002.jpg", "Image003.jpg",
-                                                "Image004.jpg", "Image005.jpg", "Image006.jpg",
-                                                "Image007.jpg", "Image008.jpg", "Image009.jpg",
+  public static final String[] LIST_OF_FILES = {"default_Image001.jpg", "default_Image002.jpg", "default_Image003.jpg",
+                                                "default_Image004.jpg", "default_Image005.jpg", "default_Image006.jpg",
+                                                "default_Image007.jpg", "default_Image008.jpg", "default_Image009.jpg",
                                                 "Image010.jpg"};
   public static final String IMAGE_UPLOAD_RESOURCES_PATH = "." + File.separator + "src"
                                                            + File.separator + "test"
