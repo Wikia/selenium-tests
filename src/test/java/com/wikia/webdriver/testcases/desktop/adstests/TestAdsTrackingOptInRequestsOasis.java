@@ -76,7 +76,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInRejectedOasis")
-  public void adsTrackingRejectedForNordics(List<String> urlPatterns) {
+  public void adsTrackingRejectedForNordics(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
