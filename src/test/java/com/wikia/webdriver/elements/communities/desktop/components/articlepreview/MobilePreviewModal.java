@@ -1,9 +1,13 @@
 package com.wikia.webdriver.elements.communities.desktop.components.articlepreview;
 
-import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-import org.openqa.selenium.By;
+/*
+  Mobile preview modal. Entry point for that preview could be find in the article's editor on Desktop.
+  User is able to see how his/her page would look on mobile view.
+ */
 
 public class MobilePreviewModal extends WikiBasePageObject {
 
@@ -11,51 +15,45 @@ public class MobilePreviewModal extends WikiBasePageObject {
     super();
   }
 
-  public MobilePreviewModal heroImageIsPresent() {
-    waitForElementToBePresent(".has-hero-image", "Hero image");
+  @FindBy(css = ".has-hero-image")
+  private WebElement heroImage;
 
-    return this;
+  @FindBy(css = ".portable-infobox")
+  private WebElement portableInfobox;
+
+  @FindBy(css = ".article-table")
+  private WebElement articleTable;
+
+  @FindBy(css = ".article-media-gallery")
+  private WebElement articleGallery;
+
+  @FindBy(css = "#Single_Image")
+  private WebElement singleImage;
+
+  @FindBy(css = ".article-video")
+  private WebElement articleVideo;
+
+  public boolean heroImageIsPresent() {
+    return isVisible(heroImage);
   }
 
-  public MobilePreviewModal infoboxIsPresent() {
-    waitForElementToBePresent(".portable-infobox", "Portable infobox");
-
-    return this;
+  public boolean infoboxIsPresent() {
+    return isVisible(portableInfobox);
   }
 
-  public MobilePreviewModal articleTableIsPresent() {
-    waitForElementToBePresent(".article-table", "Article table");
-
-    return this;
+  public boolean articleTableIsPresent() {
+    return isVisible(articleTable);
   }
 
-  public MobilePreviewModal mediaGalleryIsPresent() {
-    waitForElementToBePresent(".article-media-gallery", "Media gallery");
-
-    return this;
+  public boolean mediaGalleryIsPresent() {
+    return isVisible(articleGallery);
   }
 
-  public MobilePreviewModal linkedMediaGalleryIsPresent() {
-    waitForElementToBePresent(".article-media-linked-gallery", "Linked media gallery");
-
-    return this;
+  public boolean singleImageIsPresent() {
+    return isVisible(singleImage);
   }
 
-  public MobilePreviewModal singleImageIsPresent() {
-    waitForElementToBePresent("#Single_Image", "Single image");
-
-    return this;
-  }
-
-  public MobilePreviewModal singleVideoIsPresent() {
-    waitForElementToBePresent(".article-video", "Single video");
-
-    return this;
-  }
-
-  private void waitForElementToBePresent(String cssSelector, String elementName) {
-    Log.info("Waiting for: \"" + elementName + "\", to be present");
-    wait.forElementPresent(By.cssSelector(cssSelector));
-    Log.info("\"" + elementName + "\", is present");
+  public boolean singleVideoIsPresent() {
+    return isVisible(articleVideo);
   }
 }
