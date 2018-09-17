@@ -561,7 +561,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyHeader(String fileName) {
     wait.forElementVisible(articleTitle);
-    Assertion.assertStringContains(articleTitle.getText(), fileName);
+    Assertion.assertEquals(articleTitle.getText().replace(" ", "_"), fileName);
   }
 
   public String getNameForArticle() {
