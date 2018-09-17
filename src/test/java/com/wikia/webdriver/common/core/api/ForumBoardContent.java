@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
@@ -34,10 +35,17 @@ public class ForumBoardContent extends ApiCall {
 
   @Override
   protected String getURL() {
-    return UrlBuilder.createUrlBuilder()
-               .getUrl()
-               .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
-           + "/wikia.php?controller=ForumExternal&method=createNewBoard&format=json";
+    if (Configuration.getForceFandomDomain()) {
+      return UrlBuilder.createUrlBuilder()
+                 .getUrl()
+                 .replace(UrlBuilder.HTTP_PREFIX, UrlBuilder.HTTPS_PREFIX)
+             + "/wikia.php?controller=ForumExternal&method=createNewBoard&format=json";
+    } else {
+      return UrlBuilder.createUrlBuilder()
+                 .getUrl()
+                 .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
+             + "/wikia.php?controller=ForumExternal&method=createNewBoard&format=json";
+    }
   }
 
   @Override
