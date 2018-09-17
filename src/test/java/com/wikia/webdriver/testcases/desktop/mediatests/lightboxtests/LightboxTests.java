@@ -75,7 +75,7 @@ public class LightboxTests extends NewTestTemplate {
   @Execute(asUser = User.SUS_REGULAR_USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void UserCanShareAFileFromArticlePageOnSocialMedia() {
-    new ArticleContent(User.SUS_STAFF).push("[[File:Image1.png|thumb|TestDataCaption1]]");
+    new ArticleContent(User.SUS_STAFF).push("[[File:Default_Image001.png|thumb|TestDataCaption1]]");
 
     ArticlePageObject article = new ArticlePageObject().open();
     LightboxComponentObject lightbox = article.clickThumbnailImage();

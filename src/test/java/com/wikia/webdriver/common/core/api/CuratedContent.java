@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.api;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
@@ -14,10 +15,17 @@ public class CuratedContent extends ApiCall {
 
   @Override
   protected String getURL() {
-    return UrlBuilder.createUrlBuilder()
-               .getUrl()
-               .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
-           + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
+    if (Configuration.getForceFandomDomain()) {
+      return UrlBuilder.createUrlBuilder()
+                 .getUrl()
+                 .replace(UrlBuilder.HTTP_PREFIX, UrlBuilder.HTTPS_PREFIX)
+             + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
+    } else {
+      return UrlBuilder.createUrlBuilder()
+                 .getUrl()
+                 .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
+             + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
+    }
   }
 
   @Override
