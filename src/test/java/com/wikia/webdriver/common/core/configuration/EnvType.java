@@ -10,6 +10,7 @@ public enum EnvType {
   @Getter
   private final String wikiaDomain;
 
+  @Getter
   private final String fandomDomain;
 
   @Getter
