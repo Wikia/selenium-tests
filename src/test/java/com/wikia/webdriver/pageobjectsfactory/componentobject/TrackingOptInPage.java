@@ -132,75 +132,69 @@ public class TrackingOptInPage extends BasePageObject {
   }
 
   private void isTrackingRequestsNotSend(
-      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToRejected();
-    for (String anElementsList : elementsList) {
-      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
-                                                             anElementsList
-                            ),
-                            "Request to " + anElementsList + " services was found"
+    for (String url : listOfUrlsToVerify) {
+      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, url),
+                            "Request to " + url + " services was found"
       );
     }
   }
 
   private void isTrackingRequestsNotSendForAccepted(
-      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToAccepted();
-    for (String anElementsList : elementsList) {
-      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
-                                                             anElementsList
-                            ),
-                            "Request to " + anElementsList + " services was found"
+    for (String url : listOfUrlsToVerify) {
+      Assertion.assertFalse(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, url),
+                            "Request to " + url + " services was found"
       );
     }
   }
 
   private void isTrackingRequestsSendForRejected(
-      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToRejected();
-    for (String anElementsList : elementsList) {
-      Assertion.assertTrue(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
-                                                            anElementsList
-                           ),
-                           "Request to " + anElementsList + " services was not found"
+    for (String url : listOfUrlsToVerify) {
+      Assertion.assertTrue(isSuccessfulResponseByUrlPattern(networkTrafficInterceptor, url),
+                           "Request to " + url + " services was not found"
       );
     }
   }
 
   private void isTrackingRequestSend(
-      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToAccepted();
-    for (String anElementsList : elementsList) {
-      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
+    for (String url : listOfUrlsToVerify) {
+      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, url);
     }
   }
 
   private void isTrackingRequestSendOutsideEU(
-      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
-    for (String anElementsList : elementsList) {
-      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
+    for (String url : listOfUrlsToVerify) {
+      wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, url);
     }
   }
 
   public boolean areResponsesByUrlPatternSuccessful(
-      List<String> elementsList, NetworkTrafficInterceptor networkTrafficInterceptor
+      List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
     boolean result = true;
-    for (String anElementsList : elementsList) {
+    for (String url : listOfUrlsToVerify) {
       try {
-        wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, anElementsList);
+        wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, url);
       } catch (Exception e) {
-        Log.log("Did not get successful response with element: " + anElementsList, e, false);
+        Log.log("Did not get successful response with element: " + url, e, false);
         result = false;
       }
     }
@@ -229,14 +223,23 @@ public class TrackingOptInPage extends BasePageObject {
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
   }
 
-  private void isConsentCookieSetToAccepted() {
-    final String cookieValue = driver.manage().getCookieNamed("euconsent").getValue();
+  private String getEuConsentCookieValue() {
+    return driver.manage().getCookieNamed("euconsent").getValue();
+  }
 
-    Assertion.assertEquals(cookieValue.length(), 48, "Incorrect length of accepted euconsent value");
+  private void isConsentCookieSetToAccepted() {
+    Assertion.assertEquals(
+        getEuConsentCookieValue().length(),
+        48,
+        "Incorrect length of accepted euconsent value"
+    );
   }
 
   private void isConsentCookieSetToRejected() {
-    final String cookieValue = driver.manage().getCookieNamed("euconsent").getValue();
-    Assertion.assertEquals(cookieValue.length(), 32, "Incorrect length of rejected euconsent value");
+    Assertion.assertEquals(
+        getEuConsentCookieValue().length(),
+        32,
+        "Incorrect length of rejected euconsent value"
+    );
   }
 }
