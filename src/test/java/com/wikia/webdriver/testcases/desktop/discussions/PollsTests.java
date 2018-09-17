@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -19,6 +20,7 @@ public class PollsTests extends NewTestTemplate {
 
     public static final int DEFAULT_ANSWERS_NUMBER = 2;
     public static final String ALREADY_VOTED_POST_ID = "3100000000000020087";
+    public static final String ALREADY_VOTED_POST_ID_FANDOM = "3259773155803166890";
 
     /**
      * DESKTOP TESTS SECTION
@@ -106,7 +108,7 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
     public void userWhoVotedCanSeeVotersListOnDesktop() {
         PostDetailsPage postDetails = new PostDetailsPage();
-        postDetails.open(ALREADY_VOTED_POST_ID);
+        openAlreadyExistingPoll(postDetails);
         Poll poll = postDetails.getPoll();
         postDetails.clickFollowingTooltip();
 
@@ -166,7 +168,7 @@ public class PollsTests extends NewTestTemplate {
     @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
     public void userWhoVotedCanSeeVotersListOnMobile() {
         PostDetailsPage postDetails = new PostDetailsPage();
-        postDetails.open(ALREADY_VOTED_POST_ID);
+        openAlreadyExistingPoll(postDetails);
         Poll poll = postDetails.getPoll();
         postDetails.clickFollowingTooltip();
 
@@ -178,6 +180,15 @@ public class PollsTests extends NewTestTemplate {
     /**
      * TESTING METHODS SECTION
      */
+
+    public void openAlreadyExistingPoll(PostDetailsPage post) {
+        //Opens specific post depending on Fandom domain config
+        if(Configuration.getForceFandomDomain()) {
+            post.open(ALREADY_VOTED_POST_ID_FANDOM);
+        } else {
+            post.open(ALREADY_VOTED_POST_ID);
+        }
+    }
 
     public void manageSignInModal(Poll p) {
         SignInToFollowModalDialog signInModal = new SignInToFollowModalDialog();
