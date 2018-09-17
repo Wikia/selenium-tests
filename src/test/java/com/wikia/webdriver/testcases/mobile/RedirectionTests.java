@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 import org.testng.annotations.Test;
@@ -16,15 +17,17 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class RedirectionTests extends NewTestTemplate {
 
-  @Test(groups = "mercury_redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW")
-  public void mercury_redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW() {
+  @Test(groups = "redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW")
+  public void redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW() {
+    UrlChecker checker = new UrlChecker();
     String navigateUrl = urlBuilder.getUrlForWikiPageWithWWW(MobileSubpages.MAIN_PAGE);
     String expectedUrl = urlBuilder.getUrlForWikiPage(MobileSubpages.MAIN_PAGE);
 
     driver.get(navigateUrl);
 
     String currentUrl = driver.getCurrentUrl();
-    Assertion.assertEquals(currentUrl, expectedUrl);
+    Assertion.assertEquals(checker.getProtocolRelativeURL(currentUrl),
+            checker.getProtocolRelativeURL(expectedUrl));
     Assertion.assertStringNotContains(currentUrl, "www");
   }
 }

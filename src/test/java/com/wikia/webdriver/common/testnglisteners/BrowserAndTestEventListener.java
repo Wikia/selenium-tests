@@ -86,6 +86,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         Log.warning("Url after navigation", "Unable to check URL after navigation - alert present");
       }
 
+      boolean reload = false;
+
       if (driver.getCurrentUrl().contains(cookieDomain)) {
         // HACK FOR DISABLING NOTIFICATIONS
         try {
@@ -129,6 +131,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                       "/",
                                       cookieDate
                 ));
+            reload = true;
           } else if (userOptedOut) {
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-status",
@@ -137,6 +140,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                       "/",
                                       cookieDate
                 ));
+            reload = true;
           }
         }
 
@@ -148,6 +152,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
             && "true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
           driver.manage()
               .addCookie(new Cookie("cpBenefitsModalShown", "1", cookieDomain, "/", cookieDate));
+          reload = true;
         }
 
         if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
@@ -158,6 +163,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                     "/",
                                     cookieDate
               ));
+          reload = true;
           Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s",
                                  XMLReader.getValue("mock.ads_token"),
                                  String.format(".%s", Configuration.getEnvType().getDomain())
@@ -187,6 +193,10 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         if (networkTrafficInterceptor != null) {
           networkTrafficInterceptor.startIntercepting();
         }
+      }
+
+      if(reload){
+        driver.navigate().refresh();
       }
     }
     Log.logJSError();
