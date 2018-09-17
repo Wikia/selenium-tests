@@ -1,13 +1,11 @@
 package com.wikia.webdriver.common.remote;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.remote.operations.http.NoAuthOperation;
-
-import lombok.Getter;
-import org.json.JSONObject;
-
+import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.Getter;
+import org.openqa.selenium.WebDriverException;
 
 public class SiteId {
 
@@ -21,16 +19,15 @@ public class SiteId {
   }
 
   private void extractSiteIdFromSpecialVersion() {
-    NoAuthOperation request = new NoAuthOperation();
-    String response = request.execute(this.wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VERSION,
-                                      new JSONObject()
-    );
+    GetRemoteOperation request = new GetRemoteOperation(null);
+    String url = this.wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VERSION;
+    String response = request.execute(url);
     Pattern p = Pattern.compile(".*city_id: (\\d+).*", Pattern.DOTALL);
     Matcher m = p.matcher(response);
     if (m.find()) {
       this.siteId = m.group(1);
     } else {
-      this.siteId = "";
+      throw new WebDriverException("Can't extract site id from url: " + url);
     }
   }
 }
