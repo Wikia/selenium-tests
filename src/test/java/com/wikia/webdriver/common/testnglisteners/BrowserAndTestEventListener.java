@@ -55,14 +55,10 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
       Class<?> declaringClass = method.getDeclaringClass();
 
       // Fallback to wikia.com domain
-      String cookieDomain = Configuration.getEnvType().getWikiaDomain();
+      String cookieDomain = String.format(".%s", Configuration.getEnvType().getWikiaDomain());
 
       for(EnvType env: EnvType.values()){
-        String current_url = driver.getCurrentUrl();
-        if (current_url.contains(env.getWikiaDomain())){
-          cookieDomain = String.format(".%s", env.getWikiaDomain());
-          break;
-        }else if(current_url.contains(env.getFandomDomain())){
+        if(driver.getCurrentUrl().contains(env.getFandomDomain())){
           cookieDomain = String.format(".%s", env.getFandomDomain());
           break;
         }
