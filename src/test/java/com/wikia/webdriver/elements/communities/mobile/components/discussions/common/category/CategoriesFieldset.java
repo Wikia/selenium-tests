@@ -28,8 +28,8 @@ public class CategoriesFieldset extends BasePage {
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
 
-  @FindBy(css = ".discussion-categories > legend.mobile-hidden")
-  private WebElement label;
+  @FindBy(css = ".discussion-categories > discussion-mobile-categories-list-container")
+  private WebElement mobileCategoriesContainer;
 
   @FindBy(className = "discussion-categories-edit-link")
   private List<WebElement> editLinks;
@@ -132,7 +132,13 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public CategoriesFieldset clickEdit() {
-    editLinks.get(1).click();
+    //XF-737
+    if(isMobile()) {
+      editLinks.get(1).click();
+
+    } else {
+      editLinks.get(0).click();
+    }
     return this;
   }
 
@@ -150,7 +156,7 @@ public class CategoriesFieldset extends BasePage {
   }
 
   private boolean isMobile() {
-    return !label.isDisplayed();
+    return isVisible(mobileCategoriesContainer);
   }
 
   public boolean canEditGeneralCategory() {
