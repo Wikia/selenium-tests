@@ -140,7 +140,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
-    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("default_Image001.png");
+    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("Default_Image001.png");
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
