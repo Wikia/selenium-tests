@@ -19,7 +19,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
   public void adsFandomArticleUapDesktop(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
-    verifyUapAtf(atfId, AdSlot.TOP_BOXAD, fandomPage);
+    verifyUapAtf(atfId, fandomPage);
     verifyUapBtf(btfId,
                  AdSlot.INCONTENT_BOXAD,
                  fandomPage
@@ -33,7 +33,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
 
-    verifyUapAtf(atfId, AdSlot.TOP_BOXAD, fandomPage);
+    verifyUapAtf(atfId, fandomPage);
     fandomPage.triggerOnScrollSlots();
     verifyUapBtf(btfId,
                  AdSlot.INCONTENT_BOXAD,
@@ -46,7 +46,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
   public void adsFandomUapOnTopicDesktop(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
-    verifyUapAtf(atfId, AdSlot.TOP_BOXAD, fandomPage);
+    verifyUapAtf(atfId, fandomPage);
     verifyUapBtf(btfId,
                  AdSlot.FEED_BOXAD_IFRAME,
                  fandomPage
@@ -59,19 +59,16 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
   public void adsFandomUapOnTopicMobile(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
-    verifyUapAtf(atfId, AdSlot.TOP_BOXAD, fandomPage);
+    verifyUapAtf(atfId, fandomPage);
     verifyUapBtf(btfId,
                  AdSlot.FEED_BOXAD_MOBILE_IFRAME,
                  fandomPage
     );
   }
 
-  private void verifyUapAtf(long atfId, AdSlot slot, AdsFandomObject fandomPage) {
+  private void verifyUapAtf(long atfId, AdsFandomObject fandomPage) {
     fandomPage.verifySlot(AdSlot.TOP_LEADERBOARD);
     Assertion.assertEquals(fandomPage.getLineItemId(AdsFandomContent.TOP_LEADERBOARD), atfId);
-
-    fandomPage.verifySlot(slot);
-    Assertion.assertEquals(fandomPage.getLineItemId(AdsFandomContent.TOP_BOXAD), atfId);
   }
 
   private void verifyUapBtf(
@@ -80,6 +77,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
     fandomPage.verifySlot(slot);
 
     fandomPage.verifySlot(AdSlot.BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(AdSlot.TOP_BOXAD);
     Assertion.assertEquals(fandomPage.getLineItemId(AdsFandomContent.BOTTOM_LEADERBOARD), btfId);
   }
 }
