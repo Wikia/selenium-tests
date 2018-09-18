@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.auth;
 
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static org.testng.Assert.assertFalse;
-
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -21,8 +18,12 @@ import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
-import java.time.Instant;
 import org.testng.annotations.Test;
+
+import java.time.Instant;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -74,15 +75,6 @@ public class LoginTests extends NewTestTemplate {
   public void japaneseUserCanLogInOnDesktop() {
     ArticlePageObject article = openArticleOnDesktop();
     loginOnDesktopAs(JAPANESE_USER);
-    article.verifyUserLoggedIn(JAPANESE_USER);
-  }
-
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void japaneseUserCanLogInOnMobile() {
-    ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(JAPANESE_USER);
-    article.waitForPageReload();
     article.verifyUserLoggedIn(JAPANESE_USER);
   }
 
