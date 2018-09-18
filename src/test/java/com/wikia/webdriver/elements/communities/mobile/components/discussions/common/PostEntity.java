@@ -82,7 +82,7 @@ public class PostEntity {
   }
 
   public String findTitle() {
-    List<WebElement> elements = post.findElements(By.className("post-content__body"));
+    List<WebElement> elements = post.findElements(By.className("post-content__title"));
     return elements.isEmpty() ? "" : elements.get(0).getText();
   }
 
