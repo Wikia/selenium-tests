@@ -3,10 +3,11 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.WebDriverException;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import org.openqa.selenium.WebDriverException;
 
 public abstract class AttachedPageBase<T extends AttachedPageBase<T>> extends BasePageObject {
 
@@ -26,8 +27,8 @@ public abstract class AttachedPageBase<T extends AttachedPageBase<T>> extends Ba
   public T open(String redirectUrl) {
     String signinUrl = urlBuilder.getWikiGlobalURL() + siteSpecificPath;
     try {
-      getUrl(urlBuilder.appendQueryStringToURL(signinUrl,
-          URLEncoder.encode(redirectUrl, StandardCharsets.UTF_8.name()))
+      getUrl(urlBuilder.appendQueryStringToURL(signinUrl, "redirect=" +
+          URLEncoder.encode( redirectUrl, StandardCharsets.UTF_8.name()))
       );
     } catch (UnsupportedEncodingException e) {
       Log.log("Opening attached page", "Unable to encode redirect", false);
