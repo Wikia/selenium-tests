@@ -26,9 +26,9 @@ public class RenamePageObject extends ArticlePageObject {
     newNameInput.clear();
     newNameInput.sendKeys(newName);
     if (leaveRedirect) {
-      leaveRedirectCheckbox.click();
+      scrollAndClick(leaveRedirectCheckbox);
     }
-    submitRename.click();
+    scrollAndClick(submitRename);
     Log.log("ArticleRenamed", "Article renamed", true);
     return new ArticlePageObject();
   }
