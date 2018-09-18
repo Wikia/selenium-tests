@@ -29,13 +29,13 @@ public class Post extends BasePage {
   @FindBy(css = ".user-avatar__username")
   private WebElement avatarUsername;
 
-  @FindBy(css = "li.post-upvote")
-  private List<WebElement> postUpvoteButton;
+  @FindBy(css = "li.post-actions__upvote")
+  private List<WebElement> postUpvoteButtonList;
 
   @FindBy(css = ".post-counters .upvote-count")
   private List<WebElement> postVoteCount;
 
-  @FindBy(css = "li.post-upvote")
+  @FindBy(css = "li.post-actions__upvote")
   private WebElement upvoteArea;
 
   @FindBy(css = ".post-upvote")
@@ -44,7 +44,7 @@ public class Post extends BasePage {
   @FindBy(css = ".load-more-button")
   private WebElement loadMoreButton;
 
-  @FindBy(css = ".discussion.post .discussion-content")
+  @FindBy(css = ".discussion.post .post-content")
   private WebElement postDetails;
 
   @FindBy(css = ".post-detail .og-container")
@@ -121,7 +121,7 @@ public class Post extends BasePage {
   }
 
   public boolean isUpvoteButtonVisible(int index) {
-    WebElement button = postUpvoteButton.get(index);
+    WebElement button = postUpvoteButtonList.get(index);
     wait.forElementVisible(button);
     return button.isDisplayed();
   }
@@ -133,7 +133,7 @@ public class Post extends BasePage {
   }
 
   public Post clickUpvoteButton(int postIndex) {
-    WebElement button = postUpvoteButton.get(postIndex);
+    WebElement button = postUpvoteButtonList.get(postIndex);
     wait.forElementClickable(button);
     button.click();
 

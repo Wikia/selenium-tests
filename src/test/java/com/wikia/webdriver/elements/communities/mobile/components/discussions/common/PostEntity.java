@@ -20,7 +20,7 @@ public class PostEntity {
   @Getter(AccessLevel.PACKAGE)
   private final WebElement post;
   @Getter
-  @FindBy(css = ".follow-area.is-active")
+  @FindBy(css = ".card-actions__follow.is-active")
   private WebElement followingActiveState;
 
   public PostEntity(WebElement post) {
@@ -82,7 +82,7 @@ public class PostEntity {
   }
 
   public String findTitle() {
-    List<WebElement> elements = post.findElements(By.className("post-title"));
+    List<WebElement> elements = post.findElements(By.className("post-content__body"));
     return elements.isEmpty() ? "" : elements.get(0).getText();
   }
 
@@ -94,11 +94,11 @@ public class PostEntity {
   private boolean isOnPostDetailsPage() {
     return post.findElements(By.tagName("a"))
         .stream()
-        .noneMatch(e -> e.getAttribute(CLASS_ATTRIBUTE).contains("post-details-link"));
+        .noneMatch(e -> e.getAttribute(CLASS_ATTRIBUTE).contains("post-content"));
   }
 
   private String createDescriptionOnPostDetailsPage() {
-    final String content = post.findElement(By.className("discussion-content")).getText();
+    final String content = post.findElement(By.className("post-content")).getText();
     return StringUtils.remove(content, findTitle());
   }
 
@@ -112,7 +112,7 @@ public class PostEntity {
   }
 
   private WebElement findDescriptionElement() {
-    return post.findElement(By.cssSelector(".post-details-link.clamp"));
+    return post.findElement(By.cssSelector(".post-content.is-link"));
   }
 
   public String findAuthorId() {
@@ -164,7 +164,7 @@ public class PostEntity {
   }
 
   private WebElement findFollowArea() {
-    return post.findElement(By.className("follow-area"));
+    return post.findElement(By.className("card-actions__follow"));
   }
 
   public boolean isFollowed() {
