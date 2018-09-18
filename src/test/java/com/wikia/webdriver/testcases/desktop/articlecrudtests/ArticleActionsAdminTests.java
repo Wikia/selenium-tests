@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -61,6 +62,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "XF-739", comment = "Passes locally, but fails on VM")
   public void moveArticle() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
