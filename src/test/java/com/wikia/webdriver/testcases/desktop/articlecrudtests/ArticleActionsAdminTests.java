@@ -62,7 +62,6 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "XF-739", comment = "Passes locally, but fails on VM")
   public void moveArticle() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
