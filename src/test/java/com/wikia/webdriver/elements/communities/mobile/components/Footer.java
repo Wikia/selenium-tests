@@ -10,7 +10,7 @@ public class Footer extends WikiBasePageObject {
   @FindBy(css = ".wds-global-footer")
   private WebElement footer;
 
-  @FindBy(css = ".wds-global-footer__button-link")
+  @FindBy(css = ".global-footer-bottom__link")
   private WebElement viewFullSiteLink;
 
   @FindBy(css = ".mobile-site-link")
