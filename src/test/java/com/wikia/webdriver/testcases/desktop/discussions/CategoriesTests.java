@@ -1,12 +1,9 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import static com.wikia.webdriver.elements.communities.mobile.components.discussions.common.TextGenerator.createUniqueCategoryName;
-import static com.wikia.webdriver.common.core.Assertion.assertTrue;
-import static com.wikia.webdriver.common.core.Assertion.assertFalse;
-import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -24,6 +21,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+
+import static com.wikia.webdriver.common.core.Assertion.*;
+import static com.wikia.webdriver.elements.communities.mobile.components.discussions.common.TextGenerator.createUniqueCategoryName;
 
 
 @Execute(onWikia = MobileWikis.DISCUSSIONS_1)
@@ -180,6 +180,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void userOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
@@ -187,6 +188,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void userOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
@@ -212,6 +214,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
     CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
@@ -228,6 +231,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanAddCategory() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = createUniqueCategoryName();
@@ -249,6 +253,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanEditCategory() {
     CategoryPill.Data editableCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
@@ -272,6 +277,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategories() {
     deleteCategoriesMobile();
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MobileWikis.DISCUSSIONS_MOBILE,
@@ -292,6 +298,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanRemoveCategory() {
     CategoryPill.Data data = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final String temporaryCategoryName = createUniqueCategoryName();
