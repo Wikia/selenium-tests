@@ -164,7 +164,7 @@ public class PostEntity {
   }
 
   private WebElement findFollowArea() {
-    return post.findElement(By.className("card-actions__follow"));
+    return post.findElement(By.className("post-actions__follow"));
   }
 
   public boolean isFollowed() {
