@@ -162,7 +162,7 @@ public class PortableInfobox extends BasePageObject {
   public String getDataImageName() {
     wait.forElementVisible(imageTag);
 
-    return imageTag.getAttribute("data-image-name");
+    return imageTag.getAttribute("data-image-key");
   }
 
   public PortableInfobox clickLink(WebElement element) {
