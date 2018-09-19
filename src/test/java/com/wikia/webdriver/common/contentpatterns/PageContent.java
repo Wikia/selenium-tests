@@ -51,7 +51,7 @@ public class PageContent {
   public static final String WIKIA_CONTRIBUTOR = "A FANDOM user";
 
   // image serving
-  public static final String FILE = "default_Image001.jpg";
+  public static final String FILE = "Default_Image001.jpg";
   public static final String FILEPNG = "default_Image001.png";
   public static final String FILE2PNG = "default_Image002.png";
 
