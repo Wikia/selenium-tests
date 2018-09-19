@@ -32,6 +32,7 @@ public class TwitterTests extends NewTestTemplate {
   private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME;
 
   @Test(groups = "MercuryTwitterWidgetTest_001")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
@@ -42,6 +43,7 @@ public class TwitterTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_002")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
@@ -53,6 +55,7 @@ public class TwitterTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_003")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
@@ -66,6 +69,7 @@ public class TwitterTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_004")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().createMultiple(TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
