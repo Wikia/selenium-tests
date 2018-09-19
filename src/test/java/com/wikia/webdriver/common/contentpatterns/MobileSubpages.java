@@ -41,7 +41,6 @@ public class MobileSubpages {
 
   // Login and SignUp pages
   public static final String LOGIN_PAGE = "/signin";
-  public static final String REGISTER_PAGE = "/register";
 
   private MobileSubpages() {
   }
