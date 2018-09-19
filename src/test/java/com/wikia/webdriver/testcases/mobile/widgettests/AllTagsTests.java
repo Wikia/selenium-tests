@@ -38,7 +38,7 @@ public class AllTagsTests extends NewTestTemplate {
     widgets = new ArrayList<>();
     widgets.add(new SoundCloudWidgetPageObject());
     widgets.add(new SpotifyWidgetPageObject());
-    widgets.add(new TwitterWidgetPageObject());
+//    widgets.add(new TwitterWidgetPageObject()); - uncomment when mobile-wiki embedding is fixed MAIN-17401
     widgets.add(new VKWidgetPageObject());
     widgets.add(new WeiboWidgetPageObject());
     widgets.add(new GoogleFormWidgetPageObject());
