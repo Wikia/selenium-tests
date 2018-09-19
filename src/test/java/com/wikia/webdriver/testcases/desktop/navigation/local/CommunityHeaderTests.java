@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RunOnly;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.desktop.components.navigation.local.CommunityHeaderDesktop;
@@ -33,7 +34,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
   @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = MobileWikis.DE_WIKI, language = "de")
+  @Execute(onWikia = MobileWikis.DE_WIKI)
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeaderDesktop().clickWikiName();
 
@@ -229,7 +230,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertStringContains(driver.getCurrentUrl(),"Special:Forum");
 
     communityHeader.clickDiscussLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(),"wikia.com/d/f");
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/d/f", Configuration.getEnvType().getDomain()));
   }
 
   /**
@@ -245,7 +246,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Forum");
 
     communityHeader.clickDiscussLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(),"wikia.com/szl/d/f");
+    Assertion.assertStringContains(driver.getCurrentUrl(),String.format("%s/d/f", Configuration.getEnvType().getDomain()));
   }
 
   @DontRun(language = "szl")

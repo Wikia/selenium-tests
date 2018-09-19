@@ -1,0 +1,98 @@
+<infobox layout="tabular">
+<title source="Tytuł">
+	<default>Postać</default>
+</title>
+<image source="Obraz">
+<default>It's title pic</default> </image>
+<image source="Obraz1">
+<default>It's title pic</default> </image>
+<image source="Obraz2">
+<default>It's title pic</default> </image>
+<image source="Obraz3">
+<default>It's title pic</default> </image>
+<image source="Obraz4">
+<default>It's title pic</default> </image>
+<image source="Obraz5">
+<default>It's title pic</default> </image>
+<image source="Obraz6">
+<default>It's title pic</default> </image>
+<image source="Obraz7">
+<default>It's title pic</default> </image>
+<image source="Obraz8">
+<default>It's title pic</default> </image>
+<image source="Obraz9">
+<default>It's title pic</default> </image>
+<data source="Płeć">
+ <label>Płeć a dasdfdf</label>
+</data>
+<data source="Pełne imię">
+	<label>Pełne imię</label>
+</data>
+<data source="Tożsamość">
+	<label>Tożsamość [[Category:Postacie]]</label>
+</data>
+
+<group>
+
+<header>
+header1
+</header>
+
+<data source="Gatunek">
+	<label>Gatunek</label>
+</data>
+<data source="Kolor Kostiumu">
+	<label>Kolor</label>
+</data>
+<data source="Kolor oczu">
+	<label>Kolor oczu</label>
+</data>
+<data source="Kolor spodni">
+	<label>Kolor spodni</label>
+</data>
+<data source="Kolor muszki">
+	<label>Kolor muszki</label>
+</data>
+<data source="Nowsza wersja">
+	<label>Nowsza wersja</label>
+</data>
+
+</group>
+
+<data source="Straty">
+	<label>Straty</label>
+</data>
+<data source="Rola">
+	<label>Rola w Pizzerii</label>
+</data>
+<data source="Zajęcie">
+	<label>Zajęcie</label>
+</data>
+
+<data source="Atrybut">
+	<label>Atrybut</label>
+</data>
+<data source="Lokacja Startowa">
+	<label>Lokacja Startowa</label>
+</data>
+<data source="Pomieszczenia">
+	<label>Pomieszczenia</label>
+</data>
+<data source="Kiedy zaczyna">
+	<label>Kiedy zaczyna</label>
+</data>
+<data source="Pierwsze pojawienie się">
+	<label>Pierwsze pojawienie się</label>
+</data>
+<data source="Empty value">
+	<label>Empty value</label>
+</data>
+
+<group layout="horizontal" show="incomplete">
+ <header>Horizontal</header>
+ <data source="horizontal1"> <label>hor1</label></data>
+ <data source="horizontal2"> <label>hor2</label></data>
+</group>
+
+
+</infobox>

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.auth;
 
-import static org.testng.Assert.assertTrue;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.core.helpers.FacebookUser;
@@ -14,12 +12,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.Instant;
+
+import static org.testng.Assert.assertTrue;
 
 @Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
@@ -61,9 +60,10 @@ public class FacebookTests extends NewTestTemplate {
 
   public void userCanSignUpViaFacebook() {
     String userName = String.format("QA%s", Instant.now().getEpochSecond());
+    String redirectUrl = driver.getCurrentUrl();
 
     new FacebookMainPageObject().login(facebookUser.getEmail(), facebookUser.getPassword());
-    AttachedRegisterPage signUp = new AttachedRegisterPage().open();
+    AttachedRegisterPage signUp = new AttachedRegisterPage().open(redirectUrl);
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, 1, 1, 1970);

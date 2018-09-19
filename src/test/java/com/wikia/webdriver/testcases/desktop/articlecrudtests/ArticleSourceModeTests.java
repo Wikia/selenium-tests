@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
@@ -139,7 +140,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
-    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("default_Image001.png");
+    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("Default_Image001.png");
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
@@ -152,8 +153,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_012A"})
-  @Execute(language = "szl", asUser = User.SUS_REGULAR_USER3, onWikia = "sustainingtest")
-  public void RTE_012A_Photo() {
+  @RunOnly(language = "szl")
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "sustainingtest")
+  public void RTE_012A_PhotoSzl() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
