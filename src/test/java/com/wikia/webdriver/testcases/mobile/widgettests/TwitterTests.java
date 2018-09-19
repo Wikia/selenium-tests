@@ -16,7 +16,7 @@ import com.wikia.webdriver.elements.communities.mobile.components.navigation.glo
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 import org.testng.annotations.Test;
-@Test(enabled = false, groups = "Mercury_TwitterWidget")
+@Test(groups = "Mercury_TwitterWidget")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
@@ -31,7 +31,7 @@ public class TwitterTests extends NewTestTemplate {
   private static final String QUERY_1 = MobileSubpages.MAP;
   private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME;
 
-  @Test(groups = "MercuryTwitterWidgetTest_001")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_001")
   @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
@@ -42,7 +42,7 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_002")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_002")
   @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     WidgetPageObject widget =
@@ -54,7 +54,7 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_003")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_003")
   @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     WidgetPageObject widget =
@@ -68,7 +68,7 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_004")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_004")
   @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
