@@ -327,12 +327,12 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_ARTICLE1_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
     // Check tracking pixels on consecutive page views
     for (String linkName : articles) {
       ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
       ads.clickOnArticleLink(linkName);
-      modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+      modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
     }
   }
 
@@ -346,6 +346,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 }
