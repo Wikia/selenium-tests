@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.mobile.curatedcontenttests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -57,8 +56,8 @@ public class CropImageTests extends NewTestTemplate {
 
     navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
     curatedMainPage.isCuratedElementVisible(ARTICLE_TITLE_SELECTOR);
+    curatedMainPage.editCuratedMainPage();
 
-    navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);
     editor.clickAddFeaturedContent();
     itemForm.clickOnImage();
 
