@@ -28,7 +28,7 @@ public class VEImageTests extends NewTestTemplate {
   @Test(groups = {"VEImageTests", "VEMediaPreview"})
   @Execute(asUser = User.USER_9)
   public void previewImage() {
-    String mediaTitle = "Thomas Wright 1792 - 1849";
+    String mediaTitle = "Default Image002";
 
     VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
                                                                              PageContent.ARTICLE_NAME_PREFIX

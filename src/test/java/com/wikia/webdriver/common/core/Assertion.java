@@ -162,7 +162,7 @@ public class Assertion extends Assert {
   public static void assertNumber(Number actual, Number expected, String message) {
     boolean assertion = true;
     try {
-      Assert.assertEquals(expected, actual);
+      Assert.assertEquals(actual, expected);
     } catch (AssertionError ass) {
       addVerificationFailure(ass);
       assertion = false;

@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -21,6 +22,7 @@ import org.testng.annotations.Test;
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
+
 public class TwitterTests extends NewTestTemplate {
 
   private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "TwitterMercury/OneWidget";
@@ -29,7 +31,8 @@ public class TwitterTests extends NewTestTemplate {
   private static final String QUERY_1 = MobileSubpages.MAP;
   private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME;
 
-  @Test(groups = "MercuryTwitterWidgetTest_001")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_001")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
@@ -39,7 +42,8 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_002")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_002")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
@@ -50,7 +54,8 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_003")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_003")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
@@ -63,7 +68,8 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_004")
+  @Test(enabled = false, groups = "MercuryTwitterWidgetTest_004")
+  @RelatedIssue(issueID = "MAIN-17401")
   public void MercuryTwitterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
             new TwitterWidgetPageObject().createMultiple(TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);

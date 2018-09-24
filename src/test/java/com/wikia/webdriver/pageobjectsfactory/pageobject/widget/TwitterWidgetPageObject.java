@@ -9,14 +9,14 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
 
   private static final String TAG_NAME = "twitter";
   private static final String[] TAGS = {
-      //twitter.com/Wikia
-      "<twitter widget-id=\"345311016592228352\" />",
+      //twitter.com/TwitterDev
+      "<twitter screen-name=\"TwitterDev\" />",
 
       //twitter.com/Nukapedia
-      "<twitter widget-id=\"430155638820200448\" />",
+      "<twitter screen-name=\"nukapedia\" />",
 
-      //twitter.com/Nukapedia overridden to SFBART
-      "<twitter widget-id=\"430155638820200448\" screen-name=\"sfbart\" />",};
+      //twitter.com/Nukapedia overridden to getFANDOM
+      "<twitter screen-name=\"nukapedia\" screen-name=\"getFANDOM\" />",};
   private static final String INCORRECT_TAG = "<twitter />";
   private static final String
       ERROR_MESSAGE
