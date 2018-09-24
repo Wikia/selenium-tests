@@ -29,16 +29,16 @@ public class Post extends BasePage {
   @FindBy(css = ".user-avatar__username")
   private WebElement avatarUsername;
 
-  @FindBy(css = "li.post-upvote")
+  @FindBy(css = "li.post-actions__upvote")
   private List<WebElement> postUpvoteButton;
 
   @FindBy(css = ".post-counters .upvote-count")
   private List<WebElement> postVoteCount;
 
-  @FindBy(css = "li.post-upvote")
+  @FindBy(css = "li.post-actions__upvote")
   private WebElement upvoteArea;
 
-  @FindBy(css = ".post-upvote")
+  @FindBy(css = ".post-actions__upvote")
   private WebElement upvoteButton;
 
   @FindBy(css = ".load-more-button")
