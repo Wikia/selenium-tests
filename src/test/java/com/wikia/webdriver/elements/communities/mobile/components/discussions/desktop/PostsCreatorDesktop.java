@@ -53,7 +53,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".inline-editor textarea[required]")
+  @FindBy(css = ".inline-editor textarea[required], .ql-editor")
   private WebElement descriptionTextarea;
 
   @Getter
