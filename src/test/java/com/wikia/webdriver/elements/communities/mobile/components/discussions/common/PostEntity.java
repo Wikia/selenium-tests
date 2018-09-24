@@ -98,7 +98,7 @@ public class PostEntity {
   }
 
   private String createDescriptionOnPostDetailsPage() {
-    final String content = post.findElement(By.className("discussion-content")).getText();
+    final String content = post.findElement(By.className("post-content")).getText();
     return StringUtils.remove(content, findTitle());
   }
 
@@ -164,7 +164,7 @@ public class PostEntity {
   }
 
   private WebElement findFollowArea() {
-    return post.findElement(By.className("follow-area"));
+    return post.findElement(By.className("post-actions__follow"));
   }
 
   public boolean isFollowed() {

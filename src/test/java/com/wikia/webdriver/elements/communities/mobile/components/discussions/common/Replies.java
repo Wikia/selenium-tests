@@ -16,7 +16,7 @@ public class Replies extends BasePageObject {
   @FindBy(className = "replies-list")
   private WebElement webElement;
 
-  @FindBy(css = ".discussion-reply .discussion-content")
+  @FindBy(css = ".discussion-reply .post-content")
   private WebElement replyContent;
 
   @FindBy(css = ".discussion-reply .og-container")
