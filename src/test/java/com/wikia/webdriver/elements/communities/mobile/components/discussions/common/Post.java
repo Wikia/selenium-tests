@@ -44,7 +44,7 @@ public class Post extends BasePage {
   @FindBy(css = ".load-more-button")
   private WebElement loadMoreButton;
 
-  @FindBy(css = ".discussion.post .discussion-content")
+  @FindBy(css = ".post-card__body .post-content")
   private WebElement postDetails;
 
   @FindBy(css = ".post-detail .og-container")
