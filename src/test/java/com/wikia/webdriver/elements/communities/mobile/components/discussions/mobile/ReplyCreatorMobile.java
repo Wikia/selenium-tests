@@ -32,7 +32,7 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @FindBy(css = ".discussion-standalone-editor button[type='submit']")
   private WebElement submitButton;
 
-  @FindBy(css = ".discussion-standalone-editor .editor-textarea:not([disabled])")
+  @FindBy(css = ".discussion-standalone-editor .editor-textarea:not([disabled]), .discussion-standalone-editor .ql-editor")
   private WebElement textarea;
 
   @FindBy(css = ".wds-spinner__stroke")
