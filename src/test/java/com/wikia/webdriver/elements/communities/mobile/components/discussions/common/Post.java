@@ -23,7 +23,7 @@ public class Post extends BasePage {
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  @FindBy(css = ".post-detail figure.avatar")
+  @FindBy(css = ".post-detail .wds-avatar")
   private WebElement avatarImage;
 
   @FindBy(css = ".user-avatar__username")
