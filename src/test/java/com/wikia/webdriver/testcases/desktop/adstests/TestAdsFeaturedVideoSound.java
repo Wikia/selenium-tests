@@ -28,13 +28,6 @@ public class TestAdsFeaturedVideoSound extends TemplateNoFirstLoad {
     verifyFeaturedVideoWithoutSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
   }
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X_WITHOUT_TOUCH)
-  @UnsafePageLoad
-  @Test(groups = {"AdsFeaturedVideoSoundMercury"})
-  public void adsFeaturedVideoWithSoundMercury() {
-    verifyFeaturedVideoWithSound(AdsDataProvider.PAGE_FV_JWPLAYER_AND_SOUND.getUrl());
-  }
-
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"AdsFeaturedVideoSoundMercury"})
   public void adsFeaturedVideoWithoutSoundMercury() {
