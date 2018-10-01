@@ -586,7 +586,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
-    wait.forElementVisible(welcomeLightBoxTitle);
+    wait.forElementVisible(welcomeLightBoxTitle, 30);
     Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
   }
 
