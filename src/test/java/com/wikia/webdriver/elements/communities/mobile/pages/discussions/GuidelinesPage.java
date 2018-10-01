@@ -24,7 +24,7 @@ public class GuidelinesPage extends BasePage {
   @FindBy(css = ".discussion-left-rail__header")
   private WebElement leftRailHeader;
 
-  @FindBy(css = ".editor-input-label-wrapper textarea.is-description")
+  @FindBy(css = ".editor-textarea.is-description")
   private List<WebElement> guidelinesEditorTextarea;
 
   @FindBy(css = ".guidelines-edit-button")
