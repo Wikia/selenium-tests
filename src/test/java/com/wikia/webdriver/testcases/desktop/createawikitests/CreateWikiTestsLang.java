@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 import org.testng.annotations.Test;
 
-@Test(groups = {"CNW_la1ng"})
+@Test(groups = {"CNW_lang"})
 public class CreateWikiTestsLang extends NewTestTemplate {
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs", groups = {
