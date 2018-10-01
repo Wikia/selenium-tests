@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.visualeditor;
 
+import static com.wikia.webdriver.common.contentpatterns.VideoContent.TEST_VIDEO_QUERY;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -26,7 +28,7 @@ public class VEImageTests extends NewTestTemplate {
   @Test(groups = {"VEImageTests", "VEMediaPreview"})
   @Execute(asUser = User.USER_9)
   public void previewImage() {
-    String mediaTitle = "Thomas Wright 1792 - 1849";
+    String mediaTitle = "Default Image002";
 
     VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL,
                                                                              PageContent.ARTICLE_NAME_PREFIX
@@ -54,7 +56,7 @@ public class VEImageTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog = ve.clickImageButton();
-    mediaDialog = mediaDialog.searchMedia("h");
+    mediaDialog = mediaDialog.searchMedia(TEST_VIDEO_QUERY);
     ve = mediaDialog.addExistingMedia(1);
     ve.verifyVideos(1);
     ve.selectMedia();
@@ -78,7 +80,7 @@ public class VEImageTests extends NewTestTemplate {
     VisualEditorPageObject veCreatePage = new VisualEditorPageObject().openVEOnArticle(wikiURL,
                                                                                        randomArticleName
     );
-    VisualEditorAddMediaDialog mediaDialog = veCreatePage.searchImage("i");
+    VisualEditorAddMediaDialog mediaDialog = veCreatePage.searchImage(TEST_VIDEO_QUERY);
     veCreatePage = mediaDialog.addExistingMedia(numOfMedia);
     veCreatePage.verifyMedias(numOfMedia);
     veCreatePage.clickPublishButton();

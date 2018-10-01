@@ -24,4 +24,8 @@ public class UrlChecker {
   public static boolean isUrlEqualToCurrentUrl(WebDriver driver, String url) {
     return driver.getCurrentUrl().equalsIgnoreCase(url);
   }
+
+  public static String getProtocolRelativeURL(String fullURL) {
+    return fullURL.replaceFirst("^(http[s]?)", "");
+  }
 }

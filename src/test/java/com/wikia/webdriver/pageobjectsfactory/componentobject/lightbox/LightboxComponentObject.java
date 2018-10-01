@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoCompone
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -44,14 +45,14 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement moreInfoLink;
   @FindBy(css = ".WikiaLightbox div.media img")
   private WebElement imageContainer;
-  @FindBy(css = "span.carousel-arrow.next")
+  @FindBy(css = "span.arrow.next")
   private WebElement carouselRight;
-  @FindBy(css = "span.carousel-arrow.previous:not(.disabled)")
+  @FindBy(css = "span.arrow.previous:not(.disabled)")
   private WebElement carouselLeft;
-  @FindBy(css = "span.carousel-arrow.previous.disabled")
-  private WebElement carouselLeftDisabled;
   @FindBy(css = "button.more-info-close")
   private WebElement closeShareScreenButton;
+
+  private By carouselLeftDisabled = new By.ByCssSelector("span.arrow.previous.disabled");
 
   public LightboxComponentObject(WebDriver driver) {
     super();
@@ -170,7 +171,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void verifyCarouselLeftDisabled() {
-    wait.forElementVisible(carouselLeftDisabled);
+    wait.forElementPresent(carouselLeftDisabled);
     Log.log("verifyCarouselLeftDisabled", "carousel left button is disabled", true);
   }
 

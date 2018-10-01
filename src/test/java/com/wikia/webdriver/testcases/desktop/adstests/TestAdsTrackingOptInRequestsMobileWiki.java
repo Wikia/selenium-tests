@@ -32,7 +32,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -43,7 +43,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -78,13 +78,13 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_UAP_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInRejectedMobileWiki")
-  public void adsTrackingRejectedForNordics(List<String> urlPatterns) {
+  public void adsTrackingRejectedForNordics(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
@@ -100,7 +100,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -111,7 +111,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -133,7 +133,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -144,7 +144,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -258,7 +258,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -269,7 +269,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -293,7 +293,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_MERCURY_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
@@ -319,8 +319,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsMobileWiki", dataProvider = "adsTrackingPixelsOnConsecutivePages")
   public void adsTrackingPixelsOnConsecutivePagesOutsideUE(
-      List<String> urlPatterns,
-      String[] articles
+      List<String> urlPatterns, String[] articles
   ) {
     networkTrafficInterceptor.startIntercepting();
     MobileAdsBaseObject ads = new MobileAdsBaseObject();
@@ -328,12 +327,12 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_ARTICLE1_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
     // Check tracking pixels on consecutive page views
     for (String linkName : articles) {
       ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
       ads.clickOnArticleLink(linkName);
-      modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+      modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
     }
   }
 
@@ -347,6 +346,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_HOME_PAGE);
 
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
+    modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 }

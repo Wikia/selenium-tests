@@ -84,7 +84,7 @@ public class Reply extends BasePageObject {
     setShortImplicitWait();
     boolean
         hasOpenGraph
-        = !reply.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
+        = !reply.findElements(By.cssSelector(".post-content + .og-container")).isEmpty();
     restoreDefaultImplicitWait();
     return hasOpenGraph;
   }

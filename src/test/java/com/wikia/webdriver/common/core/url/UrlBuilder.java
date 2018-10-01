@@ -19,7 +19,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
   private static final Set<String>
       FANDOM_EXCULUDED_WIKIS =
-      new HashSet<>(Arrays.asList(new String[]{"community"}));
+      new HashSet<>(Arrays.asList(new String[]{"community", "gameofthrones", "sydneybuses"}));
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;

@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
@@ -53,7 +54,15 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     if (method != null) {
       Class<?> declaringClass = method.getDeclaringClass();
 
-      String cookieDomain = String.format(".%s", Configuration.getEnvType().getDomain());
+      // Fallback to wikia.com domain
+      String cookieDomain = String.format(".%s", Configuration.getEnvType().getWikiaDomain());
+
+      for(EnvType env: EnvType.values()){
+        if(driver.getCurrentUrl().contains(env.getFandomDomain())){
+          cookieDomain = String.format(".%s", env.getFandomDomain());
+          break;
+        }
+      }
 
       Date cookieDate = new Date(new DateTime().plusYears(10).getMillis());
 
@@ -77,7 +86,9 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         Log.warning("Url after navigation", "Unable to check URL after navigation - alert present");
       }
 
-      if (driver.getCurrentUrl().contains(Configuration.getDomain())) {
+      boolean reload = false;
+
+      if (driver.getCurrentUrl().contains(cookieDomain)) {
         // HACK FOR DISABLING NOTIFICATIONS
         try {
           new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
@@ -120,6 +131,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                       "/",
                                       cookieDate
                 ));
+            reload = true;
           } else if (userOptedOut) {
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-status",
@@ -128,6 +140,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                       "/",
                                       cookieDate
                 ));
+            reload = true;
           }
         }
 
@@ -139,6 +152,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
             && "true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
           driver.manage()
               .addCookie(new Cookie("cpBenefitsModalShown", "1", cookieDomain, "/", cookieDate));
+          reload = true;
         }
 
         if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
@@ -149,6 +163,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                     "/",
                                     cookieDate
               ));
+          reload = true;
           Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s",
                                  XMLReader.getValue("mock.ads_token"),
                                  String.format(".%s", Configuration.getEnvType().getDomain())
@@ -178,6 +193,10 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         if (networkTrafficInterceptor != null) {
           networkTrafficInterceptor.startIntercepting();
         }
+      }
+
+      if(reload){
+        driver.navigate().refresh();
       }
     }
     Log.logJSError();

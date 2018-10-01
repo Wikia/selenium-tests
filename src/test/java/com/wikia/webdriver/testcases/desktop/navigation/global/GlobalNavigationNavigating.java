@@ -1,20 +1,18 @@
 package com.wikia.webdriver.testcases.desktop.navigation.global;
 
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI_SZL;
-import static com.wikia.webdriver.common.contentpatterns.URLsContent.HUBS_SZL;
-import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
-
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.contentpatterns.URLsContent.*;
+import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAULT_LANGUAGE;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
 public class GlobalNavigationNavigating extends NewTestTemplate {
@@ -91,10 +89,11 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   @DontRun(language = "szl")
   @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})
   public void testExploreWikisLink() {
+    UrlChecker checker = new UrlChecker();
     new HomePage().getGlobalNavigation().openWikisMenu().clickExploreWikisLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore"
+    Assertion.assertEquals(checker.getProtocolRelativeURL(driver.getCurrentUrl()),
+                           checker.getProtocolRelativeURL(fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore")
     );
   }
 

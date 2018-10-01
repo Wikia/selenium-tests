@@ -84,6 +84,8 @@ public class TrackingOptInDataProvider {
   private static final String[] ADS_A9_INSTANT_GLOBALS = {"wgAdDriverA9BidderCountries",
                                                           "wgAdDriverA9VideoBidderCountries"};
 
+  private static final String[] ADS_NORDICS_INSTANT_GLOBALS = {"InstantGlobals.wgAdDriverTurtleCountries"};
+
   private static final String[] ADS_ARTICLE_PAGES = {"TrackingPixels/Article2",
                                                      "TrackingPixels/Article3",
                                                      "TrackingPixels/Article2",
@@ -245,7 +247,7 @@ public class TrackingOptInDataProvider {
 
   @DataProvider
   public static Object[][] adsNordicsDataProvider() {
-    return new Object[][]{{Arrays.asList(ADS_NORDICS_PATTERN)}};
+    return new Object[][]{{ADS_NORDICS_INSTANT_GLOBALS, Arrays.asList(ADS_NORDICS_PATTERN)}};
   }
 
   @DataProvider
