@@ -22,6 +22,8 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
   @FindBy(css = "li[id='ThemeWiki'] input.next.enabled")
   private WebElement submitButton;
+  @FindBy(css = "#CreateNewWiki")
+  private WebElement wikiTaskId;
 
   public CreateNewWikiPageObjectStep3(WebDriver driver) {
     super();
@@ -48,5 +50,9 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
     scrollAndClick(submitButton);
     Log.log("submit", "Submit button clicked", true, driver);
     return new ArticlePageObject();
+  }
+
+  public void logWikiTaskId() {
+    Log.info("Create New Wiki task ID=", wikiTaskId.getAttribute("data-task-id"));
   }
 }
