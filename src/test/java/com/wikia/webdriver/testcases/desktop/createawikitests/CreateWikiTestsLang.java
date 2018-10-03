@@ -34,6 +34,7 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
+    cnw3.logWikiTaskId();
     ArticlePageObject article = cnw3.submit();
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();

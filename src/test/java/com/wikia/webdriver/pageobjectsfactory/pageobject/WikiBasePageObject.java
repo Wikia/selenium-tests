@@ -659,9 +659,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getUrlWithCacheBuster(String url) {
-    return urlBuilder.appendQueryStringToURL(url, "cb=" + DateTime.now().getMillis()
-            + "&AbTest.DISCUSSIONS_LIGHTWEIGHT_CONTRIBUTION_MENU=OLD_1");
-    //Temporary change until the outcome of experiment in IRIS-5829
+    return urlBuilder.appendQueryStringToURL(url, "cb=" + DateTime.now().getMillis());
   }
 
   public String getWikiID() {
