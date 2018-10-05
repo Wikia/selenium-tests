@@ -37,7 +37,7 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement submitButton;
 
-  @FindBy(css = ".inline-reply-editor .editor-textarea")
+  @FindBy(css = ".inline-reply-editor .editor-textarea, .inline-reply-editor .ql-editor")
   @Getter
   private WebElement textarea;
 

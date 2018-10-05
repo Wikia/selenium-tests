@@ -23,28 +23,28 @@ public class Post extends BasePage {
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  @FindBy(css = ".post-detail figure.avatar")
+  @FindBy(css = ".post-detail .wds-avatar")
   private WebElement avatarImage;
 
   @FindBy(css = ".user-avatar__username")
   private WebElement avatarUsername;
 
-  @FindBy(css = "li.post-upvote")
+  @FindBy(css = "li.post-actions__upvote")
   private List<WebElement> postUpvoteButton;
 
   @FindBy(css = ".post-counters .upvote-count")
   private List<WebElement> postVoteCount;
 
-  @FindBy(css = "li.post-upvote")
+  @FindBy(css = "li.post-actions__upvote")
   private WebElement upvoteArea;
 
-  @FindBy(css = ".post-upvote")
+  @FindBy(css = ".post-actions__upvote")
   private WebElement upvoteButton;
 
   @FindBy(css = ".load-more-button")
   private WebElement loadMoreButton;
 
-  @FindBy(css = ".discussion.post .discussion-content")
+  @FindBy(css = ".post-card__body .post-content")
   private WebElement postDetails;
 
   @FindBy(css = ".post-detail .og-container")

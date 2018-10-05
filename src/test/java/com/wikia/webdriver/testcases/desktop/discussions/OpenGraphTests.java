@@ -30,6 +30,7 @@ import java.net.URL;
 public class OpenGraphTests extends NewTestTemplate {
 
   private static final String URL = "http://fandom.wikia.com";
+  private static final String URL_NO_PROTOCOL = "fandom.wikia.com";
 
   /**
    * fixture methods
@@ -119,7 +120,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(postsCreator.hasOpenGraph());
     postsCreator.clickSubmitButton();
     page.waitForLoadingSpinner();
-    page.getPost().waitForPostToAppearWithText(URL);
+    page.getPost().waitForPostToAppearWithText(URL_NO_PROTOCOL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
@@ -133,7 +134,7 @@ public class OpenGraphTests extends NewTestTemplate {
 
     postsCreator.clickSubmitButton();
     page.waitForLoadingSpinner();
-    page.getPost().waitForPostToAppearWithOpenGraph(URL);
+    page.getPost().waitForPostToAppearWithOpenGraph(URL_NO_PROTOCOL);
 
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
@@ -145,7 +146,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
     page.waitForLoadingSpinner();
-    page.getReplies().waitForReplyToAppearWithText(URL);
+    page.getReplies().waitForReplyToAppearWithText(URL_NO_PROTOCOL);
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }
@@ -159,7 +160,7 @@ public class OpenGraphTests extends NewTestTemplate {
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();
     page.waitForLoadingSpinner();
-    page.getReplies().waitForReplyToAppearWithOpenGraph(URL);
+    page.getReplies().waitForReplyToAppearWithOpenGraph(URL_NO_PROTOCOL);
 
     Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }

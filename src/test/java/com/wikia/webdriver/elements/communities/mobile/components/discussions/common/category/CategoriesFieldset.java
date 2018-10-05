@@ -28,7 +28,7 @@ public class CategoriesFieldset extends BasePage {
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
 
-  @FindBy(css = ".discussion-categories > discussion-mobile-categories-list-container")
+  @FindBy(css = ".discussion-categories > .discussion-mobile-categories-list-container")
   private WebElement mobileCategoriesContainer;
 
   @FindBy(className = "discussion-categories-edit-link")

@@ -53,7 +53,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement titleTextarea;
 
   @Getter
-  @FindBy(css = ".inline-editor textarea[required]")
+  @FindBy(css = ".inline-editor textarea[required], .ql-editor")
   private WebElement descriptionTextarea;
 
   @Getter
@@ -101,10 +101,6 @@ public class PostsCreatorDesktop extends BasePostsCreator {
 
   @Override
   public PostsCreator click() {
-    /*
-      This entry point is disabled until the outcome of experiment in IRIS-5829
-    */
-
     wait.forElementClickable(getPostsCreator());
     getPostsCreator().click();
     wait.forElementClickable(getTextPostType());
