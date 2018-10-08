@@ -41,7 +41,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingRejectedForSlotsAdSlots(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -52,7 +52,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -76,7 +76,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingRejectedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_UAP_PAGE, instantGlobals);
+    modal.rejectOptInModal(driver, GERMANY, ADS_UAP_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -201,7 +201,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_UAP_PAGE, instantGlobals);
+    modal.acceptOptInModal(driver, GERMANY, ADS_UAP_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -302,7 +302,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_ARTICLE1_PAGE);
+    modal.acceptOptInModal(driver, GERMANY, ADS_ARTICLE1_PAGE);
     MobileAdsBaseObject ads = new MobileAdsBaseObject();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
