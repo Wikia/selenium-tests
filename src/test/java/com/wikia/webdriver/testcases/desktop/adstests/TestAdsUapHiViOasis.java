@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 @Test(groups = "AdsUapHiViOasis")
 public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
 
+  private static final String NOT_RESOLVED = "resolved_state=0";
   private static final double IMPACT_STATE_ASPECT_RATIO = 1600 / 400;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 1600 / 160;
   private static final String
@@ -22,7 +23,7 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   }
 
   private TestAdsUapHiVi test(Page page) {
-    return new TestAdsUapHiVi(driver, new AdsBaseObject(page.getUrl()), AdsContent.TOP_LB);
+    return new TestAdsUapHiVi(driver, new AdsBaseObject(page.getUrl(NOT_RESOLVED)), AdsContent.TOP_LB);
   }
 
   @Test

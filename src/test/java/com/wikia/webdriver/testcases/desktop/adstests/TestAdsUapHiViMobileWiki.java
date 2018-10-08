@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 @Test(groups = "AdsUapHiViMobileWiki")
 public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
+  private static final String NOT_RESOLVED = "resolved_state=0";
   private static final double IMPACT_STATE_ASPECT_RATIO = 272.0 / 153.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 640.0 / 213;
   private static final String TLB_SLOT_ID = "MOBILE_TOP_LEADERBOARD";
@@ -22,7 +23,7 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
       = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
 
   private AdsBaseObject openPage(Page page) {
-    final AdsBaseObject adsBaseObject = new AdsBaseObject(page.getUrl());
+    final AdsBaseObject adsBaseObject = new AdsBaseObject(page.getUrl(NOT_RESOLVED));
 
     return adsBaseObject.waitForPageLoaded();
   }
