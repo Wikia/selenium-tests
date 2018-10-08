@@ -26,9 +26,6 @@ public class TrackingOptInDataProvider {
   private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve\\.com/.*";
   private static final String ADS_QUANTCAST_SECURE_PATTERN = "https?://.*quantserve\\.com/.*";
   private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/.*";
-  private static final String
-      ADS_NORDICS_PATTERN
-      = "https?://.*doubleclick\\.net/gampad/ads.*Nordics_RoN.*";
   private static final String ADS_OPOENX_PATTERN = "https?://.*wikia-d.*openx.*arj.*";
   private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
   private static final String
@@ -83,8 +80,6 @@ public class TrackingOptInDataProvider {
 
   private static final String[] ADS_A9_INSTANT_GLOBALS = {"wgAdDriverA9BidderCountries",
                                                           "wgAdDriverA9VideoBidderCountries"};
-
-  private static final String[] ADS_NORDICS_INSTANT_GLOBALS = {"InstantGlobals.wgAdDriverTurtleCountries"};
 
   private static final String[] ADS_ARTICLE_PAGES = {"TrackingPixels/Article2",
                                                      "TrackingPixels/Article3",
@@ -246,11 +241,6 @@ public class TrackingOptInDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsNordicsDataProvider() {
-    return new Object[][]{{ADS_NORDICS_INSTANT_GLOBALS, Arrays.asList(ADS_NORDICS_PATTERN)}};
-  }
-
-  @DataProvider
   public static Object[][] adsPetametricsDataProvider() {
     return new Object[][]{{Arrays.asList(PETAMETRICS_PATTERN)}};
   }
@@ -310,4 +300,3 @@ public class TrackingOptInDataProvider {
                           {ADS_COMSCORE_PATTERN, false}};
   }
 }
-
