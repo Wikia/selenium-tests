@@ -57,6 +57,7 @@ public class TestAdsUapHiVi {
       double impactStateAspectRatio, double resolvedStateAspectRatio
   ) throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(By.id(slotName));
 
