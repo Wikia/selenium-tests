@@ -83,17 +83,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInRejectedMobileWiki")
-  public void adsTrackingRejectedForNordics(String[] instantGlobals, List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPrebidDataProvider", groups = "AdsOptInRejectedMobileWiki")
   public void adsTrackingRejectedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
