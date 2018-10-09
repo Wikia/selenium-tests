@@ -21,6 +21,7 @@ public class TestAdsUapHiVi {
   private WikiaWebDriver driver;
   private AdsBaseObject page;
   private String slotName;
+  private static final String NOT_RESOLVED = "resolved_state=0";
 
   TestAdsUapHiVi(WikiaWebDriver driver, AdsBaseObject page, String slotName) {
     this.driver = driver;
@@ -30,6 +31,7 @@ public class TestAdsUapHiVi {
 
   public void shouldHaveCorrectAspectRatioForImpactState(double impactStateAspectRatio) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
 
     AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(),
@@ -95,6 +97,7 @@ public class TestAdsUapHiVi {
 
   public void shouldAutoplayVideoForImpactState() {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
   }
@@ -114,6 +117,7 @@ public class TestAdsUapHiVi {
 
   public void shouldMuteVideoForAutoplayedImpactState() throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
 
@@ -146,6 +150,7 @@ public class TestAdsUapHiVi {
 
   public void shouldRedirectToPageAfterClickOnAd(String redirectUrl) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     page.refreshPage();
     hiViUap.waitForAdLoaded();
@@ -187,7 +192,7 @@ public class TestAdsUapHiVi {
   ) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
 
-    page.refreshPage();
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(By.id(slotName));
     AssertionAds.assertAspectRatio(slot.getSize(), impactStateAspectRatio);
