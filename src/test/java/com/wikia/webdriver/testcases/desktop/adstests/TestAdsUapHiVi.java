@@ -22,6 +22,7 @@ public class TestAdsUapHiVi {
   private AdsBaseObject page;
   private String slotName;
   private static final String NOT_RESOLVED = "resolved_state=0";
+  private static final String RESOLVED = "resolved_state=1";
 
   TestAdsUapHiVi(WikiaWebDriver driver, AdsBaseObject page, String slotName) {
     this.driver = driver;
@@ -41,6 +42,7 @@ public class TestAdsUapHiVi {
 
   public void shouldHaveCorrectAspectRatioForResolvedState(double expectedResolvedState) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.refreshPage();
     hiViUap.waitForAdLoaded();
     page.refreshPage();
 
@@ -151,7 +153,7 @@ public class TestAdsUapHiVi {
 
   public void shouldRedirectToPageAfterClickOnAd(String redirectUrl) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, RESOLVED);
     hiViUap.waitForAdLoaded();
     page.refreshPage();
     hiViUap.waitForAdLoaded();
