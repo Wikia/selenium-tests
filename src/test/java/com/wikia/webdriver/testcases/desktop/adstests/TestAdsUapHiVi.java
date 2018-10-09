@@ -251,6 +251,8 @@ public class TestAdsUapHiVi {
   // mobile only
   public void shouldRedirectAfterClickOnLearnMore(String url) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    hiViUap.waitForAdLoaded();
     hiViUap.clickLearnMore();
 
     Assert.assertTrue(page.tabContainsUrl(url));
