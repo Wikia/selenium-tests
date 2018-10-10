@@ -75,18 +75,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInRejectedOasis")
-  public void adsTrackingRejectedForNordics(String[] instantGlobals, List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPrebidDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -205,19 +193,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
-
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @UnsafePageLoad
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNordicsDataProvider", groups = "AdsOptInAcceptedOasis")
-  public void adsTrackingAcceptedForNordics(
-      String[] instantGlobals, List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }

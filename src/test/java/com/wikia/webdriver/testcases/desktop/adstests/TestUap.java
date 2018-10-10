@@ -22,12 +22,13 @@ import java.util.Map;
 public class TestUap extends TemplateNoFirstLoad {
 
   private static final String MOBILE_IN_CONTENT = ".mobile-in-content";
+  private static final String RESOLVED_STATE = "resolved_state=0";
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsUapOasis", groups = "AdsUapOasis")
   public void adsUapOasis(
       Page page, List<Map<String, Object>> atfSlots, List<Map<String, Object>> btfSlots
   ) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(RESOLVED_STATE), WindowSize.DESKTOP);
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
