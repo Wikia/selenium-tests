@@ -269,9 +269,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyEmptyTagsAreNotAppearing() {
-    new ArticleContent().push(INFOBOX_EMPTY_TAGS_INVOCATION, PageContent.INFOBOX_1);
+    new ArticleContent().push(INFOBOX_EMPTY_TAGS_INVOCATION, PageContent.INFOBOX_3);
     PortableInfobox infobox = new PortableInfobox();
-    infobox.open(PageContent.INFOBOX_1);
+    infobox.open(PageContent.INFOBOX_3);
 
     Assertion.assertTrue(infobox.infoboxContainsEmptyTag());
   }
