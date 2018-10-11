@@ -267,6 +267,7 @@ public class TestAdsUapHiVi {
 
   public void shouldPlayVideoWithSoundForClickToPlay() throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
 
     hiViUap.clickReplayButton();
