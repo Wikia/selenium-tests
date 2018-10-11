@@ -76,7 +76,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.openExploreMenu().clickExploreRandomLink();
 
     Assertion.assertTrue(driver.getCurrentUrl()
-                             .matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
+                             .matches(".*\\.(wikia|fandom)\\.com/wiki/(?!Special:Images).*"));
   }
 
   @RunOnly(language = "szl")
