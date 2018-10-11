@@ -32,7 +32,7 @@ public class TestAdsUapHiVi {
 
   public void shouldHaveCorrectAspectRatioForImpactState(double impactStateAspectRatio) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
 
     AssertionAds.assertAspectRatio(driver.findElement(By.id(slotName)).getSize(),
@@ -59,7 +59,7 @@ public class TestAdsUapHiVi {
       double impactStateAspectRatio, double resolvedStateAspectRatio
   ) throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(By.id(slotName));
 
@@ -100,7 +100,7 @@ public class TestAdsUapHiVi {
 
   public void shouldAutoplayVideoForImpactState() {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
   }
@@ -120,7 +120,7 @@ public class TestAdsUapHiVi {
 
   public void shouldMuteVideoForAutoplayedImpactState() throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     hiViUap.waitForVideoStart();
 
@@ -153,7 +153,7 @@ public class TestAdsUapHiVi {
 
   public void shouldRedirectToPageAfterClickOnAd(String redirectUrl) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, RESOLVED);
+    page.goToCurrentUrlWithSuffix(RESOLVED);
     hiViUap.waitForAdLoaded();
     page.refreshPage();
     hiViUap.waitForAdLoaded();
@@ -194,19 +194,20 @@ public class TestAdsUapHiVi {
       double impactStateAspectRatio, double resolvedStateAspectRatio
   ) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
+    String CURRENT_URL = driver.getCurrentUrl();
 
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(By.id(slotName));
     AssertionAds.assertAspectRatio(slot.getSize(), impactStateAspectRatio);
 
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE);
+    page.getUrl(CURRENT_URL, RESOLVED);
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     slot = driver.findElement(By.id(slotName));
     AssertionAds.assertAspectRatio(slot.getSize(), resolvedStateAspectRatio);
 
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE);
+    page.refreshPage();
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     slot = driver.findElement(By.id(slotName));
@@ -251,7 +252,7 @@ public class TestAdsUapHiVi {
   // mobile only
   public void shouldRedirectAfterClickOnLearnMore(String url) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
+    page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     hiViUap.clickLearnMore();
 
@@ -267,7 +268,6 @@ public class TestAdsUapHiVi {
 
   public void shouldPlayVideoWithSoundForClickToPlay() throws InterruptedException {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.getUrl(AdsDataProvider.UAP_HIVI_PAGE, NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
 
     hiViUap.clickReplayButton();
