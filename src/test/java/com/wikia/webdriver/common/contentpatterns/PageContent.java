@@ -116,6 +116,7 @@ public class PageContent {
   // Portable Infoboxes content
   public static final String INFOBOX_1 = "Infobox1";
   public static final String INFOBOX_2 = "Infobox2";
+  public static final String INFOBOX_3 = "Infobox3";
 
   // Customized toolbar
   public static final String FOLLOW = "follow";
