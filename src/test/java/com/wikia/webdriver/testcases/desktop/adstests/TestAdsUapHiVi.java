@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.desktop.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AssertionAds;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.HiViUap;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -194,14 +193,14 @@ public class TestAdsUapHiVi {
       double impactStateAspectRatio, double resolvedStateAspectRatio
   ) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    String CURRENT_URL = driver.getCurrentUrl();
+    String currentUrl = driver.getCurrentUrl();
 
     page.goToCurrentUrlWithSuffix(NOT_RESOLVED);
     hiViUap.waitForAdLoaded();
     WebElement slot = driver.findElement(By.id(slotName));
     AssertionAds.assertAspectRatio(slot.getSize(), impactStateAspectRatio);
 
-    page.getUrl(CURRENT_URL, RESOLVED);
+    page.getUrl(currentUrl, RESOLVED);
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     slot = driver.findElement(By.id(slotName));
