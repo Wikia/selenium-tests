@@ -13,10 +13,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.CuratedMainPagePageObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent.EditorHomePageObject;
+import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,25 +33,22 @@ public class EditorTests extends NewTestTemplate {
 
   private static String FEATURED_CONTENT_SELECTOR = ".featured-content";
   private static String CURATED_CONTENT_SELECTOR = ".curated-content";
-  private static Navigate navigate;
 
   @BeforeMethod(alwaysRun = true)
   public void beforeMethod() {
     new CuratedContent().clear();
-    navigate = new Navigate();
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
   @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-
-    navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
-    CuratedMainPagePageObject curatedMainPage = new ArticlePage().getCuratedMainPage();
-    Boolean result = curatedMainPage.isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
+    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+        .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
 
-    curatedMainPage.editCuratedMainPage()
+    new EditorHomePageObject()
+        .open()
         .clickAddFeaturedContent()
         .typeDisplayName(ITEM_DISPLAY_NAME)
         .typePageName(ITEM_PAGE_NAME)
@@ -74,13 +71,13 @@ public class EditorTests extends NewTestTemplate {
   @RelatedIssue(issueID = "XF-241")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
-    navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
-    CuratedMainPagePageObject curatedMainPage = new ArticlePage().getCuratedMainPage();
-    Boolean result = curatedMainPage.isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
+    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+        .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
 
-    curatedMainPage.editCuratedMainPage()
+    new EditorHomePageObject()
+        .open()
         .clickAddSection()
         .typeDisplayName(SECTION_DISPLAY_NAME)
         .clickOnImage()
@@ -118,13 +115,12 @@ public class EditorTests extends NewTestTemplate {
   @Test(groups = "MercuryCuratedEditorTest_003")
   @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
-    navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
-    CuratedMainPagePageObject curatedMainPage = new ArticlePage().getCuratedMainPage();
-    Boolean result = curatedMainPage.isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
+    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+        .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
-
-    curatedMainPage.editCuratedMainPage()
+    new EditorHomePageObject()
+        .open()
         .clickAddCategory()
         .typeDisplayName(ITEM_DISPLAY_NAME)
         .typePageName(ITEM_PAGE_NAME)
