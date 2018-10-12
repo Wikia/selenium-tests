@@ -67,7 +67,7 @@ public class WikiBasePageObject extends BasePageObject {
           + ".wds-global-navigation__user-logged-in .wds-avatar img";
   
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
-  private static final By MERCURY_SKIN = By.cssSelector(".mobile-wiki");
+  private static final By MERCURY_SKIN = By.cssSelector("#ember-container, .mobile-wiki");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
       ".wds-global-navigation__modal-control-user .wds-avatar__inner-border[title=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
