@@ -167,7 +167,6 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public int getBannerNotificationsHeight(){
-    wait.forElementClickable(bannerNotificationContainer);
     return bannerNotificationContainer.getSize().getHeight();
   }
 
