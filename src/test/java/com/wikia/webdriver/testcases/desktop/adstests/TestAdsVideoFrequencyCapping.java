@@ -12,6 +12,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
 
   private static final String
@@ -24,7 +26,7 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
   private static final Page PAGE_WITH_VELES = new Page(DIRECT_VELES_WIKI, DIRECT_VELES_PAGE_URI);
 
   @Test(groups = "AdsVideoFrequencyCapping")
-  public void adsVideoFrequencyCapping() {
+  public void adsVideoFrequencyCapping() throws InterruptedException {
     String testedPage = PAGE_WITH_VELES.getUrl();
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, CONFIG);
 
@@ -33,6 +35,7 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
     Assertion.assertTrue(velesAds.isIncontentWrapperOnPage(), "Incontent player not inserted");
     velesAds.triggerIncontentPlayer();
     Assertion.assertTrue(isIncontentPlayerDispalyed(velesAds), "Video Player is not displayed");
+    TimeUnit.SECONDS.sleep(3);
 
     velesAds.refreshPage();
     Assertion.assertFalse(velesAds.isIncontentWrapperOnPage(), "Incontent player inserted");
