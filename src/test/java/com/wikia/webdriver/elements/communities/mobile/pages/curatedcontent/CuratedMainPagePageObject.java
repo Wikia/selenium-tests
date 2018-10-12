@@ -3,13 +3,11 @@ package com.wikia.webdriver.elements.communities.mobile.pages.curatedcontent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.TimeoutException;
 
 public class CuratedMainPagePageObject extends BasePageObject {
-
-  @FindBy(css = ".main-page-edit")
-  private WebElement editMainPageButton;
 
   public float getElementOffsetTop(String element) {
     return Float.parseFloat(driver.executeScript(
@@ -26,10 +24,5 @@ public class CuratedMainPagePageObject extends BasePageObject {
       return false;
     }
     return true;
-  }
-
-  public EditorHomePageObject editCuratedMainPage() {
-    editMainPageButton.click();
-    return new EditorHomePageObject();
   }
 }
