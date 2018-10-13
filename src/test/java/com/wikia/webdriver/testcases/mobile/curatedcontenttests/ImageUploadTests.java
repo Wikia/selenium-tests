@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mobile.curatedcontenttests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -55,8 +56,8 @@ public class ImageUploadTests extends NewTestTemplate {
 
     navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
     curatedMainPage.isCuratedElementVisible(CURATED_CONTENT_SELECTOR);
-    curatedMainPage.editCuratedMainPage();
 
+    navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);
     generator.generateImageWithRandomText();
     String imagePath = generator.getImageAbsolutePath();
 
