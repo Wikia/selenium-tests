@@ -117,7 +117,7 @@ public class GlobalNavigationLayout extends NewTestTemplate {
 
   @RunOnly(language = "szl")
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
-  @Execute(language = "szl", asUser = User.USER_GERMAN)
+  @Execute(asUser = User.USER_GERMAN)
   public void testLayoutForLoggedInSzl() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
