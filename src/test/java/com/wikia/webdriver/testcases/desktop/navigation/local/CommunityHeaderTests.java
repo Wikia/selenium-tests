@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.desktop.components.navigation.local.CommunityHeaderDesktop;
 import com.wikia.webdriver.elements.communities.desktop.components.globalshortcuts.ActionExplorerModal;
+import com.wikia.webdriver.elements.communities.desktop.components.navigation.local.CommunityHeaderDesktop;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
@@ -205,7 +205,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   public void testDiscussLinkOnWikiWithDiscussionsWithoutForum() {
     new CommunityHeaderDesktop().clickDiscussLink();
 
-    Assertion.assertStringContains(driver.getCurrentUrl(),"wikia.com/d/f");
+    Assertion.assertTrue(driver.getCurrentUrl().matches(".*(wikia|fandom).com/d/f"));
   }
 
   @RunOnly(language = "szl")
