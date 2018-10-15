@@ -328,6 +328,10 @@ public class BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(page.getUrl(), queryString));
   }
 
+  public void getUrl(String page, String queryString) {
+    getUrl(urlBuilder.appendQueryStringToURL(page, queryString));
+  }
+
   public void refreshPage() {
     try {
       driver.navigate().refresh();
