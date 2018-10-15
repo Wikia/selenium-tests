@@ -1,22 +1,20 @@
 package com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 import javax.annotation.CheckForNull;
+import java.util.List;
 
 public class CategoryPills extends BasePageObject {
 
   @Setter
   private boolean isEmpty;
 
-  @FindBy(css = ".pop-over-compass")
+  @FindBy(css = ".discussion-category-picker .wds-dropdown__content")
   private WebElement categoryPillsPopover;
 
   /**
