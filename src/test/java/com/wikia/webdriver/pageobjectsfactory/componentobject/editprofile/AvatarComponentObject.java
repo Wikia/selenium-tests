@@ -10,7 +10,7 @@ import java.io.File;
 
 public class AvatarComponentObject extends WikiBasePageObject {
 
-  @FindBy(id = "UPPLightboxAvatarUpload")
+  @FindBy(css = "#UPPLightboxAvatar")
   private WebElement uploadInput;
   @FindBy(css = "#UPPLightboxWrapper [data-event=save]")
   private WebElement saveButton;
