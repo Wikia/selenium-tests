@@ -354,7 +354,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      WebElement adsDiv = driver.findElement(By.cssSelector("#" + slotName + " [" + attr + "]"));
+      WebElement adsDiv = driver.findElement(By.cssSelector("#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),
