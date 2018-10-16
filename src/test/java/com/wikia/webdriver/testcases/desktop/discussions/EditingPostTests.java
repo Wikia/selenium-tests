@@ -71,7 +71,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotSeeThatPostWasEditedByAuthorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsStaffRemotely());
 
-    final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
+    final PostEntity post = new PostDetailsPage().open(data.getFirstPostId()).getPost().findNewestPost();
     Assertion.assertFalse(post.hasEditedBySection(), SAME_PERSON_MESSAGE);
   }
 
@@ -83,7 +83,7 @@ public class EditingPostTests extends NewTestTemplate {
 
     final PostEntity post = new PostDetailsPage().open(data.getId())
         .getPost()
-        .findPostById(data.getId());
+        .findPostById(data.getFirstPostId());
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
     Assertion.assertEquals(post.getEditedBySectionText(),
                            EDITED_BY_STAFF,
@@ -111,7 +111,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
+    final PostEntity post = new PostsListPage().open().getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
   }
 
@@ -133,7 +133,7 @@ public class EditingPostTests extends NewTestTemplate {
 
     final PostEntity post = new PostDetailsPage().open(data.getId())
         .getPost()
-        .findPostById(data.getId());
+        .findPostById(data.getFirstPostId());
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
     Assertion.assertEquals(post.getEditedBySectionText(),
                            EDITED_BY_STAFF,
