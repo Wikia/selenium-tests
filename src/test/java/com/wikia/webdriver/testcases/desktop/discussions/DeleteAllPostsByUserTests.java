@@ -242,7 +242,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   }
 
   private PostEntity deleteAllAndReturnFirstMobile() {
-    String postId = setUp().getId();
+    String postId = setUp().getFirstPostId();
     getDeleteAllButtonMobile(userWithPosts.getUserId()).click().confirmAndWait();
     return new Post().findPostById(postId);
   }
