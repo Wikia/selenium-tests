@@ -97,7 +97,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   @Override
   public CategoryPills clickAddCategoryButton() {
     try {
-      new BasePageObject().builder.moveToElement(getAddCategoryButton()).pause(500).perform();
+      getAddCategoryButton().click();
       wait.forElementVisible(By.cssSelector(".discussion-category-picker .wds-dropdown__content"));
       categoryPills.setEmpty(false);
     } catch (NoSuchElementException e) {
