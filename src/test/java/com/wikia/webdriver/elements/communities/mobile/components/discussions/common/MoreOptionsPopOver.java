@@ -30,7 +30,7 @@ public class MoreOptionsPopOver {
   }
 
   private boolean hasOption(final String href) {
-    return post.findElements(By.cssSelector(".wds-dropdown__content > .more-options > li > a"))
+    return post.findElements(By.cssSelector(".wds-dropdown__content .more-options li a use"))
         .stream()
         .map(element -> element.getAttribute("xlink:href"))
         .anyMatch(attribute -> attribute.equals(href));
