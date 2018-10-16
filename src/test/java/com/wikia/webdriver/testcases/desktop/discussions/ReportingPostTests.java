@@ -312,7 +312,7 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
 
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -330,7 +330,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnDesktopCanReportPostOnPostsListPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
@@ -340,7 +340,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnDesktopCanReportPostOnPostDetailsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
@@ -350,7 +350,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnDesktopCanReportPostOnUserPostsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
@@ -372,7 +372,7 @@ public class ReportingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
@@ -396,7 +396,7 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
 
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
@@ -420,7 +420,7 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
 
     final UserPostsPage userPostsPage = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity postEntity = userPostsPage.getPost().findPostById(data.getId());
+    final PostEntity postEntity = userPostsPage.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
@@ -431,7 +431,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertNull(postEntity, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
@@ -451,7 +451,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final UserPostsPage userPostsPage = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity post = userPostsPage.getPost().findPostById(data.getId());
+    final PostEntity post = userPostsPage.getPost().findPostById(data.getFirstPostId());
     Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
@@ -472,7 +472,7 @@ public class ReportingPostTests extends NewTestTemplate {
   private void userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     final PageWithPosts page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -494,7 +494,7 @@ public class ReportingPostTests extends NewTestTemplate {
   private void userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     final PageWithPosts page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -516,7 +516,7 @@ public class ReportingPostTests extends NewTestTemplate {
   private void userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     final PageWithPosts page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -532,7 +532,7 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
 
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -557,7 +557,7 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
 
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -581,7 +581,7 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
 
     final PostsListPage postsListPage = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = postsListPage.getPost().findPostById(data.getId());
+    final PostEntity postEntity = postsListPage.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
   }
 
@@ -604,7 +604,7 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
 
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertTrue(clickCancelOnValidatePostModalDialog(page, postEntity),
             REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -630,7 +630,7 @@ public class ReportingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
   }
 
