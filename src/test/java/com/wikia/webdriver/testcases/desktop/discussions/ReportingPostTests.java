@@ -229,7 +229,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnMobileCanReportPostOnPostsListPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
@@ -239,7 +239,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnMobileCanReportPostOnPostDetailsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
@@ -249,7 +249,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnMobileCanReportPostOnUserPostsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
+    final PostEntity postEntity = page.getPost().findPostById(data.getFirstPostId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
@@ -294,7 +294,7 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
 
     final PostEntity postEntity =
-        openPostListPageAndWaitUntilLoaded().getPost().findPostById(data.getId());
+        openPostListPageAndWaitUntilLoaded().getPost().findPostById(data.getFirstPostId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
