@@ -20,10 +20,10 @@ public class FiltersPopOver extends BasePage {
   @FindBy(css = ".discussion-filters .discussion-sort")
   private WebElement sortingFilter;
 
-  @FindBy(css = ".sort-options .sort-trending")
+  @FindBy(css = ".sort-options .sort-trending .sort-option-label")
   private WebElement trendingOptionInSortMenu;
 
-  @FindBy(css = ".sort-options .sort-latest")
+  @FindBy(css = ".sort-options .sort-latest .sort-option-label")
   private WebElement latestOptionInSortMenu;
 
   @FindBy(css = ".filters-apply")
