@@ -1,7 +1,5 @@
 package com.wikia.webdriver.elements.communities.mobile.components.discussions.common;
 
-import com.wikia.webdriver.elements.communities.mobile.pages.discussions.UserPostsPage;
-
 import com.google.common.base.Function;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,7 +30,7 @@ public class MoreOptionsPopOver {
   }
 
   private boolean hasOption(final String href) {
-    return post.findElements(By.cssSelector(".more-options-pop-over use"))
+    return post.findElements(By.cssSelector(".wds-dropdown__content .more-options li a use"))
         .stream()
         .map(element -> element.getAttribute("xlink:href"))
         .anyMatch(attribute -> attribute.equals(href));

@@ -81,7 +81,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void clickCancelDeleteAllDesktopHidesConfirmationDialog() {
-    String postId = setUp().getId();
+    String postId = setUp().getFirstPostId();
     getDeleteAllButtonDesktop(userWithPosts.getUserId()).click().cancelAndWait();
     assertFalse(new Post().findPostById(postId).isDeleted());
   }
@@ -90,7 +90,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void clickCancelDeleteAllMobileHidesConfirmationDialog() {
-    String postId = setUp().getId();
+    String postId = setUp().getFirstPostId();
     getDeleteAllButtonMobile(userWithPosts.getUserId()).click().cancelAndWait();
     assertFalse(new Post().findPostById(postId).isDeleted());
   }
@@ -236,13 +236,13 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   }
 
   private PostEntity deleteAllAndReturnFirstDesktop() {
-    String postId = setUp().getId();
+    String postId = setUp().getFirstPostId();
     getDeleteAllButtonDesktop(userWithPosts.getUserId()).click().confirmAndWait();
     return new Post().findPostById(postId);
   }
 
   private PostEntity deleteAllAndReturnFirstMobile() {
-    String postId = setUp().getId();
+    String postId = setUp().getFirstPostId();
     getDeleteAllButtonMobile(userWithPosts.getUserId()).click().confirmAndWait();
     return new Post().findPostById(postId);
   }

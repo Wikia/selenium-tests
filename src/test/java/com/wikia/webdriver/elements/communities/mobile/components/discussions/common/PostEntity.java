@@ -72,8 +72,9 @@ public class PostEntity {
   }
 
   public String findId() {
-    final String idAttribute = post.findElement(By.className("options-menu"))
-        .getAttribute("id");
+    // The fact that whole remote data creation depends on ID from CSS element's attribute value is unbelievable.
+    // I'm just here editing selector. Do not blame me for that hell.
+    final String idAttribute = post.findElement(By.className("post-card__header")).getAttribute("id");
     return StringUtils.substringAfterLast(idAttribute, "-");
   }
 

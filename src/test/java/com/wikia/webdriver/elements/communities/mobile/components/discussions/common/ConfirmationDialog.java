@@ -11,9 +11,8 @@ public class ConfirmationDialog extends BasePageObject {
 
   WebElement getActiveDialog() {
 
-    List<WebElement>
-        elements
-        = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
+    List<WebElement> elements = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
+
     if (elements.isEmpty()) {
       // allow selenium to throw exception
       return driver.findElement(By.cssSelector(".discussion-dialog.is-visible.modal-dialog-approve"));
