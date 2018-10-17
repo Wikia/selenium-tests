@@ -20,17 +20,14 @@ public class FiltersPopOver extends BasePage {
   @FindBy(css = ".discussion-filters .discussion-sort")
   private WebElement sortingFilter;
 
-  @FindBy(css = ".pop-over-container .sortby-fieldset .sort-trending")
+  @FindBy(css = ".sort-options .sort-trending .sort-option-label")
   private WebElement trendingOptionInSortMenu;
 
-  @FindBy(css = ".pop-over-container .sortby-fieldset .sort-latest")
+  @FindBy(css = ".sort-options .sort-latest .sort-option-label")
   private WebElement latestOptionInSortMenu;
 
-  @FindBy(css = ".pop-over-container .filters-apply-container .filters-apply")
+  @FindBy(css = ".filters-apply")
   private WebElement applyButtonInSortMenu;
-
-  @FindBy(css = ".pop-over-container")
-  private WebElement sortOptionsMobile;
 
   public FiltersPopOver click() {
     waitAndClick(filterButton);

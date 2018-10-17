@@ -389,7 +389,7 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private MoreOptionsPopOver findMoreOptions(final PageWithPosts page, final PostEntity.Data data) {
-    return page.getPost().findPostById(data.getId()).clickMoreOptions();
+    return page.getPost().findPostById(data.getFirstPostId()).clickMoreOptions();
   }
 
   private MoreOptionsPopOver findMoreOptionsOnUserPostsPage() {

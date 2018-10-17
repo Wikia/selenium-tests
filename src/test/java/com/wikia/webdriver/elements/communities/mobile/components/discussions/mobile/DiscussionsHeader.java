@@ -10,7 +10,7 @@ public class DiscussionsHeader extends BasePageObject {
 
   @Getter(lazy = true)
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
-  @FindBy(css = ".discussion-dropdown > .wds-dropdown")
+  @FindBy(css = ".discussion-mobile-filter > .wds-dropdown__toggle")
   private WebElement filterMenuButton;
 
   public FiltersPopOver openFilterMenu() {

@@ -98,7 +98,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   public CategoryPills clickAddCategoryButton() {
     try {
       getAddCategoryButton().click();
-      wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
+      wait.forElementVisible(By.cssSelector(".discussion-category-picker .wds-dropdown__content"));
       categoryPills.setEmpty(false);
     } catch (NoSuchElementException e) {
       Log.info("Category picker not found", e);

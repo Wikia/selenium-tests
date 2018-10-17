@@ -49,7 +49,7 @@ public class CategoriesFieldset extends BasePage {
   @FindBy(className = "discussion-categories-edit-add-link")
   private WebElement addCategoryLink;
 
-  @FindBy(css = ".discussion-categories-edit button.submit")
+  @FindBy(css = ".edit-approve-button[type='submit']")
   private WebElement approveChangesButton;
 
   @FindBy(className = "categories-edit-info-message")

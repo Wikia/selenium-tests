@@ -9,7 +9,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   public static final String
       A9_VIDEO_DEBUG_BID_PATTERN
-      = ".*aax.amazon-adsystem\\.com.*vast.*v_2975ds";
+      = ".*aax.amazon-adsystem\\.com.*vast.*v_testBid";
   public static final String A9_TEST_LINE_ITEM = "4397742201";
   public static final String[] DESKTOP_SLOTS = {AdsContent.TOP_LB, AdsContent.MEDREC};
   public static final String[] MOBILE_SLOTS = {AdsContent.MOBILE_TOP_LB,
