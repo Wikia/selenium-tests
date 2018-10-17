@@ -19,8 +19,8 @@ public class AdsContent {
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
   public static final String MOBILE_TOP_LB = "mobile_top_leaderboard";
-  public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
-  public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+  public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
+  public static final String MOBILE_PREFOOTER = "mobile_prefooter";
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
   public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
   public static final String INVISIBLE_HIGH_IMPACT_2 = "INVISIBLE_HIGH_IMPACT_2";
@@ -50,7 +50,7 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
     SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#mobile_top_leaderboard");
-    SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#MOBILE_IN_CONTENT");
+    SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#incontent_boxad_1");
     SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
     SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#bottom_leaderboard");
 

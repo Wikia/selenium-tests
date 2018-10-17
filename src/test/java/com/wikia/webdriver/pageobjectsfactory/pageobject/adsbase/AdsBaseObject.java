@@ -450,7 +450,7 @@ public class AdsBaseObject extends WikiBasePageObject {
               true
       );
 
-      return adWebElements.size() > 1;
+      return adWebElements.size() >= 1;
     } finally {
       restoreDefaultImplicitWait();
     }
