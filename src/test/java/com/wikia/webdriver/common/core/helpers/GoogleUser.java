@@ -9,5 +9,4 @@ public class GoogleUser {
 
   private String email;
   private String password;
-  private String id;
 }
