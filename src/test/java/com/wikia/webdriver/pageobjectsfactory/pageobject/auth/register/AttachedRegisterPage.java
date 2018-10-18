@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.GoogleSignupModalComponent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedPageBase;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
@@ -141,7 +142,15 @@ public class AttachedRegisterPage extends AttachedPageBase<AttachedRegisterPage>
     return authContext.clickFacebookSignUp();
   }
 
+  public GoogleSignupModalComponent clickGoogleSignUp() {
+    return authContext.clickGoogleSignUp();
+  }
+
   public boolean isConnectWithFacebookButtonVisible() {
     return authContext.isConnectWithFacebookButtonVisible();
+  }
+
+  public boolean isConnectWithGoogleButtonVisible() {
+    return authContext.isConnectWithGoogleButtonVisible();
   }
 }

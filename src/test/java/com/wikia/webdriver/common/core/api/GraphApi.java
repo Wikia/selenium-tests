@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.helpers.FacebookUser;
+import com.wikia.webdriver.common.core.helpers.GoogleUser;
 import com.wikia.webdriver.common.logging.Log;
 
 import com.jayway.jsonpath.DocumentContext;
