@@ -123,6 +123,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
             userOptedOut = true;
           }
 
+          String cmpVersion = "2";
+
           if (userOptedIn) {
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-status",
@@ -133,7 +135,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                 ));
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-version",
-                                      "2",
+                                      cmpVersion,
                                       cookieDomain,
                                       "/",
                                       cookieDate
@@ -149,7 +151,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                 ));
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-version",
-                                      "2",
+                                      cmpVersion,
                                       cookieDomain,
                                       "/",
                                       cookieDate
