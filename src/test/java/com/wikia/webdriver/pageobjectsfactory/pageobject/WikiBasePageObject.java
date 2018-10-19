@@ -134,7 +134,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement newGlobalNavigation;
   @FindBy(css = "#facebook-connect-button")
   protected WebElement facebookConnectButton;
-  @FindBy(css = ".connect-provider-button")
+  @FindBy(css = "#googleConnectPreferences .google-button")
   protected WebElement googleConnectButton;
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");

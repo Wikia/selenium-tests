@@ -17,6 +17,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement facebookDisconnect;
   @FindBy(css = "#fbConnectPreferences .wikia-button-facebook")
   private WebElement fbConnect;
+  @FindBy(css = "a.connect-provider-google")
+  private WebElement googleConnect;
   @FindBy(css = "#preftoc li")
   private List<WebElement> tabs;
   @FindBy(css = "#mw-htmlform-email-me-v2 td.mw-input")
@@ -62,7 +64,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
         tabNum = 3;
         tabs.get(tabNum).findElement(By.cssSelector("a")).click();
         break;
-      case FACEBOOK:
+      case CONNECTIONS:
         tabNum = 4;
         tabs.get(tabNum).findElement(By.cssSelector("a")).click();
         break;
@@ -116,6 +118,6 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public enum tabNames {
-    INFO, EMAIL, EDITING, UNDER, FACEBOOK, GOOGLE
+    INFO, EMAIL, EDITING, UNDER, CONNECTIONS
   }
 }
