@@ -131,11 +131,25 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
                                       "/",
                                       cookieDate
                 ));
+            driver.manage()
+                .addCookie(new Cookie("tracking-opt-in-version",
+                                      "2",
+                                      cookieDomain,
+                                      "/",
+                                      cookieDate
+                ));
             reload = true;
           } else if (userOptedOut) {
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-status",
                                       "rejected",
+                                      cookieDomain,
+                                      "/",
+                                      cookieDate
+                ));
+            driver.manage()
+                .addCookie(new Cookie("tracking-opt-in-version",
+                                      "2",
                                       cookieDomain,
                                       "/",
                                       cookieDate
