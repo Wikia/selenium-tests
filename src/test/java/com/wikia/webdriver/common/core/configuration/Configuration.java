@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.configuration;
 
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -8,6 +9,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 
 import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpHost;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
 import org.yaml.snakeyaml.Yaml;
@@ -284,5 +286,27 @@ public class Configuration {
 
   public static String getDisableCommunityPageSalesPitchDialog() {
     return getProp("disableCommunityPageSalesPitchDialog");
+  }
+
+  public static HttpHost getBorderProxy() {
+
+    EnvType envType = getEnvType(getEnv());
+    File configFile = new File(getCredentialsFilePath());
+
+    switch (envType) {
+      case DEV: {
+        return new HttpHost(
+            XMLReader.getValue(configFile, "border.poz.address"),
+            Integer.parseInt(XMLReader.getValue(configFile, "border.poz.port")),
+            XMLReader.getValue(configFile, "border.poz.protocol")
+        );
+      }
+      default: {
+        return new HttpHost(XMLReader.getValue(configFile, "border.sjc.address"),
+                            Integer.parseInt(XMLReader.getValue(configFile, "border.sjc.port")),
+                            XMLReader.getValue(configFile, "border.sjc.protocol")
+        );
+      }
+    }
   }
 }

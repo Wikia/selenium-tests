@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.api;
 import static com.wikia.webdriver.common.contentpatterns.URLsContent.API_URL;
 
 import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
@@ -11,6 +12,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -28,7 +30,7 @@ import java.util.Iterator;
 public class EditToken {
 
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
-  private String baseURL = API_URL.replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX);
+  private String baseURL = API_URL;
   private User user;
   private String username;
 
@@ -78,8 +80,12 @@ public class EditToken {
           .disableAutomaticRetries()
           .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
           .build();
-      HttpGet httpGet = new HttpGet(apiURL);
+      HttpGet httpGet = new HttpGet(UrlBuilder.stripUrlFromEnvSpecificPart(apiURL));
+      //TODO:Move getBorderProxy() somewhere else
+      httpGet.setConfig(RequestConfig.custom().setProxy(Helios.getBorderProxy()).build());
       // set header
+      httpGet.addHeader("X-Staging", Configuration.getEnv());
+
       if (username != null) {
         httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(username));
       } else if (user != null) {

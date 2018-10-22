@@ -3,7 +3,6 @@ package com.wikia.webdriver.common.core;
 import static com.wikia.webdriver.common.contentpatterns.URLsContent.COMMUNITY_WIKI;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
@@ -12,7 +11,6 @@ import com.wikia.webdriver.common.properties.HeliosConfig;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
@@ -28,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -211,7 +208,7 @@ public class Helios {
 
       //Downgrade to use http proxy
       HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername).replace("https:", "http:"));
-      httpGet.setConfig(RequestConfig.custom().setProxy(getBorderProxy()).build());
+      httpGet.setConfig(RequestConfig.custom().setProxy(Configuration.getBorderProxy()).build());
 
       Log.info("USER_ID_REQUEST", httpGet.getURI().toString());
       return executeAndRetry(httpGet, extractUserId());
@@ -227,27 +224,6 @@ public class Helios {
               false
       );
       throw new WebDriverException(e);
-    }
-  }
-
-  private static HttpHost getBorderProxy() {
-
-    EnvType envType = Configuration.getEnvType(Configuration.getEnv());
-    File configFile = new File(Configuration.getCredentialsFilePath());
-
-    switch (envType) {
-      case DEV: {
-        return new HttpHost(XMLReader.getValue(configFile, "border.poz.address"),
-                            Integer.parseInt(XMLReader.getValue(configFile, "border.poz.port")),
-                            XMLReader.getValue(configFile, "border.poz.protocol")
-        );
-      }
-      default: {
-        return new HttpHost(XMLReader.getValue(configFile, "border.sjc.address"),
-                            Integer.parseInt(XMLReader.getValue(configFile, "border.sjc.port")),
-                            XMLReader.getValue(configFile, "border.sjc.protocol")
-        );
-      }
     }
   }
 
