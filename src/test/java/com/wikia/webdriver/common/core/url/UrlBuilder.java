@@ -78,6 +78,15 @@ public class UrlBuilder extends BaseUrlBuilder {
     return url;
   }
 
+  /**
+   * Provides env-agnostic url used for calls to php API through border proxy
+   * @return wiki url
+   */
+  public String getUrlForApiCalls() {
+    return stripUrlFromEnvSpecificPart(getUrl().replace(UrlBuilder.HTTPS_PREFIX,UrlBuilder.HTTP_PREFIX));
+  }
+
+
   public String getUrlForPath(String wikiPath) {
     return addPathToUrl(getUrl(), wikiPath);
   }
@@ -186,5 +195,10 @@ public class UrlBuilder extends BaseUrlBuilder {
     } else {
       return envType.getDomain();
     }
+  }
+
+  public static String stripUrlFromEnvSpecificPart(String url) {
+    //TODO: handle dev
+    return url.replaceAll("(?:preview|stable|verify|sandbox[^.]*).","");
   }
 }
