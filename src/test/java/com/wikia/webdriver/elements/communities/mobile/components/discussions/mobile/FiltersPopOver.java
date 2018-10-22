@@ -8,6 +8,8 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class FiltersPopOver extends BasePage {
 
   @Getter(lazy = true)
@@ -21,10 +23,10 @@ public class FiltersPopOver extends BasePage {
   private WebElement sortingFilter;
 
   @FindBy(css = ".sort-options .sort-trending .sort-option-label")
-  private WebElement trendingOptionInSortMenu;
+  private List<WebElement>  trendingOptionInSortMenu;
 
   @FindBy(css = ".sort-options .sort-latest .sort-option-label")
-  private WebElement latestOptionInSortMenu;
+  private List<WebElement> latestOptionInSortMenu;
 
   @FindBy(css = ".filters-apply")
   private WebElement applyButtonInSortMenu;
@@ -35,10 +37,10 @@ public class FiltersPopOver extends BasePage {
   }
 
   public FiltersPopOver chooseSortingOption(SortOption option) {
-    if (option == SortOption.LATEST) {
-      scrollAndClick(latestOptionInSortMenu);
+    if (option == SortOption.LATEST ) {
+      scrollAndClick(latestOptionInSortMenu.get(1));
     } else if (option == SortOption.TRENDING) {
-      scrollAndClick(trendingOptionInSortMenu);
+      scrollAndClick(trendingOptionInSortMenu.get(1));
     } else {
       throw new IllegalArgumentException(String.format(
           "Option %s not supported by sorting",
