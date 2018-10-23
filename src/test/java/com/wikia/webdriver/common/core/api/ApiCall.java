@@ -2,7 +2,9 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
@@ -57,8 +59,11 @@ public abstract class ApiCall {
           .disableAutomaticRetries()
           .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
           .build();
-      HttpPost httpPost = new HttpPost(getURL());
+      HttpPost httpPost = new HttpPost(UrlBuilder.stripUrlFromEnvSpecificPartAndDowngrade(getURL()));
+      PostRemoteOperation.setBorderProxy(httpPost);
       // set header
+      PostRemoteOperation.addXstagingHeaderIfNeeded(httpPost);
+
       if (getUserName() != null) {
         httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUserName()));
       } else if (getUser() != null) {

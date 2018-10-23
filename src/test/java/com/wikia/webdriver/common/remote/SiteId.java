@@ -1,26 +1,29 @@
 package com.wikia.webdriver.common.remote;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import lombok.Getter;
 import org.openqa.selenium.WebDriverException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SiteId {
 
   @Getter
   private String siteId;
-  private String wikiUrl;
+  private UrlBuilder urlBuilder;
 
-  public SiteId(String wikiUrl) {
-    this.wikiUrl = wikiUrl;
+  public SiteId(String wikiName) {
+    this.urlBuilder = UrlBuilder.createUrlBuilderForWiki(wikiName);
     this.extractSiteIdFromSpecialVersion();
   }
 
   private void extractSiteIdFromSpecialVersion() {
     GetRemoteOperation request = new GetRemoteOperation(null);
-    String url = this.wikiUrl + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VERSION;
+    String url = urlBuilder.getUrlForApiCalls() + URLsContent.WIKI_DIR + URLsContent.SPECIAL_VERSION;
     String response = request.execute(url);
     Pattern p = Pattern.compile(".*city_id: (\\d+).*", Pattern.DOTALL);
     Matcher m = p.matcher(response);

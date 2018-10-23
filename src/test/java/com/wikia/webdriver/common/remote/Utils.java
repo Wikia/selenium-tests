@@ -26,25 +26,17 @@ public final class Utils {
     return StringUtils.substringBetween(text, ": ", ",");
   }
 
-  private static String extractSiteIdFromMediaWiki(String wikiUrl) {
-    return new SiteId(wikiUrl).getSiteId();
-  }
-
   public static String excractSiteIdFromWikiName(String wikiName) {
-    String wikiUrl = UrlBuilder.createUrlBuilderForWiki(wikiName)
-        .getUrl()
-        .replace("https://", "http://");
-    return extractSiteIdFromMediaWiki(wikiUrl);
+    return new SiteId(wikiName).getSiteId();
   }
 
+  //TODO: Get rid of it and add services' url for fandom in config
   public static String buildServicesUrl() {
-    File configurationFile = new File(Configuration.getCredentialsFilePath());
     final String environment = Configuration.getEnvType().getKey();
-    final String url = XMLReader.getValue(configurationFile, "services." + environment);
-    Objects.requireNonNull(url,
-                           "Please check if your configuration file contains url for service "
-                           + environment
-    );
-    return url;
+    File configurationFile = new File(Configuration.getCredentialsFilePath());
+    final String url = XMLReader.getValue(configurationFile, "services." + environment).replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX);
+    final String properUrl = Configuration.getForceFandomDomain() ? url.replace("wikia", "fandom") : url;
+    Objects.requireNonNull(url, "Please check if your configuration file contains url for service ");
+    return properUrl;
   }
 }

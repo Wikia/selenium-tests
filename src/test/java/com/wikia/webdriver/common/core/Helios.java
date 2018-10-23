@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.properties.HeliosConfig;
+import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -207,8 +208,9 @@ public class Helios {
       String encodedUsername = URLEncoder.encode(userName, "UTF-8");
 
       //Downgrade to use http proxy
-      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername).replace("https:", "http:"));
-      httpGet.setConfig(RequestConfig.custom().setProxy(Configuration.getBorderProxy()).build());
+      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername));
+      GetRemoteOperation.addXstagingHeaderIfNeeded(httpGet);
+      GetRemoteOperation.setBorderProxy(httpGet);
 
       Log.info("USER_ID_REQUEST", httpGet.getURI().toString());
       return executeAndRetry(httpGet, extractUserId());
@@ -228,9 +230,11 @@ public class Helios {
   }
 
   private static String getUserIdUrl(String encodedUsername) {
-    String communityUrl = UrlBuilder.createUrlBuilderForWikiAndLang(COMMUNITY_WIKI,
-                                                                    Configuration.DEFAULT_LANGUAGE
-    ).getUrl();
+    String communityUrl = UrlBuilder.stripUrlFromEnvSpecificPartAndDowngrade(UrlBuilder.createUrlBuilderForWikiAndLang(
+        COMMUNITY_WIKI,
+        Configuration.DEFAULT_LANGUAGE
+    ).getUrl());
+
     return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
                          communityUrl,
                          encodedUsername,

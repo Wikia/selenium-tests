@@ -83,8 +83,9 @@ public class UrlBuilder extends BaseUrlBuilder {
    * @return wiki url
    */
   public String getUrlForApiCalls() {
-    return stripUrlFromEnvSpecificPart(getUrl().replace(UrlBuilder.HTTPS_PREFIX,UrlBuilder.HTTP_PREFIX));
+    return stripUrlFromEnvSpecificPartAndDowngrade(getUrl().replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX));
   }
+
 
 
   public String getUrlForPath(String wikiPath) {
@@ -197,8 +198,7 @@ public class UrlBuilder extends BaseUrlBuilder {
     }
   }
 
-  public static String stripUrlFromEnvSpecificPart(String url) {
-    //TODO: handle dev
-    return url.replaceAll("(?:preview|stable|verify|sandbox[^.]*).","");
+  public static String stripUrlFromEnvSpecificPartAndDowngrade(String url) {
+    return url.replaceAll("\\.(?:preview|stable|verify|sandbox[^.]*)\\.",".").replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX);
   }
 }
