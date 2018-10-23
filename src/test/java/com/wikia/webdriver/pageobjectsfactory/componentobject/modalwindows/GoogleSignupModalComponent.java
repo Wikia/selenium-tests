@@ -55,7 +55,7 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
       }
     });
 
-    //switch to Facebook modal;
+    //switch to Google modal;
     Object[] handles = driver.getWindowHandles().toArray();
     driver.switchTo().window(handles[1].toString());
 
@@ -97,17 +97,5 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
     registerButton.click();
     Log.log("clickRegister", "Create account button clicked", true);
     waitForElementNotVisibleByElement(registerButton);
-  }
-
-  public void createAccountNoEmail(
-      String email, String userName, Integer birthMonth, Integer birthDay, Integer birthYear
-  ) {
-    acceptWikiaAppPolicyNoEmail();
-
-    wait.forElementVisible(facebookRegistrationForm);
-    typeEmail(email);
-    typeUserName(userName);
-    typeBirthday(birthMonth, birthDay, birthYear);
-    clickRegister();
   }
 }
