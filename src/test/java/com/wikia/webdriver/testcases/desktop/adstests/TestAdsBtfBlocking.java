@@ -132,6 +132,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB));
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT));
-    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB));
   }
 }
