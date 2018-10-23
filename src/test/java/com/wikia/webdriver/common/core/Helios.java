@@ -207,7 +207,6 @@ public class Helios {
     try {
       String encodedUsername = URLEncoder.encode(userName, "UTF-8");
 
-      //Downgrade to use http proxy
       HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername));
       GetRemoteOperation.addXstagingHeaderIfNeeded(httpGet);
       GetRemoteOperation.setBorderProxy(httpGet);

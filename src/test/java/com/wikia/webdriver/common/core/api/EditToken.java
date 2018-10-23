@@ -80,7 +80,6 @@ public class EditToken {
           .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
           .build();
       HttpGet httpGet = new HttpGet(UrlBuilder.stripUrlFromEnvSpecificPartAndDowngrade(apiURL));
-      //TODO:Move getBorderProxy() somewhere else
       GetRemoteOperation.setBorderProxy(httpGet);
       // set header
       GetRemoteOperation.addXstagingHeaderIfNeeded(httpGet);
