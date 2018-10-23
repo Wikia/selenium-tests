@@ -326,9 +326,8 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] disableGptOasis() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain",
-                           "", AdsContent.TOP_LB,
-                           ""},};
+    return new Object[][]{
+        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", "", AdsContent.TOP_LB, ""},};
   }
 
   @DataProvider
@@ -366,14 +365,15 @@ public class AdsDataProvider {
              .put("slotSize", new Dimension(300, 250))
              .put("lineItemId", "269679732").build()}, {new Page(WIKI_SPECIAL,
                                                                  "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"
-    ), "", ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)
-                                                            .put(
-                                                                "slotSize",
-                                                                new Dimension(300, 250)
+    ), "", ImmutableMap.<String, Object>builder().put(
+        "slotName",
+        AdsContent.FLOATING_MEDREC
+    )
+                                                            .put("slotSize",
+                                                                 new Dimension(300, 250)
                                                             )
-                                                            .put(
-                                                                "lineItemId",
-                                                                "269679732"
+                                                            .put("lineItemId",
+                                                                 "269679732"
                                                             ).build()},
         {new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"), "",
          ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)

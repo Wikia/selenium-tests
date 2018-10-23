@@ -23,19 +23,22 @@ public class AdsInterstitialObject extends AdsBaseObject {
    */
   private static final int SIZE_DIFFERENCE_TOLERANCE = 32;
 
-  private static final int WAIT_BUTTON_DELAY_TOLERANCE = 2;
+  private static final int WAIT_BUTTON_DELAY_TOLERANCE = 5;
 
   private static final String
       INTERSTITSIAL_AD_SELECTOR
-      = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe";
+      = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe, #invisible_high_impact_2 iframe";
 
-  @FindBy(css = "a.close")
+  @FindBy(css = ".close-button")
   private WebElement interstitialCloseButton;
 
-  @FindBy(css = ".lightbox-close-wrapper")
+  @FindBy(css = "#invisible_high_impact_2 .button-close")
   private WebElement interstitialCloseButtonMercury;
 
-  @FindBy(css = "#INVISIBLE_HIGH_IMPACT_2")
+  @FindBy(css = ".invisible-high-impact-wrapper.out-of-page-template-loaded")
+  private WebElement interstitialCloseButtonWrapperMercury;
+
+  @FindBy(css = "#INVISIBLE_HIGH_IMPACT_2, #invisible_high_impact_2")
   private WebElement interstitialAd;
 
   public AdsInterstitialObject(WebDriver driver) {
@@ -80,23 +83,21 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
     boolean isMercury = false;
     try {
-      isMercury = interstitialCloseButtonMercury.isDisplayed();
+      isMercury = interstitialCloseButtonWrapperMercury.isDisplayed();
       Log.log("Interstitial Mercury", "Yes", true);
     } catch (NoSuchElementException e) {
       Log.log("Interstitial Mercury", "No", true);
     }
 
     if (isMercury) {
-      String closeButtonText = interstitialCloseButtonMercury.getText();
-      if (closeButtonText.length() > 0) {
-        Integer waitTillCloseButtonAppears = Integer.parseInt(closeButtonText);
-        Log.log("Wait time for close button", String.valueOf(waitTillCloseButtonAppears), true);
-        Thread.sleep((waitTillCloseButtonAppears + WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
-      }
+      String closeButtonText = interstitialCloseButtonWrapperMercury.getText();
+      Log.log("Wait time for close button", String.valueOf(WAIT_BUTTON_DELAY_TOLERANCE), true);
+      Thread.sleep((WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
+      interstitialCloseButtonMercury.click();
+    } else {
+      wait.forElementVisible(interstitialCloseButton);
+      interstitialCloseButton.click();
     }
-
-    wait.forElementClickable(interstitialCloseButton);
-    interstitialCloseButton.click();
   }
 
   public void verifyInterstitialIsClosed() {

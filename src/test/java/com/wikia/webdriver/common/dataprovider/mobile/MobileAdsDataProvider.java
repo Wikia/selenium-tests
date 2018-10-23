@@ -252,12 +252,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] providersChainMercury() {
-    return new Object[][]{{"project43", "SyntheticTests/ProvidersChain", AdsContent.MOBILE_TOP_LB,
-                           "DirectGptMobile"}};
-  }
-
-  @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{{"project43", "SyntheticTests/ProvidersChain",
                            "", AdsContent.MOBILE_TOP_LB,
