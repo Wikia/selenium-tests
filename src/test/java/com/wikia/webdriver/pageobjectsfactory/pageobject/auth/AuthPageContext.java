@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.GoogleSignupModalComponent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
@@ -21,17 +22,28 @@ public class AuthPageContext extends WikiBasePageObject {
   private WebElement secondCardHeader;
 
   private FacebookAuthContext fbAuthContext;
+  private GoogleAuthContext googleAuthContext;
+
 
   public AuthPageContext() {
     fbAuthContext = new FacebookAuthContext();
+    googleAuthContext = new GoogleAuthContext();
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
     return fbAuthContext.clickFacebookSignUp();
   }
 
+  public GoogleSignupModalComponent clickGoogleSignUp() {
+    return googleAuthContext.clickGoogleSignUp();
+  }
+
   public boolean isConnectWithFacebookButtonVisible() {
     return fbAuthContext.isConnectWithFacebookButtonVisible();
+  }
+
+  public boolean isConnectWithGoogleButtonVisible() {
+    return googleAuthContext.isConnectWithGoogleButtonVisible();
   }
 
   public AttachedSignInPage navigateToSignIn() {

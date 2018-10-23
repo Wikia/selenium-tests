@@ -134,6 +134,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement newGlobalNavigation;
   @FindBy(css = "#facebook-connect-button")
   protected WebElement facebookConnectButton;
+  @FindBy(css = "#googleConnectPreferences .google-button")
+  protected WebElement googleConnectButton;
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
@@ -644,6 +646,10 @@ public class WikiBasePageObject extends BasePageObject {
 
   public boolean isFacebookButtonVisible() {
     return isElementOnPage(facebookConnectButton);
+  }
+
+  public boolean isGoogleButtonVisible() {
+    return isElementOnPage(googleConnectButton);
   }
 
   public void verifyAvatarVisible() {
