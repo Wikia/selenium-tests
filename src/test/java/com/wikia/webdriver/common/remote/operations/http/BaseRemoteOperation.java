@@ -1,6 +1,8 @@
 package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.Helios;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.remote.RemoteException;
@@ -29,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import javax.net.ssl.SSLException;
 
@@ -48,6 +51,7 @@ class BaseRemoteOperation {
   private final User user;
 
   public String execute(final HttpRequestBase request) {
+
     String result = StringUtils.EMPTY;
 
     try (
@@ -92,6 +96,10 @@ class BaseRemoteOperation {
   private String makeRequest(final CloseableHttpClient client, final HttpRequestBase request)
       throws IOException {
     String result = StringUtils.EMPTY;
+    //set border proxy
+    setBorderProxy(request);
+    // set header
+    addXstagingHeaderIfNeeded(request);
     if (user != null) {
       request.setHeader(Utils.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
     }
@@ -121,5 +129,15 @@ class BaseRemoteOperation {
       }
     }
     return result;
+  }
+
+  public static void addXstagingHeaderIfNeeded(HttpRequestBase httpRequest) {
+    if (!Arrays.asList(EnvType.PROD, EnvType.DEV).contains(Configuration.getEnvType())) {
+      httpRequest.addHeader("X-Staging", Configuration.getEnv());
+    }
+  }
+
+  public static void setBorderProxy(HttpRequestBase request) {
+    request.setConfig(RequestConfig.custom().setProxy(Configuration.getBorderProxy()).build());
   }
 }

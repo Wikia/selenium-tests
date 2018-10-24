@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.remote.notifications;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Utils;
 
 import lombok.AllArgsConstructor;
 
@@ -12,7 +12,7 @@ public class NotificationsOperations {
   private final User user;
 
   public static String service(String url) {
-    return Utils.buildServicesUrl() + NOTIFICATIONS_SERVICE + url;
+    return Configuration.getServicesUrl() + NOTIFICATIONS_SERVICE + url;
   }
 
   public void markAllAsRead() {
