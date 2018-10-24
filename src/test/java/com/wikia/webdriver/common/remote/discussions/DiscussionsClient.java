@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.remote.discussions;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.context.*;
@@ -18,7 +19,7 @@ public class DiscussionsClient {
   private final WebDriver driver;
 
   public static String service(String url) {
-    return Utils.buildServicesUrl() + DISCUSSIONS_SERVICE + url;
+    return Configuration.getServicesUrl() + DISCUSSIONS_SERVICE + url;
   }
 
   /**

@@ -2,7 +2,6 @@ package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
@@ -25,17 +24,8 @@ public class ArticleContent extends ApiCall {
   private String username;
 
   public ArticleContent() {
-    if (Configuration.getForceFandomDomain()) {
-      this.baseURL = UrlBuilder.createUrlBuilder()
-                         .getUrl()
-                         .replace(UrlBuilder.HTTP_PREFIX, UrlBuilder.HTTPS_PREFIX)
-                     + "/api.php";
-    } else {
-      this.baseURL = UrlBuilder.createUrlBuilder()
-                         .getUrl()
-                         .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
-                     + "/api.php";
-    }
+    this.baseURL = UrlBuilder.stripUrlFromEnvSpecificPartAndDowngrade(
+        UrlBuilder.createUrlBuilder().getUrl() + "/api.php");
   }
 
   /**

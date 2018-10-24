@@ -1,13 +1,16 @@
 package com.wikia.webdriver.common.core.configuration;
 
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 
 import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpHost;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
 import org.yaml.snakeyaml.Yaml;
@@ -16,9 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -284,5 +285,35 @@ public class Configuration {
 
   public static String getDisableCommunityPageSalesPitchDialog() {
     return getProp("disableCommunityPageSalesPitchDialog");
+  }
+
+  public static HttpHost getBorderProxy() {
+
+    EnvType envType = getEnvType(getEnv());
+    File configFile = new File(getCredentialsFilePath());
+
+    if (envType.equals(EnvType.DEV)) {
+      return new HttpHost(
+          XMLReader.getValue(configFile, "border.poz.address"),
+          Integer.parseInt(XMLReader.getValue(configFile, "border.poz.port")),
+          XMLReader.getValue(configFile, "border.poz.protocol")
+      );
+    } else {
+      return new HttpHost(
+          XMLReader.getValue(configFile, "border.sjc.address"),
+          Integer.parseInt(XMLReader.getValue(configFile, "border.sjc.port")),
+          XMLReader.getValue(configFile, "border.sjc.protocol")
+      );
+    }
+  }
+
+  //TODO: Get rid of replacing wikia with fandom
+  public static String getServicesUrl() {
+    final String environment = Configuration.getEnvType().getKey();
+    File configurationFile = new File(Configuration.getCredentialsFilePath());
+    final String url = XMLReader.getValue(configurationFile, "services." + environment).replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX);
+    final String properUrl = Configuration.getForceFandomDomain() ? url.replace("wikia", "fandom") : url;
+    Objects.requireNonNull(url, "Please check if your configuration file contains url for service ");
+    return properUrl;
   }
 }
