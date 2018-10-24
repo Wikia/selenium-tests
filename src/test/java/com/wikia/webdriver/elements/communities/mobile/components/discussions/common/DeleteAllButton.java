@@ -13,10 +13,6 @@ public class DeleteAllButton extends BasePageObject {
   @FindBy(className = "delete-all")
   private WebElement button;
 
-  // context of DeleteAllButton in which it should be displayed
-  @FindBy(css = ".discussion-page.row > div:nth-child(3).rail")
-  private WebElement rightRail;
-
   public boolean isVisible() {
     try {
       return button.isDisplayed();
