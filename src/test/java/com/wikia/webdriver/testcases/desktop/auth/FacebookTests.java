@@ -54,7 +54,7 @@ public class FacebookTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void facebookButtonIsVisibleOnUserPreferencesPage() {
     PreferencesPageObject prefsPage = new WikiBasePageObject().openSpecialPreferencesPage(wikiURL);
-    prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
+    prefsPage.selectTab(PreferencesPageObject.tabNames.CONNECTIONS);
     assertTrue(prefsPage.isFacebookButtonVisible());
   }
 

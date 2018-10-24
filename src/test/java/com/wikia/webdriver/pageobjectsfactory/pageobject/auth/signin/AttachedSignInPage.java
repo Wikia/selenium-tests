@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.GoogleSignupModalComponent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedPageBase;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
@@ -107,6 +108,14 @@ public class AttachedSignInPage extends AttachedPageBase<AttachedSignInPage> imp
 
   public boolean isConnectWithFacebookButtonVisible() {
     return authContext.isConnectWithFacebookButtonVisible();
+  }
+
+  GoogleSignupModalComponent clickGoogleSignUp() {
+    return authContext.clickGoogleSignUp();
+  }
+
+  public boolean isConnectWithGoogleButtonVisible() {
+    return authContext.isConnectWithGoogleButtonVisible();
   }
 
   @Override
