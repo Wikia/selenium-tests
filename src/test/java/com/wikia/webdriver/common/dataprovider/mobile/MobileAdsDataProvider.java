@@ -252,15 +252,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] disableGptMercury() {
-    return new Object[][]{{"project43", "SyntheticTests/ProvidersChain",
-                           "", AdsContent.MOBILE_TOP_LB,
-                           ""}, {"project43", "SyntheticTests/ProvidersChain",
-                                 "",
-                                 AdsContent.MOBILE_TOP_LB, ""},};
-  }
-
-  @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
         {"project43", "SyntheticTests/AdType/1xHop", "DirectGptMobile", "\"source\":\"mobile/LB\""},

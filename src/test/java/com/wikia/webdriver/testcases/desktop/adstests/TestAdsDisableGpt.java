@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.desktop.adstests;
 
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -17,17 +16,6 @@ public class TestAdsDisableGpt extends TemplateNoFirstLoad {
   @UseUnstablePageLoadStrategy
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "disableGptOasis", groups = "AdsDisableGptOasis")
   public void adsDisableGptOasis(
-      String wikiName,
-      String article,
-      String instantGlobals,
-      String slotName,
-      String disasterProviders
-  ) {
-    adsDisableGpt(wikiName, article, instantGlobals, slotName, disasterProviders);
-  }
-
-  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "disableGptMercury", groups = "AdsDisableGptMercury")
-  public void adsDisableGptMercury(
       String wikiName,
       String article,
       String instantGlobals,
