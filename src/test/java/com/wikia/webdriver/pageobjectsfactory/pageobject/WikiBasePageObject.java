@@ -67,9 +67,10 @@ public class WikiBasePageObject extends BasePageObject {
           + ".wds-global-navigation__user-logged-in .wds-avatar img";
   
   private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
-  private static final By MERCURY_SKIN = By.cssSelector(".mobile-wiki");
+//  private static final By MERCURY_SKIN = By.cssSelector("#ember-container, .mobile-wiki");
+  private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
-      ".wds-global-navigation__modal-control-user .wds-avatar__inner-border[title=%userName%], .wds-global-navigation__user-logged-in .wds-avatar img";
+      ".wds-global-navigation__modal-control-user .wds-avatar__inner-border[title=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder,.smart-banner");
   private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
   private static final By RECIRCULATION_PREFOOTER = By.cssSelector(".recirculation-prefooter");
@@ -385,29 +386,21 @@ public class WikiBasePageObject extends BasePageObject {
         driver.switchTo().frame("PreviewFrame");
       }
       if (driver.findElements(MERCURY_SKIN).size() > 0) {
-        try {
-          wait.forElementVisible(By.cssSelector(
-              LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
-        } catch (TimeoutException e) {
-          verifyIfElementContainsUsername(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS), userName);
-        }
+        wait.forElementVisible(By.cssSelector(
+            LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
       } else {
-        verifyIfElementContainsUsername(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS), userName);
+        WebElement avatar = wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
+        String loggedInUserName = avatar.getAttribute("alt");
+        if (!loggedInUserName.equals(userName) && !loggedInUserName.equals(userName + " avatar")) {
+          throw new IllegalArgumentException(
+              "Invalid user, expected " + userName + ", but found: " + loggedInUserName);
+        }
       }
     } finally {
       restoreDefaultImplicitWait();
       driver.switchTo().defaultContent();
     }
     Log.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
-  }
-
-  private void verifyIfElementContainsUsername(By selector,String userName) {
-    WebElement avatar = wait.forElementPresent(selector);
-    String loggedInUserName = avatar.getAttribute("alt");
-    if (!loggedInUserName.equals(userName) && !loggedInUserName.equals(userName + " avatar")) {
-      throw new IllegalArgumentException(
-          "Invalid user, expected " + userName + ", but found: " + loggedInUserName);
-    }
   }
 
   public void verifyUserLoggedIn(User user) {
