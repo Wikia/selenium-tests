@@ -11,8 +11,12 @@ import com.wikia.webdriver.common.logging.Log;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,7 +93,18 @@ public class ChromeBrowser extends BrowserAbstract {
       caps.setCapability("pageLoadStrategy", "none");
     }
 
-    return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
+    caps.setBrowserName("chrome");
+    caps.setVersion("69.0");
+    caps.setCapability("enableVNC", true);
+    caps.setCapability("enableVideo", true);
+
+    try {
+      return new WikiaWebDriver(new RemoteWebDriver(URI.create("http://selenoid:4444/wd/hub").toURL(), caps), server, useMobile);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+
+    return new WikiaWebDriver(null, server, useMobile);
   }
 
   @Override
