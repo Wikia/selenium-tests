@@ -99,7 +99,7 @@ public class ChromeBrowser extends BrowserAbstract {
     caps.setCapability("enableVideo", true);
 
     try {
-      return new WikiaWebDriver(new RemoteWebDriver(URI.create("http://selenoid:4444/wd/hub").toURL(), caps), server, useMobile);
+      return new WikiaWebDriver(new RemoteWebDriver(URI.create("http://localhost:4444/wd/hub").toURL(), caps), server, useMobile);
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
