@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.ExtHelper;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
@@ -92,7 +93,7 @@ public class ChromeBrowser extends BrowserAbstract {
     if (Configuration.isUnsafePageLoad()) {
       caps.setCapability("pageLoadStrategy", "none");
     }
-
+    caps.setCapability("name", TestContext.getCurrentMethodName());
     caps.setBrowserName("chrome");
     caps.setVersion("69.0");
     caps.setCapability("enableVNC", true);
