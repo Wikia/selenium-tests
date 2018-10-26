@@ -134,7 +134,7 @@ public abstract class CoreTestTemplate {
       if (browserSize != null) {
         driver.manage().window().setSize(browserSize);
       } else {
-//        driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
       }
     }
   }
