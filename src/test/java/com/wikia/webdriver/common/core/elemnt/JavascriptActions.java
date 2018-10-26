@@ -156,7 +156,7 @@ public class JavascriptActions {
       offset += searchComponent.getHeight();
     }
 
-    return offset + 200;
+    return offset + 100;
   }
 
   public void scrollToSpecificElement(WebElement element) {
