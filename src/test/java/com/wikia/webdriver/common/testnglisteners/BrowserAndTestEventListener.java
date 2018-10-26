@@ -123,10 +123,19 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
             userOptedOut = true;
           }
 
+          String cmpVersion = "2";
+
           if (userOptedIn) {
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-status",
                                       "accepted",
+                                      cookieDomain,
+                                      "/",
+                                      cookieDate
+                ));
+            driver.manage()
+                .addCookie(new Cookie("tracking-opt-in-version",
+                                      cmpVersion,
                                       cookieDomain,
                                       "/",
                                       cookieDate
@@ -136,6 +145,13 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
             driver.manage()
                 .addCookie(new Cookie("tracking-opt-in-status",
                                       "rejected",
+                                      cookieDomain,
+                                      "/",
+                                      cookieDate
+                ));
+            driver.manage()
+                .addCookie(new Cookie("tracking-opt-in-version",
+                                      cmpVersion,
                                       cookieDomain,
                                       "/",
                                       cookieDate

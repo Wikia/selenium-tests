@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.Log;
+import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
@@ -28,7 +29,7 @@ import java.util.Iterator;
 public class EditToken {
 
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
-  private String baseURL = API_URL.replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX);
+  private String baseURL = API_URL;
   private User user;
   private String username;
 
@@ -78,8 +79,11 @@ public class EditToken {
           .disableAutomaticRetries()
           .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
           .build();
-      HttpGet httpGet = new HttpGet(apiURL);
+      HttpGet httpGet = new HttpGet(UrlBuilder.stripUrlFromEnvSpecificPartAndDowngrade(apiURL));
+      GetRemoteOperation.setBorderProxy(httpGet);
       // set header
+      GetRemoteOperation.addXstagingHeaderIfNeeded(httpGet);
+
       if (username != null) {
         httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(username));
       } else if (user != null) {

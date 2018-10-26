@@ -90,7 +90,7 @@ public class URLsContent {
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
-  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrl() + "/api.php";
+  public static final String API_URL = UrlBuilder.createUrlBuilder().getUrlForApiCalls() + "/api.php";
 
   // File Pages
   public static final String FILE_NAMESPACE = "File:";
