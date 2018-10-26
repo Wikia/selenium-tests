@@ -56,7 +56,6 @@ public class ChromeBrowser extends BrowserAbstract {
     chromedriver.setExecutable(true);
 
     System.setProperty("webdriver.chrome.driver", chromedriver.getPath());
-    Log.info("Using chromedriver: ", chromedriver.getPath());
 
     chromeOptions.addArguments("start-maximized");
     chromeOptions.addArguments("disable-notifications");
@@ -99,13 +98,20 @@ public class ChromeBrowser extends BrowserAbstract {
     caps.setCapability("enableVNC", true);
     caps.setCapability("enableVideo", true);
 
+    RemoteWebDriver rDriver = null;
+
     try {
-      return new WikiaWebDriver(new RemoteWebDriver(URI.create("http://localhost:4444/wd/hub").toURL(), caps), server, useMobile);
+      rDriver = new RemoteWebDriver(
+          URI.create("http://localhost:4444/wd/hub").toURL(),
+          caps
+      );
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
 
-    return new WikiaWebDriver(null, server, useMobile);
+    TestContext.setSessionID(rDriver.getSessionId().toString());
+
+    return new WikiaWebDriver(rDriver, server, useMobile);
   }
 
   @Override

@@ -35,7 +35,6 @@ public abstract class CoreTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void initTestContext(Method method) {
     TestContext.writeMethodName(method);
-    Log.startTest(method);
 
     Configuration.clearCustomTestProperties();
 
@@ -56,6 +55,8 @@ public abstract class CoreTestTemplate {
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
+
+    Log.startTest(method);
 
     loadFirstPage();
   }

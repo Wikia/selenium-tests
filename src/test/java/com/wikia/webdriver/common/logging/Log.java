@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.logging;
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -228,7 +229,14 @@ public class Log {
       command = "";
       description = testName;
     }
-    String html = VelocityWrapper.fillFirstLogRow(className, testName, command, description);
+
+    String videoLink = String.format("http://ludwik-builder-s1:4444/video/%s.mp4", TestContext
+        .getSessionID());
+
+    String logsLink = String.format("http://ludwik-builder-s1:4444/logs/%s.log", TestContext
+        .getSessionID());
+
+    String html = VelocityWrapper.fillFirstLogRow(className, testName, command, description, videoLink, logsLink);
     CommonUtils.appendTextToFile(LOG_PATH, html);
     testStarted = true;
   }

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
@@ -9,6 +11,10 @@ public class TestContext {
   private static String methodName;
   private static Method testMethod;
   private static boolean isFirstLoad = false;
+
+  @Getter
+  @Setter
+  private static String sessionID;
 
   public static void writeMethodName(Method method) {
     methodName = method.getDeclaringClass().getSimpleName()

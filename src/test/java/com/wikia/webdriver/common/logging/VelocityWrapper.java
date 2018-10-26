@@ -159,7 +159,7 @@ public class VelocityWrapper {
   }
 
   static String fillFirstLogRow(
-      String className, String testName, String command, String description
+      String className, String testName, String command, String description, String videoLink, String logLink
   ) {
     StringBuilder builder = new StringBuilder();
 
@@ -170,6 +170,8 @@ public class VelocityWrapper {
     context.put("testName", testName);
     context.put("command", command);
     context.put("description", description);
+    context.put("videoLink", videoLink);
+    context.put("logLink", logLink);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
     builder.append(writer.toString());

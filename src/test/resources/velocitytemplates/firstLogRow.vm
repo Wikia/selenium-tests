@@ -2,5 +2,8 @@
     <tr class="step">
         <td>$command</td>
         <td><h1><em>$description</em></h1></td>
-        <td> <br/> &nbsp;</td>
+        <td align="center">
+        <a href=$videoLink style="color: white"><i class="material-icons" style="font-size: 36px">video_library</i></a>
+        <a href=$logLink style="color: white"><i class="material-icons" style="font-size: 36px">format_list_bulleted</i></a>
+        </td>
     </tr>
