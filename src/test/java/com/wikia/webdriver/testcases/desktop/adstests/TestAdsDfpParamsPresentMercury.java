@@ -57,6 +57,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject ads = new AdsBaseObject(testedPage);
 
+    ads.refreshPage();
     ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }

@@ -32,7 +32,7 @@ public class MobileAdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {"project43", "SyntheticTests/DfpParams", null, "wka.life/_project43//article",
-         "MOBILE_TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
+         "mobile_top_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                                  "\"s1\":\"_project43\"",
                                                  "\"s2\":\"article\"",
                                                  "\"dmn\":\"wikiacom\"",
@@ -44,13 +44,13 @@ public class MobileAdsDataProvider {
                                                  "\"skin\":\"mercury\"",
                                                  "\"esrb\":\"teen\""
 
-        ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"", "\"src\":\"test\"")}};
+        ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"", "\"src\":\"test\"")}};
   }
 
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
-        {"yugioh", "Dark_Magician", "wka.gaming/_yugioh//article", "MOBILE_TOP_LEADERBOARD",
+        {"yugioh", "Dark_Magician", "wka.gaming/_yugioh//article", "mobile_top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"anime\"]",
@@ -67,7 +67,7 @@ public class MobileAdsDataProvider {
                        "\"wpage\":\"dark_magician\"",
                        "\"ref\":\"direct\"",
                        "\"lang\":\"en\"",
-                       "\"pv\":\"1\"",
+                       "\"pv\":\"2\"",
                        "\"top\":\"1k\"",
                        "\"esrb\":\"everyone\"",
                        "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
@@ -76,10 +76,10 @@ public class MobileAdsDataProvider {
                        "\"pform\":[\"pc\",\"psp\"]",
                        "\"sex\":[\"m\"]"
 
-         ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+         ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"top\""
-        )}, {"fallout", "Fallout", "wka.gaming/_fallout//article", "MOBILE_TOP_LEADERBOARD",
+        )}, {"fallout", "Fallout", "wka.gaming/_fallout//article", "mobile_top_leaderboard",
              Arrays.asList("\"s0\":\"gaming\"",
                            "\"s0v\":\"games\"",
                            "\"s0c\":[\"gaming\"]",
@@ -98,7 +98,7 @@ public class MobileAdsDataProvider {
                            "\"lang\":\"en\"",
                            "\"wpage\":\"fallout\"",
                            "\"ref\":\"direct\"",
-                           "\"pv\":\"1\"",
+                           "\"pv\":\"2\"",
                            "\"top\":\"1k\"",
                            "\"sex\":[\"m\"]",
                            "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
@@ -108,10 +108,10 @@ public class MobileAdsDataProvider {
                            "\"esrb\":\"mature\"",
                            "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
 
-             ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+             ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                               "\"src\":\"mobile\"",
                               "\"loc\":\"top\""
-    )}, {"runescape", "Grew", "wka.gaming/_runescape//article", "MOBILE_TOP_LEADERBOARD",
+    )}, {"runescape", "Grew", "wka.gaming/_runescape//article", "mobile_top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -127,7 +127,7 @@ public class MobileAdsDataProvider {
                        "\"wpage\":\"grew\"",
                        "\"ref\":\"direct\"",
                        "\"lang\":\"en\"",
-                       "\"pv\":\"1\"",
+                       "\"pv\":\"2\"",
                        "\"top\":\"1k\"",
                        "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
                        "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
@@ -136,10 +136,10 @@ public class MobileAdsDataProvider {
                        "\"esrb\":\"teen\"",
                        "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
 
-         ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+         ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"top\""
-    )}, {"lego", "LEGO_Wiki", "wka.ent/_lego//home", "MOBILE_TOP_LEADERBOARD", Arrays.asList(
+    )}, {"lego", "LEGO_Wiki", "wka.ent/_lego//home", "mobile_top_leaderboard", Arrays.asList(
         "\"s0\":\"ent\"",
         "\"s0v\":\"movies\"",
         "\"s0c\":[\"toys\"]",
@@ -154,7 +154,7 @@ public class MobileAdsDataProvider {
         "\"wpage\":\"lego_wiki\"",
         "\"ref\":\"direct\"",
         "\"lang\":\"en\"",
-        "\"pv\":\"1\"",
+        "\"pv\":\"2\"",
         "\"top\":\"1k\"",
         "\"age\":[\"under18\",\"13-17\",\"18-24\",\"34-44\",\"kids\",\"teen\"]",
         "\"media\":[\"movies\"]",
@@ -163,11 +163,11 @@ public class MobileAdsDataProvider {
         "\"gnre\":[\"3rdpersonshooter\",\"adventure\",\"casual\",\"comedy\",\"platformer\"]",
         "\"theme\":[\"lego\"]",
         "\"esrb\":\"everyone\""
-    ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+    ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
     )}, {"civilization", "Category:Browse", "wka.gaming/_civilization//article",
-         "MOBILE_TOP_LEADERBOARD", Arrays.asList("\"s0\":\"gaming\"",
+         "mobile_top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                                  "\"s0v\":\"games\"",
                                                  "\"s0c\":[\"gaming\"]",
                                                  "\"s1\":\"_civilization\"",
@@ -183,17 +183,17 @@ public class MobileAdsDataProvider {
                                                  "\"lang\":\"en\"",
                                                  "\"wpage\":\"category:browse\"",
                                                  "\"ref\":\"direct\"",
-                                                 "\"pv\":\"1\"",
+                                                 "\"pv\":\"2\"",
                                                  "\"top\":\"1k\"",
                                                  "\"sex\":[\"m\"]",
                                                  "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
                                                  "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
                                                  "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                                                  "\"esrb\":\"everyone\""
-    ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+    ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "MOBILE_TOP_LEADERBOARD",
+    )}, {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "mobile_top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -201,7 +201,7 @@ public class MobileAdsDataProvider {
                        "\"s2\":\"home\"",
                        "\"ar\":\"3:4\"",
                        "\"artid\":\"172\"",
-                       "\"dmn\":\"wikiacom\"",
+                       "\"dmn\":\"fandomcom\"",
                        "\"hostpre\":",
                        "\"ab\":[",
                        "\"ksg\":[",
@@ -211,7 +211,7 @@ public class MobileAdsDataProvider {
                        "\"lang\":\"en\"",
                        "\"wpage\":\"starcraft_wiki\"",
                        "\"ref\":\"direct\"",
-                       "\"pv\":\"1\"",
+                       "\"pv\":\"2\"",
                        "\"top\":\"1k\"",
                        "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                        "\"media\":[\"books\",\"comics\"]",
@@ -221,12 +221,12 @@ public class MobileAdsDataProvider {
                        "\"sex\":[\"m\"]",
                        "\"pub\":[\"blizzard\"]",
                        "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
-         ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+         ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"top\"",
                           "\"loc\":\"top\""
     )}, {"overlordmaruyama", "Blood_of_Jormungandr", "wka.ent/_not_a_top1k_wiki//article",
-         "MOBILE_TOP_LEADERBOARD", Arrays.asList("\"s0\":\"ent\"",
+         "mobile_top_leaderboard", Arrays.asList("\"s0\":\"ent\"",
                                                  "\"s0v\":\"books\"",
                                                  "\"s0c\":[\"ent\",\"comics\"]",
                                                  "\"s1\":\"_overlordmaruyama\"",
@@ -243,9 +243,9 @@ public class MobileAdsDataProvider {
                                                  "\"lang\":\"en\"",
                                                  "\"wpage\":\"blood_of_jormungandr\"",
                                                  "\"ref\":\"direct\"",
-                                                 "\"pv\":\"1\"",
+                                                 "\"pv\":\"2\"",
                                                  "\"esrb\":\"teen\""
-    ), Arrays.asList("\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+    ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
     )}};
