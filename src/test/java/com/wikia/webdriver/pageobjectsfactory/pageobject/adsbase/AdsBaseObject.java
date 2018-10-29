@@ -317,7 +317,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyIframe(String slotName, String iframeId) {
-    By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
+    By cssSelector = By.cssSelector("iframe[id*='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
 
