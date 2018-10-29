@@ -115,6 +115,13 @@ public class URLsContent {
       FACEBOOK_SETTINGS_APP_TAB
       = "https://www.facebook.com/settings?tab=applications";
 
+
+  // Google
+  public static final String GOOGLE_MAINPAGE = "https://www.google.com/";
+  public static final String GOOGLE_LOGIN_PAGE = "https://accounts.google.com/signin/v2/identifier?";
+  public static final String GOOGLE_REGISTER_PAGE = "https://www.accounts.google.com/signup";
+  public static final String GOOGLE_LOGOUT = "https://mail.google.com/mail/?logout&hl=en";
+
   // avatars
   public static final String AVATAR_GENERIC = "Avatar.jpg";
 

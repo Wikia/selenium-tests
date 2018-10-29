@@ -11,14 +11,16 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import javax.xml.xpath.XPath;
+
 public class PreferencesPageObject extends WikiBasePageObject {
 
   @FindBy(css = "a.fb-disconnect")
   private WebElement facebookDisconnect;
   @FindBy(css = "#fbConnectPreferences .wikia-button-facebook")
   private WebElement fbConnect;
-  @FindBy(css = "a.connect-provider-google")
-  private WebElement googleConnect;
+  @FindBy(css = ".google-button")
+  public WebElement googleConnect;
   @FindBy(css = "#preftoc li")
   private List<WebElement> tabs;
   @FindBy(css = "#mw-htmlform-email-me-v2 td.mw-input")

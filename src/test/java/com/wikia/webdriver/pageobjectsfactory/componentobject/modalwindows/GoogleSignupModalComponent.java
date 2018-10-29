@@ -26,8 +26,9 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
   @FindBy(css = "#signupSubmit")
   private WebElement registerButton;
 
-  @FindBy(css = "#facebookRegistrationForm")
-  private WebElement facebookRegistrationForm;
+  // TODO: Check the selector
+  @FindBy(css = "#googleRegistrationForm")
+  private WebElement googleRegistrationForm;
 
   @FindBy(css = "#signupBirthDate")
   private WebElement birthdateContainer;
@@ -45,7 +46,7 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
     super();
   }
 
-  public void acceptWikiaAppPolicyNoEmail() {
+  protected void acceptWikiaAppPolicyNoEmail() {
 
     new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
       @Nullable
@@ -66,19 +67,19 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
     driver.switchTo().window(handles[0].toString());
   }
 
-  public void typeEmail(String email) {
+  protected void typeEmail(String email) {
     wait.forElementClickable(emailField);
     emailField.sendKeys(email);
     Log.log("typeEmail", "email " + email + " typed into the field", true);
   }
 
-  public void typeUserName(String userName) {
+  protected void typeUserName(String userName) {
     wait.forElementClickable(usernameField);
     usernameField.sendKeys(userName);
     Log.log("typeUserName", "username " + userName + " typed into the field", true);
   }
 
-  public void typeBirthday(int month, int day, int year) {
+  protected void typeBirthday(int month, int day, int year) {
     wait.forElementClickable(birthdateContainer);
     birthdateContainer.click();
 
@@ -92,10 +93,22 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
     birthYearField.sendKeys(Integer.toString(year));
   }
 
-  public void clickRegister() {
+  protected void clickRegister() {
     wait.forElementVisible(registerButton);
     registerButton.click();
     Log.log("clickRegister", "Create account button clicked", true);
     waitForElementNotVisibleByElement(registerButton);
+  }
+
+  public void createAccountNoEmailGoogle(
+      String userName, Integer birthMonth, Integer birthDay, Integer birthYear
+  ) {
+//    acceptWikiaAppPolicyNoEmail();
+
+    wait.forElementVisible(googleRegistrationForm);
+//    typeEmail(email);
+    typeUserName(userName);
+    typeBirthday(birthMonth, birthDay, birthYear);
+    clickRegister();
   }
 }
