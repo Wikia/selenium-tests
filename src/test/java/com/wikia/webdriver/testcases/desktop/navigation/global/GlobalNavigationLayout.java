@@ -97,7 +97,7 @@ public class GlobalNavigationLayout extends NewTestTemplate {
 
   @DontRun(language = "szl")
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
-  @Execute(onWikia = "gta", language = "de", asUser = User.USER_GERMAN)
+  @Execute(onWikia = "harrypotter", language = "de", asUser = User.USER_GERMAN)
   public void testLayoutForDeLoggedIn() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
