@@ -6,14 +6,17 @@ import org.openqa.selenium.*;
 
 public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
-  private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-floor";
+  private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-floor, #invisible_high_impact_2";
   private static final String
       FLOOR_ADHESION_AD_FRAME_CSS
       = "#ext-wikia-adEngine-template-floor .ad iframe";
-  private static final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "img";
+  private static final String
+      FLOOR_ADHESION_AD_FRAME_CSS_MOBILE
+      = "#invisible_high_impact_2 iframe";
+  private static final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "a";
   private static final String
       FLOOR_ADHESION_CLOSE_CSS
-      = "#ext-wikia-adEngine-template-floor .close";
+      = "#ext-wikia-adEngine-template-floor .close, .button-close";
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
   private static final By FLOOR_ADHESION_CLOSE_SELECTOR = By.cssSelector(FLOOR_ADHESION_CLOSE_CSS);
 
@@ -34,8 +37,13 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
     Log.log("Check visibility", "Clicking Floor Adhesion close button hides ad unit", true);
   }
 
-  public AdsFloorAdhesionOldObject clickFloorAdhesion() {
-    WebElement iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS));
+  public AdsFloorAdhesionOldObject clickFloorAdhesion(Boolean isMobile) {
+    WebElement iframeAd;
+    if (isMobile) {
+      iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS_MOBILE));
+    } else {
+      iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS));
+    }
     driver.switchTo().frame(iframeAd);
     driver.findElement(By.cssSelector(FLOOR_ADHESION_IMAGE_IN_FRAME_CSS)).click();
     driver.switchTo().defaultContent();
@@ -62,8 +70,8 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
     Log.log("Check visibility", "Clicking light-box close button hides light-box", true);
   }
 
-  public void verifyThereIsNoWikiaBar(String browser) {
-    if (driver.isChromeMobile()) {
+  public void verifyThereIsNoWikiaBar(Boolean isMobile) {
+    if (isMobile) {
       // Mercury does not have WikiaBar
       Log.log("Check visibility of Wikia Bar", "It is Mercury skin with no Wikia Bar", true);
       return;

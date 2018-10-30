@@ -1,7 +1,10 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
@@ -15,12 +18,10 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   private static final String WIKI_NAME = "project43";
 
-  private static final String OLD_ARTICLE_TITLE = "SyntheticTests/FloorAdhesion";
   private static final String
       ARTICLE_TITLE
       = "SyntheticTests/Slots/InvisibleHighImpact/FloorAdhesion";
 
-  private static final String OLD_URL_TRIGGER = "highimpactslot=1";
   private static final String
       URL_TRIGGER
       = "InstantGlobals.wgAdDriverHighImpact2SlotCountries=[XX]";
@@ -30,34 +31,22 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String CREATIVE_ID = "94178805972";
   private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
-  @Test(groups = "AdsFloorAdhesionOasis")
-  public void testOldFloorAdhesionPresenceOasis() {
-    testOldFloorAdhesionPresence(WindowSize.DESKTOP);
-  }
-
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFloorAdhesionMercury")
-  public void testOldFloorAdhesionPresenceMercury() {
-    testOldFloorAdhesionPresence(WindowSize.PHONE);
+  public void testFloorAdhesionPresenceMercury() {
+    testFloorAdhesionPresenceMercury(WindowSize.PHONE, true);
   }
 
-  @Test(groups = "AdsFloorAdhesionOasis")
-  public void testOldFloorAdhesionModalOasis() {
-    testOldFloorAdhesionModal(WindowSize.DESKTOP);
-  }
-
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFloorAdhesionMercury")
-  public void testOldFloorAdhesionModalMercury() {
-    testOldFloorAdhesionModal(WindowSize.PHONE);
+  public void testFloorAdhesionModalMercury() {
+    testFloorAdhesionModalMercury(WindowSize.PHONE, true);
   }
 
-  @Test(groups = "AdsFloorAdhesionOasis")
-  public void testOldFloorAdhesionCloseButtonOasis() {
-    testOldFloorAdhesionCloseButton(WindowSize.DESKTOP);
-  }
-
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFloorAdhesionMercury")
-  public void testOldFloorAdhesionCloseButtonMercury() {
-    testOldFloorAdhesionCloseButton(WindowSize.PHONE);
+  public void testFloorAdhesionCloseButtonMercury() {
+    testFloorAdhesionCloseButtonMercury(WindowSize.PHONE);
   }
 
   @Test(groups = "AdsFloorAdhesionOasis")
@@ -88,14 +77,14 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     return urlBuilder.appendQueryStringToURL(url, urlTrigger);
   }
 
-  private void testOldFloorAdhesionPresence(Dimension resolution) {
+  private void testFloorAdhesionPresenceMercury(Dimension resolution, Boolean isMobile) {
     String browser = Configuration.getBrowser();
-    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
+    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(isMobile);
 
     AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
                                                                        getArticleUrl(
-                                                                           OLD_ARTICLE_TITLE,
-                                                                           OLD_URL_TRIGGER
+                                                                           ARTICLE_TITLE,
+                                                                           URL_TRIGGER
                                                                        ),
                                                                        resolution
     );
@@ -104,35 +93,35 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
                                         skinContext.getLineItemId(),
                                         skinContext.getCreativeId()
     );
-    wikiPage.verifyThereIsNoWikiaBar(browser);
+    wikiPage.verifyThereIsNoWikiaBar(isMobile);
   }
 
-  private void testOldFloorAdhesionModal(Dimension resolution) {
+  private void testFloorAdhesionModalMercury(Dimension resolution, Boolean isMobile) {
     String browser = Configuration.getBrowser();
 
     AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
                                                                        getArticleUrl(
-                                                                           OLD_ARTICLE_TITLE,
-                                                                           OLD_URL_TRIGGER
+                                                                           ARTICLE_TITLE,
+                                                                           URL_TRIGGER
                                                                        ),
                                                                        resolution
     );
-    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
+    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(isMobile);
 
     String floorAdhesionModalSelector = skinContext.getModalSelector();
     String floorAdhesionModalCloseSelector = skinContext.getModalCloseSelector();
 
-    wikiPage.clickFloorAdhesion().verifyModalOpened(floorAdhesionModalSelector);
+    wikiPage.clickFloorAdhesion(isMobile).verifyModalOpened(floorAdhesionModalSelector);
 
     wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
         .verifyThereIsNoModal(floorAdhesionModalSelector);
   }
 
-  private void testOldFloorAdhesionCloseButton(Dimension resolution) {
+  private void testFloorAdhesionCloseButtonMercury(Dimension resolution) {
     AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
                                                                        getArticleUrl(
-                                                                           OLD_ARTICLE_TITLE,
-                                                                           OLD_URL_TRIGGER
+                                                                           ARTICLE_TITLE,
+                                                                           URL_TRIGGER
                                                                        ),
                                                                        resolution
     );
