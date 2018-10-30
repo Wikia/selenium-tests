@@ -39,12 +39,6 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFloorAdhesionMercury")
-  public void testFloorAdhesionModalMercury() {
-    testFloorAdhesionModalMercury(WindowSize.PHONE, true);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "AdsFloorAdhesionMercury")
   public void testFloorAdhesionCloseButtonMercury() {
     testFloorAdhesionCloseButtonMercury(WindowSize.PHONE);
   }
@@ -78,7 +72,6 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   private void testFloorAdhesionPresenceMercury(Dimension resolution, Boolean isMobile) {
-    String browser = Configuration.getBrowser();
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(isMobile);
 
     AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
@@ -94,27 +87,6 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
                                         skinContext.getCreativeId()
     );
     wikiPage.verifyThereIsNoWikiaBar(isMobile);
-  }
-
-  private void testFloorAdhesionModalMercury(Dimension resolution, Boolean isMobile) {
-    String browser = Configuration.getBrowser();
-
-    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
-                                                                       getArticleUrl(
-                                                                           ARTICLE_TITLE,
-                                                                           URL_TRIGGER
-                                                                       ),
-                                                                       resolution
-    );
-    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(isMobile);
-
-    String floorAdhesionModalSelector = skinContext.getModalSelector();
-    String floorAdhesionModalCloseSelector = skinContext.getModalCloseSelector();
-
-    wikiPage.clickFloorAdhesion(isMobile).verifyModalOpened(floorAdhesionModalSelector);
-
-    wikiPage.clickFloorAdhesionModalClose(floorAdhesionModalCloseSelector)
-        .verifyThereIsNoModal(floorAdhesionModalSelector);
   }
 
   private void testFloorAdhesionCloseButtonMercury(Dimension resolution) {

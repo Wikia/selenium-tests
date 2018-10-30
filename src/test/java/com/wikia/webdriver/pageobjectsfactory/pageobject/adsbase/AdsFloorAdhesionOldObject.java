@@ -8,13 +8,6 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
 
   private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-floor, #invisible_high_impact_2";
   private static final String
-      FLOOR_ADHESION_AD_FRAME_CSS
-      = "#ext-wikia-adEngine-template-floor .ad iframe";
-  private static final String
-      FLOOR_ADHESION_AD_FRAME_CSS_MOBILE
-      = "#invisible_high_impact_2 iframe";
-  private static final String FLOOR_ADHESION_IMAGE_IN_FRAME_CSS = "a";
-  private static final String
       FLOOR_ADHESION_CLOSE_CSS
       = "#ext-wikia-adEngine-template-floor .close, .button-close";
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
@@ -37,38 +30,13 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
     Log.log("Check visibility", "Clicking Floor Adhesion close button hides ad unit", true);
   }
 
-  public AdsFloorAdhesionOldObject clickFloorAdhesion(Boolean isMobile) {
-    WebElement iframeAd;
-    if (isMobile) {
-      iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS_MOBILE));
-    } else {
-      iframeAd = driver.findElement(By.cssSelector(FLOOR_ADHESION_AD_FRAME_CSS));
-    }
-    driver.switchTo().frame(iframeAd);
-    driver.findElement(By.cssSelector(FLOOR_ADHESION_IMAGE_IN_FRAME_CSS)).click();
-    driver.switchTo().defaultContent();
-    return this;
-  }
-
-  public AdsFloorAdhesionOldObject clickFloorAdhesionModalClose(String floorAdhesionModalCloseSelector) {
-    wait.forElementClickable(By.cssSelector(floorAdhesionModalCloseSelector)).click();
-    return this;
-  }
 
   public AdsFloorAdhesionOldObject clickFloorAdhesionClose() {
     wait.forElementPresent(FLOOR_ADHESION_CLOSE_SELECTOR).click();
     return this;
   }
 
-  public void verifyModalOpened(String floorAdhesionModalSelector) {
-    wait.forElementVisible(By.cssSelector(floorAdhesionModalSelector));
-    Log.log("Check visibility", "Clicking Floor Adhesion opens light-box", true);
-  }
 
-  public void verifyThereIsNoModal(String floorAdhesionModalSelector) {
-    wait.forElementNotPresent(By.cssSelector(floorAdhesionModalSelector));
-    Log.log("Check visibility", "Clicking light-box close button hides light-box", true);
-  }
 
   public void verifyThereIsNoWikiaBar(Boolean isMobile) {
     if (isMobile) {
