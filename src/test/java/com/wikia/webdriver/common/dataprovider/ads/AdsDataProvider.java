@@ -263,7 +263,7 @@ public class AdsDataProvider {
                        "\"s2\":\"home\"",
                        "\"ar\":\"4:3\"",
                        "\"artid\":\"172\"",
-                       "\"dmn\":\"wikiacom\"",
+                       "\"dmn\":\"fandomcom\"",
                        "\"hostpre\":",
                        "\"lang\":\"en\"",
                        "\"wpage\":\"starcraft_wiki\"",
