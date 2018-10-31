@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.GoogleSignupModalComponent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
@@ -117,6 +118,16 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   public boolean isConnectWithFacebookButtonVisible() {
     gainFocus();
     return registerPage.isConnectWithFacebookButtonVisible();
+  }
+
+  public GoogleSignupModalComponent clickGoogleSignUp() {
+    gainFocus();
+    return registerPage.clickGoogleSignUp();
+  }
+
+  public boolean isConnectWithGoogleButtonVisible() {
+    gainFocus();
+    return registerPage.isConnectWithGoogleButtonVisible();
   }
 
   @Override

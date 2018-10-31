@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.api;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
@@ -18,17 +17,9 @@ public class DeleteMWVideo extends ApiCall {
 
   @Override
   protected String getURL() {
-    if (Configuration.getForceFandomDomain()) {
-      return UrlBuilder.createUrlBuilder()
-                 .getUrl()
-                 .replace(UrlBuilder.HTTP_PREFIX, UrlBuilder.HTTPS_PREFIX)
-             + "/wikia.php?controller=VideoHandler&method=removeVideo&format=json";
-    } else {
-      return UrlBuilder.createUrlBuilder()
-                 .getUrl()
-                 .replace(UrlBuilder.HTTPS_PREFIX, UrlBuilder.HTTP_PREFIX)
-             + "/wikia.php?controller=VideoHandler&method=removeVideo&format=json";
-    }
+    return UrlBuilder.stripUrlFromEnvSpecificPartAndDowngrade(
+        UrlBuilder.createUrlBuilder().getUrl()
+        + "/wikia.php?controller=VideoHandler&method=removeVideo&format=json");
   }
 
   @Override

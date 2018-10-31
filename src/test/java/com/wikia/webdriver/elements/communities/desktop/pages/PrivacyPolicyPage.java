@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class PrivacyPolicyPage extends WikiBasePageObject {
 
   private static final String PRIVACY_POLICY_PAGE = "http://www.wikia.com/Privacy_Policy";
-  @FindBy(css = "#privacy-settings-button")
+  @FindBy(css = ".privacy-settings-button")
   private WebElement resetTrackingButton;
 
   public void navigateToPrivacyPolicyPage() {

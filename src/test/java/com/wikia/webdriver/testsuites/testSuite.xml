@@ -73,6 +73,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.RTETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.ConfirmEmailTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.FacebookTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.auth.GoogleTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.ForcedLoginTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.ForgottenPasswordTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.LoginTests"/>

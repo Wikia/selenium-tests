@@ -13,7 +13,6 @@ import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import lombok.Getter;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -182,7 +181,7 @@ public class Log {
   public static void image(String command, File image, boolean success) {
     byte[] bytes = new byte[0];
     try {
-      bytes = new Base64().encode(FileUtils.readFileToByteArray(image));
+      bytes = Base64.getEncoder().encode(FileUtils.readFileToByteArray(image));
     } catch (IOException e) {
       log("logImage", e.getMessage(), false);
     }

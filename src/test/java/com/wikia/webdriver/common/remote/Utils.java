@@ -1,15 +1,8 @@
 package com.wikia.webdriver.common.remote;
 
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import java.io.File;
-import java.util.Objects;
 
 public final class Utils {
 
@@ -26,25 +19,7 @@ public final class Utils {
     return StringUtils.substringBetween(text, ": ", ",");
   }
 
-  private static String extractSiteIdFromMediaWiki(String wikiUrl) {
-    return new SiteId(wikiUrl).getSiteId();
-  }
-
   public static String excractSiteIdFromWikiName(String wikiName) {
-    String wikiUrl = UrlBuilder.createUrlBuilderForWiki(wikiName)
-        .getUrl()
-        .replace("https://", "http://");
-    return extractSiteIdFromMediaWiki(wikiUrl);
-  }
-
-  public static String buildServicesUrl() {
-    File configurationFile = new File(Configuration.getCredentialsFilePath());
-    final String environment = Configuration.getEnvType().getKey();
-    final String url = XMLReader.getValue(configurationFile, "services." + environment);
-    Objects.requireNonNull(url,
-                           "Please check if your configuration file contains url for service "
-                           + environment
-    );
-    return url;
+    return new SiteId(wikiName).getSiteId();
   }
 }

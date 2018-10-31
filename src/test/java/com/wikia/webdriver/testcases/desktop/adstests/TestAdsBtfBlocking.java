@@ -35,9 +35,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN),
-                         AdsContent.INVISIBLE_SKIN
-    );
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB),
                          AdsContent.BOTTOM_LB
     );
@@ -56,9 +53,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     );
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB),
                          "Slot" + AdsContent.TOP_LB
-    );
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN),
-                         "Slot" + AdsContent.INVISIBLE_SKIN
     );
 
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB),
@@ -100,9 +94,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     );
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB),
                          String.format("Ad is not loaded inside %s", AdsContent.TOP_LB)
-    );
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN),
-                         String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_SKIN)
     );
 
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB),

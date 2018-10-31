@@ -18,10 +18,12 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
   private static final String WIKI_NAME = "project43";
 
+  private static final String OLD_ARTICLE_TITLE = "SyntheticTests/FloorAdhesion";
   private static final String
       ARTICLE_TITLE
       = "SyntheticTests/Slots/InvisibleHighImpact/FloorAdhesion";
 
+  private static final String OLD_URL_TRIGGER = "highimpactslot=1";
   private static final String
       URL_TRIGGER
       = "InstantGlobals.wgAdDriverHighImpact2SlotCountries=[XX]";
@@ -31,8 +33,17 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String CREATIVE_ID = "94178805972";
   private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
+  @Test(groups = "AdsFloorAdhesionMercury")
+  public void testOldFloorAdhesionPresenceMercury() {
+    testOldFloorAdhesionPresence(WindowSize.PHONE);
+  }
+
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFloorAdhesionMercury")
+  public void testOldFloorAdhesionModalMercury() {
+    testOldFloorAdhesionModal(WindowSize.PHONE);
+  }
+
   public void testFloorAdhesionPresenceMercury() {
     testFloorAdhesionPresenceMercury(WindowSize.PHONE, true);
   }
