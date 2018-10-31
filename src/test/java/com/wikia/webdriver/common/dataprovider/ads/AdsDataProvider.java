@@ -320,8 +320,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] providersChainOasis() {
     return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt; RemnantGpt"},
-        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.INVISIBLE_SKIN, "DirectGpt"}};
+        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt; RemnantGpt"}};
   }
 
   @DataProvider
