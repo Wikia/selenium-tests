@@ -263,7 +263,7 @@ public class AdsDataProvider {
                        "\"s2\":\"home\"",
                        "\"ar\":\"4:3\"",
                        "\"artid\":\"172\"",
-                       "\"dmn\":\"wikiacom\"",
+                       "\"dmn\":\"fandomcom\"",
                        "\"hostpre\":",
                        "\"lang\":\"en\"",
                        "\"wpage\":\"starcraft_wiki\"",
@@ -320,8 +320,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] providersChainOasis() {
     return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt; RemnantGpt"},
-        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.INVISIBLE_SKIN, "DirectGpt"}};
+        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt; RemnantGpt"}};
   }
 
   @DataProvider
