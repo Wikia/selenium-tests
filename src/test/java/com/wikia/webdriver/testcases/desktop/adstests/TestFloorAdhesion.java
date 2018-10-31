@@ -33,18 +33,9 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String CREATIVE_ID = "94178805972";
   private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
-  @Test(groups = "AdsFloorAdhesionMercury")
-  public void testOldFloorAdhesionPresenceMercury() {
-    testOldFloorAdhesionPresence(WindowSize.PHONE);
-  }
-
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "AdsFloorAdhesionMercury")
-  public void testOldFloorAdhesionModalMercury() {
-    testOldFloorAdhesionModal(WindowSize.PHONE);
-  }
-
-  public void testFloorAdhesionPresenceMercury() {
+  public void testOldFloorAdhesionPresenceMercury() {
     testFloorAdhesionPresenceMercury(WindowSize.PHONE, true);
   }
 
