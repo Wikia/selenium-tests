@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"EnAnonMixedContentFooter"})
-@Execute(onWikia = "gameofthrones", asUser = User.ANONYMOUS)
+@Execute(onWikia = "harrypotter", asUser = User.ANONYMOUS)
 public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @DontRun( language = "szl")
