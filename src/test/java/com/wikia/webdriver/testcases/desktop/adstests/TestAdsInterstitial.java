@@ -15,18 +15,17 @@ import org.testng.annotations.Test;
 public class TestAdsInterstitial extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = AdsDataProvider.class, groups = "TestInterstitialOasis", dataProvider = "interstitialOasis")
-  public void adsInterstitialAdOnOasis(Page page, Dimension adSize) throws InterruptedException {
+  public void adsInterstitialAdOnOasis(Page page, Dimension adSize) {
     testInterstitial(page, adSize);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(dataProviderClass = AdsDataProvider.class, groups = "TestInterstitialMercury", dataProvider = "interstitialMercury")
-  public void adsInterstitialAdOnMobileInPortraitPosition(Page page, Dimension adSize)
-      throws InterruptedException {
+  public void adsInterstitialAdOnMobileInPortraitPosition(Page page, Dimension adSize) {
     testInterstitial(page, adSize);
   }
 
-  private void testInterstitial(Page page, Dimension adSize) throws InterruptedException {
+  private void testInterstitial(Page page, Dimension adSize) {
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver);
     adsInterstitial.getUrl(page);
 

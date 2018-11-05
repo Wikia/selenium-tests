@@ -79,7 +79,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
     );
   }
 
-  public void closeInterstitial() throws InterruptedException {
+  public void closeInterstitial() {
 
     boolean isMercury = false;
     try {
@@ -90,9 +90,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
     }
 
     if (isMercury) {
-      String closeButtonText = interstitialCloseButtonWrapperMercury.getText();
-      Log.log("Wait time for close button", String.valueOf(WAIT_BUTTON_DELAY_TOLERANCE), true);
-      Thread.sleep((WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
+      wait.forElementVisible(interstitialCloseButtonMercury);
       interstitialCloseButtonMercury.click();
     } else {
       wait.forElementVisible(interstitialCloseButton);
