@@ -104,6 +104,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     DeletePageObject delete = blogPage.deleteFirstComment();
     delete.submitDeletion();
 
+
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(
         confirmNotifications.size(),
