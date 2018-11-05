@@ -30,19 +30,9 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String CREATIVE_ID = "94178805972";
   private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
-  @Test(groups = "AdsFloorAdhesionOasis")
-  public void testOldFloorAdhesionPresenceOasis() {
-    testOldFloorAdhesionPresence(WindowSize.DESKTOP);
-  }
-
   @Test(groups = "AdsFloorAdhesionMercury")
   public void testOldFloorAdhesionPresenceMercury() {
     testOldFloorAdhesionPresence(WindowSize.PHONE);
-  }
-
-  @Test(groups = "AdsFloorAdhesionOasis")
-  public void testOldFloorAdhesionModalOasis() {
-    testOldFloorAdhesionModal(WindowSize.DESKTOP);
   }
 
   @Test(groups = "AdsFloorAdhesionMercury")
@@ -50,10 +40,6 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     testOldFloorAdhesionModal(WindowSize.PHONE);
   }
 
-  @Test(groups = "AdsFloorAdhesionOasis")
-  public void testOldFloorAdhesionCloseButtonOasis() {
-    testOldFloorAdhesionCloseButton(WindowSize.DESKTOP);
-  }
 
   @Test(groups = "AdsFloorAdhesionMercury")
   public void testOldFloorAdhesionCloseButtonMercury() {
