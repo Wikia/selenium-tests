@@ -16,6 +16,7 @@ public class MobileWikis {
   // Other wikis
   public static final String MLP = "mlp";
   public static final String DE_WIKI = "de.dman";
+  public static final String DE_WIKI_2 = "de.elderscrolls";
   // for discussions desktop view tests
   public static final String DISCUSSIONS_1 = "dauto";
   public static final String DISCUSSIONS_2 = "dauto2";
