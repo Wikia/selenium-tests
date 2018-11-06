@@ -540,8 +540,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("#" + slotName + " iframe"));
   }
 
-  public void verifyNoAd(final String slotName) {
-    final String slotSelector = AdsContent.getSlotSelector(slotName);
+  public void verifyNoAd(final String slotName, final String slotSelector) {
     Log.log("verifyNoAd", "Triggering " + slotName, true, driver);
     triggerAdSlot(slotName);
     verifyNoAdWithoutTrigger(slotSelector);
@@ -736,7 +735,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      verifyNoAd(entry.getKey());
+      verifyNoAd(entry.getKey(), entry.getValue());
     }
   }
 
