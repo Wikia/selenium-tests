@@ -13,14 +13,14 @@ public class AdsContent {
       = "top.window.adDriver2ForcedStatus['%s']='success';";
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
-  public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
+  public static final String MOBILE_BOTTOM_LB = "mobile_bottom_leaderboard";
   public static final String TOP_LB = "TOP_LEADERBOARD";
   public static final String MEDREC = "TOP_RIGHT_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
   public static final String MOBILE_TOP_LB = "mobile_top_leaderboard";
-  public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
-  public static final String MOBILE_AD_IN_CONTENT_PLAYER = "incontent_player";
+  public static final String MOBILE_AD_IN_CONTENT = "mobile_incontent_boxad_1";
+  public static final String MOBILE_AD_IN_CONTENT_PLAYER = "mobile_incontent_player";
   public static final String MOBILE_PREFOOTER = "mobile_prefooter";
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
   public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
@@ -101,7 +101,7 @@ public class AdsContent {
   }
 
   public static String getSlotSelector(String slotName) {
-    if (slotName.startsWith("MOBILE")) {
+    if (slotName.startsWith("mobile")) {
       return MOBILE_SLOTS_SELECTORS.get(slotName);
     }
 
