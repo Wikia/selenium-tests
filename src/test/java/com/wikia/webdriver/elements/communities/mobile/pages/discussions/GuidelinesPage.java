@@ -46,6 +46,7 @@ public class GuidelinesPage extends BasePage {
   }
 
   public DiscussionsPage clickBackToDiscussions() {
+    scrollTo(backToDiscussionsButton);
     waitAndClick(backToDiscussionsButton);
 
     return new DiscussionsPage();

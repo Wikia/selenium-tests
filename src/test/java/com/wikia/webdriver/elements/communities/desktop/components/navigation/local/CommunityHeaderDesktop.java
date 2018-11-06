@@ -136,6 +136,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
   }
 
   public CommunityHeaderDesktop openExploreMenu() {
+    scrollTo(exploreTab);
     new Actions(driver).moveToElement(exploreTab).perform();
 
     Log.info("explore dropdown opened");
