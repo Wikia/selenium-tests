@@ -2,6 +2,8 @@ package com.wikia.webdriver.common.contentpatterns;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdsContent {
 
@@ -101,7 +103,16 @@ public class AdsContent {
   }
 
   public static String getSlotSelector(String slotName) {
-    if (slotName.startsWith("MOBILE")) {
+
+    Pattern pat = Pattern.compile("[A-Z][^A-Z]*$");
+    Matcher match = pat.matcher(slotName);
+
+    int lastCapitalIndex = -1;
+    if (match.find()) {
+      lastCapitalIndex = match.start();
+    }
+
+    if (lastCapitalIndex == -1) {
       return MOBILE_SLOTS_SELECTORS.get(slotName);
     }
 
