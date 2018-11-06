@@ -93,7 +93,7 @@ public class ChromeBrowser extends BrowserAbstract {
       caps.setCapability("pageLoadStrategy", "none");
     }
     caps.setCapability("name", TestContext.getCurrentMethodName());
-    caps.setBrowserName("chrome");
+    caps.setBrowserName("chromeDummy");
     caps.setVersion("69.0");
     caps.setCapability("enableVNC", true);
     caps.setCapability("enableVideo", true);
