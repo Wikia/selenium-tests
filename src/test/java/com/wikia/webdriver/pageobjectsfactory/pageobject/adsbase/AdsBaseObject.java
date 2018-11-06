@@ -443,7 +443,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         return false;
       }
 
-      List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
+      List<WebElement> adWebElements = slot.findElements(By.cssSelector("iframe"));
 
       Log.log("Slot found",
               String.format("%s found on the page with selector: %s", slotName, slotSelector),
