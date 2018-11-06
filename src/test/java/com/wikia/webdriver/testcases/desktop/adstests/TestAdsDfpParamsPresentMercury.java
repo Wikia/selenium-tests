@@ -18,6 +18,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
   private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
   private static final String SRC_MOBILE = "mobile";
+  private static final String SRC_TEST = "test";
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "dfpParamsSynthetic", groups = {
@@ -38,7 +39,8 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     }
 
     AdsBaseObject ads = new AdsBaseObject(testedPage);
-    ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
+    ads.refreshPage();
+    ads.verifyGptIframe(adUnit, slot, SRC_TEST);
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
@@ -57,6 +59,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
     AdsBaseObject ads = new AdsBaseObject(testedPage);
 
+    ads.refreshPage();
     ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }

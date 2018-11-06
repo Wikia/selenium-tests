@@ -67,7 +67,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement presentFloatingMedrec;
   @FindBy(css = "#WikiaFooter")
   private WebElement wikiaFooter;
-  @FindBy(css = ".mobile-in-content")
+  @FindBy(css = "#incontent_boxad_1")
   private WebElement mobileInContent;
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
@@ -317,7 +317,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyIframe(String slotName, String iframeId) {
-    By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
+    By cssSelector = By.cssSelector("iframe[id*='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
 
@@ -354,7 +354,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      WebElement adsDiv = driver.findElement(By.cssSelector("#" + slotName + " [" + attr + "]"));
+      WebElement adsDiv = driver.findElement(By.cssSelector("#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),
@@ -450,7 +450,7 @@ public class AdsBaseObject extends WikiBasePageObject {
               true
       );
 
-      return adWebElements.size() > 1;
+      return adWebElements.size() >= 1;
     } finally {
       restoreDefaultImplicitWait();
     }
