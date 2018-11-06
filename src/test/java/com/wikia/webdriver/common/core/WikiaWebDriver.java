@@ -42,10 +42,6 @@ public class WikiaWebDriver extends EventFiringWebDriver {
     return webDriver instanceof ChromeDriver && isMobile;
   }
 
-  public boolean htmlUnit() {
-    return webDriver instanceof HtmlUnitDriver;
-  }
-
   public boolean isAndroid() {
     return webDriver instanceof AndroidDriver;
   }
