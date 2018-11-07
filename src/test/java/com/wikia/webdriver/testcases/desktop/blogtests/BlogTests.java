@@ -74,7 +74,7 @@ public class BlogTests extends NewTestTemplate {
     blogPage.verifyContent(blogContent);
   }
   @Test(groups = "k8s-notification-fail")
-  @Execute(asUser = User.SUS_STAFF)
+  @Execute(asUser = User.DELETER)
   public void StaffCanDeleteAndUndeleteUsersBlogPost() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
@@ -115,7 +115,7 @@ public class BlogTests extends NewTestTemplate {
     blogPage.getBlogTitle();
   }
   @Test(groups = "k8s-notification-fail")
-  @Execute(asUser = User.SUS_STAFF)
+  @Execute(asUser = User.DELETER)
   public void StaffCanMoveUserBlogPosts() {
     String blogTitleMove = "Renamed - " + PageContent.BLOG_POST_NAME_PREFIX + DateTime.now()
         .getMillis();

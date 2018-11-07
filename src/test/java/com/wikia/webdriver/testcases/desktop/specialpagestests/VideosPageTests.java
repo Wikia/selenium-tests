@@ -42,7 +42,7 @@ public class VideosPageTests extends NewTestTemplate {
    * presented by Global Notifications. (Note: This test also adds a video beforehand to make sure
    * running this test is sustainable).
    */
-  @Execute(asUser = User.SUS_STAFF)
+  @Execute(asUser = User.DELETER)
   @Test(groups = {"VideosPage", "VideosPageTest_002", "Media", "k8s-notification-fail"})
   @RelatedIssue(issueID = "SUS-755")
   public void VideosPageTest_002_deleteVideo_notificationContainsTitle() {
@@ -81,7 +81,7 @@ public class VideosPageTests extends NewTestTemplate {
    * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
    * video is).
    */
-  @Execute(asUser = User.SUS_STAFF)
+  @Execute(asUser = User.DELETER)
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media", "k8s-notification-fail"})
   @RelatedIssue(issueID = "SUS-863")
   public void VideosPageTest_003_deleteVideo_removedFromRecentVideos() {

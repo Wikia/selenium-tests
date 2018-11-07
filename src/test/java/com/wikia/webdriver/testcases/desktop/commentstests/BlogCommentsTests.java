@@ -88,7 +88,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = {"BlogComments_004", "k8s-notification-fail"})
-  @Execute(asUser = User.SUS_STAFF)
+  @Execute(asUser = User.DELETER)
   public void AdminCanDeleteAComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
