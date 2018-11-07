@@ -104,8 +104,8 @@ public class AdsContent {
 
   public static String getSlotSelector(String slotName) {
 
-    Pattern pat = Pattern.compile("[A-Z][^A-Z]*$");
-    Matcher match = pat.matcher(slotName);
+    Pattern pattern = Pattern.compile("[A-Z]");
+    Matcher match = pattern.matcher(slotName);
 
     int lastCapitalIndex = -1;
     if (match.find()) {
