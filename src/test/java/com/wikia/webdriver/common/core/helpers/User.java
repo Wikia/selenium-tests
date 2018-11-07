@@ -146,7 +146,7 @@ public enum User {
   ), SUS_REGULAR_USER3(
       "ci.user.sus_user3.username",
       "ci.user.sus_user3.password"
-  ), USER_CTEST("ci.user.ctest3.username", "ci.user.ctest3.password"),;
+  ), DELETER("ci.user.deleter.username", "ci.user.deleter.password"),;
 
   private final String userName;
 

@@ -43,7 +43,7 @@ public class VideosPageTests extends NewTestTemplate {
    * running this test is sustainable).
    */
   @Execute(asUser = User.SUS_STAFF)
-  @Test(groups = {"VideosPage", "VideosPageTest_002", "Media", "k8s-notification-fail"})
+  @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
   @RelatedIssue(issueID = "SUS-755")
   public void VideosPageTest_002_deleteVideo_notificationContainsTitle() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
@@ -81,8 +81,8 @@ public class VideosPageTests extends NewTestTemplate {
    * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
    * video is).
    */
-  @Execute(asUser = User.STAFF)
-  @Test(groups = {"VideosPage", "VideosPageTest_003", "Media", "k8s-notification-fail"})
+  @Execute(asUser = User.DELETER)
+  @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
   @RelatedIssue(issueID = "SUS-863")
   public void VideosPageTest_003_deleteVideo_removedFromRecentVideos() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
