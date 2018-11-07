@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
-  private static final String FIRST_LINE = "# Big List of Naughty Strings\n";
+  private static final String FIRST_LINE = "# Big List of Naughty Strings ";
 
   private static final String DESKTOP = "discussions-creating-posts-desktop";
   private static final String MOBILE = "discussions-creating-posts-mobile";

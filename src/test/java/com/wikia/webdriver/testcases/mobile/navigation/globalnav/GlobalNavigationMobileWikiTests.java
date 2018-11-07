@@ -153,7 +153,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
 
   @DontRun(language = "szl")
   @Test
-  @Execute(onWikia = MobileWikis.DE_WIKI)
+  @Execute(onWikia = MobileWikis.DE_WIKI_2)
   public void trendingArticlesModuleDoesNotOpenUnderMobileSearchOnNonEnWikis() {
     GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()

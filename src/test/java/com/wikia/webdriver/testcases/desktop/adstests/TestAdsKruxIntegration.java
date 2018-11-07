@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
@@ -15,6 +18,7 @@ public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
   private static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
   private static final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
 
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "kruxIntegration", groups = "AdsKruxIntegrationMercury")
   @UseUnstablePageLoadStrategy
   public void adsKruxIntegrationMercury(String wikiName, String article) {
