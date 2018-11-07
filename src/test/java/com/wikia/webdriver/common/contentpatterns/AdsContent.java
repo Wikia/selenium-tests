@@ -2,6 +2,8 @@ package com.wikia.webdriver.common.contentpatterns;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdsContent {
 
@@ -50,10 +52,6 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
-    SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#mobile_top_leaderboard");
-    SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#incontent_boxad_1");
-    SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
-    SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#bottom_leaderboard");
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LB,
@@ -105,7 +103,16 @@ public class AdsContent {
   }
 
   public static String getSlotSelector(String slotName) {
-    if (slotName.startsWith("MOBILE")) {
+
+    Pattern pattern = Pattern.compile("[A-Z]");
+    Matcher match = pattern.matcher(slotName);
+
+    int lastCapitalIndex = -1;
+    if (match.find()) {
+      lastCapitalIndex = match.start();
+    }
+
+    if (lastCapitalIndex == -1) {
       return MOBILE_SLOTS_SELECTORS.get(slotName);
     }
 
