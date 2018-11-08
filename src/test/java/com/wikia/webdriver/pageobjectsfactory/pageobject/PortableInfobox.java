@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryExhibitionPage;
+import com.wikia.webdriver.elements.communities.desktop.pages.categories.CategoryExhibitionPage;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
