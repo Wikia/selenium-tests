@@ -21,7 +21,7 @@ public class CategoryPage extends WikiBasePageObject {
   private By categoryMembersContainer = By.cssSelector(".category-members-grouped");
   private By categoryMembers = By.cssSelector(".category-members-grouped li a");
   private By nextButton = By.cssSelector(".category-pagination__next");
-  private By previousButton = By.cssSelector("category-pagination__prev");
+  private By previousButton = By.cssSelector(".category-pagination__prev");
 
   private Navigate navigate;
 
