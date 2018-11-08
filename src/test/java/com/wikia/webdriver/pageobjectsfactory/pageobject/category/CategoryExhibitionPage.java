@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class CategoryPageObject extends WikiBasePageObject {
+public class CategoryExhibitionPage extends WikiBasePageObject {
 
   @FindBy(css = ".category-gallery-item")
   private List<WebElement> categoryGalleryItems;
