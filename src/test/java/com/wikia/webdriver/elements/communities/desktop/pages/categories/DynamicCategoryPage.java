@@ -24,7 +24,7 @@ public class DynamicCategoryPage extends WikiBasePageObject {
   private By categoryMembers = By.cssSelector(".category-page__members li a");
 
   @Getter(lazy = true)
-  private final CategoryLayoutSelector layoutSelector = CategoryLayoutSelector.getComponent();
+  private final CategoryLayoutSelector layoutSelector = new CategoryLayoutSelector();
   @Getter(lazy = true)
   private final PaginationControls paginationControls = new PaginationControls(this);
 

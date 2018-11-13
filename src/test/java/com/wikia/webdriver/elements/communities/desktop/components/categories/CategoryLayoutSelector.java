@@ -19,17 +19,7 @@ public class CategoryLayoutSelector extends BasePageObject {
   @FindBy(css = "li[data-category-layout=category-page3]")
   private WebElement dynamicViewButton;
   @FindBy(css = ".category-layout-selector")
-  private WebElement ViewContainer;
-
-  public static CategoryLayoutSelector getComponent() {
-    //TODO: Chack if user is logged in, if not throw exception
-
-    return new CategoryLayoutSelector();
-  }
-
-  private CategoryLayoutSelector() {
-
-  }
+  private WebElement viewContainer;
 
   public boolean isCategoryExhibitionActive() {
     return categoryExhibitionButton.getAttribute("class").contains("is-active");
@@ -54,6 +44,6 @@ public class CategoryLayoutSelector extends BasePageObject {
   }
 
   public boolean isVisible() {
-    return isVisible(ViewContainer);
+    return isVisible(viewContainer);
   }
 }
