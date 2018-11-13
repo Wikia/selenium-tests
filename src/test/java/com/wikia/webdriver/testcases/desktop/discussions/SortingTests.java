@@ -74,7 +74,7 @@ public class SortingTests extends NewTestTemplate {
   private void performSortingCheckOnMobile(PageWithPosts page, SortOption sortOption) {
     page.getDiscussionsHeader()
         .openFilterMenu()
-        .chooseSortingOption(sortOption)
+        .chooseSortingOptionMobile(sortOption)
         .clickApplyButton()
         .waitForLoadingSpinner();
     Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));

@@ -5,7 +5,7 @@ import com.wikia.webdriver.elements.communities.mobile.components.discussions.co
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.desktop.*;
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.DiscussionsHeader;
-import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.FiltersPopOverMobile;
 
 import lombok.Getter;
 
@@ -18,7 +18,7 @@ public abstract class PageWithPosts extends BasePage {
   private final DiscussionsHeader discussionsHeader = new DiscussionsHeader();
 
   @Getter(lazy = true)
-  private final FiltersPopOver filtersPopOver = new FiltersPopOver();
+  private final FiltersPopOverMobile filtersPopOverMobile = new FiltersPopOverMobile();
 
   @Getter(lazy = true)
   private final CommunityBadge communityBadge = new CommunityBadge();

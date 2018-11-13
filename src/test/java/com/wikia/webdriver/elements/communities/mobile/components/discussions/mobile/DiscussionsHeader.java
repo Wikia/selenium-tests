@@ -9,12 +9,12 @@ import org.openqa.selenium.support.FindBy;
 public class DiscussionsHeader extends BasePageObject {
 
   @Getter(lazy = true)
-  private final FiltersPopOver filtersPopOver = new FiltersPopOver();
+  private final FiltersPopOverMobile filtersPopOverMobile = new FiltersPopOverMobile();
   @FindBy(css = ".discussion-mobile-filter > .wds-dropdown__toggle")
   private WebElement filterMenuButton;
 
-  public FiltersPopOver openFilterMenu() {
+  public FiltersPopOverMobile openFilterMenu() {
     waitAndClick(filterMenuButton);
-    return getFiltersPopOver();
+    return this.getFiltersPopOverMobile();
   }
 }

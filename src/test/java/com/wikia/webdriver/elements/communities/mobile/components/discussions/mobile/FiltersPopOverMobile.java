@@ -8,7 +8,9 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FiltersPopOver extends BasePage {
+import java.util.List;
+
+public class FiltersPopOverMobile extends BasePage {
 
   @Getter(lazy = true)
   private final CategoriesFieldset categoriesFieldset = new CategoriesFieldset();
@@ -21,24 +23,24 @@ public class FiltersPopOver extends BasePage {
   private WebElement sortingFilter;
 
   @FindBy(css = ".sort-options .sort-trending .sort-option-label")
-  private WebElement trendingOptionInSortMenu;
+  private List<WebElement> trendingOptionInSortMenu;
 
   @FindBy(css = ".sort-options .sort-latest .sort-option-label")
-  private WebElement latestOptionInSortMenu;
+  private List<WebElement> latestOptionInSortMenu;
 
   @FindBy(css = ".filters-apply")
   private WebElement applyButtonInSortMenu;
 
-  public FiltersPopOver click() {
+  public FiltersPopOverMobile click() {
     waitAndClick(filterButton);
     return this;
   }
 
-  public FiltersPopOver chooseSortingOption(SortOption option) {
+  public FiltersPopOverMobile chooseSortingOptionMobile(SortOption option) {
     if (option == SortOption.LATEST) {
-      scrollAndClick(latestOptionInSortMenu);
+      scrollAndClick(latestOptionInSortMenu.get(1));
     } else if (option == SortOption.TRENDING) {
-      scrollAndClick(trendingOptionInSortMenu);
+      scrollAndClick(trendingOptionInSortMenu.get(1));
     } else {
       throw new IllegalArgumentException(String.format(
           "Option %s not supported by sorting",
@@ -48,7 +50,7 @@ public class FiltersPopOver extends BasePage {
     return this;
   }
 
-  public FiltersPopOver clickApplyButton() {
+  public FiltersPopOverMobile clickApplyButton() {
     scrollAndClick(applyButtonInSortMenu);
     return this;
   }

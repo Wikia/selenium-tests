@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.communities.mobile.components.discussions.co
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.communities.mobile.components.discussions.mobile.FiltersPopOverMobile;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -218,7 +218,7 @@ public class CategoriesTests extends NewTestTemplate {
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
     CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
-    final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
+    final CategoriesFieldset categoriesFieldset = page.getFiltersPopOverMobile().click().getCategoriesFieldset();
     try {
       assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
       assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(),
@@ -236,14 +236,14 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = createUniqueCategoryName();
     final CategoriesFieldset categoriesFieldset = addCategory(
-        page.getFiltersPopOver().click().getCategoriesFieldset(),
+        page.getFiltersPopOverMobile().click().getCategoriesFieldset(),
         categoryName);
     page.waitForLoadingSpinner();
     CategoryPill.Data newCategory = categoriesFieldset.findCategoryOrElseThrow(categoryName);
     try {
-      assertTrue(categoriesFieldset.hasCategory(categoryName), 
+      assertTrue(categoriesFieldset.hasCategory(categoryName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), 
+      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName),
         String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       cleanUp(newCategory);
@@ -258,7 +258,7 @@ public class CategoriesTests extends NewTestTemplate {
     CategoryPill.Data editableCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open();
     final String editedName = createUniqueCategoryName();
-    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
+    CategoriesFieldset categoriesFieldset = page.getFiltersPopOverMobile().click()
         .getCategoriesFieldset().clickEdit()
         .renameMobile(editableCategory.getName(), editedName)
         .clickApproveButton();
@@ -285,10 +285,10 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final String newCategoryName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = addCategory(
-      page.getFiltersPopOver().click().getCategoriesFieldset(),
+      page.getFiltersPopOverMobile().click().getCategoriesFieldset(),
       newCategoryName);
     try {
-      assertEquals(categoriesFieldset.getInfoMessageText(), 
+      assertEquals(categoriesFieldset.getInfoMessageText(),
         CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
     } finally {
       cleanUp(categoriesAdded);
@@ -304,7 +304,7 @@ public class CategoriesTests extends NewTestTemplate {
     final String temporaryCategoryName = createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page
-      .getFiltersPopOver()
+      .getFiltersPopOverMobile()
       .click()
       .getCategoriesFieldset();
     canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
@@ -319,9 +319,9 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getCategories();
     categoriesFieldset.clickEdit();
-    assertFalse(categoriesFieldset.canEditAllCategory(), 
+    assertFalse(categoriesFieldset.canEditAllCategory(),
       ALL_CATEGORY_SHOULD_NOT_BE_EDITABLE_MESSAGE);
-    assertFalse(categoriesFieldset.canEditGeneralCategory(), 
+    assertFalse(categoriesFieldset.canEditGeneralCategory(),
       GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
@@ -477,9 +477,9 @@ public class CategoriesTests extends NewTestTemplate {
   // helpers
 
   private void openPageAndSelectCategoryOnMobile(PostsListPage page, String categoryName) {
-    final FiltersPopOver filtersPopOver = page.getFiltersPopOver().click();
-    filtersPopOver.getCategoriesFieldset().clickCategoryWith(categoryName);
-    filtersPopOver.clickApplyButton();
+    final FiltersPopOverMobile filtersPopOverMobile = page.getFiltersPopOverMobile().click();
+    filtersPopOverMobile.getCategoriesFieldset().clickCategoryWith(categoryName);
+    filtersPopOverMobile.clickApplyButton();
     page.waitForLoadingSpinnerWith(categoryName);
   }
 
@@ -496,7 +496,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private boolean canEditCategoriesOnMobile(PostsListPage page) {
-    return page.getFiltersPopOver().click()
+    return page.getFiltersPopOverMobile().click()
         .getCategoriesFieldset()
         .canEdit();
   }
