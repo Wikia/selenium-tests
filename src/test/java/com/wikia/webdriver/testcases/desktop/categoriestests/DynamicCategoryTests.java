@@ -14,10 +14,11 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Test(groups = {"DynamicCategoryTests"}, invocationCount = 5)
 @Execute(onWikia = "category")
 public class DynamicCategoryTests extends NewTestTemplate {
 
-  @Test(groups = {"DynamicCategoryTests"})
+
   public void dynamicCategoryAnonNotAbleToChangeLayout() {
     new ArticlePageObject().open("Category:Wikia_tests");
 
@@ -26,7 +27,6 @@ public class DynamicCategoryTests extends NewTestTemplate {
     Assertion.assertFalse(layoutSelector.isVisible(), "Layout selectors are displayed for anon");
   }
 
-  @Test(groups = {"DynamicCategoryTests"})
   @Execute(asUser = User.USER)
   public void categoryExhibitionSetInPreferencesAsDefaultView() {
     new ArticlePageObject().open("Category:Wikia_tests");
@@ -37,7 +37,6 @@ public class DynamicCategoryTests extends NewTestTemplate {
 
   }
 
-  @Test(groups = {"DynamicCategoryTests"})
   @Execute(asUser = User.USER)
   public void dynamicCategoryLoggedInUserCanChangeLayout() {
     new ArticlePageObject().open("Category:Wikia_tests");
@@ -50,7 +49,6 @@ public class DynamicCategoryTests extends NewTestTemplate {
     Assertion.assertStringContains(categoryPage.getCurrentUrl(), pageUrl);
   }
 
-  @Test(groups = {"DynamicCategoryTests"})
   @Execute(asUser = User.USER_2)
   public void pagination200elementsNoNextButton() {
     new ArticlePageObject().open("Category:200elements");
@@ -62,7 +60,6 @@ public class DynamicCategoryTests extends NewTestTemplate {
     Assertion.assertFalse(paginationControls.isNextButtonVisible());
   }
 
-  @Test(groups = {"DynamicCategoryTests"})
   @Execute(asUser = User.USER_2)
   public void pagination201elementsNextButtonVisible() {
     new ArticlePageObject().open("Category:201elements");
@@ -75,7 +72,6 @@ public class DynamicCategoryTests extends NewTestTemplate {
     Assertion.assertEquals(categoryPage.getMembers().size(), 1, "Invalid number of members on category page");
   }
 
-  @Test(groups = {"DynamicCategoryTests"})
   @Execute(asUser = User.USER_2)
   public void pagination401elementsNextButtonVisible() {
     new ArticlePageObject().open("Category:401elements");
@@ -98,7 +94,6 @@ public class DynamicCategoryTests extends NewTestTemplate {
     Assertion.assertTrue(memberList.stream().anyMatch(e->e.getText().equals("Article1")));
   }
 
-  @Test(groups = {"DynamicCategoryTests"})
   @Execute(asUser = User.USER_2)
   public void overridingLayoutSetInPreferences() {
     new ArticlePageObject().open("Category:201elements");
