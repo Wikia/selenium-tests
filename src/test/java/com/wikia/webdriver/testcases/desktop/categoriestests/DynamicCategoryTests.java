@@ -87,11 +87,11 @@ public class DynamicCategoryTests extends NewTestTemplate {
     List<WebElement> memberList = categoryPage.getMembers();
 
     Assertion.assertEquals(categoryPage.getMembers().size(), 1);
-    Assertion.assertTrue(memberList.stream().anyMatch(e->e.getText().equals("Article99")));
+    Assertion.assertTrue(memberList.stream().anyMatch(e->"Article99".equals(e.getText())));
     paginationControls.clickFirstButton();
 
     memberList = categoryPage.getMembers();
-    Assertion.assertTrue(memberList.stream().anyMatch(e->e.getText().equals("Article1")));
+    Assertion.assertTrue(memberList.stream().anyMatch(e->"Article1".equals(e.getText())));
   }
 
   @Execute(asUser = User.USER_2)

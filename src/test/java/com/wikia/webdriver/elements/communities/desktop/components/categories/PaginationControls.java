@@ -22,40 +22,20 @@ public class PaginationControls<T> extends BasePageObject {
     this.outer = outer;
   }
 
-  //TODO:Check if it actually works
   public boolean isFirstButtonIsVisible() {
-
-    boolean isVisible = isVisible(firstButton);
-//    Log.info("Next page button is visible.");
-
-    return isVisible;
+    return isVisible(firstButton);
   }
 
-  //TODO:Check if it actually works
   public boolean isNextButtonVisible() {
-
-    boolean isVisible = isVisible(nextButton);
-//    Log.info("Next page button is visible.");
-
-    return isVisible;
+    return isVisible(nextButton);
   }
 
-  //TODO:Check if it actually works
   public boolean isPreviousButtonVisible() {
-
-    boolean isVisible = isVisible(previousButton);
-//    Log.info("Previous page button is visible.");
-
-    return isVisible;
+    return isVisible(previousButton);
   }
 
-  //TODO:Check if it actually works
   public boolean isLastButtonVisible() {
-
-    boolean isVisible = isVisible(lastButton);
-//    Log.info("Next page button is visible.");
-
-    return isVisible;
+    return isVisible(lastButton);
   }
 
   public T clickFirstButton() {
