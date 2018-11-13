@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Test(groups = {"DynamicCategoryTests"}, invocationCount = 5)
+@Test(groups = {"Category, Oasis_Category"})
 @Execute(onWikia = "category")
 public class DynamicCategoryTests extends NewTestTemplate {
 
