@@ -50,7 +50,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPageByPath(MobileSubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).isFooterVisible();
 
-    List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
+    List<String> elemntsWhichShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
                                                                 ARTICLE_TITLE_SELECTOR,
                                                                 WIKIA_STATS_SELECTOR,
                                                                 FEATURED_CONTENT_SELECTOR,
@@ -60,8 +60,8 @@ public class MainPageTests extends NewTestTemplate {
                                                                 TRENDING_VIDEOS_SELECTOR
     );
 
-    verifyElementsVisible(elemntsWhiuchShouldBeDisplayed);
-    verifyElementsPositionOnPage(elemntsWhiuchShouldBeDisplayed);
+    verifyElementsVisible(elemntsWhichShouldBeDisplayed);
+    verifyElementsPositionOnPage(elemntsWhichShouldBeDisplayed);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_002")
