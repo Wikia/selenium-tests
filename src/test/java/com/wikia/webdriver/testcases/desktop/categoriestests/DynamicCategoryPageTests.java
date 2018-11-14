@@ -16,20 +16,23 @@ import java.util.List;
 
 @Test(groups = {"Category, Oasis_Category"})
 @Execute(onWikia = "category")
-public class DynamicCategoryTests extends NewTestTemplate {
+public class DynamicCategoryPageTests extends NewTestTemplate {
 
 
   public void dynamicCategoryAnonNotAbleToChangeLayout() {
-    new ArticlePageObject().open("Category:Wikia_tests");
+    new ArticlePageObject().open("Category:200elements");
 
     DynamicCategoryPage categoryPage = new DynamicCategoryPage();
     CategoryLayoutSelector layoutSelector = categoryPage.getLayoutSelector();
     Assertion.assertFalse(layoutSelector.isVisible(), "Layout selectors are displayed for anon");
   }
 
+  /**
+   * Category exhibition is set as default for USER
+   */
   @Execute(asUser = User.USER)
   public void categoryExhibitionSetInPreferencesAsDefaultView() {
-    new ArticlePageObject().open("Category:Wikia_tests");
+    new ArticlePageObject().open("Category:200elements");
 
     DynamicCategoryPage categoryPage = new DynamicCategoryPage();
     CategoryLayoutSelector layoutSelector = categoryPage.getLayoutSelector();
@@ -39,7 +42,7 @@ public class DynamicCategoryTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void dynamicCategoryLoggedInUserCanChangeLayout() {
-    new ArticlePageObject().open("Category:Wikia_tests");
+    new ArticlePageObject().open("Category:200elements");
 
     DynamicCategoryPage categoryPage = new DynamicCategoryPage();
     CategoryLayoutSelector layoutSelector = categoryPage.getLayoutSelector();
@@ -49,6 +52,9 @@ public class DynamicCategoryTests extends NewTestTemplate {
     Assertion.assertStringContains(categoryPage.getCurrentUrl(), pageUrl);
   }
 
+  /**
+   * Default settings (dynamic category) are applied for USER_2
+   */
   @Execute(asUser = User.USER_2)
   public void pagination200elementsNoNextButton() {
     new ArticlePageObject().open("Category:200elements");
@@ -105,5 +111,18 @@ public class DynamicCategoryTests extends NewTestTemplate {
     layoutSelector.switchToCategoryExhibitionView();
     categoryPage.refreshPage();
     Assertion.assertTrue(layoutSelector.isCategoryExhibitionActive());
+  }
+
+  @Execute(asUser = User.USER_2)
+  public void subcategoriesAreMixedWithArticles() {
+    new ArticlePageObject().open("Category:Articles");
+
+    DynamicCategoryPage categoryPage = new DynamicCategoryPage();
+    List<WebElement> memberList = categoryPage.getMembers();
+    Assertion.assertTrue(
+        memberList.stream().anyMatch(m -> m.getText().matches("(?:Category|Kategoria):TestArticles")),
+        "Category cannot be found in the list"
+    );
+
   }
 }
