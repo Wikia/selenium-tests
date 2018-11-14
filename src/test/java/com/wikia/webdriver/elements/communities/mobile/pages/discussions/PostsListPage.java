@@ -28,7 +28,7 @@ public class PostsListPage extends PageWithPosts {
   private final ErrorMessages errorMessages = new ErrorMessages();
   @Getter(lazy = true)
   private final CategoriesFieldset categories = new CategoriesFieldset();
-  @FindBy(css = ".wikia-guidelines")
+  @FindBy(css = ".guidelines-link")
   private WebElement guidelinesLink;
 
   @Override
