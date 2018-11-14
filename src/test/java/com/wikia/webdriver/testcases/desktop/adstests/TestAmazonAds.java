@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.desktop.adstests;
 
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -19,7 +20,8 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     checkAmazonSlots(AdsAmazonObject.DESKTOP_SLOTS);
   }
 
-  @Test(groups = "AmazonAdsMobile")
+  @Test(groups = "AmazonAdsMobile", enabled = false)
+  @RelatedIssue(issueID = "ADEN-7541")
   @NetworkTrafficDump
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void testAmazonDisplayAdsMobile() {
