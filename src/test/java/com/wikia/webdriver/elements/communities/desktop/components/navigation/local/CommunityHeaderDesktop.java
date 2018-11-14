@@ -146,7 +146,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
 
   public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
     wait.forElementClickable(exploreWikiActivityLink);
-    scrollAndClick(exploreWikiActivityLink);
+    exploreWikiActivityLink.click();
 
     Log.info("explore -> wikiActivity link clicked");
 
@@ -155,8 +155,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
 
   public ArticlePageObject clickExploreRandomLink() {
     wait.forElementClickable(exploreRandomLink);
-    scrollAndClick(exploreRandomLink);
-
+    exploreRandomLink.click();
     Log.info("explore -> random page link clicked");
 
     return new ArticlePageObject();
@@ -164,22 +163,19 @@ public class CommunityHeaderDesktop extends BasePageObject {
 
   public void clickExploreCommunityLink() {
     wait.forElementClickable(exploreCommunityLink);
-    scrollAndClick(exploreCommunityLink);
-
+    exploreCommunityLink.click();
     Log.info("explore -> community link clicked");
   }
 
   public void clickExploreVideosLink() {
     wait.forElementClickable(exploreVideosLink);
-    scrollAndClick(exploreVideosLink);
-
+    exploreVideosLink.click();
     Log.info("explore -> videos link clicked");
   }
 
   public void clickExploreImagesLink() {
     wait.forElementClickable(exploreImagesLink);
-    scrollAndClick(exploreImagesLink);
-
+    exploreImagesLink.click();
     Log.info("explore -> images link clicked");
   }
 
