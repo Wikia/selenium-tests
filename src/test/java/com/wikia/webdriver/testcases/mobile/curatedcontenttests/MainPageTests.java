@@ -28,7 +28,7 @@ public class MainPageTests extends NewTestTemplate {
   private static String WIKIA_STATS_SELECTOR = ".wikia-stats-container";
   private static String FEATURED_CONTENT_SELECTOR = ".featured-content";
   private static String CURATED_CONTENT_SELECTOR = ".curated-content";
-  private static String AD_MOBILE_IN_CONTENT_SELECTOR = ".mobile-in-content";
+  private static String AD_MOBILE_IN_CONTENT_SELECTOR = "#incontent_boxad_1";
   private static String TRENDING_ARTICLES_SELECTOR = ".trending-articles";
   private static String TRENDING_VIDEOS_SELECTOR = ".trending-videos";
 
