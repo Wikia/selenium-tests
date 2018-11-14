@@ -20,9 +20,16 @@ public class AdsVelesObject extends AdsBaseObject {
       DIRECT_PLAYER_EVENT_PATTERN
       = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
   public static final String
+      MOBILE_PLAYER_EVENT_PATTERN_WITH_OFFER
+      = ".*adengplayerinfo.*event_name=in_viewport_with_offer.*";
+  public static final String
+      MOBILE_PLAYER_EVENT_PATTERN_WITHOUT_OFFER
+      = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
+  public static final String
       NO_OFFER_PLAYER_EVENT_PATTERN
       = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
-  private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER,.mobile-in-content";
+  private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER";
+  private static final String MOBILE_INCONTENT_WRAPPER = "#incontent_player";
   private static final String INCONTENT_VIDEO = ".video-display-wrapper";
   private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
 
@@ -30,9 +37,15 @@ public class AdsVelesObject extends AdsBaseObject {
     super(testedPage);
   }
 
-  public boolean isVelesPlayerInIncontentSlotDisplayed() {
+  public boolean isVelesPlayerInIncontentSlotDisplayed(boolean isMobile) {
     try {
-      triggerIncontentPlayer();
+      if (isMobile) {
+        triggerMobileIncontentPlayer();
+//        wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+      } else {
+        triggerIncontentPlayer();
+//        wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+      }
       wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
@@ -47,6 +60,12 @@ public class AdsVelesObject extends AdsBaseObject {
 
   public void triggerIncontentPlayer() {
     final WebElement wrapper = driver.findElement(By.cssSelector(INCONTENT_WRAPPER));
+
+    jsActions.scrollElementIntoViewPort(wrapper);
+  }
+
+  public void triggerMobileIncontentPlayer() {
+    final WebElement wrapper = driver.findElement(By.cssSelector(MOBILE_INCONTENT_WRAPPER));
 
     jsActions.scrollElementIntoViewPort(wrapper);
   }
