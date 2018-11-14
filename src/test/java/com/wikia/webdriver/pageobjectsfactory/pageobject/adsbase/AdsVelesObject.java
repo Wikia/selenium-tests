@@ -41,10 +41,8 @@ public class AdsVelesObject extends AdsBaseObject {
     try {
       if (isMobile) {
         triggerMobileIncontentPlayer();
-//        wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
       } else {
         triggerIncontentPlayer();
-//        wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
       }
       wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
       return true;
