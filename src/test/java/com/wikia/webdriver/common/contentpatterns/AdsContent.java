@@ -2,6 +2,8 @@ package com.wikia.webdriver.common.contentpatterns;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdsContent {
 
@@ -13,14 +15,15 @@ public class AdsContent {
       = "top.window.adDriver2ForcedStatus['%s']='success';";
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
-  public static final String MOBILE_BOTTOM_LB = "BOTTOM_LEADERBOARD";
+  public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
   public static final String TOP_LB = "TOP_LEADERBOARD";
   public static final String MEDREC = "TOP_RIGHT_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
-  public static final String MOBILE_TOP_LB = "MOBILE_TOP_LEADERBOARD";
-  public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
-  public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+  public static final String MOBILE_TOP_LB = "mobile_top_leaderboard";
+  public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
+  public static final String MOBILE_AD_IN_CONTENT_PLAYER = "incontent_player";
+  public static final String MOBILE_PREFOOTER = "mobile_prefooter";
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
   public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
   public static final String INVISIBLE_HIGH_IMPACT_2 = "INVISIBLE_HIGH_IMPACT_2";
@@ -56,10 +59,11 @@ public class AdsContent {
     );
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#MOBILE_IN_CONTENT");
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#mobile_top_leaderboard");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#incontent_boxad_1");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT_PLAYER, "#incontent_player");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#bottom_leaderboard");
 
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(
@@ -99,7 +103,16 @@ public class AdsContent {
   }
 
   public static String getSlotSelector(String slotName) {
-    if (slotName.startsWith("MOBILE")) {
+
+    Pattern pattern = Pattern.compile("[A-Z]");
+    Matcher match = pattern.matcher(slotName);
+
+    int lastCapitalIndex = -1;
+    if (match.find()) {
+      lastCapitalIndex = match.start();
+    }
+
+    if (lastCapitalIndex == -1) {
       return MOBILE_SLOTS_SELECTORS.get(slotName);
     }
 
