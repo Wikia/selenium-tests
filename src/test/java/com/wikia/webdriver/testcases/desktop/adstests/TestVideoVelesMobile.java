@@ -27,7 +27,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithDirectOfferEventMobile"})
-  public void adsVelesWithDirectOfferEvent() {
+  public void adsVelesWithOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE.getUrl());
 
@@ -36,6 +36,9 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     );
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
                                                     AdsVelesObject.MOBILE_PLAYER_EVENT_PATTERN_WITH_OFFER
+    );
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                    AdsVelesObject.MOBILE_PLAYER_LINE_ITEM_WITH_OFFER
     );
   }
 
@@ -55,6 +58,9 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     );
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
                                                     AdsVelesObject.MOBILE_PLAYER_EVENT_PATTERN_WITH_OFFER
+    );
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                    AdsVelesObject.MOBILE_PLAYER_LINE_ITEM_WITH_BIDDER
     );
   }
 

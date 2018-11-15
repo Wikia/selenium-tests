@@ -23,6 +23,12 @@ public class AdsVelesObject extends AdsBaseObject {
       MOBILE_PLAYER_EVENT_PATTERN_WITH_OFFER
       = ".*adengplayerinfo.*event_name=in_viewport_with_offer.*";
   public static final String
+      MOBILE_PLAYER_LINE_ITEM_WITH_OFFER
+      = ".*adengplayerinfo.*line_item_id=4407275016.*";
+  public static final String
+      MOBILE_PLAYER_LINE_ITEM_WITH_BIDDER
+      = ".*adengplayerinfo.*line_item_id=4762545758.*";
+  public static final String
       MOBILE_PLAYER_EVENT_PATTERN_WITHOUT_OFFER
       = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
   public static final String
