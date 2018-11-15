@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
@@ -15,29 +14,31 @@ import org.testng.annotations.Test;
 public class TestVideoVelesMobile extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "project43";
-  private static final String OUTSTREAM_DEBUG_MODE = "wikia_video_adapter=2000";
+  private static final String WITH_BIDDER = "wikia_video_adapter=2000";
 
-  private static final String ASSERTION_VELES_PLAYER_RENDERED = "Veles player rendered";
   private static final String ASSERTION_VELES_PLAYER_NOT_RENDERED = "Veles player not rendered";
 
-  private static final Page TEST_PAGE_BIDDER = new Page(WIKIA,
-                                                        "SyntheticTests/Video/Porvata/Bidder"
+  private static final Page TEST_PAGE = new Page(WIKIA,
+                                                        "SyntheticTests/Video/Porvata3"
   );
-  private static final Page TEST_PAGE_DIRECT = new Page(WIKIA,
-                                                        "SyntheticTests/Video/Porvata/Direct"
+  private static final Page TEST_PAGE_NO_OFFER = new Page(WIKIA,
+                                                        "SyntheticTests/Video/Porvata3/NoOffer"
   );
 
   @NetworkTrafficDump(useMITM = true)
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithDirectOfferEventMobile"})
-  public void adsVelesWithDirectOfferEvent() {
+  public void adsVelesWithOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
-    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
+    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE.getUrl());
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(true),
                          ASSERTION_VELES_PLAYER_NOT_RENDERED
     );
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
-                                                    AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN
+                                                    AdsVelesObject.MOBILE_PLAYER_EVENT_PATTERN_WITH_OFFER
+    );
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                    AdsVelesObject.MOBILE_PLAYER_LINE_ITEM_WITH_OFFER
     );
   }
 
@@ -45,18 +46,21 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithBidderOfferEventMobile"})
   public void adsVelesWithBidderOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
-    String url = TEST_PAGE_BIDDER.getUrl();
+    String url = TEST_PAGE.getUrl();
     AdsVelesObject velesAds = new AdsVelesObject(driver,
                                                  urlBuilder.appendQueryStringToURL(url,
-                                                                                   OUTSTREAM_DEBUG_MODE
+                                                                                   WITH_BIDDER
                                                  )
     );
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(true),
                          ASSERTION_VELES_PLAYER_NOT_RENDERED
     );
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
-                                                    AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN
+                                                    AdsVelesObject.MOBILE_PLAYER_EVENT_PATTERN_WITH_OFFER
+    );
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
+                                                    AdsVelesObject.MOBILE_PLAYER_LINE_ITEM_WITH_BIDDER
     );
   }
 
@@ -64,22 +68,13 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
   @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferEventMobile"})
   public void adsVelesWithoutOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
-    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
+    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_NO_OFFER.getUrl());
 
-    velesAds.triggerIncontentPlayer();
+    velesAds.triggerMobileIncontentPlayer();
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
-                                                    AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN
+                                                    AdsVelesObject.MOBILE_PLAYER_EVENT_PATTERN_WITHOUT_OFFER
     );
     Assertion.assertTrue(velesAds.isVideoHidden(), "Video player not hidden");
   }
 
-  @Test(groups = {"AdsVideoVelesMobile", "AdsVelesWithoutOfferHopToDisplayMobile"})
-  public void adsVelesWithoutOfferHopToDisplay() {
-    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
-
-    Assertion.assertFalse(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
-                          ASSERTION_VELES_PLAYER_RENDERED
-    );
-    velesAds.verifySlotAttribute(AdsContent.MOBILE_AD_IN_CONTENT, "data-slot-result", "hop");
-  }
 }
