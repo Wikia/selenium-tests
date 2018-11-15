@@ -94,8 +94,18 @@ public class TestAdsPrebid extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON.getUrl());
 
-    Assertion.assertEquals(getFVStatus(ads), "error");
+    Assertion.assertEquals(getFVStatus(ads), "success");
     Assertion.assertEquals(ads.getFVLineItem(), BIDDER_PREROLL_LINE_ITEM_ID);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  public void fvBidderVideoAdNotDisplayed() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON_NO_VIDEO.getUrl());
+
+    Assertion.assertEquals(getFVStatus(ads), "error");
   }
 
   private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPatterns) {
