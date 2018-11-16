@@ -225,6 +225,7 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public String getInfoMessageText() {
+    wait.forElementVisible(infoMessage);
     return infoMessage.getText();
   }
 
