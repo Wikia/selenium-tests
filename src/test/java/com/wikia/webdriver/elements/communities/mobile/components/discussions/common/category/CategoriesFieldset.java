@@ -193,6 +193,7 @@ public class CategoriesFieldset extends BasePage {
 
   public CategoriesFieldset clickApproveButton() {
     approveChangesButton.click();
+    this.waitForLoadingSpinner();
     return this;
   }
 
