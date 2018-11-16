@@ -241,9 +241,9 @@ public class CategoriesTests extends NewTestTemplate {
     page.waitForLoadingSpinner();
     CategoryPill.Data newCategory = categoriesFieldset.findCategoryOrElseThrow(categoryName);
     try {
-      assertTrue(categoriesFieldset.hasCategory(categoryName), 
+      assertTrue(categoriesFieldset.hasCategory(categoryName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), 
+      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName),
         String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       cleanUp(newCategory);
@@ -288,7 +288,7 @@ public class CategoriesTests extends NewTestTemplate {
       page.getFiltersPopOver().click().getCategoriesFieldset(),
       newCategoryName);
     try {
-      assertEquals(categoriesFieldset.getInfoMessageText(), 
+      assertEquals(categoriesFieldset.getInfoMessageText(),
         CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
     } finally {
       cleanUp(categoriesAdded);
@@ -319,9 +319,9 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getCategories();
     categoriesFieldset.clickEdit();
-    assertFalse(categoriesFieldset.canEditAllCategory(), 
+    assertFalse(categoriesFieldset.canEditAllCategory(),
       ALL_CATEGORY_SHOULD_NOT_BE_EDITABLE_MESSAGE);
-    assertFalse(categoriesFieldset.canEditGeneralCategory(), 
+    assertFalse(categoriesFieldset.canEditGeneralCategory(),
       GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
@@ -376,6 +376,7 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final String newCategoryName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = addCategory(page.getCategories(), newCategoryName);
+    categoriesFieldset.clickEdit();
     try {
       assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE,
         INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);

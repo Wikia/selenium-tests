@@ -193,6 +193,7 @@ public class CategoriesFieldset extends BasePage {
 
   public CategoriesFieldset clickApproveButton() {
     approveChangesButton.click();
+    this.waitForLoadingSpinner();
     return this;
   }
 
@@ -224,6 +225,7 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public String getInfoMessageText() {
+    wait.forElementVisible(infoMessage);
     return infoMessage.getText();
   }
 
