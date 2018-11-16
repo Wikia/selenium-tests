@@ -192,7 +192,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private void clickFollowOn(PageWithPosts page, PostEntity.Data data) {
-    page.getPostById(data.getId()).clickFollow();
+    page.getPostById(data.getFirstPostId()).clickFollow();
   }
 
   private void assertThatPostCanBeFollowedAndUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
