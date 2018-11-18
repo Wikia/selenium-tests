@@ -25,6 +25,9 @@ public class AdsDataProvider {
   public static final Page PAGE_FV_RUBICON = new Page(WIKI_SPECIAL,
                                                       "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000"
   );
+  public static final Page PAGE_FV_RUBICON_NO_VIDEO = new Page(WIKI_SPECIAL,
+                                                      "SyntheticTests/Premium/FeaturedVideo/Rubicon"
+  );
   public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
   public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
   public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
