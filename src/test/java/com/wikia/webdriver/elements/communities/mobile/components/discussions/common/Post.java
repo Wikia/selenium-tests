@@ -47,7 +47,7 @@ public class Post extends BasePage {
   @FindBy(css = ".post-card__body .post-content")
   private WebElement postDetails;
 
-  @FindBy(css = ".post-detail .og-container")
+  @FindBy(css = ".post-detail > .post-card__body > a")
   private WebElement postOpenGraph;
 
   @FindBy(css = ".post-detail .poll-wrapper")

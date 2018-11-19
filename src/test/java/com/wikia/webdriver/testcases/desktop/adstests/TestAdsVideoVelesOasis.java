@@ -31,7 +31,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(false),
                          ASSERTION_VELES_PLAYER_NOT_RENDERED
     );
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
@@ -50,7 +50,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
                                                  )
     );
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(false),
                          ASSERTION_VELES_PLAYER_NOT_RENDERED
     );
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,
@@ -89,7 +89,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
   public void adsVelesWithoutOfferHopToDisplay() {
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
 
-    Assertion.assertFalse(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+    Assertion.assertFalse(velesAds.isVelesPlayerInIncontentSlotDisplayed(false),
                           ASSERTION_VELES_PLAYER_RENDERED
     );
     velesAds.verifySlotAttribute(AdsContent.INCONTENT_PLAYER, "data-slot-result", "hop");
