@@ -29,8 +29,8 @@ public class UrlBuilder extends BaseUrlBuilder {
   private UrlBuilder(String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
     super(env);
     //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis except languagepath tests
-    areLanguageTestsEnabled = (Configuration.getForceLanguageInPath()
-                               && "szl".equals(Configuration.getWikiLanguage()));
+    areLanguageTestsEnabled = Configuration.getForceLanguageInPath()
+                               && "szl".equals(Configuration.getWikiLanguage());
     if (FANDOM_EXCLUDED_WIKIS.contains(wiki) || areLanguageTestsEnabled) {
       this.wikiName = wiki;
     } else {
