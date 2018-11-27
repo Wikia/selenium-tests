@@ -73,7 +73,7 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = "#articleCategories .category a")
   private List<WebElement> categories;
 
-  @FindBy(css = "a[href*='redlink']")
+  @FindBy(css = "a.new")
   private List<WebElement> redLinks;
 
   @FindBy(css = ".pi-item .external")
