@@ -61,7 +61,7 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = ".poem")
   private List<WebElement> internalLinksInsidePoemTag;
 
-  @FindBy(css = ".poem a[href*='redlink']")
+  @FindBy(css = ".poem a.new")
   private List<WebElement> externalLinksInsidePoemTag;
 
   @FindBy(css = ".pi-navigation")
