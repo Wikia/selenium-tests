@@ -61,7 +61,7 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = ".poem")
   private List<WebElement> internalLinksInsidePoemTag;
 
-  @FindBy(css = ".poem a[href*='redlink']")
+  @FindBy(css = ".poem a[title='Redlink89328932 (page does not exist)']")
   private List<WebElement> externalLinksInsidePoemTag;
 
   @FindBy(css = ".pi-navigation")
@@ -73,7 +73,7 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = "#articleCategories .category a")
   private List<WebElement> categories;
 
-  @FindBy(css = "a[href*='redlink']")
+  @FindBy(css = "a[title='Redlink89328932 (page does not exist)']")
   private List<WebElement> redLinks;
 
   @FindBy(css = ".pi-item .external")
