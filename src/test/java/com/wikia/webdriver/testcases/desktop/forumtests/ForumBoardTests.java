@@ -25,7 +25,7 @@ public class ForumBoardTests extends NewTestTemplate {
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
 
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
   }
 
@@ -97,7 +97,7 @@ public class ForumBoardTests extends NewTestTemplate {
 
     forumBoard.open(boardTitle);
 
-    ForumThreadPageObject thread = forumBoard.startDiscussion("A nice discussion", "A nice Message", false);
+    ForumThreadPageObject thread = forumBoard.startDiscussion("A nice discussion", "A nice Message");
     thread.verifyDiscussionTitleAndMessage("A nice discussion", "A nice Message");
 
     forumBoard.open(boardTitle);

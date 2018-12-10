@@ -36,7 +36,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPage forumBoard = forumMainPage.openForumBoard();
     forumBoardTitle = forumBoard.getTitle();
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
   }
 
