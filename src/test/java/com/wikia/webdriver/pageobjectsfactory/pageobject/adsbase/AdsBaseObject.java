@@ -61,7 +61,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private long tStart;
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   private WebElement presentLeaderboard;
-  @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
+  @FindBy(css = "div[id*='TOP_BOXAD']")
   private WebElement presentMedrec;
   @FindBy(css = FLOATING_MEDREC_SELECTOR)
   private WebElement presentFloatingMedrec;
@@ -135,7 +135,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyMedrec() {
-    verifyAdVisibleInSlot("div[id*='TOP_RIGHT_BOXAD']", presentMedrec);
+    verifyAdVisibleInSlot("div[id*='TOP_BOXAD']", presentMedrec);
   }
 
   public void verifyTopLeaderboard() {
@@ -284,6 +284,16 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   /**
+   * Test whether the correct GPT MEGA ad unit is called
+   *
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName the name of the slot an ad is going to be inserted into
+   */
+  public void verifyGptMEGAIframe(String adUnit, String slotName) {
+    verifyGptMEGAIframe(WIKIA_DFP_CLIENT_ID, adUnit, slotName);
+  }
+
+  /**
    * Builds GPT iframe id
    *
    * @param dfpClientId in most cases it's Wikia id
@@ -314,6 +324,17 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
     verifyIframe(slotName, buildGptIframeId(dfpClientId, adUnit, slotName, src));
+  }
+
+  /**
+   * Test whether the correct GPT MEGA ad unit is called
+   *
+   * @param dfpClientId in most cases it's Wikia id
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName    the name of the slot an ad is going to be inserted into
+   */
+  public void verifyGptMEGAIframe(int dfpClientId, String adUnit, String slotName) {
+    verifyIframe(slotName, buildMEGAGptIframeId(dfpClientId, adUnit));
   }
 
   private void verifyIframe(String slotName, String iframeId) {

@@ -17,7 +17,7 @@ public class AdsContent {
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
   public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
   public static final String TOP_LB = "TOP_LEADERBOARD";
-  public static final String MEDREC = "TOP_RIGHT_BOXAD";
+  public static final String MEDREC = "TOP_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
   public static final String MOBILE_TOP_LB = "mobile_top_leaderboard";
@@ -40,13 +40,13 @@ public class AdsContent {
 
     FILE_PAGE_SLOTS_SELECTORS = new HashMap<>();
     FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    FILE_PAGE_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    FILE_PAGE_SLOTS_SELECTORS.put(MEDREC, "#TOP_BOXAD");
     FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
 
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    SLOTS_SELECTORS.put(MEDREC, "#TOP_BOXAD");
     SLOTS_SELECTORS.put(FLOATING_MEDREC, "#INCONTENT_BOXAD_1");
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
