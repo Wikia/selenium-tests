@@ -38,6 +38,7 @@ public class AdsVelesObject extends AdsBaseObject {
   private static final String MOBILE_INCONTENT_WRAPPER = "#incontent_player";
   private static final String INCONTENT_VIDEO = ".video-display-wrapper";
   private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
+  private static final int DEFAULT_TIMEOUT = 15;
 
   public AdsVelesObject(WebDriver driver, String testedPage) {
     super(testedPage);
@@ -50,7 +51,7 @@ public class AdsVelesObject extends AdsBaseObject {
       } else {
         triggerIncontentPlayer();
       }
-      wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+      wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)), DEFAULT_TIMEOUT);
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       Log.log("Video Veles ad not displayed", ex, true);
