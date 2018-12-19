@@ -125,7 +125,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/AdDriver2ForceStatus/Success",
-                           Arrays.asList("TOP_LEADERBOARD", "TOP_BOXAD")}};
+                           Arrays.asList("TOP_LEADERBOARD", "TOP_BOXAD,TOP_RIGHT_BOXAD")}};
   }
 
   @DataProvider
