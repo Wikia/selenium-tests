@@ -53,4 +53,21 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
+
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "dfpMEGAParams", groups = {
+      "DfpParamsPresentOasis", "Ads"})
+  public void dfpMEGAParamsPresentOasis(
+      String wikiName,
+      String article,
+      String adUnit,
+      String slot,
+      List<String> pageParams,
+      List<String> slotParams
+  ) {
+    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
+    AdsBaseObject ads = new AdsBaseObject(testedPage);
+
+    ads.verifyGptMEGAIframe(adUnit, slot);
+    ads.verifyGptParams(slot, pageParams, slotParams);
+  }
 }
