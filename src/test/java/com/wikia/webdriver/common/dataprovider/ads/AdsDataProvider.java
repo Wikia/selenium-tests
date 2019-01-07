@@ -125,7 +125,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/AdDriver2ForceStatus/Success",
-                           Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")}};
+                           Arrays.asList("TOP_LEADERBOARD", "TOP_BOXAD,TOP_RIGHT_BOXAD")}};
   }
 
   @DataProvider
@@ -170,30 +170,6 @@ public class AdsDataProvider {
             "\"pform\":[\"pc\",\"psp\"]",
             "\"sex\":[\"m\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"fallout", "Fallout", "wka.gaming/_fallout//article", "TOP_RIGHT_BOXAD", Arrays.asList(
-            "\"s0\":\"gaming\"",
-            "\"s0v\":\"games\"",
-            "\"s0c\":[\"gaming\"]",
-            "\"s1\":\"_fallout\"",
-            "\"s2\":\"article\"",
-            "\"ar\":\"4:3\"",
-            "\"artid\":\"948\"",
-            "\"cat\":[\"fallout\"]",
-            "\"dmn\":\"wikiacom\"",
-            "\"hostpre\":",
-            "\"lang\":\"en\"",
-            "\"wpage\":\"fallout\"",
-            "\"ref\":\"direct\"",
-            "\"pv\":\"2\"",
-            "\"top\":\"1k\"",
-            "\"sex\":[\"m\"]",
-            "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
-            "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
-            "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
-            "\"pub\":[\"bethesda\"]",
-            "\"esrb\":\"mature\"",
-            "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")},
         {"runescape", "Grew", "wka.gaming/_runescape//article", "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
@@ -238,26 +214,6 @@ public class AdsDataProvider {
             "\"theme\":[\"magic\"]",
             "\"esrb\":\"ec\""
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"civilization", "Category:Browse", "wka.gaming/_civilization//article", "TOP_RIGHT_BOXAD",
-         Arrays.asList("\"s0\":\"gaming\"",
-                       "\"s0v\":\"games\"",
-                       "\"s0c\":[\"gaming\"]",
-                       "\"s1\":\"_civilization\"",
-                       "\"s2\":\"article\"",
-                       "\"ar\":\"4:3\"",
-                       "\"artid\":\"25\"",
-                       "\"hostpre\":",
-                       "\"lang\":\"en\"",
-                       "\"wpage\":\"category:browse\"",
-                       "\"ref\":\"direct\"",
-                       "\"pv\":\"2\"",
-                       "\"top\":\"1k\"",
-                       "\"sex\":[\"m\"]",
-                       "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
-                       "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
-                       "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
-                       "\"esrb\":\"everyone\""
-         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")},
         {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "TOP_LEADERBOARD",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
@@ -280,9 +236,59 @@ public class AdsDataProvider {
                        "\"sex\":[\"m\"]",
                        "\"pub\":[\"blizzard\"]",
                        "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
-         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"overlordmaruyama", "Blood_of_Jormungandr", "wka.ent/_not_a_top1k_wiki//article",
-         "TOP_RIGHT_BOXAD", Arrays.asList("\"s0\":\"ent\"",
+         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")}};
+  }
+
+  @DataProvider
+  public static Object[][] dfpMEGAParams() {
+    return new Object[][]{
+        {"fallout", "Fallout", "wka1a.MR/top_boxad/desktop/oasis-article-ic/_fallout-gaming", "TOP_BOXAD",
+         Arrays.asList(
+            "\"s0\":\"gaming\"",
+            "\"s0v\":\"games\"",
+            "\"s0c\":[\"gaming\"]",
+            "\"s1\":\"_fallout\"",
+            "\"s2\":\"article\"",
+            "\"ar\":\"4:3\"",
+            "\"artid\":\"948\"",
+            "\"cat\":[\"fallout\"]",
+            "\"dmn\":\"wikiacom\"",
+            "\"hostpre\":",
+            "\"lang\":\"en\"",
+            "\"wpage\":\"fallout\"",
+            "\"ref\":\"direct\"",
+            "\"pv\":\"2\"",
+            "\"top\":\"1k\"",
+            "\"sex\":[\"m\"]",
+            "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+            "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+            "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+            "\"pub\":[\"bethesda\"]",
+            "\"esrb\":\"mature\"",
+            "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
+        {"civilization", "Category:Browse", "wka1a.MR/top_boxad/desktop/oasis-article/_civilization-gaming", "TOP_BOXAD",
+         Arrays.asList("\"s0\":\"gaming\"",
+                       "\"s0v\":\"games\"",
+                       "\"s0c\":[\"gaming\"]",
+                       "\"s1\":\"_civilization\"",
+                       "\"s2\":\"article\"",
+                       "\"ar\":\"4:3\"",
+                       "\"artid\":\"25\"",
+                       "\"hostpre\":",
+                       "\"lang\":\"en\"",
+                       "\"wpage\":\"category:browse\"",
+                       "\"ref\":\"direct\"",
+                       "\"pv\":\"2\"",
+                       "\"top\":\"1k\"",
+                       "\"sex\":[\"m\"]",
+                       "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                       "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                       "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
+                       "\"esrb\":\"everyone\""
+         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
+        {"overlordmaruyama", "Blood_of_Jormungandr", "wka1a.MR/top_boxad/desktop/oasis-article/_not_a_top1k_wiki-ent", "TOP_BOXAD",
+         Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"books\"",
                                           "\"s0c\":[\"ent\",\"comics\"]",
                                           "\"s1\":\"_overlordmaruyama\"",
@@ -296,7 +302,7 @@ public class AdsDataProvider {
                                           "\"ref\":\"direct\"",
                                           "\"pv\":\"2\"",
                                           "\"esrb\":\"teen\""
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")}};
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")}};
   }
 
   @DataProvider
