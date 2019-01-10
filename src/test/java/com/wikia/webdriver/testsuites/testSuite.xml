@@ -71,6 +71,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleTOCTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ModalTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.RTETemplateTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ExampleTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.ConfirmEmailTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.FacebookTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.auth.GoogleTests"/>
