@@ -129,9 +129,10 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpParamsSynthetic() {
+  public static Object[][] dfpMEGAParamsTLB() {
     return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/DfpParams", null, "wka.life/_top1k_wiki//article",
+        {WIKI_SPECIAL, "SyntheticTests/DfpParams",
+         "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-life",
          "TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
@@ -142,12 +143,14 @@ public class AdsDataProvider {
                                           "\"lang\":\"en\"",
                                           "\"esrb\":\"teen\""
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"test\"")}};
-  }
+    }
 
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
-        {"yugioh", "Dark_Magician", "wka.gaming/_top1k_wiki//article", "TOP_LEADERBOARD", Arrays.asList(
+        {"yugioh", "Dark_Magician",
+         "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
+         "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"anime\"]",
@@ -170,7 +173,8 @@ public class AdsDataProvider {
             "\"pform\":[\"pc\",\"psp\"]",
             "\"sex\":[\"m\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"runescape", "Grew", "wka.gaming/_top1k_wiki//article", "TOP_LEADERBOARD", Arrays.asList(
+        {"runescape", "Grew", "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
+         "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"gaming\"]",
@@ -192,7 +196,8 @@ public class AdsDataProvider {
             "\"esrb\":\"teen\"",
             "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"avatar", "Avatar_Wiki", "wka.ent/_top1k_wiki//home", "TOP_LEADERBOARD", Arrays.asList(
+        {"avatar", "Avatar_Wiki", "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-ent",
+         "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"ent\"",
             "\"s0v\":\"tv\"",
             "\"s0c\":[\"tv\"]",
@@ -214,7 +219,8 @@ public class AdsDataProvider {
             "\"theme\":[\"magic\"]",
             "\"esrb\":\"ec\""
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"starcraft", "StarCraft_Wiki", "wka.gaming/_top1k_wiki//home", "TOP_LEADERBOARD",
+        {"starcraft", "StarCraft_Wiki",
+         "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-gaming", "TOP_LEADERBOARD",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -328,8 +334,7 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] providersChainOasis() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB,
-                           "DirectGpt; RemnantGpt"}};
+    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt"}};
   }
 
   @DataProvider

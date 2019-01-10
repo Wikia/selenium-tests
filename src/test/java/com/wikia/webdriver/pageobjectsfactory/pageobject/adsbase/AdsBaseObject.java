@@ -46,7 +46,7 @@ public class AdsBaseObject extends WikiBasePageObject {
                                                        "data-gpt-creative-size",};
   private static final String[] SPOTLIGHT_SLOTS = {"#SPOTLIGHT_FOOTER_1", "#SPOTLIGHT_FOOTER_2",
                                                    "#SPOTLIGHT_FOOTER_3",};
-  private static final String[] PROVIDERS = {"DirectGpt", "DirectGptMobile", "RemnantGpt",
+  private static final String[] PROVIDERS = {"DirectGpt", "DirectGptMobile",
                                              "RemnantGptMobile"};
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC
