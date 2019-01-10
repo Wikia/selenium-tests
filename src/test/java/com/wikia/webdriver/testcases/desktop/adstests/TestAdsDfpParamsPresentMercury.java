@@ -40,7 +40,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
     AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.refreshPage();
-    ads.verifyGptIframe(adUnit, slot, SRC_TEST);
+    ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
@@ -60,7 +60,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(testedPage);
 
     ads.refreshPage();
-    ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
+    ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 
