@@ -20,7 +20,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] allSlots() {
     return new Object[][]{
-        {"project43", "SyntheticTests/Mercury/Slots/AllSlots", "wka.life/_project43//article"}};
+        {"project43", "SyntheticTests/Mercury/Slots/AllSlots", "wka.life/_top1k_wiki//article"}};
   }
 
   @DataProvider
@@ -31,7 +31,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
-        {"project43", "SyntheticTests/DfpParams", null, "wka.life/_project43//article",
+        {"project43", "SyntheticTests/DfpParams", null, "wka.life/_top1k_wiki//article",
          "mobile_top_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                                  "\"s1\":\"_project43\"",
                                                  "\"s2\":\"article\"",
@@ -50,7 +50,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
-        {"yugioh", "Dark_Magician", "wka.gaming/_yugioh//article", "mobile_top_leaderboard",
+        {"yugioh", "Dark_Magician", "wka.gaming/_top1k_wiki//article", "mobile_top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"anime\"]",
@@ -79,7 +79,7 @@ public class MobileAdsDataProvider {
          ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"top\""
-        )}, {"fallout", "Fallout", "wka.gaming/_fallout//article", "mobile_top_leaderboard",
+        )}, {"fallout", "Fallout", "wka.gaming/_top1k_wiki//article", "mobile_top_leaderboard",
              Arrays.asList("\"s0\":\"gaming\"",
                            "\"s0v\":\"games\"",
                            "\"s0c\":[\"gaming\"]",
@@ -111,7 +111,7 @@ public class MobileAdsDataProvider {
              ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                               "\"src\":\"mobile\"",
                               "\"loc\":\"top\""
-    )}, {"runescape", "Grew", "wka.gaming/_runescape//article", "mobile_top_leaderboard",
+    )}, {"runescape", "Grew", "wka.gaming/_top1k_wiki//article", "mobile_top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -139,7 +139,7 @@ public class MobileAdsDataProvider {
          ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"top\""
-    )}, {"lego", "LEGO_Wiki", "wka.ent/_lego//home", "mobile_top_leaderboard", Arrays.asList(
+    )}, {"lego", "LEGO_Wiki", "wka.ent/_top1k_wiki//home", "mobile_top_leaderboard", Arrays.asList(
         "\"s0\":\"ent\"",
         "\"s0v\":\"movies\"",
         "\"s0c\":[\"toys\"]",
@@ -166,7 +166,7 @@ public class MobileAdsDataProvider {
     ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"civilization", "Category:Browse", "wka.gaming/_civilization//article",
+    )}, {"civilization", "Category:Browse", "wka.gaming/_top1k_wiki//article",
          "mobile_top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                                  "\"s0v\":\"games\"",
                                                  "\"s0c\":[\"gaming\"]",
@@ -193,7 +193,7 @@ public class MobileAdsDataProvider {
     ), Arrays.asList("\"pos\":\"mobile_top_leaderboard\"",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "mobile_top_leaderboard",
+    )}, {"starcraft", "StarCraft_Wiki", "wka.gaming/_top1k_wiki//home", "mobile_top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",

@@ -131,7 +131,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/DfpParams", null, "wka.life/_project43//article",
+        {WIKI_SPECIAL, "SyntheticTests/DfpParams", null, "wka.life/_top1k_wiki//article",
          "TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
@@ -147,7 +147,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
-        {"yugioh", "Dark_Magician", "wka.gaming/_yugioh//article", "TOP_LEADERBOARD", Arrays.asList(
+        {"yugioh", "Dark_Magician", "wka.gaming/_top1k_wiki//article", "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"anime\"]",
@@ -170,7 +170,7 @@ public class AdsDataProvider {
             "\"pform\":[\"pc\",\"psp\"]",
             "\"sex\":[\"m\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"runescape", "Grew", "wka.gaming/_runescape//article", "TOP_LEADERBOARD", Arrays.asList(
+        {"runescape", "Grew", "wka.gaming/_top1k_wiki//article", "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"gaming\"]",
@@ -192,7 +192,7 @@ public class AdsDataProvider {
             "\"esrb\":\"teen\"",
             "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"avatar", "Avatar_Wiki", "wka.ent/_avatar//home", "TOP_LEADERBOARD", Arrays.asList(
+        {"avatar", "Avatar_Wiki", "wka.ent/_top1k_wiki//home", "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"ent\"",
             "\"s0v\":\"tv\"",
             "\"s0c\":[\"tv\"]",
@@ -214,7 +214,7 @@ public class AdsDataProvider {
             "\"theme\":[\"magic\"]",
             "\"esrb\":\"ec\""
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "TOP_LEADERBOARD",
+        {"starcraft", "StarCraft_Wiki", "wka.gaming/_top1k_wiki//home", "TOP_LEADERBOARD",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -242,7 +242,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] dfpMEGAParams() {
     return new Object[][]{
-        {"fallout", "Fallout", "wka1b.MR/top_boxad/desktop/oasis-article-ic/_fallout-gaming", "TOP_BOXAD",
+        {"fallout", "Fallout", "wka1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-gaming", "TOP_BOXAD",
          Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
@@ -267,7 +267,7 @@ public class AdsDataProvider {
             "\"esrb\":\"mature\"",
             "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
-        {"civilization", "Category:Browse", "wka1b.MR/top_boxad/desktop/oasis-article/_civilization-gaming", "TOP_BOXAD",
+        {"civilization", "Category:Browse", "wka1b.MR/top_boxad/desktop/oasis-article/_top1k_wiki-gaming", "TOP_BOXAD",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",

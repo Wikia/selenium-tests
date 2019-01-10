@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   private static final String TEST_LINE_ITEM_ID = "271491732";
-  private static final String FILE_PAGE_AD_UNIT = "wka.life/_project43//file";
-  private static final String SPECIAL_PAGE_AD_UNIT = "wka.life/_project43//special";
+  private static final String FILE_PAGE_AD_UNIT = "wka.life/_top1k_wiki//file";
+  private static final String SPECIAL_PAGE_AD_UNIT = "wka.life/_top1k_wiki//special";
   private static final String FILE_PAGE_MR_MEGA_AD_UNIT =
-      "wka1b.MR/top_boxad/desktop/oasis-file/_project43-life";
+      "wka1b.MR/top_boxad/desktop/oasis-file/_top1k_wiki-life";
   private static final String FILE_PAGE_BLB_MEGA_AD_UNIT =
-      "wka1b.PF/bottom_leaderboard/desktop/oasis-file/_project43-life";
+      "wka1b.PF/bottom_leaderboard/desktop/oasis-file/_top1k_wiki-life";
   private static final Dimension RESOLUTION = new Dimension(1292, 1000);
 
   private void testSpecialPage(AdsBaseObject ads) {

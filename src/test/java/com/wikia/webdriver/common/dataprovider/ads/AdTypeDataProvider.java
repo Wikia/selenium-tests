@@ -14,7 +14,7 @@ public class AdTypeDataProvider {
         {
             "project43",
             "SyntheticTests/AdType/Collapse",
-            "wka1b.MR/top_boxad/desktop/oasis-article-ic/_project43-life",
+            "wka1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-life",
             new String[]{
                 AdsContent.TOP_LB, AdsContent.MEDREC
             }
