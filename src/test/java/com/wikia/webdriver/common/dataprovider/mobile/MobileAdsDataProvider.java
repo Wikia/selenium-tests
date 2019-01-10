@@ -32,7 +32,7 @@ public class MobileAdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {"project43", "SyntheticTests/DfpParams", null, "wka1a.LB/top_leaderboard/smartphone/mercury-article/_project43-life",
-         "mobile_top_leaderboard", Arrays.asList("\"s0\":\"life\"",
+         "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                                  "\"s1\":\"_project43\"",
                                                  "\"s2\":\"article\"",
                                                  "\"dmn\":\"wikiacom\"",
