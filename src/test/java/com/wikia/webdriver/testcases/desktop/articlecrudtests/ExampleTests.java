@@ -6,11 +6,11 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
@@ -58,27 +58,31 @@ public class ExampleTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(asUser = User.USER)
-  public void articlesLinkingBackForth() {
-    // create a new article
-    new ArticleContent().push();
-    new ArticleContent().push(PageContent.ARTICLE_TEXT, PageContent.);
-    // open the article and enter the classic editor
-    ArticlePageObject article = new ArticlePageObject().open();
-    VisualEditModePageObject classicVisualEditMode = article.openCKModeWithMainEditButtonDropdown();
+  @Execute(asUser = User.USER_9)
+  public void articleLinkingToOther() {
+    // create the second article
+    String linkingArticleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis() +
+                               "LinkingArticle";
+    String linkedToArticleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis() +
+                               "LinkedToArticle";
+    new ArticleContent().push(PageContent.ARTICLE_TEXT_DROZDY, linkedToArticleTitle);
 
-    // add text and photo content
-    classicVisualEditMode.addContent(PageContent.ARTICLE_TEXT);
-    PhotoAddComponentObject photoAddPhoto = classicVisualEditMode.clickPhotoButton();
-    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-    photoOptions.setCaption(PageContent.CAPTION);
-    photoOptions.clickAddPhoto();
-    classicVisualEditMode.clickPublishButton();
 
-    // verify photo and text
-    article.refreshPage();
-    Assertion.assertStringContains(article.getAtricleTextRaw(), PageContent.ARTICLE_TEXT);
-    article.verifyPhoto();
+    // get the link to the article and add it in a linking article
+    new ArticlePageObject().open(linkedToArticleTitle).waitForPageLoad();
+    String linkToArticle = new ArticlePageObject().getCurrentUrl();
+    new ArticleContent().push("["+linkToArticle+"]", linkingArticleTitle);
+
+    // open the newly created article with a link
+    ArticlePageObject linkingArticlePage = new ArticlePageObject().open(linkingArticleTitle);
+
+    // click the link and verify we're back on the linkedToArticle
+    ArticlePage linkedArticlePage = new ArticlePage().clickArticleLink(0);
+    linkedArticlePage.waitForPageLoad();
+    String linkToActualArticle = new ArticlePageObject().getCurrentUrl();
+    Assertion.assertEquals(linkToActualArticle,linkToArticle);
+
+
   }
 
 
