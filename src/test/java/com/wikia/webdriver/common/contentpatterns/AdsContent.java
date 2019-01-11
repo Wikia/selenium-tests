@@ -54,7 +54,7 @@ public class AdsContent {
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LB,
-                              "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
+                              "div[id*='wka1b.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
     );
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
