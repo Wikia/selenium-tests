@@ -15,7 +15,7 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   private static final double RESOLVED_STATE_ASPECT_RATIO = 1600 / 160;
   private static final String
       AD_REDIRECT
-      = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
+      = "https://www.fandom.com/articles/legacy-luke-skywalker";
 
   private TestAdsUapHiVi test() {
     return test(AdsDataProvider.UAP_HIVI_PAGE);
