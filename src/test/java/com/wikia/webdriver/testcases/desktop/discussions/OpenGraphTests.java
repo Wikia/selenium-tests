@@ -29,8 +29,8 @@ import java.net.URL;
 @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
 public class OpenGraphTests extends NewTestTemplate {
 
-  private static final String URL = "http://fandom.wikia.com";
-  private static final String URL_NO_PROTOCOL = "fandom.wikia.com";
+  private static final String URL = "http://fandom.com";
+  private static final String URL_NO_PROTOCOL = "fandom.com";
 
   /**
    * fixture methods

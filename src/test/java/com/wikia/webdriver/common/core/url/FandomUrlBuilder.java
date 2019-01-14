@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.configuration.EnvType;
 
 public class FandomUrlBuilder extends BaseUrlBuilder {
 
-  private static final String FANDOM_HOSTNAME = "fandom.wikia.com";
+  private static final String FANDOM_HOSTNAME = "fandom.com";
   private static final String ARTICLE_PATH = "articles";
   private static final String TOPICS_PATH = "topics";
 
