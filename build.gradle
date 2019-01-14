@@ -42,10 +42,6 @@ tasks.withType(Test) {
     systemProperties = System.getProperties()
 }
 
-import groovy.json.JsonSlurper
-import groovy.xml.XmlUtil
-import org.ajoberstar.grgit.Credentials
-import org.ajoberstar.grgit.Grgit
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
@@ -114,6 +110,7 @@ dependencies {
     testRuntimeOnly 'commons-beanutils:commons-beanutils:1.9.3'
     testCompile 'commons-io:commons-io:2.4'
     testCompile 'commons-lang:commons-lang:2.4'
+    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
 }
 
 
