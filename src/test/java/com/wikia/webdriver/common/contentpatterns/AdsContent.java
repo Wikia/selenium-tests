@@ -19,7 +19,7 @@ public class AdsContent {
   public static final String MEDREC = "TOP_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
-  public static final String MOBILE_TOP_LB = "mobile_top_leaderboard";
+  public static final String MOBILE_TOP_LB = "top_leaderboard";
   public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
   public static final String MOBILE_AD_IN_CONTENT_PLAYER = "incontent_player";
   public static final String MOBILE_PREFOOTER = "mobile_prefooter";
@@ -58,7 +58,7 @@ public class AdsContent {
     );
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#mobile_top_leaderboard");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#top_leaderboard");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#incontent_boxad_1");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT_PLAYER, "#incontent_player");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
