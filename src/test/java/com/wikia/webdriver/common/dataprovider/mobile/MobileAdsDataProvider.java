@@ -31,7 +31,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
-        {"project43", "SyntheticTests/DfpParams", null, "wka1a.LB/top_leaderboard/smartphone/mercury-article/_project43-life",
+        {"project43", "SyntheticTests/DfpParams", null, "wka1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-life",
          "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
@@ -51,7 +51,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
-        {"yugioh", "Dark_Magician", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_yugioh-gaming",
+        {"yugioh", "Dark_Magician", "wka1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-gaming",
          "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                           "\"s0v\":\"games\"",
                                           "\"s0c\":[\"anime\"]",
@@ -79,7 +79,7 @@ public class MobileAdsDataProvider {
         ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                          "\"src\":\"mobile\"",
                          "\"loc\":\"top\""
-        )}, {"fallout", "Fallout", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_fallout-gaming",
+        )}, {"fallout", "Fallout", "wka1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-gaming",
              "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                               "\"s0v\":\"games\"",
                                               "\"s0c\":[\"gaming\"]",
@@ -110,7 +110,7 @@ public class MobileAdsDataProvider {
     ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"runescape", "Grew", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_runescape-gaming",
+    )}, {"runescape", "Grew", "wka1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-gaming",
          "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                           "\"s0v\":\"games\"",
                                           "\"s0c\":[\"gaming\"]",
@@ -137,7 +137,7 @@ public class MobileAdsDataProvider {
     ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"lego", "LEGO_Wiki", "wka1a.LB/top_leaderboard/smartphone/mercury-home/_lego-ent",
+    )}, {"lego", "LEGO_Wiki", "wka1b.LB/top_leaderboard/smartphone/mercury-home/_top1k_wiki-ent",
          "top_leaderboard", Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"movies\"",
                                           "\"s0c\":[\"toys\"]",
@@ -164,7 +164,7 @@ public class MobileAdsDataProvider {
     ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"civilization", "Category:Browse", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_civilization-gaming",
+    )}, {"civilization", "Category:Browse", "wka1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-gaming",
          "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                           "\"s0v\":\"games\"",
                                           "\"s0c\":[\"gaming\"]",
@@ -191,7 +191,7 @@ public class MobileAdsDataProvider {
     ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\""
-    )}, {"starcraft", "StarCraft_Wiki", "wka1a.LB/top_leaderboard/smartphone/mercury-home/_starcraft-gaming",
+    )}, {"starcraft", "StarCraft_Wiki", "wka1b.LB/top_leaderboard/smartphone/mercury-home/_top1k_wiki-gaming",
          "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                           "\"s0v\":\"games\"",
                                           "\"s0c\":[\"gaming\"]",
@@ -223,7 +223,7 @@ public class MobileAdsDataProvider {
                      "\"src\":\"mobile\"",
                      "\"loc\":\"top\"",
                      "\"loc\":\"top\""
-    )}, {"overlordmaruyama", "Blood_of_Jormungandr", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_not_a_top1k_wiki-ent",
+    )}, {"overlordmaruyama", "Blood_of_Jormungandr", "wka1b.LB/top_leaderboard/smartphone/mercury-article/_not_a_top1k_wiki-ent",
          "top_leaderboard", Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"books\"",
                                           "\"s0c\":[\"ent\",\"comics\"]",
