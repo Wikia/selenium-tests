@@ -334,7 +334,8 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] providersChainOasis() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt"}};
+    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB,
+                           "DirectGpt; RemnantGpt"}};
   }
 
   @DataProvider
