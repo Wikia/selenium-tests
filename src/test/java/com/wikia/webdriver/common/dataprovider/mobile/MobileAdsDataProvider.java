@@ -20,7 +20,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] allSlots() {
     return new Object[][]{
-        {"project43", "SyntheticTests/Mercury/Slots/AllSlots", "wka.life/_project43//article"}};
+        {"project43", "SyntheticTests/Mercury/Slots/AllSlots", "wka.life/_top1k_wiki//article"}};
   }
 
   @DataProvider
@@ -33,17 +33,16 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {"project43", "SyntheticTests/DfpParams", null, "wka1a.LB/top_leaderboard/smartphone/mercury-article/_project43-life",
          "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
-                                                 "\"s1\":\"_project43\"",
-                                                 "\"s2\":\"article\"",
-                                                 "\"dmn\":\"wikiacom\"",
-                                                 "\"hostpre\":\"",
-                                                 "\"skin\":\"mercury\"",
-                                                 "\"wpage\":\"synthetictests/dfpparams\"",
-                                                 "\"ref\":\"direct\"",
-                                                 "\"lang\":\"en\"",
-                                                 "\"skin\":\"mercury\"",
-                                                 "\"esrb\":\"teen\""
-
+                                          "\"s1\":\"_project43\"",
+                                          "\"s2\":\"article\"",
+                                          "\"dmn\":\"wikiacom\"",
+                                          "\"hostpre\":\"",
+                                          "\"skin\":\"mercury\"",
+                                          "\"wpage\":\"synthetictests/dfpparams\"",
+                                          "\"ref\":\"direct\"",
+                                          "\"lang\":\"en\"",
+                                          "\"skin\":\"mercury\"",
+                                          "\"esrb\":\"teen\""
         ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                          "\"src\":\"test\""
         )}};
@@ -77,9 +76,9 @@ public class MobileAdsDataProvider {
                                           "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                                           "\"pform\":[\"pc\",\"psp\"]",
                                           "\"sex\":[\"m\"]"
-         ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
-                          "\"src\":\"mobile\"",
-                          "\"loc\":\"top\""
+        ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
+                         "\"src\":\"mobile\"",
+                         "\"loc\":\"top\""
         )}, {"fallout", "Fallout", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_fallout-gaming",
              "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                               "\"s0v\":\"games\"",
@@ -108,9 +107,9 @@ public class MobileAdsDataProvider {
                                               "\"pub\":[\"bethesda\"]",
                                               "\"esrb\":\"mature\"",
                                               "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
-             ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
-                              "\"src\":\"mobile\"",
-                              "\"loc\":\"top\""
+    ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
+                     "\"src\":\"mobile\"",
+                     "\"loc\":\"top\""
     )}, {"runescape", "Grew", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_runescape-gaming",
          "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                           "\"s0v\":\"games\"",
@@ -135,9 +134,9 @@ public class MobileAdsDataProvider {
                                           "\"sex\":[\"m\"]",
                                           "\"esrb\":\"teen\"",
                                           "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
-         ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
-                          "\"src\":\"mobile\"",
-                          "\"loc\":\"top\""
+    ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
+                     "\"src\":\"mobile\"",
+                     "\"loc\":\"top\""
     )}, {"lego", "LEGO_Wiki", "wka1a.LB/top_leaderboard/smartphone/mercury-home/_lego-ent",
          "top_leaderboard", Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"movies\"",
@@ -220,10 +219,10 @@ public class MobileAdsDataProvider {
                                           "\"sex\":[\"m\"]",
                                           "\"pub\":[\"blizzard\"]",
                                           "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
-         ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
-                          "\"src\":\"mobile\"",
-                          "\"loc\":\"top\"",
-                          "\"loc\":\"top\""
+    ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
+                     "\"src\":\"mobile\"",
+                     "\"loc\":\"top\"",
+                     "\"loc\":\"top\""
     )}, {"overlordmaruyama", "Blood_of_Jormungandr", "wka1a.LB/top_leaderboard/smartphone/mercury-article/_not_a_top1k_wiki-ent",
          "top_leaderboard", Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"books\"",
