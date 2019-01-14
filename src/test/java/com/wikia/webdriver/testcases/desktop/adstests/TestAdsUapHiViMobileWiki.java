@@ -16,7 +16,7 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
 
   private static final double IMPACT_STATE_ASPECT_RATIO = 272.0 / 153.0;
   private static final double RESOLVED_STATE_ASPECT_RATIO = 640.0 / 213;
-  private static final String TLB_SLOT_ID = "mobile_top_leaderboard";
+  private static final String TLB_SLOT_ID = "top_leaderboard";
   private static final String
       AD_REDIRECT
       = "https://www.fandom.com/articles/legacy-luke-skywalker";
