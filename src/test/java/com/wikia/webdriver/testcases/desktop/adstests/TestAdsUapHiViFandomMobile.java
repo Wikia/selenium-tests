@@ -17,7 +17,7 @@ public class TestAdsUapHiViFandomMobile extends AdsFandomTestTemplate {
   private static final String TLB_SLOT_ID = "top_leaderboard";
   private static final String
       AD_REDIRECT
-      = "http://fandom.wikia.com/articles/legacy-luke-skywalker";
+      = "https://www.fandom.com/articles/legacy-luke-skywalker";
 
   private TestAdsUapHiVi test() {
     return test(FandomAdsDataProvider.PAGE_HIVI_UAP_ARTICLE);

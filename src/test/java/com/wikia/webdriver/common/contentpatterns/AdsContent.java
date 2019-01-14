@@ -19,7 +19,7 @@ public class AdsContent {
   public static final String MEDREC = "TOP_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
-  public static final String MOBILE_TOP_LB = "mobile_top_leaderboard";
+  public static final String MOBILE_TOP_LB = "top_leaderboard";
   public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
   public static final String MOBILE_AD_IN_CONTENT_PLAYER = "incontent_player";
   public static final String MOBILE_PREFOOTER = "mobile_prefooter";
@@ -54,11 +54,11 @@ public class AdsContent {
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LB,
-                              "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
+                              "div[id*='wka1b.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
     );
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#mobile_top_leaderboard");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#top_leaderboard");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#incontent_boxad_1");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT_PLAYER, "#incontent_player");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
