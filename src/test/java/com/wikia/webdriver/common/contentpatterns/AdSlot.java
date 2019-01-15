@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.contentpatterns;
 import lombok.Getter;
 
 public enum AdSlot {
-  TOP_LEADERBOARD("top_leaderboard","div[id$='top_leaderboard_0__container__']"),
+  TOP_LEADERBOARD("top_leaderboard","div[id*='wka1b.LB/top_leaderboard'][id*='_0__container__']"),
   BOTTOM_LEADERBOARD("bottom_leaderboard","div[id*='wka1b.PF/bottom_leaderboard'][id*='_0__container__']"),
   TOP_BOXAD("top_boxad", "div[id*='wka1b.MR/top_boxad'][id*='_0__container__']"),
   INCONTENT_BOXAD("incontent_boxad", "div[id*='/incontent_boxad']"),

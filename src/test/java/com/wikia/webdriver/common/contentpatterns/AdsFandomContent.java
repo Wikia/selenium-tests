@@ -19,7 +19,8 @@ public class AdsFandomContent {
 
   static {
     SLOT_SELECTORS = new HashMap<>();
-    SLOT_SELECTORS.put(TOP_LEADERBOARD, "div[id$='top_leaderboard_0__container__']");
+    SLOT_SELECTORS.put(TOP_LEADERBOARD,
+                       "div[id*='wka1b.LB/top_leaderboard'][id*='_0__container__']");
     SLOT_SELECTORS.put(BOTTOM_LEADERBOARD,
                        "div[id*='wka1b.PF/bottom_leaderboard'][id*='_0__container__']"
     );
