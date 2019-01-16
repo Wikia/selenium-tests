@@ -75,17 +75,15 @@ public class ExampleTests extends NewTestTemplate {
     new ArticleContent().push("["+linkToArticle+"]", linkingArticleTitle);
 
     // open the newly created article with a link
-    ArticlePageObject linkingArticlePage = new ArticlePageObject().open(linkingArticleTitle);
+    new ArticlePageObject().open(linkingArticleTitle);
 
     // click the link and verify we're back on the content article
     // due to Expected condition failed: waiting for url to contain... sometimes
     // don't see other way to suppress it
     try {
-      ArticlePage linkedArticlePage = new ArticlePage().clickArticleLink(0);
-    }
-    catch (TimeoutException ignored){
-    }
-    finally {
+      new ArticlePage().clickArticleLink(0);
+    } catch (TimeoutException timeoutException){
+    } finally {
       String urlAfterClickingLink = new ArticlePageObject().getCurrentUrl();
       Assertion.assertEquals(urlAfterClickingLink,linkToArticle);
     }
