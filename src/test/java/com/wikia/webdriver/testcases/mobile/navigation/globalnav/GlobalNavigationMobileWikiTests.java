@@ -65,7 +65,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
 
     globalNavigationMobile.clickFandomLogo();
 
-    Assertion.assertTrue(globalNavigationMobile.getCurrentUrl().contains("fandom.wikia.com"));
+    Assertion.assertTrue(globalNavigationMobile.getCurrentUrl().contains("fandom.com"));
   }
 
   @Test

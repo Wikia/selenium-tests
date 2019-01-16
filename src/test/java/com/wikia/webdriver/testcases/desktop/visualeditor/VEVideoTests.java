@@ -48,7 +48,7 @@ public class VEVideoTests extends NewTestTemplate {
                                                                                  .getMillis()
     );
 
-    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("y");
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("2");
     VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
     veNew.verifyVideos(2);
     veNew.verifyVEToolBarPresent();
@@ -83,7 +83,7 @@ public class VEVideoTests extends NewTestTemplate {
   public void previewVideo() {
     String
         mediaTitle
-        = "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
+        = "LES PAUL vs STRATOCASTER - Which Guitar is Right for You?";
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve = new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);

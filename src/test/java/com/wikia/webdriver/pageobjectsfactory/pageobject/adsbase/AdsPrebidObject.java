@@ -13,7 +13,6 @@ import org.openqa.selenium.WebElement;
 public class AdsPrebidObject extends AdsBaseObject {
 
   private static final String CUSTOM_ADAPTER_CREATIVE = "Wikia Creative";
-  private static final String GPT_NODE = "div[id^=wikia_gpt]:not(.hidden)";
   private static final String NEXT_PV = "a[href='/wiki/SyntheticTests/RTB/Prebid.js/Wikia/2']";
   private static final String NEXT_TITLE = "SyntheticTests/RTB/Prebid.js/Wikia/2";
 
@@ -23,13 +22,7 @@ public class AdsPrebidObject extends AdsBaseObject {
 
   public void verifyKeyValues(String slotName, String adapter, String size, String price) {
 
-    WebElement gptNode;
-
-    if (slotName.contains("mobile")) {
-      gptNode = driver.findElement(By.cssSelector("#" + slotName));
-    } else {
-      gptNode = driver.findElement(By.cssSelector("#" + slotName + " " + GPT_NODE));
-    }
+    WebElement gptNode = driver.findElement(By.cssSelector("#" + slotName));
 
     try {
       JSONObject keyValues = new JSONObject(gptNode.getAttribute("data-gpt-slot-params"));

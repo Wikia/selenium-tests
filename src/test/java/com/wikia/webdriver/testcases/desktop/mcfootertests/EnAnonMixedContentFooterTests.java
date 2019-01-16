@@ -164,7 +164,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
         .waitForPageLoad();
 
     String url = driver.getCurrentUrl();
-    Assertion.assertTrue(url.contains("fandom.wikia.com/articles/"));
+    Assertion.assertTrue(url.contains("fandom.com/articles/"));
   }
 
   @DontRun( language = "szl")
