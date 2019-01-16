@@ -13,6 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 
 import org.joda.time.DateTime;
+import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.Test;
 
 @Test(groups = "ExampleTests")
@@ -60,15 +61,15 @@ public class ExampleTests extends NewTestTemplate {
   @Test
   @Execute(asUser = User.USER_9)
   public void articleLinkingToOther() {
-    // create the second article
     String linkingArticleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis() +
                                "LinkingArticle";
     String linkedToArticleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis() +
                                "LinkedToArticle";
+    // create an article with real content
     new ArticleContent().push(PageContent.ARTICLE_TEXT_DROZDY, linkedToArticleTitle);
 
 
-    // get the link to the article and add it in a linking article
+    // get the link to the content article and add it in a linking article
     new ArticlePageObject().open(linkedToArticleTitle).waitForPageLoad();
     String linkToArticle = new ArticlePageObject().getCurrentUrl();
     new ArticleContent().push("["+linkToArticle+"]", linkingArticleTitle);
@@ -76,12 +77,18 @@ public class ExampleTests extends NewTestTemplate {
     // open the newly created article with a link
     ArticlePageObject linkingArticlePage = new ArticlePageObject().open(linkingArticleTitle);
 
-    // click the link and verify we're back on the linkedToArticle
-    ArticlePage linkedArticlePage = new ArticlePage().clickArticleLink(0);
-    linkedArticlePage.waitForPageLoad();
-    String linkToActualArticle = new ArticlePageObject().getCurrentUrl();
-    Assertion.assertEquals(linkToActualArticle,linkToArticle);
-
+    // click the link and verify we're back on the content article
+    // due to Expected condition failed: waiting for url to contain... sometimes
+    // don't see other way to suppress it
+    try {
+      ArticlePage linkedArticlePage = new ArticlePage().clickArticleLink(0);
+    }
+    catch (TimeoutException ignored){
+    }
+    finally {
+      String urlAfterClickingLink = new ArticlePageObject().getCurrentUrl();
+      Assertion.assertEquals(urlAfterClickingLink,linkToArticle);
+    }
 
   }
 
