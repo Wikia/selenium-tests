@@ -162,7 +162,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     return this;
   }
 
-  public String getAtricleTextRaw() {
+  public String getArticleTextRaw() {
     return pageContentContainer.getText();
   }
 

@@ -54,7 +54,7 @@ public class ExampleTests extends NewTestTemplate {
 
     // verify photo and text
     article.refreshPage();
-    Assertion.assertStringContains(article.getAtricleTextRaw(), PageContent.ARTICLE_TEXT);
+    Assertion.assertStringContains(article.getArticleTextRaw(), PageContent.ARTICLE_TEXT);
     article.verifyPhoto();
   }
 
