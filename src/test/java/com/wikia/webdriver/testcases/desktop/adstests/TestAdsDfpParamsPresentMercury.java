@@ -17,8 +17,6 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
-  private static final String SRC_MOBILE = "mobile";
-  private static final String SRC_TEST = "test";
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "dfpParamsSynthetic", groups = {
@@ -40,7 +38,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
     AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.refreshPage();
-    ads.verifyGptIframe(adUnit, slot, SRC_TEST);
+    ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
@@ -60,7 +58,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(testedPage);
 
     ads.refreshPage();
-    ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
+    ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 

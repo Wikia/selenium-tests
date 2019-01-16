@@ -274,7 +274,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Test whether the correct GPT ad unit is called
    *
-   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName the name of the slot an ad is going to be inserted into
    * @param src      the source of an ad, for example gpt or remnant
    */
@@ -285,7 +285,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Test whether the correct GPT MEGA ad unit is called
    *
-   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName the name of the slot an ad is going to be inserted into
    */
   public void verifyGptMEGAIframe(String adUnit, String slotName) {
@@ -296,7 +296,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Builds GPT iframe id
    *
    * @param dfpClientId in most cases it's Wikia id
-   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
@@ -317,7 +317,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Test whether the correct GPT ad unit is called
    *
    * @param dfpClientId in most cases it's Wikia id
-   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
@@ -329,7 +329,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Test whether the correct GPT MEGA ad unit is called
    *
    * @param dfpClientId in most cases it's Wikia id
-   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    */
   public void verifyGptMEGAIframe(int dfpClientId, String adUnit, String slotName) {
