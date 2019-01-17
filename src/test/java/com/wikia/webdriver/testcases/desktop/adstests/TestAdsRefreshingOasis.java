@@ -26,6 +26,6 @@ public class TestAdsRefreshingOasis extends TemplateNoFirstLoad {
                                            urlBuilder.getUrlForPath(PATH),
                                            WindowSize.DESKTOP
     );
-    page.verifyAdChainForSlot(CREATIVE_ID_CHAIN, AdsContent.MEDREC, page);
+    page.verifyAdChainForSlot(CREATIVE_ID_CHAIN, AdsContent.TOP_BOXAD, page);
   }
 }
