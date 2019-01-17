@@ -22,7 +22,7 @@ public class AdsPrebidObject extends AdsBaseObject {
 
   public void verifyKeyValues(String slotName, String adapter, String size, String price) {
 
-    WebElement gptNode = driver.findElement(By.cssSelector("#" + slotName));
+    WebElement gptNode = driver.findElement(By.cssSelector(slotName));
 
     try {
       JSONObject keyValues = new JSONObject(gptNode.getAttribute("data-gpt-slot-params"));
@@ -37,7 +37,7 @@ public class AdsPrebidObject extends AdsBaseObject {
   }
 
   public void verifyPrebidCreative(String slotName, boolean rendered) {
-    WebElement iframe = driver.findElement(By.cssSelector("#" + slotName + " " + "iframe"));
+    WebElement iframe = driver.findElement(By.cssSelector(slotName + " " + "iframe"));
     driver.switchTo().frame(iframe);
 
     WebElement body = driver.findElement(By.cssSelector("body"));
