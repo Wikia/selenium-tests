@@ -395,7 +395,7 @@ public class AdsDataProvider {
              .put("slotSize", new Dimension(120, 600))
              .put("lineItemId", "257673852").build()},
         {new Page(WIKI_SPECIAL, "SyntheticTests/Slots/Size/300x1050"), "",
-         ImmutableMap.<String, Object>builder().put("slotName", AdsContent.MEDREC)
+         ImmutableMap.<String, Object>builder().put("slotName", AdsContent.TOP_BOXAD)
              .put("slotSize", new Dimension(300, 1050))
              .put("lineItemId", "255534972").build()}};
   }
@@ -411,7 +411,7 @@ public class AdsDataProvider {
                                                        .build(),
                                                    ImmutableMap.<String, Object>builder().put(
                                                        "slotName",
-                                                       AdsContent.MEDREC
+                                                       AdsContent.TOP_BOXAD
                                                    )
                                                        .put("slotSize", new Dimension(300, 250))
                                                        .put("lineItemId", "365416332")
