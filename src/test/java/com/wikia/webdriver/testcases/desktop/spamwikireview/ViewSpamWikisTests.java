@@ -6,6 +6,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.desktop.pages.SpamWikiReviewPage;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 @Test(groups = "SpamWikiReview")
@@ -44,8 +46,12 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
                            spamWikiReviewListViewUrl+"?lang=ja");
 
-    // TODO: assert here that it opened that language
-    String b = spamWikiReviewPage.getDisplayedWikis();
+    // check if all Wikis on a presumably filtered page have the 'ja' language
+    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows())
+    {
+      Assertion.assertEquals(wikiRow.findElement(By.xpath("./td[4]")).getText(), "ja");
+    }
+
   }
 
 

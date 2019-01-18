@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class SpamWikiReviewPage extends BasePageObject {
 
   private static final String SPAM_WIKI_REVIEW_SERVICE_NAME = "spam-wiki-review";
@@ -26,6 +28,11 @@ public class SpamWikiReviewPage extends BasePageObject {
     return this;
   }
 
+  /**
+   * This selects filtering of displayed wikis with selectLanguagesOfWikis button
+   * and loads a new page with the filter applied
+   * @param language one of LANGUAGE_CODE enum
+   */
   public SpamWikiReviewPage selectLanguageOfWikis(LANGUAGE_CODE language){
     selectLanguageButton.click();
     selectLanguageButton
@@ -35,9 +42,21 @@ public class SpamWikiReviewPage extends BasePageObject {
     return this;
   }
 
-  public String getDisplayedWikis()
+  /**
+   * This gets a list of WebElements containing Rows of displayed table with Wikis' info
+   * excludes thead, header of the table
+   */
+  public List<WebElement> getListDisplayedWikisTableRows()
   {
-    return displayedWikisTable.getText();
+    return displayedWikisTable.findElements(By.xpath("./tr"));
   }
 
+  /**
+   * This gets a WebElement containing nth Row of displayed table with Wiki information
+   * excludes thead, header of the table
+   */
+  public WebElement getNthDisplayedWikisTableRow(int wikiaRowNumber) {
+    List<WebElement> allRows = getListDisplayedWikisTableRows();
+    return allRows.get(wikiaRowNumber);
+  }
 }
