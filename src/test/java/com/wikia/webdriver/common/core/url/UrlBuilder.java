@@ -204,7 +204,7 @@ public class UrlBuilder extends BaseUrlBuilder {
 
     String www = addWWW ? "www." : "";
     String host = getServicesEnvURL(www, envType)+"/"+serviceName;
-    // Should it be wrapped in a UrlBuilder?
+    // TODO: Should it be wrapped in a UrlBuilder?
     return UrlBuilder.HTTPS_PREFIX + host;
   }
 
