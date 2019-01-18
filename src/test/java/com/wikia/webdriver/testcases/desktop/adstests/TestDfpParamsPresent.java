@@ -65,4 +65,16 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
+
+  @Test(groups = "TestAdsOnFilePagesOasis")
+  public void testAdsMEGAValMorganAUOasis() {
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.UAP_PAGE.getUrl());
+    ads.verifyValMorgan("AU", "AU", false);
+  }
+
+  @Test(groups = "TestAdsOnFilePagesOasis")
+  public void testAdsMEGAValMorganNZOasis() {
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.UAP_PAGE.getUrl());
+    ads.verifyValMorgan("AU", "NZ", false);
+  }
 }
