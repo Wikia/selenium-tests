@@ -207,6 +207,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.specialpagestests.ThemeDesigner"/>
             <class name="com.wikia.webdriver.testcases.desktop.specialpagestests.UserAndRights"/>
             <class name="com.wikia.webdriver.testcases.desktop.specialpagestests.VideosPageTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.spamwikireview.ViewSpamWikisTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.templateclassification.TemplateClassificationTest"/>
             <class name="com.wikia.webdriver.testcases.desktop.toolbartests.CustomizeToolbarTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.trackingoptintests.TrackingOptInTestsOasis"/>
