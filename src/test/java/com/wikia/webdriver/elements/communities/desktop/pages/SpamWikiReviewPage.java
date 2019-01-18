@@ -1,9 +1,8 @@
 package com.wikia.webdriver.elements.communities.desktop.pages;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,14 +18,26 @@ public class SpamWikiReviewPage extends BasePageObject {
   @FindBy(xpath = "//button[contains(text(),'Select language of Wikis')]")
   private WebElement selectLanguageButton;
 
+  @FindBy(xpath = "//table[@class='table table-hover']//tbody")
+  private WebElement displayedWikisTable;
+
   public SpamWikiReviewPage open() {
-    getUrl(urlBuilder.getUrlForService("spam-wiki-review")+VIEW_WIKIS_SUBPAGE);
+    getUrl(urlBuilder.getUrlForService(SPAM_WIKI_REVIEW_SERVICE_NAME)+VIEW_WIKIS_SUBPAGE);
     return this;
   }
 
   public SpamWikiReviewPage selectLanguageOfWikis(LANGUAGE_CODE language){
     selectLanguageButton.click();
+    selectLanguageButton
+        .findElement(By.xpath(String.format("//a[contains(text(),'%s')]", language)))
+        .click();
+
     return this;
+  }
+
+  public String getDisplayedWikis()
+  {
+    return displayedWikisTable.getText();
   }
 
 }

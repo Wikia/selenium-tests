@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.spamwikireview;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -34,9 +35,17 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
+    String spamWikiReviewListViewUrl = spamWikiReviewPage.getCurrentUrl();
+
+    // select 'ja' language
     spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.ja);
 
+    // assert current page contains query param selecting the language
+    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
+                           spamWikiReviewListViewUrl+"?lang=ja");
+
     // TODO: assert here that it opened that language
+    String b = spamWikiReviewPage.getDisplayedWikis();
   }
 
 
