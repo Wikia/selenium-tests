@@ -47,8 +47,7 @@ public class ViewSpamWikisTests extends NewTestTemplate {
                            spamWikiReviewListViewUrl+"?lang=ja");
 
     // check if all Wikis on a presumably filtered page have the 'ja' language
-    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows())
-    {
+    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
       Assertion.assertEquals(wikiRow.findElement(By.xpath("./td[4]")).getText(), "ja");
     }
 

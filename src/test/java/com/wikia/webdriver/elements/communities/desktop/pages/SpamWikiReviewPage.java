@@ -46,8 +46,7 @@ public class SpamWikiReviewPage extends BasePageObject {
    * This gets a list of WebElements containing Rows of displayed table with Wikis' info
    * excludes thead, header of the table
    */
-  public List<WebElement> getListDisplayedWikisTableRows()
-  {
+  public List<WebElement> getListDisplayedWikisTableRows() {
     return displayedWikisTable.findElements(By.xpath("./tr"));
   }
 
