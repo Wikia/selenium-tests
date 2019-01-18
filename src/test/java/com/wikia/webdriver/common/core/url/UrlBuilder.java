@@ -200,7 +200,6 @@ public class UrlBuilder extends BaseUrlBuilder {
    * @param serviceName normalized service name as used in its url, e.g. spam-wiki-review
    */
   public String getUrlForService(String serviceName,  boolean addWWW, EnvType envType){
-    HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
 
     String www = addWWW ? "www." : "";
     String host = getServicesEnvURL(www, envType)+"/"+serviceName;
