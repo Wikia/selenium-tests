@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import static com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage.setGeoCookie;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -73,6 +75,23 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement mobilePrefooter;
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
+  private static final String
+      VAL_MORGAN_TLB_MEGA_AD_UNIT
+      = "vm1b.LB/top_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
+  private static final String
+      VAL_MORGAN_TB_MEGA_AD_UNIT
+      = "vm1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-life";
+  private static final String
+      VAL_MORGAN_BLB_MEGA_AD_UNIT
+      = "vm1b.PF/bottom_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
+
+  private static final String
+      VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY
+      = "vm1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-life";
+
+  private static final String
+      VAL_MORGAN_BLB_MEGA_AD_UNIT_MERCURY
+      = "vm1b.PF/bottom_leaderboard/smartphone/mercury-article/_top1k_wiki-life";
 
   public AdsBaseObject() {
     super();
@@ -120,7 +139,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
       driver.switchTo().frame(slotGptIframe);
       WebElement iframeHtml = driver.findElement(By.tagName("html"));
-      String adDriverForcedSuccessFormatted = String.format(AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slotPos);
+      String
+          adDriverForcedSuccessFormatted
+          = String.format(AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slotPos);
       if (checkScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
         Log.log("AdDriver2ForceStatus script",
                 "adDriverForcedSuccess script found in slot " + slot,
@@ -226,6 +247,33 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMEGAAdUnit(String slotName, String adUnit) {
     verifyIframe(slotName, buildMEGAGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit));
+  }
+
+  public void verifyValMorgan(String continent, String country, Boolean isMobile) {
+    String MEGA_LB;
+    String MEGA_BLB;
+
+    if (!isMobile) {
+      MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT;
+      MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT;
+    } else {
+      MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY;
+      MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT_MERCURY;
+    }
+
+    setGeoCookie(driver, continent, country);
+    refreshPage();
+    setPageType(AdsBaseObject.PAGE_TYPE_ARTICLE);
+
+    verifyMEGAAdUnit(AdsContent.TOP_LB, MEGA_LB);
+    if (!isMobile) {
+      verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
+      triggerAdSlot(AdsContent.BOTTOM_LB);
+    } else {
+      triggerAdSlot(AdsContent.MOBILE_AD_IN_CONTENT);
+      triggerAdSlot(AdsContent.MOBILE_BOTTOM_LB);
+    }
+    verifyMEGAAdUnit(AdsContent.BOTTOM_LB, MEGA_BLB);
   }
 
   public void verifySpotlights() {
@@ -374,7 +422,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      WebElement adsDiv = driver.findElement(By.cssSelector("#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
+      WebElement adsDiv = driver.findElement(By.cssSelector(
+          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),

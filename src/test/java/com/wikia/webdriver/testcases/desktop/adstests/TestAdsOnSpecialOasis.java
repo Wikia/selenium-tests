@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
-import static com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage.setGeoCookie;
-
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -17,15 +15,6 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
                                                            + "/oasis-file/_top1k_wiki-life";
   private static final String SPECIAL_PAGE_AD_UNIT = "wka1b.LB/top_leaderboard/unknown"
                                                      + "-specialpage/oasis-special/_top1k_wiki-life";
-  private static final String
-      VAL_MORGAN_TLB_MEGA_AD_UNIT
-      = "vm1b.LB/top_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
-  private static final String
-      VAL_MORGAN_TB_MEGA_AD_UNIT
-      = "vm1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-life";
-  private static final String
-      VAL_MORGAN_BLB_MEGA_AD_UNIT
-      = "vm1b.PF/bottom_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
   private static final String
       FILE_PAGE_MR_MEGA_AD_UNIT
       = "wka1b.MR/top_boxad/desktop/oasis-file/_top1k_wiki-life";
@@ -76,28 +65,5 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     ads.triggerAdSlot(AdsContent.BOTTOM_LB);
     ads.verifyGptAdInSlot(AdsContent.BOTTOM_LB, TEST_LINE_ITEM_ID);
     ads.verifyMEGAAdUnit(AdsContent.BOTTOM_LB, FILE_PAGE_BLB_MEGA_AD_UNIT);
-  }
-
-  private void testValMorgan(String continent, String country) {
-    AdsBaseObject ads = new AdsBaseObject(driver, AdsDataProvider.UAP_PAGE.getUrl(), RESOLUTION);
-    setGeoCookie(driver, continent, country);
-    ads.refreshPage();
-    ads.setPageType(AdsBaseObject.PAGE_TYPE_ARTICLE);
-
-    ads.verifyMEGAAdUnit(AdsContent.TOP_LB, VAL_MORGAN_TLB_MEGA_AD_UNIT);
-    ads.verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
-
-    ads.triggerAdSlot(AdsContent.BOTTOM_LB);
-    ads.verifyMEGAAdUnit(AdsContent.BOTTOM_LB, VAL_MORGAN_BLB_MEGA_AD_UNIT);
-  }
-
-  @Test(groups = "TestAdsOnFilePagesOasis")
-  public void testAdsMEGAValMorganAUOasis() {
-    testValMorgan("AU", "AU");
-  }
-
-  @Test(groups = "TestAdsOnFilePagesOasis")
-  public void testAdsMEGAValMorganNZOasis() {
-    testValMorgan("AU", "NZ");
   }
 }
