@@ -179,6 +179,43 @@ public class UrlBuilder extends BaseUrlBuilder {
         .replaceFirst("/$", "");
   }
 
+  /**
+   * Gets env-specific url for a service
+   * @param serviceName normalized service name as used in its url, e.g. spam-wiki-review
+   */
+  public String getUrlForService(String serviceName) {
+    return getUrlForService(serviceName, false);
+  }
+
+  /**
+   * Gets env-specific url for a service
+   * @param serviceName normalized service name as used in its url, e.g. spam-wiki-review
+   */
+  public String getUrlForService(String serviceName, boolean addWWW) {
+    return getUrlForService(serviceName, addWWW, envType);
+  }
+
+  /**
+   * Gets env-specific url for a service
+   * @param serviceName normalized service name as used in its url, e.g. spam-wiki-review
+   */
+  public String getUrlForService(String serviceName,  boolean addWWW, EnvType envType){
+    HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
+
+    String www = addWWW ? "www." : "";
+    String host = getServicesEnvURL(www, envType)+"/"+serviceName;
+    // Should it be wrapped in a UrlBuilder?
+    return UrlBuilder.HTTPS_PREFIX + host;
+  }
+
+  /**
+   * Private getter for env-specific url root for services, eg. services.wikia.com
+   */
+  private String getServicesEnvURL(String www, EnvType envType) {
+    // TODO: this won't work for SANDBOX environments I hear
+    return String.join(".", www, "services", envType.getDomain());
+    }
+
   private String getWikiaGlobalName(String wikiName) {
     if (wikiName.endsWith(".wikia")) {
       if (getEnvType(this.env) == EnvType.DEV) {
