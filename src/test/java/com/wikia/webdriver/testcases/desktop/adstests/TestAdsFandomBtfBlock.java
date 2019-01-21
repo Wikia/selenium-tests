@@ -33,6 +33,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     fandomPage.triggerOnScrollSlots();
 
     fandomPage.verifySlot(AdSlot.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdSlot.TOP_BOXAD);
 
     Assertion.assertTrue(areBtfSlotsHidden(fandomPage), "BTF ads are displayed");
   }
