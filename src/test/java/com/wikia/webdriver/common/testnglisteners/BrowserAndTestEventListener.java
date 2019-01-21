@@ -91,7 +91,8 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
       if (driver.getCurrentUrl().contains(cookieDomain)) {
         // HACK FOR DISABLING NOTIFICATIONS
         try {
-          new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
+          new JavascriptActions(driver).execute("$('.wds-banner-notification__close').click()");
+          new JavascriptActions(driver).execute("$('.sprite.close-notification')[0].click()");
         } catch (WebDriverException e) {
           Log.info("Hack for disabling notifications", "Failed to execute js action");
         }
