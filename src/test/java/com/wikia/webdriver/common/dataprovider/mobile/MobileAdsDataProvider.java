@@ -57,7 +57,7 @@ public class MobileAdsDataProvider {
                                           "\"s0c\":[\"anime\"]",
                                           "\"s1\":\"_yugioh\"",
                                           "\"s2\":\"article\"",
-                                          "\"dmn\":\"wikiacom\"",
+                                          "\"dmn\":\"fandomcom\"",
                                           "\"hostpre\":",
                                           "\"cat\":[",
                                           "\"ab\":[",

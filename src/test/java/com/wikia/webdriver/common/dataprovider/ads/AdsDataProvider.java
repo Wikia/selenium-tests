@@ -156,7 +156,7 @@ public class AdsDataProvider {
             "\"s0c\":[\"anime\"]",
             "\"s1\":\"_yugioh\"",
             "\"s2\":\"article\"",
-            "\"dmn\":\"wikiacom\"",
+            "\"dmn\":\"fandomcom\"",
             "\"hostpre\":",
             "\"cat\":[",
             "\"ar\":\"4:3\"",
