@@ -258,7 +258,7 @@ public class AdsDataProvider {
             "\"ar\":\"4:3\"",
             "\"artid\":\"948\"",
             "\"cat\":[\"fallout\"]",
-            "\"dmn\":\"wikiacom\"",
+            "\"dmn\":\"fandomcom\"",
             "\"hostpre\":",
             "\"lang\":\"en\"",
             "\"wpage\":\"fallout\"",

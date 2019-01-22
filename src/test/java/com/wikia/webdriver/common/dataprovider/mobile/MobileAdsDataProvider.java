@@ -87,7 +87,7 @@ public class MobileAdsDataProvider {
                                               "\"s2\":\"article\"",
                                               "\"ar\":\"3:4\"",
                                               "\"artid\":\"948\"",
-                                              "\"dmn\":\"wikiacom\"",
+                                              "\"dmn\":\"fandomcom\"",
                                               "\"hostpre\":",
                                               "\"cat\":[",
                                               "\"ab\":[",
