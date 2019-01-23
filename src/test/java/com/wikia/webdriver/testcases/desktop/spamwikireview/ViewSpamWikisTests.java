@@ -6,22 +6,13 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.desktop.pages.SpamWikiReviewPage;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 @Test(groups = "SpamWikiReview")
 public class ViewSpamWikisTests extends NewTestTemplate {
-
-  @Test
-  @Execute(asUser = User.STAFF)
-  public void openSpamWikiReviewTest() {
-    SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
-    spamWikiReviewPage.open();
-
-
-    //TODO: assert here that it was opened
-  }
 
   /**
    * Tests if a normal user correctly doesn't have access to Spam Wiki Review
@@ -54,7 +45,7 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     // assert current page contains query param selecting the language
     Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl+"?lang=ja");
+                           spamWikiReviewListViewUrl + "?lang=" + SpamWikiReviewPage.LANGUAGE_CODE.ja);
 
     // check if all Wikis on a presumably filtered page have the 'ja' language
     for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
@@ -70,7 +61,15 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
-    // TODO: assert here that it opened all languages
+    String spamWikiReviewListViewUrl = spamWikiReviewPage.getCurrentUrl();
+
+    // select all languages
+    spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.all);
+
+
+    // assert current page contains query param selecting the language ALL
+    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
+                           spamWikiReviewListViewUrl + "?lang=" + SpamWikiReviewPage.LANGUAGE_CODE.all);
   }
 
 
@@ -80,7 +79,24 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
-    // TODO: assert here that it filtred to all but enum languages
+    String spamWikiReviewListViewUrl = spamWikiReviewPage.getCurrentUrl();
+
+    // select 'ja' language
+    spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.other);
+
+
+    // assert current page contains query param selecting the language
+    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
+                           spamWikiReviewListViewUrl + "?lang=" + SpamWikiReviewPage.LANGUAGE_CODE.other);
+
+    // check if all Wikis on a presumably filtered page have languages other than those in LANGUAGE_CODE
+    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
+      Assertion.assertFalse(EnumUtils.isValidEnum(SpamWikiReviewPage.LANGUAGE_CODE.class,
+                                                 wikiRow.findElement(By.xpath("./td[4]")).getText()),
+                           "Spam Wiki Review other languages view contained languages from"
+                           + "LANGUAGE CODE - those that can be filtered individually, "
+                           + "namely " + wikiRow.findElement(By.xpath("./td[4]")).getText());
+    }
   }
 
 }
