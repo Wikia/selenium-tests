@@ -24,9 +24,19 @@ public class SpamWikiReviewPage extends BasePageObject {
   @FindBy(xpath = "//table[@class='table table-hover']//tbody")
   private WebElement displayedWikisTable;
 
+  @FindBy(xpath = "/html//body")
+  private WebElement bodyHTML;
+
   public SpamWikiReviewPage open() {
     getUrl(urlBuilder.getUrlForService(SPAM_WIKI_REVIEW_SERVICE_NAME)+VIEW_WIKIS_SUBPAGE);
     return this;
+  }
+
+  /**
+   * Gets Raw Visible Text visible between <body> </body> tags
+   */
+  public String getRawVisibleBodyText() {
+    return bodyHTML.getText();
   }
 
   /**

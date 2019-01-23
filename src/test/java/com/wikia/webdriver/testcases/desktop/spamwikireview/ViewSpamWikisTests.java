@@ -19,16 +19,25 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
+
     //TODO: assert here that it was opened
   }
 
+  /**
+   * Tests if a normal user correctly doesn't have access to Spam Wiki Review
+   */
   @Test
   @Execute(asUser = User.USER)
   public void authorizationFailSpamWikiReviewTest() {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
-    // TODO: assert here that it returned a failure
+    Assertion.assertTrue(spamWikiReviewPage.getRawVisibleBodyText()
+                             .matches(".*(User not authorized|Unauthorized).*"),
+                         "No unauthorized message was displayed to the user");
+
+    Assertion.assertTrue(spamWikiReviewPage.getListDisplayedWikisTableRows().isEmpty(),
+                         "It shouldn't be possible to see Wikis' list when unauthorized");
   }
 
   @Test
@@ -41,6 +50,7 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     // select 'ja' language
     spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.ja);
+
 
     // assert current page contains query param selecting the language
     Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
