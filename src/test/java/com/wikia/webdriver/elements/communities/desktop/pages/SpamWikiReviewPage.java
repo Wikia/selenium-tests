@@ -60,9 +60,8 @@ public class SpamWikiReviewPage extends BasePageObject {
   public List<WebElement> getListDisplayedWikisTableRows() {
     try {
       return displayedWikisTable.findElements(By.xpath("./tr"));
-    }
-    // if no elements were found return an empty list
-  catch (org.openqa.selenium.NoSuchElementException notFoundException) {
+    } catch (org.openqa.selenium.NoSuchElementException notFoundException) {
+      // if no elements were found return an empty list
     return Collections.emptyList();
     }
   }

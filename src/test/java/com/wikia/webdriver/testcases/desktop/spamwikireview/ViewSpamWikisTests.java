@@ -34,7 +34,7 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     Assertion.assertTrue(spamWikiReviewPage.getRawVisibleBodyText()
                              .matches(".*(User not authorized|Unauthorized).*"),
-                         "No unauthorized message was displayed to the user");
+                         "No 'unauthorized' type message was displayed to the user");
 
     Assertion.assertTrue(spamWikiReviewPage.getListDisplayedWikisTableRows().isEmpty(),
                          "It shouldn't be possible to see Wikis' list when unauthorized");
