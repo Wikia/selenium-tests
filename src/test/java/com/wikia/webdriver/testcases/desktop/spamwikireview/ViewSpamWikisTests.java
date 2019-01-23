@@ -14,6 +14,10 @@ import org.testng.annotations.Test;
 @Test(groups = "SpamWikiReview")
 public class ViewSpamWikisTests extends NewTestTemplate {
 
+
+  private final String XPATH_LANGUAGE_COLUMN = "./td[4]";
+  private final String QUERY_PARAM_LANG = "?lang=";
+
   /**
    * Tests if a normal user correctly doesn't have access to Spam Wiki Review
    */
@@ -45,11 +49,11 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     // assert current page contains query param selecting the language
     Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl + "?lang=" + SpamWikiReviewPage.LANGUAGE_CODE.ja);
+                           spamWikiReviewListViewUrl + QUERY_PARAM_LANG + SpamWikiReviewPage.LANGUAGE_CODE.ja);
 
     // check if all Wikis on a presumably filtered page have the 'ja' language
     for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
-      Assertion.assertEquals(wikiRow.findElement(By.xpath("./td[4]")).getText(), "ja");
+      Assertion.assertEquals(wikiRow.findElement(By.xpath(XPATH_LANGUAGE_COLUMN)).getText(), "ja");
     }
 
   }
@@ -69,7 +73,7 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     // assert current page contains query param selecting the language ALL
     Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl + "?lang=" + SpamWikiReviewPage.LANGUAGE_CODE.all);
+                           spamWikiReviewListViewUrl + QUERY_PARAM_LANG + SpamWikiReviewPage.LANGUAGE_CODE.all);
   }
 
 
@@ -87,15 +91,15 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     // assert current page contains query param selecting the language
     Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl + "?lang=" + SpamWikiReviewPage.LANGUAGE_CODE.other);
+                           spamWikiReviewListViewUrl + QUERY_PARAM_LANG + SpamWikiReviewPage.LANGUAGE_CODE.other);
 
     // check if all Wikis on a presumably filtered page have languages other than those in LANGUAGE_CODE
     for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
       Assertion.assertFalse(EnumUtils.isValidEnum(SpamWikiReviewPage.LANGUAGE_CODE.class,
-                                                 wikiRow.findElement(By.xpath("./td[4]")).getText()),
+                                                 wikiRow.findElement(By.xpath(XPATH_LANGUAGE_COLUMN)).getText()),
                            "Spam Wiki Review other languages view contained languages from"
                            + "LANGUAGE CODE - those that can be filtered individually, "
-                           + "namely " + wikiRow.findElement(By.xpath("./td[4]")).getText());
+                           + "namely " + wikiRow.findElement(By.xpath(XPATH_LANGUAGE_COLUMN)).getText());
     }
   }
 
