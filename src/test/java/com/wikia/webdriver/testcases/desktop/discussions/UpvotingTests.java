@@ -26,11 +26,11 @@ public class UpvotingTests extends NewTestTemplate {
 
   @BeforeSuite
   private void setUp() {
-    User user = User.USER_5;
-    String siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
-
-    existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
-    DiscussionsClient.using(user, driver).createReplyToPost(siteId, existingPost);
+//    User user = User.USER_5;
+//    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_4);
+//
+//    existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
+//    DiscussionsClient.using(user, driver).createReplyToPost(siteId, existingPost);
   }
   
   /**
