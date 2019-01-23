@@ -138,17 +138,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPetametricsDataProvider", groups = "AdsOptInRejectedMobileWiki")
-  public void adsTrackingRejectedForPetametrics(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraAcceptedDataProvider", groups = "AdsOptInAcceptedMobileWiki")
   public void verifyAdsTrackingAcceptedForKikimora(
       String[] instantGlobals, List<String> urlPatterns
@@ -259,17 +248,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
 
     modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPetametricsDataProvider", groups = "AdsOptInAcceptedMobileWiki")
-  public void adsTrackingAcceptedForPetametrics(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump(useMITM = true)
