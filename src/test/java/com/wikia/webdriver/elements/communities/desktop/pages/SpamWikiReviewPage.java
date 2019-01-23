@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SpamWikiReviewPage extends BasePageObject {
@@ -47,7 +48,13 @@ public class SpamWikiReviewPage extends BasePageObject {
    * excludes thead, header of the table
    */
   public List<WebElement> getListDisplayedWikisTableRows() {
-    return displayedWikisTable.findElements(By.xpath("./tr"));
+    try {
+      return displayedWikisTable.findElements(By.xpath("./tr"));
+    }
+    // if no elements were found return an empty list
+  catch (org.openqa.selenium.NoSuchElementException notFoundException) {
+    return Collections.emptyList();
+    }
   }
 
   /**
