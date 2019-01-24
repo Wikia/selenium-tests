@@ -11,20 +11,25 @@ import java.util.List;
 
 public class SpamWikiReviewPage extends BasePageObject {
 
-  private static final String SPAM_WIKI_REVIEW_SERVICE_NAME = "spam-wiki-review";
-  private static final String VIEW_WIKIS_SUBPAGE = "/wiki";
-
-  public static enum LANGUAGE_CODE {
+  public enum LANGUAGE_CODE {
     all, en, ar, de, es, fi, fr, id, hi, hu, it, ja, ka, kn, ko, nl, pt, pl, ru, uk, vi, zh, other
   }
 
-  public static String QUESTIONABLE_BUTTON_TEXT = "Questionable";
-  public static String SPAM_BUTTON_TEXT = "Spam";
-  public static String NOT_SPAM_BUTTON_TEXT = "Not Spam";
+  public final static String QUESTIONABLE_STATUS = "questionable";
+
+  public final static String QUESTIONABLE_BUTTON_TEXT = "Questionable";
+  public final static String SPAM_BUTTON_TEXT = "Spam";
+  public final static String NOT_SPAM_BUTTON_TEXT = "Not Spam";
 
   public final static String XPATH_LANGUAGE_COLUMN = "./td[4]";
   public final static String XPATH_STATUS_COLUMN = "./td[6]";
-  public final static String QUERY_PARAM_LANG = "?lang=";
+
+  public final static String LANG_QUERY_PARAM = "lang=";
+  public final static String STATUS_QUERY_PARAM = "status=";
+
+  private static final String SPAM_WIKI_REVIEW_SERVICE_NAME = "spam-wiki-review";
+  private static final String VIEW_WIKIS_SUBPAGE = "/wiki";
+
 
   @FindBy(xpath = "/html[1]/body[1]/nav[1]/div[2]/ul[1]/li[2]/a[1]")
   private WebElement showQuestionableWikisButton;

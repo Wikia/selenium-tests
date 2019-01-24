@@ -37,21 +37,18 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
-    String spamWikiReviewListViewUrl = spamWikiReviewPage.getCurrentUrl();
-
     // select 'ja' language
     spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.ja);
 
-
     // assert current page contains query param selecting the language
-    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl + SpamWikiReviewPage.QUERY_PARAM_LANG
+    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(),
+                           SpamWikiReviewPage.LANG_QUERY_PARAM
                            + SpamWikiReviewPage.LANGUAGE_CODE.ja);
 
     // check if all Wikis on a presumably filtered page have the 'ja' language
     for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
       Assertion.assertEquals(wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_LANGUAGE_COLUMN))
-                                 .getText(), "ja");
+                                 .getText(), SpamWikiReviewPage.LANGUAGE_CODE.ja.toString());
     }
 
   }
@@ -63,15 +60,13 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
-    String spamWikiReviewListViewUrl = spamWikiReviewPage.getCurrentUrl();
-
     // select all languages
     spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.all);
 
 
     // assert current page contains query param selecting the language ALL
-    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl + SpamWikiReviewPage.QUERY_PARAM_LANG
+    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(),
+                           SpamWikiReviewPage.LANG_QUERY_PARAM
                            + SpamWikiReviewPage.LANGUAGE_CODE.all);
   }
 
@@ -89,8 +84,8 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
 
     // assert current page url contains query param selecting the language
-    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(),
-                           spamWikiReviewListViewUrl + SpamWikiReviewPage.QUERY_PARAM_LANG
+    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(),
+                           SpamWikiReviewPage.LANG_QUERY_PARAM
                            + SpamWikiReviewPage.LANGUAGE_CODE.other);
 
     // check if all Wikis on a presumably filtered page have languages other than those in LANGUAGE_CODE
@@ -115,23 +110,55 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     spamWikiReviewPage.showQuestionableWikis();
 
     // assert current page url contains query param selecting the questionable Wikis
-    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(), "status=questionable");
+    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(),
+                                   SpamWikiReviewPage.STATUS_QUERY_PARAM
+                                   + SpamWikiReviewPage.QUESTIONABLE_STATUS);
 
     // check if all Wikis on a presumably only questionable wikis page
     for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
       String visibleButtonsText = wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_STATUS_COLUMN)).getText();
 
       //have Spam and Not Spam buttons in that order without Questionable button
-
-      Assertion.assertStringNotContains(visibleButtonsText,
-                                        SpamWikiReviewPage.QUESTIONABLE_BUTTON_TEXT);
-
       Assertion.assertEquals(visibleButtonsText,SpamWikiReviewPage.SPAM_BUTTON_TEXT
                                                 + "\n" + SpamWikiReviewPage.NOT_SPAM_BUTTON_TEXT);
     }
+  }
 
+  /**
+   * This test first navigates to "Show only Questionable wikis",
+   * and then filters them to de language
+   */
+  @Test
+  @Execute(asUser = User.STAFF)
+  public void filterQuestionableAndLanguageWikis() {
+    SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
+    spamWikiReviewPage.open();
 
+    // navigate to Questionable Wikis page
+    spamWikiReviewPage.showQuestionableWikis();
 
+    // filter language
+    spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.de);
+
+    // check whether the url contains both of the queryparams
+    String currentURL = spamWikiReviewPage.getCurrentUrl();
+    Assertion.assertStringContains(currentURL, SpamWikiReviewPage.LANG_QUERY_PARAM
+                                               + SpamWikiReviewPage.LANGUAGE_CODE.de);
+    Assertion.assertStringContains(currentURL, SpamWikiReviewPage.STATUS_QUERY_PARAM
+                                               + SpamWikiReviewPage.QUESTIONABLE_STATUS);
+
+    // check if all Wikis on a presumably only questionable wikis page
+    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
+
+      // have Spam and Not Spam buttons in that order without Questionable button
+      Assertion.assertEquals(wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_STATUS_COLUMN)).getText(),
+                             SpamWikiReviewPage.SPAM_BUTTON_TEXT
+                             + "\n" + SpamWikiReviewPage.NOT_SPAM_BUTTON_TEXT);
+
+      // and are in de language
+      Assertion.assertEquals(wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_LANGUAGE_COLUMN)).getText(),
+                             SpamWikiReviewPage.LANGUAGE_CODE.de.toString());
+    }
   }
 
   @Test
