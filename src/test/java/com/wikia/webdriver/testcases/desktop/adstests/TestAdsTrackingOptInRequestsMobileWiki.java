@@ -312,7 +312,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_HOME_PAGE);
-
     modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 }
