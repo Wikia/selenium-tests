@@ -77,8 +77,6 @@ public class ViewSpamWikisTests extends NewTestTemplate {
     SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
     spamWikiReviewPage.open();
 
-    String spamWikiReviewListViewUrl = spamWikiReviewPage.getCurrentUrl();
-
     // select 'ja' language
     spamWikiReviewPage.selectLanguageOfWikis(SpamWikiReviewPage.LANGUAGE_CODE.other);
 
