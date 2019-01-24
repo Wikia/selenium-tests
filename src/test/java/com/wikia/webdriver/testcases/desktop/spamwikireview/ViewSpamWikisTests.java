@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.AddQuestionableWikiSubpage;
 import com.wikia.webdriver.elements.communities.desktop.pages.SpamWikiReviewPage;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -181,8 +182,16 @@ public class ViewSpamWikisTests extends NewTestTemplate {
   @Test
   @Execute(asUser = User.STAFF)
   public void NavigateToAddQuestionableWikiTest() {
-    // TODO: Click on show questionable wikis button and see if all wikis displayed are questionable
+    SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
+    spamWikiReviewPage.open();
+
+    AddQuestionableWikiSubpage addQuestionableWikiSubpage = spamWikiReviewPage.moveToAddQuestionableWikisPage();
+
+    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(), "add");
+
+    Assertion.assertTrue(addQuestionableWikiSubpage.getAddIdsTextArea().isDisplayed(),
+                         "Text area to input wikis is not displayed");
+    Assertion.assertTrue(addQuestionableWikiSubpage.getSubmitIdsButton().isDisplayed(),
+                         "Submit button is not displayed");
   }
-
-
 }

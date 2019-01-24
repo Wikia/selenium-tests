@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.communities.desktop.pages;
 
+import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.AddQuestionableWikiSubpage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -33,6 +34,9 @@ public class SpamWikiReviewPage extends BasePageObject {
   @FindBy(xpath="/html[1]/body[1]/nav[1]/div[1]/a[1]/strong[1]")
   private WebElement spamWikiReviewHeaderLogo;
 
+  @FindBy(xpath="/html[1]/body[1]/nav[1]/div[2]/ul[1]/li[1]/a[1]")
+  private WebElement addQuestionableWikisButton;
+
   @FindBy(xpath = "/html[1]/body[1]/nav[1]/div[2]/ul[1]/li[2]/a[1]")
   private WebElement showQuestionableWikisButton;
 
@@ -53,6 +57,11 @@ public class SpamWikiReviewPage extends BasePageObject {
   public SpamWikiReviewPage returnToMainPageByClickingHeaderLogo(){
     spamWikiReviewHeaderLogo.click();
     return this;
+  }
+
+  public AddQuestionableWikiSubpage moveToAddQuestionableWikisPage(){
+    addQuestionableWikisButton.click();
+    return new AddQuestionableWikiSubpage();
   }
 
   /**
