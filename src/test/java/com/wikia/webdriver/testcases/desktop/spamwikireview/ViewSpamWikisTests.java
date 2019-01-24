@@ -162,7 +162,20 @@ public class ViewSpamWikisTests extends NewTestTemplate {
   @Test
   @Execute(asUser = User.STAFF)
   public void SpamWikiReviewHeaderNavigatesToMainPageTest() {
-    // TODO: Click on Spam Wiki Review in header and see if it redirects to main page
+    SpamWikiReviewPage spamWikiReviewPage = new SpamWikiReviewPage();
+    spamWikiReviewPage.open();
+
+    String startingURL = spamWikiReviewPage.getCurrentUrl();
+
+    // navigate to Questionable Wikis page
+    spamWikiReviewPage.showQuestionableWikis();
+
+    Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(), SpamWikiReviewPage.STATUS_QUERY_PARAM
+                                               + SpamWikiReviewPage.QUESTIONABLE_STATUS);
+
+    // click the header SWR logo
+    spamWikiReviewPage.returnToMainPageByClickingHeaderLogo();
+    Assertion.assertEquals(spamWikiReviewPage.getCurrentUrl(), startingURL);
   }
 
   @Test

@@ -30,6 +30,8 @@ public class SpamWikiReviewPage extends BasePageObject {
   private static final String SPAM_WIKI_REVIEW_SERVICE_NAME = "spam-wiki-review";
   private static final String VIEW_WIKIS_SUBPAGE = "/wiki";
 
+  @FindBy(xpath="/html[1]/body[1]/nav[1]/div[1]/a[1]/strong[1]")
+  private WebElement spamWikiReviewHeaderLogo;
 
   @FindBy(xpath = "/html[1]/body[1]/nav[1]/div[2]/ul[1]/li[2]/a[1]")
   private WebElement showQuestionableWikisButton;
@@ -45,6 +47,11 @@ public class SpamWikiReviewPage extends BasePageObject {
 
   public SpamWikiReviewPage open() {
     getUrl(urlBuilder.getUrlForService(SPAM_WIKI_REVIEW_SERVICE_NAME)+VIEW_WIKIS_SUBPAGE);
+    return this;
+  }
+
+  public SpamWikiReviewPage returnToMainPageByClickingHeaderLogo(){
+    spamWikiReviewHeaderLogo.click();
     return this;
   }
 
