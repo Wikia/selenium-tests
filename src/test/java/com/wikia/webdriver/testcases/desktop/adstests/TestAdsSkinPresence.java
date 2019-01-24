@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsSkinPresence extends NewTestTemplate {
 
-  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "skinWithoutTheme", groups = "AdsSkinPresence")
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "skinWithoutTheme", groups = "TestAdsSkinPresenceWithoutTheme")
   public void adsSkinPresenceOnWikiWithoutTheme(
       String wikiName,
       String article,
@@ -32,7 +32,7 @@ public class TestAdsSkinPresence extends NewTestTemplate {
     );
   }
 
-  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "skinWithTheme", groups = "AdsSkinPresence")
+  @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "skinWithTheme", groups = "TestAdsSkinPresenceWithTheme")
   public void adsSkinPresenceOnWikiWithTheme(
       String wikiName,
       String article,
