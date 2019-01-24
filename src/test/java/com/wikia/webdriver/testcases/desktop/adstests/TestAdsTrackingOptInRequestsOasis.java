@@ -37,7 +37,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInRejectedOasis")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxOasis")
   public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -111,7 +111,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInRejectedOasis")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreOasis")
   public void adsTrackingRejectedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -162,7 +162,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInAcceptedOasis")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxOasis")
   public void adsTrackingAcceptedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -236,7 +236,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @UnsafePageLoad
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInAcceptedOasis")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreOasis")
   public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
