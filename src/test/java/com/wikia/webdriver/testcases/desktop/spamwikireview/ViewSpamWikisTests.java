@@ -189,9 +189,9 @@ public class ViewSpamWikisTests extends NewTestTemplate {
 
     Assertion.assertStringContains(spamWikiReviewPage.getCurrentUrl(), "add");
 
-    Assertion.assertTrue(addQuestionableWikiSubpage.getAddIdsTextArea().isDisplayed(),
+    Assertion.assertTrue(addQuestionableWikiSubpage.isAddIdsTextAreaDisplayed(),
                          "Text area to input wikis is not displayed");
-    Assertion.assertTrue(addQuestionableWikiSubpage.getSubmitIdsButton().isDisplayed(),
+    Assertion.assertTrue(addQuestionableWikiSubpage.isSubmitIdsButtonDisplayed(),
                          "Submit button is not displayed");
   }
 }

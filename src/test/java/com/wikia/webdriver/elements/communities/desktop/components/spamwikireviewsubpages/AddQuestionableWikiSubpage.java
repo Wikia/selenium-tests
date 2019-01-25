@@ -13,11 +13,11 @@ public class AddQuestionableWikiSubpage extends BasePageObject {
   @FindBy(xpath = "//button[@type='submit']")
   private WebElement submitIdsButton;
 
-  public WebElement getSubmitIdsButton() {
-    return submitIdsButton;
+  public boolean isSubmitIdsButtonDisplayed(){
+    return submitIdsButton.isDisplayed();
   }
 
-  public WebElement getAddIdsTextArea() {
-    return addIdsTextArea;
+  public boolean isAddIdsTextAreaDisplayed() {
+    return addIdsTextArea.isDisplayed();
   }
 }
