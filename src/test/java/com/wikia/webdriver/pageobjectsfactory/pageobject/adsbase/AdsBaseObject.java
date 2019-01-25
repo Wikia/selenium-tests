@@ -202,7 +202,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public boolean slotHasSize(String slotName, int width, int height) {
-    return getSlotAttribute(slotName, "data-gpt-slot-sizes").contains(String.format("%d,%d",
+    return getSlotAttribute(slotName, "data-sizes").contains(String.format("%d,%d",
                                                                                     width,
                                                                                     height
     ));
