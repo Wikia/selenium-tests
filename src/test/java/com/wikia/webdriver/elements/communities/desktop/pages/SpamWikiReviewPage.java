@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.communities.desktop.pages;
 
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.AddQuestionableWikiSubpage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -10,23 +11,25 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Collections;
 import java.util.List;
 
+import javax.sound.sampled.Line;
+
 public class SpamWikiReviewPage extends BasePageObject {
 
   public enum LANGUAGE_CODE {
     all, en, ar, de, es, fi, fr, id, hi, hu, it, ja, ka, kn, ko, nl, pt, pl, ru, uk, vi, zh, other
   }
 
-  public final static String QUESTIONABLE_STATUS = "questionable";
+  public static final String QUESTIONABLE_STATUS = "questionable";
 
-  public final static String QUESTIONABLE_BUTTON_TEXT = "Questionable";
-  public final static String SPAM_BUTTON_TEXT = "Spam";
-  public final static String NOT_SPAM_BUTTON_TEXT = "Not Spam";
+  public static final String QUESTIONABLE_BUTTON_TEXT = "Questionable";
+  public static final String SPAM_BUTTON_TEXT = "Spam";
+  public static final String NOT_SPAM_BUTTON_TEXT = "Not Spam";
 
-  public final static String XPATH_LANGUAGE_COLUMN = "./td[4]";
-  public final static String XPATH_STATUS_COLUMN = "./td[6]";
+  public static final String XPATH_LANGUAGE_COLUMN = "./td[4]";
+  public static final String XPATH_STATUS_COLUMN = "./td[6]";
 
-  public final static String LANG_QUERY_PARAM = "lang=";
-  public final static String STATUS_QUERY_PARAM = "status=";
+  public static final String LANG_QUERY_PARAM = "lang=";
+  public static final String STATUS_QUERY_PARAM = "status=";
 
   private static final String SPAM_WIKI_REVIEW_SERVICE_NAME = "spam-wiki-review";
   private static final String VIEW_WIKIS_SUBPAGE = "/wiki";
@@ -102,7 +105,8 @@ public class SpamWikiReviewPage extends BasePageObject {
       return displayedWikisTable.findElements(By.xpath("./tr"));
     } catch (org.openqa.selenium.NoSuchElementException notFoundException) {
       // if no elements were found return an empty list
-    return Collections.emptyList();
+      Log.info("No wikis were displayed in the Wiki Table", notFoundException);
+      return Collections.emptyList();
     }
   }
 
