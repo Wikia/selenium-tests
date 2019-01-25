@@ -48,7 +48,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInRejectedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxMobileWiki")
   public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -105,7 +105,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInRejectedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreMobileWiki")
   public void adsTrackingRejectedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -151,7 +151,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInAcceptedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxMobileWiki")
   public void adsTrackingAcceptedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -208,7 +208,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInAcceptedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreMobileWiki")
   public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -312,7 +312,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_HOME_PAGE);
-
     modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 }
