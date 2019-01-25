@@ -34,7 +34,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD), AdsContent.TOP_BOXAD);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB),
                          AdsContent.BOTTOM_LB
     );
@@ -48,8 +48,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     );
     adsBaseObject.waitForPageLoadedWithGpt();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC),
-                         "Slot" + AdsContent.MEDREC
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD),
+                         "Slot" + AdsContent.TOP_BOXAD
     );
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB),
                          "Slot" + AdsContent.TOP_LB
@@ -89,8 +89,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
     adsBaseObject.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC),
-                         String.format("Ad is not loaded inside %s", AdsContent.MEDREC)
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD),
+                         String.format("Ad is not loaded inside %s", AdsContent.TOP_BOXAD)
     );
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB),
                          String.format("Ad is not loaded inside %s", AdsContent.TOP_LB)

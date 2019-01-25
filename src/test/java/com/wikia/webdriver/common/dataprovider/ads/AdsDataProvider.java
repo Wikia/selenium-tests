@@ -156,7 +156,7 @@ public class AdsDataProvider {
             "\"s0c\":[\"anime\"]",
             "\"s1\":\"_yugioh\"",
             "\"s2\":\"article\"",
-            "\"dmn\":\"wikiacom\"",
+            "\"dmn\":\"fandomcom\"",
             "\"hostpre\":",
             "\"cat\":[",
             "\"ar\":\"4:3\"",
@@ -258,7 +258,7 @@ public class AdsDataProvider {
             "\"ar\":\"4:3\"",
             "\"artid\":\"948\"",
             "\"cat\":[\"fallout\"]",
-            "\"dmn\":\"wikiacom\"",
+            "\"dmn\":\"fandomcom\"",
             "\"hostpre\":",
             "\"lang\":\"en\"",
             "\"wpage\":\"fallout\"",
@@ -395,7 +395,7 @@ public class AdsDataProvider {
              .put("slotSize", new Dimension(120, 600))
              .put("lineItemId", "257673852").build()},
         {new Page(WIKI_SPECIAL, "SyntheticTests/Slots/Size/300x1050"), "",
-         ImmutableMap.<String, Object>builder().put("slotName", AdsContent.MEDREC)
+         ImmutableMap.<String, Object>builder().put("slotName", AdsContent.TOP_BOXAD)
              .put("slotSize", new Dimension(300, 1050))
              .put("lineItemId", "255534972").build()}};
   }
@@ -411,7 +411,7 @@ public class AdsDataProvider {
                                                        .build(),
                                                    ImmutableMap.<String, Object>builder().put(
                                                        "slotName",
-                                                       AdsContent.MEDREC
+                                                       AdsContent.TOP_BOXAD
                                                    )
                                                        .put("slotSize", new Dimension(300, 250))
                                                        .put("lineItemId", "365416332")

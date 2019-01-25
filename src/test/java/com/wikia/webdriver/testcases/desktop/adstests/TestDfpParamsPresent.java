@@ -50,7 +50,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
   }
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "dfpMEGAParams", groups = {
-      "DfpParamsPresentOasis", "Ads"})
+      "DfpMEGAParamsPresentOasis", "Ads"})
   public void dfpMEGAParamsPresentOasis(
       String wikiName,
       String article,
@@ -64,5 +64,17 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
 
     ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
+  }
+
+  @Test(groups = "DfpMEGAParamsPresentOasis")
+  public void testAdsMEGAValMorganAUOasis() {
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.UAP_PAGE.getUrl());
+    ads.verifyValMorgan("AU", "AU", false);
+  }
+
+  @Test(groups = "DfpMEGAParamsPresentOasis")
+  public void testAdsMEGAValMorganNZOasis() {
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.UAP_PAGE.getUrl());
+    ads.verifyValMorgan("AU", "NZ", false);
   }
 }

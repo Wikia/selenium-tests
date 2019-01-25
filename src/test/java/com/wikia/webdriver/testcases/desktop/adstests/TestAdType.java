@@ -32,10 +32,10 @@ public class TestAdType extends TemplateNoFirstLoad {
   @Test
   public void adsAdTypeInspectIframe() {
     Page page = new Page("project43", "SyntheticTests/AdType/InspectIframe");
-    final By slotSelector = By.id(AdsContent.MEDREC);
+    final By slotSelector = By.id(AdsContent.TOP_BOXAD);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
     ads.waitForSlotExpanded(slotSelector);
     ads.scrollToPosition(slotSelector);
-    ads.verifyImgAdLoadedInSlot(AdsContent.MEDREC, DFP_IMAGE_URL);
+    ads.verifyImgAdLoadedInSlot(AdsContent.TOP_BOXAD, DFP_IMAGE_URL);
   }
 }
