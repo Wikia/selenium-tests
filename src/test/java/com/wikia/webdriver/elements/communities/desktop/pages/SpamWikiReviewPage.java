@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.communities.desktop.pages;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.AddQuestionableWikiSubpage;
+import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.WikiTableRow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
@@ -10,8 +11,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.Collections;
 import java.util.List;
-
-import javax.sound.sampled.Line;
+import java.util.stream.Collectors;
 
 public class SpamWikiReviewPage extends BasePageObject {
 
@@ -24,9 +24,6 @@ public class SpamWikiReviewPage extends BasePageObject {
   public static final String QUESTIONABLE_BUTTON_TEXT = "Questionable";
   public static final String SPAM_BUTTON_TEXT = "Spam";
   public static final String NOT_SPAM_BUTTON_TEXT = "Not Spam";
-
-  public static final String XPATH_LANGUAGE_COLUMN = "./td[4]";
-  public static final String XPATH_STATUS_COLUMN = "./td[6]";
 
   public static final String LANG_QUERY_PARAM = "lang=";
   public static final String STATUS_QUERY_PARAM = "status=";
@@ -96,13 +93,18 @@ public class SpamWikiReviewPage extends BasePageObject {
     return this;
   }
 
+
+
   /**
-   * This gets a list of WebElements containing Rows of displayed table with Wikis' info
+   * This gets a list of WikiTableRows, rows of table with Wikis' info
    * excludes thead, header of the table
    */
-  public List<WebElement> getListDisplayedWikisTableRows() {
+  public List<WikiTableRow> getListDisplayedWikiTableRows() {
     try {
-      return displayedWikisTable.findElements(By.xpath("./tr"));
+      return displayedWikisTable.findElements(By.xpath("./tr"))
+          .stream()
+          .map(WikiTableRow::new)
+          .collect(Collectors.toList());
     } catch (org.openqa.selenium.NoSuchElementException notFoundException) {
       // if no elements were found return an empty list
       Log.info("No wikis were displayed in the Wiki Table", notFoundException);
@@ -111,11 +113,11 @@ public class SpamWikiReviewPage extends BasePageObject {
   }
 
   /**
-   * This gets a WebElement containing nth Row of displayed table with Wiki information
+   * This gets a ViewOnlyWebElement containing nth Row of displayed table with Wiki information
    * excludes thead, header of the table
    */
-  public WebElement getNthDisplayedWikisTableRow(int wikiaRowNumber) {
-    List<WebElement> allRows = getListDisplayedWikisTableRows();
+    public WikiTableRow getNthDisplayedWikisTableRow(int wikiaRowNumber) {
+    List<WikiTableRow> allRows = getListDisplayedWikiTableRows();
     return allRows.get(wikiaRowNumber);
   }
 }

@@ -5,11 +5,10 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.AddQuestionableWikiSubpage;
+import com.wikia.webdriver.elements.communities.desktop.components.spamwikireviewsubpages.WikiTableRow;
 import com.wikia.webdriver.elements.communities.desktop.pages.SpamWikiReviewPage;
 
 import org.apache.commons.lang3.EnumUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 @Test(groups = "SpamWikiReview")
@@ -28,7 +27,7 @@ public class ViewSpamWikisTests extends NewTestTemplate {
                              .matches(".*(User not authorized|Unauthorized).*"),
                          "No 'unauthorized' type message was displayed to the user");
 
-    Assertion.assertTrue(spamWikiReviewPage.getListDisplayedWikisTableRows().isEmpty(),
+    Assertion.assertTrue(spamWikiReviewPage.getListDisplayedWikiTableRows().isEmpty(),
                          "It shouldn't be possible to see Wikis' list when unauthorized");
   }
 
@@ -47,9 +46,8 @@ public class ViewSpamWikisTests extends NewTestTemplate {
                            + SpamWikiReviewPage.LANGUAGE_CODE.ja);
 
     // check if all Wikis on a presumably filtered page have the 'ja' language
-    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
-      Assertion.assertEquals(wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_LANGUAGE_COLUMN))
-                                 .getText(), SpamWikiReviewPage.LANGUAGE_CODE.ja.toString());
+    for(WikiTableRow wikiRow : spamWikiReviewPage.getListDisplayedWikiTableRows()) {
+      Assertion.assertEquals(wikiRow.getLanguageColumnValue(), SpamWikiReviewPage.LANGUAGE_CODE.ja.toString());
     }
 
   }
@@ -88,14 +86,12 @@ public class ViewSpamWikisTests extends NewTestTemplate {
                            + SpamWikiReviewPage.LANGUAGE_CODE.other);
 
     // check if all Wikis on a presumably filtered page have languages other than those in LANGUAGE_CODE
-    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
+    for(WikiTableRow wikiRow : spamWikiReviewPage.getListDisplayedWikiTableRows()) {
       Assertion.assertFalse(EnumUtils.isValidEnum(SpamWikiReviewPage.LANGUAGE_CODE.class,
-                                                 wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_LANGUAGE_COLUMN))
-                                                     .getText()),
+                                                 wikiRow.getLanguageColumnValue()),
                            "Spam Wiki Review other languages view contained languages from"
                            + "LANGUAGE CODE - those that can be filtered individually, "
-                           + "namely " + wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_LANGUAGE_COLUMN))
-                               .getText());
+                           + "namely " + wikiRow.getLanguageColumnValue());
     }
   }
 
@@ -114,8 +110,8 @@ public class ViewSpamWikisTests extends NewTestTemplate {
                                    + SpamWikiReviewPage.QUESTIONABLE_STATUS);
 
     // check if all Wikis on a presumably only questionable wikis page
-    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
-      String visibleButtonsText = wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_STATUS_COLUMN)).getText();
+    for(WikiTableRow wikiRow : spamWikiReviewPage.getListDisplayedWikiTableRows()) {
+      String visibleButtonsText = wikiRow.getStatusColumnValue();
 
       //have Spam and Not Spam buttons in that order without Questionable button
       Assertion.assertEquals(visibleButtonsText,SpamWikiReviewPage.SPAM_BUTTON_TEXT
@@ -147,15 +143,15 @@ public class ViewSpamWikisTests extends NewTestTemplate {
                                                + SpamWikiReviewPage.QUESTIONABLE_STATUS);
 
     // check if all Wikis on a presumably only questionable wikis page
-    for(WebElement wikiRow : spamWikiReviewPage.getListDisplayedWikisTableRows()) {
+    for(WikiTableRow wikiRow : spamWikiReviewPage.getListDisplayedWikiTableRows()) {
 
       // have Spam and Not Spam buttons in that order without Questionable button
-      Assertion.assertEquals(wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_STATUS_COLUMN)).getText(),
+      Assertion.assertEquals(wikiRow.getStatusColumnValue(),
                              SpamWikiReviewPage.SPAM_BUTTON_TEXT
                              + "\n" + SpamWikiReviewPage.NOT_SPAM_BUTTON_TEXT);
 
       // and are in de language
-      Assertion.assertEquals(wikiRow.findElement(By.xpath(SpamWikiReviewPage.XPATH_LANGUAGE_COLUMN)).getText(),
+      Assertion.assertEquals(wikiRow.getLanguageColumnValue(),
                              SpamWikiReviewPage.LANGUAGE_CODE.de.toString());
     }
   }
