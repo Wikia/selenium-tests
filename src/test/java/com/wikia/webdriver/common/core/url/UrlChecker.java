@@ -26,6 +26,6 @@ public class UrlChecker {
   }
 
   public static String getProtocolRelativeURL(String fullURL) {
-    return fullURL.replaceFirst("^(http[s]?)", "");
+    return fullURL.replaceFirst("^(http[s]?)", "").replaceFirst("(www.?)", "");
   }
 }

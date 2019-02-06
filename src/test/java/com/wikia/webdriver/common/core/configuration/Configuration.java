@@ -48,7 +48,7 @@ public class Configuration {
   @Getter(lazy = true)
   private static final String domain = getEnvType().getDomain();
 
-  private Configuration() {}
+  public Configuration() {}
 
   private static Map<String, String> readConfiguration() {
     if (defaultConfig == null) {
