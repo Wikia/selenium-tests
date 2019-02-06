@@ -29,7 +29,7 @@ public class MobileWikis {
   public static final String DISCUSSIONS_MOBILE = "dauto-mobile";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";
   // for testing zero state messages - please don't add any posts!
-  public static final String DISCUSSIONS_EMPTY = "discussions-empty";
+  public static final String DISCUSSIONS_EMPTY = "discussionsempty";
   // read-only tests for Promoting
   public static final String FALLOUT = "fallout";
 
