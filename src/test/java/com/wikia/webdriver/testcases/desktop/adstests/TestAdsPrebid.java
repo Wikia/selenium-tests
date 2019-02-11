@@ -106,7 +106,7 @@ public class TestAdsPrebid extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON_NO_VIDEO.getUrl());
 
-    Assertion.assertEquals(getFVStatus(ads), "error");
+    Assertion.assertEquals(getFVStatus(ads), "collapse");
   }
 
   private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPatterns) {
