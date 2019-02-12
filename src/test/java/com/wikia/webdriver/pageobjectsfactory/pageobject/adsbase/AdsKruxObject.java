@@ -34,7 +34,7 @@ public class AdsKruxObject extends AdsBaseObject {
    * Test whether the Krux user id is not empty and added to GPT calls
    */
   public void verifyKruxUserParam(String slotName) {
-    String script = "return localStorage.kxuser;";
+    String script = "return localStorage.kxwikia_user;";
     String user1 = (String) ((JavascriptExecutor) driver).executeScript(script);
 
     // Fourth page view
