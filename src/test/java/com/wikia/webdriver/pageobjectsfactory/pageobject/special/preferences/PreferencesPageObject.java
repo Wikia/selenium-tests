@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.google.GoogleMainPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -39,6 +40,14 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement facebookSubmitButton;
   @FindBy(css = "#mw-input-wpusenewrc")
   private WebElement useAdvancedRecentChangesCheckbox;
+
+  private String frameGoogle = "iframe[class='google-button']";
+  private String googleButtonLabel = "//html/body/main/a/span";
+  private String googleButton = "//html/body/main/a";
+
+  protected String connect = "CONNECT WITH GOOGLE";
+  protected String disconnect = "DISCONNECT FROM GOOGLE";
+
 
   public PreferencesPageObject open() {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_PREFERENCES));
@@ -115,6 +124,15 @@ public class PreferencesPageObject extends WikiBasePageObject {
         "GSet_advanced_recent_changes_checkbox_value set to default unchecked",
         true
     );
+
+    return this;
+  }
+
+  public PreferencesPageObject disconnectFromGoogleOnPreferencesPage() {
+    driver.switchTo().frame(driver.findElement(By.cssSelector(frameGoogle)));
+    driver.findElement(By.xpath(googleButton)).click();
+    wait.forTextInElement(driver.findElement(By.xpath(googleButtonLabel)),connect);
+    new GoogleMainPage().googleLogout();
 
     return this;
   }

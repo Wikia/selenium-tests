@@ -5,7 +5,6 @@ import static org.testng.Assert.assertTrue;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.helpers.GoogleUser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.GoogleSignupModalComponent;
@@ -17,31 +16,37 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.google.GoogleMainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
 import java.time.Instant;
 
 @Test(groups = {"auth-google"})
+@Execute(onWikia = "mediawiki119")
 public class GoogleTests extends NewTestTemplate {
 
-  private GoogleUser googleUser;
-  private String email = XMLReader.getValue("ci.user.google.google1.email");
-  private String password = XMLReader.getValue("ci.user.google.google1.password");
-  private String email2 = XMLReader.getValue("ci.user.google.google2.email");
-  private String password2 = XMLReader.getValue("ci.user.google.google2.password");
+  private String email = XMLReader.getValue("ci.user.google.email");
+  private String password = XMLReader.getValue("ci.user.google.password");
+  private String frame = "iframe[class='google-button']";
+  private String googleButtonLabel = "//html/body/main/a/span";
+  private String googleButton = "//html/body/main/a";
 
+  protected String connect = "CONNECT WITH GOOGLE";
+  protected String disconnect = "DISCONNECT FROM GOOGLE";
+
+
+  @Test
   public void googleButtonIsVisibleOnSignUpPage() {
     AttachedRegisterPage registerPage = new WikiBasePageObject().openUserSignUpPage(wikiURL);
     assertTrue(registerPage.isConnectWithGoogleButtonVisible());
   }
 
+  @Test
   public void googleButtonIsVisibleOnLoginPage() {
     AttachedSignInPage signInPage = new WikiBasePageObject().openUserLoginPage(wikiURL);
     assertTrue(signInPage.isConnectWithGoogleButtonVisible());
   }
 
+  @Test
   public void googleButtonIsVisibleOnForcedLoginModal() {
     new WikiBasePageObject().openSpecialNewFiles(wikiURL).addPhoto();
     assertTrue(new DetachedRegisterPage().isConnectWithGoogleButtonVisible());
@@ -55,54 +60,25 @@ public class GoogleTests extends NewTestTemplate {
     assertTrue(prefsPage.isGoogleButtonVisible());
   }
 
+  // User with existing Google Account wants to create a Fandom Account
   @Test
   public void userCanSignUpViaGoogle() {
     String userName = String.format("QA%s", Instant.now().getEpochSecond());
     String redirectUrl = driver.getCurrentUrl();
 
-    new GoogleMainPage().login(email2, password2);
+    new GoogleMainPage().login(email, password);
+
     AttachedRegisterPage signUp = new AttachedRegisterPage().open(redirectUrl);
     GoogleSignupModalComponent googleModal = signUp.clickGoogleSignUp();
-    googleModal.createAccountNoEmailGoogle(userName, 1,1,1990);
-
-    disconnectFromGoogleOnPreferencesPage();
-
-  }
-
-
-
-  // Test to connect via Special:Preferences
-  @Execute(asUser = User.USER)
-  public void userCanConnectAccountWithGoogleOnPreferencesPage() {
-    PreferencesPageObject prefsPage = new WikiBasePageObject().openSpecialPreferencesPage(wikiURL);
-    prefsPage.selectTab(PreferencesPageObject.tabNames.CONNECTIONS);
-
-// TODO: FINISH! 1186
-  }
-
-
-
-  // methods for tests
-  @FindBy(css = "a[class='connect-provider-google']")
-  protected WebElement disconnectGoogle;
-
-
-  protected String connect = "Connect with Google";
-  protected String disconnect = "Disconnect from Google";
-
-  public void disconnectFromGoogleOnPreferencesPage() {
+    googleModal.createAccountNoEmailGoogle(userName, 1, 1, 1990);
 
     PreferencesPageObject prefsPage = new WikiBasePageObject()
         .openSpecialPreferencesPage(wikiURL)
         .selectTab(PreferencesPageObject.tabNames.CONNECTIONS);
 
-   driver.switchTo().frame(driver.findElement(By.cssSelector("iframe[class='google-button']")));
-
-   assertEquals(prefsPage.googleConnect.getText(), disconnect);
-   driver.findElement(By.xpath("//html/body/main/a")).click();
-
-    assertEquals(prefsPage.googleConnect.getText(), connect);
-
-    new GoogleMainPage().googleLogout();
+    prefsPage.disconnectFromGoogleOnPreferencesPage();
+    prefsPage.open().selectTab(PreferencesPageObject.tabNames.CONNECTIONS);
+    driver.switchTo().frame(driver.findElement(By.cssSelector(frame)));
+    assertEquals(driver.findElement(By.xpath(googleButtonLabel)).getText(), connect);
   }
 }

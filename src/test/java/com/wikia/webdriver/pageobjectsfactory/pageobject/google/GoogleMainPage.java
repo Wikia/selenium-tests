@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GoogleMainPage extends BasePageObject {
 
@@ -25,10 +26,12 @@ public class GoogleMainPage extends BasePageObject {
 
   private void performLogin(String email, String password) {
     typeEmail(email);
-    wait.forXMilliseconds(2500);
-    clickNextButton();
-    typePassword(password);
     wait.forXMilliseconds(3500);
+    clickNextButton();
+    WebDriverWait wait = new WebDriverWait(driver, 20);
+//    wait.forXMilliseconds(3500);
+    typePassword(password);
+//    wait.forXMilliseconds(3500);
     clickLoginButton();
   }
 

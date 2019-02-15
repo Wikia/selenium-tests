@@ -103,10 +103,7 @@ public class GoogleSignupModalComponent extends WikiBasePageObject {
   public void createAccountNoEmailGoogle(
       String userName, Integer birthMonth, Integer birthDay, Integer birthYear
   ) {
-//    acceptWikiaAppPolicyNoEmail();
-
     wait.forElementVisible(googleRegistrationForm);
-//    typeEmail(email);
     typeUserName(userName);
     typeBirthday(birthMonth, birthDay, birthYear);
     clickRegister();

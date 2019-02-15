@@ -85,7 +85,9 @@ public enum User {
       "ci.user.constantlyBlockedAccountUser.password"
   ), GOOGLE_CONNECTED("ci.user.google_connected.username",
                       "ci.user.google_connected.password"
-  ), CONTENT_REVIEWER("ci.user.wikiaContentReviewer.username",
+  ), GOOGLE_USER("ci.user.google.username",
+                 "ci.user.google.password"
+  ),CONTENT_REVIEWER("ci.user.wikiaContentReviewer.username",
                       "ci.user.wikiaContentReviewer.password"
   ), COMMENTS_REGULAR_USER("ci.user.comments.username",
                            "ci.user.comments.password",
