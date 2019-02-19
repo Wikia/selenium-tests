@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.desktop.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -25,6 +26,11 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 
 import org.joda.time.DateTime;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.server.handler.GetCurrentUrl;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -281,8 +287,9 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.checkSymbolsTools();
     source.submitArticle();
   }
-//  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
+
   @Test(groups = {"RTE_draft","draft_saving"})
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
   public void RTE_draft() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
@@ -290,20 +297,19 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     new ArticleContent().push("Test content", articleName);
     source.focusTextArea();
     source.addContentInSourceMode(articleName);
+    
     try {
       Thread.sleep(5001);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
 
-
-    //    //This wait is to let draft saving process to occure
-//    try {
-//      driver.wait(5001);
-//    } catch (InterruptedException e) {
-//      e.printStackTrace();
-//    }
     driver.navigate().refresh();
+    AlertHandler.acceptPopupWindow(driver,15);
+
+    WebElement el = driver.findElement(By.cssSelector(".close.wikia-chiclet-button"));
+    el.click();
+
     source.submitArticle();
 
   }
