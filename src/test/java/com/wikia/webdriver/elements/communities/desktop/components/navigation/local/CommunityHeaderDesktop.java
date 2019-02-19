@@ -34,7 +34,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
   @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"admin-dashboard\"]")
   private WebElement adminDashboardButton;
 
-  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-explore-tiny\"]")
+  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-book-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-book-tiny\"]")
   private WebElement exploreTab;
 
   @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-activity\"], .wds-dropdown a[data-tracking-label=\"explore-activity\"]")
