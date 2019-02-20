@@ -290,26 +290,53 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @Test(groups = {"RTE_draft","draft_saving"})
   @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
-  public void RTE_draft() {
+  public void RTE_draft_intervening_accepted() {
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+//    String articleName2 = articleName+"D";
+
+    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
+    source.addContentInSourceMode(articleName);
+//    source.focusTextArea();
+//    source.addContentInSourceMode(articleName);
+//This sleep is necessery for draft to be saved (every 5 sec)
+    new ArticleContent(User.SUS_REGULAR_USER).push("Test content", articleName);
+
+    try {
+      Thread.sleep(5001);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    driver.navigate().refresh();
+    AlertHandler.acceptPopupWindow(driver,15);
+    WebElement el = driver.findElement(By.cssSelector(".close.wikia-chiclet-button"));
+    el.click();
+
+    Assertion.assertStringContains(source.getSourceContent(),articleName+articleName);
+    source.submitArticle();
+    driver.quit();
+  }
+
+  @Test(groups = {"RTE_draft","draft_saving"})
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
+  public void RTE_draft_intervening_rejected() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.addContentInSourceMode(articleName);
     new ArticleContent().push("Test content", articleName);
     source.focusTextArea();
     source.addContentInSourceMode(articleName);
-    
+//This sleep is necessery for draft to be saved (every 5 sec)
     try {
       Thread.sleep(5001);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
-
     WebElement el = driver.findElement(By.cssSelector(".close.wikia-chiclet-button"));
     el.click();
 
+//    Assertion.assertStringContains();
     source.submitArticle();
 
   }
