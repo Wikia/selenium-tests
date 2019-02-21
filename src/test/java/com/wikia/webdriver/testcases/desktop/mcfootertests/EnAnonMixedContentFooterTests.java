@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"EnAnonMixedContentFooter"})
-@Execute(onWikia = "harrypotter", asUser = User.ANONYMOUS)
+@Execute(onWikia = "mediawiki119", asUser = User.ANONYMOUS)
 public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @DontRun( language = "szl")
@@ -45,7 +45,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @DontRun( language = "szl")
   @Test
-  @Execute(onWikia = "mcfwithoutmoreofwikiarticles")
+  @Execute(onWikia = "enwikiwithemptydiscussions")
   public void discussionsCardIsPresentOnENwikiWithEmptyDiscussions() {
     DiscussionCard discussionCard = new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
@@ -92,7 +92,6 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @DontRun( language = "szl")
   @Test
-  @Execute(onWikia = "mcfwithoutmoreofwikiarticles")
   public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter().openWikiMainPage().scrollToMCFooter();
 
@@ -141,7 +140,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
         .clickDiscussionsPost();
 
     String url = driver.getCurrentUrl();
-    Assertion.assertTrue(url.contains(".wikia.com/d/"));
+    Assertion.assertTrue(url.matches(".*\\.(wikia|fandom)\\.com/d/.*"));
   }
 
   @DontRun( language = "szl")
@@ -164,7 +163,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
         .waitForPageLoad();
 
     String url = driver.getCurrentUrl();
-    Assertion.assertTrue(url.contains("fandom.com/articles/"));
+    Assertion.assertTrue(url.matches(".*\\.(fandom|fandom.wikia)\\.com/articles/.*"));
   }
 
   @DontRun( language = "szl")
