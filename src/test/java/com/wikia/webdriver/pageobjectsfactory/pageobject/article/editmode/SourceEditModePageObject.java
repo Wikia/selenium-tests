@@ -74,6 +74,8 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
+  @FindBy(css = ".close.wikia-chiclet-button")
+  private WebElement draftNotificationClose;
 
   public SourceEditModePageObject openArticle(String articleTitle) {
     String url = urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleTitle;
@@ -322,6 +324,10 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.clear();
     Log.log("clearContent", "source mode cleared", true);
+  }
+
+  public void closeDraftNotification() {
+    draftNotificationClose.click();
   }
 
   public void verifySourceModeEnabled() {

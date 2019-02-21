@@ -292,28 +292,28 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
   public void RTE_draft_intervening_accepted() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+
+    new ArticleContent(User.SUS_REGULAR_USER3).push("An awesome start", articleName);
+
 //    String articleName2 = articleName+"D";
 
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.addContentInSourceMode(articleName);
 //    source.focusTextArea();
 //    source.addContentInSourceMode(articleName);
-//This sleep is necessery for draft to be saved (every 5 sec)
     new ArticleContent(User.SUS_REGULAR_USER).push("Test content", articleName);
+//This sleep is necessery for draft to be saved (every 5 sec)
 
     try {
-      Thread.sleep(5001);
+      Thread.sleep(10001);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
-    WebElement el = driver.findElement(By.cssSelector(".close.wikia-chiclet-button"));
-    el.click();
+    source.closeDraftNotification();
 
-    Assertion.assertStringContains(source.getSourceContent(),articleName+articleName);
-    source.submitArticle();
-    driver.quit();
+    Assertion.assertStringContains(source.getSourceContent(),articleName);
   }
 
   @Test(groups = {"RTE_draft","draft_saving"})
