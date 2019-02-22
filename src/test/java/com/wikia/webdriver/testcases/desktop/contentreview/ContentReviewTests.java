@@ -28,7 +28,7 @@ public class ContentReviewTests extends NewTestTemplate {
   @Test
   @Execute(asUser = User.STAFF)
   public void staffUserShouldSeeReviewModule() {
-    SpecialJsPage wikiaJs = new SpecialJsPage().open("Wikia");
+    SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
     Assertion.assertTrue(wikiaJs.getReviewModule().isModuleVisible());
   }

@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -78,8 +77,6 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement draftNotificationClose;
   @FindBy(css = ".modalContent")
   private WebElement modalText;
-  @FindBy(css = ".wpDiff")
-  private WebElement wpDiff;
 
 
   public SourceEditModePageObject openArticle(String articleTitle) {
@@ -358,5 +355,13 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject();
+  }
+
+  public void waitForDraftToBeSaved() {
+    try {
+      Thread.sleep(5001);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }

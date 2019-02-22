@@ -24,13 +24,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
-
 import org.joda.time.DateTime;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.server.handler.GetCurrentUrl;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -295,12 +289,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     new ArticleContent(User.SUS_REGULAR_USER3).push("An awesome start", articleName);
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.addContentInSourceMode(articleName);
-//This sleep is necessery for draft to be saved (every 5 sec)
-    try {
-      Thread.sleep(5001);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    source.waitForDraftToBeSaved();
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
     Assertion.assertStringContains(source.getModalText(),"Here are your unpublished changes. Keep up the great work!");
@@ -316,12 +305,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.addContentInSourceMode(articleName);
     new ArticleContent(User.SUS_REGULAR_USER).push("Test content", articleName);
-//This sleep is necessery for draft to be saved (every 5 sec)
-    try {
-      Thread.sleep(10001);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    source.waitForDraftToBeSaved();
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
     Assertion.assertStringContains(source.getModalText(),"Someone else has changed this page");
