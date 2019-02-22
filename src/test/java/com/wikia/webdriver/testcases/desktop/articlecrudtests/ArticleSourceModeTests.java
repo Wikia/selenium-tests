@@ -292,17 +292,18 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
   public void RTE_draft_save() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    new ArticleContent(User.SUS_REGULAR_USER3).push("An awesome start", articleName);
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     source.addContentInSourceMode(articleName);
 //This sleep is necessery for draft to be saved (every 5 sec)
     try {
-      Thread.sleep(10001);
+      Thread.sleep(5001);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
-
+    Assertion.assertStringContains()
     source.closeDraftNotification();
     Assertion.assertStringContains(source.getSourceContent(),articleName);
   }
