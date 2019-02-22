@@ -76,6 +76,11 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeTextArea;
   @FindBy(css = ".close.wikia-chiclet-button")
   private WebElement draftNotificationClose;
+  @FindBy(css = ".modalContent")
+  private WebElement modalText;
+  @FindBy(css = ".wpDiff")
+  private WebElement wpDiff;
+
 
   public SourceEditModePageObject openArticle(String articleTitle) {
     String url = urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleTitle;
@@ -330,6 +335,9 @@ public class SourceEditModePageObject extends EditMode {
     draftNotificationClose.click();
   }
 
+  public String getModalText() {
+    return modalText.getText();
+  }
   public void verifySourceModeEnabled() {
     wait.forElementVisible(sourceModeTextArea);
     waitForElementNotVisibleByElement(sourceModeLoadingIndicator);
