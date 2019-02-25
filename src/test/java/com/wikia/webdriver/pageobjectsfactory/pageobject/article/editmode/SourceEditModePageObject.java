@@ -77,6 +77,10 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement draftNotificationClose;
   @FindBy(css = ".modalContent")
   private WebElement modalText;
+  @FindBy(css = "#wpDiff")
+  private WebElement showChanges;
+  @FindBy(css = ".diff-deletedline")
+  private WebElement diffDeletedLine;
 
 
   public SourceEditModePageObject openArticle(String articleTitle) {
@@ -160,6 +164,11 @@ public class SourceEditModePageObject extends EditMode {
     focusTextArea();
     nowiki.click();
     Log.log("clickNoWiki", "nowwiki button was clicked", true, driver);
+  }
+
+  public void clickShowChanges() {
+    showChanges.click();
+    Log.log("clickShowChanges", "Show changes button was clicked", true, driver);
   }
 
   public void clickSignature() {

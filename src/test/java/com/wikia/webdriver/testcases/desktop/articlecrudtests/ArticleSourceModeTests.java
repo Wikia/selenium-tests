@@ -25,6 +25,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import org.joda.time.DateTime;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -311,6 +312,8 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     Assertion.assertStringContains(source.getModalText(),"Someone else has changed this page");
     source.closeDraftNotification();
     Assertion.assertStringContains(source.getSourceContent(),articleName);
+    source.clickShowChanges();
+    Assertion.assertStringContains(source.getContent(), "Text content");
   }
 
 }
