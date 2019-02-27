@@ -56,7 +56,8 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @DontRun( language = "szl")
   @Test
-  @Execute(onWikia = "enwikiwithoutdiscussions")
+  @Execute(onWikia = "sydneybuses")
+  //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE MCF with 'More of..' will appear on this wiki
   public void discussionsCardIsNotPresentOnENwikiWithoutDiscussions() {
     DiscussionCard discussionCard = new MixedContentFooter().
         openWikiMainPage().scrollToMCFooter().getDiscussionsCard();
@@ -83,7 +84,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   @DontRun( language = "szl")
   @Test
   @Execute(onWikia = "sydneybuses")
-  //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE 'More of..' will appear on this wiki
+  //SHOULD BE RUN AT enwikiwithoutdiscussions.wikia.com ONCE MCF with 'More of..' will appear on this wiki
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter().openWikiMainPage().scrollToMCFooter();
 
@@ -92,6 +93,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @DontRun( language = "szl")
   @Test
+  @Execute(onWikia = "enwikiwithemptydiscussions")
   public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter().openWikiMainPage().scrollToMCFooter();
 
