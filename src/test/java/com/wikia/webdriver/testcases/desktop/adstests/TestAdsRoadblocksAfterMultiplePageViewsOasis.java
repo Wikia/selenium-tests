@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsRoadblocksAfterMultiplePageViewsOasis extends TemplateNoFirstLoad {
 
-  private static final int PAGE_VIEWS_COUNT = 5;
+  private static final int PAGE_VIEWS_COUNT = 2;
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "roadblocks", groups = "AdsTestRoadblocksOasis")
   public void adsTestRoadblockOasis(
