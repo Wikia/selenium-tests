@@ -68,7 +68,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   public void verifyBoardCreated(String title, String description) {
-    wait.forElementVisible(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
+    wait.forElementPresent(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
                                     + "')]/../../../p[contains(text(), '" + description + "')]"));
     Log.log("verifyBoardCreated", "recently created board verified", true);
   }
