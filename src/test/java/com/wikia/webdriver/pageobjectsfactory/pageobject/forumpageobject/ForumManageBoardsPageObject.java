@@ -68,14 +68,8 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   public void verifyBoardCreated(String title, String description) {
-    String forumSelector = null;
-    try {
-      forumSelector = new String("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
-                                        + "')]/../../../p[contains(text(), '" + description + "')]".getBytes("UTF-8"));
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    }
-    wait.forElementPresent(By.xpath(forumSelector));
+    wait.forElementPresent(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
+                                    + "')]/../../../p[contains(text(), '" + description + "')]"));
     Log.log("verifyBoardCreated", "recently created board verified", true);
   }
 

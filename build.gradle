@@ -46,6 +46,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 // docs: https://gradle.org/docs/current/dsl/org.gradle.api.tasks.testing.Test.html
 test {
+//    systemProperty "file.encoding", "utf-8"
     ignoreFailures = true;
     def groups = ''
 

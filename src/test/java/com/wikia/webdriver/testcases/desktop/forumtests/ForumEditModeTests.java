@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
@@ -42,6 +43,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanCreateNewBoard(String name) {
+    Log.ok("TITLE", name + "dsadasdasdasd");
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.createNew(User.USER_ADMIN_FORUM);
 
