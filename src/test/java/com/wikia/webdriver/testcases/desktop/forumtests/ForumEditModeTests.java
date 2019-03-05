@@ -21,10 +21,11 @@ public class ForumEditModeTests extends NewTestTemplate {
   @DataProvider
   private static final Object[][] getForumName() {
     return new Object[][]{{PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
-                          {PageContent.FORUM_TITLE_PREFIX},
-                          {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
-                          {PageContent.FORUM_TITLE_SLASH_PREFIX},
-                          {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}};
+//                          {PageContent.FORUM_TITLE_PREFIX},
+//                          {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
+//                          {PageContent.FORUM_TITLE_SLASH_PREFIX},
+//                          {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}
+    };
   }
 
   @Test(groups = {"ForumEditModeTests_001"})
