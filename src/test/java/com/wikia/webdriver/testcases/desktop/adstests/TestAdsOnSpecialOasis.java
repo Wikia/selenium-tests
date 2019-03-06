@@ -55,7 +55,7 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
                                           RESOLUTION
     );
     ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
-
+//
     ads.verifyGptAdInSlot(AdsContent.TOP_LB, TEST_LINE_ITEM_ID);
     ads.verifyMEGAAdUnit(AdsContent.TOP_LB, FILE_PAGE_TLB_MEGA_AD_UNIT);
 
