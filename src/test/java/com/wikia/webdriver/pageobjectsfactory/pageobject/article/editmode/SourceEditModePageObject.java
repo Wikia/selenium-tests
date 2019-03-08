@@ -81,6 +81,14 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement showChanges;
   @FindBy(css = ".diff-deletedline")
   private WebElement diffDeletedLine;
+  @FindBy(css = ".wds-banner-notification__text")
+  private WebElement draftBanner;
+  @FindBy(css = "#discard")
+  private WebElement discard;
+  @FindBy(css = "#keep")
+  private WebElement keep;
+  @FindBy(css = ".diff-deletedline")
+  private WebElement deletedLine;
 
 
   public SourceEditModePageObject openArticle(String articleTitle) {
@@ -344,6 +352,18 @@ public class SourceEditModePageObject extends EditMode {
   public String getModalText() {
     return modalText.getText();
   }
+
+  public String getDeletedText() {
+    return deletedLine.getText();
+  }
+
+  public String getBannerText() {
+    return draftBanner.getText();
+  }
+
+  public void setDiscardChanges() { discard.click(); }
+  public void setKeepChanges() { keep.click(); }
+
   public void verifySourceModeEnabled() {
     wait.forElementVisible(sourceModeTextArea);
     waitForElementNotVisibleByElement(sourceModeLoadingIndicator);

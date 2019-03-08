@@ -285,35 +285,52 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @Test(groups = {"RTE_draft","draft_saving"})
   @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
-  public void RTE_draft_save() {
+  public void RTE_draft_save_discard_changes() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    new ArticleContent(User.SUS_REGULAR_USER3).push("An awesome start", articleName);
+    new ArticleContent(User.SUS_REGULAR_USER3).push("Published edit of article", articleName);
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
-    source.addContentInSourceMode(articleName);
+    source.addContentInSourceMode("Unpublished edit of article");
     source.waitForDraftToBeSaved();
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
-    Assertion.assertStringContains(source.getModalText(),"Here are your unpublished changes. Keep up the great work!");
-    source.closeDraftNotification();
-    Assertion.assertStringContains(source.getSourceContent(),articleName);
+    Assertion.assertStringContains(source.getBannerText(),"This is a draft that includes your unpublished changes. Keep up the great work!");
+    source.setDiscardChanges();
+    Assertion.assertStringNotContains(source.getSourceContent(),"Unpublished edit of article");
   }
 
   @Test(groups = {"RTE_draft","draft_saving"})
   @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
-  public void RTE_draft_intervening() {
+  public void RTE_draft_save_keep_changes() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    new ArticleContent(User.SUS_REGULAR_USER3).push("An awesome start", articleName);
+    new ArticleContent(User.SUS_REGULAR_USER3).push("Published edit of article", articleName);
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
-    source.addContentInSourceMode(articleName);
-    new ArticleContent(User.SUS_REGULAR_USER).push("Test content", articleName);
+    source.addContentInSourceMode("Unpublished edit of article");
+    source.waitForDraftToBeSaved();
+    driver.navigate().refresh();
+    AlertHandler.acceptPopupWindow(driver,15);
+    Assertion.assertStringContains(source.getBannerText(),"This is a draft that includes your unpublished changes. Keep up the great work!");
+    source.setKeepChanges();
+    Assertion.assertStringContains(source.getSourceContent(), "Unpublished edit of article");
+  }
+
+  @Test(groups = {"RTE_draft","draft_saving"})
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
+  public void RTE_draft_conflict_showChanges() {
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    new ArticleContent(User.SUS_REGULAR_USER3).push("Published edit of article \n", articleName);
+    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
+    source.addContentInSourceMode("Unpublished edit of article");
+    new ArticleContent(User.SUS_REGULAR_USER).push("Edit published by another user", articleName);
     source.waitForDraftToBeSaved();
     driver.navigate().refresh();
     AlertHandler.acceptPopupWindow(driver,15);
     Assertion.assertStringContains(source.getModalText(),"Someone else has changed this page");
     source.closeDraftNotification();
-    Assertion.assertStringContains(source.getSourceContent(),articleName);
+    Assertion.assertStringContains(source.getSourceContent(),"Unpublished edit of article");
     source.clickShowChanges();
-    Assertion.assertStringContains(source.getContent(), "Text content");
+    Assertion.assertStringContains(source.getDeletedText(), "Edit published by another user");
   }
+
+
 
 }
