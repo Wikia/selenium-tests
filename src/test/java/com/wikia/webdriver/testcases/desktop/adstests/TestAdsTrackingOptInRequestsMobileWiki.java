@@ -23,6 +23,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   private static final Page ADS_MERCURY_PAGE = new Page("mercuryautomationtesting", "/join");
   private static final String DENMARK = "DK";
   private static final String GERMANY = "DE";
+  private static final String FRANCE = "FR";
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
@@ -269,7 +270,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, GERMANY, ADS_ARTICLE1_PAGE);
+    modal.acceptOptInModal(driver, FRANCE, ADS_ARTICLE1_PAGE);
     MobileAdsBaseObject ads = new MobileAdsBaseObject();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
