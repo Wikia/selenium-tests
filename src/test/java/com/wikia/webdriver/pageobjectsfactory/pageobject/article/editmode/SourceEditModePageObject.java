@@ -390,8 +390,7 @@ public class SourceEditModePageObject extends EditMode {
     try {
       Thread.sleep(5001);
     } catch (InterruptedException e) {
-      e.printStackTrace();
-      Log.log("waitForDraftToBeSaved","draft has been saved", false);
+      Log.log("ERROR","waiting for draft save interrupted", false);
     }
   }
 }
