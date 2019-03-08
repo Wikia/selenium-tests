@@ -392,5 +392,6 @@ public class SourceEditModePageObject extends EditMode {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    Log.log("waitForDraftToBeSaved","draft has been saved", true, driver);
   }
 }
