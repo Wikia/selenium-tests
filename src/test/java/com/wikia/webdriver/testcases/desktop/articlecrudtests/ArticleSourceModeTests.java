@@ -25,7 +25,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import org.joda.time.DateTime;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -330,7 +329,5 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.clickShowChanges();
     Assertion.assertStringContains(source.getDeletedText(), "Edit published by another user");
   }
-
-
 
 }
