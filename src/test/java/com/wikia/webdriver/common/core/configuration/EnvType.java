@@ -25,4 +25,8 @@ public enum EnvType {
   public String getDomain() {
     return Configuration.getForceFandomDomain() ? fandomDomain : wikiaDomain;
   }
+
+  public String getDomain(String currentURL) {
+    return currentURL.contains("fandom.com") ? fandomDomain : wikiaDomain;
+  }
 }
