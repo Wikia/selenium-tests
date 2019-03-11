@@ -33,7 +33,7 @@ public class SpecialJsPage extends WikiBasePageObject {
   }
 
   public SpecialJsPage open(String articleTitle) {
-    getUrl(urlBuilder.getUrlForWikiPage(String.format("mediawiki:%s.js", articleTitle)));
+    getUrl(urlBuilder.getUrlForWikiPage(String.format("mediaWiki:%s.js", articleTitle)));
 
     return this;
   }
