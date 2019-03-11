@@ -180,7 +180,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, GERMANY, ADS_UAP_PAGE, instantGlobals);
+    modal.acceptOptInModal(driver, FRANCE, ADS_UAP_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
