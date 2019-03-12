@@ -27,14 +27,16 @@ public class ImageStorageTests extends NewTestTemplate {
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.USER_2)
   public void ImageStorage_001_deleteImage() {
-    SpecialNewFilesPage filesPage = new SpecialNewFilesPage().openSpecialNewFiles(wikiURL);
-    filesPage.addPhoto();
-    filesPage.selectFileToUpload(PageContent.FILE);
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
-    filesPage.clickOnMoreOptions();
-    filesPage.setFileName(fileName);
-    filesPage.checkIgnoreAnyWarnings();
-    filesPage.clickUploadButton();
+    SpecialNewFilesPage filesPage = new SpecialNewFilesPage();
+    filesPage.openSpecialNewFiles(wikiURL)
+		.addPhoto()
+        .selectFileToUpload(PageContent.FILE)
+        .hideWarnings()
+        .clickOnMoreOptions()
+        .setFileName(fileName)
+        .checkIgnoreAnyWarnings()
+        .clickUploadButton();
     Assertion.assertTrue(
         filesPage.isImageOnPage(fileName),
         String.format("File %s was not found on the page", fileName)
@@ -98,8 +100,8 @@ public class ImageStorageTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   public void ImageStorage_002_moveImage() {
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
-
-    new SpecialNewFilesPage().openSpecialNewFiles(wikiURL)
+	  SpecialNewFilesPage filesPage = new SpecialNewFilesPage();
+	  filesPage.openSpecialNewFiles(wikiURL)
         .addPhoto()
         .selectFileToUpload(PageContent.FILE)
         .hideWarnings()
@@ -107,8 +109,10 @@ public class ImageStorageTests extends NewTestTemplate {
         .setFileName(fileName)
         .checkIgnoreAnyWarnings()
         .clickUploadButton();
-
-    Assertion.assertTrue(new SpecialNewFilesPage().isImageOnPage(fileName));
+    Assertion.assertTrue(
+        filesPage.isImageOnPage(fileName),
+	    String.format("File %s was not found on the page", fileName)
+	);
 
     FilePage file = new FilePage().open(fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
