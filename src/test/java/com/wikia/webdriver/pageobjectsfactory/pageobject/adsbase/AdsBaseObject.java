@@ -236,6 +236,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyGptAdInSlot(String slotName, String lineItemId) {
+    waitForSlotExpanded("#" + slotName);
     Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-line-item-id"), lineItemId);
 
     Log.log("verifyGptAdInSlot", "Line item id loaded: " + lineItemId, true, driver);

@@ -18,7 +18,7 @@ public class TrackingOptInDataProvider {
   private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
   private static final String
       ADS_NETZ_ATHLETEN_PATTERN
-      = "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
+      = "http?://.*tag\\.md-nx\\.com/.*/loader\\.js.*";
   private static final String ADS_MOAT_PATTERN = "https?://.*moatads\\.com.*";
   private static final String ADS_PUBMATIC_PATTERN = "http?://.*pubmatic\\.com/AdServer.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
