@@ -27,9 +27,9 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private WebElement wikiLanguageDropdown;
   @FindBy(css = "#NameWiki .wds-dropdown .wds-list li:not(.spacer)")
   private List<WebElement> wikiLanguageList;
-  @FindBy(css = ".domain-country")
+  @FindBy(css = ".wiki-base-domain")
   @Getter
-  private WebElement domainPrefix;
+  private WebElement domainSufix;
   @FindBy(css = ".wiki-domain-error.error-msg")
   private WebElement wikiDomainErrorMessage;
 
@@ -48,6 +48,10 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   public String getWikiName() {
     wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + DateTime.now().getMillis();
     return this.wikiNameString;
+  }
+
+  public String getDomainSufix() {
+    return domainSufix.getText();
   }
 
   public void selectLanguage(String lang) {

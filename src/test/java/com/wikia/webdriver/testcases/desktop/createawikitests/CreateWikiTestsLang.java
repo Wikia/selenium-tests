@@ -25,8 +25,8 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.selectLanguage(lang);
-    String expectedDomainPrefix = "en".equals(lang) ? "" : String.format("%s.", lang);
-    assertEquals(cnw1.getDomainPrefix().getText(), expectedDomainPrefix);
+    String expectedDomainSufix = "en".equals(lang) ? "" : String.format("%s", lang);;
+    assertEquals(cnw1.getDomainSufix(), "fandom.com/" + expectedDomainSufix);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifyNextButtonEnabled();
