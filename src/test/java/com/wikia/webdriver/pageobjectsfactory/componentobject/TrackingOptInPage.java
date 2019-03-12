@@ -32,7 +32,7 @@ public class TrackingOptInPage extends BasePageObject {
                                          "{%22region%22:%22WP%22%2C%22country%22:%22" + country
                                          + "%22%2C%22continent%22:%22" + continent + "%22}",
                                          String.format(".%s",
-                                                       Configuration.getEnvType().getDomain()
+                                                       Configuration.getEnvType().getDomain(driver.getCurrentUrl())
                                          ),
                                          null,
                                          null
@@ -170,6 +170,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isTrackingRequestSend(
       List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
+    refreshPage();
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToAccepted();
     for (String url : listOfUrlsToVerify) {
@@ -230,7 +231,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isConsentCookieSetToAccepted() {
     Assertion.assertEquals(
         getEuConsentCookieValue().length(),
-        128,
+        127,
         "Incorrect length of accepted euconsent value"
     );
   }

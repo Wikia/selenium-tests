@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -74,6 +73,23 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement textArea;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
+  @FindBy(css = ".close.wikia-chiclet-button")
+  private WebElement draftNotificationClose;
+  @FindBy(css = ".modalContent")
+  private WebElement modalText;
+  @FindBy(css = "#wpDiff")
+  private WebElement showChanges;
+  @FindBy(css = ".diff-deletedline")
+  private WebElement diffDeletedLine;
+  @FindBy(css = ".wds-banner-notification__text")
+  private WebElement draftBanner;
+  @FindBy(css = "#discard")
+  private WebElement discard;
+  @FindBy(css = "#keep")
+  private WebElement keep;
+  @FindBy(css = ".diff-deletedline")
+  private WebElement deletedLine;
+
 
   public SourceEditModePageObject openArticle(String articleTitle) {
     String url = urlBuilder.getUrl() + URLsContent.WIKI_DIR + articleTitle;
@@ -156,6 +172,11 @@ public class SourceEditModePageObject extends EditMode {
     focusTextArea();
     nowiki.click();
     Log.log("clickNoWiki", "nowwiki button was clicked", true, driver);
+  }
+
+  public void clickShowChanges() {
+    showChanges.click();
+    Log.log("clickShowChanges", "Show changes button was clicked", true, driver);
   }
 
   public void clickSignature() {
@@ -324,6 +345,25 @@ public class SourceEditModePageObject extends EditMode {
     Log.log("clearContent", "source mode cleared", true);
   }
 
+  public void closeDraftNotification() {
+    draftNotificationClose.click();
+  }
+
+  public String getModalText() {
+    return modalText.getText();
+  }
+
+  public String getDeletedText() {
+    return deletedLine.getText();
+  }
+
+  public String getBannerText() {
+    return draftBanner.getText();
+  }
+
+  public void setDiscardChanges() { discard.click(); }
+  public void setKeepChanges() { keep.click(); }
+
   public void verifySourceModeEnabled() {
     wait.forElementVisible(sourceModeTextArea);
     waitForElementNotVisibleByElement(sourceModeLoadingIndicator);
@@ -344,5 +384,13 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject();
+  }
+
+  public void waitForDraftToBeSaved() {
+    try {
+      Thread.sleep(5001);
+    } catch (InterruptedException e) {
+      Log.log("ERROR","waiting for draft save interrupted", false);
+    }
   }
 }
