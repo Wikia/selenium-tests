@@ -28,7 +28,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   @FindBy(css = "#NameWiki .wds-dropdown .wds-list li:not(.spacer)")
   private List<WebElement> wikiLanguageList;
   @FindBy(css = ".wiki-base-domain")
-  @Getter
   private WebElement domainSufix;
   @FindBy(css = ".wiki-domain-error.error-msg")
   private WebElement wikiDomainErrorMessage;

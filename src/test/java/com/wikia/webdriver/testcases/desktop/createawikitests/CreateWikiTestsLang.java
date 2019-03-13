@@ -26,10 +26,10 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.selectLanguage(lang);
     String expectedDomainSufix;
-    if (!lang.equals("en")) {
-      expectedDomainSufix = String.format("%s", lang);
-    } else {
+    if (lang.equals("en")) {
       expectedDomainSufix = String.format("");
+    } else {
+      expectedDomainSufix = String.format("%s", lang);
     }
 
     assertEquals(cnw1.getDomainSufix(), "fandom.com/" + expectedDomainSufix);
