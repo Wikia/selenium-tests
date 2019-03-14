@@ -55,15 +55,15 @@ public class AdsBaseObject extends WikiBasePageObject {
                                                          + "']";
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation,.site-head-container";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
-  String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+  String presentLeaderboardSelector = "div[id*='top_leaderboard']";
   private String pageType = PAGE_TYPE_ARTICLE;
   private String environment = AdsContent.ENV_DESKTOP;
   @FindBy(css = MIX_CONTENT_FOOTER_ROW_SELECTOR)
   private WebElement mixContentFooterItem;
   private long tStart;
-  @FindBy(css = "div[id*='TOP_LEADERBOARD']")
+  @FindBy(css = "div[id*='top_leaderboard']")
   private WebElement presentLeaderboard;
-  @FindBy(css = "div[id*='TOP_BOXAD']")
+  @FindBy(css = "div[id*='top_boxad']")
   private WebElement presentMedrec;
   @FindBy(css = FLOATING_MEDREC_SELECTOR)
   private WebElement presentFloatingMedrec;
