@@ -43,10 +43,10 @@ public class TestAdsVideoFrequencyCapping extends TemplateNoFirstLoad {
 
   private boolean isIncontentPlayerDispalyed(AdsBaseObject ads) {
     try {
-      ads.waitForSlotExpanded(driver.findElement(By.cssSelector("#INCONTENT_PLAYER")));
+      ads.waitForSlotExpanded(driver.findElement(By.cssSelector("#incontent_player")));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      Log.log("INCONTENT_PLAYER is not displayed", ex, true);
+      Log.log("Incontent player is not displayed", ex, true);
       return false;
     }
   }

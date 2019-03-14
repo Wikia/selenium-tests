@@ -155,7 +155,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyMedrec() {
-    verifyAdVisibleInSlot("div[id*='TOP_BOXAD']", presentMedrec);
+    verifyAdVisibleInSlot("div[id*='top_boxad']", presentMedrec);
   }
 
   public void verifyTopLeaderboard() {
