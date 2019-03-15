@@ -183,7 +183,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
           reload = true;
           Log.info(String.format("Adding moc-ads cookie with value: %s, and domain: %s",
                                  XMLReader.getValue("mock.ads_token"),
-                                 String.format(".%s", Configuration.getEnvType().getDomain())
+                                 String.format(".%s", Configuration.getEnvType().getDomain(driver.getCurrentUrl()))
           ));
         }
       }

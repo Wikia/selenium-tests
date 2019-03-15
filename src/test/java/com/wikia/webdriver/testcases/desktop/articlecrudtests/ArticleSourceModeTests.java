@@ -2,10 +2,12 @@ package com.wikia.webdriver.testcases.desktop.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RunOnly;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
@@ -22,7 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -280,4 +281,53 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     source.checkSymbolsTools();
     source.submitArticle();
   }
+
+  @Test(groups = {"RTE_draft","draft_saving"})
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
+  public void RTE_draft_save_discard_changes() {
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    new ArticleContent(User.SUS_REGULAR_USER3).push("Published edit of article", articleName);
+    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
+    source.addContentInSourceMode("Unpublished edit of article");
+    source.waitForDraftToBeSaved();
+    driver.navigate().refresh();
+    AlertHandler.acceptPopupWindow(driver,15);
+    Assertion.assertStringContains(source.getBannerText(),"This is a draft that includes your unpublished changes. Keep up the great work!");
+    source.setDiscardChanges();
+    Assertion.assertStringNotContains(source.getSourceContent(),"Unpublished edit of article");
+  }
+
+  @Test(groups = {"RTE_draft","draft_saving"})
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
+  public void RTE_draft_save_keep_changes() {
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    new ArticleContent(User.SUS_REGULAR_USER3).push("Published edit of article", articleName);
+    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
+    source.addContentInSourceMode("Unpublished edit of article");
+    source.waitForDraftToBeSaved();
+    driver.navigate().refresh();
+    AlertHandler.acceptPopupWindow(driver,15);
+    Assertion.assertStringContains(source.getBannerText(),"This is a draft that includes your unpublished changes. Keep up the great work!");
+    source.setKeepChanges();
+    Assertion.assertStringContains(source.getSourceContent(), "Unpublished edit of article");
+  }
+
+  @Test(groups = {"RTE_draft","draft_saving"})
+  @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "draftsavetest")
+  public void RTE_draft_conflict_showChanges() {
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    new ArticleContent(User.SUS_REGULAR_USER3).push("Published edit of article \n", articleName);
+    SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
+    source.addContentInSourceMode("Unpublished edit of article");
+    new ArticleContent(User.SUS_REGULAR_USER).push("Edit published by another user", articleName);
+    source.waitForDraftToBeSaved();
+    driver.navigate().refresh();
+    AlertHandler.acceptPopupWindow(driver,15);
+    Assertion.assertStringContains(source.getModalText(),"Someone else has changed this page");
+    source.closeDraftNotification();
+    Assertion.assertStringContains(source.getSourceContent(),"Unpublished edit of article");
+    source.clickShowChanges();
+    Assertion.assertStringContains(source.getDeletedText(), "Edit published by another user");
+  }
+
 }
