@@ -42,9 +42,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   @Test(groups = {"CrossWikiSearch_002", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_002_pagination() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.goToSearchPage(wikiCorporateURL);
-    search.searchFor(SearchContent.SEARCH_PHRASE);
-    search.navigateToWikiResults();
+    search.searchForWiki(wikiCorporateURL, SearchContent.SEARCH_PHRASE);
     // verify results pos parameter for first page
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
@@ -73,9 +71,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   @Test(groups = {"CrossWikiSearch_003", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_003_resultClick() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.goToSearchPage(wikiCorporateURL);
-    search.searchFor(SearchContent.SEARCH_PHRASE);
-    search.navigateToWikiResults();
+    search.searchForWiki(wikiCorporateURL, SearchContent.SEARCH_PHRASE);
     WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
     driver.navigate().back();
@@ -119,9 +115,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
       groups = {"CrossWikiSearch_007", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_007_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.goToSearchPage(wikiCorporateURL);
-    search.searchFor(SearchContent.SEARCH_PHRASE_ROMAN_NUMBER);
-    search.navigateToWikiResults();
+    search.searchForWiki(wikiCorporateURL, SearchContent.SEARCH_PHRASE_ROMAN_NUMBER);
     search.verifyQuery(SearchContent.WIKI_NAME);
     search.searchFor(SearchContent.SEARCH_PHRASE_DECIMAL_NUMBER);
     search.verifyQuery(SearchContent.WIKI_NAME);
