@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdSlot;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -35,8 +36,8 @@ public class TestAdsPrebid extends NewTestTemplate {
     final String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=1881");
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
 
-    prebidAds.verifyKeyValues(AdsContent.TOP_LB, "wikia", "728x90", "18.50");
-    prebidAds.verifyPrebidCreative(AdsContent.TOP_LB, true);
+    prebidAds.verifyKeyValues(AdSlot.TOP_LEADERBOARD.getMainPath(), "wikia", "728x90", "18.50");
+    prebidAds.verifyPrebidCreative(AdSlot.TOP_LEADERBOARD.getMainPath(), true);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -45,8 +46,8 @@ public class TestAdsPrebid extends NewTestTemplate {
     String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=831");
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
 
-    prebidAds.verifyKeyValues(AdsContent.MOBILE_TOP_LB, "wikia", "320x50", "8.30");
-    prebidAds.verifyPrebidCreative(AdsContent.MOBILE_TOP_LB, true);
+    prebidAds.verifyKeyValues("#" + AdSlot.TOP_LEADERBOARD.getName(), "wikia", "320x50", "8.30");
+    prebidAds.verifyPrebidCreative("#" + AdSlot.TOP_LEADERBOARD.getName(), true);
   }
 
   @NetworkTrafficDump
@@ -55,7 +56,7 @@ public class TestAdsPrebid extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, AdsDataProvider.PAGE_CAP.getUrl());
 
-    prebidAds.verifyKeyValues(AdsContent.TOP_LB, "veles", "640x480", "20.00");
+    prebidAds.verifyKeyValues(AdSlot.TOP_LEADERBOARD.getMainPath(), "veles", "640x480", "20.00");
     prebidAds.wait.forSuccessfulResponse(networkTrafficInterceptor, STARTED_EVENT);
     prebidAds.verifyLineItemId(AdsContent.TOP_LB, VELES_LINE_ITEM_ID);
   }
@@ -94,8 +95,18 @@ public class TestAdsPrebid extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON.getUrl());
 
-    Assertion.assertEquals(getFVStatus(ads), "error");
+    Assertion.assertEquals(getFVStatus(ads), "success");
     Assertion.assertEquals(ads.getFVLineItem(), BIDDER_PREROLL_LINE_ITEM_ID);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @UnsafePageLoad
+  @Test(groups = {"AdsPrebidOasis", "AdsPrebidFV"})
+  public void fvBidderVideoAdNotDisplayed() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV_RUBICON_NO_VIDEO.getUrl());
+
+    Assertion.assertEquals(getFVStatus(ads), "collapse");
   }
 
   private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPatterns) {

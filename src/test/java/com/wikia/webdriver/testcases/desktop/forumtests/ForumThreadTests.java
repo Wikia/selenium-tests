@@ -27,7 +27,7 @@ public class ForumThreadTests extends NewTestTemplate {
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
 
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.reply(message);
     forumThread.verifyReplyMessage(1, message);
@@ -41,7 +41,7 @@ public class ForumThreadTests extends NewTestTemplate {
 
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.removeThread("QA reason");
     forumThread.verifyThreadRemoved();
@@ -58,7 +58,7 @@ public class ForumThreadTests extends NewTestTemplate {
 
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.verifyParentBoard(forumThread.moveThread());
   }
@@ -71,7 +71,7 @@ public class ForumThreadTests extends NewTestTemplate {
 
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     ForumHistoryPageObject forumHistory = forumThread.openHistory();
     forumHistory.verifyImportandPageElements();
@@ -86,7 +86,7 @@ public class ForumThreadTests extends NewTestTemplate {
 
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.closeThread(PageContent.CLOSE_REASON);
     forumThread.verifyThreadClosed();

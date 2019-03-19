@@ -23,6 +23,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   private static final Page ADS_MERCURY_PAGE = new Page("mercuryautomationtesting", "/join");
   private static final String DENMARK = "DK";
   private static final String GERMANY = "DE";
+  private static final String FRANCE = "FR";
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
@@ -48,7 +49,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInRejectedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxMobileWiki")
   public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -105,7 +106,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInRejectedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreMobileWiki")
   public void adsTrackingRejectedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -138,17 +139,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPetametricsDataProvider", groups = "AdsOptInRejectedMobileWiki")
-  public void adsTrackingRejectedForPetametrics(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraAcceptedDataProvider", groups = "AdsOptInAcceptedMobileWiki")
   public void verifyAdsTrackingAcceptedForKikimora(
       String[] instantGlobals, List<String> urlPatterns
@@ -162,7 +152,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInAcceptedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxMobileWiki")
   public void adsTrackingAcceptedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -190,7 +180,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, GERMANY, ADS_UAP_PAGE, instantGlobals);
+    modal.acceptOptInModal(driver, FRANCE, ADS_UAP_PAGE, instantGlobals);
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -219,7 +209,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInAcceptedMobileWiki")
+  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreMobileWiki")
   public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
@@ -262,17 +252,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Execute(trackingOptIn = false)
-  @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPetametricsDataProvider", groups = "AdsOptInAcceptedMobileWiki")
-  public void adsTrackingAcceptedForPetametrics(List<String> urlPatterns) {
-    networkTrafficInterceptor.startIntercepting();
-    TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-
-    modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptOut = true)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsQuantcastSecureDataProvider", groups = "AdsOptInAcceptedMobileWiki")
   public void adsTrackingPixelSentAuthPageOutsideUE(List<String> urlPatterns) {
@@ -291,7 +270,7 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
   public void adsTrackingPixelsOnConsecutivePagesInEU(List<String> urlPatterns, String[] articles) {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
-    modal.acceptOptInModal(driver, GERMANY, ADS_ARTICLE1_PAGE);
+    modal.acceptOptInModal(driver, FRANCE, ADS_ARTICLE1_PAGE);
     MobileAdsBaseObject ads = new MobileAdsBaseObject();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
@@ -334,7 +313,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.setGeoCookie(driver, "NA", "US");
     modal.getUrl(ADS_HOME_PAGE);
-
     modal.verifyTrackingRequestsSendOutsideEU(urlPatterns, networkTrafficInterceptor);
   }
 }

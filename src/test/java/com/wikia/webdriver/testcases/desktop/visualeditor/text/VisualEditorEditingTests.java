@@ -139,7 +139,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     article.verifyElementInContent(By.cssSelector("a[href*='" + PageContent.INTERNAL_LINK + "']"));
-    article.verifyElementInContent(By.cssSelector("a.new[href*='" + PageContent.REDLINK + "']"));
+    article.verifyElementInContent(By.cssSelector("a[title='" + PageContent.REDLINK + " (page does not exist)'"));
     article.verifyElementInContent(By.cssSelector(
         "a.external[href*='" + PageContent.EXTERNAL_LINK + "']"));
   }

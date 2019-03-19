@@ -34,7 +34,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
   @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"admin-dashboard\"]")
   private WebElement adminDashboardButton;
 
-  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-explore-tiny\"]")
+  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-book-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-book-tiny\"]")
   private WebElement exploreTab;
 
   @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-activity\"], .wds-dropdown a[data-tracking-label=\"explore-activity\"]")
@@ -136,6 +136,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
   }
 
   public CommunityHeaderDesktop openExploreMenu() {
+    scrollTo(exploreTab);
     new Actions(driver).moveToElement(exploreTab).perform();
 
     Log.info("explore dropdown opened");
@@ -145,7 +146,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
 
   public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
     wait.forElementClickable(exploreWikiActivityLink);
-    scrollAndClick(exploreWikiActivityLink);
+    exploreWikiActivityLink.click();
 
     Log.info("explore -> wikiActivity link clicked");
 
@@ -154,8 +155,7 @@ public class CommunityHeaderDesktop extends BasePageObject {
 
   public ArticlePageObject clickExploreRandomLink() {
     wait.forElementClickable(exploreRandomLink);
-    scrollAndClick(exploreRandomLink);
-
+    exploreRandomLink.click();
     Log.info("explore -> random page link clicked");
 
     return new ArticlePageObject();
@@ -163,22 +163,19 @@ public class CommunityHeaderDesktop extends BasePageObject {
 
   public void clickExploreCommunityLink() {
     wait.forElementClickable(exploreCommunityLink);
-    scrollAndClick(exploreCommunityLink);
-
+    exploreCommunityLink.click();
     Log.info("explore -> community link clicked");
   }
 
   public void clickExploreVideosLink() {
     wait.forElementClickable(exploreVideosLink);
-    scrollAndClick(exploreVideosLink);
-
+    exploreVideosLink.click();
     Log.info("explore -> videos link clicked");
   }
 
   public void clickExploreImagesLink() {
     wait.forElementClickable(exploreImagesLink);
-    scrollAndClick(exploreImagesLink);
-
+    exploreImagesLink.click();
     Log.info("explore -> images link clicked");
   }
 

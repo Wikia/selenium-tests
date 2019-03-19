@@ -18,18 +18,19 @@ public class UrlBuilder extends BaseUrlBuilder {
 
   public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
   private static final Set<String>
-      FANDOM_EXCULUDED_WIKIS =
+      FANDOM_EXCLUDED_WIKIS =
       new HashSet<>(Arrays.asList(new String[]{"community", "gameofthrones", "sydneybuses"}));
   private final String wikiName;
+  private final boolean areLanguageTestsEnabled;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
   private String language;
 
-  private UrlBuilder(
-      String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
+  private UrlBuilder(String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
     super(env);
-    //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis
-    if (FANDOM_EXCULUDED_WIKIS.contains(wiki)) {
+    //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis except languagepath tests
+    areLanguageTestsEnabled = Configuration.getForceLanguageInPath() && "szl".equals(Configuration.getWikiLanguage());
+    if (FANDOM_EXCLUDED_WIKIS.contains(wiki) || areLanguageTestsEnabled) {
       this.wikiName = wiki;
     } else {
       this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
@@ -191,7 +192,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   private String getDomain(EnvType env) {
-    if (FANDOM_EXCULUDED_WIKIS.contains(wikiName)) {
+    if (FANDOM_EXCLUDED_WIKIS.contains(wikiName)) {
       return envType.getWikiaDomain();
     } else {
       return envType.getDomain();

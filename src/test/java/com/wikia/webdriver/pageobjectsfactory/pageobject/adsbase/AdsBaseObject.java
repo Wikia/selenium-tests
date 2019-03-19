@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import static com.wikia.webdriver.pageobjectsfactory.componentobject.TrackingOptInPage.setGeoCookie;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -61,18 +63,35 @@ public class AdsBaseObject extends WikiBasePageObject {
   private long tStart;
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   private WebElement presentLeaderboard;
-  @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
+  @FindBy(css = "div[id*='TOP_BOXAD']")
   private WebElement presentMedrec;
   @FindBy(css = FLOATING_MEDREC_SELECTOR)
   private WebElement presentFloatingMedrec;
   @FindBy(css = "#WikiaFooter")
   private WebElement wikiaFooter;
-  @FindBy(css = ".mobile-in-content")
+  @FindBy(css = "#incontent_boxad_1")
   private WebElement mobileInContent;
   @FindBy(css = ".mobile-prefooter")
   private WebElement mobilePrefooter;
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
+  private static final String
+      VAL_MORGAN_TLB_MEGA_AD_UNIT
+      = "vm1b.LB/top_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
+  private static final String
+      VAL_MORGAN_TB_MEGA_AD_UNIT
+      = "vm1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-life";
+  private static final String
+      VAL_MORGAN_BLB_MEGA_AD_UNIT
+      = "vm1b.PF/bottom_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
+
+  private static final String
+      VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY
+      = "vm1b.LB/top_leaderboard/smartphone/mercury-article/_top1k_wiki-life";
+
+  private static final String
+      VAL_MORGAN_BLB_MEGA_AD_UNIT_MERCURY
+      = "vm1b.PF/bottom_leaderboard/smartphone/mercury-article/_top1k_wiki-life";
 
   public AdsBaseObject() {
     super();
@@ -114,14 +133,15 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
-    for (String slot : slots) {
+    for (String slotPos : slots) {
+      String slot = slotPos.split(",")[0];
       WebElement slotElement = driver.findElement(By.id(slot));
       WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
       driver.switchTo().frame(slotGptIframe);
       WebElement iframeHtml = driver.findElement(By.tagName("html"));
       String
           adDriverForcedSuccessFormatted
-          = String.format(AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slot);
+          = String.format(AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slotPos);
       if (checkScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
         Log.log("AdDriver2ForceStatus script",
                 "adDriverForcedSuccess script found in slot " + slot,
@@ -135,7 +155,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyMedrec() {
-    verifyAdVisibleInSlot("div[id*='TOP_RIGHT_BOXAD']", presentMedrec);
+    verifyAdVisibleInSlot("div[id*='TOP_BOXAD']", presentMedrec);
   }
 
   public void verifyTopLeaderboard() {
@@ -182,7 +202,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public boolean slotHasSize(String slotName, int width, int height) {
-    return getSlotAttribute(slotName, "data-gpt-slot-sizes").contains(String.format("%d,%d",
+    return getSlotAttribute(slotName, "data-sizes").contains(String.format("%d,%d",
                                                                                     width,
                                                                                     height
     ));
@@ -216,6 +236,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyGptAdInSlot(String slotName, String lineItemId) {
+    waitForSlotExpanded("#" + slotName);
     Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-line-item-id"), lineItemId);
 
     Log.log("verifyGptAdInSlot", "Line item id loaded: " + lineItemId, true, driver);
@@ -227,6 +248,33 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMEGAAdUnit(String slotName, String adUnit) {
     verifyIframe(slotName, buildMEGAGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit));
+  }
+
+  public void verifyValMorgan(String continent, String country, Boolean isMobile) {
+    String MEGA_LB;
+    String MEGA_BLB;
+
+    if (!isMobile) {
+      MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT;
+      MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT;
+    } else {
+      MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY;
+      MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT_MERCURY;
+    }
+
+    setGeoCookie(driver, continent, country);
+    refreshPage();
+    setPageType(AdsBaseObject.PAGE_TYPE_ARTICLE);
+
+    verifyMEGAAdUnit(AdsContent.TOP_LB, MEGA_LB);
+    if (!isMobile) {
+      verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
+      triggerAdSlot(AdsContent.BOTTOM_LB);
+    } else {
+      triggerAdSlot(AdsContent.MOBILE_AD_IN_CONTENT);
+      triggerAdSlot(AdsContent.MOBILE_BOTTOM_LB);
+    }
+    verifyMEGAAdUnit(AdsContent.BOTTOM_LB, MEGA_BLB);
   }
 
   public void verifySpotlights() {
@@ -275,7 +323,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Test whether the correct GPT ad unit is called
    *
-   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName the name of the slot an ad is going to be inserted into
    * @param src      the source of an ad, for example gpt or remnant
    */
@@ -284,10 +332,20 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   /**
+   * Test whether the correct GPT MEGA ad unit is called
+   *
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
+   * @param slotName the name of the slot an ad is going to be inserted into
+   */
+  public void verifyGptMEGAIframe(String adUnit, String slotName) {
+    verifyGptMEGAIframe(WIKIA_DFP_CLIENT_ID, adUnit, slotName);
+  }
+
+  /**
    * Builds GPT iframe id
    *
    * @param dfpClientId in most cases it's Wikia id
-   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
@@ -308,7 +366,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Test whether the correct GPT ad unit is called
    *
    * @param dfpClientId in most cases it's Wikia id
-   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
@@ -316,8 +374,19 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyIframe(slotName, buildGptIframeId(dfpClientId, adUnit, slotName, src));
   }
 
+  /**
+   * Test whether the correct GPT MEGA ad unit is called
+   *
+   * @param dfpClientId in most cases it's Wikia id
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_top1k_wiki//home
+   * @param slotName    the name of the slot an ad is going to be inserted into
+   */
+  public void verifyGptMEGAIframe(int dfpClientId, String adUnit, String slotName) {
+    verifyIframe(slotName, buildMEGAGptIframeId(dfpClientId, adUnit));
+  }
+
   private void verifyIframe(String slotName, String iframeId) {
-    By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
+    By cssSelector = By.cssSelector("iframe[id*='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
 
@@ -354,7 +423,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      WebElement adsDiv = driver.findElement(By.cssSelector("#" + slotName + " [" + attr + "]"));
+      WebElement adsDiv = driver.findElement(By.cssSelector(
+          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),
@@ -443,14 +513,14 @@ public class AdsBaseObject extends WikiBasePageObject {
         return false;
       }
 
-      List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
+      List<WebElement> adWebElements = slot.findElements(By.cssSelector("iframe"));
 
       Log.log("Slot found",
               String.format("%s found on the page with selector: %s", slotName, slotSelector),
               true
       );
 
-      return adWebElements.size() > 1;
+      return adWebElements.size() >= 1;
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -540,8 +610,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("#" + slotName + " iframe"));
   }
 
-  public void verifyNoAd(final String slotName) {
-    final String slotSelector = AdsContent.getSlotSelector(slotName);
+  public void verifyNoAd(final String slotName, final String slotSelector) {
     Log.log("verifyNoAd", "Triggering " + slotName, true, driver);
     triggerAdSlot(slotName);
     verifyNoAdWithoutTrigger(slotSelector);
@@ -736,7 +805,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      verifyNoAd(entry.getKey());
+      verifyNoAd(entry.getKey(), entry.getValue());
     }
   }
 

@@ -3,8 +3,9 @@ package com.wikia.webdriver.testcases.desktop.navigation.global;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.RunOnly;
-import com.wikia.webdriver.common.core.configuration.EnvType;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -17,12 +18,17 @@ import static com.wikia.webdriver.common.core.configuration.Configuration.DEFAUL
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
 public class GlobalNavigationNavigating extends NewTestTemplate {
 
+  UrlChecker urlChecker = new UrlChecker();
+
   @DontRun(language = "szl")
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void logoClickOnEnglishCommunityOpensFandom() {
     new HomePage().getGlobalNavigation().clickFandomLogo();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), fandomUrlBuilder.getFandomUrl(EnvType.PROD));
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()))
+    );
 
   }
 
@@ -31,8 +37,10 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testGamesHubLink() {
     new HomePage().getGlobalNavigation().clickGamesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/games"
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + "topics/games")
     );
   }
 
@@ -41,8 +49,10 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testGamesHubLinkSzl() {
     new HomePage().getGlobalNavigation().clickGamesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + HUBS_SZL + "#Gry"
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + HUBS_SZL + "#Gry")
     );
   }
 
@@ -51,8 +61,10 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testMoviesHubLink() {
     new HomePage().getGlobalNavigation().clickMoviesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/movies"
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + "topics/movies")
     );
   }
 
@@ -61,8 +73,10 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testMoviesHubLinkSzl() {
     new HomePage().getGlobalNavigation().clickMoviesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + HUBS_SZL + "#Filmy"
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + HUBS_SZL + "#Filmy")
     );
   }
 
@@ -71,8 +85,10 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testTVHubLink() {
     new HomePage().getGlobalNavigation().clickTVHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "topics/tv"
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + "topics/tv")
     );
   }
 
@@ -81,19 +97,23 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testTVHubLinkSzl() {
     new HomePage().getGlobalNavigation().clickTVHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + HUBS_SZL + "#TV"
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + HUBS_SZL + "#TV")
     );
   }
 
+  @RelatedIssue(issueID = "IW-1607")
   @DontRun(language = "szl")
-  @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})
+  @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"}, enabled = false)
   public void testExploreWikisLink() {
-    UrlChecker checker = new UrlChecker();
     new HomePage().getGlobalNavigation().openWikisMenu().clickExploreWikisLink();
 
-    Assertion.assertEquals(checker.getProtocolRelativeURL(driver.getCurrentUrl()),
-                           checker.getProtocolRelativeURL(fandomUrlBuilder.getFandomUrl(EnvType.PROD) + "explore")
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + "explore")
     );
   }
 
@@ -102,8 +122,10 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   public void testExploreWikisLinkSzl() {
     new HomePage().getGlobalNavigation().openWikisMenu().clickExploreWikisLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(),
-                           fandomUrlBuilder.getFandomUrl(EnvType.PROD) + HUBS_SZL
+    Assertion.assertEquals(
+            urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
+            urlChecker.getProtocolRelativeURL(
+                    fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()) + HUBS_SZL)
     );
   }
 

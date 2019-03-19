@@ -11,18 +11,23 @@ import org.testng.annotations.Test;
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   private static final String TEST_LINE_ITEM_ID = "271491732";
-  private static final String FILE_PAGE_AD_UNIT = "wka.life/_project43//file";
-  private static final String SPECIAL_PAGE_AD_UNIT = "wka.life/_project43//special";
+  private static final String FILE_PAGE_TLB_MEGA_AD_UNIT = "wka1b.LB/top_leaderboard/desktop"
+                                                           + "/oasis-file/_top1k_wiki-life";
+  private static final String SPECIAL_PAGE_AD_UNIT = "wka1b.LB/top_leaderboard/unknown"
+                                                     + "-specialpage/oasis-special/_top1k_wiki-life";
+  private static final String
+      FILE_PAGE_MR_MEGA_AD_UNIT
+      = "wka1b.MR/top_boxad/desktop/oasis-file/_top1k_wiki-life";
   private static final String
       FILE_PAGE_BLB_MEGA_AD_UNIT
-      = "wka1a.PF/bottom_leaderboard/desktop/oasis-file/_project43-life";
+      = "wka1b.PF/bottom_leaderboard/desktop/oasis-file/_top1k_wiki-life";
   private static final Dimension RESOLUTION = new Dimension(1292, 1000);
 
   private void testSpecialPage(AdsBaseObject ads) {
     ads.setPageType(AdsBaseObject.PAGE_TYPE_SPECIAL);
 
     ads.verifyGptAdInSlot(AdsContent.TOP_LB, TEST_LINE_ITEM_ID);
-    ads.verifyAdUnit(AdsContent.TOP_LB, SPECIAL_PAGE_AD_UNIT);
+    ads.verifyGptMEGAIframe(SPECIAL_PAGE_AD_UNIT, AdsContent.TOP_LB);
   }
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
@@ -50,12 +55,11 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
                                           RESOLUTION
     );
     ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
-
     ads.verifyGptAdInSlot(AdsContent.TOP_LB, TEST_LINE_ITEM_ID);
-    ads.verifyAdUnit(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
+    ads.verifyMEGAAdUnit(AdsContent.TOP_LB, FILE_PAGE_TLB_MEGA_AD_UNIT);
 
-    ads.verifyGptAdInSlot(AdsContent.MEDREC, TEST_LINE_ITEM_ID);
-    ads.verifyAdUnit(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
+    ads.verifyGptAdInSlot(AdsContent.TOP_BOXAD, TEST_LINE_ITEM_ID);
+    ads.verifyMEGAAdUnit(AdsContent.TOP_BOXAD, FILE_PAGE_MR_MEGA_AD_UNIT);
 
     ads.triggerAdSlot(AdsContent.BOTTOM_LB);
     ads.verifyGptAdInSlot(AdsContent.BOTTOM_LB, TEST_LINE_ITEM_ID);

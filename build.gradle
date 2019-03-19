@@ -108,7 +108,6 @@ dependencies {
     testCompile 'net.lightbody.bmp:mitm:2.1.5'
     testCompile 'commons-io:commons-io:2.4'
     testCompile 'commons-lang:commons-lang:2.4'
-    testRuntimeOnly 'commons-beanutils:commons-beanutils:1.9.3'
 }
 
 

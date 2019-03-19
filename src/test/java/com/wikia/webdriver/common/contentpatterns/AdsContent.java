@@ -2,25 +2,28 @@ package com.wikia.webdriver.common.contentpatterns;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdsContent {
 
   public static final Map<String, String> IFRAME_SLOT_SELECTORS;
   public static final String ENV_DESKTOP = "desktop";
   public static final String ENV_MOBILE = "mobile";
-  public static final String
-      AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT
-      = "top.window.adDriver2ForcedStatus['%s']='success';";
+  public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
+      "top.window.adDriver2ForcedStatus['%s'.split(',')[0]]='success';";
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
-  public static final String MOBILE_BOTTOM_LB = "BOTTOM_LEADERBOARD";
+  public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
   public static final String TOP_LB = "TOP_LEADERBOARD";
-  public static final String MEDREC = "TOP_RIGHT_BOXAD";
+  public static final String HIVI_TOP_LB = "top_leaderboard"; // revert to hivi_leaderboard after ae3 rollout to XX
+  public static final String TOP_BOXAD = "TOP_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
-  public static final String MOBILE_TOP_LB = "MOBILE_TOP_LEADERBOARD";
-  public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
-  public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+  public static final String MOBILE_TOP_LB = "top_leaderboard";
+  public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
+  public static final String MOBILE_AD_IN_CONTENT_PLAYER = "incontent_player";
+  public static final String MOBILE_PREFOOTER = "mobile_prefooter";
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
   public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
   public static final String INVISIBLE_HIGH_IMPACT_2 = "INVISIBLE_HIGH_IMPACT_2";
@@ -37,13 +40,13 @@ public class AdsContent {
 
     FILE_PAGE_SLOTS_SELECTORS = new HashMap<>();
     FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    FILE_PAGE_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    FILE_PAGE_SLOTS_SELECTORS.put(TOP_BOXAD, "#TOP_BOXAD");
     FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
 
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    SLOTS_SELECTORS.put(TOP_BOXAD, "#TOP_BOXAD");
     SLOTS_SELECTORS.put(FLOATING_MEDREC, "#INCONTENT_BOXAD_1");
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
@@ -52,14 +55,15 @@ public class AdsContent {
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LB,
-                              "div[id*='wka1a.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
+                              "div[id*='wka1b.PF/bottom_leaderboard'][id*='_0__container__'] iframe"
     );
 
     MOBILE_SLOTS_SELECTORS = new HashMap<>();
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#MOBILE_IN_CONTENT");
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
-    MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#top_leaderboard");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#incontent_boxad_1");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT_PLAYER, "#incontent_player");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#bottom_leaderboard");
 
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(
@@ -99,7 +103,16 @@ public class AdsContent {
   }
 
   public static String getSlotSelector(String slotName) {
-    if (slotName.startsWith("MOBILE")) {
+
+    Pattern pattern = Pattern.compile("[A-Z]");
+    Matcher match = pattern.matcher(slotName);
+
+    int lastCapitalIndex = -1;
+    if (match.find()) {
+      lastCapitalIndex = match.start();
+    }
+
+    if (lastCapitalIndex == -1) {
       return MOBILE_SLOTS_SELECTORS.get(slotName);
     }
 

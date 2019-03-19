@@ -33,15 +33,6 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test
-  public void adsAdTypeAsyncHopWithoutAd() {
-    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
-    Page page = new Page("project43", "SyntheticTests/AdType/Async/Hop");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
-    ads.wait.forElementPresent(By.id(AdsContent.MOBILE_AD_IN_CONTENT));
-    ads.verifyNoAdInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
-  }
-
-  @Test
   public void adsAdTypeAsyncSuccessNoAd() {
     // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261075132&orderId=245575332
     Page page = new Page("project43", "SyntheticTests/AdType/Async/Success/NoAd");
@@ -49,30 +40,6 @@ public class TestAdTypeMobile extends MobileTestTemplate {
     ads.scrollToRecirculationPrefooter();
     ads.wait.forElementPresent(By.id(AdsContent.MOBILE_BOTTOM_LB));
     ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
-  }
-
-  @Test
-  public void adsAdTypeAsyncHopWithAd() {
-    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261089652&orderId=245575332
-    Page page = new Page("project43", "SyntheticTests/AdType/Async/Hop/WithAd");
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
-    ads.wait.forElementPresent(By.id(AdsContent.MOBILE_AD_IN_CONTENT));
-    ads.verifyNoAdInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
-  }
-
-  @Test
-  public void adsAdTypeAsyncSuccessAndHop() {
-    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
-    // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
-    Page page = new Page("project43", "SyntheticTests/AdType/Async/Success,Hop");
-    String slotNameWithAd = AdsContent.MOBILE_BOTTOM_LB;
-    String slotNameWithoutAd = AdsContent.MOBILE_AD_IN_CONTENT;
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
-    ads.scrollToRecirculationPrefooter();
-    ads.wait.forElementPresent(By.id(slotNameWithAd));
-    ads.wait.forElementPresent(By.id(slotNameWithoutAd));
-    ads.verifyImgAdLoadedInSlot(slotNameWithAd, DFP_IMAGE_URL);
-    ads.verifyNoAdInSlot(slotNameWithoutAd);
   }
 
   @Test

@@ -33,8 +33,6 @@ public class ForumBoardPage extends BasePageObject {
   private List<WebElement> postedImageList;
   @FindBys(@FindBy(css = "li.thread div.thread-left h4 a"))
   private List<WebElement> threadTitlesList;
-  @FindBy(css = ".notify-everyone")
-  private WebElement highlight;
   @FindBy(css = "#cke_WikiaEditor-0")
   private WebElement wikiaEditorTextArea;
 
@@ -68,14 +66,7 @@ public class ForumBoardPage extends BasePageObject {
     return boardName;
   }
 
-  private void checkHighlightCheckbox(boolean isHighLighted) {
-    if (isHighLighted) {
-      highlight.click();
-      Log.log("checkHighlightCheckbox", "highlight checkbox clicked", true, driver);
-    }
-  }
-
-  public ForumThreadPageObject startDiscussion(String title, String message, boolean highlight) {
+  public ForumThreadPageObject startDiscussion(String title, String message) {
     wait.forElementVisible(discussionTitleArea);
     jsActions.focus(discussionTitleArea);
     discussionTitleArea.sendKeys(title);
@@ -84,7 +75,6 @@ public class ForumBoardPage extends BasePageObject {
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
-    checkHighlightCheckbox(highlight);
     clickPostButton();
     Log.log(
         "startDiscussion",

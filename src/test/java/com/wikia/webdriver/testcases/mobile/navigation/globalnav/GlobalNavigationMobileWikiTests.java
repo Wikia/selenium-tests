@@ -65,7 +65,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
 
     globalNavigationMobile.clickFandomLogo();
 
-    Assertion.assertTrue(globalNavigationMobile.getCurrentUrl().contains("fandom.wikia.com"));
+    Assertion.assertTrue(globalNavigationMobile.getCurrentUrl().contains("fandom.com"));
   }
 
   @Test
@@ -153,7 +153,7 @@ public class GlobalNavigationMobileWikiTests extends NewTestTemplate {
 
   @DontRun(language = "szl")
   @Test
-  @Execute(onWikia = MobileWikis.DE_WIKI)
+  @Execute(onWikia = MobileWikis.DE_WIKI_2)
   public void trendingArticlesModuleDoesNotOpenUnderMobileSearchOnNonEnWikis() {
     GlobalNavigationMobile globalNavigationMobile =
         new ArticlePage()

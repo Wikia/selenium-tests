@@ -21,7 +21,7 @@ public class ForumAnonTests extends NewTestTemplate {
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
 
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
   }
 
@@ -31,7 +31,7 @@ public class ForumAnonTests extends NewTestTemplate {
     String message = String.format(PageContent.FORUM_MESSAGE, DateTime.now().getMillis());
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
-    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+    ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.reply(message);
     forumThread.verifyReplyMessage(1, message);

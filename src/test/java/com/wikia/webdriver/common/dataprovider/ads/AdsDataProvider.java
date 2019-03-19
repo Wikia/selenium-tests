@@ -25,6 +25,9 @@ public class AdsDataProvider {
   public static final Page PAGE_FV_RUBICON = new Page(WIKI_SPECIAL,
                                                       "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000"
   );
+  public static final Page PAGE_FV_RUBICON_NO_VIDEO = new Page(WIKI_SPECIAL,
+                                                      "SyntheticTests/Premium/FeaturedVideo/Rubicon"
+  );
   public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
   public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
   public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
@@ -122,13 +125,14 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/AdDriver2ForceStatus/Success",
-                           Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")}};
+                           Arrays.asList("TOP_LEADERBOARD", "TOP_BOXAD,TOP_RIGHT_BOXAD")}};
   }
 
   @DataProvider
-  public static Object[][] dfpParamsSynthetic() {
+  public static Object[][] dfpMEGAParamsTLB() {
     return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/DfpParams", null, "wka.life/_project43//article",
+        {WIKI_SPECIAL, "SyntheticTests/DfpParams",
+         "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-life",
          "TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
@@ -139,18 +143,20 @@ public class AdsDataProvider {
                                           "\"lang\":\"en\"",
                                           "\"esrb\":\"teen\""
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"test\"")}};
-  }
+    }
 
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
-        {"yugioh", "Dark_Magician", "wka.gaming/_yugioh//article", "TOP_LEADERBOARD", Arrays.asList(
+        {"yugioh", "Dark_Magician",
+         "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
+         "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"anime\"]",
             "\"s1\":\"_yugioh\"",
             "\"s2\":\"article\"",
-            "\"dmn\":\"wikiacom\"",
+            "\"dmn\":\"fandomcom\"",
             "\"hostpre\":",
             "\"cat\":[",
             "\"ar\":\"4:3\"",
@@ -167,31 +173,8 @@ public class AdsDataProvider {
             "\"pform\":[\"pc\",\"psp\"]",
             "\"sex\":[\"m\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"fallout", "Fallout", "wka.gaming/_fallout//article", "TOP_RIGHT_BOXAD", Arrays.asList(
-            "\"s0\":\"gaming\"",
-            "\"s0v\":\"games\"",
-            "\"s0c\":[\"gaming\"]",
-            "\"s1\":\"_fallout\"",
-            "\"s2\":\"article\"",
-            "\"ar\":\"4:3\"",
-            "\"artid\":\"948\"",
-            "\"cat\":[\"fallout\"]",
-            "\"dmn\":\"wikiacom\"",
-            "\"hostpre\":",
-            "\"lang\":\"en\"",
-            "\"wpage\":\"fallout\"",
-            "\"ref\":\"direct\"",
-            "\"pv\":\"2\"",
-            "\"top\":\"1k\"",
-            "\"sex\":[\"m\"]",
-            "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
-            "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
-            "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
-            "\"pub\":[\"bethesda\"]",
-            "\"esrb\":\"mature\"",
-            "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")},
-        {"runescape", "Grew", "wka.gaming/_runescape//article", "TOP_LEADERBOARD", Arrays.asList(
+        {"runescape", "Grew", "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
+         "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"gaming\"]",
@@ -213,7 +196,8 @@ public class AdsDataProvider {
             "\"esrb\":\"teen\"",
             "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"avatar", "Avatar_Wiki", "wka.ent/_avatar//home", "TOP_LEADERBOARD", Arrays.asList(
+        {"avatar", "Avatar_Wiki", "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-ent",
+         "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"ent\"",
             "\"s0v\":\"tv\"",
             "\"s0c\":[\"tv\"]",
@@ -235,27 +219,8 @@ public class AdsDataProvider {
             "\"theme\":[\"magic\"]",
             "\"esrb\":\"ec\""
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"civilization", "Category:Browse", "wka.gaming/_civilization//article", "TOP_RIGHT_BOXAD",
-         Arrays.asList("\"s0\":\"gaming\"",
-                       "\"s0v\":\"games\"",
-                       "\"s0c\":[\"gaming\"]",
-                       "\"s1\":\"_civilization\"",
-                       "\"s2\":\"article\"",
-                       "\"ar\":\"4:3\"",
-                       "\"artid\":\"25\"",
-                       "\"hostpre\":",
-                       "\"lang\":\"en\"",
-                       "\"wpage\":\"category:browse\"",
-                       "\"ref\":\"direct\"",
-                       "\"pv\":\"2\"",
-                       "\"top\":\"1k\"",
-                       "\"sex\":[\"m\"]",
-                       "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
-                       "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
-                       "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
-                       "\"esrb\":\"everyone\""
-         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")},
-        {"starcraft", "StarCraft_Wiki", "wka.gaming/_starcraft//home", "TOP_LEADERBOARD",
+        {"starcraft", "StarCraft_Wiki",
+         "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-gaming", "TOP_LEADERBOARD",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -277,9 +242,59 @@ public class AdsDataProvider {
                        "\"sex\":[\"m\"]",
                        "\"pub\":[\"blizzard\"]",
                        "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
-         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
-        {"overlordmaruyama", "Blood_of_Jormungandr", "wka.ent/_not_a_top1k_wiki//article",
-         "TOP_RIGHT_BOXAD", Arrays.asList("\"s0\":\"ent\"",
+         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")}};
+  }
+
+  @DataProvider
+  public static Object[][] dfpMEGAParams() {
+    return new Object[][]{
+        {"fallout", "Fallout", "wka1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-gaming", "TOP_BOXAD",
+         Arrays.asList(
+            "\"s0\":\"gaming\"",
+            "\"s0v\":\"games\"",
+            "\"s0c\":[\"gaming\"]",
+            "\"s1\":\"_fallout\"",
+            "\"s2\":\"article\"",
+            "\"ar\":\"4:3\"",
+            "\"artid\":\"948\"",
+            "\"cat\":[\"fallout\"]",
+            "\"dmn\":\"fandomcom\"",
+            "\"hostpre\":",
+            "\"lang\":\"en\"",
+            "\"wpage\":\"fallout\"",
+            "\"ref\":\"direct\"",
+            "\"pv\":\"2\"",
+            "\"top\":\"1k\"",
+            "\"sex\":[\"m\"]",
+            "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+            "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+            "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+            "\"pub\":[\"bethesda\"]",
+            "\"esrb\":\"mature\"",
+            "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
+        {"civilization", "Category:Browse", "wka1b.MR/top_boxad/desktop/oasis-article/_top1k_wiki-gaming", "TOP_BOXAD",
+         Arrays.asList("\"s0\":\"gaming\"",
+                       "\"s0v\":\"games\"",
+                       "\"s0c\":[\"gaming\"]",
+                       "\"s1\":\"_civilization\"",
+                       "\"s2\":\"article\"",
+                       "\"ar\":\"4:3\"",
+                       "\"artid\":\"25\"",
+                       "\"hostpre\":",
+                       "\"lang\":\"en\"",
+                       "\"wpage\":\"category:browse\"",
+                       "\"ref\":\"direct\"",
+                       "\"pv\":\"2\"",
+                       "\"top\":\"1k\"",
+                       "\"sex\":[\"m\"]",
+                       "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                       "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                       "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
+                       "\"esrb\":\"everyone\""
+         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
+        {"overlordmaruyama", "Blood_of_Jormungandr", "wka1b.MR/top_boxad/desktop/oasis-article/_not_a_top1k_wiki-ent", "TOP_BOXAD",
+         Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"books\"",
                                           "\"s0c\":[\"ent\",\"comics\"]",
                                           "\"s1\":\"_overlordmaruyama\"",
@@ -293,7 +308,7 @@ public class AdsDataProvider {
                                           "\"ref\":\"direct\"",
                                           "\"pv\":\"2\"",
                                           "\"esrb\":\"teen\""
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_RIGHT_BOXAD\"", "\"src\":\"gpt\"")}};
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")}};
   }
 
   @DataProvider
@@ -319,15 +334,14 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] providersChainOasis() {
-    return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB, "DirectGpt; RemnantGpt"}};
+    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain", AdsContent.TOP_LB,
+                           "DirectGpt; RemnantGpt"}};
   }
 
   @DataProvider
   public static Object[][] disableGptOasis() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/ProvidersChain",
-                           "", AdsContent.TOP_LB,
-                           ""},};
+    return new Object[][]{
+        {WIKI_SPECIAL, "SyntheticTests/ProvidersChain", "", AdsContent.TOP_LB, ""},};
   }
 
   @DataProvider
@@ -366,13 +380,11 @@ public class AdsDataProvider {
              .put("lineItemId", "269679732").build()}, {new Page(WIKI_SPECIAL,
                                                                  "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"
     ), "", ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)
-                                                            .put(
-                                                                "slotSize",
-                                                                new Dimension(300, 250)
+                                                            .put("slotSize",
+                                                                 new Dimension(300, 250)
                                                             )
-                                                            .put(
-                                                                "lineItemId",
-                                                                "269679732"
+                                                            .put("lineItemId",
+                                                                 "269679732"
                                                             ).build()},
         {new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"), "",
          ImmutableMap.<String, Object>builder().put("slotName", AdsContent.FLOATING_MEDREC)
@@ -383,7 +395,7 @@ public class AdsDataProvider {
              .put("slotSize", new Dimension(120, 600))
              .put("lineItemId", "257673852").build()},
         {new Page(WIKI_SPECIAL, "SyntheticTests/Slots/Size/300x1050"), "",
-         ImmutableMap.<String, Object>builder().put("slotName", AdsContent.MEDREC)
+         ImmutableMap.<String, Object>builder().put("slotName", AdsContent.TOP_BOXAD)
              .put("slotSize", new Dimension(300, 1050))
              .put("lineItemId", "255534972").build()}};
   }
@@ -399,7 +411,7 @@ public class AdsDataProvider {
                                                        .build(),
                                                    ImmutableMap.<String, Object>builder().put(
                                                        "slotName",
-                                                       AdsContent.MEDREC
+                                                       AdsContent.TOP_BOXAD
                                                    )
                                                        .put("slotSize", new Dimension(300, 250))
                                                        .put("lineItemId", "365416332")
@@ -411,7 +423,7 @@ public class AdsDataProvider {
                          .put("lineItemId", "365416332")
                          .build(),
                      ImmutableMap.<String, Object>builder().put("slotName", AdsContent.BOTTOM_LB)
-                         .put("slotSize", new Dimension(1178, 479))
+                         .put("slotSize", new Dimension(1188, 483))
                          .put("lineItemId", "365416332")
                          .build()
     )}};

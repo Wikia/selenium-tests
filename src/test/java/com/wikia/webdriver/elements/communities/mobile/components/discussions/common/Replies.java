@@ -19,7 +19,7 @@ public class Replies extends BasePageObject {
   @FindBy(css = ".discussion-reply .post-content")
   private WebElement replyContent;
 
-  @FindBy(css = ".discussion-reply .og-container")
+  @FindBy(css = ".discussion-reply > a")
   private WebElement replyOpenGraph;
 
   public boolean hasNoRepliesIcon() {

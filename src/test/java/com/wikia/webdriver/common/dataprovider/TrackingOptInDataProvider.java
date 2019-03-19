@@ -18,7 +18,7 @@ public class TrackingOptInDataProvider {
   private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
   private static final String
       ADS_NETZ_ATHLETEN_PATTERN
-      = "http?://.*adadapter\\.netzathleten-media\\.de/.*/naMediaAd\\.js.*";
+      = "http?://.*tag\\.md-nx\\.com/.*/loader\\.js.*";
   private static final String ADS_MOAT_PATTERN = "https?://.*moatads\\.com.*";
   private static final String ADS_PUBMATIC_PATTERN = "http?://.*pubmatic\\.com/AdServer.*";
   private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
@@ -38,27 +38,38 @@ public class TrackingOptInDataProvider {
       ADS_TLB_NPA_FIRST_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
   private static final String
+      ADS_MOBILE_TLB_NPA_FIRST_PARAMETER_PATTERN
+      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
+  private static final String
       ADS_TLB_NPA_SECOND_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*TOP_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+  private static final String
+      ADS_MOBILE_TLB_NPA_SECOND_PARAMETER_PATTERN
+      = "https?://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_BLB_NPA_FIRST_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*BOTTOM_LEADERBOARD.*";
   private static final String
+      ADS_MOBILE_BLB_NPA_FIRST_PARAMETER_PATTERN
+      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
+  private static final String
       ADS_BLB_NPA_SECOND_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*BOTTOM_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
+      ADS_MOBILE_BLB_NPA_SECOND_PARAMETER_PATTERN
+      = "https?://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
+  private static final String
       ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*MOBILE_IN_CONTENT.*";
+      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*incontent_boxad_1.*";
   private static final String
       ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*MOBILE_IN_CONTENT.*cust_params=.*npa%3D1.*cookie.*";
+      = "https?://.*\\.doubleclick\\.net.*ads.*incontent_boxad_1.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_VAST_NPA_FIRST_PARAMETER_PATTERN
       = "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
   private static final String
       ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
       = "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
-  private static final String PETAMETRICS_PATTERN = "http?://.*petametrics\\.com.*";
 
   private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
       "wgAdDriverKikimoraTrackingCountries", "wgAdDriverKikimoraViewabilityTrackingCountries",
@@ -226,10 +237,10 @@ public class TrackingOptInDataProvider {
   @DataProvider
   public static Object[][] adsNpaSlotsDataProviderMobile() {
     return new Object[][]{{Arrays.asList(
-        ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
-        ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
+        ADS_MOBILE_TLB_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_MOBILE_TLB_NPA_SECOND_PARAMETER_PATTERN,
+        ADS_MOBILE_BLB_NPA_FIRST_PARAMETER_PATTERN,
+        ADS_MOBILE_BLB_NPA_SECOND_PARAMETER_PATTERN,
         ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN,
         ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
     )}};
@@ -238,11 +249,6 @@ public class TrackingOptInDataProvider {
   @DataProvider
   public static Object[][] adsA9DataProvider() {
     return new Object[][]{{ADS_A9_INSTANT_GLOBALS, Arrays.asList(ADS_A9_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsPetametricsDataProvider() {
-    return new Object[][]{{Arrays.asList(PETAMETRICS_PATTERN)}};
   }
 
   @DataProvider

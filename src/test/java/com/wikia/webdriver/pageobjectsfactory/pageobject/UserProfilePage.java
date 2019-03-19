@@ -64,7 +64,7 @@ public class UserProfilePage extends WikiBasePageObject {
   public BlogPage openFirstPost() {
     for (int i = 0; i < blogPostList.size(); i++) {
       BlogPage blogPage = openBlogPage(i);
-      String pageContent = blogPage.getAtricleTextRaw().toLowerCase();
+      String pageContent = blogPage.getArticleTextRaw().toLowerCase();
       if (!(pageContent.contains("deleted") || pageContent.contains("redirected"))) {
         Log.log("openFirstPost", "valid post found on " + i + " position", true);
         break;

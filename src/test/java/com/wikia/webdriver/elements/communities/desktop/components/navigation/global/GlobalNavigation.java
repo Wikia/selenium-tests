@@ -18,7 +18,7 @@ import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
 
-  By loggedOutUserAvatar = By.xpath("//div[@class=\"wds-avatar__inner-border\" and @alt=\"\"]");
+  By loggedOutUserAvatar = By.cssSelector(".wds-global-navigation__user-anon");
   @FindBy(css = ".wds-global-navigation__search-toggle")
   private WebElement searchButton;
   @FindBy(css = ".wds-global-navigation__search-input-wrapper input")

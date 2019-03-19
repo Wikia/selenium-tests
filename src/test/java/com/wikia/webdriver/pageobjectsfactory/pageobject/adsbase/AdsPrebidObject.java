@@ -13,8 +13,6 @@ import org.openqa.selenium.WebElement;
 public class AdsPrebidObject extends AdsBaseObject {
 
   private static final String CUSTOM_ADAPTER_CREATIVE = "Wikia Creative";
-  private static final String GPT_NODE = "div[id^=wikia_gpt]:not(.hidden)";
-  private static final String IFRAME_NODE = "div[id^=wikia_gpt]:not(.hidden) > div > iframe";
   private static final String NEXT_PV = "a[href='/wiki/SyntheticTests/RTB/Prebid.js/Wikia/2']";
   private static final String NEXT_TITLE = "SyntheticTests/RTB/Prebid.js/Wikia/2";
 
@@ -23,10 +21,8 @@ public class AdsPrebidObject extends AdsBaseObject {
   }
 
   public void verifyKeyValues(String slotName, String adapter, String size, String price) {
-    WebElement
-        slotContainer
-        = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-    WebElement gptNode = slotContainer.findElement(By.cssSelector(GPT_NODE));
+
+    WebElement gptNode = driver.findElement(By.cssSelector(slotName));
 
     try {
       JSONObject keyValues = new JSONObject(gptNode.getAttribute("data-gpt-slot-params"));
@@ -41,10 +37,7 @@ public class AdsPrebidObject extends AdsBaseObject {
   }
 
   public void verifyPrebidCreative(String slotName, boolean rendered) {
-    WebElement
-        slotContainer
-        = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-    WebElement iframe = slotContainer.findElement(By.cssSelector(IFRAME_NODE));
+    WebElement iframe = driver.findElement(By.cssSelector(slotName + " " + "iframe"));
     driver.switchTo().frame(iframe);
 
     WebElement body = driver.findElement(By.cssSelector("body"));
