@@ -45,7 +45,7 @@ public class ContentReviewTests extends NewTestTemplate {
     editPage.clickPublishButton();
 
     SpecialJsPage specialJsPage = new SpecialJsPage();
-    Assertion.assertEquals(specialJsPage.getScriptContent(), expectedContent);
+    Assertion.assertStringContains(specialJsPage.getScriptContent(), expectedContent);
     Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkVisible());
 
     editPage.open("MediaWiki:Wikia.js")
@@ -54,7 +54,7 @@ public class ContentReviewTests extends NewTestTemplate {
         .insertContent("console.log(\"content review test 2\");");
 
     editPage.clickAutoApproveCheckbox().clickPublishButton();
-    Assertion.assertEquals(specialJsPage.getScriptContent(),
+    Assertion.assertStringContains(specialJsPage.getScriptContent(),
                            "console.log(\"content review test 2\");"
     );
     Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkNotVisible());
