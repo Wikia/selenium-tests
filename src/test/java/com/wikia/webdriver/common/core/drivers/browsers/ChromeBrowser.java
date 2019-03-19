@@ -96,13 +96,13 @@ public class ChromeBrowser extends BrowserAbstract {
     caps.setBrowserName("chrome");
     caps.setVersion("69.0");
     caps.setCapability("enableVNC", true);
-    caps.setCapability("enableVideo", true);
+    caps.setCapability("enableVideo", false);
 
     RemoteWebDriver rDriver = null;
 
     try {
       rDriver = new RemoteWebDriver(
-          URI.create("http://localhost:4444/wd/hub").toURL(),
+          URI.create("http://192.168.99.100:31557/wd/hub").toURL(),
           caps
       );
     } catch (MalformedURLException e) {
