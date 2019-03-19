@@ -78,10 +78,12 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     return this;
   }
 
-  public CrossWikiSearchPageObject navigateToWikiResults() {
-    wait.forElementVisible(otherCommunitiesLink);
-    scrollAndClick(otherCommunitiesLink);
-    return this;
+  public void searchForWiki(String searchUrl, String term) {
+    try {
+      getUrl(searchUrl + "/Special:Search?search=" + term);
+    } catch (TimeoutException e) {
+      Log.log("searchForWiki", "timeout", false);
+    }
   }
 
   public void verifyFirstResultTitle(String wikiName) {
