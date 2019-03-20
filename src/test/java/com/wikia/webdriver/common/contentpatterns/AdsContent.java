@@ -33,7 +33,7 @@ public class AdsContent {
   private static final Map<String, String> FILE_PAGE_SLOTS_SELECTORS;
   private static final Map<String, String> MOBILE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
-
+  // Some changes are temporary due to ae2-ae3 switch
   static {
     SPECIAL_PAGE_SLOTS_SELECTORS = new HashMap<>();
     SPECIAL_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#top_leaderboard");
@@ -64,6 +64,9 @@ public class AdsContent {
     MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT_PLAYER, "#incontent_player");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#bottom_leaderboard");
+    MOBILE_SLOTS_SELECTORS.put(TOP_BOXAD, "#top_boxad");
+    MOBILE_SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#invisible_high_impact_2");
+    MOBILE_SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#invisible_skin");
 
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(
