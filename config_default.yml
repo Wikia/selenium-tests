@@ -16,6 +16,7 @@ adsData: false
 mockAds: false
 forceHttps: false
 forceLanguageInPath: false
+forceWikiaOrg: false
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
 useZapProxy: false
