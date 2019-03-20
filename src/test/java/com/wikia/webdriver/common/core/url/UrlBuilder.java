@@ -24,6 +24,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   private final boolean areLanguageTestsEnabled;
   private Boolean forceHttps;
   private Boolean forceLanguageInPath;
+  private Boolean forceWikiaOrg;
   private String language;
 
   private UrlBuilder(String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
@@ -38,6 +39,7 @@ public class UrlBuilder extends BaseUrlBuilder {
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;
     this.language = language;
+    this.forceWikiaOrg = Configuration.getForceWikiOrg();
   }
 
   public static UrlBuilder createUrlBuilder() {
