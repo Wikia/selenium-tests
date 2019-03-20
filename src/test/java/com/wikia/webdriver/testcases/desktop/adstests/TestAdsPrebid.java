@@ -36,7 +36,7 @@ public class TestAdsPrebid extends NewTestTemplate {
     final String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=1881");
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
 
-    prebidAds.verifyKeyValues(AdSlot.TOP_LEADERBOARD.getMainPath(), "wikia", "728x90", "18.50");
+    prebidAds.verifyKeyValues("#" + AdSlot.TOP_LEADERBOARD.getName(), "wikia", "728x90", "18.50");
     prebidAds.verifyPrebidCreative(AdSlot.TOP_LEADERBOARD.getMainPath(), true);
   }
 
