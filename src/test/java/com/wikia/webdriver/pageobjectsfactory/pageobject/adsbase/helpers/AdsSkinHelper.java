@@ -21,7 +21,7 @@ import java.io.File;
 public class AdsSkinHelper {
 
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
-  private static final String WIKIA_MESSAGE_BUBLE_CLOSE_BUTTON = ".sprite close-notification";
+  private static final String WIKIA_MESSAGE_BUBLE_CLOSE_BUTTON = ".close-notification";
   private static final int IMAGES_THRESHOLD_PERCENT = 12;
   private final WebDriver driver;
   private String pathToLeftPart;

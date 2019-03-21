@@ -54,7 +54,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     if (method != null) {
       Class<?> declaringClass = method.getDeclaringClass();
 
-      String cookieDomain = String.format(".%s", Configuration.getEnvType().getDomain(url));
+      String cookieDomain = String.format(".%s", Configuration.getEnvType().getDomain(driver.getCurrentUrl()));
       Date cookieDate = new Date(new DateTime().plusYears(10).getMillis());
 
       if (!AlertHandler.isAlertPresent(driver)) {
@@ -83,7 +83,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         // HACK FOR DISABLING NOTIFICATIONS
         try {
           new JavascriptActions(driver).execute("$('.wds-banner-notification__close').click()");
-          new JavascriptActions(driver).execute("$('.sprite.close-notification')[0].click()");
+          new JavascriptActions(driver).execute("$('#WikiaNotifications .sprite.close-notification').click()");
         } catch (WebDriverException e) {
           Log.info("Hack for disabling notifications", "Failed to execute js action");
         }
