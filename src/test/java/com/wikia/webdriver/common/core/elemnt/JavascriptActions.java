@@ -56,7 +56,6 @@ public class JavascriptActions {
   }
 
   public Object execute(String script) {
-    driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     // TODO: Get rid of this wait
     try {
       Object value = js.executeScript("return " + script);

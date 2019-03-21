@@ -83,7 +83,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
         // HACK FOR DISABLING NOTIFICATIONS
         try {
           new JavascriptActions(driver).execute("$('.wds-banner-notification__close').click()");
-          new JavascriptActions(driver).execute("$('.sprite.close-notification')[0].click()");
+          new JavascriptActions(driver).execute("$('#WikiaNotifications .sprite.close-notification').click()");
         } catch (WebDriverException e) {
           Log.info("Hack for disabling notifications", "Failed to execute js action");
         }
