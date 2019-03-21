@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum EnvType {
   PROD("prod", "wikia.com", "fandom.com", "wikia.org"),
-  SANDBOX("sandbox", "wikia.com", "fandom", "wikia.org"),
+  SANDBOX("sandbox", "wikia.com", "fandom.com", "wikia.org"),
   DEV("dev", "wikia-dev.pl", "fandom-dev.pl", "wikia-dev.pl");
 
   @Getter
