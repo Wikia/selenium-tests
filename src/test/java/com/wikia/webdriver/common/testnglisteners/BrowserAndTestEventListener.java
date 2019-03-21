@@ -54,7 +54,7 @@ public class BrowserAndTestEventListener extends AbstractWebDriverEventListener
     if (method != null) {
       Class<?> declaringClass = method.getDeclaringClass();
 
-      String cookieDomain = String.format(".%s", Configuration.getEnvType().getDomain(url));
+      String cookieDomain = String.format(".%s", Configuration.getEnvType().getDomain(driver.getCurrentUrl()));
       Date cookieDate = new Date(new DateTime().plusYears(10).getMillis());
 
       if (!AlertHandler.isAlertPresent(driver)) {
