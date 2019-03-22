@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
+@Test(groups = "AdsNoAdsOnAdsFreeWikisOasis")
 public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adFreeWikis", groups = "AdsNoAdsOnAdsFreeWikisOasis")
