@@ -12,7 +12,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsAbcdProductsPriority"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsDfpParamsPresentMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsMercury"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsAdDriverForcedStatusOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsDisableGpt"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandom"/>
@@ -38,7 +37,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsVideoVelesOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestVideoVelesMobile"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSpotlights"/>
