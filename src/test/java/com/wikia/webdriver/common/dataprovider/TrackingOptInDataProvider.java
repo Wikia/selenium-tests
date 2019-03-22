@@ -36,25 +36,25 @@ public class TrackingOptInDataProvider {
       = "https?://.*google-analytics\\.com/collect.*";
   private static final String
       ADS_TLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*TOP_LEADERBOARD.*";
+      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
   private static final String
       ADS_MOBILE_TLB_NPA_FIRST_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
   private static final String
       ADS_TLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*TOP_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+      = "https?://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_MOBILE_TLB_NPA_SECOND_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_BLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*BOTTOM_LEADERBOARD.*";
+      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
   private static final String
       ADS_MOBILE_BLB_NPA_FIRST_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
   private static final String
       ADS_BLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*BOTTOM_LEADERBOARD.*cust_params=.*npa%3D1.*cookie.*";
+      = "https?://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_MOBILE_BLB_NPA_SECOND_PARAMETER_PATTERN
       = "https?://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
