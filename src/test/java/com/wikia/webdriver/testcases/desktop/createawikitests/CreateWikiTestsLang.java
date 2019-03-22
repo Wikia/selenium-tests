@@ -29,10 +29,10 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     if (lang.equals("en")) {
       expectedDomainSufix = String.format("");
     } else {
-      expectedDomainSufix = String.format("%s", lang);
+      expectedDomainSufix = String.format("/%s", lang);
     }
 
-    assertEquals(cnw1.getDomainSufix(), "fandom.com/" + expectedDomainSufix);
+    assertEquals(cnw1.getDomainSufix(), "fandom.com" + expectedDomainSufix);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifyNextButtonEnabled();
