@@ -25,7 +25,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraRejectedDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForKikimora(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -37,7 +36,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKruxDataProvider", groups = "AdsOptInOutKruxOasis")
   public void adsTrackingRejectedForKrux(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -49,7 +47,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNetzAthletenDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForNetzAthleten(
       String[] instantGlobals, List<String> urlPatterns
@@ -63,7 +60,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsMoatDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -75,7 +71,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPrebidDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -87,7 +82,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsA9DataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForA9(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -99,7 +93,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsQuantcastDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForQuantcast(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -111,7 +104,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreOasis")
   public void adsTrackingRejectedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -135,7 +127,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNpaHiViDataProviderOasis", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForHiViAdSlots(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -148,7 +139,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraAcceptedDataProvider", groups = "AdsOptInAcceptedOasis")
   public void verifyAdsTrackingAcceptedForKikimora(
       String[] instantGlobals, List<String> urlPatterns
@@ -174,7 +164,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNetzAthletenDataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForNetzAthleten(
       String[] instantGlobals, List<String> urlPatterns
@@ -188,7 +177,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsMoatDataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForMoat(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -200,7 +188,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsPrebidDataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForPrebid(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -212,7 +199,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsA9DataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForA9(String[] instantGlobals, List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -224,7 +210,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump()
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsQuantcastDataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForQuantcast(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -236,7 +221,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsComscoreDataProvider", groups = "AdsOptInOutComscoreOasis")
   public void adsTrackingAcceptedForComscore(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -248,7 +232,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsNpaHiViDataProviderOasis", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForHiViAdSlots(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -261,7 +244,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsGoogleAnalyticsDataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForGoogleAnalytics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -311,7 +293,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, groups = "AdsTrackingPixelsOasis", dataProvider = "adsTrackingPixelsSent")
   public void adsTrackingPixelsOutsideUE(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
