@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Execute(trackingOptIn = false, onWikia = "project43")
 public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   private static final Page ADS_HOME_PAGE = new Page("project43", "Project43_Wikia");
