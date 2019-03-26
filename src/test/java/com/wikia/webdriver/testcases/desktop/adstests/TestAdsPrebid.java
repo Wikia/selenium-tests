@@ -60,7 +60,7 @@ public class TestAdsPrebid extends NewTestTemplate {
     prebidAds.verifyLineItemId(AdsContent.TOP_LB, VELES_LINE_ITEM_ID);
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @UnsafePageLoad
   @Test(groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"})
   public void adsPrebidRubiconRequestsInSlots() {
