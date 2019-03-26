@@ -3,9 +3,7 @@ package com.wikia.webdriver.testcases.desktop.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdSlot;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -19,6 +17,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+@Execute(onWikia = "project43")
 public class TestAdsPrebid extends NewTestTemplate {
 
   private static final String STARTED_EVENT = "event_name=started";
