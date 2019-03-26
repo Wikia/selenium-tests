@@ -208,7 +208,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
 
-  @NetworkTrafficDump()
+  @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsQuantcastDataProvider", groups = "AdsOptInAcceptedOasis")
   public void adsTrackingAcceptedForQuantcast(List<String> urlPatterns) {
