@@ -91,7 +91,6 @@ public abstract class BrowserAbstract {
         server = new NetworkTrafficInterceptor();
         server.setTrustAllServers(true);
         server.setConnectTimeout(90, TimeUnit.SECONDS);
-        server.setTrustSource(TrustSource.defaultTrustSource());
         server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
         server.setRequestTimeout(90, TimeUnit.SECONDS);
         server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.RESPONSE_HEADERS);
