@@ -136,7 +136,7 @@ public class AdsDataProvider {
          "TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
-                                          "\"dmn\":\"wikiacom\"",
+                                          "\"dmn\":\"fandomcom\"",
                                           "\"hostpre\":\"",
                                           "\"wpage\":\"synthetictests/dfpparams\"",
                                           "\"ref\":\"direct\"",

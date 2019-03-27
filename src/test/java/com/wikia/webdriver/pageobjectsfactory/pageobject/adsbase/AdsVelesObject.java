@@ -37,7 +37,7 @@ public class AdsVelesObject extends AdsBaseObject {
   private static final String INCONTENT_WRAPPER = "#INCONTENT_WRAPPER";
   private static final String MOBILE_INCONTENT_WRAPPER = "#incontent_player";
   private static final String INCONTENT_VIDEO = ".video-display-wrapper";
-  private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hidden";
+  private static final String INCONTENT_VIDEO_HIDDEN = ".video-display-wrapper .hide";
   private static final int DEFAULT_TIMEOUT = 15;
 
   public AdsVelesObject(WebDriver driver, String testedPage) {

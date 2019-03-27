@@ -8,68 +8,68 @@ public class TrackingOptInDataProvider {
 
   public static final String
       ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN
-      = "https?://.*google-analytics\\.com(/r)?/collect.*aip=1.*";
+      = "https://.*google-analytics\\.com(/r)?/collect.*aip=1.*";
   private static final String
       ADS_KIKIMORA_OPT_IN_ACCEPTED_PATTERN
-      = "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=0.*";
+      = "https://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=0.*";
   private static final String
       ADS_KIKIMORA_OPT_IN_REJECTED_PATTERN
-      = "https?://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=-1.*";
-  private static final String ADS_KRUX_PATTERN = "https?://.*cdn\\.krxd\\.net.*";
+      = "https://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=-1.*";
+  private static final String ADS_KRUX_PATTERN = "https://.*cdn\\.krxd\\.net.*";
   private static final String
       ADS_NETZ_ATHLETEN_PATTERN
-      = "http?://.*tag\\.md-nx\\.com/.*/loader\\.js.*";
-  private static final String ADS_MOAT_PATTERN = "https?://.*moatads\\.com.*";
-  private static final String ADS_PUBMATIC_PATTERN = "http?://.*pubmatic\\.com/AdServer.*";
-  private static final String ADS_A9_PATTERN = "http?://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
-  private static final String ADS_COMSCORE_PATTERN = "http?://.*scorecardresearch\\.com.*";
-  private static final String ADS_QUANTCAST_PATTERN = "http?://.*quantserve\\.com/.*";
-  private static final String ADS_QUANTCAST_SECURE_PATTERN = "https?://.*quantserve\\.com/.*";
-  private static final String ADS_APP_NEXUS_PATTERN = "http?://.*ib\\.adnxs\\.com/.*";
-  private static final String ADS_OPOENX_PATTERN = "https?://.*wikia-d.*openx.*arj.*";
-  private static final String ADS_INDEX_EXCHANGE_PATTERN = "http?://.*casalemedia\\.com/cygnus.*";
+      = "https://.*tag\\.md-nx\\.com/.*/loader\\.js.*";
+  private static final String ADS_MOAT_PATTERN = "https://.*moatads\\.com.*";
+  private static final String ADS_PUBMATIC_PATTERN = "https://.*pubmatic\\.com/AdServer.*";
+  private static final String ADS_A9_PATTERN = "https://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
+  private static final String ADS_COMSCORE_PATTERN = "https://.*scorecardresearch\\.com.*";
+  private static final String ADS_QUANTCAST_PATTERN = "https://.*quantserve\\.com/.*";
+  private static final String ADS_QUANTCAST_SECURE_PATTERN = "https://.*quantserve\\.com/.*";
+  private static final String ADS_APP_NEXUS_PATTERN = "https://.*ib\\.adnxs\\.com/.*";
+  private static final String ADS_OPOENX_PATTERN = "https://.*wikia-d.*openx.*arj.*";
+  private static final String ADS_INDEX_EXCHANGE_PATTERN = "https://.*casalemedia\\.com/cygnus.*";
   private static final String
       ADS_RUBBICON_FASTLANE_PATTERN
-      = "http?://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
+      = "https://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
   private static final String
       ADS_GOOGLE_ANALYTICS_PATTERN
-      = "https?://.*google-analytics\\.com/collect.*";
+      = "https://.*google-analytics\\.com/collect.*";
   private static final String
       ADS_TLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
   private static final String
       ADS_MOBILE_TLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
   private static final String
       ADS_TLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_MOBILE_TLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_BLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
   private static final String
       ADS_MOBILE_BLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
   private static final String
       ADS_BLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_MOBILE_BLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*npa=1.*incontent_boxad_1.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*incontent_boxad_1.*";
   private static final String
       ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*\\.doubleclick\\.net.*ads.*incontent_boxad_1.*cust_params=.*npa%3D1.*cookie.*";
+      = "https://.*\\.doubleclick\\.net.*ads.*incontent_boxad_1.*cust_params=.*npa%3D1.*cookie.*";
   private static final String
       ADS_VAST_NPA_FIRST_PARAMETER_PATTERN
-      = "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
+      = "https://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
   private static final String
       ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
-      = "https?://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
+      = "https://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
 
   private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
       "wgAdDriverKikimoraTrackingCountries", "wgAdDriverKikimoraViewabilityTrackingCountries",
@@ -99,7 +99,7 @@ public class TrackingOptInDataProvider {
 
   private static final String
       GOOGLE_ANALYTICS_ANONYMIZED_USER
-      = "https?://.*google-analytics\\.com/collect\\?.*aip=1.*";
+      = "https://.*google-analytics\\.com/collect\\?.*aip=1.*";
 
   @DataProvider
   public static Object[][] GDPRcountries() {

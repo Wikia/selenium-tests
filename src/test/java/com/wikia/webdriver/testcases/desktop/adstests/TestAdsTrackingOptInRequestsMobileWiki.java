@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Execute(trackingOptIn = false, onWikia = "project43")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
 

@@ -35,7 +35,7 @@ public class MobileAdsDataProvider {
          "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
-                                          "\"dmn\":\"wikiacom\"",
+                                          "\"dmn\":\"fandomcom\"",
                                           "\"hostpre\":\"",
                                           "\"skin\":\"mercury\"",
                                           "\"wpage\":\"synthetictests/dfpparams\"",
