@@ -133,7 +133,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {WIKI_SPECIAL, "SyntheticTests/DfpParams",
          "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-life",
-         "TOP_LEADERBOARD", Arrays.asList("\"s0\":\"life\"",
+         "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                           "\"s1\":\"_project43\"",
                                           "\"s2\":\"article\"",
                                           "\"dmn\":\"fandomcom\"",
@@ -142,7 +142,7 @@ public class AdsDataProvider {
                                           "\"ref\":\"direct\"",
                                           "\"lang\":\"en\"",
                                           "\"esrb\":\"teen\""
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"test\"")}};
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"test\"")}};
     }
 
   @DataProvider
