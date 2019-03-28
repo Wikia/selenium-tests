@@ -50,6 +50,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestFloorAdhesion"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
+            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsNoAdsOnFreeWikisMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRepeatableIncontentBoxadMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestTopWamWikis"/>
