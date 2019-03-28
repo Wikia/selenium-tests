@@ -28,7 +28,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
       URL_TRIGGER
       = "InstantGlobals.wgAdDriverHighImpact2SlotCountries=[XX]";
 
-  private static final String SLOT_NAME = "INVISIBLE_HIGH_IMPACT_2";
+  private static final String SLOT_NAME = "invisible_high_impact_2";
   private static final String LINE_ITEM_ID = "270609492";
   private static final String CREATIVE_ID = "94178805972";
   private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
@@ -55,7 +55,6 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     );
 
     wikiPage.verifyFloorAdhesionPresent(SLOT_NAME, LINE_ITEM_ID, CREATIVE_ID);
-    wikiPage.verifyThereIsNoWikiaBar(browser);
   }
 
   @Test(groups = "AdsFloorAdhesionOasis")
