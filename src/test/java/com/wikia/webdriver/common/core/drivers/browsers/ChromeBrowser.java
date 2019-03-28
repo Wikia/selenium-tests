@@ -102,7 +102,7 @@ public class ChromeBrowser extends BrowserAbstract {
 
     try {
       rDriver = new RemoteWebDriver(
-          URI.create("http://192.168.99.100:31557/wd/hub").toURL(),
+          URI.create("http://moon.poz-dev.k8s.wikia.net/wd/hub").toURL(),
           caps
       );
     } catch (MalformedURLException e) {
