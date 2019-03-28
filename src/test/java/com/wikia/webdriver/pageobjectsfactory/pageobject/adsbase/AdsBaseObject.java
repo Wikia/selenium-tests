@@ -132,28 +132,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return String.valueOf(elapsedSeconds);
   }
 
-  public void verifyForcedSuccessScriptInSlots(List<String> slots) {
-    for (String slotPos : slots) {
-      String slot = slotPos.split(",")[0];
-      WebElement slotElement = driver.findElement(By.id(slot));
-      WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
-      driver.switchTo().frame(slotGptIframe);
-      WebElement iframeHtml = driver.findElement(By.tagName("html"));
-      String
-          adDriverForcedSuccessFormatted
-          = String.format(AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slotPos);
-      if (checkScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
-        Log.log("AdDriver2ForceStatus script",
-                "adDriverForcedSuccess script found in slot " + slot,
-                true
-        );
-      } else {
-        throw new NoSuchElementException("AdDriver2ForcedStatus script not found in slot " + slot);
-      }
-      driver.switchTo().defaultContent();
-    }
-  }
-
   public void verifyMedrec() {
     verifyAdVisibleInSlot("div[id*='top_boxad']", presentMedrec);
   }

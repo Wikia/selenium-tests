@@ -123,12 +123,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adDriverForcedStatusSuccess() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/AdDriver2ForceStatus/Success",
-                           Arrays.asList("top_leaderboard", "TOP_BOXAD,TOP_RIGHT_BOXAD")}};
-  }
-
-  @DataProvider
   public static Object[][] dfpMEGAParamsTLB() {
     return new Object[][]{
         {WIKI_SPECIAL, "SyntheticTests/DfpParams",

@@ -10,8 +10,6 @@ public class AdsContent {
   public static final Map<String, String> IFRAME_SLOT_SELECTORS;
   public static final String ENV_DESKTOP = "desktop";
   public static final String ENV_MOBILE = "mobile";
-  public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
-      "top.window.adDriver2ForcedStatus['%s'.split(',')[0]]='success';";
   //SLOTS NAMES
   public static final String BOTTOM_LB = "bottom_leaderboard";
   public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
