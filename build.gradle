@@ -7,7 +7,6 @@ buildscript {
         classpath 'org.ajoberstar:gradle-git:1.0.0'
         classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
         classpath 'org.projectlombok:lombok:1.18.6'
-        annotationProcessor 'org.projectlombok:lombok:1.18.6'
     }
 }
 
@@ -79,6 +78,8 @@ test {
 dependencies {
     def webdriverVersion = '3.141.0'
 
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    testCompile "org.projectlombok:lombok:1.18.6"
     testCompile "org.apache.velocity:velocity:1.7"
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}"
