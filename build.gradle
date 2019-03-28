@@ -112,6 +112,8 @@ dependencies {
     testCompile 'net.lightbody.bmp:mitm:2.1.5'
     testCompile 'commons-io:commons-io:2.4'
     testCompile 'commons-lang:commons-lang:2.4'
+    testCompile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+
 }
 
 
