@@ -290,11 +290,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
-  public void verifyProvidersChain(String slotName, String providers) {
-    Log.log("SlotName", slotName, true);
-    waitForProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
-  }
-
   /**
    * Test whether the correct GPT ad unit is called
    *
