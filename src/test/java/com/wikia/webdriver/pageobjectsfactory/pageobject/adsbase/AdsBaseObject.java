@@ -167,8 +167,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void verifyNoAdsOnPage() {
-    verifyNoAds();
+  public void verifyNoAdsOnPage(Boolean isMobile) {
+    verifyNoAds(isMobile);
     Log.log("verifyNoAdsOnPage", "No ads detected", true, driver);
   }
 
@@ -607,9 +607,9 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("#" + slotName + " iframe"));
   }
 
-  public void verifyNoAd(final String slotName, final String slotSelector) {
+  public void verifyNoAd(final String slotName, final String slotSelector, boolean isMobile) {
     Log.log("verifyNoAd", "Triggering " + slotName, true, driver);
-    triggerAdSlot(slotName);
+    triggerAdSlotWithMobileState(slotName, isMobile);
     verifyNoAdWithoutTrigger(slotSelector);
   }
 
@@ -653,6 +653,31 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+      triggerFMR();
+      return this;
+    }
+
+    String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+
+    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+      jsActions.execute(javaScriptTrigger);
+    }
+
+    return this;
+  }
+
+  public AdsBaseObject triggerAdSlotWithMobileState(String slotName, Boolean isMobile) {
+    if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB) && isMobile) {
+      triggerBLB();
+      return this;
+    }
+
+    if (slotName.equals(AdsContent.BOTTOM_LB)) {
+      triggerBLB();
+      return this;
+    }
+
+    if (slotName.equals(AdsContent.FLOATING_MEDREC ) && !isMobile) {
       triggerFMR();
       return this;
     }
@@ -799,10 +824,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Verify if there are no ads on the page for ad slots in given pageType
    */
-  private void verifyNoAds() {
+  private void verifyNoAds(Boolean isMobile) {
     Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      verifyNoAd(entry.getKey(), entry.getValue());
+      verifyNoAd(entry.getKey(), entry.getValue(), isMobile);
     }
   }
 

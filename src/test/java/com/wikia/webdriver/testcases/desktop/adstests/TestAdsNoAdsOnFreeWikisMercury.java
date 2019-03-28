@@ -20,6 +20,6 @@ public class TestAdsNoAdsOnFreeWikisMercury extends TemplateNoFirstLoad {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
     AdsBaseObject wikiPage = new AdsBaseObject(testedPage);
     wikiPage.setEnvironment(AdsContent.ENV_MOBILE);
-    wikiPage.verifyNoAdsOnPage();
+    wikiPage.verifyNoAdsOnPage(true);
   }
 }

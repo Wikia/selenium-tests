@@ -14,6 +14,6 @@ public class TestAdsNoAdsOnFreeWikisOasis extends TemplateNoFirstLoad {
   public void testNoAdsOasis(String wikiName, String path) {
     String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(path);
     AdsBaseObject wikiPage = new AdsBaseObject(testedPage);
-    wikiPage.verifyNoAdsOnPage();
+    wikiPage.verifyNoAdsOnPage(false);
   }
 }
