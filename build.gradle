@@ -108,7 +108,7 @@ dependencies {
     testCompile 'net.lightbody.bmp:mitm:2.1.5'
     testCompile 'commons-io:commons-io:2.4'
     testCompile 'commons-lang:commons-lang:2.4'
-    testCompile 'org.projectlombok:lombok:1.18.6'
+    compile 'org.projectlombok:lombok:1.18.6'
     annotationProcessor 'org.projectlombok:lombok:1.18.6'
 }
 
