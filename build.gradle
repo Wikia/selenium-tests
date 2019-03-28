@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath 'org.ajoberstar:gradle-git:1.0.0'
         classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
-        compile 'org.projectlombok:lombok:1.18.6'
+        classpath 'org.projectlombok:lombok:1.18.6'
         annotationProcessor 'org.projectlombok:lombok:1.18.6'
     }
 }
