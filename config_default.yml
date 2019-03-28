@@ -20,6 +20,7 @@ forceWikiaOrg: false
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
 useZapProxy: false
+fandomDomainSuffix: fandom
 language: en # run tests on wikis with specific language unless there is an annotation
 
 # Specify browser window size in format <width>x<height>, example: 800x600

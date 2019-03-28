@@ -16,7 +16,6 @@ import java.util.Set;
 
 public class UrlBuilder extends BaseUrlBuilder {
 
-  public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
   private static final Set<String>
       FANDOM_EXCLUDED_WIKIS =
       new HashSet<>(Arrays.asList(new String[]{"community", "gameofthrones", "sydneybuses"}));
@@ -34,7 +33,7 @@ public class UrlBuilder extends BaseUrlBuilder {
     if (FANDOM_EXCLUDED_WIKIS.contains(wiki) || areLanguageTestsEnabled) {
       this.wikiName = wiki;
     } else {
-      this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
+      this.wikiName = Configuration.getForceFandomDomain() ? wiki + Configuration.getFandomDomainSuffix() : wiki;
     }
     this.forceHttps = forceHttps;
     this.forceLanguageInPath = forceLanguageInPath;

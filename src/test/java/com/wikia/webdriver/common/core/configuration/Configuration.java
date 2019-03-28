@@ -164,6 +164,10 @@ public class Configuration {
     return "true".equalsIgnoreCase(getProp("forceHttps"));
   }
 
+  public static String getFandomDomainSuffix() {
+    return getProp("fandomDomainSuffix");
+  }
+
   public static Boolean isUnsafePageLoad() {
     return "true".equalsIgnoreCase(getProp("unsafePageLoad"));
   }
