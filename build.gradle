@@ -12,6 +12,7 @@ buildscript {
 
 plugins {
     id 'nebula.lint' version '9.3.4'
+    id 'io.franzbecker.gradle-lombok' version '2.1'
 }
 
 repositories {
