@@ -144,7 +144,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"yugioh", "Dark_Magician",
          "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
-         "TOP_LEADERBOARD", Arrays.asList(
+         "top_leaderboard", Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
             "\"s0c\":[\"anime\"]",
@@ -166,7 +166,7 @@ public class AdsDataProvider {
             "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
             "\"pform\":[\"pc\",\"psp\"]",
             "\"sex\":[\"m\"]"
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"gpt\"")},
         {"runescape", "Grew", "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
          "TOP_LEADERBOARD", Arrays.asList(
             "\"s0\":\"gaming\"",
@@ -189,9 +189,9 @@ public class AdsDataProvider {
             "\"sex\":[\"m\"]",
             "\"esrb\":\"teen\"",
             "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"gpt\"")},
         {"avatar", "Avatar_Wiki", "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-ent",
-         "TOP_LEADERBOARD", Arrays.asList(
+         "top_leaderboard", Arrays.asList(
             "\"s0\":\"ent\"",
             "\"s0v\":\"tv\"",
             "\"s0c\":[\"tv\"]",
@@ -212,9 +212,9 @@ public class AdsDataProvider {
             "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"]",
             "\"theme\":[\"magic\"]",
             "\"esrb\":\"ec\""
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")},
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"gpt\"")},
         {"starcraft", "StarCraft_Wiki",
-         "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-gaming", "TOP_LEADERBOARD",
+         "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-gaming", "top_leaderboard",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -236,13 +236,13 @@ public class AdsDataProvider {
                        "\"sex\":[\"m\"]",
                        "\"pub\":[\"blizzard\"]",
                        "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
-         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"TOP_LEADERBOARD\"", "\"src\":\"gpt\"")}};
+         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"gpt\"")}};
   }
 
   @DataProvider
   public static Object[][] dfpMEGAParams() {
     return new Object[][]{
-        {"fallout", "Fallout", "wka1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-gaming", "TOP_BOXAD",
+        {"fallout", "Fallout", "wka1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-gaming", "top_boxad",
          Arrays.asList(
             "\"s0\":\"gaming\"",
             "\"s0v\":\"games\"",
@@ -267,7 +267,7 @@ public class AdsDataProvider {
             "\"esrb\":\"mature\"",
             "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
-        {"civilization", "Category:Browse", "wka1b.MR/top_boxad/desktop/oasis-article/_top1k_wiki-gaming", "TOP_BOXAD",
+        {"civilization", "Category:Browse", "wka1b.MR/top_boxad/desktop/oasis-article/_top1k_wiki-gaming", "top_boxad",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
                        "\"s0c\":[\"gaming\"]",
@@ -287,7 +287,7 @@ public class AdsDataProvider {
                        "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                        "\"esrb\":\"everyone\""
          ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
-        {"overlordmaruyama", "Blood_of_Jormungandr", "wka1b.MR/top_boxad/desktop/oasis-article/_not_a_top1k_wiki-ent", "TOP_BOXAD",
+        {"overlordmaruyama", "Blood_of_Jormungandr", "wka1b.MR/top_boxad/desktop/oasis-article/_not_a_top1k_wiki-ent", "top_boxad",
          Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"books\"",
                                           "\"s0c\":[\"ent\",\"comics\"]",

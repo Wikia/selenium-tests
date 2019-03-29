@@ -393,8 +393,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      WebElement adsDiv = driver.findElement(By.cssSelector(
-          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
+      String x =
+          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]";
+      WebElement adsDiv = driver.findElement(By.cssSelector(x));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),
@@ -666,6 +667,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private void triggerFMR() {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
+    jsActions.scrollBy(0, 500);
+    wait.forX(Duration.ofSeconds(1));
 
     try {
       doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)),
