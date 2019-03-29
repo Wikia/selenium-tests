@@ -667,6 +667,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private void triggerFMR() {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
+    wait.forX(Duration.ofSeconds(2));
     jsActions.scrollBy(0, 500);
     wait.forX(Duration.ofSeconds(1));
 
