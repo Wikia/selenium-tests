@@ -116,7 +116,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsGoogleAnalyticsDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
