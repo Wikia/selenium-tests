@@ -29,7 +29,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
       INTERSTITSIAL_AD_SELECTOR
       = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe, #invisible_high_impact_2 iframe";
 
-  @FindBy(css = ".close-button")
+  @FindBy(css = ".button-close")
   private WebElement interstitialCloseButton;
 
   @FindBy(css = "#invisible_high_impact_2 .button-close")

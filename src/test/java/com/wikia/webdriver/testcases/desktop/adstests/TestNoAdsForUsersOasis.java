@@ -28,7 +28,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnArticlePageOasis() {
     AdsBaseObject ads = buildAdsObject(LONG_ARTICLE_PAGE_PATH);
-    ads.verifyNoAdsOnPage();
+    ads.verifyNoAdsOnPage(false);
   }
 
   @Test(groups = "NoAdsForUsersOasis")
@@ -36,7 +36,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   public void noAdsForUsersOnCategoryPageOasis() {
     AdsBaseObject ads = buildAdsObject(CATEGORY_PAGE_PATH);
     ads.setPageType(AdsBaseObject.PAGE_TYPE_CATEGORY);
-    ads.verifyNoAdsOnPage();
+    ads.verifyNoAdsOnPage(false);
   }
 
   @Test(groups = "NoAdsForUsersOasis")
@@ -44,7 +44,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   public void noAdsForUsersOnSpecialPageOasis() {
     AdsBaseObject ads = buildAdsObject(SPECIAL_PAGE_PATH);
     ads.setPageType(AdsBaseObject.PAGE_TYPE_SPECIAL);
-    ads.verifyNoAdsOnPage();
+    ads.verifyNoAdsOnPage(false);
   }
 
   @Test(groups = "NoAdsForUsersOasis")
@@ -52,13 +52,13 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   public void noAdsForUsersOnFilePageOasis() {
     AdsBaseObject ads = buildAdsObject(FILE_PAGE_PATH);
     ads.setPageType(AdsBaseObject.PAGE_TYPE_FILE);
-    ads.verifyNoAdsOnPage();
+    ads.verifyNoAdsOnPage(false);
   }
 
   @Test(groups = "NoAdsForUsersOasis")
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnCustomPageOasis() {
     AdsBaseObject ads = buildAdsObject(CUSTOM_NAMESPACE_PAGE_PATH);
-    ads.verifyNoAdsOnPage();
+    ads.verifyNoAdsOnPage(false);
   }
 }
