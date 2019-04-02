@@ -55,15 +55,15 @@ public class AdsBaseObject extends WikiBasePageObject {
                                                          + "']";
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation,.site-head-container";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
-  String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+  String presentLeaderboardSelector = "div[id*='top_leaderboard']";
   private String pageType = PAGE_TYPE_ARTICLE;
   private String environment = AdsContent.ENV_DESKTOP;
   @FindBy(css = MIX_CONTENT_FOOTER_ROW_SELECTOR)
   private WebElement mixContentFooterItem;
   private long tStart;
-  @FindBy(css = "div[id*='TOP_LEADERBOARD']")
+  @FindBy(css = "div[id*='top_leaderboard']")
   private WebElement presentLeaderboard;
-  @FindBy(css = "div[id*='TOP_BOXAD']")
+  @FindBy(css = "div[id*='top_boxad']")
   private WebElement presentMedrec;
   @FindBy(css = FLOATING_MEDREC_SELECTOR)
   private WebElement presentFloatingMedrec;
@@ -132,30 +132,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     return String.valueOf(elapsedSeconds);
   }
 
-  public void verifyForcedSuccessScriptInSlots(List<String> slots) {
-    for (String slotPos : slots) {
-      String slot = slotPos.split(",")[0];
-      WebElement slotElement = driver.findElement(By.id(slot));
-      WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
-      driver.switchTo().frame(slotGptIframe);
-      WebElement iframeHtml = driver.findElement(By.tagName("html"));
-      String
-          adDriverForcedSuccessFormatted
-          = String.format(AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slotPos);
-      if (checkScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
-        Log.log("AdDriver2ForceStatus script",
-                "adDriverForcedSuccess script found in slot " + slot,
-                true
-        );
-      } else {
-        throw new NoSuchElementException("AdDriver2ForcedStatus script not found in slot " + slot);
-      }
-      driver.switchTo().defaultContent();
-    }
-  }
-
   public void verifyMedrec() {
-    verifyAdVisibleInSlot("div[id*='TOP_BOXAD']", presentMedrec);
+    verifyAdVisibleInSlot("div[id*='top_boxad']", presentMedrec);
   }
 
   public void verifyTopLeaderboard() {
@@ -167,8 +145,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void verifyNoAdsOnPage() {
-    verifyNoAds();
+  public void verifyNoAdsOnPage(Boolean isMobile) {
+    verifyNoAds(isMobile);
     Log.log("verifyNoAdsOnPage", "No ads detected", true, driver);
   }
 
@@ -202,10 +180,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public boolean slotHasSize(String slotName, int width, int height) {
-    return getSlotAttribute(slotName, "data-sizes").contains(String.format("%d,%d",
-                                                                                    width,
-                                                                                    height
-    ));
+    return getSlotAttribute(slotName, "data-sizes").contains(String.format("%d,%d", width, height));
   }
 
   public boolean slotParamHasValue(String slotName, String paramName, String value) {
@@ -315,11 +290,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
-  public void verifyProvidersChain(String slotName, String providers) {
-    Log.log("SlotName", slotName, true);
-    waitForProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
-  }
-
   /**
    * Test whether the correct GPT ad unit is called
    *
@@ -423,8 +393,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      WebElement adsDiv = driver.findElement(By.cssSelector(
-          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]"));
+      String x =
+          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]";
+      WebElement adsDiv = driver.findElement(By.cssSelector(x));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),
@@ -610,9 +581,9 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("#" + slotName + " iframe"));
   }
 
-  public void verifyNoAd(final String slotName, final String slotSelector) {
+  public void verifyNoAd(final String slotName, final String slotSelector, boolean isMobile) {
     Log.log("verifyNoAd", "Triggering " + slotName, true, driver);
-    triggerAdSlot(slotName);
+    triggerAdSlotWithMobileState(slotName, isMobile);
     verifyNoAdWithoutTrigger(slotSelector);
   }
 
@@ -669,8 +640,36 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
+  public AdsBaseObject triggerAdSlotWithMobileState(String slotName, Boolean isMobile) {
+    if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB) && isMobile) {
+      triggerBLB();
+      return this;
+    }
+
+    if (slotName.equals(AdsContent.BOTTOM_LB)) {
+      triggerBLB();
+      return this;
+    }
+
+    if (slotName.equals(AdsContent.FLOATING_MEDREC ) && !isMobile) {
+      triggerFMR();
+      return this;
+    }
+
+    String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+
+    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+      jsActions.execute(javaScriptTrigger);
+    }
+
+    return this;
+  }
+
   private void triggerFMR() {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
+    wait.forX(Duration.ofSeconds(2));
+    jsActions.scrollBy(0, 500);
+    wait.forX(Duration.ofSeconds(1));
 
     try {
       doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)),
@@ -802,10 +801,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Verify if there are no ads on the page for ad slots in given pageType
    */
-  private void verifyNoAds() {
+  private void verifyNoAds(Boolean isMobile) {
     Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      verifyNoAd(entry.getKey(), entry.getValue());
+      verifyNoAd(entry.getKey(), entry.getValue(), isMobile);
     }
   }
 

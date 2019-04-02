@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdSlot;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
@@ -115,7 +116,6 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
 
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
-  @UnsafePageLoad
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsGoogleAnalyticsDataProvider", groups = "AdsOptInRejectedOasis")
   public void adsTrackingRejectedForGoogleAnalytics(List<String> urlPatterns) {
     networkTrafficInterceptor.startIntercepting();
@@ -133,6 +133,8 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, AdsDataProvider.UAP_HIVI_PAGE);
     modal.scrollTo(driver.findElement(By.className("wds-global-footer__header")));
+    modal.scrollTo(driver.findElement(By.className("page-header__main")));
+    modal.scrollTo(driver.findElement(By.className("wds-global-footer")));
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }

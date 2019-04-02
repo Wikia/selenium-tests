@@ -10,48 +10,46 @@ public class AdsContent {
   public static final Map<String, String> IFRAME_SLOT_SELECTORS;
   public static final String ENV_DESKTOP = "desktop";
   public static final String ENV_MOBILE = "mobile";
-  public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
-      "top.window.adDriver2ForcedStatus['%s'.split(',')[0]]='success';";
   //SLOTS NAMES
-  public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
+  public static final String BOTTOM_LB = "bottom_leaderboard";
   public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
-  public static final String TOP_LB = "TOP_LEADERBOARD";
-  public static final String HIVI_TOP_LB = "top_leaderboard"; // revert to hivi_leaderboard after ae3 rollout to XX
-  public static final String TOP_BOXAD = "TOP_BOXAD";
-  public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
+  public static final String TOP_LB = "top_leaderboard";
+  public static final String HIVI_TOP_LB = "hivi_leaderboard";
+  public static final String TOP_BOXAD = "top_boxad";
+  public static final String FLOATING_MEDREC = "incontent_boxad_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
   public static final String MOBILE_TOP_LB = "top_leaderboard";
   public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
   public static final String MOBILE_AD_IN_CONTENT_PLAYER = "incontent_player";
   public static final String MOBILE_PREFOOTER = "mobile_prefooter";
-  public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
-  public static final String INVISIBLE_SKIN = "INVISIBLE_SKIN";
-  public static final String INVISIBLE_HIGH_IMPACT_2 = "INVISIBLE_HIGH_IMPACT_2";
+  public static final String INCONTENT_PLAYER = "incontent_player";
+  public static final String INVISIBLE_SKIN = "invisible_skin";
+  public static final String INVISIBLE_HIGH_IMPACT_2 = "invisible_high_impact_2";
   //HashMap with slots selector
   private static final Map<String, String> SLOTS_SELECTORS;
   private static final Map<String, String> SPECIAL_PAGE_SLOTS_SELECTORS;
   private static final Map<String, String> FILE_PAGE_SLOTS_SELECTORS;
   private static final Map<String, String> MOBILE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
-
+  // Some changes are temporary due to ae2-ae3 switch
   static {
     SPECIAL_PAGE_SLOTS_SELECTORS = new HashMap<>();
-    SPECIAL_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+    SPECIAL_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#top_leaderboard");
 
     FILE_PAGE_SLOTS_SELECTORS = new HashMap<>();
-    FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    FILE_PAGE_SLOTS_SELECTORS.put(TOP_BOXAD, "#TOP_BOXAD");
-    FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
+    FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#top_leaderboard");
+    FILE_PAGE_SLOTS_SELECTORS.put(TOP_BOXAD, "#top_boxad");
+    FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#bottom_leaderboard");
 
     SLOTS_SELECTORS = new HashMap<>();
-    SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
-    SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(TOP_BOXAD, "#TOP_BOXAD");
-    SLOTS_SELECTORS.put(FLOATING_MEDREC, "#INCONTENT_BOXAD_1");
+    SLOTS_SELECTORS.put(BOTTOM_LB, "#bottom_leaderboard");
+    SLOTS_SELECTORS.put(TOP_LB, "#top_leaderboard");
+    SLOTS_SELECTORS.put(TOP_BOXAD, "#top_boxad");
+    SLOTS_SELECTORS.put(FLOATING_MEDREC, "#incontent_boxad_1");
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
-    SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
-    SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
-    SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#INVISIBLE_SKIN");
+    SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#incontent_player");
+    SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#invisible_high_impact_2");
+    SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#invisible_skin");
 
     IFRAME_SLOT_SELECTORS = new HashMap<>();
     IFRAME_SLOT_SELECTORS.put(BOTTOM_LB,
@@ -64,6 +62,9 @@ public class AdsContent {
     MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT_PLAYER, "#incontent_player");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#mobile_prefooter");
     MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#bottom_leaderboard");
+    MOBILE_SLOTS_SELECTORS.put(TOP_BOXAD, "#top_boxad");
+    MOBILE_SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#invisible_high_impact_2");
+    MOBILE_SLOTS_SELECTORS.put(INVISIBLE_SKIN, "#invisible_skin");
 
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(
