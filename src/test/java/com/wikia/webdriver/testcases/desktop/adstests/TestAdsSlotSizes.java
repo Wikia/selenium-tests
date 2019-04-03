@@ -20,18 +20,18 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsSlotSizeOasis", groups = "AdsSlotSizesOasis")
   public void adsSlotSizesOasis(Page page, String urlParamToEnable, Map<String, Object> slotInfo) {
-    adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo);
+    adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo, false);
   }
 
   @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsSlotSizeMercury", groups = "AdsSlotSizesMercury")
   public void adsSlotSizesMercury(
       Page page, String urlParamToEnable, Map<String, Object> slotInfo
   ) {
-    adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo);
+    adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo, true);
   }
 
   private void adsSlotSizes(
-      Page page, String urlParamToEnable, Dimension pageSize, Map<String, Object> slotInfo
+      Page page, String urlParamToEnable, Dimension pageSize, Map<String, Object> slotInfo, Boolean isMobile
   ) {
     String slotName = slotInfo.get("slotName").toString();
     Dimension slotSize = (Dimension) slotInfo.get("slotSize");
@@ -45,7 +45,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
     AdsBaseObject ads = new AdsBaseObject(driver, url, pageSize);
 
-    ads.triggerAdSlot(slotName).wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(
+    ads.triggerAdSlotWithMobileState(slotName, isMobile).wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(
         slotName)));
 
     ads.verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()));

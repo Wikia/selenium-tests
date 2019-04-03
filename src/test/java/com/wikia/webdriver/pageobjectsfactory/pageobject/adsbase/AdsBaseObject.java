@@ -496,6 +496,38 @@ public class AdsBaseObject extends WikiBasePageObject {
       restoreDefaultImplicitWait();
     }
   }
+  /**
+   * Check if AdEngine loaded the ad web elements inside slot with mobile state
+   */
+  public boolean checkSlotOnPageLoaded(String slotName, Boolean isMobile) {
+    WebElement slot;
+
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+
+    try {
+      String slotSelector = AdsContent.getSlotSelector(slotName);
+      triggerAdSlotWithMobileState(slotName, isMobile);
+
+      try {
+        slot = driver.findElement(By.cssSelector(slotSelector));
+      } catch (NoSuchElementException elementNotFound) {
+        Log.logError(String.format("Slot %s not found on the page", slotName), elementNotFound);
+
+        return false;
+      }
+
+      List<WebElement> adWebElements = slot.findElements(By.cssSelector("iframe"));
+
+      Log.log("Slot found",
+              String.format("%s found on the page with selector: %s", slotName, slotSelector),
+              true
+      );
+
+      return adWebElements.size() >= 1;
+    } finally {
+      restoreDefaultImplicitWait();
+    }
+  }
 
   private Optional<WebElement> getLastGptDiv(String slotSelector) {
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
