@@ -30,9 +30,9 @@ public class TestUap extends TemplateNoFirstLoad {
       Page page, List<Map<String, Object>> atfSlots, List<Map<String, Object>> btfSlots
   ) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(RESOLVED_STATE), WindowSize.DESKTOP);
-    verifySlotsUnblocked(ads, atfSlots);
+    verifySlotsUnblocked(ads, atfSlots, false);
     verifySlotsBlocked(ads, btfSlots);
-    verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
+    verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots), false);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5_DEFAULT // FIXME: use default emulator if mobile flag will be reverted
@@ -45,7 +45,7 @@ public class TestUap extends TemplateNoFirstLoad {
       List<Map<String, Object>> mobileBottomLeaderboard
   ) {
     AdsBaseObject ads = new AdsBaseObject(page.getUrl());
-    verifySlotsUnblocked(ads, mobileTopLeaderboard);
+    verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
     verifySlotsBlocked(ads, mobileInContent);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
@@ -54,18 +54,18 @@ public class TestUap extends TemplateNoFirstLoad {
     Assertion.assertTrue(ads.isMobileInContentAdDisplayed(),
                          "Mobile in content ad is not displayed"
     );
-    verifySlotsUnblocked(ads, mobileTopLeaderboard);
-    verifySlotsUnblocked(ads, mobileInContent);
-    verifySlotsUnblocked(ads, mobileBottomLeaderboard);
+    verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
+    verifySlotsUnblocked(ads, mobileInContent, true);
+    verifySlotsUnblocked(ads, mobileBottomLeaderboard, true);
 
     ads.scrollToRecirculationPrefooter();
     ads.scrollToPosition(By.id(AdsContent.MOBILE_BOTTOM_LB));
     Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(),
                          "Mobile bottom leaderboard ad is not dispalyed"
     );
-    verifySlotsUnblocked(ads, mobileTopLeaderboard);
-    verifySlotsUnblocked(ads, mobileInContent);
-    verifySlotsUnblocked(ads, mobileBottomLeaderboard);
+    verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
+    verifySlotsUnblocked(ads, mobileInContent, true);
+    verifySlotsUnblocked(ads, mobileBottomLeaderboard, true);
   }
 
   private void verifySlotsBlocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
@@ -75,12 +75,12 @@ public class TestUap extends TemplateNoFirstLoad {
     }
   }
 
-  private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
+  private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData, Boolean isMobile) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
-      ads.checkSlotOnPageLoaded(slotName);
+      ads.checkSlotOnPageLoaded(slotName, isMobile);
       ads.verifyLineItemId(slotName, slotData.get("lineItemId").toString());
       ads.verifyIframeSize(slotName, slotSize.getWidth(), slotSize.getHeight());
     }
