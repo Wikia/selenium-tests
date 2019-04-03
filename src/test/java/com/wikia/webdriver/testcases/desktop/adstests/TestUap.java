@@ -24,6 +24,7 @@ public class TestUap extends TemplateNoFirstLoad {
   private static final String MOBILE_IN_CONTENT = "#incontent_boxad_1";
   private static final String RESOLVED_STATE = "resolved_state=0";
   private static final String ARTICLE_MIDDLE = "#ArticleMidSection, #Header";
+  private static final String ARTICLE_FOOTER = ".article-footer";
 
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsUapOasis", groups = "AdsUapOasis")
   public void adsUapOasis(
@@ -56,6 +57,7 @@ public class TestUap extends TemplateNoFirstLoad {
     );
     verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
     verifySlotsUnblocked(ads, mobileInContent, true);
+    ads.scrollTo(ARTICLE_FOOTER);
     verifySlotsUnblocked(ads, mobileBottomLeaderboard, true);
 
     ads.scrollToRecirculationPrefooter();
@@ -65,7 +67,7 @@ public class TestUap extends TemplateNoFirstLoad {
     );
     verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
     verifySlotsUnblocked(ads, mobileInContent, true);
-    verifySlotsUnblocked(ads, mobileBottomLeaderboard, true);
+    verifySlotsUnblocked(ads, mobileBottomLeaderboard, false);
   }
 
   private void verifySlotsBlocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
