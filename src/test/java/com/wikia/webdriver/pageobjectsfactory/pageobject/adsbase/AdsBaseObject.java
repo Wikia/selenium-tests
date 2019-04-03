@@ -75,6 +75,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement mobilePrefooter;
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
+  private static final String ARTICLE_FOOTER = ".article-footer";
   private static final String
       VAL_MORGAN_TLB_MEGA_AD_UNIT
       = "vm1b.LB/top_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
@@ -246,8 +247,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
       triggerAdSlot(AdsContent.BOTTOM_LB);
     } else {
-      triggerAdSlot(AdsContent.MOBILE_AD_IN_CONTENT);
-      triggerAdSlot(AdsContent.MOBILE_BOTTOM_LB);
+      triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
+      scrollTo(ARTICLE_FOOTER);
+      triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
     }
     verifyMEGAAdUnit(AdsContent.BOTTOM_LB, MEGA_BLB);
   }
@@ -475,6 +477,38 @@ public class AdsBaseObject extends WikiBasePageObject {
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
       triggerAdSlot(slotName);
+
+      try {
+        slot = driver.findElement(By.cssSelector(slotSelector));
+      } catch (NoSuchElementException elementNotFound) {
+        Log.logError(String.format("Slot %s not found on the page", slotName), elementNotFound);
+
+        return false;
+      }
+
+      List<WebElement> adWebElements = slot.findElements(By.cssSelector("iframe"));
+
+      Log.log("Slot found",
+              String.format("%s found on the page with selector: %s", slotName, slotSelector),
+              true
+      );
+
+      return adWebElements.size() >= 1;
+    } finally {
+      restoreDefaultImplicitWait();
+    }
+  }
+  /**
+   * Check if AdEngine loaded the ad web elements inside slot with mobile state
+   */
+  public boolean checkSlotOnPageLoaded(String slotName, Boolean isMobile) {
+    WebElement slot;
+
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+
+    try {
+      String slotSelector = AdsContent.getSlotSelector(slotName);
+      triggerAdSlotWithMobileState(slotName, isMobile);
 
       try {
         slot = driver.findElement(By.cssSelector(slotSelector));
