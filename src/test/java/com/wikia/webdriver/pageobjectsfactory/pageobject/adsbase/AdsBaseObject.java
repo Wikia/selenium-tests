@@ -75,6 +75,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement mobilePrefooter;
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
+  private static final String ARTICLE_FOOTER = ".article-footer";
   private static final String
       VAL_MORGAN_TLB_MEGA_AD_UNIT
       = "vm1b.LB/top_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
@@ -246,8 +247,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
       triggerAdSlot(AdsContent.BOTTOM_LB);
     } else {
-      triggerAdSlot(AdsContent.MOBILE_AD_IN_CONTENT);
-      triggerAdSlot(AdsContent.MOBILE_BOTTOM_LB);
+      triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
+      scrollTo(ARTICLE_FOOTER);
+      triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
     }
     verifyMEGAAdUnit(AdsContent.BOTTOM_LB, MEGA_BLB);
   }
