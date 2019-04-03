@@ -14,7 +14,7 @@ public class AdsContent {
   public static final String BOTTOM_LB = "bottom_leaderboard";
   public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
   public static final String TOP_LB = "top_leaderboard";
-  public static final String HIVI_TOP_LB = "hivi_leaderboard";
+  public static final String HIVI_TOP_LB = "top_leaderboard";
   public static final String TOP_BOXAD = "top_boxad";
   public static final String FLOATING_MEDREC = "incontent_boxad_1";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";

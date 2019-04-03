@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -14,6 +15,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+
+@Execute(onWikia = "project43")
 public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   private static final String LINE_ITEM_ID = "282067812";
