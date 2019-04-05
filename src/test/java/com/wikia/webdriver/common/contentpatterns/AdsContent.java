@@ -17,6 +17,7 @@ public class AdsContent {
   public static final String HIVI_TOP_LB = "top_leaderboard";
   public static final String TOP_BOXAD = "top_boxad";
   public static final String FLOATING_MEDREC = "incontent_boxad_1";
+  public static final String FLOATING_MEDREC_2 = "incontent_boxad_2";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
   public static final String MOBILE_TOP_LB = "top_leaderboard";
   public static final String MOBILE_AD_IN_CONTENT = "incontent_boxad_1";
@@ -46,6 +47,7 @@ public class AdsContent {
     SLOTS_SELECTORS.put(TOP_LB, "#top_leaderboard");
     SLOTS_SELECTORS.put(TOP_BOXAD, "#top_boxad");
     SLOTS_SELECTORS.put(FLOATING_MEDREC, "#incontent_boxad_1");
+    SLOTS_SELECTORS.put(FLOATING_MEDREC_2, "#incontent_boxad_2");
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#incontent_player");
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#invisible_high_impact_2");
