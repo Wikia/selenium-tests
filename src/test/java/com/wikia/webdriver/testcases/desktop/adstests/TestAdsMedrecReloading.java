@@ -19,7 +19,8 @@ import java.time.Duration;
 public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
 
   private static final By RECIRCULATION_SELECTOR = By.id("recirculation-rail");
-  private static final By FMR_SELECTOR = By.id(AdsContent.FLOATING_MEDREC);
+  private static final By FMR_SELECTOR_1 = By.id(AdsContent.FLOATING_MEDREC);
+  private static final By FMR_SELECTOR_2 = By.id(AdsContent.FLOATING_MEDREC_2);
 
   @Test(groups = {"AdsRefreshFMR"})
   @UnsafePageLoad
@@ -29,12 +30,10 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
 
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
     ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR_1);
     checkIfNextModuleWillBe(ads, RECIRCULATION_SELECTOR);
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR_2);
     checkIfNextModuleWillBe(ads, RECIRCULATION_SELECTOR);
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
   }
 
   @Test(groups = {"AdsRefreshFMRWithUAP"})
@@ -44,9 +43,9 @@ public class TestAdsMedrecReloading extends TemplateNoFirstLoad {
     ads.wait.forElementPresent(RECIRCULATION_SELECTOR);
     ads.scrollToPosition(RECIRCULATION_SELECTOR);
 
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
-    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR_1);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR_1);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR_1);
   }
 
   private void checkIfNextModuleWillBe(AdsBaseObject ads, By moduleSelector) {
