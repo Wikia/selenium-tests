@@ -972,7 +972,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private void waitForAdInSlot(String creativeId, String slotName) {
     wait.forElementPresent(By.cssSelector(
-        "#" + slotName + " div[data-gpt-creative-id='" + creativeId + "']"));
+        "#" + slotName + "[data-gpt-creative-id='" + creativeId + "']"));
   }
 
   public void verifyAdChainForSlot(String[] creativeIdChain, String slotName, AdsBaseObject page) {
