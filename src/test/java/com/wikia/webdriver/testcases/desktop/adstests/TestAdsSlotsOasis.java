@@ -14,6 +14,6 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
         .getUrlForPath("SyntheticTests/OasisSlots");
     AdsBaseObject ads = new AdsBaseObject(testedPage);
     ads.waitForPageLoadedWithGpt();
-    ads.verifyAds();
+    ads.verifyAds(false);
   }
 }
