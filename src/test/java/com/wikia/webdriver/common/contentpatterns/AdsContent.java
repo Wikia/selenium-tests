@@ -122,6 +122,14 @@ public class AdsContent {
     return SLOTS_SELECTORS.get(slotName);
   }
 
+  public static String getSlotSelector(String slotName,  Boolean isMobile) {
+    if (isMobile) {
+      return MOBILE_SLOTS_SELECTORS.get(slotName);
+    }
+
+    return SLOTS_SELECTORS.get(slotName);
+  }
+
   public static String getSlotTrigger(String slotName) {
     return SLOTS_TRIGGERS.get(slotName);
   }
