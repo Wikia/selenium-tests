@@ -266,7 +266,7 @@ public class AdsDataProvider {
             "\"pub\":[\"bethesda\"]",
             "\"esrb\":\"mature\"",
             "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_boxad\"", "\"src\":\"gpt\"")},
         {"civilization", "Category:Browse", "wka1b.MR/top_boxad/desktop/oasis-article/_top1k_wiki-gaming", "top_boxad",
          Arrays.asList("\"s0\":\"gaming\"",
                        "\"s0v\":\"games\"",
@@ -286,7 +286,7 @@ public class AdsDataProvider {
                        "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
                        "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                        "\"esrb\":\"everyone\""
-         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")},
+         ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_boxad\"", "\"src\":\"gpt\"")},
         {"overlordmaruyama", "Blood_of_Jormungandr", "wka1b.MR/top_boxad/desktop/oasis-article-ic/_not_a_top1k_wiki-ent", "top_boxad",
          Arrays.asList("\"s0\":\"ent\"",
                                           "\"s0v\":\"books\"",
@@ -302,7 +302,7 @@ public class AdsDataProvider {
                                           "\"ref\":\"direct\"",
                                           "\"pv\":\"2\"",
                                           "\"esrb\":\"teen\""
-        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":[\"TOP_BOXAD\",\"TOP_RIGHT_BOXAD\"]", "\"src\":\"gpt\"")}};
+        ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_boxad\"", "\"src\":\"gpt\"")}};
   }
 
   @DataProvider

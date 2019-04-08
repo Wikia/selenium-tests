@@ -507,7 +507,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
 
     try {
-      String slotSelector = AdsContent.getSlotSelector(slotName);
+      String slotSelector = AdsContent.getSlotSelector(slotName, isMobile);
       triggerAdSlotWithMobileState(slotName, isMobile);
 
       try {
@@ -661,7 +661,12 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-      triggerFMR();
+      triggerFMR(AdsContent.FLOATING_MEDREC);
+      return this;
+    }
+
+    if (slotName.equals(AdsContent.FLOATING_MEDREC_2)) {
+      triggerFMR(AdsContent.FLOATING_MEDREC_2);
       return this;
     }
 
@@ -686,7 +691,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     if (slotName.equals(AdsContent.FLOATING_MEDREC ) && !isMobile) {
-      triggerFMR();
+      triggerFMR(AdsContent.FLOATING_MEDREC);
       return this;
     }
 
@@ -699,14 +704,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  private void triggerFMR() {
+  private void triggerFMR(String slotName) {
     scrollToPosition(By.cssSelector("#wikia-recent-activity"));
     wait.forX(Duration.ofSeconds(2));
     jsActions.scrollBy(0, 500);
     wait.forX(Duration.ofSeconds(1));
 
     try {
-      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)),
+      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)),
                             () -> {
                               jsActions.scrollBy(0, 100);
                               wait.forX(Duration.ofSeconds(1));
@@ -845,10 +850,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Verify if slots for set pageType are on the page
    */
-  public void verifyAds() {
+  public void verifyAds(Boolean isMobile) {
     Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      checkSlotOnPageLoaded(entry.getKey());
+      checkSlotOnPageLoaded(entry.getKey(), isMobile);
     }
   }
 
