@@ -275,6 +275,12 @@ public class AdsBaseObject extends WikiBasePageObject {
     Log.log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
     return this;
   }
+  public AdsBaseObject verifyLineItemId(List<String> slots, String lineItemId) {
+    String lineItemParam = getSlotAttribute(slots, GPT_DATA_ATTRIBUTES[0]);
+    Assertion.assertStringContains(lineItemParam, lineItemId);
+    Log.log("verifyLineItemId", slots + " has following line item: " + lineItemParam, true);
+    return this;
+  }
 
   /**
    * Overloading for backwards compatibility
@@ -395,9 +401,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private String getSlotAttribute(String slotName, String attr) {
     try {
-      String x =
-          "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "[" + attr + "]";
-      WebElement adsDiv = driver.findElement(By.cssSelector(x));
+      String slotWithAttribute = "#" + slotName + " [" + attr + "]" + "," + "#" + slotName + "["
+                                 + attr + "]";
+      WebElement adsDiv = driver.findElement(By.cssSelector(slotWithAttribute));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
       Log.logError(String.format("Slot %s with attribute [%s] not found", slotName, attr),
@@ -405,6 +411,16 @@ public class AdsBaseObject extends WikiBasePageObject {
       );
       return null;
     }
+  }
+
+  private String getSlotAttribute(List<String> slots, String attr) {
+    for (String slotName : slots) {
+      String slotWithAttribute = getSlotAttribute(slotName, attr);
+      if (slotWithAttribute != null) {
+        return slotWithAttribute;
+      }
+    }
+    return null;
   }
 
   public String getGptPageParams(String slotName) {
@@ -498,6 +514,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       restoreDefaultImplicitWait();
     }
   }
+
   /**
    * Check if AdEngine loaded the ad web elements inside slot with mobile state
    */
@@ -690,7 +707,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       return this;
     }
 
-    if (slotName.equals(AdsContent.FLOATING_MEDREC ) && !isMobile) {
+    if (slotName.equals(AdsContent.FLOATING_MEDREC) && !isMobile) {
       triggerFMR(AdsContent.FLOATING_MEDREC);
       return this;
     }
@@ -711,12 +728,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     wait.forX(Duration.ofSeconds(1));
 
     try {
-      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)),
-                            () -> {
-                              jsActions.scrollBy(0, 100);
-                              wait.forX(Duration.ofSeconds(1));
-                            }
-      );
+      doUntilElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)), () -> {
+        jsActions.scrollBy(0, 100);
+        wait.forX(Duration.ofSeconds(1));
+      });
     } catch (NoSuchElementException ex) {
       Log.log(AdsContent.FLOATING_MEDREC + " is not displayed", ex, true);
     }
