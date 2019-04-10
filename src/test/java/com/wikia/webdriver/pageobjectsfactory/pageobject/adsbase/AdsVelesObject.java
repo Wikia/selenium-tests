@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.Log;
@@ -76,7 +77,7 @@ public class AdsVelesObject extends AdsBaseObject {
   }
 
   public void triggerPorvataAlien() {
-    final WebElement wrapper = driver.findElement(By.cssSelector(presentLeaderboardSelector));
+    final WebElement wrapper = driver.findElement(By.cssSelector(AdsContent.TOP_LB));
 
     jsActions.scrollToElement(wrapper);
   }

@@ -46,8 +46,8 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   }
 
   private void verifyAbcdAdIsDisplayed(AdsBaseObject ads) {
-    ads.verifyLineItemId(AdsContent.TOP_LB, ABCD_LINE_ITEM_ID);
-    ads.verifySlotAttribute(AdsContent.TOP_LB, "data-slot-result", "success");
+    ads.verifyLineItemId(AdsContent.HIVI_TOP_LB, ABCD_LINE_ITEM_ID);
+    ads.verifySlotAttribute(AdsContent.HIVI_TOP_LB, "data-slot-result", "success");
   }
 
   private void verifyAbcdHIVIAdIsNotDisplayed(AdsBaseObject ads) {
