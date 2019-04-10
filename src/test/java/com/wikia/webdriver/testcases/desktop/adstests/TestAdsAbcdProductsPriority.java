@@ -32,8 +32,8 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
     AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV.getUrl());
     verifyAbcdHIVIAdIsNotDisplayed(ads);
 
-    Assert.assertTrue(ads.slotHasSize(AdsContent.HIVI_TOP_LB, 728, 90));
-    verifyNoUAPSizesInSlot(ads, AdsContent.HIVI_TOP_LB);
+    Assert.assertTrue(ads.slotHasSize(AdsContent.TOP_LB, 728, 90));
+    verifyNoUAPSizesInSlot(ads, AdsContent.TOP_LB);
   }
 
   private void verifyNoUAPSizesInSlot(AdsBaseObject ads, String slot) {
@@ -51,7 +51,7 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   }
 
   private void verifyAbcdHIVIAdIsNotDisplayed(AdsBaseObject ads) {
-    Assertion.assertNotEquals(String.valueOf(ads.getLineItemId(AdsContent.HIVI_TOP_LB)),
+    Assertion.assertNotEquals(String.valueOf(ads.getLineItemId(AdsContent.TOP_LB)),
                               ABCD_LINE_ITEM_ID,
                               String.format("ABCD %s line item id is displayed", ABCD_LINE_ITEM_ID)
     );
