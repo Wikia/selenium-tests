@@ -55,7 +55,7 @@ public class AdsBaseObject extends WikiBasePageObject {
                                                          + "']";
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation,.site-head-container";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
-  private static final String presentLeaderboardSelector = "div[id*='hivi_leaderboard']";
+  private static final String PRESENT_LEADERBOARD_SELECTOR = "div[id*='hivi_leaderboard']";
   private String pageType = PAGE_TYPE_ARTICLE;
   private String environment = AdsContent.ENV_DESKTOP;
   @FindBy(css = MIX_CONTENT_FOOTER_ROW_SELECTOR)
@@ -143,7 +143,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       Log.warning("Special ad", "Ad in #jpsuperheader detected");
       return;
     }
-    verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
+    verifyAdVisibleInSlot(PRESENT_LEADERBOARD_SELECTOR, presentLeaderboard);
   }
 
   public void verifyNoAdsOnPage(Boolean isMobile) {
