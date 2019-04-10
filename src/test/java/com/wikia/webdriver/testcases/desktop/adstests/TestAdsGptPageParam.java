@@ -22,7 +22,7 @@ public class TestAdsGptPageParam extends TemplateNoFirstLoad {
   ) {
     AdsBaseObject wikiPage = new AdsBaseObject(UrlBuilder.createUrlBuilderForWiki(wikiName)
                                                    .getUrlForPath(article));
-    String gptPageParams = wikiPage.getGptPageParams(AdsContent.TOP_LB);
+    String gptPageParams = wikiPage.getGptPageParams(AdsContent.HIVI_TOP_LB);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);
     } else {
