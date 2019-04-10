@@ -14,7 +14,7 @@ public class AdsContent {
   public static final String BOTTOM_LB = "bottom_leaderboard";
   public static final String MOBILE_BOTTOM_LB = "bottom_leaderboard";
   public static final String TOP_LB = "top_leaderboard";
-  public static final String HIVI_TOP_LB = "top_leaderboard";
+  public static final String HIVI_TOP_LB = "hivi_leaderboard";
   public static final String TOP_BOXAD = "top_boxad";
   public static final String FLOATING_MEDREC = "incontent_boxad_1";
   public static final String FLOATING_MEDREC_2 = "incontent_boxad_2";
@@ -45,6 +45,7 @@ public class AdsContent {
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(BOTTOM_LB, "#bottom_leaderboard");
     SLOTS_SELECTORS.put(TOP_LB, "#top_leaderboard");
+    SLOTS_SELECTORS.put(HIVI_TOP_LB, "#hivi_leaderboard");
     SLOTS_SELECTORS.put(TOP_BOXAD, "#top_boxad");
     SLOTS_SELECTORS.put(FLOATING_MEDREC, "#incontent_boxad_1");
     SLOTS_SELECTORS.put(FLOATING_MEDREC_2, "#incontent_boxad_2");

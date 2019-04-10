@@ -51,8 +51,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD),
                          "Slot" + AdsContent.TOP_BOXAD
     );
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB),
-                         "Slot" + AdsContent.TOP_LB
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.HIVI_TOP_LB, false),
+                         "Slot" + AdsContent.HIVI_TOP_LB
     );
 
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB),
@@ -92,8 +92,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD),
                          String.format("Ad is not loaded inside %s", AdsContent.TOP_BOXAD)
     );
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB),
-                         String.format("Ad is not loaded inside %s", AdsContent.TOP_LB)
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.HIVI_TOP_LB,false),
+                         String.format("Ad is not loaded inside %s", AdsContent.HIVI_TOP_LB)
     );
 
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB),

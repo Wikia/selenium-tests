@@ -25,7 +25,6 @@ public class TestAdsPrebid extends NewTestTemplate {
   private static final String BIDDER_PREROLL_LINE_ITEM_ID = "4618393909";
   private static final int VELES_LINE_ITEM_ID = 333201132;
   private static final List<String> RUBICON_URL_PATTERNS = Arrays.asList(
-      ".*fastlane.json.*TOP_LEADERBOARD.*",
       ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
       ".*fastlane.json.*INCONTENT_BOXAD_1.*"
   );
@@ -35,8 +34,8 @@ public class TestAdsPrebid extends NewTestTemplate {
     final String url = AdsDataProvider.PAGE_PREBID.getUrl("wikia_adapter=1881");
     AdsPrebidObject prebidAds = new AdsPrebidObject(driver, url);
 
-    prebidAds.verifyKeyValues("#" + AdSlot.TOP_LEADERBOARD.getName(), "wikia", "728x90", "18.50");
-    prebidAds.verifyPrebidCreative(AdSlot.TOP_LEADERBOARD.getMainPath(), true);
+    prebidAds.verifyKeyValues("#" + AdSlot.TOP_BOXAD.getName(), "wikia", "300x250", "18.50");
+    prebidAds.verifyPrebidCreative(AdSlot.TOP_BOXAD.getMainPath(), true);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
