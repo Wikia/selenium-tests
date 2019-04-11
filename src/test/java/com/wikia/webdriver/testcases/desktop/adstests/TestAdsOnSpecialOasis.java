@@ -13,8 +13,8 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   private static final String TEST_LINE_ITEM_ID = "271491732";
   private static final String FILE_PAGE_TLB_MEGA_AD_UNIT = "wka1b.LB/top_leaderboard/desktop"
                                                            + "/oasis-file/_top1k_wiki-life";
-  private static final String SPECIAL_PAGE_AD_UNIT = "wka1b.LB/top_leaderboard/unknown"
-                                                     + "-specialpage/oasis-special/_top1k_wiki-life";
+  private static final String SPECIAL_PAGE_AD_UNIT = "wka1b.LB/top_leaderboard/desktop"
+                                                     + "/oasis-special/_top1k_wiki-life";
   private static final String
       FILE_PAGE_MR_MEGA_AD_UNIT
       = "wka1b.MR/top_boxad/desktop/oasis-file/_top1k_wiki-life";
