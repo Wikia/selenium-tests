@@ -65,8 +65,7 @@ public class WikiBasePageObject extends BasePageObject {
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".wds-global-navigation__user-logged-in .wds-avatar svg, "
           + ".wds-global-navigation__user-logged-in .wds-avatar img";
-  
-  private static final String WDS_FOOTER_HEADER_CLASS = "wds-global-footer__header";
+
   private static final By MERCURY_SKIN = By.cssSelector(".mobile-wiki");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
       ".wds-global-navigation__modal-control-user div.wds-avatar[title=%userName%], .wds-global-navigation__modal-control-user div.wds-avatar img[alt=%userName%], .wds-global-navigation__modal-control-user div.wds-avatar svg[alt=%userName%]";
@@ -146,7 +145,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-dropdown__toggle .wds-avatar")
   private WebElement globalNavigationAvatar;
-  @FindBy(className = WDS_FOOTER_HEADER_CLASS)
+  @FindBy(css = ".wds-global-footer__header,.wds-global-footer-wikia-org__header")
   private WebElement footer;
   @FindBy(css = ".wds-global-navigation")
   private WebElement globalNavigationBar;
