@@ -19,25 +19,21 @@ public class UrlBuilder extends BaseUrlBuilder {
   public static final String WIKI_NAME_FANDOM_SUFFIX = "fandom";
   private static final Set<String>
       FANDOM_EXCLUDED_WIKIS =
-      new HashSet<>(Arrays.asList(new String[]{"community", "gameofthrones", "sydneybuses"}));
+      new HashSet<>(Arrays.asList(new String[]{"community", "gameofthrones", "sydneybuses", "elderscrolls", "gta", "harrypotter"}));
   private final String wikiName;
-  private final boolean areLanguageTestsEnabled;
   private Boolean forceHttps;
-  private Boolean forceLanguageInPath;
   private Boolean forceWikiaOrg;
   private String language;
 
-  private UrlBuilder(String wiki, String env, Boolean forceHttps, Boolean forceLanguageInPath, String language) {
+  private UrlBuilder(String wiki, String env, Boolean forceHttps, String language) {
     super(env);
     //Add fandom suffix when fandom domain is enabled in configuration to run tests on fandom wikis except languagepath tests
-    areLanguageTestsEnabled = Configuration.getForceLanguageInPath() && "szl".equals(Configuration.getWikiLanguage());
-    if (FANDOM_EXCLUDED_WIKIS.contains(wiki) || areLanguageTestsEnabled) {
+    if (FANDOM_EXCLUDED_WIKIS.contains(wiki)) {
       this.wikiName = wiki;
     } else {
       this.wikiName = Configuration.getForceFandomDomain() ? wiki + WIKI_NAME_FANDOM_SUFFIX : wiki;
     }
     this.forceHttps = forceHttps;
-    this.forceLanguageInPath = forceLanguageInPath;
     this.language = language;
     this.forceWikiaOrg = Configuration.getForceWikiOrg();
   }
@@ -51,7 +47,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   public static UrlBuilder createUrlBuilderForWikiAndLang(String wiki, String language) {
-    return new UrlBuilder(wiki, getEnv(), getForceHttps(), getForceLanguageInPath(), language);
+    return new UrlBuilder(wiki, getEnv(), getForceHttps(), language);
   }
 
   public String normalizePageName(String pageName) {
@@ -117,22 +113,12 @@ public class UrlBuilder extends BaseUrlBuilder {
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder();
 
     String www = addWWW ? "www." : "";
-    String host = getFormattedWikiHost(www, wikiaName, envType, language);
+    String host = getFormattedWikiHost(www, wikiaName, envType);
 
-    if (!DEFAULT_LANGUAGE.equals(language) && forceLanguageInPath) {
-      urlBuilder.addEncodedPathSegments(language);
+    if (!DEFAULT_LANGUAGE.equals(language)) {
+      urlBuilder = urlBuilder.addEncodedPathSegments(language);
     }
     return urlBuilder.scheme(getUrlProtocol()).host(host).build().toString().replaceFirst("/$", "");
-  }
-
-  private String getFormattedWikiHost(
-      String www, String wikiaName, EnvType envType, String language
-  ) {
-
-    if (!forceLanguageInPath && !(DEFAULT_LANGUAGE).equals(language)) {
-      return getFormattedWikiHost(www, String.join(".", language, wikiaName), envType);
-    }
-    return getFormattedWikiHost(www, wikiaName, envType);
   }
 
   private String getFormattedWikiHost(String www, String wikiaName, EnvType envType) {
@@ -194,11 +180,7 @@ public class UrlBuilder extends BaseUrlBuilder {
   }
 
   private String getDomain(EnvType env) {
-    if (FANDOM_EXCLUDED_WIKIS.contains(wikiName)) {
-      return envType.getWikiaDomain();
-    } else {
       return envType.getDomain();
-    }
   }
 
   public static String stripUrlFromEnvSpecificPartAndDowngrade(String url) {
