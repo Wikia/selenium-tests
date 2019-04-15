@@ -168,10 +168,6 @@ public class Configuration {
     return "true".equalsIgnoreCase(getProp("unsafePageLoad"));
   }
 
-  public static Boolean getForceLanguageInPath() {
-    return "true".equalsIgnoreCase(getProp("forceLanguageInPath"));
-  }
-
   public static Boolean getForceFandomDomain() {
     return "true".equalsIgnoreCase(getProp("forceFandomDomain"));
   }
