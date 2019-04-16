@@ -65,7 +65,6 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     ads.refreshPage();
     ads.triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
     ads.triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
-    ads.verifyGptMEGAIframe(adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 
