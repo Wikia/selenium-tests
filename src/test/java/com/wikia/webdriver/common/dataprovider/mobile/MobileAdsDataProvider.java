@@ -112,8 +112,8 @@ public class MobileAdsDataProvider {
                      "\"src\":\"mobile\"",
                      "\"loc\":\"middle\""
     )}, {"runescape", "Grew",
-         "wka1b.PF/bottom_leaderboard/smartphone/mercury-article/_top1k_wiki-gaming",
-         "bottom_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
+         "wka1b.PF/top_leaderboard/smartphone/mercury-article/_top1k_wiki-gaming",
+         "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                           "\"s0v\":\"games\"",
                                           "\"s0c\":[\"gaming\"]",
                                           "\"s1\":\"_runescape\"",
@@ -136,9 +136,9 @@ public class MobileAdsDataProvider {
                                           "\"sex\":[\"m\"]",
                                           "\"esrb\":\"teen\"",
                                           "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
-    ), Arrays.asList("\"pos\":[\"bottom_leaderboard\",\"mobile_prefooter\"]",
+    ), Arrays.asList("\"pos\":[\"top_leaderboard\",\"mobile_top_leaderboard\"]",
                      "\"src\":\"mobile\"",
-                     "\"loc\":\"footer\""
+                     "\"loc\":\"top\""
     )}, {"lego", "LEGO_Wiki",
          "wka1b.HiVi/incontent_boxad_1/smartphone/mercury-home/_top1k_wiki-ent", "incontent_boxad_1",
          Arrays.asList("\"s0\":\"ent\"",
