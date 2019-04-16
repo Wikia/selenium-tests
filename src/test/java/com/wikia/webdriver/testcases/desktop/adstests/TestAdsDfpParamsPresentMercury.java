@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -62,7 +63,8 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(testedPage);
 
     ads.refreshPage();
-    ads.verifyGptMEGAIframe(adUnit, slot);
+    ads.triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
+    ads.triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 
