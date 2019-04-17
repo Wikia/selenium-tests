@@ -49,12 +49,12 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @BeforeClass(groups = DESKTOP)
   public void setUpDesktop() {
-    siteId = Utils.excractSiteIdFromWikiName(WIKI_DESKTOP);
+    siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
   }
 
   @BeforeClass(groups = MOBILE)
   public void setUpMobile() {
-    siteId = Utils.excractSiteIdFromWikiName(WIKI_MOBILE);
+    siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
   }
 
   /**

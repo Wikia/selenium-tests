@@ -34,7 +34,7 @@ public class SharingTests extends NewTestTemplate {
 
   @BeforeSuite
   private void setUp() {
-    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_5);
+    String siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
     existingPost = DiscussionsClient
       .using(User.USER_4, driver)
       .createPostWithUniqueData(siteId);

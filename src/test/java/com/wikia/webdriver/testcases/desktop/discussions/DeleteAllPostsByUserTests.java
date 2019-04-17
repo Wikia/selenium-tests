@@ -40,15 +40,15 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
    * @param wikiName wiki on which a post by `userWithPosts` will be created
    * @return post that was created
    */
-  private PostEntity.Data setUp(String wikiName) {
-    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+  private PostEntity.Data setUp(String wikiName, String language) {
+    siteId = Utils.extractSiteIdFromWikiName(wikiName, language);
     return DiscussionsClient
       .using(userWithPosts, driver)
       .createPostWithUniqueData(siteId);
   }
 
   private PostEntity.Data setUp() {
-    return setUp(MobileWikis.DISCUSSIONS_4);
+    return setUp("qadiscussions", "de");
   }
 
   /**
@@ -189,7 +189,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_MESSAGING)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopDeleteAllOptionNotVisibleOnDifferentWiki() {
-    PostEntity.Data post = setUp(MobileWikis.DISCUSSIONS_MESSAGING);
+    PostEntity.Data post = setUp("qadiscussions", "de");
     assertTrue(deleteAllOptionNotVisibleDesktop(userWithPosts.getUserId()));
     cleanUp(post);
   }
@@ -198,7 +198,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_MESSAGING)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void modUserMobileDeleteAllOptionNotVisibleOnDifferentWiki() {
-    PostEntity.Data post = setUp(MobileWikis.DISCUSSIONS_MESSAGING);
+    PostEntity.Data post = setUp("qadiscussions", "de");
     assertTrue(deleteAllOptionNotVisibleMobile(userWithPosts.getUserId()));
     cleanUp(post);
   }
