@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -12,11 +11,12 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.Guideli
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_2)
+@Execute(onWikia = "qadiscussions", language = "de")
 @Test(groups = {"discussions-guidelines"})
 public class GuidelinesTests extends NewTestTemplate {
 
   private static final String DESKTOP = "discussions-guidelines-desktop";
+
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)

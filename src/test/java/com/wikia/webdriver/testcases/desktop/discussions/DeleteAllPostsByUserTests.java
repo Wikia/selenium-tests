@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -24,7 +23,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 /**
  * Tests for deleting all posts by some user
  */
-@Execute(onWikia = MobileWikis.DISCUSSIONS_4)
+@Execute(onWikia = "qadiscussions", language = "de")
 public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   private static final User userWithPosts = User.USER_12;
@@ -185,20 +184,22 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // MODERATOR
 
+  // Test is run on "es" not "de" wiki in case of testing MOD rights on wiki that they are not MODS
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_MESSAGING)
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR, language = "es")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopDeleteAllOptionNotVisibleOnDifferentWiki() {
-    PostEntity.Data post = setUp("qadiscussions", "de");
+    PostEntity.Data post = setUp("qadiscussions", "es");
     assertTrue(deleteAllOptionNotVisibleDesktop(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
+  // Test is run on "es" not "de" wiki in case of testing MOD rights on wiki that they are not MODS
   @Test(groups = MOBILE)
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MobileWikis.DISCUSSIONS_MESSAGING)
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR, language = "es")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void modUserMobileDeleteAllOptionNotVisibleOnDifferentWiki() {
-    PostEntity.Data post = setUp("qadiscussions", "de");
+    PostEntity.Data post = setUp("qadiscussions", "es");
     assertTrue(deleteAllOptionNotVisibleMobile(userWithPosts.getUserId()));
     cleanUp(post);
   }

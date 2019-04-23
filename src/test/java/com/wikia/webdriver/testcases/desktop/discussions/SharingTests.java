@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -23,7 +22,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
+@Execute(onWikia = "qadiscussions", language = "de")
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 

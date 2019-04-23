@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RunOnly;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.desktop.components.navigation.local.CommunityHeaderDesktop;
@@ -13,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
 import org.testng.annotations.Test;
 
+@Execute(onWikia = "qadiscussions", language = "de")
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class CommunityHeaderTests extends NewTestTemplate {
 
@@ -48,35 +47,21 @@ public class CommunityHeaderTests extends NewTestTemplate {
   public void testExploreMenuLinks() {
     new PostsListPage().open();
     CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
-
     communityHeader.openExploreMenu().clickExploreWikiActivityLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Special:WikiActivity");
-
-    new PostsListPage().open();
-
-    communityHeader.openExploreMenu().clickExploreCommunityLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Special:Community");
+    Assertion.assertStringContains(driver.getCurrentUrl(),"Spezial:WikiActivity");
 
     new PostsListPage().open();
-
     communityHeader.openExploreMenu().clickExploreVideosLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Special:Videos");
+    Assertion.assertStringContains(driver.getCurrentUrl(),"Spezial:Videos");
 
     new PostsListPage().open();
-
     communityHeader.openExploreMenu().clickExploreImagesLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Special:Images");
+    Assertion.assertStringContains(driver.getCurrentUrl(),"Spezial:Bilder");
 
     new PostsListPage().open();
-
     communityHeader.openExploreMenu().clickExploreRandomLink();
-
     Assertion.assertTrue(driver.getCurrentUrl()
-                             .matches(".*\\.(wikia|fandom)\\.com/wiki/(?!Special:Images).*"));
+                             .matches(".*.fandom.com/de/wiki/(?!Spezial:Bilder).*"));
   }
 
   @RunOnly(language = "szl")
