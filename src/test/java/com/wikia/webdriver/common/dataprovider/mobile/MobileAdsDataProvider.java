@@ -108,7 +108,7 @@ public class MobileAdsDataProvider {
                                           "\"pub\":[\"bethesda\"]",
                                           "\"esrb\":\"mature\"",
                                           "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
-    ), Arrays.asList("\"pos\":[\"incontent_boxad\",\"mobile_in_content\"]",
+    ), Arrays.asList("\"pos\":[\"incontent_boxad\"]",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"middle\""
     )}, {"runescape", "Grew",
@@ -164,7 +164,7 @@ public class MobileAdsDataProvider {
                        "\"gnre\":[\"3rdpersonshooter\",\"adventure\",\"casual\",\"comedy\",\"platformer\"]",
                        "\"theme\":[\"lego\"]",
                        "\"esrb\":\"everyone\""
-         ), Arrays.asList("\"pos\":[\"incontent_boxad\",\"mobile_in_content\"]",
+         ), Arrays.asList("\"pos\":[\"incontent_boxad\"]",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"middle\""
     )}, {"civilization", "Category:Browse",
@@ -224,7 +224,7 @@ public class MobileAdsDataProvider {
                        "\"sex\":[\"m\"]",
                        "\"pub\":[\"blizzard\"]",
                        "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
-         ), Arrays.asList("\"pos\":[\"incontent_boxad\",\"mobile_in_content\"]",
+         ), Arrays.asList("\"pos\":[\"incontent_boxad\"]",
                           "\"src\":\"mobile\"",
                           "\"loc\":\"middle\""
     )}, {"overlordmaruyama", "Blood_of_Jormungandr",
@@ -248,7 +248,7 @@ public class MobileAdsDataProvider {
                                           "\"ref\":\"direct\"",
                                           "\"pv\":\"2\"",
                                           "\"esrb\":\"teen\""
-    ), Arrays.asList("\"pos\":[\"incontent_boxad\",\"mobile_in_content\"]",
+    ), Arrays.asList("\"pos\":[\"incontent_boxad\"]",
                      "\"src\":\"mobile\"",
                      "\"loc\":\"middle\""
     )}};
