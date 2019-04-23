@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -19,8 +18,8 @@ import org.testng.SkipException;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-layout"})
+@Execute(onWikia = "qadiscussions", language = "de")
 public class LayoutTests extends NewTestTemplate {
 
   private PostEntity.Data existingPost;
@@ -37,18 +36,21 @@ public class LayoutTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanViewMorePosts() {
@@ -59,12 +61,14 @@ public class LayoutTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeePostsList() {
@@ -82,12 +86,14 @@ public class LayoutTests extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
+  @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
+  @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeePostsList() {
@@ -98,12 +104,14 @@ public class LayoutTests extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
+  @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
+  @Test
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {

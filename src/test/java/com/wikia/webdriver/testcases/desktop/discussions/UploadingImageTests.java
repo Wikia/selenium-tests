@@ -28,7 +28,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private static final String
       UNSUPPORTED_IMAGE_MSG
-      = "Invalid image type, please use jpeg, png or gif.";
+      = "Ungültiger Bildtyp, verwende bitte jpeg, png oder gif.";
   private static final String POST_IMAGE_VISIBLE = "Uploaded image should be visible in new post";
   private static final String
       POST_DELETED_IMAGE_NOT_VISIBLE
