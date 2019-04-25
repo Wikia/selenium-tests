@@ -26,6 +26,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Execute(asUser = User.USER_GERMAN, onWikia = "qadiscussions", language = "de")
 public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private static final String DESKTOP = "on-site-notifications-desktop";
@@ -36,9 +37,9 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private static final String ARTICLE = "article";
   private static final String DISCUSSION = "discussion";
 
+  private static final String ARTICLE_NAME = "Qadiscussionsfandom_Wiki";
+
   private String siteId;
-  private static final String WIKI_DESKTOP = MobileWikis.DISCUSSIONS_6;
-  private static final String WIKI_MOBILE = MobileWikis.DISCUSSIONS_7;
   private List<User> replyUsers = Lists.newArrayList(
     User.USER_2,
     User.USER_3,
@@ -47,13 +48,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     User.USER_6,
     User.USER_9);
 
-  @BeforeClass(groups = DESKTOP)
-  public void setUpDesktop() {
-    siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
-  }
-
-  @BeforeClass(groups = MOBILE)
-  public void setUpMobile() {
+  @BeforeClass()
+  public void setUp() {
     siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
   }
 
@@ -61,45 +57,40 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
    * Test methods - DESKTOP
    */
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostReplyNotification() {
-    Notification notification = createReplyReturningExpectedNotification(User.USER_11, User.USER_2);
+    Notification notification = createReplyReturningExpectedNotification(User.USER_GERMAN, User.USER_2);
 
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
     Notification notification =
-      createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
+      createPostUpvoteReturningExpectedNotification(User.USER_GERMAN, User.USER_2);
 
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
     Notification notification =
-      createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
+      createReplyUpvoteReturningExpectedNotification(User.USER_GERMAN, User.USER_GERMAN, User.USER_2);
 
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopSeesConsolidatedReplyNotification() {
-    Notification notification = createRepliesReturningConsolidatedNotification(User.USER_11);
+    Notification notification = createRepliesReturningConsolidatedNotification(User.USER_GERMAN);
 
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopMarksAllNotificationsAsRead() {
@@ -117,40 +108,36 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
    * Test methods - MOBILE
    */
 
-  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesPostReplyNotification() {
-    Notification notification = createReplyReturningExpectedNotification(User.USER_12, User.USER_2);
+    Notification notification = createReplyReturningExpectedNotification(User.USER_GERMAN, User.USER_2);
 
     verifyNotificationDisplayedOnMobile(notification);
   }
 
-  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
     Notification notification =
-      createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
+      createPostUpvoteReturningExpectedNotification(User.USER_GERMAN, User.USER_2);
 
     verifyNotificationDisplayedOnMobile(notification);
   }
 
-  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
     Notification notification =
-      createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
+      createReplyUpvoteReturningExpectedNotification(User.USER_GERMAN, User.USER_GERMAN, User.USER_2);
 
     verifyNotificationDisplayedOnMobile(notification);
   }
 
-  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileSeesConsolidatedReplyNotification() {
-    Notification notification = createRepliesReturningConsolidatedNotification(User.USER_12);
+    Notification notification = createRepliesReturningConsolidatedNotification(User.USER_GERMAN);
 
     verifyNotificationDisplayedOnMobile(notification);
   }
@@ -207,7 +194,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notifications getNotificationsOnArticlePageDesktop() {
     return getNotificationsDesktop(
-      new ArticlePageObject().open(MobileSubpages.MAIN_PAGE));
+      new ArticlePageObject().open(ARTICLE_NAME));
   }
 
   private Notifications getNotificationsDesktop(WikiBasePageObject page) {

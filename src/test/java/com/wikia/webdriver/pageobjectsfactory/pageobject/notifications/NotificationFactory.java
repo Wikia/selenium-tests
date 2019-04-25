@@ -10,13 +10,13 @@ public final class NotificationFactory {
   }
 
   public static Notification getPostReplyNotification(User user, PostEntity.Data post) {
-    return getPostReplyNotfication(user.getUserName(), post.getTitle());
+    return getPostReplyNotfication(String.join(user.getUserName(),"hat"), post.getTitle());
   }
 
   public static Notification getPostReplyConsolidatedNotification(
       User lastActor, int remainingActors, PostEntity.Data post
   ) {
-    String actor = String.format("%s and %d other users", lastActor.getUserName(), remainingActors);
+    String actor = String.format("%s und %d weitere Benutzer haben", lastActor.getUserName(), remainingActors);
     return getPostReplyNotfication(actor, post.getTitle());
   }
 
@@ -30,13 +30,13 @@ public final class NotificationFactory {
 
   public static Notification getPostUpvoteNotification(PostEntity.Data post) {
     return Notification.builder()
-        .actor("1 user")
+        .actor("1 Benutzer hat")
         .contentObject(post.getTitle())
         .type(NotificationType.POST_UPVOTE)
         .build();
   }
 
   public static Notification getReplyUpvoteNotification() {
-    return Notification.builder().actor("1 user").type(NotificationType.REPLY_UPVOTE).build();
+    return Notification.builder().actor("1 Benutzer hat").type(NotificationType.REPLY_UPVOTE).build();
   }
 }
