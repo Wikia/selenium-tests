@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -21,9 +20,12 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsLi
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_2)
+@Execute(onWikia = "qadiscussions", language = "de")
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
+
+  private static final String wikiName = "qadiscussions";
+  private static final String language = "de";
 
   private static final String FIRST_LINE = "# Big List of Naughty Strings ";
 
@@ -32,8 +34,8 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private String siteId;
 
-  private void setUp(String wikiName) {
-    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+  private void setUp(String wikiName, String language) {
+    siteId = Utils.extractSiteIdFromWikiName(wikiName, language);
   }
 
   /*
@@ -41,7 +43,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewPost() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
@@ -69,7 +71,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_1)
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
@@ -85,7 +87,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryOrAnyContent() {
     PostsListPage page = new PostsListPage().open();
@@ -94,21 +96,21 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MobileWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(wikiName, language);
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MobileWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(wikiName, language);
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotAddPostWithoutTitle() {
     PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorMobile();
@@ -145,14 +147,14 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MobileWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(wikiName, language);
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MobileWikis.DISCUSSIONS_2);
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(wikiName, language);
   }
 
   @Test(groups = DESKTOP)
@@ -299,8 +301,8 @@ public class CreatingPostTests extends NewTestTemplate {
     return DiscussionsClient.using(user, driver).createCustomPost(siteId, title, description);
   }
 
-  private PostEntity.Data createWeirdCharactersPostOnWiki(String wiki) {
-    setUp(wiki);
+  private PostEntity.Data createWeirdCharactersPostOnWiki(String wiki, String language) {
+    setUp(wiki, language);
     return createNaughtyStringsPostRemotely(User.USER);
   }
 
@@ -308,8 +310,8 @@ public class CreatingPostTests extends NewTestTemplate {
     DiscussionsClient.using(User.STAFF, driver).deletePost(post, siteId);
   }
 
-  private void assertPostWithWeirdCharactersDisplayedOnPostsListPage(String wiki) {
-    PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
+  private void assertPostWithWeirdCharactersDisplayedOnPostsListPage(String wiki, String language) {
+    PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki, language);
     String description = new PostsListPage().open()
         .getPost()
         .findPostById(post.getFirstPostId())
@@ -321,8 +323,8 @@ public class CreatingPostTests extends NewTestTemplate {
     }
   }
 
-  private void assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(String wiki) {
-    PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
+  private void assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(String wiki, String language) {
+    PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki, language);
     String description = new PostDetailsPage().open(post.getId()).getPost().getPostDetailText();
     try {
       Assertion.assertStringContains(description, FIRST_LINE);

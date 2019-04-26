@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -18,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.util.function.Function;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_4)
+@Execute(onWikia = "qadiscussions", language = "de")
 public class FollowingPostTests extends NewTestTemplate {
 
   private static final String
@@ -183,7 +182,7 @@ public class FollowingPostTests extends NewTestTemplate {
     clickFollowOn(page, data);
 
     Assertion.assertEquals(page.getSignInDialog().getText(),
-                           SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT,
+                           SignInToFollowModalDialog.DE_FOLLOW_DISCUSSION_TEXT,
                            SIGN_IN_MODAL_SHOULD_APPEAR
     );
     Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(),

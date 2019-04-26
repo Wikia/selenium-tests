@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -14,26 +13,29 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsLi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
+@Execute(onWikia = "qadiscussions", language = "de")
 public class NavigatingTests extends NewTestTemplate {
 
   /**
    * ANONS ON MOBILE SECTION
    */
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanClickOnPostAuthorUsername() {
     clickingOnPostAuthorUsernameLoadsUserPage();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNavigateToPostDetailsPageByClickingOnPost() {
     clickingPostContentRedirectsToPostDetailsPage();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanClickOnPostAuthorAvatar() {
@@ -44,18 +46,21 @@ public class NavigatingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickOnPostAuthorAvatar() {
     clickingOnPostAuthorAvatarLoadsUserPage();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickOnPostAuthorUsername() {
     clickingOnPostAuthorUsernameLoadsUserPage();
   }
 
+  @Test
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNavigateToPostDetailsPageByClickingOnPost() {

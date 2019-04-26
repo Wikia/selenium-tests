@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -17,23 +16,26 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.*;
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_EMPTY)
+@Execute(onWikia = "deemptydiscussions", language = "de")
 @Test(groups = {"discussions-zero-error-state"})
 public class ZeroErrorStateTests extends NewTestTemplate {
 
-  private static final String MESSAGE_1 = "The page you are looking for doesn't exist.\n";
-  private static final String MESSAGE_2 = "Show Me All Discussions";
-  private static final String MESSAGE_3 = "All Discussions";
-  private static final String NO_REPLIES_MESSAGE = "No replies yet. Be the first!";
-  private static final String FOLLOW_MESSAGE_HEADER_TEXT = "Welcome to your Following tab.";
+  private static final String MESSAGE_1 = "Die von dir angeforderte Seite existiert nicht.\n";
+  private static final String MESSAGE_2 = "Alle Diskussionen anzeigen";
+  private static final String MESSAGE_3 = "Alle Diskussionen";
+
+  private static final String NO_REPLIES_MESSAGE = "Noch keine Antworten. Deine kann die erste sein!";
+  private static final String FOLLOW_MESSAGE_HEADER_TEXT = "Willkommen auf dem Tab „Verfolgt“.";
   private static final String
       FOLLOW_MESSAGE_CONTENT_TEXT
-      = "Hit the “Follow” icon at the bottom of any post to fill your list with discussions that matter most to you. We’ll put them here and notify you of new activity.";
-  private static final String FOLLOW_MESSAGE_BUTTON_TEXT = "FIND POSTS TO FOLLOW";
+      = "Klicke auf das Symbol „Folgen“ am Ende eines beliebigen Beitrags, um deine Liste mit den Diskussionen zu füllen, die dir am wichtigsten sind. Wir stellen sie hier ein und geben dir Bescheid, wenn es etwas Neues gibt.";
+  private static final String FOLLOW_MESSAGE_BUTTON_TEXT = "FINDE BEITRÄGE, DENEN DU FOLGEN MÖCHTEST";
   private static final String NO_REPLIES_ICON_MESSAGE = "No replies icon should be visible.";
   private static final String
       NO_REPLIES_UNDER_POST_MESSAGE
       = "There should be no replies on new post (without replies).";
+  private static final String NO_POSTS_MESSAGE = "Es gibt noch keine Beiträge. Bringe doch du die Diskussion zum Laufen und verfasse jetzt den ersten Beitrag!";
+  private static final String NO_REPORTED_POSTS_MESSAGE = "Es gibt keine gemeldeten Beiträge oder Antworten.\n";
 
   private static final String DESKTOP = "discussions-zero-error-state-desktop";
   private static final String MOBILE = "discussions-zero-error-state-mobile";
@@ -72,7 +74,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.ANONYMOUS, onWikia = "qadiscussions", language = "de")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -112,7 +114,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.ANONYMOUS, onWikia = "qadiscussions", language = "de")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -151,7 +153,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.STAFF, onWikia = MobileWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.STAFF, onWikia = "qadiscussions", language = "de")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -197,7 +199,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.STAFF, onWikia = MobileWikis.DISCUSSIONS_5)
+  @Execute(asUser = User.STAFF, onWikia = "qadiscussions", language = "de")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -231,7 +233,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     Assertion.assertTrue(errorMessage.isErrorMessagePresent());
     Assertion.assertEquals(
         errorMessage.getErrorMessageText(),
-        "There are no reported posts or replies.\n" + MESSAGE_2
+        NO_REPORTED_POSTS_MESSAGE + MESSAGE_2
     );
   }
 
@@ -240,7 +242,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     Assertion.assertTrue(errorMessage.isEmptyPostsListMessageDisplayed());
     Assertion.assertEquals(
         errorMessage.getEmptyPostsListMessageText(),
-        "No posts yet. Get the discussion started, create the first post now!"
+        NO_POSTS_MESSAGE
     );
   }
 

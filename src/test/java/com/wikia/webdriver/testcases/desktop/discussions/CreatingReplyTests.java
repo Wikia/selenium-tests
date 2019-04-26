@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -17,8 +16,8 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDet
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_3)
 @Test(groups = {"discussions-creating-replies"})
+@Execute(onWikia = "qadiscussions", language = "de")
 public class CreatingReplyTests extends NewTestTemplate {
 
   private static final String REPLY_ADDED_MESSAGE = "Reply should appear below post.";
@@ -32,7 +31,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   // Anonymous on mobile
 
   @Test(groups = MOBILE)
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
@@ -51,7 +50,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   // User on mobile
   @Test(groups = MOBILE)
-  @Execute(asUser = User.USER_2, onWikia = MobileWikis.DISCUSSIONS_2)
+  @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());

@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -18,7 +17,7 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.Reporte
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_1)
+@Execute(onWikia = "qadiscussions", language = "de")
 public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST =

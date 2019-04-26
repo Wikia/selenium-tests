@@ -19,7 +19,7 @@ public final class Utils {
     return StringUtils.substringBetween(text, ": ", ",");
   }
 
-  public static String excractSiteIdFromWikiName(String wikiName) {
-    return new SiteId(wikiName).getSiteId();
+  public static String extractSiteIdFromWikiName(String wikiName, String language) {
+    return new SiteId(wikiName, language).getSiteId();
   }
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class SignInToFollowModalDialog extends BasePageObject {
 
   public static final String FOLLOW_DISCUSSION_TEXT = "Sign in to start following the discussion!";
+  public static final String DE_FOLLOW_DISCUSSION_TEXT = "Melde dich an, um der Diskussion zu folgen!";
   private static final String DIALOG_CSS_CLASS = "discussion-dialog";
   private static final String POSTING_NOT_ALLOWED_CLASS = "modal-dialog-posting-not-allowed";
   private static final String SELECTOR_PREFIX = "." + DIALOG_CSS_CLASS + ".is-visible."

@@ -18,7 +18,7 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
   @Execute(asUser = User.USER_CNW)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanSeeEmptyDiscussionsMessageAndAddPostOnNewCommunityDiscussionsPage() {
-    createNewWikiLangTC001("en");
+    createNewWikiLangTC001("de");
     PostsListPage page = navigateToDiscussions();
     Assertion.assertTrue(page.getErrorMessages().isEmptyPostsListMessageDisplayed());
     createNewPost(page);
@@ -28,7 +28,7 @@ public class DiscussionsCreation extends CreateWikiTestsLang {
   @Execute(asUser = User.USER_CNW)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void guidelinesIsNotEmptyOnNewCommunityDiscussionsPage() {
-    createNewWikiLangTC001("en");
+    createNewWikiLangTC001("de");
     PostsListPage page = navigateToDiscussions();
     GuidelinesPage guidelines = page.openGuidelinesPage();
     Assertion.assertFalse(guidelines.getGuidelinesText().isEmpty());
