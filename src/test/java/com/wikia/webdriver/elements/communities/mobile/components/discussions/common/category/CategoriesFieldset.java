@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class CategoriesFieldset extends BasePage {
 
-  private static final String GENERAL_CATEGORY_NAME = "General";
+  private static final String GENERAL_CATEGORY_NAME = "Allgemeines";
   private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
   private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
   private static final String DELETE_COMMAND = "action-delete";
@@ -101,6 +101,7 @@ public class CategoriesFieldset extends BasePage {
   }
 
   public int getCategoryPosition(final String categoryName) {
+    wait.forElementNotVisible(approveChangesButton);
     return getCategoryPosition(this.categories, categoryName);
   }
 

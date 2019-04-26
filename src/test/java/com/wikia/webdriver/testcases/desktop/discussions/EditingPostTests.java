@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -15,14 +14,14 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsLi
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
+@Execute(onWikia = "qadiscussions", language = "de")
 public class EditingPostTests extends NewTestTemplate {
 
   private static final String MOBILE = "discussions-editing-post-mobile";
   private static final String DESKTOP = "discussions-editing-post-desktop";
 
-  private static final String EDITED_BY = "(edited by %s)";
-  private static final String EDITED_BY_ADMINISTRATORS = String.format(EDITED_BY, "administrators");
+  private static final String EDITED_BY = "(Von %s bearbeitet)";
+  private static final String EDITED_BY_ADMINISTRATORS = String.format(EDITED_BY, "Administratoren");
   private static final String EDITED_BY_STAFF = String.format(EDITED_BY, User.STAFF.getUserName());
 
   private static final String

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -26,14 +25,16 @@ import static com.wikia.webdriver.common.core.Assertion.*;
 import static com.wikia.webdriver.elements.communities.mobile.components.discussions.common.TextGenerator.createUniqueCategoryName;
 
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_1)
+@Execute(onWikia = "qadiscussions", language = "de")
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
+  private static final String wikiName = "qadiscussions";
+  private static final String language = "de";
 
   private String siteId;
   private static final int MAX_NUMBER_OF_CATEGORIES = 10;
-  private static final String GENERAL_CATEGORY_NAME = "General";
+  private static final String GENERAL_CATEGORY_NAME = "Allgemeines";
 
   // assertion messages
 
@@ -53,6 +54,8 @@ public class CategoriesTests extends NewTestTemplate {
     "Category %s should be visible on post creator.";
   private static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE =
     "You have reached the limit of allowed categories (10).";
+  private static final String DE_CATEGORIES_LIMIT_REACHED_INFO_MESSAGE =
+      "Du hast die maximal zulässige Anzahl an Kategorien erreicht (10).";
   private static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE =
     "Info message should appear when reached max categories limit.";
   private static final String TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE =
@@ -68,33 +71,34 @@ public class CategoriesTests extends NewTestTemplate {
   // fixtures
 
   /**
-   * Runs once before all tests in DESKTOP group, deletes all categories on DISCUSSIONS_1 wiki
+   * Runs once before all tests in DESKTOP group, deletes all categories on qadiscussions (de) wiki
    */
   @BeforeClass(groups = {DESKTOP})
   private void deleteCategoriesDesktop() {
-    deleteCategories(MobileWikis.DISCUSSIONS_1);
+    deleteCategories(wikiName, language);
   }
 
   /**
-   * Runs once before all tests in MOBILE group, deletes all categories on DISCUSSIONS_MOBILE wiki
+   * Runs once before all tests in MOBILE group, deletes all categories on qadiscussions (de) wiki
    */
   @BeforeClass(groups = {MOBILE})
   private void deleteCategoriesMobile() {
-    deleteCategories(MobileWikis.DISCUSSIONS_MOBILE);
+    deleteCategories(wikiName, language);
   }
 
-  private void deleteCategories(String wikiName) {
-    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+  private void deleteCategories(String wikiName, String language) {
+    siteId = Utils.extractSiteIdFromWikiName(wikiName, language);
     DiscussionsCategoryOperations.using(User.STAFF).deleteAllCategories(siteId, User.STAFF);
   }
 
   /**
    * Creates a unique post using DISCUSSIONS_ADMINISTRATOR account in new, unique category
    * @param wikiName wiki on which post is made
+   * @param language of the wiki
    * @return new category
    */
-  private CategoryPill.Data setUp(String wikiName) {
-    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+  private CategoryPill.Data setUp(String wikiName, String language) {
+    siteId = Utils.extractSiteIdFromWikiName(wikiName, language);
     CategoryPill.Data category = addCategoryRemotely(siteId, createUniqueCategoryName());
     DiscussionsClient
       .using(User.STAFF, driver)
@@ -103,25 +107,26 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private CategoryPill.Data setUp() {
-    return setUp(MobileWikis.DISCUSSIONS_1);
+    return setUp(wikiName, language);
   }
 
   /**
    *
    * @param wikiName to create categories on,
+   * @param language of the wiki
    * @param size number of posts with unique categories to create
    * @return list of categories
    */
-  private ArrayList<CategoryPill.Data> setUp(final String wikiName, int size) {
+  private ArrayList<CategoryPill.Data> setUp(final String wikiName, String language, int size) {
     ArrayList<CategoryPill.Data> categories = new ArrayList<>();
     for (int i = 0; i < size; i++) {
-      categories.add(setUp(wikiName));
+      categories.add(setUp(wikiName, language));
     }
     return categories;
   }
 
   private ArrayList<CategoryPill.Data> setUp(int size) {
-    return setUp(MobileWikis.DISCUSSIONS_1, size);
+    return setUp(wikiName, language, size);
   }
 
   /**
@@ -143,23 +148,23 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
 
-  // Anonymous user on mobile
+  // Anonymous user on MOBILE
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
 
-  // Anonymous user on desktop
+  // Anonymous user on DESKTOP
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
@@ -175,10 +180,10 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryDesktop();
   }
 
-  // User on mobile
+  // User on MOBILE
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void userOnMobileCanChangeCategory() {
@@ -186,14 +191,14 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.USER, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void userOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
 
-  // User on desktop
+  // User on DESKTOP
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
@@ -209,14 +214,14 @@ public class CategoriesTests extends NewTestTemplate {
     cannotEditCategoryDesktop();
   }
 
-  // Discussions Administrator on mobile
+  // Discussions Administrator on MOBILE
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
-    CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data postCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
     try {
@@ -229,7 +234,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanAddCategory() {
@@ -251,11 +256,11 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanEditCategory() {
-    CategoryPill.Data editableCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data editableCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     final String editedName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
@@ -275,12 +280,12 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategories() {
     deleteCategoriesMobile();
-    ArrayList<CategoryPill.Data> categoriesAdded = setUp(MobileWikis.DISCUSSIONS_MOBILE,
+    ArrayList<CategoryPill.Data> categoriesAdded = setUp(wikiName, language,
       MAX_NUMBER_OF_CATEGORIES - 1);
     final PostsListPage page = new PostsListPage().open();
     final String newCategoryName = createUniqueCategoryName();
@@ -289,18 +294,18 @@ public class CategoriesTests extends NewTestTemplate {
       newCategoryName);
     try {
       assertEquals(categoriesFieldset.getInfoMessageText(),
-        CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
+        DE_CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
     } finally {
       cleanUp(categoriesAdded);
     }
   }
 
   @Test(groups = {MOBILE})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MobileWikis.DISCUSSIONS_MOBILE)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanRemoveCategory() {
-    CategoryPill.Data data = setUp(MobileWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data data = setUp(wikiName, language);
     final String temporaryCategoryName = createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page
@@ -310,7 +315,7 @@ public class CategoriesTests extends NewTestTemplate {
     canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
   }
 
-  // Discussions Administrator on desktop
+  // Discussions Administrator on DESKTOP
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
@@ -378,7 +383,7 @@ public class CategoriesTests extends NewTestTemplate {
     CategoriesFieldset categoriesFieldset = addCategory(page.getCategories(), newCategoryName);
     categoriesFieldset.clickEdit();
     try {
-      assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE,
+      assertEquals(categoriesFieldset.getInfoMessageText(), DE_CATEGORIES_LIMIT_REACHED_INFO_MESSAGE,
         INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
     } finally {
       cleanUp(categoriesAdded);
@@ -428,7 +433,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void changeCategoryMobile() {
-    CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data postCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     openPageAndSelectCategoryOnMobile(page, postCategory.getName());
     assertCategoryVisibleAndCleanUp(page, postCategory);
@@ -456,7 +461,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void cannotEditCategoryMobile() {
-    CategoryPill.Data postCategory = setUp(MobileWikis.DISCUSSIONS_MOBILE);
+    CategoryPill.Data postCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     try {
       assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);

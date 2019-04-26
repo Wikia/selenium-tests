@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -16,7 +15,7 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsLi
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_3)
+@Execute(onWikia = "qadiscussions", language = "de")
 @Test(groups = {"discussions-sorting"})
 public class SortingTests extends NewTestTemplate {
 

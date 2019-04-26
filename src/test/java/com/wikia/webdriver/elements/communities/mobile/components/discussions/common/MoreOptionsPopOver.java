@@ -37,7 +37,7 @@ public class MoreOptionsPopOver {
   }
 
   public MoreOptionsPopOver clickLockPostOption() {
-    clickReportLinkOption("Lock Post");
+    clickReportLinkOption("Beitrag sperren");
     waitFor(PostEntity::isLocked);
     return this;
   }
@@ -68,7 +68,7 @@ public class MoreOptionsPopOver {
   }
 
   public MoreOptionsPopOver clickUnlockPostOption() {
-    clickReportLinkOption("Unlock Post");
+    clickReportLinkOption("Beitrag entsperren");
     waitFor(PostEntity::isNotLocked);
     return this;
   }

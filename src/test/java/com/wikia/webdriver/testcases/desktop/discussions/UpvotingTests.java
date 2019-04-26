@@ -7,7 +7,6 @@ import com.wikia.webdriver.elements.communities.mobile.components.discussions.co
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -19,7 +18,7 @@ import com.wikia.webdriver.elements.communities.mobile.components.discussions.co
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_4)
+@Execute(onWikia = "qadiscussions", language = "de")
 @Test(groups = {"discussions-upvoting"})
 public class UpvotingTests extends NewTestTemplate {
 
@@ -28,7 +27,7 @@ public class UpvotingTests extends NewTestTemplate {
   @BeforeSuite
   private void setUp() {
     User user = User.USER_5;
-    String siteId = Utils.excractSiteIdFromWikiName(MobileWikis.DISCUSSIONS_4);
+    String siteId = Utils.extractSiteIdFromWikiName("qadiscussions", "de");
 
     existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
     DiscussionsClient.using(user, driver).createReplyToPost(siteId, existingPost);

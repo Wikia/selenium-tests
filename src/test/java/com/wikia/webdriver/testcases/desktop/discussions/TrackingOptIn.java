@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 @Test(groups = {"discussions-tracking-opt-in"})
+@Execute(onWikia = "qadiscussions", language = "de")
 public class TrackingOptIn extends NewTestTemplate {
 
     /*

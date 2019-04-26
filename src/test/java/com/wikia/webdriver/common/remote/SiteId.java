@@ -16,8 +16,8 @@ public class SiteId {
   private String siteId;
   private UrlBuilder urlBuilder;
 
-  public SiteId(String wikiName) {
-    this.urlBuilder = UrlBuilder.createUrlBuilderForWiki(wikiName);
+  public SiteId(String wikiName, String language) {
+    this.urlBuilder = UrlBuilder.createUrlBuilderForWikiAndLang(wikiName, language);
     this.extractSiteIdFromSpecialVersion();
   }
 

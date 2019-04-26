@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -16,7 +15,8 @@ import com.wikia.webdriver.elements.communities.mobile.pages.discussions.*;
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MobileWikis.DISCUSSIONS_5)
+@Test
+@Execute(onWikia = "qadiscussions", language = "de")
 public class LockingPostTests extends NewTestTemplate {
 
   private static final String SHOULD_BE_LOCKED_MESSAGE = "Post should be locked.";
@@ -368,6 +368,9 @@ public class LockingPostTests extends NewTestTemplate {
     final String name = User.DISCUSSIONS_MODERATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
+
+
+  // Methods:
 
   private MoreOptionsPopOver findMoreOptionsOnPostDetailsPage() {
     final PostEntity.Data data = DiscussionsClient.using(User.USER, driver)

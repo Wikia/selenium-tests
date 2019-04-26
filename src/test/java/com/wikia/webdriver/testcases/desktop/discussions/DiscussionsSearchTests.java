@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.desktop.discussions;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.skin.Skin;
@@ -17,11 +18,12 @@ import org.testng.annotations.Test;
 
 @Test(groups = "discussions-search")
 @InBrowser(browser = Browser.CHROME)
-@Execute(onWikia = "dauto")
+@Execute(onWikia = "qadiscussions", language = "de")
 public class DiscussionsSearchTests extends SearchTests {
 
   private static final String SEARCH_PHRASE = "Infobox";
 
+  @Test
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void navigateUsingSearchSuggestionsOnMobileFromDiscussionsGuidelinesPage() {
 
@@ -38,6 +40,7 @@ public class DiscussionsSearchTests extends SearchTests {
     );
   }
 
+  @Test
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void navigateUsingSearchSuggestionsOnDesktopFromDiscussionsGuidelinesPage() {
     Integer resultNo = 0;
@@ -53,6 +56,7 @@ public class DiscussionsSearchTests extends SearchTests {
     );
   }
 
+  @Test
   public void clearSearchPhraseFromDiscussionsGuidelinesPageOnDesktop() {
     GlobalNavigation nav = new GuidelinesPage().open().getGlobalNavigation();
 
@@ -62,12 +66,15 @@ public class DiscussionsSearchTests extends SearchTests {
     Assertion.assertTrue(nav.getCurrentSearchPhrase().isEmpty());
   }
 
+  @Test
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   public void verifySearchLayoutFromDiscussionsGuidelinesPage() {
     super.verifySearchLayout(new GuidelinesPage().open());
   }
 
+  @Test
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IW-1949")
   public void userIsRedirectedToSearchResultsPageFromDiscussionsGuidelinesPage() {
     SearchResultsPage searchResults = new GuidelinesPage().open()
         .getGlobalNavigationMobile()

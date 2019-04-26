@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -12,15 +11,17 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.mobile.components.discussions.common.*;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostsListPage;
+
 import org.testng.annotations.Test;
 
+@Execute(onWikia = "qadiscussions", language = "de")
 public class PollsTests extends NewTestTemplate {
 
     /* TODO: Use fixtures to create Poll post */
 
     public static final int DEFAULT_ANSWERS_NUMBER = 2;
     public static final String ALREADY_VOTED_POST_ID = "3100000000000020087";
-    public static final String ALREADY_VOTED_POST_ID_FANDOM = "3259773155803166890";
+    public static final String ALREADY_VOTED_POST_ID_FANDOM = "3245980547809658650";
 
     /**
      * DESKTOP TESTS SECTION
@@ -28,7 +29,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-    @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_6)
     public void userCanCreatePostWithSimplePollOnDesktop() {
         PostsListPage page = new PostsListPage().open();
         BasePostsCreator postsCreator = page.getPostsCreatorDesktop();
@@ -50,7 +51,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"}, groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-    @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.ANONYMOUS)
     public void anonUserCanNotVoteInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         manageSignInModal(poll);
@@ -58,7 +59,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnDesktop"}, groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-    @Execute(asUser = User.USER_3, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_3)
     public void loggedInUserCanVoteOnceInPollOnDesktop() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         poll.clickNthAnswer(0);
@@ -71,7 +72,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-    @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_6)
     public void userCanCreateComplexPollOnDesktop() {
         PostsListPage page = new PostsListPage().open();
         BasePostsCreator postsCreator = page.getPostsCreatorDesktop();
@@ -105,7 +106,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(groups = "discussions-polls")
     @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-    @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_6)
     public void userWhoVotedCanSeeVotersListOnDesktop() {
         PostDetailsPage postDetails = new PostDetailsPage();
         openAlreadyExistingPoll(postDetails);
@@ -123,7 +124,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-    @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_6)
     public void userCanCreatePostWithSimplePollOnMobile() {
         PostsListPage page = new PostsListPage().open();
         BasePostsCreator postsCreator = page.open().getPostsCreatorMobile();
@@ -145,7 +146,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-    @Execute(asUser = User.ANONYMOUS, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.ANONYMOUS)
     public void anonUserCanNotVoteInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
         manageSignInModal(poll);
@@ -153,9 +154,10 @@ public class PollsTests extends NewTestTemplate {
 
     @Test()//dependsOnMethods = {"userCanCreatePostWithSimplePollOnMobile"}, groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-    @Execute(asUser = User.USER_3, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_3)
     public void loggedInUserCanVoteOnceInPollOnMobile() {
         Poll poll = new PostsListPage().open().getPost().clickNthPostWithPoll(0).getPoll();
+        poll.clickNthAnswer(0);
         poll.clickVoteButton();
 
         Assertion.assertTrue(poll.isChosenResultBarDisplayed());
@@ -165,7 +167,7 @@ public class PollsTests extends NewTestTemplate {
 
     @Test(groups = "discussions-polls")
     @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-    @Execute(asUser = User.USER_6, onWikia = MobileWikis.DISCUSSIONS_2)
+    @Execute(asUser = User.USER_6)
     public void userWhoVotedCanSeeVotersListOnMobile() {
         PostDetailsPage postDetails = new PostDetailsPage();
         openAlreadyExistingPoll(postDetails);
