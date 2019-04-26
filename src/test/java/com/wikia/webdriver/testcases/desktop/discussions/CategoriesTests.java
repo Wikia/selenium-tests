@@ -29,6 +29,8 @@ import static com.wikia.webdriver.elements.communities.mobile.components.discuss
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
+  private static final String wikiName = "qadiscussions";
+  private static final String language = "de";
 
   private String siteId;
   private static final int MAX_NUMBER_OF_CATEGORIES = 10;
@@ -73,7 +75,7 @@ public class CategoriesTests extends NewTestTemplate {
    */
   @BeforeClass(groups = {DESKTOP})
   private void deleteCategoriesDesktop() {
-    deleteCategories("qadiscussions", "de");
+    deleteCategories(wikiName, language);
   }
 
   /**
@@ -81,7 +83,7 @@ public class CategoriesTests extends NewTestTemplate {
    */
   @BeforeClass(groups = {MOBILE})
   private void deleteCategoriesMobile() {
-    deleteCategories("qadiscussions", "de");
+    deleteCategories(wikiName, language);
   }
 
   private void deleteCategories(String wikiName, String language) {
@@ -105,7 +107,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private CategoryPill.Data setUp() {
-    return setUp("qadiscussions", "de");
+    return setUp(wikiName, language);
   }
 
   /**
@@ -124,7 +126,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private ArrayList<CategoryPill.Data> setUp(int size) {
-    return setUp("qadiscussions", "de", size);
+    return setUp(wikiName, language, size);
   }
 
   /**
@@ -219,7 +221,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
-    CategoryPill.Data postCategory = setUp("qadiscussions", "de");
+    CategoryPill.Data postCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
     try {
@@ -258,7 +260,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanEditCategory() {
-    CategoryPill.Data editableCategory = setUp("qadiscussions", "de");
+    CategoryPill.Data editableCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     final String editedName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
@@ -283,7 +285,7 @@ public class CategoriesTests extends NewTestTemplate {
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategories() {
     deleteCategoriesMobile();
-    ArrayList<CategoryPill.Data> categoriesAdded = setUp("qadiscussions", "de",
+    ArrayList<CategoryPill.Data> categoriesAdded = setUp(wikiName, language,
       MAX_NUMBER_OF_CATEGORIES - 1);
     final PostsListPage page = new PostsListPage().open();
     final String newCategoryName = createUniqueCategoryName();
@@ -303,7 +305,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "XF-737", comment = "Test manually")
   public void discussionsAdministratorOnMobileCanRemoveCategory() {
-    CategoryPill.Data data = setUp("qadiscussions", "de");
+    CategoryPill.Data data = setUp(wikiName, language);
     final String temporaryCategoryName = createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page
@@ -431,7 +433,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void changeCategoryMobile() {
-    CategoryPill.Data postCategory = setUp("qadiscussions", "de");
+    CategoryPill.Data postCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     openPageAndSelectCategoryOnMobile(page, postCategory.getName());
     assertCategoryVisibleAndCleanUp(page, postCategory);
@@ -459,7 +461,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void cannotEditCategoryMobile() {
-    CategoryPill.Data postCategory = setUp("qadiscussions", "de");
+    CategoryPill.Data postCategory = setUp(wikiName, language);
     final PostsListPage page = new PostsListPage().open();
     try {
       assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);

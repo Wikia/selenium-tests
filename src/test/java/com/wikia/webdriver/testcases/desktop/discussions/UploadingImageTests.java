@@ -19,7 +19,11 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Execute(onWikia = "qadiscussions", language = "de")
 public class UploadingImageTests extends NewTestTemplate {
+
+  private static final String wikiName = "qadiscussions";
+  private static final String language = "de";
 
   private static final String URL = "http://fandom.wikia.com";
 
@@ -65,7 +69,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   public void userCanUploadImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     startEmptyPostCreationDesktop(page).uploadImage().clickSubmitButton();
@@ -75,9 +79,9 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   public void userCanUploadImageToTheirReplyOnDesktop() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     startEmptyReplyCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
@@ -85,7 +89,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     addPostWithUnsupportedImage(startPostCreationDesktop(page));
@@ -96,9 +100,9 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = DESKTOP, enabled = false)
   @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     addReplyWithUnsupportedImage(startReplyCreationDesktop(page));
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
@@ -106,7 +110,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   public void userCanRemoveImagePreviewFromPostDraftOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
@@ -117,16 +121,16 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = DESKTOP, enabled = false)
   @RelatedIssue(issueID = "IRIS-6198")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     startReplyCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInPostWithUploadedImageOnDesktop()
       throws MalformedURLException {
@@ -139,11 +143,11 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_3)
+  @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInReplyWithUploadedImageOnDesktop()
       throws MalformedURLException {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     startReplyCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasOpenGraph(),
@@ -157,7 +161,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCanUploadImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
     startEmptyPostCreationMobile(page).uploadImage().clickSubmitButton();
@@ -167,9 +171,9 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCanUploadImageTotheirReplyOnMobile() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     startEmptyReplyCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
@@ -177,7 +181,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCannotUploadUnsupportedImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
     addPostWithUnsupportedImage(startPostCreationMobile(page));
@@ -187,9 +191,9 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCannotUploadUnsupportedImageToTheirReplyOnMobile() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     addReplyWithUnsupportedImage(startReplyCreationMobile(page));
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
@@ -197,7 +201,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCanRemoveImagePreviewFromPostDraftOnMobile() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
@@ -207,9 +211,9 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCanRemoveImagePreviewFromReplyDraftOnMobile() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     startReplyCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
@@ -217,7 +221,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile()
       throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
@@ -228,10 +232,10 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "qadiscussions", language = "de", asUser = User.USER_2)
+  @Execute(asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile()
       throws MalformedURLException {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("qadiscussions", "de").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(wikiName, language).getId());
     startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForLoadingSpinner();
     Assertion.assertFalse(page.findNewestReply().hasOpenGraph(),

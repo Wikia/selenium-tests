@@ -24,6 +24,9 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
+  private static final String wikiName = "qadiscussions";
+  private static final String language = "de";
+
   private static final String FIRST_LINE = "# Big List of Naughty Strings ";
 
   private static final String DESKTOP = "discussions-creating-posts-desktop";
@@ -96,14 +99,14 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage("qadiscussions", "de");
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(wikiName, language);
   }
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage("qadiscussions", "de");
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(wikiName, language);
   }
 
   @Test(groups = MOBILE)
@@ -144,14 +147,14 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage("qadiscussions", "de");
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(wikiName, language);
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage("qadiscussions", "de");
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(wikiName, language);
   }
 
   @Test(groups = DESKTOP)
