@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class CommunityHeaderTests extends NewTestTemplate {
 
-  @DontRun(language = "szl")
   @Test(groups = {"discussions-CommunityHeaderTests"})
   public void wordmarkShouldLinkToMainPage() {
     new PostsListPage().open();
@@ -42,7 +41,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertEquals(userPage.getUserName(), username);
   }
 
-  @DontRun(language = "szl")
   @Test(groups = {"discussions-CommunityHeaderTests"})
   public void testExploreMenuLinks() {
     new PostsListPage().open();
@@ -62,41 +60,5 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.openExploreMenu().clickExploreRandomLink();
     Assertion.assertTrue(driver.getCurrentUrl()
                              .matches(".*.fandom.com/de/wiki/(?!Spezial:Bilder).*"));
-  }
-
-  @RunOnly(language = "szl")
-  @Test(groups = {"discussions-CommunityHeaderTests"})
-  public void testExploreMenuLinksSzl() {
-    new PostsListPage().open();
-    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
-
-    communityHeader.openExploreMenu().clickExploreWikiActivityLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Aktywno%C5%9B%C4%87_na_wiki");
-
-    new PostsListPage().open();
-
-    communityHeader.openExploreMenu().clickExploreCommunityLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Spo%C5%82eczno%C5%9B%C4%87");
-
-    new PostsListPage().open();
-
-    communityHeader.openExploreMenu().clickExploreVideosLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Filmy");
-
-    new PostsListPage().open();
-
-    communityHeader.openExploreMenu().clickExploreImagesLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Obrazy");
-
-    new PostsListPage().open();
-
-    communityHeader.openExploreMenu().clickExploreRandomLink();
-
-    Assertion.assertTrue(driver.getCurrentUrl()
-                             .matches(".*\\.wikia\\.com/szl/wiki/(?!Specjalna:Obrazy).*"));
   }
 }

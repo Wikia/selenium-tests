@@ -4,10 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -38,7 +36,6 @@ public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
     "We don't recognize these credentials. Try again or register a new account.";
-  private static final String ERROR_MESSAGE_SZL = "Nie rozpoznajemy tych danych uwierzytelniania. Spróbuj ponownie lub zarejestruj nowe konto.";
 
   private static final  String PASSWORD_FORM = "P@55_%s";
 
@@ -139,7 +136,6 @@ public class LoginTests extends NewTestTemplate {
     assertTrue(article.isUserLoggedOutMobile());
   }
 
-  @DontRun(language = "szl")
   @Test(groups = DESKTOP)
   public void invalidPasswordErrorMessagesIsPresentedOnDesktop() {
     SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
@@ -148,16 +144,6 @@ public class LoginTests extends NewTestTemplate {
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = DESKTOP)
-  public void invalidPasswordErrorMessagesIsPresentedOnDesktopSzl() {
-    SignInPage signIn = openLoginPageFromGlobalnavOnDesktop();
-    String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
-    signIn.login(USER.getUserName(), invalidPassword);
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE_SZL);
-  }
-
-  @DontRun(language = "szl")
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void invalidPasswordErrorMessagesIsPresentedOnMobile() {
@@ -166,17 +152,6 @@ public class LoginTests extends NewTestTemplate {
     String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
     signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  @RunOnly(language = "szl")
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void invalidPasswordErrorMessagesIsPresentedOnMobileSzl() {
-    openArticleOnMobile();
-    SignInPage signIn = navigateToSignInOnMobile();
-    String invalidPassword = String.format(PASSWORD_FORM, Instant.now().getEpochSecond());
-    signIn.login(USER.getUserName(), invalidPassword);
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE_SZL);
   }
 
   /**
