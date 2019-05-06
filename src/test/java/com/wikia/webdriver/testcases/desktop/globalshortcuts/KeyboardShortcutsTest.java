@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
 import org.testng.annotations.Test;
 
-@Execute(asUser = User.USER, onWikia = "globalshortcuts-en", mockAds = "true")
+@Execute(asUser = User.SUS_STAFF2, onWikia = "globalshortcuts-en", mockAds = "true")
 @InBrowser(browser = Browser.CHROME)
 @Test(groups = {"globalShortcuts"})
 public class KeyboardShortcutsTest extends NewTestTemplate {
