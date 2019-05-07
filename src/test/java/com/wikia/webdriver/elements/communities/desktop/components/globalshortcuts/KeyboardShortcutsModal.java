@@ -27,6 +27,10 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   public KeyboardShortcutsModal() {
     super();
 
+    // Refresh cause insights sometimes don't load on first time
+    driver.navigate().refresh();
+    waitForPageLoad();
+
     this.actions = new Actions(driver);
   }
 
