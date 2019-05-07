@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
@@ -30,7 +28,6 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_002"})
-  @DontRun(language = "szl")
   public void anonymousUserCanStartDiscussionWithoutTitleOnForum() {
     String message = String.format(PageContent.FORUM_MESSAGE, DateTime.now().getMillis());
 
@@ -39,18 +36,6 @@ public class ForumBoardTests extends NewTestTemplate {
     ForumThreadPageObject forumThread = forumBoard.startDiscussionWithoutTitle(message);
     // "Message from" default title appears after posting message without title
     forumThread.verifyDiscussionTitleAndMessage("Message from", message);
-  }
-
-  @Test(groups = {"ForumBoardTests_002"})
-  @RunOnly(language = "szl")
-  public void anonymousUserCanStartDiscussionWithoutTitleOnForumSzl() {
-    String message = String.format(PageContent.FORUM_MESSAGE, DateTime.now().getMillis());
-
-    ForumBoardPage forumBoard = new ForumBoardPage();
-    forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
-    ForumThreadPageObject forumThread = forumBoard.startDiscussionWithoutTitle(message);
-    // "Message from" default title appears after posting message without title
-    forumThread.verifyDiscussionTitleAndMessage("Wiadomość od", message);
   }
 
   @Test(groups = {"ForumBoardTests_003"})

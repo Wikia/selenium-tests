@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -37,7 +36,6 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_001")
-  @DontRun(language = "szl")
   public void mercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 

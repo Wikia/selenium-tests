@@ -34,12 +34,7 @@ public class AnonymizationTests extends NewTestTemplate {
       ERROR_MESSAGE
       = "We don't recognize these credentials. Try again or register a new account.";
 
-  private static final String
-      ERROR_MESSAGE_SZL
-      = "Nie rozpoznajemy tych danych uwierzytelniania. Spróbuj ponownie lub zarejestruj nowe konto.";
-
   @Test
-  @DontRun(language = "szl")
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -63,32 +58,6 @@ public class AnonymizationTests extends NewTestTemplate {
     SignInPage signIn = new GlobalNavigation().clickOnSignIn();
     signIn.login(qanon, passw);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-  @Test
-  @RunOnly(language = "szl")
-  public void anonymizedUserCannotLoginSzl() {
-    Credentials credentials = new Credentials();
-    String timestamp = Long.toString(DateTime.now().getMillis());
-    String qanon = User.SUS_REGULAR_USER.getUserName() + timestamp;
-    String passw = User.SUS_REGULAR_USER.getPassword();
-    SignUpUser user = new SignUpUser(qanon,
-                                     credentials.emailAnonymousUserTestWikia,
-                                     passw,
-                                     LocalDate.of(1990, 3, 19)
-    );
-    UserRegistration.registerUserEmailConfirmed(user);
-
-    SpecialAnonymizationUserPage anonymizationPage = new SpecialAnonymizationUserPage().open();
-    anonymizationPage.loginAs(User.SUS_STAFF);
-    anonymizationPage.fillFutureAnon(qanon).submitAnonymization();
-
-    Assertion.assertStringContains(anonymizationPage.getAnonConfirmation(), qanon);
-
-    anonymizationPage.logOut();
-
-    SignInPage signIn = new GlobalNavigation().clickOnSignIn();
-    signIn.login(qanon, passw);
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE_SZL);
   }
 
   @Test

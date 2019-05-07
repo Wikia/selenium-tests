@@ -2,9 +2,7 @@ package com.wikia.webdriver.testcases.desktop.navigation.local;
 
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -32,7 +30,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(mainPage.isMainPage());
   }
 
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = MobileWikis.DE_WIKI)
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
@@ -49,7 +46,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(modal.isCreateNewArticleModalVisible());
   }
 
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.USER)
   public void testLoggedInWikiButtons() {
@@ -80,38 +76,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(actionExplorerModal.isVisible());
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = {"CommunityHeaderTests"})
-  @Execute(asUser = User.USER)
-  public void testLoggedInWikiButtonsSzl() {
-    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
-
-    communityHeader.clickWikiActivity();
-    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Aktywno%C5%9B%C4%87_na_wiki");
-
-    CreateArticleModalComponentObject addNewPageModal = communityHeader.clickAddNewPage();
-    Assertion.assertTrue(addNewPageModal.isCreateNewArticleModalVisible());
-    addNewPageModal.close();
-
-    communityHeader.openMoreToolsDropdown().clickMoreAddImageLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Prze%C5%9Blij");
-
-    AddMediaModalComponentObject addVideoModal = communityHeader.openMoreToolsDropdown()
-        .clickMoreAddVideoLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Filmy");
-    Assertion.assertTrue(addVideoModal.isVideoModalVisible());
-
-    addVideoModal.closeAddVideoModal();
-
-    communityHeader.openMoreToolsDropdown().clickMoreRecentChanges();
-    Assertion.assertStringContains(driver.getCurrentUrl(), "Specjalna:Ostatnie_zmiany");
-
-    ActionExplorerModal actionExplorerModal = communityHeader.openMoreToolsDropdown()
-        .clickMoreAllShortcuts();
-    Assertion.assertTrue(actionExplorerModal.isVisible());
-  }
-
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.MW119_ADMINISTRATOR)
   public void testAdminWikiButtons() {
@@ -145,7 +109,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(actionExplorerModal.isVisible());
   }
 
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   public void testExploreMenuLinks() {
     CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
@@ -172,34 +135,6 @@ public class CommunityHeaderTests extends NewTestTemplate {
                              .matches(".*\\.(wikia|fandom)\\.com/wiki/(?!Special:Images).*"));
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = {"CommunityHeaderTests"})
-  public void testExploreMenuLinksSzl() {
-    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
-
-    communityHeader.openExploreMenu().clickExploreWikiActivityLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Aktywno%C5%9B%C4%87_na_wiki");
-
-    communityHeader.openExploreMenu().clickExploreCommunityLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Spo%C5%82eczno%C5%9B%C4%87");
-
-    communityHeader.openExploreMenu().clickExploreVideosLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Filmy");
-
-    communityHeader.openExploreMenu().clickExploreImagesLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Obrazy");
-
-    communityHeader.openExploreMenu().clickExploreRandomLink();
-
-    Assertion.assertTrue(driver.getCurrentUrl()
-        .matches(".*\\.wikia\\.com/szl/wiki/(?!Specjalna:Obrazy).*"));
-  }
-
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestdiscussionsnoforum")
   public void testDiscussLinkOnWikiWithDiscussionsWithoutForum() {
@@ -208,19 +143,9 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().matches(".*(wikia|fandom).com/d/f"));
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = "qatestdiscussionsnoforum")
-  public void testDiscussLinkOnWikiWithDiscussionsWithoutForumSzl() {
-    new CommunityHeaderDesktop().clickDiscussLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"wikia.com/szl/d/f");
-  }
-
   /**
    * @prerequisites use wiki with enabled forum and discussions
    */
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestdiscussiosandforum")
   public void testDiscussLinkOnWikiWithDiscussionsAndForum() {
@@ -236,35 +161,13 @@ public class CommunityHeaderTests extends NewTestTemplate {
   /**
    * @prerequisites use wiki with enabled forum and discussions
    */
-  @RunOnly(language = "szl")
-  @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = "qatestdiscussiosandforum")
-  public void testDiscussLinkOnWikiWithDiscussionsAndForumSzl() {
-    CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
 
-    communityHeader.openExploreMenu().clickExploreForumLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Forum");
-
-    communityHeader.clickDiscussLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(),String.format("%s/d/f", Configuration.getEnvType().getDomain()));
-  }
-
-  @DontRun(language = "szl")
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(onWikia = "qatestforumnodiscussions")
   public void testDiscussLinkOnWikiWithNoDiscussionsAndWithForum() {
     new CommunityHeaderDesktop().clickDiscussLink();
 
     Assertion.assertStringContains(driver.getCurrentUrl(),"Special:Forum");
-  }
-
-  @RunOnly(language = "szl")
-  @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = "qatestforumnodiscussions")
-  public void testDiscussLinkOnWikiWithNoDiscussionsAndWithForumSzl() {
-    new CommunityHeaderDesktop().clickDiscussLink();
-
-    Assertion.assertStringContains(driver.getCurrentUrl(),"Specjalna:Forum");
   }
 
   @Test(groups = {"CommunityHeaderTests"})

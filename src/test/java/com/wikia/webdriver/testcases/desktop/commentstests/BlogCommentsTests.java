@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.desktop.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -25,7 +24,6 @@ public class BlogCommentsTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @DontRun(language = "szl")
   @Test(groups = "BlogComments_001")
   public void AnonCanCommentAReply() {
     WikiBasePageObject base = new WikiBasePageObject();
