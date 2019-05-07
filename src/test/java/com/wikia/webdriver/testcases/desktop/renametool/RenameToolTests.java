@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.renametool;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -27,7 +26,6 @@ import org.testng.annotations.Test;
 public class RenameToolTests extends NewTestTemplate {
 
   @Test
-  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void userProvidesCorrectNewNameDoesntClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
@@ -41,7 +39,6 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void userProvidesInCorrectNewNameDoesClickUnderstandCheckbox() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
@@ -55,7 +52,6 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void userProvidesNoNewUserNameErrorIsShown() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
@@ -76,7 +72,6 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(language = "szl")
   @Execute(asUser = User.QARENAME)
   public void goToHelpPage() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open();
@@ -98,7 +93,6 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(language = "szl")
   public void newUserCreateAndRenameDone() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -124,7 +118,6 @@ public class RenameToolTests extends NewTestTemplate {
   }
 
   @Test
-  @DontRun(language = "szl")
   @Execute(onWikia = "communitytest")
   public void newUserCreateEditProfileAndRenameDone() {
     Credentials credentials = new Credentials();

@@ -28,15 +28,8 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
-  @DontRun(language = "szl")
   public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut() {
     new HomePage().open().getKeyboardShortcuts().useShortcut("?").useShortcut("gi");
-  }
-
-  @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
-  @RunOnly(language = "szl")
-  public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcutSzl() {
-    new HomePage().open().getKeyboardShortcuts().useShortcutSzl("?").useShortcutSzl("gi");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut")

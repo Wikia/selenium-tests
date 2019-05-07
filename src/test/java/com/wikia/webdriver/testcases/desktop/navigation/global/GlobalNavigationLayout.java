@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.navigation.global;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RunOnly;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
@@ -22,7 +20,6 @@ public class GlobalNavigationLayout extends NewTestTemplate {
     wikiActivity.verifyGlobalNavigation();
   }
 
-  @DontRun(language = "szl")
   @Test(groups = {"globalNavigationBarLayoutForEnglishAnon"})
   public void testLayoutForEnglishAnon() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
@@ -57,7 +54,6 @@ public class GlobalNavigationLayout extends NewTestTemplate {
     Assertion.assertTrue(globalNavigation.isStartWikiButtonVisible());
   }
 
-  @DontRun(language = "szl")
   @Test(groups = {"globalNavigationBarLayoutForDeAnon"})
   @Execute(onWikia = "gta", language = "de")
   public void testLayoutForDeAnon() {
@@ -77,48 +73,9 @@ public class GlobalNavigationLayout extends NewTestTemplate {
     Assertion.assertFalse(globalNavigation.isNotificationsIconVisible());
   }
 
-  @RunOnly(language = "szl")
-  @Test(groups = {"globalNavigationBarLayoutForDeAnon"})
-  public void testLayoutForAnonSzl() {
-    GlobalNavigation globalNavigation = new HomePage().open().getGlobalNavigation();
-
-    Assertion.assertTrue(globalNavigation.isFandomLogoVisible());
-    Assertion.assertTrue(globalNavigation.isSearchInputVisible());
-    Assertion.assertTrue(globalNavigation.isStartWikiButtonVisible());
-    Assertion.assertTrue(globalNavigation.isGryHubVisible());
-    Assertion.assertTrue(globalNavigation.isFilmyHubVisible());
-    Assertion.assertTrue(globalNavigation.isTVDEHubVisible());
-    Assertion.assertTrue(globalNavigation.isWikisMenuVisible());
-
-    Assertion.assertFalse(globalNavigation.isVideoHubVisible());
-    Assertion.assertFalse(globalNavigation.isUserAvatarVisible());
-    Assertion.assertFalse(globalNavigation.isNotificationsIconVisible());
-  }
-
-  @DontRun(language = "szl")
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
   @Execute(onWikia = "harrypotter", language = "de", asUser = User.USER_GERMAN)
   public void testLayoutForDeLoggedIn() {
-    GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
-
-    Assertion.assertTrue(globalNavigation.isFandomLogoVisible());
-    Assertion.assertTrue(globalNavigation.isSearchInputVisible());
-    Assertion.assertTrue(globalNavigation.isStartWikiButtonVisible());
-    Assertion.assertTrue(globalNavigation.isPartnerSlotLinkVisible());
-    Assertion.assertTrue(globalNavigation.isVideospieleHubVisible());
-    Assertion.assertTrue(globalNavigation.isFilmeHubVisible());
-    Assertion.assertTrue(globalNavigation.isTVDEHubVisible());
-    Assertion.assertTrue(globalNavigation.isWikisMenuVisible());
-    Assertion.assertTrue(globalNavigation.isUserAvatarVisible());
-    Assertion.assertTrue(globalNavigation.isNotificationsIconVisible());
-
-    Assertion.assertFalse(globalNavigation.isVideoHubVisible());
-  }
-
-  @RunOnly(language = "szl")
-  @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
-  @Execute(asUser = User.USER_GERMAN)
-  public void testLayoutForLoggedInSzl() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
     Assertion.assertTrue(globalNavigation.isFandomLogoVisible());
