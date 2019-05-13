@@ -443,7 +443,12 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public boolean hasTopBoxad() {
-    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.TOP_BOXAD))) != null;
+    try {
+      return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.TOP_BOXAD))) != null;
+    } catch (NoSuchElementException e) {
+      Log.log("Slot top_boxad not found on the page", e, true);
+      return false;
+    }
   }
 
   /**
