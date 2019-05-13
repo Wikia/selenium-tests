@@ -107,11 +107,17 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, PAGE_DELAY_BTF.getUrl(), MOBILE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT, true),
-                         AdsContent.MOBILE_AD_IN_CONTENT
-    );
+    if (adsBaseObject.hasTopBoxad()) {
+      Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT, true),
+                           AdsContent.MOBILE_AD_IN_CONTENT
+      );
+    } else {
+      Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD, true),
+                           AdsContent.TOP_BOXAD
+      );
+    }
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB, true),
-                         AdsContent.MOBILE_PREFOOTER
+                         AdsContent.MOBILE_BOTTOM_LB
     );
   }
 
@@ -122,6 +128,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB, true));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD, true));
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT, true));
     Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB, true));
   }

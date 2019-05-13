@@ -442,6 +442,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
+  public boolean hasTopBoxad() {
+    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.TOP_BOXAD))) != null;
+  }
+
   /**
    * Mercury is a single page application (SPA) and if you want to test navigating between different
    * pages in the application you might want to use this method after clicking anything which is not
