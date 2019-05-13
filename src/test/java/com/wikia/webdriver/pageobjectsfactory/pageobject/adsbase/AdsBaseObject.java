@@ -701,6 +701,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerAdSlotWithMobileState(String slotName, Boolean isMobile) {
+    if (slotName.equals(AdsContent.MOBILE_AD_IN_CONTENT) && isMobile) {
+      triggerBLB();
+      return this;
+    }
+
     if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB) && isMobile) {
       triggerBLB();
       return this;
