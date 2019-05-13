@@ -23,7 +23,7 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
   private static final String
       AD_INFO_PATTERN
-      = "https?://.*wikia-services\\.com.*kv_pos=incontent_boxad.*kv_rv=3.*";
+      = "https?://.*wikia-services\\.com.*kv_pos=incontent_boxad.*kv_rv=2.*";
   private static final String AE3_INSTANT_GLOBAL = "wgAdDriverAdEngine3Countries";
   private static final String
       REPEATABLE_INCONTENT_INSTANT_GLOBAL
