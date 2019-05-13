@@ -53,26 +53,30 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
   public void adDisplayedBeforeSections() {
     AdsBaseObject ads = new AdsBaseObject();
     ads.getUrl(urlWithInstantGlobals(true));
+    int headerOffset = 0;
 
+    if (ads.hasTopBoxad()) {
+      headerOffset = 1;
+    }
 
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(1))));
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 1))));
     Assertion.assertTrue(isIncontenAdDisplayed(1, ads),
                          "IncontentBoxad is not displayed before section"
     );
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(3))));
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 4))));
     Assertion.assertTrue(isIncontenAdDisplayed(2, ads),
                          "IncontentBoxad is not displayed before section"
     );
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(4))));
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 5))));
     Assertion.assertTrue(isIncontenAdDisplayed(3, ads),
                          "IncontentBoxad is not displayed before section"
     );
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(5))));
-    Assertion.assertFalse(isIncontenAdDisplayed(5, ads),
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 6))));
+    Assertion.assertFalse(isIncontenAdDisplayed(4, ads),
                           "IncontentBoxad is displayed before section"
     );
-    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(6))));
-    Assertion.assertFalse(isIncontenAdDisplayed(6, ads),
+    ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 7))));
+    Assertion.assertFalse(isIncontenAdDisplayed(5, ads),
                           "IncontentBoxad is displayed before section"
     );
   }
@@ -85,7 +89,13 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
                                      Double.toString(HEADER_WITHOUT_AD_NUMBER)
     )));
 
-    Assertion.assertFalse(isIncontenAdDisplayed(3, ads),
+    int incontentIndex = 2;
+
+    if (ads.hasTopBoxad()) {
+      incontentIndex = 3;
+    }
+
+    Assertion.assertFalse(isIncontenAdDisplayed(incontentIndex, ads),
                           "IncontentBoxad is displayed before section"
     );
   }
