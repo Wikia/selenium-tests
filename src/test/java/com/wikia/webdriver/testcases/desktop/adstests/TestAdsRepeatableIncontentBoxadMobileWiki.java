@@ -61,23 +61,29 @@ public class TestAdsRepeatableIncontentBoxadMobileWiki extends NewTestTemplate {
 
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 1))));
     Assertion.assertTrue(isIncontenAdDisplayed(1, ads),
-                         "IncontentBoxad is not displayed before section"
+            "IncontentBoxad is not displayed before section"
     );
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 3))));
     Assertion.assertTrue(isIncontenAdDisplayed(2, ads),
-                         "IncontentBoxad is not displayed before section"
+            "IncontentBoxad is not displayed before section"
     );
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 4))));
     Assertion.assertTrue(isIncontenAdDisplayed(3, ads),
-                         "IncontentBoxad is not displayed before section"
+            "IncontentBoxad is not displayed before section"
     );
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 5))));
-    Assertion.assertFalse(isIncontenAdDisplayed(4, ads),
-                          "IncontentBoxad is displayed before section"
-    );
+    if (ads.hasTopBoxad()) {
+      Assertion.assertFalse(isIncontenAdDisplayed(4, ads),
+              "IncontentBoxad is displayed before section"
+      );
+    } else {
+      Assertion.assertTrue(isIncontenAdDisplayed(4, ads),
+              "IncontentBoxad is not displayed before section"
+      );
+    }
     ads.scrollTo(By.id(String.format(ARTICLE_HEADER_SELECTOR, Integer.toString(headerOffset + 6))));
     Assertion.assertFalse(isIncontenAdDisplayed(5, ads),
-                          "IncontentBoxad is displayed before section"
+            "IncontentBoxad is displayed before section"
     );
   }
 
