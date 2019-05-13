@@ -702,7 +702,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject triggerAdSlotWithMobileState(String slotName, Boolean isMobile) {
     if (slotName.equals(AdsContent.MOBILE_AD_IN_CONTENT) && isMobile) {
-      triggerBLB();
+      triggerMobileInContent();
       return this;
     }
 
@@ -772,10 +772,23 @@ public class AdsBaseObject extends WikiBasePageObject {
     doUntilElementVisible(by, f, 20);
   }
 
+  private void triggerMobileInContent() {
+    scrollToInContent();
+
+    simulateUserActivity(Duration.ofSeconds(3));
+  }
+
   private void triggerBLB() {
     scrollToFooter();
 
     simulateUserActivity(Duration.ofSeconds(3));
+  }
+
+  private void scrollToInContent() {
+    wait.forElementVisible(mobileInContent);
+    jsActions.scrollIntoView(mobileInContent);
+
+    Log.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
   private void simulateUserActivity(Duration duration) {
