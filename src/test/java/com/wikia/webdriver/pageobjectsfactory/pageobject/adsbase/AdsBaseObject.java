@@ -785,7 +785,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void scrollToInContent() {
-    wait.forElementVisible(mobileInContent);
     jsActions.scrollIntoView(mobileInContent);
 
     Log.log("scrollToFooter", "Scroll to the footer of the page", true);
