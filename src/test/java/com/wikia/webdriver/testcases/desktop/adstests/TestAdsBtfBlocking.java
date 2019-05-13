@@ -108,12 +108,12 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
 
     if (adsBaseObject.hasTopBoxad()) {
-      Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT, true),
-                           AdsContent.MOBILE_AD_IN_CONTENT
-      );
-    } else {
       Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD, true),
                            AdsContent.TOP_BOXAD
+      );
+    } else {
+      Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT, true),
+                           AdsContent.MOBILE_AD_IN_CONTENT
       );
     }
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB, true),
