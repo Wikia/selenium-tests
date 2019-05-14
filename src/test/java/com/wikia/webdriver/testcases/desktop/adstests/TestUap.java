@@ -47,8 +47,12 @@ public class TestUap extends TemplateNoFirstLoad {
   ) {
     AdsBaseObject ads = new AdsBaseObject(page.getUrl());
     verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
-    verifySlotsBlocked(ads, mobileInContent);
-    verifySlotsBlocked(ads, mobileBottomLeaderboard);
+    if (ads.hasTopBoxad()) {
+      verifySlotsBlocked(ads, AdsContent.TOP_BOXAD);
+    } else {
+      verifySlotsBlocked(ads, AdsContent.MOBILE_AD_IN_CONTENT);
+    }
+    verifySlotsBlocked(ads, AdsContent.MOBILE_BOTTOM_LB);
 
     ads.scrollTo(ARTICLE_MIDDLE);
     if (ads.hasTopBoxad()) {
@@ -77,11 +81,8 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, mobileBottomLeaderboard, false);
   }
 
-  private void verifySlotsBlocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
-    for (Map<String, Object> slotData : slotsData) {
-      String slotName = slotData.get("slotName").toString();
-      ads.verifyNoAdWithoutTrigger(AdsContent.getSlotSelector(slotName));
-    }
+  private void verifySlotsBlocked(AdsBaseObject ads, String slotName) {
+    ads.verifyNoAdWithoutTrigger(AdsContent.getSlotSelector(slotName));
   }
 
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData, Boolean isMobile) {
