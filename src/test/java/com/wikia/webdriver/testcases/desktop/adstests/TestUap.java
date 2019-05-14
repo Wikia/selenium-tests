@@ -22,6 +22,7 @@ import java.util.Map;
 public class TestUap extends TemplateNoFirstLoad {
 
   private static final String MOBILE_IN_CONTENT = "#incontent_boxad_1";
+  private static final String MOBILE_IN_CONTENT = "#incontent_boxad_1";
   private static final String RESOLVED_STATE = "resolved_state=0";
   private static final String ARTICLE_MIDDLE = "#ArticleMidSection, #Header";
   private static final String ARTICLE_FOOTER = ".article-footer";
@@ -51,12 +52,19 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
     ads.scrollTo(ARTICLE_MIDDLE);
-    ads.scrollTo(MOBILE_IN_CONTENT);
-    Assertion.assertTrue(ads.isMobileInContentAdDisplayed(),
-                         "Mobile in content ad is not displayed"
-    );
-    verifySlotsUnblocked(ads, mobileTopLeaderboard, true);
-    verifySlotsUnblocked(ads, mobileInContent, true);
+    if (ads.hasTopBoxad()) {
+      ads.scrollTo(AdsContent.TOP_BOXAD);
+      Assertion.assertTrue(ads.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD),
+              "Mobile top_boxad ad is not displayed"
+      );
+    } else {
+      ads.scrollTo(MOBILE_IN_CONTENT);
+      Assertion.assertTrue(ads.isMobileInContentAdDisplayed(),
+                           "Mobile in content ad is not displayed"
+      );
+      verifySlotsUnblocked(ads, mobileInContent, true);
+    }
+
     ads.scrollTo(ARTICLE_FOOTER);
     verifySlotsUnblocked(ads, mobileBottomLeaderboard, true);
 
