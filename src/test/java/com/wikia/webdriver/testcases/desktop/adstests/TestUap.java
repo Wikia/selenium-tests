@@ -59,7 +59,7 @@ public class TestUap extends TemplateNoFirstLoad {
     ads.scrollTo(ARTICLE_MIDDLE);
     if (ads.hasTopBoxad()) {
       ads.scrollTo(AdsContent.TOP_BOXAD);
-      Assertion.assertTrue(ads.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD),
+      Assertion.assertTrue(ads.checkSlotOnPageLoaded(AdsContent.TOP_BOXAD, true),
               "Mobile top_boxad ad is not displayed"
       );
     } else {
