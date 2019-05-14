@@ -82,7 +82,7 @@ public class TestUap extends TemplateNoFirstLoad {
   }
 
   private void verifySlotsBlocked(AdsBaseObject ads, String slotName) {
-    ads.verifyNoAdWithoutTrigger(AdsContent.getSlotSelector(slotName));
+    ads.verifyNoAdWithoutTrigger(AdsContent.getSlotSelector(slotName, true));
   }
 
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData, Boolean isMobile) {
