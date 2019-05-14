@@ -22,7 +22,6 @@ import java.util.Map;
 public class TestUap extends TemplateNoFirstLoad {
 
   private static final String MOBILE_IN_CONTENT = "#incontent_boxad_1";
-  private static final String MOBILE_IN_CONTENT = "#incontent_boxad_1";
   private static final String RESOLVED_STATE = "resolved_state=0";
   private static final String ARTICLE_MIDDLE = "#ArticleMidSection, #Header";
   private static final String ARTICLE_FOOTER = ".article-footer";
