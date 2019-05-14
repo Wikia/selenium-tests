@@ -32,7 +32,9 @@ public class TestUap extends TemplateNoFirstLoad {
   ) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(RESOLVED_STATE), WindowSize.DESKTOP);
     verifySlotsUnblocked(ads, atfSlots, false);
-    verifySlotsBlocked(ads, btfSlots);
+    for (Map<String, Object> slotData : btfSlots) {
+      verifySlotsBlocked(ads, slotData.get("slotName").toString());
+    }
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots), false);
   }
 
