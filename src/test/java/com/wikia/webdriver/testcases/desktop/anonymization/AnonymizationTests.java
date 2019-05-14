@@ -120,7 +120,7 @@ public class AnonymizationTests extends NewTestTemplate {
   }
 
   @Test
-  public void anonyizationMessageWallRemoved() {
+  public void anonymizationMessageWallRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
     String testsite = "AnonymizationTest";
