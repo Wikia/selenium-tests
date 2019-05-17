@@ -39,6 +39,9 @@ public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
     new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
     article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userName10);
+    // Caused by: https://wikia-inc.atlassian.net/browse/PLATFORM-3829
+    // User wont be logged in after the migration is finished, since we are not going to sync access token over in CNW
+    // TODO: Enable once wikia.com -> fandom.com migration is complete
+    // article.verifyUserLoggedIn(credentials.userName10);
   }
 }
