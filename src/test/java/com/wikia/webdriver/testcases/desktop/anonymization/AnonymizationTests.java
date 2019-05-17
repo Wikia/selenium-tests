@@ -170,12 +170,6 @@ public class AnonymizationTests extends NewTestTemplate {
 
     Assertion.assertStringContains(anonymizationPage.getAnonConfirmation(), qanon);
 
-    UserProfilePage userProfilePage = new UserProfilePage().open(qanon);
-    Assertion.assertEquals(userProfilePage.getNotExistsMessage(), String.format(
-        "User account \"%s\" does not exist or has never logged in on this wiki.",
-        qanon
-    ));
-
     articleHistoryPage = new ArticleHistoryPage().open(testsite);
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
 
