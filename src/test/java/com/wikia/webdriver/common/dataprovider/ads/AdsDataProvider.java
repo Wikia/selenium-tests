@@ -418,48 +418,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsUapMercury() {
-    return new Object[][]{{UAP_PAGE, Arrays.asList(ImmutableMap.<String, Object>builder().put(
-        "slotName",
-        AdsContent.MOBILE_TOP_LB
-    )
-                                                       .put("slotSize", new Dimension(360, 540))
-                                                       .put("lineItemId", "365404452")
-                                                       .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                                    AdsContent.MOBILE_AD_IN_CONTENT
-                           )
-                                             .put("slotSize", new Dimension(300, 250))
-                                             .put("lineItemId", "365416332")
-                                             .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                                    AdsContent.MOBILE_BOTTOM_LB
-                           )
-                                             .put("slotSize", new Dimension(360, 540))
-                                             .put("lineItemId", "365416332")
-                                             .build())},
-                          {new Page(WIKI_SPECIAL, "SyntheticTests/UAP/Infobox"),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                                    AdsContent.MOBILE_TOP_LB
-                           )
-                                             .put("slotSize", new Dimension(360, 540))
-                                             .put("lineItemId", "365404452")
-                                             .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                                    AdsContent.MOBILE_AD_IN_CONTENT
-                           )
-                                             .put("slotSize", new Dimension(300, 250))
-                                             .put("lineItemId", "365416332")
-                                             .build()),
-                           Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                                    AdsContent.MOBILE_BOTTOM_LB
-                           )
-                                             .put("slotSize", new Dimension(360, 540))
-                                             .put("lineItemId", "365416332")
-                                             .build())}};
-  }
-
-  @DataProvider
   public static Object[][] adsVuapClickToPlayDesktop() {
     return new Object[][]{{new Page(WIKI_SPECIAL,
                                     "SyntheticTests/VUAP/ClickToPlay/BlueAd"

@@ -49,26 +49,6 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "dfpParams", groups = {
-      "MobileAds", "AdsDfpParamsPresentMercury"})
-  public void dfpParamsPresentMercury(
-      String wikiName,
-      String article,
-      String adUnit,
-      String slot,
-      List<String> pageParams,
-      List<String> slotParams
-  ) {
-    String testedPage = UrlBuilder.createUrlBuilderForWiki(wikiName).getUrlForPath(article);
-    AdsBaseObject ads = new AdsBaseObject(testedPage);
-
-    ads.refreshPage();
-    ads.triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
-    ads.triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
-    ads.verifyGptParams(slot, pageParams, slotParams);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"MobileAds", "AdsDfpParamsPresentMercury"})
   public void testAdsMEGAValMorganAUMercury(
   ) {

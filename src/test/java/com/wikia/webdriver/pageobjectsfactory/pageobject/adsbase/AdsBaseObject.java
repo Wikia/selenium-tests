@@ -247,7 +247,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
       triggerAdSlot(AdsContent.BOTTOM_LB);
     } else {
-      triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
       scrollTo(ARTICLE_FOOTER);
       triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
     }
