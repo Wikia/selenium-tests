@@ -47,7 +47,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   private By otherCommunitiesLinkBy = By.cssSelector(".other-communities-link a");
 
-  public CrossWikiSearchPageObject(WebDriver driver) {
+  public CrossWikiSearchPageObject() {
     super();
   }
 

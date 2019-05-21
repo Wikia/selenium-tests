@@ -17,11 +17,11 @@ public class CrossWikiSearchProvider {
 
   @DataProvider
   public static final Object[][] getExactMatchQueries() {
-    return new Object[][]{{"call of duty", "Call of Duty Wiki", "Gaming"},
-                          {"call-of-duty", "Call of Duty Wiki", "Gaming"},
-                          {"call_of_duty", "Call of Duty Wiki", "Gaming"},
-                          {"callofduty", "Call of Duty Wiki", "Gaming"},
-                          {"cod", "Call of Duty Wiki", "Gaming"},};
+    return new Object[][]{{"call of duty", "Call of Duty Wiki", "VIDEO GAMES"},
+                          {"call-of-duty", "Call of Duty Wiki", "VIDEO GAMES"},
+                          {"call_of_duty", "Call of Duty Wiki", "VIDEO GAMES"},
+                          {"callofduty", "Call of Duty Wiki", "VIDEO GAMES"},
+                          {"cod", "Call of Duty Wiki", "VIDEO GAMES"},};
   }
 
   /**
@@ -30,10 +30,6 @@ public class CrossWikiSearchProvider {
   @DataProvider
   public static final Object[][] getPushToTopQueries() {
     return new Object[][]{{"Gauzz's Sandbox", "Gauzz's Sandbox Wiki"},
-// PLA-1602
-//			{
-//				"Marvel: Avengers Alliance Wiki", "Marvel: Avengers Alliance Wiki"
-//			},
                           {"Red vs. Blue", "Red vs. Blue Wiki"},
                           {"PlayStation All-Stars FanFiction Royale",
                            "PlayStation All-Stars FanFiction Royale Wiki"},
