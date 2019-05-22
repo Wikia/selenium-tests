@@ -5,9 +5,11 @@ import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.mobile.pages.ArticlePage;
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.DiscussionsPage;
@@ -68,7 +70,7 @@ public class CommunityBarMobileWikiTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.USER)
-  public void clickOnDiscussionsIconTakesUserToDiscussions() {
+  public void clickOnDiscussionsIconTakesUserToFeeds() {
     CommunityBarMobile localNavMobile =
         new ArticlePage()
             .open(MobileSubpages.MAIN_PAGE)
@@ -76,9 +78,7 @@ public class CommunityBarMobileWikiTests extends NewTestTemplate {
 
     localNavMobile.clickDiscussionsEntrypoint();
 
-    DiscussionsPage discussions = new DiscussionsPage();
-
-    Assertion.assertTrue(discussions.isDiscussionsPresent());
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   @Test
