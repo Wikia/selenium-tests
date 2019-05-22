@@ -34,7 +34,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsOnSpecialOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsPrebid"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestVideoVelesMobile"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSpotlights"/>
