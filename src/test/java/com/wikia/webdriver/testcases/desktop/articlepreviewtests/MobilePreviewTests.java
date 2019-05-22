@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.desktop.articlepreviewtests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -22,6 +23,7 @@ public class MobilePreviewTests extends NewTestTemplate {
   private static final String ARTICLE_PREVIEW_PAGE = "ArticlePreview";
 
   @Test(groups = "desktop-articlePreview-mobilePreviewIsRenderedCorrectlyInModal")
+  @RelatedIssue(issueID = "IW-1916")
   public void mobilePreviewIsRenderedCorrectlyInModal() {
     new ArticleContent().push(RICH_ARTICLE, ARTICLE_PREVIEW_PAGE);
 
