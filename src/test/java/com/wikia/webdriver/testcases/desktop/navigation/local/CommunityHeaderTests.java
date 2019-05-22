@@ -31,7 +31,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CommunityHeaderTests"})
-  @Execute(onWikia = MobileWikis.DE_WIKI)
+  @Execute(onWikia = "qadiscussions", language = "de")
   public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeaderDesktop().clickWikiName();
 
