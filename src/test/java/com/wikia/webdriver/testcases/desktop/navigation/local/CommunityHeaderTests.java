@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.desktop.navigation.local;
 
-import com.wikia.webdriver.common.contentpatterns.MobileWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -140,7 +139,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   public void testDiscussLinkOnWikiWithDiscussionsWithoutForum() {
     new CommunityHeaderDesktop().clickDiscussLink();
 
-    Assertion.assertTrue(driver.getCurrentUrl().matches(".*(wikia|fandom).com/d/f"));
+    Assertion.assertStringContains(driver.getCurrentUrl(),String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   /**
@@ -155,7 +154,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
     Assertion.assertStringContains(driver.getCurrentUrl(),"Special:Forum");
 
     communityHeader.clickDiscussLink();
-    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/d/f", Configuration.getEnvType().getDomain()));
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   /**
