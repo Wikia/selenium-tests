@@ -84,7 +84,7 @@ public class RenameToolTests extends NewTestTemplate {
   @Execute(asUser = User.QARENAME)
   public void confirmationModalDeclineRedirectionToRenameTool() {
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
-        .fillFormData("ChesskyTest", "ChesskyTest", "q")
+        .fillFormData("ChesskyTest", "ChesskyTest", User.QARENAME.getPassword())
         .agreeToTermsAndConditions()
         .submitChange();
     new ConfirmationModalPage().reject();
