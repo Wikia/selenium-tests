@@ -99,7 +99,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  public void userIsTakenToFeedsAfterClickOnViewAll() {
+  public void userIsTakenToDiscussionsAfterClickOnViewAll() {
     new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
@@ -122,7 +122,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  public void userIsTakenToFeedsPostViewAfterClickOnPost() {
+  public void userIsTakenToDiscussionsPostViewAfterClickOnPost() {
     new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
