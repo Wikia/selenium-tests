@@ -2,7 +2,9 @@ package com.wikia.webdriver.testcases.desktop.auth;
 
 import com.wikia.webdriver.common.contentpatterns.MobileSubpages;
 import com.wikia.webdriver.common.contentpatterns.MobileWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.*;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.*;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -115,21 +117,22 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
-  public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
-    PostsListPage discussionPage = new PostsListPage().open();
+  public void userIsRedirectedToFeedsPageUponSignUpFromFeedsPageDesktop() {
+
+    PostsListPage feedsPage = new PostsListPage().open();
     signUpOnDesktopFromDiscussionPageAs(createNewUser(userWithEmail));
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-      "User should be redirected to discussion post list view upon sign up");
+    feedsPage.waitForPageReload();
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   @Test(groups = MOBILE)
   @Execute(onWikia = MobileWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
-    PostsListPage discussionPage = new PostsListPage().open();
-    signUpOnDiscussionMobilePageAs(discussionPage, createNewUser(userWithEmail));
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-      "User should be redirected to discussion post list view upon sign up");
+  public void userIsRedirectedToFeedsPageUponSignUpFromFeedsPageMobile() {
+    PostsListPage feedsPage = new PostsListPage().open();
+    signUpOnDiscussionMobilePageAs(feedsPage, createNewUser(userWithEmail));
+    feedsPage.waitForPageReload();
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   @Test(groups = DESKTOP)

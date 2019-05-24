@@ -18,8 +18,7 @@ public class GlobalNavigationSearching extends NewTestTemplate {
   public Object[][] getDataForGlobalSearch() {
     return new Object[][]{{"muppet", "en", "kermit", "Special:Search"},
                           {"gta", "de", "san fierro", "Spezial:Suche"},
-                          {"pad", "zh", "pad", "Special:%E6%90%9C%E7%B4%A2"},
-                          {"mediawiki119", "szl", "Mix", "Specjalna:Szukaj"}};
+                          {"pad", "zh", "pad", "Special:%E6%90%9C%E7%B4%A2"}};
   }
 
   @Test(groups = {"serachGlobalNavigationBarAsAnon"}, dataProvider = "getDataForGlobalSearch")

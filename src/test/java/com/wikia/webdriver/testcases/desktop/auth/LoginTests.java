@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -77,21 +78,21 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
-  public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnDesktop() {
-    PostsListPage discussionPage = new PostsListPage().open();
+  public void userIsRedirectedToFeedsPageUponLogInFromFeedsPageOnDesktop() {
+    PostsListPage feedsPage = new PostsListPage().open();
     loginOnDesktopFromDiscussionPageAs(USER);
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-      "User should be redirected to discussion post list view upon log in");
+    feedsPage.waitForPageReload();
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   @Test(groups = MOBILE)
   @Execute(onWikia = MobileWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnMobile() {
-    PostsListPage discussionPage = new PostsListPage().open();
+    PostsListPage feedsPage = new PostsListPage().open();
     loginOnDiscussionMobilePageAs(USER);
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
-      "User should be redirected to discussion post list view upon log in");
+    feedsPage.waitForPageReload();
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   @Test(groups = DESKTOP)

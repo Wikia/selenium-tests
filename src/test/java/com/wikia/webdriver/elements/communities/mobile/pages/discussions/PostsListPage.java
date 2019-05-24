@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PostsListPage extends PageWithPosts {
 
-  public static final String PATH = "/d/f?sort=latest";
+  public static final String PATH = "/f";
   @Getter(lazy = true)
   private final PostEditor postEditor = new PostEditor();
   @Getter(lazy = true)
@@ -34,7 +34,6 @@ public class PostsListPage extends PageWithPosts {
   @Override
   public PostsListPage open() {
     driver.get(getUrlWithCacheBuster(urlBuilder.getUrl() + PATH));
-    waitForEmberLoad();
     return this;
   }
 
