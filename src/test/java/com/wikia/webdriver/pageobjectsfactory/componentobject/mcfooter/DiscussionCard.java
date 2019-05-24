@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter;
 
 import com.wikia.webdriver.elements.communities.mobile.pages.discussions.DiscussionsPage;
+import com.wikia.webdriver.elements.communities.mobile.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -61,12 +62,12 @@ public class DiscussionCard extends WikiBasePageObject {
     return new UserProfilePage();
   }
 
-  public DiscussionsPage clickDiscussionsPost() {
+  public PostDetailsPage clickDiscussionsPost() {
     scrollTo(discussionsPost);
     wait.forElementClickable(discussionsPostTitle);
     discussionsPostTitle.click();
 
-    return new DiscussionsPage();
+    return new PostDetailsPage();
   }
 
   public boolean isZeroState() {

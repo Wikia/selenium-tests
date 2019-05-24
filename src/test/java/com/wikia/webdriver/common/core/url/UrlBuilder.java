@@ -21,7 +21,8 @@ public class UrlBuilder extends BaseUrlBuilder {
       FANDOM_EXCLUDED_WIKIS =
       new HashSet<>(Arrays.asList(new String[]{"community", "community-search", "gameofthrones", "sydneybuses",
                                                "elderscrolls", "gta", "harrypotter", "sktest123", "pokemon", "starwars",
-                                               "dnd4", "muppet", "pad"}));
+                                               "dnd4", "muppet", "pad", "nonenwikiwithemptydiscussions",
+                                               "nonenwikiwithoutdiscussions"}));
   private final String wikiName;
   private Boolean forceHttps;
   private Boolean forceWikiaOrg;
