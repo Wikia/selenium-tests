@@ -2,9 +2,9 @@ package com.wikia.webdriver.testcases.desktop.mcfootertests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.mobile.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.DiscussionCard;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
@@ -74,7 +74,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
-  @Execute(onWikia = "gta", language = "es")
+  @Execute(onWikia = "elderscrolls", language = "es")
   public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles() {
     MixedContentFooter mcFooter = new MixedContentFooter().openWikiMainPage().scrollToMCFooter();
 
@@ -98,13 +98,13 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   void isUserTakenToDiscussionsAfterClickOnViewAll() {
-    DiscussionsPage discussions = new MixedContentFooter().openWikiMainPage()
+    new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
         .scrollToDiscussions()
         .clickOnViewAllLinkInDiscussions();
 
-    Assertion.assertTrue(discussions.isDiscussionsPresent());
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/%s/f", Configuration.getEnvType().getDomain(), Configuration.getWikiLanguage()));
   }
 
   @Test
@@ -129,12 +129,11 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .scrollToDiscussions()
         .clickDiscussionsPost();
 
-    String url = driver.getCurrentUrl();
-    Assertion.assertTrue(url.contains(".wikia.com/d/"));
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/%s/f/p/", Configuration.getEnvType().getDomain(), Configuration.getWikiLanguage()));
   }
 
   @Test
-  @Execute(onWikia = "enwikiwithemptydiscussions")
+  @Execute(onWikia = "nonenwikiwithemptydiscussions", language = "es")
   public void zeroStateAppearsInDiscussionsWithoutPosts() {
     DiscussionCard discussionCard = new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()

@@ -32,22 +32,22 @@ public class HTMLTitleTests extends NewTestTemplate {
    * [0] wikiName [1] path [2] expected title
    */
   private String[][] testCases = {
-      {"sktest123", "Sktest123_Wiki", "Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "Style-5H2", "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "TestDisplayTitle", "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "Category:Premium_Videos",
+      {"sktest123", "en", "Sktest123_Wiki", "Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "en", "Style-5H2", "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "en", "TestDisplayTitle", "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "en", "Category:Premium_Videos",
        "Category:Premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "Category:Non-premium_Videos",
+      {"sktest123", "en", "Category:Non-premium_Videos",
        "Category:Non-premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "Category:Premium", "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"es.pokemon", "WikiDex", "WikiDex | FANDOM powered by Wikia"},
-      {"es.pokemon", "Lista_de_Pokémon", "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"},
-      {"es.pokemon", "Categoría:Regiones",
+      {"sktest123", "en", "Category:Premium", "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"pokemon", "es", "WikiDex", "WikiDex | FANDOM powered by Wikia"},
+      {"pokemon", "es", "Lista_de_Pokémon", "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"},
+      {"pokemon", "es", "Categoría:Regiones",
        "Categoría:Regiones | WikiDex | FANDOM powered by Wikia"},
-      {"starwars", "Main_Page", "Wookieepedia | FANDOM powered by Wikia"},
-      {"starwars", "Droid_starfighter",
+      {"starwars", "en", "Main_Page", "Wookieepedia | FANDOM powered by Wikia"},
+      {"starwars", "en", "Droid_starfighter",
        "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"},
-      {"dnd4", "Dungeons_&_Dragons", "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"}};
+      {"dnd4", "en", "Dungeons_&_Dragons", "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"}};
 
   private Head head;
   private Navigate navigate;
@@ -62,13 +62,13 @@ public class HTMLTitleTests extends NewTestTemplate {
   public void mercury_htmlTitleSet() {
     for (String[] testCase : testCases) {
       String testUrl = urlBuilder.appendQueryStringToURL(new Page(testCase[0],
-                                                                  testCase[1]
+                                                                  testCase[1], testCase[2]
       ).getUrl(), "cb=" + DateTime.now().getMillis());
 
       navigate.toUrl(testUrl);
       String actualTitle = head.getDocumentTitle();
 
-      Assertion.assertEquals(actualTitle, testCase[2]);
+      Assertion.assertEquals(actualTitle, testCase[3]);
     }
   }
 
@@ -82,14 +82,14 @@ public class HTMLTitleTests extends NewTestTemplate {
       PrintWriter out2 = new PrintWriter("./logs/seo-guard2.txt");
 
       for (String[] testCase : testCases) {
-        navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
+        navigate.toUrl(new Page(testCase[0], testCase[1], testCase[2]).getUrl());
         new Wait(driver).forElementVisible(By.cssSelector(".side-nav-toggle-2016"));
         this.pushMetaTagsToFile(out);
 
         if (!originalEnv.equals("prod")) {
           Configuration.setTestValue("env", "prod");
 
-          navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
+          navigate.toUrl(new Page(testCase[0], testCase[1], testCase[2]).getUrl());
           new Wait(driver).forElementVisible(By.cssSelector(".side-nav-toggle-2016"));
           this.pushMetaTagsToFile(out2);
 

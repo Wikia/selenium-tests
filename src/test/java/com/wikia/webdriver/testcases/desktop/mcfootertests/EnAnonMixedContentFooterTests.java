@@ -2,9 +2,9 @@ package com.wikia.webdriver.testcases.desktop.mcfootertests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.mobile.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.DiscussionCard;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FandomPageObject;
@@ -99,12 +99,12 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
 
   @Test
   public void userIsTakenToDiscussionsAfterClickOnViewAll() {
-    DiscussionsPage discussions = new MixedContentFooter().openWikiMainPage()
+    new MixedContentFooter().openWikiMainPage()
         .scrollToMCFooter()
         .getDiscussionsCard()
         .clickOnViewAllLinkInDiscussions();
 
-    Assertion.assertTrue(discussions.isDiscussionsPresent());
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f", Configuration.getEnvType().getDomain()));
   }
 
   @Test
@@ -127,8 +127,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
         .getDiscussionsCard()
         .clickDiscussionsPost();
 
-    String url = driver.getCurrentUrl();
-    Assertion.assertTrue(url.matches(".*\\.(wikia|fandom)\\.com/d/.*"));
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f/p/", Configuration.getEnvType().getDomain()));
   }
 
   @Test
