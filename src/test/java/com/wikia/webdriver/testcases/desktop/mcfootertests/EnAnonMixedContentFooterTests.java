@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.communities.mobile.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.DiscussionCard;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedContentFooter;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.FandomPageObject;
@@ -128,7 +127,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
         .getDiscussionsCard()
         .clickDiscussionsPost();
 
-    Assertion.assertTrue(driver.getCurrentUrl().matches(".*.fandom.com/f/p/.*"));
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/f/p/", Configuration.getEnvType().getDomain()));
   }
 
   @Test

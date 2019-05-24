@@ -104,7 +104,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .scrollToDiscussions()
         .clickOnViewAllLinkInDiscussions();
 
-    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s.%s.%s/%s/f", Configuration.getWikiName(),Configuration.getEnv(),Configuration.getEnvType().getDomain(), Configuration.getWikiLanguage()));
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/%s/f", Configuration.getEnvType().getDomain(), Configuration.getWikiLanguage()));
   }
 
   @Test
@@ -129,7 +129,7 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate {
         .scrollToDiscussions()
         .clickDiscussionsPost();
 
-    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s.%s.%s/%s/f/p/", Configuration.getWikiName(),Configuration.getEnv(),Configuration.getEnvType().getDomain(), Configuration.getWikiLanguage()));
+    Assertion.assertStringContains(driver.getCurrentUrl(), String.format("%s/%s/f/p/", Configuration.getEnvType().getDomain(), Configuration.getWikiLanguage()));
   }
 
   @Test
