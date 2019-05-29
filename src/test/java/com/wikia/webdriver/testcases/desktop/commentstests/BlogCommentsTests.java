@@ -11,8 +11,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.communities.desktop.components.notifications.Notification;
 import com.wikia.webdriver.elements.communities.desktop.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
