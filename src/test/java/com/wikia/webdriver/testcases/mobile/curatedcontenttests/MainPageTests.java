@@ -28,7 +28,7 @@ public class MainPageTests extends NewTestTemplate {
   private static String WIKIA_STATS_SELECTOR = ".wikia-stats-container";
   private static String FEATURED_CONTENT_SELECTOR = ".featured-content";
   private static String CURATED_CONTENT_SELECTOR = ".curated-content";
-  private static String AD_MOBILE_IN_CONTENT_SELECTOR = "#incontent_boxad_1";
+  private static String AD_MOBILE_TOP_BOXAD_SELECTOR = "#top_boxad";
   private static String TRENDING_ARTICLES_SELECTOR = ".trending-articles";
   private static String TRENDING_VIDEOS_SELECTOR = ".trending-videos";
 
@@ -50,18 +50,18 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPageByPath(MobileSubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).isFooterVisible();
 
-    List<String> elemntsWhichShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
+    List<String> elementsWhichShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
                                                                 ARTICLE_TITLE_SELECTOR,
                                                                 WIKIA_STATS_SELECTOR,
                                                                 FEATURED_CONTENT_SELECTOR,
                                                                 CURATED_CONTENT_SELECTOR,
-                                                                AD_MOBILE_IN_CONTENT_SELECTOR,
+                                                               AD_MOBILE_TOP_BOXAD_SELECTOR,
                                                                 TRENDING_ARTICLES_SELECTOR,
                                                                 TRENDING_VIDEOS_SELECTOR
     );
 
-    verifyElementsVisible(elemntsWhichShouldBeDisplayed);
-    verifyElementsPositionOnPage(elemntsWhichShouldBeDisplayed);
+    verifyElementsVisible(elementsWhichShouldBeDisplayed);
+    verifyElementsPositionOnPage(elementsWhichShouldBeDisplayed);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_002")
@@ -71,17 +71,17 @@ public class MainPageTests extends NewTestTemplate {
 
     navigate.toPageByPath(MobileSubpages.ECC_MAIN_PAGE);
 
-    List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(RIVERSED_ARTICLE_TITLE_SELECTOR);
+    List<String> elementsWhichShouldBeDisplayed = Arrays.asList(RIVERSED_ARTICLE_TITLE_SELECTOR);
 
-    List<String> elemntsWhiuchShouldNotBeDisplayed = Arrays.asList(WIKIA_STATS_SELECTOR,
+    List<String> elementsWhichShouldNotBeDisplayed = Arrays.asList(WIKIA_STATS_SELECTOR,
                                                                    FEATURED_CONTENT_SELECTOR,
                                                                    CURATED_CONTENT_SELECTOR,
                                                                    TRENDING_ARTICLES_SELECTOR,
                                                                    TRENDING_VIDEOS_SELECTOR
     );
 
-    verifyElementsVisible(elemntsWhiuchShouldBeDisplayed);
-    verifyElementsNotVisible(elemntsWhiuchShouldNotBeDisplayed);
+    verifyElementsVisible(elementsWhichShouldBeDisplayed);
+    verifyElementsNotVisible(elementsWhichShouldNotBeDisplayed);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_003")
@@ -91,19 +91,19 @@ public class MainPageTests extends NewTestTemplate {
 
     navigate.toPageByPath(MobileSubpages.NTACC_MAIN_PAGE);
 
-    List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
+    List<String> elementsWhichShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
                                                                 ARTICLE_TITLE_SELECTOR,
                                                                 WIKIA_STATS_SELECTOR,
                                                                 FEATURED_CONTENT_SELECTOR,
                                                                 CURATED_CONTENT_SELECTOR,
-                                                                AD_MOBILE_IN_CONTENT_SELECTOR,
+                                                                AD_MOBILE_TOP_BOXAD_SELECTOR,
                                                                 TRENDING_VIDEOS_SELECTOR
     );
 
-    List<String> elemntsWhiuchShouldNotBeDisplayed = Arrays.asList(TRENDING_ARTICLES_SELECTOR);
+    List<String> elementsWhichShouldNotBeDisplayed = Arrays.asList(TRENDING_ARTICLES_SELECTOR);
 
-    verifyElementsVisible(elemntsWhiuchShouldBeDisplayed);
-    verifyElementsNotVisible(elemntsWhiuchShouldNotBeDisplayed);
+    verifyElementsVisible(elementsWhichShouldBeDisplayed);
+    verifyElementsNotVisible(elementsWhichShouldNotBeDisplayed);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_004")
@@ -113,18 +113,18 @@ public class MainPageTests extends NewTestTemplate {
 
     navigate.toPageByPath(MobileSubpages.NTVCC_MAIN_PAGE);
 
-    List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
+    List<String> elementsWhichShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
                                                                 ARTICLE_TITLE_SELECTOR,
                                                                 WIKIA_STATS_SELECTOR,
                                                                 FEATURED_CONTENT_SELECTOR,
                                                                 CURATED_CONTENT_SELECTOR,
-                                                                AD_MOBILE_IN_CONTENT_SELECTOR
+                                                                AD_MOBILE_TOP_BOXAD_SELECTOR
     );
 
-    List<String> elemntsWhiuchShouldNotBeDisplayed = Arrays.asList(TRENDING_VIDEOS_SELECTOR);
+    List<String> elementsWhichShouldNotBeDisplayed = Arrays.asList(TRENDING_VIDEOS_SELECTOR);
 
-    verifyElementsVisible(elemntsWhiuchShouldBeDisplayed);
-    verifyElementsNotVisible(elemntsWhiuchShouldNotBeDisplayed);
+    verifyElementsVisible(elementsWhichShouldBeDisplayed);
+    verifyElementsNotVisible(elementsWhichShouldNotBeDisplayed);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_005")
@@ -133,20 +133,20 @@ public class MainPageTests extends NewTestTemplate {
     init();
     navigate.toPageByPath(MobileSubpages.NTAVCC_MAIN_PAGE);
 
-    List<String> elemntsWhiuchShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
+    List<String> elementsWhichShouldBeDisplayed = Arrays.asList(AD_TOP_LEADERBOARD_SELECTOR,
                                                                 ARTICLE_TITLE_SELECTOR,
                                                                 WIKIA_STATS_SELECTOR,
                                                                 FEATURED_CONTENT_SELECTOR,
                                                                 CURATED_CONTENT_SELECTOR,
-                                                                AD_MOBILE_IN_CONTENT_SELECTOR
+                                                                AD_MOBILE_TOP_BOXAD_SELECTOR
     );
 
-    List<String> elemntsWhiuchShouldNotBeDisplayed = Arrays.asList(TRENDING_ARTICLES_SELECTOR,
+    List<String> elementsWhichShouldNotBeDisplayed = Arrays.asList(TRENDING_ARTICLES_SELECTOR,
                                                                    TRENDING_VIDEOS_SELECTOR
     );
 
-    verifyElementsVisible(elemntsWhiuchShouldBeDisplayed);
-    verifyElementsNotVisible(elemntsWhiuchShouldNotBeDisplayed);
+    verifyElementsVisible(elementsWhichShouldBeDisplayed);
+    verifyElementsNotVisible(elementsWhichShouldNotBeDisplayed);
   }
 
   private void verifyElementsVisible(List<String> elementsList) {
