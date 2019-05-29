@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.desktop.blogtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.api.BlogContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -24,8 +24,6 @@ import java.util.List;
 
 @Test(groups = "BlogTests")
 public class BlogTests extends NewTestTemplate {
-
-  private static final String USER_BLOG_PATH_FORMAT = "User_blog:%s/%s";
 
   @Execute(asUser = User.BLOGS)
   public void UserCanAddBlogFromProfilePage() {
@@ -59,12 +57,7 @@ public class BlogTests extends NewTestTemplate {
   public void UserCanEditBlogPost() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-    new ArticleContent(User.BLOGS).push(blogContent,
-                                        String.format(USER_BLOG_PATH_FORMAT,
-                                                      User.BLOGS.getUserName(),
-                                                      blogTitle
-                                        )
-    );
+    new BlogContent(User.BLOGS).push(blogContent, blogTitle);
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
@@ -73,17 +66,13 @@ public class BlogTests extends NewTestTemplate {
     blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
+
   @Test(groups = "k8s-notification-fail")
   @Execute(asUser = User.STAFF_FORUM)
   public void StaffCanDeleteAndUndeleteUsersBlogPost() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-    new ArticleContent(User.BLOGS).push(blogContent,
-                                        String.format(USER_BLOG_PATH_FORMAT,
-                                                      User.BLOGS.getUserName(),
-                                                      blogTitle
-                                        )
-    );
+    new BlogContent(User.BLOGS).push(blogContent, blogTitle);
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
@@ -114,6 +103,7 @@ public class BlogTests extends NewTestTemplate {
 
     blogPage.getBlogTitle();
   }
+
   @Test(groups = "k8s-notification-fail")
   @Execute(asUser = User.STAFF_FORUM)
   public void StaffCanMoveUserBlogPosts() {
@@ -121,12 +111,7 @@ public class BlogTests extends NewTestTemplate {
         .getMillis();
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-    new ArticleContent(User.BLOGS).push(blogContent,
-                                        String.format(USER_BLOG_PATH_FORMAT,
-                                                      User.BLOGS.getUserName(),
-                                                      blogTitle
-                                        )
-    );
+    new BlogContent(User.BLOGS).push(blogContent, blogTitle);
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     RenamePageObject renamePage = blogPage.renameUsingDropdown();
