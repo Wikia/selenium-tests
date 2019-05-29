@@ -136,14 +136,26 @@ public class BlogContent extends ApiCall {
       // Retry if 200, since on that specific call, it should be 302 redirect to created page,
       // so 200 is probably an error
       if (resp.getStatusLine().getStatusCode() == HttpStatusCodes.OK) {
+        httpPost.releaseConnection();
         Log.info("CONTENT PUSH: ", "Retry push content to: " + httpPost.toString());
         Log.info("CONTENT PUSH: ", "STATUS before retry: " + resp.getStatusLine());
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
         resp = httpClient.execute(httpPost);
       }
 
       if (resp.getStatusLine().getStatusCode() == HttpStatusCodes.OK) {
+        httpPost.releaseConnection();
         Log.info("CONTENT PUSH: ", "Retry again push content to: " + httpPost.toString());
         Log.info("CONTENT PUSH: ", "STATUS before retry: " + resp.getStatusLine());
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
         resp = httpClient.execute(httpPost);
       }
 
