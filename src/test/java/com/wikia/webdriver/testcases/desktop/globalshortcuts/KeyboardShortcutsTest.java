@@ -12,10 +12,12 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME)
 @Test(groups = {"globalShortcuts"})
 public class KeyboardShortcutsTest extends NewTestTemplate {
+  // refresh() cause insights sometimes don't load on first time
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")
   public void globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton() {
     new HomePage().open()
+        .refresh()
         .getWikiaBar()
         .ensureBarIsNotCollapsed()
         .clickOnShortcutsLink()
@@ -24,21 +26,21 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts")
   public void globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts() {
-    new HomePage().open().getKeyboardShortcuts().useShortcut("?").useShortcut("ESC");
+    new HomePage().open().refresh().getKeyboardShortcuts().useShortcut("?").useShortcut("ESC");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
   public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut() {
-    new HomePage().open().getKeyboardShortcuts().useShortcut("?").useShortcut("gi");
+    new HomePage().open().refresh().getKeyboardShortcuts().useShortcut("?").useShortcut("gi");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut")
   public void globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut() {
-    new HomePage().open().getKeyboardShortcuts().useShortcut("?").useShortcut("gs");
+    new HomePage().open().refresh().getKeyboardShortcuts().useShortcut("?").useShortcut("gs");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut")
   public void globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut() {
-    new HomePage().open().getKeyboardShortcuts().useShortcut("?").useShortcut(".");
+    new HomePage().open().refresh().getKeyboardShortcuts().useShortcut("?").useShortcut(".");
   }
 }

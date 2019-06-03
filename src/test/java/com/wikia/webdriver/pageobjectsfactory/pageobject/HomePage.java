@@ -19,6 +19,14 @@ public class HomePage extends WikiBasePageObject {
     return this;
   }
 
+  public HomePage refresh(){
+    // Refresh cause insights sometimes don't load on first time
+    driver.navigate().refresh();
+    waitForPageLoad();
+
+    return this;
+  }
+
   public HomePage openAndWaitForGlobalShortcuts() {
     open();
     waitFor.until((Function<WebDriver, Boolean>) arg0 -> driver.executeScript(
