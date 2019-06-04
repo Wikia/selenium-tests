@@ -27,6 +27,7 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyTabIsSelected(WamTab.ALL);
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamIndexHasExactRowsNo(wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
   @Test(groups = {"WamPage002", "WamPageTests"})
@@ -41,21 +42,30 @@ public class WamPageTests extends NewTestTemplate {
     }
   }
 
-  @RelatedIssue(issueID = "DE-4379", comment = "If fails, notify DE team."
-                                               + "Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores."
-                                               + "This is caused by remaining hive staging files during wam calculation ")
+  /**
+   * Test pagination and if WAM ranks are displayed in order
+   */
+  @RelatedIssue(issueID = "DE-4379", comment = "If fails, notify DE team.")
   @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
-    wam.verifyWamIndexPageFirstColumn(1, 20);
+    wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
     wam.clickNextPaginator();
-    wam.verifyWamIndexPageFirstColumn(21, 40);
+    wam.verifyWamIndexPageFirstColumnInOrder(wam.DEFAULT_WAM_INDEX_ROWS + 1, 2 * wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(2 * wam.DEFAULT_WAM_INDEX_ROWS + 1, 3 * wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
+  /**
+   * Tests behaviour of date picker
+   */
   @Test(groups = {"wamPage_005", "WamPageTests"})
   public void wam_005_testDatePicker() {
-    wam.verifyLatestDateInDatePicker();
-    String date = "July 12, 2014";
+    // test if today's or yesterday's date is set by default
+    wam.verifyYesterdaysOrCurrentDateInDatePicker();
+    // test behaviour of selecting a date
+    String date = "June 1, 2019";
     wam.typeDateInDatePicker(date);
     wam.verifyDateInDatePicker(date);
+    wam.verifyWamIndexIsNotEmpty();
   }
 }

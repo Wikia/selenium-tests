@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class WamPageObject extends BasePageObject {
 
-  public static final int DEFAULT_WAM_INDEX_ROWS = 21;
+  public static final int DEFAULT_WAM_INDEX_ROWS = 20;
   private static final int FIRST_WAM_TAB_INDEX = 0;
   private static final By WAM_INDEX_TABLE = By.cssSelector("#wam-index table");
   private static final String WAM_TAB_CSS_SELECTOR_FORMAT = "a[data-vertical-id='%s']";
@@ -106,12 +106,13 @@ public class WamPageObject extends BasePageObject {
   /**
    * @param expectedRowsNo the number of expecting table rows
    * @desc Checks if there are as many rows in the WAM index table as we expect
+   * Adds +1 to expectedRowsNo to account for header of the table
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
     Assertion.assertNumber(
         wamIndexRows.size(),
-        expectedRowsNo,
+        expectedRowsNo + 1,
         "wam index rows equals " + expectedRowsNo
     );
   }
@@ -169,7 +170,7 @@ public class WamPageObject extends BasePageObject {
     return counter;
   }
 
-  public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
+  public void verifyWamIndexPageFirstColumnInOrder(int startElement, int endElement) {
     wait.forElementPresent(WAM_INDEX_TABLE);
     List<String> current = getCurrentIndexNo();
     for (int i = 0; i <= endElement - startElement; i++) {
@@ -203,24 +204,28 @@ public class WamPageObject extends BasePageObject {
     wait.forElementVisible(tabSelected);
   }
 
-  public void verifyLatestDateInDatePicker() {
+  /**
+   * Checks if yesterday's or current day is selected by default in date picker
+   * Yesterday clause was added due to possible lags in bulkimporter (providing data for WAM API)
+   */
+  public void verifyYesterdaysOrCurrentDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
     String yesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
         .withLocale(Locale.ENGLISH)
         .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
-    String dayBeforeYesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
+    String today = DateTimeFormat.forPattern("MMMM d, yyyy")
         .withLocale(Locale.ENGLISH)
-        .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
+        .print(DateTime.now().withZone(DateTimeZone.UTC));
     Assertion.assertTrue(
-        yesterday.equals(currentDate) || dayBeforeYesterday.equals(currentDate),
-        "Current date does not match yesterday or the day before"
+        yesterday.equals(currentDate) || today.equals(currentDate),
+        "Default date does not match yesterday or today"
     );
   }
 
   public void verifyDateInDatePicker(String date) {
     isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
-    Assertion.assertEquals(date, currentDate, "Current date and expected date are not the same");
+    Assertion.assertEquals(date, currentDate, "Current date and entered manually date are not the same");
   }
 
   public void typeDateInDatePicker(String date) {
