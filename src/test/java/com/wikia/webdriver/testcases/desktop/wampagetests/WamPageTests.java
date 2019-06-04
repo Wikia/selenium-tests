@@ -41,8 +41,9 @@ public class WamPageTests extends NewTestTemplate {
     }
   }
 
-  @RelatedIssue(issueID = "CONCF-6", comment = "Test manually."
-                                               + " Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores.")
+  @RelatedIssue(issueID = "DE-4379", comment = "If fails, notify DE team."
+                                               + "Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores."
+                                               + "This is caused by remaining hive staging files during wam calculation ")
   @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumn(1, 20);
