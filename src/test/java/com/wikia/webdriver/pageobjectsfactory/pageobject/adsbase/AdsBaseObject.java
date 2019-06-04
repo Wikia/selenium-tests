@@ -247,7 +247,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
       triggerAdSlot(AdsContent.BOTTOM_LB);
     } else {
-      triggerAdSlotWithMobileState(AdsContent.MOBILE_AD_IN_CONTENT, true);
       scrollTo(ARTICLE_FOOTER);
       triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
     }
@@ -440,6 +439,15 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.waitForJavaScriptTruthy(waitForGPTJS);
     Log.log("GPT Loaded", "after " + String.valueOf(getNumberOfSecondsFromStart()) + " s", true);
     return this;
+  }
+
+  public boolean hasTopBoxad() {
+    try {
+      return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.TOP_BOXAD))) != null;
+    } catch (NoSuchElementException e) {
+      Log.log("Slot top_boxad not found on the page", e, true);
+      return false;
+    }
   }
 
   /**
@@ -697,6 +705,11 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerAdSlotWithMobileState(String slotName, Boolean isMobile) {
+    if (slotName.equals(AdsContent.MOBILE_AD_IN_CONTENT) && isMobile) {
+      triggerMobileInContent();
+      return this;
+    }
+
     if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB) && isMobile) {
       triggerBLB();
       return this;
@@ -763,10 +776,22 @@ public class AdsBaseObject extends WikiBasePageObject {
     doUntilElementVisible(by, f, 20);
   }
 
+  private void triggerMobileInContent() {
+    scrollToInContent();
+
+    simulateUserActivity(Duration.ofSeconds(3));
+  }
+
   private void triggerBLB() {
     scrollToFooter();
 
     simulateUserActivity(Duration.ofSeconds(3));
+  }
+
+  private void scrollToInContent() {
+    jsActions.scrollIntoView(mobileInContent);
+
+    Log.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
   private void simulateUserActivity(Duration duration) {

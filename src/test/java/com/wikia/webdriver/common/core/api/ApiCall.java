@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.api;
 
+import static org.testng.util.Strings.escapeHtml;
+
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -77,7 +79,7 @@ public abstract class ApiCall {
       CloseableHttpResponse resp = httpClient.execute(httpPost);
 
       Log.info("CONTENT PUSH: ", "Content posted to: " + httpPost.toString());
-      Log.info("CONTENT PUSH: ", "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
+      Log.info("CONTENT PUSH: ", "Response: " + escapeHtml(EntityUtils.toString(resp.getEntity(), "UTF-8")));
     } catch (ClientProtocolException e) {
       Log.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);

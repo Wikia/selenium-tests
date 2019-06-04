@@ -27,10 +27,6 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   public KeyboardShortcutsModal() {
     super();
 
-    // Refresh cause insights sometimes don't load on first time
-    driver.navigate().refresh();
-    waitForPageLoad();
-
     this.actions = new Actions(driver);
   }
 
@@ -45,6 +41,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   }
 
   public KeyboardShortcutsModal useShortcut(String shortcut) {
+
     switch (shortcut) {
       case ".":
         triggerDotShortcut();
@@ -110,7 +107,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   }
 
   private KeyboardShortcutsModal triggerQuestionMarkShortcut() {
-    actions.sendKeys("?").perform();
+    actions.keyDown(Keys.LEFT_SHIFT).pause(1000).sendKeys("?").keyUp(Keys.LEFT_SHIFT).perform();
 
     wait.forElementVisible(keyboardShortcutsModalSelector);
     Log.info("Keyboard shortcuts modal was opened by ? keyboard button");
