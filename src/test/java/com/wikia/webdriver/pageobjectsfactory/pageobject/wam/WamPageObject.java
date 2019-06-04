@@ -53,10 +53,10 @@ public class WamPageObject extends BasePageObject {
   }
 
   /**
-   * @desc Opens "WAM Scores" page in example: www.wikia.com/WAM
+   * @desc Opens "WAM Scores" page: https://community.fandom.com/wiki/WAM
    */
   public void openWamPage(String wikiCorporateURL) {
-    getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.WAM_PAGE));
     waitForPageLoad();
     Log.log("openWamPage", "WAM page opened", true);
   }
@@ -66,8 +66,9 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if given tab has an anchor with "selected" class
    */
   public void verifyTabIsSelected(WamTab tab) {
-    WebElement wamTab = driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-                                                                        tab.getId()
+    WebElement wamTab = driver.findElement(By.cssSelector(String.format(
+        WAM_TAB_CSS_SELECTOR_FORMAT,
+        tab.getId()
     )));
     Log.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
@@ -92,9 +93,10 @@ public class WamPageObject extends BasePageObject {
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
-      Log.log("verifyWamIndexIsNotEmpty",
-              "there are more rows in the table than just a head row (" + rows + ")",
-              true
+      Log.log(
+          "verifyWamIndexIsNotEmpty",
+          "there are more rows in the table than just a head row (" + rows + ")",
+          true
       );
     } else {
       Log.log("verifyTabIsSelected", "there is only the head row", false);
@@ -107,9 +109,10 @@ public class WamPageObject extends BasePageObject {
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
-    Assertion.assertNumber(wamIndexRows.size(),
-                           expectedRowsNo,
-                           "wam index rows equals " + expectedRowsNo
+    Assertion.assertNumber(
+        wamIndexRows.size(),
+        expectedRowsNo,
+        "wam index rows equals " + expectedRowsNo
     );
   }
 
@@ -130,14 +133,16 @@ public class WamPageObject extends BasePageObject {
     }
 
     if (result.equals(true)) {
-      Log.log("verifyWamVerticalFilterOptions",
-              "There are correct options in the vertical select box",
-              true
+      Log.log(
+          "verifyWamVerticalFilterOptions",
+          "There are correct options in the vertical select box",
+          true
       );
     } else {
-      Log.log("verifyWamVerticalFilterOptions",
-              "There is invalid option in the vertical select box",
-              false
+      Log.log(
+          "verifyWamVerticalFilterOptions",
+          "There is invalid option in the vertical select box",
+          false
       );
     }
   }
@@ -180,16 +185,18 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void selectTab(WamTab tab) {
-    scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-                                                                   tab.getId()
+    scrollAndClick(driver.findElement(By.cssSelector(String.format(
+        WAM_TAB_CSS_SELECTOR_FORMAT,
+        tab.getId()
     ))));
     isLoaded();
     verifyTabSelected(tab);
   }
 
   private void verifyTabSelected(WamTab tab) {
-    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-                                                                         tab.getId()
+    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(
+        WAM_TAB_CSS_SELECTOR_FORMAT,
+        tab.getId()
     )))
                              .getAttribute("class")
                              .contains("icon-vertical-selected"));
