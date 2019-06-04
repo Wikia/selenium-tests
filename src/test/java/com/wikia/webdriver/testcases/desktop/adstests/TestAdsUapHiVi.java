@@ -200,13 +200,7 @@ public class TestAdsUapHiVi {
     WebElement slot = driver.findElement(By.id(slotName));
     AssertionAds.assertAspectRatio(slot.getSize(), impactStateAspectRatio);
 
-    page.getUrl(currentUrl, RESOLVED);
-    hiViUap = new HiViUap(driver, slotName);
-    hiViUap.waitForAdLoaded();
-    slot = driver.findElement(By.id(slotName));
-    AssertionAds.assertAspectRatio(slot.getSize(), resolvedStateAspectRatio);
-
-    page.refreshPage();
+    page.getUrl(currentUrl);
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
     slot = driver.findElement(By.id(slotName));
