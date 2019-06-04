@@ -73,11 +73,6 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
   }
 
   @Test
-  public void shouldUnmuteVideoAfterClickOnIcon() throws InterruptedException {
-    test().shouldUnmuteVideoAfterClickOnIcon();
-  }
-
-  @Test
   public void shouldPlayUnmutedVideoForReplayedAd() throws InterruptedException {
     test().shouldPlayUnmutedVideoForReplayedAd();
   }
@@ -90,11 +85,6 @@ public class TestAdsUapHiViMobileWiki extends TemplateNoFirstLoad {
   @Test
   public void shouldRedirectAfterClickOnLearnMore() {
     test().shouldRedirectAfterClickOnLearnMore(AD_REDIRECT);
-  }
-
-  @Test
-  public void shouldPauseOnVideoAfterClickOnPauseIcon() throws InterruptedException {
-    test().shouldPauseOnVideoAfterClickOnPauseIcon();
   }
 
   @Test

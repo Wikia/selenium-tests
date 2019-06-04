@@ -41,11 +41,10 @@ public class TestAdsUapHiVi {
 
   public void shouldHaveCorrectAspectRatioForResolvedState(double expectedResolvedState) {
     HiViUap hiViUap = new HiViUap(driver, slotName);
-    page.refreshPage();
-    hiViUap.waitForAdLoaded();
-    page.refreshPage();
 
+    page.goToCurrentUrlWithSuffix(RESOLVED);
     page.waitForPageLoaded();
+
     hiViUap = new HiViUap(driver, slotName);
     hiViUap.waitForAdLoaded();
 
