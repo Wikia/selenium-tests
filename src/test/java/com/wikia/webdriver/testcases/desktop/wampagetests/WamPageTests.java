@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.wampagetests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.EnumSet;
 
+@Execute(onWikia = "community")
 public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;
