@@ -20,6 +20,7 @@ public class WamPageTests extends NewTestTemplate {
   public void wam_000_setup() {
     wam = new WamPageObject(driver);
     wam.openWamPage(wikiCorporateURL);
+    wam.verifyIfOnWamFandomPage();
   }
 
   @Test(groups = {"WamPage001", "WamPageTests"})
@@ -37,6 +38,7 @@ public class WamPageTests extends NewTestTemplate {
 
     for (WamTab tab : EnumSet.complementOf(EnumSet.of(WamTab.ALL))) {
       wam.selectTab(tab);
+      wam.verifyIfVerticalIdSelectedInUrl(tab.getId());
       wam.verifyWamIndexIsNotEmpty();
       wam.verifyVerticalColumnValuesAreTheSame();
     }
@@ -50,9 +52,15 @@ public class WamPageTests extends NewTestTemplate {
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
     wam.clickNextPaginator();
-    wam.verifyWamIndexPageFirstColumnInOrder(wam.DEFAULT_WAM_INDEX_ROWS + 1, 2 * wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        2 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
     wam.clickNextPaginator();
-    wam.verifyWamIndexPageFirstColumnInOrder(2 * wam.DEFAULT_WAM_INDEX_ROWS + 1, 3 * wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        2 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        3 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
   }
 
   /**

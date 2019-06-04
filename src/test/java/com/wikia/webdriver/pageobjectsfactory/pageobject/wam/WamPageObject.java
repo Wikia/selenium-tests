@@ -105,8 +105,8 @@ public class WamPageObject extends BasePageObject {
 
   /**
    * @param expectedRowsNo the number of expecting table rows
-   * @desc Checks if there are as many rows in the WAM index table as we expect
-   * Adds +1 to expectedRowsNo to account for header of the table
+   * @desc Checks if there are as many rows in the WAM index table as we expect Adds +1 to
+   * expectedRowsNo to account for header of the table
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
@@ -205,8 +205,8 @@ public class WamPageObject extends BasePageObject {
   }
 
   /**
-   * Checks if yesterday's or current day is selected by default in date picker
-   * Yesterday clause was added due to possible lags in bulkimporter (providing data for WAM API)
+   * Checks if yesterday's or current day is selected by default in date picker Yesterday clause was
+   * added due to possible lags in bulkimporter (providing data for WAM API)
    */
   public void verifyYesterdaysOrCurrentDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
@@ -225,7 +225,11 @@ public class WamPageObject extends BasePageObject {
   public void verifyDateInDatePicker(String date) {
     isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
-    Assertion.assertEquals(date, currentDate, "Current date and entered manually date are not the same");
+    Assertion.assertEquals(
+        date,
+        currentDate,
+        "Current date and entered manually date are not the same"
+    );
   }
 
   public void typeDateInDatePicker(String date) {
@@ -233,5 +237,17 @@ public class WamPageObject extends BasePageObject {
     jsActions.execute("$(arguments[0])[0].value=''", datePickerInput);
     scrollAndClick(datePickerInput);
     new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
+  }
+
+  public void verifyIfOnWamFandomPage() {
+    Assertion.assertTrue(this.isStringInURL("WAM"), "Not on WAM subpage (in URL");
+    Assertion.assertTrue(this.isStringInURL("fandom"), "Not on fandom (in URL");
+  }
+
+  public void verifyIfVerticalIdSelectedInUrl(int verticalId) {
+    Assertion.assertTrue(
+        this.isStringInURL("verticalId=" + verticalId),
+        "No VerticalId selection (in URL)"
+    );
   }
 }
