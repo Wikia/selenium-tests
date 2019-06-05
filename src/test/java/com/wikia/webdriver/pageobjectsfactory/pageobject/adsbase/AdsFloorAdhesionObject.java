@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 public class AdsFloorAdhesionObject extends AdsBaseObject {
 
-  private static final String FLOOR_ADHESION_CSS = "#InvisibleHighImpactWrapper";
-  private static final String FLOOR_ADHESION_CLOSE_CSS = "#InvisibleHighImpactWrapper .button-close";
+  private static final String FLOOR_ADHESION_CSS = "#invisible_high_impact_2";
+  private static final String FLOOR_ADHESION_CLOSE_CSS = "#invisible_high_impact_2 .button-close";
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
 
   public AdsFloorAdhesionObject(WebDriver driver, String testedPage) {
