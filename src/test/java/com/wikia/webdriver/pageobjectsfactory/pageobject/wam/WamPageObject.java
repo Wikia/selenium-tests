@@ -205,11 +205,14 @@ public class WamPageObject extends BasePageObject {
   }
 
   /**
-   * Checks if yesterday's or current day is selected by default in date picker Yesterday clause was
-   * added due to possible lags in bulkimporter (providing data for WAM API)
+   * Checks if yesterday's, day before yesterday, or current day is selected by default in date picker
+   * 3 days are checked due to lags in bulkimporter (providing data for WAM API)
    */
-  public void verifyYesterdaysOrCurrentDateInDatePicker() {
+  public void verifyDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
+    String dayBeforeYesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
+        .withLocale(Locale.ENGLISH)
+        .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
     String yesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
         .withLocale(Locale.ENGLISH)
         .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
@@ -217,8 +220,8 @@ public class WamPageObject extends BasePageObject {
         .withLocale(Locale.ENGLISH)
         .print(DateTime.now().withZone(DateTimeZone.UTC));
     Assertion.assertTrue(
-        yesterday.equals(currentDate) || today.equals(currentDate),
-        "Default date does not match yesterday or today"
+        dayBeforeYesterday.equals(currentDate)|| yesterday.equals(currentDate) || today.equals(currentDate),
+        "Default date does not match day before yesterday, yesterday or today"
     );
   }
 

@@ -61,6 +61,11 @@ public class WamPageTests extends NewTestTemplate {
         2 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
         3 * wam.DEFAULT_WAM_INDEX_ROWS
     );
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        3 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        4 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
   }
 
   /**
@@ -68,12 +73,34 @@ public class WamPageTests extends NewTestTemplate {
    */
   @Test(groups = {"wamPage_005", "WamPageTests"})
   public void wam_005_testDatePicker() {
-    // test if today's or yesterday's date is set by default
-    wam.verifyYesterdaysOrCurrentDateInDatePicker();
+    wam.verifyDateInDatePicker();
     // test behaviour of selecting a date
     String date = "June 1, 2019";
     wam.typeDateInDatePicker(date);
     wam.verifyDateInDatePicker(date);
     wam.verifyWamIndexIsNotEmpty();
+  }
+
+  /**
+   * Tests order of ranks on date that was previously out of order
+   */
+  @Test(groups = {"wamPage_005", "WamPageTests"})
+  public void wam_006_testJune32019DataCorrectness() {
+    String date = "June 3, 2019";
+    wam.typeDateInDatePicker(date);
+    wam.verifyDateInDatePicker(date);
+
+    wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        2 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        2 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        3 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
+
   }
 }
