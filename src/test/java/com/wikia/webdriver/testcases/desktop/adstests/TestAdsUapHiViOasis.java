@@ -63,11 +63,6 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   }
 
   @Test
-  public void shouldUnmuteVideoAfterClickOnIcon() throws InterruptedException {
-    test().shouldUnmuteVideoAfterClickOnIcon();
-  }
-
-  @Test
   public void shouldPlayUnmutedVideoForReplayedAd() throws InterruptedException {
     test().shouldPlayUnmutedVideoForReplayedAd();
   }
@@ -75,11 +70,6 @@ public class TestAdsUapHiViOasis extends TemplateNoFirstLoad {
   @Test
   public void shouldRedirectToPageAfterClickOnAd() {
     test().shouldRedirectToPageAfterClickOnAd(AD_REDIRECT);
-  }
-
-  @Test
-  public void shouldPauseOnVideoAfterClickOnPauseIcon() throws InterruptedException {
-    test().shouldPauseOnVideoAfterClickOnPauseIcon();
   }
 
   @Test
