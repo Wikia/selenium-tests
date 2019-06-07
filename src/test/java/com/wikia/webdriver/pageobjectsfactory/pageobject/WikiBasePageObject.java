@@ -487,7 +487,7 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
 
-  public String loginAs(String userName, String password, String wikiURL) {
+  public String loginAs(String userName, String wikiURL) {
     String token = Helios.getAccessToken(userName);
 
     driver.manage().addCookie(new Cookie("access_token", token,
@@ -508,7 +508,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(User user) {
-    return loginAs(user.getUserName(), user.getPassword(), urlBuilder.getUrl());
+    return loginAs(user.getUserName(), urlBuilder.getUrl());
   }
 
   private void logMercuryUserId() {

@@ -100,7 +100,7 @@ public class AnonymizationTests extends NewTestTemplate {
     );
     UserRegistration.registerUserEmailConfirmed(user);
 
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+    new WikiBasePageObject().loginAs(user.getUsername(), wikiURL);
 
     new ArticleContent(user.getUsername()).push("Test" + timestamp, testsite);
 
@@ -133,7 +133,7 @@ public class AnonymizationTests extends NewTestTemplate {
     );
     UserRegistration.registerUserEmailConfirmed(user);
 
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+    new WikiBasePageObject().loginAs(user.getUsername(), wikiURL);
 
     MessageWall wall = new MessageWall().open(user.getUsername());
     MiniEditorComponentObject mini = wall.triggerMessageArea(true);

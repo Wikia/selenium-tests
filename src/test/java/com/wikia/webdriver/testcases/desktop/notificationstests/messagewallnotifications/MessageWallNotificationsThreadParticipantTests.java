@@ -30,7 +30,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   @Test(groups = {"MessageWallNotificationsThreadParticipantTests_001"})
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName3, credentials.password3, wikiURL);
+    base.loginAs(credentials.userName3, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName3);
     MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -45,7 +45,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
       "MessageWallNotificationsThreadParticipantTests_002"}, dependsOnMethods = "threadCreatorNotification_setup_1")
   public void threadCreatorNotification_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
+    base.loginAs(credentials.userName4, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName3);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
@@ -58,7 +58,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
       "MessageWallNotificationsThreadParticipantTests_003"}, dependsOnMethods = "threadCreatorNotification_setup_2")
   public void threadCreatorNotification_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName3, credentials.password3, wikiURL);
+    base.loginAs(credentials.userName3, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName3);
     MessageWallThreadPageObject thread = wall.openThread(title);
     MiniEditorComponentObject miniReply = thread.triggerMessageArea();
@@ -72,7 +72,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
       "MessageWallNotificationsThreadParticipantTests_004"}, dependsOnMethods = "threadCreatorNotification_setup_3")
   public void userIsNotifiedWhenOtherUserWritesResponseToHerResponseOnMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
+    base.loginAs(credentials.userName4, wikiURL);
     MessagesNotifications notifications = new MessagesNotifications();
     notifications.showMessagesNotifications();
     notifications.verifyNotification(title,

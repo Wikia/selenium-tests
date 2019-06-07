@@ -22,6 +22,8 @@ public class CreateNewWikiPage extends WikiBasePageObject {
 
   private static final String DATA_THEME_LIST = "li[data-theme]";
   private static final String SPECIAL_CREATE_NEW_WIKI_PAGE = "Special:CreateNewWiki";
+  private static final By LOADING_INDICATOR_BY = By.cssSelector(".wikiaThrobber");
+  private static final String THEME_LOCATOR = "li[data-theme='%name%']";
   @FindBy(name = "wiki-name")
   private WebElement wikiName;
   @FindBy(name = "wiki-domain")
@@ -46,17 +48,14 @@ public class CreateNewWikiPage extends WikiBasePageObject {
   private WebElement allAgesCheckBox;
   @FindBy(css = "#DescWiki .wiki-vertical-error.error-msg")
   private WebElement categoryErrorMsg;
-  private By loadingIndicatorBy = By.cssSelector(".wikiaThrobber");
-  private String themeLocator = "li[data-theme='%name%']";
   @FindBy(css = "li[id='ThemeWiki'] input.next.enabled")
   private WebElement submitButton;
   @FindBy(css = "#CreateNewWiki")
   private WebElement wikiTaskId;
-  private String wikiNameString;
 
   /**
    * Open special Page to create new Wikia. This special page 'Special:CreateNewWiki' is only
-   * available on www.wikia.com domain
+   * available on community.fandom.com domain
    */
   public CreateNewWikiPage open() {
     getUrl(
@@ -67,8 +66,7 @@ public class CreateNewWikiPage extends WikiBasePageObject {
   }
 
   public String getWikiName() {
-    wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + DateTime.now().getMillis();
-    return this.wikiNameString;
+    return CreateWikiMessages.WIKINAME_PREFIX + DateTime.now().getMillis();
   }
 
   public String getDomainSufix() {
@@ -180,7 +178,7 @@ public class CreateNewWikiPage extends WikiBasePageObject {
 
   public CreateNewWikiPage selectThemeByName(String name) {
     wait.forElementVisible(By.cssSelector(DATA_THEME_LIST));
-    String themeName = themeLocator.replace("%name%", name);
+    String themeName = THEME_LOCATOR.replace("%name%", name);
     scrollAndClick(driver.findElement(By.cssSelector(themeName)));
     Log.log("selectTheme", "skin " + name + " selected", true, driver);
 
@@ -192,7 +190,7 @@ public class CreateNewWikiPage extends WikiBasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, 180).until(CommonExpectedConditions.elementNotPresent(
-          loadingIndicatorBy));
+          LOADING_INDICATOR_BY));
     } finally {
       restoreDefaultImplicitWait();
     }

@@ -86,19 +86,19 @@ public abstract class CoreTestTemplate {
 
   private void setPropertiesFromAnnotationsOnMethod(Method method) {
     if (method.isAnnotationPresent(Execute.class)) {
-      if (!method.getAnnotation(Execute.class).onWikia().isEmpty()){
+      if (!method.getAnnotation(Execute.class).onWikia().isEmpty()) {
         setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
       }
-      if (!method.getAnnotation(Execute.class).language().isEmpty()){
+      if (!method.getAnnotation(Execute.class).language().isEmpty()) {
         setTestProperty("language", method.getAnnotation(Execute.class).language());
       }
-      if(!method.getAnnotation(Execute.class).disableFlash().isEmpty()){
+      if (!method.getAnnotation(Execute.class).disableFlash().isEmpty()) {
         setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
       }
-      if(!method.getAnnotation(Execute.class).mockAds().isEmpty()){
+      if (!method.getAnnotation(Execute.class).mockAds().isEmpty()) {
         setTestProperty("mockAds", method.getAnnotation(Execute.class).mockAds());
       }
-      if(!method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog().isEmpty()){
+      if (!method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog().isEmpty()) {
         setTestProperty("disableCommunityPageSalesPitchDialog",
                         method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog()
         );

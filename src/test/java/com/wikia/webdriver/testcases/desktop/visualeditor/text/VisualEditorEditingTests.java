@@ -110,7 +110,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     linkWikiTexts.add(WikiTextContent.REDLINK_TEXT);
     linkWikiTexts.add(WikiTextContent.EXTERNAL_LINK_TEXT);
 
-    base.loginAs(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+    base.loginAs(credentials.userNameVEPreferred, wikiURL);
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -189,7 +189,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
 
   @Test(groups = {"VisualEditorEditing", "VisualEditorEditing_007"})
   public void VisualEditorEditing_007_minorEdit() {
-    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
+    base.loginAs(credentials.userName7, wikiURL);
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);

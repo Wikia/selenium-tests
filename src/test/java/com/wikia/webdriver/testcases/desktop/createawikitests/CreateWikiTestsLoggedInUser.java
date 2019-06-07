@@ -68,7 +68,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
   public void createNewWikiCreateWikiChangedDomain() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();
     String wikiName = cnw.getWikiName();
-    String wikiDomain = String.format("%sDifferentDomain", cnw.getWikiName());
+    String wikiDomain = String.format("%sDifferentDomain", wikiName);
 
     ArticlePageObject article = cnw.typeInWikiName(wikiName)
         .typeInWikiDomain(wikiDomain)
