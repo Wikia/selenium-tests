@@ -24,7 +24,7 @@ public class CreateWikiTestsLang extends NewTestTemplate {
         .selectLanguage(lang);
 
     String expectedDomainSufix = "";
-    if (!lang.equals("en")) {
+    if (!"en".equals(lang)) {
       expectedDomainSufix = String.format("/%s", lang);
     }
 

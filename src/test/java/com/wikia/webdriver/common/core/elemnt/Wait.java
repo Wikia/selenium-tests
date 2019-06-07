@@ -436,7 +436,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+      Log.info(INIT_MESSAGE, e);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
 
