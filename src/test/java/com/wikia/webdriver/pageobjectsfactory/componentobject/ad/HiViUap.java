@@ -123,7 +123,7 @@ public class HiViUap {
     iframeRunner.usingIframe(adIframe, () -> {
       JavascriptActions jsActions = new JavascriptActions(driver);
       jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
-      wait.forElementVisible(By.id("adContainer"));
+      wait.forElementVisible(By.id("adContainer"), 15);
     });
 
     return driver.findElement(slotSelector);
