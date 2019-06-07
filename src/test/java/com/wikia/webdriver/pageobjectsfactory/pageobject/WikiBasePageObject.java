@@ -23,7 +23,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
@@ -149,18 +148,12 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = ".wds-global-navigation")
   private WebElement globalNavigationBar;
-  @FindBy(id = "recirculation-rail")
-  private WebElement recirculationRightRailModule;
   @FindBy(css = ".wds-global-navigation__modal-control-anon")
   private WebElement mobileAnonAvatarPlaceholder;
 
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
     return currentURL.substring(0, currentURL.lastIndexOf("/wiki/"));
-  }
-
-  public String getUrl() {
-    return driver.getCurrentUrl();
   }
 
   public boolean isBannerNotificationContainerPresent(){
@@ -259,11 +252,6 @@ public class WikiBasePageObject extends BasePageObject {
   public SpecialMultipleUploadPageObject openSpecialMultipleUpload(String wikiURL) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_MULTIPLE_UPLOAD);
     return new SpecialMultipleUploadPageObject(driver);
-  }
-
-  public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
-    return new CreateNewWikiPageObjectStep1();
   }
 
   public void openSpecialWatchListPage(String wikiURL) {
@@ -401,6 +389,31 @@ public class WikiBasePageObject extends BasePageObject {
       driver.switchTo().defaultContent();
     }
     Log.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
+  }
+
+  public boolean isUserLoggedIn(final String userName) {
+    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    try {
+      if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
+        driver.switchTo().frame("PreviewFrame");
+      }
+      if (driver.findElements(MERCURY_SKIN).size() > 0) {
+        wait.forElementVisible(By.cssSelector(
+            LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
+      } else {
+        WebElement avatar = wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
+        String loggedInUserName = avatar.getAttribute("alt");
+        if (!loggedInUserName.equals(userName) && !loggedInUserName.equals(userName + " avatar")) {
+          throw new IllegalArgumentException(
+              "Invalid user, expected " + userName + ", but found: " + loggedInUserName);
+        }
+      }
+    } finally {
+      restoreDefaultImplicitWait();
+      driver.switchTo().defaultContent();
+    }
+    Log.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
+    return true;
   }
 
   public void verifyUserLoggedIn(User user) {

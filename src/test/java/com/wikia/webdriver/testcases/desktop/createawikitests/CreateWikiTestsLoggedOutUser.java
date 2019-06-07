@@ -1,44 +1,59 @@
 package com.wikia.webdriver.testcases.desktop.createawikitests;
 
+import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.api.WikiFactory;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.elements.communities.desktop.pages.CreateNewWikiPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
+
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
+
+import java.time.LocalDate;
 
 @Test(groups = {"CNW_Anon"})
 public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
   public void loggedOutUserCanCreateNewWiki() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    String wikiName = cnw1.getWikiName();
-    cnw1.typeInWikiName(wikiName);
-    cnw1.verifyNextButtonEnabled();
-    cnw1.clickNextToSignIn().navigateToSignIn();
-    DetachedSignInPage authModal = new DetachedSignInPage();
-    authModal.login(credentials.userName10, credentials.password10);
-    CreateNewWikiPageObjectStep2 cnw2 = new CreateNewWikiPageObjectStep2(driver);
-    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
-    CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-    cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
-    ArticlePageObject article = cnw3.submit();
-    article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
+    String tempLogin = "QACreateWiki" + DateTime.now().getMillis();
+    String tempPass = Long.toString(DateTime.now().getMillis());
+
+    SignUpUser newUser = new SignUpUser(
+        tempLogin,
+        "qaCreateWiki@fandom.com",
+        tempPass,
+        LocalDate.of(1990, 3, 19)
+    );
+    UserRegistration.registerUserEmailConfirmed(newUser);
+
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
+    String wikiName = cnw.getWikiName();
+    DetachedRegisterPage authModal = cnw.typeInWikiName(wikiName)
+        .clickNextToSignIn();
+
+    authModal
+        .navigateToSignIn()
+        .login(newUser.getUsername(), newUser.getPassword());
+
+    ArticlePageObject article = cnw
+        .selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID)
+        .createMyWiki()
+        .selectThemeByName(CreateWikiMessages.WIKI_THEME)
+        .showMeMyWiki();
+
     article.closeNewWikiCongratulationsLightBox();
 
     new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
-    article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userName10);
+    assertStringContains(article.getWikiTitleHeader(), wikiName);
+
+    Assertion.assertTrue(article.isUserLoggedIn(newUser.getUsername()));
   }
 }

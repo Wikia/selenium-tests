@@ -432,6 +432,26 @@ public class Wait {
     }
   }
 
+  public void forTextNotEmpty(WebElement element) {
+    try {
+      element.getTagName();
+    } catch (WebDriverException e) {
+      Log.info(INIT_MESSAGE, INIT_ERROR_MESSAGE);
+    }
+    changeImplicitWait(0, TimeUnit.SECONDS);
+
+    try {
+      new WebDriverWait(driver, DEFAULT_TIMEOUT).until(new ExpectedCondition<Boolean>() {
+        @Override
+        public Boolean apply(WebDriver webDriver) {
+          return !element.getText().isEmpty();
+        }
+      });
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public boolean forTextInElementAfterRefresh(WebElement element, String text) {
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
