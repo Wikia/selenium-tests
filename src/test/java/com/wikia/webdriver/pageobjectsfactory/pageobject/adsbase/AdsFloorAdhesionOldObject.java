@@ -9,7 +9,7 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
   private static final String FLOOR_ADHESION_CSS = "#ext-wikia-adEngine-template-floor, #invisible_high_impact_2";
   private static final String
       FLOOR_ADHESION_CLOSE_CSS
-      = "#ext-wikia-adEngine-template-floor .close, .invisible-high-impact-wrapper .button-close";
+      = "#invisible_high_impact_2 .button-close";
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
   private static final By FLOOR_ADHESION_CLOSE_SELECTOR = By.cssSelector(FLOOR_ADHESION_CLOSE_CSS);
 
@@ -35,8 +35,6 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
     wait.forElementPresent(FLOOR_ADHESION_CLOSE_SELECTOR).click();
     return this;
   }
-
-
 
   public void verifyThereIsNoWikiaBar(Boolean isMobile) {
     if (isMobile) {
