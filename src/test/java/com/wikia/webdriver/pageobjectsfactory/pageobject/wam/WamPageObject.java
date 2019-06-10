@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class WamPageObject extends BasePageObject {
 
-  public static final int DEFAULT_WAM_INDEX_ROWS = 21;
+  public static final int DEFAULT_WAM_INDEX_ROWS = 20;
   private static final int FIRST_WAM_TAB_INDEX = 0;
   private static final By WAM_INDEX_TABLE = By.cssSelector("#wam-index table");
   private static final String WAM_TAB_CSS_SELECTOR_FORMAT = "a[data-vertical-id='%s']";
@@ -53,10 +53,10 @@ public class WamPageObject extends BasePageObject {
   }
 
   /**
-   * @desc Opens "WAM Scores" page in example: www.wikia.com/WAM
+   * @desc Opens "WAM Scores" page: https://community.fandom.com/wiki/WAM
    */
   public void openWamPage(String wikiCorporateURL) {
-    getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
+    getUrl(urlBuilder.getUrlForWikiPage(URLsContent.WAM_PAGE));
     waitForPageLoad();
     Log.log("openWamPage", "WAM page opened", true);
   }
@@ -66,8 +66,9 @@ public class WamPageObject extends BasePageObject {
    * @desc Checks if given tab has an anchor with "selected" class
    */
   public void verifyTabIsSelected(WamTab tab) {
-    WebElement wamTab = driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-                                                                        tab.getId()
+    WebElement wamTab = driver.findElement(By.cssSelector(String.format(
+        WAM_TAB_CSS_SELECTOR_FORMAT,
+        tab.getId()
     )));
     Log.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
@@ -92,9 +93,10 @@ public class WamPageObject extends BasePageObject {
     int rows = wamIndexRows.size();
 
     if (rows > 1) {
-      Log.log("verifyWamIndexIsNotEmpty",
-              "there are more rows in the table than just a head row (" + rows + ")",
-              true
+      Log.log(
+          "verifyWamIndexIsNotEmpty",
+          "there are more rows in the table than just a head row (" + rows + ")",
+          true
       );
     } else {
       Log.log("verifyTabIsSelected", "there is only the head row", false);
@@ -103,13 +105,15 @@ public class WamPageObject extends BasePageObject {
 
   /**
    * @param expectedRowsNo the number of expecting table rows
-   * @desc Checks if there are as many rows in the WAM index table as we expect
+   * @desc Checks if there are as many rows in the WAM index table as we expect Adds +1 to
+   * expectedRowsNo to account for header of the table
    */
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
-    Assertion.assertNumber(wamIndexRows.size(),
-                           expectedRowsNo,
-                           "wam index rows equals " + expectedRowsNo
+    Assertion.assertNumber(
+        wamIndexRows.size(),
+        expectedRowsNo + 1,
+        "wam index rows equals " + expectedRowsNo
     );
   }
 
@@ -130,14 +134,16 @@ public class WamPageObject extends BasePageObject {
     }
 
     if (result.equals(true)) {
-      Log.log("verifyWamVerticalFilterOptions",
-              "There are correct options in the vertical select box",
-              true
+      Log.log(
+          "verifyWamVerticalFilterOptions",
+          "There are correct options in the vertical select box",
+          true
       );
     } else {
-      Log.log("verifyWamVerticalFilterOptions",
-              "There is invalid option in the vertical select box",
-              false
+      Log.log(
+          "verifyWamVerticalFilterOptions",
+          "There is invalid option in the vertical select box",
+          false
       );
     }
   }
@@ -164,7 +170,7 @@ public class WamPageObject extends BasePageObject {
     return counter;
   }
 
-  public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
+  public void verifyWamIndexPageFirstColumnInOrder(int startElement, int endElement) {
     wait.forElementPresent(WAM_INDEX_TABLE);
     List<String> current = getCurrentIndexNo();
     for (int i = 0; i <= endElement - startElement; i++) {
@@ -180,40 +186,53 @@ public class WamPageObject extends BasePageObject {
   }
 
   public void selectTab(WamTab tab) {
-    scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-                                                                   tab.getId()
+    scrollAndClick(driver.findElement(By.cssSelector(String.format(
+        WAM_TAB_CSS_SELECTOR_FORMAT,
+        tab.getId()
     ))));
     isLoaded();
     verifyTabSelected(tab);
   }
 
   private void verifyTabSelected(WamTab tab) {
-    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-                                                                         tab.getId()
+    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(
+        WAM_TAB_CSS_SELECTOR_FORMAT,
+        tab.getId()
     )))
                              .getAttribute("class")
                              .contains("icon-vertical-selected"));
     wait.forElementVisible(tabSelected);
   }
 
-  public void verifyLatestDateInDatePicker() {
+  /**
+   * Checks if yesterday's, day before yesterday, or current day is selected by default in date picker
+   * 3 days are checked due to lags in bulkimporter (providing data for WAM API)
+   */
+  public void verifyDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
-    String yesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
-        .withLocale(Locale.ENGLISH)
-        .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
     String dayBeforeYesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
         .withLocale(Locale.ENGLISH)
         .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
+    String yesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
+        .withLocale(Locale.ENGLISH)
+        .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
+    String today = DateTimeFormat.forPattern("MMMM d, yyyy")
+        .withLocale(Locale.ENGLISH)
+        .print(DateTime.now().withZone(DateTimeZone.UTC));
     Assertion.assertTrue(
-        yesterday.equals(currentDate) || dayBeforeYesterday.equals(currentDate),
-        "Current date does not match yesterday or the day before"
+        dayBeforeYesterday.equals(currentDate)|| yesterday.equals(currentDate) || today.equals(currentDate),
+        "Default date does not match day before yesterday, yesterday or today"
     );
   }
 
   public void verifyDateInDatePicker(String date) {
     isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
-    Assertion.assertEquals(date, currentDate, "Current date and expected date are not the same");
+    Assertion.assertEquals(
+        date,
+        currentDate,
+        "Current date and entered manually date are not the same"
+    );
   }
 
   public void typeDateInDatePicker(String date) {
@@ -221,5 +240,17 @@ public class WamPageObject extends BasePageObject {
     jsActions.execute("$(arguments[0])[0].value=''", datePickerInput);
     scrollAndClick(datePickerInput);
     new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
+  }
+
+  public void verifyIfOnWamFandomPage() {
+    Assertion.assertTrue(this.isStringInURL("WAM"), "Not on WAM subpage (in URL");
+    Assertion.assertTrue(this.isStringInURL("fandom"), "Not on fandom (in URL");
+  }
+
+  public void verifyIfVerticalIdSelectedInUrl(int verticalId) {
+    Assertion.assertTrue(
+        this.isStringInURL("verticalId=" + verticalId),
+        "No VerticalId selection (in URL)"
+    );
   }
 }

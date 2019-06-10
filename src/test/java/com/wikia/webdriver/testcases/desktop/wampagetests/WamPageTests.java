@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.desktop.wampagetests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamPageObject;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.EnumSet;
 
+@Execute(onWikia = "community")
 public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;
@@ -18,6 +20,7 @@ public class WamPageTests extends NewTestTemplate {
   public void wam_000_setup() {
     wam = new WamPageObject(driver);
     wam.openWamPage(wikiCorporateURL);
+    wam.verifyIfOnWamFandomPage();
   }
 
   @Test(groups = {"WamPage001", "WamPageTests"})
@@ -25,6 +28,7 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyTabIsSelected(WamTab.ALL);
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamIndexHasExactRowsNo(wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
   @Test(groups = {"WamPage002", "WamPageTests"})
@@ -34,25 +38,69 @@ public class WamPageTests extends NewTestTemplate {
 
     for (WamTab tab : EnumSet.complementOf(EnumSet.of(WamTab.ALL))) {
       wam.selectTab(tab);
+      wam.verifyIfVerticalIdSelectedInUrl(tab.getId());
       wam.verifyWamIndexIsNotEmpty();
       wam.verifyVerticalColumnValuesAreTheSame();
     }
   }
 
-  @RelatedIssue(issueID = "CONCF-6", comment = "Test manually."
-                                               + " Test is failing because WAM page sometimes has wrong order due to duplicate WAM scores.")
+  /**
+   * Test pagination and if WAM ranks are displayed in order
+   */
+  @RelatedIssue(issueID = "DE-4379", comment = "If fails, notify DE team.")
   @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
   public void wam_003_verifyPaginationByNextButton() {
-    wam.verifyWamIndexPageFirstColumn(1, 20);
+    wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
     wam.clickNextPaginator();
-    wam.verifyWamIndexPageFirstColumn(21, 40);
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        2 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        2 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        3 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        3 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        4 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
   }
 
+  /**
+   * Tests behaviour of date picker
+   */
   @Test(groups = {"wamPage_005", "WamPageTests"})
   public void wam_005_testDatePicker() {
-    wam.verifyLatestDateInDatePicker();
-    String date = "July 12, 2014";
+    wam.verifyDateInDatePicker();
+    // test behaviour of selecting a date
+    String date = "June 1, 2019";
     wam.typeDateInDatePicker(date);
     wam.verifyDateInDatePicker(date);
+    wam.verifyWamIndexIsNotEmpty();
+  }
+
+  /**
+   * Tests order of ranks on date that was previously out of order
+   */
+  @Test(groups = {"wamPage_005", "WamPageTests"})
+  public void wam_006_testJune32019DataCorrectness() {
+    String date = "June 3, 2019";
+    wam.typeDateInDatePicker(date);
+    wam.verifyDateInDatePicker(date);
+
+    wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        2 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
+    wam.clickNextPaginator();
+    wam.verifyWamIndexPageFirstColumnInOrder(
+        2 * wam.DEFAULT_WAM_INDEX_ROWS + 1,
+        3 * wam.DEFAULT_WAM_INDEX_ROWS
+    );
+
   }
 }
