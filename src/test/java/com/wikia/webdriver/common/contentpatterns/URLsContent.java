@@ -86,7 +86,7 @@ public class URLsContent {
   public static final String ACTION_RAW = "action=raw";
 
   // WAM Scores page url
-  public static final String WAM_PAGE = "/WAM";
+  public static final String WAM_PAGE = "WAM";
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
