@@ -28,7 +28,7 @@ public class SocialButtonsTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials[0], credentials[1], wikiURL);
+    base.loginAs(credentials[0], wikiURL);
     new ArticlePageObject().open();
     SocialButtonsComponentObject buttons = new SocialButtonsComponentObject(driver);
     buttons.verifyShareButtonsPresent();

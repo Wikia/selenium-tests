@@ -23,7 +23,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(groups = {"MessageWallNotificationsFollowersResponseTests_001"})
   public void followerNotificationResponse_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
+    base.loginAs(credentials.userName7, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName8);
     WatchPageObject watch = wall.unfollowCurrentUrl();
     watch.confirmWatchUnwatch();
@@ -33,7 +33,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
       "MessageWallNotificationsFollowersResponseTests_002"}, dependsOnMethods = "followerNotificationResponse_setup_1")
   public void followerNotificationResponse_setup_2() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
+    base.loginAs(credentials.userName8, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName8);
     MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -48,7 +48,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
       "MessageWallNotificationsFollowersResponseTests_003"}, dependsOnMethods = "followerNotificationResponse_setup_2")
   public void followerNotificationResponse_setup_3() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
+    base.loginAs(credentials.userName7, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName8);
     wall.follow();
   }
@@ -57,7 +57,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
       "MessageWallNotificationsFollowersResponseTests_004"}, dependsOnMethods = "followerNotificationResponse_setup_3")
   public void followerNotificationResponse_setup_4() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
+    base.loginAs(credentials.userName8, wikiURL);
     MessageWall wall = new MessageWall().open(credentials.userName8);
     MessageWallThreadPageObject thread = wall.openThread(title);
     MiniEditorComponentObject miniReply = thread.triggerMessageArea();
@@ -71,7 +71,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
       "MessageWallNotificationsFollowersResponseTests_005"}, dependsOnMethods = "followerNotificationResponse_setup_4")
   public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName7, credentials.password7, wikiURL);
+    base.loginAs(credentials.userName7, wikiURL);
     MessagesNotifications notifications = new MessagesNotifications();
     notifications.showMessagesNotifications();
     notifications.verifyNotification(title, credentials.userName8);

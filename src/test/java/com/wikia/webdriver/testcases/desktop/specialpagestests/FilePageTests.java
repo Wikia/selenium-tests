@@ -83,7 +83,7 @@ public class FilePageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    specialVideos.loginAs(credentials.userNameStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete
@@ -114,7 +114,7 @@ public class FilePageTests extends NewTestTemplate {
 
     // Go to Special:Videos to add a video
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    specialVideos.loginAs(credentials.userNameStaff, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete

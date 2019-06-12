@@ -27,7 +27,7 @@ public class TestTopWamWikis extends TemplateNoFirstLoad {
     whereIsExtensionUrl = urlBuilder.appendQueryStringToURL(whereIsExtensionUrl, extensionURL);
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     wikiPage.getUrl(whereIsExtensionUrl);
-    wikiPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    wikiPage.loginAs(credentials.userNameStaff, wikiURL);
     wikiPage.verifyNumberOfTop1kWikisInRange(expectedTopWamWikiRange);
   }
 }

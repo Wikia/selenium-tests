@@ -46,6 +46,9 @@ public class BasePageObject {
   protected FandomUrlBuilder fandomUrlBuilder = new FandomUrlBuilder();
   protected JavascriptActions jsActions;
 
+  public static final int IMPLICIT_SHORT = 250;
+  public static final int IMPLICIT_MEDIUM = 500;
+
   public BasePageObject() {
     this.waitFor = new WebDriverWait(driver, timeOut);
     this.builder = new Actions(driver);
@@ -121,7 +124,7 @@ public class BasePageObject {
    * us no need for waiting 30 seconds
    */
   protected boolean isElementOnPage(By by) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_MEDIUM, TimeUnit.MILLISECONDS);
     try {
       return driver.findElements(by).size() > 0;
     } finally {
@@ -134,7 +137,7 @@ public class BasePageObject {
    * us no need for waiting 30 seconds
    */
   protected boolean isElementOnPage(WebElement element) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_MEDIUM, TimeUnit.MILLISECONDS);
     boolean isElementOnPage = true;
     try {
       // Get location on WebElement is rising exception when element is not present
@@ -205,7 +208,7 @@ public class BasePageObject {
    * no need for waiting 30 seconds
    */
   protected int getNumOfElementOnPage(By cssSelectorBy) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_MEDIUM, TimeUnit.MILLISECONDS);
     int numElementOnPage;
     try {
       numElementOnPage = driver.findElements(cssSelectorBy).size();
@@ -230,7 +233,7 @@ public class BasePageObject {
   }
 
   protected boolean isElementInContext(String cssSelector, WebElement element) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_MEDIUM, TimeUnit.MILLISECONDS);
     boolean isElementInElement = true;
     try {
       if (element.findElements(By.cssSelector(cssSelector)).size() < 1) {
@@ -287,7 +290,7 @@ public class BasePageObject {
   }
 
   public void verifyUrlContains(final String givenString, int timeOut) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, timeOut).until((ExpectedCondition<Boolean>) d -> d.getCurrentUrl()
           .toLowerCase()
@@ -399,7 +402,7 @@ public class BasePageObject {
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
@@ -408,7 +411,7 @@ public class BasePageObject {
   }
 
   public void waitForElementNotVisibleByElement(WebElement element, long timeout) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver,
                         timeout
@@ -421,7 +424,7 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsAttributeByCss(
       String selector, String attribute, String value
   ) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(By.cssSelector(
           selector), attribute, value));
@@ -433,7 +436,7 @@ public class BasePageObject {
   public void waitForValueToBePresentInElementsCssByCss(
       String selector, String cssProperty, String expectedValue
   ) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
                                                                        cssProperty,
@@ -581,7 +584,7 @@ public class BasePageObject {
   }
 
   protected void setShortImplicitWait() {
-    changeImplicitWait(3, TimeUnit.SECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.SECONDS);
   }
 
   protected void restoreDefaultImplicitWait() {
