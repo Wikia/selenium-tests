@@ -14,11 +14,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"CNW_User"})
+@Test(groups = {"CNW_User", "CNW"})
 @Execute(onWikia = "community")
 public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWikiCreateWiki() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();
@@ -30,7 +29,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
         .selectThemeByName(CreateWikiMessages.WIKI_THEME)
         .showMeMyWiki();
 
-    assertStringContains(article.getWikiTitleOnCongratualtionsLightBox(), wikiName);
+    assertStringContains(article.getWikiTitleOnCongratulationsLightBox(), wikiName);
 
     article.closeNewWikiCongratulationsLightBox();
 
@@ -41,7 +40,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     Assertion.assertTrue(article.isUserLoggedIn(User.USER_CNW.getUserName()));
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWikiCreateWikiForChildren() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();
@@ -63,7 +61,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     Assertion.assertTrue(WikiaProperties.isWikiForChildren(driver), "Wiki is not for children");
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWikiCreateWikiChangedDomain() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();
@@ -87,7 +84,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     Assertion.assertTrue(article.isStringInURL(wikiDomain));
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWikiCreatWikiNameExists() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();
@@ -98,7 +94,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
         .assertStringContains(cnw.getDomainErrorMessage(), CreateWikiMessages.ADDRESS_OCCUPIED);
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
   @Execute(asUser = User.USER)
   public void createNewWiki005CreateWikiPolicyViolation() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();
@@ -110,7 +105,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
                               CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWiki006CreateWikiNoCategory() {
     CreateNewWikiPage cnw = new CreateNewWikiPage().open();

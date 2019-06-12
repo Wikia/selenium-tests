@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"CNW_lang"})
+@Test(groups = {"createNewLanguageWiki", "CNW"})
 @Execute(onWikia = "community")
 public class CreateWikiTestsLang extends NewTestTemplate {
 
@@ -40,7 +40,7 @@ public class CreateWikiTestsLang extends NewTestTemplate {
             .logWikiTaskId()
             .showMeMyWiki();
 
-    assertStringContains(article.getWikiTitleOnCongratualtionsLightBox(), wikiName);
+    assertStringContains(article.getWikiTitleOnCongratulationsLightBox(), wikiName);
 
     article.closeNewWikiCongratulationsLightBox();
 
@@ -51,29 +51,25 @@ public class CreateWikiTestsLang extends NewTestTemplate {
     article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsDeEsFr", groups = {
-      "createNewLanguageWiki", "CNW_Lang_DE_ES_FR"})
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsDeEsFr", groups = {"CNW_Lang_DE_ES_FR"})
   @Execute(asUser = User.USER_CNW)
   public void createNewLanguageWiki_DE_ES_FR(String lang) {
     createNewLanguageWiki(lang);
   }
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsItJaZh", groups = {
-      "createNewLanguageWiki", "CNW_Lang_IT_JA_ZH"})
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsItJaZh", groups = {"CNW_Lang_IT_JA_ZH"})
   @Execute(asUser = User.USER_CNW)
   public void createNewLanguageWiki_IT_JA_ZH(String lang) {
     createNewLanguageWiki(lang);
   }
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsNlNoPl", groups = {
-      "createNewLanguageWiki", "CNW_Lang_NL_NO_PL"})
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsNlNoPl", groups = {"CNW_Lang_NL_NO_PL"})
   @Execute(asUser = User.USER_CNW)
   public void createNewLanguageWiki_NL_NO_PL(String lang) {
     createNewLanguageWiki(lang);
   }
 
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsPrPtBrRu", groups = {
-      "createNewLanguageWiki", "CNW_Lang_PT_PTBR_RU"})
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangsPrPtBrRu", groups = {"CNW_Lang_PT_PTBR_RU"})
   @Execute(asUser = User.USER_CNW)
   public void createNewLanguageWiki_PT_PTBR_RU(String lang) {
     createNewLanguageWiki(lang);

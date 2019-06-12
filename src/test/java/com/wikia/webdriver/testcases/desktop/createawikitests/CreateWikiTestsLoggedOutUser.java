@@ -17,10 +17,9 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
-@Test(groups = {"CNW_Anon"})
+@Test(groups = {"CNW_Anon", "CNW"})
 public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
   public void loggedOutUserCanCreateNewWiki() {
     String tempLogin = "QACreateWiki" + DateTime.now().getMillis();
     String tempPass = Long.toString(DateTime.now().getMillis());

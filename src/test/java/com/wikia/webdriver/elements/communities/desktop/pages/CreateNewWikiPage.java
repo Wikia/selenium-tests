@@ -24,6 +24,8 @@ public class CreateNewWikiPage extends WikiBasePageObject {
   private static final String SPECIAL_CREATE_NEW_WIKI_PAGE = "Special:CreateNewWiki";
   private static final By LOADING_INDICATOR_BY = By.cssSelector(".wikiaThrobber");
   private static final String THEME_LOCATOR = "li[data-theme='%name%']";
+  private static final int CREATE_WIKI_TIMEOUT = 180;
+
   @FindBy(name = "wiki-name")
   private WebElement wikiName;
   @FindBy(name = "wiki-domain")
@@ -43,7 +45,7 @@ public class CreateNewWikiPage extends WikiBasePageObject {
   @FindBy(css = "#DescWiki .wds-dropdown .wds-list li")
   private List<WebElement> wikiCategoryList;
   @FindBy(css = "form[name='desc-form'] input.next")
-  private WebElement createMyWikiBautton;
+  private WebElement createMyWikiButton;
   @FindBy(css = "label[for='allAges']")
   private WebElement allAgesCheckBox;
   @FindBy(css = "#DescWiki .wiki-vertical-error.error-msg")
@@ -136,7 +138,7 @@ public class CreateNewWikiPage extends WikiBasePageObject {
       throw new WebDriverException("No categories to choose from");
     }
     if (wikiCategoryList.size() < categoryId + 1) {
-      throw new WebDriverException("Cannot find a categpory with this index");
+      throw new WebDriverException("Cannot find a category with this index");
     }
     scrollTo(wikiCategoryDropdown);
     wait.forElementClickable(wikiCategoryDropdown);
@@ -157,8 +159,8 @@ public class CreateNewWikiPage extends WikiBasePageObject {
   }
 
   public CreateNewWikiPage createMyWiki() {
-    wait.forElementVisible(createMyWikiBautton);
-    scrollAndClick(createMyWikiBautton);
+    wait.forElementVisible(createMyWikiButton);
+    scrollAndClick(createMyWikiButton);
     Log.log("submit", "Submit button clicked", true);
     return this;
   }
@@ -187,9 +189,9 @@ public class CreateNewWikiPage extends WikiBasePageObject {
 
   public ArticlePageObject showMeMyWiki() {
 
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 180).until(CommonExpectedConditions.elementNotPresent(
+      new WebDriverWait(driver, CREATE_WIKI_TIMEOUT).until(CommonExpectedConditions.elementNotPresent(
           LOADING_INDICATOR_BY));
     } finally {
       restoreDefaultImplicitWait();

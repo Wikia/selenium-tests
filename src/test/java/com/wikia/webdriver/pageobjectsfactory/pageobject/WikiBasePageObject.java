@@ -368,7 +368,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyUserLoggedIn(final String userName) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
@@ -392,7 +392,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public boolean isUserLoggedIn(final String userName) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");

@@ -585,7 +585,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     Log.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID + " was scrolled up", true);
   }
 
-  public String getWikiTitleOnCongratualtionsLightBox() {
+  public String getWikiTitleOnCongratulationsLightBox() {
     wait.forElementVisible(welcomeLightBoxTitle);
     return welcomeLightBoxTitle.getText();
   }
