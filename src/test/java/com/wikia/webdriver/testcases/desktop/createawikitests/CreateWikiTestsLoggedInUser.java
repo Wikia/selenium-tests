@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.createawikitests;
 
+import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -7,117 +9,113 @@ import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.helpers.WikiaProperties;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.elements.communities.desktop.pages.CreateNewWikiPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
+
 import org.testng.annotations.Test;
 
-@Test(groups = {"CNW_User"})
+@Test(groups = {"CNW_User", "CNW"})
+@Execute(onWikia = "community")
 public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
 
-  private String wikiDomain;
-
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   @Execute(asUser = User.USER_CNW)
-  public void createNewWiki001CreateWiki() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    String wikiName = cnw1.getWikiName();
-    cnw1.typeInWikiName(wikiName);
-    cnw1.verifyNextButtonEnabled();
-    CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
-    CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-    cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
-    ArticlePageObject article = cnw3.submit();
-    article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
+  public void createNewWikiCreateWiki() {
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
+    String wikiName = cnw.getWikiName();
+    ArticlePageObject article = cnw.typeInWikiName(wikiName)
+        .clickNext()
+        .selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID)
+        .createMyWiki()
+        .selectThemeByName(CreateWikiMessages.WIKI_THEME)
+        .showMeMyWiki();
+
+    assertStringContains(article.getWikiTitleOnCongratulationsLightBox(), wikiName);
+
     article.closeNewWikiCongratulationsLightBox();
+
+    assertStringContains(article.getWikiTitleHeader(), wikiName);
 
     new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
-    article.verifyWikiTitleHeader(wikiName);
+    Assertion.assertTrue(article.isUserLoggedIn(User.USER_CNW.getUserName()));
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER_CNW)
-  public void createNewWiki002CreateWikiForChildren() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    String wikiName = cnw1.getWikiName();
-    cnw1.typeInWikiName(wikiName);
-    cnw1.verifyNextButtonEnabled();
-    CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
-    cnw2.selectAllAgesCheckbox();
-    CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-    cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
-    ArticlePageObject article = cnw3.submit();
+  public void createNewWikiCreateWikiForChildren() {
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
+    String wikiName = cnw.getWikiName();
+    ArticlePageObject article = cnw.typeInWikiName(wikiName)
+        .clickNext()
+        .selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID)
+        .selectAllAgesCheckbox()
+        .createMyWiki()
+        .selectThemeByName(CreateWikiMessages.WIKI_THEME)
+        .showMeMyWiki();
+
     article.closeNewWikiCongratulationsLightBox();
 
     new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
-    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
+    Assertion.assertTrue(article.isUserLoggedIn(User.USER_CNW.getUserName()));
 
     Assertion.assertTrue(WikiaProperties.isWikiForChildren(driver), "Wiki is not for children");
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
   @Execute(asUser = User.USER_CNW)
-  public void createNewWiki003CreateWikiChangedDomain() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    String wikiName = cnw1.getWikiName();
-    wikiDomain = cnw1.getWikiName();
-    cnw1.typeInWikiName(wikiName);
-    cnw1.typeInWikiDomain(wikiDomain);
-    cnw1.verifyNextButtonEnabled();
-    CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
-    CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-    cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
-    ArticlePageObject article = cnw3.submit();
+  public void createNewWikiCreateWikiChangedDomain() {
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
+    String wikiName = cnw.getWikiName();
+    String wikiDomain = String.format("%sDifferentDomain", wikiName);
+
+    ArticlePageObject article = cnw.typeInWikiName(wikiName)
+        .typeInWikiDomain(wikiDomain)
+        .clickNext()
+        .selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID)
+        .createMyWiki()
+        .selectThemeByName(CreateWikiMessages.WIKI_THEME)
+        .showMeMyWiki();
+
     article.closeNewWikiCongratulationsLightBox();
 
     new WikiFactory().setIsTestWiki(article.getWikiID(), true);
 
-    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
-    article.isStringInURL(wikiDomain);
+    Assertion.assertTrue(article.isUserLoggedIn(User.USER_CNW.getUserName()));
+
+    Assertion.assertTrue(article.isStringInURL(wikiDomain));
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
   @Execute(asUser = User.USER_CNW)
-  public void createNewWiki004CreatWikiNameExists() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
+  public void createNewWikiCreatWikiNameExists() {
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
     String wikiName = "muppets";
-    cnw1.typeInWikiName(wikiName);
-    cnw1.verifyOccupiedWikiAddress(wikiName);
+    cnw.typeInWikiName(wikiName);
+
+    Assertion
+        .assertStringContains(cnw.getDomainErrorMessage(), CreateWikiMessages.ADDRESS_OCCUPIED);
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
   @Execute(asUser = User.USER)
   public void createNewWiki005CreateWikiPolicyViolation() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
     String wikiName = "1234";
-    cnw1.typeInWikiName(wikiName);
-    cnw1.verifyIncorrectWikiName();
+    cnw.typeInWikiName(wikiName);
+
+    Assertion
+        .assertStringContains(cnw.getDomainErrorMessage(),
+                              CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
   }
 
-  @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
   @Execute(asUser = User.USER_CNW)
   public void createNewWiki006CreateWikiNoCategory() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    String wikiName = cnw1.getWikiName();
-    wikiDomain = cnw1.getWikiName();
-    cnw1.typeInWikiName(wikiName);
-    cnw1.typeInWikiDomain(wikiDomain);
-    cnw1.verifyNextButtonEnabled();
-    CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(0);
-    cnw2.verifyCategoryError();
+    CreateNewWikiPage cnw = new CreateNewWikiPage().open();
+    String wikiName = cnw.getWikiName();
+
+    cnw.typeInWikiName(wikiName)
+        .clickNext()
+        .selectCategory(0);
+
+    Assertion
+        .assertStringContains(cnw.getCategoryErrorMessage(),
+                              CreateWikiMessages.CATEGORY_ERROR_MESSAGE);
   }
 }

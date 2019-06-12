@@ -103,7 +103,7 @@ public class RenameToolTests extends NewTestTemplate {
                                      LocalDate.of(1993, 3, 19)
     );
     UserRegistration.registerUserEmailConfirmed(user);
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+    new WikiBasePageObject().loginAs(user.getUsername(), wikiURL);
 
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
         .fillFormData("N" + hashstamp, "N" + hashstamp, user.getPassword())
@@ -129,7 +129,7 @@ public class RenameToolTests extends NewTestTemplate {
     );
     UserRegistration.registerUserEmailConfirmed(user);
 
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+    new WikiBasePageObject().loginAs(user.getUsername(), wikiURL);
 
     new ArticleContent().push("aaa", String.format("User:%s", user.getUsername()));
 
@@ -183,7 +183,7 @@ public class RenameToolTests extends NewTestTemplate {
     );
     UserRegistration.registerUserEmailConfirmed(user);
 
-    new WikiBasePageObject().loginAs(user.getUsername(), user.getPassword(), wikiURL);
+    new WikiBasePageObject().loginAs(user.getUsername(), wikiURL);
 
     SpecialRenameUserPage renameUserPage = new SpecialRenameUserPage().open()
         .fillFormData(newName, newName, user.getPassword())

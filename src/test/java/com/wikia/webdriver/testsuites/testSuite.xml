@@ -90,7 +90,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.discussions.CreatingReplyTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.CreatingPostTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.DeleteAllPostsByUserTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.discussions.DiscussionsCreation"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.DiscussionsSearchTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.EditingPostTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.discussions.FollowingPostTests"/>

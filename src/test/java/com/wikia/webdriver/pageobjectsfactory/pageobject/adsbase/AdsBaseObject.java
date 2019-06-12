@@ -496,7 +496,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public boolean checkSlotOnPageLoaded(String slotName) {
     WebElement slot;
 
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
 
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
@@ -529,7 +529,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public boolean checkSlotOnPageLoaded(String slotName, Boolean isMobile) {
     WebElement slot;
 
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
 
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName, isMobile);
@@ -580,7 +580,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForElementToHaveSize(int width, int height, WebElement element) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
     } finally {
@@ -752,7 +752,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private void doUntilElementVisible(By by, Runnable f, final int maxNumberOfRepetitions) {
     Boolean isElementDisplayed = false;
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.MILLISECONDS);
     int i = 0;
 
     do {

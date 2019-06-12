@@ -40,7 +40,7 @@ public class PostsListPage extends PageWithPosts {
   public void waitForLoadingSpinnerWith(final String categoryName) {
     waitForLoadingSpinner();
 
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(IMPLICIT_SHORT, TimeUnit.SECONDS);
     try {
       new FluentWait<>(getPost()).withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
           .until((Function<Post, Boolean>) p -> p.getPosts()

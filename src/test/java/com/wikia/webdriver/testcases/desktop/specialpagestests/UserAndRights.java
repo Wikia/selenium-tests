@@ -102,7 +102,7 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights005"}, dependsOnMethods = {"staffCanUnblockUser"})
   public void unblockedUserCanEditUser() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+    base.loginAs(credentials.userNameBlocked, wikiURL);
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL,
                                                                    PageContent.ARTICLE_NAME_PREFIX

@@ -33,7 +33,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(URLsContent.CATEGORY_PAGE);
@@ -52,7 +51,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + BasePageObject.getTimeStamp();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(articleName);
@@ -70,7 +68,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(URLsContent.LIST_PAGE);
@@ -88,7 +85,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(URLsContent.TESTINGPAGE);
@@ -106,7 +102,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(URLsContent.TESTINGPAGE);
@@ -124,7 +119,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(URLsContent.TESTINGPAGE);
@@ -142,7 +136,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.open(URLsContent.TEMPLATE_PAGE);
@@ -159,7 +152,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.verifyURLActionEditEditor(expectedEditor, URLsContent.TESTINGPAGE, wikiURL);
@@ -175,7 +167,6 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     )).getUrl();
     ArticlePageObject article = new ArticlePageObject();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
-                    credentials.getPassBaseOnEditorPref(editorPref),
                     wikiURL
     );
     article.verifyURLVEActionEditEditor(expectedEditor, wikiURL);

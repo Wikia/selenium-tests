@@ -585,9 +585,9 @@ public class ArticlePageObject extends WikiBasePageObject {
     Log.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID + " was scrolled up", true);
   }
 
-  public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
+  public String getWikiTitleOnCongratulationsLightBox() {
     wait.forElementVisible(welcomeLightBoxTitle);
-    Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
+    return welcomeLightBoxTitle.getText();
   }
 
   public void closeNewWikiCongratulationsLightBox() {
@@ -596,8 +596,8 @@ public class ArticlePageObject extends WikiBasePageObject {
     Log.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
   }
 
-  public void verifyWikiTitleHeader(String wikiName) {
-    Assertion.assertStringContains(wikiNameHeader.getText(), wikiName);
+  public String getWikiTitleHeader() {
+    return wikiNameHeader.getText();
   }
 
   public void verifyTableRemoved() {
