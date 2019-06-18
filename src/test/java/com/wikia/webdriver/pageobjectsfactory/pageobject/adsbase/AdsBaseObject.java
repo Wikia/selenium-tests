@@ -80,6 +80,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       VAL_MORGAN_TLB_MEGA_AD_UNIT
       = "vm1b.LB/top_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
   private static final String
+      VAL_MORGAN_HIVI_TLB_MEGA_AD_UNIT
+      = "vm1b.LB/hivi_leaderboard/desktop/oasis-article-ic/_top1k_wiki-life";
+  private static final String
       VAL_MORGAN_TB_MEGA_AD_UNIT
       = "vm1b.MR/top_boxad/desktop/oasis-article-ic/_top1k_wiki-life";
   private static final String
@@ -231,7 +234,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     String MEGA_BLB;
 
     if (!isMobile) {
-      MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT;
+      if (country.equals("NZ")) {
+        MEGA_LB = VAL_MORGAN_HIVI_TLB_MEGA_AD_UNIT;
+      } else {
+        MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT;
+      }
       MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT;
     } else {
       MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY;
@@ -274,6 +281,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     Log.log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
     return this;
   }
+
   public AdsBaseObject verifyLineItemId(List<String> slots, String lineItemId) {
     String lineItemParam = getSlotAttribute(slots, GPT_DATA_ATTRIBUTES[0]);
     Assertion.assertStringContains(lineItemParam, lineItemId);
@@ -443,7 +451,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public boolean hasTopBoxad() {
     try {
-      return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.TOP_BOXAD))) != null;
+      return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.TOP_BOXAD)))
+             != null;
     } catch (NoSuchElementException e) {
       Log.log("Slot top_boxad not found on the page", e, true);
       return false;
