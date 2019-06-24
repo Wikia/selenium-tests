@@ -6,6 +6,7 @@ buildscript {
     dependencies {
         classpath 'org.ajoberstar:gradle-git:1.0.0'
         classpath 'com.palominolabs.gradle.task:gradle-git-clone-task:0.0.2'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5'
     }
 }
 
@@ -20,6 +21,16 @@ repositories {
 
 apply plugin: 'nebula.lint'
 apply plugin: 'java'
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://sonar-s3:9000"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.exclusions", "**/main/resources/**, **/test/resources/**"
+        property "sonar.projectKey", "com.wikia.selenium-tests"
+    }
+}
 
 group = 'com.wikia.qa'
 version = '1.0.0'
