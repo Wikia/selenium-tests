@@ -52,6 +52,7 @@ public class EmailUtils {
 
       for (int i = 0; !forgottenPasswordMessageFound; i++) {
         messages = inbox.getMessages();
+        Thread.sleep(2000);
 
         Log.log("Mail", "Waiting for the message", true);
         Thread.sleep(2000);
