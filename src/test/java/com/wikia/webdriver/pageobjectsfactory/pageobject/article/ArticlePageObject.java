@@ -157,6 +157,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     return this;
   }
 
+  // TODO: would sonar get this?
   public ArticlePageObject openArticleByPath(String articlePath) {
     getUrl(String.format("%s/%s", urlBuilder.getUrl(), articlePath));
     return this;
