@@ -23,10 +23,7 @@ public class SearchMobileWikiTests extends SearchTests {
   private static final String MULTIPLE_RESULTS_SEARCH_PHRASE = "Test";
   private static final String SINGLE_RESULT_SEARCH_PHRASE = "SRPWithOnlyOneSearchResult";
   private static final String EMPTY_SEARCH_PHRASE = "";
-  // Mobile Wiki tries to get 25 results, but a bug in the Search API returns 24 for the first batch
-  // See SUS-1151 for details
-  private static final int SEARCH_RESULTS_NUMBER_FIRST_BATCH = 24;
-  private static final int SEARCH_RESULTS_NUMBER_NEXT_BATCH = 25;
+  private static final int SEARCH_RESULTS_BATCH_COUNT = 25;
 
   @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
@@ -99,8 +96,8 @@ public class SearchMobileWikiTests extends SearchTests {
         new SearchResultsPage()
             .openForQuery(SEARCH_PHRASE_NO_RESULTS);
 
-    Assertion.assertTrue(searchResults.isNoResultsPagePresent());
-    Assertion.assertFalse(searchResults.isLoadMoreButtonVisible());
+    Assertion.assertEquals(searchResults.getResultCardsNumber(), 0, "No results are returned");
+    Assertion.assertFalse(searchResults.isLoadMoreButtonVisible(), "Load More button is not visible");
   }
 
   @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
@@ -122,7 +119,7 @@ public class SearchMobileWikiTests extends SearchTests {
         new SearchResultsPage()
             .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
 
-    Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_NUMBER_FIRST_BATCH);
+    Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_BATCH_COUNT);
   }
 
   @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
@@ -136,13 +133,13 @@ public class SearchMobileWikiTests extends SearchTests {
     int defaultCardNumber = resultsPage.getResultCardsNumber();
 
     Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
-    Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_NUMBER_FIRST_BATCH);
+    Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_BATCH_COUNT);
 
     resultsPage.clickLoadMoreButton();
 
     int moreResultsLoaded = resultsPage.getResultCardsNumber() - defaultCardNumber;
 
-    Assertion.assertEquals(moreResultsLoaded, SEARCH_RESULTS_NUMBER_NEXT_BATCH);
+    Assertion.assertEquals(moreResultsLoaded, SEARCH_RESULTS_BATCH_COUNT);
     Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
   }
 
@@ -155,7 +152,7 @@ public class SearchMobileWikiTests extends SearchTests {
         new SearchResultsPage()
             .openForQuery(SINGLE_RESULT_SEARCH_PHRASE);
 
-    Assertion.assertTrue(resultsPage.getResultCardsNumber() < SEARCH_RESULTS_NUMBER_FIRST_BATCH);
+    Assertion.assertTrue(resultsPage.getResultCardsNumber() < SEARCH_RESULTS_BATCH_COUNT);
     Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
   }
 
