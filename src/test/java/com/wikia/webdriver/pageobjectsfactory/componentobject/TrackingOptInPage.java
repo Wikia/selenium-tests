@@ -231,7 +231,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isConsentCookieSetToAccepted() {
     Assertion.assertEquals(
         getEuConsentCookieValue().length(),
-        131,
+        127,
         "Incorrect length of accepted euconsent value"
     );
   }
