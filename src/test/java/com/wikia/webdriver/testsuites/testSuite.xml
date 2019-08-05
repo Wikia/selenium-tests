@@ -228,6 +228,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.GoogleFormTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.wikianalyticstests.WikiAnalyticsPageTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.renametool.RenameToolTests"/>
         </classes>
     </test>
