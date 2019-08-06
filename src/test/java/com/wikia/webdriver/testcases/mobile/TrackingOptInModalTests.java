@@ -144,15 +144,14 @@ public class TrackingOptInModalTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS, trackingOptIn = true)
   public void anonUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
-    new ArticlePage().open();
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
-    Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
     PrivacyPolicyPage privacyPolicy = new PrivacyPolicyPage();
     privacyPolicy.navigateToPrivacyPolicyPage();
-    privacyPolicy.clickResetTrackingButton();
+    Assertion.assertFalse(new TrackingOptInPage().isVisible());
 
+    privacyPolicy.clickResetTrackingButton();
     Assertion.assertTrue(new TrackingOptInPage().isVisible());
   }
 

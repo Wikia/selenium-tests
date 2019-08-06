@@ -60,6 +60,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate {
   }
 
   @Test
+  @Execute(onWikia = "sydneybuses")
   public void moreOfWikiArticlesCardIsPresentOnENwiki() {
     MixedContentFooter mcFooter = new MixedContentFooter().openWikiMainPage().scrollToMCFooter();
 
