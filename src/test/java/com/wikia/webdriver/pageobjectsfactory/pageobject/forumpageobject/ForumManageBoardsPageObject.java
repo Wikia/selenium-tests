@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.elements.communities.desktop.components.notifications.Notification;
@@ -125,17 +126,11 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   public void verifyForumNotExists(String forumName, String wikiURL) {
-    try {
-      getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
-    } catch (UnsupportedEncodingException e) {
-      Log.log("verifyForumNotExists", e, false);
-    }
-    Assertion.assertListContains(
-        getNotifications(NotificationType.WARN).stream()
-            .map(Notification::getMessage)
-            .collect(Collectors.toList()),
-        "There is no Forum Board with that title. Please try again or check out this list of Forum Boards."
-    );
+    String temp = driver.getCurrentUrl();
+    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_FORUM);
+    wait.forElementNotVisible(By.xpath(
+            "//div//h4//a[contains(text(), '" + forumName.replace("_", " ") + "')]"));
+    getUrl(temp);
     Log.log("verifyForumNotExists", "verified forum not exists", true);
   }
 

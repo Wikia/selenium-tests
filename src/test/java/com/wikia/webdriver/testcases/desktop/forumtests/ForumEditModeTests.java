@@ -64,9 +64,18 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
+    description = PageContent.FORUM_DESCRIPTION_PREFIX + manageForum.getTimeStamp();
+    manageForum.createNewBoard(first, description);
+    manageForum.verifyBoardCreated(first, description);
     manageForum.verifyForumExists(first, wikiURL);
-    manageForum.deleteForum(first, second);
-    manageForum.verifyForumNotExists(first, wikiURL);
+
+
+    manageForum.createNewBoard(second, description);
+    manageForum.verifyBoardCreated(second, description);
+    manageForum.verifyForumExists(second, wikiURL);
+
+    manageForum.deleteForum(second, first);
+    manageForum.verifyForumNotExists(second, wikiURL);
   }
 
   @Test(groups = {"ForumEditModeTests_004"})
@@ -81,8 +90,11 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     title = PageContent.FORUM_TITLE_EDIT_PREFIX + manageForum.getTimeStamp();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
-    manageForum.editForum(first, title, description);
-    manageForum.verifyBoardCreated(title, description);
+    manageForum.createNewBoard(first, description);
+    manageForum.verifyBoardCreated(first, description);
+    manageForum.verifyForumExists(first, wikiURL);
+    manageForum.editForum(first, title, title + description);
+    manageForum.verifyBoardCreated(title, title + description);
     manageForum.verifyForumExists(title, wikiURL);
   }
 
@@ -91,11 +103,15 @@ public class ForumEditModeTests extends NewTestTemplate {
   public void adminUserCanMoveBoard() {
     ForumBoardPage forumBoard = new ForumBoardPage();
     first = forumBoard.createNew(User.USER_ADMIN_FORUM);
-    second = forumBoard.createNew(User.USER_ADMIN_FORUM);
 
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
+    description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
+    manageForum.createNewBoard(first, description);
+    manageForum.verifyBoardCreated(first, description);
+    manageForum.verifyForumExists(first, wikiURL);
+
     int beforeMoveDown = manageForum.getBoardPosition(first);
     manageForum.clickMoveDown(first);
     Assertion.assertTrue(beforeMoveDown < manageForum.getBoardPosition(first), "");
