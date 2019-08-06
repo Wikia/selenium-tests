@@ -13,63 +13,44 @@ public class AnalyticsPageTests extends NewTestTemplate {
 
   private AnalyticsPageObject analyticsPage;
 
-  public void goToAnalyticsPageAndVerifyUrl() {
+  private void goToAnalyticsPageAndVerifyUrl() {
     analyticsPage = new AnalyticsPageObject(driver);
     analyticsPage.openAnalyticsPage(wikiCorporateURL);
     analyticsPage.verifyIfOnAnalyticsSpecialPage();
   }
 
+  private void verifyAnalyticsShouldBeAccessible(){
+    goToAnalyticsPageAndVerifyUrl();
+    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
+  }
 
-//  @BeforeMethod(alwaysRun = false, groups = {"AnalyticsPageAsHelper"})
-//  @Execute(asUser = User.HELPER)
-//  private void setupAnalyticsAsHelper() {
-//    // TODO: Helpers for some reason don't have access
-//    goToAnalyticsPageAndVerifyUrl();
-//    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
-//  }
-
-//  @BeforeMethod(alwaysRun = false, groups = {"AnalyticsPageAsAdmin"})
-//  @Execute(asUser = User.HELPER)
-//  private void setupAnalyticsAsAdmin() {
-//    // TODO: Setup Admins process, see Special:AdminDashboard admin dashboard tests to see how qa admin is set up
-//    goToAnalyticsPageAndVerifyUrl();
-//    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
-//  }
-
-//  @BeforeMethod(alwaysRun = false, groups = {"AnalyticsPageAsUser"})
-//  @Execute(asUser = User.USER_3)
-//  private void setupAnalyticsAsHelper() {
-//    goToAnalyticsPageAndVerifyUrl();
-//  }
-
-  // Access permissions tests
+  private void verifyAnalyticsShouldBePermissionDenied(){
+    goToAnalyticsPageAndVerifyUrl();
+    analyticsPage.verifyPermissionsErrorsIsDisplayed();
+  }
 
   @Test
   @Execute(asUser = User.ANONYMOUS)
   public void anonymousCannotAccessTest(){
-    goToAnalyticsPageAndVerifyUrl();
-    analyticsPage.verifyPermissionsErrorsIsDisplayed();
+    verifyAnalyticsShouldBePermissionDenied();
   }
 
   @Test
   @Execute(asUser = User.USER_3)
   public void userCannotAccessTest() {
-    goToAnalyticsPageAndVerifyUrl();
-    analyticsPage.verifyPermissionsErrorsIsDisplayed();
+    verifyAnalyticsShouldBePermissionDenied();
   }
 
   @Test
   @Execute(asUser = User.LOGIN_STAFF)
   public void staffCanAccessTest() {
-    goToAnalyticsPageAndVerifyUrl();
-    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
+    verifyAnalyticsShouldBeAccessible();
   }
 
   @Test
   @Execute(asUser = User.HELPER)
   public void helperCanAccessTest() {
-    goToAnalyticsPageAndVerifyUrl();
-    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
+    verifyAnalyticsShouldBeAccessible();
   }
 
 //
