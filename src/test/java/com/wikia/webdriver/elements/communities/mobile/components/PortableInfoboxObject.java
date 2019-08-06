@@ -22,7 +22,7 @@ public class PortableInfoboxObject extends WikiBasePageObject {
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  @FindBy(css = ".portable-infobox .pi-data .article-media-thumbnail img")
+  @FindBy(css = ".article-media-placeholder")
   private WebElement imageInInfobox;
 
   @FindBy(css = ".pi-expand-button")
