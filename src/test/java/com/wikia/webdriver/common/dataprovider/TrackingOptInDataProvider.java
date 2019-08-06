@@ -275,22 +275,6 @@ public class TrackingOptInDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsTrackingPixelsOnConsecutivePages() {
-    return new Object[][]{
-        {Arrays.asList(ADS_COMSCORE_PATTERN, ADS_QUANTCAST_PATTERN), ADS_ARTICLE_PAGES}};
-  }
-
-  @DataProvider
-  public static Object[][] adsTrackingPixelsSent() {
-    return new Object[][]{{Arrays.asList(
-        ADS_COMSCORE_PATTERN,
-        ADS_QUANTCAST_PATTERN,
-        ADS_KRUX_PATTERN,
-        ADS_GOOGLE_ANALYTICS_PATTERN
-    )}};
-  }
-
-  @DataProvider
   public static Object[][] f2TrackingURLsForOptIn() {
     return new Object[][]{{ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN, false},
                           {ADS_GOOGLE_ANALYTICS_PATTERN, true}, {ADS_QUANTCAST_PATTERN, true},
