@@ -19,12 +19,6 @@ public class AnalyticsPageTests extends NewTestTemplate {
     analyticsPage.verifyIfOnAnalyticsSpecialPage();
   }
 
-//  @Execute(asUser = User.STAFF)
-//  @BeforeMethod(alwaysRun = false, groups = {"AnalyticsPageAsStaff"})
-//  private void setupAnalyticsAsStaff() {
-//    goToAnalyticsPageAndVerifyUrl();
-//    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
-//  }
 
 //  @BeforeMethod(alwaysRun = false, groups = {"AnalyticsPageAsHelper"})
 //  @Execute(asUser = User.HELPER)
@@ -50,9 +44,16 @@ public class AnalyticsPageTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.USER_3)
-  public void verifyIfUserCannotAccessTest() {
+  public void userCannotAccessTest() {
     goToAnalyticsPageAndVerifyUrl();
     analyticsPage.verifyPermissionsErrorsIsDisplayed();
+  }
+
+  @Test
+  @Execute(asUser = User.LOGIN_STAFF)
+  public void staffCanAccessTest() {
+    goToAnalyticsPageAndVerifyUrl();
+    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
   }
 
 //
