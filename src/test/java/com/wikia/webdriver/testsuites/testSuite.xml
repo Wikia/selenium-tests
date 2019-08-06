@@ -50,6 +50,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUrlBuilder"/>
+            <class name="com.wikia.webdriver.testcases.desktop.analyticstests.AnalyticsPageTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.announcements.AnnouncementsDesktopTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.anonymization.AnonymizationTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.articlecrudtests.ArticleActionsAdminTests"/>
@@ -228,7 +229,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.GoogleFormTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.wikianalyticstests.WikiAnalyticsPageTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.renametool.RenameToolTests"/>
         </classes>
     </test>
