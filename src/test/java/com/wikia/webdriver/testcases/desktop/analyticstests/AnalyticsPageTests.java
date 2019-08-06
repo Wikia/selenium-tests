@@ -42,6 +42,15 @@ public class AnalyticsPageTests extends NewTestTemplate {
 //    goToAnalyticsPageAndVerifyUrl();
 //  }
 
+  // Access permissions tests
+
+  @Test
+  @Execute(asUser = User.ANONYMOUS)
+  public void anonymousCannotAccessTest(){
+    goToAnalyticsPageAndVerifyUrl();
+    analyticsPage.verifyPermissionsErrorsIsDisplayed();
+  }
+
   @Test
   @Execute(asUser = User.USER_3)
   public void userCannotAccessTest() {
@@ -52,6 +61,13 @@ public class AnalyticsPageTests extends NewTestTemplate {
   @Test
   @Execute(asUser = User.LOGIN_STAFF)
   public void staffCanAccessTest() {
+    goToAnalyticsPageAndVerifyUrl();
+    analyticsPage.verifyIfConfidentialWarningIsDisplayed();
+  }
+
+  @Test
+  @Execute(asUser = User.HELPER)
+  public void helperCanAccessTest() {
     goToAnalyticsPageAndVerifyUrl();
     analyticsPage.verifyIfConfidentialWarningIsDisplayed();
   }
