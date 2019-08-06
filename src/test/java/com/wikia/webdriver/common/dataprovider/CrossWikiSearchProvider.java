@@ -17,11 +17,11 @@ public class CrossWikiSearchProvider {
 
   @DataProvider
   public static final Object[][] getExactMatchQueries() {
-    return new Object[][]{{"call of duty", "Call of Duty Wiki", "VIDEO GAMES"},
-                          {"call-of-duty", "Call of Duty Wiki", "VIDEO GAMES"},
-                          {"call_of_duty", "Call of Duty Wiki", "VIDEO GAMES"},
-                          {"callofduty", "Call of Duty Wiki", "VIDEO GAMES"},
-                          {"cod", "Call of Duty Wiki", "VIDEO GAMES"},};
+    return new Object[][]{{"call of duty", "Call of Duty Wiki", "GAMING"},
+                          {"call-of-duty", "Call of Duty Wiki", "GAMING"},
+                          {"call_of_duty", "Call of Duty Wiki", "GAMING"},
+                          {"callofduty", "Call of Duty Wiki", "GAMING"},
+                          {"cod", "Call of Duty Wiki", "GAMING"},};
   }
 
   /**
