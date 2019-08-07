@@ -15,7 +15,6 @@ takeScreenshots: true
 adsData: false
 mockAds: false
 forceHttps: false
-forceFandomDomain: true
 forceLanguageInPath: false
 forceWikiaOrg: false
 disableCommunityPageSalesPitchDialog: true

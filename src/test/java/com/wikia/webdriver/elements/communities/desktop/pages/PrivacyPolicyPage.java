@@ -4,13 +4,12 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class PrivacyPolicyPage extends WikiBasePageObject {
 
-  private static final String PRIVACY_POLICY_PAGE = "http://www.wikia.com/Privacy_Policy";
+  private static final String PRIVACY_POLICY_PAGE = "https://www.fandom.com/privacy-policy";
   @FindBy(css = "#privacy-settings-button")
   private WebElement resetTrackingButton;
 

@@ -21,8 +21,6 @@ public class GlobalNavigationNavigating extends NewTestTemplate {
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void logoClickOnEnglishCommunityOpensFandom() {
     new HomePage().getGlobalNavigation().clickFandomLogo();
-    System.out.println(driver.getCurrentUrl());
-    System.out.println(fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()));
     Assertion.assertEquals(
             urlChecker.getProtocolRelativeURL(driver.getCurrentUrl()),
             urlChecker.getProtocolRelativeURL(fandomUrlBuilder.getFandomUrl(new Configuration().getEnvType()))

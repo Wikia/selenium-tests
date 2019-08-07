@@ -157,7 +157,7 @@ public class TrackingOptInModalTests extends NewTestTemplate {
 
   @Test(groups = {"mobile-wiki-tracking-opt-in"})
   @Execute(asUser = User.USER, trackingOptIn = true)
-  public void loggedInUserInEUGetsModalBackWhenResetsCookiesViaPrivacyPolicyPage() {
+  public void loggedInUserInEUGetsModalBackWhenResetsCookieFprisViaPrivacyPolicyPage() {
     TrackingOptInPage.setGeoCookie(driver, "EU", "DE");
 
     Log.info("Geo cookie: ", driver.manage().getCookieNamed("Geo").getValue());
