@@ -64,18 +64,18 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
+    System.out.println(first+ "    "+second);
     description = PageContent.FORUM_DESCRIPTION_PREFIX + manageForum.getTimeStamp();
-    manageForum.createNewBoard(first, description);
-    manageForum.verifyBoardCreated(first, description);
-    manageForum.verifyForumExists(first, wikiURL);
+    manageForum.createNewBoard(first+second, description);
+    manageForum.verifyBoardCreated(first+second, description);
+    manageForum.verifyForumExists(first+second, wikiURL);
 
+    manageForum.createNewBoard(second+first, description);
+    manageForum.verifyBoardCreated(second+first, description);
+    manageForum.verifyForumExists(second+first, wikiURL);
 
-    manageForum.createNewBoard(second, description);
-    manageForum.verifyBoardCreated(second, description);
-    manageForum.verifyForumExists(second, wikiURL);
-
-    manageForum.deleteForum(second, first);
-    manageForum.verifyForumNotExists(second, wikiURL);
+    manageForum.deleteForum(second+first, first+second);
+    manageForum.verifyForumNotExists(second+first, wikiURL);
   }
 
   @Test(groups = {"ForumEditModeTests_004"})
@@ -90,10 +90,10 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     title = PageContent.FORUM_TITLE_EDIT_PREFIX + manageForum.getTimeStamp();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
-    manageForum.createNewBoard(first, description);
-    manageForum.verifyBoardCreated(first, description);
-    manageForum.verifyForumExists(first, wikiURL);
-    manageForum.editForum(first, title, title + description);
+    manageForum.createNewBoard(first+second, description);
+    manageForum.verifyBoardCreated(first+second, description);
+    manageForum.verifyForumExists(first+second, wikiURL);
+    manageForum.editForum(first+second, title, title + description);
     manageForum.verifyBoardCreated(title, title + description);
     manageForum.verifyForumExists(title, wikiURL);
   }
@@ -108,14 +108,14 @@ public class ForumEditModeTests extends NewTestTemplate {
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
-    manageForum.createNewBoard(first, description);
-    manageForum.verifyBoardCreated(first, description);
-    manageForum.verifyForumExists(first, wikiURL);
+    manageForum.createNewBoard(first+second, description);
+    manageForum.verifyBoardCreated(first+second, description);
+    manageForum.verifyForumExists(first+second, wikiURL);
 
-    int beforeMoveDown = manageForum.getBoardPosition(first);
-    manageForum.clickMoveDown(first);
-    Assertion.assertTrue(beforeMoveDown < manageForum.getBoardPosition(first), "");
-    manageForum.clickMoveUp(first);
-    Assertion.assertTrue(beforeMoveDown == manageForum.getBoardPosition(first), "");
+    int beforeMoveDown = manageForum.getBoardPosition(first+second);
+    manageForum.clickMoveDown(first+second);
+    Assertion.assertTrue(beforeMoveDown < manageForum.getBoardPosition(first+second), "");
+    manageForum.clickMoveUp(first+second);
+    Assertion.assertTrue(beforeMoveDown == manageForum.getBoardPosition(first+second), "");
   }
 }
