@@ -117,6 +117,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
 
       getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
+      Log.info("Forum not exists", e);
       return false;
     }
     wait.forElementVisible(By.xpath(
@@ -131,6 +132,7 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
 
       getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
+      Log.info("Forum exists", e);
       return false;
     }
     wait.forElementNotVisible(By.xpath(
