@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBo
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -65,11 +66,11 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     description = PageContent.FORUM_DESCRIPTION_PREFIX + manageForum.getTimeStamp();
 
-    manageForum.verifyForumExists(first, wikiURL);
-    manageForum.verifyForumExists(second, wikiURL);
+    Assert.assertTrue(manageForum.verifyForumExists(first, wikiURL));
+    Assert.assertTrue(manageForum.verifyForumExists(second, wikiURL));
 
     manageForum.deleteForum(second, first);
-    manageForum.verifyForumNotExists(second, wikiURL);
+    Assert.assertTrue(manageForum.verifyForumNotExists(second, wikiURL));
   }
 
   @Test(groups = {"ForumEditModeTests_004"})
@@ -85,10 +86,10 @@ public class ForumEditModeTests extends NewTestTemplate {
     title = PageContent.FORUM_TITLE_EDIT_PREFIX + manageForum.getTimeStamp();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
 
-    manageForum.verifyForumExists(first, wikiURL);
+    Assert.assertTrue(manageForum.verifyForumExists(first, wikiURL));
     manageForum.editForum(first, title, title + description);
-    manageForum.verifyBoardCreated(title, title + description);
-    manageForum.verifyForumExists(title, wikiURL);
+    Assert.assertTrue(manageForum.verifyBoardCreated(title, title + description));
+    Assert.assertTrue(manageForum.verifyForumExists(title, wikiURL));
   }
 
   @Test(groups = {"Forum_005", "Forum"})
@@ -101,7 +102,7 @@ public class ForumEditModeTests extends NewTestTemplate {
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
-    manageForum.verifyForumExists(first, wikiURL);
+    Assert.assertTrue(manageForum.verifyForumExists(first, wikiURL));
 
     int beforeMoveDown = manageForum.getBoardPosition(first);
     manageForum.clickMoveDown(first);

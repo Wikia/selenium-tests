@@ -108,7 +108,7 @@ dependencies {
     testCompile 'org.projectlombok:lombok:1.18.2'
     testCompile 'org.assertj:assertj-core:3.8.0'
     testCompile 'ru.yandex.qatools.ashot:ashot:1.5.2'
-    testCompile 'com.squareup.okhttp3:okhttp:3.11.0'
+    testCompile 'com.squareup.okhttp3:okhttp:3.10.0'
     testCompile 'com.google.code.findbugs:jsr305:1.3.9'
     testCompile 'commons-collections:commons-collections:3.2.2'
     testCompile 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.2'

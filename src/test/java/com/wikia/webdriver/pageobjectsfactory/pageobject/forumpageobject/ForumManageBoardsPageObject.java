@@ -68,10 +68,10 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     submitNewBoard();
   }
 
-  public void verifyBoardCreated(String title, String description) {
+  public boolean verifyBoardCreated(String title, String description) {
     wait.forElementVisible(By.xpath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ")
                                     + "')]/../../../p[contains(text(), '" + description + "')]"));
-    Log.log("verifyBoardCreated", "recently created board verified", true);
+    return true;
   }
 
   private void clickDeleteForum(String name) {
@@ -111,27 +111,32 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     verifyForumDeletedText(sourceForumName);
   }
 
-  public void verifyForumExists(String forumName, String wikiURL) {
+  public boolean verifyForumExists(String forumName, String wikiURL) {
     String temp = driver.getCurrentUrl();
     try {
 
       getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
-      Log.log("verifyForumExists", e, false);
+      return false;
     }
     wait.forElementVisible(By.xpath(
         "//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
-    Log.log("verifyForumExists", "verified forum exists", true);
+    return true;
   }
 
-  public void verifyForumNotExists(String forumName, String wikiURL) {
+  public boolean verifyForumNotExists(String forumName, String wikiURL) {
     String temp = driver.getCurrentUrl();
-    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.SPECIAL_FORUM);
+    try {
+
+      getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
+    } catch (UnsupportedEncodingException e) {
+      return false;
+    }
     wait.forElementNotVisible(By.xpath(
             "//div//h4//a[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
-    Log.log("verifyForumNotExists", "verified forum not exists", true);
+    return true;
   }
 
   private void clickModifyForum(String forumName) {
