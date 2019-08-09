@@ -4,35 +4,58 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wam.WamTab;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.Period;
-import org.joda.time.format.DateTimeFormat;
+import javafx.util.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class AnalyticsPageObject extends BasePageObject {
-
-  @FindBy(css = "#analytics_confidential")
-  private WebElement analyticsConfidentialBar;
-
-  @FindBy(xpath = "//h1[@class='page-header__title']")
-  private WebElement permissionsErrorText;
 
   public static final int DEFAULT_WAM_INDEX_ROWS = 20;
   private static final int FIRST_WAM_TAB_INDEX = 0;
   private static final By WAM_INDEX_TABLE = By.cssSelector("#wam-index table");
   private static final String WAM_TAB_CSS_SELECTOR_FORMAT = "a[data-vertical-id='%s']";
+  @FindBy(css = "#analytics_confidential")
+  private WebElement analyticsConfidentialBar;
+  @FindBy(css = "#PageHeader > div.page-header__main > h1")
+  private WebElement permissionsErrorText;
+  @FindBy(css = "#number_of_pageviews > div.grid_box_header")
+  private WebElement pageviewsTitleBar;
+  @FindBy(css = "#number_of_pageviews_chart")
+  private WebElement pageviewsChart;
+  @FindBy(css = "#edits_per_day > div.grid_box_header")
+  private WebElement editsTitleBar;
+  @FindBy(css = "#edits_per_day_chart")
+  private WebElement editsChart;
+  @FindBy(css = "#desktop_vs_mobile > div.grid_box_header")
+  private WebElement desktopVsMobileSessionsTitleBar;
+  @FindBy(css = "#desktop_vs_mobile_chart")
+  private WebElement desktopVsMobileSessionsChart;
+  @FindBy(css = "#browser_breakdown > div.grid_box_header")
+  private WebElement browserSessionsBreakdownTitle;
+  @FindBy(css = "#browser_breakdown_chart")
+  private WebElement browserSessionsBreakdownChart;
+
+  private List<Pair<WebElement, WebElement>> mandatoryToCheckTitleChartPairs =
+      Arrays.asList(
+          new Pair<WebElement, WebElement>(pageviewsTitleBar, pageviewsChart),
+          new Pair<WebElement, WebElement>(editsTitleBar, editsChart),
+          new Pair<WebElement, WebElement>(
+              desktopVsMobileSessionsTitleBar,
+              desktopVsMobileSessionsTitleBar
+          ),
+          new Pair<WebElement, WebElement>(
+              browserSessionsBreakdownTitle,
+              browserSessionsBreakdownChart
+          )
+      );
+
   @FindBy(css = ".wam-filtering-tab a")
   private List<WebElement> wamTabs;
   @FindBy(css = "#wam-index table tr")
@@ -60,8 +83,7 @@ public class AnalyticsPageObject extends BasePageObject {
   }
 
   /**
-   * @desc Opens "Analytics" page on a given wiki:
-   * e.g. https://undertale.fandom.com/wiki/Special:Analytics
+   * @desc Opens "Analytics" page on a given wiki: e.g. https://undertale.fandom.com/wiki/Special:Analytics
    */
   public void openAnalyticsPage(String wikiCorporateURL) {
     getUrl(urlBuilder.getUrlForWikiPage(URLsContent.SPECIAL_ANALYTICS));
@@ -69,196 +91,25 @@ public class AnalyticsPageObject extends BasePageObject {
     Log.log("openAnalyticsPage", "Analytics Page opened", true);
   }
 
-  public void verifyIfConfidentialWarningIsDisplayed(){
-    Assertion.assertNotNull(analyticsConfidentialBar, "Couldn't find Analytics confidential warning");
-    Assertion.assertNotNull(analyticsConfidentialBar.getText(),"Text of Analytics confidential warning can't be empty");
+  public void verifyIfConfidentialWarningIsDisplayed() {
+    Assertion.assertNotNull(
+        analyticsConfidentialBar,
+        "Couldn't find Analytics confidential warning"
+    );
+    Assertion.assertNotNull(
+        analyticsConfidentialBar.getText(),
+        "Text of Analytics confidential warning can't be empty"
+    );
   }
 
-  public void verifyPermissionsErrorsIsDisplayed(){
+  public void verifyPermissionsErrorsIsDisplayed() {
     Assertion.assertTrue(permissionsErrorText.isDisplayed(), "PermissionsErrorText is not visible");
-    Assertion.assertStringContains(permissionsErrorText.getText(), "Permissions errors");
+    Assertion.assertNotNull(permissionsErrorText.getText(), "Permissions errors text is missing");
   }
 
-  /**
-   * @param tab WamTab enum
-   * @desc Checks if given tab has an anchor with "selected" class
-   */
-  public void verifyTabIsSelected(WamTab tab) {
-    WebElement wamTab = driver.findElement(By.cssSelector(String.format(
-        WAM_TAB_CSS_SELECTOR_FORMAT,
-        tab.getId()
-    )));
-    Log.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
-
-    if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
-      Log.log("verifyTabIsSelected", "the tab's anchor's selected", true);
-    } else {
-      Log.log("verifyTabIsSelected", "the tab's anchor's NOT selected", false);
-    }
-  }
-
-  public AnalyticsPageObject isLoaded() {
-    waitForPageLoad();
-
-    return this;
-  }
-
-  /**
-   * @desc Checks if there is a table row different than head one in WAM index table
-   */
-  public void verifyWamIndexIsNotEmpty() {
-    wait.forElementPresent(WAM_INDEX_TABLE);
-    int rows = wamIndexRows.size();
-
-    if (rows > 1) {
-      Log.log(
-          "verifyWamIndexIsNotEmpty",
-          "there are more rows in the table than just a head row (" + rows + ")",
-          true
-      );
-    } else {
-      Log.log("verifyTabIsSelected", "there is only the head row", false);
-    }
-  }
-
-  /**
-   * @param expectedRowsNo the number of expecting table rows
-   * @desc Checks if there are as many rows in the WAM index table as we expect Adds +1 to
-   * expectedRowsNo to account for header of the table
-   */
-  public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
-    wait.forElementPresent(WAM_INDEX_TABLE);
-    Assertion.assertNumber(
-        wamIndexRows.size(),
-        expectedRowsNo + 1,
-        "wam index rows equals " + expectedRowsNo
-    );
-  }
-
-  /**
-   * @desc Checks if vertical filter except "All" option has options with our verticals' ids
-   */
-  public void verifyWamVerticalFilterOptions() {
-    Boolean result = true;
-
-    for (WebElement e : wamTabs) {
-      String optionValue = e.getAttribute("data-vertical-id");
-
-      if (!WamTab.contains(optionValue)) {
-        // once an option is not in our ENUM the test is failed
-        result = false;
-        break;
-      }
-    }
-
-    if (result.equals(true)) {
-      Log.log(
-          "verifyWamVerticalFilterOptions",
-          "There are correct options in the vertical select box",
-          true
-      );
-    } else {
-      Log.log(
-          "verifyWamVerticalFilterOptions",
-          "There is invalid option in the vertical select box",
-          false
-      );
-    }
-  }
-
-  /**
-   * @desc Checks if "Vertical" column in WAM index has the same values for each row
-   */
-  public void verifyVerticalColumnValuesAreTheSame() {
-    wait.forElementPresent(WAM_INDEX_TABLE);
-    String selectedValue = tabSelected.getAttribute("data-vertical-id");
-
-    for (int i = 1; i < wamIndexRows.size(); ++i) {
-      Assertion.assertEquals(wamIndexRows.get(i).getAttribute("data-vertical-id"), selectedValue);
-    }
-  }
-
-  private List<String> getCurrentIndexNo() {
-    List<String> counter = new ArrayList<>();
-    String no;
-    for (WebElement cell : indexList) {
-      no = cell.getText().replace(".", "");
-      counter.add(no);
-    }
-    return counter;
-  }
-
-  public void verifyWamIndexPageFirstColumnInOrder(int startElement, int endElement) {
-    wait.forElementPresent(WAM_INDEX_TABLE);
-    List<String> current = getCurrentIndexNo();
-    for (int i = 0; i <= endElement - startElement; i++) {
-      Assertion.assertEquals(current.get(i), Integer.toString(i + startElement));
-    }
-    Assertion.assertEquals(current.size(), endElement - startElement + 1);
-  }
-
-  public void clickNextPaginator() {
-    wait.forElementVisible(paginationNext);
-    scrollAndClick(paginationNext);
-    Log.log("clickNextPaginator", "next button in pagination was clicked", true);
-  }
-
-  public void selectTab(WamTab tab) {
-    scrollAndClick(driver.findElement(By.cssSelector(String.format(
-        WAM_TAB_CSS_SELECTOR_FORMAT,
-        tab.getId()
-    ))));
-    isLoaded();
-    verifyTabSelected(tab);
-  }
-
-  private void verifyTabSelected(WamTab tab) {
-    Assertion.assertTrue(driver.findElement(By.cssSelector(String.format(
-        WAM_TAB_CSS_SELECTOR_FORMAT,
-        tab.getId()
-    )))
-                             .getAttribute("class")
-                             .contains("icon-vertical-selected"));
-    wait.forElementVisible(tabSelected);
-  }
-
-  /**
-   * Checks if yesterday's, day before yesterday, or current day is selected by default in date
-   * picker 3 days are checked due to lags in bulkimporter (providing data for WAM API)
-   */
-  public void verifyDateInDatePicker() {
-    String currentDate = datePickerInput.getAttribute("value");
-    String dayBeforeYesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
-        .withLocale(Locale.ENGLISH)
-        .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
-    String yesterday = DateTimeFormat.forPattern("MMMM d, yyyy")
-        .withLocale(Locale.ENGLISH)
-        .print(DateTime.now().minus(Period.days(1)).withZone(DateTimeZone.UTC));
-    String today = DateTimeFormat.forPattern("MMMM d, yyyy")
-        .withLocale(Locale.ENGLISH)
-        .print(DateTime.now().withZone(DateTimeZone.UTC));
-    Assertion.assertTrue(
-        dayBeforeYesterday.equals(currentDate) || yesterday.equals(currentDate) || today.equals(
-            currentDate),
-        "Default date does not match day before yesterday, yesterday or today"
-    );
-  }
-
-  public void verifyDateInDatePicker(String date) {
-    isLoaded();
-    String currentDate = datePickerInput.getAttribute("value");
-    Assertion.assertEquals(
-        date,
-        currentDate,
-        "Current date and entered manually date are not the same"
-    );
-  }
-
-  public void typeDateInDatePicker(String date) {
-    wait.forElementClickable(datePickerInput);
-    jsActions.execute("$(arguments[0])[0].value=''", datePickerInput);
-    scrollAndClick(datePickerInput);
-    new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
+  public void verifyIfPageviewsChartIsDisplayed() {
+    Assertion.assertNotNull(pageviewsTitleBar.getText(), "Pageviews chart's title is missing");
+    Assertion.assertTrue(pageviewsChart.isDisplayed(), "Chart with pageviews is not displayed");
   }
 
   public void verifyIfOnAnalyticsSpecialPage() {
@@ -270,5 +121,15 @@ public class AnalyticsPageObject extends BasePageObject {
         this.isStringInURL("verticalId=" + verticalId),
         "No VerticalId selection (in URL)"
     );
+  }
+
+  public void verifyIfAllMandatoryChartsAreDisplayed() {
+    for (Pair<WebElement, WebElement> titleChartPair : mandatoryToCheckTitleChartPairs) {
+      Assertion.assertTrue(titleChartPair.getKey().isDisplayed(), "Chart's title is not displayed");
+      Assertion.assertNotNull(titleChartPair.getKey().getText(), "Chart's title is missing");
+
+      Assertion.assertTrue(titleChartPair.getValue().isDisplayed(), "Chart is not displayed");
+      Assertion.assertNotNull(titleChartPair, "Chart is not present");
+    }
   }
 }
