@@ -114,14 +114,13 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   public boolean verifyForumExists(String forumName, String wikiURL) {
     String temp = driver.getCurrentUrl();
     try {
-
       getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
+      wait.forElementVisible(By.xpath(
+              "//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     } catch (UnsupportedEncodingException e) {
       Log.info("Forum not exists", e);
       return false;
     }
-    wait.forElementVisible(By.xpath(
-        "//h1[contains(text(), '" + forumName.replace("_", " ") + "')]"));
     getUrl(temp);
     return true;
   }
