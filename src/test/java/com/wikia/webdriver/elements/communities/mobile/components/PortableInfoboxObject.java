@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -126,7 +127,7 @@ public class PortableInfoboxObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxObject clickOnImageInInfobox() {
-    wait.forElementClickable(imageInInfobox).click();
+    new Actions(driver).moveToElement(imageInInfobox).click().perform();
 
     return this;
   }
@@ -139,7 +140,6 @@ public class PortableInfoboxObject extends WikiBasePageObject {
 
   public PortableInfoboxObject clickGalleryImage(int index) {
     wait.forElementClickable(galleryImageList.get(index)).click();
-
     return this;
   }
 

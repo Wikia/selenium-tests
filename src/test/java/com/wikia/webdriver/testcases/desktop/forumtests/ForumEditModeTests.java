@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBo
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -60,13 +61,16 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumBoardPage forumBoard = new ForumBoardPage();
     first = forumBoard.createNew(User.USER_ADMIN_FORUM);
     second = forumBoard.createNew(User.USER_ADMIN_FORUM);
-
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
-    manageForum.verifyForumExists(first, wikiURL);
-    manageForum.deleteForum(first, second);
-    manageForum.verifyForumNotExists(first, wikiURL);
+    description = PageContent.FORUM_DESCRIPTION_PREFIX + manageForum.getTimeStamp();
+
+    Assert.assertTrue(manageForum.verifyForumExists(first, wikiURL));
+    Assert.assertTrue(manageForum.verifyForumExists(second, wikiURL));
+
+    manageForum.deleteForum(second, first);
+    Assert.assertTrue(manageForum.verifyForumNotExists(second, wikiURL));
   }
 
   @Test(groups = {"ForumEditModeTests_004"})
@@ -81,9 +85,11 @@ public class ForumEditModeTests extends NewTestTemplate {
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     title = PageContent.FORUM_TITLE_EDIT_PREFIX + manageForum.getTimeStamp();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
-    manageForum.editForum(first, title, description);
-    manageForum.verifyBoardCreated(title, description);
-    manageForum.verifyForumExists(title, wikiURL);
+
+    Assert.assertTrue(manageForum.verifyForumExists(first, wikiURL));
+    manageForum.editForum(first, title, title + description);
+    Assert.assertTrue(manageForum.verifyBoardCreated(title, title + description));
+    Assert.assertTrue(manageForum.verifyForumExists(title, wikiURL));
   }
 
   @Test(groups = {"Forum_005", "Forum"})
@@ -91,11 +97,13 @@ public class ForumEditModeTests extends NewTestTemplate {
   public void adminUserCanMoveBoard() {
     ForumBoardPage forumBoard = new ForumBoardPage();
     first = forumBoard.createNew(User.USER_ADMIN_FORUM);
-    second = forumBoard.createNew(User.USER_ADMIN_FORUM);
 
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
+    description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
+    Assert.assertTrue(manageForum.verifyForumExists(first, wikiURL));
+
     int beforeMoveDown = manageForum.getBoardPosition(first);
     manageForum.clickMoveDown(first);
     Assertion.assertTrue(beforeMoveDown < manageForum.getBoardPosition(first), "");
