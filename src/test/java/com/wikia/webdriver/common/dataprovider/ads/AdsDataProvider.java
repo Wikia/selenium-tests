@@ -125,8 +125,8 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] dfpMEGAParamsTLB() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/DfpParams",
-                           "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-life",
-                           "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
+                           "wka1b.LB/hivi_leaderboard/desktop/oasis-article/_top1k_wiki-life",
+                           "hivi_leaderboard", Arrays.asList("\"s0\":\"life\"",
                                                             "\"s1\":\"_project43\"",
                                                             "\"s2\":\"article\"",
                                                             "\"dmn\":\"fandomcom\"",
@@ -135,14 +135,14 @@ public class AdsDataProvider {
                                                             "\"ref\":\"direct\"",
                                                             "\"lang\":\"en\"",
                                                             "\"esrb\":\"teen\""
-    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"test\"")}};
+    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"hivi_leaderboard\"", "\"src\":\"test\"")}};
   }
 
   @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{{"yugioh", "Dark_Magician",
-                           "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
-                           "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
+                           "wka1b.LB/hivi_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
+                           "hivi_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                                             "\"s0v\":\"games\"",
                                                             "\"s0c\":[\"anime\"]",
                                                             "\"s1\":\"_yugioh\"",
@@ -163,10 +163,10 @@ public class AdsDataProvider {
                                                             "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                                                             "\"pform\":[\"pc\",\"psp\"]",
                                                             "\"sex\":[\"m\"]"
-    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"gpt\"")},
+    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"hivi_leaderboard\"", "\"src\":\"gpt\"")},
                           {"runescape", "Grew",
-                           "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
-                           "TOP_LEADERBOARD", Arrays.asList("\"s0\":\"gaming\"",
+                           "wka1b.LB/hivi_leaderboard/desktop/oasis-article/_top1k_wiki-gaming",
+                           "hivi_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                                             "\"s0v\":\"games\"",
                                                             "\"s0c\":[\"gaming\"]",
                                                             "\"s1\":\"_runescape\"",
@@ -187,11 +187,11 @@ public class AdsDataProvider {
                                                             "\"esrb\":\"teen\"",
                                                             "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
                           ), Arrays.asList("\"loc\":\"top\"",
-                                           "\"pos\":\"top_leaderboard\"",
+                                           "\"pos\":\"hivi_leaderboard\"",
                                            "\"src\":\"gpt\""
                           )}, {"avatar", "Avatar_Wiki",
-                               "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-ent",
-                               "top_leaderboard", Arrays.asList("\"s0\":\"ent\"",
+                               "wka1b.LB/hivi_leaderboard/desktop/oasis-home/_top1k_wiki-ent",
+                               "hivi_leaderboard", Arrays.asList("\"s0\":\"ent\"",
                                                                 "\"s0v\":\"tv\"",
                                                                 "\"s0c\":[\"tv\"]",
                                                                 "\"s1\":\"_avatar\"",
@@ -211,10 +211,10 @@ public class AdsDataProvider {
                                                                 "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"]",
                                                                 "\"theme\":[\"magic\"]",
                                                                 "\"esrb\":\"ec\""
-    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"gpt\"")},
+    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"hivi_leaderboard\"", "\"src\":\"gpt\"")},
                           {"starcraft", "StarCraft_Wiki",
-                           "wka1b.LB/top_leaderboard/desktop/oasis-home/_top1k_wiki-gaming",
-                           "top_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
+                           "wka1b.LB/hivi_leaderboard/desktop/oasis-home/_top1k_wiki-gaming",
+                           "hivi_leaderboard", Arrays.asList("\"s0\":\"gaming\"",
                                                             "\"s0v\":\"games\"",
                                                             "\"s0c\":[\"gaming\"]",
                                                             "\"s1\":\"_starcraft\"",
@@ -230,13 +230,13 @@ public class AdsDataProvider {
                                                             "\"top\":\"1k\"",
                                                             "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                                                             "\"esrb\":\"teen\"",
-                                                            "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\",\"esports\"]",
+                                                            "\"gnre\":[\"esports\",\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                                                             "\"pform\":[\"pc\"]",
                                                             "\"sex\":[\"m\"]",
                                                             "\"pub\":[\"blizzard\"]",
                                                             "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
                           ), Arrays.asList("\"loc\":\"top\"",
-                                           "\"pos\":\"top_leaderboard\"",
+                                           "\"pos\":\"hivi_leaderboard\"",
                                            "\"src\":\"gpt\""
                           )}};
   }
