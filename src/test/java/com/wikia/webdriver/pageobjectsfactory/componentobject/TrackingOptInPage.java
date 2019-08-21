@@ -19,6 +19,7 @@ import java.util.List;
 public class TrackingOptInPage extends BasePageObject {
 
   private static final Duration WAITING_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
+  private static final Duration WAITING_TIME_FOR_MODAL = Duration.ofSeconds(3);
   private static final String MODAL_INSTANT_GLOBAL = "InstantGlobals.wgEnableTrackingOptInModal=1";
   private static final String EU_CONTINENT = "EU";
   private TrackingOptInModal modal = new TrackingOptInModal(this);
@@ -61,18 +62,29 @@ public class TrackingOptInPage extends BasePageObject {
     return modal.isVisible();
   }
 
-  public void clickAcceptButton() {
+  private void acceptTracking() {
+    wait.forX(WAITING_TIME_FOR_MODAL);
     modal.clickAcceptButton();
+  }
+  private void rejectTracking() {
+    modal.clickLearnMoreButton();
+    wait.forX(WAITING_TIME_FOR_MODAL);
+    modal.rejectAllFeatures();
+    modal.clickSaveChangesButton();
+  }
+
+  public void clickAcceptButton() {
+    acceptTracking();
   }
 
   public void clickRejectButton() {
-    modal.clickRejectButton();
+    rejectTracking();
   }
 
   public void acceptOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlOptInModalDisplayedOasis(page));
-    modal.clickAcceptButton();
+    acceptTracking();
   }
 
   public void acceptOptInModal(
@@ -80,13 +92,13 @@ public class TrackingOptInPage extends BasePageObject {
   ) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlWithInstantGlobals(instantGlobals, page));
-    modal.clickAcceptButton();
+    acceptTracking();
   }
 
   public void rejectOptInModal(WikiaWebDriver driver, String country, Page page) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlOptInModalDisplayedOasis(page));
-    modal.clickRejectButton();
+    rejectTracking();
   }
 
   public void rejectOptInModal(
@@ -94,7 +106,7 @@ public class TrackingOptInPage extends BasePageObject {
   ) {
     setGeoCookie(driver, EU_CONTINENT, country);
     getUrl(urlWithInstantGlobals(instantGlobals, page));
-    modal.clickRejectButton();
+    rejectTracking();
   }
 
   public void verifyTrackingRequestsNotSend(
@@ -239,7 +251,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isConsentCookieSetToRejected() {
     Assertion.assertEquals(
         getEuConsentCookieValue().length(),
-        32,
+        142,
         "Incorrect length of rejected euconsent value"
     );
   }
