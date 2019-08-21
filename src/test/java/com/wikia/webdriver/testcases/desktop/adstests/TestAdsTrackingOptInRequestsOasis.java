@@ -31,6 +31,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -42,6 +43,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -55,6 +57,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -66,6 +69,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -77,6 +81,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -88,6 +93,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -99,6 +105,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -110,6 +117,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -121,6 +129,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -132,6 +141,8 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, AdsDataProvider.UAP_HIVI_PAGE);
+    modal.refreshPage();
+
     modal.scrollTo(driver.findElement(By.className("wds-global-footer__header")));
     modal.scrollTo(driver.findElement(By.className("page-header__main")));
     modal.scrollTo(driver.findElement(By.className("wds-global-footer")));
@@ -148,6 +159,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -160,6 +172,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -173,6 +186,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -184,6 +198,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -195,6 +210,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -206,6 +222,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -217,6 +234,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -228,6 +246,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -239,6 +258,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, GERMANY, AdsDataProvider.UAP_HIVI_PAGE);
+    modal.refreshPage();
     modal.scrollTo(driver.findElement(By.className("wds-global-footer__header")));
 
     modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
@@ -251,6 +271,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
+    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
