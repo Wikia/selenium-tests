@@ -33,7 +33,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -45,7 +44,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -57,7 +55,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -71,7 +68,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -83,7 +79,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, GERMANY, ADS_UAP_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -95,7 +90,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -107,7 +101,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -119,7 +112,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -131,7 +123,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -143,7 +134,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.rejectOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSendForRejected(urlPatterns, networkTrafficInterceptor);
   }
@@ -157,7 +147,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -169,7 +158,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -183,7 +171,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, GERMANY, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -195,7 +182,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, FRANCE, ADS_UAP_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -207,7 +193,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -219,7 +204,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE, instantGlobals);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -231,7 +215,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -243,7 +226,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsSend(urlPatterns, networkTrafficInterceptor);
   }
@@ -255,7 +237,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
@@ -267,7 +248,6 @@ public class TestAdsTrackingOptInRequestsMobileWiki extends NewTestTemplate {
     networkTrafficInterceptor.startIntercepting();
     TrackingOptInPage modal = new TrackingOptInPage();
     modal.acceptOptInModal(driver, DENMARK, ADS_HOME_PAGE);
-    modal.refreshPage();
 
     modal.verifyTrackingRequestsNotSendForAccepted(urlPatterns, networkTrafficInterceptor);
   }
