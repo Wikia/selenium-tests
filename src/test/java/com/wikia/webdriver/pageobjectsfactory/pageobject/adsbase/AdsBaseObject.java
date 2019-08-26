@@ -234,11 +234,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     String MEGA_BLB;
 
     if (!isMobile) {
-      if (country.equals("NZ")) {
-        MEGA_LB = VAL_MORGAN_HIVI_TLB_MEGA_AD_UNIT;
-      } else {
-        MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT;
-      }
+      MEGA_LB = VAL_MORGAN_HIVI_TLB_MEGA_AD_UNIT;
       MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT;
     } else {
       MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY;
