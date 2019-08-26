@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 public class ForcedLoginTests extends NewTestTemplate {
 
-  private User user = User.FORCED_LOGIN_USER;
+  private User user = User.USER_11;
 
   public void anonCanLogInViaAuthModalWhenAddingFile() {
     SpecialNewFilesPage specialPage = new WikiBasePageObject().openSpecialNewFiles().addPhoto();

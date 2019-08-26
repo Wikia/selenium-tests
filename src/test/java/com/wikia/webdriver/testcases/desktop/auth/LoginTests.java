@@ -28,9 +28,10 @@ import static org.testng.Assert.assertFalse;
 @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class LoginTests extends NewTestTemplate {
 
-  private static final User USER = User.LOGIN_USER;
-  private static final User JAPANESE_USER = User.USER_JAPAN;
-  private static final User STAFF = User.LOGIN_STAFF;
+  private static final User USER = User.USER_11;
+  private static final User JAPANESE_USER = User.REGULAR_USER_JAPAN;
+
+  private static final User STAFF = User.STAFF;
 
   private static final String DESKTOP = "auth-login-desktop";
   private static final String MOBILE = "auth-login-mobile";
