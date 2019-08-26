@@ -22,7 +22,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   public void wallOwnerReceivesNotification_setup() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName9, wikiURL);
-    MessageWall wall = new MessageWall().open(credentials.userName10);
+    MessageWall wall = new MessageWall().open(credentials.userName11);
     MiniEditorComponentObject mini = wall.triggerMessageArea(true);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -36,7 +36,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
       "MessageWallNotificationsOwnerTests_002"}, dependsOnMethods = "wallOwnerReceivesNotification_setup")
   public void userIsNotifiedWhenOtherUserWritesMessageOnHerMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName10, wikiURL);
+    base.loginAs(credentials.userName11, wikiURL);
     MessagesNotifications notifications = new MessagesNotifications();
     notifications.showMessagesNotifications();
     notifications.verifyNotification(title, credentials.userName9);
