@@ -5,10 +5,11 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLActiveInfo;
 import javafx.util.Pair;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.bcel.generic.RETURN;
+import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -17,10 +18,10 @@ import java.util.List;
 
 public class AnalyticsPageObject extends BasePageObject {
 
-  public static final int DEFAULT_WAM_INDEX_ROWS = 20;
-  private static final int FIRST_WAM_TAB_INDEX = 0;
-  private static final By WAM_INDEX_TABLE = By.cssSelector("#wam-index table");
-  private static final String WAM_TAB_CSS_SELECTOR_FORMAT = "a[data-vertical-id='%s']";
+  private String MWDisableAnonymousEditingVar = "wgDisableAnonymousEditing";
+
+  // WebElements and their Pairs declared
+
   @FindBy(css = "#analytics_confidential")
   private WebElement analyticsConfidentialBar;
   @FindBy(css = "#PageHeader > div.page-header__main > h1")
@@ -44,8 +45,10 @@ public class AnalyticsPageObject extends BasePageObject {
 
   private List<Pair<WebElement, WebElement>> mandatoryToCheckTitleChartPairs =
       Arrays.asList(
-          new Pair<WebElement, WebElement>(pageviewsTitleBar, pageviewsChart),
-          new Pair<WebElement, WebElement>(editsTitleBar, editsChart),
+          new Pair<WebElement, WebElement>(pageviewsTitleBar,
+                                           pageviewsChart),
+          new Pair<WebElement, WebElement>(editsTitleBar,
+                                           editsChart),
           new Pair<WebElement, WebElement>(
               desktopVsMobileSessionsTitleBar,
               desktopVsMobileSessionsTitleBar
@@ -56,26 +59,18 @@ public class AnalyticsPageObject extends BasePageObject {
           )
       );
 
-  @FindBy(css = ".wam-filtering-tab a")
-  private List<WebElement> wamTabs;
-  @FindBy(css = "#wam-index table tr")
-  private List<WebElement> wamIndexRows;
-  @FindBy(css = "a.paginator-next")
-  private WebElement paginationNext;
-  @FindBy(css = "div.wam-index tr td:nth-child(1)")
-  private List<WebElement> indexList;
-  @FindBy(css = "li.selected a")
-  private WebElement tabSelected;
-  @FindBy(css = "div.wam-header h2")
-  private WebElement selectedHeaderName;
-  @FindBy(id = "WamFilterHumanDate")
-  private WebElement datePickerInput;
-  @FindBy(id = "ui-datepicker-div")
-  private WebElement calendarElement;
-  @FindBy(css = ".ui-datepicker-prev.ui-corner-all")
-  private WebElement previousMonthArrow;
-  @FindBy(css = ".ui-datepicker-month")
-  private WebElement monthInCalendar;
+  @FindBy(css = "#logged_in_out > div.grid_box_header")
+  private WebElement loggedInVsOutEditsTitleBar;
+  @FindBy(css = "#logged_in_out_chart")
+  private WebElement loggedInVsOutChart;
+
+  private Pair<WebElement, WebElement> optionalLoggedInVsOutTitleChartPair =
+      new Pair<WebElement, WebElement>(loggedInVsOutEditsTitleBar, loggedInVsOutChart);
+
+
+  JavascriptExecutor js = (JavascriptExecutor) driver;
+
+  // Logic driving operation/tests on Special:Analytics
 
   public AnalyticsPageObject(WebDriver driver) {
     super();
@@ -107,29 +102,41 @@ public class AnalyticsPageObject extends BasePageObject {
     Assertion.assertNotNull(permissionsErrorText.getText(), "Permissions errors text is missing");
   }
 
-  public void verifyIfPageviewsChartIsDisplayed() {
-    Assertion.assertNotNull(pageviewsTitleBar.getText(), "Pageviews chart's title is missing");
-    Assertion.assertTrue(pageviewsChart.isDisplayed(), "Chart with pageviews is not displayed");
-  }
-
   public void verifyIfOnAnalyticsSpecialPage() {
     Assertion.assertTrue(this.isStringInURL("Analytics"), "Not on 'Analytics' subpage (in URL");
   }
 
-  public void verifyIfVerticalIdSelectedInUrl(int verticalId) {
-    Assertion.assertTrue(
-        this.isStringInURL("verticalId=" + verticalId),
-        "No VerticalId selection (in URL)"
-    );
-  }
-
   public void verifyIfAllMandatoryChartsAreDisplayed() {
     for (Pair<WebElement, WebElement> titleChartPair : mandatoryToCheckTitleChartPairs) {
-      Assertion.assertTrue(titleChartPair.getKey().isDisplayed(), "Chart's title is not displayed");
-      Assertion.assertNotNull(titleChartPair.getKey().getText(), "Chart's title is missing");
-
-      Assertion.assertTrue(titleChartPair.getValue().isDisplayed(), "Chart is not displayed");
-      Assertion.assertNotNull(titleChartPair, "Chart is not present");
+      checkIfTitleChartWPairAreDisplayed(titleChartPair);
     }
+  }
+
+  public void verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed(){
+    checkIfTitleChartWPairAreDisplayed(optionalLoggedInVsOutTitleChartPair);
+  }
+
+  // Helper methods
+
+  public boolean IsAnonymousEditingAllowed() {
+    try {
+      Object disableAnonymousEditingObject = jsActions.execute(MWDisableAnonymousEditingVar);
+      return !disableAnonymousEditingObject.toString().equalsIgnoreCase("true");
+    } catch (WebDriverException exception) {
+      if (exception.getMessage().contains(MWDisableAnonymousEditingVar + " is not defined")) {
+        return true;
+      }
+      throw exception;
+    }
+  }
+
+  /**
+   * Checks for a pair of WebElements<Title, Chart>, if text and other elements are displayed correctly
+   */
+  private void checkIfTitleChartWPairAreDisplayed(Pair<WebElement, WebElement> titleChartPair){
+    Assertion.assertNotNull(titleChartPair, "Chart is not present");
+    Assertion.assertNotNull(titleChartPair.getKey().getText(), "Chart's title is missing");
+    Assertion.assertTrue(titleChartPair.getKey().isDisplayed(), "Chart's title is not displayed");
+    Assertion.assertTrue(titleChartPair.getValue().isDisplayed(), "Chart is not displayed");
   }
 }
