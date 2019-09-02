@@ -146,7 +146,11 @@ public enum User {
   ), SUS_REGULAR_USER3(
       "ci.user.sus_user3.username",
       "ci.user.sus_user3.password"
-  ), USER_CTEST("ci.user.ctest3.username", "ci.user.ctest3.password"),;
+  ), USER_CTEST("ci.user.ctest3.username", "ci.user.ctest3.password"),
+    DE_USER_ADMIN_SPECIAL_ANALYTICS_TEST_WIKI("ci.user.de_user_admin_special_analytics_test_wiki.username",
+                                            "ci.user.de_user_admin_special_analytics_test_wiki.password"),
+  ;
+
 
   private final String userName;
 

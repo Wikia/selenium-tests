@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "muppet")
 public class AnalyticsPageTests extends NewTestTemplate {
 
+  // Special wiki for testing, of which DE_USER_ADMIN_SPECIAL_ANALYTICS_TEST_WIKI is an admin
+  private final static String ANALYTICS_ADMIN_EMPTY_TEST_WIKI = "specialanalyticstestwiki";
+
   private AnalyticsPageObject analyticsPage;
 
   private void goToAnalyticsPageAndVerifyUrl() {
@@ -49,6 +52,12 @@ public class AnalyticsPageTests extends NewTestTemplate {
   @Test
   @Execute(asUser = User.HELPER)
   public void helperCanAccessTest() {
+    verifyAnalyticsShouldBeAccessible();
+  }
+
+  @Test
+  @Execute(asUser = User.DE_USER_ADMIN_SPECIAL_ANALYTICS_TEST_WIKI, onWikia = ANALYTICS_ADMIN_EMPTY_TEST_WIKI)
+  public void adminOfWikiCanAccessTest() {
     verifyAnalyticsShouldBeAccessible();
   }
 
