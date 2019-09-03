@@ -9,8 +9,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class AnalyticsPageObject extends BasePageObject {
 
@@ -235,17 +238,21 @@ public class AnalyticsPageObject extends BasePageObject {
 
     // check table column names
     for (WebElement columnTitle : table.findElements(By.cssSelector("thead > tr > th"))) {
-      Assertion.assertFalse(columnTitle.getText().isEmpty(), "Table's column name can't be empty ");
+      Assertion.assertFalse(columnTitle.getText().isEmpty(), "Table's column name can't be empty");
     }
 
-    // check Views column: if entries follow '123,333' pattern}
+    // check Views column: if entries follow '123,333' pattern and are > 0}
     for (WebElement row : table.findElements(By.cssSelector(tableRowSelector))) {
       WebElement viewsElement = row.findElement(By.cssSelector("td:nth-child(2)"));
       String viewsText = viewsElement.getText();
-      Assertion.assertTrue(
-          viewsText.matches("\\d{0,3}([,.]\\d{0,3})*"),
-          "Views column value does not match regexp"
-      );
+      try {
+        int viewsValue = NumberFormat.getNumberInstance(Locale.US).parse(viewsText).intValue();
+        Assertion.assertTrue(viewsValue > 0, "Entries with views lower than 0"
+                                             + " shouldn't be showed");
+      } catch (ParseException e) {
+        throw new AssertionError("Views format does not fit expected Locale,"
+                                 + "views: " + viewsText);
+      }
     }
   }
 
