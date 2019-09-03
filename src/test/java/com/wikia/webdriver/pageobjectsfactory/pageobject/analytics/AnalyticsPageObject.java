@@ -41,8 +41,6 @@ public class AnalyticsPageObject extends BasePageObject {
   private WebElement loggedInVsOutBox;
 
   //  Tables
-  private String tableCssSelector = "div.grid_box_inner > table";
-
   @FindBy(css = "#top_search_terms")
   private WebElement internalTopSearchTermsBox;
   @FindBy(css = "#geolocation")
@@ -52,12 +50,15 @@ public class AnalyticsPageObject extends BasePageObject {
   @FindBy(css = "#most_visited_files")
   private WebElement mostVistedFilesBox;
 
-  private List<WebElement> mandatoryTableBoxesToCheck = Arrays.asList(
+  private List<WebElement> TableBoxesToCheck = Arrays.asList(
       internalTopSearchTermsBox,
       geolocationBox,
       topViewedPagesBox,
       mostVistedFilesBox
   );
+
+  private String tableSelector = "div.grid_box_inner > table";
+  private String tableRowSelector = "tbody > tr";
 
   // Logic driving operation/tests on Special:Analytics
 
@@ -75,6 +76,9 @@ public class AnalyticsPageObject extends BasePageObject {
     Log.log("openAnalyticsPage", "Analytics Page opened", true);
   }
 
+  /**
+   * Checks if a message informing user about confidential nature of Special:Analytics is displayed
+   */
   public void verifyIfConfidentialWarningIsDisplayed() {
     Assertion.assertNotNull(
         analyticsConfidentialBar,
@@ -86,6 +90,9 @@ public class AnalyticsPageObject extends BasePageObject {
     );
   }
 
+  /**
+   * Checks if an invalid permissions message is shown
+   */
   public void verifyPermissionsErrorsIsDisplayed() {
     Assertion.assertTrue(permissionsErrorText.isDisplayed(), "PermissionsErrorText is not visible");
     Assertion.assertNotNull(permissionsErrorText.getText(), "Permissions errors text is missing");
@@ -95,22 +102,52 @@ public class AnalyticsPageObject extends BasePageObject {
     Assertion.assertTrue(this.isStringInURL("Analytics"), "Not on 'Analytics' subpage (in URL");
   }
 
+  /**
+   * Checks if all charts that should always be displayed on every wiki are shown properly,
+   * including Box's title and chart canvas
+   */
   public void verifyIfAllMandatoryChartsAreDisplayed() {
     for (WebElement chartBox : mandatoryChartBoxesToCheck) {
       checkIfChartBoxIsDisplayed(chartBox);
     }
   }
 
+  /**
+   * Checks that all tables are displayed, with their Box's title, and proper content (links, views
+   * verification)
+   */
   public void verifyIfAllTablesAreDisplayed() {
-    for (WebElement tableBox : mandatoryTableBoxesToCheck) {
-      checkIfTableBoxIsDisplayed(tableBox);
+    for (WebElement tableBox : TableBoxesToCheck) {
+      checkCommonTableBoxContents(tableBox);
     }
+
+    // check table-specific things, such as links
+    checkTopSearchTermsTableSpecificContent(
+        internalTopSearchTermsBox.findElement(
+            By.cssSelector(tableSelector)));
+
+    checkTopViewedPagesTableSpecificContent(
+        topViewedPagesBox.findElement(
+            By.cssSelector(tableSelector)));
+
+    checkMostVisitedFilesTableSpecificContent(
+        mostVistedFilesBox.findElement(
+            By.cssSelector(tableSelector)));
   }
 
-  public void verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed() {
+  /**
+   * Checks if Logged In Vs Logged Out Edits Box and its chart is displayed This chart's existence
+   * is dependent on anonymous editing being allowed on a wiki. See method
+   * IsAnonymousEditingAllowed
+   */
+  public void verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed() {
     checkIfChartBoxIsDisplayed(loggedInVsOutBox);
   }
 
+  /**
+   * Returns !wgDisableAnonymousEditing, important for determining if Logged In vs Logged Out Edits
+   * chart should be displayed
+   */
   public boolean IsAnonymousEditingAllowed() {
     String MWDisableAnonymousEditingVar = "wgDisableAnonymousEditing";
     try {
@@ -124,35 +161,99 @@ public class AnalyticsPageObject extends BasePageObject {
     }
   }
 
+  // Helper methods
+
+  /// Table-specific checks
+
+  private void checkTopSearchTermsTableSpecificContent(WebElement topSearchTable) {
+    for (WebElement row : topSearchTable.findElements(By.cssSelector(tableRowSelector))) {
+      WebElement aLinkElement = row.findElement(By.cssSelector("td > a"));
+      Assertion.assertNotNull(
+          aLinkElement,
+          "Each column 1 in row Internal Top Search should contain a link"
+      );
+      String searchTerm = aLinkElement.getText();
+      Assertion.assertStringNotContains(searchTerm, "Special:");
+      Assertion.assertStringContains(
+          aLinkElement.getAttribute("href"),
+          "Special:Search?query="
+      );
+    }
+  }
+
+  private void checkTopViewedPagesTableSpecificContent(WebElement topViewedPagesTable) {
+
+    for (WebElement row : topViewedPagesTable.findElements(By.cssSelector(tableRowSelector))) {
+      WebElement aLinkElement = row.findElement(By.cssSelector("td > a"));
+      Assertion.assertNotNull(
+          aLinkElement,
+          "Each column 1 in row Top Viewed Pages should contain a link"
+      );
+    }
+  }
+
+  private void checkMostVisitedFilesTableSpecificContent(WebElement mostVisitedFilesTable) {
+    for (WebElement row : mostVisitedFilesTable.findElements(By.cssSelector(tableRowSelector))) {
+      WebElement aLinkElement = row.findElement(By.cssSelector("td > a"));
+      Assertion.assertNotNull(
+          aLinkElement,
+          "Each column 1 in row Most Visited Files Tavle should contain a link"
+      );
+      String searchTerm = aLinkElement.getText();
+      Assertion.assertStringContains(
+          aLinkElement.getAttribute("href"),
+          "File:"
+      );
+    }
+  }
+
   /**
-   * This checks if a Box contains a title header and a chart canvas.
+   * This checks if a Chart Box contains a title header and a Chart Canvas.
    */
   private void checkIfChartBoxIsDisplayed(WebElement chartBox) {
     checkIfBoxIsDisplayed(chartBox);
     checkIfBoxTitleIsDisplayed(chartBox);
-    WebElement chart = chartBox.findElement(By.cssSelector("div.grid_box_chart > canvas.chart_canvas.chartjs-render-monitor"));
+    WebElement chart = chartBox.findElement(By.cssSelector(
+        "div.grid_box_chart > canvas.chart_canvas.chartjs-render-monitor"));
     Assertion.assertNotNull(chart, "Chart is not present");
     Assertion.assertTrue(chart.isDisplayed(), "Chart is not displayed");
   }
 
   /**
-   * This checks if a Box contains a title header and a table with column names.
+   * This checks if a Table Box contains: - a title header - a table with named column: where second
+   * column has pageviews number-like entries
    */
-  private void checkIfTableBoxIsDisplayed(WebElement tableBox) {
+  private void checkCommonTableBoxContents(WebElement tableBox) {
     checkIfBoxIsDisplayed(tableBox);
     checkIfBoxTitleIsDisplayed(tableBox);
+    checkTableHeaderAndViewsColumn(tableBox);
+  }
 
-    WebElement table = tableBox.findElement(By.cssSelector(tableCssSelector));
+  private void checkTableHeaderAndViewsColumn(WebElement tableBox) {
+    WebElement table = tableBox.findElement(By.cssSelector(tableSelector));
     Assertion.assertTrue(table.isDisplayed(), "Table is not displayed");
+
+    // check table column names
     for (WebElement columnTitle : table.findElements(By.cssSelector("thead > tr > th"))) {
       Assertion.assertFalse(columnTitle.getText().isEmpty(), "Table's column name can't be empty ");
     }
+
+    // check Views column: if entries follow '123,333' pattern}
+    for (WebElement row : table.findElements(By.cssSelector(tableRowSelector))) {
+      WebElement viewsElement = row.findElement(By.cssSelector("td:nth-child(2)"));
+      String viewsText = viewsElement.getText();
+      Assertion.assertTrue(
+          viewsText.matches("\\d{0,3}([,.]\\d{0,3})*"),
+          "Views column value does not match regexp"
+      );
+    }
   }
 
-  private void checkIfBoxIsDisplayed(WebElement box){
+  private void checkIfBoxIsDisplayed(WebElement box) {
     Assertion.assertNotNull(box, "Box is not present");
     Assertion.assertTrue(box.isDisplayed(), "Box is not displayed");
   }
+
   private void checkIfBoxTitleIsDisplayed(WebElement box) {
     String gridBoxHeaderCssSelector = "div.grid_box_header";
     WebElement boxTitle = box.findElement(By.cssSelector(gridBoxHeaderCssSelector));

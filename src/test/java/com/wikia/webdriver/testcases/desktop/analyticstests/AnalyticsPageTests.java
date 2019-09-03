@@ -36,6 +36,7 @@ public class AnalyticsPageTests extends NewTestTemplate {
   /**
    * Helper testing method for data (titles, charts, tables) displayed by Analytics, checks if:
    *  - all mandatory charts are displayed
+   *  - all tables are displayed and their content matches expectations
    *  - depending on MW wgXXX.. variables, check if:
    *    - LoggedInVsLoggedOut chart is displayed depending on whether Anonymous Editing is allowed
    */
@@ -49,11 +50,11 @@ public class AnalyticsPageTests extends NewTestTemplate {
     // check if anonymous users can edit on this wiki
     if (analyticsPage.IsAnonymousEditingAllowed()){
       // if so, logged in vs logged out edits charts should be displayed
-      analyticsPage.verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed();
+      analyticsPage.verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed();
     }
     else {
       // else no chart should be displayed and we get an exception
-      Assertion.assertThrows(analyticsPage::verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed);
+      Assertion.assertThrows(analyticsPage::verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed);
     }
   }
 
@@ -99,7 +100,7 @@ public class AnalyticsPageTests extends NewTestTemplate {
                          "Anonymous editing is not allowed on the prepared test wiki when it should," 
                          + "test wiki variable value or MediaWiki's mechanism has changed");
     // and therefore Logged In vs Logged out Edits chart
-    analyticsPage.verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed();
+    analyticsPage.verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed();
   }
 
   @Test
