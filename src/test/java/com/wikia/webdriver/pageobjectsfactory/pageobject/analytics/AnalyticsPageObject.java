@@ -153,15 +153,16 @@ public class AnalyticsPageObject extends BasePageObject {
    */
   public boolean IsAnonymousEditingAllowed() {
     String MWDisableAnonymousEditingVar = "wgDisableAnonymousEditing";
+    Object disableAnonymousEditingObject;
     try {
-      Object disableAnonymousEditingObject = jsActions.execute(MWDisableAnonymousEditingVar);
-      return !disableAnonymousEditingObject.toString().equalsIgnoreCase("true");
+      disableAnonymousEditingObject = jsActions.execute(MWDisableAnonymousEditingVar);
     } catch (WebDriverException exception) {
       if (exception.getMessage().contains(MWDisableAnonymousEditingVar + " is not defined")) {
         return true;
       }
       throw exception;
     }
+    return !disableAnonymousEditingObject.toString().equalsIgnoreCase("true");
   }
 
   // Helper methods
@@ -244,15 +245,19 @@ public class AnalyticsPageObject extends BasePageObject {
     // check Views column: if entries follow '123,333' pattern and are > 0}
     for (WebElement row : table.findElements(By.cssSelector(tableRowSelector))) {
       WebElement viewsElement = row.findElement(By.cssSelector("td:nth-child(2)"));
-      String viewsText = viewsElement.getText();
+      int viewsValue;
       try {
-        int viewsValue = NumberFormat.getNumberInstance(Locale.US).parse(viewsText).intValue();
-        Assertion.assertTrue(viewsValue > 0, "Entries with views lower than 0"
-                                             + " shouldn't be showed");
+        viewsValue = NumberFormat
+            .getNumberInstance(Locale.US)
+            .parse(viewsElement.getText())
+            .intValue();
       } catch (ParseException e) {
         throw new AssertionError("Views format does not fit expected Locale,"
-                                 + "views: " + viewsText);
+                                 + "views: "
+                                 + viewsElement.getText());
       }
+      Assertion.assertTrue(viewsValue > 0,
+                           "Entries with views lower than 0 shouldn't be showed");
     }
   }
 

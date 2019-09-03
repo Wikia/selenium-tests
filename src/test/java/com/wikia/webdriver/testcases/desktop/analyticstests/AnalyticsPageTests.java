@@ -34,7 +34,7 @@ public class AnalyticsPageTests extends NewTestTemplate {
   }
 
   /**
-   * Helper testing method for data (titles, charts, tables) displayed by Analytics, checks if:
+   * Helper testing method for data (titles, charts) displayed by Analytics, checks if:
    *  - all mandatory charts are displayed
    *  - all tables are displayed and their content matches expectations
    *  - depending on MW wgXXX.. variables, check if:
