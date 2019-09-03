@@ -43,6 +43,9 @@ public class AnalyticsPageTests extends NewTestTemplate {
     // check all mandatory charts
     analyticsPage.verifyIfAllMandatoryChartsAreDisplayed();
 
+    // check all tables
+    analyticsPage.verifyIfAllTablesAreDisplayed();
+
     // check if anonymous users can edit on this wiki
     if (analyticsPage.IsAnonymousEditingAllowed()){
       // if so, logged in vs logged out edits charts should be displayed
@@ -101,7 +104,7 @@ public class AnalyticsPageTests extends NewTestTemplate {
 
   @Test
   @Execute(asUser = User.HELPER)
-  public void chartsAreDisplayedTest() {
+  public void dataIsDisplayedTest() {
     verifyAnalyticsShouldBeAccessible();
     verifyIfAllDataElementsAreDisplayed();
   }
