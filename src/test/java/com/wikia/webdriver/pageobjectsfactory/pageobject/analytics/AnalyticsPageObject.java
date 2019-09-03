@@ -5,10 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLActiveInfo;
-import javafx.util.Pair;
-import org.apache.bcel.generic.RETURN;
-import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,57 +14,50 @@ import java.util.List;
 
 public class AnalyticsPageObject extends BasePageObject {
 
-  private String MWDisableAnonymousEditingVar = "wgDisableAnonymousEditing";
-
-  // WebElements and their Pairs declared
-
   @FindBy(css = "#analytics_confidential")
   private WebElement analyticsConfidentialBar;
   @FindBy(css = "#PageHeader > div.page-header__main > h1")
   private WebElement permissionsErrorText;
-  @FindBy(css = "#number_of_pageviews > div.grid_box_header")
-  private WebElement pageviewsTitleBar;
-  @FindBy(css = "#number_of_pageviews_chart")
-  private WebElement pageviewsChart;
-  @FindBy(css = "#edits_per_day > div.grid_box_header")
-  private WebElement editsTitleBar;
-  @FindBy(css = "#edits_per_day_chart")
-  private WebElement editsChart;
-  @FindBy(css = "#desktop_vs_mobile > div.grid_box_header")
-  private WebElement desktopVsMobileSessionsTitleBar;
-  @FindBy(css = "#desktop_vs_mobile_chart")
-  private WebElement desktopVsMobileSessionsChart;
-  @FindBy(css = "#browser_breakdown > div.grid_box_header")
-  private WebElement browserSessionsBreakdownTitle;
-  @FindBy(css = "#browser_breakdown_chart")
-  private WebElement browserSessionsBreakdownChart;
 
-  private List<Pair<WebElement, WebElement>> mandatoryToCheckTitleChartPairs =
-      Arrays.asList(
-          new Pair<WebElement, WebElement>(pageviewsTitleBar,
-                                           pageviewsChart),
-          new Pair<WebElement, WebElement>(editsTitleBar,
-                                           editsChart),
-          new Pair<WebElement, WebElement>(
-              desktopVsMobileSessionsTitleBar,
-              desktopVsMobileSessionsTitleBar
-          ),
-          new Pair<WebElement, WebElement>(
-              browserSessionsBreakdownTitle,
-              browserSessionsBreakdownChart
-          )
-      );
+  //  Charts
+  @FindBy(css = "#number_of_pageviews")
+  private WebElement pageviewsBox;
+  @FindBy(css = "#edits_per_day")
+  private WebElement editsBox;
+  @FindBy(css = "#desktop_vs_mobile")
+  private WebElement desktopVsMobileSessionsBox;
+  @FindBy(css = "#browser_breakdown")
+  private WebElement browserSessionsBreakdownBox;
 
-  @FindBy(css = "#logged_in_out > div.grid_box_header")
-  private WebElement loggedInVsOutEditsTitleBar;
-  @FindBy(css = "#logged_in_out_chart")
-  private WebElement loggedInVsOutChart;
+  private List<WebElement> mandatoryChartBoxesToCheck = Arrays.asList(
+      pageviewsBox,
+      editsBox,
+      desktopVsMobileSessionsBox,
+      browserSessionsBreakdownBox
+  );
 
-  private Pair<WebElement, WebElement> optionalLoggedInVsOutTitleChartPair =
-      new Pair<WebElement, WebElement>(loggedInVsOutEditsTitleBar, loggedInVsOutChart);
+  //  Logged Out vs Logged In Optional Box
+  @FindBy(css = "#logged_in_out")
+  private WebElement loggedInVsOutBox;
 
+  //  Tables
+  private String tableCssSelector = "div.grid_box_inner > table";
 
-  JavascriptExecutor js = (JavascriptExecutor) driver;
+  @FindBy(css = "#top_search_terms")
+  private WebElement internalTopSearchTermsBox;
+  @FindBy(css = "#geolocation")
+  private WebElement geolocationBox;
+  @FindBy(css = "#top_viewed_pages")
+  private WebElement topViewedPagesBox;
+  @FindBy(css = "#most_visited_files")
+  private WebElement mostVistedFilesBox;
+
+  private List<WebElement> mandatoryTableBoxesToCheck = Arrays.asList(
+      internalTopSearchTermsBox,
+      geolocationBox,
+      topViewedPagesBox,
+      mostVistedFilesBox
+  );
 
   // Logic driving operation/tests on Special:Analytics
 
@@ -107,18 +96,23 @@ public class AnalyticsPageObject extends BasePageObject {
   }
 
   public void verifyIfAllMandatoryChartsAreDisplayed() {
-    for (Pair<WebElement, WebElement> titleChartPair : mandatoryToCheckTitleChartPairs) {
-      checkIfTitleChartWPairAreDisplayed(titleChartPair);
+    for (WebElement chartBox : mandatoryChartBoxesToCheck) {
+      checkIfChartBoxIsDisplayed(chartBox);
     }
   }
 
-  public void verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed(){
-    checkIfTitleChartWPairAreDisplayed(optionalLoggedInVsOutTitleChartPair);
+  public void verifyIfAllTablesAreDisplayed() {
+    for (WebElement tableBox : mandatoryTableBoxesToCheck) {
+      checkIfTableBoxIsDisplayed(tableBox);
+    }
   }
 
-  // Helper methods
+  public void verifyIfOptionalLoggedInVsLoggedOutEditsChartAreDisplayed() {
+    checkIfChartBoxIsDisplayed(loggedInVsOutBox);
+  }
 
   public boolean IsAnonymousEditingAllowed() {
+    String MWDisableAnonymousEditingVar = "wgDisableAnonymousEditing";
     try {
       Object disableAnonymousEditingObject = jsActions.execute(MWDisableAnonymousEditingVar);
       return !disableAnonymousEditingObject.toString().equalsIgnoreCase("true");
@@ -131,12 +125,41 @@ public class AnalyticsPageObject extends BasePageObject {
   }
 
   /**
-   * Checks for a pair of WebElements<Title, Chart>, if text and other elements are displayed correctly
+   * This checks if a Box contains a title header and a chart canvas.
    */
-  private void checkIfTitleChartWPairAreDisplayed(Pair<WebElement, WebElement> titleChartPair){
-    Assertion.assertNotNull(titleChartPair, "Chart is not present");
-    Assertion.assertNotNull(titleChartPair.getKey().getText(), "Chart's title is missing");
-    Assertion.assertTrue(titleChartPair.getKey().isDisplayed(), "Chart's title is not displayed");
-    Assertion.assertTrue(titleChartPair.getValue().isDisplayed(), "Chart is not displayed");
+  private void checkIfChartBoxIsDisplayed(WebElement chartBox) {
+    checkIfBoxIsDisplayed(chartBox);
+    checkIfBoxTitleIsDisplayed(chartBox);
+    WebElement chart = chartBox.findElement(By.cssSelector("div.grid_box_chart > canvas.chart_canvas.chartjs-render-monitor"));
+    Assertion.assertNotNull(chart, "Chart is not present");
+    Assertion.assertTrue(chart.isDisplayed(), "Chart is not displayed");
+  }
+
+  /**
+   * This checks if a Box contains a title header and a table with column names.
+   */
+  private void checkIfTableBoxIsDisplayed(WebElement tableBox) {
+    checkIfBoxIsDisplayed(tableBox);
+    checkIfBoxTitleIsDisplayed(tableBox);
+
+    WebElement table = tableBox.findElement(By.cssSelector(tableCssSelector));
+    Assertion.assertTrue(table.isDisplayed(), "Table is not displayed");
+    for (WebElement columnTitle : table.findElements(By.cssSelector("thead > tr > th"))) {
+      Assertion.assertFalse(columnTitle.getText().isEmpty(), "Table's column name can't be empty ");
+    }
+  }
+
+  private void checkIfBoxIsDisplayed(WebElement box){
+    Assertion.assertNotNull(box, "Box is not present");
+    Assertion.assertTrue(box.isDisplayed(), "Box is not displayed");
+  }
+  private void checkIfBoxTitleIsDisplayed(WebElement box) {
+    String gridBoxHeaderCssSelector = "div.grid_box_header";
+    WebElement boxTitle = box.findElement(By.cssSelector(gridBoxHeaderCssSelector));
+    Assertion.assertNotNull(
+        boxTitle.getText(),
+        "Box's title is missing"
+    );
+    Assertion.assertTrue(boxTitle.isDisplayed(), "Box's title is not displayed");
   }
 }
