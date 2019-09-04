@@ -201,7 +201,7 @@ public class AnalyticsPageObject extends BasePageObject {
       WebElement aLinkElement = row.findElement(By.cssSelector("td > a"));
       Assertion.assertNotNull(
           aLinkElement,
-          "Each column 1 in row Most Visited Files Tavle should contain a link"
+          "Each column 1 value in row in Most Visited Files Table should contain a link"
       );
       String searchTerm = aLinkElement.getText();
       Assertion.assertStringContains(
