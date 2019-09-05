@@ -54,6 +54,7 @@ public class URLsContent {
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "Special:VideoPageAdmin/edit";
   public static final String SPECIAL_VERSION = "Special:Version";
   public static final String SPECIAL_INFOBOX_BUILDER = "Special:InfoboxBuilder";
+  public static final String SPECIAL_ANALYTICS = "Special:Analytics";
   public static final String SPECIAL_WIKI_FEATURES = "Special:WikiFeatures/";
   public static final String COMMUNITY_CENTRAL = "Community_Central";
   public static final String FANDOM_UNIVERSITY = "Fandom_University";

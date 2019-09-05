@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import java.util.EnumSet;
 
 @Execute(onWikia = "community")
+@Test(groups = {"DataEngineering", "WamPageTests"})
 public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;
@@ -23,7 +24,7 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyIfOnWamFandomPage();
   }
 
-  @Test(groups = {"WamPage001", "WamPageTests"})
+  @Test
   public void wam_001_verifyDefaultPage() {
     wam.verifyTabIsSelected(WamTab.ALL);
     wam.verifyWamIndexIsNotEmpty();
@@ -31,7 +32,6 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
-  @Test(groups = {"WamPage002", "WamPageTests"})
   public void wam_002_verifyFilteringByVertical() {
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamVerticalFilterOptions();
@@ -48,7 +48,7 @@ public class WamPageTests extends NewTestTemplate {
    * Test pagination and if WAM ranks are displayed in order
    */
   @RelatedIssue(issueID = "DE-4379", comment = "If fails, notify DE team.")
-  @Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
+  @Test
   public void wam_003_verifyPaginationByNextButton() {
     wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
     wam.clickNextPaginator();
@@ -71,7 +71,7 @@ public class WamPageTests extends NewTestTemplate {
   /**
    * Tests behaviour of date picker
    */
-  @Test(groups = {"wamPage_005", "WamPageTests"})
+  @Test
   public void wam_005_testDatePicker() {
     wam.verifyDateInDatePicker();
     // test behaviour of selecting a date
@@ -84,7 +84,7 @@ public class WamPageTests extends NewTestTemplate {
   /**
    * Tests order of ranks on date that was previously out of order
    */
-  @Test(groups = {"wamPage_005", "WamPageTests"})
+  @Test
   public void wam_006_testJune32019DataCorrectness() {
     String date = "June 3, 2019";
     wam.typeDateInDatePicker(date);
