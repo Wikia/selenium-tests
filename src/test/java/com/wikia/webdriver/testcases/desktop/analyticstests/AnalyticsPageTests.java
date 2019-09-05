@@ -35,10 +35,10 @@ public class AnalyticsPageTests extends NewTestTemplate {
   }
 
   /**
-   * Helper testing method for data (titles, charts) displayed by Analytics, checks if: - all
-   * mandatory charts are displayed - all tables are displayed and their content matches
-   * expectations - depending on MW wgXXX.. variables, check if: - LoggedInVsLoggedOut chart is
-   * displayed depending on whether Anonymous Editing is allowed
+   * Helper testing method for data (titles, charts) displayed by Analytics, checks if:
+   * - all mandatory charts are displayed
+   * - all tables are displayed and their content matches expectations
+   * depending on MW wgXXX.. variables, check if LoggedInVsLoggedOut chart is displayed
    */
   private void verifyIfAllDataElementsAreDisplayed() {
     // check all mandatory charts
