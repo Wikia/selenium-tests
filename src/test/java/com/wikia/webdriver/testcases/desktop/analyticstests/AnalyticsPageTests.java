@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.analytics.AnalyticsPage
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "muppet")
+@Test(groups = {"DataEngineering", "AnalyticsPageTests"})
 public class AnalyticsPageTests extends NewTestTemplate {
 
   // Special wiki for testing, of which DE_USER_ADMIN_SPECIAL_ANALYTICS_TEST_WIKI is an admin
@@ -34,13 +35,12 @@ public class AnalyticsPageTests extends NewTestTemplate {
   }
 
   /**
-   * Helper testing method for data (titles, charts) displayed by Analytics, checks if:
-   *  - all mandatory charts are displayed
-   *  - all tables are displayed and their content matches expectations
-   *  - depending on MW wgXXX.. variables, check if:
-   *    - LoggedInVsLoggedOut chart is displayed depending on whether Anonymous Editing is allowed
+   * Helper testing method for data (titles, charts) displayed by Analytics, checks if: - all
+   * mandatory charts are displayed - all tables are displayed and their content matches
+   * expectations - depending on MW wgXXX.. variables, check if: - LoggedInVsLoggedOut chart is
+   * displayed depending on whether Anonymous Editing is allowed
    */
-  private void verifyIfAllDataElementsAreDisplayed(){
+  private void verifyIfAllDataElementsAreDisplayed() {
     // check all mandatory charts
     analyticsPage.verifyIfAllMandatoryChartsAreDisplayed();
 
@@ -48,11 +48,10 @@ public class AnalyticsPageTests extends NewTestTemplate {
     analyticsPage.verifyIfAllTablesAreDisplayed();
 
     // check if anonymous users can edit on this wiki
-    if (analyticsPage.IsAnonymousEditingAllowed()){
+    if (analyticsPage.IsAnonymousEditingAllowed()) {
       // if so, logged in vs logged out edits charts should be displayed
       analyticsPage.verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed();
-    }
-    else {
+    } else {
       // else no chart should be displayed and we get an exception
       Assertion.assertThrows(analyticsPage::verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed);
     }
@@ -94,11 +93,13 @@ public class AnalyticsPageTests extends NewTestTemplate {
     verifyAnalyticsShouldBeAccessible();
     // check if all mandatory charts are displayed
     analyticsPage.verifyIfAllMandatoryChartsAreDisplayed();
-    
+
     // on this Wiki we know to expect Anonymous Editing to be allowed
-    Assertion.assertTrue(analyticsPage.IsAnonymousEditingAllowed(),
-                         "Anonymous editing is not allowed on the prepared test wiki when it should," 
-                         + "test wiki variable value or MediaWiki's mechanism has changed");
+    Assertion.assertTrue(
+        analyticsPage.IsAnonymousEditingAllowed(),
+        "Anonymous editing is not allowed on the prepared test wiki when it should,"
+        + "test wiki variable value or MediaWiki's mechanism has changed"
+    );
     // and therefore Logged In vs Logged out Edits chart
     analyticsPage.verifyIfLoggedInVsLoggedOutEditsChartIsDisplayed();
   }
