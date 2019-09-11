@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdSlot;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.annotations.UnsafePageLoad;
+import com.wikia.webdriver.common.core.annotations.*;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.TrackingOptInDataProvider;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -24,6 +22,7 @@ public class TestAdsTrackingOptInRequestsOasis extends NewTestTemplate {
   private static final String DENMARK = "DK";
   private static final String GERMANY = "DE";
 
+  @RelatedIssue(issueID = "CAKE-5150")
   @NetworkTrafficDump(useMITM = true)
   @Execute(trackingOptIn = false)
   @Test(dataProviderClass = TrackingOptInDataProvider.class, dataProvider = "adsKikimoraRejectedDataProvider", groups = "AdsOptInRejectedOasis")
