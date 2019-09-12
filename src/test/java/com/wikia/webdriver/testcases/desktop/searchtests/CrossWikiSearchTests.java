@@ -8,7 +8,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch.CrossWikiSearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
 
-import org.junit.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -98,9 +97,8 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyNoCommunitiesLink();
   }
 
-  @Ignore
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries", groups = {
-      "CrossWikiSearch_006", "Search", "CrossWikiSearch_2"})
+      "CrossWikiSearch_006", "Search", "CrossWikiSearch_2"}, enabled = false)
   public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject();
     search.searchForWiki(wikiURL, query);
