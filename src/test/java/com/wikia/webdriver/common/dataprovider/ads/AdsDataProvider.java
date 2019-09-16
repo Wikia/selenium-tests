@@ -391,7 +391,7 @@ public class AdsDataProvider {
         "slotName",
         AdsContent.HIVI_TOP_LB
                                                    )
-                                                       .put("slotSize", new Dimension(1889, 767))
+                                                       .put("slotSize", new Dimension(1887, 767))
                                                        .put("lineItemId", "365404452")
                                                        .build(),
                                                    ImmutableMap.<String, Object>builder().put(
