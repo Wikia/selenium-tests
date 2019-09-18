@@ -17,13 +17,13 @@ public class CrossWikiSearchProvider {
 
   @DataProvider
   public static final Object[][] getExactMatchQueries() {
-    return new Object[][]{{"call of duty", "Call of Duty Wiki", "GAMING"},
-                          {"call-of-duty", "Call of Duty Wiki", "GAMING"},
-                          {"call_of_duty", "Call of Duty Wiki", "GAMING"},
+    return new Object[][]{{"call of duty", "Call of Duty Wiki", "GAMES"},
+                          {"call-of-duty", "Call of Duty Wiki", "GAMES"},
+                          {"call_of_duty", "Call of Duty Wiki", "GAMES"},
 // ignore - so tests will be green
 // also it may be worth rethink if those cases are still valid with Algolia
-//                          {"callofduty", "Call of Duty Wiki", "GAMING"},
-//                          {"cod", "Call of Duty Wiki", "GAMING"},
+//                          {"callofduty", "Call of Duty Wiki", "GAMES"},
+//                          {"cod", "Call of Duty Wiki", "GAMES"},
                           };
   }
 
