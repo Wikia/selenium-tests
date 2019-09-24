@@ -469,28 +469,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public void verifySkin(
-      String adSkinLeftPath, String adSkinRightPath, String backgroundColor, String middleColor
-  ) {
-    AdsSkinHelper skinHelper = new AdsSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
-    Assertion.assertTrue(skinHelper.skinPresent(), "Skin was not present");
-    Log.log("SKIN", "SKIN presents on the page", true);
-
-    if (!Strings.isNullOrEmpty(backgroundColor)) {
-      Assertion.assertEquals(skinHelper.getBackgroundColor(),
-                             backgroundColor,
-                             "Background colors differ"
-      );
-      Log.log("SKIN", "SKIN has correct background color", true);
-    }
-
-    if (!Strings.isNullOrEmpty(middleColor)
-        && getWindowSize().getWidth() > MIN_MIDDLE_COLOR_PAGE_WIDTH) {
-      Assertion.assertEquals(skinHelper.getMiddleColor(), middleColor);
-      Log.log("SKIN", "SKIN has correct middle color", true);
-    }
-  }
-
   /**
    * Check if AdEngine loaded the ad web elements inside slot.
    */
