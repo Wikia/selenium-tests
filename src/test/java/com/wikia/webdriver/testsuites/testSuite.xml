@@ -30,9 +30,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsInterstitial"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsKruxIntegration"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsOnSpecialOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
@@ -45,7 +43,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestFloorAdhesion"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRepeatableIncontentBoxadMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUap"/>

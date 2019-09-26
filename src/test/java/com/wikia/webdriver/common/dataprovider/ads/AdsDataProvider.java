@@ -28,9 +28,6 @@ public class AdsDataProvider {
   public static final Page PAGE_FV_RUBICON_NO_VIDEO = new Page(WIKI_SPECIAL,
                                                                "SyntheticTests/Premium/FeaturedVideo/Rubicon"
   );
-  public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
-  public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
-  public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
   public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL,
                                                          "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"
   );
@@ -82,38 +79,6 @@ public class AdsDataProvider {
                           {"gameshub", "en", "Games_Hub"}, {"comicshub", "en", "What%27s_Hot"},
                           {"filmhub", "es", "Wiki_Pel%C3%ADculas_Hub"}, {"entertainmenthub", "ja",
                                                                          "%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%83%8F%E3%83%96_Wiki"}};
-  }
-
-  @DataProvider
-  public static Object[][] skinWithTheme() {
-    return new Object[][]{
-        {WIKI_REGULAR, "Skin", new Dimension(1200, 1000), NO_SKIN_LEFT, NO_SKIN_RIGHT, null, null},
-        {WIKI_REGULAR, "Skin", new Dimension(1600, 900), SKIN_LEFT, SKIN_RIGHT, "AAAAAA", "FFFFFF"},
-        {WIKI_REGULAR, "Skin", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA", "FFFFFF"},
-        {WIKI_REGULAR, "Skin", new Dimension(2400, 1080), SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         "FFFFFF"},
-        {WIKI_REGULAR, "Skin/NoMiddleColor", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         ""}};
-  }
-
-  @DataProvider
-  public static Object[][] skinWithoutTheme() {
-    return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/Skin", new Dimension(1600, 900), SKIN_LEFT, SKIN_RIGHT,
-         "AAAAAA", "FFFFFF"},
-        {WIKI_SPECIAL, "SyntheticTests/Skin", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         "FFFFFF"},
-        {WIKI_SPECIAL, "SyntheticTests/Skin", new Dimension(2400, 1080), SKIN_LEFT, SKIN_RIGHT,
-         "AAAAAA", "FFFFFF"},
-        {WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor", WindowSize.DESKTOP, SKIN_LEFT,
-         SKIN_RIGHT, "AAAAAA", ""}};
-  }
-
-  @DataProvider
-  public static Object[][] roadblocks() {
-    return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/Skin", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         "FFFFFF"}};
   }
 
   @DataProvider
@@ -394,7 +359,7 @@ public class AdsDataProvider {
         "slotName",
         AdsContent.HIVI_TOP_LB
                                                    )
-                                                       .put("slotSize", new Dimension(1889, 767))
+                                                       .put("slotSize", new Dimension(1887, 767))
                                                        .put("lineItemId", "365404452")
                                                        .build(),
                                                    ImmutableMap.<String, Object>builder().put(

@@ -31,19 +31,8 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   public void adsUAPFamilyAdIsNotDisplayedOnFeaturedVideoPage() {
     AdsBaseObject ads = new AdsBaseObject(AdsDataProvider.PAGE_FV.getUrl());
     verifyAbcdHIVIAdIsNotDisplayed(ads);
-
-    Assert.assertTrue(ads.slotHasSize(AdsContent.TOP_LB, 728, 90));
-    verifyNoUAPSizesInSlot(ads, AdsContent.TOP_LB);
   }
 
-  private void verifyNoUAPSizesInSlot(AdsBaseObject ads, String slot) {
-    Assert.assertFalse(ads.slotHasSize(slot, 2, 2),
-                       String.format("Slot %s has UAP supported 2x2 size", slot)
-    );
-    Assert.assertFalse(ads.slotHasSize(slot, 3, 3),
-                       String.format("Slot %s has UAP supported 3x3 size", slot)
-    );
-  }
 
   private void verifyAbcdAdIsDisplayed(AdsBaseObject ads) {
     ads.verifyLineItemId(AdsContent.HIVI_TOP_LB, ABCD_LINE_ITEM_ID);
