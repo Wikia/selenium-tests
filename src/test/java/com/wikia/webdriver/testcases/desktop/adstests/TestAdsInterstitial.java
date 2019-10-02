@@ -19,12 +19,6 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     testInterstitial(page, adSize);
   }
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(dataProviderClass = AdsDataProvider.class, groups = "TestInterstitialMercury", dataProvider = "interstitialMercury")
-  public void adsInterstitialAdOnMobileInPortraitPosition(Page page, Dimension adSize) {
-    testInterstitial(page, adSize);
-  }
-
   private void testInterstitial(Page page, Dimension adSize) {
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver);
     adsInterstitial.getUrl(page);
