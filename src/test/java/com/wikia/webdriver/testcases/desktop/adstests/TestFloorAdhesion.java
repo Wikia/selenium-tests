@@ -33,18 +33,6 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String CREATIVE_ID = "94178805972";
   private UrlBuilder urlBuilder = UrlBuilder.createUrlBuilderForWiki(WIKI_NAME);
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "AdsFloorAdhesionMercury")
-  public void testOldFloorAdhesionPresenceMercury() {
-    testFloorAdhesionPresenceMercury(WindowSize.PHONE, true);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "AdsFloorAdhesionMercury")
-  public void testFloorAdhesionCloseButtonMercury() {
-    testFloorAdhesionCloseButtonMercury(WindowSize.PHONE);
-  }
-
   @Test(groups = "AdsFloorAdhesionOasis")
   public void testFloorAdhesionPresenceOasis() {
     String browser = Configuration.getBrowser();
@@ -70,34 +58,5 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private String getArticleUrl(String articleTitle, String urlTrigger) {
     String url = urlBuilder.getUrlForPath(articleTitle);
     return urlBuilder.appendQueryStringToURL(url, urlTrigger);
-  }
-
-  private void testFloorAdhesionPresenceMercury(Dimension resolution, Boolean isMobile) {
-    AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(isMobile);
-
-    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
-                                                                       getArticleUrl(
-                                                                           ARTICLE_TITLE,
-                                                                           URL_TRIGGER
-                                                                       ),
-                                                                       resolution
-    );
-
-    wikiPage.verifyFloorAdhesionPresent(skinContext.getSlotName(),
-                                        skinContext.getLineItemId(),
-                                        skinContext.getCreativeId()
-    );
-    wikiPage.verifyThereIsNoWikiaBar(isMobile);
-  }
-
-  private void testFloorAdhesionCloseButtonMercury(Dimension resolution) {
-    AdsFloorAdhesionOldObject wikiPage = new AdsFloorAdhesionOldObject(driver,
-                                                                       getArticleUrl(
-                                                                           ARTICLE_TITLE,
-                                                                           URL_TRIGGER
-                                                                       ),
-                                                                       resolution
-    );
-    wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
   }
 }
