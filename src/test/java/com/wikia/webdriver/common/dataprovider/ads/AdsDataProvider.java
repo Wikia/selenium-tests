@@ -369,7 +369,7 @@ public class AdsDataProvider {
                          .put("lineItemId", "365416332")
                          .build(),
                      ImmutableMap.<String, Object>builder().put("slotName", AdsContent.BOTTOM_LB)
-                         .put("slotSize", new Dimension(1188, 483))
+                         .put("slotSize", new Dimension(728, 296))
                          .put("lineItemId", "365416332")
                          .build()
     )}};
