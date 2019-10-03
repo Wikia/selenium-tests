@@ -25,8 +25,8 @@ public class TestAdsPrebid extends NewTestTemplate {
   private static final String BIDDER_PREROLL_LINE_ITEM_ID = "4618393909";
   private static final int VELES_LINE_ITEM_ID = 333201132;
   private static final List<String> RUBICON_URL_PATTERNS = Arrays.asList(
-      ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
-      ".*fastlane.json.*INCONTENT_BOXAD_1.*"
+      ".*fastlane.json.*top_boxad.*",
+      ".*fastlane.json.*incontent_boxad_1.*"
   );
 
   @Test(groups = "AdsPrebidOasis")
