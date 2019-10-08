@@ -347,35 +347,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsUapOasis() {
-    return new Object[][]{{UAP_PAGE, Arrays.asList(ImmutableMap.<String, Object>builder().put(
-        "slotName",
-        AdsContent.HIVI_TOP_LB
-                                                   )
-                                                       .put("slotSize", new Dimension(1887, 767))
-                                                       .put("lineItemId", "365404452")
-                                                       .build(),
-                                                   ImmutableMap.<String, Object>builder().put(
-                                                       "slotName",
-                                                       AdsContent.TOP_BOXAD
-                                                   )
-                                                       .put("slotSize", new Dimension(300, 250))
-                                                       .put("lineItemId", "365416332")
-                                                       .build()
-    ), Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                AdsContent.FLOATING_MEDREC
-                     )
-                         .put("slotSize", new Dimension(300, 250))
-                         .put("lineItemId", "365416332")
-                         .build(),
-                     ImmutableMap.<String, Object>builder().put("slotName", AdsContent.BOTTOM_LB)
-                         .put("slotSize", new Dimension(1188, 483))
-                         .put("lineItemId", "365416332")
-                         .build()
-    )}};
-  }
-
-  @DataProvider
   public static Object[][] adsVuapClickToPlayDesktop() {
     return new Object[][]{{new Page(WIKI_SPECIAL,
                                     "SyntheticTests/VUAP/ClickToPlay/BlueAd"
