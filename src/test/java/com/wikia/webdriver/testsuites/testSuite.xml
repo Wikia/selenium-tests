@@ -44,7 +44,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRepeatableIncontentBoxadMobileWiki"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.desktop.analyticstests.AnalyticsPageTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.announcements.AnnouncementsDesktopTests"/>
