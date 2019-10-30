@@ -34,7 +34,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdType"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsBtfBlocking"/>
