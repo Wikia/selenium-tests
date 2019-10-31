@@ -29,7 +29,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsGptPageParam"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
