@@ -254,13 +254,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] interstitialOasis() {
-    return new Object[][]{
-        {new Page(WIKI_SPECIAL, "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
-         new Dimension(728, 90)},};
-  }
-
-  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage"), "",
