@@ -19,6 +19,7 @@ import java.util.List;
 public class TrackingOptInPage extends BasePageObject {
 
   private static final Duration WAITING_TIME_FOR_ALL_REQUESTS = Duration.ofSeconds(10);
+  private static final Duration WAITING_TIME_FOR_EUCONSENT_TO_BE_STORED = Duration.ofSeconds(5);
   private static final Duration WAITING_TIME_FOR_MODAL = Duration.ofSeconds(3);
   private static final String MODAL_INSTANT_GLOBAL = "InstantGlobals.wgEnableTrackingOptInModal=1";
   private static final String EU_CONTINENT = "EU";
@@ -182,6 +183,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isTrackingRequestSend(
       List<String> listOfUrlsToVerify, NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
+    wait.forX(WAITING_TIME_FOR_EUCONSENT_TO_BE_STORED); //
     refreshPage();
     wait.forX(WAITING_TIME_FOR_ALL_REQUESTS);
     isConsentCookieSetToAccepted();
@@ -243,7 +245,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isConsentCookieSetToAccepted() {
     Assertion.assertEquals(
         getEuConsentCookieValue().length(),
-        142,
+        148,
         "Incorrect length of accepted euconsent value"
     );
   }
@@ -251,7 +253,7 @@ public class TrackingOptInPage extends BasePageObject {
   private void isConsentCookieSetToRejected() {
     Assertion.assertEquals(
         getEuConsentCookieValue().length(),
-        142,
+        148,
         "Incorrect length of rejected euconsent value"
     );
   }

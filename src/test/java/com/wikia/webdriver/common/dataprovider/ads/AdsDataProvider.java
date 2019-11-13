@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
-import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 
@@ -12,10 +11,8 @@ import java.util.Arrays;
 
 public class AdsDataProvider {
 
-  private static final String WIKI_REGULAR = "adtest-pluto";
   private static final String WIKI_SPECIAL = "project43";
   public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
-  public static final Page UAP_ABCD_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP/ABCD");
   public static final Page UAP_HIVI_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP/HiVi");
   public static final Page UAP_CTP_HIVI_PAGE = new Page(WIKI_SPECIAL,
                                                         "SyntheticTests/UAP/HiVi/CTP"
@@ -28,9 +25,6 @@ public class AdsDataProvider {
   public static final Page PAGE_FV_RUBICON_NO_VIDEO = new Page(WIKI_SPECIAL,
                                                                "SyntheticTests/Premium/FeaturedVideo/Rubicon"
   );
-  public static final Page PAGE_SPECIAL_VIDEOS = new Page(WIKI_SPECIAL, "Special:Videos");
-  public static final Page PAGE_SPECIAL_IMAGES = new Page(WIKI_SPECIAL, "Special:Images");
-  public static final Page PAGE_SPECIAL_FILE = new Page(WIKI_SPECIAL, "File:Example.jpg");
   public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL,
                                                          "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"
   );
@@ -38,16 +32,6 @@ public class AdsDataProvider {
                                                   "SyntheticTests/RTB/Prebid.js/Wikia"
   );
   public static final Page PAGE_CAP = new Page(WIKI_SPECIAL, "SyntheticTests/Cap");
-  private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
-  private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
-  private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
-  private static final String
-      NO_SKIN_LEFT
-      = "src/test/resources/adsResources/no_wikia_skin_left.png";
-  private static final String
-      NO_SKIN_RIGHT
-      = "src/test/resources/adsResources/no_wikia_skin_right.png";
-  private static final String VIDEO_PLAYER_IFRAME = " .video-player iframe";
   private static final String
       FV_JWPLAYER_PAGE_URI
       = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
@@ -60,61 +44,6 @@ public class AdsDataProvider {
   );
 
   private AdsDataProvider() {}
-
-  @DataProvider
-  public static Object[][] noAdsForSony() {
-    return new Object[][]{
-        // Articles
-        {"elderscrolls", "ru", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"creepypasta", "it", "Categoria:Creepypasta"}, {"monsterhunter", "en", "MH3U:_Monsters"},
-        {"monsterhunter", "en", "Portal:MH3U"},
-
-        // Main pages
-        {"runescape", "en", "RuneScape_Wiki"}, {"yugioh", "en", "Main_Page"},
-        {"naruto", "en", "Narutopedia"}, {"leagueoflegends", "en", "League_of_Legends_Wiki"},
-        {"drama", "es", "Portada"}, {"memory-alpha", "de", "Hauptseite"},
-        {"marvel-filme", "de", "Marvel-Filme"},};
-  }
-
-  @DataProvider
-  public static Object[][] hubsPages() {
-    return new Object[][]{{"portail-modedevie", "en", "Portail_mode_de_vie/2014-12-28"},
-                          {"gameshub", "en", "Games_Hub"}, {"comicshub", "en", "What%27s_Hot"},
-                          {"filmhub", "es", "Wiki_Pel%C3%ADculas_Hub"}, {"entertainmenthub", "ja",
-                                                                         "%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%83%8F%E3%83%96_Wiki"}};
-  }
-
-  @DataProvider
-  public static Object[][] skinWithTheme() {
-    return new Object[][]{
-        {WIKI_REGULAR, "Skin", new Dimension(1200, 1000), NO_SKIN_LEFT, NO_SKIN_RIGHT, null, null},
-        {WIKI_REGULAR, "Skin", new Dimension(1600, 900), SKIN_LEFT, SKIN_RIGHT, "AAAAAA", "FFFFFF"},
-        {WIKI_REGULAR, "Skin", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA", "FFFFFF"},
-        {WIKI_REGULAR, "Skin", new Dimension(2400, 1080), SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         "FFFFFF"},
-        {WIKI_REGULAR, "Skin/NoMiddleColor", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         ""}};
-  }
-
-  @DataProvider
-  public static Object[][] skinWithoutTheme() {
-    return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/Skin", new Dimension(1600, 900), SKIN_LEFT, SKIN_RIGHT,
-         "AAAAAA", "FFFFFF"},
-        {WIKI_SPECIAL, "SyntheticTests/Skin", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         "FFFFFF"},
-        {WIKI_SPECIAL, "SyntheticTests/Skin", new Dimension(2400, 1080), SKIN_LEFT, SKIN_RIGHT,
-         "AAAAAA", "FFFFFF"},
-        {WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor", WindowSize.DESKTOP, SKIN_LEFT,
-         SKIN_RIGHT, "AAAAAA", ""}};
-  }
-
-  @DataProvider
-  public static Object[][] roadblocks() {
-    return new Object[][]{
-        {WIKI_SPECIAL, "SyntheticTests/Skin", WindowSize.DESKTOP, SKIN_LEFT, SKIN_RIGHT, "AAAAAA",
-         "FFFFFF"}};
-  }
 
   @DataProvider
   public static Object[][] adFreeWikis() {
@@ -293,7 +222,7 @@ public class AdsDataProvider {
          "wka1b.MR/top_boxad/desktop/oasis-article-ic/_not_a_top1k_wiki-ent", "top_boxad",
          Arrays.asList("\"s0\":\"ent\"",
                        "\"s0v\":\"books\"",
-                       "\"s0c\":[\"ent\",\"comics\"]",
+                       "\"s0c\":[\"comics\",\"anime\"]",
                        "\"s1\":\"_overlordmaruyama\"",
                        "\"s2\":\"article-ic\"",
                        "\"ar\":\"4:3\"",
@@ -320,32 +249,8 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] spotlights() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/Spotlights"}};
-  }
-
-  @DataProvider
-  public static Object[][] prebidVelesAdapter() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/Cap", 333201132},};
-  }
-
-  @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/Krux"}};
-  }
-
-  @DataProvider
-  public static Object[][] interstitialMercury() {
-    return new Object[][]{
-        {new Page(WIKI_SPECIAL, "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
-         new Dimension(300, 250)},};
-  }
-
-  @DataProvider
-  public static Object[][] interstitialOasis() {
-    return new Object[][]{
-        {new Page(WIKI_SPECIAL, "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
-         new Dimension(728, 90)},};
   }
 
   @DataProvider
@@ -386,86 +291,5 @@ public class AdsDataProvider {
          ImmutableMap.<String, Object>builder().put("slotName", AdsContent.TOP_BOXAD)
              .put("slotSize", new Dimension(300, 1050))
              .put("lineItemId", "255534972").build()}};
-  }
-
-  @DataProvider
-  public static Object[][] adsUapOasis() {
-    return new Object[][]{{UAP_PAGE, Arrays.asList(ImmutableMap.<String, Object>builder().put(
-        "slotName",
-        AdsContent.HIVI_TOP_LB
-                                                   )
-                                                       .put("slotSize", new Dimension(1889, 767))
-                                                       .put("lineItemId", "365404452")
-                                                       .build(),
-                                                   ImmutableMap.<String, Object>builder().put(
-                                                       "slotName",
-                                                       AdsContent.TOP_BOXAD
-                                                   )
-                                                       .put("slotSize", new Dimension(300, 250))
-                                                       .put("lineItemId", "365416332")
-                                                       .build()
-    ), Arrays.asList(ImmutableMap.<String, Object>builder().put("slotName",
-                                                                AdsContent.FLOATING_MEDREC
-                     )
-                         .put("slotSize", new Dimension(300, 250))
-                         .put("lineItemId", "365416332")
-                         .build(),
-                     ImmutableMap.<String, Object>builder().put("slotName", AdsContent.BOTTOM_LB)
-                         .put("slotSize", new Dimension(1188, 483))
-                         .put("lineItemId", "365416332")
-                         .build()
-    )}};
-  }
-
-  @DataProvider
-  public static Object[][] adsVuapClickToPlayDesktop() {
-    return new Object[][]{{new Page(WIKI_SPECIAL,
-                                    "SyntheticTests/VUAP/ClickToPlay/BlueAd"
-                                    + PORVATA_OVERRIDE_VAST_QUERY_STRING
-    ), AdsContent.TOP_LB}, {new Page(WIKI_SPECIAL,
-                                     "SyntheticTests/VUAP/ClickToPlay/BlueAd"
-                                     + PORVATA_OVERRIDE_VAST_QUERY_STRING
-    ), AdsContent.BOTTOM_LB}};
-  }
-
-  @DataProvider
-  public static Object[][] adsVuapAutoplayDesktop() {
-    return new Object[][]{
-        {new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/McDonalds"), AdsContent.TOP_LB,
-         "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME}};
-  }
-
-  @DataProvider
-  public static Object[][] adsVuapResolvedStateDesktop() {
-    return new Object[][]{
-        {new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolveState2"), AdsContent.TOP_LB,
-         "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME}};
-  }
-
-  @DataProvider
-  public static Object[][] adsVuapDesktop() {
-    return new Object[][]{{new Page(WIKI_SPECIAL,
-                                    "SyntheticTests/VUAP/ResolvedState/BlueAd"
-                                    + PORVATA_OVERRIDE_VAST_QUERY_STRING
-    ), AdsContent.TOP_LB}, {new Page(WIKI_SPECIAL,
-                                     "SyntheticTests/VUAP/ResolvedState/BlueAd"
-                                     + PORVATA_OVERRIDE_VAST_QUERY_STRING
-    ), AdsContent.BOTTOM_LB}};
-  }
-
-  @DataProvider
-  public static Object[][] adsVuapResolvedState() {
-    return new Object[][]{{new Page(WIKI_SPECIAL,
-                                    "SyntheticTests/VUAP/ResolvedState/BlueAd"
-                                    + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"
-    ), AdsContent.TOP_LB}, {new Page(WIKI_SPECIAL,
-                                     "SyntheticTests/VUAP/ResolvedState/BlueAd"
-                                     + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"
-    ), AdsContent.BOTTOM_LB}};
-  }
-
-  @DataProvider
-  public static Object[][] premiumLayoutPages() {
-    return new Object[][]{{new Page(WIKI_SPECIAL, "SyntheticTests/LongPage")}};
   }
 }
