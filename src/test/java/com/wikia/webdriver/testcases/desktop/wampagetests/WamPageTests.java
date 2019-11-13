@@ -32,6 +32,7 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyWamIndexPageFirstColumnInOrder(1, wam.DEFAULT_WAM_INDEX_ROWS);
   }
 
+  @Test
   public void wam_002_verifyFilteringByVertical() {
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamVerticalFilterOptions();
