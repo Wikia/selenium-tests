@@ -39,7 +39,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestFloorAdhesion"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestNoAdsForUsersOasis"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsNoAdsOnFreeWikisOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRepeatableIncontentBoxadMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.desktop.analyticstests.AnalyticsPageTests"/>
