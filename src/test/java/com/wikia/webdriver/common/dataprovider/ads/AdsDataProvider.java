@@ -46,22 +46,6 @@ public class AdsDataProvider {
   private AdsDataProvider() {}
 
   @DataProvider
-  public static Object[][] dfpMEGAParamsTLB() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/DfpParams",
-                           "wka1b.LB/top_leaderboard/desktop/oasis-article/_top1k_wiki-life",
-                           "top_leaderboard", Arrays.asList("\"s0\":\"life\"",
-                                                            "\"s1\":\"_project43\"",
-                                                            "\"s2\":\"article\"",
-                                                            "\"dmn\":\"fandomcom\"",
-                                                            "\"hostpre\":\"",
-                                                            "\"wpage\":\"synthetictests/dfpparams\"",
-                                                            "\"ref\":\"direct\"",
-                                                            "\"lang\":\"en\"",
-                                                            "\"esrb\":\"teen\""
-    ), Arrays.asList("\"loc\":\"top\"", "\"pos\":\"top_leaderboard\"", "\"src\":\"test\"")}};
-  }
-
-  @DataProvider
   public static Object[][] adsGptPageParam() {
     return new Object[][]{{"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
                           {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
