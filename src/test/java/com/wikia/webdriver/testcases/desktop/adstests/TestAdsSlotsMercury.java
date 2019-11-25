@@ -81,30 +81,4 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
         "Ad top position >= page header position (ad below page header)"
     );
   }
-
-  @Test
-  public void leaderboardsOnConsecutivePageViews() {
-    Page page = new Page("project43", "SyntheticTests/Mercury/Slots/ConsecutivePageViews/1");
-    String secondArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2";
-    String thirdArticle = "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3";
-
-    MobileAdsBaseObject ads = new MobileAdsBaseObject(page.getUrl());
-    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
-    ads.scrollToRecirculationPrefooter();
-    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
-
-    ads.scrollToPosition(ARTICLE_BODY);
-    ads.mercuryNavigateToAnArticle(secondArticle);
-    ads.waitTitleChangesTo(secondArticle);
-    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
-    ads.scrollToRecirculationPrefooter();
-    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
-
-    ads.scrollToPosition(ARTICLE_BODY);
-    ads.mercuryNavigateToAnArticle(thirdArticle);
-    ads.waitTitleChangesTo(thirdArticle);
-    ads.verifySlotExpanded(AdsContent.MOBILE_TOP_LB);
-    ads.scrollToRecirculationPrefooter();
-    ads.verifySlotExpanded(AdsContent.MOBILE_BOTTOM_LB);
-  }
 }

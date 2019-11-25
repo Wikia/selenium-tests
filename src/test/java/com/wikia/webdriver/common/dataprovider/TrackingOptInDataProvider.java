@@ -9,93 +9,12 @@ public class TrackingOptInDataProvider {
   public static final String
       ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN
       = "https://.*google-analytics\\.com(/r)?/collect.*aip=1.*";
-  private static final String
-      ADS_KIKIMORA_OPT_IN_ACCEPTED_PATTERN
-      = "https://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=0.*";
-  private static final String
-      ADS_KIKIMORA_OPT_IN_REJECTED_PATTERN
-      = "https://.*beacon\\.wikia-services\\.com/__track/special/adeng.*u=-1.*";
   private static final String ADS_KRUX_PATTERN = "https://.*cdn\\.krxd\\.net.*";
-  private static final String
-      ADS_NETZ_ATHLETEN_PATTERN
-      = "https://.*tag\\.md-nx\\.com/.*/loader\\.js.*";
-  private static final String ADS_MOAT_PATTERN = "https://.*moatads\\.com.*";
-  private static final String ADS_PUBMATIC_PATTERN = "https://.*pubmatic\\.com/AdServer.*";
-  private static final String ADS_A9_PATTERN = "https://.*amazon-adsystem\\.com/.*/apstag\\.js.*";
   private static final String ADS_COMSCORE_PATTERN = "https://.*scorecardresearch\\.com.*";
   private static final String ADS_QUANTCAST_PATTERN = "https://.*quantserve\\.com/.*";
-  private static final String ADS_QUANTCAST_SECURE_PATTERN = "https://.*quantserve\\.com/.*";
-  private static final String ADS_APP_NEXUS_PATTERN = "https://.*ib\\.adnxs\\.com/.*";
-  private static final String ADS_OPOENX_PATTERN = "https://.*wikia-d.*openx.*arj.*";
-  private static final String ADS_INDEX_EXCHANGE_PATTERN = "https://.*casalemedia\\.com/cygnus.*";
-  private static final String
-      ADS_RUBBICON_FASTLANE_PATTERN
-      = "https://.*fastlane\\.rubiconproject\\.com/.*/fastlane\\.json.*";
   private static final String
       ADS_GOOGLE_ANALYTICS_PATTERN
       = "https://.*google-analytics\\.com/collect.*";
-  private static final String
-      ADS_TLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*hivi_leaderboard.*";
-  private static final String
-      ADS_MOBILE_TLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*top_leaderboard.*";
-  private static final String
-      ADS_TLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*hivi_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
-  private static final String
-      ADS_MOBILE_TLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*top_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
-  private static final String
-      ADS_BLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
-  private static final String
-      ADS_MOBILE_BLB_NPA_FIRST_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*bottom_leaderboard.*";
-  private static final String
-      ADS_BLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
-  private static final String
-      ADS_MOBILE_BLB_NPA_SECOND_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*bottom_leaderboard.*cust_params=.*npa%3D1.*cookie.*";
-  private static final String
-      ADS_MOBILE_IN_CONTENT_NPA_FIRST_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*npa=1.*incontent_boxad_1.*";
-  private static final String
-      ADS_MOBILE_IN_CONTENT_NPA_SECOND_PARAMETER_PATTERN
-      = "https://.*\\.doubleclick\\.net.*ads.*incontent_boxad_1.*cust_params=.*npa%3D1.*cookie.*";
-  private static final String
-      ADS_VAST_NPA_FIRST_PARAMETER_PATTERN
-      = "https://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*cust_params=.*npa%3D1.*";
-  private static final String
-      ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
-      = "https://.*pubads\\.g\\.doubleclick\\.net/gampad/ads.*output=xml_vast.*npa=1.*";
-
-  private static final String[] ADS_KIKIMORA_INSTANT_GLOBALS = {
-      "wgAdDriverKikimoraTrackingCountries", "wgAdDriverKikimoraViewabilityTrackingCountries",
-      "wgAdDriverKikimoraPlayerTrackingCountries"};
-
-  private static final String[] ADS_KRUX_INSTANT_GLOBALS = {"wgAdDriverKruxCountries"};
-
-  private static final String[] ADS_NETZ_ATHLETEN_INSTANT_GLOBALS = {
-      "wgAdDriverNetzAthletenCountries"};
-
-  private static final String[] ADS_MOAT_INSTANT_GLOBALS = {"wgAdDriverVideoMoatTrackingCountries",
-                                                            "wgAdDriverPorvataMoatTrackingCountries",
-                                                            "wgAdDriverVideoMoatTrackingCountries"};
-
-  private static final String[] ADS_PREBID_INSTANT_GLOBALS = {
-      "wgAdDriverBottomLeaderBoardLazyPrebidCountries", "wgAdDriverOpenXPrebidBidderCountries",
-      "wgAdDriverPrebidBidderCountries", "wgAdDriverRubiconDisplayPrebidCountries",
-      "wgAdDriverRubiconPrebidCountries", "wgAdDriverAppNexusBidderCountries"};
-
-  private static final String[] ADS_A9_INSTANT_GLOBALS = {"wgAdDriverA9BidderCountries",
-                                                          "wgAdDriverA9VideoBidderCountries"};
-
-  private static final String[] ADS_ARTICLE_PAGES = {"TrackingPixels/Article2",
-                                                     "TrackingPixels/Article3",
-                                                     "TrackingPixels/Article2",
-                                                     "TrackingPixels/Article1", "Project43 Wikia"};
 
   private static final String
       GOOGLE_ANALYTICS_ANONYMIZED_USER
@@ -181,92 +100,6 @@ public class TrackingOptInDataProvider {
 
                           {"NA", "US", false}, // USA
     };
-  }
-
-  @DataProvider
-  public static Object[][] adsKikimoraAcceptedDataProvider() {
-    return new Object[][]{
-        {ADS_KIKIMORA_INSTANT_GLOBALS, Arrays.asList(ADS_KIKIMORA_OPT_IN_ACCEPTED_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsKikimoraRejectedDataProvider() {
-    return new Object[][]{
-        {ADS_KIKIMORA_INSTANT_GLOBALS, Arrays.asList(ADS_KIKIMORA_OPT_IN_REJECTED_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsKruxDataProvider() {
-    return new Object[][]{{ADS_KRUX_INSTANT_GLOBALS, Arrays.asList(ADS_KRUX_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsNetzAthletenDataProvider() {
-    return new Object[][]{
-        {ADS_NETZ_ATHLETEN_INSTANT_GLOBALS, Arrays.asList(ADS_NETZ_ATHLETEN_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsMoatDataProvider() {
-    return new Object[][]{{ADS_MOAT_INSTANT_GLOBALS, Arrays.asList(ADS_MOAT_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsPrebidDataProvider() {
-    return new Object[][]{{ADS_PREBID_INSTANT_GLOBALS, Arrays.asList(
-        ADS_PUBMATIC_PATTERN,
-        ADS_APP_NEXUS_PATTERN,
-        ADS_OPOENX_PATTERN,
-        ADS_INDEX_EXCHANGE_PATTERN,
-        ADS_RUBBICON_FASTLANE_PATTERN
-    )}};
-  }
-
-  @DataProvider
-  public static Object[][] adsNpaHiViDataProviderOasis() {
-    return new Object[][]{{Arrays.asList(
-        ADS_TLB_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_TLB_NPA_SECOND_PARAMETER_PATTERN,
-        ADS_BLB_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_BLB_NPA_SECOND_PARAMETER_PATTERN,
-        ADS_VAST_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_VAST_NPA_SECOND_PARAMETER_PATTERN
-    )}};
-  }
-
-  @DataProvider
-  public static Object[][] adsNpaSlotsDataProviderMobile() {
-    return new Object[][]{{Arrays.asList(
-        ADS_MOBILE_TLB_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_MOBILE_TLB_NPA_SECOND_PARAMETER_PATTERN,
-        ADS_MOBILE_BLB_NPA_FIRST_PARAMETER_PATTERN,
-        ADS_MOBILE_BLB_NPA_SECOND_PARAMETER_PATTERN
-    )}};
-  }
-
-  @DataProvider
-  public static Object[][] adsA9DataProvider() {
-    return new Object[][]{{ADS_A9_INSTANT_GLOBALS, Arrays.asList(ADS_A9_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsQuantcastDataProvider() {
-    return new Object[][]{{Arrays.asList(ADS_QUANTCAST_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsQuantcastSecureDataProvider() {
-    return new Object[][]{{Arrays.asList(ADS_QUANTCAST_SECURE_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsComscoreDataProvider() {
-    return new Object[][]{{Arrays.asList(ADS_COMSCORE_PATTERN)}};
-  }
-
-  @DataProvider
-  public static Object[][] adsGoogleAnalyticsDataProvider() {
-    return new Object[][]{{Arrays.asList(ADS_GOOGLE_ANALYTICS_REJECTED_PATTERN)}};
   }
 
   @DataProvider
