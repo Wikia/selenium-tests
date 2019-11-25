@@ -17,7 +17,6 @@ public class AdsDataProvider {
   public static final Page UAP_CTP_HIVI_PAGE = new Page(WIKI_SPECIAL,
                                                         "SyntheticTests/UAP/HiVi/CTP"
   );
-  public static final Page PAGE_A9_DISPLAY = new Page(WIKI_SPECIAL, "SyntheticTests/Amazon");
   public static final Page PAGE_FV = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo");
   public static final Page PAGE_FV_RUBICON = new Page(WIKI_SPECIAL,
                                                       "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000"
