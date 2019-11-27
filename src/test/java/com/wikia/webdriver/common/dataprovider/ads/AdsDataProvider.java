@@ -7,8 +7,6 @@ import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
-import java.util.Arrays;
-
 public class AdsDataProvider {
 
   private static final String WIKI_SPECIAL = "project43";
@@ -43,17 +41,6 @@ public class AdsDataProvider {
   );
 
   private AdsDataProvider() {}
-
-  @DataProvider
-  public static Object[][] adsGptPageParam() {
-    return new Object[][]{{"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
-                          {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
-                          {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
-                          {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
-                          {"tardis", "Mang", "\"esrb\":\"teen\"", true},
-                          {WIKI_SPECIAL, "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
-                          {WIKI_SPECIAL, "SyntheticTests/LB", "\"s0c\":[\"tech\"]", true}};
-  }
 
   @DataProvider
   public static Object[][] kruxIntegration() {
