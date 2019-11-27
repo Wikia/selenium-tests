@@ -25,13 +25,11 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsF2"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdType"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsBtfBlocking"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestCorrelatorDFP"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestFloorAdhesion"/>
