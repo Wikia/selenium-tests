@@ -4,6 +4,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.UserRegistration;
 import com.wikia.webdriver.common.core.api.WikiFactory;
 import com.wikia.webdriver.common.core.helpers.SignUpUser;
@@ -18,6 +19,7 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 
 @Test(groups = {"CNW_Anon", "CNW"})
+@Execute(onWikia = "communitytest")
 public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
 
   public void loggedOutUserCanCreateNewWiki() {

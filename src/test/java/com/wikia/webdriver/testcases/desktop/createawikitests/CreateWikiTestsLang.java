@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"createNewLanguageWiki", "CNW"})
-@Execute(onWikia = "community")
+@Execute(onWikia = "communitytest")
 public class CreateWikiTestsLang extends NewTestTemplate {
 
   private void createNewLanguageWiki(String lang) {

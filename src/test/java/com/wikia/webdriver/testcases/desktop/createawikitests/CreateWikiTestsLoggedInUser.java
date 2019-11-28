@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_User", "CNW"})
-@Execute(onWikia = "community")
+@Execute(onWikia = "communitytest")
 public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
 
   @Execute(asUser = User.USER_CNW)
