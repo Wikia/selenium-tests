@@ -16,19 +16,6 @@ public class AdsDataProvider {
                                                         "SyntheticTests/UAP/HiVi/CTP"
   );
   public static final Page PAGE_FV = new Page(WIKI_SPECIAL, "SyntheticTests/Premium/FeaturedVideo");
-  public static final Page PAGE_FV_RUBICON = new Page(WIKI_SPECIAL,
-                                                      "SyntheticTests/Premium/FeaturedVideo/Rubicon?wikia_video_adapter=2000"
-  );
-  public static final Page PAGE_FV_RUBICON_NO_VIDEO = new Page(WIKI_SPECIAL,
-                                                               "SyntheticTests/Premium/FeaturedVideo/Rubicon"
-  );
-  public static final Page PAGE_LONG_WITH_FMR = new Page(WIKI_SPECIAL,
-                                                         "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"
-  );
-  public static final Page PAGE_PREBID = new Page(WIKI_SPECIAL,
-                                                  "SyntheticTests/RTB/Prebid.js/Wikia"
-  );
-  public static final Page PAGE_CAP = new Page(WIKI_SPECIAL, "SyntheticTests/Cap");
   private static final String
       FV_JWPLAYER_PAGE_URI
       = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
