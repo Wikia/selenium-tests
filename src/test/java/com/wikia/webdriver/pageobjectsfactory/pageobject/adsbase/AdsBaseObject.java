@@ -138,40 +138,6 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Test whether the correct GPT ad parameters are passed
    *
    * @param slotName   Slotname
-   * @param pageParams List of gpt page-level params to test
-   * @param slotParams List of gpt slot-level params to test
-   */
-  public void verifyGptParams(
-      String slotName, List<String> pageParams, List<String> slotParams
-  ) {
-    String dataGptPageParams = getSlotAttribute(slotName, "data-gpt-page-params");
-    String dataGptSlotParams = getSlotAttribute(slotName, "data-gpt-slot-params");
-
-    for (String param : pageParams) {
-      Assertion.assertStringContains(dataGptPageParams, param);
-    }
-
-    for (String param : slotParams) {
-      Assertion.assertStringContains(dataGptSlotParams, param);
-    }
-
-    Log.log("verifyGptParams",
-            "All page-level and slot-level params present as expected " + dataGptPageParams + ", "
-            + dataGptSlotParams,
-            true,
-            driver
-    );
-  }
-
-  public boolean slotParamHasValue(String slotName, String paramName, String value) {
-    String dataGptSlotParams = getSlotAttribute(slotName, "data-gpt-slot-params");
-    return dataGptSlotParams.contains(String.format("\"%s\":\"%s\"", paramName, value));
-  }
-
-  /**
-   * Test whether the correct GPT ad parameters are passed
-   *
-   * @param slotName   Slotname
    * @param lineItemId expected line item id
    * @param creativeId expected creative id
    */
@@ -410,24 +376,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   /**
-   * Mercury is a single page application (SPA) and if you want to test navigating between different
-   * pages in the application you might want to use this method after clicking anything which is not
-   * on the first page.
-   *
-   * First page in Mercury loads just as a regular web page but next articles in Mercury just change
-   * part of loaded DOM. We tried few things but waiting for the page title to change was so far the
-   * best way to make sure we can move on with our tests.
-   */
-  public void waitTitleChangesTo(String desiredArticleTitle) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(ExpectedConditions.titleContains(desiredArticleTitle));
-    } finally {
-      restoreDefaultImplicitWait();
-    }
-  }
-
-  /**
    * Check if AdEngine loaded the ad web elements inside slot.
    */
   public boolean checkSlotOnPageLoaded(String slotName) {
@@ -531,24 +479,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     waitForPageLoaded();
     Log.log("waitForIframeLoaded", "Switching back to the page", true);
     driver.switchTo().defaultContent();
-  }
-
-  private List<String> getProvidersChain(String slotName) {
-    List<String> providersChain = new ArrayList<>();
-    String slotSelector = AdsContent.getSlotSelector(slotName);
-    for (WebElement providerSlot : driver.findElements(By.cssSelector(slotSelector + " > div"))) {
-      String providerSlotName = providerSlot.getAttribute("id").split("_")[0];
-      String provider = "";
-      for (String providerName : PROVIDERS) {
-        String providerSearch = "/" + providerName + "/";
-        if (providerSlotName.contains(providerSearch)) {
-          provider = providerName;
-          break;
-        }
-      }
-      providersChain.add(provider.isEmpty() ? providerSlotName : provider);
-    }
-    return providersChain;
   }
 
   private WebElement getIframe(String slotName) {
