@@ -22,7 +22,7 @@ public class MobilePreviewTests extends NewTestTemplate {
   private static final String RICH_ARTICLE = ContentLoader.loadWikiTextContent("Rich_Article");
   private static final String ARTICLE_PREVIEW_PAGE = "ArticlePreview";
 
-  @Test(groups = "desktop-articlePreview-mobilePreviewIsRenderedCorrectlyInModal")
+  @Test(groups = "desktop-articlePreview-mobilePreviewIsRenderedCorrectlyInModal", enabled = false)
   @RelatedIssue(issueID = "IW-1916")
   public void mobilePreviewIsRenderedCorrectlyInModal() {
     new ArticleContent().push(RICH_ARTICLE, ARTICLE_PREVIEW_PAGE);
