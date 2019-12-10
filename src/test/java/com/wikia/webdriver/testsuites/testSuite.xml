@@ -25,7 +25,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsF2"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdType"/>

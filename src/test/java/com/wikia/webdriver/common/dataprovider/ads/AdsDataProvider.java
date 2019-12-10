@@ -30,11 +30,6 @@ public class AdsDataProvider {
   private AdsDataProvider() {}
 
   @DataProvider
-  public static Object[][] kruxIntegration() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/Krux"}};
-  }
-
-  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {new Page(WIKI_SPECIAL, "SyntheticTests/Oasis/FloatingMedrecOnLongPage"), "",

@@ -18,11 +18,6 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxIntegration() {
-    return new Object[][]{{"project43", "SyntheticTests/Krux"}};
-  }
-
-  @DataProvider
   public static Object[][] adsSlotSizeMercury() {
     return new Object[][]{{new Page("project43", "SyntheticTests/MobileLeaderboard"), "",
                            ImmutableMap.<String, Object>builder().put("slotName",
