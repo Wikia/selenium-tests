@@ -103,26 +103,6 @@ public class AdsJWPlayerObject extends BasePageObject {
     elementColor.verifyMostFrequentColor(element, color, 15);
   }
 
-  public Boolean wasSoundHeard() {
-    return SoundMonitor.wasSoundHeardOnPage(jsActions);
-  }
-
-  public void clickVolumeButton() {
-    builder.moveToElement(driver.findElement(PLAYER_SELECTOR))
-        .pause(1000)
-        .moveToElement(volumeButton, 30, 30)
-        .click()
-        .perform();
-  }
-
-  public void allowToPlayVideoForSomeTime(Duration duration) {
-    try {
-      Thread.sleep(duration.toMillis());
-    } catch (InterruptedException e) {
-      Log.log("Error", e.getMessage(), false);
-    }
-  }
-
   public void clickOnPlayer() {
     builder.moveToElement(playButton)
         .pause(1000)
