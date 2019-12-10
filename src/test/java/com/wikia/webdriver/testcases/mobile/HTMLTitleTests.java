@@ -32,22 +32,22 @@ public class HTMLTitleTests extends NewTestTemplate {
    * [0] wikiName [1] path [2] expected title
    */
   private String[][] testCases = {
-      {"sktest123", "en", "Sktest123_Wiki", "Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "en", "Style-5H2", "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "en", "TestDisplayTitle", "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"},
+      {"sktest123", "en", "Sktest123_Wiki", "Sktest123 Wiki | Fandom"},
+      {"sktest123", "en", "Style-5H2", "Style-5H2 | Sktest123 Wiki | Fandom"},
+      {"sktest123", "en", "TestDisplayTitle", "testing abc | Sktest123 Wiki | Fandom"},
       {"sktest123", "en", "Category:Premium_Videos",
-       "Category:Premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"},
+       "Category:Premium Videos | Sktest123 Wiki | Fandom"},
       {"sktest123", "en", "Category:Non-premium_Videos",
-       "Category:Non-premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"sktest123", "en", "Category:Premium", "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"},
-      {"pokemon", "es", "WikiDex", "WikiDex | FANDOM powered by Wikia"},
-      {"pokemon", "es", "Lista_de_Pokémon", "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"},
+       "Category:Non-premium Videos | Sktest123 Wiki | Fandom"},
+      {"sktest123", "en", "Category:Premium", "PremiumVideos | Sktest123 Wiki | Fandom"},
+      {"pokemon", "es", "WikiDex", "WikiDex | Fandom"},
+      {"pokemon", "es", "Lista_de_Pokémon", "Lista de Pokémon | WikiDex | Fandom"},
       {"pokemon", "es", "Categoría:Regiones",
-       "Categoría:Regiones | WikiDex | FANDOM powered by Wikia"},
-      {"starwars", "en", "Main_Page", "Wookieepedia | FANDOM powered by Wikia"},
+       "Categoría:Regiones | WikiDex | Fandom"},
+      {"starwars", "en", "Main_Page", "Wookieepedia | Fandom"},
       {"starwars", "en", "Droid_starfighter",
-       "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"},
-      {"dnd4", "en", "Dungeons_&_Dragons", "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"}};
+       "Droid starfighter | Wookieepedia | Fandom"},
+      {"dnd4", "en", "Dungeons_&_Dragons", "Dungeons & Dragons | D&D4 Wiki | Fandom"}};
 
   private Head head;
   private Navigate navigate;
