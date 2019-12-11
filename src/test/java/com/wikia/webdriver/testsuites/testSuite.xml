@@ -9,7 +9,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.activityfeedstests.WikiActivityTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsMedrecReloading"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdTypeMobile"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsAbcdProductsPriority"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandom"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandomArticleVideo"/>
