@@ -23,13 +23,6 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
     adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo, false);
   }
 
-  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsSlotSizeMercury", groups = "AdsSlotSizesMercury")
-  public void adsSlotSizesMercury(
-      Page page, String urlParamToEnable, Map<String, Object> slotInfo
-  ) {
-    adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo, true);
-  }
-
   private void adsSlotSizes(
       Page page, String urlParamToEnable, Dimension pageSize, Map<String, Object> slotInfo, Boolean isMobile
   ) {
