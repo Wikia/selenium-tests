@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
