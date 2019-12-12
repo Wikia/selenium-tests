@@ -8,9 +8,6 @@
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.desktop.activityfeedstests.WikiActivityTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsMedrecReloading"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdTypeMobile"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsAbcdProductsPriority"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsDfpParamsPresentMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsMercury"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandom"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFandomArticleVideo"/>
@@ -23,16 +20,10 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsUapHiViMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideo"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideoSound"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsF2"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotsOasis"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdType"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestCorrelatorDFP"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestNoAdsForUsersOasis"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsRepeatableIncontentBoxadMobileWiki"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.desktop.analyticstests.AnalyticsPageTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.announcements.AnnouncementsDesktopTests"/>

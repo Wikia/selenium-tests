@@ -65,40 +65,6 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
     }
   }
 
-  /**
-   * Looks for correlator pattern in requests query strings to DFP domain, and logs if all the calls
-   * have the same correlator ID. Any difference is ID is logged as failure.
-   */
-  public void logDFP(String skinCorrelator) {
-    har = getHar();
-    String expectedCorrelator = null;
-    Pattern pt = Pattern.compile("(correlator=)\\d*");
-
-    for (HarEntry entry : har.getLog().getEntries()) {
-      if (entry.getRequest().getUrl().contains("pubads.g.doubleclick.net") && entry.getRequest()
-          .getQueryString()
-          .toString()
-          .contains(skinCorrelator)) {
-        Matcher matcher = pt.matcher(entry.getRequest().getQueryString().toString());
-        if (matcher.find()) {
-          String correlatorID = matcher.group(0);
-
-          if (expectedCorrelator == null) {
-            expectedCorrelator = correlatorID;
-          }
-
-          Log.log(
-              "CORRELATOR CHECK",
-              "CORRELATOR ID: " + correlatorID,
-              correlatorID.equals(expectedCorrelator)
-          );
-        } else {
-          throw new WebDriverException("Missing correlator param in query string");
-        }
-      }
-    }
-  }
-
   public void setProxyServer(String ip) {
     setChainedProxy(new InetSocketAddress(ip.split(":")[0], 8888));
   }
