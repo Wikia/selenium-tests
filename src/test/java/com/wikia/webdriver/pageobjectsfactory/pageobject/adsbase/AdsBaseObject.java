@@ -134,59 +134,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     Log.log("verifyNoAdsOnPage", "No ads detected", true, driver);
   }
 
-  /**
-   * Test whether the correct GPT ad parameters are passed
-   *
-   * @param slotName   Slotname
-   * @param lineItemId expected line item id
-   * @param creativeId expected creative id
-   */
-  public void verifyGptAdInSlot(String slotName, String lineItemId, String creativeId) {
-
-    Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-line-item-id"), lineItemId);
-
-    if (creativeId.length() > 0) {
-      Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-creative-id"), creativeId);
-    }
-
-    Log.log("verifyGptAdInSlot",
-            "Line item id loaded: " + lineItemId + ", creativeId:" + creativeId,
-            true,
-            driver
-    );
-  }
-
-  public void verifyMEGAAdUnit(String slotName, String adUnit) {
-    verifyIframe(slotName, buildMEGAGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit));
-  }
-
-  public void verifyValMorgan(String continent, String country, Boolean isMobile) {
-    String MEGA_LB;
-    String MEGA_BLB;
-
-    if (!isMobile) {
-      MEGA_LB = VAL_MORGAN_HIVI_TLB_MEGA_AD_UNIT;
-      MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT;
-    } else {
-      MEGA_LB = VAL_MORGAN_TLB_MEGA_AD_UNIT_MERCURY;
-      MEGA_BLB = VAL_MORGAN_BLB_MEGA_AD_UNIT_MERCURY;
-    }
-
-    setGeoCookie(driver, continent, country);
-    refreshPage();
-    setPageType(AdsBaseObject.PAGE_TYPE_ARTICLE);
-
-    verifyMEGAAdUnit(AdsContent.TOP_LB, MEGA_LB);
-    if (!isMobile) {
-      verifyMEGAAdUnit(AdsContent.TOP_BOXAD, VAL_MORGAN_TB_MEGA_AD_UNIT);
-      triggerAdSlot(AdsContent.BOTTOM_LB);
-    } else {
-      scrollTo(ARTICLE_FOOTER);
-      triggerAdSlotWithMobileState(AdsContent.MOBILE_BOTTOM_LB, true);
-    }
-    verifyMEGAAdUnit(AdsContent.BOTTOM_LB, MEGA_BLB);
-  }
-
   public void verifyIframeSize(String slotName, int slotWidth, int slotHeight) {
     waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName));
   }
@@ -195,13 +142,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     String lineItemParam = getSlotAttribute(slotName, GPT_DATA_ATTRIBUTES[0]);
     Assertion.assertStringContains(lineItemParam, lineItemId);
     Log.log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
-    return this;
-  }
-
-  public AdsBaseObject verifyLineItemId(List<String> slots, String lineItemId) {
-    String lineItemParam = getSlotAttribute(slots, GPT_DATA_ATTRIBUTES[0]);
-    Assertion.assertStringContains(lineItemParam, lineItemId);
-    Log.log("verifyLineItemId", slots + " has following line item: " + lineItemParam, true);
     return this;
   }
 
@@ -702,12 +642,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return !adTypeScripts.isEmpty();
   }
 
-  private void verifySlotExpanded(WebElement element) {
-    if (!checkIfSlotExpanded(element)) {
-      throw new WebDriverException(element.getAttribute("id") + " is collapsed");
-    }
-  }
-
   private Map<String, String> getSlotsSelectorMap() {
     switch (pageType) {
       case PAGE_TYPE_SPECIAL:
@@ -739,23 +673,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
       checkSlotOnPageLoaded(entry.getKey(), isMobile);
-    }
-  }
-
-  /**
-   * Verify if slots for set pageType are on the page and have correct line-items and ad units
-   *
-   * @param lineItems slot and expected line item pairs
-   * @param adUnits   slot and expected ad unit pairs
-   */
-  public void verifyAds(Map<String, String> lineItems, Map<String, String> adUnits) {
-    Map<String, String> slots = getSlotsSelectorMap();
-    for (Map.Entry<String, String> entry : slots.entrySet()) {
-      String slotName = entry.getKey();
-
-      checkSlotOnPageLoaded(slotName);
-      verifyGptIframe(adUnits.get(slotName), slotName, "gpt");
-      verifyGptAdInSlot(slotName, lineItems.get(slotName), "");
     }
   }
 
@@ -797,20 +714,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void scrollTo(String cssSelector) {
     scrollTo(By.cssSelector(cssSelector));
-  }
-
-  public String getValueFromTracking(
-      NetworkTrafficInterceptor networkTrafficInterceptor, String slotName, String paramName
-  ) {
-    final String fvTrackingUrl = getTrackingUrl(networkTrafficInterceptor, slotName);
-    Matcher matcher = Pattern.compile(".*" + paramName + "=([^&]+)&.*").matcher(fvTrackingUrl);
-    return matcher.matches() ? matcher.group(1) : "";
-  }
-
-  public String getFVLineItem() {
-    final By FV_SLOT_SELECTOR = By.cssSelector("div.featured-video__player-container");
-    wait.forAttributeToBePresent(driver.findElement(FV_SLOT_SELECTOR), "data-vast-line-item-id");
-    return driver.findElement(FV_SLOT_SELECTOR).getAttribute("data-vast-line-item-id");
   }
 
   public String getTrackingUrl(NetworkTrafficInterceptor networkTrafficInterceptor, String pos) {
