@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 )
 public class CropImageTests extends NewTestTemplate {
 
-  private static final String SEARCH_IMAGE_QUERY = "U";
+  private static final String SEARCH_IMAGE_QUERY = "Random";
   private static String ARTICLE_TITLE_SELECTOR = ".wiki-page-title";
 
   private CuratedMainPagePageObject curatedMainPage;
