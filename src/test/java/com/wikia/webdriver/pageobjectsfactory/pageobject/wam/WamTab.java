@@ -8,8 +8,9 @@ public enum WamTab {
   COMICS(4, "COMICS"),
   LIFESTYLE(5, "LIFESTYLE"),
   MUSIC(6, "MUSIC"),
-  MOVIES(7, "MOVIES"),
-  ANIME(8, "ANIME");
+  MOVIES(7, "MOVIES");
+  // ANIME the line below should be uncommented somewhere in 2020 when Anime data will start to appear
+  //ANIME(8, "ANIME");
 
   private final int verticalId;
 

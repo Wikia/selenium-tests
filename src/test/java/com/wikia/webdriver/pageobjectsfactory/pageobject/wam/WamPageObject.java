@@ -125,8 +125,8 @@ public class WamPageObject extends BasePageObject {
 
     for (WebElement e : wamTabs) {
       String optionValue = e.getAttribute("data-vertical-id");
-
-      if (!WamTab.contains(optionValue)) {
+      // ANIME value "8" corresponds to Anime. To be removed once we will decide to start testing anime tab as well
+      if (!WamTab.contains(optionValue) && !optionValue.toLowerCase().trim().equals("8")) {
         // once an option is not in our ENUM the test is failed
         result = false;
         break;

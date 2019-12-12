@@ -34,6 +34,9 @@ public class WamPageTests extends NewTestTemplate {
 
   @Test
   public void wam_002_verifyFilteringByVertical() {
+    // WARNING! There are some hardcoded instructions which aim was to make sure that the test will not fail on Anime tab
+    // when the Anime tab will start to be filled with data, we should remove those fragments
+    // Seek for "Anime" in the tests to find those instructions
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamVerticalFilterOptions();
 
