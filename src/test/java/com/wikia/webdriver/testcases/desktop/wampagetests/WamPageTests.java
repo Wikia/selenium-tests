@@ -34,13 +34,14 @@ public class WamPageTests extends NewTestTemplate {
 
   @Test
   public void wam_002_verifyFilteringByVertical() {
-    // WARNING! There are some hardcoded instructions which aim was to make sure that the test will not fail on Anime tab
-    // when the Anime tab will start to be filled with data, we should remove those fragments
-    // Seek for "Anime" in the tests to find those instructions
     wam.verifyWamIndexIsNotEmpty();
     wam.verifyWamVerticalFilterOptions();
 
     for (WamTab tab : EnumSet.complementOf(EnumSet.of(WamTab.ALL))) {
+      // ignore ANIME vertical
+      // delete the line below when ANIME wertical will start to be filled withd data!
+      if (tab.getId() == 8)
+        continue;
       wam.selectTab(tab);
       wam.verifyIfVerticalIdSelectedInUrl(tab.getId());
       wam.verifyWamIndexIsNotEmpty();
@@ -106,5 +107,16 @@ public class WamPageTests extends NewTestTemplate {
         3 * wam.DEFAULT_WAM_INDEX_ROWS
     );
 
+  }
+
+  @Test
+  @RelatedIssue(issueID = "DE-4569", comment = "If fails, remove the tests and include ANIME vertical in test 002.")
+  /**
+   * The goal of this test is to alert the DE team when Anime verticall will start to be filled with data.
+   * If the test fails, we need to changge the tests to start monitoring if this vertical is filled with data.
+   */
+  public void wam_007_checkIfAnimeAlreadyIsFilled() {
+    wam.selectTab(WamTab.ANIME);
+    wam.verifyWamIndexIsEmpty();
   }
 }
