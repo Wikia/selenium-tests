@@ -26,10 +26,12 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class EditorTests extends NewTestTemplate {
 
+  public static final String ECC_MAIN_PAGE = "Mercury_Empty_CC_Editor_Wikia";
+
   private static final String ITEM_DISPLAY_NAME = "Templates";
   private static final String ITEM_PAGE_NAME = "Category:Templates";
   private static final String SECTION_DISPLAY_NAME = "New Section";
-  private static final String SEARCH_IMAGE_QUERY = "U";
+  private static final String SEARCH_IMAGE_QUERY = "Random";
 
   private static String FEATURED_CONTENT_SELECTOR = ".featured-content";
   private static String CURATED_CONTENT_SELECTOR = ".curated-content";
@@ -40,9 +42,8 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
-  @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+    Boolean result = new ArticlePage().open(ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
@@ -68,10 +69,9 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @RelatedIssue(issueID = "XF-241")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
-    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+    Boolean result = new ArticlePage().open(ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
@@ -113,9 +113,8 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
-  @RelatedIssue(issueID = "XF-241")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
-    Boolean result = new ArticlePage().open(MobileSubpages.ECC_MAIN_PAGE).getCuratedMainPage()
+    Boolean result = new ArticlePage().open(ECC_MAIN_PAGE).getCuratedMainPage()
         .isCuratedElementVisible(FEATURED_CONTENT_SELECTOR);
 
     Log.info(String.format("Curated content is visible: %s", result));
