@@ -20,7 +20,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsUapHiViOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsTrackingOptInRequestsF2"/>
-            <class name="com.wikia.webdriver.testcases.desktop.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.desktop.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.desktop.analyticstests.AnalyticsPageTests"/>
