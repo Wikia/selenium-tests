@@ -99,7 +99,25 @@ public class WamPageObject extends BasePageObject {
           true
       );
     } else {
-      Log.log("verifyTabIsSelected", "there is only the head row", false);
+      Log.log("verifyWamIndexIsNotEmpty", "there is only the head row", false);
+    }
+  }
+
+  /**
+   * @desc Checks if the table for the vertical tab is empty. Needed to monitor data in ANIME vertical
+   */
+  public void verifyWamIndexIsEmpty() {
+    wait.forElementPresent(WAM_INDEX_TABLE);
+    int rows = wamIndexRows.size();
+    if (rows == 2 && wamIndexRows.get(1).getText().startsWith("The wiki you searched for is not in the top 5000")) {
+      Log.log(
+          "verifyWamIndexIsEmpty",
+          "WamTab for this vertical is empty, as it should be",
+          true
+      );
+    } else {
+      Log.log("verifyWamIndexIsEmpty",
+              "Rows in this tab started to appear! ANIME vertical is probably filled with data!", false);
     }
   }
 
@@ -125,8 +143,8 @@ public class WamPageObject extends BasePageObject {
 
     for (WebElement e : wamTabs) {
       String optionValue = e.getAttribute("data-vertical-id");
-
-      if (!WamTab.contains(optionValue)) {
+      // ANIME value "8" corresponds to Anime. To be removed once we will decide to start testing anime tab as well
+      if (!WamTab.contains(optionValue) && !optionValue.toLowerCase().trim().equals("8")) {
         // once an option is not in our ENUM the test is failed
         result = false;
         break;

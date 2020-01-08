@@ -20,19 +20,8 @@ public class AdsDataProvider {
       FV_JWPLAYER_PAGE_URI
       = "SyntheticTests/Premium/FeaturedVideo/JWPlayer";
   public static final Page PAGE_FV_JWPLAYER = new Page(WIKI_SPECIAL, FV_JWPLAYER_PAGE_URI);
-  private static final String
-      FV_JWPLAYER_WITH_SOUND_PAGE_URI
-      = "SyntheticTests/Premium/FeaturedVideo/JWPlayer/WithSound";
-  public static final Page PAGE_FV_JWPLAYER_AND_SOUND = new Page(WIKI_SPECIAL,
-                                                                 FV_JWPLAYER_WITH_SOUND_PAGE_URI
-  );
 
   private AdsDataProvider() {}
-
-  @DataProvider
-  public static Object[][] kruxIntegration() {
-    return new Object[][]{{WIKI_SPECIAL, "SyntheticTests/Krux"}};
-  }
 
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {

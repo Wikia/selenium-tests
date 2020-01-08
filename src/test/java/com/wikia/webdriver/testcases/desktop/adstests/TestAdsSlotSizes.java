@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -21,13 +20,6 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
   @Test(dataProviderClass = AdsDataProvider.class, dataProvider = "adsSlotSizeOasis", groups = "AdsSlotSizesOasis")
   public void adsSlotSizesOasis(Page page, String urlParamToEnable, Map<String, Object> slotInfo) {
     adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo, false);
-  }
-
-  @Test(dataProviderClass = MobileAdsDataProvider.class, dataProvider = "adsSlotSizeMercury", groups = "AdsSlotSizesMercury")
-  public void adsSlotSizesMercury(
-      Page page, String urlParamToEnable, Map<String, Object> slotInfo
-  ) {
-    adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo, true);
   }
 
   private void adsSlotSizes(
