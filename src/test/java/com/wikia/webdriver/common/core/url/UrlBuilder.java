@@ -22,7 +22,7 @@ public class UrlBuilder extends BaseUrlBuilder {
       new HashSet<>(Arrays.asList(new String[]{"community", "community-search", "gameofthrones", "sydneybuses",
                                                "elderscrolls", "gta", "harrypotter", "sktest123", "pokemon", "starwars",
                                                "dnd4", "muppet", "pad", "nonenwikiwithemptydiscussions",
-                                               "nonenwikiwithoutdiscussions"}));
+                                               "nonenwikiwithoutdiscussions", "app-on-ucp2"}));
 
   private final String wikiName;
   private Boolean forceHttps;
