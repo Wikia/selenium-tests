@@ -62,7 +62,6 @@ public class GlobalNavigationLayout extends NewTestTemplate {
     Assertion.assertTrue(globalNavigation.isFandomLogoVisible());
     Assertion.assertTrue(globalNavigation.isSearchInputVisible());
     Assertion.assertTrue(globalNavigation.isStartWikiButtonVisible());
-    Assertion.assertTrue(globalNavigation.isPartnerSlotLinkVisible());
     Assertion.assertTrue(globalNavigation.isVideospieleHubVisible());
     Assertion.assertTrue(globalNavigation.isFilmeHubVisible());
     Assertion.assertTrue(globalNavigation.isTVDEHubVisible());
@@ -81,7 +80,6 @@ public class GlobalNavigationLayout extends NewTestTemplate {
     Assertion.assertTrue(globalNavigation.isFandomLogoVisible());
     Assertion.assertTrue(globalNavigation.isSearchInputVisible());
     Assertion.assertTrue(globalNavigation.isStartWikiButtonVisible());
-    Assertion.assertTrue(globalNavigation.isPartnerSlotLinkVisible());
     Assertion.assertTrue(globalNavigation.isVideospieleHubVisible());
     Assertion.assertTrue(globalNavigation.isFilmeHubVisible());
     Assertion.assertTrue(globalNavigation.isTVDEHubVisible());
