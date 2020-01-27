@@ -30,6 +30,7 @@ import static org.testng.Assert.assertTrue;
 public class SignupTests extends NewTestTemplate {
 
   private static final String USERNAME_TAKEN_MSG = "Username is taken";
+  private static final String USERNAME_TAKEN_OR_INVALID_MSG = "Username is taken or has invalid characters. Username can contain letters and numbers from one alphabet and must include one letter";
   private static final String PASSWORD_MATCHING_USERNAME_MSG = "Password and username cannot match";
   private static final String GENERIC_ERROR_MSG =
     "We cannot complete your registration at this time";
@@ -66,16 +67,20 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
+  @RelatedIssue(issueID="MAIN-19813")
   public void userCannotSignUpWithExistingUsernameDesktop() {
     RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithExistingUsername());
-    assertEquals(form.getError(), USERNAME_TAKEN_MSG);
+    // When Related issue (MAIN-19813) will be fixed change this assert pattern to USERNAME_TAKEN_MSG
+    assertEquals(form.getError(), USERNAME_TAKEN_OR_INVALID_MSG);
   }
 
   @Test(groups = MOBILE)
+  @RelatedIssue(issueID="MAIN-19813")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithExistingUsernameMobile() {
     RegisterPage form = performSignUpExpectingFailureOnMobileAs(createUserWithExistingUsername());
-    assertEquals(form.getError(), USERNAME_TAKEN_MSG);
+    // When Related issue (MAIN-19813) will be fixed change this assert pattern to USERNAME_TAKEN_MSG
+    assertEquals(form.getError(), USERNAME_TAKEN_OR_INVALID_MSG);
   }
 
   @Test(groups = DESKTOP)

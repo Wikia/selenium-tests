@@ -63,8 +63,6 @@ public class GlobalNavigation extends BasePageObject {
   private WebElement videospieleHubLink;
   @FindBy(css = "a[href*='Filme']")
   private WebElement filmeHubLink;
-  @FindBy(css = ".wds-global-navigation__partner-slot-link")
-  private WebElement partnerSlotLink;
   @FindBy(css = ".wds-global-navigation__user-menu")
   private WebElement myAccount;
   @FindBy(xpath = "//div[contains(@class,\"wds-global-navigation__user-menu\")]//li[1]/a")
@@ -283,10 +281,6 @@ public class GlobalNavigation extends BasePageObject {
 
   public boolean isStartWikiButtonVisible() {
     return isElementDisplayed(startWikiButton, 3);
-  }
-
-  public boolean isPartnerSlotLinkVisible() {
-    return isElementDisplayed(partnerSlotLink, 3);
   }
 
   public String getNthSearchResultText(int n) {
