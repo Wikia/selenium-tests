@@ -74,9 +74,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   public void crossWikiSearch_003_resultClick() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject();
     search.searchForWiki(wikiURL, SearchContent.SEARCH_PHRASE);
-    //TODO Temtem Wiki on Gamepedia is popular ATM - dirty hack to pass tests
-//    WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
-    WikiArticleHomePage wikiArticleHomePage = search.openResult(1);
+    WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
     driver.navigate().back();
     search.openResult(2);
