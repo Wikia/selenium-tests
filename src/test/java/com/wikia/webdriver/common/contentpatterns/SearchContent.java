@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.contentpatterns;
 public class SearchContent {
 
   public static final int RESULTS_PER_PAGE = 10;
-  public static final String SEARCH_PHRASE = "fallout";
+  public static final String SEARCH_PHRASE = "star";
   public static final String SEARCH_PHRASE_NO_RESULTS = "qazwsxedcrfvtgb";
   public static final String SEARCH_PHRASE_ONE_PAGE_RESULTS = "Legacy Of Heroes Wiki";
   public static final String SEARCH_PHRASE_RESULTS_SAME_ORDER = "marvel";
