@@ -49,7 +49,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
     search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
-    Assertion.assertFalse(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
+    Assertion.assertTrue(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
     search.nextPage();
@@ -57,7 +57,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyResultsPosForPage(1, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
     search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
-    Assertion.assertFalse(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
+    Assertion.assertTrue(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
     search.prevPage();
@@ -65,7 +65,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
     search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
-    Assertion.assertFalse(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
+    Assertion.assertTrue(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
   }
