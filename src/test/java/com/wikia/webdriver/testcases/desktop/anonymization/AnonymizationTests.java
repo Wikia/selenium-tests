@@ -34,7 +34,7 @@ public class AnonymizationTests extends NewTestTemplate {
       ERROR_MESSAGE
       = "We don't recognize these credentials. Try again or register a new account.";
 
-  @Test
+  @Test(enabled = false)
   public void anonymizedUserCannotLogin() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -60,7 +60,7 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
-  @Test
+  @Test(enabled = false)
   public void anonymizedUserProfilePageRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -86,7 +86,7 @@ public class AnonymizationTests extends NewTestTemplate {
     )));
   }
 
-  @Test
+  @Test(enabled = false)
   public void anonymizationWikiEdits() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
@@ -119,7 +119,7 @@ public class AnonymizationTests extends NewTestTemplate {
     Assertion.assertFalse(articleHistoryPage.isUserInHistory(user.getUsername()));
   }
 
-  @Test
+  @Test(enabled = false)
   public void anonymizationMessageWallRemoved() {
     Credentials credentials = new Credentials();
     String timestamp = Long.toString(DateTime.now().getMillis());
