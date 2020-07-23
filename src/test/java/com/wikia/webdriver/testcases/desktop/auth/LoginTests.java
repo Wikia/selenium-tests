@@ -36,8 +36,7 @@ public class LoginTests extends NewTestTemplate {
   private static final String DESKTOP = "auth-login-desktop";
   private static final String MOBILE = "auth-login-mobile";
 
-  private static final String ERROR_MESSAGE =
-    "We don't recognize these credentials. Try again or register a new account.";
+  private static final String ERROR_MESSAGE = "We don't recognize these credentials. Your username may have been changed as a result of login system changes, adding -fduser or -gpuser as a suffix. Try again or register a new account.";
 
   private static final  String PASSWORD_FORM = "P@55_%s";
 
