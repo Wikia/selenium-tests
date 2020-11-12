@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.analytics.AnalyticsPage
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = "muppet")
+@Execute(onWikia = "sydneybuses")
 @Test(groups = {"DataEngineering", "AnalyticsPageTests"})
 public class AnalyticsPageTests extends NewTestTemplate {
 
