@@ -13,7 +13,8 @@ public class PlaybuzzWidgetPageObject extends WidgetPageObject {
   private static final String[] TAGS = {
       "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />",
       "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />"};
-  @FindBy(css = ".widget-playbuzz iframe")
+
+  @FindBy(css="iframe[data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\"]")
   private List<WebElement> widgetIFrameList;
   @FindBy(css = "#pb-body-container")
   private List<WebElement> widgetWrapperList;
