@@ -55,7 +55,7 @@ public class GlobalNavigationLayout extends NewTestTemplate {
   }
 
   @Test(groups = {"globalNavigationBarLayoutForDeAnon"})
-  @Execute(onWikia = "gta", language = "de")
+  @Execute(onWikia = "mediawiki119", language = "de")
   public void testLayoutForDeAnon() {
     GlobalNavigation globalNavigation = new HomePage().open().getGlobalNavigation();
 
@@ -73,7 +73,7 @@ public class GlobalNavigationLayout extends NewTestTemplate {
   }
 
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
-  @Execute(onWikia = "harrypotter", language = "de", asUser = User.USER_GERMAN)
+  @Execute(onWikia = "mediawiki119", language = "de", asUser = User.USER_GERMAN)
   public void testLayoutForDeLoggedIn() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 

@@ -86,10 +86,6 @@
             <class name="com.wikia.webdriver.testcases.desktop.followingtests.FollowBlogTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.followingtests.FollowPhotosTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.followingtests.FollowVideosTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumBoardTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumEditModeTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumThreadTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.forumtests.ForumAnonTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.navigation.global.GlobalNavigationLayout"/>
             <class name="com.wikia.webdriver.testcases.desktop.navigation.global.GlobalNavigationSearching"/>
             <class name="com.wikia.webdriver.testcases.desktop.navigation.global.GlobalNavigationNavigating"/>
@@ -146,7 +142,6 @@
             <class name="com.wikia.webdriver.testcases.mobile.search.SearchMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobile.SmartBannerTest"/>
             <class name="com.wikia.webdriver.testcases.desktop.multiwikifindertests.MultiWikiFinderTests"/>
-            <class name="com.wikia.webdriver.testcases.desktop.notificationstests.ForumNotificationsTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersMessageTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersResponseTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.notificationstests.messagewallnotifications.MessageWallNotificationsOwnerTests"/>

@@ -85,6 +85,7 @@ public class URLsContent {
   public static final String SOURCE_MODE = "useeditor=source";
   public static final String MOST_RECENT = "?sort=recent";
   public static final String ACTION_RAW = "action=raw";
+  public static final String TEST_WIKI = "?istestwiki=1"; // used for disabling GTM survey
 
   // WAM Scores page url
   public static final String WAM_PAGE = "WAM";
