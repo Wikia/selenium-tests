@@ -145,7 +145,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
   /**
    * @prerequisites use wiki with enabled forum and discussions
    */
-  @Test(groups = {"CommunityHeaderTests"})
+  @Test(groups = {"CommunityHeaderTests"}, enabled = false)
   @Execute(onWikia = "qatestdiscussiosandforum")
   public void testDiscussLinkOnWikiWithDiscussionsAndForum() {
     CommunityHeaderDesktop communityHeader = new CommunityHeaderDesktop();
@@ -161,7 +161,7 @@ public class CommunityHeaderTests extends NewTestTemplate {
    * @prerequisites use wiki with enabled forum and discussions
    */
 
-  @Test(groups = {"CommunityHeaderTests"})
+  @Test(groups = {"CommunityHeaderTests"}, enabled = false)
   @Execute(onWikia = "qatestforumnodiscussions")
   public void testDiscussLinkOnWikiWithNoDiscussionsAndWithForum() {
     new CommunityHeaderDesktop().clickDiscussLink();

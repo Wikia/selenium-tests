@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.desktop.infobox.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -368,7 +369,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-    infobox.open(PageContent.INFOBOX_2);
+    infobox.open(PageContent.INFOBOX_2 + URLsContent.TEST_WIKI);
 
     String imageName = infobox.getDataImageName();
 

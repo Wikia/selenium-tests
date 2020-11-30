@@ -140,6 +140,25 @@ public class GlobalNavigation extends BasePageObject {
     return new HomePage();
   }
 
+  public String getFandomLogoLink() {
+    wait.forElementVisible(fandomLogo);
+    return fandomLogo.getAttribute("href");
+  }
+
+  public String getGamesHubLink() {
+    wait.forElementVisible(gamesHubLink);
+    return gamesHubLink.getAttribute("href");
+  }
+  public String getMoviesHubLink() {
+    wait.forElementVisible(moviesHubLink);
+    return moviesHubLink.getAttribute("href");
+  }
+
+  public String getTVHubLink() {
+    wait.forElementVisible(tvHubLink);
+    return tvHubLink.getAttribute("href");
+  }
+
   public GlobalNavigation openWikisMenu() {
     wait.forElementClickable(wikisMenu).click();
     Log.log("openWikisMenu", "clicked on wikis menu in global nav bar", true);
