@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.analytics.AnalyticsPage
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = "nonenwikiwithemptydiscussions")
+@Execute(onWikia = "community")
 @Test(groups = {"DataEngineering", "AnalyticsPageTests"})
 public class AnalyticsPageTests extends NewTestTemplate {
 
