@@ -59,6 +59,7 @@ public class ChromeBrowser extends BrowserAbstract {
     chromeOptions.addArguments("dns-prefetch-disable");
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--ignore-ssl-errors=yes");
+    chromeOptions.setAcceptInsecureCerts(true);
 
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
@@ -86,8 +87,6 @@ public class ChromeBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-    caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-    caps.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
     if (Configuration.isUnsafePageLoad()) {
       caps.setCapability("pageLoadStrategy", "none");
     }
