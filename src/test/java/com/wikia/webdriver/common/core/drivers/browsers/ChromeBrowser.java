@@ -86,6 +86,8 @@ public class ChromeBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+    caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+    caps.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
     if (Configuration.isUnsafePageLoad()) {
       caps.setCapability("pageLoadStrategy", "none");
     }
