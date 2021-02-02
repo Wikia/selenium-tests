@@ -57,8 +57,7 @@ public class ChromeBrowser extends BrowserAbstract {
     chromeOptions.addArguments("disable-notifications");
     chromeOptions.addArguments("process-per-site");
     chromeOptions.addArguments("dns-prefetch-disable");
-    chromeOptions.addArguments("--allow-running-insecure-content");
-    chromeOptions.addArguments("--ignore-ssl-errors=yes");
+    chromeOptions.addArguments("allow-running-insecure-content");
     chromeOptions.setAcceptInsecureCerts(true);
 
     if ("true".equals(Configuration.getDisableFlash())) {
