@@ -58,6 +58,7 @@ public class ChromeBrowser extends BrowserAbstract {
     chromeOptions.addArguments("process-per-site");
     chromeOptions.addArguments("dns-prefetch-disable");
     chromeOptions.addArguments("allow-running-insecure-content");
+    chromeOptions.setAcceptInsecureCerts(true);
 
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
