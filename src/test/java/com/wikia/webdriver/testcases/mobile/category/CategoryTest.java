@@ -11,7 +11,7 @@ import com.wikia.webdriver.elements.communities.mobile.pages.MainPage;
 
 import org.testng.annotations.Test;
 
-@Test(groups = "Mercury_Category")
+@Test(groups = "Category, Mercury_Category")
 @Execute(onWikia = MobileWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryTest extends NewTestTemplate {
