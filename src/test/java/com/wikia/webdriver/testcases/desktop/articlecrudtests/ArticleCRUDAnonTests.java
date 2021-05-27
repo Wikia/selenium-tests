@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.desktop.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -102,5 +105,15 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     visualEditMode.navigateToArticleEditPage(wikiURL, secondArticleTitle);
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
+  }
+
+  @Test(groups = {"ArticlePushNtimes"})
+  @Execute(onWikia = "my_wiki_name")
+  public void articlePushTest() {
+    int articlenum = 100;
+
+    for(int i =0; i<articlenum;++i){
+      new ArticleContent().push("Lorem Ipsum", String.format("Article_%s", Long.toString(DateTime.now().getMillis())));
+    }
   }
 }
