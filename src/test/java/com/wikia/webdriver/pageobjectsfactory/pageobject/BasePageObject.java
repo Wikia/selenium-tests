@@ -750,11 +750,14 @@ public class BasePageObject {
 
   public boolean isVisible(WebElement element) {
     boolean result;
+
     try {
       wait.forElementVisible(element);
       result = true;
     } catch (TimeoutException e) {
+      changeImplicitWait(0, TimeUnit.MILLISECONDS);
       Log.info("Element: " + element.toString() + " not found.", e);
+      restoreDefaultImplicitWait();
       result = false;
     }
     return result;

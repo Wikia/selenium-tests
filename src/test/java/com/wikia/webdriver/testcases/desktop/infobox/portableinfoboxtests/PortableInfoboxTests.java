@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+import com.wikia.webdriver.elements.communities.desktop.pages.categories.CategoryExhibitionPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -198,7 +198,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String categoryLinkName = infobox.getCategoryLinkName();
     infobox.clickCategoryLink();
-    String categoryPageTitle = new CategoryPageObject().getCategoryPageTitle();
+    String categoryPageTitle = new CategoryExhibitionPage().getCategoryPageTitle();
 
     Assertion.assertTrue(categoryLinkName.contains(categoryPageTitle));
   }
@@ -373,10 +373,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String imageName = infobox.getDataImageName();
 
-    CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
+    CategoryExhibitionPage categoryExhibitionPage = infobox.clickCategoryWithIndex(0);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    String categoryImageURL = categoryPage.getImageURLFromGallery(PageContent.INFOBOX_2);
+    String categoryImageURL = categoryExhibitionPage.getImageURLFromGallery(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(categoryImageURL.contains(imageName));
   }

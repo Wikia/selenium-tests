@@ -195,6 +195,7 @@
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.desktop.renametool.RenameToolTests"/>
+            <class name="com.wikia.webdriver.testcases.desktop.categoriestests.DynamicCategoryPageTests"/>
         </classes>
     </test>
 </suite>
