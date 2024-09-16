@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+import com.wikia.webdriver.elements.communities.desktop.pages.categories.CategoryExhibitionPage;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -195,18 +195,18 @@ public class PortableInfobox extends BasePageObject {
     return this;
   }
 
-  public CategoryPageObject clickCategoryLink() {
+  public CategoryExhibitionPage clickCategoryLink() {
     wait.forElementVisible(categoryLinkInInfobox);
     scrollAndClick(categoryLinkInInfobox);
 
-    return new CategoryPageObject();
+    return new CategoryExhibitionPage();
   }
 
-  public CategoryPageObject clickCategoryWithIndex(int index) {
+  public CategoryExhibitionPage clickCategoryWithIndex(int index) {
     wait.forElementVisible(categories.get(index));
     scrollAndClick(categories.get(index));
 
-    return new CategoryPageObject();
+    return new CategoryExhibitionPage();
   }
 
   public PortableInfobox open(String articleTitle) {

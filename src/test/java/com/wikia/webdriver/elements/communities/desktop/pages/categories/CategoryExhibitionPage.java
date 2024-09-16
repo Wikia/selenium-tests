@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.category;
+package com.wikia.webdriver.elements.communities.desktop.pages.categories;
 
 import com.wikia.webdriver.common.logging.Log;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class CategoryPageObject extends WikiBasePageObject {
+public class CategoryExhibitionPage extends WikiBasePageObject {
 
   @FindBy(css = ".category-gallery-item")
   private List<WebElement> categoryGalleryItems;
